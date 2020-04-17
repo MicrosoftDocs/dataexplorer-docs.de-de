@@ -7,7 +7,7 @@
       "locale": "de-DE",
       "monikers": [],
       "moniker_ranges": [],
-      "open_to_public_contributors": false,
+      "open_to_public_contributors": true,
       "type_mapping": {
         "Conceptual": "Content",
         "ContextObject": "Toc",
@@ -20,20 +20,20 @@
       "template_folder": "_themes"
     }
   ],
-  "notification_subscribers": [
-    "cfowler@microsoft.com"
-  ],
+  "notification_subscribers": [],
   "sync_notification_subscribers": [],
   "branches_to_filter": [
-    "live-sxs",
-    "master-sxs"
+    "live",
+    "master"
   ],
-  "git_repository_url_open_to_public_contributors": "https://github.com/MicrosoftDocs/dataexplorer-docs",
-  "git_repository_branch_open_to_public_contributors": "master",
+  "git_repository_url_open_to_public_contributors": "https://github.com/MicrosoftDocs/dataexplorer-docs.de-de",
+  "git_repository_branch_open_to_public_contributors": "live",
   "continue_with_document_error": true,
   "skip_source_output_uploading": false,
   "need_preview_pull_request": true,
-  "contribution_branch_mappings": {},
+	"contribution_branch_mappings": {
+	     "live-sxs": "live"
+  },
   "dependent_repositories": [
     {
       "path_to_root": "_themes",
@@ -60,11 +60,14 @@
   "branch_target_mapping": {
     "live": [
       "Publish",
-      "Intellisense",
-      "Pdf"
-    ]
+      "Intellisense"
+    ],
+    "live-sxs": [
+      "Publish",
+      "Intellisense"
+    ],
   },
-  "need_generate_pdf_url_template": true,
+  "need_generate_pdf_url_template": false,
   "targets": {
     "pdf": {
       "template_folder": "_themes.pdf"
