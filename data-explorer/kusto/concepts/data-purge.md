@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 49d024d1deecd8e0c7bf16eda9917cd237fe6319
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 460ad9cfca4f97e6735d30a4d47d6384581e7af7
+ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523272"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "82029987"
 ---
 # <a name="data-purge"></a>Datenbereinigung
 
@@ -90,6 +90,7 @@ Der Befehl "Bereinigen" kann für unterschiedliche Verwendungsszenarien auf zwei
 1. Programmgesteuerter Aufruf: Ein einstufiger Aufruf, der von Anwendungen aufgerufen werden soll. Der Aufruf dieses Befehls löst direkt die Löschausführungssequenz aus.
 
     **Syntax**
+
      ```kusto
      .purge table [TableName] records in database [DatabaseName] with (noregrets='true') <| [Predicate]
      ```
@@ -101,6 +102,7 @@ Der Befehl "Bereinigen" kann für unterschiedliche Verwendungsszenarien auf zwei
     <!-- If query times-out on DM endpoint (default timeout is 10 minutes), it is recommended to use the [engine `whatif` command](#purge-whatif-command) directly againt the engine endpoint while increasing the [server timeout limit](../concepts/querylimits.md#limit-on-request-execution-time-timeout). Only after you have verified the expected results using the engine whatif command, issue the purge command via the DM endpoint using the 'noregrets' option. -->
 
      **Syntax**
+
      ```kusto
      // Step #1 - retrieve a verification token (no records will be purged until step #2 is executed)
      .purge table [TableName] records in database [DatabaseName] <| [Predicate]
@@ -211,7 +213,7 @@ Status = 'Abgeschlossen' gibt den erfolgreichen Abschluss der ersten Phase des B
 .show purges from '<StartDate>' to '<EndDate>' [in database <DatabaseName>]
 ```
 
-|Eigenschaften  |Beschreibung  |Obligatorisch/Optional
+|Eigenschaften  |BESCHREIBUNG  |Obligatorisch/Optional
 |---------|---------|
 |OperationId    |      Die Datenverwaltungs-ID wird nach der Ausführung einer einzelnen oder zweiten Phase ausgegeben.   |Obligatorisch.
 |StartDate    |   Geringeres Zeitlimit für Filtervorgänge. Wenn nicht angegeben, wird standardmäßig 24 Stunden vor der aktuellen Zeit angezeigt.      |Optional
@@ -256,8 +258,6 @@ Status = 'Abgeschlossen' gibt den erfolgreichen Abschluss der ersten Phase des B
 * ClientRequestId - Clientaktivitäts-ID der DM-Bereinigungsanforderung. 
 * Principal - Identität des Emittenten des Bereinigungsbefehls.
 
-
-
 ## <a name="purging-an-entire-table"></a>Bereinigen eines gesamten Tisches
 Zum Löschen einer Tabelle gehört das Löschen der Tabelle und das Markieren als gelöscht, sodass der im [Vorgang "Löschen"](#purge-process) beschriebene Hartlöschprozess auf ihr ausgeführt wird. Wenn Sie eine Tabelle löschen, ohne sie zu löschen, werden nicht alle Speicherartefakte gelöscht (gemäß der ursprünglich für die Tabelle festgelegten Richtlinie für die harte Aufbewahrung gelöscht). Der `purge table allrecords` Befehl ist schnell und effizient und ist dem Prozess der Bereinigung von Datensätzen, falls für Ihr Szenario zutreffend, sehr viel vorzuziehen. 
 
@@ -270,6 +270,7 @@ Zum Löschen einer Tabelle gehört das Löschen der Tabelle und das Markieren al
 1. Programmgesteuerter Aufruf (einstufiger Schritt):
 
      **Syntax**
+
      ```kusto
      .purge table [TableName] in database [DatabaseName] allrecords with (noregrets='true')
      ```
@@ -277,6 +278,7 @@ Zum Löschen einer Tabelle gehört das Löschen der Tabelle und das Markieren al
 2. Menschliche Anrufung (zwei Schritte):
 
      **Syntax**
+
      ```kusto
      // Step #1 - retrieve a verification token (the table will not be purged until step #2 is executed)
      .purge table [TableName] in database [DatabaseName] allrecords
@@ -312,6 +314,7 @@ Zum Löschen einer Tabelle gehört das Löschen der Tabelle und das Markieren al
     .purge table MyTable in database MyDatabase allrecords 
     with (verificationtoken='eyJTZXJ2aWNlTmFtZSI6IkVuZ2luZS1pdHNhZ3VpIiwiRGF0YWJhc2VOYW1lIjoiQXp1cmVTdG9yYWdlTG9ncyIsIlRhYmxlTmFtZSI6IkF6dXJlU3RvcmFnZUxvZ3MiLCJQcmVkaWNhdGUiOiIgd2hlcmUgU2VydmVyTGF0ZW5jeSA9PSAyNSJ9')
     ```
+    
     Die Ausgabe ist die gleiche wie die Befehlsausgabe '.show tables' (zurückgegeben ohne die gelöschte Tabelle).
 
     **Ausgabe**

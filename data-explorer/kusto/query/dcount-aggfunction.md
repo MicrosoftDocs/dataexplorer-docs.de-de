@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: abd474d1ef06a71e3971df18c7ba65904b34ee06
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 6f1df8c93d21b73be3753468708a119177d4d602
+ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663827"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "82030406"
 ---
 # <a name="dcount-aggregation-function"></a>dcount() (Aggregationsfunktion)
 
@@ -38,7 +38,7 @@ Gibt eine Schätzung der Anzahl von unterschiedlichen Werten für *Expr* in der 
 PageViewLog | summarize countries=dcount(country) by continent
 ```
 
-![alt text](./images/aggregations/dcount.png "dcount")
+:::image type="content" source="images/dcount-aggfunction/dcount.png" alt-text="D-Zählung":::
 
 **Hinweise**
 
@@ -77,4 +77,4 @@ Die fehlergebundene ist probabilistisch, keine theoretische Grenze. Der Wert ist
 
 Im Folgenden wird die Wahrscheinlichkeitsverteilungsfunktion des relativen Schätzfehlers (in Prozent) für alle unterstützten Genauigkeitseinstellungen dargestellt:
 
-:::image type="content" border="false" source="images/aggregations/hll-error-distribution.png" alt-text="hll-Fehlerverteilung":::
+:::image type="content" border="false" source="images/dcount-aggfunction/hll-error-distribution.png" alt-text="hll-Fehlerverteilung":::
