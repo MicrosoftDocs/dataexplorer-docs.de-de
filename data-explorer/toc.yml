@@ -1,0 +1,326 @@
+- name: Azure-Daten-Explorer – Dokumentation
+  href: index.yml
+- name: Übersicht
+  items:
+    - name: Was ist der Azure-Daten-Explorer?
+      href: data-explorer-overview.md
+- name: Schnellstarts
+  expanded: true
+  items:
+    - name: 'Erstellen eines Clusters und einer Datenbank: Azure-Portal'
+      href: create-cluster-database-portal.md
+    - name: Erfassen von Beispieldaten
+      href: ingest-sample-data.md
+    - name: Abfragen von Daten mit der Webbenutzeroberfläche
+      href: web-query-data.md
+- name: Tutorials
+  items:
+    - name: Schreiben von Abfragen
+      href: write-queries.md
+    - name: Programmgesteuerte E2E-Bloberfassung
+      items:
+        - name: 'C#'
+          href: end-to-end-csharp.md
+        - name: Python
+          href: end-to-end-python.md
+    - name: Erfassen und Abfragen von Überwachungsdaten
+      href: ingest-data-no-code.md
+    - name: Visualisieren von Daten in Power BI
+      href: visualize-power-bi.md
+- name: Konzepte
+  items:
+    - name: Datenerfassung
+      items:
+        - name: Übersicht über die Datenerfassung
+          displayName: 'pipelines, connectors, plugins, Python, .NET, Java, Node, REST'
+          href: ingest-data-overview.md
+        - name: Datenerfassungseigenschaften
+          href: ingestion-properties.md
+        - name: Formate für die Datenerfassung
+          href: ingestion-supported-formats.md
+    - name: Kusto-Abfragesprache
+      items:
+        - name: Kurzübersicht
+          href: kql-quick-reference.md
+    - name: Übersicht über die Datenvisualisierung
+      href: viz-overview.md
+    - name: Sicherheit
+      items:
+        - name: Sicherheitsübersicht
+          href: security.md
+        - name: Sicherheitsbaseline
+          href: security-baseline.md
+- name: Anleitungen
+  items:
+    - name: Erstellen eines Clusters und einer Datenbank
+      items:
+        - name: Azure-Befehlszeilenschnittstelle
+          href: create-cluster-database-cli.md
+        - name: PowerShell
+          href: create-cluster-database-powershell.md
+        - name: 'C#'
+          href: create-cluster-database-csharp.md
+        - name: Python
+          href: create-cluster-database-python.md
+        - name: Azure Resource Manager-Vorlage
+          href: create-cluster-database-resource-manager.md
+    - name: Erfassen von Daten
+      items:
+        - name: 1-Klick-Erfassung
+          items:
+            - name: Übersicht über die 1-Klick-Erfassung
+              href: ingest-data-one-click.md
+            - name: 1-Klick-Erfassung in einer neuen Tabelle
+              href: one-click-ingestion-new-table.md
+            - name: 1-Klick-Erfassung in einer vorhandenen Tabelle
+              href: one-click-ingestion-existing-table.md
+        - name: Streamingerfassung
+          href: ingest-data-streaming.md
+        - name: Verwenden von LightIngest
+          href: lightingest.md
+        - name: Event Hub
+          items:
+            - name: Azure-Portal
+              href: ingest-data-event-hub.md
+            - name: 'C#'
+              href: data-connection-event-hub-csharp.md
+            - name: Python
+              href: data-connection-event-hub-python.md
+            - name: Azure Resource Manager-Vorlage
+              href: data-connection-event-hub-resource-manager.md
+        - name: Event Grid
+          items:
+            - name: Azure-Portal
+              href: ingest-data-event-grid.md
+            - name: 'C#'
+              href: data-connection-event-grid-csharp.md
+            - name: Python
+              href: data-connection-event-grid-python.md
+            - name: Azure Resource Manager-Vorlage
+              href: data-connection-event-grid-resource-manager.md
+        - name: IoT Hub
+          items:
+            - name: Azure-Portal
+              href: ingest-data-iot-hub.md
+            - name: 'C#'
+              href: data-connection-iot-hub-csharp.md
+            - name: Python
+              href: data-connection-iot-hub-python.md
+            - name: Azure Resource Manager-Vorlage
+              href: data-connection-iot-hub-resource-manager.md
+        - name: Verwenden von SDKs
+          items:
+            - name: Python
+              href: python-ingest-data.md
+            - name: Node SDK
+              href: node-ingest-data.md
+            - name: .NET Standard SDK
+              href: net-standard-ingest-data.md
+        - name: Kafka
+          href: ingest-data-kafka.md
+        - name: Logstash
+          href: ingest-data-logstash.md
+        - name: Daten im JSON-Format
+          href: ingest-json-formats.md
+    - name: Daten abfragen
+      items:
+        - name: Abfragen von Daten in Azure Data Lake
+          href: data-lake-query-data.md
+        - name: Abfragen von Daten in Azure Monitor
+          href: query-monitor-data.md
+        - name: Inlinedebuggen von KQL (Python)
+          href: debug-inline-python.md
+        - name: mithilfe von SDKs
+          items:
+            - name: Python
+              href: python-query-data.md
+        - name: Zeitreihenanalyse und Machine Learning
+          items:
+            - name: Zeitreihenanalyse
+              href: time-series-analysis.md
+            - name: Anomalieerkennung und -vorhersage
+              href: anomaly-detection.md
+            - name: Machine Learning
+              href: machine-learning-clustering.md
+    - name: Visualisieren von Daten
+      items:
+        - name: Power BI
+          items:
+            - name: Bewährte Methoden
+              href: power-bi-best-practices.md
+            - name: Connector
+              href: power-bi-connector.md
+            - name: Importierte Abfrage
+              href: power-bi-imported-query.md
+            - name: SQL-Abfrage (SQL query)
+              href: power-bi-sql-query.md
+        - name: Excel
+          items:
+            - name: Connector
+              href: excel-connector.md
+            - name: Leere Abfrage
+              href: excel-blank-query.md
+        - name: Grafana
+          href: grafana.md
+        - name: ODBC-Connector
+          href: connect-odbc.md
+        - name: Tableau
+          href: tableau.md
+        - name: Sisense
+          href: sisense.md
+        - name: Redash
+          href: redash.md
+        - name: Kibana (K2Bridge-Connector)
+          href: k2bridge.md
+    - name: Sicher
+      items:
+        - name: Netzwerkisolation (VNET)
+          items:
+            - name: 'Erstellen eines Clusters in Ihrem VNET: Portal'
+              href: vnet-create-cluster-portal.md
+            - name: Bereitstellen Ihres Clusters in Ihrem VNET
+              href: vnet-deployment.md
+            - name: 'Behandeln von Problemen mit der VNET-Clustererstellung, -konnektivität und -verwendung'
+              href: vnet-deploy-troubleshoot.md
+        - name: Verwalten der Clustersicherheit
+          href: manage-cluster-security.md
+        - name: Konfigurieren von verwalteten Identitäten
+          href: managed-identities.md
+        - name: Konfigurieren von kundenseitig verwalteten Schlüsseln
+          items:
+            - name: Portal
+              href: customer-managed-keys-portal.md
+            - name: 'C#'
+              href: customer-managed-keys-csharp.md
+            - name: Azure Resource Manager-Vorlage
+              href: customer-managed-keys-resource-manager.md
+        - name: Erstellen der Azure AD-App
+          href: provision-azure-ad-app.md
+    - name: Verwalten
+      items:
+        - name: Cluster
+          items:
+            - name: Auswählen der VM-SKU eines Clusters
+              href: manage-cluster-choose-sku.md
+            - name: Verwalten von horizontaler Clusterskalierung
+              href: manage-cluster-horizontal-scaling.md
+            - name: Verwalten von vertikaler Clusterskalierung
+              href: manage-cluster-vertical-scaling.md
+            - name: Überprüfen der Clusterintegrität
+              href: check-cluster-health.md
+            - name: Hinzufügen eines Clusterprinzipals
+              items:
+                - name: 'C#'
+                  href: cluster-principal-csharp.md
+                - name: Python
+                  href: cluster-principal-python.md
+                - name: Azure Resource Manager-Vorlage
+                  href: cluster-principal-resource-manager.md
+            - name: Verwalten von Clusterspracherweiterungen
+              href: language-extensions.md
+        - name: Datenbank
+          items:
+            - name: Follower-Datenbanken
+              href: follower.md
+            - name: Verwalten von Datenbankberechtigungen
+              href: manage-database-permissions.md
+            - name: Hinzufügen eines Datenbankprinzipals
+              items:
+                - name: 'C#'
+                  href: database-principal-csharp.md
+                - name: Python
+                  href: database-principal-python.md
+                - name: Azure Resource Manager-Vorlage
+                  href: database-principal-resource-manager.md
+            - name: Richtlinien
+              items:
+                - name: 'C#'
+                  href: database-table-policies-csharp.md
+                - name: Python
+                  href: database-table-policies-python.md
+        - name: Daten
+          items:
+            - name: Löschen von Daten
+              href: delete-data.md
+            - name: Behandeln von doppelten Daten
+              href: dealing-with-duplicates.md
+    - name: Überwachen
+      items:
+        - name: Verwenden von Diagnoseprotokollen zum Überwachen der Erfassung
+          href: using-diagnostic-logs.md
+        - name: Verwenden von Metriken zum Überwachen der Clusterintegrität
+          href: using-metrics.md
+        - name: Überwachen der Clusterintegrität mithilfe von Resource Health
+          href: monitor-with-resource-health.md
+    - name: Integration in andere Tools
+      items:
+        - name: Azure Data Factory
+          items:
+            - name: Integration mit Data Factory
+              href: data-factory-integration.md
+            - name: Kopieren von Daten mit Azure Data Factory
+              href: data-factory-load-data.md
+            - name: Massenkopieren von Daten mit einer Azure Data Factory-Vorlage
+              href: data-factory-template.md
+            - name: Ausführen von Steuerungsbefehlen mithilfe von Azure Data Factory
+              href: data-factory-command-activity.md
+        - name: "Microsoft\_Flow-Connector"
+          items:
+            - name: "Microsoft\_Flow-Connector"
+              href: flow.md
+            - name: "Verwendungsbeispiele für den Microsoft\_Flow-Connector"
+              href: flow-usage.md
+        - name: Apache Spark-Connector
+          href: spark-connector.md
+        - name: Herstellen einer Databricks-Verbindung unter Verwendung von Python
+          href: connect-from-databricks.md
+        - name: Analysieren von Daten in Jupyter Notebooks und Kqlmagic
+          href: kqlmagic.md
+        - name: Analysieren von Daten in Azure Notebooks
+          href: azure-notebooks.md
+        - name: Azure Pipelines
+          href: devops.md
+    - name: Problembehandlung
+      items:
+        - name: Erstellen eines Clusters
+          href: troubleshoot-create-cluster.md
+        - name: Herstellen der Verbindung mit einem Cluster
+          href: troubleshoot-connect-cluster.md
+        - name: Verwenden von Datenbanken und Tabellen
+          href: troubleshoot-database-table.md
+- name: Verweis
+  items:
+    - name: Abfragesprache
+      href: kusto/query/index.md
+    - name: Befehle für Verwaltung
+      href: kusto/management/index.md
+    - name: APIs
+      href: kusto/api/index.md
+    - name: Tools
+      href: kusto/tools/index.md
+    - name: Konzepte
+      href: kusto/concepts/index.md
+- name: Ressourcen
+  items:
+    - name: Blog
+      href: 'https://azure.microsoft.com/blog/tag/azure-data-explorer/'
+    - name: Foren
+      items:
+        - name: Stack Overflow
+          href: 'https://stackoverflow.com/questions/tagged/azure-data-explorer'
+        - name: Technische Microsoft-Community
+          href: 'https://techcommunity.microsoft.com/t5/Azure-Data-Explorer/bd-p/Kusto'
+        - name: MSDN-Forum
+          href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureKusto'
+    - name: Produktfeedback
+      href: 'https://aka.ms/adefeedback'
+    - name: Preise und Abrechnung
+      items:
+        - name: Seite mit der Preisübersicht
+          href: 'https://azure.microsoft.com/pricing/details/data-explorer/'
+        - name: Kostenschätzungstool
+          href: 'https://aka.ms/adecostestimator'
+        - name: Reservierte Kapazität
+          href: pricing-reserved-capacity.md
+    - name: Dienstupdates
+      href: 'https://azure.microsoft.com/updates/?product=data-explorer'

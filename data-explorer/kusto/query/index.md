@@ -1,0 +1,41 @@
+---
+title: Übersicht – Azure Data Explorer | Microsoft-Dokumentation
+description: Dieser Artikel enthält eine Übersicht über Azure Data Explorer.
+services: data-explorer
+author: orspod
+ms.author: orspodek
+ms.reviewer: rkarlin
+ms.service: data-explorer
+ms.topic: reference
+ms.date: 03/07/2019
+ms.openlocfilehash: 1c6c3cafef35c1292292e86da69a4d6ec03bb87c
+ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.translationtype: HT
+ms.contentlocale: de-DE
+ms.lasthandoff: 04/15/2020
+ms.locfileid: "81490275"
+---
+# <a name="overview"></a>Übersicht
+
+Eine Kusto-Abfrage ist eine schreibgeschützte Anforderung zur Verarbeitung von Daten und zur Rückgabe der Ergebnisse.
+Die Anforderung wird in unformatiertem Text formuliert, wobei ein Datenflussmodell verwendet wird, das darauf ausgelegt ist, die Lesbarkeit, das Verfassen und die Automatisierung der Syntax zu vereinfachen. Die Abfrage verwendet Schemaentitäten, die in einer SQL-ähnlichen Hierarchie organisiert sind: Datenbanken, Tabellen und Spalten.
+
+Die Abfrage besteht aus einer Abfolge von Abfrageanweisungen, jeweils getrennt durch ein Semikolon (`;`), mit mindestens einer [tabellarischen Ausdrucksanweisung](tabularexpressionstatements.md), bei der es sich um eine Anweisung handelt, die Daten in einem tabellenähnlichen Raster aus Spalten und Zeilen erzeugt. Die tabellarischen Ausdrucksanweisungen der Abfrage erzeugen die Ergebnisse der Abfrage.
+
+Die Syntax der tabellarischen Ausdrucksanweisung besteht aus einem tabellarischen Datenfluss von einem tabellarischen Abfrageoperator zu einem anderen. Dieser beginnt mit einer Datenquelle (z. B. mit einer Tabelle in einer Datenbank oder mit einem Operator, der Daten erzeugt) und durchläuft anschließend eine Reihe von Datentransformationsoperatoren, die mit einem senkrechten Strich (`|`) als Trennzeichen miteinander verbunden sind.
+
+Die folgende Kusto-Abfrage enthält beispielsweise eine einzelne Anweisung, bei der es sich um eine tabellarische Ausdrucksanweisung handelt. Die Anweisung beginnt mit einem Verweis auf eine Tabelle namens `StormEvents` (die Datenbank, die diese Tabelle hostet, ist hier impliziert und Teil der Verbindungsinformationen). Die Daten (Zeilen) für diese Tabelle werden dann zuerst nach dem Wert der Spalte `StartTime` gefiltert und anschließend nach dem Wert der Spalte `State`. Die Abfrage gibt dann die Anzahl der "verbleibenden" Zeilen zurück.
+
+```kusto
+StormEvents 
+| where StartTime >= datetime(2007-11-01) and StartTime < datetime(2007-12-01)
+| where State == "FLORIDA"  
+| count 
+```
+
+Klicken Sie [hier](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAAwsuyS/KdS1LzSspVuDlqlEoz0gtSlUILkksKgnJzE1VsLNVSEksSS0BsjWMDAzMdQ0NdQ0MNRUS81KQVNmgKzICKUIxryRVwdZWQcnNxz/I08VRSQFsW3J+aV6JAgAwMx4+hAAAAA==), um diese Abfrage auszuführen.
+In diesem Fall sieht das Ergebnis wie folgt aus:
+
+|Anzahl|
+|-----|
+|   23|
