@@ -741,6 +741,8 @@
           href: ./query/rolling-percentile-plugin.md
     - name: Zeitreihenanalyse
       items:
+        - name: Übersicht über die Zeitreihenanalyse
+          href: ./query/machine-learning-and-tsa.md
         - name: make-series-Operator
           href: ./query/make-seriesoperator.md
         - name: series_add()
@@ -803,8 +805,6 @@
           href: ./query/series-stats-dynamicfunction.md
         - name: series_subtract()
           href: ./query/series-subtractfunction.md
-        - name: Übersicht über die Zeitreihenanalyse
-          href: ./query/machine-learning-and-tsa.md
     - name: Machine Learning
       items:
         - name: autocluster
