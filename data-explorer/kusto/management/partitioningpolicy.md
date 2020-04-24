@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 857756b5be76746c65f58d0d8269c341e6217564
-ms.sourcegitcommit: 2e63c7c668c8a6200f99f18e39c3677fcba01453
+ms.openlocfilehash: ad255c6930e76628a5187fa8d321e3445dbb5f99
+ms.sourcegitcommit: fbe298e88542c0dcea0f491bb53ac427f850f729
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 04/24/2020
-ms.locfileid: "82117674"
+ms.locfileid: "82138865"
 ---
 # <a name="data-partitioning-policy-preview"></a>Richtlinie für die Daten Partitionierung (Vorschau)
 
@@ -25,7 +25,8 @@ Die Partitionierungs Richtlinie definiert, ob und wie Blöcke [(datenshards)](..
 Der Hauptzweck der Richtlinie besteht darin, die Leistung von Abfragen zu verbessern, die bekanntermaßen zu einer kleinen Teilmenge der Werte in den partitionierten Spalten reduziert werden.
 Ein sekundärer potenzieller Vorteil ist eine bessere Komprimierung der Daten.
 
-Obwohl für die Menge der Tabellen, für die die Richtlinie definiert werden kann, keine hart codierten Limits festgelegt sind, erhöht jede zusätzliche Tabelle den Aufwand für den Hintergrunddaten Partitionierungs Prozess, der auf den Knoten des Clusters ausgeführt wird, und erfordert möglicherweise zusätzliche Ressourcen aus dem Cluster. Weitere Informationen finden Sie weiter [unten](#capacity).
+> [!WARNING]
+> Es sind zwar keine hart codierten Grenzwerte für die Tabellen Menge festgelegt, für die die Richtlinie definiert ist, aber jede zusätzliche Tabelle erhöht den mehr Aufwand für den Hintergrunddaten Partitionierungs Prozess, der auf den Knoten des Clusters ausgeführt wird, und erfordert möglicherweise zusätzliche Ressourcen aus dem Cluster (siehe [Kapazität](#capacity)).
 
 ## <a name="partition-keys"></a>Partitionsschlüssel
 
@@ -202,8 +203,8 @@ Die Ausgabe umfasst Folgendes:
 
 #### <a name="capacity"></a>Capacity
 
-* Da der Daten Partitionierungs Prozess zur Erstellung von größeren Blöcken führt, müssen Sie möglicherweise die Zusammenführung der [clusterzusammenführungs Kapazität](../management/capacitypolicy.md#extents-merge-capacity) des Clusters erhöhen, damit der Prozess zum Zusammenführen von [Blöcken](../management/extents-overview.md) in der Lage ist.
-* Wenn dies erforderlich ist (beispielsweise bei einem hohen Erfassungs Durchsatz und/oder einer ausreichend großen Anzahl von Tabellen, die Partitionierung erfordern), können Sie die [Partitions Kapazität](../management/capacitypolicy.md#extents-partition-capacity) des Clusters erhöhen, um eine größere Anzahl gleichzeitiger Partitionierungs Vorgänge zuzulassen.
+* Da der Daten Partitionierungs Prozess zur Erstellung von größeren Blöcken führt, ist es möglicherweise erforderlich, (schrittweise und linear) die [Zusammenführungs Kapazität](../management/capacitypolicy.md#extents-merge-capacity) des Clusters zu vergrößern, sodass der Prozess zum Zusammenführen von [Blöcken](../management/extents-overview.md) in der Lage ist.
+* Wenn dies erforderlich ist (beispielsweise bei einem hohen Erfassungs Durchsatz und/oder einer ausreichend großen Anzahl von Tabellen, die partitioniert werden müssen), kann die [Partitions Kapazität](../management/capacitypolicy.md#extents-partition-capacity) des Clusters (schrittweise und linear) erhöht werden, um eine größere Anzahl gleichzeitiger Partitionierungs Vorgänge zu ermöglichen.
   * Wenn das Erhöhen der Partitionierung einen erheblichen Anstieg der Verwendung der Cluster Ressourcen zur Folge hat, Skalieren Sie den Cluster entweder manuell oder durch Aktivieren der automatischen Skalierung zentral hoch-oder Herunterskalieren.
 
 ### <a name="outliers-in-partitioned-columns"></a>Ausreißer in partitionierten Spalten
