@@ -1,6 +1,6 @@
 ---
-title: Python-Plugin - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird das Python-Plugin in Azure Data Explorer beschrieben.
+title: 'Python-Plug-in: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt das python-Plug-in in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,69 +10,69 @@ ms.topic: reference
 ms.date: 04/01/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 5192474779fb712595ff1c25785892bb543fda84
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 5ceafde1361c87d368237d0f8c71ad8d0708aec1
+ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765713"
+ms.lasthandoff: 04/23/2020
+ms.locfileid: "82108506"
 ---
 # <a name="python-plugin"></a>Python-Plug-In
 
 ::: zone pivot="azuredataexplorer"
 
-Das Python-Plugin führt eine benutzerdefinierte Funktion (UDF) mit einem Python-Skript aus. Das Python-Skript ruft Tabellarische Daten als Eingabe ab und wird voraussichtlich eine tabellarische Ausgabe erzeugen.
-Die Laufzeit des Plugins wird in [Sandboxes](../concepts/sandboxes.md)gehostet, die auf den Knoten des Clusters ausgeführt werden.
+Das python-Plug-in führt eine benutzerdefinierte Funktion (User-Defined Function, UDF) mit einem Python-Skript aus. Das Python-Skript ruft Tabellendaten als Eingabe ab, und es wird erwartet, dass eine tabellarische Ausgabe erzeugt wird.
+Die Laufzeit des Plug-ins wird in [Sand Fächern](../concepts/sandboxes.md)gehostet, die auf den Knoten des Clusters ausgeführt werden.
 
 ## <a name="syntax"></a>Syntax
 
-*T* `|` `per_node` `python(` *output_schema* `,` *script* `,` *script_parameters*`,` *external_artifacts*[ `=` `single`( | )] output_schema Skript [ script_parameters ][ external_artifacts ] `evaluate` `hint.distribution``)`
+*T* `|` `single``,` *script* *output_schema* `,` *external_artifacts*[`hint.distribution` (`per_node`)] `python(`output_schema Skript [`,` *script_parameters*] [external_artifacts] |  `evaluate` `=``)`
 
 ## <a name="arguments"></a>Argumente
 
-* *output_schema*: `type` Ein Literal, das das Ausgabeschema der Tabellendaten definiert, das vom Python-Code zurückgegeben wird.
-    * Das Format `typeof(`lautet: *ColumnName* `:` *ColumnType* [, ...] `)`, z. `typeof(col1:string, col2:long)`B.: .
-    * Verwenden Sie zum Erweitern des Eingabeschemas die folgende Syntax:`typeof(*, col1:string, col2:long)`
-* *skript*: `string` Ein Literal, das das gültige Python-Skript ist, das ausgeführt werden soll.
-* *script_parameters*: `dynamic` Ein optionales Literal, das eine Eigenschaftstasche mit Namen/Wert-Paaren ist, die als reserviertes `kargs` Wörterbuch an das Python-Skript übergeben werden soll (siehe [Reservierte Python-Variablen](#reserved-python-variables)).
-* *hint.distribution*: Ein optionaler Hinweis für die Ausführung des Plugins, der auf mehrere Clusterknoten verteilt werden soll.
-  * Der Standardwert ist `single`.
-  * `single`: Eine einzelne Instanz des Skripts wird über die gesamten Abfragedaten ausgeführt.
-  * `per_node`: Wenn die Abfrage vor dem Python-Block verteilt wird, wird auf jedem Knoten eine Instanz des Skripts über die darin enthaltenen Daten ausgeführt.
-* *external_artifacts*: `dynamic` Ein optionales Literal, das eine Eigenschaftstasche mit Namen & URL-Paare für Artefakte ist, auf die aus dem Cloudspeicher zugegriffen werden kann und die für das Skript zur Laufzeit verfügbar gemacht werden können.
-  * URLs, auf die in diesem Eigenschaftenbeutel verwiesen wird, sind erforderlich, um:
-  * Werden Sie in die [Legendenrichtlinie](../management/calloutpolicy.md)des Clusters einbezogen.
-    2. An einem öffentlich verfügbaren Speicherort sein oder die erforderlichen Anmeldeinformationen bereitstellen, wie unter [Speicherverbindungszeichenfolgen](../api/connection-strings/storage.md)erläutert.
-  * Die Artefakte werden für das Skript zur Verfügung gestellt, um aus einem lokalen temporären Verzeichnis zu verwenden, `.\Temp`und die im Eigenschaftenbeutel angegebenen Namen werden als lokale Dateinamen verwendet (siehe [Beispiel](#examples) unten).
+* *output_schema*: ein `type` Literalwert, der das Ausgabe Schema der tabellarischen Daten definiert, die vom Python-Code zurückgegeben werden.
+    * Das Format ist: `typeof(` *ColumnName* `:` *ColumnType* [,...] `)`Beispiel: `typeof(col1:string, col2:long)`.
+    * Verwenden Sie zum Erweitern des Eingabe Schemas die folgende Syntax:`typeof(*, col1:string, col2:long)`
+* *Skript*: ein `string` Literalzeichen, das das gültige auszuführende Python-Skript ist.
+* *script_parameters*: ein optionales `dynamic` literalobjekt, bei dem es sich um einen Eigenschaften Behälter mit Name-Wert-Paaren handelt, die `kargs` als reserviertes Wörterbuch an das Python-Skript übermittelt werden sollen (siehe [reservierte python](#reserved-python-variables)
+* *Hint. Distribution*: ein optionaler Hinweis für die Ausführung des Plug-ins, das auf mehrere Cluster Knoten verteilt wird.
+  * Standardwert: `single`.
+  * `single`: Eine einzelne Instanz des Skripts wird über die gesamten Abfrage Daten ausgeführt.
+  * `per_node`: Wenn die Abfrage vor der Verteilung des python-Blocks verteilt wird, wird eine Instanz des Skripts auf jedem Knoten über die darin enthaltenen Daten ausgeführt.
+* *external_artifacts*: ein optionales `dynamic` Literalformat, bei dem es sich um einen Eigenschaften Behälter mit Name & URL-Paaren für Artefakte handelt, auf die über den cloudspeicher zugegriffen werden kann und die zur Laufzeit für das Skript verfügbar gemacht werden können
+  * URLs, auf die in diesem Eigenschaften Behälter verwiesen wird, sind erforderlich für:
+  * Sie sind in der Legenden [Richtlinie](../management/calloutpolicy.md)des Clusters enthalten.
+    2. Wenn Sie sich an einem öffentlich verfügbaren Speicherort befinden oder die erforderlichen Anmelde Informationen bereitstellen, wie unter [Speicher Verbindungs](../api/connection-strings/storage.md)Zeichenfolgen erläutert.
+  * Die Artefakte werden bereitgestellt, damit das Skript aus einem lokalen temporären Verzeichnis,, `.\Temp`verwendet werden kann. die in der Eigenschaften Sammlung bereitgestellten Namen werden als lokale Dateinamen verwendet (siehe [Beispiel](#examples) unten).
   * Weitere Informationen finden Sie im [Anhang](#appendix-installing-packages-for-the-python-plugin) unten.
 
-## <a name="reserved-python-variables"></a>Reservierte Python-Variablen
+## <a name="reserved-python-variables"></a>Reservierte python-Variablen
 
 Die folgenden Variablen sind für die Interaktion zwischen der Kusto-Abfragesprache und dem Python-Code reserviert:
 
-* `df`: Die Eingabe-Tabellarischen `T` Daten (die `pandas` oben genannten Werte) als DataFrame.
-* `kargs`: Der Wert des *script_parameters-Arguments* als Python-Wörterbuch.
-* `result`: `pandas` Ein DataFrame, der vom Python-Skript erstellt wurde, dessen Wert zu den Tabellendaten wird, die an den Kusto-Abfrageoperator gesendet werden, der dem Plugin folgt.
+* `df`: Die Eingabe Tabellendaten (die Werte von `T` oben) als `pandas` dataframe.
+* `kargs`: Der Wert des *script_parameters* Arguments als python-Wörterbuch.
+* `result`: Ein `pandas` dataframe, der vom Python-Skript erstellt wurde, dessen Wert zu den Tabellendaten wird, die an den Kusto-Abfrage Operator gesendet werden, der auf das Plug-in folgt
 
 ## <a name="onboarding"></a>Onboarding
 
-* Das Plugin ist standardmäßig deaktiviert.
-* Voraussetzungen für die Aktivierung des Plugins sind [hier](../concepts/sandboxes.md#prerequisites)aufgeführt.
-* Aktivieren oder deaktivieren Sie das Plugin im [Azure-Portal auf der Registerkarte **Konfiguration** Ihres Clusters](https://docs.microsoft.com/azure/data-explorer/language-extensions).
+* Das Plug-in ist standardmäßig deaktiviert.
+* Die Voraussetzungen für die Aktivierung des Plug-ins sind [hier](../concepts/sandboxes.md#prerequisites)aufgeführt.
+* Aktivieren oder deaktivieren Sie das Plug-in auf der [Azure-Portal auf der Registerkarte **Konfiguration** Ihres Clusters](https://docs.microsoft.com/azure/data-explorer/language-extensions).
 
 ## <a name="notes-and-limitations"></a>Hinweise und Einschränkungen
 
-* Das Python-Sandbox-Image basiert auf der *Anaconda 5.2.0-Distribution* mit *Python 3.6-Engine.*
-  Die Liste der Pakete finden Sie [hier](http://docs.anaconda.com/anaconda/packages/old-pkg-lists/5.2.0/py3.6_win-64/) (ein kleiner Prozentsatz der Pakete kann mit den Einschränkungen, die durch die Sandbox, in der das Plugin ausgeführt wird, erzwungen werden, nicht kompatibel sein).
-* Das Python-Image enthält auch `tensorflow` `keras`allgemeine `torch` `hdbscan`ML-Pakete: , , , und `xgboost` andere nützliche Pakete.
-* Das Plugin importiert standardmäßig `np` *numpy* (as `pd`) & *Pandas* (as ) .  Sie können andere Module nach Bedarf importieren.
-* **[Erfassung aus Abfrage-](../management/data-ingestion/ingest-from-query.md) und [Aktualisierungsrichtlinien](../management/updatepolicy.md)**
-  * Es ist möglich, das Plugin in Abfragen zu verwenden, die:
-      1. Definiert als Teil einer Aktualisierungsrichtlinie, deren Quelltabelle für die Verwendung *nicht-streaming-Erfassung* aufgenommen wird.
-      2. Wird als Teil eines Befehls ausgeführt, der von `.set-or-append`einer Abfrage erfasst wird (z. B. ).
-  * In beiden oben genannten Fällen wird empfohlen, zu überprüfen, ob das Volumen und die Häufigkeit der Aufnahme sowie die Komplexität und Ressourcenauslastung der Python-Logik an den [Sandbox-Einschränkungen](../concepts/sandboxes.md#limitations)und den verfügbaren Ressourcen des Clusters ausgerichtet sind.
-    Andernfalls kann es zu [Drosselungsfehlern kommen.](../concepts/sandboxes.md#errors)
-  * Es ist *nicht* möglich, das Plugin in einer Abfrage zu verwenden, die als Teil einer Aktualisierungsrichtlinie definiert ist, deren Quelltabelle mithilfe der [Streaming-Aufnahme](https://docs.microsoft.com/azure/data-explorer/ingest-data-streaming)aufgenommen wird.
+* Das python Sandbox-Image basiert auf der *Anaconda 5.2.0* -Verteilung mit dem *python 3,6* -Modul.
+  Die Liste der Pakete finden Sie [hier](http://docs.anaconda.com/anaconda/packages/old-pkg-lists/5.2.0/py3.6_win-64/) (ein kleiner Prozentsatz der Pakete ist möglicherweise nicht mit den von der Sandbox, in der das Plug-in ausgeführt wird, erzwungenen Beschränkungen kompatibel).
+* Das python-Image enthält auch gängige `tensorflow`ml `keras` `torch` `hdbscan` `xgboost` -Pakete:,,, und andere nützliche Pakete.
+* Das Plug-in importiert *numpy* (as `np`) & *Pandas* (as `pd`) standardmäßig.  Sie können andere Module nach Bedarf importieren.
+* **Erfassung [von Abfrage](../management/data-ingestion/ingest-from-query.md) -und [Aktualisierungs Richtlinien](../management/updatepolicy.md)**
+  * Es ist möglich, das Plug-in in Abfragen zu verwenden, die folgende Aktionen ausführen:
+      1. Definiert als Teil einer Update Richtlinie, deren Quell Tabelle mit der *nicht-streamingerfassung* erfasst wird.
+      2. Führen Sie als Teil eines Befehls aus, der von einer Abfrage erfasst wird (z `.set-or-append`. b.).
+  * In beiden oben genannten Fällen wird empfohlen, zu überprüfen, ob das Volume und die Häufigkeit der Erfassung sowie die Komplexität und Ressourcennutzung der python-Logik an den [Sandkasten Einschränkungen](../concepts/sandboxes.md#limitations)und den verfügbaren Ressourcen des Clusters angepasst sind.
+    Wenn dies nicht der Fall ist, kann dies zu [Drosselungs Fehlern](../concepts/sandboxes.md#errors)führen.
+  * Es ist *nicht* möglich, das Plug-in in einer Abfrage zu verwenden, die als Teil einer Update Richtlinie definiert ist, deren Quell Tabelle mithilfe der [streamingansung](https://docs.microsoft.com/azure/data-explorer/ingest-data-streaming)erfasst wird.
 
 ## <a name="examples"></a>Beispiele
 
@@ -121,12 +121,12 @@ print "This is an example for using 'external_artifacts'"
 
 ## <a name="performance-tips"></a>Leistungstipps
 
-* Reduzieren Sie den Eingabedatensatz des Plugins auf den erforderlichen Mindestbetrag (Spalten/Zeilen).
-    * Verwenden Sie filtert nach Möglichkeit mit der Abfragesprache von Kusto.
-    * Um eine Berechnung für eine Teilmenge der Quellspalten durchzuführen, projizieren Sie nur die Spalten, bevor Sie das Plugin aufrufen.
-* Verwenden `hint.distribution = per_node` Sie immer dann, wenn die Logik in Ihrem Skript verteilbar ist.
-    * Sie können den [Partitionsoperator](partitionoperator.md) auch zum Partitionieren des Eingabedatensatzes verwenden.
-* Verwenden Sie nach Möglichkeit die Abfragesprache von Kusto, um die Logik Ihres Python-Skripts zu implementieren.
+* Reduzieren Sie die Eingabedaten des Plug-Ins auf den minimal erforderlichen Wert (Spalten/Zeilen).
+    * Verwenden Sie nach Möglichkeit Filter für das Quell DataSet mit der Abfragesprache von Kusto.
+    * Um eine Berechnung für eine Teilmenge der Quell Spalten auszuführen, projizieren Sie nur diese Spalte, bevor Sie das Plug-in aufrufen.
+* Verwenden `hint.distribution = per_node` Sie immer dann, wenn die Logik in Ihrem Skript Verteil Bar ist.
+    * Sie können auch den [Partitions Operator](partitionoperator.md) für die Partitionierung des Eingabe Datasets verwenden.
+* Verwenden Sie die Abfragesprache von Kusto, wann immer dies möglich ist, um die Logik Ihres python-Skripts zu implementieren.
 
     Beispiel:
 
@@ -144,11 +144,11 @@ print "This is an example for using 'external_artifacts'"
 
 ## <a name="usage-tips"></a>Verwendungstipps
 
-* Um mehrzeilige Zeichenfolgen zu `Kusto.Explorer`generieren, die das Python-Skript in enthalten, kopieren Sie Ihr Python-Skript aus Ihrem bevorzugten Python-Editor (*Jupyter*, *Visual Studio Code*, *PyCharm*usw.), dann entweder:
-    * Drücken Sie *F2,* um das Fenster **Bearbeiten in Python** zu öffnen. Fügen Sie das Skript in dieses Fenster ein. Klicken Sie auf **OK**. Das Skript wird mit Anführungszeichen und neuen Zeilen (so dass es in Kusto gültig ist) dekoriert und automatisch in die Abfrageregisterkarte eingefügt.
-    * Fügen Sie den Python-Code direkt in die Abfrage-Registerkarte ein, wählen Sie diese Zeilen aus und drücken Sie *Strg+K*, *Strg+S-Hotkey,* um sie wie oben zu dekorieren (um sie umzukehren, drücken Sie *Strg+K*, *Strg+M-Hotkey).* [Hier](../tools/kusto-explorer-shortcuts.md#query-editor) ist die vollständige Liste der Verknüpfungen mit dem Abfrage-Editor.
-* Um Konflikte zwischen Kusto-Zeichenfolgentrennzeichen und Python-Zeichenfolgenliteralen zu`'`vermeiden, empfehlen wir die Verwendung einzelner Anführungszeichen`"`( ) für Kusto-Zeichenfolgenliterale in Kusto-Abfragen und doppelte Anführungszeichen ( ) für Python-Zeichenfolgenliterale in Python-Skripts.
-* Verwenden Sie den [externen Datenoperator,](externaldata-operator.md) um den Inhalt eines Skripts abzudateien, das Sie an einem externen Speicherort, z. B. Azure Blob Storage, gespeichert haben.
+* Um mehrzeilige Zeichen folgen mit dem Python-Skript `Kusto.Explorer`in zu generieren, kopieren Sie Ihr Python-Skript aus Ihrem bevorzugten python-Editor (*jupyter*, *Visual Studio Code*, *pycharm*usw.), und führen Sie dann eine der folgenden Aktionen aus:
+    * Drücken Sie *F2* , um das Fenster **in python bearbeiten** zu öffnen. Fügen Sie das Skript in dieses Fenster ein. Wählen Sie **OK** aus. Das Skript wird mit Anführungszeichen und neuen Zeilen versehen (ist in Kusto gültig) und wird automatisch in die Registerkarte Abfrage eingefügt.
+    * Fügen Sie den Python-Code direkt in die Registerkarte Abfrage ein, wählen Sie die Zeilen aus, und drücken Sie *STRG + k*, *STRG + S* -Taste, um Sie wie oben zu ergänzen (um Sie umzukehren, drücken Sie *STRG + k*, *STRG + M* heiße Taste). [Hier](../tools/kusto-explorer-shortcuts.md#query-editor) ist die vollständige Liste der Verknüpfungen für den Abfrage-Editor.
+* Zum Vermeiden von Konflikten zwischen Kusto-Zeichen folgen Trennzeichen und python-Zeichenfolgenliteralen empfiehlt es`'`sich, einfache Anführungszeichen () für Kusto-Zeichen folgen Literale in Kusto-Abfragen und doppelte Anführungszeichen (`"`) für python-Zeichen folgen Literale in python-Skripts zu verwenden.
+* Verwenden Sie den [externaldata-Operator](externaldata-operator.md) zum Abrufen des Inhalts eines Skripts, das Sie an einem externen Speicherort gespeichert haben, z. b. Azure BLOB Storage.
   
     **Beispiel**
 
@@ -165,52 +165,52 @@ print "This is an example for using 'external_artifacts'"
     | render linechart 
     ```
 
-## <a name="appendix-installing-packages-for-the-python-plugin"></a>Anhang: Installieren von Paketen für das Python-Plugin
+## <a name="appendix-installing-packages-for-the-python-plugin"></a>Anhang: Installieren von Paketen für das python-Plug-in
 
-Möglicherweise müssen Sie Paket(e) aus einem der folgenden Gründe selbst installieren:
+Aus den folgenden Gründen müssen Sie möglicherweise Pakete selbst installieren:
 
-* Das Paket ist privat und ist Ihr eigenes.
-* Das Paket ist öffentlich, aber nicht im Basisbild des Plugins enthalten.
+* Das Paket ist privat und selbst.
+* Das Paket ist öffentlich, aber nicht im Basis Image des Plug-ins enthalten.
 
 Sie können Pakete installieren, indem Sie die folgenden Schritte ausführen:
 
 1. Einmalige Voraussetzung:
   
-  a. Erstellen Sie einen Blobcontainer, um das Paket zu hosten, vorzugsweise in derselben Region wie Ihr Cluster.
-    * Beispiel: https://artifcatswestus.blob.core.windows.net/python (vorausgesetzt, Ihr Cluster befindet sich in West US)
+  ein. Erstellen Sie einen BLOB-Container, um die Pakete zu hosten, vorzugsweise in derselben Region wie Ihr Cluster.
+    * Beispiel: `https://artifcatswestus.blob.core.windows.net/python` (angenommen, Ihr Cluster befindet sich in der Region "USA, Westen")
   
-  b. Ändern Sie die [Callout-Richtlinie](../management/calloutpolicy.md) des Clusters, um den Zugriff auf diesen Speicherort zu ermöglichen.
-    * Dies erfordert [AllDatabasesAdmin-Berechtigungen.](../management/access-control/role-based-authorization.md)
-    * Um z. B. den Zugriff https://artifcatswestus.blob.core.windows.net/pythonauf ein Blob in zu aktivieren, lautet der auszuführende Befehl:
+  b. Ändern Sie die Legenden [Richtlinien](../management/calloutpolicy.md) des Clusters, um den Zugriff auf diesen Speicherort zuzulassen.
+    * Hierfür sind [alldatabasesadmin](../management/access-control/role-based-authorization.md) -Berechtigungen erforderlich.
+    * Um z. b. den Zugriff auf ein BLOB in `https://artifcatswestus.blob.core.windows.net/python`zu aktivieren, lautet der Befehl, der ausgeführt werden soll, wie folgt:
 
       ```kusto
       .alter-merge cluster policy callout @'[ { "CalloutType": "sandbox_artifacts", "CalloutUriRegex": "artifcatswestus\\.blob\\.core\\.windows\\.net/python/","CanCall": true } ]'
       ```
 
-2. Für öffentliche Pakete (in [PyPi](https://pypi.org/) oder anderen Kanälen) a. Laden Sie das Paket und seine Abhängigkeiten herunter.
-  b. Kompilieren Sie bei`*.whl`Bedarf in Wheel- ( )-Dateien:
-    * Führen Sie in einem cmd-Fenster (in Ihrer lokalen Python-Umgebung) folgende Ausführungszeit aus:
+2. Für öffentliche Pakete (in [pypi](https://pypi.org/) oder anderen Kanälen) a. Laden Sie das Paket und seine Abhängigkeiten herunter.
+  b. Kompilieren Sie ggf. in Wheel`*.whl`()-Dateien:
+    * Führen Sie in einem cmd-Fenster (in Ihrer lokalen python-Umgebung) Folgendes aus:
       ```python
       pip wheel [-w download-dir] package-name.
       ```
 
 3. Erstellen Sie eine ZIP-Datei, die das erforderliche Paket und seine Abhängigkeiten enthält:
 
-    * Für öffentliche Pakete: Zip die Dateien, die im vorherigen Schritt heruntergeladen wurden.
+    * Bei öffentlichen Paketen: zippen Sie die Dateien, die Sie im vorherigen Schritt heruntergeladen haben.
     * Notizen:
-        * Achten Sie darauf, die `.whl` Dateien selbst und *nicht* ihren übergeordneten Ordner zu verpacken.
-        * Sie können `.whl` Dateien für Pakete überspringen, die bereits mit derselben Version im Basissandkastenabbild vorhanden sind.
-    * Für private Pakete: Zip den Ordner des Pakets und die seiner Abhängigkeiten
+        * Stellen Sie sicher, dass `.whl` Sie die Dateien selbst und *nicht* ihren übergeordneten Ordner komprimieren.
+        * Sie können Dateien `.whl` für Pakete überspringen, die bereits mit derselben Version im Basis Sandbox Image vorhanden sind.
+    * Bei privaten Paketen: ZIP-Ordner des Pakets und der zugehörigen Abhängigkeiten
 
-4. Laden Sie die gezippte Datei in ein Blob am Speicherort der Artefakte hoch (ab Schritt 1).
+4. Laden Sie die gezippte Datei in ein BLOB im artefaktspeicherort hoch (aus Schritt 1.).
 
-5. Aufrufen `python` des Plugins:
-    * Geben `external_artifacts` Sie den Parameter mit einem Eigenschaftenbeutel mit Namen und Verweis auf die ZIP-Datei (url des Blobs) an.
-    * In Ihrem Inline-Python-Code: Importieren `Zipackage` Sie aus `sandbox_utils` und rufen Sie seine `install()` Methode mit dem Namen der ZIP-Datei auf.
+5. Aufrufen des `python` Plug-ins:
+    * Geben Sie `external_artifacts` den Parameter mit dem Eigenschaften Behälter Name und Verweis auf die ZIP-Datei an (die URL des BLOBs).
+    * In Ihrem Inline-Python-Code `Zipackage` : `sandbox_utils` importieren Sie aus `install()` , und wenden Sie die-Methode mit dem Namen der ZIP-Datei an.
 
 ### <a name="example"></a>Beispiel
 
-Installieren des [Faker-Pakets,](https://pypi.org/project/Faker/) das gefälschte Daten generiert:
+Installieren des [Faker](https://pypi.org/project/Faker/) -Pakets, das gefälschte Daten generiert:
 
 ```kusto
 range Id from 1 to 3 step 1 
