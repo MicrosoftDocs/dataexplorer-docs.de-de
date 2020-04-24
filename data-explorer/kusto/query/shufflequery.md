@@ -1,6 +1,6 @@
 ---
-title: Shuffle-Abfrage - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt Shuffle-Abfrage in Azure Data Explorer.
+title: Shuffle Query-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird das Mischen von Abfragen in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,20 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: c687d495a41a5f73ac8dbca15d93729f2132a556
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 600e561937b779ff9dd10d5d82f5522d204466a0
+ms.sourcegitcommit: 2e63c7c668c8a6200f99f18e39c3677fcba01453
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81662975"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82117691"
 ---
-# <a name="shuffle-query"></a>Shuffle-Abfrage
+# <a name="shuffle-query"></a>Abfrage mischen
 
-Shuffle-Abfrage ist eine semantisch erhaltende Transformation für eine Gruppe von Operatoren, die Shuffle-Strategie unterstützt, die je nach den tatsächlichen Daten eine erheblich bessere Leistung erzielen kann.
+Bei der shuffle-Abfrage handelt es sich um eine semantische Beibehaltung für eine Reihe von Operatoren, die eine shuffle-Strategie unterstützen, die abhängig von den tatsächlichen Daten die Leistung erheblich verbessert.
 
-Operatoren, die das Mischen in Kusto unterstützen, sind [Join](joinoperator.md), [Summarize](summarizeoperator.md) und [make-series](make-seriesoperator.md).
+Operatoren [, die](summarizeoperator.md) die Wiederherstellung in Kusto unterstützen, sind [Join](joinoperator.md), Sum und [make-Series](make-seriesoperator.md).
 
-Shuffle-Abfragestrategie kann durch den `hint.strategy = shuffle` `hint.shufflekey = <key>`Abfrageparameter oder festgelegt werden.
+Die Strategie zum Mischen von Abfragen kann durch den Abfrage `hint.strategy = shuffle` Parameter `hint.shufflekey = <key>`oder festgelegt werden.
+
+Sie können auch die Definition einer [Richtlinie für die Daten Partitionierung](../management/partitioningpolicy.md) für Ihre Tabelle untersuchen. Abfragen, in denen `shufflekey` auch der Hash Partitions Schlüssel der Tabelle ist, werden erwartungsgemäß ausgeführt, da die Menge an Daten, die für die Umstellung auf Cluster Knoten erforderlich ist, erheblich reduziert wird.
 
 **Syntax**
 
@@ -43,13 +45,13 @@ T
 | make-series hint.shufflekey = Fruit PriceAvg=avg(Price) default=0  on Purchase from datetime(2016-09-10) to datetime(2016-09-13) step 1d by Supplier, Fruit
 ```
 
-Diese Strategie teilt die Last auf allen Clusterknoten, auf denen jeder Knoten eine Partition der Daten verarbeitet.
-Es ist nützlich, die Shuffle-Abfragestrategie`join` zu `summarize` verwenden, wenn der Schlüssel (Schlüssel, Schlüssel oder `make-series` Schlüssel) eine hohe Kardinalität hat, wodurch die reguläre Abfragestrategie Abfragelimits erreicht.
+Durch diese Strategie wird die Last auf allen Cluster Knoten gemeinsam genutzt, wobei jeder Knoten eine Partition der Daten verarbeitet.
+Es ist hilfreich, die Strategie zum Mischen von Abfragen zu verwenden,`join` wenn der `summarize` Schlüssel ( `make-series` Schlüssel, Schlüssel oder Schlüssel) über eine hohe Kardinalität verfügt, was dazu führt, dass die reguläre Abfrage Strategie die Abfrage Limits trifft.
 
-**Unterschied zwischen hint.strategy=shuffle und hint.shufflekey = Key**
+**Unterschied zwischen Hint. Strategy = shuffle und Hint. shufflekey = Key**
 
-`hint.strategy=shuffle`bedeutet, dass der gemischte Operator durch alle Tasten gemischt wird.
-In dieser Abfrage:
+`hint.strategy=shuffle`bedeutet, dass der Operator mit gemischtes Operator von allen Schlüsseln gemischt wird.
+Beispielsweise in dieser Abfrage:
 
 ```kusto
 T | where Event=="Start" | project ActivityId, Started=Timestamp
@@ -59,9 +61,9 @@ T | where Event=="Start" | project ActivityId, Started=Timestamp
 | summarize avg(Duration)
 ```
 
-Die Hashfunktion, die die Daten mischt, verwendet sowohl die Tasten ActivityId als auch ProcessId.
+Die Hash Funktion, mit der die Daten gemischt werden, verwendet die beiden Schlüssel ActivityId und ProcessID.
 
-Die obige Abfrage entspricht:
+Die obige Abfrage ist äquivalent zu:
 
 ```kusto
 T | where Event=="Start" | project ActivityId, Started=Timestamp
@@ -71,8 +73,8 @@ T | where Event=="Start" | project ActivityId, Started=Timestamp
 | summarize avg(Duration)
 ```
 
-Dieser Hinweis kann verwendet werden, wenn Sie daran interessiert sind, die Daten durch alle Schlüssel des gemischten Operators zu mischen, da der zusammengesetzte Schlüssel zu eindeutig ist, aber jeder Schlüssel nicht eindeutig genug ist.
-Wenn der gemischte Operator andere mischbare `summarize` Operatoren wie oder `join`hat, wird die Abfrage komplexer und dann wird hint.strategy=shuffle nicht angewendet.
+Dieser Hinweis kann verwendet werden, wenn Sie daran interessiert sind, die Daten mit allen Schlüsseln des Mischungs Operators zu beenden, da der Verbund Schlüssel zu eindeutig ist, aber jeder Schlüssel nicht eindeutig genug ist.
+Wenn der Operator mit gemischter Operator andere, mit einem `summarize` Operator `join`wie oder verwendet, wird die Abfrage komplexer, und Hint. Strategy = shuffle wird nicht angewendet.
 
 Zum Beispiel:
 
@@ -91,11 +93,11 @@ on ActivityId, numeric_column
 | summarize avg(Duration)
 ```
 
-In diesem Fall, wenn `hint.strategy=shuffle` wir die anwenden (anstatt die Strategie während der Abfrageplanung`ActivityId`zu `numeric_column`ignorieren) und mischen Sie die Daten durch den zusammengesetzten Schlüssel [ , ] das Ergebnis wird nicht korrekt sein.
-Die, `summarize` die auf der `join` linken Seite der Groubs `join` durch `ActivityId`eine Teilmenge der Tasten ist, die ist . Es bedeutet, `summarize` dass der `ActivityId` Wille nach dem Schlüssel gruppiert`ActivityId`wird, während die Daten durch den zusammengesetzten Schlüssel [ , `numeric_column`] partitioniert werden.
-Das Mischen durch den`ActivityId`zusammengesetzten Schlüssel [ , `numeric_column`] bedeutet nicht, dass es sich um ein gültiges Shuffling für die Schlüssel-ActivityId handelt und die Ergebnisse möglicherweise falsch sind.
+Wenn Sie in diesem Fall das `hint.strategy=shuffle` anwenden (anstatt die Strategie während der Abfrage Planung zu ignorieren) und die Daten nach dem Verbund Schlüssel [`ActivityId`, `numeric_column`] mischen, ist das Ergebnis nicht richtig.
+Der `summarize` , der sich auf der linken Seite der `join` groubs durch eine Teilmenge der `join` Schlüssel befindet, die `ActivityId`ist. Dies bedeutet, dass `summarize` der nach dem Schlüssel `ActivityId` gruppiert wird, während die Daten durch den Verbund Schlüssel [`ActivityId`, `numeric_column`] partitioniert werden.
+Das Herunterfahren durch den Verbund Schlüssel [`ActivityId`, `numeric_column`] bedeutet nicht, dass es sich um einen gültigen Vorgang für die Schlüssel-ActivityId handelt und die Ergebnisse möglicherweise falsch sind.
 
-Dieses Beispiel vereinfacht dies unter der Annahme, dass die für einen zusammengesetzten Schlüssel verwendete Hashfunktion`binary_xor(hash(key1, 100) , hash(key2, 100))`
+Dieses Beispiel vereinfacht dies, wenn die für einen Verbund Schlüssel verwendete Hash Funktion`binary_xor(hash(key1, 100) , hash(key2, 100))`
 
 ```kusto
 
@@ -107,17 +109,17 @@ datatable(ActivityId:string, NumericColumn:long)
 | extend hash_by_key = binary_xor(hash(ActivityId, 100) , hash(NumericColumn, 100))
 ```
 
-|ActivityId|NumericColumn|hash_by_key|
+|ActivityId|Numericcolumn|hash_by_key|
 |---|---|---|
-|Aktivität1|2|56|
-|Aktivität1|1|65|
+|Activity1|2|56|
+|Activity1|1|65|
 
 
 
-Wie Sie sehen, wurde der zusammengesetzte Schlüssel für beide Datensätze verschiedenen Partitionen 56 `ActivityId` und 65 `summarize` zugeordnet, aber `join` diese beiden Datensätze haben `ActivityId` den gleichen Wert, was bedeutet, dass die auf der linken Seite der, die erwartet, dass ähnliche Werte der Spalte in der gleichen Partition sein werden, entintelt falsche Ergebnisse erzeugen wird.
+Wie Sie sehen, wurde der Verbund Schlüssel für beide Datensätze den verschiedenen Partitionen 56 und 65 zugeordnet, aber diese beiden Datensätze weisen `ActivityId` denselben Wert auf. `summarize` Dies bedeutet, dass der auf `join` der linken Seite von, der erwartet `ActivityId` , dass ähnliche Werte der Spalte in derselben Partition vorhanden sind, zu falschen Ergebnissen führt.
 
-Löst in `hint.shufflekey` diesem Fall dieses Problem, indem der Shuffle-Schlüssel für die Verknüpfung angegeben wird, bei `hint.shufflekey = ActivityId` dem ein gemeinsamer Schlüssel für alle mischbaren Operatoren ist.
-In diesem Fall ist das Shuffling sicher, beide `join` und `summarize` mischt mit dem gleichen Schlüssel, so dass alle ähnlichen Werte in der gleichen Partition defintely die Ergebnisse sind richtig:
+In diesem Fall löst `hint.shufflekey` dieses Problem, indem Sie den Schlüssel zum Mischen auf dem Join `hint.shufflekey = ActivityId` angibt, zu dem es sich um einen gemeinsamen Schlüssel für alle abbrechbaren Operatoren handelt.
+In diesem Fall ist die ordnungsgemäße Wiedergabe sicher `join` und `summarize` wird durch denselben Schlüssel heruntergefahren, sodass sich alle ähnlichen Werte in derselben Partition befinden, wenn die Ergebnisse korrekt sind:
 
 ```kusto
 T
@@ -134,24 +136,24 @@ on ActivityId, numeric_column
 | summarize avg(Duration)
 ```
 
-|ActivityId|NumericColumn|hash_by_key|
+|ActivityId|Numericcolumn|hash_by_key|
 |---|---|---|
-|Aktivität1|2|56|
-|Aktivität1|1|65|
+|Activity1|2|56|
+|Activity1|1|65|
 
-In der Shuffle-Abfrage ist die Standardpartitionsnummer die Clusterknotennummer. Diese Zahl kann überdiest werden, indem die Syntax `hint.num_partitions = total_partitions` verwendet wird, die die Anzahl der Partitionen steuert.
+Bei der shuffle-Abfrage ist die Standard Partitionsnummer die Anzahl der Cluster Knoten. Diese Zahl kann überschrieben werden, indem die Syntax `hint.num_partitions = total_partitions` verwendet wird, mit der die Anzahl der Partitionen gesteuert wird.
 
-Dieser Hinweis ist nützlich, wenn der Cluster über eine kleine Anzahl von Clusterknoten verfügt, bei denen die Standardpartitionsnummer ebenfalls klein ist und die Abfrage immer noch fehlschlägt oder lange Ausführungszeit in Anspruch nimmt.
+Dieser Hinweis ist nützlich, wenn der Cluster über eine kleine Anzahl von Cluster Knoten verfügt, bei denen die Standard Partitionsnummer ebenfalls klein ist und die Abfrage weiterhin ausfällt oder lange Ausführungszeit benötigt.
 
-Beachten Sie, dass das Festlegen vieler Partitionen die Leistung beeinträchtigen und mehr Clusterressourcen verbrauchen kann, daher wird empfohlen, die Partitionsnummer sorgfältig auszuwählen (beginnend mit der Hint.Strategy = Shuffle und beginnen Sie, die Partitionen schrittweise zu erhöhen).
+Beachten Sie, dass durch das Festlegen von vielen Partitionen die Leistung beeinträchtigt und mehr Cluster Ressourcen beansprucht werden. Daher wird empfohlen, die Partitionsnummer sorgfältig auszuwählen (beginnend mit "Hint. Strategy = Shuffle" und der schrittweisen Erhöhung der Partitionen).
 
 **Beispiele**
 
-Das folgende Beispiel `summarize` zeigt, wie Shuffle die Leistung erheblich verbessert.
+Im folgenden Beispiel wird gezeigt, `summarize` wie die Leistung von shuffle erheblich verbessert wird.
 
-Die Quelltabelle verfügt über 150M-Datensätze, und die Kardinalität der Gruppe nach Schlüssel ist 10M, die auf 10 Clusterknoten verteilt ist.
+Die Quell Tabelle enthält 150 Mio. Datensätze, und die Kardinalität des Group by-Schlüssels ist 10M, der über 10 Cluster Knoten verteilt wird.
 
-Wenn Sie `summarize` die reguläre Strategie ausführen, endet die Abfrage nach 1:08, und die Speicherauslastungsspitze beträgt 3 GB:
+Durch Ausführen der `summarize` regulären Strategie endet die Abfrage nach 1:08, und die Auslastung der Speicherauslastung beträgt ca. 3 GB:
 
 ```kusto
 orders
@@ -164,7 +166,7 @@ orders
 |---|
 |1086|
 
-Bei Verwendung `summarize` der Shuffle-Strategie endet die Abfrage nach 7 Sekunden, und die Speicherauslastungsspitze beträgt 0,43 GB:
+Bei der Verwendung `summarize` der shuffle-Strategie endet die Abfrage nach ungefähr 7 Sekunden, und die Auslastung der Speicherauslastung beträgt 0,43 GB:
 
 ```kusto
 orders
@@ -177,9 +179,9 @@ orders
 |---|
 |1086|
 
-Das folgende Beispiel zeigt die Verbesserung auf einem Cluster mit 2 Clusterknoten, die Tabelle hat 60M-Datensätze und die Kardinalität der Gruppe nach Schlüssel ist 2M.
+Das folgende Beispiel zeigt die Verbesserung in einem Cluster mit zwei Cluster Knoten, die Tabelle 60 Mio. Datensätze und die Kardinalität des Group by-Schlüssels 2 m.
 
-Wenn Sie `hint.num_partitions` die Abfrage ohne ausführen, werden nur 2 Partitionen (als Clusterknotennummer) verwendet, und die folgende Abfrage dauert 1:10 Min.
+Wenn Sie die Abfrage `hint.num_partitions` ohne ausführen, werden nur 2 Partitionen (als Cluster Knotennummer) verwendet, und die folgende Abfrage dauert ~ 1:10 Minuten:
 
 ```kusto
 lineitem    
@@ -187,7 +189,7 @@ lineitem
 | consume
 ```
 
-Partitionen auf 10 festlegen, wird die Abfrage nach 23 Sekunden beendet: 
+Wenn die Partitionsnummer auf 10 festgelegt wird, endet die Abfrage nach 23 Sekunden: 
 
 ```kusto
 lineitem    
@@ -195,12 +197,12 @@ lineitem
 | consume
 ```
 
-Das folgende Beispiel `join` zeigt, wie Shuffle die Leistung erheblich verbessert.
+Im folgenden Beispiel wird gezeigt, `join` wie die Leistung von shuffle erheblich verbessert wird.
 
-Die Beispiele wurden in einem Cluster mit 10 Knoten abgetastet, in dem die Daten auf alle diese Knoten verteilt sind.
+Die Beispiele wurden in einem Cluster mit 10 Knoten getestet, bei denen die Daten über alle diese Knoten verteilt sind.
 
-Die linke Tabelle hat 15M Datensätze, `join` wobei die Kardinalität des Schlüssels `join` 14M ist, die rechte Seite `join` des ist mit 150M Datensätzen und die Kardinalität des Schlüssels ist 10M.
-Durch Ausführen der `join`regulären Strategie der endet die Abfrage nach 28 Sekunden, und die Speicherauslastungsspitze beträgt 1,43 GB:
+Die linke Tabelle enthält 15M-Datensätze, bei denen die Kardinalität des `join` Schlüssels ~ 14m ist, die Rechte Seite `join` von 150 Mio. Datensätze und die Kardinalität des `join` Schlüssels 10 m.
+Wenn die reguläre Strategie von ausgeführt `join`wird, endet die Abfrage nach ungefähr 28 Sekunden, und die Auslastung der Speicherauslastung beträgt 1,43 GB:
 
 ```kusto
 customer
@@ -210,7 +212,7 @@ on $left.c_custkey == $right.o_custkey
 | summarize sum(c_acctbal) by c_nationkey
 ```
 
-Bei Verwendung `join` der Shuffle-Strategie endet die Abfrage nach 4 Sekunden und die Speicherauslastungsspitze beträgt 0,3 GB:
+Bei der Verwendung `join` der shuffle-Strategie endet die Abfrage nach ungefähr 4 Sekunden, und die Speicherauslastung beträgt 0,3 GB:
 
 ```kusto
 customer
@@ -220,14 +222,14 @@ on $left.c_custkey == $right.o_custkey
 | summarize sum(c_acctbal) by c_nationkey
 ```
 
-Versuchen Sie die gleichen Abfragen für ein `join` größeres Dataset, wobei die linke Seite des 150M und `join` die Kardinalität des Schlüssels 148M ist, die rechte Seite des ist 1.5B und die Kardinalität des Schlüssels ist 100M.
+Die gleichen Abfragen für ein größeres DataSet, bei dem die linke Seite `join` von 150 Mio. ist, und die Kardinalität des Schlüssels ist 148m, die Rechte Seite `join` von beträgt 1,5 b, und die Kardinalität des Schlüssels beträgt ungefähr 100 Mio.
 
-Die Abfrage mit `join` der Standardstrategie erreicht nach 4 Min. die Kusto-Grenzwerte und das Zeitlimit.
-Bei Verwendung `join` der Shuffle-Strategie endet die Abfrage nach 34 Sekunden, und die Speicherauslastungsspitze beträgt 1,23 GB.
+Die Abfrage mit der Standard `join` Strategie trifft Kusto-Limits und ein Timeout nach 4 Minuten.
+Bei der Verwendung `join` der shuffle-Strategie endet die Abfrage nach ungefähr 34 Sekunden, und die Auslastung der Speicherauslastung beträgt 1,23 GB.
 
 
-Das folgende Beispiel zeigt die Verbesserung auf einem Cluster mit 2 Clusterknoten, die Tabelle `join` hat 60M-Datensätze und die Kardinalität des Schlüssels ist 2M.
-Wenn Sie `hint.num_partitions` die Abfrage ohne ausführen, werden nur 2 Partitionen (als Clusterknotennummer) verwendet, und die folgende Abfrage dauert 1:10 Min.
+Das folgende Beispiel zeigt die Verbesserung in einem Cluster mit zwei Cluster Knoten, die Tabelle 60 Mio. Datensätze und die Kardinalität des `join` Schlüssels 2 m.
+Wenn Sie die Abfrage `hint.num_partitions` ohne ausführen, werden nur 2 Partitionen (als Cluster Knotennummer) verwendet, und die folgende Abfrage dauert ~ 1:10 Minuten:
 
 ```kusto
 lineitem
@@ -238,7 +240,7 @@ on $left.l_partkey == $right.p_partkey
 | consume
 ```
 
-Partitionen auf 10 festlegen, wird die Abfrage nach 23 Sekunden beendet: 
+Wenn die Partitionsnummer auf 10 festgelegt wird, endet die Abfrage nach 23 Sekunden: 
 
 ```kusto
 lineitem
