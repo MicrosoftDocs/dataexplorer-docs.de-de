@@ -7,12 +7,12 @@ ms.reviewer: michazag
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 1/14/2020
-ms.openlocfilehash: 0c8d1add5f5f72ad96475df67ec2ff20bc9364c0
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 6e7879948fb7683210859c84970f31bc5adb4a90
+ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492390"
+ms.lasthandoff: 04/23/2020
+ms.locfileid: "82108319"
 ---
 # <a name="azure-data-explorer-connector-for-apache-spark"></a>Azure Data Explorer-Connector für Apache Spark
 
@@ -103,9 +103,9 @@ Weitere Informationen finden Sie unter [Connectorverwendung](https://github.com/
 
 Der Azure Data Explorer-Connector für Spark ermöglicht Ihnen die Authentifizierung bei Azure Active Directory (Azure AD) mit einer der folgenden Methoden:
 * [Azure AD-Anwendung](#azure-ad-application-authentication)
-* [Azure AD-Zugriffstoken](https://github.com/Azure/azure-kusto-spark/blob/dev/docs/Authentication.md#direct-authentication-with-access-token)
-* [Geräteauthentifizierung](https://github.com/Azure/azure-kusto-spark/blob/dev/docs/Authentication.md#device-authentication) (in Nicht-Produktionsszenarien)
-* [Azure Key Vault](https://github.com/Azure/azure-kusto-spark/blob/dev/docs/Authentication.md#key-vault): Um auf die Key Vault-Ressource zugreifen zu können, müssen Sie das „azure-keyvault“-Paket installieren und die Anwendungsanmeldeinformationen bereitstellen.
+* [Azure AD-Zugriffstoken](https://github.com/Azure/azure-kusto-spark/blob/master/docs/Authentication.md#direct-authentication-with-access-token)
+* [Geräteauthentifizierung](https://github.com/Azure/azure-kusto-spark/blob/master/docs/Authentication.md#device-authentication) (in Nicht-Produktionsszenarien)
+* [Azure Key Vault](https://github.com/Azure/azure-kusto-spark/blob/master/docs/Authentication.md#key-vault): Um auf die Key Vault-Ressource zugreifen zu können, müssen Sie das „azure-keyvault“-Paket installieren und die Anwendungsanmeldeinformationen bereitstellen.
 
 ### <a name="azure-ad-application-authentication"></a>Azure AD-Anwendungsauthentifizierung
 
