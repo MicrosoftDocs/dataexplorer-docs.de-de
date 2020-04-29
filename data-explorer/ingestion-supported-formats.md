@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/19/2020
-ms.openlocfilehash: 530fc02c58b719f29ef43b118fad1ce8f207337b
-ms.sourcegitcommit: 653bfb3edf32553c52ef36b339c8b80713a601b0
+ms.openlocfilehash: 93451dd1237905754ac834cb335f5d8a02157ac7
+ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81494550"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "82030054"
 ---
 # <a name="data-formats-supported-by-azure-data-explorer-for-ingestion"></a>Von Azure Data Explorer für die Erfassung unterstützte Datenformate.
 
@@ -50,7 +50,7 @@ Beispiel:
 * `MyData.csv.zip` gibt an, dass ein Blob oder eine Datei als CSV formatiert und mit ZIP (Archiv oder einzelne Datei) komprimiert ist.
 * `MyData.csv.gz` gibt an, dass ein Blob oder eine Datei als CSV formatiert und mit GZIP (Archiv oder einzelne Datei) komprimiert ist.
 
-Blob- oder Dateinamen, die nicht die Formaterweiterungen, sondern nur die Komprimierung (z. B. ) enthalten, werden ebenfalls unterstützt. In diesem Fall muss das Dateiformat als Erfassungseigenschaft angegeben werden, da es nicht abgeleitet werden kann.
+Blob- oder Dateinamen, die nicht die Formaterweiterungen, sondern nur die Komprimierung (z. B. `MyData.zip`) enthalten, werden ebenfalls unterstützt. In diesem Fall muss das Dateiformat als Erfassungseigenschaft angegeben werden, da es nicht abgeleitet werden kann.
 
 > [!NOTE]
 > Bei einigen Komprimierungsformaten wird die ursprüngliche Dateierweiterung in den komprimierten Datenstrom aufgenommen. Diese Erweiterung wird bei der Bestimmung des Dateiformats generell ignoriert. Kann das Dateiformat nicht anhand des Namens des (komprimierten) Blobs oder der (komprimierten) Datei bestimmt werden, muss es mithilfe der Erfassungseigenschaft `format` angegeben werden.
