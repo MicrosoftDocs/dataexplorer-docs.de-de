@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 04/01/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 5ceafde1361c87d368237d0f8c71ad8d0708aec1
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.openlocfilehash: 6b33ee0ed9535d512c909dd8de124fc8b1770cee
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108506"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618988"
 ---
 # <a name="python-plugin"></a>Python-Plug-In
 
@@ -92,7 +92,8 @@ typeof(*, fx:double),               //  Output schema: append a new fx column to
 )
 | render linechart 
 ```
-:::image type="content" source="images/samples/sine-demo.png" alt-text="Sinus-Demo":::
+
+:::image type="content" source="images/plugin/sine-demo.png" alt-text="Sinus-Demo" border="false":::
 
 ```kusto
 print "This is an example for using 'external_artifacts'"
@@ -145,7 +146,7 @@ print "This is an example for using 'external_artifacts'"
 ## <a name="usage-tips"></a>Verwendungstipps
 
 * Um mehrzeilige Zeichen folgen mit dem Python-Skript `Kusto.Explorer`in zu generieren, kopieren Sie Ihr Python-Skript aus Ihrem bevorzugten python-Editor (*jupyter*, *Visual Studio Code*, *pycharm*usw.), und führen Sie dann eine der folgenden Aktionen aus:
-    * Drücken Sie *F2* , um das Fenster **in python bearbeiten** zu öffnen. Fügen Sie das Skript in dieses Fenster ein. Wählen Sie **OK** aus. Das Skript wird mit Anführungszeichen und neuen Zeilen versehen (ist in Kusto gültig) und wird automatisch in die Registerkarte Abfrage eingefügt.
+    * Drücken Sie *F2* , um das Fenster **in python bearbeiten** zu öffnen. Fügen Sie das Skript in dieses Fenster ein. Klicken Sie auf **OK**. Das Skript wird mit Anführungszeichen und neuen Zeilen versehen (ist in Kusto gültig) und wird automatisch in die Registerkarte Abfrage eingefügt.
     * Fügen Sie den Python-Code direkt in die Registerkarte Abfrage ein, wählen Sie die Zeilen aus, und drücken Sie *STRG + k*, *STRG + S* -Taste, um Sie wie oben zu ergänzen (um Sie umzukehren, drücken Sie *STRG + k*, *STRG + M* heiße Taste). [Hier](../tools/kusto-explorer-shortcuts.md#query-editor) ist die vollständige Liste der Verknüpfungen für den Abfrage-Editor.
 * Zum Vermeiden von Konflikten zwischen Kusto-Zeichen folgen Trennzeichen und python-Zeichenfolgenliteralen empfiehlt es`'`sich, einfache Anführungszeichen () für Kusto-Zeichen folgen Literale in Kusto-Abfragen und doppelte Anführungszeichen (`"`) für python-Zeichen folgen Literale in python-Skripts zu verwenden.
 * Verwenden Sie den [externaldata-Operator](externaldata-operator.md) zum Abrufen des Inhalts eines Skripts, das Sie an einem externen Speicherort gespeichert haben, z. b. Azure BLOB Storage.
@@ -176,7 +177,7 @@ Sie können Pakete installieren, indem Sie die folgenden Schritte ausführen:
 
 1. Einmalige Voraussetzung:
   
-  ein. Erstellen Sie einen BLOB-Container, um die Pakete zu hosten, vorzugsweise in derselben Region wie Ihr Cluster.
+  a. Erstellen Sie einen BLOB-Container, um die Pakete zu hosten, vorzugsweise in derselben Region wie Ihr Cluster.
     * Beispiel: `https://artifcatswestus.blob.core.windows.net/python` (angenommen, Ihr Cluster befindet sich in der Region "USA, Westen")
   
   b. Ändern Sie die Legenden [Richtlinien](../management/calloutpolicy.md) des Clusters, um den Zugriff auf diesen Speicherort zuzulassen.

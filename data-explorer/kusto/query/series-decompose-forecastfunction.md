@@ -1,6 +1,6 @@
 ---
-title: series_decompose_forecast() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird series_decompose_forecast() in Azure Data Explorer beschrieben.
+title: series_decompose_forecast ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird series_decompose_forecast () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,51 +8,51 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: 67f464949bbc432e73932c4d8bff8290ef8f0f8f
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 97f87a7390ab099886e84642b2eb46a8087b6da9
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663544"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618841"
 ---
 # <a name="series_decompose_forecast"></a>series_decompose_forecast()
 
-Prognose basierend auf Serienzerlegung.
+Vorhersage basierend auf der Reihen Zerlegung.
 
-Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, als Eingabe und prognostiziere die Werte der letzten nachgestellten Punkte (weitere Details zur Zersetzungsmethode finden Sie in [series_decompose).](series-decomposefunction.md)
+Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, als Eingabe auf und prognostiziert die Werte der letzten nachfolgenden Punkte (Weitere Informationen zur Zerlegungs Methode finden Sie in der [series_decompose](series-decomposefunction.md) ).
  
 **Syntax**
 
-`series_decompose_forecast(`*Serienpunkte* `,` `[,` *Saisonalität* `,` *Points* *Trend* `,` *Seasonality_threshold*`])`
+`series_decompose_forecast(`*Series* `,` *Points* `[,` `,` *Trend* Trend`,` der *Saisonalität* für Reihen Punkte *Seasonality_threshold*`])`
 
 **Argumente**
 
-* *Serie*: Dynamische Arrayzelle, die ein Array numerischer Werte ist. In der Regel die resultierende Ausgabe von [Make-Series](make-seriesoperator.md) oder [make_list](makelist-aggfunction.md) Operatoren.
-* *Punkte*: Ganzzahl, die die Anzahl der Punkte am Ende der Reihe angibt, die vorhergesagt werden sollen (Prognose). Diese Punkte sind vom Lernprozess (Regression) ausgeschlossen.
-* *Saisonalität*: Eine ganze Zahl, die die saisonale Analyse kontrolliert und eine der folgenden Optionen enthält:
-    * -1: Saisonalität mit [series_periods_detect](series-periods-detectfunction.md) automatisch erkennen (Standard). 
-    * Periode: positive ganze Zahl, die die erwartete Periode in der Anzahl der Lagerplätze angibt. Wenn sich die Serie z. B. in 1h-Abschnitten befindet, beträgt eine wöchentliche Periode 168 Abschnitte.
-    * 0: keine Saisonalität (überspringen Sie das Extrahieren dieser Komponente).   
-* *Trend*: Eine Zeichenfolge, die die Trendanalyse steuert und eine der folgenden Optionen enthält:
-    * "linefit": Extrahieren Sie die Trendkomponente mithilfe der linearen Regression (Standard).    
-    * "avg": Definieren Sie trendkomponente als average(x).
-    * "none": kein Trend, überspringen Sie das Extrahieren dieser Komponente.   
-* *Seasonality_threshold*: Der Schwellenwert für die Saisonalitätsbewertung, wenn *Saisonalität* `0.6`auf Auto-Erkennung festgelegt ist, ist der Standardwertschwellenwert . Weitere Informationen finden Sie [unter series_periods_detect](series-periods-detectfunction.md).
+* *Series*: dynamische Array Zelle, bei der es sich um ein Array numerischer Werte handelt. In der Regel die resultierende Ausgabe von [make-Series-](make-seriesoperator.md) oder [make_list](makelist-aggfunction.md) -Operatoren.
+* *Points*: ganze Zahl, die die Anzahl der Punkte am Ende der vorher zusagenden Reihe angibt (Vorhersage). Diese Punkte werden vom Lernprozess (Regression) ausgeschlossen.
+* *Saison*Abhängigkeit: eine ganze Zahl, die die saisonale Analyse steuert und eine der folgenden Komponenten enthält:
+    * -1: automatische Erkennung der Saisonalität mithilfe von [series_periods_detect](series-periods-detectfunction.md) (Standard). 
+    * Period: eine positive ganze Zahl, die den erwarteten Zeitraum in der Anzahl von Containern angibt. Wenn sich die Reihe z. b. in 1-Stunden-Containern befindet, beträgt die wöchentliche Zeit 168 Behälter.
+    * 0: keine Saisonalität (Extrahieren dieser Komponente überspringen).   
+* *Trend*: eine Zeichenfolge, die die Trend Analyse steuert und eine der folgenden Zeichen folgen enthält:
+    * "Linefit": Trend Komponente mithilfe von linearer Regression extrahieren (Standard).    
+    * "AVG": Hiermit wird die Trend Komponente als Durchschnitt (x) definiert.
+    * "None": kein Trend, Extrahieren dieser Komponente überspringen.   
+* *Seasonality_threshold*: der Schwellenwert für die saisonalitätsbewertung, wenn *Saison alität* auf automatische Erkennung festgelegt ist, ist `0.6`der Standardwert für die Bewertung. Weitere Informationen finden Sie unter [series_periods_detect](series-periods-detectfunction.md).
 
-**Rückgabe**
+**Hre**
 
- Ein dynamisches Array mit der prognostizierten Serie
+ Ein dynamisches Array mit der vorhergesagten Reihe
   
 
 **Hinweise**
 
-* Das dynamische Array der ursprünglichen Eingabereihe sollte einen zu prognostizierenden *Anzahlpunkt-Slots* enthalten, dies geschieht in der Regel, indem die [Serien](make-seriesoperator.md) verwendet und die Endzeit im Bereich angegeben wird, die den Zeitrahmen für die Prognose enthält.
+* Das dynamische Array der ursprünglichen Eingabe Reihe sollte *eine Reihe von* Slots enthalten, die vorhergesagt werden müssen. Dies erfolgt in der Regel mithilfe von [make-Series](make-seriesoperator.md) und durch Angeben der Endzeit im Bereich, die den Zeitrahmen für die Vorhersage umfasst.
     
-* Entweder Saisonalität und/oder Trend sollten aktiviert werden, andernfalls ist die Funktion redundant und gibt nur eine Reihe mit Nullen zurück.
+* Die Saison Abhängigkeit und/oder der Trend sollten aktiviert werden, andernfalls ist die Funktion redundant und gibt nur eine Reihe zurück, die mit Nullen gefüllt ist.
 
 **Beispiel**
 
-Im folgenden Beispiel erzeugen wir eine Serie von 4 Wochen in einem stündlichen Korn `make-series` mit wöchentlicher Saisonalität und einem kleinen Aufwärtstrend, dann verwenden und fügen wir eine weitere leere Woche in die Serie. `series_decompose_forecast`wird mit einer Woche (24 * 7 Punkte) aufgerufen, erkennt automatisch die Saisonalität und den Trend und generiert eine Prognose für den gesamten Zeitraum von 5 Wochen. 
+Im folgenden Beispiel generieren wir eine Reihe von 4 Wochen in stündlicher Abhängigkeit mit wöchentlicher Saison Abhängigkeit und einem kleinen Aufwärtstrend. Anschließend verwenden `make-series` wir und fügen der Reihe eine weitere leere Woche hinzu. `series_decompose_forecast`wird mit einer Woche (24 * 7 Punkte) aufgerufen und erkennt automatisch die Saisonalität und den Trend und generiert eine Vorhersage des gesamten Zeitraums von 5 Wochen. 
 
 ```kusto
 let ts=range t from 1 to 24*7*4 step 1 // generate 4 weeks of hourly data
@@ -66,4 +66,4 @@ ts
 | render timechart 
 ```
 
-:::image type="content" source="images/samples/series-decompose-forecast.png" alt-text="Serienzerlegen egnostieren Prognose":::
+:::image type="content" source="images/series-decompose-forecastfunction/series-decompose-forecast.png" alt-text="Vorhersage der Reihen Erstellung":::

@@ -1,6 +1,6 @@
 ---
-title: R-Plugin (Vorschau) - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt das R-Plugin (Vorschau) in Azure Data Explorer.
+title: 'R-Plug-in (Vorschau): Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird das R-Plug-in (Vorschau) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,59 +10,59 @@ ms.topic: reference
 ms.date: 04/01/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: d815a75b241f7779a5f4ee9cae626c38ed54f9f4
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 514c67133980c9ab1c38b65cc51e4592dcb15eda
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765999"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618960"
 ---
-# <a name="r-plugin-preview"></a>R-Plugin (Vorschau)
+# <a name="r-plugin-preview"></a>R-Plug-in (Vorschau)
 
 ::: zone pivot="azuredataexplorer"
 
-Das R-Plugin führt eine benutzerdefinierte Funktion (UDF) mit einem R-Skript aus. Das R-Skript ruft Tabellarische Daten als Eingabe ab und wird voraussichtlich eine tabellarische Ausgabe erzeugen.
-Die Laufzeit des Plugins wird in einer [Sandbox](../concepts/sandboxes.md)gehostet , einer isolierten und sicheren Umgebung, die auf den Knoten des Clusters ausgeführt wird.
+Das r-Plug-in führt eine benutzerdefinierte Funktion (UDF) mithilfe eines r-Skripts aus. Das R-Skript ruft Tabellendaten als Eingabe ab, und es wird erwartet, dass eine tabellarische Ausgabe erzeugt wird.
+Die Laufzeit des Plug-ins wird in einem [Sandkasten](../concepts/sandboxes.md)gehostet, eine isolierte und sichere Umgebung, die auf den Knoten des Clusters ausgeführt wird.
 
 ### <a name="syntax"></a>Syntax
 
-*T* `|` `=` `single` | `per_node` `r(` *output_schema* `,` *script* `,` [ ( )] output_schema Skript [ script_parameters ] *script_parameters* `evaluate` `hint.distribution``)`
+*T* `|` `per_node``,` *script_parameters* *output_schema* *script* [`hint.distribution` (`single`)] `r(`output_schema`,` Skript [script_parameters] `evaluate` `=`  | `)`
 
 
 ### <a name="arguments"></a>Argumente
 
-* *output_schema*: `type` Ein Literal, das das Ausgabeschema der Tabellendaten definiert, das vom R-Code zurückgegeben wird.
-    * Das Format `typeof(`lautet: *ColumnName* `:` *ColumnType* [, ...] `)`, z. `typeof(col1:string, col2:long)`B.: .
-    * Um das Eingabeschema zu erweitern, `typeof(*, col1:string, col2:long)`verwenden Sie die folgende Syntax: .
-* *script*: `string` Ein Literal, das das gültige R-Skript ist, das ausgeführt werden soll.
-* *script_parameters*: `dynamic` Ein optionales Literal, das ein Eigenschaftenbeutel mit Namen/Wert-Paaren ist, der als reserviertes `kargs` Wörterbuch an das R-Skript übergeben werden soll (siehe [Reservierte R-Variablen](#reserved-r-variables)).
-* *hint.distribution*: Ein optionaler Hinweis für die Ausführung des Plugins, der auf mehrere Clusterknoten verteilt werden soll.
-   Standard: `single`
-    * `single`: Eine einzelne Instanz des Skripts wird über die gesamten Abfragedaten ausgeführt.
-    * `per_node`: Wenn die Abfrage vor dem R-Block verteilt wird, wird auf jedem Knoten eine Instanz des Skripts über die darin enthaltenen Daten ausgeführt.
+* *output_schema*: ein `type` Literalwert, der das Ausgabe Schema der tabellarischen Daten definiert, die vom R-Code zurückgegeben werden.
+    * Das Format ist: `typeof(` *ColumnName* `:` *ColumnType* [,...] `)`Beispiel: `typeof(col1:string, col2:long)`.
+    * Um das Eingabe Schema zu erweitern, verwenden Sie die folgende `typeof(*, col1:string, col2:long)`Syntax:.
+* *Skript*: ein `string` Literalwert, der das gültige R-Skript ist, das ausgeführt werden soll.
+* *script_parameters*: ein optionales `dynamic` literalobjekt, bei dem es sich um einen Eigenschaften Behälter mit Name-Wert-Paaren handelt, `kargs` die an das R-Skript als reserviertes Wörterbuch (siehe [reservierte R-Variablen](#reserved-r-variables))
+* *Hint. Distribution*: ein optionaler Hinweis für die Ausführung des Plug-ins, das auf mehrere Cluster Knoten verteilt wird.
+   Standardwert: `single`.
+    * `single`: Eine einzelne Instanz des Skripts wird über die gesamten Abfrage Daten ausgeführt.
+    * `per_node`: Wenn die Abfrage vor der Verteilung des R-Blocks verteilt wird, wird eine Instanz des Skripts auf jedem Knoten über die darin enthaltenen Daten ausgeführt.
 
 
 ### <a name="reserved-r-variables"></a>Reservierte R-Variablen
 
-Die folgenden Variablen sind für die Interaktion zwischen Kusto Query Language und dem R-Code reserviert:
+Die folgenden Variablen sind für die Interaktion zwischen der Kusto-Abfragesprache und dem R-Code reserviert:
 
-* `df`: Die Eingabe-Tabellarischen `T` Daten (die oben genannten Werte) als R DataFrame.
-* `kargs`: Der Wert des *script_parameters-Arguments* als R-Wörterbuch.
-* `result`: Ein R DataFrame, der vom R-Skript erstellt wurde, dessen Wert zu den Tabellendaten wird, die an jeden Kusto-Abfrageoperator gesendet werden, der dem Plugin folgt.
+* `df`: Die Eingabe Tabellendaten (die Werte von `T` oben) als R-dataframe.
+* `kargs`: Der Wert des *script_parameters* Arguments als R-Wörterbuch.
+* `result`: Ein r-Datenrahmen, der vom r-Skript erstellt wurde, dessen Wert zu den Tabellendaten wird, die an einen beliebigen Kusto-Abfrage Operator gesendet werden, der auf das Plug-in folgt.
 
 ### <a name="onboarding"></a>Onboarding
 
 
-* Das Plugin ist standardmäßig deaktiviert.
-    * *Möchten Sie das Plugin auf Ihrem Cluster aktivieren?*
+* Das Plug-in ist standardmäßig deaktiviert.
+    * *Möchten Sie das Plug-in in Ihrem Cluster aktivieren?*
         
-        * Wählen Sie im Azure-Portal in Ihrem Azure Data Explorer-Cluster im linken Menü **neue Supportanfrage** aus.
-        * Das Deaktivieren des Plugins erfordert auch das Öffnen eines Support-Tickets.
+        * Wählen Sie im Azure-Portal im Azure Daten-Explorer-Cluster im Menü auf der linken Seite die Option **neue Supportanfrage** aus.
+        * Das Deaktivieren des Plug-ins erfordert auch das Öffnen eines Support Tickets.
 
 ### <a name="notes-and-limitations"></a>Hinweise und Einschränkungen
 
-* Das R-Sandbox-Image basiert auf *R 3.4.4 für Windows*und enthält Pakete aus [Anacondas R Essentials-Bundle](https://docs.anaconda.com/anaconda/packages/r-language-pkg-docs/).
-* Die R-Sandbox beschränkt den Zugriff auf das Netzwerk, daher kann der R-Code keine zusätzlichen Pakete dynamisch installieren, die nicht im Abbild enthalten sind. Öffnen Sie eine **neue Supportanfrage** im Azure-Portal, wenn Sie bestimmte Pakete benötigen.
+* Das r Sandbox-Image basiert auf *r 3.4.4 für Windows*und enthält Pakete aus [dem r Essentials-Bundle von Anaconda](https://docs.anaconda.com/anaconda/packages/r-language-pkg-docs/).
+* Die r-Sandbox schränkt den Zugriff auf das Netzwerk ein, daher kann der r-Code keine weiteren Pakete installieren, die nicht im Abbild enthalten sind. Öffnen Sie eine **neue Supportanfrage** in der Azure-Portal, wenn Sie bestimmte Pakete benötigen.
 
 
 ### <a name="examples"></a>Beispiele
@@ -84,15 +84,15 @@ typeof(*, fx:double),               //  Output schema: append a new fx column to
 | render linechart 
 ```
 
-:::image type="content" source="images/samples/sine-demo.png" alt-text="Sinus-Demo":::
+:::image type="content" source="images/plugin/sine-demo.png" alt-text="Sinus-Demo" border="false":::
 
 ### <a name="performance-tips"></a>Leistungstipps
 
-* Reduzieren Sie den Eingabedatensatz des Plugins auf den erforderlichen Mindestbetrag (Spalten/Zeilen).
-    * Verwenden Sie filter für den Quelldatensatz, wenn möglich, mithilfe der Kusto-Abfragesprache.
-    * Um eine Berechnung für eine Teilmenge der Quellspalten durchzuführen, projizieren Sie nur die Spalten, bevor Sie das Plugin aufrufen.
-* Verwenden `hint.distribution = per_node` Sie immer dann, wenn die Logik in Ihrem Skript verteilbar ist.
-    * Sie können den [Partitionsoperator](partitionoperator.md) auch zum Partitionieren des Eingabedatensatzes verwenden.
+* Reduzieren Sie die Eingabedaten des Plug-Ins auf den minimal erforderlichen Wert (Spalten/Zeilen).
+    * Verwenden Sie nach Möglichkeit Filter für das Quell DataSet mithilfe der Kusto-Abfragesprache.
+    * Um eine Berechnung für eine Teilmenge der Quell Spalten auszuführen, projizieren Sie nur diese Spalte, bevor Sie das Plug-in aufrufen.
+* Verwenden `hint.distribution = per_node` Sie immer dann, wenn die Logik in Ihrem Skript Verteil Bar ist.
+    * Sie können auch den [Partitions Operator](partitionoperator.md) für die Partitionierung des Eingabe Datasets verwenden.
 * Verwenden Sie nach Möglichkeit die Kusto-Abfragesprache, um die Logik Ihres R-Skripts zu implementieren.
 
     Beispiel:
@@ -111,8 +111,8 @@ typeof(*, fx:double),               //  Output schema: append a new fx column to
 
 ### <a name="usage-tips"></a>Verwendungstipps
 
-* Um Konflikte zwischen Kusto-Zeichenfolgentrennzeichen und R-Zeichenfolgen zu vermeiden,`'`empfehlen wir die Verwendung einzelner Anführungszeichen (`"`) für Kusto-Zeichenfolgenliterale in Kusto-Abfragen und doppelte Anführungszeichen ( ) für R-Zeichenfolgenliterale in R-Skripten.
-* Verwenden Sie den [externen Datenoperator,](externaldata-operator.md) um den Inhalt eines Skripts abzurufen, das Sie an einem externen Speicherort gespeichert haben, z. B. Azure-Blobspeicher, ein öffentliches GitHub-Repository usw.
+* Um Konflikte zwischen Kusto-Zeichen folgen Trennzeichen und r-Zeichen zu vermeiden, empfiehlt es sich, einfache`'`Anführungszeichen () für Kusto-Zeichen folgen Literale in Kusto-Abfragen`"`und doppelte Anführungszeichen () für r-Zeichen folgen Literale in r-Skripts zu verwenden.
+* Verwenden Sie den [externaldata-Operator](externaldata-operator.md) zum Abrufen des Inhalts eines Skripts, das Sie an einem externen Speicherort gespeichert haben, z. b. Azure BLOB Storage, ein öffentliches GitHub-Repository usw.
   
   Beispiel:
 

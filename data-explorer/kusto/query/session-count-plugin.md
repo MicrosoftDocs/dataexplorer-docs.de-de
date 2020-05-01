@@ -1,6 +1,6 @@
 ---
-title: session_count-Plugin - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird session_count-Plugin in Azure Data Explorer beschrieben.
+title: 'session_count-Plug-in: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird session_count-Plug-in in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 76ce6ca3be1859aba0a94ae155c60342be3f1ad1
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 7ebbbc401f8fdee79aaa328d45c7758d9acb931e
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663149"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82619045"
 ---
 # <a name="session_count-plugin"></a>session_count-Plug-In
 
-Berechnet die Anzahl der Sitzungen basierend auf der ID-Spalte über eine Zeitachse.
+Berechnet die Anzahl der Sitzungen basierend auf der ID-Spalte einer Zeitachse.
 
 ```kusto
 T | evaluate session_count(id, datetime_column, startofday(ago(30d)), startofday(now()), 1min, 30min, dim1, dim2, dim3)
@@ -25,42 +25,42 @@ T | evaluate session_count(id, datetime_column, startofday(ago(30d)), startofday
 
 **Syntax**
 
-*T* `| evaluate` `,` *End* `,` *Bin* `,` `,` `,` `,` *IdColumn* `,` `,` *Start* *TimelineColumn* *LookBackWindow* *dim2* *dim1* IdColumn TimelineColumn Start End Bin LookBackWindow [ dim1 dim2 ...] `session_count(``)`
+*T* `| evaluate` `,` *dim2* *Start* `,` `,` *dim1* `,` *IdColumn* `,` `,` `,` *LookBackWindow* *Bin* *End* *TimelineColumn* idColumn`,` timelinecolenn Start Ende bin lookbackwindow [dim1 dim2...] `session_count(``)`
 
 **Argumente**
 
-* *T*: Der tabellarische Eingabeausdruck.
-* *IdColumn*: Der Name der Spalte mit ID-Werten, die die Benutzeraktivität darstellen. 
-* *TimelineColumn*: Der Name der Spalte, die die Zeitachse darstellt.
-* *Start*: Skalar mit Wert des Analysestartzeitraums.
-* *Ende*: Skalar mit Wert der Analyseendperiode.
-* *Bin*: skalarkonstanter Wert des Sitzungsanalyseschrittzeitraums.
-* *LookBackWindow*: skalarer konstanter Wert, der den Sitzungs-Lookback-Zeitraum darstellt. Wenn die `IdColumn` ID von in `LookBackWindow` einem Zeitfenster innerhalb angezeigt wird - die Sitzung wird als vorhanden betrachtet, wenn nicht - wird die Sitzung als neu betrachtet.
-* *dim1*, *dim2*, ...: (optional) Liste der Dimensionsspalten, die die Berechnung der Sitzungsanzahl aufteilen.
+* *T*: der tabellarische Eingabe Ausdruck.
+* *IdColumn*: der Name der Spalte mit ID-Werten, die die Benutzeraktivität darstellen. 
+* *Timelinecolren*: der Name der Spalte, die die Zeitachse darstellt.
+* *Start*: Skalar mit dem Wert des Start Zeitraums der Analyse.
+* *End*: Skalar mit dem Wert des endzeitraums der Analyse.
+* *Bin*: skalare konstanter Wert der Sitzungs Analyseschritt Zeitraum.
+* *Lookbackwindow*: skalare Konstante Wert, der den Sitzungs Such Zeitraum darstellt. Wenn die ID von `IdColumn` in einem Zeitfenster innerhalb `LookBackWindow` von angezeigt wird, wird die Sitzung als vorhanden angesehen, wenn dies nicht der Fall ist. die Sitzung wird als neu eingestuft.
+* *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, in denen die Berechnung der Sitzungs Anzahl in Slice ist.
 
 **Rückgabe**
 
-Gibt eine Tabelle zurück, die die Sitzungsanzahlwerte für jeden Zeitachsenzeitraum und für jede vorhandene Dimensionskombination enthält.
+Gibt eine Tabelle zurück, die die Sitzungs Zählerwerte für jeden Zeitachsen Zeitraum und jede vorhandene Dimensions Kombination enthält.
 
-Ausgabetabellenschema ist:
+Das Ausgabe Tabellen Schema ist:
 
-|*TimelineColumn*|dim1|..|dim_n|count_sessions|
+|*Timelinecolumschlag*|dim1|..|dim_n|count_sessions|
 |---|---|---|---|---|--|--|--|--|--|--|
-|Typ: ab *TimelineColumn*|..|..|..|long|
+|Typ: ab *timelinecolumschlag*|..|..|..|long|
 
 
 **Beispiele**
 
 
-Im Interesse des Beispiels werden wir Daten deterministisch machen - eine Tabelle mit zwei Spalten:
-- Zeitleiste: eine laufende Zahl von 1 bis 10.000
+Für das Beispiel machen wir Daten deterministisch: eine Tabelle mit zwei Spalten:
+- Zeitachse: eine laufende Zahl zwischen 1 und 10.000
 - ID: ID des Benutzers von 1 bis 50
 
-`Id`am spezifischen `Timeline` Steckplatz angezeigt werden, `Timeline` wenn es sich um einen Teiler von (Timeline % ID == 0) handelt.
+`Id`wird am bestimmten `Timeline` Slot angezeigt, wenn es sich um einen unter Teiler von `Timeline` handelt (Timeline% ID = = 0).
 
-Dies bedeutet, `Id==1` dass das `Timeline` Ereignis mit `Id==2` an `Timeline` jedem Slot, Ereignis mit jedem zweiten Slot erscheinen wird, und so weiter.
+Dies bedeutet, dass das `Id==1` Ereignis mit an jedem `Timeline` Slot, Ereignis mit `Id==2` an jedem zweiten `Timeline` Slot usw. angezeigt wird.
 
-Hier sind nur 20 Zeilen der Daten:
+Im folgenden finden Sie einige 20 Zeilen der Daten:
 
 ```kusto
 let _data = range Timeline from 1 to 10000 step 1
@@ -97,9 +97,9 @@ _data
 |8|4|
 |8|8|
 
-Definieren wir eine Sitzung in den nächsten Begriffen: Sitzung`Id`gilt als aktiv, solange Benutzer ( ) mindestens einmal in einem Zeitrahmen von 100 Zeitfenstern angezeigt wird, während das Sitzungs-Look-Back-Fenster 41 Zeitfenster beträgt.
+Wir definieren eine Sitzung in den nächsten Begriffen: die Sitzung wird als aktiv betrachtet, solange der Benutzer`Id`() mindestens einmal an einem Zeitraum von 100 Zeit Slots angezeigt wird, während das Fenster für die Sitzungs Suche 41 Zeit Slots ist.
 
-Die nächste Abfrage zeigt die Anzahl der aktiven Sitzungen gemäß der obigen Definition.
+In der nächsten Abfrage wird die Anzahl der aktiven Sitzungen entsprechend der obigen Definition angezeigt.
 
 ```kusto
 let _data = range Timeline from 1 to 9999 step 1
@@ -113,4 +113,4 @@ _data
 | render linechart 
 ```
 
-:::image type="content" source="images/queries/example-session-count.png" alt-text="Beispielsitzungsanzahl":::
+:::image type="content" source="images/session-count-plugin/example-session-count.png" alt-text="Beispiel für Sitzungs Anzahl" border="false":::
