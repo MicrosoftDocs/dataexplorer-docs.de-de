@@ -1,6 +1,6 @@
 ---
-title: Verwaltung von Datenpartitionierungsrichtlinien - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt die Verwaltung von Datenpartitionierungsrichtlinien in Azure Data Explorer.
+title: 'Richtlinien Verwaltung für die Daten Partitionierung: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt die Richtlinien Verwaltung für die Daten Partitionierung in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/04/2020
-ms.openlocfilehash: 0e1ff783195f26adf7f98e511ca155f43609098c
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 1ad9b359422b51084f1be1c64d27d656313d9296
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663967"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82616319"
 ---
-# <a name="data-partitioning-policy-management"></a>Datenpartitionierungsrichtlinienverwaltung
+# <a name="data-partitioning-policy-management"></a>Richtlinien Verwaltung für die Daten Partitionierung
 
-Die Datenpartitionierungsrichtlinie wird [hier](../management/partitioningpolicy.md)detailliert beschrieben.
+Die Richtlinie zur Daten Partitionierung wird [hier](../management/partitioningpolicy.md)ausführlich erläutert.
 
-## <a name="show-policy"></a>Show-Politik
+## <a name="show-policy"></a>Richtlinie anzeigen
 
 ```kusto
 .show table [table_name] policy partitioning
 ```
 
-Der `.show` Befehl zeigt die Partitionierungsrichtlinie an, die auf die Tabelle angewendet wird.
+Der `.show` Befehl zeigt die Partitionierungs Richtlinie an, die auf die Tabelle angewendet wird.
 
 ### <a name="output"></a>Output
 
 |Richtlinienname | Name der Entität | Richtlinie | Untergeordnete Entitäten | Entitätstyp
 |---|---|---|---|---
-|DataPartitioning | Tabellenname | JSON-Serialisierung des Richtlinienobjekts | NULL | Tabelle
+|Datapartitionierung | Tabellenname | JSON-Serialisierung des Policy-Objekts | NULL | Tabelle
 
-## <a name="alter-and-alter-merge-policy"></a>Änderungs- und Änderungsfusionsrichtlinie
+## <a name="alter-and-alter-merge-policy"></a>Alter-und Alter-Merge-Richtlinie
 
 ```kusto
 .alter table [table_name] policy partitioning @'policy object, serialized as JSON'
@@ -41,15 +41,15 @@ Der `.show` Befehl zeigt die Partitionierungsrichtlinie an, die auf die Tabelle 
 .alter-merge table [table_name] policy partitioning @'partial policy object, serialized as JSON'
 ```
 
-Der `.alter` Befehl ermöglicht das Ändern der Partitionierungsrichtlinie, die auf die Tabelle angewendet wird.
+Der `.alter` -Befehl ermöglicht das Ändern der Partitionierungs Richtlinie, die auf die Tabelle angewendet wird.
 
-Der Befehl erfordert [DatabaseAdmin-Berechtigungen.](access-control/role-based-authorization.md)
+Für den Befehl sind [databaseadmin](access-control/role-based-authorization.md) -Berechtigungen erforderlich.
 
-Änderungen an der Richtlinie können bis zu 1 Stunde in Anspruch nehmen.
+Es kann bis zu einer Stunde dauern, bis Änderungen an der Richtlinie wirksam werden.
 
 ### <a name="examples"></a>Beispiele
 
-#### <a name="setting-all-properties-of-the-policy-explicitly-at-table-level"></a>Festlegen aller Eigenschaften der Richtlinie explizit auf Tabellenebene
+#### <a name="setting-all-properties-of-the-policy-explicitly-at-table-level"></a>Explizites Festlegen aller Eigenschaften der Richtlinie auf Tabellenebene
 
 ```kusto
 .alter table [table_name] policy partitioning @'{'
@@ -74,12 +74,12 @@ Der Befehl erfordert [DatabaseAdmin-Berechtigungen.](access-control/role-based-a
 '}'
 ```
 
-#### <a name="setting-a-specific-property-of-the-policy-explicitly-at-table-level"></a>Festlegen einer bestimmten Eigenschaft der Richtlinie explizit auf Tabellenebene
+#### <a name="setting-a-specific-property-of-the-policy-explicitly-at-table-level"></a>Explizites Festlegen einer bestimmten Eigenschaft der Richtlinie auf Tabellenebene
 
-Um die `EffectiveDateTime` Richtlinie auf einen anderen Wert festzulegen, verwenden Sie den folgenden Befehl:
+Verwenden Sie den `EffectiveDateTime` folgenden Befehl, um die der Richtlinie auf einen anderen Wert festzulegen:
 
 ```kusto
-.alter table [table_name] policy partitioning @'{"EffectiveDateTime":"2020-01-01"}'
+.alter-merge table [table_name] policy partitioning @'{"EffectiveDateTime":"2020-01-01"}'
 ```
 
 ## <a name="delete-policy"></a>Richtlinie löschen
@@ -88,4 +88,4 @@ Um die `EffectiveDateTime` Richtlinie auf einen anderen Wert festzulegen, verwen
 .delete table [table_name] policy partitioning
 ```
 
-Der `.delete` Befehl löscht die Partitionierungsrichtlinie der angegebenen Tabelle.
+Der `.delete` -Befehl löscht die Partitionierungs Richtlinie der angegebenen Tabelle.

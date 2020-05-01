@@ -1,6 +1,6 @@
 ---
-title: .anzeigen Datenbankschema - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird das Datenbankschema in Azure Data Explorer beschrieben.
+title: '. Anzeigen des Datenbankschemas: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird beschrieben, wie Sie das Datenbankschema in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,44 +8,44 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 212aaf428e03190226a17509c97e9acd1394d2b1
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 90a48ec3a830e754bf823712ca7016d162474a39
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81519804"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82616982"
 ---
-# <a name="show-databases-schema"></a>.show Datenbankschema
+# <a name="show-databases-schema"></a>. Anzeigen des Datenbankschemas
 
-Gibt eine flache Liste der Struktur der ausgewählten Datenbanken mit allen tabellen- und spaltentabellen in einer einzelnen Tabelle oder einem JSON-Objekt zurück.
-Bei Verwendung mit einer Version wird die Datenbank nur zurückgegeben, wenn es sich um eine spätere Version als die bereitgestellte Version handelt.
+Gibt eine flache Liste der Struktur der ausgewählten Datenbanken mit allen Tabellen und Spalten in einer einzelnen Tabelle oder einem JSON-Objekt zurück.
+Bei Verwendung mit einer Version wird die Datenbank nur zurückgegeben, wenn Sie eine höhere Version als die bereitgestellte Version ist.
 
 > [!NOTE]
-> Die Version sollte nur im "vMM.mm"-Format bereitgestellt werden. MM stellt die Hauptversion und mm die Nebenversion dar.
+> Die Version sollte nur im Format "vMM.mm" bereitgestellt werden. Mm stellt die Hauptversion und mm die neben Version dar.
 
-`.show``database` *Datenbankname* `schema` `details`[`if_later_than` ] [ *"Version"*] 
+`.show``database` *DatabaseName* `schema` [`details`] [`if_later_than` *"Version"*] 
 
-`.show``database` *Datenbankname* `schema` `if_later_than` [ *"Version"*] `as``json`
+`.show``database` *DatabaseName* `schema` [`if_later_than` *"Version"*] `as``json`
  
-`.show``databases` `,` DatabaseName1 ... *DatabaseName1* `(` `)` `schema` [`details` | `as` `json`]
+`.show``databases` `,` *DatabaseName1* DatabaseName1 `(` ... `)` `schema` [`details` | `as` `json`]
  
-`.show``databases` `,` *"Version"* *DatabaseName1* DatabaseName1 if_later_than "Version" ... `(` `)` `schema` [`details` | `as` `json`]
+`.show``databases` *"Version"* `,` *DatabaseName1* DatabaseName1 if_later_than "Version"... `(` `)` `schema` [`details` | `as` `json`]
 
 **Beispiel** 
  
-Die Datenbank 'TestDB' hat 1 Tabelle mit dem Namen 'Events'.
+Die Datenbank "TestDB" hat eine Tabelle mit dem Namen "Events".
 
-```
+```kusto
 .show database TestDB schema 
 ```
 
 **Beispielausgabe**
 
-|DatabaseName|TableName|ColumnName|ColumnType|IsDefaultTable|IsDefaultColumn|PrettyName|Version
+|DatabaseName|TableName|ColumnName|ColumnType|Isdefaulbar|Isdefaultcolumn|Prettyname|Version
 |---|---|---|---|---|---|---|--- 
-|TestDB||||False|False||v.1.1       
+|TestDB||||False|False||v. 1.1       
 |TestDB|Ereignisse|||True|False||       
-|TestDB|Ereignisse| name|System.String|True|False||     
+|TestDB|Ereignisse| Name|System.String|True|False||     
 |TestDB|Ereignisse| StartTime|  System.DateTime|True|False||    
 |TestDB|Ereignisse| EndTime|    System.DateTime|True|False||        
 |TestDB|Ereignisse| City|   System.String|True| False||     
@@ -53,26 +53,26 @@ Die Datenbank 'TestDB' hat 1 Tabelle mit dem Namen 'Events'.
 
 **Beispiel** 
  
-```
+```kusto
 .show database TestDB schema if_later_than "v1.0" 
 ```
 **Beispielausgabe**
 
-|DatabaseName|TableName|ColumnName|ColumnType|IsDefaultTable|IsDefaultColumn|PrettyName|Version
+|DatabaseName|TableName|ColumnName|ColumnType|Isdefaulbar|Isdefaultcolumn|Prettyname|Version
 |---|---|---|---|---|---|---|--- 
-|TestDB||||False|False||v.1.1       
+|TestDB||||False|False||v. 1.1       
 |TestDB|Ereignisse|||True|False||       
-|TestDB|Ereignisse| name|System.String|True|False||     
+|TestDB|Ereignisse| Name|System.String|True|False||     
 |TestDB|Ereignisse| StartTime|  System.DateTime|True|False||    
 |TestDB|Ereignisse| EndTime|    System.DateTime|True|False||        
 |TestDB|Ereignisse| City|   System.String|True| False||     
 |TestDB|Ereignisse| SessionID|  System. Int32|True|  True||  
 
-Da eine Version bereitgestellt wurde, die niedriger als die aktuelle Datenbankversion ist, wurde das Schema "TestDB" zurückgegeben. Die Bereitstellung einer gleichen oder höheren Version hätte ein leeres Ergebnis generiert.
+Da eine niedrigere Version als die aktuelle Datenbankversion bereitgestellt wurde, wurde das Schema "TestDB" zurückgegeben. Das Bereitstellen einer gleichen oder einer höheren Version hätte ein leeres Ergebnis generiert.
 
 **Beispiel** 
  
-```
+```kusto
 .show database TestDB schema as json
 ```
 

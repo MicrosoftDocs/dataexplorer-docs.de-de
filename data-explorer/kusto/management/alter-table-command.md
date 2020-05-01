@@ -1,6 +1,6 @@
 ---
-title: .alter-Tabelle und .alter-merge-Tabelle - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden die .alter-Tabelle und die .alter-merge-Tabelle in Azure Data Explorer beschrieben.
+title: . ALTER TABLE und. Alter-Merge Table-Azure Daten-Explorer | Microsoft-Dokumentation
+description: Dieser Artikel beschreibt die Tabelle "ALTER TABLE" und ". Alter-Merge" in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,62 +8,62 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/17/2020
-ms.openlocfilehash: 516c5c7b85f7c310188fd11ae24e52cb23423143
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 18b0502754e95ca56d6a7f6946b9330bd42b174a
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81522371"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82616438"
 ---
-# <a name="alter-table-and-alter-merge-table"></a>.alter-Tabelle und .alter-merge-Tabelle
+# <a name="alter-table-and-alter-merge-table"></a>. ALTER TABLE-und Alter-MERGE-Tabelle
 
-Der `.alter table` Befehl legt ein neues Spaltenschema, eine neue Dokumentzeichenfolge und einen neuen Ordner in eine vorhandene Tabelle fest und überschreibt das vorhandene Spaltenschema, die Dokumentation und den Ordner. Daten in vorhandenen Spalten, die durch den Befehl "erhalten" werden, werden beibehalten (so kann dieser Befehl z. B. verwendet werden, um die Spalten einer Tabelle neu anzuordnen).
+Mit `.alter table` dem Befehl werden ein neues Spalten Schema, eine Zeichenfolge und ein neuer Ordner auf eine vorhandene Tabelle festgelegt, wobei das vorhandene Spalten Schema, die DocString und der Ordner überschrieben werden. Daten in vorhandenen Spalten, die vom Befehl "beibehalten" werden, werden beibehalten (daher kann dieser Befehl beispielsweise verwendet werden, um die Spalten einer Tabelle neu zu ordnen).
 
-Der `.alter-merge table` Befehl fügt einer vorhandenen Tabelle neue Spalten, Docstring und Ordner hinzu.
-Daten in vorhandenen Spalten bleiben erhalten.
+Der `.alter-merge table` Befehl fügt einer vorhandenen Tabelle neue Spalten, DocString und Folder, hinzu.
+Daten in vorhandenen Spalten werden beibehalten.
 
-Beide Befehle müssen im Kontext einer bestimmten Datenbank ausgeführt werden, die den Tabellennamen umgibt.
+Beide Befehle müssen im Kontext einer bestimmten Datenbank ausgeführt werden, die den Tabellennamen eingibt.
 
-Erfordert [die Berechtigung "Table Admin"](../management/access-control/role-based-authorization.md).
+Erfordert die [Table admin-Berechtigung](../management/access-control/role-based-authorization.md).
 
 **Syntax**
 
-`.alter``table` *TableName* (*columnName*:*columnType*, ...)  [`with` `(``docstring` `=` [ *Dokumentation*`,` `folder` `=` ] `)`[ *Ordnername*] ]
+`.alter``table` *TableName* (*ColumnName*:*ColumnType*,...)  [`with` `(`[`docstring` `=` *Documentation*`,` *FolderName* `)`Dokumentation] [ `folder` FolderName]] `=`
 
-`.alter-merge``table` *TableName* (*columnName*:*columnType*, ...)  [`with` `(``docstring` `=` [ *Dokumentation*`,` `folder` `=` ] `)`[ *Ordnername*] ]
+`.alter-merge``table` *TableName* (*ColumnName*:*ColumnType*,...)  [`with` `(`[`docstring` `=` *Documentation*`,` *FolderName* `)`Dokumentation] [ `folder` FolderName]] `=`
 
-Geben Sie die Spalten an, die die Tabelle nach erfolgreichem Abschluss haben soll. 
+Geben Sie die Spalten an, die die Tabelle nach erfolgreichem Abschluss aufweisen soll. 
 
 > [!WARNING]
-> Die `.alter` falsche Verwendung des Befehls kann zu Datenverlust führen.
-> Lesen Sie die `.alter` `.alter-merge` Unterschiede zwischen und unten sorgfältig durch.
+> Wenn Sie `.alter` den Befehl falsch verwenden, kann dies zu Datenverlusten führen.
+> Lesen Sie sorgfältig die unter `.alter` schiede `.alter-merge` zwischen und darunter.
 
 `.alter-merge`:
 
  * Spalten, die nicht vorhanden sind und die Sie angeben, werden am Ende des vorhandenen Schemas hinzugefügt.
- * Wenn das übergebene Schema einige Tabellenspalten nicht enthält, werden sie nicht gelöscht.
+ * Wenn das über gegebene Schema nicht einige Tabellen Spalten enthält, werden diese nicht gelöscht.
  * Wenn Sie eine vorhandene Spalte mit einem anderen Typ angegeben haben, schlägt der Befehl fehl.
 
-`.alter`nur (nicht): `.alter-merge`
+`.alter`nur (nicht `.alter-merge`):
 
- * Die Tabelle hat genau die gleichen Spalten in der gleichen Reihenfolge wie angegeben.
- * Vorhandene Spalten, die nicht im Befehl angegeben `.drop column`sind, werden gelöscht (wie in ) und daten in ihnen gehen verloren.
- * Das Ändern eines Spaltentyps wird beim Ändern einer Tabelle nicht unterstützt. Verwenden Sie stattdessen den Spaltenbefehl [.alter.](alter-column.md)
+ * Die Tabelle weist genau die gleichen Spalten in derselben Reihenfolge wie angegeben auf.
+ * Vorhandene Spalten, die nicht im Befehl angegeben sind, werden gelöscht (wie in `.drop column`), und die Daten gehen verloren.
+ * Das Ändern eines Spalten Typs wird beim Ändern einer Tabelle nicht unterstützt. Verwenden Sie stattdessen den Befehl [. Alter Column](alter-column.md) .
 
 > [!TIP] 
-> Verwenden `.show table [TableName] cslschema` Sie diese Datei, um das vorhandene Spaltenschema abzudateien, bevor Sie es ändern. 
+> Verwenden `.show table [TableName] cslschema` Sie, um das vorhandene Spalten Schema zu erhalten, bevor Sie es ändern. 
 
-Für beide Befehle gilt:
+Folgendes gilt für beide Befehle:
 
-1. Vorhandene Daten werden durch diese Befehle nicht physisch geändert. Daten in entfernten Spalten werden ignoriert. Daten in neuen Spalten werden als null angenommen.
-1. Je nachdem, wie der Cluster konfiguriert ist, kann die Datenerfassung das Spaltenschema der Tabelle ändern, auch ohne Benutzerinteraktion. Stellen Sie daher beim Vornehmen von Änderungen am Spaltenschema einer Tabelle sicher, dass die Aufnahme keine erforderlichen Spalten hinzufügt, die der Befehl dann entfernt.
+1. Vorhandene Daten werden von diesen Befehlen nicht physisch geändert. Daten in entfernten Spalten werden ignoriert. Es wird davon ausgegangen, dass Daten in neuen Spalten NULL sind.
+1. Abhängig von der Konfiguration des Clusters kann die Datenerfassung das Spalten Schema der Tabelle ändern, auch ohne Benutzerinteraktion. Wenn Sie Änderungen am Spalten Schema einer Tabelle vornehmen, sollten Sie daher sicherstellen, dass bei der Erfassung erforderliche Spalten nicht hinzugefügt werden, die der Befehl dann entfernt.
 
 > [!WARNING]
-> Datenerfassungsprozesse in die Tabelle, die das Spaltenschema der Tabelle `.alter table` ändern, die parallel mit dem Befehl auftreten, können agnostisch in der Reihenfolge der Tabellenspalten ausgeführt werden. Es besteht auch die Gefahr, dass Daten in die falschen Spalten aufgenommen werden. Verhindern Sie dies, indem Sie die Aufnahme während solcher Befehle beenden oder indem Sie sicherstellen, dass solche Aufnahmevorgänge immer ein Zuordnungsobjekt verwenden.
+> Daten Erfassungs Prozesse in die Tabelle, die das Spalten Schema der Tabelle ändern, die parallel mit dem `.alter table` Befehl auftreten, können für die Reihenfolge der Tabellen Spalten agnostisch ausgeführt werden. Außerdem besteht das Risiko, dass Daten in die falschen Spalten aufgenommen werden. Verhindern Sie dies, indem Sie die Erfassung während solcher Befehle Beenden oder sicherstellen, dass bei solchen Erfassungs Vorgängen immer ein Mapping-Objekt verwendet wird.
 
 **Beispiele**
 
-```
+```kusto
 .alter table MyTable (ColumnX:string, ColumnY:int) 
 .alter table MyTable (ColumnX:string, ColumnY:int) with (docstring = "Some documentation", folder = "Folder1")
 .alter-merge table MyTable (ColumnX:string, ColumnY:int) 

@@ -1,6 +1,6 @@
 ---
-title: Spalte-Docstrings der Alter-Merge-Tabelle - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt die Spalte "Spalte-Docstrings" der Alter-Merge-Tabelle in Azure Data Explorer.
+title: Alter-Merge Table Column-Docstrings-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel werden Alter-Merge Table Column-Docstrings in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,39 +8,39 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 75d298f35a215af5da443f673278e4a252c24cc9
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 7dd36181be1140d3960369b1c8a5284ed55e48f5
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81522388"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82616489"
 ---
-# <a name="alter-merge-table-column-docstrings"></a>alter-merge-Tabelle Column-docstrings
+# <a name="alter-merge-table-column-docstrings"></a>Alter-Merge Table Column-Docstrings
 
-Legt `docstring` die Eigenschaft einer oder mehrerer Spalten der angegebenen Tabelle fest. Spalten, die nicht explizit festgelegt sind, **behalten** ihren vorhandenen Wert für diese Eigenschaft bei, sofern sie einen werthaben.
+Legt die `docstring` -Eigenschaft einer oder mehrerer Spalten der angegebenen Tabelle fest. Nicht explizit festgelegte Spalten **behalten** Ihren vorhandenen Wert für diese Eigenschaft bei, wenn Sie über einen verfügen.
 
-Änderungstabelle column-docstring finden Sie [unten](#alter-table-column-docstrings).
+Informationen zu alter Table Column-DocString finden Sie [unten](#alter-table-column-docstrings).
 
 **Syntax**
 
-`.alter-merge``table` *Tabellenname* `column-docstring` *Col1* `:` `:` `,` *Col2* *Docstring1* *Docstring2*Col1 Docstring1 [ Col2 Docstring2 ]... `(``)`
+`.alter-merge``table` *TableName* `column-docstring` `(` *col1* `,` *Docstring1* `:` *Docstring2*Docstring1 [Col2 Docstring2]... *Col2* `:``)`
 
 **Beispiel** 
 
-```
+```kusto
 .alter-merge table Table1 column-docstrings (Column1:"DocString1", Column2:"DocString2")
 ```
 
-## <a name="alter-table-column-docstrings"></a>Ändern der Tabelle Spalten-Docstrings
+## <a name="alter-table-column-docstrings"></a>Alter Table Column-Docstrings
 
-Legt `docstring` die Eigenschaft einer oder mehrerer Spalten der angegebenen Tabelle fest. In Spalten, die nicht explizit festgelegt sind, wird diese Eigenschaft **entfernt.**
+Legt die `docstring` -Eigenschaft einer oder mehrerer Spalten der angegebenen Tabelle fest. Für nicht explizit festgelegte Spalten wird diese Eigenschaft **entfernt**.
 
 **Syntax**
 
-`.alter``table` *Tabellenname* `column-docstring` *Col1* `:` `:` `,` *Col2* *Docstring1* *Docstring2*Col1 Docstring1 [ Col2 Docstring2 ]... `(``)`
+`.alter``table` *TableName* `column-docstring` `(` *col1* `,` *Docstring1* `:` *Docstring2*Docstring1 [Col2 Docstring2]... *Col2* `:``)`
 
 **Beispiel** 
 
-```
+```kusto
 .alter table Table1 column-docstrings (Column1:"DocString1", Column2:"DocString2")
 ```
