@@ -1,6 +1,6 @@
 ---
-title: geo_point_to_s2cell() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird geo_point_to_s2cell() in Azure Data Explorer beschrieben.
+title: geo_point_to_s2cell ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird geo_point_to_s2cell () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,47 +8,47 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: 253b850da519aceb0ead9456f7e49d6dd37d78ec
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: d1cd2106865419f9407b3ff464d9852eb5ffb630
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663740"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618467"
 ---
 # <a name="geo_point_to_s2cell"></a>geo_point_to_s2cell()
 
-Berechnet den S2-Zellentokenzeichenfolgenwert für einen geografischen Standort.
+Berechnet den S2-zelltokenzeichenfolgen-Wert für einen geografischen Standort.
 
-Weitere Informationen zu S2-Zellen finden Sie [hier](http://s2geometry.io/devguide/s2cell_hierarchy).
+Klicken Sie [hier](http://s2geometry.io/devguide/s2cell_hierarchy), um weitere Informationen zu S2-Zellen zu erhalten.
 
 **Syntax**
 
-`geo_point_to_s2cell(`*longitude*`, `*Längengrad-Breitengrad*`, `*level*`)`
+`geo_point_to_s2cell(`*Längengrad*`, `*level* *latitude*`, ``)`
 
 **Argumente**
 
-* *Längengrad*: Längengradwert einer geografischen Position. Längengrad x gilt als gültig, wenn x eine reelle Zahl ist und x im Bereich [-180, +180] liegt. 
-* *Breitengrad*: Breitengradwert eines geografischen Standorts. Breitengrad y gilt als gültig, wenn y eine reelle Zahl und y im Bereich [-90, +90] ist. 
-* *level*: `int` Ein optionaler Wert, der die angeforderte Zellenebene definiert. Unterstützte Werte liegen im Bereich [0,30]. Wenn nicht angegeben, `11` wird der Standardwert verwendet.
+* *Längengrad*: Längengrad eines geografischen Standorts. Der Längengrad "x" wird als gültig betrachtet, wenn "x" eine reelle Zahl und "x" im Bereich [-180, + 180] ist. 
+* *breiten*Grad: Breitengrad eines geografischen Standorts. Der Breitengrad y wird als gültig betrachtet, wenn y eine reelle Zahl und y im Bereich [-90, + 90] ist. 
+* *Level*: ein optionales `int` , das die angeforderte Zellen Ebene definiert. Unterstützte Werte liegen im Bereich [0,0]. Wenn nicht angegeben, wird der Standard `11` Wert verwendet.
 
 **Rückgabe**
 
-Der Zeichenfolgenwert des S2-Zellentokens einer bestimmten geografischen Position. Wenn die Koordinate oder Ebene ungültig ist, führt die Abfrage zu einem leeren Ergebnis.
+Der Zeichen folgen Wert des S2-zelltokens eines angegebenen geografischen Standorts. Wenn die Koordinate oder die Ebene ungültig sind, führt die Abfrage zu einem leeren Ergebnis.
 
 > [!NOTE]
 >
-> * S2Cell kann ein nützliches räumliches Clustering-Tool sein.
-> * S2Cell hat 31 Hierarchieebenen mit Flächenabdeckung von 85.011.012,19 km2 auf der höchsten Ebene 0 bis 00,44 cm2 auf der niedrigsten Ebene 30.
-> * S2Cell bewahrt das Zellenzentrum während der Pegelerhöhung von 0 auf 30 gut.
-> * S2Cell ist eine Zelle auf einer Kugeloberfläche und ihre Kanten sind geodäsie.
-> * Das Aufrufen der [geo_s2cell_to_central_point()-Funktion](geo-s2cell-to-central-point-function.md) für eine s2cell-Tokenzeichenfolge, die für Längengrad x und Breitengrad y berechnet wurde, gibt nicht notwendigerweise x und y zurück.
-> * Es ist möglich, dass zwei geografische Standorte sehr nahe beieinander liegen, aber unterschiedliche S2-Zellentoken haben.
+> * S2Cell kann ein nützliches Georäumliches Clustering-Tool sein.
+> * S2Cell verfügt über 31 Hierarchieebenen mit Bereichs Abdeckung von 85011, 012.19 km ² auf der höchsten Ebene 0 bis 00.44 cm ² auf niedrigster Ebene 30.
+> * S2Cell behält den Zell Mittelwert bei der Erhöhung der Ebene zwischen 0 und 30 bei.
+> * S2Cell ist eine Zelle auf einer Kugeloberfläche, und die Ränder sind geodäcs.
+> * Das Aufrufen der [geo_s2cell_to_central_point ()](geo-s2cell-to-central-point-function.md) -Funktion für eine s2cell-Tokenzeichenfolge, die für Längengrad x und Breite y berechnet wurde, gibt nicht notwendigerweise x und y zurück.
+> * Es ist möglich, dass sich zwei geografische Standorte sehr nah beieinander befinden, aber über unterschiedliche S2-zelltoken verfügen.
 
-**S2 Zell ungefähre Flächenabdeckung pro Füllstandwert**
+**S2-Zelle ungefähre Bereichs Abdeckung pro Wert**
 
-Für jede Ebene ist die Größe der s2cell ähnlich, aber nicht genau gleich. In der Nähe ZellenGröße in der Regel mehr gleich sein.
+Für jede Ebene ist die Größe des s2cell ähnlich, aber nicht genau gleich. Die Größe der nahe gelegenen Zellen ist tendenziell gleichbedeutend.
 
-|Ebene|Minimale zufällige Zellkantenlänge (UK)|Maximale zufällige Zellkantenlänge (US)|
+|Ebene|Minimale Länge der Zufalls Zellen Kante (UK)|Maximale Länge von Zufalls Zellen Kanten (USA)|
 |--|--|--|
 |0|7842 km|7842 km|
 |1|3921 km|5004 km|
@@ -62,17 +62,17 @@ Für jede Ebene ist die Größe der s2cell ähnlich, aber nicht genau gleich. In
 |9|14 km|20 km|
 |10|7 km|10 km|
 |11|3 km|5 km|
-|12|1699 m|2 km|
-|13|850 m|1225 m|
-|14|425 m|613 m|
-|15|212 m|306 m|
-|16|106 m|153 m|
-|17|53 m|77 m|
-|18|27 m|38 m|
-|19|13 m|19 m|
-|20|7 m|10 m|
-|21|3 m|5 m|
-|22|166 cm|2 m|
+|12|1699 Mio.|2 km|
+|13|850 Mio.|1225 Mio.|
+|14|425 Mio.|613 Mio.|
+|15|212 Mio.|306 Mio.|
+|16|106 Mio.|153 Mio.|
+|17|53 Mio.|77 Mio.|
+|18|27 Mio.|38 Mio.|
+|19|13 min.|19 Mio.|
+|20|7 min.|10 Mio.|
+|21|3 Mio.|5 Mio.|
+|22|166 cm|2 Mio.|
 |23|83 cm|120 cm|
 |24|41 cm|60 cm|
 |25|21 cm|30 cm|
@@ -82,15 +82,15 @@ Für jede Ebene ist die Größe der s2cell ähnlich, aber nicht genau gleich. In
 |29|12 mm|18 mm|
 |30|6 mm|9 mm|
 
-Die Tabellenquelle finden Sie [hier](http://s2geometry.io/resources/s2cell_statistics).
+Die Tabellen Quelle finden Sie [hier](http://s2geometry.io/resources/s2cell_statistics).
 
-Siehe auch [geo_point_to_geohash()](geo-point-to-geohash-function.md).
+Siehe auch [geo_point_to_geohash ()](geo-point-to-geohash-function.md).
 
 **Beispiele**
 
-US-Sturmereignisse aggregiert nach s2cell.
+US Storm-Ereignisse, die von s2cell aggregiert werden.
 
-:::image type="content" source="images/queries/geo/s2cell.png" alt-text="US s2cell":::
+:::image type="content" source="images/geo-point-to-s2cell-function/s2cell.png" alt-text="US-s2cell":::
 
 ```kusto
 StormEvents
@@ -108,7 +108,7 @@ print s2cell = geo_point_to_s2cell(-80.195829, 25.802215, 8)
 |--------|
 | 88d9b  |
 
-Im folgenden Beispiel werden Gruppen von Koordinaten gefunden. Jedes Koordinatenpaar in der Gruppe befindet sich in s2cell mit einer maximalen Fläche von 1632,45 km2.
+Im folgenden Beispiel werden Gruppen von Koordinaten gefunden. Alle Koordinatenpaare in der Gruppe befinden sich in s2cell mit einem maximalen Bereich von 1632,45 KB.
 ```kusto
 datatable(location_id:string, longitude:real, latitude:real)
 [
@@ -123,10 +123,10 @@ datatable(location_id:string, longitude:real, latitude:real)
 
 | s2cell | count | locations |
 |--------|-------|-----------|
-| 47b1d  | 2     | ["A","B"] |
+| 47b1d  | 2     | ["A", "B"] |
 | 47ae3  | 1     | ["C"]     |
 
-Im folgenden Beispiel wird aufgrund der ungültigen Koordinateneingabe ein leeres Ergebnis erstellt.
+Im folgenden Beispiel wird aufgrund der ungültigen Koordinaten Eingabe ein leeres Ergebnis erzeugt.
 ```kusto
 print s2cell = geo_point_to_s2cell(300,1,8)
 ```
@@ -135,7 +135,7 @@ print s2cell = geo_point_to_s2cell(300,1,8)
 |--------|
 |        |
 
-Im folgenden Beispiel wird aufgrund der ungültigen Ebeneneingabe ein leeres Ergebnis erstellt.
+Im folgenden Beispiel wird aufgrund der ungültigen Stufen Eingabe ein leeres Ergebnis erzeugt.
 ```kusto
 print s2cell = geo_point_to_s2cell(1,1,35)
 ```
@@ -144,7 +144,7 @@ print s2cell = geo_point_to_s2cell(1,1,35)
 |--------|
 |        |
 
-Im folgenden Beispiel wird aufgrund der ungültigen Ebeneneingabe ein leeres Ergebnis erstellt.
+Im folgenden Beispiel wird aufgrund der ungültigen Stufen Eingabe ein leeres Ergebnis erzeugt.
 ```kusto
 print s2cell = geo_point_to_s2cell(1,1,int(null))
 ```

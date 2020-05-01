@@ -1,6 +1,6 @@
 ---
-title: Authentifizierung über HTTPS - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt die Authentifizierung über HTTPS in Azure Data Explorer.
+title: 'Authentifizierung über https: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird die Authentifizierung über HTTPS in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 4b6fbf5bb34dc3ff52938c7042778a7e49fd5faf
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: e0910089d87d6bce6124cb7e4560c2fa7b92b847
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81503042"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617985"
 ---
 # <a name="authentication-over-https"></a>Authentifizierung über HTTPS
 
-Bei Verwendung von HTTPS unterstützt `Authorization` der Dienst den Standard-HTTP-Header für die Authentifizierung.
+Bei Verwendung von HTTPS unterstützt der Dienst den HTTP `Authorization` -Standard Header zum Durchführen der Authentifizierung.
 
-Die unterstützten HTTP-Authentifizierungsmethoden sind:
+Die folgenden HTTP-Authentifizierungsmethoden werden unterstützt:
 
-* **Azure Active Directory** `bearer` , über die Methode.
+* **Azure Active Directory**über die `bearer` -Methode.
 
-Bei der Authentifizierung mit Azure `Authorization` Active Directory hat der Header das folgende Format:
+Bei der Authentifizierung mithilfe Azure AD hat der `Authorization` Header das folgende Format:
 
 ```txt
 Authorization: bearer TOKEN
 ```
 
-Wo `TOKEN` befindet sich das Zugriffstoken, das der Aufrufer durch Die Kommunikation mit dem Azure Active Directory-Dienst mit den folgenden Eigenschaften erhält:
+Dabei `TOKEN` ist das Zugriffs Token, das der Aufrufer durch die Kommunikation mit dem Azure AD-Dienst abruft. Das Token verfügt über die folgenden Eigenschaften:
 
-* Die Ressource ist der Dienst-URI `https://help.kusto.windows.net`(z. B. ).
-* Der Azure Active Directory-Dienstendpunkt ist `https://login.microsoftonline.com/TENANT/`.
+* Die Ressource ist der Dienst-URI (z. `https://help.kusto.windows.net`b.).
+* Der Azure AD-Dienst Endpunkt ist`https://login.microsoftonline.com/TENANT/`
 
-Wobei `TENANT` sich die Azure Active Directory-Mandanten-ID oder der Name befindet. Beispielsweise können Dienste, die unter `https://login.microsoftonline.com/microsoft.com/`dem Microsoft-Mandanten erstellt wurden, verwenden. Alternativ kann die Anforderung nur für die `https://login.microsoftonline.com/common/` Benutzerauthentifizierung gestellt werden.
+Dabei `TENANT` ist die Azure AD Mandanten-ID oder der Name des Mandanten. Beispielsweise können Dienste, die unter dem Microsoft-Mandanten erstellt werden `https://login.microsoftonline.com/microsoft.com/`, verwenden. Alternativ kann die Anforderung nur für die Benutzerauthentifizierung an `https://login.microsoftonline.com/common/`erfolgen.
 
 > [!NOTE]
-> Der Azure Active Directory-Dienstendpunkt ändert sich, wenn er in nationalen Clouds ausgeführt wird.
-> Um den zu verwendenden Endpunkt zu `AadAuthorityUri` ändern, legen Sie eine Umgebungsvariable auf den erforderlichen URI fest.
+> Der Azure AD-Dienst Endpunkt ändert sich, wenn er in nationalen Clouds ausgeführt wird.
+> Um den Endpunkt zu ändern, legen Sie eine `AadAuthorityUri` Umgebungsvariable auf den erforderlichen URI fest.
 
-Weitere Informationen finden Sie in der [Authentifizierungsübersicht](../../management/access-control/index.md) und [Anleitung zur Azure Active Directory-Authentifizierung](../../management/access-control/how-to-authenticate-with-aad.md).
+Weitere Informationen finden Sie in der [Übersicht über die Authentifizierung](../../management/access-control/index.md) und im [Leitfaden zur Azure AD-Authentifizierung](../../management/access-control/how-to-authenticate-with-aad.md).

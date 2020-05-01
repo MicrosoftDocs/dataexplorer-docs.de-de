@@ -1,6 +1,6 @@
 ---
-title: RestrictedViewAccess-Richtlinie - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die RestrictedViewAccess-Richtlinie in Azure Data Explorer beschrieben.
+title: 'Kusto restrictedviewaccess-Richtlinie steuert Abfragen: Azure Daten-Explorer'
+description: In diesem Artikel wird die restrictedviewaccess-Richtlinie in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,24 +8,24 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 6f994f5b80632650ab6dbe5dcf28cd82407d688f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: e44aa2b14aa8babdab95a6ad8c6f7ef5ed026ff9
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81520416"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617425"
 ---
-# <a name="restrictedviewaccess-policy"></a>RestrictedViewAccess-Richtlinie
+# <a name="restrictedviewaccess-policy"></a>Restrictedviewaccess-Richtlinie
 
-*RestrictedViewAccess* ist eine optionale Richtlinie, die für Tabellen in einer Datenbank aktiviert werden kann.
+*Restrictedviewaccess* ist eine optionale Richtlinie, die für Tabellen in einer Datenbank aktiviert werden kann.
 
-Wenn diese Richtlinie für eine Tabelle aktiviert ist, können Daten in der Tabelle *nur* an Prinzipale abgefragt werden, die der [Rolle UnrestrictedViewer](../management/access-control/role-based-authorization.md) in der Datenbank hinzugefügt wurden.
+Wenn diese Richtlinie für eine Tabelle aktiviert ist, können die Daten in der Tabelle *nur* auf Prinzipale abgefragt werden, die der [unrestrictedviewer](../management/access-control/role-based-authorization.md) -Rolle in der Datenbank hinzugefügt wurden.
 
-Wenn eine Richtlinie für eine Tabelle aktiviert ist, kann kein Prinzipal (auch ein Tabellen-/Datenbank-/Clusteradministrator), der nicht in der Rolle ["UnrestrictedViewer"-Datenbankebene](../management/access-control/role-based-authorization.md) enthalten ist, Keine Daten in der Tabelle abfragen.
+Wenn eine Richtlinie für eine Tabelle aktiviert ist, kann jeder Prinzipal (auch eine Tabelle/Datenbank/Cluster Administrator), der nicht in der [unrestrictedviewer](../management/access-control/role-based-authorization.md) -Rolle auf Datenbankebene enthalten ist, Daten in der Tabelle Abfragen.
 
-Die Rolle [UnrestrictedViewer](../management/access-control/role-based-authorization.md) erteilt *allen* Tabellen in der Datenbank, für die die Richtlinie aktiviert ist, Die Ansichtsberechtigung, vorausgesetzt, der aktuelle Prinzipal ist bereits berechtigt, die Datenbank abzufragen (ein Datenbankadministrator/Benutzer/Viewer). Das Hinzufügen oder Entfernen von Prinzipalen zu oder aus der Rolle kann von einem [DatabaseAdmin](../management/access-control/role-based-authorization.md)ausgeführt werden.
+Die [unrestrictedviewer](../management/access-control/role-based-authorization.md) -Rolle gewährt *allen* Tabellen in der Datenbank, für die die Richtlinie aktiviert ist, die VIEW-Berechtigung, vorausgesetzt, der aktuelle Prinzipal ist bereits zum Abfragen der Datenbank autorisiert (Datenbankadministrator/Benutzer/Viewer). Das Hinzufügen oder Entfernen von Prinzipale zu oder aus der Rolle kann von einem [databaseadmin](../management/access-control/role-based-authorization.md)durchgeführt werden.
 
 > [!NOTE]
-> Die RestrictedViewAccess-Richtlinie kann nicht für eine Tabelle konfiguriert werden, für die eine Richtlinie auf [Zeilenebene](./rowlevelsecuritypolicy.md) aktiviert ist.
+> Die restrictedviewaccess-Richtlinie kann nicht für eine Tabelle konfiguriert werden, für die eine [Sicherheit auf Zeilenebene Richtlinie](./rowlevelsecuritypolicy.md) aktiviert ist.
 
-Weitere Informationen zu den Steuerbefehlen zum Verwalten der RestrictedViewAccess-Richtlinie [finden Sie hier](../management/restrictedviewaccess-policy.md).
+Weitere Informationen zu den Steuerungs Befehlen zum Verwalten der restrictedviewaccess-Richtlinie [finden Sie hier](../management/restrictedviewaccess-policy.md).

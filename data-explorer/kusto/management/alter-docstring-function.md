@@ -1,6 +1,6 @@
 ---
-title: .alter-Funktion docstring - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt .alter function docstring in Azure Data Explorer.
+title: . Alter Function DocString-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird die ". Alter Function DocString" in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,38 +8,38 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/11/2020
-ms.openlocfilehash: 25f6dac67f65add545f7215b44daafb0257a8375
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d590e93a6772483aba6b9580b26490eb2fe5ec08
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81522575"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617849"
 ---
-# <a name="alter-function-docstring"></a>.alter-Funktion docstring
+# <a name="alter-function-docstring"></a>. Alter Function DocString
 
 Ändert den DocString-Wert einer vorhandenen Funktion.
 
-`.alter``function` *FunctionName-Dokumentation* `docstring` *Documentation*
+`.alter``function` *FunctionName* `docstring` - *Dokumentation*
 
 > [!NOTE]
-> * Erfordert [Datenbankadministratorberechtigung](../management/access-control/role-based-authorization.md)
-> * Der [Datenbankbenutzer,](../management/access-control/role-based-authorization.md) der die Funktion ursprünglich erstellt hat, darf die Funktion ändern. 
-> * Wenn die Funktion nicht vorhanden ist, wird ein Fehler zurückgegeben. Informationen zum Erstellen einer neuen Funktion finden Sie unter [.create-Funktion](create-function.md)
+> * Erfordert [Datenbankadministrator Berechtigung](../management/access-control/role-based-authorization.md)
+> * Der [Datenbankbenutzer](../management/access-control/role-based-authorization.md) , der die Funktion ursprünglich erstellt hat, kann die Funktion ändern. 
+> * Wenn die Funktion nicht vorhanden ist, wird ein Fehler zurückgegeben. Informationen zum Erstellen einer neuen Funktion finden Sie unter [. Create-Funktion](create-function.md)
 
-|Ausgabeparameter |type |BESCHREIBUNG
+|Output-Parameter |type |BESCHREIBUNG
 |---|---|--- 
 |Name  |String |Der Name der Funktion. 
-|Parameter  |String |Die für die Funktion erforderlichen Parameter.
-|Body  |String |(Null oder mehr) `let` gefolgt von einem gültigen CSL-Ausdruck, der beim Funktionsaufruf ausgewertet wird.
-|Ordner|String|Ein Ordner, der für die Kategorisierung von UI-Funktionen verwendet wird. Dieser Parameter ändert nicht die Art und Weise, wie die Funktion aufgerufen wird.
-|DocString|String|Eine Beschreibung der Funktion für UI-Zwecke.
+|Parameter  |String |Die Parameter, die für die Funktion erforderlich sind.
+|Body  |String |(0 (null) oder mehr) `let` Anweisungen gefolgt von einem gültigen CSL-Ausdruck, der beim Funktionsaufruf ausgewertet wird.
+|Ordner|String|Ein für die Kategorisierung von Benutzeroberflächen Funktionen verwendeter Ordner. Dieser Parameter ändert nicht die Art und Weise, in der die Funktion aufgerufen wird.
+|DocString|String|Eine Beschreibung der Funktion zu UI-Zwecken.
 
 **Beispiel** 
 
-```
+```kusto
 .alter function MyFunction1 docstring "Updated docstring"
 ```
     
-|name |Parameter |Body|Ordner|DocString
+|Name |Parameter |Body|Ordner|DocString
 |---|---|---|---|---
-|MyFunction2 |(myLimit: lang)| "StormEvents&#124; myLimit einschränken"|Myfolder|Aktualisierte Docstring|
+|MyFunction2 |(mylimit: Long)| {Stormevents &#124; Limit von mylimit}|MyFolder|Aktualisierte DocString|

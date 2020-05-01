@@ -1,6 +1,6 @@
 ---
-title: .show-Funktionen - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden die Funktionen der Anzeigen in Azure Data Explorer beschrieben.
+title: . Show Functions-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird beschrieben, wie Sie Funktionen in Azure Daten-Explorer anzeigen.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,47 +8,47 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a7acfdb96570b067b0461f5a788b55fc8274c03f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: aa81df5ca89c1a7dc523d7799050b8a7ad3adaba
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81519838"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617327"
 ---
-# <a name="show-functions"></a>.show Funktionen
+# <a name="show-functions"></a>. Show-Funktionen
 
 Listet alle gespeicherten Funktionen in der aktuell ausgewählten Datenbank auf.
-Um nur eine bestimmte Funktion zurückzugeben, finden Sie weitere Informationen unter [.show-Funktion](#show-function).
+Informationen zum Zurückgeben einer bestimmten Funktion finden Sie unter [. Show Function](#show-function).
 
-```
+```kusto
 .show functions
 ```
 
-Erfordert [Datenbankbenutzerberechtigungen](../management/access-control/role-based-authorization.md).
+Erfordert die [Berechtigung für Datenbankbenutzer](../management/access-control/role-based-authorization.md).
  
-|Ausgabeparameter |type |BESCHREIBUNG
+|Output-Parameter |type |BESCHREIBUNG
 |---|---|--- 
 |Name  |String |Der Name der Funktion. 
-|Parameter  |String |Die für die Funktion erforderlichen Parameter.
-|Body  |String |(Null oder mehr) `let` gefolgt von einem gültigen CSL-Ausdruck, der beim Funktionsaufruf ausgewertet wird.
-|Ordner|String|Ein Ordner, der für die Kategorisierung von UI-Funktionen verwendet wird. Dieser Parameter ändert nicht die Art und Weise, wie die Funktion aufgerufen wird.
-|DocString|String|Eine Beschreibung der Funktion für UI-Zwecke.
+|Parameter  |String |Die Parameter, die für die Funktion erforderlich sind.
+|Body  |String |(0 (null) oder mehr) `let` Anweisungen gefolgt von einem gültigen CSL-Ausdruck, der beim Funktionsaufruf ausgewertet wird.
+|Ordner|String|Ein für die Kategorisierung von Benutzeroberflächen Funktionen verwendeter Ordner. Dieser Parameter ändert nicht die Art und Weise, in der die Funktion aufgerufen wird.
+|DocString|String|Eine Beschreibung der Funktion zu UI-Zwecken.
  
-**Ausgabebeispiel** 
+**Ausgabe Beispiel** 
 
-|name |Parameter|Body|Ordner|DocString
+|Name |Parameter|Body|Ordner|DocString
 |---|---|---|---|---
-|MyFunction1 |() | "StormEvents &#124; Limit 100"|Myfolder|Einfache Demo-Funktion|
-|MyFunction2 |(myLimit: lang)| "StormEvents&#124; myLimit einschränken"|Myfolder|Demofunktion mit Parameter|
-|MyFunction3 |() | • StormEvents(100)|Myfolder|Funktion, die eine andere Funktion aufruft||
+|MyFunction1 |() | {Stormevents &#124; Limit 100}|MyFolder|Einfache Demofunktion|
+|MyFunction2 |(mylimit: Long)| {Stormevents &#124; Limit von mylimit}|MyFolder|Demo Funktion mit Parameter|
+|MyFunction3 |() | {Stormevents (100)}|MyFolder|Funktion aufrufen einer anderen Funktion||
 
-## <a name="show-function"></a>.show-Funktion
+## <a name="show-function"></a>.show function
 
-```
+```kusto
 .show function MyFunc1
 ```
 
-Listet die Details einer bestimmten gespeicherten Funktion auf. Eine Liste **aller** Funktionen finden Sie unter [.show-Funktionen](#show-functions).
+Listet die Details einer bestimmten gespeicherten Funktion auf. Eine Liste **aller** Funktionen finden Sie unter [. Show Functions](#show-functions).
 
 **Syntax**
 
@@ -56,24 +56,24 @@ Listet die Details einer bestimmten gespeicherten Funktion auf. Eine Liste **all
 
 **Ausgabe**
 
-|Ausgabeparameter |type |BESCHREIBUNG
+|Output-Parameter |type |BESCHREIBUNG
 |---|---|--- 
 |Name  |String |Der Name der Funktion. 
-|Parameter  |String |Die für die Funktion erforderlichen Parameter.
-|Body  |String |(Null oder mehr) `let` gefolgt von einem gültigen CSL-Ausdruck, der beim Funktionsaufruf ausgewertet wird.
-|Ordner|String|Ein Ordner, der für die Kategorisierung von UI-Funktionen verwendet wird. Dieser Parameter ändert nicht die Art und Weise, wie die Funktion aufgerufen wird.
-|DocString|String|Eine Beschreibung der Funktion für UI-Zwecke.
+|Parameter  |String |Die Parameter, die für die Funktion erforderlich sind.
+|Body  |String |(0 (null) oder mehr) `let` Anweisungen gefolgt von einem gültigen CSL-Ausdruck, der beim Funktionsaufruf ausgewertet wird.
+|Ordner|String|Ein für die Kategorisierung von Benutzeroberflächen Funktionen verwendeter Ordner. Dieser Parameter ändert nicht die Methode, mit der die Funktion aufgerufen wird.
+|DocString|String|Eine Beschreibung der Funktion zu UI-Zwecken.
  
 > [!NOTE] 
 > * Wenn die Funktion nicht vorhanden ist, wird ein Fehler zurückgegeben.
-> * Erfordert [Datenbankbenutzerberechtigungen](../management/access-control/role-based-authorization.md).
+> * Erfordert die [Berechtigung für Datenbankbenutzer](../management/access-control/role-based-authorization.md).
  
 **Beispiel** 
 
-```
+```kusto
 .show function MyFunction1 
 ```
     
-|name |Parameter |Body|Ordner|DocString
+|Name |Parameter |Body|Ordner|DocString
 |---|---|---|---|---
-|MyFunction1 |() | "StormEvents &#124; Limit 100"|Myfolder|Einfache Demo-Funktion
+|MyFunction1 |() | {Stormevents &#124; Limit 100}|MyFolder|Einfache Demofunktion

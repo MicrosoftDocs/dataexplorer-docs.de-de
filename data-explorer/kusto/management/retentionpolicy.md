@@ -1,6 +1,6 @@
 ---
-title: Aufbewahrungsrichtlinie - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die Aufbewahrungsrichtlinie in Azure Data Explorer beschrieben.
+title: 'Kusto-Beibehaltungs Richtlinie steuert, wie Daten entfernt werden: Azure Daten-Explorer'
+description: Dieser Artikel beschreibt die Aufbewahrungs Richtlinie in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,65 +8,65 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 81e08b6e007a6e3c669e7138e1d36ae1e701d442
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 5254f2daee767f51111f2ac3d1be07b7f2bb09f4
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81520314"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617390"
 ---
 # <a name="retention-policy"></a>Aufbewahrungsrichtlinie
 
-Die Aufbewahrungsrichtlinie steuert den Mechanismus, mit dem Daten automatisch aus Tabellen entfernt werden.
-Eine solche Entfernung ist in der Regel nützlich für Daten, die kontinuierlich in eine Tabelle fließen, deren Relevanz altersabhängig ist. Die Aufbewahrungsrichtlinie kann z. B. für eine Tabelle verwendet werden, die Diagnoseereignisse enthält, die nach zwei Wochen möglicherweise nicht mehr interesing.
+Die Beibehaltungs Richtlinie steuert den Mechanismus, mit dem Daten automatisch aus Tabellen entfernt werden.
+Eine solche Entfernung ist in der Regel nützlich für Daten, die kontinuierlich in eine Tabelle fließen, deren Relevanz Alters basiert ist. Beispielsweise kann die Aufbewahrungs Richtlinie für eine Tabelle verwendet werden, die Diagnose Ereignisse enthält, die nach zwei Wochen möglicherweise uninteressant werden.
 
-Die Aufbewahrungsrichtlinie kann für eine bestimmte Tabelle oder eine ganze Datenbank konfiguriert werden (in diesem Fall gilt sie für alle Tabellen in der Datenbank, die die Richtlinie nicht überschreiben).
+Die Aufbewahrungs Richtlinie kann für eine bestimmte Tabelle oder für eine gesamte Datenbank konfiguriert werden (in diesem Fall gilt sie für alle Tabellen in der Datenbank, die die Richtlinie nicht außer Kraft setzen).
 
-Das Einrichten einer Aufbewahrungsrichtlinie ist wichtig für Cluster, die kontinuierlich Daten aufzeichnen, wodurch die Kosten begrenzt werden.
+Das Einrichten einer Aufbewahrungs Richtlinie ist wichtig für Cluster, die kontinuierlich Daten erfassen, wodurch die Kosten eingeschränkt werden.
 
-Daten, die sich "außerhalb" der Aufbewahrungsrichtlinie befindet, können entfernt werden. Kusto übernimmt keine Garantie, wenn die Entfernung erfolgt (so können Daten auch dann "verweilen", wenn die Aufbewahrungsrichtlinie ausgelöst wurde).
+Daten, die sich außerhalb der Aufbewahrungs Richtlinie befinden, sind zum Entfernen berechtigt. Kusto garantiert nicht, wann das Entfernen erfolgt (sodass Daten möglicherweise "Linger" sind, auch wenn die Aufbewahrungs Richtlinie ausgelöst wurde).
 
-Die Aufbewahrungsrichtlinie wird am häufigsten festgelegt, um das Alter der Daten seit der Aufnahme zu begrenzen (siehe [SoftDeletePeriod](#the-policy-object), unten).
+Die Aufbewahrungs Richtlinie ist in der Regel so festgelegt, dass das Alter der Daten seit der Erfassung eingeschränkt wird (siehe " [Software Update Period](#the-policy-object)" weiter unten).
 
 > [!NOTE]
-> * Die Löschzeit ist ungenau. Das System garantiert, dass Daten nicht gelöscht werden, bevor das Limit überschritten wird, aber das Löschen erfolgt nicht unmittelbar nach diesem Punkt.
-> * Ein Soft-Lösch-Zeitraum von 0 kann als Teil einer Aufbewahrungsrichtlinie auf Tabellenebene festgelegt werden (jedoch nicht als Teil einer Aufbewahrungsrichtlinie auf Datenbankebene).
->   * Wenn dies geschieht, werden die aufgenommenen Daten nicht an die Quelltabelle gebunden, sodass die Daten nicht beibehalten werden müssen.
->   * Eine solche Konfiguration ist vor allem dann nützlich, wenn die Daten in eine Tabelle aufgenommen werden.
->   Eine [Transaktionsaktualisierungsrichtlinie](updatepolicy.md) wird verwendet, um sie zu transformieren und die Ausgabe in eine andere Tabelle umzuleiten.
+> * Der Lösch Zeitpunkt ist unpräzise. Das System stellt sicher, dass die Daten nicht gelöscht werden, bevor der Grenzwert überschritten wird. das Löschen erfolgt jedoch nicht unmittelbar nach diesem Punkt.
+> * Ein vorläufiger Lösch Zeitraum von 0 kann als Teil einer Aufbewahrungs Richtlinie auf Tabellenebene (aber nicht als Teil einer Aufbewahrungs Richtlinie auf Datenbankebene) festgelegt werden.
+>   * Wenn dies der Fall ist, werden die erfassten Daten nicht in die Quell Tabelle übernommen, sodass die Daten nicht persistent gespeichert werden müssen.
+>   * Eine solche Konfiguration ist besonders nützlich, wenn die Daten in eine Tabelle aufgenommen werden.
+>   Eine transaktionale [Update Richtlinie](updatepolicy.md) wird verwendet, um Sie zu transformieren und die Ausgabe in eine andere Tabelle umzuleiten.
 
-## <a name="the-policy-object"></a>Das Richtlinienobjekt
+## <a name="the-policy-object"></a>Das Policy-Objekt
 
-Eine Aufbewahrungsrichtlinie enthält die folgenden Eigenschaften:
+Eine Beibehaltungs Richtlinie umfasst die folgenden Eigenschaften:
 
-* **SoftDeletePeriod**:
-    * Eine Zeitspanne, für die sichergestellt ist, dass die Daten für Abfragen verfügbar gehalten werden, gemessen seit dem Zeitpunkt, zu dem sie aufgenommen wurden.
+* **Softwaretest Zeitraum**:
+    * Eine Zeitspanne, für die sichergestellt ist, dass die Daten für die Abfrage verfügbar gehalten werden, gemessen seit der erfassten Zeit.
     * Der Standardwert lautet `100 years`.
-    * Beim Ändern des Soft-Löschzeitraums einer Tabelle oder Datenbank gilt der neue Wert sowohl für vorhandene als auch für neue Daten.
-* **Wiederherstellbarkeit**:
-    * Datenwiederherstellbarkeit (aktiviert/deaktiviert), nachdem die Daten gelöscht wurden
+    * Wenn Sie den vorläufig Lösch Zeitraum einer Tabelle oder Datenbank ändern, gilt der neue Wert sowohl für vorhandene als auch für neue Daten.
+* Wieder **Herstellbarkeit**:
+    * Daten Wiederherstell barkeit (aktiviert/deaktiviert), nachdem die Daten gelöscht wurden
     * Der Standardwert lautet `enabled`.
-    * Wenn auf `enabled`gesetzt, können die Daten 14 Tage nach dem Löschen wiederhergestellt werden.
+    * Wenn diese Einstellung `enabled`auf festgelegt ist, können die Daten nach dem Löschvorgang 14 Tage lang wieder hergestellt werden.
 
 ## <a name="control-commands"></a>Steuerungsbefehle
 
-* Verwenden Sie [.show-Richtlinienaufbewahrung,](../management/retention-policy.md) um die aktuelle Aufbewahrungsrichtlinie für eine Datenbank oder Tabelle anzuzeigen.
-* Verwenden Sie [.alter-Richtlinienaufbewahrung,](../management/retention-policy.md) um die aktuelle Aufbewahrungsrichtlinie einer Datenbank oder Tabelle zu ändern.
+* Verwenden Sie [. zeigen Sie die Richtlinien Beibehaltung](../management/retention-policy.md) an, um die aktuelle Aufbewahrungs Richtlinie für eine Datenbank oder eine Tabelle anzuzeigen.
+* Ändern Sie die aktuelle Aufbewahrungs Richtlinie einer Datenbank oder Tabelle mithilfe von [. Alter Policy Retention](../management/retention-policy.md) .
 
 ## <a name="defaults"></a>Standardeinstellungen
 
-Wenn eine Datenbank oder Tabelle erstellt wird, ist standardmäßig keine Aufbewahrungsrichtlinie definiert.
-In allgemeinen Fällen wird die Datenbank erstellt und hat dann sofort ihre Aufbewahrungsrichtlinie vom Ersteller entsprechend bekannten Anforderungen festgelegt.
-Wenn Sie einen [Showbefehl](../management/retention-policy.md) für die Aufbewahrungsrichtlinie einer Datenbank oder Tabelle `Policy` ausführen, für die bzw. deren Richtlinie nicht festgelegt wurde, wird als `null`angezeigt.
+Wenn eine Datenbank oder eine Tabelle erstellt wird, wird standardmäßig keine Beibehaltungs Richtlinie definiert.
+In den gängigen Fällen wird die Datenbank erstellt, und dann wird die Beibehaltungs Richtlinie sofort gemäß den bekannten Anforderungen vom Ersteller festgelegt.
+Wenn Sie einen [Show-Befehl](../management/retention-policy.md) für die Aufbewahrungs Richtlinie einer Datenbank oder Tabelle ausführen, für die die Richtlinie `Policy` nicht fest `null`gelegt wurde, wird als angezeigt.
 
-Die Standardaufbewahrungsrichtlinie (mit den oben genannten Standardwerten) kann mit dem folgenden Befehl angewendet werden:
+Die standardmäßige Aufbewahrungs Richtlinie (mit den oben erwähnten Standardwerten) kann mithilfe des folgenden Befehls angewendet werden:
 
 ```kusto
 .alter database DatabaseName policy retention "{}"
 .alter table TableName policy retention "{}"
 ```
 
-Dies führt zu dem folgenden Richtlinienobjekt, das auf die Datenbank oder Tabelle angewendet wird:
+Dies führt dazu, dass das folgende Richtlinien Objekt auf die Datenbank oder Tabelle angewendet wird:
 
 ```kusto
 {
@@ -74,7 +74,7 @@ Dies führt zu dem folgenden Richtlinienobjekt, das auf die Datenbank oder Tabel
 }
 ```
 
-Das Löschen der Aufbewahrungsrichtlinie einer Datenbank oder Tabelle kann mit dem folgenden Befehl erfolgen:
+Das Löschen der Aufbewahrungs Richtlinie einer Datenbank oder Tabelle kann mithilfe des folgenden Befehls erfolgen:
 
 ```kusto
 .delete database DatabaseName policy retention
@@ -83,11 +83,11 @@ Das Löschen der Aufbewahrungsrichtlinie einer Datenbank oder Tabelle kann mit d
 
 ## <a name="examples"></a>Beispiele
 
-Da Ihr Cluster über `MyDatabase`eine `MyTable1`Datenbank `MyTable2` mit dem Namen , mit Tabellen und`MySpecialTable`
+Der Cluster verfügt über eine Datenbank mit `MyDatabase`dem Namen, `MyTable1`mit `MyTable2` Tabellen und`MySpecialTable`
 
-**1. Festlegen aller Tabellen in der Datenbank auf einen Soft-Delete-Zeitraum von 7 Tagen und deaktivierte Wiederherstellbarkeit:**
+**1. Legen Sie für alle Tabellen in der Datenbank einen Zeitraum von 7 Tagen mit vorläufiger Löschung fest, und deaktivieren Sie die Wiederherstellbarkeit**:
 
-* *Option 1 (Empfohlen)*: Legen Sie eine Aufbewahrungsrichtlinie auf Datenbankebene mit einem Soft-Löschzeitraum von sieben Tagen fest, und die Wiederherstellbarkeit ist deaktiviert, und stellen Sie sicher, dass keine Richtlinien auf Tabellenebene festgelegt sind.
+* *Option 1 (empfohlen)*: Legen Sie eine Aufbewahrungs Richtlinie auf Datenbankebene mit einem vorläufigen Lösch Zeitraum von sieben Tagen und der wieder Herstellbarkeit deaktiviert fest, und stellen Sie sicher, dass keine Richtlinien auf Tabellenebene festgelegt sind.
 
 ```kusto
 .delete table MyTable1 policy retention        // optional, only if the table previously had its policy set
@@ -96,7 +96,7 @@ Da Ihr Cluster über `MyDatabase`eine `MyTable1`Datenbank `MyTable2` mit dem Nam
 .alter-merge database MyDatabase policy retention softdelete = 7d recoverability = disabled
 ```
 
-* *Option 2*: Legen Sie für jede Tabelle eine Aufbewahrungsrichtlinie auf Tabellenebene mit einem Soft-Delete-Zeitraum von sieben Tagen fest, und die Wiederherstellbarkeit ist deaktiviert.
+* *Option 2*: Legen Sie für jede Tabelle eine Beibehaltungs Richtlinie auf Tabellenebene mit einem vorläufigen Lösch Zeitraum von sieben Tagen und deaktivierter wieder Herstellbarkeit fest.
 
 ```kusto
 .alter-merge table MyTable1 policy retention softdelete = 7d recoverability = disabled
@@ -104,9 +104,9 @@ Da Ihr Cluster über `MyDatabase`eine `MyTable1`Datenbank `MyTable2` mit dem Nam
 .alter-merge table MySpecialTable policy retention softdelete = 7d recoverability = disabled
 ```
 
-**2. Tabellen `MyTable1` `MyTable2` festlegen, dass ein Soft-Lösch-Zeitraum von 7 `MySpecialTable` Tagen und wiederherstellbare Fähigkeit aktiviert ist und ein Soft-Lösch-Zeitraum von 14 Tagen festgelegt ist und die Wiederherstellbarkeit deaktiviert ist:**
+**2. Einrichten von `MyTable1`Tabellen `MyTable2` , um einen Zeitraum von 7 Tagen mit vorläufiger Löschung und eine aktivierte Wiederherstellbarkeit zu erhalten, und auf einen vorläufigen Lösch Zeitraum von 14 Tagen und deaktivierte wieder Herstellbarkeit festgelegt `MySpecialTable` **:
 
-* *Option 1 (empfohlen)*: Legen Sie eine Aufbewahrungsrichtlinie auf Datenbankebene mit einem Soft-Löschzeitraum von sieben Tagen und aktivierter Wiederherstellbarkeit `MySpecialTable`fest, und legen Sie eine Aufbewahrungsrichtlinie auf Tabellenebene mit einem Soft-Lösch-Zeitraum von 14 Tagen fest, und die Wiederherstellbarkeit ist für deaktiviert.
+* *Option 1 (empfohlen)*: Legen Sie eine Aufbewahrungs Richtlinie auf Datenbankebene mit einem vorläufigen Lösch Zeitraum von sieben Tagen und der aktivierten wieder Herstellbarkeit fest, und legen Sie eine Aufbewahrungs Richtlinie auf Tabellenebene mit einem vorläufigen Lösch Zeitraum von 14 Tagen `MySpecialTable`und der wieder Herstellbarkeit für deaktiviert fest.
 
 ```kusto
 .delete table MyTable1 policy retention   // optional, only if the table previously had its policy set
@@ -115,7 +115,7 @@ Da Ihr Cluster über `MyDatabase`eine `MyTable1`Datenbank `MyTable2` mit dem Nam
 .alter-merge table MySpecialTable policy retention softdelete = 14d recoverability = enabled
 ```
 
-* *Option 2*: Legen Sie für jede Tabelle eine Aufbewahrungsrichtlinie auf Tabellenebene mit dem gewünschten Soft-Löschzeitraum und der Wiederherstellbarkeit fest.
+* *Option 2*: Legen Sie für jede Tabelle eine Beibehaltungs Richtlinie auf Tabellenebene mit dem gewünschten vorläufigen Lösch Zeitraum und der gewünschten Wiederherstellbarkeit fest.
 
 ```kusto
 .alter-merge table MyTable1 policy retention softdelete = 7d recoverability = disabled
@@ -123,9 +123,9 @@ Da Ihr Cluster über `MyDatabase`eine `MyTable1`Datenbank `MyTable2` mit dem Nam
 .alter-merge table MySpecialTable policy retention softdelete = 14d recoverability = enabled
 ```
 
-**3. Tabellen `MyTable1` `MyTable2` einstellen, einen Soft-Lösch-Zeitraum von `MySpecialTable` 7 Tagen haben und seine Daten auf unbestimmte Zeit aufbewahren:**
+**3. Einrichten von `MyTable1`Tabellen `MyTable2` , um einen Zeitraum von 7 Tagen mit vorläufigem löschen zu haben `MySpecialTable` und die Daten unbegrenzt aufbewahren zu**lassen:
 
-* *Option 1*: Legen Sie eine Aufbewahrungsrichtlinie auf Datenbankebene mit einem Soft-Löschzeitraum von sieben Tagen fest, und legen Sie eine `MySpecialTable`Aufbewahrungsrichtlinie auf Tabellenebene mit einem Soft-Lösch-Zeitraum von 100 Jahren (standardaufbewahrungsrichtlinie) für fest.
+* *Option 1*: Legen Sie eine Aufbewahrungs Richtlinie auf Datenbankebene mit einem vorläufigen Lösch Zeitraum von sieben Tagen fest, und legen Sie eine Aufbewahrungs Richtlinie auf Tabellenebene mit einem vorläufigen Lösch Zeitraum von 100 Jahren (die Standard Aufbewahrungs Richtlinie `MySpecialTable`) für fest.
 
 ```kusto
 .delete table MyTable1 policy retention   // optional, only if the table previously had its policy set
@@ -134,7 +134,7 @@ Da Ihr Cluster über `MyDatabase`eine `MyTable1`Datenbank `MyTable2` mit dem Nam
 .alter table MySpecialTable policy retention "{}" // this sets the default retention policy
 ```
 
-* *Option 2*: `MyTable1` `MyTable2`Legen Sie für Tabellen eine Aufbewahrungsrichtlinie auf Tabellenebene mit dem gewünschten Soft-Löschzeitraum von `MySpecialTable` sieben Tagen fest, und stellen Sie sicher, dass die Richtlinie auf Datenbank- und Tabellenebene nicht festgelegt ist.
+* *Option 2*: Legen Sie `MyTable1`für `MyTable2`Tabellen eine Beibehaltungs Richtlinie auf Tabellenebene mit dem gewünschten vorläufigen Lösch Zeitraum von sieben Tagen fest, und überprüfen Sie, ob die Richtlinie auf Datenbankebene `MySpecialTable` und auf Tabellenebene für nicht festgelegt ist.
 
 ```kusto
 .delete database MyDatabase policy retention   // optional, only if the database previously had its policy set
@@ -143,7 +143,7 @@ Da Ihr Cluster über `MyDatabase`eine `MyTable1`Datenbank `MyTable2` mit dem Nam
 .alter-merge table MyTable2 policy retention softdelete = 7d
 ```
 
-* *Option 3*: `MyTable1` `MyTable2`Legen Sie für Tabellen eine Aufbewahrungsrichtlinie auf Tabellenebene mit dem gewünschten Soft-Delete-Zeitraum von sieben Tagen fest. Legen `MySpecialTable`Sie für Tabelle eine Aufbewahrungsrichtlinie auf Tabellenebene mit einem Soft-Delete-Zeitraum von 100 Jahren fest (Standardaufbewahrungsrichtlinie).
+* *Option 3*: Legen Sie `MyTable1`für `MyTable2`Tabellen eine Beibehaltungs Richtlinie auf Tabellenebene mit dem gewünschten vorläufigen Lösch Zeitraum von sieben Tagen fest. Legen Sie `MySpecialTable`für Tabelle eine Beibehaltungs Richtlinie auf Tabellenebene mit einem vorläufigen Lösch Zeitraum von 100 Jahren (die standardmäßige Aufbewahrungs Richtlinie) fest.
 
 ```kusto
 .alter-merge table MyTable1 policy retention softdelete = 7d

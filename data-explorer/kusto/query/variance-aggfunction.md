@@ -1,6 +1,6 @@
 ---
-title: variance() (Aggregationsfunktion) - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt variance() (Aggregationsfunktion) in Azure Data Explorer.
+title: 'Varianz () (Aggregations Funktion): Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird die Varianz () (Aggregations Funktion) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,32 +8,34 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5b1d2ea47060ecede855a3fb419bbbfe2bf0b538
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 9f8afae2413d65618cf6b6e2f400df2500b06078
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81504708"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618043"
 ---
-# <a name="variance-aggregation-function"></a>varianz() (Aggregationsfunktion)
+# <a name="variance-aggregation-function"></a>Varianz () (Aggregations Funktion)
 
-Berechnet die Varianz von *Expr* in der Gruppe unter Berücksichtigung der Gruppe als [Beispiel](https://en.wikipedia.org/wiki/Sample_%28statistics%29). 
+Berechnet die Varianz der *expr* in der Gruppe, wobei die Gruppe als [Beispiel](https://en.wikipedia.org/wiki/Sample_%28statistics%29)betrachtet wird. 
 
-* Verwendete Formel: ![Alt-Text](./images/aggregations/variance-sample.png "Varianz-Probe")
+* Verwendete Formel:
 
-* Kann nur im Kontext der Aggregation innerhalb [der Zusammenfassung](summarizeoperator.md) verwendet werden
+:::image type="content" source="images/variance-aggfunction/variance-sample.png" alt-text="Varianz Beispiel":::
+
+* Kann [nur im Kontext der Aggregation innerhalb von](summarizeoperator.md) Zusammenfassung verwendet werden.
 
 **Syntax**
 
-`variance(` *Expr* zusammenfassen`)`
+`variance(` *expr* zusammenfassen`)`
 
 **Argumente**
 
-* *Expr*: Ausdruck, der für die Aggregationsberechnung verwendet wird. 
+* *Expr*: Ausdruck, der für die Aggregations Berechnung verwendet wird. 
 
 **Rückgabe**
 
-Der Varianzwert von *Expr* in der gesamten Gruppe.
+Der Varianz Wert von *expr* in der Gruppe.
  
 **Beispiele**
 
@@ -44,4 +46,4 @@ range x from 1 to 5 step 1
 
 |list_x|variance_x|
 |---|---|
-|[ 1, 2, 3, 4, 5]|2.5|
+|[1, 2, 3, 4, 5]|2.5|

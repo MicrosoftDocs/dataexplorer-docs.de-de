@@ -1,6 +1,6 @@
 ---
-title: .create-Erfassungszuordnung - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die .create-Erfassungszuordnung in Azure Data Explorer beschrieben.
+title: '. Erstellen einer Erfassungs Zuordnung: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt das Erstellen einer Erfassungs Zuordnung in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,27 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: 10e656b074516ad8b0018e627d9904251aebbf10
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.openlocfilehash: 84ab277f5b0d4d1b2e09d31fb7c1254786affe6d
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744497"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617730"
 ---
 # <a name="create-ingestion-mapping"></a>.create ingestion mapping
 
-Erstellt eine Erfassungszuordnung, die einer bestimmten Tabelle und einem bestimmten Format zugeordnet ist.
+Erstellt eine Erfassungs Zuordnung, die einer bestimmten Tabelle und einem bestimmten Format zugeordnet ist.
 
 **Syntax**
 
-`.create``table` *TableName* `ingestion` *MappingKind* `mapping` *MappingName* *MappingFormattedAsJson*
+`.create``table` *TableName* `ingestion` *mappingkind* `mapping` *MappingName* *mappingformattedasjson*
 
 > [!NOTE]
-> * Nach der Erstellung kann auf die Zuordnung anhand ihres Namens in Aufnahmebefehlen verwiesen werden, anstatt die vollständige Zuordnung als Teil des Befehls anzugeben.
-> * Gültige Werte für _MappingKind_ `CSV`sind: `JSON`, , `avro`, `parquet`, und`orc`
-> * Wenn für die Tabelle bereits eine Zuordnung mit demselben Namen vorhanden ist:
->    * `.create`wird scheitern
->    * `.create-or-alter`ändert die vorhandene Zuordnung
+> * Nachdem die Zuordnung erstellt wurde, kann Ihr Name in Erfassungs Befehlen referenziert werden, anstatt die gesamte Zuordnung als Teil des Befehls anzugeben.
+> * Gültige Werte für _mappingkind_ sind: `CSV`, `JSON`, `avro`, `parquet`und.`orc`
+> * Wenn für die Tabelle bereits eine Zuordnung mit dem gleichen Namen vorhanden ist:
+>    * `.create`schlägt fehl
+>    * `.create-or-alter`ändert die vorhandene Zuordnung.
  
 **Beispiel** 
  
@@ -50,4 +50,7 @@ Erstellt eine Erfassungszuordnung, die einer bestimmten Tabelle und einem bestim
 
 | Name     | Variante | Zuordnung                                                                                                                                                                          |
 |----------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| Mapping1 | CSV  | ['Name":"rownumber","DataType":"int","CsvDataType":null,"Ordinal":0,"ConstValue":null','Name":"rowguid","DataType":"string","CsvDataType":null,"Ordinal":1,"ConstValue":null'] |
+| mapping1 | CSV  | [{"Name": "RowNumber", "DataType": "int", "csvdatatype": NULL, "Ordinal": 0, "constvalue": NULL}, {"Name": "ROWGUID", "DataType": "String", "csvdatatype": NULL, "Ordinal": 1, "constvalue": NULL}] |
+
+## <a name="next-steps"></a>Nächste Schritte
+Weitere Informationen zur Erfassung von Zuordnungen finden Sie unter [Daten](mappings.md)Zuordnungen.

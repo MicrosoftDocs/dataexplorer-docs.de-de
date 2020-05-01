@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/27/2020
-ms.openlocfilehash: 69d8f4e8e0ffa388893c55e447dd3e03ed058380
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.openlocfilehash: 7abcead19e0306853bc6a585a41b5b79657a6842
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108404"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617713"
 ---
 # <a name="continuous-data-export"></a>Kontinuierlicher Datenexport
 
@@ -73,7 +73,7 @@ Zusätzlich zu den oben genannten werden alle Eigenschaften unterstützt, die im
 
 **Beispiel:**
 
-```
+```kusto
 .create-or-alter continuous-export MyExport
 over (T)
 to table ExternalBlob
@@ -185,7 +185,7 @@ Gibt alle Fehler zurück, die als Teil des fortlaufenden Exports protokolliert w
 
 **Beispiel:** 
 
-```
+```kusto
 .show continuous-export MyExport failures 
 ```
 
@@ -236,7 +236,7 @@ Das Ergebnis des [Befehls zum Anzeigen des fortlaufenden Exports](#show-continuo
 
 Beim fortlaufenden Export wird der Export von Daten nur ab dem Zeitpunkt der Erstellung gestartet. Datensätze, die vor diesem Zeitpunkt erfasst wurden, sollten separat mit dem (nicht kontinuierlichen) [Export Befehl](export-data-to-an-external-table.md)exportiert werden. Um Duplikate mit vom fortlaufenden Export exportierten Daten zu vermeiden, verwenden Sie den vom [Befehl Show Continuous Export](#show-continuous-export) zurückgegebenen startcursor, und exportieren Sie nur Datensätze, bei denen der Cursor Wert cursor_before_or_at. Betrachten Sie das folgende Beispiel. Verlaufs Daten sind möglicherweise zu groß, um in einem einzelnen Export Befehl exportiert zu werden. Partitionieren Sie die Abfrage daher in mehrere kleinere Batches. 
 
-```
+```kusto
 .show continuous-export MyExport | project StartCursor
 ```
 
@@ -246,7 +246,7 @@ Beim fortlaufenden Export wird der Export von Daten nur ab dem Zeitpunkt der Ers
 
 Gefolgt von: 
 
-```
+```kusto
 .export async to table ExternalBlob
 <| T | where cursor_before_or_at("636751928823156645")
 ```

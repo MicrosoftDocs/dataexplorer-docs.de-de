@@ -1,6 +1,6 @@
 ---
-title: Operator der serie - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird der Make-Series-Operator in Azure Data Explorer beschrieben.
+title: 'Make-Series-Operator: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt den Operator "Make-Series" in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2020
-ms.openlocfilehash: 3fa8f1693b56fc0820b9e0ba6b5f03a9363c9b98
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 66211cfcb33f97ba5f58d82e7ee4a8a8c7631e96
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663727"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618433"
 ---
 # <a name="make-series-operator"></a>make-series-Operator
 
-Erstellen Sie eine Reihe von angegebenen aggregierten Werten entlang der angegebenen Achse. 
+Erstellt eine Reihe von angegebenen aggregierten Werten auf der angegebenen Achse. 
 
 ```kusto
 T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from datetime(2016-01-01) to datetime(2016-01-10) step 1d by fruit, supplier
@@ -25,103 +25,103 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
 
 **Syntax**
 
-*T* `| make-series` [*MakeSeriesParamters*] [`default` `=` *Spalte* `=`]`,` *Aggregation* [ *DefaultValue*] [ ...] `on` *AxisColumn* `from` *start*[ start`to` ] `step` [ *end*] *step* [`by` [*Column* `=`] *GroupExpression* [`,` ...]]
+*T* `| make-series` [*makeseriesparamters*] [*Column* `=`] *Aggregation* [`default` `=` *DefaultValue*] [`,` ...] `on` *Axiscolumn* [`from` *Start*] [`to` *Ende*] `step` *Schritt* [`by` [*Column* `=`] *groupexpression* [`,` ...]]
 
 **Argumente**
 
 * *Column:* Optionaler Name für eine Ergebnisspalte. Nimmt standardmäßig den vom Ausdruck abgeleiteten Namen an.
-* *DefaultValue:* Standardwert, der anstelle fehlender Werte verwendet wird. Wenn keine Zeile mit bestimmten Werten von *AxisColumn* und *GroupExpression* vorhanden ist, wird in den Ergebnissen das entsprechende Element des Arrays mit einem *DefaultValue*zugewiesen. Wenn `default =` *DefaultValue* weggelassen wird, wird 0 angenommen. 
-* *Aggregation:* Ein Aufruf einer [Aggregationsfunktion](make-seriesoperator.md#list-of-aggregation-functions) wie `count()` oder `avg()`mit Spaltennamen als Argumenten. Siehe [Liste der Aggregationsfunktionen](make-seriesoperator.md#list-of-aggregation-functions). Beachten Sie, dass nur Aggregationsfunktionen, `make-series` die numerische Ergebnisse zurückgeben, mit dem Operator verwendet werden können.
-* *AxisColumn:* Eine Spalte, für die die Serie bestellt wird. Es könnte als Zeitachse `datetime` betrachtet werden, aber neben allen numerischen Typen werden akzeptiert.
-* *start*: (optional) Der niedrige gebundene Wert der *AxisColumn* für jede der Reihen wird erstellt. *start*, *end* und *step* werden verwendet, um Arrayvon *AxisColumn-Werte* innerhalb eines bestimmten Bereichs zu erstellen und den angegebenen *Schritt zu verwenden.* Alle *Aggregationswerte* werden jeweils nach diesem Array sortiert. Dieses *AxisColumn-Array* ist auch die letzte Ausgabespalte in der Ausgabe mit demselben Namen wie *AxisColumn*. Wenn kein *Startwert* angegeben ist, ist der Start der erste Abschnitt (Schritt), der Daten in jeder Reihe enthält.
-* *end*: (optional) Der hohe grenzwertige (nicht inklusive) Wert der *AxisColumn*, der letzte Index der Zeitreihe ist kleiner als dieser Wert (und wird *start* plus ganzzahlig mehrere *Schritte,* die kleiner als *Ende*ist). Wenn der *Endwert* nicht angegeben wird, ist dies die obere Grenze des letzten Abschnitts (Schritt), der Daten pro Reihe enthält.
-* *Schritt*: Die Differenz zwischen zwei aufeinander folgenden Elementen des *AxisColumn-Arrays* (d. h. der Abschnittsgröße).
+* *DefaultValue:* Standardwert, der anstelle von fehlenden Werten verwendet wird. Wenn keine Zeile mit bestimmten Werten von *axiscolumn* und *groupexpression* vorhanden ist, wird das entsprechende Element des Arrays in den Ergebnissen mit einem *DefaultValue*zugewiesen. Wenn `default =` *DefaultValue* weggelassen wird, wird 0 angenommen. 
+* *Aggregation:* Ein Aufrufe einer [Aggregations Funktion](make-seriesoperator.md#list-of-aggregation-functions) , z `count()` . `avg()`b. oder, mit Spaltennamen als Argumente. Weitere Informationen finden Sie [in der Liste der Aggregations Funktionen](make-seriesoperator.md#list-of-aggregation-functions). Beachten Sie, dass nur Aggregations Funktionen, die numerische Ergebnisse zurück `make-series` geben, mit Operator verwendet werden können.
+* *Axiscolumn:* Eine Spalte, für die die Reihe angeordnet wird. Sie kann als Zeitachse angesehen werden, `datetime` aber abgesehen von allen numerischen Typen werden Sie akzeptiert.
+* *Start*: (optional) der niedrige gebundene Wert der *axiscolumn* für jede Reihe wird erstellt. *Start*, *Ende* und *Schritt* werden verwendet, um ein Array von *axiscolumn* -Werten innerhalb eines angegebenen Bereichs und mithilfe des angegebenen *Schritts*zu erstellen Alle *Aggregations* Werte werden in diesem Array angeordnet. Dieses *axiscolumn* -Array ist auch die letzte Ausgabe Spalte in der Ausgabe mit dem gleichen Namen wie " *axiscolumn*". Wenn kein *Startwert* angegeben wird, ist der Start der erste bin (Step), der Daten in jeder Reihe enthält.
+* *End*: (optional) der hoch gebundene Wert (nicht inklusiv) der *axiscolumn*, der letzte Index der Zeitreihe ist kleiner als dieser Wert (und wird mit einem ganzzahligen Vielfachen von *Schritt* , der kleiner als das *Ende*ist *, angezeigt)* . Wenn *Endwert* nicht angegeben wird, wird die obere Grenze des letzten bin (Schritts) angezeigt, der Daten pro Reihe enthält.
+* *Step*: der Unterschied zwischen zwei aufeinander folgenden Elementen des *axiscolumn* -Arrays (d. h. die bin-Größe).
 * *GroupExpression:* Ein Ausdruck für die Spalten, der einen Satz von unterschiedlichen Werten bereitstellt. Hierbei handelt es sich in der Regel um einen Spaltennamen, der bereits einen eingeschränkten Satz von Werten bereitstellt. 
-* *MakeSeriesParameters*: Null oder mehr (raumgetrennte) Parameter in Form von *Name* `=` *Value,* die das Verhalten steuern. Die folgenden Parameter werden unterstützt: 
+* *Makeseriesparameters*: NULL oder mehr (durch Leerzeichen getrennte) Parameter in der Form des *namens* `=` *Werts* , die das Verhalten steuern. Die folgenden Parameter werden unterstützt: 
   
   |Name           |Werte                                        |BESCHREIBUNG                                                                                        |
   |---------------|-------------------------------------|------------------------------------------------------------------------------|
-  |`kind`          |`nonempty`                               |Erzeugt das Standardergebnis, wenn die Eingabe des Make-Series-Operators leer ist|                                
+  |`kind`          |`nonempty`                               |Erzeugt ein Standard Ergebnis, wenn die Eingabe des Operators "Make-Series" leer ist.|                                
 
 **Rückgabe**
 
-Die Eingabezeilen sind in Gruppen mit `by` den `bin_at(`gleichen Werten des Ausdrucks und des *AxisColumn-Schrittstartausdrucks*`, `*step*`, `*start* `)` angeordnet. Anschließend werden die angegebenen Aggregationsfunktionen über jede Gruppe berechnet, dabei wird eine Zeile für jede Gruppe erzeugt. Das Ergebnis `by` enthält die Spalten, *die AxisColumn-Spalte* und mindestens eine Spalte für jedes berechnete Aggregat. (Aggregation, dass mehrere Spalten oder nicht numerische Ergebnisse nicht unterstützt werden.)
+Die Eingabezeilen werden in Gruppen angeordnet, die die gleichen Werte wie `by` der Ausdruck `bin_at(`Ausdrücke und der Ausdruck " *axiscolumn*`, `*Step*`, `*Start* `)` " aufweisen. Anschließend werden die angegebenen Aggregationsfunktionen über jede Gruppe berechnet, dabei wird eine Zeile für jede Gruppe erzeugt. Das Ergebnis enthält die `by` Spalten *axiscolumn* und auch mindestens eine Spalte für jedes berechnete Aggregat. (Aggregationen, die mehrere Spalten oder nicht numerische Ergebnisse nicht unterstützen.)
 
-Dieses Zwischenergebnis hat so viele Zeilen, `by` wie `bin_at(`es unterschiedliche Kombinationen von und *AxisColumn*`, `*Schrittstartwerte* `)` *step*`, `gibt.
+Dieses Zwischenergebnis verfügt über so viele Zeilen, wie es unterschiedliche `by` Kombinationen von und `bin_at(` *axiscolumn*`, `*-Schritt*`, `*Start* `)` Werten gibt.
 
-Schließlich sind die Zeilen aus dem Zwischenergebnis, `by` die in Gruppen mit den gleichen Werten `dynamic` der Ausdrücke angeordnet sind, und alle aggregierten Werte in Arrays (Werte des Typs) angeordnet. Für jede Aggregation gibt es eine Spalte, die ihr Array mit demselben Namen enthält. Die letzte Spalte in der Ausgabe der Bereichsfunktion mit allen *AxisColumn-Werten.* Sein Wert wird für alle Zeilen wiederholt. 
+Schließlich werden die Zeilen aus dem Zwischenergebnis in Gruppen angeordnet, die dieselben Werte der `by` Ausdrücke aufweisen, und alle aggregierten Werte werden in Arrays (Werte `dynamic` vom Typ) angeordnet. Für jede Aggregation gibt es eine Spalte, die das zugehörige Array mit demselben Namen enthält. Die letzte Spalte in der Ausgabe der Bereichs Funktion mit allen *axiscolumn* -Werten. Der Wert wird für alle Zeilen wiederholt. 
 
-Beachten Sie, dass die resultierende Pivot-Tabelle aufgrund der fehlenden Fülllagerstellen als Standardwert die gleiche Anzahl von Lagerplätzen (d. h. aggregierte Werte) für alle Reihen aufweist.  
+Beachten Sie, dass die sich ergebende Pivottabelle aufgrund der Standardwerte für die fehlende Anzahl von Containern die gleiche Anzahl von Containern (d.h. aggregierte Werte) für alle Reihen enthält.  
 
 **Hinweis**
 
-Obwohl Sie beliebige Ausdrücke sowohl für die Aggregations- als auch für die Gruppierungsausdrücke bereitstellen können, ist es effizienter, einfache Spaltennamen zu verwenden.
+Obwohl Sie beliebige Ausdrücke für die Aggregations-und Gruppierungs Ausdrücke bereitstellen können, ist es effizienter, einfache Spaltennamen zu verwenden.
 
 **Alternative Syntax**
 
-*T* `| make-series` [*Spalte* `=``default` `=` ] *Aggregation* `,` [ *DefaultValue*] [ ...] `on` *AxisColumn* `in` `,` `,` `by` `=``,` *start* `)` *Column* *GroupExpression* *step* *stop* Startstoppschritt [ [ Spalte ] GroupExpression [ ...]] `range(`
+*T* `| make-series` [*Spalte* `=`] *Aggregation* [`default` `=` *DefaultValue*] [`,` ...] `on` *"Axiscolumn* `in` `range(` *Start* `,` *stop* `,` " Starten`by` ( *Schritt* `)` ) [[*Column* `=`] *groupexpression* [`,` ...]]
 
-Die generierte Reihe aus der alternativen Syntax unterscheidet sich von der Hauptsyntax in 2 Aspekten:
-* Der *Stop-Wert* ist inklusive.
-* Binning der Indexachse wird mit bin() generiert und nicht mit bin_at(), was bedeutet, dass *der Start* nicht garantiert in die generierte Reihe einbezogen wird.
+Die generierten Reihen aus der alternativen Syntax unterscheiden sich von der Haupt Syntax in zwei Aspekten:
+* Der *Endwert* ist inklusiv.
+* Das Klassifizieren der Index Achse wird mit bin () und nicht mit bin_at () generiert. Dies bedeutet, dass der *Start* nicht garantiert in der generierten Reihe enthalten ist.
 
-Es wird empfohlen, die Hauptsyntax der Make-Serie und nicht die alternative Syntax zu verwenden.
+Es wird empfohlen, die Haupt Syntax von Make-Series und nicht die alternative Syntax zu verwenden.
 
 **Verteilung und Shuffle**
 
-`make-series`unterstützt `summarize` [Shufflekey-Hinweise](shufflequery.md) mithilfe der Syntax hint.shufflekey.
+`make-series`unter `summarize` stützt [shufflekey-Hinweise](shufflequery.md) mithilfe der Syntax Hint. shufflekey.
 
-## <a name="list-of-aggregation-functions"></a>Liste der Aggregationsfunktionen
+## <a name="list-of-aggregation-functions"></a>Liste der Aggregations Funktionen
 
-|Funktion|BESCHREIBUNG|
+|Funktion|Beschreibung|
 |--------|-----------|
-|[any()](any-aggfunction.md)|Gibt zufälligen nicht leeren Wert für die Gruppe zurück|
-|[avg()](avg-aggfunction.md)|Retuns Durchschnittswert in der gesamten Gruppe|
-|[count()](count-aggfunction.md)|Rückgabeanzahl der Gruppe|
-|[countif()](countif-aggfunction.md)|Retouren zählen mit dem Prädikat der Gruppe|
-|[dcount()](dcount-aggfunction.md)|Gibt ungefähre eindeutige Anzahl der Gruppenelemente zurück|
-|[max()](max-aggfunction.md)|Gibt den Maximalwert in der Gruppe zurück|
-|[min()](min-aggfunction.md)|Gibt den Mindestwert in der Gruppe zurück|
-|[stdev()](stdev-aggfunction.md)|Gibt die Standardabweichung über die Gruppe hinweg zurück|
-|[sum()](sum-aggfunction.md)|Gibt die Summe der Elemente zurück, die die Gruppe|
-|[variance()](variance-aggfunction.md)|Gibt die Varianz in der Gruppe zurück|
+|[Any ()](any-aggfunction.md)|Gibt einen zufälligen, nicht leeren Wert für die Gruppe zurück.|
+|[AVG ()](avg-aggfunction.md)|Retuns der durchschnittliche Wert in der Gruppe|
+|[count ()](count-aggfunction.md)|Gibt die Anzahl der Gruppe zurück.|
+|[countif()](countif-aggfunction.md)|Gibt die Anzahl mit dem Prädikat der Gruppe zurück.|
+|[dcount()](dcount-aggfunction.md)|Gibt eine ungefähre eindeutige Anzahl der Gruppenelemente zurück.|
+|[Max ()](max-aggfunction.md)|Gibt den maximalen Wert in der Gruppe zurück.|
+|[min ()](min-aggfunction.md)|Gibt den Mindestwert in der Gruppe zurück.|
+|[StDev ()](stdev-aggfunction.md)|Gibt die Standardabweichung in der Gruppe zurück.|
+|[Sum ()](sum-aggfunction.md)|Gibt die Summe der Elemente zurück, die die Gruppe unterliegen.|
+|[Varianz ()](variance-aggfunction.md)|Gibt die Varianz innerhalb der Gruppe zurück.|
 
-## <a name="list-of-series-analysis-functions"></a>Liste der Reihenanalysefunktionen
+## <a name="list-of-series-analysis-functions"></a>Liste der Reihen Analysefunktionen
 
-|Funktion|BESCHREIBUNG|
+|Funktion|Beschreibung|
 |--------|-----------|
-|[series_fir()](series-firfunction.md)|Wendet [Finite Impulse Response](https://en.wikipedia.org/wiki/Finite_impulse_response) Filter an|
-|[series_iir()](series-iirfunction.md)|Wendet [den Filtern "Unendliche Impulsantwort"](https://en.wikipedia.org/wiki/Infinite_impulse_response) an|
-|[series_fit_line()](series-fit-linefunction.md)|Findet eine gerade Linie, die die beste Annäherung an den Eingang ist|
-|[series_fit_line_dynamic()](series-fit-line-dynamicfunction.md)|Sucht eine Zeile, die die beste Annäherung an die Eingabe ist, und gibt dynamisches Objekt zurück|
-|[series_fit_2lines()](series-fit-2linesfunction.md)|Sucht zwei Zeilen, die die beste Annäherung an den Eingang ist|
-|[series_fit_2lines_dynamic()](series-fit-2lines-dynamicfunction.md)|Sucht zwei Zeilen, die die beste Annäherung an die Eingabe ist, und gibt dynamisches Objekt zurück|
-|[series_outliers()](series-outliersfunction.md)|Erzielt Anomaliepunkte in einer Serie|
-|[series_periods_detect()](series-periods-detectfunction.md)|Sucht die wichtigsten Zeiträume, die in einer Zeitreihe vorhanden sind|
-|[series_periods_validate()](series-periods-validatefunction.md)|Überprüft, ob eine Zeitreihe periodische Muster bestimmter Längen enthält|
-|[series_stats_dynamic()](series-stats-dynamicfunction.md)|Geben Sie mehrere Spalten mit den gemeinsamen Statistiken zurück (min/max/variance/stdev/average)|
-|[series_stats()](series-statsfunction.md)|Generiert einen dynamischen Wert mit den gemeinsamen Statistiken (min/max/variance/stdev/average)|
+|[series_fir()](series-firfunction.md)|Wendet einen [begrenzten Impuls Antwort](https://en.wikipedia.org/wiki/Finite_impulse_response) Filter an.|
+|[series_iir()](series-iirfunction.md)|Wendet einen [unendlichen Impuls Antwort](https://en.wikipedia.org/wiki/Infinite_impulse_response) Filter an.|
+|[series_fit_line()](series-fit-linefunction.md)|Findet eine gerade Linie, die die beste Näherung der Eingabe darstellt.|
+|[series_fit_line_dynamic()](series-fit-line-dynamicfunction.md)|Sucht eine Zeile, die die beste Näherung der Eingabe darstellt und ein dynamisches Objekt zurückgibt.|
+|[series_fit_2lines()](series-fit-2linesfunction.md)|Sucht zwei Zeilen, die die beste Näherung der Eingabe sind.|
+|[series_fit_2lines_dynamic()](series-fit-2lines-dynamicfunction.md)|Sucht zwei Zeilen, die die beste Näherung der Eingabe sind, und gibt ein dynamisches Objekt zurück.|
+|[series_outliers()](series-outliersfunction.md)|Bewertet anomaliepunkte in einer Reihe.|
+|[series_periods_detect()](series-periods-detectfunction.md)|Sucht die signifikantesten Zeiträume, die in einer Zeitreihe vorhanden sind.|
+|[series_periods_validate()](series-periods-validatefunction.md)|Überprüft, ob eine Zeitreihe periodische Muster mit angegebenen Längen enthält.|
+|[series_stats_dynamic()](series-stats-dynamicfunction.md)|Gibt mehrere Spalten mit den allgemeinen Statistiken zurück (Min/Max/Varianz/StDev/Average).|
+|[series_stats()](series-statsfunction.md)|Generiert einen dynamischen Wert mit der Common Statistics (Min/Max/Varianz/StDev/Average).|
   
-## <a name="list-of-series-interpolation-functions"></a>Liste der Serieninterpolationsfunktionen
+## <a name="list-of-series-interpolation-functions"></a>Liste der Reihen Interpolations Funktionen
 |Funktion|BESCHREIBUNG|
 |--------|-----------|
-|[series_fill_backward()](series-fill-backwardfunction.md)|Führt die Rückwärtsfüllinterpolation fehlender Werte in einer Reihe durch|
-|[series_fill_const()](series-fill-constfunction.md)|Ersetzt fehlende Werte in einer Reihe durch einen angegebenen konstanten Wert|
-|[series_fill_forward()](series-fill-forwardfunction.md)|Führt die Vorwärtsfüllinterpolation fehlender Werte in einer Reihe durch|
-|[series_fill_linear()](series-fill-linearfunction.md)|Führt lineare Interpolation fehlender Werte in einer Reihe durch|
+|[series_fill_backward()](series-fill-backwardfunction.md)|Führt eine rückwärts Füll interpolung von fehlenden Werten in einer Reihe aus.|
+|[series_fill_const()](series-fill-constfunction.md)|Ersetzt fehlende Werte in einer Reihe durch einen angegebenen konstanten Wert.|
+|[series_fill_forward()](series-fill-forwardfunction.md)|Führt die vorwärts Füll interpolung von fehlenden Werten in einer Reihe aus.|
+|[series_fill_linear()](series-fill-linearfunction.md)|Führt eine lineare interpolung von fehlenden Werten in einer Reihe aus.|
 
-* Hinweis: Interpolationsfunktionen werden `null` standardmäßig als fehlender Wert angenommen. Daher wird empfohlen, `default=` *Double*(`null`) in `make-series` anzugeben, wenn Sie Interpolationsfunktionen für die Serie verwenden möchten. 
+* Hinweis: Interpolations Funktionen werden standardmäßig `null` als fehlender Wert angenommen. Daher wird empfohlen, `default=` *Double*(`null`) in `make-series` anzugeben, wenn Sie beabsichtigen, Interpolations Funktionen für die Reihe zu verwenden. 
 
 ## <a name="example"></a>Beispiel
   
- Eine Tabelle, die Arrays der Zahlen und Durchschnittspreise der einzelnen Früchte von jedem Lieferanten nach dem Zeitstempel mit dem angegebenen Bereich anzeigt. Es gibt eine Reihe in der Ausgabe für jede einzelne Kombination von Obst und Lieferant. Die Ausgabespalten zeigen die Früchte, Lieferanten und Arrays von: Zählen, Durchschnitt und die gesamte Zeitlinie (von 2016-01-01 bis 2016-01-10). Alle Arrays werden nach dem jeweiligen Zeitstempel sortiert und alle Lücken werden mit Standardwerten gefüllt (in diesem Beispiel 0). Alle anderen Eingabespalten werden ignoriert.
+ Eine Tabelle, die Arrays der Zahlen und Durchschnittspreise der einzelnen Früchte von jedem Lieferanten anzeigt, geordnet nach dem Zeitstempel mit dem angegebenen Bereich. Es gibt eine Zeile in der Ausgabe für jede einzelne Kombination von Obst und Lieferant. In den Ausgabespalten werden die Früchte, der Lieferant und die Arrays von angezeigt: count, Average und die gesamte zeitzeile (von 2016-01-01 bis 2016-01-10). Alle Arrays werden nach dem entsprechenden Zeitstempel sortiert, und alle Lücken werden mit Standardwerten gefüllt (in diesem Beispiel 0). Alle anderen Eingabespalten werden ignoriert.
   
 ```kusto
 T | make-series PriceAvg=avg(Price) default=0
 on Purchase from datetime(2016-09-10) to datetime(2016-09-13) step 1d by Supplier, Fruit
 ```
 
-:::image type="content" source="images/aggregations/makeseries.png" alt-text="Makeseries":::  
+:::image type="content" source="images/make-seriesoperator/makeseries.png" alt-text="Makeseries":::  
   
 ```kusto
 let data=datatable(timestamp:datetime, metric: real)
@@ -150,10 +150,10 @@ data
   
 |avg_metric|timestamp|
 |---|---|
-|[ 4.0, 3.0, 5.0, 0.0, 10.5, 4.0, 3.0, 8.0, 6.5 ]|[ "2017-01-01T00:00:00.0000000Z", "2017-01-02T00:00:00.0000000Z", "2017-01 -03T00:00:00.0000000Z", "2017-01-04T00:00:00.0000000Z", "2017-01-05T00:0 00:00.0000000Z", "2017-01-06T00:00:00.00000000Z", "2017-01-07T00:00:00.000 00000Z", "2017-01-08T00:00:00.00000000Z", "2017-01-09T00:00:00.0000000Z" ]|  
+|[4,0, 3,0, 5,0, 0,0, 10,5, 4,0, 3,0, 8,0, 6,5]|["2017-01-01t00:00:00.0000000 z", "2017-01-02t00:00:00.0000000 z", "2017-01-03t00:00:00.0000000 z", "2017-01-04t00:00:00.0000000 z", "2017-01-05t00:00:00.0000000 z", "2017-01-06t00:00:00.0000000 z", "2017-01-07t00:00:00.0000000 z", "2017-01-08t00:00:00.0000000 z", "2017-01-09t00:00:00.0000000 z"]|  
 
 
-Wenn die `make-series` Eingabe leer ist, `make-series` erzeugt das Standardverhalten von auch ein leeres Ergebnis.
+Wenn die Eingabe in `make-series` leer ist, erzeugt das Standardverhalten `make-series` von ebenfalls ein leeres Ergebnis.
 
 ```kusto
 let data=datatable(timestamp:datetime, metric: real)
@@ -187,7 +187,7 @@ data
 |0|
 
 
-Die `kind=nonempty` `make-series` Verwendung von in führt zu einem nicht leeren Ergebnis der Standardwerte:
+Die `kind=nonempty` Verwendung `make-series` von in führt zu einem nicht leeren Ergebnis der Standardwerte:
 
 ```kusto
 let data=datatable(timestamp:datetime, metric: real)
@@ -217,4 +217,4 @@ data
 
 |avg_metric|timestamp|
 |---|---|
-|[<br>  1.0,<br>  1.0,<br>  1.0,<br>  1.0,<br>  1.0,<br>  1.0,<br>  1.0,<br>  1.0,<br>  1.0<br>]|[<br>  "2017-01-01T00:00:00.0000000Z",<br>  "2017-01-02T00:00:00.0000000Z",<br>  "2017-01-03T00:00:00.0000000Z",<br>  "2017-01-04T00:00:00.0000000Z",<br>  "2017-01-05T00:00:00.0000000Z",<br>  "2017-01-06T00:00:00.0000000Z",<br>  "2017-01-07T00:00:00.0000000Z",<br>  "2017-01-08T00:00:00.0000000Z",<br>  "2017-01-09T00:00:00.0000000Z"<br>]|
+|[<br>  1,0,<br>  1,0,<br>  1,0,<br>  1,0,<br>  1,0,<br>  1,0,<br>  1,0,<br>  1,0,<br>  1.0<br>]|[<br>  "2017-01-01t00:00:00.0000000 z",<br>  "2017-01-02t00:00:00.0000000 z",<br>  "2017-01-03t00:00:00.0000000 z",<br>  "2017-01-04t00:00:00.0000000 z",<br>  "2017-01-05t00:00:00.0000000 z",<br>  "2017-01-06t00:00:00.0000000 z",<br>  "2017-01-07t00:00:00.0000000 z",<br>  "2017-01-08t00:00:00.0000000 z",<br>  "2017-01-09t00:00:00.0000000 z"<br>]|

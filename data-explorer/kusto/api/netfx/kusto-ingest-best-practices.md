@@ -1,6 +1,6 @@
 ---
-title: Kusto-Ingest-Clientbibliothek - Bewährte Methoden - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird Kusto Ingest Client Library – Best Practices in Azure Data Explorer beschrieben.
+title: Kusto-Erfassungs Client Bibliothek-bewährte Methoden-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel werden die bewährten Methoden der Kusto-Erfassungs Client Bibliothek in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,53 +8,64 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/16/2019
-ms.openlocfilehash: e28ec3f99abe4163b83721d753da98c0035d1e46
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 2369d352e316f1d9b49de71fb197507280598754
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523697"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617934"
 ---
-# <a name="kusto-ingest-client-library---best-practices"></a>Kusto Ingest Client Library – Bewährte Methoden
+# <a name="kusto-ingest-client-library---best-practices"></a>Kusto-Erfassungs Client Bibliothek-bewährte Methoden
 
-## <a name="choosing-the-right-ingestclient-flavor"></a>Die Wahl des richtigen IngestClient-Geschmacks
-Die Verwendung von [KustoQueuedIngestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) ist der empfohlene systemeigene Datenerfassungsmodus. Dies ist der Grund:
-* Die direkte Erfassung ist während der Ausfallzeit des Kusto-Moduls (z. B. während der Bereitstellung) nicht möglich, während im Warteschlangenerfassungsmodus die Anforderungen in der Azure-Warteschlange beibehalten werden und der Datenverwaltungsdienst bei Bedarf erneut versucht.
-* Der Datenverwaltungsdienst ist dafür verantwortlich, das Modul nicht mit Aufnahmeanforderungen zu überlasten. Das Überschreiben dieses Steuerelements (z. B. die direkte Einnahme) kann die Motorleistung erheblich beeinträchtigen, sowohl die Aufnahme als auch die Abfrage.
-* Data Management aggregiert mehrere Erfassungsanforderungen, um die Größe des zu erstellenden ursprünglichen Shards (Ausdehnung) zu optimieren.
-* Es gibt eine bequeme Möglichkeit, Feedback über jede Einnahme zu erhalten - ob erfolgreich oder nicht.
+## <a name="choosing-the-right-ingestclient-flavor"></a>Auswählen der richtigen ingestclient-Konfiguration
 
-## <a name="tracking-ingest-operation-status"></a>Nachverfolgen des Status des Aufnahmevorgangs
-[Das Nachverfolgen des Status des Aufnahmevorgangs](kusto-ingest-client-status.md#tracking-ingestion-status-kustoqueuedingestclient) ist ein nützliches Feature in Kusto, jedoch kann das Einschalten für die Erfolgsberichterstattung leicht in dem Maße missbraucht werden, in dem sie Ihren Dienst lahmlegen wird.<BR>
+Die Verwendung von [kustoqueuedingestclient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) ist der empfohlene systemeigene Daten Erfassungs Modus. Dies ist der Grund:
+* Die direkte Erfassung ist während der Engine-Ausfallzeit (z. b. während der Bereitstellung) nicht möglich, während die Anforderungen im Erfassungs Modus der Warteschlange dauerhaft in der Azure-Warteschlange gespeichert werden und der Datenverwaltung-Dienst bei Bedarf wiederholt wird.
+* Der Datenverwaltung-Dienst ist dafür verantwortlich, die Engine nicht mit Erfassungs Anforderungen zu überladen. Das Überschreiben dieses Steuer Elements (z. b. die direkte Erfassung) beeinträchtigt möglicherweise die Engine-Leistung, sowohl die Erfassung als auch die Abfrage.
+* Datenverwaltung aggregiert mehrere Erfassungs Anforderungen, um die Größe des anfänglichen Shards (Block) zu optimieren, der erstellt werden soll.
+* Es ist einfach, Feedback zu den einzelnen Erfassungs Möglichkeiten zu erhalten.
+
+## <a name="tracking-ingest-operation-status"></a>Status der Erfassung des Erfassungs Vorgangs
+
+Der [Status der Erfassung des Erfassungs Vorgangs](kusto-ingest-client-status.md#tracking-ingestion-status-kustoqueuedingestclient) ist ein nützliches Feature. Allerdings kann es leicht missbraucht werden, um die erfolgreiche Berichterstellung zu aktivieren.
 
 > [!WARNING]
-> Das Aktivieren positiver Benachrichtigungen für jede Aufnahmeanforderung für Datenströme mit großem Volumen sollte vermieden werden, da dies die zugrunde liegenden xStore-Ressourcen extrem belastet, > was zu einer erhöhten Aufnahmelatenz und sogar zur vollständigen Cluster-Nichtreaktion führen kann.
+> Das Aktivieren positiver Benachrichtigungen für jede Erfassungs Anforderung für große volumedatenströme sollte vermieden werden, da dadurch die zugrunde liegenden XStore-Ressourcen extrem belastet werden. Die zusätzliche Auslastung kann zu einer längeren Erfassungs Latenz und sogar zu einem kompletten Cluster ohne Reaktionsfähigkeit führen.
 
-## <a name="optimizing-for-throughput"></a>Optimierung für Durchsatz
-* Die Aufnahme funktioniert am besten (d. h., sie verbraucht die geringsten Ressourcen während der Aufnahme, erzeugt die meisten COGS-optimierten Datenshards und führt zu den leistungsstärksten Datenartefakten), wenn sie in großen Blöcken ausgeführt wird. Im Allgemeinen empfehlen wir Kunden, die Daten mit der Kusto.Ingest-Bibliothek oder direkt in das Modul aufnehmen, Daten in Batches von **100 MB bis 1 GB (unkomprimiert)** zu senden.
-* Die obere Grenze ist wichtig, wenn Sie direkt mit dem Kusto-Modul arbeiten, um `KustoQueuedIngestClient` die Speichermenge zu reduzieren, die vom Aufnahmeprozess verwendet wird (bei Verwendung der Klasse werden zu große Datenblöcke auf dem Client in kleinere Teile aufgeteilt, und kleine Blöcke werden bis zu einem gewissen Grad aggregiert, bevor die Kusto Engine erreicht wird).
-* Die untere Grenze für die aufgenommene Datengröße ist ebenfalls wichtig, wenn auch weniger kritisch. Die Einfallsmenge von Daten in kleinen Chargen ist hin und wieder vollkommen in Ordnung, wenn auch etwas weniger effizient als bei großen Chargen. `KustoQueuedIngestClient`Class löst auch das Problem für Kunden, die große Datenmengen aufnehmen müssen und diese nicht in große Blöcke stapeln können, bevor sie an Kusto gesendet werden
+## <a name="optimizing-for-throughput"></a>Optimieren des Durchsatzes
 
-## <a name="factors-impacting-ingestion-throughput"></a>Faktoren, die den Aufnahmedurchsatz beeinflussen
-Mehrere Faktoren können sich auf den Durchsatz der Aufnahme auswirken. Achten Sie bei der Planung Ihrer Kusto-Aufnahmepipeline darauf, die folgenden Punkte zu bewerten, was erhebliche Auswirkungen auf Ihre COGs haben kann.
-* Datenformat - CSV ist das schnellste Format, das zu erfassen ist, JSON dauert in der Regel x2 oder x3 länger für das gleiche Datenvolumen
-* Tabellenbreite - Stellen Sie sicher, dass Sie nur Daten aufnehmen, die Sie wirklich benötigen, da je breiter die Tabelle, desto mehr Spalten werden codiert und indiziert, daher je niedriger der Durchsatz.
-    Sie können steuern, welche Felder aufgenommen werden, indem Sie eine Aufnahmezuordnung bereitstellen.
-* Quelldatenspeicherort - Vermeidung von regionsübergreifenden Lesevorgängen beschleunigt die Aufnahme
-* Laden auf den Cluster : Wenn clusterlange Abfragelasten zu sich nehmen, dauert die Erfassung länger, wodurch der Durchsatz reduziert wird.
-* Aufnahmemuster - Die Aufnahme ist optimal, wenn der Cluster mit Batches von bis zu `KustoQueuedIngestClient`1 GB serviert wird (mit Vorsicht bei der Verwendung von )
+* Die Erfassung funktioniert am besten, wenn Sie in großen Blöcken ausgeführt wird. Dabei werden die geringsten Ressourcen beansprucht, die meisten COGS-optimierten Daten-Shards erzeugt und die am besten leistungsfähigen Daten Artefakte erzielt. Im Allgemeinen empfehlen wir Kunden, die Daten mit der Kusto. Erfassungs Bibliothek oder direkt in der Engine erfassen, um Daten in Batches von **100 MB an 1 GB (unkomprimiert) zu** senden.
+* Die Obergrenze ist wichtig, wenn Sie direkt mit der Engine arbeiten, um die Menge des vom Erfassungsprozess genutzten Arbeitsspeichers zu reduzieren. 
 
-## <a name="optimizing-for-cogs"></a>Optimierung für COGS
-Während die Verwendung von Kusto-Clientbibliotheken, um Daten in Kusto aufzunehmen, die billigste und robusteste Option bleibt, fordern wir unsere Kunden auf, ihre Aufnahmetaktik zu überprüfen und die jüngsten (Herbst 2017) Änderungen der Azure Storage-Preise zu berücksichtigen, die Blobtransaktionen erheblich verteuern (x100).
-<BR>
-Es ist wichtig zu verstehen, dass je mehr Datenblöcke (Dateien/Blobs/Streams) Sie an Kusto senden, desto größer wird Ihre monatliche Rechnung.
-Wenn Sie die folgenden Empfehlungen befolgen, können Sie Ihre Kusto-Aufnahmekosten besser kontrollieren:
-* **Bevorzugen Sie die Aufnahme größerer Datenblöcke (bis zu 1 GB unkomprimierter Daten)**<br>
-    Viele Teams versuchen, eine niedrige Latenz zu erreichen, indem sie zig Millionen winzigedatenteile einfließen, was extrem ineffizient und sehr kostspielig ist.<br>
-    Jede Batchverarbeitung auf der Clientseite würde helfen. 
-* **Stellen Sie sicher, dass Sie dem Kusto.Ingest-Client eine genaue unkomprimierte Datengröße zur Verfügung stellen.**<br>
-    Wenn dies nicht der Fall ist, kann Kusto dazu führen, dass zusätzliche Speichertransaktionen ausgeführt werden.
-* **Vermeiden Sie** das Senden von `FlushImmediately` Daten `true`für die Aufnahme mit `ingest-by` / `drop-by` dem flag auf , oder das Senden kleiner Blöcke mit Tags gesetzt.<br>
-    Die Verwendung dieser Daten verhindert, dass der Kusto-Dienst die Daten während der Aufnahme ordnungsgemäß aggregiert, und führt zu unnötigen Speichertransaktionen nach der Aufnahme, die sich auf COGS auswirken.<br>
-    Darüber hinaus kann die übermäßige Verwendung dieser Daten zu einer beeinträchtigten Aufnahme- und/oder Abfrageleistung in Ihrem Cluster führen.<br>
+> [!NOTE]
+> Wenn Sie die `KustoQueuedIngestClient` -Klasse verwenden, werden übermäßig große Datenblöcke in kleinere Blöcke aufgeteilt, und diese kleinen Blöcke werden zu einem bestimmten Zeitpunkt aggregiert, bevor die Engine erreicht wird.
+
+* Der untere Grenzwert für die erfasste Datengröße ist ebenfalls wichtig, obwohl weniger kritisch ist. Das Erfassen von Daten in kleinen Batches wird alle angezeigt und ist dann problemlos einwandfrei, obwohl etwas weniger effizient als die Verwendung großer Batches ist. Die `KustoQueuedIngestClient` -Klasse löst auch das Problem für Kunden, die große Datenmengen erfassen müssen, und kann Sie nicht in große Blöcke Stapeln, bevor Sie an die-Engine gesendet werden.
+
+## <a name="factors-impacting-ingestion-throughput"></a>Faktoren, die sich auf den Erfassungs Durchsatz auswirken
+
+Mehrere Faktoren können sich auf den Erfassungs Durchsatz auswirken. Stellen Sie beim Planen der Erfassungs Pipeline sicher, dass Sie die folgenden Punkte evaluieren, die sich auf Ihre COGS auswirken können.
+
+| Faktor für die Überlegung |  Decription                                                                                               |
+|--------------------------|-----------------------------------------------------------------------------------------------------------|
+| Datenformat              | CSV ist das schnellste zu erfasse Format, JSON dauert in der Regel 2X oder 3X länger für dieselbe Datenmenge.|
+| Tabellenbreite              | Stellen Sie sicher, dass nur Daten erfasst werden, die Sie wirklich benötigen. Je größer die Tabelle ist, desto mehr Spalten müssen codiert und indiziert werden. Daher wird der Durchsatz gesenkt. Sie können steuern, welche Felder erfasst werden, indem Sie eine Erfassungs Zuordnung bereitstellen.|
+| Quelldaten Speicherort     | Vermeiden Sie Regions übergreifende Lesevorgänge, um die Erfassung zu beschleunigen.                                                       |
+| Laden des Clusters      | Wenn ein Cluster eine hohe Abfrage Auslastung hat, dauert die Ausführung von Ingestionen länger, was den Durchsatz reduziert.|
+| Erfassungs Muster        | Die Erfassung erfolgt am optimalen, wenn der Cluster mit Batches von bis zu 1 GB (verarbeitet durch `KustoQueuedIngestClient`) bedient wird. |
+
+## <a name="optimizing-for-cogs"></a>Optimieren für COGS
+
+Die Verwendung von Kusto-Client Bibliotheken zum Erfassen von Daten in Kusto bleibt die billigste und stabilste Option. Wir empfehlen unseren Kunden, ihre Erfassungsmethoden zu überprüfen und die Azure Storage Preise zu nutzen, mit denen BLOB-Transaktionen erheblich kostengünstig werden.
+
+Beschränken Sie die Anzahl der erfassten Datenblöcke (Dateien/blobdateien/Streams), um eine bessere Kontrolle über ihre Kosten bei der Azure-Daten-Explorer Erfassung zu erhalten und Ihre monatliche Rechnung zu verringern.
+
+* **Ziehen Sie die Erfassung größerer Datenblöcke (bis zu 1 GB unkomprimierter Daten)** vor. 
+    Viele Teams versuchen, eine geringe Latenz zu erzielen, indem Sie zehn Millionen von kleinen Datenblöcken erfassen, was extrem ineffizient und sehr kostspielig ist. Eine beliebige Menge an Batch Verarbeitung auf Clientseite würde dabei helfen. 
+* Stellen **Sie sicher, dass Sie den Kusto. Erfassungs Client mit einer exakten, unkomprimierten Datengröße bereitstellen**.
+    Dies führt möglicherweise zu zusätzlichen Speicher Transaktionen.
+* **Vermeiden** Sie das Senden von Daten für die `FlushImmediately` Erfassung, wenn `true`das Flag auf festgelegt ist oder `ingest-by` / `drop-by` kleine Blöcke mit festgelegtem Tag gesendet werden.
+    Durch die Verwendung dieser Methoden wird verhindert, dass der Dienst die Daten während der Erfassung ordnungsgemäß aggregierte, und es werden nach der Erfassung unnötige Speicher Transaktionen verursacht, was sich auf die COGS auswirkt.
+    
+    Darüber hinaus kann die Verwendung dieser übermäßig zu einer beeinträchtigten Erfassungs-und/oder Abfrageleistung Ihres Clusters führen.
     

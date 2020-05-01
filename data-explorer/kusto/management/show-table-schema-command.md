@@ -1,6 +1,6 @@
 ---
-title: .show-Tabellenschema - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt das .show Tabellenschema in Azure Data Explorer.
+title: '. Anzeigen des Tabellen Schemas: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird beschrieben, wie Sie das Tabellen Schema in Azure Daten-Explorer anzeigen.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,45 +8,46 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: 9223baa0242cc936b25a7d3293d102cb3966ed53
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: e2a550f0ea755181d39524876833cff4281608b4
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81519770"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618342"
 ---
-# <a name="show-table-schema"></a>.show Tabellenschema
+# <a name="show-table-schema"></a>.show table schema
 
-Ruft das Schema ab, das in Create/Alter-Befehlen und zusätzlichen Tabellenmetadaten verwendet werden soll.
+Ruft das Schema ab, das in CREATE/ALTER-Befehlen und zusätzlichen Tabellen Metadaten verwendet werden soll.
 
-Erfordert [Datenbankbenutzerberechtigung](../management/access-control/role-based-authorization.md).
+Erfordert die [Berechtigung für Datenbankbenutzer](../management/access-control/role-based-authorization.md).
 
-```
+```kusto
 .show table TableName cslschema 
 ```
-| Ausgabeparameter | type   | BESCHREIBUNG                                               |
+
+| Output-Parameter | type   | BESCHREIBUNG                                               |
 |------------------|--------|-----------------------------------------------------------|
 | TableName        | String | Der Name der Tabelle.                                    |
-| Schema           | String | Das Tabellenschema, das für Tabellenerstellung/-änderungen verwendet werden soll |
-| DatabaseName     | String | Die Datenbank, zu der die Tabelle gehört                   |
-| Ordner           | String | Ordner der Tabelle                                            |
-| DocString        | String | Tabelle docstring                                         |
+| Schema           | String | Das Tabellen Schema, das zum Erstellen/Ändern von Tabellen verwendet werden soll. |
+| DatabaseName     | String | Die Datenbank, zu der die Tabelle gehört.                   |
+| Ordner           | String | Tabellen Ordner                                            |
+| DocString        | String | DocString der Tabelle                                         |
 
 
-## <a name="show-table-schema-as-json"></a>.show Tabellenschema als JSON
+## <a name="show-table-schema-as-json"></a>. Anzeigen des Tabellen Schemas als JSON
 
-Ruft das Schema im JSON-Format und zusätzliche Tabellenmetadaten ab.
+Ruft das Schema im JSON-Format und zusätzliche Tabellen Metadaten ab.
 
-Erfordert [Datenbankbenutzerberechtigung](../management/access-control/role-based-authorization.md).
+Erfordert die [Berechtigung für Datenbankbenutzer](../management/access-control/role-based-authorization.md).
 
-```
+```kusto
 .show table TableName schema as JSON
 ```
 
-| Ausgabeparameter | type   | BESCHREIBUNG                             |
+| Output-Parameter | type   | BESCHREIBUNG                             |
 |------------------|--------|-----------------------------------------|
 | TableName        | String | Der Name der Tabelle.                   |
-| Schema           | String | Das Tabellenschema im JSON-Format         |
-| DatabaseName     | String | Die Datenbank, zu der die Tabelle gehört |
-| Ordner           | String | Ordner der Tabelle                          |
-| DocString        | String | Tabelle docstring                       |
+| Schema           | String | Das Tabellen Schema im JSON-Format         |
+| DatabaseName     | String | Die Datenbank, zu der die Tabelle gehört. |
+| Ordner           | String | Tabellen Ordner                          |
+| DocString        | String | DocString der Tabelle                       |

@@ -1,6 +1,6 @@
 ---
-title: RestrictedViewAccess-Richtlinie - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die RestrictedViewAccess-Richtlinie in Azure Data Explorer beschrieben.
+title: Kusto restrictedviewaccess Policy Management-Azure Daten-Explorer
+description: In diesem Artikel wird die restrictedviewaccess-Richtlinie in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 9fcf37d30bfe3ab0f9c4b5d4a720e6a5ba4ffe34
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 9da59a53819396cf2cbd522f4a1e1296f585bf2f
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81520450"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617546"
 ---
-# <a name="restrictedviewaccess-policy"></a>RestrictedViewAccess-Richtlinie
+# <a name="restrictedviewaccess-policy"></a>Restrictedviewaccess-Richtlinie
 
-Die *RestrictedViewAccess-Richtlinie* wird [hier](../management/restrictedviewaccesspolicy.md)dokumentiert.
+Die *restrictedviewaccess* -Richtlinie ist [hier](../management/restrictedviewaccesspolicy.md)dokumentiert.
 
-Die folgenden Steuerungsbefehle zum Aktivieren oder Deaktivieren der Richtlinie für Tabellen in der Datenbank sind die folgenden:
+Kontroll Befehle zum Aktivieren oder Deaktivieren der Richtlinie für Tabellen in der Datenbank lauten wie folgt:
 
 So aktivieren/deaktivieren Sie die Richtlinie:
 ```kusto
@@ -31,7 +31,7 @@ So aktivieren/deaktivieren Sie die Richtlinie mehrerer Tabellen:
 .alter tables (TableName1, ..., TableNameN) policy restricted_view_access true|false
 ```
 
-So zeigen Sie die Richtlinie an:
+Anzeigen der Richtlinie:
 ```kusto
 .show table TableName policy restricted_view_access  
 

@@ -1,6 +1,6 @@
 ---
-title: RowLevelSecurity-Richtlinie (Vorschau) - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt RowLevelSecurity-Richtlinie (Vorschau) in Azure Data Explorer.
+title: 'Rowlevelsecurity-Richtlinie (Vorschau): Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird die rowlevelsecurity-Richtlinie (Vorschauversion) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,20 +8,20 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/25/2020
-ms.openlocfilehash: bf8ee8bc4c43c4ed3bcd320ce5b4778f33c3cc64
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: f8f6f820090bde91b9ed6479e0677a893a682983
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81520297"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617373"
 ---
-# <a name="rowlevelsecurity-policy-preview"></a>RowLevelSecurity-Richtlinie (Vorschau)
+# <a name="rowlevelsecurity-policy-preview"></a>Rowlevelsecurity-Richtlinie (Vorschau)
 
 In diesem Artikel werden Befehle beschrieben, die zum Konfigurieren einer [row_level_security Richtlinie](rowlevelsecuritypolicy.md) für Datenbanktabellen verwendet werden.
 
 ## <a name="displaying-the-policy"></a>Anzeigen der Richtlinie
 
-Um die Richtlinie anzuzeigen, verwenden Sie den folgenden Befehl:
+Verwenden Sie den folgenden Befehl, um die Richtlinie anzuzeigen:
 
 ```kusto
 .show table <table_name> policy row_level_security
@@ -29,34 +29,34 @@ Um die Richtlinie anzuzeigen, verwenden Sie den folgenden Befehl:
 
 ## <a name="configuring-the-policy"></a>Konfigurieren der Richtlinie
 
-Aktivieren row_level_security Richtlinie für eine Tabelle:
+Aktivieren Sie row_level_security Richtlinie für eine Tabelle:
 
 ```kusto
 .alter table <table_name> policy row_level_security enable "<query>"
 ```
 
-Deaktivieren row_level_security Richtlinie für eine Tabelle:
+Deaktivieren Sie row_level_security Richtlinie für eine Tabelle:
 
 ```kusto
 .alter table <table_name> policy row_level_security disable "<query>"
 ```
 
-Selbst wenn die Richtlinie deaktiviert ist, können Sie erzwingen, dass sie auf eine einzelne Abfrage angewendet wird. Geben Sie die folgende Zeile vor der Abfrage ein:
+Auch wenn die Richtlinie deaktiviert ist, können Sie erzwingen, dass Sie auf eine einzelne Abfrage angewendet wird. Geben Sie vor der Abfrage die folgende Zeile ein:
 
 `set query_force_row_level_security;`
 
-Dies ist nützlich, wenn Sie verschiedene Abfragen für row_level_security ausprobieren möchten, aber nicht möchten, dass sie tatsächlich auf Benutzer wirksam werden. Sobald Sie sich in die Abfrage verlassen, aktivieren Sie die Richtlinie.
+Dies ist nützlich, wenn Sie verschiedene Abfragen für row_level_security ausprobieren möchten, aber nicht möchten, dass es für Benutzer tatsächlich wirksam wird. Wenn Sie in der Abfrage sicher sind, aktivieren Sie die Richtlinie.
 
 > [!NOTE]
-> Die folgenden Einschränkungen `query`gelten für:
+> Die folgenden Einschränkungen gelten für `query`:
 >
-> * Die Abfrage sollte genau das gleiche Schema wie die Tabelle erzeugen, für die die Richtlinie definiert ist. Das heißt, das Ergebnis der Abfrage sollte genau die gleichen Spalten wie die ursprüngliche Tabelle in der gleichen Reihenfolge mit den gleichen Namen und Typen zurückgeben.
-> * Die Abfrage kann nur die `extend` `where`folgenden `project` `project-away`Operatoren `project-reorder` `union`verwenden: , , , , `project-rename`, und .
-> * Die Abfrage kann nicht auf andere Tabellen als die, für die die Richtlinie definiert ist, verweisen.
-> * Die Abfrage kann eine der folgenden sein, oder eine Kombination von ihnen:
->    * Abfrage (z. `<table_name> | extend CreditCardNumber = "****"`B. )
->    * Funktion (z. `AnonymizeSensitiveData`B. )
->    * Datentabelle (z. `datatable(Col1:datetime, Col2:string) [...]`B. )
+> * Die Abfrage sollte genau das gleiche Schema wie die Tabelle ergeben, in der die Richtlinie definiert ist. Das heißt, das Ergebnis der Abfrage sollte genau die gleichen Spalten wie die ursprüngliche Tabelle in derselben Reihenfolge mit denselben Namen und Typen zurückgeben.
+> * In der Abfrage können nur die folgenden Operatoren `extend`verwendet `where`werden `project`: `project-away`, `project-rename`, `project-reorder` , `union`, und.
+> * Die Abfrage kann nicht auf Tabellen verweisen, die nicht auf die Tabellen verweisen, für die die Richtlinie definiert ist.
+> * Bei der Abfrage kann es sich um eine der folgenden oder um eine Kombination der folgenden Elemente handeln:
+>    * Abfrage (z. b `<table_name> | extend CreditCardNumber = "****"`.)
+>    * Function (z. b `AnonymizeSensitiveData`.)
+>    * Datdatababel (z. `datatable(Col1:datetime, Col2:string) [...]`b.)
 
 > [!TIP]
 > Diese Funktionen sind häufig für row_level_security Abfragen nützlich:
@@ -76,8 +76,9 @@ Dies ist nützlich, wenn Sie verschiedene Abfragen für row_level_security auspr
 
 .alter table Customers policy row_level_security enable "TrimCreditCardNumbers"
 ```
-**Leistungshinweis** `UserCanSeeFullNumbers` : wird zuerst bewertet, `AllData` `PartialData` und dann entweder oder wird ausgewertet werden, aber nicht beides, was das erwartete Ergebnis ist.
-Weitere Informationen zu den Auswirkungen von RLS auf die Leistung von RLS finden Sie [hier](rowlevelsecuritypolicy.md#performance-impact-on-queries).
+
+**Leistungs Hinweis**: `UserCanSeeFullNumbers` wird zuerst ausgewertet, und dann wird entweder `AllData` oder `PartialData` ausgewertet, aber nicht beides, was das erwartete Ergebnis ist.
+Weitere Informationen zu den Auswirkungen von RLS auf die Leistung finden Sie [hier](rowlevelsecuritypolicy.md#performance-impact-on-queries).
 
 ## <a name="deleting-the-policy"></a>Löschen der Richtlinie
 

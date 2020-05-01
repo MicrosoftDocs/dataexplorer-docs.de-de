@@ -1,6 +1,6 @@
 ---
-title: .rename-Tabellen und .rename-Tabellen - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden .rename-Tabellen und .rename-Tabellen in Azure Data Explorer beschrieben.
+title: . RENAME TABLE und. rename Tables-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird beschrieben, wie Sie Tabellen und Umbenennungs Tabellen in Azure Daten-Explorer umbenennen.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,56 +8,56 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: db3e38c562573f52df70979b71fe72d8947158bf
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a1644021d1e2df294782d3b24e111d3c57af5f91
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81520484"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617577"
 ---
-# <a name="rename-table-and-rename-tables"></a>.rename Tabellen und .rename Tabellen
+# <a name="rename-table-and-rename-tables"></a>Umbenennen von Tabellen und Umbenennen von Tabellen
 
 Ändert den Namen einer vorhandenen Tabelle.
 
-Der `.rename tables` Befehl ändert den Namen einer Reihe von Tabellen in der Datenbank als eine einzelne Transaktion.
+Der `.rename tables` -Befehl ändert den Namen einer Anzahl von Tabellen in der Datenbank als einzelne Transaktion.
 
-Erfordert [Datenbankadministratorberechtigung](../management/access-control/role-based-authorization.md).
+Erfordert die [Administrator Berechtigung](../management/access-control/role-based-authorization.md)für die Datenbank.
 
 **Syntax**
 
-`.rename``table` *OldName* `to` *NewName*
+`.rename``table` *OldName* *NewName* OldName `to` newname
 
 `.rename``tables` *NewName* = *OldName* [`ifexists`] [`,` ...]
 
 > [!NOTE]
-> * *OldName* ist der Name einer vorhandenen Tabelle. Ein Fehler wird ausgelöst, und der gesamte Befehl schlägt fehl (hat keine `ifexists` Auswirkung), wenn *OldName* keine vorhandene Tabelle benennt, es sei denn, es wird angegeben (in diesem Fall wird dieser Teil des Befehls umbenennen ignoriert).
-> * *NewName* ist der neue Name der vorhandenen Tabelle, die früher *OldName*hieß.
-> * Wenn `ifexists` angegeben, wird das Verhalten des Befehls geändert, um das Umbenennen von Teilen nicht vorhandener Tabellen zu ignorieren.
+> * *OldName* ist der Name einer vorhandenen Tabelle. Ein Fehler wird ausgelöst, und der gesamte Befehl schlägt fehl (hat keine Auswirkung), wenn *OldName* eine vorhandene Tabelle nicht benennt `ifexists` , es sei denn, wird angegeben (in diesem Fall wird dieser Teil des rename-Befehls ignoriert).
+> * *NewName* ist der neue Name der vorhandenen Tabelle, die als *OldName*verwendet wurde.
+> * Wenn `ifexists` angegeben wird, wird das Verhalten des-Befehls dahingehend geändert, dass das Umbenennen von Teilen nicht vorhandener Tabellen ignoriert wird.
 
 **Anmerkungen**
 
-Dieser Befehl wird nur für Tabellen der Datenbank im Gültigkeitsbereich bedient.
-Tabellennamen können nicht mit Cluster- oder Datenbanknamen qualifiziert werden.
+Mit diesem Befehl werden Tabellen der Datenbank nur im Gültigkeitsbereich angewendet.
+Tabellennamen können nicht mit Cluster-oder Datenbanknamen qualifiziert werden.
 
-Dieser Befehl erstellt keine neuen Tabellen und entfernt auch keine vorhandenen Tabellen.
-Die durch den Befehl beschriebene Transformation muss so sein, dass sich die Anzahl der Tabellen in der Datenbank nicht ändert.
+Mit diesem Befehl werden weder neue Tabellen erstellt noch vorhandene Tabellen entfernt.
+Die Transformation, die durch den-Befehl beschrieben wird, muss so lauten, dass sich die Anzahl der Tabellen in der Datenbank nicht ändert.
 
-Der **Befehl** unterstützt das Austauschen von Tabellennamen oder komplexere Permutationen, sofern sie die oben genannten Regeln einhalten. Erfassen Sie beispielsweise Daten in mehrere Stagingtabellen, und tauschen Sie sie dann in einer einzigen Transaktion in vorhandene Tabellen aus.
+Der Befehl **unter** stützt das Austauschen von Tabellennamen oder komplexeren Permutationen, sofern Sie den oben aufgeführten Regeln entsprechen. Erfassen Sie z. b. Daten in mehreren Stagingtabellen, und tauschen Sie diese dann mit vorhandenen Tabellen in einer einzigen Transaktion aus.
 
 **Beispiele**
 
-Stellen Sie sich eine `A`Datenbank `B` `C`mit `A_TEMP`den folgenden Tabellen vor: , , und .
-Der folgende Befehl `A` `A_TEMP` wird ausgetauscht `A_TEMP` und (damit `A`die Tabelle nun aufgerufen wird, `NEWB`und `C` umgekehrt), in umbenennen `B` und beibehalten. 
+Stellen Sie sich eine Datenbank mit den folgenden `A`Tabellen `B`vor `C`:, `A_TEMP`, und.
+Der folgende Befehl `A` tauscht und `A_TEMP` aus (damit die `A_TEMP` Tabelle jetzt aufgerufen `A`wird, und umgekehrt), benennen `B` Sie in um und behalten `NEWB` `C` Sie unverändert bei. 
 
-```
+```kusto
 .rename tables A=A_TEMP, NEWB=B, A_TEMP=A
 ``` 
 
-Die folgende Befehlsfolge:
-1. Erstellt eine neue temporäre Tabelle
-1. Ersetzt eine vorhandene oder nicht vorhandene Tabelle durch die neue Tabelle
+Die folgende Sequenz von Befehlen:
+1. Erstellt eine neue temporäre Tabelle.
+1. Ersetzt eine vorhandene oder nicht vorhandene Tabelle durch die neue Tabelle.
 
-```
+```kusto
 // Drop the temporary table if it exists
 .drop table TempTable ifexists
 

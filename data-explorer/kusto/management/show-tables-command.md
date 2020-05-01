@@ -1,6 +1,6 @@
 ---
-title: .show-Tabellen - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden .show-Tabellen in Azure Data Explorer beschrieben.
+title: '. Anzeigen von Tabellen: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird beschrieben, wie Sie Tabellen in Azure Daten-Explorer anzeigen.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,38 +8,38 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: a8faf307a241d1ba0f73436d9503a56c9078e471
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 3da4f705d3182c52d06c7767a12d9be15a219e5c
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81519634"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618325"
 ---
-# <a name="show-tables"></a>.anzeigen Tabellen
+# <a name="show-tables"></a>. Anzeigen von Tabellen
 
-Gibt einen Satz zurück, der die angegebene Tabelle oder alle Tabellen in der Datenbank enthält.
+Gibt eine Menge zurück, die die angegebene Tabelle oder alle Tabellen in der Datenbank enthält.
 
-Erfordert [Database Viewer-Berechtigung](../management/access-control/role-based-authorization.md).
+Erfordert die [Database Viewer-Berechtigung](../management/access-control/role-based-authorization.md).
 
-```
+```kusto
 .show tables
 .show tables (T1, ..., Tn)
 ```
 
 **Ausgabe**
 
-|Ausgabeparameter |type |BESCHREIBUNG
+|Output-Parameter |type |BESCHREIBUNG
 |---|---|---
 |TableName  |String |Der Name der Tabelle.
 |DatabaseName  |String |Die Datenbank, zu der die Tabelle gehört.
 |Ordner |String |Der Ordner der Tabelle.
 |DocString |String |Eine Zeichenfolge, die die Tabelle dokumentiert.
 
-**Ausgabebeispiel**
+**Ausgabe Beispiel**
 
 |Tabellenname |Datenbankname |Ordner | DocString
 |---|---|---|---
-|Table1 |DB1 |Protokolle |Enthält Dienstprotokolle
+|Table1 |DB1 |Protokolle |Enthält Dienst Protokolle
 |Table2 |DB1 | Berichterstellung |
 |Table3 |DB1 | | Erweiterte Informationen |
-|Tabelle4 |DB2 | Metriken| Enthält Leistungsleistungsinformationen
+|Table4 |DB2 | Metriken| Enthält Leistungsinformationen zu Diensten

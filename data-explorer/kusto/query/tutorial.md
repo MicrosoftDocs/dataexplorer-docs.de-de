@@ -1,6 +1,6 @@
 ---
-title: Tutorial - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird das Tutorial in Azure Data Explorer beschrieben.
+title: 'Tutorial: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt das Tutorial in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 03/23/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 4720d44396fbb30350a4113fa798d7d179d7ae85
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 69e5815fbe14805b0cf3044dafe8691bbea5fb88
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765767"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618155"
 ---
 # <a name="tutorial"></a>Lernprogramm
 
 ::: zone pivot="azuredataexplorer"
 
-Der beste Weg, um mehr über die Kusto-Abfragesprache zu erfahren, besteht darin, einige einfache Abfragen zu betrachten, um das "Gefühl" für die Sprache mithilfe einer [Datenbank mit einigen Beispieldaten](https://help.kusto.windows.net/Samples)zu erhalten. Die in diesem Artikel gezeigten Abfragen sollten in dieser Datenbank ausgeführt werden. Die `StormEvents` Tabelle in dieser Beispieldatenbank enthält einige Informationen zu Stürmen, die in den USA aufgetreten sind.
+Die beste Möglichkeit, um mehr über die Kusto-Abfragesprache zu erfahren, besteht darin, einige einfache Abfragen zu untersuchen, um das "Gefühl" für die Sprache zu erhalten, indem Sie eine [Datenbank mit Beispiel Daten](https://help.kusto.windows.net/Samples)verwenden. Die in diesem Artikel gezeigten Abfragen sollten für diese Datenbank ausgeführt werden. Die `StormEvents` Tabelle in dieser Beispieldatenbank enthält Informationen zu den in den USA
 
 <!--
   TODO: Provide link to reference data we used originally in StormEvents
@@ -34,10 +34,10 @@ Der beste Weg, um mehr über die Kusto-Abfragesprache zu erfahren, besteht darin
 
 ## <a name="count-rows"></a>Zeilen zählen
 
-Unsere Beispieldatenbank verfügt `StormEvents`über eine Tabelle mit dem Namen .
-Um herauszufinden, wie groß es ist, werden wir seinen Inhalt in einen Operator einfließen lassen, der einfach die Zeilen zählt:
+Die Beispieldatenbank enthält eine Tabelle mit `StormEvents`dem Namen.
+Um herauszufinden, wie groß es ist, übergeben wir den Inhalt an einen Operator, der die Zeilen einfach zählt:
 
-* *Syntax:* Eine Abfrage ist eine Datenquelle (in der Regel ein Tabellenname), optional gefolgt von einem oder mehreren Paaren des Pipe-Zeichens und einem tabellarischen Operator.
+* *Syntax:* Eine Abfrage ist eine Datenquelle (normalerweise ein Tabellenname), gefolgt von einem oder mehreren Paaren des Senk Zeichens und einem tabellarischen Operator.
 
 ```kusto
 StormEvents | count
@@ -49,15 +49,15 @@ Das Ergebnis lautet wie folgt:
 |-----|
 |59066|
     
-[Zähloperator](./countoperator.md).
+[count-Operator](./countoperator.md).
 
-## <a name="project-select-a-subset-of-columns"></a>Projekt: Wählen Sie eine Teilmenge von Spalten aus
+## <a name="project-select-a-subset-of-columns"></a>Projekt: Wählen Sie eine Teilmenge von Spalten aus.
 
-Verwenden Sie [Projekt,](./projectoperator.md) um nur die gewünschten Spalten auszuwählen. Siehe Beispiel unten, das sowohl [Projekt-](./projectoperator.md) als auch [Take-Operator](./takeoperator.md) verwendet.
+Verwenden Sie [Project](./projectoperator.md) , um nur die gewünschten Spalten auszuwählen. Siehe Beispiel unten, das sowohl [Project](./projectoperator.md) als auch [Take](./takeoperator.md) Operator verwendet.
 
-## <a name="where-filtering-by-a-boolean-expression"></a>Wo: Filtern nach einem booleschen Ausdruck
+## <a name="where-filtering-by-a-boolean-expression"></a>WHERE: Filtern nach einem booleschen Ausdruck
 
-Sehen wir uns `flood`nur `California` die s in während Feb-2007:
+Sehen wir uns im Februar `flood`-2007 `California` nur die e an:
 
 ```kusto
 StormEvents
@@ -66,11 +66,11 @@ StormEvents
 | project StartTime, EndTime , State , EventType , EpisodeNarrative
 ```
 
-|StartTime|EndTime|State|EventType|EpisodeNarrative|
+|StartTime|EndTime|State|EventType|Episodenarrative|
 |---|---|---|---|---|
-|2007-02-19 00:00:00.0000000|2007-02-19 08:00:00.0000000|Kalifornien|Hochwasser|Ein Frontalsystem, das sich über das südliche San Joaquin Valley bewegte, brachte in den frühen Morgenstunden des 19. Kleinere Überschwemmungen wurden über den State Highway 166 in der Nähe von Taft gemeldet.|
+|2007-02-19 00:00:00.0000000|2007-02-19 08:00:00.0000000|Kalifornische|Hochwasser|Ein frontaler System, das sich über den südlichen San-Joaquin Valley bewegt, hat in den frühen Morgenstunden des 19 Über Bundesland-Autobahn 166 in der Nähe von Taft wurde eine neben Überflutung|
 
-## <a name="take-show-me-n-rows"></a>nehmen: zeige mir n Zeilen
+## <a name="take-show-me-n-rows"></a>Take: Anzeigen von n Zeilen
 
 Betrachten Sie einige Daten: Was sehen Sie in 5 Beispielzeilen?
 
@@ -82,18 +82,18 @@ StormEvents
 
 |StartTime|EndTime|EventType|State|EventNarrative|
 |---|---|---|---|---|
-|2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|Heavy Rain|Florida|In einem Zeitraum von 24 Stunden fielen in Teilen des Küstenkreises Volusia bis zu 9 Zoll Regen.|
-|2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|Tornado|Florida|Ein Tornado traf in der Stadt Eustis am nördlichen Ende des West Crooked Lake. Der Tornado intensivierte sich schnell zu EF1-Stärke, als er sich nach Nordwesten durch Eustis bewegte. Die Strecke war knapp zwei Meilen lang und hatte eine maximale Breite von 300 Metern.  Der Tornado zerstörte 7 Häuser. 27 Häuser erlitten große Schäden, 81 Häuser meldeten kleinere Schäden. Es gab keine schweren Verletzungen und Sachschaden wurde auf 6,2 Millionen US-Dollar festgesetzt.|
-|2007-09-29 08:11:00.0000000|2007-09-29 08:11:00.0000000|Wasserauslauf|ATLANTIC SOUTH|Im Atlantik südöstlich von Melbourne Beach bildete sich ein Wasserauslauf, der sich kurzzeitig in Richtung Küste bewegte.|
-|2007-12-20 07:50:00.0000000|2007-12-20 07:53:00.0000000|Sturm|Mississippi|Zahlreiche große Bäume wurden mit einigen heruntergehauen. Schäden traten im östlichen Adams County auf.|
-|2007-12-30 16:00:00.0000000|2007-12-30 16:05:00.0000000|Sturm|Georgien|Die County-Dispatch berichtete, dass mehrere Bäume entlang Quincey Batten Loop in der Nähe der State Road 206 umgestürzt wurden. Die Kosten für die Entfernung von Bäumen wurden geschätzt.|
+|2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|Starker Regen|Flori|Bis zu 9 Zoll in einem Zeitraum von 24 Stunden in Teilen des Küsten bauweiten Kreises.|
+|2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|Hüterin|Flori|Ein Tornado, der in der Stadt von Eustis am Nord Ende des West-kruklake liegt. Der Tornado hat sich schnell auf die EF1 Stärke verstärkt, als er Nord Nordwest durch Eustis verlagert hat. Die Nachverfolgung war direkt unter zwei km lang und hatte eine maximale Breite von 300 Meter.  Der Tornado hat 7 Häuser zerstört. 20 sieben Häuser erhielten größere Schäden, und 81 Häuser haben geringfügige Schäden gemeldet. Es sind keine schwerwiegenden Verletzungen aufgetreten, und der Eigenschafts Schaden wurde bei $6,2 Millionen festgelegt.|
+|2007-09-29 08:11:00.0000000|2007-09-29 08:11:00.0000000|Wasser Spout|Atlantik, Süden|Ein Wasserzeichen, das im Atlantik-Südosten des Melbourne-Strandes gebildet und kurz nach "Shore" verschoben wurde.|
+|2007-12-20 07:50:00.0000000|2007-12-20 07:53:00.0000000|Sturm|Mississippi|Zahlreiche große Strukturen wurden mit einigen Netz Linien in der Luft gesprengt. In Ost Adams County ist ein Schaden aufgetreten.|
+|2007-12-30 16:00:00.0000000|2007-12-30 16:05:00.0000000|Sturm|Georgien|Die Bezirks Verteilung hat berichtet, dass mehrere Strukturen entlang der Quincey Batch 10-Schleife in der Nähe von State Road 206 aufgesprengt wurden. Die Kosten der Baum Entfernung wurden geschätzt.|
 
-Aber [take](./takeoperator.md) zeigt Zeilen aus der Tabelle in keiner bestimmten Reihenfolge an, also lassen Sie uns sie sortieren.
-* [limit](./takeoperator.md) ist ein Alias für [Take](./takeoperator.md) und hat den gleichen Effekt.
+Wenn [Sie jedoch](./takeoperator.md) Zeilen aus der Tabelle ohne bestimmte Reihenfolge anzeigen, Sortieren Sie Sie.
+* " [Limit](./takeoperator.md) " ist ein Alias für " [Take](./takeoperator.md) " und hat die gleiche Wirkung.
 
-## <a name="sort-and-top"></a>Sortieren und oben
+## <a name="sort-and-top"></a>Sortieren und nach oben
 
-* *Syntax:* Einige Operatoren verfügen über Parameter, die durch Schlüsselwörter wie `by`eingeführt werden.
+* *Syntax:* Einige Operatoren verfügen über Parameter, die von `by`Schlüsselwörtern wie eingeführt werden.
 * `desc` = absteigende Reihenfolge, `asc` = aufsteigende Reihenfolge.
 
 Zeigen Sie die ersten n Zeilen, sortiert nach einer bestimmten Spalte an:
@@ -106,13 +106,13 @@ StormEvents
 
 |StartTime|EndTime|EventType|State|EventNarrative|
 |---|---|---|---|---|
-|2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Wintersturm|MICHIGAN|Dieses schwere Schneeereignis setzte sich am Neujahrstag bis in die frühen Morgenstunden fort.|
-|2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Wintersturm|MICHIGAN|Dieses schwere Schneeereignis setzte sich am Neujahrstag bis in die frühen Morgenstunden fort.|
-|2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Wintersturm|MICHIGAN|Dieses schwere Schneeereignis setzte sich am Neujahrstag bis in die frühen Morgenstunden fort.|
-|2007-12-31 23:53:00.0000000|2007-12-31 23:53:00.0000000|Hoher Wind|Kalifornien|Nord- bis Nordostwinde böten bis etwa 58 mph in den Bergen des Ventura County.|
-|2007-12-31 23:53:00.0000000|2007-12-31 23:53:00.0000000|Hoher Wind|Kalifornien|Der Warm Springs RAWS Sensor meldete Nordwinde mit Böen von bis zu 58 mph.|
+|2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Winter Storm|MICHIGAN|Dieses schwere Schnee Ereignis wurde in den frühen Morgenstunden am Tag des neuen Jahrs fortgesetzt.|
+|2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Winter Storm|MICHIGAN|Dieses schwere Schnee Ereignis wurde in den frühen Morgenstunden am Tag des neuen Jahrs fortgesetzt.|
+|2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Winter Storm|MICHIGAN|Dieses schwere Schnee Ereignis wurde in den frühen Morgenstunden am Tag des neuen Jahrs fortgesetzt.|
+|2007-12-31 23:53:00.0000000|2007-12-31 23:53:00.0000000|Hoher Wind|Kalifornische|In den Bergen von Ventura County wurden Nord-zu-Nordost-Windböen an ungefähr 58 mph gemeldet.|
+|2007-12-31 23:53:00.0000000|2007-12-31 23:53:00.0000000|Hoher Wind|Kalifornische|Der Warm Springs RAWs-Sensor hat Nord Windböen gemeldet, die an 58 mph ausgegeben wurden.|
 
-Das gleiche kann durch die Verwendung von [Sortierung](./sortoperator.md) und dann [nehmen](./takeoperator.md) Operator erreicht werden
+Dies kann mithilfe des [Sortier](./sortoperator.md) -und anschließenden [Operators erreicht](./takeoperator.md) werden.
 
 ```kusto
 StormEvents
@@ -121,9 +121,9 @@ StormEvents
 | project  StartTime, EndLat, EventType, EventNarrative
 ```
 
-## <a name="extend-compute-derived-columns"></a>Erweitern: abgeleitete Spalten berechnen
+## <a name="extend-compute-derived-columns"></a>erweitern: abgeleitete Spalten berechnen
 
-Erstellen Sie eine neue Spalte, indem Sie einen Wert in jeder Zeile berechnen:
+Erstellen Sie eine neue Spalte, indem Sie in jeder Zeile einen Wert berechnen:
 
 ```kusto
 StormEvents
@@ -134,13 +134,13 @@ StormEvents
 
 |StartTime|EndTime|Duration|EventType|State|
 |---|---|---|---|---|
-|2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|22:00:00|Heavy Rain|Florida|
-|2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|00:08:00|Tornado|Florida|
-|2007-09-29 08:11:00.0000000|2007-09-29 08:11:00.0000000|00:00:00|Wasserauslauf|ATLANTIC SOUTH|
+|2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|22:00:00|Starker Regen|Flori|
+|2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|00:08:00|Hüterin|Flori|
+|2007-09-29 08:11:00.0000000|2007-09-29 08:11:00.0000000|00:00:00|Wasser Spout|Atlantik, Süden|
 |2007-12-20 07:50:00.0000000|2007-12-20 07:53:00.0000000|00:03:00|Sturm|Mississippi|
 |2007-12-30 16:00:00.0000000|2007-12-30 16:05:00.0000000|00:05:00|Sturm|Georgien|
 
-Es ist möglich, den Spaltennamen wiederzuverwenden und der gleichen Spalte das Berechnungsergebnis zuzuweisen.
+Es ist möglich, den Spaltennamen wiederzuverwenden und das Berechnungs Ergebnis der gleichen Spalte zuzuweisen.
 Beispiel:
 
 ```kusto
@@ -153,21 +153,21 @@ print x=1
 |---|---|
 |3|1|
 
-[Skalare Ausdrücke](./scalar-data-types/index.md) können alle üblichen`+` `-`Operatoren `/` `%`( , , `*`, , , ) enthalten, und es gibt eine Reihe nützlicher Funktionen.
+[Skalare Ausdrücke](./scalar-data-types/index.md) können alle üblichen Operatoren (`+`, `-`, `*`, `/`, `%`) enthalten, und es gibt eine Reihe nützlicher Funktionen.
 
-## <a name="summarize-aggregate-groups-of-rows"></a>Zusammenfassend: Aggregatgruppen von Zeilen
+## <a name="summarize-aggregate-groups-of-rows"></a>Zusammenfassung: Aggregieren von Zeilen Gruppen
 
-Zählen Sie, wie viele Veranstaltungen aus jedem Land kommen:
+Zählen der Anzahl von Ereignissen aus jedem Land:
 
 ```kusto
 StormEvents
 | summarize event_count = count() by State
 ```
 
-[fasst](./summarizeoperator.md) Zeilen zusammen, die die `by` gleichen Werte in der Klausel haben, und verwendet dann die Aggregationsfunktion (z. B.), `count`um jede Gruppe in einer einzigen Zeile zu kombinieren. In diesem Fall gibt es also eine Zeile für jeden Status und eine Spalte für die Anzahl der Zeilen in diesem Zustand.
+[fassen](./summarizeoperator.md) Sie Gruppen zusammen, die in der `by` -Klausel dieselben Werte aufweisen, und verwenden Sie dann die Aggregations Funktion `count`(z. b.), um die einzelnen Gruppen in einer einzelnen Zeile zu kombinieren. In diesem Fall gibt es eine Zeile für jeden Status und eine Spalte für die Anzahl der Zeilen in diesem Zustand.
 
-Es gibt eine Reihe von [Aggregationsfunktionen](./summarizeoperator.md#list-of-aggregation-functions), und Sie können mehrere von ihnen in einem Zusammengefasstoperator verwenden, um mehrere berechnete Spalten zu erstellen. Zum Beispiel könnten wir die Anzahl der Stürme in jedem Bundesstaat und auch eine Summe der einzigartigen Art von Stürmen pro Zustand erhalten,  
-dann könnten wir [top](./topoperator.md) verwenden, um die am stärksten vom Sturm betroffenen Zustände zu erhalten:
+Es gibt eine Reihe von [Aggregations Funktionen](./summarizeoperator.md#list-of-aggregation-functions), die Sie in einem Zusammenfassungs Operator zum entwickeln mehrerer berechneter Spalten verwenden können. Wir könnten beispielsweise die Anzahl der Stürme in jedem Status und auch eine Summe der eindeutigen Art von Stürmen pro Bundesstaat erhalten.  
+dann könnten wir [Top](./topoperator.md) verwenden, um die meisten Storm-betroffenen Zustände zu erhalten:
 
 ```kusto
 StormEvents 
@@ -175,7 +175,7 @@ StormEvents
 | top 5 by StormCount desc
 ```
 
-|State|StormCount|TypeOfStorms|
+|State|Stormcount|Typeofstorms|
 |---|---|---|
 |TEXAS|4701|27|
 |Kansas|3166|21|
@@ -186,13 +186,13 @@ StormEvents
 Das Ergebnis von „summarize“ verfügt über Folgendes:
 
 * jede in `by`genannte Spalte
-* eine Spalte für jeden berechneten Ausdruck;
+* eine Spalte für jeden berechneten Ausdruck.
 * eine Zeile für jede Kombination von `by` -Werten
 
 ## <a name="summarize-by-scalar-values"></a>Zusammenfassen nach Skalarwerten
 
-Sie können skalare Werte (numerische Werte, Zeit `by` oder Intervall) in der Klausel verwenden, aber Sie sollten die Werte in Lagerplätze einzahlen.  
-Die [bin()-Funktion](./binfunction.md) ist hierfür nützlich:
+Sie können Skalarwerte (numerisch, Zeit oder Intervall) in der `by` -Klausel verwenden, aber Sie sollten die Werte in Behälter platzieren.  
+Hierfür ist die [bin ()](./binfunction.md) -Funktion nützlich:
 
 ```kusto
 StormEvents
@@ -200,7 +200,7 @@ StormEvents
 | summarize event_count = count() by bin(StartTime, 1d)
 ```
 
-Dadurch werden alle Zeitstempel auf Intervalle von 1 Tag reduziert:
+Dadurch werden alle Zeitstempel auf Intervalle von einem Tag reduziert:
 
 |StartTime|event_count|
 |---|---|
@@ -212,11 +212,11 @@ Dadurch werden alle Zeitstempel auf Intervalle von 1 Tag reduziert:
 |2007-02-19 00:00:00.0000000|52|
 |2007-02-20 00:00:00.0000000|60|
 
-Der [bin()](./binfunction.md) ist in vielen Sprachen identisch mit der [Floor()-Funktion.](./floorfunction.md) Es reduziert einfach jeden Wert auf das nächste Vielfache des Moduls, das Sie bereitstellen, sodass diese [Zusammenfassung](./summarizeoperator.md) die Zeilen Gruppen zuweisen kann.
+[Bin ()](./binfunction.md) ist identisch mit der [Floor ()](./floorfunction.md) -Funktion in vielen Sprachen. Dadurch wird jeder Wert einfach auf das nächstgelegene Vielfache des von Ihnen angegebenen Modulo reduziert, sodass die Zeilen von zusammen [fassen](./summarizeoperator.md) den Gruppen zugewiesen werden können.
 
-## <a name="render-display-a-chart-or-table"></a>Rendern: Anzeigen eines Diagramms oder einer Tabelle
+## <a name="render-display-a-chart-or-table"></a>Rendering: Diagramm oder Tabelle anzeigen
 
-Projizieren Sie zwei Spalten, und verwenden Sie sie als x- und y-Achse eines Diagramms:
+Projizieren Sie zwei Spalten, und verwenden Sie Sie als x-und y-Achse eines Diagramms:
 
 ```kusto
 StormEvents 
@@ -227,16 +227,16 @@ StormEvents
 | render columnchart
 ```
 
-:::image type="content" source="images/tour/060.png" alt-text="060":::
+:::image type="content" source="images/tutorial/event-counts-state.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status":::
 
-Obwohl wir `mid` im Projektbetrieb entfernt haben, brauchen wir es immer noch, wenn wir wollen, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
+Obwohl wir den `mid` Projekt Vorgang entfernt haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
 
-Streng genommen ist "Render" ein Merkmal des Clients und nicht Teil der Abfragesprache. Dennoch ist es in die Sprache integriert und ist sehr nützlich, um sich Ihre Ergebnisse vorzustellen.
+Streng genommen handelt es sich bei "Rendering" nicht um einen Teil der Abfragesprache, sondern um eine Funktion des-Clients. Dennoch ist es in die Sprache integriert und ist sehr nützlich, um Ihre Ergebnisse zu entwerfen.
 
 
 ## <a name="timecharts"></a>Zeitdiagramme
 
-Wenn wir zu numerischen Abschnitten zurückkehren, zeigen wir eine Zeitreihe an:
+Wenn wir zu numerischen Containern zurückkehren, zeigen wir eine Zeitreihe an:
 
 ```kusto
 StormEvents
@@ -244,7 +244,7 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tour/080.png" alt-text="080":::
+:::image type="content" source="images/tutorial/time-series-start-bin.png" alt-text="Zeilendiagramm Ereignisse, klassifiziert nach Zeit":::
 
 ## <a name="multiple-series"></a>Mehrere Reihen
 
@@ -257,19 +257,19 @@ StormEvents
 | summarize count() by bin(StartTime, 10h), Source
 ```
 
-:::image type="content" source="images/tour/090.png" alt-text="090":::
+:::image type="content" source="images/tutorial/table-count-source.png" alt-text="Tabellen Anzahl nach Quelle":::
 
-Fügen Sie einfach den Renderbegriff zu den oben genannten hinzu: `| render timechart`.
+Fügen Sie einfach den "Rendering"-Begriff `| render timechart`zum obigen hinzu:.
 
-:::image type="content" source="images/tour/100.png" alt-text="100":::
+:::image type="content" source="images/tutorial/line-count-source.png" alt-text="Liniendiagramm Anzahl nach Quelle":::
 
-Beachten `render timechart` Sie, dass die erste Spalte als x-Achse verwendet wird, und zeigt dann die anderen Spalten als separate Linien an.
+Beachten Sie `render timechart` , dass die erste Spalte als x-Achse verwendet und die anderen Spalten dann als separate Zeilen anzeigt.
 
 ## <a name="daily-average-cycle"></a>Durchschnittlicher Tageszyklus
 
-Wie schwankt die Aktivität über den durchschnittlichen Tag?
+Wie unterscheidet sich die Aktivität über den durchschnittlichen Tag?
 
-Zählen Sie Ereignisse nach der Zeit modulo eines Tages, in Stunden eingebunden. Beachten Sie, `floor` dass wir anstelle von Bin verwenden:
+Zählen Sie Ereignisse nach Zeit Modulo einen Tag, klassifiziert in Stunden. Beachten Sie, dass `floor` anstelle von "bin" verwendet wird:
 
 ```kusto
 StormEvents
@@ -279,15 +279,15 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tour/120.png" alt-text="120":::
+:::image type="content" source="images/tutorial/time-count-hour.png" alt-text="Zeitdiagramm Anzahl nach Stunde":::
 
-Derzeit `render` wird die Dauer nicht richtig gekennzeichnet, `| render columnchart` aber wir könnten stattdessen verwenden:
+Derzeit wird `render` die Dauer nicht ordnungsgemäß beschriftet, aber wir könnten `| render columnchart` stattdessen verwenden:
 
-:::image type="content" source="images/tour/110.png" alt-text="110":::
+:::image type="content" source="images/tutorial/column-count-hour.png" alt-text="Säulendiagramm Anzahl nach Stunde":::
 
 ## <a name="compare-multiple-daily-series"></a>Vergleichen mehrerer täglicher Reihen
 
-Wie schwankt die Aktivität über die Tageszeit in verschiedenen Zuständen?
+Wie unterscheidet sich die Aktivität im Laufe der Tageszeit in verschiedenen Zuständen?
 
 ```kusto
 StormEvents
@@ -297,9 +297,9 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tour/130.png" alt-text="130":::
+:::image type="content" source="images/tutorial/time-hour-state.png" alt-text="Zeitdiagramm nach Stunde und Zustand":::
 
-Dividieren Sie durch, `1h` um die x-Achse in Stundenzahl anstelle einer Dauer zu drehen:
+Dividieren `1h` Sie durch, um die x-Achse in Stundenzahl anstelle einer Dauer zu verwandeln:
 
 ```kusto
 StormEvents
@@ -309,13 +309,13 @@ StormEvents
 | render columnchart
 ```
 
-:::image type="content" source="images/tour/140.png" alt-text="140":::
+:::image type="content" source="images/tutorial/column-hour-state.png" alt-text="Säulendiagramm nach Stunde und Zustand":::
 
-## <a name="join"></a>join
+## <a name="join"></a>Join
 
-Wie finde ich für zwei gegebene EventTypes, in welchem Zustand beide aufgetreten sind?
+Wie finde ich zwei angegebene EventTypes, in welchem Zustand beide aufgetreten sind?
 
-Sie können Sturmereignisse mit dem ersten EventType und mit dem zweiten EventType abrufen und dann den beiden Sätzen im Status beitreten.
+Sie können Storm-Ereignisse mit dem ersten EventType und mit dem zweiten EventType abrufen und dann die beiden Sätze für den Zustand verknüpfen.
 
 ```kusto
 StormEvents
@@ -327,17 +327,17 @@ StormEvents
 | distinct State
 ```
 
-:::image type="content" source="images/tour/145.png" alt-text="145":::
+:::image type="content" source="images/tutorial/join-events-la.png" alt-text="Ereignisse Blitz und Lawinen in Verbindung treten":::
 
-## <a name="user-session-example-of-join"></a>Beispiel für Benutzersitzungen für die Verknüpfung
+## <a name="user-session-example-of-join"></a>Benutzer Sitzungs Beispiel für Join
 
-In diesem Abschnitt `StormEvents` wird die Tabelle nicht verwendet.
+In diesem Abschnitt wird die `StormEvents` -Tabelle nicht verwendet.
 
-Angenommen, Sie verfügen über Daten, die Ereignisse enthalten, die den Anfang und das Ende jeder Benutzersitzung markieren, mit einer eindeutigen ID für jede Sitzung. 
+Angenommen, Sie verfügen über Daten, die Ereignisse enthalten, die den Beginn und das Ende jeder Benutzersitzung markieren, mit einer eindeutigen ID für jede Sitzung. 
 
 Wie lange dauert jede Benutzersitzung?
 
-Wenn `extend` Sie einen Alias für die beiden Zeitstempel bereitstellen, können Sie die Sitzungsdauer berechnen.
+Wenn Sie `extend` verwenden, um einen Alias für die beiden Zeitstempel anzugeben, können Sie die Sitzungsdauer berechnen.
 
 ```kusto
 Events
@@ -352,14 +352,14 @@ Events
 | take 10
 ```
 
-:::image type="content" source="images/tour/150.png" alt-text="150":::
+:::image type="content" source="images/tutorial/user-session-extend.png" alt-text="Erweiterung für Benutzersitzung":::
 
 Es ist üblich, `project` zu verwenden, um vor dem Verknüpfen nur die Spalten auszuwählen, die wir benötigen.
 In den gleichen Klauseln benennen wir die Zeitstempelspalte um.
 
 ## <a name="plot-a-distribution"></a>Darstellen einer Verteilung
 
-Wie viele Stürme gibt es unterschiedlicher Länge?
+Wie viele Stürme gibt es unterschiedliche Längen?
 
 ```kusto
 StormEvents
@@ -372,33 +372,33 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tour/170.png" alt-text="170":::
+:::image type="content" source="images/tutorial/event-count-duration.png" alt-text="Ereignis Anzahl Zeitdiagramm nach Dauer":::
 
-Oder `| render columnchart`verwenden Sie :
+Oder verwenden `| render columnchart`Sie Folgendes:
 
-:::image type="content" source="images/tour/160.png" alt-text="160":::
+:::image type="content" source="images/tutorial/column-event-count-duration.png" alt-text="Säulendiagramm Ereignis Anzahl Zeitdiagramm nach Dauer":::
 
 ## <a name="percentiles"></a>Perzentile
 
-Welche Dauerbereiche decken unterschiedliche Prozentsätze von Stürmen ab?
+Welche Zeiträume von dauern decken verschiedene Prozentsätze von Stürmen ab?
 
-Verwenden Sie die obige Abfrage, aber ersetzen Sie sie durch: `render`
+Verwenden Sie die obige Abfrage, aber `render` ersetzen Sie durch:
 
 ```kusto
 | summarize percentiles(duration, 5, 20, 50, 80, 95)
 ```
 
-In diesem Fall haben `by` wir keine Klausel bereitgestellt, so dass das Ergebnis eine einzelne Zeile ist:
+In diesem Fall haben wir keine `by` -Klausel bereitgestellt, sodass das Ergebnis eine einzelne Zeile ist:
 
-:::image type="content" source="images/tour/180.png" alt-text="180":::
+:::image type="content" source="images/tutorial/summarize-percentiles-duration.png" alt-text="Tabelle fasst Perzentilen nach Dauer zusammen":::
 
 Daraus lässt sich Folgendes ablesen:
 
-* 5% der Stürme haben eine Dauer von weniger als 5m;
-* 50% der Stürme dauern weniger als 1h 25m;
-* 5% der Stürme dauern mindestens 2h 50m.
+* 5% der Stürme haben eine Dauer von weniger als 5 m.
+* 50% der Stürme sind kleiner als 1 h 25 m.
+* 5% der Stürme sind mindestens 2 Std. 50 ms.
 
-Um eine separate Aufschlüsselung für jeden Zustand zu erhalten, müssen wir nur die Zustandsspalte getrennt durch beide zusammenfassenden Operatoren bringen:
+Um eine separate Aufschlüsselung für jeden Zustand zu erhalten, müssen wir die Spalte State separat über beide Zusammenfassungs Operatoren hinzu bringen:
 
 ```kusto
 StormEvents
@@ -411,11 +411,11 @@ StormEvents
 | summarize percentiles(duration, 5, 20, 50, 80, 95) by State
 ```
 
-:::image type="content" source="images/tour/190.png" alt-text="190":::
+:::image type="content" source="images/tutorial/summarize-percentiles-state.png" alt-text="Tabelle fasst die Dauer des Perzentils nach Status zusammen.":::
 
 ## <a name="let-assign-a-result-to-a-variable"></a>let: Zuweisen eines Ergebnisses zu einer Variablen
 
-Verwenden Sie [let,](./letstatement.md) um die Teile des Abfrageausdrucks im obigen Beispiel "Join" zu trennen. Die Ergebnisse sind wie folgt unverändert:
+Verwenden [Sie Let](./letstatement.md) , um die Teile des Abfrage Ausdrucks im obigen Beispiel "Join" zu trennen. Die Ergebnisse sind wie folgt unverändert:
 
 ```kusto
 let LightningStorms = 
@@ -429,11 +429,11 @@ LightningStorms
 | distinct State
 ```
 
-> Tipp: Legen Sie im Kusto-Client keine leeren Zeilen zwischen die Teile davon. Stellen Sie sicher, dass Sie alles ausführen.
+> Tipp: Fügen Sie im Kusto-Client keine leeren Zeilen zwischen den Teilen dieser ein. Stellen Sie sicher, dass Sie alles ausführen.
 
 ## <a name="combining-data-from-several-databases-in-a-query"></a>Kombinieren von Daten aus mehreren Datenbanken in einer Abfrage
 
-Ausführliche Informationen zu [datenbankübergreifenden Abfragen](./cross-cluster-or-database-queries.md) finden Sie unter
+Ausführliche Erörterung finden Sie unter [datenbankübergreifende Abfragen](./cross-cluster-or-database-queries.md)
 
 Wenn Sie eine Abfrage des Stils schreiben:
 
@@ -441,31 +441,31 @@ Wenn Sie eine Abfrage des Stils schreiben:
 Logs | where ...
 ```
 
-Die Tabelle mit dem Namen Logs muss sich in der Standarddatenbank befinden. Wenn Sie auf Tabellen aus einer anderen Datenbank zugreifen möchten, verwenden Sie die folgende Syntax:
+Die Tabelle mit dem Namen Logs muss sich in ihrer Standarddatenbank befinden. Wenn Sie auf Tabellen aus einer anderen Datenbank zugreifen möchten, verwenden Sie die folgende Syntax:
 
 ```kusto
 database("db").Table
 ```
 
-Wenn Sie also über Datenbanken mit dem Namen *Diagnostics* and *Telemetry* verfügen und einige ihrer Daten korrelieren möchten, können Sie schreiben (vorausgesetzt, *Diagnostics* ist Ihre Standarddatenbank)
+Wenn Sie also über Datenbanken mit dem Namen " *Diagnostics* " und " *Telemetrie* " verfügen und einige Ihrer Daten korrelieren möchten, können Sie schreiben (angenommen, die *Diagnose* ist die Standarddatenbank).
 
 ```kusto
 Logs | join database("Telemetry").Metrics on Request MachineId | ...
 ```
 
-oder wenn Ihre Standarddatenbank *Telemetrie* ist
+oder wenn die Standarddatenbank *Telemetrie* ist
 
 ```kusto
 union Requests, database("Diagnostics").Logs | ...
 ```
     
-Alle oben genannten Annahmen, dass sich beide Datenbanken in dem Cluster befinden, mit dem Sie derzeit verbunden sind. Angenommen, die *Telemetriedatenbank* gehörte zu einem anderen Cluster mit dem Namen *TelemetryCluster.kusto.windows.net* dann benötigen Sie für den Zugriff darauf.
+Im obigen Beispiel wird davon ausgegangen, dass sich beide Datenbanken in dem Cluster befinden, mit dem Sie derzeit verbunden sind. Angenommen, die *telemetriedatenbank* gehörte zu einem anderen Cluster mit dem Namen *TelemetryCluster.Kusto.Windows.net* , um darauf zugreifen zu können.
 
 ```kusto
 Logs | join cluster("TelemetryCluster").database("Telemetry").Metrics on Request MachineId | ...
 ```
 
-> Hinweis: Wenn der Cluster angegeben ist, ist die Datenbank obligatorisch
+> Hinweis: Wenn der Cluster angegeben wird, ist die Datenbank obligatorisch.
 
 ::: zone-end
 

@@ -1,6 +1,6 @@
 ---
-title: .alter-Funktion - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt die .alter-Funktion in Azure Data Explorer.
+title: '. Alter-Funktion: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird die Funktion ". Alter" in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,47 +8,47 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/11/2020
-ms.openlocfilehash: 3fb7b3aab9d140d5f3660ef1384bf54efa9cd825
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d8248fdd9428df11a8e77316eec621102ddff9d6
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81522456"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82617798"
 ---
-# <a name="alter-function"></a>.alter-Funktion
+# <a name="alter-function"></a>.alter function
 
-Ändert eine vorhandene Funktion und speichert sie in den Datenbankmetadaten.
-Die Regeln für Parametertypen und CSL-Anweisungen sind die gleichen wie für [ `let` Anweisungen](../query/letstatement.md).
+Ändert eine vorhandene Funktion und speichert Sie in den Daten Bank Metadaten.
+Regeln für Parametertypen und CSL-Anweisungen sind identisch mit denen [ `let` ](../query/letstatement.md)für-Anweisungen.
 
 **Syntax**
 
-```
+```kusto
 .alter function [with (docstring = '<description>', folder='<name>', skipvalidation='true')] [FunctionName] ([paramName:paramType], ...) { CSL-statement }
 ```
     
-|Ausgabeparameter |type |BESCHREIBUNG
+|Output-Parameter |type |BESCHREIBUNG
 |---|---|--- 
 |Name  |String |Der Name der Funktion.
-|Parameter  |String |Die für die Funktion erforderlichen Parameter.
-|Body  |String |(Null oder mehr) `let` gefolgt von einem gültigen CSL-Ausdruck, der beim Funktionsaufruf ausgewertet wird.
-|Ordner|String|Ein Ordner, der für die Kategorisierung von UI-Funktionen verwendet wird. Dieser Parameter ändert nicht die Art und Weise, wie die Funktion aufgerufen wird.
-|DocString|String|Eine Beschreibung der Funktion für UI-Zwecke.
+|Parameter  |String |Die Parameter, die für die Funktion erforderlich sind.
+|Body  |String |(0 (null) oder mehr) `let` Anweisungen gefolgt von einem gültigen CSL-Ausdruck, der beim Funktionsaufruf ausgewertet wird.
+|Ordner|String|Ein für die Kategorisierung von Benutzeroberflächen Funktionen verwendeter Ordner. Dieser Parameter ändert nicht die Methode, mit der die Funktion aufgerufen wird.
+|DocString|String|Eine Beschreibung der Funktion zu UI-Zwecken.
 
 > [!NOTE]
-> * Wenn die Funktion nicht vorhanden ist, wird ein Fehler zurückgegeben. Informationen zum Erstellen einer neuen Funktion finden Sie unter [.create-Funktion](create-function.md)
-> * Erfordert [Datenbankadministratorberechtigung](../management/access-control/role-based-authorization.md)
-> * Der [Datenbankbenutzer,](../management/access-control/role-based-authorization.md) der die Funktion ursprünglich erstellt hat, darf die Funktion ändern. 
-> * Nicht alle Kusto-Typen `let` werden in Anweisungen unterstützt. Unterstützte Typen sind: String, Long, Datetime, Timespan und Double.
-> * Verwenden `skipvalidation` Sie diese Option, um die semantische Validierung der Funktion zu überspringen. Dies ist nützlich, wenn Funktionen in einer falschen Reihenfolge und F1, das F2 verwendet, früher erstellt werden.
+> * Wenn die Funktion nicht vorhanden ist, wird ein Fehler zurückgegeben. Informationen zum Erstellen einer neuen Funktion finden Sie unter [. Create-Funktion](create-function.md)
+> * Erfordert [Datenbankadministrator Berechtigung](../management/access-control/role-based-authorization.md)
+> * Der [Datenbankbenutzer](../management/access-control/role-based-authorization.md) , der die Funktion ursprünglich erstellt hat, kann die Funktion ändern. 
+> * Nicht alle Kusto-Typen werden in `let` -Anweisungen unterstützt. Folgende Typen werden unterstützt: String, Long, DateTime, TimeSpan und Double.
+> * Verwenden `skipvalidation` Sie, um die semantische Validierung der Funktion zu überspringen. Dies ist nützlich, wenn Funktionen in falscher Reihenfolge erstellt werden und F1, das F2 verwendet, zuvor erstellt wurde.
  
 **Beispiel** 
 
-```
+```kusto
 .alter function
 with (docstring = 'Demo function with parameter', folder='MyFolder')
  MyFunction2(myLimit: long)  {StormEvents | limit myLimit}
 ``` 
     
-|name |Parameter |Body|Ordner|DocString
+|Name |Parameter |Body|Ordner|DocString
 |---|---|---|---|---
-|MyFunction2 |(myLimit: lang)| "StormEvents&#124; myLimit einschränken"|Myfolder|Demofunktion mit Parameter|
+|MyFunction2 |(mylimit: Long)| {Stormevents &#124; Limit von mylimit}|MyFolder|Demo Funktion mit Parameter|
