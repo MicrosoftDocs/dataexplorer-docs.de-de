@@ -1,6 +1,6 @@
 ---
-title: tdigest_merge() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird tdigest_merge() in Azure Data Explorer beschrieben.
+title: tdigest_merge ()-Azure Daten-Explorer
+description: In diesem Artikel wird tdigest_merge () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/09/2019
-ms.openlocfilehash: 988d7f05791723a823a5850f6865a780477f7bd4
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 92dce1a98cc0e24dcfbfcd7cb875fa370e3ae1d0
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506374"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737724"
 ---
 # <a name="tdigest_merge"></a>tdigest_merge()
 
-Führt tdigest-Ergebnisse zusammen (skalare Version [`tdigest_merge()`](tdigest-merge-aggfunction.md)der Aggregatversion ).
+`tdigest` Führt Ergebnisse aus (skalare Version der Aggregat Version [`tdigest_merge()`](tdigest-merge-aggfunction.md)).
 
-Lesen Sie [hier](percentiles-aggfunction.md#estimation-error-in-percentiles)mehr über den zugrunde liegenden Algorithmus (T-Digest) und den geschätzten Fehler .
+Weitere Informationen zum zugrunde liegenden Algorithmus (T-Digest) und dem geschätzten Fehler [finden Sie hier](percentiles-aggfunction.md#estimation-error-in-percentiles).
 
 **Syntax**
 
-`merge_tdigests(`*Expr1* `,` *Expr2*`, ...)`
+`merge_tdigests(`*Expr1* `,` *expr2*`, ...)`
 
-`tdigest_merge(`*Expr1* `,` *Expr2* `, ...)` - Ein Alias.
+`tdigest_merge(`*Expr1* `,` *Expr2* expr2`, ...)` -Alias.
 
 **Argumente**
 
-* Spalten, in denen die zu verschmelzenden tdigests enthalten sind.
+* Spalten mit den Werten `tdigest` , die zusammengeführt werden sollen.
 
 **Rückgabe**
 
-Das Ergebnis für das `*Expr1*` `*Expr2*`Zusammenführen der Spalten , , ... `*ExprN*` auf einen Tdigest.
+Das Ergebnis für das Zusammenführen `*Expr1*`der `*Expr2*`Spalten,,... `*ExprN*` zu eins `tdigest`.
 
 **Beispiele**
 

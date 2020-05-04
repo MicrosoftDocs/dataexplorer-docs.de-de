@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 04/01/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 6b33ee0ed9535d512c909dd8de124fc8b1770cee
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 3d88b04220851b8218d0d23fed93ba3627720afd
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618988"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737826"
 ---
 # <a name="python-plugin"></a>Python-Plug-In
 
@@ -36,7 +36,7 @@ Die Laufzeit des Plug-ins wird in [Sand Fächern](../concepts/sandboxes.md)gehos
 * *Skript*: ein `string` Literalzeichen, das das gültige auszuführende Python-Skript ist.
 * *script_parameters*: ein optionales `dynamic` literalobjekt, bei dem es sich um einen Eigenschaften Behälter mit Name-Wert-Paaren handelt, die `kargs` als reserviertes Wörterbuch an das Python-Skript übermittelt werden sollen (siehe [reservierte python](#reserved-python-variables)
 * *Hint. Distribution*: ein optionaler Hinweis für die Ausführung des Plug-ins, das auf mehrere Cluster Knoten verteilt wird.
-  * Standardwert: `single`.
+  * Der Standardwert lautet `single`.
   * `single`: Eine einzelne Instanz des Skripts wird über die gesamten Abfrage Daten ausgeführt.
   * `per_node`: Wenn die Abfrage vor der Verteilung des python-Blocks verteilt wird, wird eine Instanz des Skripts auf jedem Knoten über die darin enthaltenen Daten ausgeführt.
 * *external_artifacts*: ein optionales `dynamic` Literalformat, bei dem es sich um einen Eigenschaften Behälter mit Name & URL-Paaren für Artefakte handelt, auf die über den cloudspeicher zugegriffen werden kann und die zur Laufzeit für das Skript verfügbar gemacht werden können
@@ -115,7 +115,7 @@ print "This is an example for using 'external_artifacts'"
 )
 ```
 
-| Datei                  | Size |
+| Datei                  | Größe |
 |-----------------------|------|
 | this_is_a_script      | 120  |
 | this_is_my_first_file | 105  |
@@ -227,7 +227,7 @@ range Id from 1 to 3 step 1
     external_artifacts=pack('faker.zip', 'https://artifacts.blob.core.windows.net/kusto/Faker.zip?...'))
 ```
 
-| Id | Name         |
+| Id | name         |
 |----|--------------|
 |   1| Gary Tapia   |
 |   2| Emma Evans   |
@@ -239,6 +239,6 @@ range Id from 1 to 3 step 1
 
 ::: zone pivot="azuremonitor"
 
-Dies wird in Azure Monitor nicht unterstützt.
+Diese Funktion wird in Azure Monitor nicht unterstützt.
 
 ::: zone-end

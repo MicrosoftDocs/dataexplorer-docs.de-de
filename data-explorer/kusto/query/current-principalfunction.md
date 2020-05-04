@@ -1,6 +1,6 @@
 ---
-title: current_principal() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird current_principal() in Azure Data Explorer beschrieben.
+title: current_principal ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird current_principal () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 12/10/2019
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 36cebef7db3042bb59ccc5c7c25a56b2c1a661dc
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 0561ac200105015e6d1c1cce1c16fe5f60fc2ccf
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81766043"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737707"
 ---
 # <a name="current_principal"></a>current_principal()
 
 ::: zone pivot="azuredataexplorer"
 
-Gibt den aktuellen Prinzipalnamen zurück, der die Abfrage ausführt.
+Gibt den aktuellen Prinzipal Namen zurück, der die Abfrage ausgeführt hat.
 
 **Syntax**
 
@@ -29,9 +29,9 @@ Gibt den aktuellen Prinzipalnamen zurück, der die Abfrage ausführt.
 
 **Rückgabe**
 
-Der aktuelle Haupt-Vollqualifikationsname (FQN) `string`als .  
-Die Zeichenfolge wird wie:  
-*PrinciplaType*`=`*PrincipalId*`;`*TenantId*
+Der aktuelle Prinzipal voll qualifizierte Name (fqn) als `string`.  
+Die Zeichenfolge ist wie folgt formatiert:  
+*Principlatype*`=`*principalid*`;`*tenantid*
 
 **Beispiel**
 
@@ -41,12 +41,12 @@ print fqn=current_principal()
 
 |fqn|
 |---|
-|aaduser=346e950e-4a62-42bf-96f5-4cf4eac3f11e;72f988bf-86f1-41af-91ab-2d7cd011db47|
+|aaduser = 346e950 e-4a62-42bf-96f5-4cf4eac3f11e; 72f988bf-86f1-41af-91ab-2d7cd011db47|
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
-Dies wird in Azure Monitor nicht unterstützt.
+Diese Funktion wird in Azure Monitor nicht unterstützt.
 
 ::: zone-end

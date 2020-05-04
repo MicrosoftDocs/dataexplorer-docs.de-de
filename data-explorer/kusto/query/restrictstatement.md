@@ -1,6 +1,6 @@
 ---
-title: Restrict-Anweisung - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die Restrict-Anweisung in Azure Data Explorer beschrieben.
+title: 'Einschränkungs Anweisung: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt die Einschränkungs Anweisung in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,40 +10,40 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: cbd21c01956f817c5db19a93104028dba2b2b2b4
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 094cec5b467c35eb9dbeeb756362bd13c77873ce
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765994"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737775"
 ---
 # <a name="restrict-statement"></a>restrict-Anweisung
 
 ::: zone pivot="azuredataexplorer"
 
-Die restrict-Anweisung schränkt den Satz von Tabellen-/Ansichtsentitäten ein, die für Abfrageanweisungen sichtbar sind, die darauf folgen. In einer Datenbank, die z.`A` `B`B. zwei Tabellen ( , ) `B` enthält, kann die Anwendung verhindern, dass der Rest der Abfrage auf eine eingeschränkte Form von Tabellen `A` zugreift, indem sie eine Ansicht verwendet.
+Die Einschränkungs Anweisung schränkt den Satz von Tabellen-/ansichtentitäten ein, die für die folgenden Abfrage Anweisungen sichtbar sind. In einer Datenbank, die zwei Tabellen`A`(, `B`) enthält, kann die Anwendung z. b. verhindern, dass der Rest der `B` Abfrage auf eine begrenzte Form einer Tabelle `A` zugreift, indem eine Sicht verwendet wird.
 
-Das Hauptszenario der restrict-Anweisung ist für Anwendungen der mittleren Ebene, die Abfragen von Benutzern akzeptieren und einen Sicherheitsmechanismus auf Zeilenebene auf diese Abfragen anwenden möchten. Die Anwendung der mittleren Ebene kann der Abfrage des Benutzers ein **logisches Modell**voranstellen, eine Reihe von `T | where UserId == "..."`let-Anweisungen, die Ansichten definieren, die den Zugriff des Benutzers auf Daten einschränken (z. B. ). Als letzte Anweisung, die hinzugefügt wird, schränkt sie den Zugriff des Benutzers auf das logische Modell ein.
+Das Hauptszenario der Einschränkungs Anweisung ist für Anwendungen der mittleren Ebene, die Abfragen von Benutzern akzeptieren und einen Sicherheitsmechanismus auf Zeilenebene über diese Abfragen anwenden möchten. Die Anwendung der mittleren Ebene kann der Abfrage des Benutzers ein **Logisches Modell**, eine Reihe von Let-Anweisungen, die Ansichten definieren, die den Zugriff des Benutzers auf Daten einschränken (z `T | where UserId == "..."`. b.). Die letzte hinzugefügte Anweisung schränkt den Zugriff des Benutzers auf das logische Modell ein.
 
 **Syntax**
 
-`restrict``access` `,` [ EntitySpecifier [ ...]]*EntitySpecifier* `to` `(``)`
+`restrict``access` `,` [Entityspecifier [...]]*EntitySpecifier* `to` `(``)`
 
-Wobei *EntitySpecifier* einer der wichtigsten ist:
-* Ein Bezeichner, der durch eine let-Anweisung als Tabellarische Ansicht definiert wird.
-* Ein Tabellenverweis (ähnlich wie ein, der von einer Union-Anweisung verwendet wird).
-* Ein Muster, das durch eine Musterdeklaration definiert ist.
+Where *entityspecifier* ist einer der folgenden:
+* Ein Bezeichner, der durch eine Let-Anweisung als tabellarische Ansicht definiert ist.
+* Ein Tabellen Verweis (ähnlich wie bei einer Union-Anweisung).
+* Ein Muster, das durch eine Muster Deklaration definiert wird.
 
-Alle Tabellen, Tabellenansichten oder Muster, die nicht durch die Restrict-Anweisung angegeben werden, werden für den Rest der Abfrage "unsichtbar". 
+Alle Tabellen, Tabellen Sichten oder Muster, die nicht von der Einschränkungs Anweisung angegeben werden, werden für den Rest der Abfrage "unsichtbar". 
 
 **Hinweise**
 
-Die restrict-Anweisung kann verwendet werden, um den Zugriff auf Entitäten in einer anderen Datenbank oder einem anderen Cluster einzuschränken (Platzhalter werden in Clusternamen nicht unterstützt).
+Die Einschränkungs Anweisung kann verwendet werden, um den Zugriff auf Entitäten in einer anderen Datenbank oder in einem Cluster einzuschränken (Platzhalter werden in Cluster Namen nicht unterstützt).
 
 **Argumente**
 
-Die restrict-Anweisung kann einen oder mehrere Parameter abrufen, die die zulässige Einschränkung während der Namensauflösung der Entität definieren. Die Entität kann sein:
-- [lassen Sie](./letstatement.md) `restrict` Anweisung vor der Anweisung erscheinen. 
+Die Einschränkungs Anweisung kann einen oder mehrere Parameter abrufen, die die Einschränkungs Einschränkung während der Namensauflösung der Entität definieren. Die Entität kann folgende sein:
+- [Let-Anweisung](./letstatement.md) wird `restrict` vor der-Anweisung angezeigt. 
 
 ```kusto
 // Limit access to 'Test' let statement only
@@ -51,7 +51,7 @@ let Test = () { print x=1 };
 restrict access to (Test);
 ```
 
-- [Tabellen](../management/tables.md) oder [Funktionen,](../management/functions.md) die in den Datenbankmetadaten definiert sind.
+- [Tabellen](../management/tables.md) oder [Funktionen](../management/functions.md) , die in den Daten Bank Metadaten definiert sind.
 
 ```kusto
 // Assuming the database that the query uses has table Table1 and Func1 defined in the metadata, 
@@ -60,7 +60,7 @@ restrict access to (Test);
 restrict access to (database().Table1, database().Func1, database('DB2').Table2);
 ```
 
-- Platzhaltermuster, die mit Mehreren von [let-Anweisungen](./letstatement.md) oder Tabellen/Funktionen übereinstimmen können  
+- Platzhalter Muster, die vielfachen von [Let-Anweisungen](./letstatement.md) oder Tabellen/Funktionen entsprechen können  
 
 ```kusto
 let Test1 = () { print x=1 };
@@ -82,7 +82,7 @@ restricts access to (database('DB2').*);
 
 **Beispiele**
 
-Das folgende Beispiel zeigt, wie eine Anwendung der mittleren Ebene der Abfrage eines Benutzers ein logisches Modell voranstellen kann, das verhindert, dass der Benutzer die Daten eines anderen Benutzers abfragt.
+Im folgenden Beispiel wird gezeigt, wie eine Anwendung der mittleren Ebene einem Benutzer eine Abfrage mit einem logischen Modell voranstellt, das verhindert, dass der Benutzer andere Benutzerdaten abfragt.
 
 ```kusto
 // Assume the database has a single table, UserData,
@@ -139,6 +139,6 @@ Table1 |  count
 
 ::: zone pivot="azuremonitor"
 
-Dies wird in Azure Monitor nicht unterstützt.
+Diese Funktion wird in Azure Monitor nicht unterstützt.
 
 ::: zone-end

@@ -1,6 +1,6 @@
 ---
-title: cursor_after() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird cursor_after() in Azure Data Explorer beschrieben.
+title: cursor_after ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird cursor_after () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 39ec32322b74b55182522e4bbb04aa0c3830d8d2
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 9fab1ec936e950368667fc3afb133dcd952e44b5
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81766024"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737690"
 ---
 # <a name="cursor_after"></a>cursor_after()
 
 ::: zone pivot="azuredataexplorer"
 
-Ein Prädikat über die Datensätze einer Tabelle, um deren Aufnahmezeit mit einem Datenbankcursor zu vergleichen.
+Ein Prädikat für die Datensätze einer Tabelle, um Ihre Erfassungs Zeit mit einem Daten Bank Cursor zu vergleichen.
 
 **Syntax**
 
@@ -29,22 +29,22 @@ Ein Prädikat über die Datensätze einer Tabelle, um deren Aufnahmezeit mit ein
 
 **Argumente**
 
-* *RHS*: Entweder ein leeres Zeichenfolgenliteral oder ein gültiger Datenbankcursorwert.
+* *RHS*: entweder ein leeres Zeichenfolgenliteralwert oder ein gültiger Daten Bank Cursor Wert.
 
 **Rückgabe**
 
-Ein skalarer Wert `bool` des Typs, der angibt, ob der`true`Datensatz nach`false`dem Datenbankcursor *RHS* ( ) aufgenommen wurde oder nicht ( ).
+Ein Skalarwert des Typs `bool` , der angibt, ob der Datensatz nach dem *RHS* (`true`) des Daten Bank Cursors erfasst wurde`false`().
 
 **Hinweise**
 
-Weitere Informationen zu Datenbankcursorn finden Sie unter [Datenbankcursor.](../management/databasecursor.md)
+Weitere Informationen zu Datenbankcursorn finden Sie unter [Daten Bank Cursor](../management/databasecursor.md) .
 
-Diese Funktion kann nur für Datensätze einer Tabelle aufgerufen werden, für die die [IngestionTime-Richtlinie](../management/ingestiontimepolicy.md) aktiviert ist.
+Diese Funktion kann nur für Datensätze einer Tabelle aufgerufen werden, für die die [ingestiontime-Richtlinie](../management/ingestiontimepolicy.md) aktiviert ist.
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
-Dies wird in Azure Monitor nicht unterstützt.
+Diese Funktion wird in Azure Monitor nicht unterstützt.
 
 ::: zone-end

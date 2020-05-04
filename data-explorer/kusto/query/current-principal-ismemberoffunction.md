@@ -1,6 +1,6 @@
 ---
-title: current_principal_is_member_of() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden current_principal_is_member_of() in Azure Data Explorer beschrieben.
+title: current_principal_is_member_of ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird current_principal_is_member_of () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 03/09/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 03d565c9eb61703b326a01b31bb6b1a79742f006
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 4b6f7d0b9ab4074f16ca00b4a3febb1a17351736
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81766056"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737758"
 ---
 # <a name="current_principal_is_member_of"></a>current_principal_is_member_of()
 
 ::: zone pivot="azuredataexplorer"
 
-Überprüft die Gruppenmitgliedschaft oder die Hauptidentität des aktuellen Prinzipals, der die Abfrage ausführt.
+Überprüft die Gruppenmitgliedschaft oder die Prinzipal Identität des aktuellen Prinzipals, der die Abfrage ausführt.
 
 ```kusto
 print current_principal_is_member_of(
@@ -37,24 +37,24 @@ print current_principal_is_member_of(
 
 **Argumente**
 
-* *Liste der Ausdrücke* - eine durch Kommas getrennte Liste von Zeichenfolgenliteralen, wobei jedes Literal eine QQN-Zeichenfolge (Principal Fully-Qualified Name) ist, die wie folgt gebildet wurde:  
-*PrinciplaType*`=`*PrincipalId*`;`*TenantId*
+* eine *Liste von Ausdrücken* : eine durch Trennzeichen getrennte Liste von Zeichenfolgenliteralen, wobei jedes Literale eine voll qualifizierte fqn-Zeichenfolge (Uniform-Qualified-Name) ist, die als:  
+*Principlatype*`=`*principalid*`;`*tenantid*
 
-| PrincipalType   | FQN-Präfix  |
+| Principaltype   | Voll qualifizierte Präfix  |
 |-----------------|-------------|
-| AAD-Benutzer        | `aaduser=`  |
-| AAD-Gruppe       | `aadgroup=` |
-| AAD-Anwendung | `aadapp=`   |
+| Aad-Benutzer        | `aaduser=`  |
+| Aad-Gruppe       | `aadgroup=` |
+| Aad-Anwendung | `aadapp=`   |
 
 **Rückgabe**
 
 Die Funktion gibt Folgendes zurück:
-* `true`: Wenn der aktuelle Prinzipal, der die Abfrage ausführt, für mindestens ein Eingabeargument erfolgreich abgeglichen wurde.
-* `false`: Wenn der aktuelle Prinzipal, der `aadgroup=` die Abfrage ausführt, kein Mitglied `aaduser=` `aadapp=` von FQN-Argumenten war und keinem der oder FQN-Argumente entspricht.
-* `(null)`: Wenn der aktuelle Prinzipal, der `aadgroup=` die Abfrage ausführt, kein Mitglied `aaduser=` `aadapp=` von FQN-Argumenten war und keinem der oder FQN-Argumente entspricht, und mindestens ein FQN-Argument nicht erfolgreich aufgelöst wurde (wurde in AAD nicht vorgegeben). 
+* `true`:, wenn der aktuelle Prinzipal, der die Abfrage ausgeführt hat, mit mindestens einem Eingabe Argument erfolgreich abgeglichen wurde.
+* `false`: Wenn der aktuelle Prinzipal, der die Abfrage ausgeführt, kein `aadgroup=` Member eines fqn-Arguments war und nicht mit einem `aaduser=` der `aadapp=` -oder fqn-Argumente übereinstimmt.
+* `(null)`: Wenn der aktuelle Prinzipal, der die Abfrage ausgeführt, kein `aadgroup=` Member eines fqn-Arguments war und nicht mit einem `aaduser=` der `aadapp=` fqn-Argumente oder übereinstimmt und mindestens ein fqn-Argument nicht erfolgreich aufgelöst wurde (wurde nicht in Aad vorgegeben). 
 
 > [!NOTE]
-> Da die Funktion einen Drei-Status-Wert (`true`, `false`, und `null`) zurückgibt, ist es wichtig, sich nur auf positive Rückgabewerte zu verlassen, um eine erfolgreiche Mitgliedschaft zu bestätigen. Mit anderen Worten, die folgenden Ausdrücke sind NICHT identisch:
+> Da die Funktion einen Tri-State-Wert zurück`true`gibt `false`(, `null`und), ist es wichtig, sich nur auf positive Rückgabewerte zu verlassen, um eine erfolgreiche Mitgliedschaft zu bestätigen. Mit anderen Worten: die folgenden Ausdrücke sind nicht identisch:
 > 
 > * `where current_principal_is_member_of('non-existing-group')`
 > * `where current_principal_is_member_of('non-existing-group') != false` 
@@ -74,7 +74,7 @@ print result=current_principal_is_member_of(
 |--------|
 | (null) |
 
-Verwenden von dynamischen Arrays anstelle von Multple-Argumenten:
+Verwenden dynamischer Arrays anstelle von mehrdimensionsargumenten:
 
 ```kusto
 print result=current_principal_is_member_of(
@@ -93,6 +93,6 @@ print result=current_principal_is_member_of(
 
 ::: zone pivot="azuremonitor"
 
-Dies wird in Azure Monitor nicht unterstützt.
+Diese Funktion wird in Azure Monitor nicht unterstützt.
 
 ::: zone-end

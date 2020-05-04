@@ -1,6 +1,6 @@
 ---
-title: Anweisung für Abfrageparameterdeklaration - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die Deklarationsanweisung der Abfrageparameter in Azure Data Explorer beschrieben.
+title: Abfrage Parameter Deklarations Anweisung-Azure Daten-Explorer | Microsoft-Dokumentation
+description: Dieser Artikel beschreibt die Deklarations Anweisung der Abfrage Parameter in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,40 +10,40 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: b7193ada6967882306d9a977b6c90af8b247036d
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: a76755d04179b3d311e79798162c61db764455d7
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765497"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737809"
 ---
-# <a name="query-parameters-declaration-statement"></a>Anweisungsanweisung für Abfrageparameter
+# <a name="query-parameters-declaration-statement"></a>Deklarations Anweisung der Abfrage Parameter
 
 ::: zone pivot="azuredataexplorer"
 
-Abfragen, die an Kusto gesendet werden, können neben dem Abfragetext selbst einen Satz von Name/Wert-Paaren enthalten, die **als Abfrageparameter**bezeichnet werden. Der Abfragetext kann dann auf einen oder mehrere Abfrageparameterwerte verweisen, indem er deren Namen und Typ über eine **Anweisungsanweisung**für Abfrageparameter angibt.
+An Kusto gesendete Abfragen können zusätzlich zum Abfragetext selbst einen Satz von Name-Wert-Paaren enthalten, die als **Abfrage Parameter**bezeichnet werden. Der Abfragetext kann dann auf einen oder mehrere Abfrage Parameterwerte verweisen, indem er die Namen und den Typ über eine **Deklarations Anweisung der Abfrage Parameter**angibt.
 
-Abfrageparameter haben zwei Hauptverwendungen:
+Abfrage Parameter haben zwei Haupt Verwendungsmöglichkeiten:
 
-1. Als Schutzmechanismus gegen **Injektionsangriffe**.
-2. Als Möglichkeit zum Parametrierung von Abfragen.
+1. Als Schutzmechanismus gegen **Injection-Angriffe**.
+2. Als Möglichkeit zum Parametrisieren von Abfragen.
 
-Insbesondere Clientanwendungen, die vom Benutzer bereitgestellte Eingaben in Abfragen kombinieren, die sie dann an Kusto senden, sollten diesen Mechanismus verwenden, um sich vor dem Kusto-Äquivalent von [SQL-Injection-Angriffen](https://en.wikipedia.org/wiki/SQL_injection) zu schützen.
+Insbesondere-Client Anwendungen, die eine vom Benutzer bereitgestellte Eingabe in Abfragen kombinieren, die Sie dann an Kusto senden, sollten diesen Mechanismus verwenden, um die Kusto-Entsprechung von [SQL-Injection](https://en.wikipedia.org/wiki/SQL_injection) -Angriffen zu schützen.
 
-## <a name="declaring-query-parameters"></a>Deklarieren von Abfrageparametern
+## <a name="declaring-query-parameters"></a>Deklarieren von Abfrage Parametern
 
-Um auf Abfrageparameter verweisen zu können, muss der Abfragetext (oder die von ihm verwendeten Funktionen) zunächst den Abfrageparameter deklarieren, den er verwendet. Für jeden Parameter enthält die Deklaration den Namen und den Skalartyp. Optional kann der Parameter auch einen Standardwert verwenden, der verwendet werden soll, wenn die Anforderung keinen konkreten Wert für den Parameter liefert. Kusto analysiert dann den Wert des Abfrageparameters gemäß den normalen Analyseregeln für diesen Typ.
+Um auf Abfrage Parameter verweisen zu können, muss der Abfragetext (oder die darin verwendeten Funktionen) zuerst den verwendeten Abfrage Parameter deklarieren. Für jeden Parameter stellt die Deklaration den Namen und den skalaren Typ bereit. Optional kann der-Parameter auch einen Standardwert aufweisen, der verwendet wird, wenn die Anforderung keinen konkreten Wert für den Parameter bereitstellt. Anschließend analysiert Kusto den Wert des Abfrage Parameters gemäß seinen normalen Analyse Regeln für diesen Typ.
 
 **Syntax**
 
-`declare``query_parameters` `:` `=` `,` *Type1* *Name1* *DefaultValue1*Name1 Typ1 [ DefaultValue1 ] [ ...] `(``);`
+`declare``query_parameters` `:` *Type1* `,` *Name1* `=` Name1 Typ1 [DefaultValue1] [...] *DefaultValue1* `(``);`
 
-* *Name1*: Der Name eines Abfrageparameters, der in der Abfrage verwendet wird.
-* *Typ1*: Der entsprechende Typ (z.B. `string`, `datetime`, etc.) Die vom Benutzer bereitgestellten Werte werden als Zeichenfolgen codiert, und Kusto wendet die entsprechende Analysemethode auf den Abfrageparameter an, um einen stark typisierten Wert abzubekommen.
-* *DefaultValue1*: Ein optionaler Standardwert für den Parameter. Dies muss ein Literal des entsprechenden Skalartyps sein.
+* *Name1*: der Name eines in der Abfrage verwendeten Abfrage Parameters.
+* *Typ1*: der entsprechende Typ (z. b `string`. `datetime`, usw.) Die vom Benutzer bereitgestellten Werte werden als Zeichen folgen codiert, damit Kusto die entsprechende Analysemethode auf den Abfrage Parameter anwendet, um einen stark typisierten Wert zu erhalten.
+* *DefaultValue1*: ein optionaler Standardwert für den-Parameter. Dabei muss es sich um einen literalen des entsprechenden skalartyps handeln.
 
 > [!NOTE]
-> Wie [benutzerdefinierte Funktionen](functions/user-defined-functions.md)können `dynamic` Abfrageparameter des Typs keine Standardwerte aufweisen.
+> Wie [benutzerdefinierte Funktionen](functions/user-defined-functions.md)können Abfrage Parameter vom Typ `dynamic` keine Standardwerte aufweisen.
 
 **Beispiele**
 
@@ -57,15 +57,15 @@ declare query_parameters(percentage:long = 90);
 T | where Likelihood > percentage
 ```
 
-## <a name="specifying-query-parameters-in-a-client-application"></a>Angeben von Abfrageparametern in einer Clientanwendung
+## <a name="specifying-query-parameters-in-a-client-application"></a>Angeben von Abfrage Parametern in einer Client Anwendung
 
-Die Namen und Werte von `string` Abfrageparametern werden von der Anwendung, die die Abfrage erstellt, als Werte bereitgestellt. Es darf kein Name wiederholt werden.
+Die Namen und Werte von Abfrage Parametern werden von der `string` Anwendung, die die Abfrage vornimmt, als Werte bereitgestellt. Es kann kein Name wiederholt werden.
 
-Die Interpretation der Werte erfolgt gemäß der Deklarationsanweisung der Abfrageparameter. Jeder Wert wird analysiert, als wäre er ein Literal im Text körpereingehend einer Abfrage entsprechend dem Typ, der durch die Anweisung für die Abfrageparameterdeklaration angegeben wird.
+Die Interpretation der Werte erfolgt gemäß der Deklarations Anweisung der Abfrage Parameter. Jeder Wert wird so analysiert, als ob es sich um einen Literalwert im Text einer Abfrage handelt, der dem Typ entspricht, der von der Deklarations Anweisung der Abfrage Parameter angegeben wird.
 
 ### <a name="rest-api"></a>REST-API
 
-Abfrageparameter werden von Clientanwendungen `properties` über den Steckplatz des JSON-Objekts des `Parameters`Anforderungstexts in einem verschachtelten Eigenschaftenbeutel mit dem Namen bereitgestellt. Hier ist z. B. der Text eines REST-API-Aufrufs an Kusto, der das Alter eines Benutzers berechnet (vermutlich, indem die Anwendung den Benutzer nach seinem Geburtstag fragt):
+Abfrage Parameter werden von Client Anwendungen über den `properties` Slot des JSON-Objekts des Anforderungs Texts in einem geschiesteten Eigenschaften Behälter namens `Parameters`bereitgestellt. Hier ist beispielsweise der Text eines REST-API-Aufrufes für Kusto, der das Alter einiger Benutzer berechnet (vermutlich, wenn die Anwendung den Benutzer zum Geburtstag auffordert):
 
 ``` json
 {
@@ -78,16 +78,16 @@ Abfrageparameter werden von Clientanwendungen `properties` über den Steckplatz 
 
 ### <a name="kusto-net-sdk"></a>Kusto .NET SDK
 
-Um die Namen und Werte von Abfrageparametern bei Verwendung der Kusto .NET-Clientbibliothek bereitzustellen, erstellt man eine neue Instanz des `ClientRequestProperties` Objekts und verwendet dann die `HasParameter`, `SetParameter`und `ClearParameter` Methoden, um Abfrageparameter zu bearbeiten. Beachten Sie, dass diese Klasse eine Reihe `SetParameter`stark typisierter Überladungen für ; Intern generieren sie das entsprechende Literal der Abfragesprache `string` und senden es wie oben beschrieben über die REST-API. Der Abfragetext selbst muss [die Abfrage paramters weiterhin deklarieren.](#declaring-query-parameters)
+Um die Namen und Werte von Abfrage Parametern bei Verwendung der Kusto .NET-Client Bibliothek bereitzustellen, wird eine neue Instanz des `ClientRequestProperties` -Objekts erstellt und dann `HasParameter`die `SetParameter`-Methode `ClearParameter` , die-Methode und die-Methode verwendet, um Abfrage Parameter zu bearbeiten. Beachten Sie, dass diese Klasse eine Reihe stark typisierter über Ladungen für `SetParameter`bereitstellt. intern generieren Sie das entsprechende Literale der Abfragesprache und senden Sie als `string` über die Rest-API, wie oben beschrieben. Der Abfragetext selbst muss weiterhin [die Abfrage Parameter deklarieren](#declaring-query-parameters).
 
 ### <a name="kustoexplorer"></a>Kusto.Explorer
 
-Um die Abfrageparameter festzulegen, die beim Stellenanstellen an den Dienst gesendet`ALT` + `P`werden, verwenden Sie das Symbol **Abfrageparameter** "Schraubenschlüssel" ( ).
+Um die Abfrage Parameter festzulegen, die beim Senden einer Anforderung an den Dienst gesendet werden, verwenden Sie das Symbol "Schlüssel`ALT` + `P`Symbol" der **Abfrage Parameter** ().
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
-Dies wird in Azure Monitor nicht unterstützt.
+Diese Funktion wird in Azure Monitor nicht unterstützt.
 
 ::: zone-end

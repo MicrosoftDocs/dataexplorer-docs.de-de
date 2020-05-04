@@ -1,6 +1,6 @@
 ---
-title: Set-Anweisung - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt Set-Anweisung in Azure Data Explorer.
+title: 'Set-Anweisung: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt die Set-Anweisung in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,27 +10,27 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 8cb9c1d72f1b2e8e4bfbbd28d67c04295c9ccf5b
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 028bfb5a2d0ddf25f65cd16bca2c498d9dcb7059
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765571"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737860"
 ---
 # <a name="set-statement"></a>set-Anweisung
 
 ::: zone pivot="azuredataexplorer"
 
-Die `set` Anweisung wird verwendet, um eine Abfrageoption für die Dauer der Abfrage festzulegen.
-Mit Abfrageoptionen wird gesteuert, wie eine Abfrage ausgeführt wird und wie Ergebnisse zurückgegeben werden. Sie können boolesche Flags sein (standardmäßig deaktiviert) oder einen Ganzzahlwert haben. Eine Abfrage kann keine, eine oder mehrere set-Anweisungen enthalten. Set-Anweisungen wirken sich nur auf die tabellenförmigen Ausdrucksanweisungen aus, die sie in der Programmreihenfolge nachfolgen.
+Die `set` -Anweisung wird verwendet, um eine Abfrage Option für die Dauer der Abfrage festzulegen.
+Mit Abfrageoptionen wird gesteuert, wie eine Abfrage ausgeführt wird und wie Ergebnisse zurückgegeben werden. Dabei kann es sich um boolesche Flags (standardmäßig deaktiviert) oder um einen ganzzahligen Wert handeln. Eine Abfrage kann keine, eine oder mehrere set-Anweisungen enthalten. Set-Anweisungen wirken sich nur auf die Anweisungen für tabellarische Ausdrücke aus, die Sie in der Programm Reihenfolge
 
-* Abfrageoptionen können auch programmgesteuert aktiviert werden, `ClientRequestProperties` indem sie im Objekt gesetzt werden. Klicken Sie [hier](../api/netfx/request-properties.md).
+* Abfrage Optionen können auch Programm gesteuert aktiviert werden, indem Sie im- `ClientRequestProperties` Objekt festgelegt werden. Klicken Sie [hier](../api/netfx/request-properties.md).
   
-* Abfrageoptionen sind formal kein Teil der Kusto-Sprache und können geändert werden, ohne als eine brechende Sprachänderung betrachtet zu werden.
+* Abfrage Optionen sind nicht formal Teil der Kusto-Sprache und können geändert werden, ohne dass Sie als unterbrechende sprach Änderung angesehen werden.
 
 **Syntax**
 
-`set`*OptionName* `=` [ *OptionValue*]
+`set`*OptionName* [`=` *OptionValue*]
 
 **Beispiel**
 
@@ -43,6 +43,6 @@ Events | take 100
 
 ::: zone pivot="azuremonitor"
 
-Dies wird in Azure Monitor nicht unterstützt.
+Diese Funktion wird in Azure Monitor nicht unterstützt.
 
 ::: zone-end

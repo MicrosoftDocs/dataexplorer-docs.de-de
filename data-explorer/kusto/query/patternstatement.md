@@ -1,6 +1,6 @@
 ---
-title: musteranweisung - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt die Musteranweisung in Azure Data Explorer.
+title: 'Pattern-Anweisung: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt die Muster Anweisung in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,32 +10,32 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: d7ad021fe7b458d54beeb24b908420324b45ad39
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 97fc8361feb3d8dddb7d0722ce741ef44bd4cec6
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765667"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737265"
 ---
-# <a name="pattern-statement"></a>Musteranweisung
+# <a name="pattern-statement"></a>Pattern-Anweisung
 
 ::: zone pivot="azuredataexplorer"
 
-Ein **Muster** ist ein benanntes ansichtsähnliches Konstrukt, das vordefinierte Zeichenfolgen-Tupeln parameterlosen Funktionskörpern zuordnet. Muster sind in zwei Aspekten einzigartig:
+Ein **Muster** ist ein benanntes Ansichts ähnliches Konstrukt, das vordefinierte zeichenfolgentupel zu parameterlosen Funktions Texten zuordnet. Muster sind in zwei Aspekten eindeutig:
 
-* Muster werden mithilfe einer Syntax " aufgerufen, die abschnittsgebundenen Tabellenverweisen ähnelt.
-* Muster verfügen über einen gesteuerten, engen Satz von Argumentwerten, die zugeordnet werden können, und der Zuordnungsprozess wird von Kusto ausgeführt. Dies bedeutet, wenn ein Muster deklariert, aber nicht definiert ist, identifiziert und kennzeichnet Kusto alle Aufrufe zum Muster als Fehler, wodurch es möglich ist, diese Muster durch eine Anwendung der mittleren Ebene zu "lösen".
+* Muster werden mithilfe einer Syntax, die Bereichs bezogenen Tabellen verweisen ähnelt, "aufgerufen".
+* Muster verfügen über einen kontrollierten, close-enden Satz von Argument Werten, die zugeordnet werden können, und der Zuordnungsprozess wird von Kusto durchgeführt. Dies bedeutet, dass, wenn ein Muster deklariert, aber nicht definiert ist, Kusto als Fehler alle Aufrufe des Musters identifiziert und gekennzeichnet wird, sodass diese Muster durch eine Anwendung der mittleren Ebene "aufgelöst" werden können.
 
 
-## <a name="pattern-declaration"></a>Musterdeklaration
-Die pattern-Anweisung wird verwendet, um ein Muster zu deklarieren oder zu definieren.
-Im Folgenden ist z. B. `app` eine Musteranweisung, die als Muster deklariert wird:
+## <a name="pattern-declaration"></a>Muster Deklaration
+Die Pattern-Anweisung wird verwendet, um ein Muster zu deklarieren oder zu definieren.
+Beispielsweise ist im folgenden eine Pattern-Anweisung angegeben, `app` die als Muster deklariert:
 
 ```kusto
 declare pattern app;
 ```
 
-Diese Aussage sagt `app` Kusto, dass es sich um ein Muster handelt, aber nicht, wie das Muster aufgelöst werden soll. Daher führt jeder Versuch, dieses Muster in der Abfrage aufzurufen, zu einem bestimmten Fehler, der alle diese Aufrufe auflistet. Beispiel:
+Diese Anweisung weist Kusto an `app` , dass ein Muster ist, aber nicht, wie das Muster aufgelöst werden kann. Daher führt jeder Versuch, dieses Muster in der Abfrage aufzurufen, zu einem bestimmten Fehler, der alle derartigen Aufrufe auflistet. Beispiel:
 
 ```kusto
 declare pattern app;
@@ -44,15 +44,15 @@ app("ApplicationX").StartEvents
 | count
 ```
 
-Diese Abfrage generiert einen Fehler aus Kusto, der angibt, dass `app("ApplicationX")["StartEvents"]` `app("ApplicationX")["StopEvents"]`die folgenden Musteraufrufe nicht aufgelöst werden können: und .
+Diese Abfrage generiert einen Fehler von Kusto und zeigt an, dass die folgenden musteraufrufe nicht aufgelöst werden können `app("ApplicationX")["StartEvents"]` : `app("ApplicationX")["StopEvents"]`und.
 
 **Syntax**
 
 `declare``pattern` *PatternName*
 
-## <a name="pattern-definition"></a>Musterdefinition
+## <a name="pattern-definition"></a>Muster Definition
 
-Die musteranweisung kann auch verwendet werden, um ein Muster zu definieren. In einer Musterdefinition werden alle möglichen Aufrufe des Musters explizit festgelegt und der entsprechende tabellarische Ausdruck angegeben. Wenn Kusto dann die Abfrage ausführt, ersetzt es jeden Musteraufruf durch den entsprechenden Mustertext. Beispiel:
+Die Pattern-Anweisung kann auch verwendet werden, um ein Muster zu definieren. In einer Muster Definition werden alle möglichen Aufrufe des Musters explizit angelegt und der entsprechende tabellarische Ausdruck angegeben. Wenn Kusto dann die Abfrage ausführt, wird jeder Muster Aufruf durch den entsprechenden Muster Text ersetzt. Beispiel:
 
 ```kusto
 declare pattern app = (applicationId:string)[eventType:string]
@@ -65,41 +65,41 @@ app("ApplicationX").StartEvents
 | count
 ```
 
-Der Ausdruck, der für jedes übereinstimmende Muster bereitgestellt wird, ist entweder ein Tabellenname oder ein Verweis auf eine [let-Anweisung](letstatement.md).
+Der Ausdruck, der für jedes übereinstimmende Muster bereitgestellt wird, ist entweder ein Tabellenname oder ein Verweis auf eine [Let-Anweisung](letstatement.md).
 
 **Syntax**
 
-`declare``pattern` *PatternName* = *ArgName* `:` *ArgType* `,` ArgName ArgType [ ... ]`(` `)` [`[` *PathName* `:` *PathArgType* `]`]`{`
-&nbsp;&nbsp;&nbsp;&nbsp;`(` *ArgValue1* `,` [ *ArgValue2* ... ] `)` [ `.[` `]` *PathValue `=` `{` *expression* `};` &nbsp; &nbsp; &nbsp; ] Ausdruck &nbsp; [ &nbsp; `,` *ArgValue2_2* ArgValue1_2 [ ArgValue2_2 ... ] *ArgValue1_2* &nbsp; &nbsp; &nbsp; `(` `)` [ `.[` *PathValue_2* `]` PathValue_2 `=` `{`] *expression_2* `};` expression_2 &nbsp; &nbsp; ... &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ]        `}`
+`declare``pattern` *PatternName* = `(`*argname* `:` *argtype* [`,` ...] `)` [`[` *Pfadname* `:` *pathargtype* `]`]`{`
+&nbsp;&nbsp;&nbsp;&nbsp;`(` *ArgValue1* [`,` *ArgValue2* ...] `)` [ `.[` * PathValue `]` ] `=` `{` *Ausdruck* `};` &nbsp; `,` *ArgValue2_2* *ArgValue1_2* [ &nbsp; ArgValue1_2 &nbsp; ArgValue2_2...] &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; `(` `)` [ `.[` *PathValue_2* `{` *expression_2* ] `=` expression_2`};` .. &nbsp; . `]` &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; ]        `}`
 
-* *PatternName*: Name des Pattern-Schlüsselworts. Syntax, die nur Schlüsselwort definiert, ist zulässig: zum Erkennen aller Musterverweise mit einem angegebenen Schlüsselwort.
-* *ArgName*: Name des Musterarguments. Muster lassen einen oder mehrere Argumentnamen zu.
-* *ArgType*: Typ des Musterarguments `string` (derzeit nur zulässig)
-* *PathName*: Name des Pfadarguments. Muster lassen Null- oder einen Pfadnamen zu.
-* *PathType*: Typ des Pfadarguments `string` (derzeit nur zulässig)
-* *ArgValue1*, *ArgValue2*, ... - Werte `string` der Musterargumente (derzeit sind nur Literale zulässig)
-* *PathValue* - Wert des Musterpfads (derzeit sind nur `string` Literale zulässig)
-* *ausdruck*: Der *Ausdruck* - ein tabellarischer Ausdruck (z. B. `Logs | where Timestamp > ago(1h)`) oder ein Lambdaausdruck, der auf eine Funktion verweist.
+* *PatternName*: Name des pattern-Schlüssel Worts. Syntax, die nur das Schlüsselwort definiert, ist zulässig: zum Erkennen aller Muster Verweise mit einem angegebenen Schlüsselwort.
+* *Argname*: Name des Muster Arguments. Muster lassen einen oder mehrere Argument Namen zu.
+* *Argtype*: Typ des Muster Arguments (derzeit ist nur `string` zulässig)
+* *Pfadname*: Name des Path-Arguments. Muster lassen NULL oder einen Pfadnamen zu.
+* *PathType*: Typ des Path-Arguments (derzeit ist `string` nur zulässig)
+* *ArgValue1*, *ArgValue2*,...-Werte der Muster Argumente (zurzeit sind `string` nur Literale zulässig)
+* *PathValue* -Wert des musterpfads (zurzeit `string` sind nur Literale zulässig)
+* *Ausdruck*: der *Ausdruck* -ein Tabellen Ausdruck (z. b `Logs | where Timestamp > ago(1h)`.) oder ein Lambda-Ausdruck, der auf eine Funktion verweist.
 
-## <a name="pattern-invocation"></a>Musteraufruf
+## <a name="pattern-invocation"></a>Muster Aufruf
 
-Die Syntax für den Musteraufruf ähnelt der Referenzsyntax für die Bereichstabelle:
+Die Muster Aufruf Syntax ähnelt der Syntax für den Tabellen Verweis im Gültigkeitsbereich:
 
-* *PatternName* `(` *ArgValue1* [`,` *ArgValue2* ...] `).` *PathValue*
-* *PatternName* `(` *ArgValue1* [`,` *ArgValue2* ...] `).["` *PathValue*`"]`
+* *PatternName* `(` *ArgValue1* [`,` *ArgValue2* ...] `).` *Pfadwert*
+* *PatternName* `(` *ArgValue1* [`,` *ArgValue2* ...] `).["` *Pfadwert*`"]`
 
 ## <a name="remarks"></a>Bemerkungen
 
 **Szenario**
 
-Die pattern-Anweisung wurde für Anwendungen der mittleren Ebene entwickelt, die Benutzerabfragen akzeptieren und diese Abfragen dann an Kusto senden. Solche Anwendungen setzen diesen Benutzerabfragen häufig ein logisches Schemamodell voran (ein Satz von [let-Anweisungen](letstatement.md), möglicherweise durch eine [restrict-Anweisung](restrictstatement.md)suffix ).
-In einigen Fällen benötigen diese Anwendungen eine Syntax, die sie Benutzern bereitstellen können, um Entitäten zu referenzieren, die nicht im Voraus bekannt sind und in dem logischen Schema definiert sind, das sie erstellen (entweder, weil sie nicht im Voraus bekannt sind, weil die Anzahl potenzieller Entitäten zu groß ist, um im logischen Schema vordefiniert zu werden).
+Die Pattern-Anweisung ist für Anwendungen der mittleren Ebene konzipiert, die Benutzer Abfragen akzeptieren und diese Abfragen dann an Kusto senden. Solche Anwendungen stellen häufig einem logischen Schema Modell (einem Satz von [Let-Anweisungen](letstatement.md), möglicherweise durch eine [Einschränkungs Anweisung](restrictstatement.md)) ein Präfix für diese Benutzer Abfragen vor.
+In einigen Fällen benötigen diese Anwendungen eine Syntax, mit der Benutzer auf Entitäten verweisen können, die nicht im Voraus bekannt sein können und im logischen Schema definiert sind, das Sie konstruieren (weil Sie nicht im Voraus bekannt sind, weil die Anzahl potenzieller Entitäten zu groß ist, um im logischen Schema vordefiniert zu werden.
 
-Pattern löst dieses Szenario wie folgt. Die Anwendung der mittleren Ebene sendet die Abfrage an Kusto, wobei alle Muster deklariert, aber nicht definiert sind. Kusto analysiert dann die Abfrage, und wenn ein oder mehrere Musteraufrufe darin vorhanden sind, wird ein Fehler an die Anwendung der mittleren Ebene zurückgegeben, wobei alle diese Aufrufe explizit aufgeführt sind. Die Anwendung der mittleren Ebene kann dann jeden dieser Verweise auflösen und die Abfrage erneut ausführen, wobei sie ihr dieses Mal die vollständig ausgearbeitete Musterdefinition voranstellt.
+Muster lösen Sie dieses Szenario auf folgende Weise. Die Anwendung der mittleren Ebene sendet die Abfrage mit allen deklarierten, aber nicht definierten Mustern an Kusto. Kusto analysiert dann die Abfrage, und wenn ein oder mehrere musteraufrufe in vorhanden sind, wird ein Fehler an die Anwendung der mittleren Ebene zurückgegeben, und alle diese Aufrufe werden explizit aufgelistet. Die Anwendung der mittleren Ebene kann dann jeden dieser Verweise auflösen und die Abfrage erneut ausführen. dieses Mal wird ihr die vollständig ausgearbeitete Muster Definition vorangestellt.
 
 **Normalisierungen**
 
-Kusto normalisiert das Muster automatisch, so dass z. B. die folgenden Aufrufe desselben Musters sind und ein einzelnes zurückgemeldet wird:
+Kusto normalisiert das Muster automatisch, sodass z. b. im folgenden alle Aufrufe desselben Musters aufgeführt werden, und eine einzelne Meldung wird zurückgegeben:
 
 ```kusto
 declare pattern app;
@@ -110,11 +110,11 @@ union
   app("ApplicationX").["StartEvent"]
 ```
 
-Das bedeutet auch, dass man sie nicht zusammen definieren kann, da sie als die gleichen angesehen werden.
+Dies bedeutet auch, dass Sie nicht in einer Weise definiert werden können, da Sie als identisch angesehen werden.
 
 **Platzhalter**
 
-Kusto behandelt Platzhalter in einem Muster nicht auf besondere Weise. In der folgenden Abfrage:
+Die Platzhalter in einem Muster werden von Kusto auf keine besondere Weise behandelt. Beispielsweise in der folgenden Abfrage:
 
 ```kusto
 declare pattern app;
@@ -122,11 +122,11 @@ union app("ApplicationX").*
 | count
 ```
 
-Kusto meldet einen einzelnen fehlenden `app("ApplicationX").["*"]`Musteraufruf: .
+Kusto meldet einen einzelnen fehlenden Muster Aufruf: `app("ApplicationX").["*"]`.
 
 ## <a name="examples"></a>Beispiele
 
-Abfragen über mehr als einen einzelnen Musteraufruf:
+Abfragen über mehrere musteraufrufe:
 
 ```kusto
 declare pattern A
@@ -140,21 +140,21 @@ union (A('a1').Text), (A('a2').Text)
 |---|---|
 |App-#1|Dies ist ein freier Text: 1|
 |App-#1|Dies ist ein freier Text: 2|
-|App-#1|Dies ist ein freier Text: 3|
-|App-#1|Dies ist ein freier Text: 4|
-|App-#1|Dies ist ein freier Text: 5|
-|App-#2|Dies ist ein freier Text: 9|
-|App-#2|Dies ist ein freier Text: 8|
-|App-#2|Dies ist ein freier Text: 7|
-|App-#2|Dies ist ein freier Text: 6|
-|App-#2|Dies ist ein freier Text: 5|
+|App-#1|Dies ist ein kostenloser Text: 3|
+|App-#1|Dies ist ein kostenloser Text: 4|
+|App-#1|Dies ist ein kostenloser Text: 5|
+|App-#2|Dies ist ein kostenloser Text: 9|
+|App-#2|Dies ist ein kostenloser Text: 8|
+|App-#2|Dies ist ein kostenloser Text: 7|
+|App-#2|Dies ist ein kostenloser Text: 6|
+|App-#2|Dies ist ein kostenloser Text: 5|
 
 ```kusto
 declare pattern App;
 union (App('a1').Text), (App('a2').Text)
 ```
 
-Semantischer Fehler:
+Semantik Fehler:
 
      SEM0036: One or more pattern references were not declared. Detected pattern references: ["App('a1').['Text']","App('a2').['Text']"].
 
@@ -178,6 +178,6 @@ Semantischer Fehler zurückgegeben:
 
 ::: zone pivot="azuremonitor"
 
-Dies wird in Azure Monitor nicht unterstützt.
+Diese Funktion wird in Azure Monitor nicht unterstützt.
 
 ::: zone-end

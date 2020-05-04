@@ -1,6 +1,6 @@
 ---
-title: extent_tags() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird extent_tags() in Azure Data Explorer beschrieben.
+title: extent_tags ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird extent_tags () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,20 +10,20 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: d8af7e51c5e2efb16763541db05e9ccc7e2cb95f
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 146ab59c1c0cbcb86bfae94fa26c09f5afa0f216
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765433"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737588"
 ---
 # <a name="extent_tags"></a>extent_tags()
 
 ::: zone pivot="azuredataexplorer"
 
-Gibt ein dynamisches Array mit den [Tags](../management/extents-overview.md#extent-tagging) des Daten-Shards ("Extent") zurück, in dem sich der aktuelle Datensatz befindet. 
+Gibt ein dynamisches Array mit den [Tags](../management/extents-overview.md#extent-tagging) des datenshards ("Block") zurück, in dem sich der aktuelle Datensatz befindet. 
 
-Wenn Sie diese Funktion auf berechnete Daten anwenden, die nicht an einen Datenshard angefügt sind, wird ein leerer Wert zurückgegeben.
+Wenn diese Funktion auf berechnete Daten angewendet wird, die nicht an einen datenshard angefügt sind, wird ein leerer Wert zurückgegeben.
 
 **Syntax**
 
@@ -31,11 +31,11 @@ Wenn Sie diese Funktion auf berechnete Daten anwenden, die nicht an einen Datens
 
 **Rückgabe**
 
-Ein Wert `dynamic` des Typs, der ein Array mit den Ausdehnungstags des aktuellen Datensatzes oder ein leerer Wert ist.
+Ein Wert vom Typ `dynamic` , bei dem es sich um ein Array mit den Block Tags des aktuellen Datensatzes oder um einen leeren Wert handelt.
 
 **Beispiele**
 
-Das folgende Beispiel zeigt, wie Sie eine Liste der Tags aller Datenshards abrufen, die `ActivityId`Datensätze von vor einer Stunde mit einem bestimmten Wert für die Spalte haben. Es zeigt, dass einige Abfrageoperatoren (hier der `where` `extend` Operator, aber dies gilt auch für und `project`) die Informationen über den Daten-Shard, der den Datensatz hostet, beibehalten.
+Im folgenden Beispiel wird gezeigt, wie Sie eine Liste der Tags aller datenshards, die über Datensätze von einer Stunde verfügen, mit einem bestimmten Wert für `ActivityId`die Spalte erhalten. Es veranschaulicht, dass einige Abfrage Operatoren (hier `where` der-Operator, aber dies gilt auch `extend` für `project`und) die Informationen über den datenshard, der den Datensatz gehostet, beibehalten.
 
 ```kusto
 T
@@ -45,7 +45,7 @@ T
 | summarize by tostring(tags)
 ```
 
-Das folgende Beispiel zeigt, wie Sie eine Anzahl aller Datensätze aus der letzten Stunde abrufen, die in Ausdehnungen gespeichert werden, die mit dem Tag `MyTag` (und möglicherweise anderen Tags) markiert, aber nicht mit dem Tag `drop-by:MyOtherTag`markiert sind.
+Im folgenden Beispiel wird gezeigt, wie die Anzahl aller Datensätze aus der letzten Stunde abgerufen wird, die in Blöcken gespeichert sind, die mit dem- `MyTag` Tag (und potenziell anderen Tags) gekennzeichnet sind, aber nicht mit `drop-by:MyOtherTag`dem-Tag markiert sind.
 
 ```kusto
 T
@@ -59,6 +59,6 @@ T
 
 ::: zone pivot="azuremonitor"
 
-Dies wird in Azure Monitor nicht unterstützt.
+Diese Funktion wird in Azure Monitor nicht unterstützt.
 
 ::: zone-end

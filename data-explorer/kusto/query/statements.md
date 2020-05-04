@@ -1,6 +1,6 @@
 ---
-title: Abfrageanweisungen - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden Abfrageanweisungen in Azure Data Explorer beschrieben.
+title: 'Abfrage Anweisungen: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel werden die Abfrage Anweisungen in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,59 +10,59 @@ ms.topic: reference
 ms.date: 12/10/2019
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 20eeb1aa755fcf4e3068cba061a2738a375e1847
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 6e383ce9fdcf373452c0b7d710302669e7987395
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765561"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737843"
 ---
 # <a name="query-statements"></a>Abfrageanweisungen
 
 ::: zone pivot="azuredataexplorer"
 
-Eine Abfrage besteht aus einer oder mehreren **Abfrageanweisungen**`;`, die durch ein Semikolon ( ) getrennt sind.
-Mindestens eine dieser Abfrageanweisungen muss eine [tabellarische Ausdrucksanweisung](./tabularexpressionstatements.md)sein.
-Die tabellenförmige Ausdrucksanweisung generiert ein oder mehrere tabellarische Ergebnisse.
-Wenn die Abfrage über mehr als eine tabellenförmige Ausdrucksanweisung verfügt, verfügt die Abfrage über einen [Batch](./batches.md) von Tabellenausdrucksanweisungen, und die durch diese Anweisungen generierten Tabellenergebnisse werden alle von der Abfrage zurückgegeben.
+Eine Abfrage besteht aus einer oder mehreren **Abfrage Anweisungen**, getrennt durch ein Semikolon (`;`).
+Mindestens eine dieser Abfrage Anweisungen muss eine [tabellarische Ausdrucks Anweisung](./tabularexpressionstatements.md)sein.
+Die tabellarische Ausdrucks Anweisung generiert ein oder mehrere tabellarische Ergebnisse.
+Wenn die Abfrage mehr als eine tabellarische Ausdrucks Anweisung enthält, enthält die Abfrage einen [Batch](./batches.md) von Tabellen Ausdrucks Anweisungen, und die von diesen Anweisungen generierten tabellarischen Ergebnisse werden von der Abfrage zurückgegeben.
 
-Zwei Arten von Abfrageanweisungen:
+Zwei Typen von Abfrage Anweisungen:
 
-* Anweisungen, die in erster Linie von Benutzern verwendet werden ([Benutzerabfrageanweisungen](#user-query-statements)),
-* Anweisungen, die für die Unterstützung von Szenarien entwickelt wurden, in denen Mid-Tier-Anwendungen Benutzerabfragen annehmen und eine geänderte Version davon an Kusto senden ([Anwendungsabfrageanweisungen](#application-query-statements)).
+* Anweisungen, die in erster Linie von Benutzern verwendet werden ([Benutzer Abfrage Anweisungen](#user-query-statements)),
+* Anweisungen, die entwickelt wurden, um Szenarios zu unterstützen, in denen Anwendungen der mittleren Ebene Benutzer Abfragen durchführen und eine geänderte Version von Ihnen an Kusto ([Anwendungs Abfrage Anweisungen](#application-query-statements)) senden.
 
-Einige Abfrageanweisungen sind in beiden Szenarien nützlich.
+Einige Abfrage Anweisungen sind in beiden Szenarien nützlich.
 
 > [!NOTE]
-> Der "Effekt" einer Abfrageanweisung beginnt an dem Punkt, an dem die Anweisung in der Abfrage angezeigt wird, und endet am Ende der Abfrage. Sobald die Abfrage abgeschlossen ist, werden alle Ressourcen freigegeben, und sie hat keine Auswirkungen auf zukünftige Abfragen (außer Nebenwirkungen, z. B. das Aufzeichnen der Abfrage in einem Protokoll aller Abfragen oder das Zwischenspeichern der Ergebnisse).
+> Der Effekt einer Abfrage Anweisung beginnt an dem Punkt, an dem die Anweisung in der Abfrage angezeigt wird, und endet am Ende der Abfrage. Sobald die Abfrage abgeschlossen ist, werden alle zugehörigen Ressourcen freigegeben, und Sie hat keine Auswirkungen auf zukünftige Abfragen (mit Ausnahme von Nebeneffekten, z. b. das Aufzeichnen der Abfrage in einem Protokoll aller Abfragen oder das Zwischenspeichern der Ergebnisse).
 
-## <a name="user-query-statements"></a>Benutzerabfrageanweisungen
+## <a name="user-query-statements"></a>Benutzer Abfrage Anweisungen
 
-Im Folgenden finden Sie eine Liste der Benutzerabfrageanweisungen:
+Im folgenden finden Sie eine Liste der Benutzer Abfrage Anweisungen:
 
-* Eine [let-Anweisung](./letstatement.md) definiert eine Bindung zwischen einem Namen und einem Ausdruck.
-  Let-Anweisungen können verwendet werden, um eine lange Abfrage in kleine benannte Teile aufzuteilen, die leichter zu verstehen sind.
+* Eine [Let-Anweisung](./letstatement.md) definiert eine Bindung zwischen einem Namen und einem Ausdruck.
+  Let-Anweisungen können verwendet werden, um eine lange Abfrage in kleine benannte Teile zu unterteilen, die leichter zu verstehen sind.
 
-* Eine [set-Anweisung](./setstatement.md) legt eine Abfrageoption fest, die sich darauf auswirkt, wie die Abfrage verarbeitet und ihre Ergebnisse zurückgegeben werden.
+* Eine [Set-Anweisung](./setstatement.md) legt eine Abfrage Option fest, die sich darauf auswirkt, wie die Abfrage verarbeitet und die Ergebnisse zurückgegeben werden.
 
-* Eine [tabellarische Ausdrucksanweisung](./tabularexpressionstatements.md), die wichtigste Abfrageanweisung, gibt die "interessanten" Daten als Ergebnisse zurück.
+* Eine [tabellarische Ausdrucks Anweisung](./tabularexpressionstatements.md), die wichtigste Abfrage Anweisung, gibt die "interessanten" Daten als Ergebnisse zurück.
 
-## <a name="application-query-statements"></a>Anwendungsabfrageanweisungen
+## <a name="application-query-statements"></a>Anwendungs Abfrage Anweisungen
 
-Im Folgenden finden Sie eine Liste der Anwendungsabfrageanweisungen:
+Im folgenden finden Sie eine Liste der Anwendungs Abfrage Anweisungen:
 
-* Eine [Aliasanweisung](./aliasstatement.md) definiert einen Alias in einer anderen Datenbank (im selben Cluster oder in einem Remotecluster).
+* Eine [Alias Anweisung](./aliasstatement.md) definiert einen Alias für eine andere Datenbank (im gleichen Cluster oder auf einem Remote Cluster).
 
-* Eine [Musteranweisung](./patternstatement.md), die von Anwendungen verwendet werden kann, die auf Kusto basieren, und die Abfragesprache für ihre Benutzer verfügbar machen, um sich selbst in den Abfragenamensauflösungsprozess einzuschleusen.
+* Eine [Pattern-Anweisung](./patternstatement.md), die von Anwendungen verwendet werden kann, die auf Kusto basieren, und ihren Benutzern die Abfragesprache zur Verfügung stellt, um Sie in den Prozess der Abfrage Namensauflösung einzufügen.
 
-* Eine [Abfrageparameteranweisung](./queryparametersstatement.md), die von Anwendungen verwendet wird, die auf Kusto basieren, um sich vor Injektionsangriffen zu schützen (ähnlich wie Befehlsparameter SQL vor SQL-Injektionsangriffen schützen).
+* Eine [Abfrage Parameter-Anweisung](./queryparametersstatement.md), die von Anwendungen verwendet wird, die auf Kusto aufbauen, um sich gegen Injection-Angriffe zu schützen (ähnlich wie Befehlsparameter SQL gegen SQL-Injection-Angriffe schützen).
 
-* Eine [restrict-Anweisung](./restrictstatement.md), die von Anwendungen verwendet wird, die auf Kusto basieren, um Abfragen auf eine bestimmte Teilmenge von Daten in Kusto zu beschränken (einschließlich der Beschränkung des Zugriffs auf bestimmte Spalten und Datensätze).
+* Eine [Einschränkungs Anweisung](./restrictstatement.md), die von Anwendungen verwendet wird, die auf Kusto aufbauen, um Abfragen auf eine bestimmte Teilmenge von Daten in Kusto einzuschränken (einschließlich der Einschränkung des Zugriffs auf bestimmte Spalten und Datensätze).
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
-Dies wird in Azure Monitor nicht unterstützt.
+Diese Funktion wird in Azure Monitor nicht unterstützt.
 
 ::: zone-end

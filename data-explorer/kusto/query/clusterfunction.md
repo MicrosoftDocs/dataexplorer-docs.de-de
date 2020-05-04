@@ -1,6 +1,6 @@
 ---
-title: cluster() (Bereichsfunktion) - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird cluster() (Bereichsfunktion) in Azure Data Explorer beschrieben.
+title: 'Cluster () (Scope-Funktion): Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt Cluster () (Scope-Funktion) in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: c5f537b47006af4035c9db26388c1d4110c69b55
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 092915c08b4b3d1e72722a4303e911403b2defd2
+ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81766106"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82737197"
 ---
-# <a name="cluster-scope-function"></a>cluster() (Bereichsfunktion)
+# <a name="cluster-scope-function"></a>Cluster () (Scope-Funktion)
 
 ::: zone pivot="azuredataexplorer"
 
-Ändert den Verweis der Abfrage in einen Remotecluster. 
+Ändert den Verweis der Abfrage auf einen Remote Cluster. 
 
 ```kusto
 cluster('help').database('Sample').SomeTable
@@ -29,22 +29,22 @@ cluster('help').database('Sample').SomeTable
 
 **Syntax**
 
-`cluster(`*stringConstant*`)`
+`cluster(`*StringConstant*`)`
 
 **Argumente**
 
-* *stringConstant*: Name des Clusters, auf den verwiesen wird. Der Clustername kann entweder ein vollqualifizierter DNS-Name oder `.kusto.windows.net`eine Zeichenfolge sein, die mit suffix wird. Das Argument muss vor der Ausführung der Abfrage _konstant_ sein, d. h. es kann nicht aus der Auswertung von Unterabfragen stammen.
+* *StringConstant*: Name des Clusters, auf den verwiesen wird. Der Cluster Name kann entweder ein voll qualifizierter DNS-Name oder eine Zeichenfolge sein, die mit `.kusto.windows.net`versehen wird. Das Argument muss vor der Ausführung der Abfrage _konstant_ sein, d. h., es kann nicht aus der Auswertung der Unterabfrage stammen.
 
 **Hinweise**
 
-* Für den Zugriff auf die Datenbank innerhalb desselben Clusters - verwenden Sie die [Database()-Funktion.](databasefunction.md)
-* Weitere Informationen zu clusterübergreifenden und datenbankübergreifenden Abfragen finden Sie [hier](cross-cluster-or-database-queries.md)  
+* Für den Zugriff auf die Datenbank innerhalb derselben Cluster-use [Database ()](databasefunction.md) -Funktion.
+* Weitere Informationen zu datenbankübergreifenden und datenbankübergreifenden Abfragen finden Sie [hier](cross-cluster-or-database-queries.md) .  
 
 ## <a name="examples"></a>Beispiele
 
-### <a name="use-cluster-to-access-remote-cluster"></a>Verwenden von Cluster() für den Zugriff auf Remotecluster 
+### <a name="use-cluster-to-access-remote-cluster"></a>Verwenden von Cluster () für den Zugriff auf Remote Cluster 
 
-Die nächste Abfrage kann auf jedem der Kusto-Cluster ausgeführt werden.
+Die nächste Abfrage kann auf einem beliebigen Kusto-Cluster ausgeführt werden.
 
 ```kusto
 cluster('help').database('Samples').StormEvents | count
@@ -56,9 +56,9 @@ cluster('help.kusto.windows.net').database('Samples').StormEvents | count
 |---|
 |59066|
 
-### <a name="use-cluster-inside-let-statements"></a>Verwenden von cluster() inside let-Anweisungen 
+### <a name="use-cluster-inside-let-statements"></a>Verwenden von Cluster () in Let-Anweisungen 
 
-Die gleiche Abfrage wie oben kann neu geschrieben werden, um die `clusterName` Inline-Funktion (let-Anweisung) zu verwenden, die einen Parameter empfängt , der an die Cluster()-Funktion übergeben wird.
+Die gleiche Abfrage wie oben kann so umgeschrieben werden, dass Sie eine Inline Funktion (Let-Anweisung `clusterName` ) verwendet, die einen Parameter empfängt, der an die Cluster ()-Funktion übergeben wird.
 
 ```kusto
 let foo = (clusterName:string)
@@ -72,9 +72,9 @@ foo('help')
 |---|
 |59066|
 
-### <a name="use-cluster-inside-functions"></a>Cluster() innerhalb von Funktionen verwenden 
+### <a name="use-cluster-inside-functions"></a>Verwenden von Cluster () innerhalb von Funktionen 
 
-Die gleiche Abfrage wie oben kann umgeschrieben werden, um `clusterName` in einer Funktion verwendet zu werden, die einen Parameter empfängt - der an die Cluster()-Funktion übergeben wird.
+Dieselbe Abfrage wie oben kann so umgeschrieben werden, dass Sie in einer Funktion verwendet wird, `clusterName` die einen Parameter empfängt, der an die Cluster ()-Funktion übergeben wird.
 
 ```kusto
 .create function foo(clusterName:string)
@@ -83,12 +83,12 @@ Die gleiche Abfrage wie oben kann umgeschrieben werden, um `clusterName` in eine
 };
 ```
 
-**Hinweis:** Solche Funktionen können nur lokal und nicht in der clusterübergreifenden Abfrage verwendet werden.
+**Hinweis:** solche Funktionen können nur lokal und nicht in der Cluster übergreifenden Abfrage verwendet werden.
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
-Dies wird in Azure Monitor nicht unterstützt.
+Diese Funktion wird in Azure Monitor nicht unterstützt.
 
 ::: zone-end
