@@ -1,6 +1,6 @@
 ---
-title: Alias-Anweisung - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die Alias-Anweisung in Azure Data Explorer beschrieben.
+title: 'Alias-Anweisung: Azure Daten-Explorer'
+description: Dieser Artikel beschreibt die Alias-Anweisung in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,30 +10,30 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: c6c689ab6daacebe1cd20742b199c8b9cc299245
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 63c639fb95322c537c5e069aa7e8ef7037371c88
+ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81766095"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82742023"
 ---
 # <a name="alias-statement"></a>alias-Anweisung
 
 ::: zone pivot="azuredataexplorer"
 
-Alias-Anweisungen ermöglichen das Definieren von Alias für Datenbanken, die später in derselben Abfrage verwendet werden können.
+Mit Alias Anweisungen können Sie einen Alias für Datenbanken definieren, der später in derselben Abfrage verwendet werden kann.
 
-Dies ist nützlich, wenn Sie mit mehreren Clustern arbeiten, während Sie versuchen, als Arbeit auf weniger Clustern oder nur auf einem Cluster angezeigt zu werden.
-Der Alias muss gemäß der folgenden Syntax definiert werden, wobei *Clustername* und *Datenbankname* eine vorhandene und gültige Entität sein müssen.
+Dies ist nützlich, wenn Sie mit mehreren Clustern arbeiten, aber so aussehen möchten, als ob Sie an weniger Clustern arbeiten.
+Der Alias muss entsprechend der folgenden Syntax definiert werden, wobei *Cluster Name* und *DatabaseName* vorhandene und gültige Entitäten sind.
 
 **Syntax**
 
-`alias`database[*'DatabaseAliasName'*] `=` cluster("https://*clustername*.kusto.windows.net:443").database("*databasename*")
+`alias`Database [*' databasealiasname '*] `=` Cluster ("https://*Cluster Name*. Kusto. Windows. net: 443"). Database ("*DatabaseName*")
 
-`alias`Datenbank *DatabaseAliasName* `=` cluster("https://*clustername*.kusto.windows.net:443").database("*databasename*")
+`alias`Database *databasealiasname* `=` Cluster ("https://*Cluster Name*. Kusto. Windows. net: 443"). Database ("*DatabaseName*")
 
-* *'DatabaseAliasName'* kann entweder ein Achsenname oder ein neuer Name sein.
-* Der zugeordnete Cluster-uri und der zugeordnete Datenbankname müssen in Doppelanführungszeichen(") oder Einzelquotes(') angezeigt werden.
+* *"Databasealiasname"* kann entweder ein vorhandener oder neuer Name sein.
+* Der zugeordnete Cluster-URI und der zugeordnete Datenbankname müssen in doppelten Anführungszeichen (") oder in einfachen Anführungszeichen (') enthalten sein.
 
 **Beispiele**
 
@@ -51,6 +51,6 @@ database("Logs").Traces | count
 
 ::: zone pivot="azuremonitor"
 
-Dies wird in Azure Monitor nicht unterstützt.
+Diese Funktion wird in Azure Monitor nicht unterstützt.
 
 ::: zone-end

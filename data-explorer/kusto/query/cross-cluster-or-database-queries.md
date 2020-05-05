@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: eaf42247840bfc5446c61bcefbb205c9e49706c3
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 834fd81e1832b8ab624da8d99cb5cc32407db84f
+ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737741"
+ms.locfileid: "82741760"
 ---
 # <a name="cross-database-and-cross-cluster-queries"></a>Datenbankübergreifende und clusterübergreifende Abfragen
 
@@ -73,7 +73,7 @@ Qualifizierte Namen oder Muster können auch in der [Einschränkung Access](./re
 restrict access to (my*, database("MyOther*").*, cluster("OtherCluster").database("my2*").*);
 ```
 
-Die obige Einschränkung schränkt den Abfrage Zugriff auf die folgenden entitete ein:
+Im obigen Beispiel wird der Abfrage Zugriff auf die folgenden Entitäten eingeschränkt:
 
 * Alle Entitäts Namen, die mit " *My...* " in der Standarddatenbank beginnen. 
 * Eine beliebige Tabelle in allen Datenbanken mit dem Namen *MyOther...* des aktuellen Clusters.

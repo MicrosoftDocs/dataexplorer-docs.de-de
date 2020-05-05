@@ -1,6 +1,6 @@
 ---
-title: rank_tdigest() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird rank_tdigest() in Azure Data Explorer beschrieben.
+title: rank_tdigest ()-Azure Daten-Explorer
+description: In diesem Artikel wird rank_tdigest () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,37 +8,37 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: ea24213b0ca673c39f399c3a12cc54cd7d7f47d5
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a849cd496d41ad473768b3f267639eaf8c467880
+ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510539"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82741777"
 ---
 # <a name="rank_tdigest"></a>rank_tdigest()
 
-Berechnet den ungefähren Rang des Wertes in einer Menge. Der `v` Wertrang in `S` einem Satz wird `S` als Anzahl der `v`Elemente `S` definiert, deren kleiner oder gleich ist, wird durch seinen tdigest dargestellt.
+Berechnet den ungefähren Rang des Werts in einer Menge. Der Rang des `v` Werts in einer `S` Menge ist als Anzahl von Elementen von `S` definiert, die kleiner oder gleich `v`sind `S` , wird durch die `tdigest`dargestellt.
 
 **Syntax**
 
-`rank_tdigest(`*TDigest* `,` *Expr*`)`
+`rank_tdigest(`*`TDigest`*`,` *`Expr`*`)`
 
 **Argumente**
 
-* *TDigest*: Ausdruck, der von [tdigest()](tdigest-aggfunction.md) oder [tdigest_merge()](tdigest-merge-aggfunction.md) erzeugt wurde
-* *Expr*: Ausdruck, der einen Wert darstellt, der für die Rankingberechnung verwendet werden soll.
+* *Tdigest*: Ausdruck, der von [tdigest ()](tdigest-aggfunction.md) oder [tdigest_merge ()](tdigest-merge-aggfunction.md) generiert wurde.
+* *Expr*: Ausdruck, der einen Wert darstellt, der für die Rang Folge Berechnung verwendet werden soll.
 
 **Rückgabe**
 
-Der Rang für jeden Wert in einem Datensatz.
+Der Rang für foreach-Werte in einem DataSet.
 
 **Tipps**
 
-1) Die Werte, die Sie erhalten möchten, müssen vom gleichen Typ wie der tdigest sein.
+1) Die Werte, deren Rang Sie erhalten möchten, müssen vom gleichen Typ sein wie das `tdigest`.
 
 **Beispiele**
 
-In einer sortierten Liste (1-1000) ist der Rang von 685 der Index:
+In einer sortierten Liste (1-1000) ist der Rang von 685 der zugehörige Index:
 
 ```kusto
 range x from 1 to 1000 step 1
@@ -50,7 +50,7 @@ range x from 1 to 1000 step 1
 |-------------|
 |`685`        |
 
-Diese Abfrage berechnet den Rang des Wertes 4490 " über alle Schadenseigenschaftenkosten:
+Diese Abfrage berechnet den Rang des Werts $4490 für alle Schäden der Schadens Eigenschaften:
 
 ```kusto
 StormEvents
@@ -63,7 +63,7 @@ StormEvents
 |--------------|
 |`50207`       |
 
-Abrufen des geschätzten Prozentsatzes des Rangs (durch Dividieren durch die festgelegte Größe):
+Erzielen des geschätzten Prozentsatzes des Rangs (durch Aufteilen durch die festgelegte Größe):
 
 ```kusto
 StormEvents
@@ -77,7 +77,7 @@ StormEvents
 |`85.0015237192293`|
 
 
-Das Perzentil 85 der Schäden Eigenschaften kosten ist 4490 .
+Das Quantil 85 der Kosten für die Schadens Eigenschaften beträgt $4490:
 
 ```kusto
 StormEvents

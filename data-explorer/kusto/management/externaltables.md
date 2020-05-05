@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 624c0a7f1105ff13642649174f769781f1749598
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.openlocfilehash: c52f0649531678e31310f5a1f4bfb97f99f15857
+ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108070"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82741940"
 ---
 # <a name="external-table-management"></a>Verwaltung externer Tabellen
 
@@ -36,13 +36,13 @@ Die folgenden Befehle sind für _jede_ externe Tabelle (eines beliebigen Typs) r
 
 **Ausgabe**
 
-| Output-Parameter | type   | BESCHREIBUNG                                                         |
+| Output-Parameter | Typ   | Beschreibung                                                         |
 |------------------|--------|---------------------------------------------------------------------|
-| TableName        | Zeichenfolge | Name der externen Tabelle                                             |
-| TableType        | Zeichenfolge | Typ externer Tabelle                                              |
-| Ordner           | Zeichenfolge | Tabellen Ordner                                                     |
-| DocString        | Zeichenfolge | Zeichenfolge, die die Tabelle dokumentiert                                       |
-| Eigenschaften       | Zeichenfolge | JSON-serialisierte Eigenschaften der Tabelle (spezifisch für den Typ der Tabelle) |
+| TableName        | string | Name der externen Tabelle                                             |
+| TableType        | string | Typ externer Tabelle                                              |
+| Ordner           | string | Tabellen Ordner                                                     |
+| DocString        | string | Zeichenfolge, die die Tabelle dokumentiert                                       |
+| Eigenschaften       | string | JSON-serialisierte Eigenschaften der Tabelle (spezifisch für den Typ der Tabelle) |
 
 
 **Beispiele:**
@@ -70,13 +70,13 @@ Die folgenden Befehle sind für _jede_ externe Tabelle (eines beliebigen Typs) r
 
 **Ausgabe**
 
-| Output-Parameter | type   | BESCHREIBUNG                        |
+| Output-Parameter | Typ   | Beschreibung                        |
 |------------------|--------|------------------------------------|
-| TableName        | Zeichenfolge | Name der externen Tabelle            |
-| Schema           | Zeichenfolge | Das Tabellen Schema in einem JSON-Format. |
-| DatabaseName     | Zeichenfolge | Datenbankname der Tabelle             |
-| Ordner           | Zeichenfolge | Tabellen Ordner                    |
-| DocString        | Zeichenfolge | Zeichenfolge, die die Tabelle dokumentiert      |
+| TableName        | string | Name der externen Tabelle            |
+| Schema           | string | Das Tabellen Schema in einem JSON-Format. |
+| DatabaseName     | string | Datenbankname der Tabelle             |
+| Ordner           | string | Tabellen Ordner                    |
+| DocString        | string | Zeichenfolge, die die Tabelle dokumentiert      |
 
 **Beispiele:**
 
@@ -173,7 +173,7 @@ Erstellt oder ändert eine neue externe Tabelle in der Datenbank, in der der Bef
 
 **Optionale Eigenschaften**:
 
-| Eigenschaft         | type     | BESCHREIBUNG       |
+| Eigenschaft         | type     | Beschreibung       |
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | Tabellen Ordner                                                                     |
 | `docString`      | `string` | Zeichenfolge, die die Tabelle dokumentiert                                                       |
@@ -182,6 +182,8 @@ Erstellt oder ändert eine neue externe Tabelle in der Datenbank, in der der Bef
 | `namePrefix`     | `string` | Wenn festgelegt, wird das Präfix der BLOB. Bei Schreibvorgängen werden alle blobvorgänge mit diesem Präfix geschrieben. Bei Lesevorgängen werden nur blobvorgänge mit diesem Präfix gelesen. |
 | `fileExtension`  | `string` | Wenn festgelegt, werden Dateierweiterungen der blobdateien angegeben. Beim Schreiben enden blobnamen mit diesem Suffix. Beim Lesen werden nur blobdateien mit dieser Dateierweiterung gelesen.           |
 | `encoding`       | `string` | Gibt an, wie der Text codiert wird: `UTF8NoBOM` ( `UTF8BOM`Standard) oder.             |
+
+Weitere Informationen zu externen Tabellen Parametern in Abfragen finden Sie unter [artefaktfilterungs-Logik](#artifact-filtering-logic).
 
 > [!NOTE]
 > * Wenn die Tabelle vorhanden ist `.create` , schlägt der Befehl mit einem Fehler fehl. Verwenden `.alter` Sie, um vorhandene Tabellen zu ändern. 
@@ -203,8 +205,7 @@ dataformat=csv
 with 
 (
    docstring = "Docs",
-   folder = "ExternalTables",
-   namePrefix="Prefix"
+   folder = "ExternalTables"
 )  
 ```
 
@@ -221,8 +222,7 @@ dataformat=csv
 with 
 (
    docstring = "Docs",
-   folder = "ExternalTables",
-   namePrefix="Prefix"
+   folder = "ExternalTables"
 )  
 ```
 
@@ -239,8 +239,7 @@ dataformat=csv
 with 
 (
    docstring = "Docs",
-   folder = "ExternalTables",
-   namePrefix="Prefix"
+   folder = "ExternalTables"
 )
 ```
 
@@ -257,8 +256,7 @@ dataformat=csv
 with 
 (
    docstring = "Docs",
-   folder = "ExternalTables",
-   namePrefix="Prefix"
+   folder = "ExternalTables"
 )
 ```
 
@@ -286,6 +284,22 @@ with
 |TableName|TableType|Ordner|DocString|Eigenschaften|ConnectionStrings|Partitionen|
 |---|---|---|---|---|---|---|
 |Externalmultiplepartitions|Blob|Externaltables|Docs|{"Format": "CSV", "Compressed": false, "compressionType": NULL, "File Extension": "CSV", "includeheaders": "None", "Encoding": NULL, "NamePrefix": NULL}|["https://storageaccount.blob.core.windows.net/container1;*******"]}|[{"StringFormat": "CustomerName ={0}", "ColumnName": "CustomerName", "Ordinal": 0}, partitionby ":" 1,00:00:00 "," ColumnName ":" timestamp "," Ordinal ": 1}]|
+
+#### <a name="artifact-filtering-logic"></a>Logik zum Filtern von Artefakten
+
+Beim Abfragen einer externen Tabelle filtert die Abfrage-Engine irrelevante externe Speicher Artefakte (BLOBs) heraus, um die Abfrageleistung zu verbessern. Der Prozess der Iteration von BLOBs und die Entscheidung, ob ein BLOB verarbeitet werden soll, finden Sie unten.
+
+1. Erstellen Sie ein URI-Muster, das eine Stelle darstellt, an der blobspeicher gefunden werden. Anfänglich ist das URI-Muster eine Verbindungs Zeichenfolge, die als Teil der externen Tabellendefinition bereitgestellt wird. Wenn Partitionen definiert sind, werden Sie an das URI-Muster angehängt.
+Wenn die Verbindungs Zeichenfolge z. b `https://storageaccount.blob.core.windows.net/container1` . lautet und die DateTime-Partition `partition by format_datetime="yyyy-MM-dd" bin(Timestamp, 1d)`definiert ist:, ist das entsprechende URI- `https://storageaccount.blob.core.windows.net/container1/yyyy-MM-dd`Muster:, und wir suchen nach BLOB-Speicherorten, die mit diesem Muster übereinstimmen.
+Wenn eine zusätzliche Zeichen folgen Partition `"CustomerId" customerId` definiert ist, lautet das entsprechende URI-Muster wie `https://storageaccount.blob.core.windows.net/container1/yyyy-MM-dd/CustomerId=*`folgt: usw.
+
+2. Überprüfen Sie für alle direkt unter den erstellten URI-Mustern gefundenen *direkt* -blobzuordnungs:
+
+ * Partitionswerte entsprechen Prädikaten, die in einer Abfrage verwendet werden.
+ * Der BLOB-Name `NamePrefix`beginnt mit, wenn eine solche Eigenschaft definiert ist.
+ * Der BLOB-Name `FileExtension`endet mit, wenn eine solche Eigenschaft definiert ist.
+
+Sobald alle Bedingungen erfüllt sind, wird das BLOB von der Abfrage-Engine abgerufen und verarbeitet.
 
 #### <a name="spark-virtual-columns-support"></a>Unterstützung für virtuelle Spark-Spalten
 
@@ -320,9 +334,9 @@ dataformat=parquet
 
 **Ausgabe**
 
-| Output-Parameter | type   | BESCHREIBUNG                       |
+| Output-Parameter | Typ   | Beschreibung                       |
 |------------------|--------|-----------------------------------|
-| Uri              | Zeichenfolge | URI des externen Speicher Artefakts |
+| URI              | string | URI des externen Speicher Artefakts |
 
 **Beispiele:**
 
@@ -332,7 +346,7 @@ dataformat=parquet
 
 **Ausgabe:**
 
-| Uri                                                                     |
+| URI                                                                     |
 |-------------------------------------------------------------------------|
 | `https://storageaccount.blob.core.windows.net/container1/folder/file.csv` |
 
@@ -350,7 +364,7 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 **Beispielausgabe**
 
-| Name     | Variante | Zuordnung                                                           |
+| name     | Variante | Zuordnung                                                           |
 |----------|------|-------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "ColumnType": "int", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "ColumnType": "", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -368,7 +382,7 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 **Beispielausgabe**
 
-| Name     | Variante | Zuordnung                                                                |
+| name     | Variante | Zuordnung                                                                |
 |----------|------|------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "ColumnType": "", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "ColumnType": "", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -390,7 +404,7 @@ Zeigt die Zuordnungen an (alle oder die durch den Namen angegebenen).
 
 **Beispielausgabe**
 
-| Name     | Variante | Zuordnung                                                                         |
+| name     | Variante | Zuordnung                                                                         |
 |----------|------|---------------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "ColumnType": "", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "ColumnType": "", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -425,7 +439,7 @@ Erstellt oder ändert eine externe SQL-Tabelle in der Datenbank, in der der Befe
 
 * *TableName* -Name der externen Tabelle. Muss den Regeln für [Entitäts Namen](../query/schema-entities/entity-names.md)folgen. Eine externe Tabelle kann nicht den gleichen Namen wie eine reguläre Tabelle in derselben Datenbank aufweisen.
 * *Sqltablename* : der Name der SQL-Tabelle.
-* *Sqlserverconnectionstring* : die Verbindungs Zeichenfolge für den SQL-Server. Kann eines der folgenden Elemente sein: 
+* *Sqlserverconnectionstring* : die Verbindungs Zeichenfolge für den SQL-Server. Dabei kann es sich um eine der folgenden Methoden handeln: 
     * **Integrierte Aad** -Authentifizierung`Authentication="Active Directory Integrated"`(): der Benutzer oder die Anwendung authentifiziert sich über Aad bei Kusto, und das gleiche Token wird dann verwendet, um auf den SQL Server Netzwerk Endpunkt zuzugreifen.
     * **Benutzernamen-/Kennwort-Authentifizierung** (`User ID=...; Password=...;`). Wenn die externe Tabelle für den [fortlaufenden Export](data-export/continuous-data-export.md)verwendet wird, muss die Authentifizierung mithilfe dieser Methode durchgeführt werden. 
 
@@ -433,12 +447,12 @@ Erstellt oder ändert eine externe SQL-Tabelle in der Datenbank, in der der Befe
 > Verbindungs Zeichenfolgen und Abfragen, die vertrauliche Informationen enthalten, sollten verdeckt werden, damit Sie bei jeder Kusto-Ablauf Verfolgung ausgelassen werden. Weitere Informationen finden Sie unter verborgene [Zeichen folgen Literale](../query/scalar-data-types/string.md#obfuscated-string-literals) .
 
 **Optionale Eigenschaften**
-| Eigenschaft            | type            | BESCHREIBUNG                          |
+| Eigenschaft            | type            | Beschreibung                          |
 |---------------------|-----------------|---------------------------------------------------------------------------------------------------|
 | `folder`            | `string`        | Der Ordner der Tabelle.                  |
 | `docString`         | `string`        | Eine Zeichenfolge, die die Tabelle dokumentiert.      |
-| `firetriggers`      | `true`/`false`  | Wenn `true`, wird das Zielsystem angewiesen, INSERT-Trigger auszulösen, die für die SQL-Tabelle definiert sind. Der Standardwert lautet `false`. (Weitere Informationen finden Sie unter [Bulk Insert](https://msdn.microsoft.com/library/ms188365.aspx) und [System. Data. SqlClient. SqlBulkCopy](https://msdn.microsoft.com/library/system.data.sqlclient.sqlbulkcopy(v=vs.110).aspx)). |
-| `createifnotexists` | `true`/ `false` | Gibt `true`an, dass die SQL-Ziel Tabelle erstellt wird, wenn Sie nicht bereits vorhanden ist. in `primarykey` diesem Fall muss die-Eigenschaft bereitgestellt werden, um die Ergebnisspalte anzugeben, bei der es sich um den Primärschlüssel handelt. Der Standardwert lautet `false`.  |
+| `firetriggers`      | `true`/`false`  | Wenn `true`, wird das Zielsystem angewiesen, INSERT-Trigger auszulösen, die für die SQL-Tabelle definiert sind. Der Standardwert ist `false`. (Weitere Informationen finden Sie unter [Bulk Insert](https://msdn.microsoft.com/library/ms188365.aspx) und [System. Data. SqlClient. SqlBulkCopy](https://msdn.microsoft.com/library/system.data.sqlclient.sqlbulkcopy(v=vs.110).aspx)). |
+| `createifnotexists` | `true`/ `false` | Gibt `true`an, dass die SQL-Ziel Tabelle erstellt wird, wenn Sie nicht bereits vorhanden ist. in `primarykey` diesem Fall muss die-Eigenschaft bereitgestellt werden, um die Ergebnisspalte anzugeben, bei der es sich um den Primärschlüssel handelt. Der Standardwert ist `false`.  |
 | `primarykey`        | `string`        | Wenn `createifnotexists` den `true`Wert hat, wird der Name der Spalte im Ergebnis angegeben, die als Primärschlüssel der SQL-Tabelle verwendet wird, wenn Sie mit diesem Befehl erstellt wird.                  |
 
 > [!NOTE]

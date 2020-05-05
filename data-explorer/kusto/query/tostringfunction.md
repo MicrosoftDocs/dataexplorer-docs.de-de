@@ -1,6 +1,6 @@
 ---
-title: tostring() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt tostring() in Azure Data Explorer.
+title: "\"$ String ()\": Azure-Daten-Explorer"
+description: In diesem Artikel wird die Zeichenfolge () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 51aaf90b60653a648457dc00200168aec7fbefd9
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 634f54533e83575139d8399124cc068af56d8574
+ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81505881"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82741673"
 ---
 # <a name="tostring"></a>tostring()
 
-Konvertiert Die Eingabe in eine Zeichenfolgendarstellung.
+Konvertiert Eingaben in eine Zeichen folgen Darstellung.
 
 ```kusto
 tostring(123) == "123"
@@ -25,14 +25,14 @@ tostring(123) == "123"
 
 **Syntax**
 
-`tostring(`*Expr*`)`
+`tostring(`*`Expr`*`)`
 
 **Argumente**
 
-* *Expr*: Ausdruck, der in Zeichenfolge konvertiert wird. 
+* *`Expr`*: Ausdruck, der in eine Zeichenfolge konvertiert wird. 
 
 **Rückgabe**
 
-Wenn *Expr-Wert* ist un-NULL-Ergebnis ist, ist eine Zeichenfolgendarstellung von *Expr*.
-Wenn *Expr-Wert* null ist, ist das Ergebnis leere Zeichenfolge.
+Wenn der *`Expr`* Wert nicht NULL ist, ist das Ergebnis eine Zeichen folgen Darstellung von *`Expr`*.
+Wenn der *`Expr`* Wert NULL ist, ist das Ergebnis eine leere Zeichenfolge.
  

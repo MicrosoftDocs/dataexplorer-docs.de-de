@@ -1,6 +1,6 @@
 ---
-title: series_fill_backward() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird series_fill_backward() in Azure Data Explorer beschrieben.
+title: series_fill_backward ()-Azure Daten-Explorer
+description: In diesem Artikel wird series_fill_backward () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,40 +8,40 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b8c3bb09c7067112fd358c94fd46ca85bea31358
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 211ac6cb078e2f61243f4616f9141a6f4834d464
+ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81508737"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82741802"
 ---
 # <a name="series_fill_backward"></a>series_fill_backward()
 
-Führt die Rückwärtsfüllinterpolation fehlender Werte in einer Reihe aus.
+Führt eine rückwärts Füll interpolung von fehlenden Werten in einer Reihe aus.
 
-Nimmt einen Ausdruck, der dynamisches numerisches Array enthält, als Eingabe, ersetzt alle Instanzen von missing_value_placeholder durch den nächsten Wert von der rechten Seite außer missing_value_placeholder und gibt das resultierende Array zurück. Die rechtsten Instanzen von missing_value_placeholder werden beibehalten.
+Ein Ausdruck, der das dynamische numerische Array enthält, ist die Eingabe. Die-Funktion ersetzt alle Instanzen von missing_value_placeholder durch den nächstgelegenen Wert von der rechten Seite (außer missing_value_placeholder) und gibt das resultierende Array zurück. Die am weitesten rechts stehenden Instanzen von missing_value_placeholder werden beibehalten.
 
 **Syntax**
 
-`series_fill_backward(`*x*`[, `*missing_value_placeholder*`])`
-* Gibt die Serie *x* mit allen Instanzen von *missing_value_placeholder* rückwärts gefüllt.
+`series_fill_backward(`*x*`[, `-*missing_value_placeholder*`])`
+* Gibt Series *x* zurück, wobei alle Instanzen von *missing_value_placeholder* rückwärts ausgefüllt werden.
 
 **Argumente**
 
-* *x*: dynamischer Array-Skalarausdruck, der ein Array numerischer Werte ist.
-* *missing_value_placeholder*: optionaler Parameter, der einen Platzhalter für fehlende Werte angibt, die ersetzt werden sollen. Der Standardwert ist `double`(*null*).
+* *x*: Skalarausdruck des dynamischen Arrays, bei dem es sich um ein Array numerischer Werte handelt.
+* *missing_value_placeholder*: mit diesem optionalen Parameter wird ein Platzhalter für fehlende Werte angegeben. Der Standardwert ist `double`(*null*).
 
 **Hinweise**
 
-* Um Interpolationsfunktionen nach [make-Series](make-seriesoperator.md) anzuwenden, wird empfohlen, *NULL* als Standardwert anzugeben: 
+* Geben Sie *null* als Standardwert an, um alle Interpolations Funktionen nach der [make-Serie](make-seriesoperator.md)anzuwenden: 
 
 ```kusto
 make-series num=count() default=long(null) on TimeStamp in range(ago(1d), ago(1h), 1h) by Os, Browser
 ```
 
-* Die *missing_value_placeholder* können von jedem Typ sein, der in tatsächliche Elementtypen konvertiert wird. Daher `double`haben entweder `long`(*null*), (*null*) oder `int`(*null*) die gleiche Bedeutung.
-* Wenn *missing_value_placeholder* missing_value_placeholder `double`ist (*null*) (oder nur weggelassen, die die gleiche Bedeutung haben), dann kann ein Ergebnis *NULL-Werte* enthalten. Verwenden Sie andere Interpolationsfunktionen, um sie auszufüllen. Derzeit unterstützen nur [series_outliers()](series-outliersfunction.md) *NULL-Werte* in Eingabe-Arrays.
-* Die Funktionen behalten den ursprünglichen Typ von Arrayelementen bei.
+* Der *missing_value_placeholder* kann einen beliebigen Typ aufweisen, der in tatsächliche Elementtypen konvertiert wird. Beide `double`(*null*), `long`(*null*) und `int`(*null*) haben dieselbe Bedeutung.
+* Wenn *missing_value_placeholder* ( `double`*null*) ist (oder weggelassen wird, das die gleiche Bedeutung hat), kann ein Ergebnis *null* -Werte enthalten. Um diese *null* -Werte auszufüllen, verwenden Sie andere Interpolations Funktionen. Derzeit unterstützen nur [series_outliers ()](series-outliersfunction.md) *null* -Werte in Eingabe Arrays.
+* Die-Funktion behält den ursprünglichen Typ von Array Elementen bei.
 
 **Beispiel**
 
@@ -56,9 +56,9 @@ data
 
 ```
 
-|Arr|fill_forward|
+|`arr`|`fill_forward`|
 |---|---|
-|[111,null,36,41,null,null,16,61,33,null,null]|[111,36,36,41,16, 16,16,61,33,null,null]|
+|[111, NULL, 36, 41, NULL, NULL, 16, 61, 33, NULL, NULL]|[111, 36, 36, 41, 16, 16, 16, 61, 33, NULL, NULL]|
 
   
-Man kann [series_fill_forward](series-fill-forwardfunction.md) oder [series-fill-const](series-fill-constfunction.md) verwenden, um die Interpolation des obigen Arrays abzuschließen.
+Verwenden Sie [series_fill_forward](series-fill-forwardfunction.md) oder [Series-Fill-Konstanten](series-fill-constfunction.md) , um die interpolung des obigen Arrays abzuschließen.
