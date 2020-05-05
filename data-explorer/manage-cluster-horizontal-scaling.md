@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 12/09/2019
-ms.openlocfilehash: ff7420619cffc2287ab8ff6332df605d56329549
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 18bd73797070ba569d1a43a8c66ab92526682f36
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81494470"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82619158"
 ---
 # <a name="manage-cluster-horizontal-scaling-scale-out-in-azure-data-explorer-to-accommodate-changing-demand"></a>Verwalten des horizontalen Skalierens (Aufskalieren) eines Clusters in Azure Data Explorer zur Anpassung an sich ändernden Bedarf
 
@@ -61,8 +61,6 @@ Wenn sich der Cluster einem Status mit zu hoher Auslastung nähert, wird er aufs
 * Die CPU-Auslastung ist für mehr als eine Stunde hoch.
 * Die Erfassungsauslastung ist seit über einer Stunde hoch.
 
-> [!NOTE]
-> Die Logik für das Aufskalieren berücksichtigt derzeit nicht die Metrik zur Erfassungsauslastung. Wenn diese Metrik für Ihren Anwendungsfall wichtig ist, verwenden Sie die [benutzerdefinierte Autoskalierung](#custom-autoscale).
 
 **Abskalieren**
 
@@ -78,7 +76,7 @@ Wenn sich der Cluster einem Status mit zu niedriger Auslastung nähert, wird er 
     * Die Anzahl der fehlerhaften Abfragen liegt unter einem definierten Mindestwert.
 
 > [!NOTE]
-> Die Logik zum Abskalieren erfordert derzeit eine 7-tägige Auswertung, bevor eine optimierte Abskalierung erfolgt. Diese Auswertung erfolgt einmal alle 24 Stunden. Wenn eine schnelle Änderung erforderlich ist, nutzen Sie die [manuelle Skalierung](#manual-scale).
+> Die Logik zum Abskalieren erfordert derzeit eine eintägige Auswertung, bevor eine optimierte Abskalierung implementiert wird. Diese Auswertung erfolgt einmal alle sechs Stunden. Ist eine sofortige Änderung erforderlich, nutzen Sie die [manuelle Skalierung](#manual-scale).
 
 ### <a name="custom-autoscale"></a>Benutzerdefinierte Autoskalierung
 

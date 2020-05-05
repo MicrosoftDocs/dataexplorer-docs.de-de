@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/24/2020
-ms.openlocfilehash: 99c32122fc48aaea7428fa559d7289713849f34e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 80936da3e56fe0a73dcf146ba61630ceeb4bcb2a
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81494014"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618512"
 ---
 # <a name="create-an-azure-data-explorer-cluster-in-your-virtual-network"></a>Erstellen eines Azure Data Explorer-Clusters in Ihrem virtuellen Netzwerk
 
@@ -79,8 +79,8 @@ So erstellen Sie die Netzwerksicherheitsgruppe:
 So erstellen Sie die öffentlichen IP-Adressen für Abfragen (Engine):
 
 1. Wählen Sie in der linken oberen Ecke des Portals die Schaltfläche **+ Ressource erstellen** aus.
-1. Suchen Sie nach *Netzwerksicherheitsgruppe*.
-1. Wählen Sie unter **Öffentliche IP-Adresse** am unteren Bildschirmrand die Option **Erstellen** aus.
+1. Suchen Sie nach *Öffentliche IP-Adresse*.
+1. Klicken Sie unter **Öffentliche IP-Adresse** auf **Erstellen**.
 1. Geben Sie im Bereich **Öffentliche IP-Adresse erstellen** die folgenden Informationen an:
    
    ![Formular „Öffentliche IP-Adresse erstellen“](media/vnet-create-cluster-portal/public-ip-blade.png)
@@ -92,7 +92,7 @@ So erstellen Sie die öffentlichen IP-Adressen für Abfragen (Engine):
     | Name | engine-pip | Verwenden Sie einen aussagekräftigen Namen für Ihre öffentliche IP-Adresse in der Ressourcengruppe.
     | Subscription | Ihr Abonnement | Wählen Sie das Azure-Abonnement aus, das Sie für Ihre öffentliche IP-Adresse verwenden möchten.|
     | Resource group | Ihre Ressourcengruppe | Verwenden Sie eine vorhandene Ressourcengruppe, oder erstellen Sie eine neue Ressourcengruppe. |
-    | Position | *USA, Westen* | Wählen Sie die Region aus, die Ihre Anforderungen am besten erfüllt.
+    | Standort | *USA, Westen* | Wählen Sie die Region aus, die Ihre Anforderungen am besten erfüllt.
     | | | |
 
 1. Wählen Sie **Erstellen** aus, um die öffentliche IP-Adresse zu erstellen.
@@ -162,4 +162,4 @@ Verwenden Sie die [Azure Resource Manager-Vorlage zum Bereitstellen eines Azur
 ## <a name="next-steps"></a>Nächste Schritte
 
 > [!div class="nextstepaction"]
-> [Bereitstellen von Azure Data Explorer in Ihrem virtuellen Netzwerk](vnet-create-cluster-portal.md)
+> [Bereitstellen von Azure Data Explorer in Ihrem virtuellen Netzwerk](vnet-deployment.md)

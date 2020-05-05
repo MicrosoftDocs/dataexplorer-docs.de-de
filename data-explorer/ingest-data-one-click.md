@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 03/29/2020
-ms.openlocfilehash: 155c4fadfc2892ddd91cc0c355f4f47fe4ce513c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 5f424716a9227f22b4ec5b148d29798b0a55fa27
+ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81491645"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82618376"
 ---
 # <a name="what-is-one-click-ingestion"></a>Was ist die 1-Klick-Erfassung? 
 
@@ -53,10 +53,13 @@ Der Assistent für die 1-Klick-Erfassung leitet Sie durch die 1-Klick-Erfassung.
     ![Wählen Sie auf der Webbenutzeroberfläche die 1-Klick Erfassung aus.](media/ingest-data-one-click/one-click-ingestion-in-webui.png)   
 
 1. Der Assistent führt Sie durch die folgenden Optionen:
-       * Erfassung in einer [vorhandenen Tabelle](one-click-ingestion-existing-table.md)
-       * Erfassung in einer [neuen Tabelle](one-click-ingestion-new-table.md)
-       * Erfassung von Daten aus:      * Blobspeicher      * einer lokalen Datei      * einem Container
-       * Geben Sie die Stichprobengröße ein (1 bis 10.000 Zeilen, nur bei Containern).
+    * Erfassung in einer [vorhandenen Tabelle](one-click-ingestion-existing-table.md)
+    * Erfassung in einer [neuen Tabelle](one-click-ingestion-new-table.md)
+    * Erfassung von Daten aus:
+      * Blob Storage
+      * einer lokalen Datei
+      * einem Container
+    * Geben Sie die Stichprobengröße ein (1 bis 10.000 Zeilen, nur bei Containern).
        
 1. Nach erfolgreicher Auswahl der Datenquelle wird eine Vorschau der Daten angezeigt. 
     Wenn Sie Daten aus einem Container erfassen, können Sie die Daten so filtern, dass nur Dateien mit bestimmten Präfixen oder Dateierweiterungen erfasst werden. Sie können z. B. nur Dateien erfassen, deren Dateinamen mit dem Begriff *Europa* beginnen, oder lediglich Dateien mit der Erweiterung *.json*. 
