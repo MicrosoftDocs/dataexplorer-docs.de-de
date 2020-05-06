@@ -1,6 +1,6 @@
 ---
-title: HowTo Datenerfassung mit Kusto.Ingest-Bibliothek - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt HowTo-Datenerfassung mit Kusto.Ingest Library in Azure Data Explorer.
+title: Datenerfassung mit Kusto. Erfassungs Bibliothek-Azure Daten-Explorer
+description: Dieser Artikel beschreibt die Erfassung von Daten mit der Kusto. Erfassungs Bibliothek von Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/05/2020
-ms.openlocfilehash: 80b2b61c70269c5bd166a064fe9d0e2c59dd8197
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: fe268d19e5f42308737b7c392c58c6c1dca071b3
+ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523629"
+ms.lasthandoff: 05/05/2020
+ms.locfileid: "82799610"
 ---
-# <a name="howto-data-ingestion-with-kustoingest-library"></a>HowTo Datenerfassung mit Kusto.Ingest Library
-In diesem Artikel wird Beispielcode dargestellt, der die Kusto.Ingest-Clientbibliothek verwendet.
+# <a name="data-ingestion-with-the-kustoingest-library"></a>Datenerfassung mit der Kusto. Erfassungs Bibliothek
 
-## <a name="overview"></a>Übersicht
-Das folgende Codebeispiel veranschaulicht die Datenerfassung von Queued (über Kusto Data Management Service) an Kusto mithilfe der Kusto.Ingest-Bibliothek.
+Dieser Artikel enthält Beispielcode, in dem die Kusto. Erfassungs-Client Bibliothek für die Datenerfassung verwendet wird. Der Code erläutert den empfohlenen Erfassungs Modus für Pipelines auf Produktionsbasis, die als Erfassung in der Warteschlange bezeichnet werden. Die zugehörige Entität für die Kusto. Erfassungs Bibliothek ist die [ikustoqueuedingestclient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) -Schnittstelle. Der Client Code interagiert mit dem Azure-Daten-Explorer Dienst, indem Erfassungs Benachrichtigungen an eine Azure-Warteschlange gesendet werden. Der Verweis auf die Warteschlange wird von der Datenverwaltung Entität abgerufen, die für die Erfassung verantwortlich ist. 
 
-> Dieser Artikel befasst sich mit dem empfohlenen Erfassungsmodus für Pipelines für Produktionsqualität, der auch als **Queued Ingestion** bezeichnet wird (in Bezug auf die Kusto.Ingest-Bibliothek ist die entsprechende Entität die [IKustoQueuedIngestClient-Schnittstelle).](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) In diesem Modus interagiert der Clientcode mit dem Kusto-Dienst, indem er Erfassungsbenachrichtigungen in einer Azure-Warteschlange sendet, auf die verwiesen wird, die von der Kusto-Datenverwaltung (auch bekannt als "Kusto Data Management") abgerufen wird. Verunstesung) Service. Die Interaktion mit dem Datenverwaltungsdienst muss mit **AAD**authentifiziert werden.
+> [!NOTE]
+> Die Interaktion mit dem Datenverwaltung-Dienst muss mithilfe Azure Active Directory (Azure AD) authentifiziert werden.
 
-#### <a name="authentication"></a>Authentifizierung
-Dieses Codebeispiel verwendet die AAD-Benutzerauthentifizierung und wird unter der Identität des interaktiven Benutzers ausgeführt.
+Das Beispiel verwendet Azure AD Benutzerauthentifizierung und wird unter der Identität des interaktiven Benutzers ausgeführt.
 
 ## <a name="dependencies"></a>Abhängigkeiten
-Dieser Beispielcode erfordert die folgenden NuGet-Pakete:
-* Microsoft.Kusto.Ingest
+
+Dieser Beispielcode erfordert die folgenden nuget-Pakete:
+* Microsoft. Kusto. Erfassung
 * Microsoft.IdentityModel.Clients.ActiveDirectory
 * WindowsAzure.Storage
 * Newtonsoft.Json
 
 ## <a name="namespaces-used"></a>Verwendete Namespaces
+
 ```csharp
 using System;
 using System.Collections.Generic;
@@ -46,14 +46,15 @@ using Kusto.Ingest;
 ```
 
 ## <a name="code"></a>Code
-Der unten dargestellte Code führt Folgendes aus:
-1. Erstellt eine `KustoLab` Tabelle im freigegebenen Kusto-Cluster unter `KustoIngestClientDemo` Datenbank
-2. Stellt ein [JSON-Spaltenzuordnungsobjekt](../../management/create-ingestion-mapping-command.md) für diese Tabelle zur Zeit ein
-3. Erstellt eine [IKustoQueuedIngestClient-Instanz](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) für den `Ingest-KustoLab` Datenverwaltungsdienst
-4. Richtet [KustoQueuedIngestionProperties](kusto-ingest-client-reference.md#class-kustoqueuedingestionproperties) mit entsprechenden Aufnahmeoptionen ein
-5. Erstellt einen MemoryStream, der mit einigen generierten Daten gefüllt ist, die aufgenommen werden sollen
-6. Erfasst die Daten `KustoQueuedIngestClient.IngestFromStream` mithilfe der Methode
-7. Umfragen zu [Einnahmefehlern](kusto-ingest-client-status.md#tracking-ingestion-status-kustoqueuedingestclient)
+
+Der Code bewirkt Folgendes:
+1. Erstellt eine Tabelle auf dem `KustoLab` freigegebenen Azure Daten-Explorer-Cluster `KustoIngestClientDemo` unter der Datenbank.
+2. Stellt ein [JSON-Spalten Zuordnung-Objekt](../../management/create-ingestion-mapping-command.md) für diese Tabelle bereit.
+3. Erstellt eine [ikustoqueuedingestclient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) -Instanz für `Ingest-KustoLab` den Datenverwaltung-Dienst.
+4. Richtet [kustoqueuedingestionproperties](kusto-ingest-client-reference.md#class-kustoqueuedingestionproperties) mit den entsprechenden Erfassungs Optionen ein.
+5. Erstellt einen MemoryStream mit einigen generierten Daten, die erfasst werden sollen.
+6. Erfassen der Daten mithilfe der `KustoQueuedIngestClient.IngestFromStream` -Methode
+7. Fragt nach Erfassungs [Fehlern](kusto-ingest-client-status.md#tracking-ingestion-status-kustoqueuedingestclient) ab.
 
 ```csharp
 static void Main(string[] args)

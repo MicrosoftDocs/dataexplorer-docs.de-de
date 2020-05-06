@@ -1,6 +1,6 @@
 ---
-title: Kusto.Ingest Referenz - AnserbungscodeBeispiele - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden Beispiele für Kusto.Ingest Reference - Ingestion Code in Azure Data Explorer beschrieben.
+title: Kusto. Erfassungs Referenz-Erfassungs Code Beispiele-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel werden die Beispiele für die Erfassung von Verweis Erfassungs Code in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/15/2019
-ms.openlocfilehash: d9314d3b9db5638a56def637e85027d4cc074d09
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: ba3232ca1c8a3f587f53ee1c3c6aad3fc12283ad
+ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81502617"
+ms.lasthandoff: 05/05/2020
+ms.locfileid: "82799678"
 ---
-# <a name="kustoingest-reference---ingestion-code-examples"></a>Kusto.Ingest Reference - Ingestion Code Beispiele
-Dies ist eine Sammlung von KurzenCodeausschnitten, die verschiedene Techniken zum Einziehen von Daten in eine Kusto-Tabelle demonstrieren.
+# <a name="kustoingest-reference---ingestion-code-examples"></a>Kusto. Erfassungs Verweis-Code Beispiele für die Erfassung
+Dies ist eine Sammlung kurzer Code Ausschnitte, die verschiedene Techniken zum Erfassen von Daten in einer Kusto-Tabelle demonstrieren.
 
->Zur Erinnerung: Diese Beispiele sehen so aus, als ob der Aufnahmeclient unmittelbar nach der Einnahme zerstört wird. Bitte nehmen Sie dies nicht wörtlich.<BR>Ingest-Clients sind reentrant, threadsicher und sollten nicht in großer Anzahl erstellt werden. Die empfohlene Kardinalität von Aufnahmeclientinstanzen ist eine pro Hostingprozess pro Kusto-Zielcluster.
+>Erinnerung: Diese Beispiele sehen so aus, als ob der Erfassungs Client sofort nach der Erfassung zerstört wird. Verwenden Sie dies nicht wörtlich.<BR>Erfassungs Clients sind Wiedereinstiegs fähig, Thread sicher und sollten nicht in großen Zahlen erstellt werden. Die empfohlene Kardinalität der Erfassungs Client Instanzen ist eine pro Hostingprozess pro Ziel-Kusto-Cluster.
 
-### <a name="useful-references"></a>Nützliche Referenzen
-* [Kusto.Ingest Client-Referenz](kusto-ingest-client-reference.md)
-* [Kusto.Ingest-Betriebsstatus](kusto-ingest-client-errors.md)
-* [Kusto.Ingest Ausnahmen](kusto-ingest-client-errors.md)
+### <a name="useful-references"></a>Hilfreiche Verweise
+* [Kusto. Erfassungs Client Verweis](kusto-ingest-client-reference.md)
+* [Kusto. Erfassungs Vorgangs Status](kusto-ingest-client-errors.md)
+* [Kusto. Erfassungs Ausnahmen](kusto-ingest-client-errors.md)
 * [Kusto-Verbindungszeichenfolgen](../connection-strings/kusto.md)
-* [Kusto-Autorisierungsmodell](../../management/security-roles.md)
+* [Kusto-Autorisierungs Modell](../../management/security-roles.md)
 
-### <a name="async-ingestion-from-a-single-azure-blob-using-kustoqueuedingestclient-with-optional-retrypolicy"></a>Async-Aufnahme aus einem einzelnen Azure-Blob mit KustoQueuedIngestClient mit (optional) RetryPolicy:
+### <a name="async-ingestion-from-a-single-azure-blob-using-kustoqueuedingestclient-with-optional-retrypolicy"></a>Asynchrone Erfassung von einem einzelnen Azure-BLOB mithilfe von kustoqueuedingestclient mit (optional) retrypolicy:
 ```csharp
 //Create Kusto connection string with App Authentication
 var kustoConnectionStringBuilderDM =
@@ -56,7 +56,10 @@ await client.IngestFromStorageAsync(uri: @"BLOB-URI-WITH-SAS-KEY", ingestionProp
 client.Dispose();
 ```
 
-### <a name="ingest-from-local-file-using-kustodirectingestclient-only-for-test-purposes"></a>Von der lokalen Datei mit KustoDirectIngestClient aufnehmen (nur zu Testzwecken):
+### <a name="ingest-from-local-file-using-kustodirectingestclient"></a>Erfassung aus lokaler Datei mithilfe von kustodirectingestclient 
+
+Diese Methode wird für ein begrenztes Volume und eine Erfassung mit geringer Frequenz empfohlen.
+
 ```csharp
 // Create Kusto connection string with App Authentication
 var kustoConnectionStringBuilderEngine =
@@ -75,7 +78,7 @@ using (IKustoIngestClient client = KustoIngestFactory.CreateDirectIngestClient(k
 }
 ```
 
-### <a name="ingest-from-local-files-using-kustoqueuedingestclient-and-ingestion-validation"></a>Aufnahme von lokalen Dateien mit KustoQueuedIngestClient und Inestion Validation 
+### <a name="ingest-from-local-files-using-kustoqueuedingestclient-and-ingestion-validation"></a>Erfassung von lokalen Dateien mithilfe von kustoqueuedingestclient und Erfassungs Validierung 
 ```csharp
 // Create Kusto connection string with App Authentication
 var kustoConnectionStringBuilderDM =
@@ -107,7 +110,7 @@ Ensure.IsTrue((ingestionFailures.Count() > 0), "Failures expected");
 client.Dispose();
 ```
 
-### <a name="ingest-from-a-local-files-using-kustoqueuedingestclient-and-report-status-to-a-queue"></a>Von lokalen Dateien mit KustoQueuedIngestClient und Berichtsstatus an eine Warteschlange erfassen
+### <a name="ingest-from-a-local-files-using-kustoqueuedingestclient-and-report-status-to-a-queue"></a>Erfassen von lokalen Dateien mithilfe von kustoqueuedingestclient und melden des Status an eine Warteschlange
 
 ```csharp
 // Create Kusto connection string with App Authentication
@@ -154,7 +157,7 @@ Ensure.ConditionIsMet((ingestionSuccesses.Count() > 0),
 client.Dispose();
 ```
 
-### <a name="ingest-from-a-local-file-using-kustoqueuedingestclient-and-report-status-to-a-table"></a>Von einer lokalen Datei mit KustoQueuedIngestClient und Berichtsstatus in einer Tabelle erfassen
+### <a name="ingest-from-a-local-file-using-kustoqueuedingestclient-and-report-status-to-a-table"></a>Erfassung aus einer lokalen Datei mithilfe von kustoqueuedingestclient und Berichts Status zu einer Tabelle
 
 ```csharp
 // Create Kusto connection string with App Authentication

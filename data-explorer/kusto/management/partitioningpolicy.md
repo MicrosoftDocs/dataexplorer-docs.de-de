@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: e03ff6fe7ffb65d11b59cc98f150df617d42932d
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 7440b42599d8559db547762daa5f8edcc24ea46f
+ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82616371"
+ms.lasthandoff: 05/05/2020
+ms.locfileid: "82799440"
 ---
 # <a name="data-partitioning-policy-preview"></a>Richtlinie für die Daten Partitionierung (Vorschau)
 
@@ -22,8 +22,7 @@ Die Partitionierungs Richtlinie definiert, ob und wie Blöcke [(datenshards)](..
 > [!NOTE]
 > Die Daten Partitionierungsfunktion befindet sich in der *Vorschau*Phase.
 
-Der Hauptzweck der Richtlinie besteht darin, die Leistung von Abfragen zu verbessern, die bekanntermaßen zu einer kleinen Teilmenge der Werte in den partitionierten Spalten reduziert werden.
-Ein sekundärer potenzieller Vorteil ist eine bessere Komprimierung der Daten.
+Der Hauptzweck der Richtlinie besteht darin, die Leistung von Abfragen zu verbessern, die bekanntermaßen zu einer kleinen Teilmenge von Werten in den partitionierten Spalten (n) und/oder Aggregat/Join für eine Spalte mit hoher kardinalitätszeichenfolge reduziert werden. Ein sekundärer potenzieller Vorteil ist eine bessere Komprimierung der Daten.
 
 > [!WARNING]
 > Es sind zwar keine hart codierten Grenzwerte für die Tabellen Menge festgelegt, für die die Richtlinie definiert ist, aber jede zusätzliche Tabelle erhöht den mehr Aufwand für den Hintergrunddaten Partitionierungs Prozess, der auf den Knoten des Clusters ausgeführt wird, und erfordert möglicherweise zusätzliche Ressourcen aus dem Cluster (siehe [Kapazität](#capacity)).

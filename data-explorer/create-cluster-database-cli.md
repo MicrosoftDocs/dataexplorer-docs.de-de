@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 06/03/2019
-ms.openlocfilehash: 342ba4a72ec365b3b3272cb073fd950112118973
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: cd503948d2f48a0ca431b7e1ce9fbe5c178fc542
+ms.sourcegitcommit: 72eaa9e5169d79507ceb6ead4a2eb703121c2190
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492890"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774968"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-azure-cli"></a>Erstellen eines Azure Data Explorer-Clusters und einer Datenbank über die Azure-Befehlszeilenschnittstelle
 
@@ -55,14 +55,15 @@ Die folgenden Schritte sind nicht erforderlich, wenn Sie Befehle in Azure Cloud 
 1. Erstellen Sie Ihren Cluster mit dem folgenden Befehl:
 
     ```azurecli-interactive
-    az kusto cluster create --name azureclitest --sku D11_v2 --resource-group testrg
+    az kusto cluster create --name azureclitest --sku name="Standard_D13_v2" tier="Standard" --resource-group testrg --location westus
     ```
 
    |**Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**|
    |---|---|---|
    | name | *azureclitest* | Der gewünschte Name Ihres Clusters.|
-   | sku | *D13_v2* | Die SKU, die für Ihren Cluster verwendet wird. |
+   | sku | *Standard_D13_v2* | Die SKU, die für Ihren Cluster verwendet wird. Parameter: *name*: Der SKU-Name *tier*: Die SKU-Ebene |
    | resource-group | *testrg* | Der Name der Ressourcengruppe, in der der Cluster erstellt werden soll |
+   | location | *westus* | Der Standort, an dem der Cluster erstellt wird. |
 
     Sie können auch noch weitere optionale Parameter verwenden, etwa die Kapazität des Clusters.
 
@@ -79,16 +80,15 @@ Wenn das Ergebnis `provisioningState` mit dem Wert `Succeeded` enthält, wurde d
 1. Erstellen Sie Ihre Datenbank mit dem folgenden Befehl:
 
     ```azurecli-interactive
-    az kusto database create --cluster-name azureclitest --name clidatabase --resource-group testrg --soft-delete-period P365D --hot-cache-period P31D
+    az kusto database create --cluster-name azureclitest --database-name clidatabase --resource-group testrg --read-write-database soft-delete-period=P365D hot-cache-period=P31D location=westus
     ```
 
    |**Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**|
    |---|---|---|
    | cluster-name | *azureclitest* | Der Name Ihres Clusters, in dem die Datenbank erstellt werden soll.|
-   | name | *clidatabase* | Der Name Ihrer Datenbank.|
+   | database-name | *clidatabase* | Der Name Ihrer Datenbank.|
    | resource-group | *testrg* | Der Name der Ressourcengruppe, in der der Cluster erstellt werden soll |
-   | soft-delete-period | *P365D* | Gibt den Zeitraum an, wie lange Daten für Abfragen verfügbar sein sollen. Weitere Informationen finden Sie unter [Aufbewahrungsrichtlinie](kusto/management/retentionpolicy.md). |
-   | hot-cache-period | *P31D* | Gibt den Zeitraum an, wie lange Daten im Cache verfügbar sein sollen. Weitere Informationen finden Sie unter [Cacherichtlinie](kusto/management/cachepolicy.md). |
+   | read-write-database | *P365D* *P31D* *westus* | Der Datenbanktyp. Parameter: *soft-delete-period*: Gibt den Zeitraum an, wie lange Daten für Abfragen verfügbar sein sollen. Weitere Informationen finden Sie unter [Aufbewahrungsrichtlinie](kusto/management/retentionpolicy.md). *hot-cache-period*: Gibt den Zeitraum an, wie lange Daten im Cache verfügbar sein sollen. Weitere Informationen finden Sie unter [Cacherichtlinie](kusto/management/cachepolicy.md). *location*: Der Standort, an dem die Datenbank erstellt wird. |
 
 1. Führen Sie den folgenden Befehl aus, um die erstellte Datenbank anzuzeigen:
 

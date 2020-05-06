@@ -1,5 +1,5 @@
 ---
-title: Einbetten der Webbenutzer Oberfläche in ein **iframe** -Azure-Daten-Explorer | Microsoft-Dokumentation
+title: Einbetten der Webbenutzer Oberfläche in ein **iframe** -Azure-Daten-Explorer
 description: In diesem Artikel wird die Einbettung der Webbenutzer Oberfläche in einem **iframe** in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 7b7bb181f640eb259b32f3a5814290a218006418
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: c6b9d1d5cb971b5c9c51cf9f9918562f12323a03
+ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617951"
+ms.lasthandoff: 05/05/2020
+ms.locfileid: "82799661"
 ---
 # <a name="embed-web-ui-in-an-iframe"></a>Einbetten der Webbenutzer Oberfläche in einen iframe
 
@@ -21,11 +21,11 @@ Die Azure Daten-Explorer-Webbenutzer Oberfläche kann in einen iframe eingebette
 
 ![alt text](../images/web-ux.jpg "Azure Daten-Explorer-Webbenutzer Oberfläche")
 
-Durch das Einbetten der Azure-Daten-Explorer Web-UX auf Ihrer Website können Ihre Benutzer folgende Aktionen ausführen:
+Durch das Einbetten der Azure Daten-Explorer Web-UX auf Ihrer Website können Ihre Benutzer Folgendes tun:
 
 - Bearbeiten von Abfragen (enthält alle sprach Features wie z. b. farbige Farbgebung und IntelliSense)
 - Visuelles Durchsuchen von Tabellen Schemas
-- Authentifizieren bei Aad
+- Authentifizieren bei Azure AD
 - Ausführen von Abfragen
 - Anzeigen der Ergebnisse der Abfrage Ausführung
 - Erstellen mehrerer Registerkarten
@@ -36,9 +36,9 @@ Alle Funktionen werden auf Barrierefreiheit getestet und unterstützen dunkle un
 
 ## <a name="use-monaco-kusto-or-embed-the-web-ui"></a>Verwenden Sie Monaco-Kusto, oder Betten Sie die Webbenutzer Oberfläche ein?
 
-Monaco-Kusto bietet Ihnen eine Bearbeitungsmethode, z. b. Vervollständigung, Farbgebung, Umgestaltung, umbenennen und gehe zu Definition. Es erfordert, dass Sie eine Lösung für die Authentifizierung, Abfrage Ausführung, Ergebnisanzeige und Schema Untersuchung erstellen, bietet Ihnen jedoch volle Flexibilität, um die Benutzer Funktionen zu gestalten, die Ihren Anforderungen entsprechen.
+Monaco-Kusto verbessert die Bearbeitungsfunktionen mit Vervollständigung, Farbgebung, Umgestaltung, umbenennen und gehe zu Definition. Damit können Sie eine Lösung für die Authentifizierung, die Abfrage Ausführung, die Ergebnisanzeige und die Schema Untersuchung erstellen. Monaco-Kusto bietet Ihnen außerdem volle Flexibilität, um die Benutzer Leistung zu gestalten, die Ihren Anforderungen entspricht.
 
-Durch das Einbetten der Azure-Daten-Explorer-Webbenutzer Oberfläche werden umfassende Funktionen mit geringem Aufwand angeboten, aber die Flexibilität in Bezug auf die Benutzeroberfläche ist eingeschränkt. Es gibt einen festgelegten Satz von Abfrage Parametern, die eine eingeschränkte Kontrolle über das Aussehen und Verhalten des Systems ermöglichen.
+Durch das Einbetten der Azure-Daten-Explorer-Webbenutzer Oberfläche werden umfassende Funktionen mit geringem Aufwand geboten. Das Einbetten führt jedoch auch zu einer begrenzten Flexibilität bei der Benutzer Leistung. Es gibt einen festgelegten Satz von Abfrage Parametern, die Ihnen die eingeschränkte Kontrolle über das Aussehen und Verhalten des Systems ermöglicht.
 
 ## <a name="how-to-embed-the-web-ui-in-an-iframe"></a>Einbetten der Webbenutzer Oberfläche in einen iframe
 
@@ -91,26 +91,26 @@ Ersetzen `<cluster>` Sie dies durch den Hostnamen des Clusters, den Sie in den V
 
 ### <a name="feature-flags"></a>Featureflags
 
-Die Hostinganwendung möchte möglicherweise bestimmte Aspekte des Benutzer Erlebnisses steuern. Blenden Sie z. b. den Verbindungsbereich aus, oder deaktivieren Sie das Herstellen einer Verbindung mit anderen Clustern.
+Die Hostinganwendung möchte möglicherweise bestimmte Aspekte der Benutzerumgebung steuern, z. b. den Verbindungsbereich ausblenden oder das Herstellen einer Verbindung mit anderen Clustern deaktivieren.
 In diesem Szenario unterstützt der Webexplorer Merkmals Flags.
 
 Ein Merkmals Flag kann in der URL als Abfrage Parameter verwendet werden. Wenn die Host Anwendung z. b. das Hinzufügen anderer Cluster deaktivieren möchte, sollten Siehttps://dataexplorer.azure.com/?ShowConnectionButtons=false
 
-| Festlegen                 | BESCHREIBUNG                                                                                                                                                                                                                                                                                       | Standardwert |
-| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| Showsharemenu           | Menü Element "freigeben" anzeigen                                                                                                                                                                                                                                                                          | true          |
-| Showconnectionbuttons   | Anzeigen der Schaltfläche " **Verbindung hinzufügen** " zum Hinzufügen eines neuen Clusters                                                                                                                                                                                                                                               | true          |
-| Showopennewwindowbutton | Anzeigen der Schaltfläche **in Webbenutzer Oberfläche öffnen** , mit der ein neues Browserfenster geöffnet wird https://dataexplorer.azure.com , auf das mit dem richtigen Cluster und der richtigen Datenbank im Bereich gezeigt wird                                                                                                                                   | false         |
-| Showfilemenu            | Menü "Datei" anzeigen (**herunterladen**, **Tab**, **Inhalt**usw.)                                                                                                                                                                                                                                                     | true          |
-| Showtos                 | Anzeigen des **Links zu den Nutzungsbedingungen für Azure Daten-Explorer über** das Dialogfeld "Einstellungen"                                                                                                                                                                                                                | true          |
-| Showpersona             | Zeigen Sie den Benutzernamen im Menü "Einstellungen" in der oberen rechten Ecke an.                                                                                                                                                                                                                                         | true          |
-| Iframeauth              | Wenn true, erwartet der Webexplorer, dass der iframe die Authentifizierung behandelt und ein Token über eine Nachricht bereitstellt. Dieser Prozess ist für iframe-Szenarien immer "true".                                                                                                                                              | false         |
-| Persistaftereachrun     | Normalerweise wird der Webexplorer im Entlade Ereignis beibehalten (Beachten Sie, dass beim Hosting in iframes nicht immer ausgelöst wird). Dieses Flag löst dann das Beibehalten des **lokalen Zustands** nach der Ausführung jeder Abfrage aus. Daher wirkt sich der auftretende Datenverlust nur auf Text aus, der nie ausgeführt wurde, wodurch die Auswirkung eingeschränkt wird. | false         |
-| Showsmooththingestion     | Bei "true" wird die einklickerfassungs-Erfassung angezeigt, wenn Sie mit der rechten Maustaste auf eine Datenbank klicken                                                                                                                                                                                                                  | true          |
-| Aktuerfrischendes Verbindung       | True gibt an, dass das Schema beim Laden der Seite immer aktualisiert und nie vom lokalen Speicher abhängig ist.                                                                                                                                                                                                      | false         |
-| Showpageheader          | Wenn der Wert true ist, wird der Seitenkopf (einschließlich der Titel und Einstellungen der Azure-Daten-Explorer) angezeigt.                                                                                                                                                                                                 | true          |
-| Hideconnectionpane      | True gibt an, dass der linke Verbindungsbereich nicht angezeigt wird.                                                                                                                                                                                                                                               | false         |
-| Skipmonacofocusoninit   | Korrigiert des Fokus Problems beim Hosten auf IFRAME                                                                                                                                                                                                                                                          | false         |
+| Einstellung                 | BESCHREIBUNG                    | Standardwert |
+| ----------------------- | ------------------------------ | ------------- |
+| Showsharemenu           | Menü Element "freigeben" anzeigen       | true          |
+| Showconnectionbuttons   | Schaltfläche " **Verbindung hinzufügen** " anzeigen, die einen neuen Cluster hinzufügt                                                                                                              | true          |
+| Showopennewwindowbutton | Zeigt die Schaltfläche **in Web öffnen an, mit** der ein neues Browserfenster geöffnet wird. Das Fenster zeigt auf https://dataexplorer.azure.com mit dem richtigen Cluster und der richtigen Datenbank im Gültigkeitsbereich.                                                                                                                        | false         |
+| Showfilemenu            | Menü "Datei" anzeigen (**herunterladen**, **Tab**, **Inhalt**usw.)                                                                                                      | true          |
+| Showtos                 | Anzeigen des **Links zu den Nutzungsbedingungen für Azure Daten-Explorer über** das Dialogfeld "Einstellungen"                                                                                  | true          |
+| Showpersona             | Zeigen Sie den Benutzernamen im Menü "Einstellungen" in der oberen rechten Ecke an.                                                                                                      | true          |
+| Iframeauth              | Wenn true, erwartet der Webexplorer, dass der iframe die Authentifizierung behandelt und ein Token über eine Nachricht bereitstellt. Dieser Prozess ist für iframe-Szenarien immer "true".      | false         |
+| Persistaftereachrun     | Normalerweise wird der Webexplorer im Entlade Ereignis beibehalten (Beachten Sie, dass beim Hosting in iframes nicht immer ausgelöst wird). Dieses Flag löst dann das Beibehalten des **lokalen Zustands** nach der Ausführung jeder Abfrage aus. Jeglicher auftretende Datenverlust wirkt sich nur auf Text aus, der nie ausgeführt wurde, und schränkt seine Auswirkung ein. | false         |
+| Showsmooththingestion     | Bei "true" wird die einklickerfassungs-Erfassung angezeigt, wenn Sie mit der rechten Maustaste auf eine Datenbank klicken                                                                                        | true          |
+| Aktuerfrischendes Verbindung       | True gibt an, dass das Schema beim Laden der Seite immer aktualisiert und nie vom lokalen Speicher abhängig ist.                                                                          | false         |
+| Showpageheader          | Wenn der Wert true ist, wird der Seitenkopf (einschließlich der Titel und Einstellungen der Azure-Daten-Explorer) angezeigt.                                                                              | true          |
+| Hideconnectionpane      | True gibt an, dass der linke Verbindungsbereich nicht angezeigt wird.                                                                                                                      | false         |
+| Skipmonacofocusoninit   | Korrigiert des Fokus Problems beim Hosten auf IFRAME                                                                                                                            | false         |
 
 ### <a name="feature-flag-presets"></a>Funktions Kennzeichen-Voreinstellungen
 

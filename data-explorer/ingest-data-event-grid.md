@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 06/03/2019
-ms.openlocfilehash: ba7305eca81ed405f2a577c4a994133509429564
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 69779e42f14a1dfc512d8752f2cc9989897b2cc6
+ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493926"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82741969"
 ---
 # <a name="ingest-blobs-into-azure-data-explorer-by-subscribing-to-event-grid-notifications"></a>Erfassen von Blobs in Azure Data Explorer durch das Abonnieren von Event Grid-Benachrichtigungen
 
@@ -56,9 +56,11 @@ In diesem Artikel wird beschrieben, wie Sie ein [Azure Event Grid](/azure/event-
 
 1. Wählen Sie die Registerkarte **Filter** aus, wenn Sie Dateien aus einem bestimmten Container nachverfolgen möchten. Legen Sie die Filter für die Benachrichtigungen wie folgt fest:
     * Das Feld **Betreff beginnt mit** ist das *Literalpräfix* des Blobcontainers. Da das angewendete Muster *startswith* ist, kann es mehrere Container umfassen. Platzhalter sind nicht zulässig.
-     Das Feld *muss* wie folgt festgelegt werden: *`/blobServices/default/containers/`* [Containerpräfix]
+        * Zum Definieren eines Filters für den Blobcontainer *muss* das Feld wie folgt festgelegt werden: *`/blobServices/default/containers/[container prefix]`* . 
+        * Zum Definieren eines Filters für ein Blobpräfix (oder einen Ordner in ADLS Gen2) *muss* das Feld wie folgt festgelegt werden: *`/blobServices/default/containers/[container name]/blobs/[folder/blob prefix]`* . 
     * Das Feld **Betreff endet auf** ist das *literale* Suffix des Blobs. Platzhalter sind nicht zulässig.
-
+    * Ausführlichere Informationen zum Filtern von Ereignissen finden Sie unter [Blob Storage-Ereignissen](https://docs.microsoft.com/azure/storage/blobs/storage-blob-event-overview#filtering-events). 
+    
 ## <a name="create-a-target-table-in-azure-data-explorer"></a>Erstellen einer Zieltabelle im Azure-Daten-Explorer
 
 Erstellen Sie in Azure Data Explorer eine Tabelle, an die Event Hubs Daten senden kann. Erstellen Sie die Tabelle in dem Cluster und der Datenbank, den bzw. die Sie unter „Voraussetzungen“ vorbereitet haben.
