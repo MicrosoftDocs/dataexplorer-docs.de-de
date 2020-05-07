@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 7d2b89e0723bbecb29ffd582ae20c2ee41199e45
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 072c908109fecb695a8961c546deb756caf830ab
+ms.sourcegitcommit: 98eabf249b3f2cc7423dade0f386417fb8e36ce7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618495"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82868702"
 ---
 # <a name="update-policy"></a>Aktualisieren von Richtlinien
 
@@ -44,7 +44,7 @@ Update Richtlinien treten in Kraft, wenn Daten erfasst oder verschoben werden (B
 Einer Tabelle können NULL, ein oder mehrere Update-Richtlinien Objekte zugeordnet sein.
 Jedes dieser Objekte wird als JSON-Eigenschaften Behälter dargestellt, wobei die folgenden Eigenschaften definiert sind:
 
-|Eigenschaft |type |BESCHREIBUNG  |
+|Eigenschaft |Typ |BESCHREIBUNG  |
 |---------|---------|----------------|
 |isEnabled                     |`bool`  |Gibt an, ob die Update Richtlinie aktiviert (true) oder deaktiviert (false) ist.                                                                                                                               |
 |`Source`                        |`string`|Name der Tabelle, in der die Aktualisier Ende Aktualisierungs Richtlinie ausgelöst wird                                                                                                                                 |
@@ -52,19 +52,22 @@ Jedes dieser Objekte wird als JSON-Eigenschaften Behälter dargestellt, wobei di
 |"IsTransactional"               |`bool`  |Gibt an, ob es sich um eine transaktionale Update Richtlinie handelt (Standardwert: false). Fehler beim Ausführen einer Richtlinie für transaktionale Updates, weil die Quell Tabelle nicht ebenfalls mit neuen Daten aktualisiert wird.   |
 |Propagateingestionproperties  |`bool`  |Gibt an, ob Erfassungs Eigenschaften (Block-und Erstellungszeit), die während der Erfassung in der Quell Tabelle angegeben werden, auch auf die in der abgeleiteten Tabelle festgelegten Werte angewendet werden sollen.                 |
 
-> [!NOTE]
->
-> * Die Quell Tabelle und die Tabelle, für die die Update Richtlinie definiert ist, **müssen sich in derselben Datenbank**befinden.
-> * Die Abfrage enthält möglicherweise **keine** datenbankübergreifenden und Cluster übergreifenden Abfragen.
-> * Die Abfrage kann gespeicherte Funktionen aufrufen.
-> * Die Abfrage wird automatisch so festgelegt, dass nur die neu erfassten Datensätze abgedeckt werden.
-> * Kaskadierende Updates sind zulässig (TableA--`[update]`-> TableB--`[update]`--> TableC--`[update]`->...)
-> * Für den Fall, dass Update Richtlinien auf zirkuläre Weise für mehrere Tabellen definiert werden, wird diese zur Laufzeit erkannt, und die Kette der Updates wird abgeschnitten (d.h., die Daten werden nur einmal für jede Tabelle in der Kette der betroffenen Tabellen erfasst).
-> * Wenn Sie im `Source` `Query` Rahmen der Richtlinie auf die Tabelle verweisen (oder in Funktionen, auf die letztere verweist), sollten Sie sicherstellen, dass Sie **nicht** den qualifizierten Namen der Tabelle verwenden `TableName` (d. h. use und **Not** `database("DatabaseName").TableName` or `cluster("ClusterName").database("DatabaseName").TableName`).
-> * Die Abfrage der Update Richtlinie kann nicht auf eine Tabelle verweisen, bei der eine [Sicherheit auf Zeilenebene Richtlinie](./rowlevelsecuritypolicy.md) aktiviert ist.
-> * Eine Abfrage, die als Teil einer Update Richtlinie ausgeführt wird, verfügt **nicht** über Lesezugriff auf Tabellen, für die die [restrictedviewaccess-Richtlinie](restrictedviewaccesspolicy.md) aktiviert ist.
-> * `PropagateIngestionProperties`tritt nur bei Erfassungs Vorgängen in Kraft. Wenn die Update Richtlinie als Teil eines- `.move extents` oder `.replace extents` -Befehls ausgelöst wird, hat diese Option **keine** Auswirkung.
-> * Wenn die Update Richtlinie als Teil eines `.set-or-replace` Befehls aufgerufen wird, ist das Standardverhalten, dass Daten in abgeleiteten Tabellen auch ersetzt werden, wie Sie in der Quell Tabelle enthalten sind.
+## <a name="notes"></a>Notizen
+
+* Die Abfrage wird automatisch so festgelegt, dass nur die neu erfassten Datensätze abgedeckt werden.
+* Die Abfrage kann gespeicherte Funktionen aufrufen.
+* Kaskadierende Updates sind zulässig (`TableA` → `TableB` → `TableC` →...)
+* Wenn die Update Richtlinie als Teil eines `.set-or-replace` Befehls aufgerufen wird, ist das Standardverhalten, dass Daten in abgeleiteten Tabellen auch ersetzt werden, wie Sie in der Quell Tabelle enthalten sind.
+
+## <a name="limitations"></a>Einschränkungen
+
+* Die Quell Tabelle und die Tabelle, für die die Update Richtlinie definiert ist, **müssen sich in derselben Datenbank**befinden.
+* Die Abfrage enthält möglicherweise **keine** datenbankübergreifenden und Cluster übergreifenden Abfragen.
+* Für den Fall, dass Update Richtlinien auf zirkuläre Weise für mehrere Tabellen definiert werden, wird diese zur Laufzeit erkannt, und die Kette der Updates wird abgeschnitten (d.h., die Daten werden nur einmal für jede Tabelle in der Kette der betroffenen Tabellen erfasst).
+* Wenn Sie im `Source` `Query` Rahmen der Richtlinie auf die Tabelle verweisen (oder in Funktionen, auf die letztere verweist), sollten Sie sicherstellen, dass Sie **nicht** den qualifizierten Namen der Tabelle verwenden `TableName` (d. h. use und **Not** `database("DatabaseName").TableName` or `cluster("ClusterName").database("DatabaseName").TableName`).
+* Eine Abfrage, die als Teil einer Update Richtlinie ausgeführt wird, verfügt **nicht** über Lesezugriff auf Tabellen, für die die [restrictedviewaccess-Richtlinie](restrictedviewaccesspolicy.md) aktiviert ist.
+* Die Abfrage der Update Richtlinie kann nicht auf eine Tabelle verweisen, bei der eine [Sicherheit auf Zeilenebene Richtlinie](./rowlevelsecuritypolicy.md) aktiviert ist.
+* `PropagateIngestionProperties`tritt nur bei Erfassungs Vorgängen in Kraft. Wenn die Update Richtlinie als Teil eines- `.move extents` oder `.replace extents` -Befehls ausgelöst wird, hat diese Option **keine** Auswirkung.
 
 ## <a name="retention-policy-on-the-source-table"></a>Aufbewahrungs Richtlinie für die Quell Tabelle
 

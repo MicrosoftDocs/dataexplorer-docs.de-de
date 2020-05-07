@@ -7,13 +7,14 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
+ms.custom: has-adal-ref
 ms.date: 10/30/2019
-ms.openlocfilehash: 5e2de0c29c58959ce683518b03bef9164fa9543c
-ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
+ms.openlocfilehash: b41f77fe97ce6adeeade63c00824818f4a3af721
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82799627"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82862036"
 ---
 # <a name="ms-tds-clients-and-azure-data-explorer"></a>MS-TDS-Clients und Azure-Daten-Explorer
 
@@ -30,7 +31,7 @@ Azure Daten-Explorer unterstützt Azure AD Authentifizierung für SQL-Clients. W
 Der Microsoft JDBC-Treiber kann zum Herstellen einer Verbindung mit Azure Daten-Explorer mit Azure AD Authentifizierung verwendet werden.
 
 Erstellen Sie eine Anwendung, um eine der Versionen von " *MSSQL-JDBC* jar" und " *adal4j* jar" und all ihre Abhängigkeiten zu verwenden.
-Beispiel:
+Ein auf ein Objekt angewendeter
 
 ```s
 mssql-jdbc-7.0.0.jre8.jar
@@ -83,7 +84,7 @@ Wenn die ODBC-Anwendung anstelle von oder zusätzlich zu DSN eine Verbindungs Ze
 "Driver={ODBC Driver 17 for SQL Server};Server=mykustocluster.kusto.windows.net;Database=mykustodatabase;Authentication=ActiveDirectoryIntegrated"
 ```
 
-Einige ODBC-Anwendungen funktionieren nicht gut mit `NVARCHAR(MAX)` dem Typ. Weitere Informationen finden Sie unter https://docs.microsoft.com/sql/relational-databases/native-client/features/using-large-value-types?view=sql-server-2017#sql-server-native-client-odbc-driver. 
+Einige ODBC-Anwendungen funktionieren nicht gut mit `NVARCHAR(MAX)` dem Typ. Weitere Informationen finden Sie unter https://docs.microsoft.com/sql/relational-databases/native-client/features/using-large-value-types?view=sql-server-2017#sql-server-native-client-odbc-driver.
 
 Die häufige Problem Umgehung besteht darin, die zurückgegebenen Daten in *nvarchar (n)* umzuwandeln, wobei ein Wert für n festgelegt ist. Beispiel: *nvarchar (4000)*. Eine solche Problem Umgehung funktioniert jedoch nicht für Azure-Daten-Explorer, da Azure Daten-Explorer nur einen String-Typ aufweist und für SQL-Clients als *nvarchar (max)* codiert ist.
 
@@ -104,7 +105,7 @@ $conn = [System.Data.Common.DbProviderFactories]::GetFactory("System.Data.Odbc")
 $conn.ConnectionString = "Driver={ODBC Driver 17 for SQL Server};Server=mykustocluster.kusto.windows.net;Database=mykustodatabase;Authentication=ActiveDirectoryIntegrated"
 $conn.Open()
 $conn.GetSchema("Tables")
-$conn.Close()  
+$conn.Close()
 ```
 
 ## <a name="linqpad"></a>LINQPad

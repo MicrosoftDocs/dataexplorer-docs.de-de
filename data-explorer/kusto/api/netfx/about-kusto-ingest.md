@@ -7,13 +7,14 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
+ms.custom: has-adal-ref
 ms.date: 03/24/2020
-ms.openlocfilehash: 8357bc387ae26fc0dfcc50c5e712a5b39df32942
-ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
+ms.openlocfilehash: c43c6c09ad6da90685c56dc47ebe257a55eaede6
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82799712"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82862138"
 ---
 # <a name="kusto-ingest-client-library"></a>Kusto-Erfassungs Client Bibliothek
 
@@ -95,4 +96,3 @@ Wenn Sie die systemeigene Erfassung verwenden, wenn Sie nicht bereits vorhanden 
 
 ### <a name="data-ingestion-rest-apis"></a>Rest-APIs für die Datenerfassung
 [Datenerfassung ohne Kusto.](kusto-ingest-client-rest.md) Erfassungs Bibliothek erläutert das Implementieren der Kusto-Erfassung in der Warteschlange mithilfe von Kusto-Rest-APIs und ohne Abhängigkeit von der Kusto. Erfassungs Bibliothek.
-

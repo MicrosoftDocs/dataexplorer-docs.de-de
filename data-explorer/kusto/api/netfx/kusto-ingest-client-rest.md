@@ -7,13 +7,14 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
+ms.custom: has-adal-ref
 ms.date: 02/19/2020
-ms.openlocfilehash: 9e4be7be65b0fe118a99835b24cd9d69ac5a531d
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.openlocfilehash: 2ea7fd33a6e6ed8728fb12d53fbe76eadf8fd6b6
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108489"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82862070"
 ---
 # <a name="howto-data-ingestion-without-kustoingest-library"></a>Datenerfassung durch howto ohne Kusto. Erfassungs Bibliothek
 
@@ -303,7 +304,7 @@ Die Meldung, dass der Kusto-Datenverwaltung-Dienst aus der Azure-Eingabe Wartesc
 
 ```json
 {
-    "Id" : "<Id>", 
+    "Id" : "<Id>",
     "BlobPath" : "https://<AccountName>.blob.core.windows.net/<ContainerName>/<PathToBlob>?<SasToken>",
     "RawDataSize" : "<RawDataSizeInBytes>",
     "DatabaseName": "<DatabaseName>",
@@ -336,7 +337,7 @@ Die Meldung, dass der Kusto-Datenverwaltung-Dienst aus der Azure-Eingabe Wartesc
 ## <a name="appendix-b-ingestion-failure-message-structure"></a>Anhang B: Struktur der Erfassungs Fehlermeldung
 In der folgenden Tabelle wird die Meldung, dass der Kusto-Datenverwaltung-Dienst aus der Azure-Eingabe Warteschlange liest, ein JSON-Dokument im folgenden Format:
 
-|Eigenschaft | Beschreibung |
+|Eigenschaft | BESCHREIBUNG |
 |---------|-------------
 |OperationId |Vorgangs-ID (GUID), die zum Nachverfolgen des Vorgangs auf der Dienst Seite verwendet werden kann. |
 |Datenbank |Name der Zieldatenbank |

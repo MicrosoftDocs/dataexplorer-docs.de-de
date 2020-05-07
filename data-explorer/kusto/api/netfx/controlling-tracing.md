@@ -1,31 +1,32 @@
 ---
-title: Steuern oder Unterdrücken der Client-Seitenablaufverfolgung von Kusto SDK - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt das Steuern oder Unterdrücken der Client-Seitenablaufverfolgung von Kusto SDK in Azure Data Explorer.
+title: 'Steuern oder unterdrücken der Client seitigen Ablauf Verfolgung von Kusto SDK: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird beschrieben, wie Sie die Client seitige Ablauf Verfolgung für das Kusto-SDK in Azure Daten-Explorer steuern
 services: data-explorer
 author: orspod
 ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
+ms.custom: has-adal-ref
 ms.date: 10/23/2018
-ms.openlocfilehash: 65964d7e990cdb639bd5bfe319d11874ea3de15d
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: cbda69063e3b1a20549dbadb4641fc9fd3f51f57
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81502736"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82862053"
 ---
-# <a name="controlling-or-suppressing-kusto-sdk-client-side-tracing"></a>Steuern oder Unterdrücken der Client-Seitenablaufverfolgung von Kusto SDK
+# <a name="controlling-or-suppressing-kusto-sdk-client-side-tracing"></a>Steuern oder unterdrücken der clientseitigen Ablauf Verfolgung von Kusto SDK
 
-Die Kusto-Clientbibliotheken verwenden eine gemeinsame Plattform für die Ablaufverfolgung. Die Plattform verwendet eine große`System.Diagnostics.TraceSource`Anzahl von Ablaufverfolgungsquellen (`System.Diagnostics.Trace.Listeners`), die während der Konstruktion jeweils mit dem Standardsatz von Ablaufverfolgungslistenern ( ) verbunden sind.
+Die Kusto-Client Bibliotheken verwenden eine gängige Plattform für die Ablauf Verfolgung. Die Plattform verwendet eine große Anzahl von Ablauf Verfolgungs Quellen`System.Diagnostics.TraceSource`(), die jeweils mit dem Standardsatz von Ablaufverfolgungslistenern (`System.Diagnostics.Trace.Listeners`) verbunden sind.
 
-Eine Folge davon ist, dass die Kusto-Clientbibliotheken, wenn einer Anwendung Ablaufverfolgungslistener zugeordnet sind (z. `System.Diagnostics.Trace` B. über ihre `app.config` Datei), Ablaufverfolgungen an diese Listener aussenden.
+Dies liegt daran, dass bei einer Anwendung Ablaufverfolgungslistener mit `System.Diagnostics.Trace` der Standard Instanz (z. b `app.config` . über die zugehörige Datei) erstellt werden, dann werden die Kusto-Client Bibliotheken Ablauf Verfolgungen an diese Listener ausgegeben.
 
-Dieses Verhalten kann programmgesteuert oder über eine Konfigurationsdatei unterdrückt oder gesteuert werden.
+Dieses Verhalten kann Programm gesteuert oder über eine Konfigurationsdatei unterdrückt oder gesteuert werden.
 
-## <a name="suppress-tracing-programmatically"></a>Programmgesteuerte Ablaufverfolgung unterdrücken
+## <a name="suppress-tracing-programmatically"></a>Ablauf Verfolgung Programm gesteuert unterdrücken
 
-Um die Ablaufverfolgung aus den Kusto-Clientbibliotheken programmgesteuert zu unterdrücken, rufen Sie beim Laden der entsprechenden Bibliothek den folgenden Codefrühzeitig frühzeitig auf:
+Um die Ablauf Verfolgung von den Kusto-Client Bibliotheken Programm gesteuert zu unterdrücken, rufen Sie den folgenden Code Abschnitt beim Laden der relevanten Bibliothek in der frühen Zeit auf:
 
 ```csharp
 Kusto.Cloud.Platform.Utils.TraceSourceManager.SetTraceVerbosityForAll(
@@ -33,18 +34,18 @@ Kusto.Cloud.Platform.Utils.TraceSourceManager.SetTraceVerbosityForAll(
     );
 ```
 
-## <a name="suppressing-tracing-by-using-a-config-file"></a>Unterdrücken der Ablaufverfolgung mithilfe einer Konfigurationsdatei
+## <a name="suppressing-tracing-by-using-a-config-file"></a>Unterdrücken der Ablauf Verfolgung mithilfe einer Konfigurationsdatei
 
-Um die Ablaufverfolgung aus den Kusto-Clientbibliotheken über `Kusto.Cloud.Platform.dll.tweaks` eine Konfigurationsdatei zu `Kusto.Data` unterdrücken, ändern Sie die Datei (die in der Bibliothek enthalten ist), so dass die entsprechende "Tweak" nun lautet:
+Um die Ablauf Verfolgung aus den Kusto-Client Bibliotheken durch eine Konfigurationsdatei zu unter `Kusto.Cloud.Platform.dll.tweaks` drücken, ändern Sie die Datei `Kusto.Data` (die in der Bibliothek enthalten ist), damit die entsprechende "Tweak" nun Folgendes liest:
 
 ```xml
     <!-- Overrides the default trace verbosity level -->
     <add key="Kusto.Cloud.Platform.Utils.Tracing.OverrideTraceVerbosityLevel" value="0" />
 ```
 
-(Beachten Sie, dass es für die Optimierung kein Minuszeichen `key`im Wert von .) geben muss.
+(Beachten Sie, dass es für den Fall, dass die Optimierung wirksam wird, dass kein Minuszeichen im `key`Wert von vorhanden sein muss.)
 
-Eine alternative Möglichkeit ist, Folgendes zu tun:
+Eine alternative Möglichkeit ist Folgendes:
 
 ```csharp
 Kusto.Cloud.Platform.Utils.Anchor.Tweaks.SetProgrammaticAppSwitch(
@@ -53,9 +54,9 @@ Kusto.Cloud.Platform.Utils.Anchor.Tweaks.SetProgrammaticAppSwitch(
     );
 ```
 
-## <a name="how-to-enable-the-kusto-client-libraries-tracing"></a>So aktivieren Sie die Ablaufverfolgung der Kusto-Clientbibliotheken
+## <a name="how-to-enable-the-kusto-client-libraries-tracing"></a>Aktivieren der Ablauf Verfolgung für die Kusto-Client Bibliotheken
 
-Um die Ablaufverfolgung der Kusto-Clientbibliotheken zu aktivieren, aktivieren Sie die .NET-Ablaufverfolgung in der Datei app.config Ihrer Anwendung. Angenommen, die Anwendung `MyApp.exe` verwendet die Kusto.Data-Clientbibliothek. Wenn Sie `MyApp.exe.config` dann die Datei so ändern, dass sie Folgendes enthält, wird Kusto.Data beim nächsten Start der Anwendung aktiviert:
+Aktivieren Sie die .net-Ablauf Verfolgung in der app. config-Datei Ihrer Anwendung, um die Ablauf Verfolgung aus den Kusto-Client Bibliotheken zu aktivieren. Angenommen, die Anwendung `MyApp.exe` verwendet die Client Bibliothek "Kusto. Data". Wenn Sie die Datei `MyApp.exe.config` dann in Folgendes einschließen, wird die Kusto. Data-Ablauf Verfolgung beim nächsten Start der Anwendung aktiviert:
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -69,11 +70,10 @@ Um die Ablaufverfolgung der Kusto-Clientbibliotheken zu aktivieren, aktivieren S
     </trace>
   </system.diagnostics>
 </configuration>
-``` 
+```
 
-Dadurch wird ein Ablaufverfolgungslistener konfiguriert, der in `RollingLogs` CSV-Dateien in einem Unterverzeichnis schreibt, das im Prozessverzeichnis angegeben ist. (Natürlich jede . NET-kompatible Ablaufverfolgungslistenerklasse kann ebenfalls verwendet werden.) 
+Dadurch wird ein Ablaufverfolgungslistener konfiguriert, der in die CSV- `RollingLogs` Dateien in einem Unterverzeichnis mit dem Namen im Verzeichnis "Process" schreibt. (Natürlich alle. Möglicherweise wird auch die NET-kompatible ablaufverfolgungslistenerklasse verwendet.)
 
-## <a name="how-to-enable-the-aad-client-libraries-adal-tracing"></a>Aktivieren der AAD-Clientbibliotheken (ADAL)-Ablaufverfolgung
+## <a name="how-to-enable-the-aad-client-libraries-adal-tracing"></a>Aktivieren der Aad-Client Bibliotheken (Adal)-Ablauf Verfolgung
 
-Sobald die Ablaufverfolgung für die Kusto-Clientbibliotheken aktiviert ist, wird auch die Ablaufverfolgung von den AAD-Clientbibliotheken (die Kusto-Clientbibliotheken konfigurieren automatisch die ADAL-Ablaufverfolgung)
-
+Nachdem die Ablauf Verfolgung für die Kusto-Client Bibliotheken aktiviert ist, wird die Ablauf Verfolgung von den Aad-Client Bibliotheken ausgegeben (die Adal-Ablauf Verfolgung wird von den Kusto-Client Bibliotheken automatisch konfiguriert).

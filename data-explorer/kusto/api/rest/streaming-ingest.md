@@ -1,6 +1,6 @@
 ---
-title: HTTP-Anforderung für die Streamingerfassung - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt die HTTP-Anforderung für die Streamingerfassung in Azure Data Explorer.
+title: Streamingerfassung http-Anforderung-Azure-Daten-Explorer
+description: In diesem Artikel wird die HTTP-Anforderung zum Streamen von Daten in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: d14987806bbc62dbc79112700bd5b88aaa6676c3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 672f924865cab14dff6c7d5319c3c34cca1a67ee
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81503008"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82862008"
 ---
-# <a name="streaming-ingestion-http-request"></a>Streaming-Aufnahme HTTP-Anforderung
+# <a name="streaming-ingestion-http-request"></a>Streamingerfassung (http-Anforderung)
 
-## <a name="request-verb-and-resource"></a>Anforderungsverb und Ressource
+## <a name="request-verb-and-resource"></a>Anforderungs Verb und Ressource
 
 |Aktion    |HTTP-Verb|HTTP-Ressource                                               |
 |----------|---------|------------------------------------------------------------|
@@ -25,71 +25,64 @@ ms.locfileid: "81503008"
 
 ## <a name="request-parameters"></a>Anforderungsparameter
 
-| Parameter    |  Beschreibung                                                                                                |
-|--------------|-------------------------------------------------------------------------------------------------------------|
-| `{database}` | **Erforderlich** Name der Zieldatenbank für die Aufnahmeanforderung                                          |
-| `{table}`    | **Erforderlich** Name der Zieltabelle für die Aufnahmeanforderung                                             |
+| Parameter    | BESCHREIBUNG                                                                 | Erforderlich/optional |
+|--------------|-----------------------------------------------------------------------------|-------------------|
+| `{database}` |   Name der Zieldatenbank für die Erfassungs Anforderung                     |  Erforderlich         |
+| `{table}`    |   Name der Ziel Tabelle für die Erfassungs Anforderung                        |  Erforderlich         |
 
 ## <a name="additional-parameters"></a>Zusätzliche Parameter
-Zusätzliche Paramter werden als URL-Abfrage formatiert: `{name}` = `{value}` Paare, die nach & Zeichen getrennt werden
 
+Zusätzliche Parameter werden als URL-Abfrage `{name}={value}` Paare formatiert, getrennt durch das & Zeichen.
 
-| Parameter    |  Beschreibung                                                                                                |
-|--------------|-------------------------------------------------------------------------------------------------------------|
-|`streamFormat`| **Erforderlich** Gibt das Format der Daten im Anforderungstext an. Der Wert sollte einer `Csv`der`Tsv``Scsv`folgenden`SOHsv``Psv`Werte`Json``SingleJson`sein: , , , , , , ,`MultiJson`, , .`Avro` Weitere Informationen finden Sie unter [Unterstützte Datenformate](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats).|
-|`mappingName` | **Erforderlich,** `streamFormat` wenn `Json`es `SingleJson` `MultiJson` sich `Avro`um eine von , oder , **optional** auf andere Weise handelt. Der Wert sollte der Name der vorerstellten Aufnahmezuordnung sein, die in der Tabelle definiert ist. Weitere Informationen zu Datenzuordnungen finden Sie unter [Datenzuordnungen](../../management/mappings.md). Die Art und Weise zum Verwalten vordefinierter Zuordnungen in der Tabelle wird [hier](../../management/create-ingestion-mapping-command.md) beschrieben. |
+| Parameter    | BESCHREIBUNG                                                                          | Erforderlich/optional   |
+|--------------|--------------------------------------------------------------------------------------|---------------------|
+|`streamFormat`| Gibt das Format der Daten im Anforderungs Text an. Der Wert muss einer der folgenden Werte `CSV`sein`TSV`:`SCsv`,`SOHsv`,`PSV`,`JSON`,`SingleJSON`,`MultiJSON`,`Avro`,,. Weitere Informationen finden Sie [unter Unterstützte Datenformate](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats).| Erforderlich |
+|`mappingName` | Der Name der vorab erstellten Erfassungs Zuordnung, die für die Tabelle definiert ist. Weitere Informationen finden Sie unter [Daten](../../management/mappings.md)Zuordnungen. Die Vorgehensweise zum Verwalten von vorab erstellten Zuordnungen in der Tabelle wird [hier](../../management/create-ingestion-mapping-command.md)beschrieben.| Optional, aber erforderlich, `streamFormat` wenn eine von `JSON`,`SingleJSON`,`MultiJSON`oder ist.`Avro`|  |
               
-
-Um z. B. CSV-formatierte `Logs` Daten `Test` in eine Tabelle in der Datenbank aufzunehmen, verwenden Sie die folgende Anforderungszeile:
+Verwenden Sie zum Erfassen von CSV-formatierten Daten in eine `Logs` Tabelle in `Test`der-Datenbank beispielsweise Folgendes:
 
 ```
 POST https://help.kusto.windows.net/v1/rest/ingest/Test/Logs?streamFormat=Csv HTTP/1.1
 ```
 
-, um JSON-formatierte Daten mit vorerstellter Zuordnung zu erfassen`mylogmapping`
+Verwenden Sie Folgendes, um JSON-formatierte Daten mit einer `mylogmapping`vorab erstellten Zuordnung zu erfassen:
 
 ```
 POST https://help.kusto.windows.net/v1/rest/ingest/Test/Logs?streamFormat=Json&mappingName=mylogmapping HTTP/1.1
 ```
 
-
-(Siehe unten für die Anforderungsheader und den zu berücksichtigenden Text.)
-
 ## <a name="request-headers"></a>Anforderungsheader
 
-Die folgende Tabelle enthält die allgemeinen Header, die zum Ausführen von Abfrage- und Verwaltungsvorgängen verwendet werden.
+In der folgenden Tabelle sind die allgemeinen Header für Abfrage-und Verwaltungsvorgänge enthalten.
 
-|Standard-Header  |Beschreibung                                                                                                              |
-|------------------|------------------------------------------------------------------------------------------------------------------------|
-|`Accept`          |**Optional:** Legen Sie diesen Eintrag auf `application/json`fest.                                                                           |
-|`Accept-Encoding` |**Optional:** Unterstützte Codierungen `gzip` sind `deflate`und .                                                             |
-|`Authorization`   |**Erforderlich**. Siehe [Authentifizierung](./authentication.md).                                                                |
-|`Connection`      |**Optional:** Es wird `Keep-Alive` empfohlen, aktiviert zu werden.                                                           |
-|`Content-Length`  |**Optional:** Es wird empfohlen, die Länge des Anforderungstexts anzugeben, wenn bekannt ist.                                   |
-|`Content-Encoding`|**Optional:** Kann auf `gzip` das eingestellt werden, in welchem Fall der Körper gzip-komprimiert werden muss                                 |
-|`Expect`          |**Optional:** Kann auf `100-Continue`gesetzt werden.                                                                             |
-|`Host`            |**Erforderlich**. Legen Sie diesen wert auf den vollqualifizierten Domänennamen, an `help.kusto.windows.net`den die Anforderung gesendet wurde (z. B. ).|
+|Standard Header   | BESCHREIBUNG                                                                               | Erforderlich/optional | 
+|------------------|-------------------------------------------------------------------------------------------|-------------------|
+|`Accept`          | Legen Sie diesen Wert `application/json`auf fest.                                                     | Optional          |
+|`Accept-Encoding` | Unterstützte Codierungen `gzip` sind `deflate`und.                                             | Optional          | 
+|`Authorization`   | Siehe [Authentifizierung](./authentication.md).                                                | Erforderlich          |
+|`Connection`      | `Keep-Alive`aktivieren.                                                                      | Optional          |
+|`Content-Length`  | Gibt die Länge des Anforderungs Texts an, sofern bekannt.                                              | Optional          |
+|`Content-Encoding`| Legen Sie `gzip` auf fest, aber der Text muss gzip-komprimiert sein.                                        | Optional          |
+|`Expect`          | Legen Sie diese Option auf `100-Continue` fest.                                                                    | Optional          |
+|`Host`            | Legen Sie auf den Domänen Namen fest, an den die Anforderung gesendet wurde `help.kusto.windows.net`(z. b.). | Erforderlich          |
 
-Die folgende Tabelle enthält die allgemeinen benutzerdefinierten Header, die beim Ausführen von Abfrage- und Verwaltungsvorgängen verwendet werden. Sofern nicht anders angegeben, werden diese Header nur für Telemetriezwecke verwendet und haben keine Auswirkungen auf die Funktionalität.
+In der folgenden Tabelle sind die allgemeinen benutzerdefinierten Header für Abfrage-und Verwaltungsvorgänge enthalten. Sofern nicht anders angegeben, dienen die Header nur zu telemetriezwecken und haben keine Auswirkungen auf die Funktionalität.
 
-Alle Header sind **optional**. Es wird jedoch dringend `x-ms-client-request-id` **empfohlen,** den benutzerdefinierten Header anzugeben. In einigen Szenarien (z. B. Abbrechen einer ausgeführten Abfrage) ist dieser Header **obligatorisch,** da er zum Identifizieren der Anforderung verwendet wird.
-
-
-|BenutzerdefinierteKopfzeile           |Beschreibung                                                                                               |
+|Benutzerdefinierter Header           |BESCHREIBUNG                                                                           | Erforderlich/optional |
 |------------------------|----------------------------------------------------------------------------------------------------------|
-|`x-ms-app`              |Der (freundliche) Name der Anwendung, die den Antrag stellt.                                                |
-|`x-ms-user`             |Der (freundliche) Name des Benutzers, der die Anforderung stellt.                                                       |
-|`x-ms-user-id`          |Identisch mit `x-ms-user`.                                                                                      |
-|`x-ms-client-request-id`|Ein eindeutiger Bezeichner für die Anforderung.                                                                      |
-|`x-ms-client-version`   |Die (freundliche) Versionskennung für den Client, der die Anforderung stellt.                                      |
+|`x-ms-app`              |Der (benutzerfreundliche) Name der Anwendung, die die Anforderung sendet.                            | Optional          |
+|`x-ms-user`             |Der (benutzerfreundliche) Name des Benutzers, der die Anforderung sendet.                                   | Optional          |
+|`x-ms-user-id`          |Wie in `x-ms-user`.                                                                  | Optional          |
+|`x-ms-client-request-id`|Ein eindeutiger Bezeichner für die Anforderung.                                                  | Optional          |
+|`x-ms-client-version`   |Der (benutzerfreundliche) Versions Bezeichner für den Client, der die Anforderung sendet. Erforderlich in Szenarien, in denen es zum Identifizieren der Anforderung verwendet wird, z. b. zum Abbrechen einer laufenden Abfrage.                                                        | Optional/erforderlich  |
 
 ## <a name="body"></a>Body
 
-Der Text ist die tatsächliche Daten aufgenommen werden. Die Textformate verwenden UTF-8-Codierung.
+Der Text ist die tatsächlich erfassten Daten. Die Textformate sollten UTF-8-Codierung verwenden.
 
 ## <a name="examples"></a>Beispiele
 
-Das folgende Beispiel zeigt die HTTP-POST-Anforderung für einen übertragenden JSON-Inhalt:
+Das folgende Beispiel zeigt die HTTP POST-Anforderung zum Erfassen von JSON-Inhalten:
 
 ```txt
 POST https://help.kusto.windows.net/v1/rest/ingest/Test/Logs?streamFormat=Json&mappingName=mylogmapping HTTP/1.1
@@ -116,7 +109,7 @@ Anforderungstext:
 {"Timestamp":"2018-11-14 11:35","Level":"Error","EventText":"Something Happened"}
 ```
 
-Das folgende Beispiel zeigt die HTTP POST-Anforderung zum Einsenden derselben komprimierten Daten
+Das folgende Beispiel zeigt die HTTP POST-Anforderung zum Erfassen derselben komprimierten Daten.
 
 ```txt
 POST https://help.kusto.windows.net/v1/rest/ingest/Test/Logs?streamFormat=Json&mappingName=mylogmapping HTTP/1.1

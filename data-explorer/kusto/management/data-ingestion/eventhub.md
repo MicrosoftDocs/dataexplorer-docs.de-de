@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: fac9fd9f218948928e4f91d0d1aa056affcebd11
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 6b2f3b2d75bd964401ae37093405e692cfd64feb
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617662"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82861781"
 ---
 # <a name="ingest-from-event-hub"></a>Erfassung aus Event Hub
 
@@ -35,11 +35,12 @@ Erfassungs Eigenschaften weist den Erfassungsprozess an. Wo die Daten weitergele
 
 |Eigenschaft |Beschreibung|
 |---|---|
-| Tabelle | Name (Groß-/Kleinschreibung beachten) der vorhandenen Ziel Tabelle. Überschreibt die `Table` Gruppe auf dem `Data Connection` Blatt. |
-| Format | Datenformat. Überschreibt die `Data format` Gruppe auf dem `Data Connection` Blatt. |
-| Ingestionmappingreferenzierung | Der Name der vorhandenen Erfassungs [Zuordnung](../create-ingestion-mapping-command.md) , die verwendet werden soll. Überschreibt die `Column mapping` Gruppe auf dem `Data Connection` Blatt.|
+| Tabelle | Name (Groß-/Kleinschreibung beachten) der vorhandenen Ziel Tabelle. Überschreibt das `Table`, das auf dem Blatt `Data Connection` festgelegt ist. |
+| Format | Datenformat. Überschreibt das `Data format`, das auf dem Blatt `Data Connection` festgelegt ist. |
+| Ingestionmappingreferenzierung | Der Name der vorhandenen Erfassungs [Zuordnung](../create-ingestion-mapping-command.md) , die verwendet werden soll. Überschreibt das `Column mapping`, das auf dem Blatt `Data Connection` festgelegt ist.|
 | Komprimierung | Datenkomprimierung `None` , (Standard) `GZip` oder Komprimierung.|
 | Codieren |  Daten Codierung, der Standardwert ist UTF8. Kann eine beliebige von [.NET unterstützte Codierungen](https://docs.microsoft.com/dotnet/api/system.text.encoding?view=netframework-4.8#remarks)sein. |
+| Tags (Vorschau) | Eine Liste von [Tags](../extents-overview.md#extent-tagging) , die den erfassten Daten zugeordnet werden sollen, die als JSON-Array Zeichenfolge formatiert sind. Beachten Sie die Auswirkungen der Verwendung von Tags auf die [Leistung](../extents-overview.md#performance-notes-1) . |
 
 <!--| Database | Name of the existing target database.|-->
 <!--| Tags | String representing [tags](https://docs.microsoft.com/azure/kusto/management/extents-overview#extent-tagging) that will be attached to resulting extent. |-->
@@ -65,6 +66,7 @@ var eventData = new EventData(Encoding.UTF8.GetBytes(data));
 eventData.Properties.Add("Table", "WeatherMetrics");
 eventData.Properties.Add("Format", "json");
 eventData.Properties.Add("IngestionMappingReference", "mapping1");
+eventData.Properties.Add("Tags", "['mydatatag']");
 
 // Send events
 var eventHubClient = EventHubClient.CreateFromConnectionString(eventHubNamespaceConnectionString, eventHubName);
@@ -87,9 +89,9 @@ System Eigenschaften sind eine Sammlung zum Speichern von Eigenschaften, die vom
 |---|---|---|
 | x-opt-enqueued-time |datetime | UTC-Zeit, zu der das Ereignis in die Warteschlange eingereiht wurde |
 | x-opt-sequence-number |long | Die logische Sequenznummer des Ereignisses innerhalb des Partitions Datenstroms des Event Hubs.
-| x-opt-offset |Zeichenfolge | Der Offset des Ereignisses relativ zum Event Hub-Partitions Datenstrom. Der Offset Bezeichner ist innerhalb einer Partition des Event Hub-Streams eindeutig. |
-| x-opt-Publisher |Zeichenfolge | Der Name des Verlegers, wenn die Nachricht an einen Verleger Endpunkt gesendet wurde. |
-| x-opt-partition-key |Zeichenfolge |Der Partitions Schlüssel der entsprechenden Partition, die das Ereignis gespeichert hat. |
+| x-opt-offset |string | Der Offset des Ereignisses relativ zum Event Hub-Partitions Datenstrom. Der Offset Bezeichner ist innerhalb einer Partition des Event Hub-Streams eindeutig. |
+| x-opt-Publisher |string | Der Name des Verlegers, wenn die Nachricht an einen Verleger Endpunkt gesendet wurde. |
+| x-opt-partition-key |string |Der Partitions Schlüssel der entsprechenden Partition, die das Ereignis gespeichert hat. |
 
 Wenn Sie im Abschnitt **Datenquelle** der Tabelle die Option **Ereignis Systemeigenschaften** ausgewählt haben, müssen Sie die Eigenschaften in das Tabellen Schema und die Zuordnung einschließen.
 

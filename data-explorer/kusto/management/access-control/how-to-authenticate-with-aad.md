@@ -1,51 +1,52 @@
 ---
-title: How-How-To Authenticate mit AAD for Azure Data Explorer Access - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird beschrieben, wie Sie sich mit AAD für Azure Data Explorer Access in Azure Data Explorer authentifizieren.
+title: 'Vorgehensweise: Authentifizieren mit Aad für Azure Daten-Explorer Access-Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird beschrieben, wie Sie sich mit Aad für Azure Daten-Explorer Access in Azure Daten-Explorer authentifizieren.
 services: data-explorer
 author: orspod
 ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
+ms.custom: has-adal-ref
 ms.date: 09/13/2019
-ms.openlocfilehash: dc3a87a290ac535ac475af5017170a0478cd9b54
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b7e2120f158093e07e096b200b96ac3e265ae2e0
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81522915"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82861985"
 ---
-# <a name="how-to-authenticate-with-aad-for-azure-data-explorer-access"></a>How-To Authenticate mit AAD für Azure Data Explorer Access
+# <a name="how-to-authenticate-with-aad-for-azure-data-explorer-access"></a>Gewusst wie: Authentifizieren mit Aad für Azure Daten-Explorer Access
 
-Die empfohlene Möglichkeit für den Zugriff auf Azure Data Explorer besteht darin, sich beim **Azure Active Directory-Dienst** zu authentifizieren (manchmal auch **als Azure AD**oder einfach **AAD**bezeichnet). Dadurch wird sichergestellt, dass Azure Data Explorer die Verzeichnisanmeldeinformationen des zugriffsbereiten Prinzipals nie sieht, indem ein zweistufiger Prozess verwendet wird:
+Die empfohlene Vorgehensweise für den Zugriff auf Azure Daten-Explorer ist die Authentifizierung beim **Azure Active Directory** -Dienst (manchmal auch als **Azure AD**oder einfach als **Aad**bezeichnet). Dadurch wird sichergestellt, dass Azure Daten-Explorer die Verzeichnis Anmelde Informationen des Zugriffs Prinzipals nicht mit einem zweistufigen Prozess ansieht:
 
-1. Im ersten Schritt kommuniziert der Client mit dem AAD-Dienst, authentifiziert ihn und fordert ein Zugriffstoken an, das speziell für den jeweiligen Azure Data Explorer-Endpunkt ausgestellt wurde, auf den der Client zugreifen möchte.
-2. Im zweiten Schritt stellt der Client Anforderungen an Azure Data Explorer aus, wobei das im ersten Schritt als Identitätsnachweis erworbene Zugriffstoken azure.
+1. Im ersten Schritt kommuniziert der Client mit dem AAD-Dienst, authentifiziert ihn und fordert ein Zugriffs Token an, das speziell für den jeweiligen Azure-Daten-Explorer Endpunkt ausgestellt wird, auf den der Client zugreifen möchte.
+2. Im zweiten Schritt gibt der Client Anforderungen an Azure Daten-Explorer aus und stellt das Zugriffs Token bereit, das im ersten Schritt als Identitätsnachweis für Azure Daten-Explorer eingerichtet wurde.
 
-Azure Data Explorer führt dann die Anforderung im Auftrag des Sicherheitsprinzipals aus, für den AAD das Zugriffstoken ausgestellt hat, und alle Autorisierungsprüfungen werden mit dieser Identität durchgeführt.
+Azure Daten-Explorer führt dann die Anforderung im Namen des Sicherheits Prinzipals aus, für den Aad das Zugriffs Token ausgestellt hat, und alle Autorisierungs Überprüfungen werden mit dieser Identität ausgeführt.
 
-In den meisten Fällen wird empfohlen, eines der Azure Data Explorer-SDKs zu verwenden, um programmgesteuert auf den Dienst zuzugreifen, da sie einen Großteil des Unumsatoles der Implementierung des oben genannten Flows (und vieles mehr) beseitigen. Siehe z. B. das [.NET SDK](../../api/netfx/about-the-sdk.md).
-Die Authentifizierungseigenschaften werden dann von der [Kusto-Verbindungszeichenfolge](../../api/connection-strings/kusto.md)festgelegt.
-Wenn dies nicht möglich ist, lesen Sie bitte weiter, um detaillierte Informationen darüber zu erhalten, wie Sie diesen Flow selbst implementieren können.
+In den meisten Fällen empfiehlt es sich, einen der Azure-Daten-Explorer sdche für den programmgesteuerten Zugriff auf den Dienst zu verwenden, da dadurch ein Großteil des Aufwands für die Implementierung des obigen Flows entfernt wird (und vieles mehr). Siehe z. b. das [.NET SDK](../../api/netfx/about-the-sdk.md).
+Die Authentifizierungs Eigenschaften werden dann von der [Kusto-Verbindungs Zeichenfolge](../../api/connection-strings/kusto.md)festgelegt.
+Wenn dies nicht möglich ist, lesen Sie weiter, um ausführliche Informationen zur Implementierung dieses Flows selbst zu erhalten.
 
-Die wichtigsten Authentifizierungsszenarien sind:
+Die wichtigsten Authentifizierungs Szenarien sind:
 
-* **Eine Clientanwendung, die einen angemeldeten Benutzer authentifiziert.**
-  In diesem Szenario löst eine interaktive (Client-)Anwendung eine AAD-Eingabeaufforderung an den Benutzer aus, die Anmeldeinformationen (z. B. Benutzername und Kennwort) anfordert.
+* **Eine Client Anwendung, die einen angemeldeten Benutzer authentifiziert**.
+  In diesem Szenario löst eine interaktive (Client-) Anwendung eine Aad-Eingabeaufforderung für Anmelde Informationen (z. b. Benutzername und Kennwort) für den Benutzer aus.
   Siehe [Benutzerauthentifizierung](#user-authentication),
 
-* **Eine "kopflose" Anwendung**.
-  In diesem Szenario wird eine Anwendung ausgeführt, in der kein Benutzer vorhanden ist, um Anmeldeinformationen bereitzustellen, und stattdessen authentifiziert sich die Anwendung als "sich selbst" bei AAD mit einigen Anmeldeinformationen, mit denen sie konfiguriert wurde.
-  Siehe [Anwendungsauthentifizierung](#application-authentication).
+* **Eine "Start lose" Anwendung**.
+  In diesem Szenario wird eine Anwendung ausgeführt, ohne dass ein Benutzer vorhanden ist, um Anmelde Informationen bereitzustellen, und die Anwendung authentifiziert sich mit einigen Anmelde Informationen, mit denen Sie konfiguriert wurde, als "selbst" in Aad.
+  Siehe [Anwendungs Authentifizierung](#application-authentication).
 
-* **Bei-der-Authentifizierung**.
-  In diesem Szenario, das manchmal als "Webdienst" oder "Web-App"-Szenario bezeichnet wird, ruft die Anwendung ein AAD-Zugriffstoken von einer anderen Anwendung ab und "konvertiert" es dann in ein anderes AAD-Zugriffstoken, das mit Azure Data Explorer verwendet werden kann.
-  Mit anderen Worten, die Anwendung fungiert als Vermittler zwischen dem Benutzer oder der Anwendung, der Anmeldeinformationen bereitgestellt hat, und dem Azure Data Explorer-Dienst.
-  Siehe [Authentifizierung im Namen](#on-behalf-of-authentication).
+* **Im-Auftrag-der-Authentifizierung**.
+  In diesem Szenario, das manchmal als "Webdienst" oder "Web-App"-Szenario bezeichnet wird, erhält die Anwendung ein Aad-Zugriffs Token aus einer anderen Anwendung und konvertiert es dann in ein anderes Aad-Zugriffs Token, das mit Azure Daten-Explorer verwendet werden kann.
+  Anders ausgedrückt: die Anwendung fungiert als Vermittler zwischen dem Benutzer oder der Anwendung, der Anmelde Informationen bereitgestellt hat, und dem Azure Daten-Explorer-Dienst.
+  Siehe [im Auftrag der Authentifizierung](#on-behalf-of-authentication).
 
-## <a name="specifying-the-aad-resource-for-azure-data-explorer"></a>Angeben der AAD-Ressource für Azure Data Explorer
+## <a name="specifying-the-aad-resource-for-azure-data-explorer"></a>Angeben der Aad-Ressource für Azure Daten-Explorer
 
-Beim Abrufen eines Zugriffstokens von AAD muss der Client AAD mitteilen, für welche **AAD-Ressource** das Token ausgegeben werden soll. Die AAD-Ressource eines Azure Data Explorer-Endpunkts ist der URI des Endpunkts, mit Ausnahme der Portinformationen und des Pfads. Beispiel:
+Wenn Sie ein Zugriffs Token aus Aad abrufen, muss der Client Aad mitteilen, für welche **Aad-Ressource** das Token ausgestellt werden soll. Die Aad-Ressource eines Azure Daten-Explorer-Endpunkts ist der URI des Endpunkts, der die Port Informationen und den Pfad ausweist. Beispiel:
 
 ```txt
 https://help.kusto.windows.net
@@ -53,42 +54,42 @@ https://help.kusto.windows.net
 
 
 
-## <a name="specifying-the-aad-tenant-id"></a>Angeben der AAD-Mandanten-ID
+## <a name="specifying-the-aad-tenant-id"></a>Angeben der Aad-Mandanten-ID
 
-AAD ist ein mehrinstanzenfähiger Dienst, und jede Organisation kann ein Objekt mit dem Namen **Verzeichnis** in AAD erstellen. Das Verzeichnisobjekt enthält sicherheitsrelevante Objekte wie Benutzerkonten, Anwendungen und Gruppen. AAD bezieht sich häufig auf das Verzeichnis als **Mandanten**. AAD-Mandanten werden durch eine GUID (**Mandanten-ID**) identifiziert. In vielen Fällen können AAD-Mandanten auch anhand des Domänennamens der Organisation identifiziert werden.
+Aad ist ein mehr Instanzen fähiger Dienst, und jede Organisation kann ein Objekt mit dem Namen " **Directory** " in Aad erstellen. Das Verzeichnis Objekt enthält sicherheitsbezogene Objekte, wie z. b. Benutzerkonten, Anwendungen und Gruppen. Aad bezieht sich häufig auf das **Verzeichnis als Mandant.** Aad-Mandanten werden anhand einer GUID (Mandanten-**ID**) identifiziert. In vielen Fällen können Aad-Mandanten auch durch den Domänen Namen der Organisation identifiziert werden.
 
-Beispielsweise kann eine Organisation mit dem Namen "Contoso" die Mandanten-ID `4da81d62-e0a8-4899-adad-4349ca6bfe24` und den Domänennamen `contoso.com`haben.
+Beispielsweise kann eine Organisation mit dem Namen "kontoso" die Mandanten- `4da81d62-e0a8-4899-adad-4349ca6bfe24` ID und den Domänen Namen `contoso.com`aufweisen.
 
-## <a name="specifying-the-aad-authority"></a>Angeben der AAD-Berechtigung
+## <a name="specifying-the-aad-authority"></a>Angeben der Aad-Autorität
 
-AAD verfügt über eine Reihe von Endpunkten für die Authentifizierung:
+Aad verfügt über eine Reihe von Endpunkten für die Authentifizierung:
 
-* Wenn der Mandant, der den zu authentifizierenden Prinzipal hostet, bekannt ist (d. h., wenn man weiß, in welchem AAD-Verzeichnis sich der Benutzer oder die Anwendung befindet), ist `https://login.microsoftonline.com/{tenantId}`der AAD-Endpunkt .
-  Hier `{tenantId}` bei der Organisation ist entweder die Mandanten-ID der Organisation in `contoso.com`AAD oder ihr Domänenname (z. B. ) der Fall.
+* Wenn der Mandant, der als Host für den authentifizierten Prinzipal dient, bekannt ist (d. h., wenn er weiß, welches Aad-Verzeichnis der Benutzer oder die `https://login.microsoftonline.com/{tenantId}`Anwendung ist), ist der Aad-Endpunkt.
+  Hier `{tenantId}` ist entweder die Mandanten-ID der Organisation in Aad oder der zugehörige Domänen Name ( `contoso.com`z. b.).
 
-* Wenn der Mandant, der den zu authentifizierenden Prinzipal hostet, `{tenantId}` nicht bekannt `common`ist, kann der "gemeinsame" Endpunkt verwendet werden, indem der obige durch den Wert ersetzt wird.
-
-> [!NOTE]
-> Der AAD-Endpunkt, der für die Authentifizierung verwendet wird, wird auch als **AAD-Berechtigungs-URL** oder einfach **Als AAD-Berechtigung**bezeichnet.
-
-## <a name="aad-token-cache"></a>AAD-Tokencache
-
-Bei Verwendung des Azure Data Explorer SDK werden die AAD-Token auf dem lokalen Computer in einem benutzerdefinierten Tokencache gespeichert (eine Datei mit dem Namen **%APPDATA%-Kusto-TokenCache.data,** auf die nur der angemeldete Benutzer zugreifen oder diese entschlüsselt werden kann). Der Cache wird auf Token überprüft, bevor der Benutzer nach Anmeldeinformationen aufgefordert wird, wodurch die Anzahl der Anmeldeinformationen, die ein Benutzer eingeben muss, erheblich reduziert wird.
+* Wenn der Mandant, der den Prinzipal, der authentifiziert wird, nicht bekannt ist, kann der "Common"- `{tenantId}` Endpunkt verwendet werden, `common`indem der obige durch den Wert ersetzt wird.
 
 > [!NOTE]
-> Der AAD-Tokencache reduziert die Anzahl der interaktiven Eingabeaufforderungen, die einem Benutzer beim Zugriff auf Azure Data Explorer angezeigt werden, reduziert sie jedoch nicht vollständig. Darüber hinaus können Benutzer nicht im Voraus vorhersehen, wann sie zur Eingabe von Anmeldeinformationen aufgefordert werden.
-> Dies bedeutet, dass man nicht versuchen darf, ein Benutzerkonto für den Zugriff auf Azure Data Explorer zu verwenden, wenn nicht interaktive Anmeldungen unterstützt werden müssen (z. B. beim Planen von Aufgaben), da, wenn die Zeit für die Aufforderung zum angemeldeten Benutzer nach Anmeldeinformationen kommt, diese Eingabeaufforderung fehlschlägt, wenn sie unter nicht interaktiver Anmeldung ausgeführt wird.
+> Der für die Authentifizierung verwendete Aad-Endpunkt wird auch als **Aad-Autoritäts-URL** oder einfach als **Aad-Autorität**bezeichnet.
+
+## <a name="aad-token-cache"></a>Aad-Tokencache
+
+Wenn Sie das Azure Daten-Explorer SDK verwenden, werden die Aad-Token auf dem lokalen Computer in einem Tokencache pro Benutzer gespeichert (eine Datei namens " **%AppData%\kusto\tokencache.Data** ", auf die nur der angemeldete Benutzer zugreifen oder diese entschlüsseln kann). Der Cache wird auf Token überprüft, bevor der Benutzer zur Eingabe von Anmelde Informationen aufgefordert wird. Dadurch wird die Häufigkeit, mit der ein Benutzer Anmelde Informationen eingeben muss, erheblich verringert.
+
+> [!NOTE]
+> Der Aad-Tokencache reduziert die Anzahl der interaktiven Eingabe Aufforderungen, die einem Benutzer für den Zugriff auf Azure-Daten-Explorer angezeigt werden, aber er wird nicht beendet. Außerdem können Benutzer nicht im Voraus vorhersehen, wann Sie zur Eingabe von Anmelde Informationen aufgefordert werden.
+> Dies bedeutet, dass Sie nicht versuchen dürfen, ein Benutzerkonto für den Zugriff auf Azure Daten-Explorer zu verwenden, wenn es erforderlich ist, nicht interaktive Anmeldungen zu unterstützen (z. b. beim Planen von Aufgaben), denn wenn der angemeldete Benutzer nach Anmelde Informationen aufgefordert werden soll, tritt bei der Ausführung unter nicht interaktiver Anmeldung ein Fehler auf.
 
 
 ## <a name="user-authentication"></a>Benutzerauthentifizierung
 
-Die einfachste Möglichkeit, mit Benutzerauthentifizierung auf Azure Data Explorer zuzugreifen, `Federated Authentication` besteht darin, das Azure `true`Data Explorer SDK zu verwenden und die Eigenschaft der Azure Data Explorer-Verbindungszeichenfolge auf festzulegen. Wenn das SDK zum ersten Mal zum Senden einer Anforderung an den Dienst verwendet wird, wird dem Benutzer ein Anmeldeformular zur Eingabe der AAD-Anmeldeinformationen angezeigt, und bei erfolgreicher Authentifizierung wird die Anforderung gesendet.
+Die einfachste Möglichkeit, auf Azure-Daten-Explorer mit Benutzerauthentifizierung zuzugreifen, ist die Verwendung des Azure Daten-Explorer SDK `Federated Authentication` und die Festlegung der-Eigenschaft der `true`Azure Daten-Explorer-Verbindungs Zeichenfolge auf. Wenn das SDK zum ersten Mal verwendet wird, um eine Anforderung an den Dienst zu senden, wird dem Benutzer ein Anmeldeformular für die Eingabe der Aad-Anmelde Informationen angezeigt. bei erfolgreicher Authentifizierung wird die Anforderung gesendet.
 
-Anwendungen, die das Azure Data Explorer SDK nicht verwenden, können weiterhin die AAD-Clientbibliothek (ADAL) verwenden, anstatt den AAD-Dienstsicherheitsprotokollclient zu implementieren. Ein Beispielhttps://github.com/AzureADSamples/WebApp-WebAPI-OpenIDConnect-DotNetdafür finden Sie unter [ ] aus einer .NET-Anwendung.
+Anwendungen, die das Azure Daten-Explorer SDK nicht verwenden, können weiterhin die Aad-Client Bibliothek (Adal) verwenden, anstatt den Aad-Dienst Sicherheitsprotokoll-Client zu implementieren. Ein Beispiel hierfürhttps://github.com/AzureADSamples/WebApp-WebAPI-OpenIDConnect-DotNetfinden Sie unter [] in einer .NET-Anwendung.
 
-Um Benutzer für azure Data Explorer-Zugriff zu `Access Kusto` authentifizieren, muss einer Anwendung zunächst die delegierte Berechtigung erteilt werden. Weitere Informationen finden Sie in der [Kusto-Anleitung zur Bereitstellung von AAD-Anwendungen.](how-to-provision-aad-app.md#set-up-delegated-permissions-for-kusto-service-application)
+Zum Authentifizieren von Benutzern für Azure Daten-Explorer Access muss einer Anwendung zunächst die `Access Kusto` Delegierte Berechtigung erteilt werden. Ausführliche Informationen finden Sie im [Kusto-Handbuch zur](how-to-provision-aad-app.md#set-up-delegated-permissions-for-kusto-service-application) Bereitstellung von Aad-Anwendungen.
 
-Der folgende kurze Codeausschnitt veranschaulicht die Verwendung von ADAL zum Abrufen eines AAD-Benutzertokens für den Zugriff auf Azure Data Explorer (startet die Anmeldebenutzeroberfläche):
+Der folgende kurze Code Ausschnitt veranschaulicht die Verwendung von Adal zum Abrufen eines Aad-Benutzer Tokens für den Zugriff auf Azure Daten-Explorer (Anmelde Benutzeroberfläche wird gestartet):
 
 ```csharp
 // Create an HTTP request
@@ -98,7 +99,7 @@ WebRequest request = WebRequest.Create(new Uri("https://{serviceNameAndRegion}.k
 AuthenticationContext authContext = new AuthenticationContext("AAD Authority URL");
 
 // Acquire user token for the interactive user for Kusto:
-AuthenticationResult result = authContext.AcquireTokenAsync("https://{serviceNameAndRegion}.kusto.windows.net", "your client app id", 
+AuthenticationResult result = authContext.AcquireTokenAsync("https://{serviceNameAndRegion}.kusto.windows.net", "your client app id",
     new Uri("your client app resource id"), new PlatformParameters(PromptBehavior.Auto)).GetAwaiter().GetResult();
 
 // Extract Bearer access token and set the Authorization header on your request:
@@ -108,7 +109,7 @@ request.Headers.Set(HttpRequestHeader.Authorization, string.Format(CultureInfo.I
 
 ## <a name="application-authentication"></a>Anwendungsauthentifizierung
 
-Der folgende kurze Codeausschnitt veranschaulicht die Verwendung von ADAL zum Abrufen eines AAD-Anwendungstokens für den Zugriff auf Azure Data Explorer. In diesem Flow wird keine Eingabeaufforderung angezeigt, und die Anwendung muss bei AAD registriert und mit Anmeldeinformationen ausgestattet sein, die für die Anwendungsauthentifizierung erforderlich sind (z. B. ein von AAD ausgestellter App-Schlüssel oder ein X509v2-Zertifikat, das bei AAD vorregistriert wurde).
+Der folgende kurze Code Ausschnitt veranschaulicht die Verwendung von Adal zum Abrufen eines Aad-Anwendungs Tokens für den Zugriff auf Azure Daten-Explorer. In diesem Flow wird keine Eingabeaufforderung angezeigt, und die Anwendung muss bei Aad registriert und mit den Anmelde Informationen ausgestattet sein, die zum Durchführen der Anwendungs Authentifizierung (z. b. ein von Aad ausgestelltes App-Schlüssel oder ein X509v2-Zertifikat, das in Aad vorab registriert wurde) benötigt wird.
 
 ```csharp
 // Create an HTTP request
@@ -127,76 +128,76 @@ string bearerToken = result.AccessToken;
 request.Headers.Set(HttpRequestHeader.Authorization, string.Format(CultureInfo.InvariantCulture, "{0} {1}", "Bearer", bearerToken));
 ```
 
-## <a name="on-behalf-of-authentication"></a>On-Behalf-of-Authentifizierung
+## <a name="on-behalf-of-authentication"></a>"Im Auftrag von"-Authentifizierung
 
-In diesem Szenario wurde einer Anwendung ein AAD-Zugriffstoken für eine beliebige Ressource gesendet, die von der Anwendung verwaltet wird, und sie verwendet dieses Token, um ein neues AAD-Zugriffstoken für die Azure Data Explorer-Ressource zu erwerben, damit die Anwendung im Namen des vom ursprünglichen AAD-Zugriffstoken angegebenen Prinzipals auf Kusto zugreifen kann.
+In diesem Szenario wurde eine Anwendung ein Aad-Zugriffs Token für eine beliebige Ressource gesendet, die von der Anwendung verwaltet wird, und Sie verwendet dieses Token zum Abrufen eines neuen Aad-Zugriffs Tokens für die Azure Daten-Explorer-Ressource, damit die Anwendung im Namen des Prinzipals, der durch das ursprüngliche Aad-Zugriffs Token angegeben wird, auf Kusto zugreifen kann.
 
-Dieser Flow wird als [OAuth2-Tokenaustauschfluss](https://tools.ietf.org/html/draft-ietf-oauth-token-exchange-04)bezeichnet.
-In der Regel sind mehrere Konfigurationsschritte mit AAD erforderlich, und in einigen Fällen (abhängig von der AAD-Mandantenkonfiguration) kann dies eine besondere Zustimmung des Administrators des AAD-Mandanten erfordern.
+Dieser Flow wird als [OAuth2-tokenaustausch](https://tools.ietf.org/html/draft-ietf-oauth-token-exchange-04)bezeichnet.
+In der Regel sind mehrere Konfigurationsschritte mit Aad erforderlich, und in einigen Fällen (abhängig von der Konfiguration des Aad-Mandanten) ist möglicherweise eine besondere Zustimmung vom Administrator des Aad-Mandanten erforderlich.
 
 
 
-**Schritt 1: Einrichten einer Vertrauensstellung zwischen Ihrer Anwendung und dem Azure Data Explorer-Dienst**
+**Schritt 1: Einrichten einer Vertrauensstellung zwischen Ihrer Anwendung und dem Azure Daten-Explorer-Dienst**
 
-1. Öffnen Sie das [Azure-Portal,](https://portal.azure.com/) und stellen Sie sicher, dass Sie beim richtigen Mandanten angemeldet sind (siehe obere/rechte Ecke für die Identität, die zum Anmelden beim Portal verwendet wird).
+1. Öffnen Sie die [Azure-Portal](https://portal.azure.com/) , und stellen Sie sicher, dass Sie beim richtigen Mandanten angemeldet sind (Weitere Informationen finden Sie in der oberen/rechten Ecke der Identität, die für die Anmeldung beim Portal verwendet wird).
 
-2. Klicken Sie im Ressourcenbereich auf **Azure Active Directory**und dann auf **App-Registrierungen**.
+2. Klicken Sie im Bereich Ressourcen auf **Azure Active Directory**und dann auf **App-Registrierungen**.
 
-3. Suchen Sie die Anwendung, die den In-Behalf-of-Flow verwendet, und öffnen Sie sie.
+3. Suchen Sie die Anwendung, die den im-Auftrag-von-Flow verwendet, und öffnen Sie Sie.
 
-4. Klicken Sie auf **API-Berechtigungen**, und fügen Sie dann **eine Berechtigung hinzu.**
+4. Klicken Sie auf **API-Berechtigungen**und dann auf **Berechtigung hinzufügen**.
 
-5. Suchen Sie nach der Anwendung mit dem Namen **Azure Data Explorer,** und wählen Sie sie aus.
+5. Suchen Sie nach der Anwendung namens **Azure Daten-Explorer** , und wählen Sie Sie aus.
 
-6. Wählen Sie **user_impersonation / Access Kusto**.
+6. Wählen Sie **user_impersonation/zugriffskusto**aus.
 
 7. Klicken Sie auf **Berechtigung hinzufügen**.
 
-**Schritt 2: Tokenaustausch in Ihrem Servercode durchführen**
+**Schritt 2: Ausführen von tokenaustausch in Ihrem Servercode**
 
 ```csharp
 // Create Auth Context for AAD (common or tenant-specific endpoint):
 AuthenticationContext authContext = new AuthenticationContext("AAD Authority URL");
 
 // Exchange your token for for Kusto token.
-// You will need to provide your application's client ID and secret to authenticate your application 
+// You will need to provide your application's client ID and secret to authenticate your application
 var tokenForKusto = authContext.AcquireTokenAsync(
     "https://{serviceNameAndRegion}.kusto.windows.net",
     new ClientCredential(customerAadWebApplicationClientId, customerAAdWebApplicationSecret),
     new UserAssertion(customerAadWebApplicationToken)).GetAwaiter().GetResult();
 ```
 
-**Schritt 3: Bereitstellen des Tokens für die Kusto-Clientbibliothek und Ausführen von Abfragen**
+**Schritt 3: Bereitstellen des Tokens für die Kusto-Client Bibliothek und Ausführen von Abfragen**
 
 ```csharp
 var kcsb = new KustoConnectionStringBuilder(string.Format(
-    "https://{0}.kusto.windows.net;fed=true;UserToken={1}", 
-    clusterName, 
+    "https://{0}.kusto.windows.net;fed=true;UserToken={1}",
+    clusterName,
     tokenForKusto.AccessToken));
 var client = KustoClientFactory.CreateCslQueryProvider(kcsb);
 var queryResult = client.ExecuteQuery(databaseName, query, null);
 ```
 
-## <a name="web-client-javascript-authentication-and-authorization"></a>Web Client -Authentifizierung und -Autorisierung (JavaScript)
+## <a name="web-client-javascript-authentication-and-authorization"></a>Authentifizierung und Autorisierung von Webclients (JavaScript)
 
 
 
-**AAD-Anwendungskonfiguration**
+**Aad-Anwendungskonfiguration**
 
 > [!NOTE]
-> Zusätzlich zu den [Standardschritten,](./how-to-provision-aad-app.md) die Sie befolgen müssen, um eine AAD-App einzurichten, sollten Sie auch den impliziten Oauth-Fluss in Ihrer AAD-Anwendung aktivieren. Sie können dies erreichen, indem Sie Manifest auf Ihrer Anwendungsseite im azure-Portal auswählen und oauth2AllowImplicitFlow auf true festlegen.
+> Zusätzlich zu den Standard [Schritten](./how-to-provision-aad-app.md) , die Sie befolgen müssen, um eine Aad-App einzurichten, sollten Sie auch den impliziten OAuth-Fluss in ihrer Aad-Anwendung aktivieren. Wählen Sie dazu im Azure-Portal auf der Anwendungsseite die Option Manifest aus, und legen Sie oauth2AllowImplicitFlow auf true fest.
 
 **Details**
 
-Wenn es sich bei dem Client um einen JavaScript-Code handelt, der im Browser des Benutzers ausgeführt wird, wird der implizite Grant-Fluss verwendet. Das Token, das der Clientanwendung Zugriff auf den Azure Data Explorer-Dienst gewährt, wird unmittelbar nach einer erfolgreichen Authentifizierung als Teil des Umleitungs-URI (in einem URI-Fragment) bereitgestellt. In diesem Flow wird kein Aktualisierungstoken angegeben, sodass der Client das Token nicht über einen längeren Zeitraum zwischenspeichern und wiederverwenden kann.
+Wenn der Client ein JavaScript-Code ist, der im Browser des Benutzers ausgeführt wird, wird der implizite Zuweisungs Fluss verwendet. Das Token, das der Client Anwendung Zugriff auf den Azure Daten-Explorer-Dienst gewährt, wird unmittelbar nach einer erfolgreichen Authentifizierung als Teil des Umleitungs-URIs (in einem URI-Fragment) bereitgestellt. in diesem Flow wird kein Aktualisierungs Token angegeben. Daher kann der Client das Token für längere Zeiträume nicht zwischenspeichern und wieder verwenden.
 
-Wie im systemeigenen Clientfluss sollten zwei AAD-Anwendungen (Server und Client) mit einer konfigurierten Beziehung zwischen ihnen vorhanden sein. 
+Wie im Native Client-Flow sollten zwei Aad-Anwendungen (Server und Client) mit einer konfigurierten Beziehung zwischen Ihnen vorhanden sein.
 
-AdalJs erfordert eine id_token, bevor access_token Anrufe getätigt werden.
+Adaljs erfordert das erhalten einer id_token, bevor access_token Aufrufe durchgeführt werden.
 
-Das Zugriffstoken wird durch `AuthenticationContext.login()` Aufrufen der Methode abgerufen, und access_tokens werden durch Aufrufen `Authenticationcontext.acquireToken()`abgerufen.
+Das Zugriffs Token wird durch Aufrufen der `AuthenticationContext.login()` -Methode abgerufen, und access_tokens durch Aufrufen `Authenticationcontext.acquireToken()`von abgerufen werden.
 
-* Erstellen Sie einen AuthenticationContext mit der richtigen Konfiguration:
+* Erstellen Sie einen authenticationcontext mit der richtigen Konfiguration:
 
 ```javascript
 var config = {
@@ -209,15 +210,15 @@ var config = {
 var authContext = new AuthenticationContext(config);
 ```
 
-* Rufen `authContext.login()` Sie `acquireToken()` an, bevor Sie versuchen, wenn Sie nicht angemeldet sind. eine gute Möglichkeit ot wissen, ob Sie angemeldet `authContext.getCachedUser()` sind oder `false`nicht, ist zu rufen und zu sehen, ob es zurückkehrt )
-* Rufen `authContext.handleWindowCallback()` Sie an, wenn Ihre Seite geladen wird. Dies ist der Code, der die Umleitung von AAD abfängt und das Token aus der Fragment-URL herauszieht und zwischenspeichert.
-* Rufen `authContext.acquireToken()` Sie an, um das eigentliche Zugriffstoken abzurufen, nachdem Sie über ein gültiges ID-Token verfügen. Der erste Parameter, der Token erfasst, ist die Kusto-Server-AAD-Anwendungsressourcen-URL.  
+* Wird `authContext.login()` aufgerufen, bevor `acquireToken()` Sie versuchen, wenn Sie nicht angemeldet sind. eine gute Methode, um zu erfahren, ob Sie angemeldet sind oder nicht, `authContext.getCachedUser()` ist das `false`aufzurufen.
+* Wird `authContext.handleWindowCallback()` aufgerufen, wenn die Seite geladen wird. Dies ist der Code, der die Umleitung von Aad abfängt und das Token aus der Fragment-URL abruft und speichert.
+* Aufrufen `authContext.acquireToken()` , um das tatsächliche Zugriffs Token abzurufen, jetzt verfügen Sie über ein gültiges ID-Token. Der erste Parameter für acquiretoken ist die Azure AD-Anwendungs Ressourcen-URL für den Kusto-Server.
 
 ```javascript
  authContext.acquireToken("<Kusto cluster URL>", callbackThatUsesTheToken);
  ```
 
-* Im callbackThatUsesTheToken können Sie das Token als Trägertoken in der Azure Data Explorer-Anforderung verwenden. Beispiel:
+* im callbackthattoesthetoken können Sie das Token als bearertoken in der Azure-Daten-Explorer Anforderung verwenden. Beispiel:
 
 ```javascript
 var settings = {
@@ -247,7 +248,8 @@ var settings = {
 };
 
 $.ajax(settings).then(function(data) {/* do something wil the data */});
-``` 
+```
 
-> Warnung - wenn Sie bei der Authentifizierung die folgende oder ähnliche Ausnahme erhalten:`ReferenceError: AuthenticationContext is not defined` 
-Dies liegt wahrscheinlich daran, dass Sie AuthenticationContext nicht im globalen Namespace haben. Leider verfügt AdalJS derzeit über eine nicht dokumentierte Anforderung, dass der Authentifizierungskontext im globalen Namespace definiert wird.
+> Warnung: Wenn die folgende oder eine ähnliche Ausnahme bei der Authentifizierung angezeigt wird:`ReferenceError: AuthenticationContext is not defined`
+Dies liegt wahrscheinlich daran, dass Sie nicht über authenticationcontext im globalen Namespace verfügen.
+Leider hat adaljs zurzeit eine nicht dokumentierte Anforderung, dass der Authentifizierungs Kontext im globalen Namespace definiert wird.

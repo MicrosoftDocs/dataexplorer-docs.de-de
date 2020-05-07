@@ -1,40 +1,41 @@
 ---
-title: Azure Active Directory (AAD)-Authentifizierung - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die Azure Active Directory (AAD)-Authentifizierung in Azure Data Explorer beschrieben.
+title: 'Azure Active Directory (AAD)-Authentifizierung: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird die Azure Active Directory Authentifizierung (AAD) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
+ms.custom: has-adal-ref
 ms.date: 09/13/2019
-ms.openlocfilehash: 637252b91af53198b3ee494309857b2d4b6e6828
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 17da89206af12e2e4f7d9867372c8babf0c4aea1
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81522932"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82862087"
 ---
 # <a name="azure-active-directory-aad-authentication"></a>Azure Active Directory (AAD)-Authentifizierung
 
 Azure Active Directory (AAD) ist der bevorzugte, mehrinstanzenfähige Cloudverzeichnisdienst von Azure. Er kann Sicherheitsprinzipale authentifizieren sowie im Verbund mit anderen Identitätsanbietern (beispielsweise Active Directory von Microsoft) verwendet werden.
 
-AAD ermöglicht die Anwendung verschiedener Arten (Webanwendung, Windows-Desktopanwendung, universelle Anwendungen, mobile Anwendungen usw.), um Kusto-Dienste gleichmäßig zu authentifizieren und zu nutzen.
+Aad ermöglicht die Verwendung von verschiedenen Arten (Webanwendung, Windows-Desktop Anwendung, universelle Anwendungen, Mobile Anwendungen usw.), um Kusto-Dienste einheitlich zu authentifizieren und zu verwenden.
 
-AAD unterstützt eine Reihe von Authentifizierungsszenarien.
-Wenn während der Authentifizierung ein Benutzer vorhanden ist, sollte der Benutzer durch AAD-Benutzerauthentifizierung bei AAD authentifiziert werden.
-In einigen Fällen möchte man, dass ein Dienst Kusto auch dann nutzt, wenn kein Benutzer interaktiv anwesend ist. In solchen Fällen sollte man die Anwendung mithilfe eines Anwendungsgeheimnisses authentifizieren, wie in AAD Application Authentication beschrieben.
+Aad unterstützt eine Reihe von Authentifizierungs Szenarien.
+Wenn während der Authentifizierung ein Benutzer vorhanden ist, muss der Benutzer von der Aad-Benutzerauthentifizierung bei Aad authentifiziert werden.
+In einigen Fällen möchte ein Dienst auch dann Kusto verwenden, wenn kein Benutzer interaktiv vorhanden ist. In solchen Fällen sollte die Anwendung durch die Verwendung eines geheimen Anwendungs Schlüssels authentifiziert werden, wie in der Aad-Anwendungs Authentifizierung beschrieben.
 
-Die folgenden Authentifizierungsmethoden werden von Kusto im Allgemeinen unterstützt, auch über seine .NET-Bibliotheken:
+Die folgenden Authentifizierungsmethoden werden von Kusto im Allgemeinen unterstützt, einschließlich der .NET-Bibliotheken:
 
-* Interaktive Benutzerauthentifizierung – Dieser Modus erfordert Interaktivität, bei Bedarf wird die Anmeldebenutzeroberfläche angezeigt
-* Benutzerauthentifizierung mit einem vorhandenen AAD-Token, das zuvor für Kusto ausgegeben wurde
-* Anwendungsauthentifizierung mit AppID und shared Secret
-* Anwendungsauthentifizierung mit lokal installiertem X.509v2-Zertifikat oder -Zertifikat inline bereitgestellt
-* Anwendungsauthentifizierung mit einem vorhandenen AAD-Token, das zuvor für Kusto ausgegeben wurde
-* Benutzer- oder Anwendungsauthentifizierung mit einem AAD-Token, das für eine andere Ressource ausgestellt wurde, sofern zwischen dieser Ressource und Kusto eine Vertrauensstellung besteht
+* Interaktive Benutzerauthentifizierung: Dieser Modus erfordert Interaktivität, wie bei Bedarf, wird die Anmelde Benutzeroberfläche angezeigt.
+* Benutzerauthentifizierung mit einem vorhandenen Aad-Token, das zuvor für Kusto ausgegeben wurde
+* Anwendungs Authentifizierung mit AppID und einem gemeinsamen geheimen Schlüssel
+* Anwendungs Authentifizierung mit lokal installiertem X. 509v2-Zertifikat oder bereitgestellter Zertifikat
+* Anwendungs Authentifizierung mit einem vorhandenen Aad-Token, das zuvor für Kusto ausgegeben wurde
+* Benutzer-oder Anwendungs Authentifizierung mit einem Aad-Token, das für eine andere Ressource ausgegeben wurde, weil eine Vertrauensstellung zwischen dieser Ressource und Kusto vorhanden ist
 
-Hinweise und Beispiele finden Sie in der [Kusto-Verbindungszeichenfolgenreferenz.](../../api/connection-strings/kusto.md)
+Anleitungen und Beispiele finden Sie in der Referenz zu [Kusto-Verbindungs](../../api/connection-strings/kusto.md) Zeichenfolgen.
 
 ## <a name="user-authentication"></a>Benutzerauthentifizierung
 
@@ -54,30 +55,29 @@ Wenn Anforderungen keinem bestimmten Benutzer zugeordnet sind oder kein Benutzer
 * Anwendungsauthentifizierung mit einem zuvor bezogenen gültigen AAD-Token (ausgestellt für Kusto)
 * Anwendungsauthentifizierung mit einem zuvor bezogenen gültigen AAD-Token, das für eine andere Ressource ausgestellt wurde – vorausgesetzt, es besteht eine Vertrauensbeziehung zwischen dieser Ressource und Kusto
 
-## <a name="aad-server-application-permissions"></a>AAD Server-Anwendungsberechtigungen
+## <a name="aad-server-application-permissions"></a>Aad-Server Anwendungs Berechtigungen
 
-Im allgemeinen Fall kann eine AAD-Serveranwendung mehrere Berechtigungen definieren (z. B. schreibgeschützte Und eine Leseschreibberechtigung), und die AAD-Clientanwendung kann entscheiden, welche Berechtigungen sie benötigt, wenn sie ein Autorisierungstoken anfordert. Im Rahmen der Tokenerfassung wird der Benutzer aufgefordert, die AAD-Clientanwendung zu autorisieren, im Namen des Benutzers mit der Berechtigung zu handeln, diese Berechtigungen zu besitzen. Sollte der Benutzer zustimmen, werden diese Berechtigungen im Gültigkeitsbereich des Tokens aufgeführt, das für die AAD-Clientanwendung ausgestellt wird.
+Im Allgemeinen kann eine Aad-Server Anwendung mehrere Berechtigungen (z. b. schreibgeschützte Berechtigungen und Lese-/Schreibberechtigungen) definieren, und die Aad-Client Anwendung entscheidet möglicherweise, welche Berechtigungen Sie benötigt, wenn Sie ein Autorisierungs Token anfordert. Im Rahmen der tokenübernahme wird der Benutzer aufgefordert, die Aad-Client Anwendung zu autorisieren, damit Sie im Auftrag des Benutzers agieren kann, um diese Berechtigungen zu erteilen. Wenn der Benutzer eine Genehmigung durchführt, werden diese Berechtigungen im Bereichs Anspruch des Tokens aufgeführt, das für die Aad-Client Anwendung ausgegeben wird.
 
 
 
-Die AAD-Clientanwendung ist so konfiguriert, dass sie die Berechtigung "Access Kusto" vom Benutzer anfordert (die AAD als "Ressourcenbesitzer" bezeichnet).
+Die Aad-Client Anwendung ist so konfiguriert, dass Sie die Berechtigung "Zugriff auf Kusto" für den Benutzer anfordert (die Aad "den Ressourcen Besitzer" aufruft).
 
 ## <a name="kusto-client-sdk-as-an-aad-client-application"></a>Kusto Client SDK als AAD-Clientanwendung
 
 Wenn die Kusto-Clientbibliotheken ADAL (die AAD-Clientbibliothek) aufrufen, um ein Token für die Kommunikation mit Kusto zu beziehen, werden folgende Informationen angegeben:
 
-1. Der AAD-Mieter, wie vom Anrufer empfangen
+1. Der Aad-Mandant, wie er vom Aufrufer empfangen wurde.
 2. Die ID der AAD-Clientanwendung
-3. Die AAD-Clientressourcen-ID
-4. Die AAD ReplyUrl (die URL, zu der der AAD-Dienst nach abschluss der Authentifizierung umgeleitet wird; ADAL erfasst dann diese Umleitung und extrahiert den Autorisierungscode daraus).
-5. Der Cluster-URIhttps://Cluster-and-region.kusto.windows.net(' ').
+3. Die Ressourcen-ID für den Aad-Client
+4. Die Aad replyurl (die URL, an die der Aad-Dienst nach dem erfolgreichen Abschluss der Authentifizierung umgeleitet wird; Adal erfasst diese Umleitung und extrahiert den Autorisierungs Code aus der Anwendung.
+5. Der Cluster-URI (https://Cluster-and-region.kusto.windows.net' ').
 
-Das Token, das von ADAL an die Kusto-Clientbibliothek zurückgegeben wird, hat die Kusto AAD Server-Anwendung als Zielgruppe und die Berechtigung "Zugriff kusto" als Bereich.
+Das Token, das von Adal an die Kusto-Client Bibliothek zurückgegeben wird, verfügt über die Kusto Aad-Server Anwendung als Zielgruppe und über die Berechtigung "Zugriff auf Kusto" als Bereich.
 
-## <a name="authenticating-with-aad-programmatically"></a>Authentifizierung mit AAD Programmatisch
+## <a name="authenticating-with-aad-programmatically"></a>Programm gesteuertes Authentifizieren mit Aad
 
-In den folgenden Artikeln wird erläutert, wie Sie Kusto programmgesteuert mit AAD authentifizieren:
+In den folgenden Artikeln wird erläutert, wie Sie Programm gesteuert bei Kusto mit Aad authentifiziert werden:
 
-* [Bereitstellen einer AAD-Anwendung](./how-to-provision-aad-app.md)
-* [So führen Sie die AAD-Authentifizierung durch](./how-to-authenticate-with-aad.md)
-
+* [Bereitstellen einer Aad-Anwendung](./how-to-provision-aad-app.md)
+* [Vorgehensweise beim Ausführen der Aad-Authentifizierung](./how-to-authenticate-with-aad.md)

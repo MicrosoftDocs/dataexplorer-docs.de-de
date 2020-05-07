@@ -7,13 +7,14 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
+ms.custom: has-adal-ref
 ms.date: 11/25/2019
-ms.openlocfilehash: 9d72373e8fc5c55740fa3e53a8f850a887517e7b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: ecdcdf22fe25c855045d90e294597c1abc769c03
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81490445"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82862104"
 ---
 # <a name="kusto-access-control-overview"></a>Übersicht über die Kusto-Zugriffssteuerung
 
@@ -30,7 +31,7 @@ Der Akteur kann erst nach erfolgreicher Authentifizierung und Autorisierung eine
 
 AAD ist die bevorzugte Methode für die Kusto-Authentifizierung in Microsoft. Diese Lösung unterstützt eine Reihe von Authentifizierungsszenarien:
 * **Benutzerauthentifizierung** (interaktive Anmeldung): Dient zur Authentifizierung menschlicher Prinzipale.
-* **Anwendungsauthentifizierung** (nicht interaktive Anmeldung): Dient zur Authentifizierung von Diensten und Anwendungen, die ohne Interaktion mit einem menschlichen Benutzer ausgeführt/authentifiziert werden müssen. 
+* **Anwendungsauthentifizierung** (nicht interaktive Anmeldung): Dient zur Authentifizierung von Diensten und Anwendungen, die ohne Interaktion mit einem menschlichen Benutzer ausgeführt/authentifiziert werden müssen.
 
 ### <a name="user-authentication"></a>Benutzerauthentifizierung
 Die Benutzerauthentifizierung erfolgt, wenn der Benutzer Anmeldeinformationen an AAD (oder an einen anderen Identitätsanbieter, der AAD nutzt – etwa AD FS) übergibt und daraufhin ein Sicherheitstoken erhält, das an den Kusto-Dienst übergeben werden kann. Für den Kusto-Dienst spielt es keine Rolle, auf welche Weise das Sicherheitstoken bezogen wurde. Er überprüft lediglich, ob das Token gültig ist und welche Informationen von AAD (oder von dem Verbundidentitätsanbieter) angegeben wurden.
@@ -94,4 +95,3 @@ Kusto verwendet ein [rollenbasiertes Autorisierungsmodell](role-based-authorizat
 So sind beispielsweise Sicherheitsprinzipale (Benutzer oder Dienste) mit der Rolle **Datenbankbenutzer** berechtigt, die Daten einer bestimmten Datenbank zu lesen, Tabellen in der Datenbank zu erstellen und Funktionen darin zu erstellen.
 
 Die Zuordnung von Sicherheitsprinzipalen zu Sicherheitsrollen kann einzeln oder mithilfe von (in AAD definierten) Sicherheitsgruppen definiert werden. Informationen zu den entsprechenden Befehlen finden Sie unter [Security roles management](../security-roles.md) (Verwaltung von Sicherheitsrollen).
-
