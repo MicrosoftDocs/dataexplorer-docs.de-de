@@ -1,6 +1,6 @@
 ---
-title: active_users_count-Plugin - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird active_users_count-Plugin in Azure Data Explorer beschrieben.
+title: 'active_users_count-Plug-in: Azure Daten-Explorer'
+description: In diesem Artikel wird active_users_count-Plug-in in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f324507d1a4528c5efefc14f7820437383211ca6
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 22d3744cfa83a003830acc07710fd459003dbf20
+ms.sourcegitcommit: 9fe6ee7db15a5cc92150d3eac0ee175f538953d2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81519345"
+ms.lasthandoff: 05/07/2020
+ms.locfileid: "82907204"
 ---
-# <a name="active_users_count-plugin"></a>active_users_count Plugin
+# <a name="active_users_count-plugin"></a>Plug-in active_users_count
 
-Berechnet die unterschiedliche Anzahl von Werten, bei denen jeder Wert in mindestens einer Mindestanzahl von Perioden in einer Nachwartezeitperiode angezeigt wurde.
+Berechnet die unterschiedliche Anzahl von Werten, wobei jeder Wert mindestens einer minimalen Anzahl von Zeitpunkten in einem Nachschlage Zeitraum angezeigt wird.
 
-Nützlich für die Berechnung unterschiedlicher Anzahlen nur von "Fans", ohne Auftritte von "Nicht-Fans". Ein Benutzer wird nur dann als "Fan" gezählt, wenn er während des Lookback-Zeitraums aktiv war. Der Lookback-Zeitraum wird nur verwendet, `active` um zu bestimmen, ob ein Benutzer als "Fan" betrachtet wird oder nicht. Die Aggregation selbst schließt keine Benutzer aus dem Lookback-Fenster ein (im Gegensatz zu [sliding_window_counts] (sliding-window-counts-plugin.md), in dem sich die Aggregation über dem Schiebefenster der Lookback-Periode befindet).
+Eignet sich nur für die Berechnung der unterschiedlichen Anzahl von "Lüfter", ohne den Anschein von "nicht-Fans" zu schließen. Ein Benutzer wird nur dann als "Lüfter" gezählt, wenn er während des Nachschlage Zeitraums aktiv war. Der Such Zeitraum wird nur verwendet, um zu bestimmen, ob ein Benutzer `active` als "Lüfter" angesehen wird. In der Aggregation selbst sind keine Benutzer aus dem Nachschlage Fenster enthalten. Im Vergleich dazu wird die [sliding_window_counts](sliding-window-counts-plugin.md) Aggregation über ein gleitender Fenster des Nachschlage Zeitraums ausgeführt.
 
 ```kusto
 T | evaluate active_users_count(id, datetime_column, startofday(ago(30d)), startofday(now()), 7d, 1d, 2, 7d, dim1, dim2, dim3)
@@ -27,35 +27,35 @@ T | evaluate active_users_count(id, datetime_column, startofday(ago(30d)), start
 
 **Syntax**
 
-*T* `| evaluate` `,` *Start* `,` *End* `,` `,` *Period* `,` `,` *Bin* `,` `,` `,` *IdColumn* `,` *TimelineColumn* *dim2* *dim1* *ActivePeriodsCount* *LookbackWindow* IdColumn TimelineColumn Start End LookbackWindow Period ActivePeriodsCount Bin [ dim1 dim2 ...] `active_users_count(``)`
+*T* `| evaluate` `,` *Bin* `,` *dim1* `,` *dim2* `,` *Start* `,` `,` *Period* `,` *IdColumn* `,` `,` *LookbackWindow* *End* *ActivePeriodsCount* *TimelineColumn* idColumn`,` timelinecolenn Start Ende lookbackwindow period activeperiodscount bin [dim1 dim2...] `active_users_count(``)`
 
 **Argumente**
 
-* *T*: Der tabellarische Eingabeausdruck.
-* *IdColumn*: Der Name der Spalte mit ID-Werten, die die Benutzeraktivität darstellen. 
-* *TimelineColumn*: Der Name der Spalte, die die Zeitachse darstellt.
-* *Start*: (optional) Skalar mit Wert des Analysestartzeitraums.
-* *Ende*: (optional) Skalar mit Wert der Analyseendperiode.
-* *LookbackWindow*: Ein gleitendes Zeitfenster, das einen Zeitraum definiert, in dem die Benutzerdarstellung aktiviert ist. Der Lookback-Zeitraum beginnt bei ([aktuelles Erscheinungsbild] - [Lookback-Fenster]) und endet auf ([aktuelles Erscheinungsbild]). 
-* *Zeitraum*: Skalarkonstante Zeitspanne als einzelne Erscheinung zu zählen (ein Benutzer wird als aktiv gezählt, wenn es in mindestens unterschiedlichen ActivePeriodsCount dieser Zeitspanne angezeigt wird.
-* *ActivePeriodsCount*: Minimale Anzahl unterschiedlicher aktiver Perioden, um zu entscheiden, ob der Benutzer aktiv ist. Aktive Benutzer sind diejenigen, die mindestens (gleich oder größer als) aktive Perioden gezählt haben.
-* *Bin*: Skalarkonstantenwert des Analyseschrittzeitraums. Kann entweder ein numerischer/datumszeitlicher/zeitstempel-Wert sein, oder eine Zeichenfolge, die `week` / `month` / `year`eine von ist, in diesem Fall werden alle Perioden Anfang des[Monatsbeginns](startofyearfunction.md) des[Monats](startofmonthfunction.md)/entsprechend [beginnen.](startofweekfunction.md)/
-* *dim1*, *dim2*, ...: (optional) Liste der Dimensionsspalten, die die Berechnung der Aktivitätsmetriken aufteilen.
+* *T*: der tabellarische Eingabe Ausdruck.
+* *IdColumn*: der Name der Spalte mit ID-Werten, die die Benutzeraktivität darstellen. 
+* *Timelinecolenn*: der Name der Spalte, die die Zeitachse darstellt.
+* *Start*: (optional) Skalar mit dem Wert des Start Zeitraums der Analyse.
+* *End*: (optional) Skalar mit dem Wert des Analyse endzeitraums.
+* *Lookbackwindow*: ein gleitender Zeitfenster, das einen Zeitraum definiert, in dem die Benutzer Darstellung aktiviert ist. Der Nachschlage Zeitraum beginnt bei ([Aktuelles aussehen]-[Nachschlage Fenster]) und endet am ([aktuelle Darstellung]). 
+* *Period*: skalare Konstante Zeitspanne, die als einzelne Darstellung gezählt werden soll (ein Benutzer wird als aktiv gezählt, wenn er in mindestens einem separaten activeperiodscount-Wert dieser Zeitspanne angezeigt wird.
+* *Activeperiodscount*: minimale Anzahl von unterschiedlichen aktiven Zeitpunkten, um zu entscheiden, ob der Benutzer aktiv ist. Aktive Benutzer sind Benutzer, die mindestens in der Anzahl aktiver Zeiträume (gleich oder größer als) aufgetreten sind.
+* *Bin*: skalare Konstante Wert des Analyseschritt Zeitraums. Kann ein numerischer/DateTime-/timestamp-Wert oder eine Zeichenfolge `week` / `month` / `year`sein, die ist. Alle Zeiträume sind die entsprechenden starstarf [Week](startofweekfunction.md)/-starto-[Month](startofmonthfunction.md)/[-Funktionen.](startofyearfunction.md)
+* *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, in denen die Berechnung der Aktivitäts Metrik in Slice ist.
 
 **Rückgabe**
 
-Gibt eine Tabelle mit den unterschiedlichen Zählwerten für IDs zurück, die in der Nachwartezeit, für jede Zeitachsenperiode und für jede vorhandene Dimensionskombination in über ActivePeriodCounts angezeigt wurden.
+Gibt eine Tabelle zurück, die unterschiedliche Zählerwerte für IDs aufweist, die in activeperiodcounts in den folgenden Punkten aufgetreten sind: der Nachschlage Zeitraum, jeder Zeitachse und jede vorhandene Dimensions Kombination.
 
-Ausgabetabellenschema ist:
+Das Ausgabe Tabellen Schema ist:
 
-|*TimelineColumn*|dim1|..|dim_n|dcount_values|
+|*Timelinecolumschlag*|dim1|..|dim_n|dcount_values|
 |---|---|---|---|---|
-|Typ: ab *TimelineColumn*|..|..|..|long|
+|Typ: ab *timelinecolumschlag*|..|..|..|long|
 
 
 **Beispiele**
 
-Berechnen Sie die wöchentliche Anzahl der verschiedenen Benutzer, die in mindestens an 3 verschiedenen Tagen über einen Zeitraum von vorherigen 8 Tagen erschienen. Analysezeitraum: Juli 2018.
+Berechnen Sie die wöchentliche Anzahl der unterschiedlichen Benutzer, die in einem Zeitraum von acht Tagen in mindestens drei Tagen aufgetreten sind. Zeitraum der Analyse: Juli 2018.
 
 ```kusto
 let Start = datetime(2018-07-01);
@@ -83,11 +83,15 @@ T | evaluate active_users_count(User, Timestamp, Start, End, LookbackWindow, Per
 
 ```
 
-|Timestamp|dcount|
+|Timestamp|`dcount`|
 |---|---|
 |2018-07-01 00:00:00.0000000|1|
 |2018-07-15 00:00:00.0000000|1|
 
-Ein Benutzer gilt als aktiv, wenn er in mindestens 3 verschiedenen Tagen (Periode = 1d, ActivePeriods=3) in einem Lookback-Fenster von 8d vor dem aktuellen Erscheinungsbild (einschließlich aktueller Darstellung) gesehen wurde. In der Abbildung unten sind die einzigen Erscheinungen, die nach diesen Kriterien aktiv sind, Benutzer A auf der 7/20 und Benutzer B auf dem 7/4 (siehe Plugin-Ergebnisse oben). Beachten Sie, dass die Darstellungen von Benutzer B am 29.06.30 zwar nicht im Start-End-Zeitbereich liegen, aber für das Lookback-Fenster von Benutzer B am 7/4 enthalten sind. 
+Ein Benutzer wird als aktiv betrachtet, wenn er eines der folgenden Kriterien erfüllt: 
+* Der Benutzer wurde in mindestens drei verschiedenen Tagen angezeigt (Period = 1D, activezeiträume = 3).
+* Der Benutzer wurde in einem Nachschlage Fenster von 8D vor und einschließlich der aktuellen Darstellung angezeigt.
 
-![alt text](images/queries/active-users-count.png "Active-Users-Count")
+In der Abbildung unten sind die folgenden Instanzen, die von diesem Kriterium aktiv sind, die folgenden Instanzen: Benutzer A auf 7/20 und Benutzer B auf 7/4 (siehe Plug-in-Ergebnisse weiter oben). Der Anschein von Benutzer B ist für das Nachschlage Fenster auf 7/4, jedoch nicht für den Start-End-Zeitbereich von 6/29-30 enthalten. 
+
+:::image type="content" source="images/queries/active-users-count.png" alt-text="Beispiel für aktive Benutzer Anzahl":::

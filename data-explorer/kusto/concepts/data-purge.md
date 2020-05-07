@@ -1,6 +1,6 @@
 ---
-title: Datenbereinigung - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt die Datenbereinigung in Azure Data Explorer.
+title: 'Daten Löschung: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird das Löschen von Daten in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,102 +8,108 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 460ad9cfca4f97e6735d30a4d47d6384581e7af7
-ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
+ms.openlocfilehash: e24edd1f47318d1ee12bfead83d2e09f67a6cc7a
+ms.sourcegitcommit: 9fe6ee7db15a5cc92150d3eac0ee175f538953d2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "82029987"
+ms.lasthandoff: 05/07/2020
+ms.locfileid: "82907170"
 ---
 # <a name="data-purge"></a>Datenbereinigung
 
 >[!Note]
-> Dieser Artikel enthält Schritte zum Löschen von persönlichen Daten vom Gerät oder aus dem Dienst und kann zur Unterstützung Ihrer Verpflichtungen im Rahmen der Datenschutz-Grundverordnung (DSGVO) verwendet werden. Wenn Sie nach allgemeinen Informationen zur DSGVO suchen, lesen Sie den [Abschnitt DSGVO im Service Trust-Portal](https://servicetrust.microsoft.com/ViewPage/GDPRGetStarted).
+> Dieser Artikel enthält Schrittanleitungen zum Löschen von personenbezogenen Daten aus einem Gerät oder Dienst und kann Sie dabei unterstützen, Ihren Pflichten gemäß DSGVO nachzukommen. Allgemeine Informationen zur dsgvo finden Sie im Abschnitt zur dsgvo [des Dienst Vertrauensstellungs Portals](https://servicetrust.microsoft.com/ViewPage/GDPRGetStarted).
 
 
 
-Als Datenplattform unterstützt Azure Data Explorer (Kusto) die Möglichkeit, einzelne `.purge` Datensätze mithilfe von und verwandten Befehlen zu löschen. Sie können auch [eine ganze Tabelle löschen.](#purging-an-entire-table)  
+Als Datenplattform unterstützt Azure Daten-Explorer (Kusto) die Möglichkeit, einzelne Datensätze zu löschen, indem `.purge` und zugehörige Befehle verwendet werden. Sie können auch [eine gesamte Tabelle](#purging-an-entire-table)löschen.  
 
 > [!WARNING]
-> Das Löschen `.purge` von Daten über den Befehl dient dem Schutz personenbezogener Daten und sollte nicht in anderen Szenarien verwendet werden. Es ist nicht für häufige Löschanforderungen oder das Löschen riesiger Datenmengen konzipiert und kann erhebliche Auswirkungen auf die Leistung des Dienstes haben.
+> Das Löschen von Daten `.purge` über den-Befehl dient zum Schutz persönlicher Daten und sollte nicht in anderen Szenarien verwendet werden. Er ist nicht für die Unterstützung von häufigen Lösch Anforderungen oder das Löschen großer Datenmengen konzipiert und hat möglicherweise eine erhebliche Auswirkung auf die Leistung des Dienstanbieter.
 
-## <a name="purge-guidelines"></a>Säuberungsrichtlinien
+## <a name="purge-guidelines"></a>Richtlinien zum Löschen
 
-Es wird **dringend empfohlen,** dass Teams, die personenbezogene Daten in Azure Data Explorer speichern, dies nur nach sorgfältiger Entwurfsplanung des Datenschemas und Untersuchung relevanter Richtlinien tun.
+Es wird **dringend empfohlen** , dass Teams, die personenbezogene Daten in Azure speichern Daten-Explorer dies nur nach einem sorgfältigen Entwurf des Daten Schemas und der Untersuchung relevanter Richtlinien durchführen.
 
-1. Im besten Fall ist die Aufbewahrungsdauer für diese Daten ausreichend kurz und die Daten werden automatisch gelöscht.
-2. Wenn die Verwendung des Aufbewahrungszeitraums nicht möglich ist, wird empfohlen, alle Datenschutzbestimmungen in einer kleinen Anzahl von Kusto-Tabellen (optimalerweise nur eine Tabelle) zu isolieren und von allen anderen Tabellen darauf zu verlinken. Auf diese Weise kann der [Datenbereinigungsprozess](#purge-process) für eine kleine Anzahl von Tabellen ausgeführt werden, die vertrauliche Daten enthalten, und alle anderen Tabellen vermeiden.
-3. Der Aufrufer sollte jeden Versuch unternehmen, die Ausführung von `.purge` Befehlen auf 1-2 Befehle pro Tabelle pro Tag zu stapeln.
-   Geben Sie nicht mehrere Befehle aus, von denen jeder ein eigenes Benutzeridentitätsprädikat enthält. Senden Sie stattdessen einen einzelnen Befehl, dessen Prädikat alle Benutzeridentitäten enthält, die gereinigt werden müssen.
+1. In einem Best-Case-Szenario ist die Beibehaltungs Dauer für diese Daten ausreichend kurz, und die Daten werden automatisch gelöscht.
+2. Wenn die Verwendung von Beibehaltungs Dauer nicht möglich ist, wird empfohlen, alle Daten mit Datenschutzregeln in einer kleinen Anzahl von Kusto-Tabellen (optimal, nur eine Tabelle) zu isolieren und aus allen anderen Tabellen zu verknüpfen. Dadurch kann der Daten Lösch [Vorgang](#purge-process) für eine kleine Anzahl von Tabellen ausgeführt werden, die sensible Daten enthält, und alle anderen Tabellen werden vermieden.
+3. Der Aufrufer sollte jeden Versuch durchführen, die `.purge` Ausführung von Befehlen in 1-2-Befehle pro Tabelle pro Tag zu verpacken.
+   Geben Sie nicht mehrere Befehle aus, die jeweils über ein eigenes Benutzer Identitäts Prädikat verfügen. Senden Sie stattdessen einen einzelnen Befehl, dessen Prädikat alle Benutzer Identitäten enthält, die gelöscht werden müssen.
 
-## <a name="purge-process"></a>Säuberungsprozess
+## <a name="purge-process"></a>Prozess bereinigen
 
-Der Prozess des selektiven Löschens von Daten aus Azure Data Explorer erfolgt in den folgenden Schritten:
+Der Prozess der selektiven Löschung von Daten aus Azure Daten-Explorer erfolgt in den folgenden Schritten:
 
-1. **Phase 1:** Angesichts eines Kusto-Tabellennamens und eines Prädikats pro Datensatz, das angibt, welche Datensätze gelöscht werden sollen, scannt Kusto die Tabelle, um Datenshards zu identifizieren, die an der Datenbereinigung beteiligt wären (einen oder mehrere Datensätze haben, für die das Prädikat true zurückgibt).
-2. **Phase 2: (Soft Delete)** Ersetzen Sie jeden Datenshard in der Tabelle (in Schritt (1) identifiziert) durch eine erneut eingeschriebene Version, die nicht über die Datensätze verfügt, für die das Prädikat true zurückgibt.
-   Solange keine neuen Daten in die Tabelle aufgenommen werden, geben Abfragen am Ende dieser Phase keine Daten mehr zurück, für die das Prädikat true zurückgibt. 
-   Die Dauer der Soft-Löschphase für die Bereinigung hängt von der Anzahl der Datensätze ab, die gelöscht werden müssen, von ihrer Verteilung über die Datenshards im Cluster, von der Anzahl der Knoten im Cluster, von der freien Kapazität für Bereinigungsvorgänge und von mehreren anderen Faktoren. Die Dauer von Phase 2 kann zwischen wenigen Sekunden und vielen Stunden variieren.
-3. **Phase 3: (Hard Delete)** Arbeiten Sie alle Speicherartefakte zurück, die möglicherweise die "Gift"-Daten enthalten, und löschen Sie sie aus dem Speicher. Diese Phase wird mindestens 5 Tage *nach* Abschluss der vorherigen Phase, jedoch nicht länger als 30 Tage nach dem ersten Befehl durchgeführt, um die Datenschutzanforderungen zu erfüllen.
+1. **Phase 1:** Bei Verwendung eines Kusto-Tabellennamens und eines Daten Satz Prädikats, das angibt, welche Datensätze gelöscht werden sollen, durchsucht Kusto die Tabelle, um Daten-Shards zu identifizieren, die am Daten Löschvorgang beteiligt sind (einen oder mehrere Datensätze aufweisen, für die das Prädikat true zurückgibt).
+2. **Phase 2: (vorläufiges löschen)** Ersetzen Sie jeden datenshard in der Tabelle (in Schritt (1) identifiziert) durch eine erneut erfasste Version, die keine Datensätze enthält, für die das Prädikat true zurückgibt.
+   Solange keine neuen Daten in der Tabelle erfasst werden, werden vom Ende dieser Phase keine Daten mehr zurückgegeben, für die das Prädikat "true" zurückgibt. 
+   Die Dauer der leeren Lösch Phase von Lösch Vorgängen hängt von der Anzahl der Datensätze ab, die bereinigt werden müssen, der Verteilung auf die Daten-Shards im Cluster, der Anzahl der Knoten im Cluster, der für Löschvorgänge verwendeten freien Kapazität und verschiedener anderer Faktoren. Die Dauer von Phase 2 kann zwischen einigen Sekunden und vielen Stunden variieren.
+3. **Phase 3: (hartes löschen)** Arbeiten Sie alle Speicher Artefakte zurück, die möglicherweise die "nicht verarbeitbaren" Daten enthalten, und löschen Sie Sie aus dem Speicher. Diese Phase wird mindestens 5 Tage *nach* dem Abschluss der vorherigen Phase ausgeführt, aber nicht mehr als 30 Tage nach dem ersten Befehl, um die Datenschutzanforderungen einzuhalten.
 
-Die `.purge` Ausgabe eines Befehls löst diesen Prozess aus, der einige Tage in Anspruch nimmt. Beachten Sie, dass, wenn die "Dichte" der Datensätze, für die das Prädikat gilt, ausreichend groß ist, der Prozess effektiv alle Daten in der Tabelle wieder einbezieht, was sich somit erheblich auf die Leistung und COGS auswirkt.
+Durch das `.purge` ausgeben eines Befehls wird dieser Prozess ausgelöst, der einige Tage in Anspruch nimmt. Beachten Sie Folgendes: Wenn die "Dichte" der Datensätze, für die das Prädikat gilt, ausreichend groß ist, werden alle Daten in der Tabelle durch den Prozess erneut erfasst, wodurch sich die Leistung und die COGS erheblich beeinträchtigen.
 
 
-## <a name="purge-limitations-and-considerations"></a>Einschränkungen und Überlegungen bereinigen
+## <a name="purge-limitations-and-considerations"></a>Entfernen von Einschränkungen und Überlegungen
 
-* **Der Spülprozess ist endgültig und irreversibel.** Es ist nicht möglich, diesen Prozess rückgängig zu machen oder gelöschte Daten wiederherzustellen. Daher können Befehle wie das Löschen von [Rückgängig-Tabellen](../management/undo-drop-table-command.md) keine gelöschten Daten wiederherstellen, und ein Rollback der Daten auf eine frühere Version kann nicht auf "vor" dem letzten Löschbefehl gehen.
+* **Der Löschvorgang ist endgültig und**nicht rückgängig. Es ist nicht möglich, diesen Prozess "Rückgängig" zu machen oder Daten wiederherzustellen, die gelöscht wurden. Daher können Befehle wie z. b. eine [Rückgängig-Tabelle](../management/undo-drop-table-command.md) nicht gelöschte Daten wiederherstellen, und ein Rollback der Daten auf eine frühere Version kann nicht vor dem letzten Löschbefehl durchgeführt werden.
 
-* Um Fehler zu vermeiden, wird empfohlen, das Prädikat zu überprüfen, indem Sie eine Abfrage vor dem Bereinigen ausführen, um sicherzustellen, dass die Ergebnisse mit dem erwarteten Ergebnis übereinstimmen, oder den 2-stufigen Prozess verwenden, der die erwartete Anzahl von Datensätzen zurückgibt, die gelöscht werden. 
+* Um Fehler zu vermeiden, wird empfohlen, das Prädikat zu überprüfen, indem Sie vor dem Löschen eine Abfrage ausführen, um sicherzustellen, dass die Ergebnisse dem erwarteten Ergebnis entsprechen, oder Sie verwenden den zweistufigen Prozess, der die erwartete Anzahl von Datensätzen zurückgibt, die bereinigt werden. 
 
-* Vorsorglich ist der Bereinigungsprozess standardmäßig für alle Cluster deaktiviert.
-   Das Aktivieren des Bereinigungsvorgangs ist ein einmaliger Vorgang, bei dem ein [Supportticket](https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview)geöffnet werden muss. Geben Sie an, `EnabledForPurge` dass die Funktion aktiviert werden soll.
+* Als Vorsichtsmaßnahme wird der Löschvorgang standardmäßig auf allen Clustern deaktiviert.
+   Das Aktivieren des Löschvorgangs ist ein einmal Vorgang, der das Öffnen eines [Support Tickets](https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview)erfordert. Geben Sie an, dass die `EnabledForPurge` Funktion aktiviert werden soll.
 
-* Der `.purge` Befehl wird für den Data `https://ingest-[YourClusterName].kusto.windows.net`Management-Endpunkt ausgeführt: .
-   Der Befehl erfordert [Datenbankadministratorberechtigungen](../management/access-control/role-based-authorization.md) für die relevanten Datenbanken. 
-* Aufgrund der Auswirkungen auf die Auswirkungen auf die Bereinigung der Prozessleistung und um sicherzustellen, dass die [Bereinigungsrichtlinien](#purge-guidelines) eingehalten wurden, wird erwartet, dass der Aufrufer das Datenschema so ändert, dass minimale Tabellen relevante Daten und Batchbefehle pro Tabelle enthalten, um die erheblichen COGS-Auswirkungen des Bereinigungsprozesses zu reduzieren.
-* Der `predicate` Parameter des [Befehls .purge](#purge-table-tablename-records-command) wird verwendet, um anzugeben, welche Datensätze bewilligt werden sollen.
-`Predicate`Größe ist auf 63 KB begrenzt. Beim Bau `predicate`der:
-    * Verwenden Sie den [Operator 'in'](../query/inoperator.md), z. B. `where [ColumnName] in ('Id1', 'Id2', .. , 'Id1000')`. 
-        * Beachten Sie die Grenzwerte des [Operators 'in'](../query/inoperator.md) (Liste kann bis zu `1,000,000` Werte enthalten).
-    * Wenn die Abfragegröße groß ist, verwenden Sie den `where UserId in (externaldata(UserId:string) ["https://...blob.core.windows.net/path/to/file?..."])` [Operator 'externaldata',](../query/externaldata-operator.md)z. B. . Die Datei speichert die Liste der zu bereinigenden IDs.
-        * Die Gesamtabfragegröße darf nach dem Erweitern aller externen Daten-Blobs (Gesamtgröße aller Blobs) 64 MB nicht überschreiten. 
+* Der `.purge` Befehl wird für den Datenverwaltung Endpunkt ausgeführt: `https://ingest-[YourClusterName].kusto.windows.net`.
+   Der-Befehl erfordert [Datenbankadministrator](../management/access-control/role-based-authorization.md) -Berechtigungen für die entsprechenden Datenbanken. 
+* Aufgrund der Auswirkungen auf den Löschvorgang auf die Leistung und um sicherzustellen, dass die Lösch [Richtlinien](#purge-guidelines) befolgt wurden, sollte der Aufrufer das Datenschema so ändern, dass die minimalen Tabellen relevante Daten und Batch Befehle pro Tabelle enthalten, um die erheblichen Auswirkungen des Löschvorgangs auf COGS zu verringern.
+* Der `predicate` -Parameter des [. Purge](#purge-table-tablename-records-command) -Befehls wird verwendet, um anzugeben, welche Datensätze gelöscht werden sollen.
+`Predicate`die Größe ist auf 63 KB beschränkt. Beim Erstellen von `predicate`:
+    * Verwenden Sie den [Operator "in"](../query/inoperator.md), z `where [ColumnName] in ('Id1', 'Id2', .. , 'Id1000')`. b.. 
+        * Beachten Sie die Grenzwerte für den [Operator "in"](../query/inoperator.md) (die Liste kann `1,000,000` bis zu Werte enthalten).
+    * Wenn die Abfrage Größe groß ist, verwenden Sie den ["externaldata"](../query/externaldata-operator.md)-Operator `where UserId in (externaldata(UserId:string) ["https://...blob.core.windows.net/path/to/file?..."])`, z. b.. In der Datei wird die Liste der zu löschenden IDs gespeichert.
+        * Die Gesamtgröße der Abfrage nach dem Erweitern aller externaldata-blobspeicher (Gesamtgröße aller blobdaten) darf 64 MB nicht überschreiten. 
 
-## <a name="purge-performance"></a>Reinigungsleistung
+## <a name="purge-performance"></a>Leistung bereinigen
 
-Es kann jeweils nur eine Löschanforderung auf dem Cluster ausgeführt werden. Alle anderen Anforderungen werden im Status "Geplant" in die Warteschlange eingereiht. Die Größe der Löschanforderungswarteschlange muss überwacht und innerhalb angemessener Grenzen gehalten werden, um die für Ihre Daten geltenden Anforderungen zu erfüllen.
+Nur eine Löschanforderung kann zu einem beliebigen Zeitpunkt auf dem Cluster ausgeführt werden. Alle anderen Anforderungen werden in eine Warteschlange eingereiht. Die Warteschlangen Größe für Lösch Anforderungen muss überwacht werden, und Sie muss innerhalb angemessener Grenzwerte aufbewahrt werden, um den für Ihre Daten geltenden Anforderungen gerecht zu werden.
 
-So reduzieren Sie die Ausführungszeit:
-* Verringern Sie die Menge der gelöschten Daten, indem Sie die [Purge-Richtlinien](#purge-guidelines) befolgen
-* Passen Sie die [Caching-Richtlinie](../management/cachepolicy.md) an, da die Bereinigung bei kalten Daten länger dauert.
-* Skalieren des Clusters
+So reduzieren Sie die Lösch Ausführungszeit:
+* Verringern Sie die Menge der gelöerten Daten durch die folgenden Lösch [Richtlinien](#purge-guidelines) .
+* Passen Sie die [Cachingrichtlinie](../management/cachepolicy.md) an, da das Löschen bei kaltdaten länger dauert
+* Horizontales hochskalieren des Clusters
 
-* Erhöhen Sie die Clusterbereinigungskapazität nach sorgfältiger Überlegung, wie unter [Extents-Wiederherstellungskapazität](../management/capacitypolicy.md#extents-purge-rebuild-capacity)beschrieben. Das Ändern dieses Parameters erfordert das Öffnen eines [Supporttickets](https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview)
+* Erhöhen Sie die Cluster Bereinigungs Kapazität nach sorgfältiger Überlegung, wie unter Erweitern der Bereinigungs [Kapazität von Blöcken](../management/capacitypolicy.md#extents-purge-rebuild-capacity)beschrieben. Zum Ändern dieses Parameters müssen Sie ein [Support Ticket](https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview) öffnen.
 
-## <a name="trigger-the-purge-process"></a>Auslösen des Bereinigungsprozesses
+## <a name="trigger-the-purge-process"></a>Löschen des Löschvorgangs
 
 > [!Note]
-> Die Löschausführung wird durch Ausführen des Befehls [ *"Purge TableName* records"](#purge-table-tablename-records-command) auf dem Endpunkt Datenverwaltung (**https://ingest-[YourClusterName].kusto.windows.net**) aufgerufen.
+> Die Lösch Ausführung wird aufgerufen, indem der Befehl zum Löschen der [ *TableName* Records-Tabelle](#purge-table-tablename-records-command) für den Datenverwaltung Endpunkt ausgeführt wird (**https://ingest-[yourclustername]. [ Region]. Kusto. Windows. net**).
 
-### <a name="purge-table-tablename-records-command"></a>Befehl *"TabelleName-Datensätze"* löschen
+### <a name="purge-table-tablename-records-command"></a>Befehl zum Löschen der Tabelle *TableName* Records
 
-Der Befehl "Bereinigen" kann für unterschiedliche Verwendungsszenarien auf zwei Arten aufgerufen werden:
-1. Programmgesteuerter Aufruf: Ein einstufiger Aufruf, der von Anwendungen aufgerufen werden soll. Der Aufruf dieses Befehls löst direkt die Löschausführungssequenz aus.
+Der Löschbefehl kann für unterschiedliche Verwendungs Szenarien auf zwei Arten aufgerufen werden:
+1. Programm gesteuerter Aufruf: ein einzelner Schritt, der von Anwendungen aufgerufen werden soll. Wenn Sie diesen Befehl direkt aufrufen, wird die Lösch Ausführungssequenz ausgelöst.
 
     **Syntax**
 
      ```kusto
+     // Connect to the Data Management service
+     #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
+     
      .purge table [TableName] records in database [DatabaseName] with (noregrets='true') <| [Predicate]
      ```
 
     > [!NOTE]
-    > Generieren Sie diesen Befehl mithilfe der CslCommandGenerator-API, die als Teil des NuGet-Pakets [kusto Client Library](../api/netfx/about-kusto-data.md) verfügbar ist.
+    > Generieren Sie diesen Befehl mithilfe der cslcommandgenerator-API, die als Teil des nuget-Pakets der [Kusto-Client Bibliothek](../api/netfx/about-kusto-data.md) verfügbar ist.
 
-1. Menschliche Anrufung: Ein zweistufiger Prozess, der eine explizite Bestätigung als separater Schritt erfordert. Der erste Aufruf des Befehls gibt ein Überprüfungstoken zurück, das bereitgestellt werden sollte, um die eigentliche Bereinigung auszuführen. Diese Sequenz reduziert das Risiko, dass versehentlich falsche Daten gelöscht werden. Die Verwendung dieser Option kann für große Tabellen mit erheblichen Kalt-Cache-Daten sehr lange dauern.
+1. Menschlicher Aufruf: ein zweistufiger Prozess, für den eine explizite Bestätigung als separater Schritt erforderlich ist. Beim ersten Aufruf des Befehls wird ein Überprüfungs Token zurückgegeben, das bereitgestellt werden muss, um den eigentlichen Lösch Betrieb auszuführen. Diese Sequenz verringert das Risiko, dass falsche Daten versehentlich gelöscht werden. Die Verwendung dieser Option kann für große Tabellen mit erheblichen kaltcache-Daten eine lange Zeit in Anspruch nehmen.
     <!-- If query times-out on DM endpoint (default timeout is 10 minutes), it is recommended to use the [engine `whatif` command](#purge-whatif-command) directly againt the engine endpoint while increasing the [server timeout limit](../concepts/querylimits.md#limit-on-request-execution-time-timeout). Only after you have verified the expected results using the engine whatif command, issue the purge command via the DM endpoint using the 'noregrets' option. -->
 
      **Syntax**
 
      ```kusto
+     // Connect to the Data Management service
+     #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
+     
      // Step #1 - retrieve a verification token (no records will be purged until step #2 is executed)
      .purge table [TableName] records in database [DatabaseName] <| [Predicate]
 
@@ -115,32 +121,35 @@ Der Befehl "Bereinigen" kann für unterschiedliche Verwendungsszenarien auf zwei
     |---------|---------|
     | DatabaseName   |   Name der Datenbank      |
     | TableName     |     Name der Tabelle    |
-    | Predicate    |    Identifiziert die zu löschenden Datensätze. Siehe Einschränkungen des Prädikats bereinigen weiter unten. | 
-    | noregrets    |     Wenn diese Einstellung, wird eine einstufige Aktivierung ausgelöst.    |
-    | verificationtoken     |  Im zweistufigen**Aktivierungsszenario (noregrets** ist nicht festgelegt) kann dieses Token verwendet werden, um den zweiten Schritt auszuführen und die Aktion zu übertragen. Wenn **verificationtoken** nicht angegeben ist, löst es den ersten Schritt des Befehls aus, in dem Informationen über die Bereinigung zurückgegeben werden und ein Token, das an den Befehl zurückgesendet werden soll, um Schritt #2 auszuführen.   |
+    | Predicate    |    Identifiziert die zu löschenden Datensätze. Weitere Informationen finden Sie weiter unten unter Bereinigungs Einschränkungen. | 
+    | noregrets    |     Wenn festgelegt, wird eine einstufige Aktivierung ausgelöst.    |
+    | verificationtoken     |  Im Szenario mit zweistufiger Aktivierung (**noregrets** ist nicht festgelegt) kann dieses Token verwendet werden, um den zweiten Schritt auszuführen und einen Commit für die Aktion auszuführen. Wenn **verificationtoken** nicht angegeben wird, wird der erste Schritt des Befehls, in dem Informationen zum Löschen zurückgegeben werden, und ein Token, das an den Befehl zurückgegeben werden soll, zurückgegeben, um Schritt #2 auszuführen.   |
 
-    **Einschränkungen des Prädikats bereinigen**
-    * Das Prädikat muss eine einfache Auswahl sein (z. B. *wobei [ColumnName] == 'X'* / *wobei [ColumnName] in ('X', 'Y', 'Z') und [OtherColumn] == 'A'*) sind.
-    * Mehrere Filter müssen mit einem "und" `where` kombiniert werden, anstatt `where [ColumnName] == 'X' and  OtherColumn] == 'Y'` separate `where [ColumnName] == 'X' | where [OtherColumn] == 'Y'`Klauseln (z. B. und nicht ).
-    * Das Prädikat kann nicht auf andere Tabellen als die gelöschte Tabelle verweisen (*TableName*). Das Prädikat kann nur die`where`Auswahlanweisung ( ) enthalten. Es kann keine spezifischen Spalten aus der Tabelle projizieren (Ausgabeschema beim Ausführen von '* `table` | Prädikat*' muss dem Tabellenschema entsprechen).
-    * Systemfunktionen (z. `ingestion_time()` `extent_id()`B. , ) werden als Teil des Prädikats nicht unterstützt.
+    **Einschränkungen für Prädikate bereinigen**
+    * Das Prädikat muss eine einfache Auswahl sein (z. b. *WHERE [columnName] = = ' x '* / *WHERE [columnName] in ("x", "Y", "Z") und [othercolumn] = = "a"*).
+    * Mehrere Filter müssen mit einem "and" und nicht mit separaten `where` Klauseln kombiniert werden (z. `where [ColumnName] == 'X' and  OtherColumn] == 'Y'` b. `where [ColumnName] == 'X' | where [OtherColumn] == 'Y'`und nicht).
+    * Das Prädikat kann nicht auf Tabellen verweisen, die nicht die Tabelle sind, die gelöscht wird (*TableName*). Das Prädikat kann nur die Selection-Anweisung (`where`) enthalten. Es kann keine bestimmten Spalten aus der Tabelle projizieren (Ausgabe Schema beim Ausführen von "* `table` |"). Prädikat*' muss dem Tabellen Schema entsprechen).
+    * System Funktionen (z. b `ingestion_time()`. `extent_id()`,,) werden nicht als Teil des Prädikats unterstützt.
 
-#### <a name="example-two-step-purge"></a>Beispiel: Zweistufige Bereinigung
+#### <a name="example-two-step-purge"></a>Beispiel: Löschen mit zwei Schritten
 
-1. Um die Bereinigung in einem zweistufigen Aktivierungsszenario zu initiieren, führen Sie Schritt #1 des Befehls aus:
+1. Führen Sie zum Initiieren des Lösch Verfahrens in einem zweistufigen Aktivierungs Szenario Schritt #1 des Befehls aus:
 
     ```kusto
+    // Connect to the Data Management service
+     #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
+     
     .purge table MyTable records in database MyDatabase <| where CustomerId in ('X', 'Y')
     ```
 
     **Ausgabe**
 
-    |NumRecordsToPurge |EstimatedPurgeExecutionTime| VerificationToken
+    |Numrecordstopurge |Estimatedpurgeexecutiontime| Verificationtoken
     |--|--|--
-    |1,596 |00:00:02 |e43c7184ed22f4f23c7a9d7b124d196be2e570096987e5baadf65057fa65736b
+    |1.596 |00:00:02 |e43c7184ed22f4f23c7a9d7b124d196be2e570096987e5baadf65057fa65736b
 
-    Überprüfen Sie numRecordsToPurge vor der Ausführung von Schritt #2. 
-2. Um eine Bereinigung in einem zweistufigen Aktivierungsszenario abzuschließen, verwenden Sie das von Schritt #1 zurückgegebene Überprüfungstoken, um Schritt #2 auszuführen:
+    Validieren Sie den numrecordstopurge vor dem Ausführen des Schritts #2. 
+2. Verwenden Sie zum Ausführen eines Löschvorgangs in einem zweistufigen Aktivierungs Szenario das von Schritt #1 zurückgegebene Überprüfungs Token, um Schritt #2 auszuführen:
 
     ```kusto
     .purge table MyTable records in database MyDatabase
@@ -150,30 +159,33 @@ Der Befehl "Bereinigen" kann für unterschiedliche Verwendungsszenarien auf zwei
 
     **Ausgabe**
 
-    |OperationId |DatabaseName |TableName |ScheduledTime |Duration |LastUpdatedOn |EngineOperationId |State |StateDetails |EngineStartTime |EngineDuration |Wiederholungsversuche |ClientRequestId |Prinzipal
+    |OperationId |DatabaseName |TableName |ScheduledTime |Duration |Lastupdatedon |Engineoperationid |Zustand |Statedetails |Enginestarttime |Engineduration |Wiederholungsversuche |ClientRequestId |Prinzipal
     |--|--|--|--|--|--|--|--|--|--|--|--|--|--
-    |c9651d74-3b80-4183-90bb-bbe9e42eadc4 |Mydatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Geplant | | | |0 |Ke. RunCommand;1d0ad28b-f791-4f5a-a60f-0e32318367b7 |AAD-App-ID=...
+    |c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Geplant | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...
 
-#### <a name="example-single-step-purge"></a>Beispiel: Einstufige Bereinigung
+#### <a name="example-single-step-purge"></a>Beispiel: Löschen mit einem Schritt
 
-Führen Sie den folgenden Befehl aus, um eine Bereinigung in einem einstufigen Aktivierungsszenario auszulösen:
+Führen Sie den folgenden Befehl aus, um in einem Aktivierungs Szenario mit nur einem Schritt eine Löschung zu initiieren:
 
-```kusto
-.purge table MyTable records in database MyDatabase with (noregrets='true') <| where CustomerId in ('X', 'Y')
-```
+    ```kusto
+    // Connect to the Data Management service
+     #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
+     
+    .purge table MyTable records in database MyDatabase with (noregrets='true') <| where CustomerId in ('X', 'Y')
+    ```
 
 **Ausgabe**
 
-|OperationId |DatabaseName |TableName |ScheduledTime |Duration |LastUpdatedOn |EngineOperationId |State |StateDetails |EngineStartTime |EngineDuration |Wiederholungsversuche |ClientRequestId |Prinzipal
+|OperationId |DatabaseName |TableName |ScheduledTime |Duration |Lastupdatedon |Engineoperationid |Zustand |Statedetails |Enginestarttime |Engineduration |Wiederholungsversuche |ClientRequestId |Prinzipal
 |--|--|--|--|--|--|--|--|--|--|--|--|--|--
-|c9651d74-3b80-4183-90bb-bbe9e42eadc4 |Mydatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Geplant | | | |0 |Ke. RunCommand;1d0ad28b-f791-4f5a-a60f-0e32318367b7 |AAD-App-ID=...
+|c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Geplant | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...
 
-### <a name="cancel-purge-operation-command"></a>Befehl zum Abbrechen des Bereinigungsvorgangs abbrechen
+### <a name="cancel-purge-operation-command"></a>Befehl "Löschvorgang Abbrechen"
 
-Bei Bedarf können Sie ausstehende Löschanforderungen abbrechen.
+Bei Bedarf können Sie ausstehende Lösch Anforderungen abbrechen.
 
 > [!NOTE]
-> Dieser Vorgang ist für Fehlerwiederherstellungsszenarien vorgesehen. Es ist nicht garantiert, erfolgreich zu sein, und sollte nicht Teil eines normalen Betriebsablaufs sein. Sie kann nur auf Anforderungen in der Warteschlange angewendet werden (die zur Ausführung noch nicht an den Modulknoten gesendet werden). Der Befehl wird auf dem Datenverwaltungsendpunkt ausgeführt.
+> Dieser Vorgang ist für Fehler Wiederherstellungs Szenarien vorgesehen. Es ist nicht garantiert, dass es erfolgreich ist und nicht Teil eines normalen Betriebs Flusses sein sollte. Sie kann nur auf Warteschlangen Anforderungen angewendet werden (noch nicht zur Ausführung an den Engine-Knoten weitergeleitet). Der Befehl wird auf dem Datenverwaltung-Endpunkt ausgeführt.
 
 **Syntax**
 
@@ -189,22 +201,22 @@ Bei Bedarf können Sie ausstehende Löschanforderungen abbrechen.
 
 **Ausgabe**
 
-Die Ausgabe dieses Befehls ist die gleiche wie die Befehlsausgabe "Show purges *OperationId",* die den aktualisierten Status des abgebrochenen Bereinigungsvorgangs anzeigt. Wenn der Versuch erfolgreich ist, wird der Vorgangsstatus auf 'Abandoned' aktualisiert, andernfalls wird der Vorgangsstatus nicht geändert. 
+Die Ausgabe dieses Befehls entspricht der Befehlsausgabe "Show löscht *operationId*" und zeigt den aktualisierten Status des abgebrochenen Löschvorgangs an. Wenn der Versuch erfolgreich ist, wird der Vorgangs Status auf "abgebrochen" aktualisiert; andernfalls wird der Vorgangs Zustand nicht geändert. 
 
-|OperationId |DatabaseName |TableName |ScheduledTime |Duration |LastUpdatedOn |EngineOperationId |State |StateDetails |EngineStartTime |EngineDuration |Wiederholungsversuche |ClientRequestId |Prinzipal
+|OperationId |DatabaseName |TableName |ScheduledTime |Duration |Lastupdatedon |Engineoperationid |Zustand |Statedetails |Enginestarttime |Engineduration |Wiederholungsversuche |ClientRequestId |Prinzipal
 |--|--|--|--|--|--|--|--|--|--|--|--|--|--
-|c9651d74-3b80-4183-90bb-bbe9e42eadc4 |Mydatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Abandoned | | | |0 |Ke. RunCommand;1d0ad28b-f791-4f5a-a60f-0e32318367b7 |AAD-App-ID=...
+|c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Abandoned | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...
 
-## <a name="track-purge-operation-status"></a>Status des Spurbereinigungsvorgangs 
+## <a name="track-purge-operation-status"></a>Status des Löschvorgangs nachverfolgen 
 
 > [!Note]
-> Löschvorgänge können mit dem Befehl ["Vorlupungen anzeigen"](#show-purges-command) nachverfolgt werden, der für den Endpunkt Datenverwaltung (**https://ingest-[YourClusterName].kusto.windows.net**) ausgeführt wird.
+> Löschvorgänge können mit dem Befehl zum [anzeigen](#show-purges-command) von Lösch Vorgängen nachverfolgt werden, der für den Datenverwaltung Endpunkt (**https://ingest-[yourclustername]) ausgeführt wird. [ Region]. Kusto. Windows. net**).
 
-Status = 'Abgeschlossen' gibt den erfolgreichen Abschluss der ersten Phase des Bereinigungsvorgangs an, d. h. Datensätze werden weich gelöscht und sind nicht mehr für Abfragen verfügbar. Von Kunden wird **nicht** erwartet, dass sie die zweite Phase (Hard-Delete) nachverfolgen und überprüfen. Diese Phase wird intern von Kusto überwacht.
+Status = ' abgeschlossen ' gibt den erfolgreichen Abschluss der ersten Phase des Löschvorgangs an, d. h. Datensätze werden vorläufig gelöscht und sind nicht mehr für Abfragen verfügbar. Es ist **nicht** zu erwarten, dass Kunden den Abschluss der zweiten Phase (Hard-Delete) nachverfolgen und überprüfen. Diese Phase wird intern von Kusto überwacht.
 
-### <a name="show-purges-command"></a>Show-Säuberungen-Befehl
+### <a name="show-purges-command"></a>Löschbefehl anzeigen
 
-`Show purges`Befehl zeigt den Status des Bereinigungsvorgangs an, indem die Vorgangs-ID innerhalb des angeforderten Zeitraums angegeben wird. 
+`Show purges`Befehl zeigt den Status des Löschvorgangs an, indem die Vorgangs-ID innerhalb des angeforderten Zeitraums angegeben wird. 
 
 ```kusto
 .show purges <OperationId>
@@ -213,15 +225,15 @@ Status = 'Abgeschlossen' gibt den erfolgreichen Abschluss der ersten Phase des B
 .show purges from '<StartDate>' to '<EndDate>' [in database <DatabaseName>]
 ```
 
-|Eigenschaften  |BESCHREIBUNG  |Obligatorisch/Optional
+|Eigenschaften  |BESCHREIBUNG  |Obligatorisch/optional
 |---------|---------|
-|OperationId    |      Die Datenverwaltungs-ID wird nach der Ausführung einer einzelnen oder zweiten Phase ausgegeben.   |Obligatorisch.
-|StartDate    |   Geringeres Zeitlimit für Filtervorgänge. Wenn nicht angegeben, wird standardmäßig 24 Stunden vor der aktuellen Zeit angezeigt.      |Optional
-|EndDate    |  Obere Zeitbegrenzung für Filtervorgänge. Wenn nicht angegeben, wird standardmäßig die aktuelle Zeit angezeigt.       |Optional
-|DatabaseName    |     Datenbankname zum Filtern von Ergebnissen.    |Optional
+|OperationId    |      Die Datenverwaltung Vorgangs-ID, die nach der Ausführung einer Phase oder einer zweiten Phase ausgegeben wird.   |Obligatorisch.
+|StartDate    |   Unteres Zeit Limit für Filter Vorgänge. Wenn der Wert weggelassen wird, wird standardmäßig 24 Stunden vor der aktuellen Uhrzeit verwendet      |Optional
+|EndDate    |  Ober Zeit Limit für Filter Vorgänge. Wenn der Wert weggelassen wird, wird standardmäßig die aktuelle Zeit       |Optional
+|DatabaseName    |     Der Datenbankname zum Filtern von Ergebnissen.    |Optional
 
 > [!NOTE]
-> Der Status wird nur für Datenbanken bereitgestellt, für die der Client über [Datenbankadministratorberechtigungen](../management/access-control/role-based-authorization.md) verfügt.
+> Der Status wird nur für Datenbanken bereitgestellt, die über [Datenbankadministrator](../management/access-control/role-based-authorization.md) Berechtigungen verfügen.
 
 **Beispiele**
 
@@ -235,51 +247,57 @@ Status = 'Abgeschlossen' gibt den erfolgreichen Abschluss der ersten Phase des B
 
 **Ausgabe** 
 
-|OperationId |DatabaseName |TableName |ScheduledTime |Duration |LastUpdatedOn |EngineOperationId |State |StateDetails |EngineStartTime |EngineDuration |Wiederholungsversuche |ClientRequestId |Prinzipal
+|OperationId |DatabaseName |TableName |ScheduledTime |Duration |Lastupdatedon |Engineoperationid |Zustand |Statedetails |Enginestarttime |Engineduration |Wiederholungsversuche |ClientRequestId |Prinzipal
 |--|--|--|--|--|--|--|--|--|--|--|--|--|--
-|c9651d74-3b80-4183-90bb-bbe9e42eadc4 |Mydatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:33.6782130 |2019-01-20 11:42:34.6169153 |a0825d4d-6b0f-47f3-a499-54ac5681ab78 |Abgeschlossen |Erfolgreich abgeschlossene Bereinigung (Speicherartefakte bis zum Löschen) |2019-01-20 11:41:34.6486506 |00:00:04.4687310 |0 |Ke. RunCommand;1d0ad28b-f791-4f5a-a60f-0e32318367b7 |AAD-App-ID=...
+|c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:33.6782130 |2019-01-20 11:42:34.6169153 |a0825d4d-6b0f-47f3-a499-54ac5681ab78 |Abgeschlossen |Löschvorgang erfolgreich abgeschlossen (Speicher Artefakte ausstehend gelöscht) |2019-01-20 11:41:34.6486506 |00:00:04.4687310 |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...
 
-* **OperationId** - die DM-Vorgangs-ID, die beim Ausführen der Bereinigung zurückgegeben wird. 
-* **DatabaseName** - Datenbankname (Groß-/Kleinschreibung). 
-* **TableName** - Tabellenname (Groß-/Kleinschreibung). 
-* **ScheduledTime** - Zeitpunkt der Ausführung des Löschbefehls für den DM-Dienst. 
-* **Dauer** - Gesamtdauer des Bereinigungsvorgangs, einschließlich der Wartezeit in der Ausführungs-DM-Warteschlange. 
-* **EngineOperationId** - die Betriebs-ID der tatsächlichen Bereinigung, die im Modul ausgeführt wird. 
-* **Zustand** - Bereinigungszustand, kann einer der folgenden sein: 
-    * Geplant - Der Löschvorgang ist für die Ausführung geplant. Wenn der Auftrag **geplant**bleibt, gibt es wahrscheinlich einen Rückstand bei den Bereinigungsvorgängen. Siehe [Löschleistung,](#purge-performance) um diesen Rückstand zu beseitigen. Wenn ein Bereinigungsvorgang bei einem vorübergehenden Fehler fehlschlägt, wird er von der DM wiederholt und erneut auf **Geplant** festgelegt (so dass möglicherweise ein Vorgangsübergang von **Geplant** zu **InProgress** und zurück zu **Geplant**angezeigt wird).
-    * InProgress - die Bereinigungsoperaration ist im Motor in Arbeit. 
-    * Abgeschlossen - Bereinigung erfolgreich abgeschlossen.
-    * BadInput - Die Bereinigung ist bei fehlerhafter Eingabe fehlgeschlagen und wird nicht wiederholt. Dies kann auf verschiedene Probleme zurückzuführen sein, z. B. auf einen Syntaxfehler im Prädikat, ein ungültiges Prädikat für Löschbefehle, eine Abfrage, die Grenzwerte überschreitet (z. B. über 1M-Entitäten in einem externen Datenoperator oder über 64 MB der gesamten erweiterten Abfragegröße) und 404 oder 403 Fehler für externe Daten-Blobs.
-    * Fehler - Die Bereinigung ist fehlgeschlagen und wird nicht wiederholt. Dies kann passieren, wenn der Vorgang zu lange in der Warteschlange gewartet hat (über 14 Tage), aufgrund eines Rückstands bei anderen Bereinigungsvorgängen oder einer Reihe von Fehlern, die das Wiederholungslimit überschreiten. Letzteres wird eine interne Überwachungswarnung auslösen und vom Azure Data Explorer-Team untersucht. 
-* StateDetails - eine Beschreibung des Staates.
-* EngineStartTime - die Zeit, zu der der Befehl an das Modul ausgegeben wurde. Wenn es einen großen Unterschied zwischen dieser Zeit und ScheduledTime gibt, gibt es in der Regel einen großen Rückstand an Löschvorgängen und der Cluster hält nicht mit dem Tempo Schritt. 
-* EngineDuration - Zeitpunkt der tatsächlichen Bereinigungsausführung im Motor. Wenn die Bereinigung mehrmals wiederholt wurde, ist dies die Summe aller Ausführungsdauern. 
-* Wiederholungen - Anzahl der Wiederholungen, mit denen der Vorgang vom DM-Dienst aufgrund eines vorübergehenden Fehlers wiederholt wurde.
-* ClientRequestId - Clientaktivitäts-ID der DM-Bereinigungsanforderung. 
-* Principal - Identität des Emittenten des Bereinigungsbefehls.
+* **OperationId** : die ID des DM-Vorgangs, die beim Ausführen der Löschung zurückgegeben wird 
+* **DatabaseName** -Datenbankname (Groß-/Kleinschreibung wird beachtet) 
+* **TableName** -Tabellenname (Groß-/Kleinschreibung wird beachtet). 
+* **Scheduledtime** : Zeitpunkt der Ausführung des Lösch Befehls für den DM-Dienst. 
+* **Dauer** : die gesamte Dauer des Löschvorgangs, einschließlich der Ausführungs Wartezeit der DM-Warteschlange. 
+* **Engineoperationid** : die Vorgangs-ID des eigentlichen Löschvorgangs, der in der Engine ausgeführt wird. 
+* **Status:** löschen kann eine der folgenden sein: 
+    * Der Vorgang für das geplante Löschen ist für die Ausführung geplant. Wenn der Auftrag **geplant**bleibt, gibt es wahrscheinlich einen Rückstand an Lösch Vorgängen. Weitere Informationen zu diesem Rückstand finden Sie unter Löschen der [Leistung](#purge-performance) . Wenn bei einem Löschvorgang bei einem vorübergehenden Fehler ein Fehler auftritt, wird er von der DM wiederholt, und der Vorgang wird erneut **geplant** (daher wird möglicherweise ein Vorgangs Übergang von " **geplant** " zu " **InProgress** " und zurück zu " **geplant**" angezeigt).
+    * InProgress-die Löschoperation wird in der-Engine ausgeführt. 
+    * Abgeschlossen: der Löschvorgang wurde erfolgreich abgeschlossen.
+    * Badinput-Fehler beim Löschen bei fehlerhafter Eingabe, und es wird kein erneuter Versuch unternommen. Dies kann auf verschiedene Probleme zurückzuführen sein, wie z. b. ein Syntax Fehler im Prädikat, ein ungültiges Prädikat für Lösch Befehle, eine Abfrage, die Grenzwerte überschreitet (z. b. über 1 Mio. Entitäten in einem externaldata-Operator oder mehr als 64 MB der Gesamtzahl der erweiterten Abfragen) und 404-oder 403-Fehler für externaldata
+    * Fehler: Fehler beim Löschen, und es wird kein erneuter Versuch unternommen. Dies kann vorkommen, wenn der Vorgang zu lange in der Warteschlange gewartet hat (über 14 Tage), aufgrund eines Backlogs von anderen Lösch Vorgängen oder einer Anzahl von Fehlern, die das Wiederholungs Limit überschreiten. Letztere generiert eine interne Überwachungs Warnung und wird vom Azure Daten-Explorer-Team untersucht. 
+* Statedetails-eine Beschreibung des Zustands.
+* Enginestarttime: die Zeit, zu der der Befehl für die Engine ausgegeben wurde. Wenn es zwischen dieser Zeit und scheduledtime einen großen Unterschied gibt, gibt es in der Regel einen großen Rückstand an Lösch Vorgängen, und der Cluster ist nicht in der Geschwindigkeit. 
+* Engineduration: Zeitpunkt der eigentlichen Lösch Ausführung in der Engine. Wenn das Löschen mehrmals wiederholt wurde, ist dies die Summe aller Ausführungs dauern. 
+* Wiederholungen: Häufigkeit, mit der der Vorgang durch den DM-Dienst aufgrund eines vorübergehenden Fehlers wiederholt wurde.
+* Clientrequestid: Client Aktivitäts-ID der DM-Löschanforderung. 
+* Prinzipal-ID des Ausstellers für den Löschbefehl.
 
-## <a name="purging-an-entire-table"></a>Bereinigen eines gesamten Tisches
-Zum Löschen einer Tabelle gehört das Löschen der Tabelle und das Markieren als gelöscht, sodass der im [Vorgang "Löschen"](#purge-process) beschriebene Hartlöschprozess auf ihr ausgeführt wird. Wenn Sie eine Tabelle löschen, ohne sie zu löschen, werden nicht alle Speicherartefakte gelöscht (gemäß der ursprünglich für die Tabelle festgelegten Richtlinie für die harte Aufbewahrung gelöscht). Der `purge table allrecords` Befehl ist schnell und effizient und ist dem Prozess der Bereinigung von Datensätzen, falls für Ihr Szenario zutreffend, sehr viel vorzuziehen. 
+## <a name="purging-an-entire-table"></a>Löschen einer gesamten Tabelle
+Das Löschen einer Tabelle umfasst das Löschen der Tabelle und das Markieren als gelöscht, sodass der unter Lösch [Vorgang](#purge-process) beschriebene Prozess für die harte Löschung auf diesem gelöscht wird. Wenn Sie eine Tabelle löschen, ohne Sie zu löschen, werden nicht alle zugehörigen Speicher Artefakte gelöscht (gelöscht gemäß der Anfangs Richtlinie, die für die Tabelle festgelegt wurde). Der `purge table allrecords` Befehl ist schnell und effizient und ist dem Vorgang zum Löschen von Datensätzen, sofern dies für Ihr Szenario zutrifft, sehr vorzuziehen. 
 
 > [!Note]
-> Der Befehl wird aufgerufen, indem der Befehl ["Purge table *TableName* allrecords"](#purge-table-tablename-allrecords-command) auf dem Endpunkt Datenverwaltung (**https://ingest-[YourClusterName].kusto.windows.net**) ausgeführt wird.
+> Der Befehl wird aufgerufen, indem der Befehl "Lösch [Tabelle *TableName* allrecords](#purge-table-tablename-allrecords-command) " für den Datenverwaltung Endpunkt (**https://ingest-[yourclustername]) ausgeführt wird. [ Region]. Kusto. Windows. net**).
 
-### <a name="purge-table-tablename-allrecords-command"></a>Löschtabelle *TableName* allrecords -Befehl
+### <a name="purge-table-tablename-allrecords-command"></a>Tabelle " *TableName* allrecords" löschen (Befehl)
 
-Ähnlich wie der Befehl['.purge table records ](#purge-table-tablename-records-command)' kann dieser Befehl in einem programmatischen (einstufigen) oder im manuellen (zweistufigen) Modus aufgerufen werden.
-1. Programmgesteuerter Aufruf (einstufiger Schritt):
+Ähnlich wie bei dem Befehl "[. Purge Table Records ](#purge-table-tablename-records-command)" kann dieser Befehl in einem programmgesteuerten (einzelnen Schritt) oder in einem manuellen (zweistufigen) Modus aufgerufen werden.
+1. Programm gesteuerter Aufruf (Einzelschritt):
 
      **Syntax**
 
      ```kusto
+     // Connect to the Data Management service
+     #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
+     
      .purge table [TableName] in database [DatabaseName] allrecords with (noregrets='true')
      ```
 
-2. Menschliche Anrufung (zwei Schritte):
+2. Menschlicher Aufruf (zwei Schritte):
 
      **Syntax**
 
      ```kusto
+     // Connect to the Data Management service
+     #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
+     
      // Step #1 - retrieve a verification token (the table will not be purged until step #2 is executed)
      .purge table [TableName] in database [DatabaseName] allrecords
 
@@ -291,53 +309,59 @@ Zum Löschen einer Tabelle gehört das Löschen der Tabelle und das Markieren al
     |---------|---------|
     |**DatabaseName**   |   Der Name der Datenbank.      |
     |**TableName**     |     Der Name der Tabelle.    |
-    |**noregrets**    |     Wenn diese Einstellung, wird eine einstufige Aktivierung ausgelöst.    |
-    |**verificationtoken**     |  Im zweistufigen**Aktivierungsszenario (noregrets** ist nicht festgelegt) kann dieses Token verwendet werden, um den zweiten Schritt auszuführen und die Aktion zu übertragen. Wenn **verificationtoken** nicht angegeben ist, löst der erste Schritt des Befehls, in dem ein Token zurückgegeben wird, den Befehl zurück an den Befehl zurückundwerden und den Schritt des Befehls #2 ausführen.|
+    |**noregrets**    |     Wenn festgelegt, wird eine einstufige Aktivierung ausgelöst.    |
+    |**verificationtoken**     |  Im Szenario mit zweistufiger Aktivierung (**noregrets** ist nicht festgelegt) kann dieses Token verwendet werden, um den zweiten Schritt auszuführen und einen Commit für die Aktion auszuführen. Wenn **verificationtoken** nicht angegeben wird, wird der erste Schritt des Befehls, in dem ein Token zurückgegeben wird, zurückgegeben, der an den Befehl zurückgegeben wird, und der Schritt #2 des Befehls ausgeführt.|
 
-#### <a name="example-two-step-purge"></a>Beispiel: Zweistufige Bereinigung
+#### <a name="example-two-step-purge"></a>Beispiel: Löschen mit zwei Schritten
 
-1. Um die Bereinigung in einem zweistufigen Aktivierungsszenario zu initiieren, führen Sie Schritt #1 des Befehls aus: 
+1. Führen Sie zum Initiieren des Lösch Verfahrens in einem zweistufigen Aktivierungs Szenario Schritt #1 des Befehls aus: 
 
     ```kusto
+    // Connect to the Data Management service
+     #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
+     
     .purge table MyTable in database MyDatabase allrecords
     ```
 
     **Ausgabe**
 
-    | VerificationToken
+    | Verificationtoken
     |--
     |e43c7184ed22f4f23c7a9d7b124d196be2e570096987e5baadf65057fa65736b
 
-1.  Um eine Bereinigung in einem zweistufigen Aktivierungsszenario abzuschließen, verwenden Sie das von Schritt #1 zurückgegebene Überprüfungstoken, um Schritt #2 auszuführen:
+1.  Verwenden Sie zum Ausführen eines Löschvorgangs in einem zweistufigen Aktivierungs Szenario das von Schritt #1 zurückgegebene Überprüfungs Token, um Schritt #2 auszuführen:
 
     ```kusto
     .purge table MyTable in database MyDatabase allrecords 
     with (verificationtoken='eyJTZXJ2aWNlTmFtZSI6IkVuZ2luZS1pdHNhZ3VpIiwiRGF0YWJhc2VOYW1lIjoiQXp1cmVTdG9yYWdlTG9ncyIsIlRhYmxlTmFtZSI6IkF6dXJlU3RvcmFnZUxvZ3MiLCJQcmVkaWNhdGUiOiIgd2hlcmUgU2VydmVyTGF0ZW5jeSA9PSAyNSJ9')
     ```
     
-    Die Ausgabe ist die gleiche wie die Befehlsausgabe '.show tables' (zurückgegeben ohne die gelöschte Tabelle).
+    Die Ausgabe ist identisch mit der Befehlsausgabe ". Show Tables" (wird ohne die gelöerte Tabelle zurückgegeben).
 
     **Ausgabe**
 
     |TableName|DatabaseName|Ordner|DocString
     |---|---|---|---
-    |SonstigeTabelle|Mydatabase|---|---
+    |Othertable|MyDatabase|---|---
 
 
-#### <a name="example-single-step-purge"></a>Beispiel: Einstufige Bereinigung
+#### <a name="example-single-step-purge"></a>Beispiel: Löschen mit einem Schritt
 
-Führen Sie den folgenden Befehl aus, um eine Bereinigung in einem einstufigen Aktivierungsszenario auszulösen:
+Führen Sie den folgenden Befehl aus, um in einem Aktivierungs Szenario mit nur einem Schritt eine Löschung zu initiieren:
 
 ```kusto
+// Connect to the Data Management service
+#connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
+
 .purge table MyTable in database MyDatabase allrecords with (noregrets='true')
 ```
 
-Die Ausgabe ist die gleiche wie die Befehlsausgabe '.show tables' (zurückgegeben ohne die gelöschte Tabelle).
+Die Ausgabe ist identisch mit der Befehlsausgabe ". Show Tables" (wird ohne die gelöerte Tabelle zurückgegeben).
 
 **Ausgabe**
 
 |TableName|DatabaseName|Ordner|DocString
 |---|---|---|---
-|SonstigeTabelle|Mydatabase|---|---
+|Othertable|MyDatabase|---|---
 
 

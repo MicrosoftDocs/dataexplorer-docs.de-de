@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 7440b42599d8559db547762daa5f8edcc24ea46f
-ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
+ms.openlocfilehash: 6ce7cf38c88879b52c4e2e259e3e9a5cade959de
+ms.sourcegitcommit: 9fe6ee7db15a5cc92150d3eac0ee175f538953d2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82799440"
+ms.lasthandoff: 05/07/2020
+ms.locfileid: "82907156"
 ---
 # <a name="data-partitioning-policy-preview"></a>Richtlinie für die Daten Partitionierung (Vorschau)
 
@@ -38,7 +38,7 @@ Die folgenden Arten von Partitions Schlüsseln werden unterstützt:
 
 ### <a name="hash-partition-key"></a>Hash Partitions Schlüssel
 
-Das Anwenden eines Hash Partitions Schlüssels auf `string`eine typisierte-Spalte in einer Tabelle ist geeignet, wenn die *Mehrzahl* der Abfragen`==`Gleichheits `in()`Filter (,) `string`für eine bestimmte typisierte Spalte der *großen Dimension* (10 m oder höher) verwenden `application_ID`, `tenant_ID` wie `user_ID`z. b. oder.
+Das Anwenden eines Hash Partitions Schlüssels auf `string`eine typisierte-Spalte in einer Tabelle ist geeignet, wenn die *Mehrzahl* der Abfragen`==`Gleichheits `in()`Filter (,) und/oder Aggregat-/joinoperationen für `string`eine bestimmte typisierte Spalte der *großen Dimension* (Kardinalität von 10 m oder höher) verwenden `application_ID`, wie `tenant_ID` z `user_ID`. b., oder.
 
 * Eine Hash-Modulo-Funktion wird verwendet, um die Daten zu partitionieren.
 * Alle *homogenen* (partitionierten) Blöcke, die derselben Partition angehören, werden demselben Datenknoten zugewiesen.

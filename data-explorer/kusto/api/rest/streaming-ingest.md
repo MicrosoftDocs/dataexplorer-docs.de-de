@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 672f924865cab14dff6c7d5319c3c34cca1a67ee
-ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
+ms.openlocfilehash: 1614a04c5e5bff51f45df914174c967ff9c7d8a2
+ms.sourcegitcommit: 9fe6ee7db15a5cc92150d3eac0ee175f538953d2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82862008"
+ms.lasthandoff: 05/07/2020
+ms.locfileid: "82907078"
 ---
 # <a name="streaming-ingestion-http-request"></a>Streamingerfassung (http-Anforderung)
 
@@ -25,7 +25,7 @@ ms.locfileid: "82862008"
 
 ## <a name="request-parameters"></a>Anforderungsparameter
 
-| Parameter    | BESCHREIBUNG                                                                 | Erforderlich/optional |
+| Parameter    | Beschreibung                                                                 | Erforderlich/optional |
 |--------------|-----------------------------------------------------------------------------|-------------------|
 | `{database}` |   Name der Zieldatenbank für die Erfassungs Anforderung                     |  Erforderlich         |
 | `{table}`    |   Name der Ziel Tabelle für die Erfassungs Anforderung                        |  Erforderlich         |
@@ -34,10 +34,10 @@ ms.locfileid: "82862008"
 
 Zusätzliche Parameter werden als URL-Abfrage `{name}={value}` Paare formatiert, getrennt durch das & Zeichen.
 
-| Parameter    | BESCHREIBUNG                                                                          | Erforderlich/optional   |
+| Parameter    | Beschreibung                                                                          | Erforderlich/optional   |
 |--------------|--------------------------------------------------------------------------------------|---------------------|
-|`streamFormat`| Gibt das Format der Daten im Anforderungs Text an. Der Wert muss einer der folgenden Werte `CSV`sein`TSV`:`SCsv`,`SOHsv`,`PSV`,`JSON`,`SingleJSON`,`MultiJSON`,`Avro`,,. Weitere Informationen finden Sie [unter Unterstützte Datenformate](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats).| Erforderlich |
-|`mappingName` | Der Name der vorab erstellten Erfassungs Zuordnung, die für die Tabelle definiert ist. Weitere Informationen finden Sie unter [Daten](../../management/mappings.md)Zuordnungen. Die Vorgehensweise zum Verwalten von vorab erstellten Zuordnungen in der Tabelle wird [hier](../../management/create-ingestion-mapping-command.md)beschrieben.| Optional, aber erforderlich, `streamFormat` wenn eine von `JSON`,`SingleJSON`,`MultiJSON`oder ist.`Avro`|  |
+|`streamFormat`| Gibt das Format der Daten im Anforderungs Text an. Der Wert muss einer der folgenden Werte `CSV`sein `TSV`: `SCsv`, `SOHsv`, `PSV`, `JSON`, `MultiJSON`, `Avro`,,. Weitere Informationen finden Sie [unter Unterstützte Datenformate](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats).| Erforderlich |
+|`mappingName` | Der Name der vorab erstellten Erfassungs Zuordnung, die für die Tabelle definiert ist. Weitere Informationen finden Sie unter [Daten](../../management/mappings.md)Zuordnungen. Die Vorgehensweise zum Verwalten von vorab erstellten Zuordnungen in der Tabelle wird [hier](../../management/create-ingestion-mapping-command.md)beschrieben.| Optional, aber erforderlich, `streamFormat` wenn eine von `JSON`, `MultiJSON`oder ist.`Avro`|  |
               
 Verwenden Sie zum Erfassen von CSV-formatierten Daten in eine `Logs` Tabelle in `Test`der-Datenbank beispielsweise Folgendes:
 
@@ -55,7 +55,7 @@ POST https://help.kusto.windows.net/v1/rest/ingest/Test/Logs?streamFormat=Json&m
 
 In der folgenden Tabelle sind die allgemeinen Header für Abfrage-und Verwaltungsvorgänge enthalten.
 
-|Standard Header   | BESCHREIBUNG                                                                               | Erforderlich/optional | 
+|Standard Header   | Beschreibung                                                                               | Erforderlich/optional | 
 |------------------|-------------------------------------------------------------------------------------------|-------------------|
 |`Accept`          | Legen Sie diesen Wert `application/json`auf fest.                                                     | Optional          |
 |`Accept-Encoding` | Unterstützte Codierungen `gzip` sind `deflate`und.                                             | Optional          | 
@@ -68,7 +68,7 @@ In der folgenden Tabelle sind die allgemeinen Header für Abfrage-und Verwaltung
 
 In der folgenden Tabelle sind die allgemeinen benutzerdefinierten Header für Abfrage-und Verwaltungsvorgänge enthalten. Sofern nicht anders angegeben, dienen die Header nur zu telemetriezwecken und haben keine Auswirkungen auf die Funktionalität.
 
-|Benutzerdefinierter Header           |BESCHREIBUNG                                                                           | Erforderlich/optional |
+|Benutzerdefinierter Header           |Beschreibung                                                                           | Erforderlich/optional |
 |------------------------|----------------------------------------------------------------------------------------------------------|
 |`x-ms-app`              |Der (benutzerfreundliche) Name der Anwendung, die die Anforderung sendet.                            | Optional          |
 |`x-ms-user`             |Der (benutzerfreundliche) Name des Benutzers, der die Anforderung sendet.                                   | Optional          |
