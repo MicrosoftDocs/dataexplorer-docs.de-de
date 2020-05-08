@@ -1,6 +1,6 @@
 ---
-title: Ausdehnungen (Datenshards) - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden Ausdehnungen (Datenshards) in Azure Data Explorer beschrieben.
+title: 'Blöcke (Daten-Shards): Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel werden die Blöcke (Daten-Shards) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,73 +8,73 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/13/2020
-ms.openlocfilehash: 16afb2dc7d2310e9e63ec3465937ac84c96b27e4
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 839042b50fce6409de29c4cf979a253a7485fb7f
+ms.sourcegitcommit: ef009294b386cba909aa56d7bd2275a3e971322f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81521011"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82977149"
 ---
-# <a name="extents-data-shards"></a>Ausdehnungen (Datenshards)
+# <a name="extents-data-shards"></a>Blöcke (Daten-Shards)
 
 ## <a name="overview"></a>Übersicht
 
-Kusto wurde entwickelt, um Tabellen mit einer großen Anzahl von Datensätzen (Zeilen) und vielen Daten zu unterstützen. Um mit solchen großen Tabellen umgehen zu können, unterteilt Kusto die Daten jeder Tabelle in kleinere "Tablets", die **als Datenshards** oder **-ausbezeichnet** werden (die beiden Begriffe sind Synonyme), sodass die Vereinigung aller Tabellenausdehnungen die Daten der Tabelle enthält. Einzelne Ausdehnungen werden dann kleiner als die Kapazität eines einzelnen Knotens gehalten, und die Ausdehnungen werden über die Knoten des Clusters verteilt, wodurch scale-out erreicht wird. 
+Kusto ist so aufgebaut, dass Tabellen mit einer großen Anzahl von Datensätzen (Zeilen) und vielen Daten unterstützt werden. Um solche großen Tabellen verarbeiten zu können, dividiert Kusto die Daten der einzelnen Tabellen in kleinere "Tablets", die als **datenshards** oder **Blöcke** bezeichnet werden (die beiden Begriffe sind Synonyme), sodass die Gesamtmenge der Blöcke der Tabelle die Daten der Tabelle enthält. Einzelne Blöcke werden dann kleiner als die Kapazität eines einzelnen Knotens gehalten, und die Blöcke werden über die Knoten des Clusters verteilt, um eine horizontale Skalierung zu erreichen. 
 
-Man kann sich ein Ausmaß als eine Art Mini-Tisch vorstellen. Die Ausdehnung enthält Metadaten (die das Schema der Daten in der Ausdehnung und zusätzliche Informationen wie die Erstellungszeit und optionale Tags angeben, die den Daten in der Ausdehnung zugeordnet sind) und Daten. Darüber hinaus enthält die Ausdehnung in der Regel Informationen, die es Kusto ermöglichen, die Daten effizient abzufragen, z. B. einen Index für jede Datenspalte in der Ausdehnung und ein Codierungswörterbuch, wenn Spaltendaten codiert werden. Daher sind die Daten der Tabelle die Vereinigung aller Daten in den Ausdehnungen der Tabelle.
+Sie können sich einen Block als Art von Mini Tabelle vorstellen. Der Block enthält Metadaten (gibt das Schema der Daten im Block und zusätzliche Informationen, wie z. b. die Erstellungszeit und optionale Tags, die den Daten im Block zugeordnet sind, und die Daten an. Darüber hinaus enthält der Umfang in der Regel Informationen, die es Kusto ermöglichen, die Daten effizient abzufragen, z. b. einen Index für jede Datenspalte im Block, und ein Codierungs Wörterbuch, wenn Spaltendaten codiert werden. Folglich sind die Daten der Tabelle die Vereinigung aller Daten in den Blöcken der Tabelle.
 
-Ausdehnungen sind *unveränderlich*. Nach der Erstellung wird eine Ausdehnung nie geändert, und die Ausdehnung kann nur abgefragt, einem anderen Knoten zugewiesen oder aus der Tabelle entfernt werden. Die Datenänderung erfolgt durch Erstellen einer oder mehreren neuen Ausdehnungen und Transaktionsaustausch alter Ausdehnungen mit neuen Ausdehnungen.
+Blöcke sind *unveränderlich*. Nach der Erstellung wird ein Block nie geändert, und der Block kann nur abgefragt, einem anderen Knoten neu zugewiesen oder aus der Tabelle gelöscht werden. Die Datenänderung erfolgt durch Erstellen eines oder mehrerer neuer Blöcke und des transaktionalen Austauschs von alten Blöcken mit neuen Blöcken.
 
-Extents enthalten eine Sammlung von Datensätzen, die physisch in Spalten angeordnet sind.
-Diese Technik **(spaltenar erwerden**) ermöglicht das effiziente Codieren und Komprimieren der Daten (da sich unterschiedliche Werte aus derselben Spalte häufig gegenseitig "ähneln" und das Abfragen großer Datenspannen effizienter macht, da nur die von der Abfrage verwendeten Spalten geladen werden müssen. Intern wird jede Datenspalte in der Ausdehnung in Segmente und die Segmente in Blöcke unterteilt. Diese Division (die für Abfragen nicht beobachtbar ist) ermöglicht Es Kusto, die Spaltenkomprimierung und -indizierung zu optimieren.
+Blöcke enthalten eine Auflistung von Datensätzen, die physisch in Spalten angeordnet sind.
+Diese Technik (als **Spalten-Speicher**bezeichnet) ermöglicht die effiziente Codierung und Komprimierung der Daten (da unterschiedliche Werte aus derselben Spalte häufig einander ähneln) und das Abfragen von großen Daten spannen effizienter ist, da nur die von der Abfrage verwendeten Spalten geladen werden müssen. Intern wird jede Datenspalte im Wertebereich in Segmente unterteilt, und die Segmente werden in Blöcke unterteilt. Diese Division (die nicht Observable für Abfragen ist) ermöglicht Kusto die Optimierung der Spalten Komprimierung und-Indizierung.
 
-Um die Abfrageeffizienz aufrechtzuerhalten, werden kleinere Ausdehnungen in größeren Ausdehnungen zusammengeführt.
-Dies wird automatisch von Kusto als Hintergrundprozess gemäß der konfigurierten [Mergerichtlinie](mergepolicy.md) und [Sharding-Richtlinie](shardingpolicy.md)durchgeführt.
-Durch das Zusammenführen von Erweiterungen verringert sich der Verwaltungsaufwand für eine große Anzahl von Nachverfolgungen, aber noch wichtiger ist, dass Kusto seine Indizes optimieren und die Komprimierung verbessern kann. Die Ausdehnungszusammenführung stoppt, sobald eine Ausdehnung bestimmte Grenzen erreicht, wie z. B. Größe, da die Zusammenführung über einen bestimmten Punkt hinaus die Effizienz eher verringert als erhöht.
+Um die Effizienz der Abfrage aufrechtzuerhalten, werden kleinere Blöcke in größere Blöcke zusammengeführt.
+Dies wird automatisch von Kusto als Hintergrundprozess gemäß der konfigurierten [mergerichtlinie](mergepolicy.md) und der [Sharding-Richtlinie](shardingpolicy.md)ausgeführt.
+Durch das Zusammenführen von Blöcken wird der Verwaltungsaufwand reduziert, wenn eine große Anzahl von Blöcke nachverfolgt werden muss, aber noch wichtiger ist, dass es Kusto ermöglicht, seine Indizes zu optimieren und die Komprimierung zu verbessern. Die Block Zusammenführung wird beendet, sobald ein Block bestimmte Grenzwerte erreicht, z. b. Größe
 
-Wenn eine [Datenpartitionierungsrichtlinie](partitioningpolicy.md) in einer Tabelle definiert ist, durchlaufen Ausdehnungen einen anderen Hintergrundprozess, nachdem sie erstellt wurden (Nacheinnahme). Dieser Prozess erfasst die Daten aus den Quellausdehnungen erneut und erstellt *homogene* Ausdehnungen, in denen die Werte der Spalte, die der *Partitionsschlüssel* der Tabelle ist, alle zur gleichen Partition gehören. Wenn die Richtlinie einen *Hashpartitionsschlüssel*enthält, ist sichergestellt, dass alle homogenen Ausdehnungen, die zur gleichen Partition gehören, demselben Datenknoten im Cluster zugewiesen werden.
+Wenn eine [Richtlinie für die Daten Partitionierung](partitioningpolicy.md) für eine Tabelle definiert wird, werden Blöcke durch einen anderen Hintergrundprozess durchlaufen, nachdem Sie erstellt wurden (nach der Erfassung). Bei diesem Prozess werden die Daten aus den Quell Blöcken neu erfasst und *homogene* Blöcke erstellt, in denen die Werte der Spalte, die den *Partitions Schlüssel* der Tabelle darstellt, zur selben Partition gehören. Wenn die Richtlinie einen *Hash Partitions Schlüssel*enthält, wird sichergestellt, dass alle homogenen Blöcke, die derselben Partition angehören, demselben Datenknoten im Cluster zugewiesen werden.
 
 > [!NOTE]
-> Vorgänge auf Ausdehnungsebene, z. B. Zusammenführen, Ändern von Ausdehnungs-Tags usw., ändern keine vorhandenen Ausdehnungen.
-> Vielmehr werden in diesen Vorgängen neue Ausdehnungen basierend auf vorhandenen Quellausdehnungen erstellt, und dann ersetzen diese neuen Ausdehnungen ihre Vorfahren in einer einzigen Transaktion.
+> Vorgänge auf Blockebene, z. b. das Zusammenführen, das Ändern von Block Tags usw., ändern vorhandene Blöcke nicht.
+> Stattdessen werden in diesen Vorgängen auf der Grundlage vorhandener Quell Blöcke neue Blöcke erstellt, und dann ersetzen diese neuen Blöcke ihre forefathers in einer einzelnen Transaktion.
 
-Der gemeinsame "Lebenszyklus" eines Ausmaßes ist daher:
+Der gemeinsame Lebenszyklus eines Blocks ist daher:
 
-1. Die Ausdehnung wird durch einen **Aufnahmevorgang** erstellt.
-2. Die Ausdehnung wird mit anderen Ausdehnungen zusammengeführt. Wenn die Zusammenlaufausdehnungen klein sind, führt Kusto tatsächlich einen Aufnahmeprozess für sie durch (dies wird **rebuild**genannt). Sobald Ausdehnungen eine bestimmte Größe erreichen, erfolgt die Zusammenführung nur für Indizes, und die Datenartefakte der Ausdehnungen im Speicher werden nicht geändert.
-3. Die zusammengeführte Ausdehnung (möglicherweise eine, die ihre Abstammung auf andere zusammengeführte Ausdehnungen und so weiter verfolgt) wird schließlich aufgrund einer Aufbewahrungsrichtlinie verworfen. Wenn Ausdehnungen basierend auf der Zeit (ältere x Stunden / Tage) fallen gelassen werden, wird das Erstellungsdatum der neuesten Ausdehnung innerhalb der zusammengeführten in die Berechnung einbezogen.
+1. Der Block wird **durch einen** Erfassungs Vorgang erstellt.
+2. Der Block wird mit anderen Blöcken zusammengeführt. Wenn die Blöcke, die zusammengeführt werden, klein sind, führt Kusto tatsächlich einen Erfassungsprozess durch (Dies wird als **Rebuild**bezeichnet). Sobald die Blöcke eine bestimmte Größe erreichen, wird die Zusammenführung nur für Indizes ausgeführt, und die Daten Artefakte der Blöcke im Speicher werden nicht geändert.
+3. Der zusammengeführte Block (möglicherweise eine, der seine Herkunft auf andere zusammengeführte Blöcke nachverfolgt usw.) wird aufgrund einer Aufbewahrungs Richtlinie gelöscht. Wenn Blöcke basierend auf der Zeit (ältere x Stunden/Tage) gelöscht werden, wird das Erstellungsdatum des neuesten Wertebereichs innerhalb des zusammengeführten Bereichs in die Berechnung übernommen.
 
-## <a name="extent-ingestion-time"></a>Extent-Einnahmezeit
+## <a name="extent-ingestion-time"></a>Erfassungs Zeit für Block
 
-Eine der wichtigeren Informationen für jedes Ausmaß ist ihre Einnahmezeit. Diese Zeit wird von Kusto für verwendet:
+Eine der wichtigsten Informationen zu den einzelnen Blöcken ist die Erfassungs Zeit. Diese Zeit wird von Kusto für Folgendes verwendet:
 
-1. Aufbewahrung (Ausdehnungen, die zuvor aufgenommen wurden, werden früher gelöscht).
-2. Caching (Ausdehnungen, die kürzlich aufgenommen wurden, werden heißer).
-3. Sampling (bei Verwendung von `take`Abfragevorgängen wie , werden aktuelle Ausdehnungen bevorzugt).
+1. Aufbewahrung (Blöcke, die zuvor erfasst wurden, werden zuvor gelöscht).
+2. Zwischenspeichern (Blöcke, die vor kurzem erfasst wurden, sind heißer).
+3. Stichprobenentnahme (bei Verwendung von Abfrage `take`Vorgängen wie werden die aktuellen Blöcke bevorzugt).
 
-Tatsächlich verfolgt Kusto `datetime` zwei Werte `MinCreatedOn` pro `MaxCreatedOn`Ausdehnung: und .
-Diese Werte beginnen gleich, aber wenn die Ausdehnung mit anderen Ausdehnungen zusammengeführt wird, sind die Werte der resultierenden Ausdehnung der minimale bzw. maximale Wert über alle zusammengeführten Ausdehnungen.
+Tatsächlich verfolgt Kusto zwei `datetime` Werte pro Block nach: `MinCreatedOn` und. `MaxCreatedOn`
+Diese Werte beginnen gleich, aber wenn der Block mit anderen Blöcken zusammengeführt wird, sind die Werte für den resultierenden Wertebereich der Mindest-und Höchstwert bzw. die Werte für alle zusammengeführten Blöcke.
 
-Die Aufnahmezeit einer Ausdehnung kann auf eine von drei Arten festgelegt werden:
+Die Erfassungs Zeit eines Blocks kann auf eine von drei Arten festgelegt werden:
 
-1. Normalerweise legt der Knoten, der die Aufnahme durchführt, diesen Wert entsprechend seiner lokalen Uhr fest.
-2. Wenn eine **Erfassungszeitrichtlinie** für die Tabelle festgelegt ist, legt der Knoten, der die Aufnahme durchführt, diesen Wert entsprechend der lokalen Uhr des Administratorknotens des Clusters fest, um sicherzustellen, dass alle späteren Erfassungen einen höheren Aufnahmezeitwert haben.
-3. Der Client kann diese Zeit festlegen. (Dies ist z. B. nützlich, wenn der Client Daten erneut erfassen möchte und nicht möchte, dass die erneut aufgenommenen Daten so angezeigt werden, als ob sie verspätet angekommen wären, z. B. zu Aufbewahrungszwecken).    
+1. Normalerweise legt der Knoten, der die Erfassung ausführt, diesen Wert entsprechend seiner lokalen Uhr fest.
+2. Wenn eine Erfassungs **Zeit Richtlinie** für die Tabelle festgelegt ist, legt der Knoten, der die Erfassung durchführt, diesen Wert entsprechend der lokalen Uhr des Verwaltungs Knotens des Clusters fest. Dadurch wird sichergestellt, dass alle späteren Ingestionen einen höheren Wert für die Erfassungs Zeit aufweisen.
+3. Dieser Zeitraum kann vom Client festgelegt werden. (Dies ist z. b. hilfreich, wenn der Client Daten erneut erfassen und nicht möchten, dass die erneut erfassten Daten so angezeigt werden, als ob Sie später eintreffen würden, z. b. für die Aufbewahrung).    
 
-## <a name="extent-tagging"></a>Extent-Tagging
+## <a name="extent-tagging"></a>Blockmarkierung
 
-Als Teil der Metadaten, die mit einer Ausdehnung gespeichert sind, unterstützt Kusto das Anfügen mehrerer optionaler *Ausdehnungs-Tags* in der Ausdehnung. Ein Extent-Tag (oder einfach *tag*) ist eine Zeichenfolge, die der Ausdehnung zugeordnet ist. Sie können die [Befehl .show extents](extents-commands.md#show-extents) verwenden, um die Tags anzuzeigen, die einer Ausdehnung zugeordnet sind, und die [Extent-tags()-Funktion,](../query/extenttagsfunction.md) um die Tags anzuzeigen, die Datensätzen in einer Ausdehnung zugeordnet sind.
-Ausdehnungs-Tags können verwendet werden, um Eigenschaften effizient zu beschreiben, die sich auf alle Daten in der Ausdehnung beziehen.
-Beispielsweise könnte man während der Aufnahme ein Ausdehnungs-Tag hinzufügen, das die Quelle der aufgenommenen Daten angibt, und dieses Tag später verwenden. Wie sie Daten beschreiben, werden die zugehörigen Tags, wenn zwei oder mehr Ausdehnungen zusammengeführt werden, auch zusammengeführt, indem die Tags der resultierenden Ausdehnung die Vereinigung aller Ausdehnungs-Tags der zu verschmelzenden Ausdehnungen sind.
+Als Teil der Metadaten, die mit einem Block gespeichert werden, unterstützt Kusto das Anfügen mehrerer Optionaler Block *Tags* bis zu diesem Block. Ein Block-Tag (oder einfach ein *Tag*) ist eine Zeichenfolge, die dem Block zugeordnet ist. Sie können das [. Showblöcke](extents-commands.md#show-extents) -Befehle verwenden, um die einem Block zugeordneten Tags anzuzeigen, und die Block [-Tags ()](../query/extenttagsfunction.md) -Funktion, um die den Datensätzen zugeordneten Tags in einem Block anzuzeigen.
+Block Tags können verwendet werden, um Eigenschaften effizient zu beschreiben, die sich auf alle Daten im Bereich beziehen.
+Beispielsweise kann bei der Erfassung ein Block-Tag hinzugefügt werden, das die Quelle der erfassten Daten angibt, und später wird dieses Tag verwendet. Wenn zwei oder mehr Blöcke zusammengeführt werden, werden die zugeordneten Tags ebenfalls zusammengeführt, wenn die zu einem Ergebnis gehörigen Tags die Gesamtmenge aller Block Tags der Blöcke darstellen, die zusammengeführt werden.
 
-Kusto weist allen Ausdehnungstags, deren Wert das *Formatpräfixsuffix* *suffix*hat, eine besondere Bedeutung zu, wobei *das Präfix* eines von:
+Kusto weist allen Block Tags, deren Wert das Format *Präfix* *Suffix*hat, eine besondere Bedeutung zu, wobei das *Präfix* einem der folgenden Werte entspricht:
 
 * `drop-by:`
 * `ingest-by:`
 
-## <a name="drop-by-extent-tags"></a>'drop-by:' Ausdehnungs-Tags
+### <a name="drop-by-extent-tags"></a>"Drop-by:"-Block Tags
 
-Tags, die **`drop-by:`** mit einem Präfix beginnen, können verwendet werden, um zu steuern, mit welchen anderen Erweiterungen zusammengeführt werden soll. Erweiterungen, die `drop-by:` ein bestimmtes Tag haben, können zusammengeführt werden, aber sie werden nicht mit anderen Ausdehnungen zusammengeführt. Auf diese Weise kann der Benutzer einen Befehl `drop-by:` ausgeben, um Ausdehnungen gemäß seinem Tag zu löschen, z. B. den folgenden Befehl:
+Tags, die mit einem **`drop-by:`** Präfix beginnen, können verwendet werden, um zu steuern, welche anderen Blöcke zusammengeführt werden sollen. Blöcke mit einem bestimmten `drop-by:` Tag können zusammengeführt werden, Sie werden jedoch nicht mit anderen Blöcken zusammengeführt. Dadurch kann der Benutzer einen Befehl ausgeben, um Werte Blöcke gemäß Ihrem `drop-by:` Tag zu löschen, wie z. b. den folgenden Befehl:
 
 ```kusto
 .ingest ... with @'{"tags":"[\"drop-by:2016-02-17\"]"}'
@@ -82,17 +82,17 @@ Tags, die **`drop-by:`** mit einem Präfix beginnen, können verwendet werden, u
 .drop extents <| .show table MyTable extents where tags has "drop-by:2016-02-17" 
 ```
 
-### <a name="performance-notes"></a>Leistungshinweise
+#### <a name="performance-notes"></a>Leistungs Hinweise
 
-* Eine über-verwendungsbasierte `drop-by` Tags wird nicht empfohlen. Die Unterstützung für das Löschen von Daten in der oben genannten Weise ist für selten auftretende Ereignisse gedacht, dient nicht zum Ersetzen von Datensätzen auf Datensatzebene und verlässt sich kritisch darauf, dass die Daten, die auf diese Weise markiert werden, "bulky" sind. Der Versuch, für jeden Datensatz oder eine kleine Anzahl von Datensätzen ein anderes Tag zu geben, kann schwerwiegende Auswirkungen auf die Leistung haben.
-* In Fällen, in denen solche Tags nach der Erfassung von Daten nicht einen gewissen Zeitraum benötigen, wird empfohlen, [die Tags zu löschen.](extents-commands.md#drop-extent-tags)
+* Die Verwendung `drop-by` von Tags wird nicht empfohlen. Die Unterstützung für das Ablegen von Daten in der obigen Weise ist für selten auftretende Ereignisse gedacht, nicht für das Ersetzen von Daten auf Datensatzebene, und die Tatsache, dass die Daten auf diese Weise markiert werden, ist "sperrig". Der Versuch, ein anderes Tag für jeden Datensatz oder eine kleine Anzahl von Datensätzen anzugeben, kann zu schwerwiegenden Auswirkungen auf die Leistung führen.
+* In Fällen, in denen solche Tags nach dem Erfassen der Daten nicht länger erforderlich sind, wird empfohlen, [die Tags zu löschen](extents-commands.md#drop-extent-tags).
 
-## <a name="ingest-by-extent-tags"></a>'ingest-by:' Ausdehnungs-Tags
+### <a name="ingest-by-extent-tags"></a>"Erfassungs-nach:"-Block Tags
 
-Tags, die **`ingest-by:`** mit einem Präfix beginnen, können verwendet werden, um sicherzustellen, dass Daten nur einmal aufgenommen werden. Der Benutzer kann einen Ingest-Befehl ausgeben, der verhindert, dass die Daten `ingest-by:` aufgenommen werden, **`ingestIfNotExists`** wenn die Eigenschaft bereits eine Ausdehnung mit diesem bestimmten Tag vorhanden ist.
-Die Werte `tags` für `ingestIfNotExists` beide und sind Arrays von Zeichenfolgen, serialisiert als JSON.
+Tags, die mit einem **`ingest-by:`** Präfix beginnen, können verwendet werden, um sicherzustellen, dass Daten nur einmal erfasst werden. Der Benutzer kann einen Erfassungs Befehl ausgeben, der verhindert, dass die Daten erfasst werden, wenn es bereits einen Block mit diesem `ingest-by:` bestimmten Tag gibt, **`ingestIfNotExists`** indem die-Eigenschaft verwendet wird.
+Die Werte für `tags` und `ingestIfNotExists` sind Arrays von Zeichen folgen, die als JSON serialisiert werden.
 
-Im folgenden Beispiel werden Daten nur einmal erfasst (der 2. und der dritte Befehl tun nichts):
+Im folgenden Beispiel werden Daten nur einmal erfasst (der zweite und der dritte Befehl führen nichts aus):
 
 ```kusto
 .ingest ... with (tags = '["ingest-by:2016-02-17"]')
@@ -103,10 +103,10 @@ Im folgenden Beispiel werden Daten nur einmal erfasst (der 2. und der dritte Bef
 ```
 
 > [!NOTE]
-> Im allgemeinen Fall enthält ein Ingest-Befehl `ingest-by:` wahrscheinlich sowohl `ingestIfNotExists` ein Tag als auch eine Eigenschaft, die auf denselben Wert festgelegt ist (wie im 3. Befehl oben gezeigt).
+> Im Allgemeinen wird ein Erfassungs Befehl wahrscheinlich sowohl ein `ingest-by:` -Tag als auch eine `ingestIfNotExists` -Eigenschaft enthalten, die auf denselben Wert festgelegt ist (wie im obigen 3. Befehl gezeigt).
 
-### <a name="performance-notes"></a>Leistungshinweise
+#### <a name="performance-notes"></a>Leistungs Hinweise
 
-- Eine `ingest-by` Überverwendung von Tags wird nicht empfohlen.
-Wenn die Pipeline-Zuführung Kusto bekannt ist, datenduplizierungen haben, wird empfohlen, diese so weit wie `ingest-by` möglich zu lösen, bevor die Daten in Kusto aufgenommen werden, und Tags in Kusto nur für Fälle zu verwenden, in denen der Teil, der in Kusto aufgenommen wird, Selbst duplizieren könnte (z. B. gibt es einen Wiederholungsmechanismus, der sich mit bereits laufenden Aufnahmeaufrufen überlappen kann). Der Versuch, für `ingest-by` jeden Aufnahmeaufruf ein eindeutiges Tag festzulegen, kann schwerwiegende Auswirkungen auf die Leistung haben.
-- In Fällen, in denen solche Tags nach der Erfassung von Daten nicht einen gewissen Zeitraum benötigen, wird empfohlen, [die Tags zu löschen.](extents-commands.md#drop-extent-tags)
+- Das über `ingest-by` Schreiben von Tags wird nicht empfohlen.
+Wenn die Pipeline zum Füttern von Kusto Daten Duplizierungen hat, es wird empfohlen, diese so weit wie möglich zu beheben, bevor die Daten in Kusto erfasst werden, und Tags `ingest-by` in Kusto nur für Fälle zu verwenden, in denen der Teil, der zu Kusto gehört, selbst Duplikate einführen könnte (z. b. gibt es einen Wiederholungs Mechanismus, der sich mit bereits in Bearbeitung befindlichen Erfassungs aufrufen überlappen kann). Wenn Sie versuchen, ein `ingest-by` eindeutiges Tag für jeden Erfassungs Befehl festzulegen, kann dies schwerwiegende Auswirkungen auf die Leistung haben.
+- In Fällen, in denen solche Tags nach dem Erfassen der Daten nicht länger erforderlich sind, wird empfohlen, [die Tags zu löschen](extents-commands.md#drop-extent-tags).
