@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 6ce7cf38c88879b52c4e2e259e3e9a5cade959de
-ms.sourcegitcommit: 9fe6ee7db15a5cc92150d3eac0ee175f538953d2
+ms.openlocfilehash: b3293916841eb56da3985f4b388754e7c8057682
+ms.sourcegitcommit: 3393ad86dac455fd182296ffb410b2bd570dbfce
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82907156"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "82991885"
 ---
 # <a name="data-partitioning-policy-preview"></a>Richtlinie für die Daten Partitionierung (Vorschau)
 
@@ -202,9 +202,10 @@ Die Ausgabe umfasst Folgendes:
 
 #### <a name="capacity"></a>Capacity
 
-* Da der Daten Partitionierungs Prozess zur Erstellung von größeren Blöcken führt, ist es möglicherweise erforderlich, (schrittweise und linear) die [Zusammenführungs Kapazität](../management/capacitypolicy.md#extents-merge-capacity) des Clusters zu vergrößern, sodass der Prozess zum Zusammenführen von [Blöcken](../management/extents-overview.md) in der Lage ist.
-* Wenn dies erforderlich ist (beispielsweise bei einem hohen Erfassungs Durchsatz und/oder einer ausreichend großen Anzahl von Tabellen, die partitioniert werden müssen), kann die [Partitions Kapazität](../management/capacitypolicy.md#extents-partition-capacity) des Clusters (schrittweise und linear) erhöht werden, um eine größere Anzahl gleichzeitiger Partitionierungs Vorgänge zu ermöglichen.
-  * Wenn das Erhöhen der Partitionierung einen erheblichen Anstieg der Verwendung der Cluster Ressourcen zur Folge hat, Skalieren Sie den Cluster entweder manuell oder durch Aktivieren der automatischen Skalierung zentral hoch-oder Herunterskalieren.
+* Der Daten Partitionierungs Prozess führt zur Erstellung von weiteren Erweiterungen. Der Cluster kann die [Zusammenführungs Kapazität für Blöcke](../management/capacitypolicy.md#extents-merge-capacity)allmählich erhöhen, sodass der Prozess zum Zusammenführen von [Blöcken](../management/extents-overview.md) fortgeführt werden kann.
+* Bei einem hohen Erfassungs Durchsatz und/oder einer ausreichend großen Anzahl von Tabellen, für die eine Partitionierungs Richtlinie definiert ist, kann der Cluster die [Partitions Kapazität des Blöcke](../management/capacitypolicy.md#extents-partition-capacity)allmählich erhöhen, sodass [der Prozess der Partitionierung von Blöcken](#the-data-partitioning-process) fort bleiben kann.
+* Um zu vermeiden, dass zu viele Ressourcen verbraucht werden, sind diese dynamischen Steigerungen begrenzt. Möglicherweise müssen Sie (schrittweise und linear) diese über die Obergrenze hinaus erhöhen, wenn Sie abgeblendet sind.
+  * Wenn die Kapazität der Cluster Ressourcen erheblich zunimmt, können Sie den Cluster entweder manuell oder durch Aktivieren der automatischen Skalierung horizontal [hoch](../../manage-cluster-vertical-scaling.md)/[skalieren.](../../manage-cluster-horizontal-scaling.md)
 
 ### <a name="outliers-in-partitioned-columns"></a>Ausreißer in partitionierten Spalten
 

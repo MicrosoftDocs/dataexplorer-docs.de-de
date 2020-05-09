@@ -8,21 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 56150c480d0d5ecfd4d428e51f7bdb4b68e36b0c
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 5a7a1b37c8c50bdff3760ad9222065191a9eb884
+ms.sourcegitcommit: 3393ad86dac455fd182296ffb410b2bd570dbfce
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617696"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "82991893"
 ---
 # <a name="export-data-to-an-external-table"></a>Exportieren von Daten in eine externe Tabelle
 
 Sie können Daten exportieren, indem Sie eine [externe Tabelle](../externaltables.md) definieren und Daten in diese exportieren.
 Die Tabellen Eigenschaften werden beim [Erstellen der externen Tabelle](../externaltables.md#create-or-alter-external-table)angegeben. Daher müssen Sie die Eigenschaften der Tabelle nicht in den Export Befehl einbetten. Der Export-Befehl verweist anhand des Namens auf die externe Tabelle.
 Zum Exportieren von Daten ist die [Berechtigung Datenbankadministrator](../access-control/role-based-authorization.md)erforderlich.
-
-> [!NOTE] 
-> * Das Exportieren in eine externe Tabelle `impersonate` mit Verbindungs Zeichenfolge wird derzeit nicht unterstützt.
 
 **Syntax:**
 
@@ -34,7 +31,7 @@ Zum Exportieren von Daten ist die [Berechtigung Datenbankadministrator](../acces
 |Output-Parameter |type |BESCHREIBUNG
 |---|---|---
 |Externaltablename  |String |Der Name der externen Tabelle.
-|`Path`|String|Ausgabepfad.
+|Pfad|String|Ausgabepfad.
 |Numrecords|String| Anzahl der Datensätze, die in den Pfad exportiert werden.
 
 **Hinweise:**
@@ -63,7 +60,7 @@ Externalblob ist eine nicht partitionierte externe Tabelle.
 .export to table ExternalBlob <| T
 ```
 
-|Externaltablename|`Path`|Numrecords|
+|Externaltablename|Pfad|Numrecords|
 |---|---|---|
 |Externalblob|http://storage1.blob.core.windows.net/externaltable1cont1/1_58017c550b384c0db0fea61a8661333e.csv|10|
 
@@ -87,7 +84,7 @@ dataformat=csv
 .export to table PartitionedExternalBlob <| T
 ```
 
-|Externaltablename|`Path`|Numrecords|
+|Externaltablename|Pfad|Numrecords|
 |---|---|---|
 |Externalblob|http://storageaccount.blob.core.windows.net/container1/CustomerName=customer1/2019/01/01/fa36f35c-c064-414d-b8e2-e75cf157ec35_1_58017c550b384c0db0fea61a8661333e.csv|10|
 |Externalblob|http://storageaccount.blob.core.windows.net/container1/CustomerName=customer2/2019/01/01/fa36f35c-c064-414d-b8e2-e75cf157ec35_2_b785beec2c004d93b7cd531208424dc9.csv|10|
