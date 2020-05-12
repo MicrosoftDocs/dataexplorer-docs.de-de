@@ -1,6 +1,6 @@
 ---
-title: assert() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird assert() in Azure Data Explorer beschrieben.
+title: Assert ()-Azure-Daten-Explorer
+description: Dieser Artikel beschreibt Assert () in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,40 +8,41 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: 97f01df7bc85171eefabeb2ed835109f0faef81e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b1f83f0b78e4bbb16de706a8d14ca04ee522c2ee
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518410"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225554"
 ---
 # <a name="assert"></a>assert()
 
-Überprüft eine Bedingung. Wenn die Bedingung falsch ist, gibt fehlermeldungen aus und schlägt die Abfrage fehl.
+Überprüft eine Bedingung. Wenn die Bedingung false lautet, werden Fehlermeldungen ausgegeben, und die Abfrage schlägt fehl.
 
 **Syntax**
 
-`assert(`*Zustandsmeldung*`, `*message*`)`
+`assert(`*Bedingung* `, ` *Nachricht*`)`
 
 **Argumente**
 
-* *Bedingung*: Der zu bewertende bedingte Ausdruck. Wenn die `false`Bedingung ist , wird die angegebene Meldung verwendet, um einen Fehler zu melden. Wenn die `true`Bedingung ist `true` , wird sie als Auswertungsergebnis zurückgegeben. Die Bedingung muss während der Abfrageanalysephase auf Konstante ausgewertet werden.
-* *message*: Die Nachricht, die `false`verwendet wird, wenn die Assertion in ausgewertet wird. Die *Nachricht* muss ein Zeichenfolgenliteral sein.
+* *Condition*: Der auszuwertende bedingte Ausdruck. Wenn die Bedingung ist `false` , wird die angegebene Meldung verwendet, um einen Fehler zu melden. Wenn die Bedingung ist `true` , wird `true` als Auswertungs Ergebnis zurückgegeben. Während der Abfrage Analysephase muss die Bedingung als konstant ausgewertet werden.
+* *Message*: die Meldung, die verwendet wird, wenn die-Assertionen ausgewertet werden `false` Die *Nachricht* muss ein zeichenfolgenliteralsein.
 
 
 **Rückgabe**
 
-* `true`- wenn der Zustand`true`
-* Löst einen semantischen Fehler aus, wenn die Bedingung auf `false`ausgewertet wird.
+* `true`-Wenn die Bedingung ist`true`
+* Löst einen semantischen Fehler aus, wenn die Bedingung als ausgewertet wird `false` .
 
 **Hinweise**
 
-* `condition`muss während der Abfrageanalysephase auf Konstante ausgewertet werden. Mit anderen Worten, es kann aus anderen Ausdrücken erstellt werden, die auf Konstanten verweisen, und kann nicht an den Zeilenkontext gebunden werden.
+* `condition`muss in der Phase der Abfrage Analyse als konstant ausgewertet werden. Das heißt, Sie kann aus anderen Ausdrücken erstellt werden, die auf Konstanten verweisen und nicht an den Zeilen Kontext gebunden werden können.
 
 **Beispiele**
 
-Die folgende Abfrage definiert `checkLength()` eine Funktion, die `assert` die Länge der Eingabezeichenfolge überprüft und zum Überprüfen des Eingabelängenparameters verwendet (überprüft, ob sie größer als Null ist).
+Die folgende Abfrage definiert eine Funktion, `checkLength()` die die Länge der Eingabe Zeichenfolge überprüft, und verwendet `assert` , um den Eingabe Längen Parameter zu überprüfen (überprüft, ob er größer als NULL ist).
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let checkLength = (len:long, s:string)
 {
@@ -56,12 +57,13 @@ datatable(input:string)
 | where checkLength(len=long(-1), input)
 ```
 
-Das Ausführen dieser Abfrage führt zu einem Fehler:  
+Wenn Sie diese Abfrage ausführen, wird ein Fehler ausgegeben:  
 `assert() has failed with message: 'Length must be greater than zero'`
 
 
-Beispiel für die `len` Ausführung mit gültiger Eingabe:
+Beispiel für die Ausführung mit gültiger `len` Eingabe:
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let checkLength = (len:long, s:string)
 {

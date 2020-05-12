@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/05/2018
-ms.openlocfilehash: 5a9166066ee664f15b07dff2b0a535044ebb929c
-ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
+ms.openlocfilehash: f926daa248a74b7b61ea4867d3a54f857444823e
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82799644"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226022"
 ---
 # <a name="querymanagement-http-response"></a>HTTP-Antwort (Abfrage/Verwaltung)
 
@@ -24,7 +24,7 @@ Code 200 gibt z. b. Erfolg an.
 
 Die folgenden Statuscodes werden derzeit verwendet, es kann jedoch ein beliebiger gültiger HTTP-Code zurückgegeben werden.
 
-|Code|Subcode        |BESCHREIBUNG                                    |
+|Code|Subcode        |Beschreibung                                    |
 |----|---------------|-----------------------------------------------|
 |100 |Continue       |Der Client kann die Anforderung weiterhin senden.       |
 |200 |OK             |Die Anforderung wurde erfolgreich verarbeitet.       |
@@ -45,7 +45,7 @@ Die folgenden Statuscodes werden derzeit verwendet, es kann jedoch ein beliebige
 
 Die folgenden benutzerdefinierten Header werden zurückgegeben.
 
-|Benutzerdefinierter Header           |BESCHREIBUNG                                                                                               |
+|Benutzerdefinierter Header           |Beschreibung                                                                                               |
 |------------------------|----------------------------------------------------------------------------------------------------------|
 |`x-ms-client-request-id`|Der eindeutige Anforderungs Bezeichner, der im Anforderungs Header desselben Namens gesendet wird, oder ein eindeutiger Bezeichner.     |
 |`x-ms-activity-id`      |Eine global eindeutige Korrelations-ID für die Anforderung. Sie wird vom-Dienst erstellt.                    |
@@ -56,25 +56,25 @@ Wenn der Statuscode 200 lautet, ist der Antworttext ein JSON-Dokument, das die E
 Weitere Informationen siehe unten.
 
 > [!NOTE]
-> Die Sequenz der Tabellen wird vom SDK reflektiert. Wenn Sie z. b. die .NET Framework Kusto. Data-Bibliothek verwenden, wird die Sequenz der Tabellen zu den `System.Data.IDataReader` Ergebnissen in dem vom SDK zurückgegebenen Objekt.
+> Die Sequenz der Tabellen wird vom SDK reflektiert. Wenn Sie z. b. die .NET Framework Kusto. Data-Bibliothek verwenden, wird die Sequenz der Tabellen zu den Ergebnissen in dem `System.Data.IDataReader` vom SDK zurückgegebenen Objekt.
 
 Wenn der Statuscode einen 4xx-oder einen 5xx-Fehler angibt (außer 401), ist der Antworttext ein JSON-Dokument, das die Details des Fehlers codiert.
 Weitere Informationen finden Sie unter [Microsoft-Rest-API-Richtlinien](https://github.com/microsoft/api-guidelines).
 
 > [!NOTE]
-> Wenn der `Accept` -Header nicht in der Anforderung enthalten ist, ist der Antworttext eines Fehlers nicht notwendigerweise ein JSON-Dokument.
+> Wenn der- `Accept` Header nicht in der Anforderung enthalten ist, ist der Antworttext eines Fehlers nicht notwendigerweise ein JSON-Dokument.
 
 ## <a name="json-encoding-of-a-sequence-of-tables"></a>JSON-Codierung einer Sequenz von Tabellen
 
 Die JSON-Codierung einer Sequenz von Tabellen ist ein einzelner JSON-Eigenschaften Behälter mit den folgenden Name/Wert-Paaren.
 
-|Name  |Wert                              |
+|name  |Wert                              |
 |------|-----------------------------------|
 |Tabellen|Ein Array des Tabellen Eigenschaften Behälters.|
 
 Der Tabellen Eigenschaften Behälter weist die folgenden Name/Wert-Paare auf.
 
-|Name     |Wert                               |
+|name     |Wert                               |
 |---------|------------------------------------|
 |TableName|Eine Zeichenfolge, die die Tabelle bezeichnet. |
 |Spalten  |Ein Array des Spalten Eigenschaften Behälters.|
@@ -82,7 +82,7 @@ Der Tabellen Eigenschaften Behälter weist die folgenden Name/Wert-Paare auf.
 
 Der Spalten Eigenschaften Behälter weist die folgenden Name/Wert-Paare auf.
 
-|Name      |Wert                                                          |
+|name      |Wert                                                          |
 |----------|---------------------------------------------------------------|
 |ColumnName|Eine Zeichenfolge, die die Spalte identifiziert.                           |
 |DataType  |Eine Zeichenfolge, die den ungefähren .NET-Typ der Spalte bereitstellt.|
@@ -90,9 +90,9 @@ Der Spalten Eigenschaften Behälter weist die folgenden Name/Wert-Paare auf.
 
 Das Zeilen Array hat dieselbe Reihenfolge wie das entsprechende Spalten Array.
 Das Zeilen Array verfügt auch über ein Element, das mit dem Wert der Zeile für die relevante Spalte übereinstimmt.
-Skalare Datentypen, die nicht in JSON `datetime` -Code dargestellt werden können `timespan`, z. b. und, werden als JSON-Zeichen folgen dargestellt.
+Skalare Datentypen, die nicht in JSON-Code dargestellt werden können, z `datetime` `timespan` . b. und, werden als JSON-Zeichen folgen dargestellt.
 
-Das folgende Beispiel zeigt ein mögliches solches Objekt, wenn es eine einzelne Tabelle mit dem `Table_0` Namen enthält, die eine `Text` einzelne Spalte `string`vom Typ und eine einzelne Zeile enthält.
+Das folgende Beispiel zeigt ein mögliches solches Objekt, wenn es eine einzelne Tabelle mit dem Namen enthält, `Table_0` die eine einzelne Spalte `Text` vom Typ `string` und eine einzelne Zeile enthält.
 
 ```json
 {
@@ -122,7 +122,31 @@ Für jede [tabellarische Ausdrucks Anweisung](../../query/tabularexpressionstate
 > Es können mehrere solcher Tabellen vorhanden sein, weil [Batches](../../query/batches.md) und [Fork-Operatoren](../../query/forkoperator.md)vorhanden sind.
 
 Es werden häufig drei Tabellen erstellt:
-
 * Eine @ExtendedProperties Tabelle, die zusätzliche Werte bereitstellt, z. b. Anweisungen zur Client Visualisierung. Diese Werte werden beispielsweise generiert, um die Informationen im Rendering- [Operator](../../query/renderoperator.md)widerzuspiegeln) und den [Daten Bank Cursor](../../management/databasecursor.md).
+  
+  Diese Tabelle verfügt über eine einzelne Spalte vom Typ `string` , die JSON-ähnliche Werte enthält:
+
+  |Wert|
+  |-----|
+  |{"Visualisierung": "PieChart",...}|
+  |{"Cursor": "637239957206013576"}|
+
 * Eine QueryStatus-Tabelle, die zusätzliche Informationen über die Ausführung der Abfrage selbst bereitstellt, z. b., wenn Sie erfolgreich abgeschlossen wurde oder nicht, und die Ressourcen, die von der Abfrage verbraucht wurden.
-* Eine Tabelle "TableOfContents", die zuletzt erstellt wird, und listet die anderen Tabellen in den Ergebnissen auf.
+
+  Diese Tabelle weist die folgende Struktur auf:
+
+  |Timestamp                  |severity|Schweregrad Name|StatusCode|StatusDescription            |Anzahl|RequestId|ActivityId|Subactivityid|Clientactivityid|
+  |---------------------------|--------|------------|----------|-----------------------------|-----|---------|----------|-------------|----------------|
+  |2020-05-02 06:09:12.7052077|4       |Info        | 0        | Abfrage wurde erfolgreich abgeschlossen.|1    |...      |...       |...          |...             |
+
+  Schweregrade von 2 oder kleiner weisen auf einen Fehler hin.
+
+* Eine Tabelle "TableOfContents", die zuletzt erstellt wird, und listet die anderen Tabellen in den Ergebnissen auf. 
+
+  Ein Beispiel für diese Tabelle ist:
+
+  |Ordinal|Variante            |name               |Id                                  |Prettyname|
+  |-------|----------------|-------------------|------------------------------------|----------|
+  |0      | QueryResult    |Primaryresult      |db9520f9-0455-4cb5-b257-53068497605a||
+  |1      | QueryProperties|@ExtendedProperties|908901l6-5319-4809-ae9e-009068c267c7||
+  |2      | QueryStatus    |QueryStatus        |00000000-0000-0000-0000-000000000000||

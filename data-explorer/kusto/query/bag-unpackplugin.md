@@ -1,6 +1,6 @@
 ---
-title: bag_unpack-Plugin - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird bag_unpack-Plugin in Azure Data Explorer beschrieben.
+title: 'bag_unpack-Plug-in: Azure Daten-Explorer'
+description: In diesem Artikel wird bag_unpack-Plug-in in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,50 +8,51 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/21/2019
-ms.openlocfilehash: 374ff3ca8101e24a53926a78a1b8781447f32dbc
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: fd8b0968d90f1c5239cae80c3be9c2a32d0603d6
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518223"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225495"
 ---
-# <a name="bag_unpack-plugin"></a>bag_unpack Plugin
+# <a name="bag_unpack-plugin"></a>Plug-in bag_unpack
 
-Das `bag_unpack` Plugin packt eine `dynamic` einzelne Spalte des Typs aus, indem es jeden Slot der obersten Ebene der Eigenschaftentasche als Spalte behandelt.
+Das `bag_unpack` Plug-in entpackt eine einzelne Spalte vom Typ, `dynamic` indem die einzelnen Eigenschaften Behälter auf oberster Ebene als Spalte behandelt werden.
 
     T | evaluate bag_unpack(col1)
 
 **Syntax**
 
-*T* `|` `evaluate` `bag_unpack(` *Column* T-Spalte `,` [ *OutputColumnPrefix* ]`)`
+*T* - `|` `evaluate` `bag_unpack(` *Spalte* `,` [ *outputcolumnprefix* ]`)`
 
 **Argumente**
 
-* *T*: Die tabellarische Eingabe, deren *Spalte* entpackt werden soll.
-* *Spalte*: Die Spalte *von T* zum Auspacken. Der Wert muss vom Typ `dynamic` sein.
-* *OutputColumnPrefix*: Ein gemeinsames Präfix, das allen Spalten hinzugefügt werden soll, die vom Plugin erstellt werden.
+* *T*: die tabellarische Eingabe, deren Spalten *Spalte* entpackt werden soll.
+* *Column*: die Spalte von *T* , die entpackt werden soll. Der Wert muss vom Typ `dynamic` sein.
+* *Outputcolumnprefix*: ein gängiges Präfix, das allen Spalten hinzugefügt wird, die vom Plug-in erzeugt werden.
   Optional.
 
 **Rückgabe**
 
-Das `bag_unpack` Plugin gibt eine Tabelle mit so vielen Datensätzen zurück wie seine tabellarische Eingabe (*T*). Das Schema der Tabelle entspricht dem der tabellarischen Eingabe mit den folgenden Änderungen:
+Das `bag_unpack` Plug-in gibt eine Tabelle mit so vielen Datensätzen zurück wie die Tabellen Eingabe (*T*). Das Schema der Tabelle ist mit den Tabellen Eingaben identisch und weist die folgenden Änderungen auf:
 
-* Die angegebene Eingabespalte (*Spalte*) wird entfernt.
+* Die angegebene Eingabe Spalte (*Spalte*) wird entfernt.
 
-* Das Schema wird um so viele Spalten erweitert, wie es unterschiedliche Steckplätze in den Eigenschaftsbeutelwerten der obersten Ebene von *T*gibt. Der Name jeder Spalte entspricht dem Namen jedes Steckplatzes, dem optional *OutputColumnPrefix*vorangestellt ist. Sein Typ ist entweder der Typ des Steckplatzes (wenn alle `dynamic` Werte desselben Steckplatzes denselben Typ haben), oder (wenn sich die Werte im Typ unterscheiden).
+* Das Schema wird mit so vielen Spalten erweitert, wie es unterschiedliche Slots in den Eigenschaften Behälter Werten der obersten Ebene von *T*gibt. Der Name jeder Spalte entspricht dem Namen der einzelnen Slots. optional wird das *Präfix outputcolumnprefix*vorangestellt. Der Typ ist entweder der Typ des Slots (wenn alle Werte desselben Slots denselben Typ aufweisen) oder `dynamic` (wenn sich die Werte im Typ unterscheiden).
 
 **Hinweise**
 
-Das Ausgabeschema des Plugins hängt von den Datenwerten ab, was es so "unvorhersehbar" macht wie die Daten selbst. Daher können mehrere Ausführungen des Plugins mit unterschiedlicher Dateneingabe unterschiedliche Ausgabeschemas erzeugen.
+Das Ausgabe Schema des Plug-ins hängt von den Datenwerten ab und macht es als "unvorhersehbare" Daten selbst. Daher können mehrere Ausführungen des Plug-ins mit unterschiedlichen Dateneingaben zu unterschiedlichen Ausgabe Schemas führen.
 
-Die Eingabedaten für das Plugin müssen so sein, dass das Ausgabeschema allen Regeln für ein tabellarisches Schema entspricht. Dies gilt insbesondere für:
+Die Eingabedaten für das Plug-in müssen so lauten, dass das Ausgabe Schema allen Regeln für ein tabellarisches Schema entspricht. Dies gilt insbesondere für:
 
-1. Ein Ausgabespaltenname kann nicht mit einer vorhandenen Spalte in der Tabellarischen Eingabe *T* identisch sein, es sei denn, es handelt sich um die Spalte, die entpackt werden soll (*Spalte*) selbst, da dadurch zwei Spalten mit demselben Namen entstehen.
+1. Der Name einer Ausgabe Spalte darf nicht mit einer vorhandenen Spalte in der tabellarischen Eingabe *T* identisch sein, es sei denn, es handelt sich um die Spalte, für die das Entpacken (*Spalte*) selbst ausgeführt werden soll, da dadurch zwei Spalten mit demselben Namen erstellt werden.
 
-2. Alle Slotnamen müssen, wenn von *OutputColumnPrefix*vorangestellt, gültige Entitätsnamen sein und den [Idbezeichnerbenennungsregeln](./schema-entities/entity-names.md#identifier-naming-rules)entsprechen.
+2. Alle slotnamen, bei vorangestellten *outputcolumnprefix*, müssen gültige Entitäts Namen sein und den [bezeichnerbenennungs Regeln](./schema-entities/entity-names.md#identifier-naming-rules)entsprechen.
 
 **Beispiel**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 datatable(d:dynamic)
 [

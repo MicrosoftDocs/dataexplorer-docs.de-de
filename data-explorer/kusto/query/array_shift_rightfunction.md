@@ -1,6 +1,6 @@
 ---
-title: array_shift_right() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird array_shift_right() in Azure Data Explorer beschrieben.
+title: array_shift_right ()-Azure Daten-Explorer
+description: In diesem Artikel wird array_shift_right () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 73f87d4c5ce1a841404e438e0e5647089b38785f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 714c6c15443420abbc973593acb2f311a5507dc4
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518767"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225665"
 ---
 # <a name="array_shift_right"></a>array_shift_right()
 
-`array_shift_right()`verschiebt Werte innerhalb eines Arrays nach rechts.
+`array_shift_right()`verschiebt Werte in einem Array nach rechts.
 
 **Syntax**
 
@@ -25,52 +25,56 @@ ms.locfileid: "81518767"
 
 **Argumente**
 
-* *arr*: Eingabe-Array zu teilen, muss dynamisches Array sein.
-* *shift_count*: Ganzzahl, die die Anzahl der Positionen angibt, die Arrayelemente nach rechts verschoben werden. Wenn der Wert negativ ist, werden die Elemente nach links verschoben.
-* *fill_value*: Skalarwert, der zum Einfügen von Elementen anstelle der Elemente verwendet wird, die verschoben und entfernt wurden. Standardwert: NULL-Wert oder leere *arr* Zeichenfolge (abhängig vom arr-Typ).
+* *arr*: das zu teilende Eingabe Array muss ein dynamisches Array sein.
+* *shift_count*: ganze Zahl, die die Anzahl der Positionen angibt, die Array Elemente nach rechts verschoben werden. Wenn der Wert negativ ist, werden die Elemente nach links verschoben.
+* *fill_value*: Skalarwert, der zum Einfügen von Elementen anstelle der verschobenen und entfernten Elemente verwendet wird. Standard: NULL-Wert oder eine leere Zeichenfolge (abhängig vom *arr* -Typ).
 
 **Rückgabe**
 
-Dynamisches Array, das die gleiche Anzahl der Elemente enthält wie im ursprünglichen Array, wobei jedes Element gemäß *shift_count*verschoben wurde. Neue Elemente, die anstelle der entfernten Elemente hinzugefügt werden, haben den Wert *fill_value*.
+Dynamisches Array, das die gleiche Menge an Elementen wie im ursprünglichen Array enthält, wobei jedes Element gemäß *shift_count*verschoben wurde. Neue Elemente, die anstelle der entfernten-Elemente hinzugefügt werden, haben den Wert *fill_value*.
 
 **Siehe auch**
 
-* Informationen zum Verschieben des Arrays nach links finden [Sie unter array_shift_left()](array_shift_leftfunction.md).
-* Informationen zum Drehen des Arrays rechts finden [Sie unter array_rotate_right()](array_rotate_rightfunction.md).
-* Informationen zum Drehen des Arrays links finden [Sie unter array_rotate_left()](array_rotate_leftfunction.md).
+* Informationen zum Verschieben des Arrays Links finden Sie unter [array_shift_left ()](array_shift_leftfunction.md).
+* Informationen zum Drehen des Arrays right finden Sie unter [array_rotate_right ()](array_rotate_rightfunction.md).
+* Informationen zum Drehen des Arrays Links finden Sie unter [array_rotate_left ()](array_rotate_leftfunction.md).
 
 **Beispiele**
 
-* Umschalten nach rechts um zwei Positionen:
+* Verschieben nach rechts um zwei Positionen:
 
+    <!-- csl: https://help.kusto.windows.net:443/Samples -->
     ```kusto
     print arr=dynamic([1,2,3,4,5]) 
     | extend arr_shift=array_shift_right(arr, 2)
     ```
     
-    |Arr|arr_shift|
+    |r|arr_shift|
     |---|---|
-    |[1,2,3,4,5]|[null,null,1,2,3]|
+    |[1, 2, 3, 4, 5]|[NULL, NULL, 1, 2, 3]|
 
-* Verschieben nach rechts um zwei Positionen und Hinzufügen eines Standardwerts:
+* Verschieben von zwei Positionen nach rechts und Hinzufügen eines Standardwerts:
 
+    <!-- csl: https://help.kusto.windows.net:443/Samples -->
     ```kusto
     print arr=dynamic([1,2,3,4,5]) 
     | extend arr_shift=array_shift_right(arr, 2, -1)
     ```
     
-    |Arr|arr_shift|
+    |r|arr_shift|
     |---|---|
-    |[1,2,3,4,5]|[-1,-1,1,2,3]|
+    |[1, 2, 3, 4, 5]|[-1,-1, 1, 2, 3]|
 
 
-* Verschieben nach links um zwei Positionen mit einem negativen shift_count Wert:
+* Verschieben nach links um zwei Positionen mithilfe eines negativen shift_count Werts:
 
+    <!-- csl: https://help.kusto.windows.net:443/Samples -->
     ```kusto
     print arr=dynamic([1,2,3,4,5]) 
     | extend arr_shift=array_shift_right(arr, -2, -1)
     ```
     
-    |Arr|arr_shift|
+    |r|arr_shift|
     |---|---|
-    |[1,2,3,4,5]|[3,4,5,-1,-1]|
+    |[1, 2, 3, 4, 5]|[3, 4, 5,-1,-1]|
+    

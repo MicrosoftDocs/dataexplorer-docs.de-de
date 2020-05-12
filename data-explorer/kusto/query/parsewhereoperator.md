@@ -1,6 +1,6 @@
 ---
-title: Parse-where-Operator - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird der Parse-where-Operator in Azure Data Explorer beschrieben.
+title: Analyse-Where-Operator-Azure Daten-Explorer
+description: In diesem Artikel wird der Operator "Analyse-where" in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,17 +8,17 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/12/2020
-ms.openlocfilehash: 0e44ab83242fc8aed0e46bdab1fa5a142992bfe5
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: c0ee38fe77c0957b9ba7fd589115eee20be6a649
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81511406"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83224849"
 ---
 # <a name="parse-where-operator"></a>parse-where-Operator
 
-Wertet einen Zeichenfolgenausdruck aus und analysiert dessen Wert in eine oder mehrere berechnete Spalten. Das Ergebnis sind nur die erfolgreich analysierten Zeichenfolgen.
-Siehe [parse-Operator,](parseoperator.md) der nulls für erfolglos analysierte Zeichenfolgen erzeugt.
+Wertet einen Zeichen folgen Ausdruck aus und analysiert seinen Wert in mindestens eine berechnete Spalte. Das Ergebnis ist nur die erfolgreich analysierten Zeichen folgen.
+Weitere Informationen finden Sie unter Analyse [Operator](parseoperator.md), der Nullen für nicht erfolgreich analysierte Zeichen folgen erzeugt.
 
 ```kusto
 T | parse-where Text with "ActivityName=" name ", ActivityType=" type
@@ -26,71 +26,74 @@ T | parse-where Text with "ActivityName=" name ", ActivityType=" type
 
 **Syntax**
 
-*T* `| parse-where` `kind=regex` [`flags=regex_flags`]`simple`| ] *Expression* `with` Ausdruck `*` (*StringConstant* `:` *ColumnName* [ `*` *ColumnType*]) ...
+*T* `| parse-where` [ `kind=regex` [ `flags=regex_flags` ] | `simple` ]- *Ausdruck* `with` `*` (*StringConstant* *ColumnName* [ `:` *ColumnType*]) `*` ...
 
 **Argumente**
 
-* *T*: Die Eingabetabelle.
+* *T*: die Eingabe Tabelle.
 
-* Art: 
+* *Art*: 
 
-    * simple (standard) : StringConstant ist ein regulärer Zeichenfolgenwert, und die Übereinstimmung ist streng, was bedeutet, dass alle Zeichenfolgentrennzeichen in der analysierten Zeichenfolge angezeigt werden sollen und alle erweiterten Spalten mit den erforderlichen Typen übereinstimmen müssen.
+    * *Simple* (Standard): StringConstant ist ein regulärer Zeichen folgen Wert, und die Entsprechung ist "Strict". Alle Zeichen folgen Trennzeichen sollten in der analysierten Zeichenfolge angezeigt werden, und alle erweiterten Spalten müssen mit den erforderlichen Typen identisch sein.
         
-    * regex : StringConstant kann ein regulärer Ausdruck sein, und die Übereinstimmung ist streng, was bedeutet, dass alle Zeichenfolgentrennzeichen (die ein Regex für diesen Modus sein können) in der analysierten Zeichenfolge angezeigt werden sollen und alle erweiterten Spalten den erforderlichen Typen entsprechen müssen.
+    * *Regex*: "StringConstant" kann ein regulärer Ausdruck sein, und die Entsprechung ist "Strict". Alle Zeichen folgen Trennzeichen sollten in der analysierten Zeichenfolge angezeigt werden, und alle erweiterten Spalten müssen mit den erforderlichen Typen identisch sein. Zeichen folgen Trennzeichen können ein Regex für diesen Modus sein.
     
-    * Flags : Flags, die im `U` Regex-Modus `m` `s` wie (Ungreedy), (Mehrzeilenmodus), (neue Zeile) `\n` `i` (ohne Groß-/Kleinschreibung) und mehr in [RE2-Flags](re2.md)verwendet werden sollen.
+    * *Flags*: für den Regex-Modus zu verwendende Flags: `U` (ungierig), `m` (mehrzeiligen Modus), `s` (Übereinstimmung mit neuer Zeile), (keine Unterscheidung nach `\n` `i` Groß-/Kleinschreibung), weitere Flags können in [RE2-Flags](re2.md)gefunden werden.
         
-* *Ausdruck*: Ein Ausdruck, der zu einer Zeichenfolge ausgewertet wird.
+* *Expression*: ein Ausdruck, der zu einer Zeichenfolge ausgewertet wird.
 
-* *Spaltenname:* Der Name einer Spalte, der ein Wert zugewiesen werden soll (aus dem Zeichenfolgenausdruck herausgenommen). 
+* *ColumnName:* Der Name einer Spalte, die einem Wert zugewiesen wird, der aus dem Zeichen folgen Ausdruck entnommen wurde. 
   
-* *ColumnType:* sollte optionaler skalarer Typ sein, der den Typ angibt, in den der Wert konvertiert werden soll (standardmäßig ist es Zeichenfolgentyp).
+* *ColumnType:* sollte ein optionaler Skalartyp sein, der den Typ angibt, in den der Wert konvertiert werden soll. Der Standardwert ist String Type.
 
 **Rückgabe**
 
-Die Eingabetabelle, die entsprechend der Liste der Spalten erweitert wird, die dem Operator bereitgestellt werden.
-Nur erfolgreich analysierte Zeichenfolgen werden in der Ausgabe angezeigt. Zeichenfolgen, die nicht mit dem Muster übereinstimmen, werden herausgefiltert.
+Die Eingabe Tabelle, die entsprechend der Liste der Spalten erweitert wird, die dem Operator bereitgestellt werden.
+
+> [!Note] 
+> Nur erfolgreich analysierte Zeichen folgen werden in der Ausgabe angezeigt. Zeichen folgen, die nicht dem Muster entsprechen, werden herausgefiltert.
 
 **Tipps**
 
-* `parse-where`analysiert die Zeichenfolgen auf die gleiche Weise wie [die Analyse,](parseoperator.md) filtert aber zusätzlich zeichenfolgen, die nicht erfolgreich analysiert wurden.
+* `parse-where`analysiert die Zeichen folgen auf die gleiche Weise wie die Analyse und filtert Zeichen [folgen, die](parseoperator.md)nicht erfolgreich analysiert wurden.
 
-* Verwenden [`project`](projectoperator.md) Sie diese Datei, wenn Sie auch einige Spalten löschen oder umbenennen möchten.
+* Verwenden Sie [Project](projectoperator.md) , wenn Sie auch einige Spalten löschen oder umbenennen möchten.
 
-* Verwenden Sie * im Muster, um Junk-Werte zu überspringen (kann nach einer Zeichenfolgenspalte nicht verwendet werden)
+* Verwenden Sie * im Muster, um Junk-Werte zu überspringen. Dieser Wert kann nach einer Zeichen folgen Spalte nicht verwendet werden.
 
-* Das Analysemuster kann mit *ColumnName* und nicht nur mit *StringConstant*beginnen. 
+* Das Analyse Muster kann zusätzlich zu *StringConstant*mit *ColumnName*beginnen. 
 
-* Wenn der analysierte *Ausdruck* nicht vom Typ string ist, wird er in type string konvertiert.
+* Wenn der analysierte *Ausdruck* nicht vom Typ "String" ist, wird er in den Typ "String" konvertiert.
 
-* Wenn der Regex-Modus verwendet wird, gibt es eine Option zum Hinzufügen von Regex-Flags, um den gesamten Regex zu steuern, der in Parse verwendet wird.
+* Wenn der Regex-Modus verwendet wird, können Sie Regex-Flags hinzufügen, um den gesamten in der Analyse verwendeten regulären Ausdruck zu steuern.
 
-* Im Regex-Modus übersetzt parse das Muster in einen Regex und verwendet [die RE2-Syntax,](re2.md) um den Abgleich mithilfe nummerierter erfasster Gruppen zu tun, die intern behandelt werden.
+* Im Regex-Modus übersetzt die Analyse das Muster in eine Regex-Syntax und verwendet die [RE2-Syntax](re2.md) , um die Übereinstimmung mit nummerierten aufgezeichneten Gruppen zu erreichen, die intern behandelt werden.
   
-  Diese Parse-Anweisung ist also z. B. :
+  Diese Analyse Anweisung z. b.:
   
     ```kusto
     parse-where kind=regex Col with * <regex1> var1:string <regex2> var2:long
     ```
 
-    Der Regex, der intern von der `.*?<regex1>(.*?)<regex2>(\-\d+)`Analyse generiert wird, ist .
+    Der Regex, der von der Analyse intern generiert wird, ist `.*?<regex1>(.*?)<regex2>(\-\d+)` .
         
-    - `*`wurde in `.*?`übersetzt.
+    - `*`wurde in übersetzt `.*?` .
         
-    - `string`wurde in `.*?`übersetzt.
+    - `string`wurde in übersetzt `.*?` .
         
-    - `long`wurde in `\-\d+`übersetzt.
+    - `long`wurde in übersetzt `\-\d+` .
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
-Der `parse-where` Operator bietet eine `extend` optimierte Möglichkeit `extract` zu einer `string` Tabelle, indem mehrere Anwendungen für denselben Ausdruck verwendet werden.
-Dies ist besonders nützlich, `string` wenn die Tabelle über eine Spalte verfügt, die mehrere Werte enthält, die`printf`Sie in`Console.WriteLine`einzelne Spalten aufteilen möchten, z. B. eine Spalte, die von einer Entwicklerablaufverfolgungsanweisung (" "/" " erstellt wurde.
+Der- `parse-where` Operator bietet eine optimierte Methode für `extend` eine Tabelle, indem mehrere `extract` Anwendungen für denselben `string` Ausdruck verwendet werden. Dies ist besonders hilfreich, wenn die Tabelle eine `string` Spalte enthält, die mehrere Werte enthält, die Sie in einzelne Spalten unterbrechen möchten. Beispielsweise können Sie eine Spalte, die von einer Entwickler `printf` -Trace-Anweisung (""/"") erstellt wurde, unterbrechen `Console.WriteLine` .
 
-Im folgenden Beispiel wird davon `EventText` ausgegangen, dass die Tabellenspalte `Traces` Zeichenfolgen des Formulars `Event: NotifySliceRelease (resourceName={0}, totalSlices= {1}, sliceNumber={2}, lockTime={3}, releaseTime={4}, previousLockTime={5})`enthält.
-Der folgende Vorgang erweitert die Tabelle `resourceName` `totalSlices`um `sliceNumber` `lockTime `6 `releaseTime` `previouLockTime`Spalten: , , , , , , `Month` und `Day`. 
+### <a name="using-parse"></a>Verwenden von `parse`
 
-Hier haben nur wenige Zeichenfolgen keine vollständige Übereinstimmung.
-Mit `parse`haben die berechneten Spalten Nullen:
+Im folgenden Beispiel enthält die-Spalte der-Tabelle Zeichen folgen in der `EventText` `Traces` Form `Event: NotifySliceRelease (resourceName={0}, totalSlices= {1}, sliceNumber={2}, lockTime={3}, releaseTime={4}, previousLockTime={5})` . Mit dem folgenden Vorgang wird die Tabelle mit sechs Spalten erweitert: `resourceName` , `totalSlices` , `sliceNumber` , `lockTime ` , `releaseTime` , `previouLockTime` , `Month` und `Day` . 
+
+Einige der Zeichen folgen haben keine vollständige Entsprechung.
+
+Mithilfe von `parse` haben die berechneten Spalten Nullen.
 
 ```kusto
 let Traces = datatable(EventText:string)
@@ -103,19 +106,20 @@ let Traces = datatable(EventText:string)
 ];
 Traces  
 | parse EventText with * "resourceName=" resourceName ", totalSlices=" totalSlices:long * "sliceNumber=" sliceNumber:long * "lockTime=" lockTime ", releaseTime=" releaseTime:date "," * "previousLockTime=" previouLockTime:date ")" *  
-| project resourceName ,totalSlices , sliceNumber , lockTime , releaseTime , previouLockTime
+| project resourceName ,totalSlices , sliceNumber , lockTime , releaseTime , previousLockTime
 ```
 
-|resourceName|totalSlices|sliceNummer|lockTime|releaseTime|previouLockTime|
+|resourceName|totalslices|slicennummer|Sperr Zeit|releasetime|previouslocktime|
 |---|---|---|---|---|---|
 |||||||
 |||||||
 |||||||
-|PipelineScheduler|27|20|02/17/2016 08:40:01|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
-|PipelineScheduler|27|22|02/17/2016 08:41:01|2016-02-17 08:41:00.0000000|2016-02-17 08:40:01.0000000|
+|Pipelinescheduler|27|20|02/17/2016 08:40:01|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
+|Pipelinescheduler|27|22|02/17/2016 08:41:01|2016-02-17 08:41:00.0000000|2016-02-17 08:40:01.0000000|
 
+### <a name="using-parse-where"></a>Verwenden von `parse-where` 
 
-Mit `parse-where` der Verwendung werden erfolglos analysierte Zeichenfolgen aus dem Ergebnis gefiltert:
+Durch die Verwendung von ' Analyse-WHERE ' werden nicht erfolgreich analysierte Zeichen folgen aus dem Ergebnis herausgefiltert.
 
 ```kusto
 let Traces = datatable(EventText:string)
@@ -127,19 +131,19 @@ let Traces = datatable(EventText:string)
 "Event: NotifySliceRelease (resourceName=PipelineScheduler, totalSlices=invalid_number, sliceNumber=16, lockTime=02/17/2016 08:41:00, releaseTime=02/17/2016 08:41:00, previousLockTime=02/17/2016 08:40:00)"
 ];
 Traces  
-| parse-where EventText with * "resourceName=" resourceName ", totalSlices=" totalSlices:long * "sliceNumber=" sliceNumber:long * "lockTime=" lockTime ", releaseTime=" releaseTime:date "," * "previousLockTime=" previouLockTime:date ")" *  
-| project resourceName ,totalSlices , sliceNumber , lockTime , releaseTime , previouLockTime
+| parse-where EventText with * "resourceName=" resourceName ", totalSlices=" totalSlices:long * "sliceNumber=" sliceNumber:long * "lockTime=" lockTime ", releaseTime=" releaseTime:date "," * "previousLockTime=" previousLockTime:date ")" *  
+| project resourceName ,totalSlices , sliceNumber , lockTime , releaseTime , previousLockTime
 ```
 
-|resourceName|totalSlices|sliceNummer|lockTime|releaseTime|previouLockTime|
+|resourceName|totalslices|slicennummer|Sperr Zeit|releasetime|previouslocktime|
 |---|---|---|---|---|---|
-|PipelineScheduler|27|20|02/17/2016 08:40:01|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
-|PipelineScheduler|27|22|02/17/2016 08:41:01|2016-02-17 08:41:00.0000000|2016-02-17 08:40:01.0000000|
+|Pipelinescheduler|27|20|02/17/2016 08:40:01|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
+|Pipelinescheduler|27|22|02/17/2016 08:41:01|2016-02-17 08:41:00.0000000|2016-02-17 08:40:01.0000000|
 
 
-für regex-Modus mit regex-Flags:
+### <a name="regex-mode-using-regex-flags"></a>Regex-Modus mit Regex-Flags
 
-wenn wir daran interessiert sind, den resouceName und totalSlices zu erhalten, und wir diese Abfrage verwenden:
+Verwenden Sie zum Abfragen von resourceName und totalslices die folgende Abfrage:
 
 ```kusto
 let Traces = datatable(EventText:string)
@@ -155,10 +159,13 @@ Traces
 | project resourceName, totalSlices
 ```
 
-In der obigen Abfrage erhalten wir kein Ergebnis, da im Standardmodus die Groß-/Kleinschreibung beachtet wird, sodass keine der Zeichenfolgen erfolgreich analysiert wurde.
+### <a name="parse-where-with-case-insensitive-regex-flag"></a>`parse-where`ohne Beachtung der Groß-/Kleinschreibung von Regex
 
-Um das erforderliche Ergebnis zu erhalten, `parse-where` können wir die`i`regex-Flagge mit Groß-/Kleinschreibung ( ) ausführen.
-Beachten Sie, dass nur 3 Zeichenfolgen erfolgreich analysiert werden und das Ergebnis 3 Datensätze ist (einige totalSlices enthalten ungültige ganze Zahlen): 
+In der obigen Abfrage hat der Standardmodus die Groß-/Kleinschreibung beachtet, sodass die Zeichen folgen erfolgreich analysiert wurden. Es wurde kein Ergebnis abgerufen.
+
+Um das erforderliche Ergebnis zu erhalten, führen Sie `parse-where` mit dem Regex-Flag für die Groß-/Kleinschreibung ( `i` ) aus.
+
+Es werden nur drei Zeichen folgen erfolgreich analysiert, sodass das Ergebnis drei Datensätze ist (einige totalslices enthalten ungültige ganze Zahlen).
 
 ```kusto
 let Traces = datatable(EventText:string)
@@ -174,10 +181,8 @@ Traces
 | project resourceName, totalSlices
 ```
 
-|resourceName|totalSlices|
+|resourceName|totalslices|
 |---|---|
-|PipelineScheduler|27|
-|PipelineScheduler|27|
-|PipelineScheduler|27|
-
-
+|Pipelinescheduler|27|
+|Pipelinescheduler|27|
+|Pipelinescheduler|27|

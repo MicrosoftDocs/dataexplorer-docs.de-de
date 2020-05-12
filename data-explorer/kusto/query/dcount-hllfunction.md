@@ -1,6 +1,6 @@
 ---
-title: dcount_hll() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden dcount_hll() in Azure Data Explorer beschrieben.
+title: dcount_hll ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird dcount_hll () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/15/2019
-ms.openlocfilehash: a0c921efa90f5d66fe42fa6ee872204b5bb399cd
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d4a76a30526f5fecbafafd735cf72de92aae7644
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516149"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225189"
 ---
 # <a name="dcount_hll"></a>dcount_hll()
 
-Berechnet die Dcount aus hll-Ergebnissen (die von [hll](hll-aggfunction.md) oder [hll_merge](hll-merge-aggfunction.md)generiert wurde).
+Berechnet die DCount aus HLL-Ergebnissen (die von [HLL](hll-aggfunction.md) oder [hll_merge](hll-merge-aggfunction.md)generiert wurden).
 
-Lesen Sie mehr über den [zugrunde liegenden Algorithmus (*H*yper*L*og*L*og) und die Schätzgenauigkeit](dcount-aggfunction.md#estimation-accuracy).
+Erfahren Sie mehr über den [zugrunde liegenden Algorithmus (*H*yper*L*og*l*OG) und die Schätzung der Schätzung](dcount-aggfunction.md#estimation-accuracy).
 
 **Syntax**
 
@@ -27,14 +27,15 @@ Lesen Sie mehr über den [zugrunde liegenden Algorithmus (*H*yper*L*og*L*og) und
 
 **Argumente**
 
-* *Expr*: Ausdruck, der durch [hll](hll-aggfunction.md) oder [hll-merge](hll-merge-aggfunction.md) generiert wurde
+* *Expr*: Ausdruck, der von [HLL](hll-aggfunction.md) oder [HLL-Merge](hll-merge-aggfunction.md) generiert wurde.
 
 **Rückgabe**
 
-Die unterschiedliche Anzahl der einzelnen Werte in *Expr*
+Die eindeutige Anzahl der einzelnen Werte in *expr*
 
 **Beispiele**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | summarize hllRes = hll(DamageProperty) by bin(StartTime,10m)

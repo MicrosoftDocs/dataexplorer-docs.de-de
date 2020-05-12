@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9931b297f5a86c46a8502902a6c396fbb2fd4191
-ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
+ms.openlocfilehash: b3dece66f3bafae989643afd418557aeaaa7d746
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82741731"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225036"
 ---
 # <a name="diff-patterns-plugin"></a>Vergleichs Muster-Plugin
 
@@ -43,7 +43,7 @@ T | evaluate diffpatterns(splitColumn)
 
     Eine Zeichenfolgendarstellung für einen der Werte in SplitColumn, der angegeben wurde. Alle Zeilen, die diesen Wert in der SplitColumn aufweisen, gelten als DataSet "B".
 
-    Beispiel: `T | extend splitColumn=iff(request_responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure") `
+    Ein Beispiel: `T | extend splitColumn=iff(request_responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure") `
 
 **Optionale Argumente**
 
@@ -51,10 +51,10 @@ Alle anderen Argumente sind optional, aber sie müssen wie unten angegeben sorti
 
 * WeightColumn - *column_name*
 
-    Berücksichtigt jede Zeile in der Eingabe gemäß dem angegebenen Gewicht (standardmäßig verfügt jede Spalte über eine Gewichtung von „1“). Das-Argument muss ein Name einer numerischen Spalte sein (z `int`. b. `long`, `real`,).
+    Berücksichtigt jede Zeile in der Eingabe gemäß dem angegebenen Gewicht (standardmäßig verfügt jede Spalte über eine Gewichtung von „1“). Das-Argument muss ein Name einer numerischen Spalte sein (z. b `int` `long` .,, `real` ).
     Eine übliche Nutzung einer Gewichtungsspalte besteht darin, die Stichprobenerstellung oder die Bucket-Zuordnung/Aggregation der Daten zu berücksichtigen, die bereits in die einzelnen Zeilen eingebettet sind.
     
-    Beispiel: `T | extend splitColumn=iff(request_responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", sample_Count) `
+    Ein Beispiel: `T | extend splitColumn=iff(request_responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", sample_Count) `
 
 * Schwellenwert-0,015 < *Double* < 1 [Standardwert: 0,05]
 
@@ -71,10 +71,10 @@ Alle anderen Argumente sind optional, aber sie müssen wie unten angegeben sorti
 * Customwildcard- *"any-value-per-Type"*
 
     Legt den Platzhalterwert für einen bestimmten Typ in der Ergebnistabelle fest, der angibt, dass das aktuelle Muster keine Einschränkung für diese Spalte besitzt.
-    Der Standard ist „null“, da der Standard eine leere Zeichenfolge ist. Wenn der Standardwert ein in den Daten funktionierender Wert ist, sollte ein anderer Platzhalter Wert verwendet werden ( `*`z. b.).
+    Der Standard ist „null“, da der Standard eine leere Zeichenfolge ist. Wenn der Standardwert ein in den Daten funktionierender Wert ist, sollte ein anderer Platzhalter Wert verwendet werden (z `*` . b.).
     Unten finden Sie ein Beispiel hierzu.
 
-    Beispiel: `T | extend splitColumn = iff(request-responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", "~", "~", "~", int(-1), double(-1), long(0), datetime(1900-1-1))`
+    Ein Beispiel: `T | extend splitColumn = iff(request-responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", "~", "~", "~", int(-1), double(-1), long(0), datetime(1900-1-1))`
 
 **Rückgabe**
 
@@ -84,9 +84,9 @@ Das Ergebnis von `diffpatterns` gibt die folgenden Spalten zurück:
 
 * Segmentid: die Identität, die dem Muster in der aktuellen Abfrage zugewiesen ist (Hinweis: IDs sind bei sich wiederholenden Abfragen nicht garantiert identisch).
 
-* Count: die Anzahl der Zeilen, die vom Muster in Set a aufgezeichnet werden (Set a ist die Entsprechung von `where tostring(splitColumn) == SplitValueA`).
+* Count: die Anzahl der Zeilen, die vom Muster in Set a aufgezeichnet werden (Set a ist die Entsprechung von `where tostring(splitColumn) == SplitValueA` ).
 
-* Zähltb: die Anzahl der Zeilen, die vom Muster in Set b aufgezeichnet werden (Set b ist das `where tostring(splitColumn) == SplitValueB`Äquivalent von).
+* Zähltb: die Anzahl der Zeilen, die vom Muster in Set b aufgezeichnet werden (Set b ist das Äquivalent von `where tostring(splitColumn) == SplitValueB` ).
 
 * Prozentua: der Prozentsatz der Zeilen in festgelegt durch das Muster (100,0 * count/count (Seta)).
 
@@ -111,6 +111,7 @@ Wenn Sie eine interessante Zeile finden, können Sie dafür einen Drilldown durc
 
 **Beispiel**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents 
 | where monthofyear(StartTime) == 5
@@ -119,7 +120,7 @@ StormEvents
 | evaluate diffpatterns(Damage, "0", "1" )
 ```
 
-|SegmentId|CountA|CountB|PercentA|PercentB|PercentDiffAB|Zustand|EventType|`Source`|DamageCrops|
+|SegmentId|CountA|CountB|PercentA|PercentB|PercentDiffAB|Bundesland/Kanton|EventType|`Source`|DamageCrops|
 |---|---|---|---|---|---|---|---|---|---|
 |0|2278|93|49,8|7.1|42,7||Hagel||0|
 |1|779|512|17,03|39,08|22,05||Sturm|||

@@ -1,6 +1,6 @@
 ---
-title: infer_storage_schema-Plugin - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird infer_storage_schema-Plugin in Azure Data Explorer beschrieben.
+title: 'infer_storage_schema-Plug-in: Azure Daten-Explorer'
+description: In diesem Artikel wird infer_storage_schema-Plug-in in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 6c4543a3b029017067867bb70d913509941c332e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1b4a917101ad3a35f8fdbc1cccb257b6f3724b69
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513905"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83224866"
 ---
-# <a name="infer_storage_schema-plugin"></a>infer_storage_schema Plugin
+# <a name="infer_storage_schema-plugin"></a>Plug-in infer_storage_schema
 
-Dieses Plug-In leitet das Schema externer Daten ab und gibt es als CSL-Schemazeichenfolge zurück, die beim [Erstellen externer Tabellen](../management/externaltables.md#create-or-alter-external-table)verwendet werden kann.
+Dieses Plug-in leitet das Schema externer Daten ab und gibt es als CSL-Schema Zeichenfolge zurück. Die Zeichenfolge kann beim [Erstellen externer Tabellen](../management/external-tables-azurestorage-azuredatalake.md#create-or-alter-external-table)verwendet werden.
 
 ```kusto
 let options = dynamic({
@@ -32,27 +32,27 @@ evaluate infer_storage_schema(options)
 
 **Syntax**
 
-`evaluate` `infer_storage_schema(` *Tastatur* `)`
+`evaluate` `infer_storage_schema(` *Optionen* `)`
 
 **Argumente**
 
-Ein einzelnes *Optionsargument* ist `dynamic` ein konstanter Wert des Typs, der einen Eigenschaftenbeutel enthält, der Eigenschaften der Anforderung angibt:
+Ein einzelnes *options* Argument ist ein konstanter Wert des Typs `dynamic` , der einen Eigenschaften Behälter enthält, der die Eigenschaften der Anforderung angibt:
 
 |Name                    |Erforderlich|BESCHREIBUNG|
 |------------------------|--------|-----------|
-|`StorageContainers`|Ja|Liste der [Speicherverbindungszeichenfolgen,](../api/connection-strings/storage.md) die präfix-URI für gespeicherte Datenartefakte darstellen|
-|`DataFormat`|Ja|Eines der [unterstützten Datenformate](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats).|
-|`FileExtension`|Nein|Scannen Sie nur Dateien, die mit dieser Dateierweiterung enden. Es ist nicht erforderlich, aber die Angabe kann den Prozess beschleunigen (oder Probleme beim Lesen von Daten beseitigen).|
-|`FileNamePrefix`|Nein|Scannen Sie nur Dateien, die mit diesem Präfix beginnen. Es ist nicht erforderlich, aber die Angabe kann den Prozess beschleunigen|
-|`Mode`|Nein|Schemarückschlussstrategie, eine `any`von: `last` `all`, , . Leiten Sie das Datenschema aus jeder (zuerst gefundenen) Datei, aus der zuletzt geschriebenen Datei bzw. aus allen Dateien ab. Standardwert: `last`.|
+|`StorageContainers`|Ja|Liste der [Speicher Verbindungs](../api/connection-strings/storage.md) Zeichenfolgen, die den Präfix-URI für gespeicherte Daten Artefakte darstellen|
+|`DataFormat`|Ja|Eines der unterstützten [Datenformate](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats).|
+|`FileExtension`|Nein|Nur Dateien überprüfen, die mit dieser Dateierweiterung enden. Dies ist nicht erforderlich, aber die Angabe kann den Prozess beschleunigen (oder Daten Leseprobleme vermeiden).|
+|`FileNamePrefix`|Nein|Nur Dateien überprüfen, die mit diesem Präfix beginnen. Dies ist nicht erforderlich, aber die Angabe kann den Prozess beschleunigen.|
+|`Mode`|Nein|Strategie für die Schema Ableitung, eine der folgenden: `any` , `last` , `all` . Ableiten Sie das Datenschema aus einer beliebigen (ersten gefundenen) Datei, aus der letzten geschriebenen Datei bzw. aus allen Dateien. Standardwert: `last`.|
 
 **Rückgabe**
 
-Das `infer_storage_schema` Plugin gibt eine einzelne Ergebnistabelle zurück, die eine einzelne Zeile/Spalte mit EINER CSL-Schemazeichenfolge enthält.
+Das `infer_storage_schema` Plug-in gibt eine einzelne Ergebnistabelle zurück, die eine einzelne Zeile/Spalte mit der CSL-Schema Zeichenfolge enthält
 
 > [!NOTE]
-> * Schema-Inferenzstrategie "all" ist eine sehr "teure" Operation, da sie das Lesen *aller* gefundenen Artefakte und das Zusammenführen ihres Schemas impliziert.
-> * Einige zurückgegebene Typen sind möglicherweise nicht die tatsächlichen Typen als Ergebnis falscher Typvermutung (oder aufgrund des Schemazusammenführungsprozesses). Aus diesem Grund wird es dringend gebeten, das Ergebnis sorgfältig zu überprüfen, bevor Sie eine externe Tabelle erstellen.
+> * Die Strategie "All" für die Schema Rückschluss Strategie ist ein sehr kostengünstiger Vorgang, da Sie das Lesen aus *allen* gefundenen Artefakten und das Zusammenführen Ihres Schemas impliziert.
+> * Einige zurückgegebene Typen sind möglicherweise nicht die tatsächlichen Typen, die durch einen falschen Typ (oder als Ergebnis des Schema Zusammenführung Prozesses) verursacht werden. Aus diesem Grund sollten Sie das Ergebnis sorgfältig überprüfen, bevor Sie eine externe Tabelle erstellen.
 
 **Beispiel**
 
@@ -70,6 +70,6 @@ evaluate infer_storage_schema(options)
 
 *Ergebnis*
 
-|CslSchema|
+|Cslschema|
 |---|
-|app_id:string, user_id:long, event_time:datetime, country:string, city:string, device_type:string, device_vendor:string, ad_network:string, campaign:string, site_id:string, event_type:string, event_name:string, organic:string, days_from_install:int, revenue:real|
+|app_id: String, user_id: Long, event_Time: DateTime, Country: String, City: String, device_type: String, device_vendor: String, ad_network: String, Kampagne: String, site_id: String, event_type: String, event_name: String, Organic: String, days_from_install: int, Revenue: Real|

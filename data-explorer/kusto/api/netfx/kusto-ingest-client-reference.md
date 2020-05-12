@@ -1,6 +1,6 @@
 ---
-title: Kusto.Ingest-Clientverweis - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird der Clientverweis von Kusto.Ingest in Azure Data Explorer beschrieben.
+title: 'Kusto. Erfassung von Client Schnittstellen und Factoryklassen: Azure Daten-Explorer'
+description: In diesem Artikel werden Kusto. Erfassung von Client Schnittstellen und Factoryklassen in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: e5a9c1fa561fa07df527f17552a3a8f594a4e5d8
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1d3c3939a5c8b3a5f1e6f1fa0b40f9b927ee5325
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81503110"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226056"
 ---
-# <a name="kustoingest-client-reference"></a>Kusto.Ingest Client-Referenz
+# <a name="kustoingest-client-interfaces-and-factory-classes"></a>Kusto. Erfassen von Client Schnittstellen und Factoryklassen
 
-Die wichtigsten Schnittstellen und Werksklassen in der Kusto.Ingest-Bibliothek sind:
+Die Haupt Schnittstellen und Factoryklassen in der Kusto. Erfassungs Bibliothek sind:
 
-* [Schnittstelle IKustoIngestClient](#interface-ikustoingestclient): Die Hauptaufnahmeschnittstelle.
-* [Class ExtendedKustoIngestClient](#class-extendedkustoingestclient): Erweiterungen der Hauptaufnahmeschnittstelle.
-* [Klasse KustoIngestFactory](#class-kustoingestfactory): Die Hauptfabrik für Aufnahmeclients.
-* [Klasse KustoIngestionProperties](#class-kustoingestionproperties): Klasse, die verwendet wird, um allgemeine Aufnahmeeigenschaften bereitzustellen.
-* [Klasse JsonColumnMapping](#class-jsoncolumnmapping): Klasse, die verwendet wird, um die Schemazuordnung zu beschreiben, die beim Einführen aus einer JSON-Datenquelle angewendet werden soll.
-* [Klasse CsvColumnMapping](#class-csvcolumnmapping): Klasse, die verwendet wird, um die Schemazuordnung zu beschreiben, die beim Einführen aus einer CSV-Datenquelle angewendet werden soll.
-* [Enum DataSourceFormat](#enum-datasourceformat): Unterstützte Datenquellenformate (z. B. CSV, JSON)
-* [Schnittstelle IKustoQueuedIngestClient](#interface-ikustoqueuedingestclient): Schnittstelle, die Vorgänge beschreibt, die nur für die Aufnahme in die Warteschlange gelten.
-* [Klasse KustoQueuedIngestionProperties](#class-kustoqueuedingestionproperties): Eigenschaften, die nur für die Aufnahme in die Warteschlange gelten.
+* [Schnittstelle ikustoingestclient](#interface-ikustoingestclient): die zentrale Erfassungs Schnittstelle.
+* [Klasse extendedkustoingestclient](#class-extendedkustoingestclient): Erweiterungen zur Haupt Erfassungs Schnittstelle.
+* [Klasse kustoingestfactory](#class-kustoingestfactory): die hauptfactory für die Erfassung von Clients.
+* [Class kustoingestionproperties](#class-kustoingestionproperties): Klasse, die verwendet wird, um allgemeine Erfassungs Eigenschaften bereitzustellen.
+* [Klasse jsoncolumnmapping](#class-jsoncolumnmapping): die Klasse, die verwendet wird, um die Schema Zuordnung zu beschreiben, die beim erfassen aus einer JSON-Datenquelle angewendet werden soll.
+* [Class csvcolumnmapping](#class-csvcolumnmapping): Klasse zum Beschreiben der Schema Zuordnung, die beim erfassen aus einer CSV-Datenquelle angewendet werden soll.
+* [Enum datasourceformat](#enum-datasourceformat): unterstützte Datenquellen Formate (z. b. CSV, JSON)
+* [Schnittstelle ikustoqueuedingestclient](#interface-ikustoqueuedingestclient): die Schnittstelle beschreibt Vorgänge, die nur für die Erfassung in der Warteschlange gelten.
+* [Class kustoqueuedingestionproperties](#class-kustoqueuedingestionproperties): Eigenschaften, die nur für die Erfassung in der Warteschlange gelten.
 
-## <a name="interface-ikustoingestclient"></a>Schnittstelle IKustoIngestClient
+## <a name="interface-ikustoingestclient"></a>Schnittstelle ikustoingestclient
 
-* IngestFromDataReaderAsync
-* IngestFromStorageAsync
-* IngestFromStreamAsync
+* Ingestfromdatareaderasync
+* Ingestfromstorageasync
+* Ingestfromstreamasync
 
 ```csharp
 public interface IKustoIngestClient : IDisposable
@@ -68,16 +68,16 @@ public interface IKustoIngestClient : IDisposable
 }
 ```
 
-## <a name="class-extendedkustoingestclient"></a>Klasse ExtendedKustoIngestClient
+## <a name="class-extendedkustoingestclient"></a>Klasse extendedkustoingestclient
 
-* IngestFromSingleBlob - Veraltet. Verwenden Sie stattdessen `IKustoIngestClient.IngestFromStorageAsync`.
-* IngestFromSingleBlobAsync - Veraltet. Verwenden Sie stattdessen `IKustoIngestClient.IngestFromStorageAsync`.
-* IngestFromDataReader - Veraltet. Verwenden Sie stattdessen `IKustoIngestClient.IngestFromDataReaderAsync`.
-* IngestFromDataReaderAsync
-* IngestFromSingleFile - Veraltet. Verwenden Sie stattdessen `IKustoIngestClient.IngestFromStorageAsync`.
-* IngestFromSingleFileAsync - Veraltet. Verwenden Sie stattdessen `IKustoIngestClient.IngestFromStorageAsync`.
-* IngestFromStream - Veraltet. Verwenden Sie stattdessen `IKustoIngestClient.IngestFromStreamAsync`.
-* IngestFromStreamAsync
+* Ingestfromsingleblob ist veraltet. Verwenden Sie stattdessen `IKustoIngestClient.IngestFromStorageAsync`.
+* Ingestfromsingleblobasync: veraltet. Verwenden Sie stattdessen `IKustoIngestClient.IngestFromStorageAsync`.
+* Ingestfromdatareader-veraltet. Verwenden Sie stattdessen `IKustoIngestClient.IngestFromDataReaderAsync`.
+* Ingestfromdatareaderasync
+* Ingestfromsinglefile: veraltet. Verwenden Sie stattdessen `IKustoIngestClient.IngestFromStorageAsync`.
+* Ingestfromsinglefileasync: veraltet. Verwenden Sie stattdessen `IKustoIngestClient.IngestFromStorageAsync`.
+* Ingestfromstream-veraltet. Verwenden Sie stattdessen `IKustoIngestClient.IngestFromStreamAsync`.
+* Ingestfromstreamasync
 
 ```csharp
 public static class ExtendedKustoIngestClient
@@ -244,12 +244,12 @@ public static class ExtendedKustoIngestClient
 }
 ```
 
-## <a name="class-kustoingestfactory"></a>Klasse KustoIngestFactory
+## <a name="class-kustoingestfactory"></a>Klasse kustoingestfactory
 
-* CreateDirectIngestClient
-* CreateQueuedIngestClient
-* CreateManagedStreamingIngestClient
-* CreateStreamingIngestClient
+* "Kreatedirectingestclient"
+* "Kreatequeuedingestclient"
+* "Kreatemanagedstreamingingestclient"
+* "Kreatestreamingingestclient"
 
 ```csharp
 /// <summary>
@@ -342,24 +342,24 @@ public static class KustoIngestFactory
 }
 ```
 
-## <a name="class-kustoingestionproperties"></a>Klasse KustoIngestionProperties
+## <a name="class-kustoingestionproperties"></a>Klassen-kustoingestionproperties
 
-Die KustoIngestionProperties-Klasse kapselt grundlegende Aufnahmeeigenschaften, die eine feine Kontrolle über den Aufnahmeprozess und seine Handhabung durch das Kusto-Modul ermöglichen:
+Die kustoingestionproperties-Klasse enthält grundlegende Erfassungs Eigenschaften für eine präzise Kontrolle über den Erfassungsprozess und die Art und Weise, wie die Kusto-Engine Sie behandelt.
 
 |Eigenschaft   |Bedeutung    |
 |-----------|-----------|
-|DatabaseName |Name der Datenbank, in die aufgenommen werden soll |
-|TableName |Name der Tabelle, in die aufgenommen werden soll |
-|DropByTags |Tags, die jede Ausdehnung haben wird. DropByTags sind permanent und können `.show table T extents where tags has 'some tag'` wie folgt verwendet werden: oder`.drop extents <| .show table T extents where tags has 'some tag'` |
-|IngestByTags |Tags, die pro Ausdehnung geschrieben werden. Später kann mit `IngestIfNotExists` Eigenschaft verwendet werden, um zu vermeiden, dass die gleichen Daten zweimal |
-|ZusätzlicheTags |Zusätzliche Tags nach Bedarf |
-|IngestIfNotExists |Liste der Tags, die Sie nicht erneut aufnehmen möchten (pro Tabelle) |
-|CSVMapping |Definiert für jede Spalte den Datentyp und die Ordinalspaltennummer. Nur für cSV-Aufnahme relevant (optional) |
-|JsonMapping |Definiert für jede Spalte den JSON-Pfad und die Transformationsoptionen. **Obligatorisch für JSON-Aufnahme** |
-|AvroMapping |Definiert für jede Spalte den Namen des Felds im Avro-Datensatz. **Obligatorisch für AVRO-Aufnahme** |
-|ValidationPolicy |Definitionen für die Datenvalidierung. Siehe [TODO] für Details |
-|Format |Format der aufgenommenen Daten |
-|ZusätzlicheEigenschaften | Andere Eigenschaften, die als [Aufnahmeeigenschaften](https://docs.microsoft.com/azure/data-explorer/ingestion-properties) an den Befehl "Aufnahme" übergeben werden, da nicht alle Aufnahmeeigenschaften in einem separaten Member dieser Klasse dargestellt werden|
+|DatabaseName |Der Name der Datenbank, in die erfasst werden soll. |
+|TableName |Der Name der Tabelle, in die erfasst werden soll. |
+|Dropbytags |Tags, die für jeden Block vorhanden sind. Dropbytags sind permanent und können wie folgt verwendet werden: `.show table T extents where tags has 'some tag'` oder`.drop extents <| .show table T extents where tags has 'some tag'` |
+|Ingestbytags |Pro Block geschriebene Tags. Kann später mit der-Eigenschaft verwendet werden `IngestIfNotExists` , um die doppelte Erfassung der gleichen Daten zu vermeiden. |
+|Additionaltags |Weitere Tags nach Bedarf |
+|Ingestifnotexists |Liste der Tags, die nicht erneut erfasst werden sollen (pro Tabelle) |
+|Csvmapping |Definiert für jede Spalte den Datentyp und die Spaltennummer der Ordinalzahl. Nur für die CSV-Erfassung relevant (optional) |
+|Jsonmapping |Definiert für jede Spalte den JSON-Pfad und die Transformations Optionen. **Obligatorisch für die JSON-Erfassung** |
+|Avromapping |Definiert für jede Spalte den Namen des Felds im Avro-Datensatz. **Obligatorisch für die Avro-Erfassung** |
+|Validationpolicy |Daten Validierungs Definitionen. Weitere Informationen finden Sie unter [TODO]. |
+|Format |Format der erfassten Daten |
+|AdditionalProperties | Andere Eigenschaften, die als Erfassungs [Eigenschaften](https://docs.microsoft.com/azure/data-explorer/ingestion-properties) an den Erfassungs Befehl übermittelt werden. Die Eigenschaften werden übermittelt, da nicht alle Erfassungs Eigenschaften in einem separaten Member dieser Klasse dargestellt werden.|
 
 ```csharp
 public class KustoIngestionProperties
@@ -382,7 +382,7 @@ public class KustoIngestionProperties
 }
 ```
 
-## <a name="class-jsoncolumnmapping"></a>Klasse JsonColumnMapping
+## <a name="class-jsoncolumnmapping"></a>Jsoncolumnmapping-Klasse
 
 ```csharp
 public class JsonColumnMapping
@@ -395,7 +395,7 @@ public class JsonColumnMapping
 }
 ```
 
-## <a name="class-csvcolumnmapping"></a>Klasse CsvColumnMapping
+## <a name="class-csvcolumnmapping"></a>Class csvcolumnmapping
 
 ```csharp
 public class CsvColumnMapping
@@ -418,7 +418,7 @@ public class CsvColumnMapping
 }
 ```
 
-## <a name="enum-datasourceformat"></a>Enum DataSourceFormat
+## <a name="enum-datasourceformat"></a>Enum datasourceformat
 
 ```csharp
 public enum DataSourceFormat
@@ -438,7 +438,7 @@ public enum DataSourceFormat
 ```
 
 
-## <a name="example-of-kustoingestionproperties-definition"></a>Beispiel für KustoIngestionProperties-Definition
+## <a name="example-of-kustoingestionproperties-definition"></a>Beispiel für die kustoingestionproperties-Definition
 
 ```csharp
 var guid = new Guid().ToString();
@@ -456,13 +456,13 @@ var kustoIngestionProperties = new KustoIngestionProperties("TargetDatabase", "T
 };
 ```
 
-## <a name="interface-ikustoqueuedingestclient"></a>Schnittstelle IKustoQueuedIngestClient
+## <a name="interface-ikustoqueuedingestclient"></a>Schnittstelle ikustoqueuedingestclient
 
-Die IKustoQueuedIngestClient-Schnittstelle fügt Nachverfolgungsmethoden hinzu, um dem Ergebnis des Aufnahmevorgangs zu folgen, und macht RetryPolicy für den Aufnahmeclient verfügbar.
+Die ikustoqueuedingestclient-Schnittstelle fügt Überwachungsmethoden hinzu, die dem Erfassungs Vorgangs Ergebnis folgen, und macht retrypolicy für den Erfassungs Client verfügbar.
 
-* PeekTopIngestionFehler
-* GetAndDiscardTopIngestionFailures
-* GetAndDiscardTopIngestionSuccesses
+* "Peer Failure"-Fehler
+* Getandverwerdtopingestionfailure
+* Getandverwerdtopingestionerfolge
 
 ```csharp
 public interface IKustoQueuedIngestClient : IKustoIngestClient
@@ -496,15 +496,15 @@ public interface IKustoQueuedIngestClient : IKustoIngestClient
 }
 ```
 
-## <a name="class-kustoqueuedingestionproperties"></a>Klasse KustoQueuedIngestionProperties
+## <a name="class-kustoqueuedingestionproperties"></a>Klasse kustoqueuedingestionproperties
 
-Die KustoQueuedIngestionProperties-Klasse erweitert KustoIngestionProperties um mehrere Steuerknöpfe, die zur Feinabstimmung des Aufnahmeverhaltens verwendet werden können:
+Die kustoqueuedingestionproperties-Klasse erweitert kustoingestionproperties durch mehrere Steuerelemente, die verwendet werden können, um das Erfassungs Verhalten zu optimieren.
 
 |Eigenschaft   |Bedeutung    |
 |-----------|-----------|
-|FlushImmediately |Der Standardwert lautet `false`. Wenn auf `true`gesetzt , wird der Aggregationsmechanismus des Datenverwaltungsdienstes umgangen. |
-|IngestionReportLevel |Steuert die Ebene der Erfassungsstatusberichterstattung `FailuresOnly`(Standardwerte auf ). In Bezug auf Leistung und Speichernutzung wird nicht empfohlen, IngestionReportLevel auf`FailuresAndSuccesses` |
-|IngestionReportMethode |Steuert das Ziel der Erfassungsstatusberichterstattung. Verfügbare Optionen sind: Azure Queue, Azure Table oder beides. Der Standardwert lautet `Queue`.
+|Flushimmediately |Der Standardwert lautet `false`. Bei Festlegung auf `true` wird der Aggregations Mechanismus des Datenverwaltung Dienstanbieter umgangen. |
+|Ingestionreportlevel |Steuert die Ebene der Erfassungs Status Berichterstattung (standardmäßig `FailuresOnly` ). Für eine gute Leistung und Speicherauslastung wird empfohlen, ingestionreportlevel nicht auf festzulegen.`FailuresAndSuccesses` |
+|Ingestionreportmethod |Steuert das Ziel der Erfassungs Status Berichterstattung. Folgende Optionen stehen zur Verfügung: Azure Queue, Azure Table oder beides. Der Standardwert lautet `Queue`.
 
 ```csharp
 public class KustoQueuedIngestionProperties : KustoIngestionProperties

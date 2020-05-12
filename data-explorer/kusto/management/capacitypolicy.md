@@ -1,6 +1,6 @@
 ---
-title: Kapazitätsrichtlinie - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die Kapazitätsrichtlinie in Azure Data Explorer beschrieben.
+title: 'Kapazitäts Richtlinie: Azure-Daten-Explorer'
+description: In diesem Artikel wird die Kapazitäts Richtlinie in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,86 +8,96 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: af648bd0a4b328477b14e20a2457e3e914df2827
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 15a1c21a38999b0a3929fcf0451a91ec607ca2a8
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81521997"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225920"
 ---
-# <a name="capacity-policy"></a>Kapazitätspolitik
+# <a name="capacity-policy"></a>Kapazitätsrichtlinie
 
-Eine Kapazitätsrichtlinie wird verwendet, um die Computeressourcen zu steuern, die zum Ausführen der Datenerfassung und anderer Datenoptimierungsvorgänge (z. B. Zusammenführen von Ausdehnungen) verwendet werden.
+Eine Kapazitäts Richtlinie wird verwendet, um die computeressourcen zu steuern, die für Daten Verwaltungsvorgänge im Cluster verwendet werden.
 
-## <a name="the-capacity-policy-object"></a>Das Kapazitätsrichtlinienobjekt
+## <a name="the-capacity-policy-object"></a>Das Kapazitäts Richtlinien Objekt
 
-Die Kapazitätsrichtlinie besteht `IngestionCapacity` `ExtentsMergeCapacity`aus `ExtentsPurgeRebuildCapacity` `ExportCapacity`, und .
+Die Kapazitäts Richtlinie besteht aus:
 
-### <a name="ingestion-capacity"></a>Aufnahmekapazität
+* [Ingestioncapacity](#ingestion-capacity)
+* [Extentsmergecapacity](#extents-merge-capacity)
+* [Extentspurgerebuildcapacity](#extents-purge-rebuild-capacity)
+* [Exportcapacity](#export-capacity)
+* [Extentspartitioncapacity](#extents-partition-capacity)
 
-|Eigenschaft                           |type    |BESCHREIBUNG                                                                                                                                                                               |
+## <a name="ingestion-capacity"></a>Erfassungs Kapazität
+
+|Eigenschaft                           |type    |Beschreibung                                                                                                                                                                               |
 |-----------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|ClusterMaximumConcurrentOperations |long    |Maximaler Wert für die Anzahl gleichzeitiger Aufnahmevorgänge in einem Cluster                                                                                                            |
-|CoreUtilizationKoeffizient         |double  |Ein Koeffizient für den Prozentsatz der Kerne, der bei der Berechnung der Aufnahmekapazität `ClusterMaximumConcurrentOperations`verwendet werden soll (das Ergebnis der Berechnung wird immer normalisiert durch ) |                                                                                                                             |
+|Clustermaximumconcurrentoperations |long    |Ein maximaler Wert für die Anzahl von gleichzeitigen Erfassungs Vorgängen in einem Cluster.                                                                                                            |
+|Coreutilizationkoeffizienten         |double  |Ein Koeffizienten für den Prozentsatz der Kerne, die beim Berechnen der Erfassungs Kapazität verwendet werden sollen (das Ergebnis der Berechnung wird immer von normalisiert `ClusterMaximumConcurrentOperations` ). |                                                                                                                             |
 
-Die Gesamtaufnahmekapazität des Clusters (wie durch [.show capacity](../management/diagnostics.md#show-capacity)dargestellt) wird berechnet durch:
+Die Gesamt Erfassungs Kapazität des Clusters (wie von angezeigt [. Anzeige Kapazität](../management/diagnostics.md#show-capacity)) wird anhand der folgenden Schritte berechnet:
 
-Minimum(`ClusterMaximumConcurrentOperations` `Number of nodes in cluster` , * Maximum(1, `Core count per node`  *  `CoreUtilizationCoefficient`))
+Minimal ( `ClusterMaximumConcurrentOperations` , `Number of nodes in cluster` * Maximum (1, `Core count per node`  *  `CoreUtilizationCoefficient` ))
 
-> [!Note] 
-> In Clustern mit drei Knoten oder höher nimmt der Admin-Knoten nicht `Number of nodes in cluster` an der Durchführung von Aufnahmevorgängen teil und wird daher um 1 reduziert.
+> [!Note]
+> In Clustern mit drei oder mehr Knoten ist der Administrator Knoten nicht Teil der Erfassungs Vorgänge. Der `Number of nodes in cluster` wird um 1 reduziert.
 
-### <a name="extents-merge-capacity"></a>Extents Merge-Kapazität
+## <a name="extents-merge-capacity"></a>Erweitert die Zusammenfassungs Kapazität
 
-|Eigenschaft                           |type    |BESCHREIBUNG                                                                                    |
+|Eigenschaft                           |type    |Beschreibung                                                                                    |
 |-----------------------------------|--------|-----------------------------------------------------------------------------------------------|
-|MaximumConcurrentOperationsPerNode |long    |Maximaler Wert für die Anzahl der gleichzeitigen Ausdehnungen, die Zusammenführungs-/Neuerstellungsvorgänge auf einem einzelnen Knoten ausführen |
+|Maximumconcurrentoperationspernode |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Vorgänge zum Zusammenführen und Neuerstellen von Blöcken auf einem einzelnen Knoten. |
 
-Die Gesamterweiterungsmergekapazität des Clusters (wie durch [.show capacity](../management/diagnostics.md#show-capacity)dargestellt) wird berechnet durch:
+Die Gesamt Zusammenfassungs Kapazität des Clusters (wie von angezeigt [. Show Capacity](../management/diagnostics.md#show-capacity)) wird berechnet durch:
 
-`Number of nodes in cluster`X`MaximumConcurrentOperationsPerNode`
+`Number of nodes in cluster`Stuben`MaximumConcurrentOperationsPerNode`
 
-> [!Note] 
-> In Clustern mit drei Knoten oder höher nimmt der Admin-Knoten `Number of nodes in cluster` nicht am Ausführen von Mergevorgängen teil und wird daher um 1 reduziert.
+> [!Note]
+> * `MaximumConcurrentOperationsPerNode`wird automatisch vom System im Bereich [1, 5] angepasst.
+> * In Clustern mit drei oder mehr Knoten ist der Administrator Knoten nicht an der Ausführung von Merge-Vorgängen beteiligt. Der `Number of nodes in cluster` wird um 1 reduziert.
 
-### <a name="extents-purge-rebuild-capacity"></a>Extents Purge Rebuild-Kapazität
+## <a name="extents-purge-rebuild-capacity"></a>Erweiterbare Lösch Kapazität für Lösch Blöcke
 
-|Eigenschaft                           |type    |BESCHREIBUNG                                                                                                                           |
+|Eigenschaft                           |type    |Beschreibung                                                                                                                           |
 |-----------------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------|
-|MaximumConcurrentOperationsPerNode |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Erweiterungen, die Neuerstellungsvorgänge (Neuerstellungsausdehnungen für Bereinigungsvorgänge) auf einem einzelnen Knoten bereinigen |
+|Maximumconcurrentoperationspernode |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Rebuild-Blöcke für Löschvorgänge auf einem einzelnen Knoten. |
 
-Die Gesamtausdehnungen des Clusters bereinigen die Wiederherstellungskapazität (wie durch [.show-Kapazität](../management/diagnostics.md#show-capacity)dargestellt) wird berechnet durch:
+Die Gesamtanzahl der Blöcke zum Löschen von Blöcken im Cluster Gesamt (wie von angezeigt [. Anzeige Kapazität](../management/diagnostics.md#show-capacity)) wird berechnet durch:
 
-`Number of nodes in cluster`X`MaximumConcurrentOperationsPerNode`
+`Number of nodes in cluster`Stuben`MaximumConcurrentOperationsPerNode`
 
-> [!Note] 
-> In Clustern mit drei Knoten oder höher nimmt der Admin-Knoten `Number of nodes in cluster` nicht am Ausführen von Mergevorgängen teil und wird daher um 1 reduziert.
+> [!Note]
+> In Clustern mit drei oder mehr Knoten ist der Administrator Knoten nicht an der Ausführung von Merge-Vorgängen beteiligt. Der `Number of nodes in cluster` wird um 1 reduziert.
 
-### <a name="export-capacity"></a>Exportkapazität
+## <a name="export-capacity"></a>Exportieren von Kapazität
 
-|Eigenschaft                           |type    |BESCHREIBUNG                                                                                                                                                                            |
+|Eigenschaft                           |type    |Beschreibung                                                                                                                                                                            |
 |-----------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|ClusterMaximumConcurrentOperations |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Exportvorgänge in einem Cluster.                                                                                                           |
-|CoreUtilizationKoeffizient         |double  |Ein Koeffizient für den Prozentsatz der Kerne, der bei der Berechnung der Exportkapazität verwendet werden soll (das Berechnungsergebnis wird immer normalisiert durch `ClusterMaximumConcurrentOperations`) |
+|Clustermaximumconcurrentoperations |long    |Ein maximaler Wert für die Anzahl von gleichzeitigen Export Vorgängen in einem Cluster.                                                                                                           |
+|Coreutilizationkoeffizienten         |double  |Ein Koeffizienten für den Prozentsatz der Kerne, die beim Berechnen der Exportkapazität verwendet werden sollen. Das Ergebnis der Berechnung wird immer von normalisiert `ClusterMaximumConcurrentOperations` . |
 
-Die gesamte Exportkapazität des Clusters (wie durch [.show capacity](../management/diagnostics.md#show-capacity)dargestellt) wird berechnet durch:
+Die Gesamt Exportkapazität des Clusters (wie von angezeigt [. Anzeige Kapazität](../management/diagnostics.md#show-capacity)) wird berechnet durch:
 
-Minimum(`ClusterMaximumConcurrentOperations` `Number of nodes in cluster` , * Maximum(1, `Core count per node`  *  `CoreUtilizationCoefficient`))
+Minimal ( `ClusterMaximumConcurrentOperations` , `Number of nodes in cluster` * Maximum (1, `Core count per node`  *  `CoreUtilizationCoefficient` ))
 
-> [!Note] 
-> In Clustern mit drei Knoten oder höher nimmt der Admin-Knoten `Number of nodes in cluster` nicht am Ausführen von Exportvorgängen teil und wird daher um 1 reduziert.
+> [!Note]
+> In Clustern mit drei oder mehr Knoten ist der Administrator Knoten nicht an der Ausführung von Export Vorgängen beteiligt. Der `Number of nodes in cluster` wird um 1 reduziert.
 
-### <a name="extents-partition-capacity"></a>Ausdehnungen Partitionskapazität
+## <a name="extents-partition-capacity"></a>Erweitert die Partitions Kapazität
 
-|Eigenschaft                           |type    |BESCHREIBUNG                                                                             |
+|Eigenschaft                           |type    |Beschreibung                                                                             |
 |-----------------------------------|--------|----------------------------------------------------------------------------------------|
-|ClusterMaximumConcurrentOperations |long    |Ein maximaler Wert für die Anzahl gleichzeitiger Erweiterungen Partitionsvorgänge in einem Cluster. |
+|Clustermaximumconcurrentoperations |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Erweiterungs Vorgänge in einem Cluster. |
 
-Die Gesamterweiterungspartitionskapazität des Clusters (wie durch [.show-Kapazität](../management/diagnostics.md#show-capacity) `ClusterMaximumConcurrentOperations`dargestellt ) wird durch eine einzelne Eigenschaft definiert: .
+Die gesamte Partitions Kapazität des Clusters (wie von angezeigt [. Show Capacity](../management/diagnostics.md#show-capacity)) wird durch eine einzelne Eigenschaft definiert: `ClusterMaximumConcurrentOperations` .
 
-### <a name="defaults"></a>Standardeinstellungen
+> [!Note]
+> `ClusterMaximumConcurrentOperations`wird automatisch vom System im Bereich [1, 10] angepasst.
 
-Die Standardkapazitätsrichtlinie weist die folgende JSON-Darstellung auf:
+## <a name="defaults"></a>Standardeinstellungen
+
+Die standardmäßige Kapazitäts Richtlinie weist die folgende JSON-Darstellung auf:
 
 ```kusto 
 {
@@ -108,28 +118,26 @@ Die Standardkapazitätsrichtlinie weist die folgende JSON-Darstellung auf:
 }
 ```
 
+## <a name="control-commands"></a>Steuerungsbefehle
+
 > [!WARNING]
-> Es wird **selten** empfohlen, eine Kapazitätsrichtlinie ohne rücksprache mit dem Kusto-Team zu ändern.
+> Es wird nur selten empfohlen, eine Kapazitäts Richtlinie aufgrund der möglichen Auswirkungen auf die verfügbaren Ressourcen des Clusters zu ändern.
 
-## <a name="control-commands"></a>Steuerbefehle
+* Verwenden Sie [. zeigen Sie die Kapazität der Cluster Richtlinie](capacity-policy.md#show-cluster-policy-capacity) an, um die aktuelle Kapazitäts Richtlinie des Clusters anzuzeigen.
 
-* Verwenden Sie [.show Clusterrichtlinienkapazität,](capacity-policy.md#show-cluster-policy-capacity) um die aktuelle Kapazitätsrichtlinie des Clusters anzuzeigen.
-* Verwenden Sie [.alter Clusterrichtlinienkapazität,](capacity-policy.md#alter-cluster-policy-capacity) um die Kapazitätsrichtlinie des Clusters zu ändern.
+* Ändern Sie die Kapazitäts Richtlinie des Clusters mithilfe von [. Alter Cluster Policy Capacity](capacity-policy.md#alter-cluster-policy-capacity) .
 
 ## <a name="throttling"></a>Drosselung
 
-Kusto begrenzt die Anzahl der gleichzeitigen Anforderungen für die folgenden Befehle:
+Kusto schränkt die Anzahl gleichzeitiger Anforderungen für die folgenden vom Benutzer initiierten Befehle ein:
 
-1. Einnahme (enthält alle Befehle, die [hier](../management/data-ingestion/index.md)aufgeführt sind)
-      * Limit ist wie in der [Kapazitätsrichtlinie](#capacity-policy)definiert.
-1. Merges
-      * Limit ist wie in der [Kapazitätsrichtlinie](#capacity-policy)definiert.
-1. Säuberungen
-      * Global ist derzeit auf 1 pro Cluster festgelegt.
-      * Die Löschkapazität wird intern verwendet, um die Anzahl der gleichzeitigen Neuerstellungsvorgänge während der Löschbefehle zu bestimmen (Löschbefehle werden daher nicht blockiert/gedrosselt, sondern arbeiten je nach Löschkapazität schneller/langsamer).
-1. Exports
-      * Limit ist wie in der [Kapazitätsrichtlinie](#capacity-policy)definiert.
+* Ingestionen (enthält alle [hier](../management/data-ingestion/index.md)aufgeführten Befehle)
+   * Der Grenzwert wird in der [Kapazitäts Richtlinie](#capacity-policy)definiert.
+* Löscht
+   * Global ist derzeit auf einem Cluster pro Cluster korrigiert.
+   * Die Kapazität zum Löschen von Lösch Vorgängen wird intern verwendet, um die Anzahl gleichzeitiger Neuerstellung während der Lösch Befehle zu bestimmen. Lösch Befehle werden aufgrund dieses Vorgangs nicht blockiert/gedrosselt, Sie funktionieren jedoch je nach Lösch Kapazität für Löschvorgänge schneller oder langsamer.
+* Exports
+   * Der Grenzwert wird in der [Kapazitäts Richtlinie](#capacity-policy)definiert.
 
-
-Wenn Kusto erkennt, dass ein Vorgang den zulässigen gleichzeitigen Vorgang überschritten hat, antwortet Kusto mit einem 429 HTTP-Code.
-Der Client sollte den Vorgang nach einem Backoff wiederholen.
+Wenn der Cluster erkennt, dass ein Vorgang den zulässigen gleichzeitigen Vorgang überschritten hat, antwortet er mit einem 429-HTTP-Code ("Throttled").
+Wiederholen Sie den Vorgang nach einigen Backoff.
