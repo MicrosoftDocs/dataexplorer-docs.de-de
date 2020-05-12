@@ -1,6 +1,6 @@
 ---
-title: binary_all_or() (Aggregationsfunktion) - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird binary_all_or() (Aggregationsfunktion) in Azure Data Explorer beschrieben.
+title: binary_all_or () (Aggregations Funktion)-Azure Daten-Explorer
+description: In diesem Artikel wird binary_all_or () (Aggregations Funktion) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,35 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 5de240f606e53b26996ebfe11073170758233e2c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: e00d170db7cbafb36f04dfeb14f64caf2b8abcff
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517713"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225257"
 ---
-# <a name="binary_all_or-aggregation-function"></a>binary_all_or() (Aggregationsfunktion)
+# <a name="binary_all_or-aggregation-function"></a>binary_all_or () (Aggregations Funktion)
 
-Kumuliert Werte `OR` mit dem binären Vorgang pro Zusammenfassungsgruppe (oder insgesamt, wenn die Zusammenfassung ohne Gruppierung erfolgt).
+Akkumuliert Werte mithilfe der binären `OR` Operation pro Zusammenfassungs Gruppe (oder insgesamt, wenn die Zusammenfassung ohne Gruppierung erfolgt).
 
-* Kann nur im Kontext der Aggregation innerhalb [der Zusammenfassung](summarizeoperator.md) verwendet werden
+* Kann [nur im Kontext der Aggregation innerhalb von](summarizeoperator.md) Zusammenfassung verwendet werden.
 
 **Syntax**
 
-`binary_all_or(` *Expr* zusammenfassen`)`
+`binary_all_or(` *expr* zusammenfassen`)`
 
 **Argumente**
 
-* *Expr*: lange Zahl.
+* *Expr*: Long-Nummer.
 
 **Rückgabe**
 
-Gibt einen Wert zurück, der `OR` mit dem binären Vorgang über Datensätze pro Zusammenfassungsgruppe aggregiert wird (oder insgesamt, wenn die Zusammenfassung ohne Gruppierung erfolgt).
+Gibt einen Wert zurück, der mithilfe der binären Operation für Datensätze pro Zusammenfassungs Gruppe aggregiert wird `OR` (oder insgesamt, wenn die Zusammenfassung ohne Gruppierung erfolgt).
 
 **Beispiel**
 
-Herstellung von "Café-Food" `OR` mit binären Operationen:
+Erstellen von "Café-Food" mithilfe von binären `OR` Vorgängen:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 datatable(num:long)
 [

@@ -1,6 +1,6 @@
 ---
-title: mv-apply-Operator - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt den mv-apply-Operator in Azure Data Explorer.
+title: 'MV-APPLY-Operator: Azure-Daten-Explorer'
+description: Dieser Artikel beschreibt den MV-APPLY-Operator in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,95 +8,96 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f24bf7721707aa1ba3ae9f0aad49b247f08c2498
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: bb0ab7fd0f3508388a29d4931cea770c8619e083
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81512307"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226430"
 ---
 # <a name="mv-apply-operator"></a>mv-apply-Operator
 
-Der Operator mv-apply erweitert jeden Datensatz in seiner Eingabetabelle in eine Untertabelle, wendet eine Unterabfrage auf jede Untertabelle an und gibt die Vereinigung der Ergebnisse aller Unterabfragen zurück.
+Der- `mv-apply` Operator erweitert jeden Datensatz in der Eingabe Tabelle in eine untergeordnete Tabelle, wendet eine Unterabfrage auf jede unter Tabelle an und gibt die Gesamtmenge der Ergebnisse aller Unterabfragen zurück.
 
-Angenommen, eine Tabelle `T` hat `Metric` eine `dynamic` Spalte des Typs, deren Werte Arrays von `real` Zahlen sind. Die folgende Abfrage sucht die beiden `Metric` größten Werte in jedem Wert und gibt die Datensätze zurück, die diesen Werten entsprechen.
+Nehmen Sie beispielsweise an, eine Tabelle `T` enthält eine Spalte `Metric` vom Typ, `dynamic` deren Werte `real` Zahlen Arrays sind. Mit der folgenden Abfrage werden die beiden größten Werte in jedem `Metric` Wert gesucht und die Datensätze zurückgegeben, die diesen Werten entsprechen.
 
 ```kusto
 T | mv-apply Metric to typeof(real) on (top 2 by Metric desc)
 ```
 
-Im Allgemeinen kann der mv-apply-Operator als mit den folgenden Verarbeitungsschritten betrachtet werden:
+Der `mv-apply` Operator verfügt über die folgenden Verarbeitungsschritte:
 
-1. Es verwendet den [operator mv-expand,](./mvexpandoperator.md) um jeden Datensatz in der Eingabe in Untertabellen zu erweitern.
-2. Sie wendet die Unterabfrage für jede der Untertabellen an.
-3. Es stellt jeder resultierenden Untertabelle null oder mehr Spalten vor, die die (bei Bedarf wiederholten) Werte der Quellspalten enthalten, die nicht erweitert werden.
-4. Es gibt die Vereinigung der Ergebnisse zurück.
+1. Verwendet den- [`mv-expand`](./mvexpandoperator.md) Operator, um jeden Datensatz in der Eingabe in untergeordnete Tabellen zu erweitern.
+1. Wendet die Unterabfrage für jede der untergeordneten Tabellen an.
+1. Fügt der resultierenden unter Tabelle 0 (null) oder mehr Spalten hinzu. Diese Spalten enthalten die Werte der Quell Spalten, die nicht erweitert werden und bei Bedarf wiederholt werden.
+1. Gibt die Gesamtmenge der Ergebnisse zurück.
 
-Der mv-expand-Operator erhält die folgenden Eingänge:
+Der `mv-expand` Operator erhält die folgenden Eingaben:
 
-1. Ein oder mehrere Ausdrücke, die in dynamische Arrays ausgewertet werden, um sie zu erweitern.
-   Die Anzahl der Datensätze in jeder erweiterten Untertabelle ist die maximale Länge jedes dieser dynamischen Arrays. (Wenn mehrere Ausdrücke angegeben werden, die entsprechenden Arrays jedoch unterschiedliche Längen aufweisen, werden bei Bedarf NULL-Werte eingeführt.)
+1. Mindestens ein Ausdruck, der in dynamische Arrays ausgewertet wird, die erweitert werden sollen.
+   Die Anzahl der Datensätze in jeder erweiterten unter Tabelle ist die maximale Länge der einzelnen dynamischen Arrays. NULL-Werte werden hinzugefügt, wenn mehrere Ausdrücke angegeben werden und die entsprechenden Arrays unterschiedlich lang sind.
 
-2. Optional sind die Namen, die die Werte der Ausdrücke nach der Erweiterung zuweisen sollen.
-   Diese werden zu den Namen der Spalten in den Untertabellen.
-   Wenn nicht angegeben, wird der ursprüngliche Name der Spalte verwendet (wenn der Ausdruck ein Spaltenverweis ist), oder ein zufälliger Name wird verwendet (andernfalls).
+1. Optional die Namen, die nach der Erweiterung den Werten der Ausdrücke zugewiesen werden sollen.
+   Diese Namen werden zu den Spaltennamen in den untergeordneten Tabellen.
+   Wenn nicht angegeben, wird der ursprüngliche Name der Spalte verwendet, wenn der Ausdruck ein Spalten Verweis ist. Andernfalls wird ein zufälliger Name verwendet. 
 
    > [!NOTE]
-   > Es wird empfohlen, die Standardspaltennamen zu verwenden.
+   > Es wird empfohlen, die Standard Spaltennamen zu verwenden.
 
-3. Die Datentypen der Elemente dieser dynamischen Arrays nach der Erweiterung.
-   Diese werden zu den Spaltentypen der Spalten in den Untertabellen.
+1. Die Datentypen der Elemente dieser dynamischen Arrays nach der Erweiterung.
+   Diese werden zu den Spaltentypen der Spalten in den untergeordneten Tabellen.
    Wenn dieser nicht angegeben wurde, wird `dynamic` verwendet.
 
-4. Optional ist der Name einer Spalte, die den Untertabellen hinzugefügt werden soll, die den 0-basierten Index des Elements im Array angibt, das zum Untertabellendatensatz geführt hat.
+1. Optional der Name einer Spalte, die den untergeordneten Tabellen hinzugefügt werden soll, die den 0-basierten Index des Elements im Array angibt, das zum Teil Tabellendaten Satz führte.
 
-5. Optional wird die maximale Anzahl der zu erweiternden Arrayelemente angezeigt.
+1. Optional die maximale Anzahl von Array Elementen, die erweitert werden sollen.
 
-Der mv-apply-Operator kann als Verallgemeinerung des [mv-expand-Operators](./mvexpandoperator.md) betrachtet werden (der letztere kann von ersteren implementiert werden, wenn die Unterabfrage nur Projektionen enthält).)
+Der `mv-apply` Operator kann sich als Generalisierung des [`mv-expand`](./mvexpandoperator.md) Operators vorstellen (der zweite kann tatsächlich von der ersten implementiert werden, wenn die Unterabfrage nur Projektionen einschließt).
 
 **Syntax**
 
-*T* `|` T `mv-apply` [*ItemIndex*] *ColumnsToExpand* [*RowLimit*] `on` `(` *SubQuery*`)`
+*T* `|` `mv-apply` [*itemIndex*] *columnstoexpand* [*ROWLIMIT*] `on` `(` *Unterabfrage*`)`
 
-Wobei *ItemIndex* die Syntax hat:
+Dabei hat *itemIndex* die Syntax:
 
-`with_itemindex``=` *IndexColumnName*
+`with_itemindex``=` *Indexcolumnname*
 
-*ColumnsToExpand* ist eine durch Kommas getrennte Liste eines oder mehrerer Elemente des Formulars:
+*Columnstoexpand* ist eine durch Trennzeichen getrennte Liste mit einem oder mehreren Elementen in der Form:
 
-[*Name* `=`] *ArrayExpression* `to` `typeof` `(`[ *Typname*`)`]
+[*Name* `=` ] *Arrayexpression* [ `to` `typeof` `(` *Typname* `)` ]
 
-*RowLimit* ist einfach:
+*ROWLIMIT* ist einfach:
 
-`limit`*RowLimit*
+`limit`*ROWLIMIT*
 
-und *SubQuery* hat die gleiche Syntax wie jede Abfrageanweisung.
+und die *Unterabfrage* haben dieselbe Syntax wie jede beliebige Abfrage Anweisung.
 
 **Argumente**
 
-* *ItemIndex*: Wenn verwendet, gibt den `long` Namen einer Spalte des Typs an, die als Teil der Array-Erweiterungsphase an die Eingabe angehängt wird, und gibt den 0-basierten Arrayindex des erweiterten Werts an.
+* *ItemIndex*: gibt bei Verwendung den Namen einer Spalte vom Typ an, die `long` als Teil der Array Erweiterungsphase an die Eingabe angehängt wird, und gibt den 0-basierten Array Index des erweiterten Werts an.
 
-* *Name*: Wenn verwendet, der Name, um die Array-erweiterten Werte jedes Array-erweiterten Ausdrucks zuzuweisen.
-  (Wenn nicht angegeben, wird der Name der Spalte verwendet, wenn verfügbar, oder ein zufälliger Name wird generiert, wenn *ArrayExpression* kein einfacher Spaltenname ist.)
+* *Name*: bei Verwendung wird der Name zum Zuweisen der durch das Array erweiterten Werte jedes Arrays erweiterter Ausdrucks verwendet.
+  Wenn nicht angegeben, wird der Name der Spalte verwendet, falls verfügbar.
+  Ein zufälliger Name wird generiert, wenn *arrayexpression* kein einfacher Spaltenname ist.
 
-* *ArrayExpression*: Ein `dynamic` Ausdruck des Typs, dessen Werte von Arrays erweitert werden.
-  Wenn der Ausdruck der Name einer Spalte in der Eingabe ist, wird die Eingabespalte aus der Eingabe entfernt, und eine neue Spalte mit demselben Namen (oder *ColumnName,* falls angegeben), wird in der Ausgabe angezeigt.
+* *Arrayexpression*: ein Ausdruck vom Typ, `dynamic` dessen Werte durch ein Array erweitert werden.
+  Wenn der Ausdruck der Name einer Spalte in der Eingabe ist, wird die Eingabe Spalte aus der Eingabe entfernt, und in der Ausgabe wird eine neue Spalte mit demselben Namen (oder *ColumnName* ) angezeigt.
 
-* *Typname*: Wenn verwendet, der Name des Typs, den die einzelnen Elemente des `dynamic` *ArrayExpression-ArrayExpression* verwenden. Elemente, die diesem Typ nicht entsprechen, werden durch einen NULL-Wert ersetzt.
-  (Wenn nicht `dynamic` angegeben, wird standardmäßig verwendet.)
+* *Typname*: bei Verwendung wird der Name des Typs, der von den einzelnen Elementen des `dynamic` *arrayexpression* -Arrays übernommen wird. Elemente, die diesem Typ nicht entsprechen, werden durch einen NULL-Wert ersetzt.
+  (Falls nicht angegeben, `dynamic` wird standardmäßig verwendet.)
 
-* *RowLimit*: Wenn verwendet, eine Begrenzung für die Anzahl der Datensätze, die aus jedem Datensatz der Eingabe generiert werden sollen.
-  (Wenn nicht angegeben, wird 2147483647 verwendet.)
+* *ROWLIMIT*: bei Verwendung ein Grenzwert für die Anzahl der Datensätze, die von jedem Datensatz der Eingabe generiert werden sollen.
+  (Wenn kein Wert angegeben wird, wird 2147483647 verwendet.)
 
-* *SubQuery*: Ein tabellarischer Abfrageausdruck mit einer impliziten Tabellenquelle, der auf jede Array-erweiterte Untertabelle angewendet wird.
+* *Unterabfrage*: ein tabellarischer Abfrage Ausdruck mit einer impliziten tabellarischen Quelle, die auf jede Array-erweiterte unter Tabelle angewendet wird.
 
 **Hinweise**
 
-* Im Gegensatz zum [mv-expand-Operator](./mvexpandoperator.md) unterstützt der mv-apply-Operator nur die Arrayerweiterung. Es gibt keine Unterstützung für den Ausbau von Immobilientaschen.
+* Im Gegensatz zum- [`mv-expand`](./mvexpandoperator.md) Operator `mv-apply` unterstützt der-Operator nur die Array Erweiterung. Es gibt keine Unterstützung für das Erweitern von Eigenschaften Beuteln.
 
 **Beispiele**
 
-## <a name="getting-the-largest-element-from-the-array"></a>Abrufen des größten Elements aus dem Array
+## <a name="getting-the-largest-element-from-the-array"></a>Das größte Element wird aus dem Array erhalten.
 
 ```kusto
 let _data =
@@ -109,12 +110,12 @@ _data
 )
 ```
 
-|xMod2|l           |element|
+|`xMod2`|l           |element|
 |-----|------------|-------|
 |1    |[1, 3, 5, 7]|7      |
 |0    |[2, 4, 6, 8]|8      |
 
-## <a name="calculating-sum-of-largest-two-elments-in-an-array"></a>Berechnung der Summe der größten zwei Elments in einem Array
+## <a name="calculating-the-sum-of-the-largest-two-elements-in-an-array"></a>Berechnen der Summe der größten zwei Elemente in einem Array
 
 ```kusto
 let _data =
@@ -128,13 +129,13 @@ _data
 )
 ```
 
-|xMod2|l        |SumOfTop2|
+|`xMod2`|l        |SumOfTop2|
 |-----|---------|---------|
-|1    |[1,3,5,7]|12       |
-|0    |[2,4,6,8]|14       |
+|1    |[1, 3, 5, 7]|12       |
+|0    |[2, 4, 6, 8]|14       |
 
 
-## <a name="using-with_itemindex-for-working-with-subset-of-the-array"></a>Verwenden `with_itemindex` für die Arbeit mit Teilmenge des Arrays
+## <a name="using-with_itemindex-for-working-with-a-subset-of-the-array"></a>Verwenden `with_itemindex` von zum Arbeiten mit einer Teilmenge des Arrays
 
 ```kusto
 let _data =
@@ -156,7 +157,7 @@ _data
 |3|8|
 |4|10|
 
-## <a name="using-mv-apply-operator-to-sort-the-output-of-makelist-aggregate-by-some-key"></a>Verwenden `mv-apply` des Operators zum `makelist` Sortieren der Ausgabe von Aggregat nach Schlüsseln
+## <a name="using-the-mv-apply-operator-to-sort-the-output-of-makelist-aggregate-by-some-key"></a>Verwenden des `mv-apply` Operators zum Sortieren der Ausgabe des `makelist` Aggregats nach einem Schlüssel
 
 ```kusto
 datatable(command:string, command_time:datetime, user_id:string)
@@ -176,15 +177,15 @@ datatable(command:string, command_time:datetime, user_id:string)
     order by todatetime(command_details['command_time']) asc
     | summarize make_list(tostring(command_details['command']))
 )
-| project-away commands_details 
+| project-away commands_details
 ```
 
-|user_id|list_command_details_command|
+|`user_id`|`list_command_details_command`|
 |---|---|
-|user1|[<br>  "ls",<br>  "mkdir",<br>  "chmod",<br>  "dir",<br>  "pwd",<br>  "rm"<br>]|
-|user2|[<br>  "rm",<br>  "pwd"<br>]|
+|user1|[<br>  "ls",<br>  "mkdir",<br>  "chmod",<br>  "dir",<br>  "pwd",<br>  RMS<br>]|
+|user2|[<br>  "RM",<br>  PWD<br>]|
 
 
 **Siehe auch**
 
-* [mv-expand](./mvexpandoperator.md) Operator.
+* [MV-Expand-](./mvexpandoperator.md) Operator.

@@ -1,51 +1,52 @@
 ---
-title: geo_point_in_circle() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird geo_point_in_circle() in Azure Data Explorer beschrieben.
+title: geo_point_in_circle ()-Azure Daten-Explorer
+description: In diesem Artikel wird geo_point_in_circle () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/03/2020
-ms.openlocfilehash: ca3ca8a1ac2299c43888ac827d46c25d02e4999d
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: 6e6ef40fcdeb4942dc0924c86862ee8f6222ac12
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663796"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83227162"
 ---
 # <a name="geo_point_in_circle"></a>geo_point_in_circle()
 
-Berechnet, ob sich die räumlichen Koordinaten innerhalb eines Kreises auf der Erde befinden.
+Berechnet, ob die georäumlichen Koordinaten sich innerhalb eines Kreises auf der Erde befinden.
 
 **Syntax**
 
-`geo_point_in_circle(`*p_longitude*`, `*p_latitude*`, `*pc_longitude pc_latitude*`, `*pc_latitude*`, `*c_radius*`)`
+`geo_point_in_circle(`*p_longitude* `, ` *p_latitude* `, ` *pc_longitude* `, ` *pc_latitude* `, ` *c_radius*`)`
 
 **Argumente**
 
-* *p_longitude*: Georäumlicher Koordinatenlängenwert in Grad. Gültiger Wert ist eine reelle Zahl und im Bereich [-180, +180].
-* *p_latitude*: Georäumliche Koordinatenbreitenwert in Grad. Gültiger Wert ist eine reelle Zahl und im Bereich [-90, +90].
-* *pc_longitude*: Kreiszentrum Georäumliche Koordinaten LängengradWert in Grad. Gültiger Wert ist eine reelle Zahl und im Bereich [-180, +180].
-* *pc_latitude*: Kreiszentrum Georäumliche Koordinaten breiten Wert in Grad. Gültiger Wert ist eine reelle Zahl und im Bereich [-90, +90].
-* *c_radius*: Kreisradius in Metern. Der gültige Wert muss positiv sein.
+* *p_longitude*: geografischer Koordinaten Längengrad Wert in Grad. Der gültige Wert ist eine reelle Zahl und liegt im Bereich [-180, + 180].
+* *p_latitude*: geografischer Koordinaten Breitenwert in Grad. Der gültige Wert ist eine reelle Zahl und liegt im Bereich [-90, + 90].
+* *pc_longitude*: der Längengrad Wert für die georäumliche Koordinate der Kreis Mitte in Grad. Der gültige Wert ist eine reelle Zahl und liegt im Bereich [-180, + 180].
+* *pc_latitude*: der Breitengrad Wert für die Kreis Center-geografischer Koordinate in Grad. Der gültige Wert ist eine reelle Zahl und liegt im Bereich [-90, + 90].
+* *c_radius*: Kreis Radius in Meter. Der gültige Wert muss positiv sein.
 
 **Rückgabe**
 
-Gibt an, ob sich die räumlichen Koordinaten innerhalb eines Kreises befinden. Wenn die Koordinaten oder der Kreis ungültig sind, erzeugt die Abfrage ein Nullergebnis.
+Gibt an, ob die räumlichen Koordinaten innerhalb eines Kreises liegen. Wenn die Koordinaten oder der Kreis ungültig sind, führt die Abfrage zu einem NULL-Ergebnis.
 
 > [!NOTE]
->* Die räumlichen Koordinaten werden als durch das [Koordinatenreferenzsystem WGS-84](https://earth-info.nga.mil/GandG/update/index.php?action=home) dargestellt interpretiert.
->* Das [geodätische Datum,](https://en.wikipedia.org/wiki/Geodetic_datum) das verwendet wird, um die Entfernung auf der Erde zu messen, ist eine Kugel.
->* Circle ist eine kugelförmige Kappe auf der Erde. Der Radius der Kappe wird entlang der Oberfläche der Kugel gemessen.
+>* Die georäumlichen Koordinaten werden entsprechend der Darstellung durch das [WGS-84-](https://earth-info.nga.mil/GandG/update/index.php?action=home) Koordinaten Referenzsystem interpretiert.
+>* Das [geodätische Datum](https://en.wikipedia.org/wiki/Geodetic_datum) , das zum Messen der Entfernung auf der Erde verwendet wird, ist eine Kugel.
+>* Ein Kreis ist eine kugelförmige Obergrenze in der Erde. Der Radius der Obergrenze wird entlang der Oberfläche der Kugel gemessen.
 
 **Beispiele**
 
-Die folgende Abfrage findet alle Orte in dem durch einen Kreis definierten Bereich mit einem Radius von 18 km, dessen Mittelpunkt [-122.317404, 47.609119] Koordinaten ist.
+Die folgende Abfrage sucht alle Orte in dem Bereich, der durch den folgenden Kreis definiert wird: Radius von 18 km, zentriert um [-122,317404, 47,609119] Koordinaten.
 
-:::image type="content" source="images/queries/geo/circle_seattle.png" alt-text="Orten nah von Seattle":::
+:::image type="content" source="images/geo-point-in-circle-function/circle-seattle.png" alt-text="Orte in naher Seattle":::
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 datatable(longitude:real, latitude:real, place:string)
 [
@@ -65,10 +66,11 @@ datatable(longitude:real, latitude:real, place:string)
 |Kirkland|
 |Redmond|
 
-Sturmereignisse in Orlando. Die Ereignisse werden nach Orlando-Koordinaten innerhalb von 100 km gefiltert und nach Ereignistyp und Hash aggregiert.
+Storm-Ereignisse in Orlando. Die Ereignisse werden nach 100 km-Koordinaten innerhalb von Orlando-Koordinaten gefiltert und nach Ereignistyp und Hash aggregiert.
 
-:::image type="content" source="images/queries/geo/orlando_storm_events.png" alt-text="Sturminsturm in Orlando":::
+:::image type="content" source="images/geo-point-in-circle-function/orlando-storm-events.png" alt-text="Storm-Ereignisse in Orlando":::
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | project BeginLon, BeginLat, EventType
@@ -78,10 +80,11 @@ StormEvents
 | render piechart with (kind=map) // map rendering available in Kusto Explorer desktop
 ```
 
-Das folgende Beispiel zeigt NY Taxi Pickups in der Nähe von einem Ort und innerhalb von 10 Metern. Relevante Pickups werden durch Hash aggregiert.
+Im folgenden Beispiel werden NY Taxi-Pickups innerhalb von 10 Metern eines bestimmten Standorts angezeigt. Relevante Pickups werden nach Hash aggregiert.
 
-:::image type="content" source="images/queries/geo/circle_junction.png" alt-text="NY Taxi in der Nähe Pickups":::
+:::image type="content" source="images/geo-point-in-circle-function/circle-junction.png" alt-text="Pickups in der Nähe von NY Taxi":::
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 nyc_taxi
 | project pickup_longitude, pickup_latitude
@@ -92,6 +95,8 @@ nyc_taxi
 ```
 
 Im folgenden Beispiel wird true zurückgegeben.
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print in_circle = geo_point_in_circle(-122.143564, 47.535677, -122.100896, 47.527351, 3500)
 ```
@@ -101,6 +106,8 @@ print in_circle = geo_point_in_circle(-122.143564, 47.535677, -122.100896, 47.52
 |1|
 
 Im folgenden Beispiel wird false zurückgegeben.
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print in_circle = geo_point_in_circle(-122.137575, 47.630683, -122.100896, 47.527351, 3500)
 ```
@@ -109,7 +116,9 @@ print in_circle = geo_point_in_circle(-122.137575, 47.630683, -122.100896, 47.52
 |---|
 |0|
 
-Im folgenden Beispiel wird ein Nullergebnis aufgrund der ungültigen Koordinateneingabe zurückgegeben.
+Im folgenden Beispiel wird aufgrund der ungültigen Koordinaten Eingabe ein NULL-Ergebnis zurückgegeben.
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print in_circle = geo_point_in_circle(200, 1, 1, 1, 1)
 ```
@@ -118,7 +127,8 @@ print in_circle = geo_point_in_circle(200, 1, 1, 1, 1)
 |---|
 ||
 
-Im folgenden Beispiel wird ein Nullergebnis aufgrund der ungültigen Kreisradiuseingabe zurückgegeben.
+Im folgenden Beispiel wird ein NULL-Ergebnis zurückgegeben, weil die Kreis-Radius-Eingabe ungültig ist.
+
 ```kusto
 print in_circle = geo_point_in_circle(1, 1, 1, 1, -1)
 ```

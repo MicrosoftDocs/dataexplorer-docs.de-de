@@ -1,6 +1,6 @@
 ---
-title: dcount_intersect-Plugin - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird dcount_intersect-Plugin in Azure Data Explorer beschrieben.
+title: 'dcount_intersect-Plug-in: Azure Daten-Explorer'
+description: In diesem Artikel wird dcount_intersect-Plug-in in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,41 +8,42 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 7771456ffa75085c79933c2e789e3d98f352b76f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: c431f17184570b294b9c8077028ac792719b4abd
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516132"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83225206"
 ---
-# <a name="dcount_intersect-plugin"></a>dcount_intersect Plugin
+# <a name="dcount_intersect-plugin"></a>Plug-in dcount_intersect
 
-Berechnet den Schnittpunkt zwischen N-Sets basierend auf hll-Werten (N im Bereich von [2..16]) und gibt N-Dcount-Werte zurück.
+Berechnet die Schnittmenge zwischen N Sätzen auf der Grundlage von `hll` Werten (n im Bereich von [2.. 16]) und gibt N- `dcount` Werte zurück.
 
-Gegebene Sätze S<sub>1</sub>, S<sub>2</sub>, .. S<sub>n</sub> - Rückgabewerte stellen unterschiedliche Zählungen dar:  
-S<sub>1</sub>, S<sub>1</sub> s<sub>2</sub>,  
-S<sub>1</sub> s<sub>2</sub> s<sub>3</sub>,  
+Die angegebenen Sätze s<sub>1</sub>, s<sub>2</sub>,.. S<sub>n</sub> -gibt Werte zurück, die eine unterschiedliche Anzahl von darstellen:  
+S<sub>1</sub>, s<sub>1</sub> ∩ s<sub>2</sub>,  
+S<sub>1</sub> ∩ s<sub>2</sub> ∩ s<sub>3</sub>,  
 ... ,  
-S<sub>1</sub> - S<sub>2</sub> - ... S<sub>n</sub>
+S<sub>1</sub> ∩ s<sub>2</sub> ∩... ∩ S<sub>n</sub>
 
     T | evaluate dcount_intersect(hll_1, hll_2, hll_3)
 
 **Syntax**
 
-*T* `| evaluate` T `dcount_intersect(` *hll_1*,`,` *hll_2*, [ *hll_3* `,` ...]`)`
+*T* `| evaluate` `dcount_intersect(` *hll_1*, *hll_2*, [ `,` *hll_3* `,` ...]`)`
 
 **Argumente**
 
-* *T*: Der tabellarische Eingabeausdruck.
-* *hll_i*: die Werte des Satzes S<sub>i,</sub> berechnet mit [hll()-Funktion.](./hll-aggfunction.md)
+* *T*: der tabellarische Eingabe Ausdruck.
+* *hll_i*: die Werte von<sub>Set S,</sub> die mit [`hll()`](./hll-aggfunction.md) Function berechnet wurden.
 
 **Rückgabe**
 
-Gibt eine Tabelle mit N-Dcount-Werten zurück (pro Spaltenspalten, die Schnittpunkte darstellen).
-Spaltennamen sind s0, s1, ... (bis n-1).
+Gibt eine Tabelle mit N `dcount` Werten zurück (pro Spalte, die festgelegte Schnittmengen darstellen).
+Spaltennamen sind S0, S1,... (bis n-1).
 
 **Beispiele**
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 // Generate numbers from 1 to 100
 range x from 1 to 100 step 1

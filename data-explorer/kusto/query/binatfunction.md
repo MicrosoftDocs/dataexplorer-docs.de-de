@@ -1,6 +1,6 @@
 ---
-title: bin_at() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden bin_at() in Azure Data Explorer beschrieben.
+title: bin_at ()-Azure Daten-Explorer
+description: In diesem Artikel wird bin_at () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,44 +8,45 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 218142e1c377e6a72abde154d4576025698b2f0d
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 90055f644dbf653eb65546202832f7cab834a0ac
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517441"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83227592"
 ---
 # <a name="bin_at"></a>bin_at()
 
-Rundet Werte auf einen "Bin" fester Größe mit der Kontrolle über den Startpunkt des Lagerplatzes.
-(Siehe [`bin function`](./binfunction.md)auch .)
+Rundet Werte auf einen "bin" mit fester Größe, wobei die Steuerung über dem Ausgangspunkt der bin gesteuert wird.
+(Siehe auch [`bin function`](./binfunction.md) .)
 
 **Syntax**
 
-`bin_at``(` *Expression* Ausdruck`,` *BinSize* `, ` *FixedPoint*`)`
+`bin_at``(` *Ausdruck* `,` *binsize* `, ` *FixedPoint*`)`
 
 **Argumente**
 
-* *Ausdruck*: Ein skalarer Ausdruck eines `datetime` `timespan`numerischen Typs (einschließlich und ), der den zu rundenden Wert angibt.
-* *BinSize*: Eine Skalarkonstante desselben Typs wie *Ausdruck,* die die Größe jedes Abschnitts angibt. 
-* *FixedPoint*: Eine Skalarkonstante desselben Typs wie *Ausdruck,* die einen Ausdruckswert angibt, *der* ein "fester Punkt" ist (d. h. ein Wert, `fixed_point` für den `bin_at(fixed_point, bin_size, fixed_point) == fixed_point`.)
+* *Ausdruck*: ein skalarer Ausdruck eines numerischen Typs (einschließlich `datetime` und `timespan` ), der den zu runden Wert angibt.
+* *Binsize*: eine skalare Konstante desselben Typs wie der *Ausdruck* , der die Größe der einzelnen bin angibt. 
+* *FixedPoint*: eine skalare Konstante desselben Typs wie der *Ausdruck* , der einen Wert des *Ausdrucks* angibt, der ein "fester Punkt" ist (d. h. ein Wert, `fixed_point` für den `bin_at(fixed_point, bin_size, fixed_point) == fixed_point` .)
 
 **Rückgabe**
 
-Das nächste Vielfache von *BinSize* unter *Ausdruck*verschoben, sodass *FixedPoint* in sich selbst übersetzt wird.
+Das nächste Vielfache von " *binsize* " unterhalb des *Ausdrucks*, der so verschoben wird, dass *FixedPoint* in sich selbst übersetzt wird.
 
 **Beispiele**
 
-|Ausdruck                                                                    |Ergebnis                           |Kommentare                   |
+|expression                                                                    |Ergebnis                           |Kommentare                   |
 |------------------------------------------------------------------------------|---------------------------------|---------------------------|
 |`bin_at(6.5, 2.5, 7)`                                                         |`4.5`                            ||
 |`bin_at(time(1h), 1d, 12h)`                                                   |`-12h`                           ||
-|`bin_at(datetime(2017-05-15 10:20:00.0), 1d, datetime(1970-01-01 12:00:00.0))`|`datetime(2017-05-14 12:00:00.0)`|Alle Mülleimer werden mittags sein   |
-|`bin_at(datetime(2017-05-17 10:20:00.0), 7d, datetime(2017-06-04 00:00:00.0))`|`datetime(2017-05-14 00:00:00.0)`|Alle Mülleimer werden sonntags sein|
+|`bin_at(datetime(2017-05-15 10:20:00.0), 1d, datetime(1970-01-01 12:00:00.0))`|`datetime(2017-05-14 12:00:00.0)`|Alle Behälter werden um 12 Uhr mittags   |
+|`bin_at(datetime(2017-05-17 10:20:00.0), 7d, datetime(2017-06-04 00:00:00.0))`|`datetime(2017-05-14 00:00:00.0)`|Alle Behälter werden sonntags angezeigt.|
 
 
-Beachten Sie im folgenden `"fixed point"` Beispiel, dass der arg zurückgegeben wird, da einer der Abschnitte `bin_size`zurückgegeben wird und die anderen Abschnitte basierend auf dem an ihm ausgerichtet sind. Beachten Sie außerdem, dass jeder Datumszeitabschnitt die Startzeit dieses Lagerplatzes darstellt:
+Beachten Sie im folgenden Beispiel, dass der `"fixed point"` arg als einer der-Container zurückgegeben wird und die anderen Behälter basierend auf dem-Wert ausgerichtet werden `bin_size` . Beachten Sie außerdem, dass jeder DateTime-bin die Startzeit dieses bin darstellt:
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 
 datatable(Date:datetime, Num:int)[

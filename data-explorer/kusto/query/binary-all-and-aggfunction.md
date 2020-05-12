@@ -1,6 +1,6 @@
 ---
-title: binary_all_and() (Aggregationsfunktion) - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird binary_all_and() (Aggregationsfunktion) in Azure Data Explorer beschrieben.
+title: binary_all_and () (Aggregations Funktion)-Azure Daten-Explorer
+description: In diesem Artikel wird binary_all_and () (Aggregations Funktion) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,35 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 4dfe4a2881f100a4bea3e9d418022c75b2621087
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 9f0e1665010885a64e6d97151b074d3a03df829b
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517747"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83227569"
 ---
-# <a name="binary_all_and-aggregation-function"></a>binary_all_and() (Aggregationsfunktion)
+# <a name="binary_all_and-aggregation-function"></a>binary_all_and () (Aggregations Funktion)
 
-Kumuliert Werte `AND` mit dem binären Vorgang pro Zusammenfassungsgruppe (oder insgesamt, wenn die Zusammenfassung ohne Gruppierung erfolgt).
+Akkumuliert Werte mithilfe der binären `AND` Operation pro Zusammenfassungs Gruppe (oder insgesamt, wenn die Zusammenfassung ohne Gruppierung erfolgt).
 
-* Kann nur im Kontext der Aggregation innerhalb [der Zusammenfassung](summarizeoperator.md) verwendet werden
+* Kann [nur im Kontext der Aggregation innerhalb von](summarizeoperator.md) Zusammenfassung verwendet werden.
 
 **Syntax**
 
-`binary_all_and(` *Expr* zusammenfassen`)`
+`binary_all_and(` *expr* zusammenfassen`)`
 
 **Argumente**
 
-* *Expr*: lange Zahl.
+* *Expr*: Long-Nummer.
 
 **Rückgabe**
 
-Gibt einen Wert zurück, der `AND` mit dem binären Vorgang über Datensätze pro Zusammenfassungsgruppe aggregiert wird (oder insgesamt, wenn die Zusammenfassung ohne Gruppierung erfolgt).
+Gibt einen Wert zurück, der mithilfe der binären Operation für Datensätze pro Zusammenfassungs Gruppe aggregiert wird `AND` (oder insgesamt, wenn die Zusammenfassung ohne Gruppierung erfolgt).
 
 **Beispiel**
 
-Herstellung von "Café-Food" `AND` mit binären Operationen:
+Erstellen von "Café-Food" mithilfe von binären `AND` Vorgängen:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 datatable(num:long)
 [

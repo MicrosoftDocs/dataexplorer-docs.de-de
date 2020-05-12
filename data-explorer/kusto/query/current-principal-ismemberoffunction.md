@@ -1,5 +1,5 @@
 ---
-title: current_principal_is_member_of ()-Azure Daten-Explorer | Microsoft-Dokumentation
+title: current_principal_is_member_of ()-Azure Daten-Explorer
 description: In diesem Artikel wird current_principal_is_member_of () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 03/09/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 4b6f7d0b9ab4074f16ca00b4a3febb1a17351736
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 521165f5b0af31207d587f3d9514e7538d284258
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737758"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83227339"
 ---
 # <a name="current_principal_is_member_of"></a>current_principal_is_member_of()
 
@@ -38,7 +38,7 @@ print current_principal_is_member_of(
 **Argumente**
 
 * eine *Liste von Ausdrücken* : eine durch Trennzeichen getrennte Liste von Zeichenfolgenliteralen, wobei jedes Literale eine voll qualifizierte fqn-Zeichenfolge (Uniform-Qualified-Name) ist, die als:  
-*Principlatype*`=`*principalid*`;`*tenantid*
+*Principlatype* `=` *Principalid* `;` *Tenantid*
 
 | Principaltype   | Voll qualifizierte Präfix  |
 |-----------------|-------------|
@@ -50,11 +50,11 @@ print current_principal_is_member_of(
 
 Die Funktion gibt Folgendes zurück:
 * `true`:, wenn der aktuelle Prinzipal, der die Abfrage ausgeführt hat, mit mindestens einem Eingabe Argument erfolgreich abgeglichen wurde.
-* `false`: Wenn der aktuelle Prinzipal, der die Abfrage ausgeführt, kein `aadgroup=` Member eines fqn-Arguments war und nicht mit einem `aaduser=` der `aadapp=` -oder fqn-Argumente übereinstimmt.
-* `(null)`: Wenn der aktuelle Prinzipal, der die Abfrage ausgeführt, kein `aadgroup=` Member eines fqn-Arguments war und nicht mit einem `aaduser=` der `aadapp=` fqn-Argumente oder übereinstimmt und mindestens ein fqn-Argument nicht erfolgreich aufgelöst wurde (wurde nicht in Aad vorgegeben). 
+* `false`: Wenn der aktuelle Prinzipal, der die Abfrage ausgeführt, kein Member eines `aadgroup=` fqn-Arguments war und nicht mit einem der- `aaduser=` oder `aadapp=` fqn-Argumente übereinstimmt.
+* `(null)`: Wenn der aktuelle Prinzipal, der die Abfrage ausgeführt, kein Member eines `aadgroup=` fqn-Arguments war und nicht mit einem der fqn `aaduser=` `aadapp=` -Argumente oder übereinstimmt und mindestens ein fqn-Argument nicht erfolgreich aufgelöst wurde (wurde nicht in Aad vorgegeben). 
 
 > [!NOTE]
-> Da die Funktion einen Tri-State-Wert zurück`true`gibt `false`(, `null`und), ist es wichtig, sich nur auf positive Rückgabewerte zu verlassen, um eine erfolgreiche Mitgliedschaft zu bestätigen. Mit anderen Worten: die folgenden Ausdrücke sind nicht identisch:
+> Da die Funktion einen Tri-State-Wert zurückgibt ( `true` , `false` und `null` ), ist es wichtig, sich nur auf positive Rückgabewerte zu verlassen, um eine erfolgreiche Mitgliedschaft zu bestätigen. Mit anderen Worten: die folgenden Ausdrücke sind nicht identisch:
 > 
 > * `where current_principal_is_member_of('non-existing-group')`
 > * `where current_principal_is_member_of('non-existing-group') != false` 
@@ -62,6 +62,7 @@ Die Funktion gibt Folgendes zurück:
 
 **Beispiel**
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print result=current_principal_is_member_of(
     'aaduser=user1@fabrikam.com', 
@@ -74,8 +75,9 @@ print result=current_principal_is_member_of(
 |--------|
 | (null) |
 
-Verwenden dynamischer Arrays anstelle von mehrdimensionsargumenten:
+Verwenden von dynamischem Array anstelle mehrerer Argumente:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print result=current_principal_is_member_of(
     dynamic([

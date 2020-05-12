@@ -1,6 +1,6 @@
 ---
-title: sliding_window_counts-Plugin - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird sliding_window_counts-Plugin in Azure Data Explorer beschrieben.
+title: 'sliding_window_counts-Plug-in: Azure Daten-Explorer'
+description: In diesem Artikel wird sliding_window_counts-Plug-in in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: feab3d0e8f548817be12f202eb2d494bd65aa133
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 2fbc870eafc45c8c63bea98a64f492d161af4c9b
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81507496"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226345"
 ---
-# <a name="sliding_window_counts-plugin"></a>sliding_window_counts Plugin
+# <a name="sliding_window_counts-plugin"></a>Plug-in sliding_window_counts
 
-Berechnet die Anzahl und die unterschiedliche Anzahl von Werten in einem Schiebefenster über eine Lookback-Periode mithilfe der [hier](samples.md#performing-aggregations-over-a-sliding-window)beschriebenen Technik .
+Berechnet die Anzahl und die unterschiedliche Anzahl von Werten in einem gleitenden Fenster mithilfe des [hier](samples.md#performing-aggregations-over-a-sliding-window)beschriebenen Verfahrens in einem gleitenden Fenster.
 
-Berechnen Sie z. B. für jeden *Tag*die Anzahl und die unterschiedliche Anzahl der Benutzer in der *Vorwoche*. 
+Berechnen Sie beispielsweise für jeden *Tag*die Anzahl und die unterschiedliche Anzahl von Benutzern in der vorherigen *Woche*. 
 
 ```kusto
 T | evaluate sliding_window_counts(id, datetime_column, startofday(ago(30d)), startofday(now()), 7d, 1d, dim1, dim2, dim3)
@@ -27,33 +27,33 @@ T | evaluate sliding_window_counts(id, datetime_column, startofday(ago(30d)), st
 
 **Syntax**
 
-*T* `| evaluate` `,` *Start* `,` *End* `,` `,` *Bin* `,` `,` `,` *IdColumn* `,` *TimelineColumn* *LookbackWindow* *dim1* *dim2* IdColumn TimelineColumn Start End LookbackWindow Bin [ dim1 dim2 ...] `sliding_window_counts(``)`
+*T* `| evaluate` `sliding_window_counts(` *idColumn* `,` *timelinecolenn* `,` *Start* `,` *Ende* `,` *lookbackwindow* `,` *bin* `,` [*dim1* `,` *dim2* `,` ...]`)`
 
 **Argumente**
 
-* *T*: Der tabellarische Eingabeausdruck.
-* *IdColumn*: Der Name der Spalte mit ID-Werten, die die Benutzeraktivität darstellen. 
-* *TimelineColumn*: Der Name der Spalte, die die Zeitachse darstellt.
-* *Start*: Skalar mit Wert des Analysestartzeitraums.
-* *Ende*: Skalar mit Wert der Analyseendperiode.
-* *LookbackWindow*: Skalar konstanter Wert der Lookback-Periode (z.B. für dcount-Benutzer in der Vergangenheit 7d: LookbackWindow = 7d)
-* *Bin*: Skalar-Konstantenwert des Analyseschrittzeitraums. Kann entweder ein numerischer/datumszeitlicher/zeitstempel-Wert sein, oder eine Zeichenfolge, die `week` / `month` / `year`eine von ist, in diesem Fall werden alle Perioden Anfang des[Monatsbeginns](startofyearfunction.md) des[Monats](startofmonthfunction.md)/entsprechend [beginnen.](startofweekfunction.md)/ 
-* *dim1*, *dim2*, ...: (optional) Liste der Dimensionsspalten, die die Berechnung der Aktivitätsmetriken aufteilen.
+* *T*: der tabellarische Eingabe Ausdruck.
+* *IdColumn*: der Name der Spalte mit ID-Werten, die die Benutzeraktivität darstellen. 
+* *Timelinecolren*: der Name der Spalte, die die Zeitachse darstellt.
+* *Start*: Skalar mit dem Wert des Start Zeitraums der Analyse.
+* *End*: Skalar mit dem Wert des endzeitraums der Analyse.
+* *Lookbackwindow*: skalare konstanter Wert des Nachschlage Zeitraums (z `dcount` . b. für Benutzer in der Vergangenheit 7D: lookbackwindow = 7D)
+* *Bin*: skalare Konstante Wert des Analyseschritt Zeitraums. Bei diesem Wert kann es sich um einen numerischen Wert/einen DateTime-/Timestampwert handeln. Wenn der Wert eine Zeichenfolge mit dem Format ist `week` / `month` / `year` , werden alle Zeiträume [StartOf Week](startofweekfunction.md)StartOf / [Month](startofmonthfunction.md) / [StartOf Year](startofyearfunction.md). 
+* *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, in denen die Berechnung der Aktivitäts Metrik in Slice ist.
 
 **Rückgabe**
 
-Gibt eine Tabelle zurück, die die Zähl- und eindeutigen Zählwerte von IDs in der Nachwartezeit, für jede Zeitachsenperiode (nach Lagerplatz) und für jede vorhandene Dimensionskombination enthält.
+Gibt eine Tabelle zurück, die die Anzahl-und unterschiedlichen Zählerwerte der IDs im Nachschlage Zeitraum, für jeden Zeitachse (von bin) und für jede vorhandene Dimensions Kombination enthält.
 
-Ausgabetabellenschema ist:
+Das Ausgabe Tabellen Schema ist:
 
-|*TimelineColumn*|dim1|..|dim_n|Anzahl|Dcount|
+|*Timelinecolumschlag*|`dim1`|..|`dim_n`|`count`|`dcount`|
 |---|---|---|---|---|---|
-|Typ: ab *TimelineColumn*|..|..|..|long|long|
+|Typ: ab *timelinecolumschlag*|..|..|..|long|long|
 
 
 **Beispiele**
 
-Berechnen Sie die Anzahl und Anzahl der Anzahln für Benutzer in der vergangenen Woche für jeden Tag im Analysezeitraum. 
+Berechnen von Anzahlen und `dcounts` für Benutzer in der letzten Woche für jeden Tag im Analysezeitraum. 
 
 ```kusto
 let start = datetime(2017 - 08 - 01);
@@ -83,7 +83,7 @@ T | evaluate sliding_window_counts(UserId, Timestamp, start, end, lookbackWindow
 
 ```
 
-|Timestamp|Anzahl|Dcount|
+|Timestamp|Anzahl|`dcount`|
 |---|---|---|
 |2017-08-01 00:00:00.0000000|5|3|
 |2017-08-02 00:00:00.0000000|8|5|

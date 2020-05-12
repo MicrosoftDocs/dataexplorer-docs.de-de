@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/15/2020
-ms.openlocfilehash: f5c47e2ebd2acc0b2ec250d183d65b6536aff756
-ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
+ms.openlocfilehash: cbe1b0639a0379fe84bc9c100a629bbadd9c3a63
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82741830"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226566"
 ---
 # <a name="hll-aggregation-function"></a>HLL () (Aggregations Funktion)
 
-Berechnet die Zwischenergebnisse von [`dcount`](dcount-aggfunction.md) innerhalb der Gruppe, nur im Kontext der Aggregation innerhalb von zusammen [Fassung.](summarizeoperator.md)
+Berechnet die Zwischenergebnisse von [`dcount`](dcount-aggfunction.md) innerhalb der Gruppe, nur im Kontext der Aggregation innerhalb [summarize](summarizeoperator.md)von Zusammenfassung.
 
 Erfahren Sie mehr über den [zugrunde liegenden Algorithmus (*H*yper*L*og*l*OG) und die Schätzung der Schätzung](dcount-aggfunction.md#estimation-accuracy).
 
@@ -40,16 +40,17 @@ Erfahren Sie mehr über den [zugrunde liegenden Algorithmus (*H*yper*L*og*l*OG) 
     
 **Rückgabe**
 
-Die Zwischenergebnisse der unterschiedlichen Anzahl *`Expr`* von in der Gruppe.
+Die Zwischenergebnisse der unterschiedlichen Anzahl von *`Expr`* in der Gruppe.
  
 **Tipps**
 
-1. Mithilfe der Aggregations Funktion [`hll_merge`](hll-merge-aggfunction.md) können Sie mehrere `hll` Zwischenergebnisse zusammenführen (dies funktioniert nur bei `hll` der Ausgabe).
+1. Mithilfe der Aggregations Funktion können Sie [`hll_merge`](hll-merge-aggfunction.md) mehrere `hll` Zwischenergebnisse zusammenführen (dies funktioniert nur bei der `hll` Ausgabe).
 
-1. Sie können die-Funktion [`dcount_hll`](dcount-hllfunction.md)verwenden, die `dcount` den aus `hll`  /  `hll_merge` Aggregations Funktionen berechnet.
+1. Sie können die-Funktion verwenden [`dcount_hll`](dcount-hllfunction.md) , die den `dcount` aus `hll`  /  `hll_merge` Aggregations Funktionen berechnet.
 
 **Beispiele**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | summarize hll(DamageProperty) by bin(StartTime,10m)

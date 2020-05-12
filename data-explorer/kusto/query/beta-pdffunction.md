@@ -1,6 +1,6 @@
 ---
-title: beta_pdf() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird beta_pdf() in Azure Data Explorer beschrieben.
+title: beta_pdf ()-Azure Daten-Explorer
+description: In diesem Artikel wird beta_pdf () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 53b86d88b05cc6c5cc31f1e3bbb9e3e712eed7f8
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 8ebd4cb0ab8a5bffec717f83892a3ea11b35f409
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517866"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83227637"
 ---
 # <a name="beta_pdf"></a>beta_pdf()
 
-Gibt die Betafunktion der Wahrscheinlichkeitsdichte zurück.
+Gibt die Beta Funktion der Wahrscheinlichkeitsdichte zurück.
 
 ```kusto
 beta_pdf(0.2, 10.0, 50.0)
@@ -27,28 +27,29 @@ Die Beta-Verteilung wird häufig verwendet, um die prozentuale Abweichung eines 
 
 **Syntax**
 
-`beta_pdf(`*x*`, `*alpha*`, `*beta*`)`
+`beta_pdf(`*x* `, ` *Alpha* `, ` *Beta Version*`)`
 
 **Argumente**
 
-* *x*: Ein Wert, bei dem die Funktion ausgewertet werden soll.
-* *alpha*: Ein Parameter der Verteilung.
-* *beta*: Ein Parameter der Verteilung.
+* *x*: ein Wert, bei dem die Funktion ausgewertet werden soll.
+* *Alpha*: ein Parameter der Verteilung.
+* *Beta*: ein Parameter der Verteilung.
 
 **Rückgabe**
 
-* Die [Wahrscheinlichkeit beta Dichtefunktion](https://en.wikipedia.org/wiki/Beta_distribution#Probability_density_function).
+* Die [Wahrscheinlichkeits-Beta-Funktion](https://en.wikipedia.org/wiki/Beta_distribution#Probability_density_function).
 
 **Hinweise**
 
-Wenn ein Argument nicht numerisch ist, gibt beta_pdf() den NULL-Wert zurück.
+Wenn ein Argument nicht numerisch ist, gibt beta_pdf () einen NULL-Wert zurück.
 
-Wenn x 0 oder 1 x, gibt beta_pdf() den NaN-Wert zurück.
+Wenn x, 0 oder 1. x, beta_pdf () den NaN-Wert zurückgibt.
 
-Wenn alpha 0 oder beta 0, beta_pdf() den NaN-Wert zurückgibt.
+Wenn Alpha-0 oder Beta-0, beta_pdf () den NaN-Wert zurückgibt.
 
 **Beispiele**
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 datatable(x:double, alpha:double, beta:double, comment:string)
 [
@@ -63,11 +64,11 @@ datatable(x:double, alpha:double, beta:double, comment:string)
 |x|alpha|Beta|comment|r|
 |---|---|---|---|---|
 |0.5|10|20|Gültige Eingabe|0.746176019310951|
-|1.5|10|20|x > 1, ergibt NaN|NaN|
-|-10|10|20|x < 0, ergibt NaN|NaN|
-|0,1|-1|20|alpha ist < 0, ergibt NaN|NaN|
+|1.5|10|20|x > 1, ergibt Nan|NaN|
+|-10|10|20|x < 0, ergibt Nan|NaN|
+|0,1|-1|20|Alpha ist < 0, ergibt Nan|NaN|
 
-**References**
+**Referenzen**
 
-* Informationen zum Berechnen der Umkehrung der kumulativen Beta-Wahrscheinlichkeitsdichtefunktion finden Sie unter [beta-inv()](./beta-invfunction.md).
-* Die standardmäßige kumulative Betaverteilungsfunktion finden Sie unter [beta-cdf()](./beta-cdffunction.md).
+* Informationen zum Berechnen der Umkehrung der kumulativen Beta Wahrscheinlichkeitsdichte-Funktion finden Sie unter [Beta-Inv ()](./beta-invfunction.md).
+* Die standardmäßige kumulative Beta-Verteilungsfunktion finden Sie unter [Beta-CDF ()](./beta-cdffunction.md).
