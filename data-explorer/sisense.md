@@ -6,13 +6,14 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: conceptual
+ms.custom: has-adal-ref
 ms.date: 5/29/2019
-ms.openlocfilehash: 33a3e51e8bd892a5d4318445ff8e5f9ee26c4b40
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 4afbf9ddf53715b045dba46d03f233f1401ff770
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81494134"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82862155"
 ---
 # <a name="visualize-data-from-azure-data-explorer-in-sisense"></a>Visualisieren von Daten über Azure Data Explorer in Sisense
 
@@ -22,7 +23,7 @@ Sisense ist eine Business Intelligence-Plattform für Analysen, mit der Sie Anal
 
 Sie benötigen Folgendes, um diesen Artikel durchzuarbeiten:
 
-* [Laden Sie die Sisense-App herunter, und installieren Sie sie](https://documentation.sisense.com/latest/getting-started/download-install.htm). 
+* [Laden Sie die Sisense-App herunter, und installieren Sie sie](https://documentation.sisense.com/latest/getting-started/download-install.htm).
 
 * Erstellen Sie einen Cluster und die Datenbank, die die StormEvents-Beispieldaten enthält. Weitere Informationen finden Sie unter [Quickstart: Erstellen eines Azure Data Explorer-Clusters und einer Datenbank](create-cluster-database-portal.md) und [Erfassen von Beispieldaten in Azure Data Explorer](ingest-sample-data.md).
 
@@ -30,7 +31,7 @@ Sie benötigen Folgendes, um diesen Artikel durchzuarbeiten:
 
 ## <a name="connect-to-sisense-dashboards-using-azure-data-explorer-jdbc-connector"></a>Herstellen einer Verbindung mit Sisense-Dashboards per Azure Data Explorer-JDBC-Connector
 
-1. Laden Sie die aktuellen Versionen der folgenden JAR-Dateien herunter, und kopieren Sie sie in das Verzeichnis *..\Sisense\DataConnectors\jdbcdrivers\adx*. 
+1. Laden Sie die aktuellen Versionen der folgenden JAR-Dateien herunter, und kopieren Sie sie in das Verzeichnis *..\Sisense\DataConnectors\jdbcdrivers\adx*.
 
     * activation-1.1.jar
     * adal4j-1.6.0.jar
@@ -46,14 +47,14 @@ Sie benötigen Folgendes, um diesen Artikel durchzuarbeiten:
     * nimbus-jose-jwt-7.0.1.jar
     * oauth2-oidc-sdk-5.24.1.jar
     * slf4j-api-1.7.21.jar
-    
+
 1. Öffnen Sie die **Sisense**-App.
 1. Wählen Sie die Registerkarte **Data** (Daten) und dann die Option **+ElastiCube**, um ein neues ElastiCube-Modell zu erstellen.
-    
+
     ![Wählen von „ElastiCube“](media/sisense/data-select-elasticube.png)
 
 1. Geben Sie unter **Add new ElastiCube Model** (Neues ElastiCube-Modell hinzufügen) dem ElastiCube-Modell einen Namen, und wählen Sie **Save** (Speichern).
-   
+
     ![Hinzufügen eines neuen ElastiCube-Modells](media/sisense/add-new-elasticube-model.png)
 
 1. Wählen Sie **+ Data** (+ Daten).
@@ -82,12 +83,12 @@ Sie benötigen Folgendes, um diesen Artikel durchzuarbeiten:
 
 1. Im Bereich *test* (Datenbankname):
     1. Wählen Sie den Tabellennamen aus, um eine Vorschau der Tabelle und die Spaltennamen der Tabelle anzuzeigen. Sie können nicht benötigte Spalten entfernen.
-    1. Aktivieren Sie das Kontrollkästchen der relevanten Tabelle, um sie auszuwählen. 
+    1. Aktivieren Sie das Kontrollkästchen der relevanten Tabelle, um sie auszuwählen.
     1. Wählen Sie **Fertig**aus.
 
-    ![Auswählen der Tabelle](media/sisense/select-table-see-columns.png)    
+    ![Auswählen der Tabelle](media/sisense/select-table-see-columns.png)
 
-1. Wählen Sie **Build** (Erstellen), um Ihr Dataset zu erstellen. 
+1. Wählen Sie **Build** (Erstellen), um Ihr Dataset zu erstellen.
 
     * Wählen Sie im Fenster **Build** (Erstellen) die Option **Build** (Erstellen).
 
@@ -103,15 +104,15 @@ Sie benötigen Folgendes, um diesen Artikel durchzuarbeiten:
 
     ![Neues Dashboard](media/sisense/new-dashboard.png)
 
-1. Wählen Sie ein Dashboard aus, und wählen Sie die Option **Create** (Erstellen). 
+1. Wählen Sie ein Dashboard aus, und wählen Sie die Option **Create** (Erstellen).
 
     ![Erstellen von Dashboards](media/sisense/create-dashboard.png)
 
-1. Wählen Sie unter **New Widget** (Neues Widget) die Option **+ Select Data** (+ Daten auswählen), um ein neues Widget zu erstellen. 
+1. Wählen Sie unter **New Widget** (Neues Widget) die Option **+ Select Data** (+ Daten auswählen), um ein neues Widget zu erstellen.
 
-    ![Hinzufügen von Feldern zum StormEvents-Dashboard](media/sisense/storm-dashboard-add-field.png)  
+    ![Hinzufügen von Feldern zum StormEvents-Dashboard](media/sisense/storm-dashboard-add-field.png)
 
-1. Wählen Sie **+ Add More Data** (+ Weitere Daten hinzufügen), um Ihrem Graphen weitere Spalten hinzuzufügen. 
+1. Wählen Sie **+ Add More Data** (+ Weitere Daten hinzufügen), um Ihrem Graphen weitere Spalten hinzuzufügen.
 
     ![Hinzufügen von weiteren Daten zum Graphen](media/sisense/add-more-data.png)
 
@@ -124,4 +125,3 @@ Sie können Ihre Daten jetzt mit Funktionen für die visuelle Analyse untersuche
 ## <a name="next-steps"></a>Nächste Schritte
 
 * [Schreiben von Abfragen für den Azure-Daten-Explorer](write-queries.md)
-
