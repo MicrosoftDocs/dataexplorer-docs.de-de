@@ -1,6 +1,6 @@
 ---
-title: hash() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt hash() in Azure Data Explorer.
+title: Hash ()-Azure Daten-Explorer
+description: In diesem Artikel wird Hash () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,34 +8,34 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f8142c42dcb0874dfbd84515e56dc8765bcba3d7
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a44f817ea57a114400f45e9ca2a841150b4590a6
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81514143"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226804"
 ---
 # <a name="hash"></a>hash()
 
-Gibt einen Hashwert für den Eingabewert zurück.
+Gibt einen Hashwert für den Eingabe Wert zurück.
 
 **Syntax**
 
-`hash(`*Quelle* `,` [ *mod*]`)`
+`hash(`*Quelle* [ `,` *mod*]`)`
 
 **Argumente**
 
-* *quelle*: Der zu hashende Wert.
-* *mod*: Ein optionaler Modulwert, der auf das Hashergebnis `0` angewendet werden soll, so dass der Ausgabewert zwischen und *mod* - 1 liegt
+* *Quelle*: der Wert, für den der Hashwert verwendet werden soll.
+* *mod*: ein optionaler Modulwert, der auf das Hash Ergebnis angewendet werden soll, sodass der Ausgabewert zwischen `0` und *mod* -1 liegt.
 
 **Rückgabe**
 
-Der Hash-Wert des angegebenen Skalars, modulo den angegebenen Mod-Wert (falls angegeben).
+Der Hashwert des angegebenen Skalars, Modulo der angegebene mod-Wert (falls angegeben).
 
 > [!WARNING]
 > Der Algorithmus, der zum Berechnen des Hashs verwendet wird, ist xxhash.
-> Dieser Algorithmus könnte sich in zukunftig ändern, und die einzige Garantie ist, dass innerhalb einer einzigen Abfrage alle Aufrufe dieser Methode den gleichen Algorithmus verwenden.
-> Daher wird Benutzern empfohlen, die `hash()` Ergebnisse einer Tabelle nicht zu speichern. Wenn weiterhin Hashwerte erforderlich sind, sollten Sie stattdessen [hash_sha256()](./sha256hashfunction.md) verwenden (beachten `hash()`Sie jedoch, dass die Berechnung wesentlich komplexer ist als ).
+> Dieser Algorithmus kann sich in Zukunft ändern, und die einzige Garantie besteht darin, dass alle Aufrufe dieser Methode innerhalb einer einzelnen Abfrage denselben Algorithmus verwenden.
+> Folglich wird empfohlen, die Ergebnisse von nicht `hash()` in einer Tabelle zu speichern. Wenn persistente Hashwerte erforderlich sind, sollten Sie stattdessen [hash_sha256 ()](./sha256hashfunction.md) verwenden (Beachten Sie aber, dass es weitaus komplexer ist, zu berechnen, als `hash()` ).
 
 **Beispiele**
 
@@ -45,8 +45,9 @@ hash("World", 100)              // 51 (1846988464401551951 % 100)
 hash(datetime("2015-01-01"))    // 1380966698541616202
 ```
 
-Im folgenden Beispiel verwendet die Hash-Funktion, um eine Abfrage für 10 % der Daten auszuführen, Es ist hilfreich, die Hash-Funktion zum Sampling der Daten zu verwenden, wenn angenommen wird, dass der Wert gleichmäßig verteilt ist (in diesem Beispiel StartTime-Wert)
+Im folgenden Beispiel wird die Hash Funktion verwendet, um eine Abfrage für 10% der Daten auszuführen. es ist hilfreich, die Hash Funktion für die Stichprobenentnahme der Daten zu verwenden, wenn davon ausgegangen wird, dass der Wert gleichmäßig verteilt wird (in diesem Beispiel StartTime-Wert).
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents 
 | where hash(StartTime, 10) == 0

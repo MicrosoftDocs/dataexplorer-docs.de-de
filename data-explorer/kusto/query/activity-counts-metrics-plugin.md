@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b06b1c137552ba19f9b1ef5367a25bb72eea5c93
-ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
+ms.openlocfilehash: 167ba8818709f52ccc344452e275405c42b1796e
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82742044"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83227671"
 ---
 # <a name="activity_counts_metrics-plugin"></a>activity_counts_metrics-Plug-In
 
@@ -25,7 +25,7 @@ T | evaluate activity_counts_metrics(id, datetime_column, startofday(ago(30d)), 
 
 **Syntax**
 
-*T* `| evaluate` `,` *dim1* `,` *dim2* `,` *Start* `,` *Window* `,` *Cohort* *IdColumn* `,` `,` *End* *TimelineColumn* idColumn`,` timelinecolenn-Start Fenster [Kohorte] [dim1 dim2...] `activity_counts_metrics(` [`,` *Lookback*]`)`
+*T* `| evaluate` `activity_counts_metrics(` *idColumn* `,` *timelinecolenn* `,` *Start* `,` *End* `,` *Endfenster* [ `,` *Kohorte*] [ `,` *dim1* `,` *dim2* `,` ...] [ `,` *Lookback*]`)`
 
 **Argumente**
 
@@ -34,7 +34,7 @@ T | evaluate activity_counts_metrics(id, datetime_column, startofday(ago(30d)), 
 * *Timelinecolumzun*: der Name der Spalte, die die Zeitachse darstellt.
 * *Start*: Skalar mit dem Wert des Start Zeitraums der Analyse.
 * *End*: Skalar mit dem Wert des endzeitraums der Analyse.
-* *Fenster*: Skalar mit dem Wert des Analysefenster Zeitraums. Kann ein numerischer/DateTime-/timestamp-Wert oder eine Zeichenfolge sein, die `week` / `month` / `year`einer von ist. in diesem Fall werden alle Zeiträume [starttfweek](startofweekfunction.md)/[starttfmonth](startofmonthfunction.md) oder [starto fyear](startofyearfunction.md). 
+* *Fenster*: Skalar mit dem Wert des Analysefenster Zeitraums. Kann ein numerischer/DateTime-/timestamp-Wert oder eine Zeichenfolge sein, die einer von ist `week` / `month` / `year` . in diesem Fall werden alle Zeiträume [starttfweek](startofweekfunction.md) / [starttfmonth](startofmonthfunction.md) oder [starto fyear](startofyearfunction.md). 
 * *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, in denen die Berechnung der Aktivitäts Metrik in Slice ist.
 
 **Rückgabe**
@@ -60,6 +60,7 @@ Das Ausgabe Tabellen Schema ist:
 
 Die nächste Abfrage berechnet die Anzahl täglicher Aktivitäten für die angegebene Eingabe Tabelle.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let start=datetime(2017-08-01);
 let end=datetime(2017-08-04);

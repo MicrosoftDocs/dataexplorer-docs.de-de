@@ -1,6 +1,6 @@
 ---
-title: beta_inv() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden beta_inv() in Azure Data Explorer beschrieben.
+title: beta_inv ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird beta_inv () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,51 +8,52 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 20bdf8bfc01ef3ac6c6a12f6a43d87fd7b5c07e6
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 60b054bbd234a77f81c47e375b98be0a5df103a5
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517883"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83227654"
 ---
 # <a name="beta_inv"></a>beta_inv()
 
-Gibt die Umkehrung der Beta-Funktion für kumulative Wahrscheinlichkeit beta-Dichte zurück.
+Gibt die Umkehrung der kumulativen Beta-Wahrscheinlichkeitsfunktion der Beta-Funktion zurück.
 
 ```kusto
 beta_inv(0.1, 10.0, 50.0)
 ```
 
-Wenn *wahrscheinlich* = `beta_cdf(`*x*,... `)`, `beta_inv(`dann *Wahrscheinlichkeit*,... `)` *x*x  = . 
+Wenn *Wahrscheinlichkeit*  =  `beta_cdf(` *x*,... `)` , dann `beta_inv(` *Wahrscheinlichkeit*,... `)`  =  *x*. 
 
 Die Beta-Verteilung kann bei der Projektplanung verwendet werden, um wahrscheinliche Abschlusszeiten zu modellieren, wenn eine erwartete Abschlusszeit und Varianz vorliegen.
 
 **Syntax**
 
-`beta_inv(`*Wahrscheinlichkeit*`, `*alpha*`, `*beta*`)`
+`beta_inv(`*Wahrscheinlichkeit* `, ` *Alpha* `, ` *Beta Version*`)`
 
 **Argumente**
 
-* *Wahrscheinlichkeit*: Eine Wahrscheinlichkeit, die mit der Betaverteilung verbunden ist.
-* *alpha*: Ein Parameter der Verteilung.
-* *beta*: Ein Parameter der Verteilung.
+* *Wahrscheinlichkeit*: eine der Beta-Verteilung zugeordnete Wahrscheinlichkeit.
+* *Alpha*: ein Parameter der Verteilung.
+* *Beta*: ein Parameter der Verteilung.
 
 **Rückgabe**
 
-* Die Umkehrung der kumulativen Beta-Wahrscheinlichkeitsdichtefunktion [beta_cdf()](./beta-cdffunction.md)
+* Die Umkehrung der kumulativen Beta-Wahrscheinlichkeitsdichte-Funktion [beta_cdf ()](./beta-cdffunction.md) .
 
 **Hinweise**
 
-Wenn ein Argument nicht numerisch ist, gibt beta_inv() den NULL-Wert zurück.
+Wenn ein Argument nicht numerisch ist, gibt beta_inv () einen NULL-Wert zurück.
 
-Wenn alpha 0 oder beta 0, beta_inv() den NULL-Wert zurückgibt.
+Wenn Alpha-0 oder Beta-0, beta_inv () den NULL-Wert zurückgibt.
 
-Wenn die Wahrscheinlichkeit 0 oder die Wahrscheinlichkeit > 1, gibt beta_inv() den NaN-Wert zurück.
+Wenn die Wahrscheinlichkeit 0 (null) oder die Wahrscheinlichkeit > 1 ist, gibt beta_inv () den NaN-Wert zurück.
 
-Bei einem Wert für die Wahrscheinlichkeit sucht beta_inv() diesen Wert x, so dass beta_cdf(x, alpha, beta) = Wahrscheinlichkeit.
+Bei Angabe eines Werts für die Wahrscheinlichkeit sucht beta_inv () den Wert x, sodass beta_cdf (x, Alpha, Beta) = Wahrscheinlichkeit ist.
 
 **Beispiele**
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 datatable(p:double, alpha:double, beta:double, comment:string)
 [
@@ -66,10 +67,10 @@ datatable(p:double, alpha:double, beta:double, comment:string)
 |p|alpha|Beta|comment|b|
 |---|---|---|---|---|
 |0,1|10|20|Gültige Eingabe|0.226415022388749|
-|1.5|10|20|p > 1, ergibt null||
-|0,1|-1|20|alpha ist < 0, ergibt NaN|NaN|
+|1.5|10|20|p > 1, ergibt NULL||
+|0,1|-1|20|Alpha ist < 0, ergibt Nan|NaN|
 
 **Siehe auch**
 
-* Informationen zur Berechnung der kumulativen Betaverteilungsfunktion finden Sie unter [beta-cdf()](./beta-cdffunction.md).
-* Informationen zur Berechnung der Wahrscheinlichkeits-Betadichtefunktion finden Sie unter [beta-pdf()](./beta-pdffunction.md).
+* Informationen zum Berechnen der kumulativen Beta Verteilungsfunktion finden Sie unter [Beta-CDF ()](./beta-cdffunction.md).
+* Informationen zum Berechnen der Wahrscheinlichkeits-Beta Dichtefunktion finden Sie unter [Beta-PDF ()](./beta-pdffunction.md).

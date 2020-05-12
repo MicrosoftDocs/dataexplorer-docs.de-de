@@ -1,6 +1,6 @@
 ---
-title: Benutzerdefinierte Funktionen - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden benutzerdefinierte Funktionen in Azure Data Explorer beschrieben.
+title: 'Benutzerdefinierte Funktionen: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel werden benutzerdefinierte Funktionen in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,37 +8,77 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: e8372be303b1540e1421f226ed0fd0fe74d44545
-ms.sourcegitcommit: c4aea69fafa9d9fbb814764eebbb0ae93fa87897
+ms.openlocfilehash: e9e199631d57f3fd3be8d438e6b0cdbf9bdd4266
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81610219"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83227358"
 ---
 # <a name="user-defined-functions"></a>Benutzerdefinierte Funktionen
 
-Kusto unterstützt benutzerdefinierte Funktionen, die entweder:
-* Teil der Abfrage selbst (**Ad-hoc-Funktionen**) 
-* Persistent als Teil der Datenbankmetadaten gespeichert (**gespeicherte Funktionen**)
+**Benutzerdefinierte Funktionen** sind wiederverwendbare Unterabfragen, die als Teil der Abfrage selbst definiert werden können (**Ad-hoc-Funktionen**) oder als Teil der Daten Bank Metadaten (**gespeicherte Funktionen**) persistent gespeichert werden. Benutzerdefinierte Funktionen werden durch einen **Namen**aufgerufen, werden mit 0 (null) oder mehr **Eingabe Argumenten** bereitgestellt (bei denen es sich um skalare oder tabellarische Werte handeln kann), und Sie können basierend auf **dem Funktions Rumpf**einen einzelnen Wert (der Skalar oder tabellarisch sein) liefern.
 
-Eine benutzerdefinierte Funktion hat:
-* Ein Name:
-    * Muss den [Idbezeichnerbenennungsregeln](../schema-entities/entity-names.md#identifier-naming-rules) folgen
-    * Muss im Rahmen der Definition mit einer Typspezifikation eindeutig sein
-* Eine stark typisierte Liste von Eingabeparametern:
-    * Kann skalare oder tabellarische Ausdrücke sein
-    * Skalare Parameter können mit einem Standardwert bereitgestellt werden, der implizit verwendet wird, wenn der Aufrufer der Funktion keinen Wert für den Parameter liefert (siehe [Standardwerte](#default-values), unten)
-* Ein stark typisierter Rückgabewert, der skalar oder tabellarisch sein kann
+Eine benutzerdefinierte Funktion gehört zu einer von zwei Kategorien:
 
-Die Ein- und Ausgänge einer Funktion bestimmen, wie und wo sie verwendet werden kann:
+* Skalarfunktionen 
+* Tabellarische Funktionen 
 
-* **Eine Skalarfunktion**: 
-    * Ist eine Funktion ohne Eingänge oder nur mit skalaren Eingängen, und das erzeugt einen skalaren Ausgang
-    * Kann überall dort verwendet werden, wo ein Skalarausdruck zulässig ist
-    * Kann nur den Zeilenkontext verwenden, in dem er definiert ist
-    * Kann nur auf Tabellen (und Ansichten) verweisen, die sich im zugänglichen Schema befinden
+Die Eingabeargumente und die Ausgabe der Funktion bestimmen, ob es sich um einen skalaren oder tabellarischen Wert handelt, der dann festlegt, wie Sie verwendet werden kann. 
+
+## <a name="scalar-function"></a>Skalarfunktion
+
+* Hat keine Eingabeargumente, oder alle Eingabeargumente sind skalare Werte.
+* Erzeugt einen einzelnen Skalarwert.
+* Kann überall dort verwendet werden, wo ein skalarer Ausdruck zulässig ist.
+* Darf nur den Zeilen Kontext verwenden, in dem er definiert ist.
+* Kann nur auf Tabellen (und Sichten) verweisen, die sich im Schema befinden, auf das zugegriffen werden kann.
+
+## <a name="tabular-function"></a>Tabellarische Funktion
+
+* Akzeptiert mindestens ein tabellarisches Eingabe Argument und NULL oder mehr skalare Eingabeargumente und/oder:
+* Erzeugt einen einzelnen tabellarischen Wert
+
+## <a name="function-names"></a>Funktionsnamen
+
+Gültige Namen von benutzerdefinierten Funktionen müssen denselben [bezeichnerbenennungs Regeln](../schema-entities/entity-names.md#identifier-naming-rules) wie andere Entitäten entsprechen.
+
+Der Name muss auch innerhalb des Definitions Bereichs eindeutig sein.
+
+> [!NOTE]
+> Das Überladen von Funktionen wird nicht unterstützt. Sie können nicht mehrere Funktionen mit dem gleichen Namen definieren.
+
+## <a name="input-arguments"></a>Eingabeargumente
+
+Gültige benutzerdefinierte Funktionen befolgen die folgenden Regeln:
+
+* Eine benutzerdefinierte Funktion verfügt über eine stark typisierte Liste von NULL oder mehr Eingabe Argumenten.
+* Ein Eingabe Argument hat einen Namen, einen Typ und (für skalare Argumente) einen [Standardwert](#default-values).
+* Der Name eines Eingabe Arguments ist ein Bezeichner.
+* Der Typ eines Eingabe Arguments ist entweder einer der skalaren Datentypen oder ein tabellarisches Schema.
+
+Syntaktisch ist die Liste der Eingabeargumente eine durch Trennzeichen getrennte Liste von Argument Definitionen, die in Klammern umschließt werden. Jede Argument Definition ist als angegeben.
+
+```
+ArgName:ArgType [= ArgDefaultValue]
+```
+ Bei tabellarischen Argumenten hat *argtype* die gleiche Syntax wie die Tabellendefinition (Klammer und eine Liste von Spaltenname-/typpaaren), mit der zusätzlichen Unterstützung für `(*)` "beliebiges tabellarisches Schema".
 
 Beispiel:
+
+|Syntax                        |Beschreibung der Eingabe Argumentliste                                 |
+|------------------------------|-----------------------------------------------------------------|
+|`()`                          |Keine Argumente|
+|`(s:string)`                  |Einzelnes skalare Argument, das `s` einen Wert vom Typ "" annimmt`string`|
+|`(a:long, b:bool=true)`       |Zwei skalare Argumente, wobei der zweite Wert über einen Standardwert verfügt.    |
+|`(T1:(*), T2(r:real), b:bool)`|Drei Argumente (zwei tabellarische Argumente und ein Skalar-Argument)  |
+
+> [!NOTE]
+> Wenn Sie sowohl tabellarische Eingabeargumente als auch skalare Eingabeargumente verwenden, platzieren Sie alle tabellarischen Eingabeargumente vor den skalaren Eingabe Argumenten.
+
+## <a name="examples"></a>Beispiele
+
+Eine skalare Funktion:
 
 ```kusto
 let Add7 = (arg0:long = 5) { arg0 + 7 };
@@ -46,14 +86,7 @@ range x from 1 to 10 step 1
 | extend x_plus_7 = Add7(x), five_plus_seven = Add7()
 ```
 
-* **Eine tabellarische Funktion**: 
-    * Ist eine Funktion ohne Eingänge oder mindestens ein tabellarischer Eingang und erzeugt einen tabellarischen Ausgang
-    * Kann überall dort verwendet werden, wo ein tabellarischer Ausdruck zulässig ist 
-
-> [!NOTE]
-> Alle Tabellarischen Parameter müssen vor skalaren Parametern angezeigt werden.
-
-Beispiel für eine tabellarische Funktion, die keine Argumente verwendet:
+Eine Tabellen Funktion, die keine Argumente annimmt:
 
 ```kusto
 let tenNumbers = () { range x from 1 to 10 step 1};
@@ -61,11 +94,11 @@ tenNumbers
 | extend x_plus_7 = x + 7
 ```
 
-Beispiel für eine tabellarische Funktion, die einen tabellarischen Eingang und einen Skalareingang verwendet:
+Eine tabellarische Funktion, die sowohl eine tabellarische Eingabe als auch eine skalare Eingabe annimmt:
 
 ```kusto
 let MyFilter = (T:(x:long), v:long) {
-  T | where x >= v 
+  T | where x >= v
 };
 MyFilter((range x from 1 to 10 step 1), 9)
 ```
@@ -75,11 +108,12 @@ MyFilter((range x from 1 to 10 step 1), 9)
 |9|
 |10|
 
-Beispiel für eine Tabellarische Funktion, die eine tabellarische Eingabe ohne Angabe von Spalten verwendet. Jede Tabelle kann an eine Funktion übergeben werden, und innerhalb der Funktion kann auf keine Tabellenspalte verwiesen werden.
+Eine tabellarische Funktion, die eine tabellarische Eingabe ohne angegebene Spalte verwendet.
+Jede Tabelle kann an eine Funktion übermittelt werden, und in der Funktion kann auf keine Tabellen Spalten verwiesen werden.
 
 ```kusto
 let MyDistinct = (T:(*)) {
-  T | distinct * 
+  T | distinct *
 };
 MyDistinct((range x from 1 to 3 step 1))
 ```
@@ -90,20 +124,20 @@ MyDistinct((range x from 1 to 3 step 1))
 |2|
 |3|
 
-## <a name="declaring-user-defined-functions"></a>Deklarieren benutzerdefinierter Funktionen
+## <a name="declaring-user-defined-functions"></a>Deklarieren von benutzerdefinierten Funktionen
 
-Die Deklaration einer benutzerdefinierten Funktion sieht Folgendes vor:
+Die Deklaration einer benutzerdefinierten Funktion stellt Folgendes bereit:
 
-* **Funktionsname**
-* **Funktionsschema** (Parameter, die es akzeptiert, falls vorhanden)
-* **Funktionskörper**
+* Funktions **Name**
+* Funktions **Schema** (Parameter, die es akzeptiert, sofern vorhanden)
+* Funktions **Rumpf**
 
 > [!Note]
-> Überladenvon Funktionen wird nicht unterstützt. Beispielsweise können Sie nicht mehrere Funktionen mit demselben Namen und unterschiedlichen Eingabeschemas erstellen.
+> Überladende Funktionen werden nicht unterstützt. Sie können nicht mehrere Funktionen mit dem gleichen Namen und unterschiedlichen Eingabe Schemas erstellen.
 
 > [!TIP]
-> Lambda-Funktionen haben keinen Namen und sind mit einer [let-Anweisung](../letstatement.md)an einen Namen gebunden. Daher können sie als benutzerdefinierte gespeicherte Funktionen betrachtet werden.
-> Beispiel: Deklaration für eine Lambda-Funktion, die zwei Argumente akzeptiert (eine `string` aufgerufene `s` und eine `long` aufgerufene `i`). Es gibt das Produkt des ersten (nach der Umwandlung in eine Zahl) und das zweite zurück. Der Lambda ist an `f`den Namen gebunden:
+> Lambda-Funktionen haben keinen Namen und werden mithilfe einer [Let-Anweisung](../letstatement.md)an einen Namen gebunden. Daher können Sie als benutzerdefinierte gespeicherte Funktionen angesehen werden.
+> Beispiel: Deklaration für eine Lambda-Funktion, die zwei Argumente akzeptiert (eine `string` aufgerufene `s` und eine `long` aufgerufene `i` ). Sie gibt das Produkt des ersten zurück (nachdem es in eine Zahl umgewandelt wurde) und das zweite. Der Lambda-Ausdruck ist an den Namen gebunden `f` :
 
 ```kusto
 let f=(s:string, i:long) {
@@ -111,20 +145,20 @@ let f=(s:string, i:long) {
 };
 ```
 
-Der **Funktionstext** umfasst:
+Der Funktions **Rumpf** umfasst Folgendes:
 
-* Genau ein Ausdruck, der den Rückgabewert der Funktion bereitstellt (Skalar- oder Tabellarisches Wert).
-* Jede Beliebige Zahl (null oder mehr) von [let-Anweisungen](../letstatement.md), deren Bereich der des Funktionstexts ist. Wenn angegeben, müssen die let-Anweisungen dem Ausdruck vorangehen, der den Rückgabewert der Funktion definiert.
-* Jede Beliebige Anzahl (null oder mehr) von [Abfrageparameteranweisungen](../queryparametersstatement.md), die Abfrageparameter deklarieren, die von der Funktion verwendet werden. Wenn angegeben, müssen sie dem Ausdruck vorangehen, der den Rückgabewert der Funktion definiert.
+* Genau ein Ausdruck, der den Rückgabewert der Funktion (Skalar-oder tabellarischer Wert) bereitstellt.
+* Eine beliebige Zahl (0 (null) oder mehr) von [Let-Anweisungen](../letstatement.md), deren Gültigkeitsbereich der des Funktions Texts ist. Wenn angegeben, müssen die Let-Anweisungen dem Ausdruck vorangestellt sein, der den Rückgabewert der Funktion definiert.
+* Eine beliebige Zahl (0 (null) oder mehr) der [Abfrage Parameter Anweisungen](../queryparametersstatement.md), die die von der Funktion verwendeten Abfrage Parameter deklarieren. Wenn angegeben, müssen Sie dem Ausdruck vorangestellt sein, der den Rückgabewert der Funktion definiert.
 
 > [!NOTE]
-> Andere Arten von [Abfrageanweisungen,](../statements.md) die auf der Abfrage "top level" unterstützt werden, werden in einem Funktionstext nicht unterstützt.
+> Andere Arten von [Abfrage Anweisungen](../statements.md) , die auf der obersten Ebene der Abfrage unterstützt werden, werden innerhalb eines Funktions Texts nicht unterstützt.
 
 ### <a name="examples-of-user-defined-functions"></a>Beispiele für benutzerdefinierte Funktionen 
 
-**Benutzerdefinierte Funktion, die eine let-Anweisung verwendet**
+**Benutzerdefinierte Funktion, die eine Let-Anweisung verwendet**
 
-Im folgenden Beispiel wird `Test` der Name an eine benutzerdefinierte Funktion (Lambda) gebunden, die drei let-Anweisungen verwendet. Die Ausgabe `70`ist:
+Im folgenden Beispiel wird der Name `Test` an eine benutzerdefinierte Funktion (Lambda) gebunden, die drei Let-Anweisungen verwendet. Die Ausgabe lautet `70` :
 
 ```kusto
 let Test1 = (id: int) {
@@ -140,9 +174,9 @@ range x from 1 to Test1(10) step 1
 | count
 ```
 
-**Benutzerdefinierte Funktion, die einen Standardwert für einen Parameter definiert**
+**Eine benutzerdefinierte Funktion, die einen Standardwert für einen Parameter definiert.**
 
-Das folgende Beispiel zeigt eine Funktion, die drei Argumente akzeptiert. Die beiden letztgenannten haben einen Standardwert und müssen nicht an der Aufrufsite vorhanden sein.
+Das folgende Beispiel zeigt eine Funktion, die drei Argumente akzeptiert. Die beiden letzteren haben einen Standardwert und müssen nicht an der Website des Aufrufes vorhanden sein.
 
 ```kusto
 let f = (a:long, b:string = "b.default", c:long = 0) {
@@ -153,7 +187,7 @@ print f(12, c=7) // Returns "12-b.default-7"
 
 ## <a name="invoking-a-user-defined-function"></a>Aufrufen einer benutzerdefinierten Funktion
 
-Eine benutzerdefinierte Funktion, die keine Argumente annimmt, kann durch ihren Namen oder durch ihren Namen mit einer leeren Argumentliste in Klammern aufgerufen werden.
+Eine benutzerdefinierte Funktion, die keine Argumente annimmt, kann entweder durch ihren Namen oder durch ihren Namen und eine leere Argumentliste in Klammern aufgerufen werden.
 
 Beispiele:
 
@@ -180,7 +214,7 @@ let T=(){
 union T, (T())
 ```
 
-Eine benutzerdefinierte Funktion, die ein oder mehrere skalare Argumente verwendet, kann mithilfe des Tabellennamens und einer konkreten Argumentliste in Klammern aufgerufen werden:
+Eine benutzerdefinierte Funktion, die ein oder mehrere skalare Argumente annimmt, kann mit dem Tabellennamen und einer konkreten Argumentliste in Klammern aufgerufen werden:
 
 ```kusto
 let f=(a:string, b:string) {
@@ -189,7 +223,7 @@ let f=(a:string, b:string) {
 print f("hello", "world")
 ```
 
-Eine benutzerdefinierte Funktion, die ein oder mehrere Tabellenargumente (und eine beliebige Anzahl von skalaren Argumenten) verwendet, kann mithilfe des Tabellennamens und einer konkreten Argumentliste in Klammern aufgerufen werden:
+Eine benutzerdefinierte Funktion, die ein oder mehrere Tabellen Argumente (und beliebig viele skalare Argumente) annimmt, kann mit dem Tabellennamen und einer konkreten Argumentliste in Klammern aufgerufen werden:
 
 ```kusto
 let MyFilter = (T:(x:long), v:long) {
@@ -198,7 +232,7 @@ let MyFilter = (T:(x:long), v:long) {
 MyFilter((range x from 1 to 10 step 1), 9)
 ```
 
-Sie können den `invoke` Operator auch verwenden, um eine benutzerdefinierte Funktion aufzurufen, die ein oder mehrere Tabellenargumente verwendet und eine Tabelle zurückgibt. Dies ist nützlich, wenn das erste konkrete Tabellenargument für die Funktion die Quelle des `invoke` Operators ist:
+Sie können auch den-Operator verwenden `invoke` , um eine benutzerdefinierte Funktion aufzurufen, die ein oder mehrere Tabellen Argumente annimmt und eine Tabelle zurückgibt. Diese Funktion ist nützlich, wenn das erste konkrete Tabellen Argument der Funktion die Quelle des Operators ist `invoke` :
 
 ```kusto
 let append_to_column_a=(T:(a:string), what:string) {
@@ -210,16 +244,16 @@ datatable (a:string) ["sad", "really", "sad"]
 
 ## <a name="default-values"></a>Standardwerte
 
-Funktionen können Standardwerte für einige ihrer Parameter unter den folgenden Bedingungen bereitstellen:
+Funktionen können unter den folgenden Bedingungen Standardwerte für einige ihrer Parameter bereitstellen:
 
 * Standardwerte können nur für skalare Parameter bereitgestellt werden.
 * Standardwerte sind immer Literale (Konstanten). Sie können keine willkürlichen Berechnungen sein.
-* Parameter ohne Standardwert gehen immer vor Parametern, die einen Standardwert aufweisen.
-* Aufrufer müssen den Wert aller Parameter ohne Standardwerte bereitstellen, die in der gleichen Reihenfolge wie die Funktionsdeklaration angeordnet sind.
-* Aufrufer müssen den Wert für Parameter mit Standardwerten nicht angeben, können dies jedoch tun.
-* Aufrufer können Argumente in einer Reihenfolge bereitstellen, die nicht mit der Reihenfolge der Parameter übereinstimmt. Wenn ja, müssen sie ihre Argumente benennen.
+* Parameter ohne Standardwert stehen immer vor Parametern, die über einen Standardwert verfügen.
+* Aufrufer müssen den Wert aller Parameter ohne Standardwerte in derselben Reihenfolge wie die Funktionsdeklaration bereitstellen.
+* Aufrufer müssen nicht den Wert für Parameter mit Standardwerten bereitstellen, dies kann jedoch der Fall sein.
+* Aufrufer können Argumente in einer Reihenfolge bereitstellen, die nicht der Reihenfolge der Parameter entspricht. Wenn dies der Fall ist, müssen Sie Ihre Argumente benennen.
 
-Im folgenden Beispiel wird eine Tabelle mit zwei identischen Datensätzen zurückgegeben. Beim ersten Aufruf `f`von werden die Argumente vollständig "verschlüsselt", so dass jedes explizit einen Namen erhält:
+Im folgenden Beispiel wird eine Tabelle mit zwei identischen Datensätzen zurückgegeben. Beim ersten Aufruf von `f` werden die Argumente vollständig "verschrottet", sodass jedem explizit ein Name zugewiesen wird:
 
 ```kusto
 let f = (a:long, b:string = "b.default", c:long = 0) {
@@ -232,13 +266,13 @@ union
 
 |x|
 |---|
-|12-b.default-7|
-|12-b.default-7|
+|12-b. Standard-7|
+|12-b. Standard-7|
 
 ## <a name="view-functions"></a>Funktionen anzeigen
 
-Eine benutzerdefinierte Funktion, die keine Argumente annimmt und einen tabellenförmigen Ausdruck zurückgibt, kann als **Ansicht**markiert werden. Das Markieren einer benutzerdefinierten Funktion als Ansicht bedeutet, dass sich die Funktion bei jeder Auflösung des Platzhaltertabellennamens wie eine Tabelle verhält.
-Das folgende Beispiel zeigt zwei `T_view` benutzerdefinierte Funktionen und `T_notview`zeigt, wie nur die erste `union`durch den Platzhalterverweis in der aufgelöst wird:
+Eine benutzerdefinierte Funktion, die keine Argumente annimmt und einen tabellarischen Ausdruck zurückgibt, kann als **Sicht**gekennzeichnet werden. Das Markieren einer benutzerdefinierten Funktion als Sicht bedeutet, dass sich die Funktion wie eine Tabelle verhält, wenn die Namensauflösung für die Platzhalter Tabelle durchgeführt wird.
+Das folgende Beispiel zeigt zwei benutzerdefinierte Funktionen, `T_view` und `T_notview` , und zeigt, wie nur der erste durch den Platzhalter Verweis in aufgelöst wird `union` :
 
 ```kusto
 let T_view = view () { print x=1 };
@@ -246,16 +280,16 @@ let T_notview = () { print x=2 };
 union T*
 ```
 
-## <a name="user-defined-functions-usage-restrictions"></a>Benutzerdefinierte Funktionsnutzungseinschränkungen
+## <a name="restrictions"></a>Beschränkungen
 
 Es gelten folgende Einschränkungen:
 
-* Benutzerdefinierte Funktionen können nicht in [toscalar()-Aufrufinformationen](../toscalarfunction.md) übergeben werden, die vom Zeilenkontext abhängen, in dem die Funktion aufgerufen wird.
-* Benutzerdefinierte Funktionen, die einen tabellarischen Ausdruck zurückgeben, können nicht mit einem Argument aufgerufen werden, das mit dem Zeilenkontext variiert.
-* Eine Funktion, die mindestens eine tabellarische Eingabe verwendet, kann auf einem Remotecluster nicht aufgerufen werden.
-* Eine Skalarfunktion kann auf einem Remotecluster nicht aufgerufen werden.
+* Benutzerdefinierte Funktionen können nicht in aufzurufende [()](../toscalarfunction.md) Aufruf Informationen übergeben werden, die von dem Zeilen Kontext abhängen, in dem die Funktion aufgerufen wird.
+* Benutzerdefinierte Funktionen, die einen tabellarischen Ausdruck zurückgeben, werden mit einem Argument aufgerufen, das mit dem Zeilen Kontext variiert.
+* Eine Funktion, die mindestens eine tabellarische Eingabe annimmt, kann nicht auf einem Remote Cluster aufgerufen werden.
+* Eine skalare Funktion kann nicht auf einem Remote Cluster aufgerufen werden.
 
-Der einzige Ort, an dem eine benutzerdefinierte Funktion mit einem Argument aufgerufen werden kann, das mit dem Zeilenkontext variiert, ist, wenn die benutzerdefinierte Funktion nur aus skalaren Funktionen besteht und nicht verwendet. `toscalar()`
+Die einzige Stelle, an der eine benutzerdefinierte Funktion mit einem Argument aufgerufen werden kann, das mit dem Zeilen Kontext variiert, ist, wenn die benutzerdefinierte Funktion nur aus skalaren Funktionen besteht und nicht verwendet `toscalar()` .
 
 **Beispiel für Einschränkung 1**
 

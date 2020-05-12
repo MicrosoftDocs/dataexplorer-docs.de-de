@@ -1,6 +1,6 @@
 ---
-title: Kusto. Erfassungs Verweis-Erfassungs Berechtigungen-Azure Daten-Explorer
-description: Dieser Artikel beschreibt die Kusto-Erfassung von Verweis Erfassungs Berechtigungen in Azure Daten-Explorer.
+title: Kusto. Erfassungs Berechtigungen für die Erfassung von Azure-Daten-Explorer
+description: In diesem Artikel werden die Erfassungs Berechtigungen von Kusto. Ingestion in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,24 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: e60eb6642a66fac81ce373f8f4d62de4f7217a91
-ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
+ms.openlocfilehash: 3fd516b7201c5e857417ca13bade668f32f25161
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82799695"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226158"
 ---
-# <a name="kustoingest-reference---ingestion-permissions"></a>Kusto. Erfassungs Verweis-Erfassungs Berechtigungen
+# <a name="kustoingest---ingestion-permissions"></a>Kusto. inerfassungs Berechtigungen
 
-In diesem Artikel wird erläutert, welche Berechtigungen für den Dienst eingerichtet werden `Native` , damit die Erfassung funktioniert.
+In diesem Artikel wird erläutert, welche Berechtigungen für den Dienst eingerichtet werden, damit `Native` die Erfassung funktioniert.
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
 * Informationen zum Anzeigen und Ändern von Autorisierungs Einstellungen für Kusto-Dienste und-Datenbanken finden Sie unter [Kusto-Steuerungsbefehle](../../management/security-roles.md).
 
-## <a name="references"></a>References
-
-* Azure AD Anwendungen, die in den folgenden Beispielen als Beispiel Prinzipale verwendet werden.
-    * Testen der Aad-app (2a904276-1234-5678-9012-66fc53add60b; Microsoft.com)
-    * Kusto Internal Ingestion Aad-app (76263cdb-1234-5678-9012-545644e9c404; Microsoft.com)
+* Azure Active Directory (Azure AD)-Anwendungen, die in den folgenden Beispielen als Beispiel Prinzipale verwendet werden:
+    * Test Azure AD-App (2a904276-1234-5678-9012-66fc53add60b; Microsoft.com)
+    * Interner Kusto-Erfassungs Azure AD-App (76263cdb-1234-5678-9012-545644e9c404; Microsoft.com)
 
 ## <a name="ingestion-permission-mode-for-queued-ingestion"></a>Erfassungs Berechtigungs Modus für die Erfassung in der Warteschlange
 
@@ -39,8 +37,8 @@ Das Diagramm zeigt die Interaktion mit dem Erfassungs Client in der Warteschlang
 
 ### <a name="permissions-on-the-engine-service"></a>Berechtigungen für den Engine-Dienst
 
-Um die Datenerfassung in eine Tabelle `T1` in der Datenbank `DB1`zu qualifizieren, muss der Prinzipal, der den Erfassungs Vorgang durch nimmt, eine Autorisierung aufweisen
-Die minimal erforderlichen Berechtigungs `Database Ingestor` Stufen `Table Ingestor` sind und, mit denen Daten in allen vorhandenen Tabellen in einer Datenbank oder in einer bestimmten vorhandenen Tabelle erfasst werden können.
+Um die Datenerfassung in eine Tabelle in der Datenbank zu qualifizieren `T1` `DB1` , muss der Prinzipal, der den Erfassungs Vorgang durch nimmt, eine Autorisierung aufweisen
+Die minimal erforderlichen Berechtigungsstufen sind `Database Ingestor` und `Table Ingestor` , mit denen Daten in allen vorhandenen Tabellen in einer Datenbank oder in einer bestimmten vorhandenen Tabelle erfasst werden können.
 Wenn eine Tabellenerstellung erforderlich ist `Database User` oder eine höhere Zugriffs Rolle zugewiesen werden muss.
 
 
@@ -49,11 +47,11 @@ Wenn eine Tabellenerstellung erforderlich ist `Database User` oder eine höhere 
 |`Database Ingestor`  |Azure AD Anwendung |`Test App (app id: 2a904276-1234-5678-9012-66fc53add60b)`
 |`Table Ingestor`     |Azure AD Anwendung |`Test App (app id: 2a904276-1234-5678-9012-66fc53add60b)`
 
->`Kusto Internal Ingestion AAD App (76263cdb-1234-5678-9012-545644e9c404)`Prinzipal, die interne Erfassungs-APP von Kusto, ist unveränderlich der `Cluster Admin` Rolle zugeordnet. Sie ist daher zum Erfassen von Daten in einer beliebigen Tabelle autorisiert. Dies geschieht in den Kusto-verwalteten Erfassungs Pipelines.
+>`Kusto Internal Ingestion Azure AD App (76263cdb-1234-5678-9012-545644e9c404)`Prinzipal, die interne Erfassungs-APP von Kusto, ist unveränderlich der `Cluster Admin` Rolle zugeordnet. Sie ist daher zum Erfassen von Daten in einer beliebigen Tabelle autorisiert. Dies geschieht in den Kusto-verwalteten Erfassungs Pipelines.
 
-Das erteilen der erforderlichen Berechtigungen `DB1` für die `T1` Datenbank oder `Test App (2a904276-1234-5678-9012-66fc53add60b in AAD tenant microsoft.com)` Tabelle für Azure AD-App würde wie folgt aussehen:
+Das erteilen der erforderlichen Berechtigungen für `DB1` die Datenbank oder Tabelle `T1` für Azure AD-App `Test App (2a904276-1234-5678-9012-66fc53add60b in Azure AD tenant microsoft.com)` würde wie folgt aussehen:
 
 ```kusto
-.add database DB1 ingestors ('aadapp=2a904276-1234-5678-9012-66fc53add60b;microsoft.com') 'Test AAD App'
-.add table T1 ingestors ('aadapp=2a904276-1234-5678-9012-66fc53add60b;microsoft.com') 'Test AAD App'
+.add database DB1 ingestors ('aadapp=2a904276-1234-5678-9012-66fc53add60b;microsoft.com') 'Test Azure AD App'
+.add table T1 ingestors ('aadapp=2a904276-1234-5678-9012-66fc53add60b;microsoft.com') 'Test Azure AD App'
 ```
