@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/31/2019
-ms.openlocfilehash: 866e9b5d8f076660dfcb453fdb47fb6a6402578b
-ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
+ms.openlocfilehash: 5505eca4435521ea82c347bcd204ff3d68a14176
+ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82741997"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82862121"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>Bereitstellen von Azure Data Explorer-Clustern in Ihrem virtuellen Netzwerk
 
@@ -112,6 +112,8 @@ Wenn Sie Azure Data Explorer-Cluster in Ihrem Subnetz bereitstellen, können Sie
 | Indien, Mitte | 40.81.249.251, 104.211.98.159 |
 | USA (Mitte) | 40.67.188.68 |
 | USA, Mitte (EUAP) | 40.89.56.69 |
+| China, Osten 2 | 139.217.236.210 |
+| China, Norden 2 | 40.73.6.21 |
 | Asien, Osten | 20.189.74.103 |
 | East US | 52.224.146.56 |
 | USA (Ost 2) | 52.232.230.201 |
@@ -131,6 +133,11 @@ Wenn Sie Azure Data Explorer-Cluster in Ihrem Subnetz bereitstellen, können Sie
 | Indien (Süden) | 40.81.72.110, 104.211.224.189 |
 | UK, Süden | 40.81.154.254 |
 | UK, Westen | 40.81.122.39 |
+| USDoD, Mitte | 52.182.33.66 |
+| USDoD, Osten | 52.181.33.69 |
+| US Gov Arizona | 52.244.33.193 |
+| US Gov Texas | 52.243.157.34 |
+| US Government, Virginia | 52.227.228.88 |
 | USA, Westen-Mitte | 52.159.55.120 |
 | Europa, Westen | 51.145.176.215 |
 | Indien, Westen | 40.81.88.112, 104.211.160.120 |
@@ -151,6 +158,8 @@ Wenn Sie Azure Data Explorer-Cluster in Ihrem Subnetz bereitstellen, können Sie
 | Indien, Mitte | 23.99.5.162 |
 | USA (Mitte) | 168.61.212.201 |
 | USA, Mitte (EUAP) | 168.61.212.201 |
+| China, Osten 2 | 40.73.96.39 |
+| China, Norden 2 | 40.73.33.105 |
 | Asien, Osten | 168.63.212.33 |
 | East US | 137.116.81.189 |
 | USA (Ost) 2 | 137.116.81.189 |
@@ -170,6 +179,11 @@ Wenn Sie Azure Data Explorer-Cluster in Ihrem Subnetz bereitstellen, können Sie
 | Asien, Südosten | 168.63.173.234 |
 | UK, Süden | 23.97.212.5 |
 | UK, Westen | 23.97.212.5 |
+| USDoD, Mitte | 52.238.116.34 |
+| USDoD, Osten | 52.238.116.34 |
+| US Gov Arizona | 52.244.48.35 |
+| US Gov Texas | 52.238.116.34 |
+| US Government, Virginia | 23.97.0.26 |
 | USA, Westen-Mitte | 168.61.212.201 |
 | Europa, Westen | 23.97.212.5 |
 | Indien, Westen | 23.99.5.162 |
