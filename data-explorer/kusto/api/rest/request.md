@@ -1,6 +1,6 @@
 ---
-title: Abfrage-/Verwaltungs-HTTP-Anforderung - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die Abfrage-/Verwaltungs-HTTP-Anforderung in Azure Data Explorer beschrieben.
+title: 'Abfrage-/Verwaltung-http-Anforderung: Azure Daten-Explorer'
+description: In diesem Artikel wird die HTTP-Anforderung Abfrage/Verwaltung in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/27/2020
-ms.openlocfilehash: 71fac7122ca51755beaa09ce3867143806e4f2b3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 2c6efc03ea252eba5ed63e99d9214e59113856e9
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81502719"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373583"
 ---
 # <a name="querymanagement-http-request"></a>HTTP-Anforderung (Abfrage/Verwaltung)
 
-## <a name="request-verb-and-resource"></a>Anforderungsverb und Ressource
+## <a name="request-verb-and-resource"></a>Anforderungs Verb und Ressource
 
 |Aktion    |HTTP-Verb|HTTP-Ressource   |
 |----------|---------|----------------|
@@ -27,70 +27,69 @@ ms.locfileid: "81502719"
 |Abfrage v2  |POST     |`/v2/rest/query`|
 |Verwaltung|POST     |`/v1/rest/mgmt` |
 
-Um beispielsweise einen Steuerbefehl ("Verwaltung") an einen Dienstendpunkt zu senden, verwenden Sie die folgende Anforderungszeile:
+Um z. b. einen Steuerungs Befehl ("Verwaltung") an einen Dienst Endpunkt zu senden, verwenden Sie die folgende Anforderungs Zeile:
 
 ```
 POST https://help.kusto.windows.net/v1/rest/mgmt HTTP/1.1
 ```
 
-(Siehe unten für die Anforderungsheader und den zu berücksichtigenden Text.)
+Nachstehend finden Sie die einzuschließenden Anforderungs Header und Text.
 
 ## <a name="request-headers"></a>Anforderungsheader
 
-Die folgende Tabelle enthält die allgemeinen Header, die zum Ausführen von Abfrage- und Verwaltungsvorgängen verwendet werden.
+Die folgende Tabelle enthält die allgemeinen Header, die für Abfrage-und Verwaltungsvorgänge verwendet werden.
 
-|Standard-Header  |Beschreibung                                                                                                                    |
-|-----------------|-------------------------------------------------------------------------------------------------------------------------------|
-|`Accept`         |**Erforderlich**. Legen Sie diesen Eintrag auf `application/json`fest.                                                                                  |
-|`Accept-Encoding`|**Optional:** Unterstützte Codierungen `gzip` sind `deflate`und .                                                                    |
-|`Authorization`  |**Erforderlich**. Siehe [Authentifizierung](./authentication.md).                                                                       |
-|`Connection`     |**Optional:** Es wird `Keep-Alive` empfohlen, aktiviert zu werden.                                                                  |
-|`Content-Length` |**Optional:** Es wird empfohlen, die Länge des Anforderungstexts anzugeben, wenn bekannt ist.                                          |
-|`Content-Type`   |**Erforderlich**. Legen Sie `application/json` `charset=utf-8`dies auf mit fest.                                                             |
-|`Expect`         |**Optional:** Kann auf `100-Continue`gesetzt werden.                                                                                    |
-|`Host`           |**Erforderlich**. Legen Sie diesen Wert auf den vollqualifizierten Domänennamen fest, an den die Anforderung gesendet wurde (z. `help.kusto.windows.net`B. ).|
+|Standard Header  |Beschreibung                                                                                 |Erforderlich/Optional |
+|-----------------|--------------------------------------------------------------------------------------------|------------------|
+|`Accept`         |Legen Sie den Wert `application/json`                                                                   |Erforderlich          |
+|`Accept-Encoding`|Unterstützte Codierungen sind `gzip` und.`deflate`                                                |Optional          |
+|`Authorization`  |Siehe [Authentifizierung](./authentication.md)                                                   |Erforderlich          |
+|`Connection`     |Es wird empfohlen, Folgendes zu aktivieren:`Keep-Alive`                                                   |Optional          |
+|`Content-Length` |Es wird empfohlen, die Länge des Anforderungs Texts anzugeben, wenn bekannt                            |Optional          |
+|`Content-Type`   |Legen Sie auf fest. `application/json``charset=utf-8`                                              |Erforderlich          |
+|`Expect`         |Kann auf festgelegt werden.`100-Continue`                                                                |Optional          |
+|`Host`           |Legen Sie auf den qualifizierten Domänen Namen fest, an den die Anforderung gesendet wurde (z. b. `help.kusto.windows.net` ). |Erforderlich|
 
-Die folgende Tabelle enthält die allgemeinen benutzerdefinierten Header, die beim Ausführen von Abfrage- und Verwaltungsvorgängen verwendet werden. Sofern nicht anders angegeben, werden diese Header nur für Telemetriezwecke verwendet und haben keine Auswirkungen auf die Funktionalität.
+Die folgende Tabelle enthält die allgemeinen benutzerdefinierten Header, die für Abfrage-und Verwaltungsvorgänge verwendet werden. Sofern nicht anders angegeben, werden diese Header nur für Telemetriezwecke verwendet und haben keine Auswirkungen auf die Funktionalität.
 
-Alle Header sind **optional**. Es wird **dringend empfohlen,** `x-ms-client-request-id` den benutzerdefinierten Header anzugeben. In einigen Szenarien (z. B. Abbrechen einer ausgeführten Abfrage) ist dieser Header **obligatorisch,** da er zum Identifizieren der Anforderung verwendet wird.
+Alle Header sind optional. Es wird empfohlen, dass Sie den `x-ms-client-request-id` benutzerdefinierten Header angeben. In einigen Szenarien, z. b. beim Abbrechen einer laufenden Abfrage, ist dieser Header erforderlich, da er zur Identifizierung der Anforderung verwendet wird.
 
-
-|BenutzerdefinierteKopfzeile           |Beschreibung                                                                                               |
+|Benutzerdefinierter Header           |Beschreibung                                                                                               |
 |------------------------|----------------------------------------------------------------------------------------------------------|
-|`x-ms-app`              |Der (freundliche) Name der Anwendung, die den Antrag stellt.                                                |
-|`x-ms-user`             |Der (freundliche) Name des Benutzers, der die Anforderung stellt.                                                       |
-|`x-ms-user-id`          |Identisch mit `x-ms-user`.                                                                                      |
-|`x-ms-client-request-id`|Ein eindeutiger Bezeichner für die Anforderung.                                                                      |
-|`x-ms-client-version`   |Die (freundliche) Versionskennung für den Client, der die Anforderung stellt.                                      |
-|`x-ms-readonly`         |Wenn angegeben, erzwingt die Anforderung, im schreibgeschützten Modus ausgeführt zu werden (verhindert, dass sie langanhaltende Änderungen vornimmt).|
+|`x-ms-app`              |Der (freundliche) Name der Anwendung, die die Anforderung sendet.                                                 |
+|`x-ms-user`             |Der (benutzerfreundliche) Name des Benutzers, der die Anforderung sendet.                                                        |
+|`x-ms-user-id`          |Identisch mit `x-ms-user`                                                                                       |
+|`x-ms-client-request-id`|Ein eindeutiger Bezeichner für die Anforderung.                                                                       |
+|`x-ms-client-version`   |Der (benutzerfreundliche) Versions Bezeichner für den Client, der die Anforderung sendet.                                       |
+|`x-ms-readonly`         |Wenn angegeben, erzwingt, dass die Anforderung im schreibgeschützten Modus ausgeführt wird, sodass lange dauerhafte Änderungen verhindert werden. |
 
 ## <a name="request-parameters"></a>Anforderungsparameter
 
-Die folgenden Parameter können in der Anforderung übergeben werden. Sie werden in der Anforderung als Abfrageparameter oder als Teil des Textkörpers kodiert, je nachdem, ob GET oder POST verwendet wird.
+Die folgenden Parameter können in der Anforderung übermittelt werden. Sie werden in der Anforderung als Abfrage Parameter oder als Teil des Texts codiert, je nachdem, ob Get oder Post verwendet wird.
 
-* `csl`: Dies ist ein **obligatorischer** Parameter. Es enthält den Text der Abfrage oder des Steuerbefehls, die ausgeführt werden sollen.
+|Parameter   |Beschreibung                                                                                 |Erforderlich/Optional |
+|------------|--------------------------------------------------------------------------------------------|------------------|
+|`csl`       |Text des auszuführenden Abfrage-oder Steuerelement Befehls                                             |Erforderlich          |
+|`db`        |Der Name der Datenbank im Bereich, der das Ziel des Abfrage-oder Steuerungs Befehls ist.            |Optional für einige Steuerbefehle. <br>Erforderlich für andere Befehle und alle Abfragen. </br>                                                                   |
+|`properties`|Stellt Client Anforderungs Eigenschaften bereit, die die Verarbeitung der Anforderung und ihre Ergebnisse ändern. Weitere Informationen finden Sie unter [Eigenschaften von Client Anforderungen](../netfx/request-properties.md) .                                               | Optional         |
 
-* `db`: Dies ist ein **optionaler** Parameter für einige Steuerbefehle und **ein obligatorischer** Parameter für andere Steuerbefehle und alle Abfragen. Es stellt den Namen der "Datenbank im Bereich" - die Datenbank, die das Ziel der Abfrage oder des Steuerbefehls ist.
+## <a name="get-query-parameters"></a>Abfrage Parameterabfragen
 
-* `properties`: Dies ist ein **optionaler** Parameter. Es stellt verschiedene Clientanforderungseigenschaften bereit, die ändern, wie die Anforderung verarbeitet wird, und deren Ergebnisse. Eine vollständige Beschreibung finden Sie unter [Clientanforderungseigenschaften](../netfx/request-properties.md).
-
-## <a name="get-query-parameters"></a>GET-Abfrageparameter
-
-Wenn GET verwendet wird, geben die Abfrageparameter der Anforderung die oben genannten Anforderungsparameter an.
+Wenn Get verwendet wird, geben die Abfrage Parameter der Anforderung die Anforderungs Parameter an.
 
 ## <a name="body"></a>Body
 
-Bei verwendungsgemäßes POST ist der Text der Anforderung ein einzelnes JSON-Dokument, das in UTF-8 codiert ist und die Werte der oben genannten Anforderungsparameter bereitstellt.
+Wenn Post verwendet wird, ist der Anforderungs Text ein einzelnes JSON-Dokument, das in UTF-8 codiert ist, mit den Werten der Anforderungs Parameter.
 
 ## <a name="examples"></a>Beispiele
 
-Das folgende Beispiel zeigt die HTTP-POST-Anforderung für eine Abfrage:
+Dieses Beispiel zeigt die HTTP POST-Anforderung für eine Abfrage.
 
 ```txt
 POST https://help.kusto.windows.net/v2/rest/query HTTP/1.1
 ```
 
-Anforderungsheader:
+Anforderungsheader
 
 ```txt
 Accept: application/json
@@ -103,7 +102,7 @@ x-ms-user-id: EARTH\davidbg
 x-ms-app: MyApp
 ```
 
-Anforderungsstelle (neue Leitungen, die aus Gründen der Klarheit eingeführt wurden; sie werden nicht benötigt):
+Anforderungstext
 
 ```json
 {
@@ -113,46 +112,46 @@ Anforderungsstelle (neue Leitungen, die aus Gründen der Klarheit eingeführt wu
 }
 ```
 
-Das folgende Beispiel zeigt, wie Sie eine Anforderung erstellen, die die obige Abfrage mithilfe von [curl](https://curl.haxx.se/)sendet:
+In diesem Beispiel wird gezeigt, wie eine Anforderung erstellt wird, die die obige Abfrage mithilfe von [curl](https://curl.haxx.se/)sendet.
 
 1. Rufen Sie ein Token für die Authentifizierung ab.
 
-* ersetzen `AAD_TENANT_NAME_OR_ID` `AAD_APPLICATION_ID` und `AAD_APPLICATION_KEY` mit den relevanten Werten, nachdem Sie die [AAD-Anwendungsauthentifizierung](../../management/access-control/how-to-provision-aad-app.md) eingerichtet haben
+    Ersetzen `AAD_TENANT_NAME_OR_ID` `AAD_APPLICATION_ID` Sie, und `AAD_APPLICATION_KEY` durch die relevanten Werte nach dem Einrichten der [Aad-Anwendungs Authentifizierung](../../management/access-control/how-to-provision-aad-app.md) .
 
-```
-curl "https://login.microsoftonline.com/AAD_TENANT_NAME_OR_ID/oauth2/token" \
-  -F "grant_type=client_credentials" \
-  -F "resource=https://help.kusto.windows.net" \
-  -F "client_id=AAD_APPLICATION_ID" \
-  -F "client_secret=AAD_APPLICATION_KEY"
-```
+    ```
+    curl "https://login.microsoftonline.com/AAD_TENANT_NAME_OR_ID/oauth2/token" \
+      -F "grant_type=client_credentials" \
+      -F "resource=https://help.kusto.windows.net" \
+      -F "client_id=AAD_APPLICATION_ID" \
+      -F "client_secret=AAD_APPLICATION_KEY"
+    ```
 
-Dadurch erhalten Sie das Träger-Token:
+    Mit diesem Code Ausschnitt wird das bearertoken bereitgestellt.
 
-```
-{
-  "token_type": "Bearer",
-  "expires_in": "3599",
-  "ext_expires_in":"3599", 
-  "expires_on":"1578439805",
-  "not_before":"1578435905",
-  "resource":"https://help.kusto.windows.net",
-  "access_token":"eyJ0...uXOQ"
-}
-```
+    ```
+    {
+      "token_type": "Bearer",
+      "expires_in": "3599",
+      "ext_expires_in":"3599", 
+      "expires_on":"1578439805",
+      "not_before":"1578435905",
+      "resource":"https://help.kusto.windows.net",
+      "access_token":"eyJ0...uXOQ"
+    }
+    ```
 
-2. Verwenden Sie das Trägertoken in Ihrer Anforderung an den Abfrageendpunkt:
+1. Verwenden Sie das bearertoken in der Anforderung an den Abfrage Endpunkt.
 
-```
-curl -d '{"db":"Samples","csl":"print Test=\"Hello, World!\"","properties":"{\"Options\":{\"queryconsistency\":\"strongconsistency\"}}"}"' \
--H "Accept: application/json" \
--H "Authorization: Bearer eyJ0...uXOQ" \
--H "Content-Type: application/json; charset=utf-8" \
--H "Host: help.kusto.windows.net" \
--H "x-ms-client-request-id: MyApp.Query;e9f884e4-90f0-404a-8e8b-01d883023bf1" \
--H "x-ms-user-id: EARTH\davidbg" \
--H "x-ms-app: MyApp" \
--X POST https://help.kusto.windows.net/v2/rest/query
-```
+    ```
+    curl -d '{"db":"Samples","csl":"print Test=\"Hello, World!\"","properties":"{\"Options\":{\"queryconsistency\":\"strongconsistency\"}}"}"' \
+    -H "Accept: application/json" \
+    -H "Authorization: Bearer eyJ0...uXOQ" \
+    -H "Content-Type: application/json; charset=utf-8" \
+    -H "Host: help.kusto.windows.net" \
+    -H "x-ms-client-request-id: MyApp.Query;e9f884e4-90f0-404a-8e8b-01d883023bf1" \
+    -H "x-ms-user-id: EARTH\davidbg" \
+    -H "x-ms-app: MyApp" \
+    -X POST https://help.kusto.windows.net/v2/rest/query
+    ```
 
-3. Lesen Sie die Antwort gemäß [dieser Spezifikation](response.md).
+1. Lesen Sie die Antwort entsprechend [dieser Spezifikation](response.md).

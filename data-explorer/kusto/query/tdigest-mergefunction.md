@@ -8,35 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/09/2019
-ms.openlocfilehash: 92dce1a98cc0e24dcfbfcd7cb875fa370e3ae1d0
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 1281e2afdf9770975c6f6f74399f9815adaec045
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737724"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83371061"
 ---
 # <a name="tdigest_merge"></a>tdigest_merge()
 
-`tdigest` Führt Ergebnisse aus (skalare Version der Aggregat Version [`tdigest_merge()`](tdigest-merge-aggfunction.md)).
+`tdigest`Führt Ergebnisse aus (skalare Version der Aggregat Version [`tdigest_merge()`](tdigest-merge-aggfunction.md) ).
 
 Weitere Informationen zum zugrunde liegenden Algorithmus (T-Digest) und dem geschätzten Fehler [finden Sie hier](percentiles-aggfunction.md#estimation-error-in-percentiles).
 
 **Syntax**
 
-`merge_tdigests(`*Expr1* `,` *expr2*`, ...)`
+`merge_tdigests(`*Expr1* `,` *Expr2*`, ...)`
 
-`tdigest_merge(`*Expr1* `,` *Expr2* expr2`, ...)` -Alias.
+`tdigest_merge(`*Expr1* `,` *Expr2* `, ...)` : Ein Alias.
 
 **Argumente**
 
-* Spalten mit den Werten `tdigest` , die zusammengeführt werden sollen.
+* Spalten mit den Werten, die `tdigest` zusammengeführt werden sollen.
 
 **Rückgabe**
 
-Das Ergebnis für das Zusammenführen `*Expr1*`der `*Expr2*`Spalten,,... `*ExprN*` zu eins `tdigest`.
+Das Ergebnis für das Zusammenführen der Spalten `*Expr1*` , `*Expr2*` ,... `*ExprN*` zu eins `tdigest` .
 
 **Beispiele**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 range x from 1 to 10 step 1 
 | extend y = x + 10

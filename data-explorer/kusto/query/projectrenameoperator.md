@@ -1,6 +1,6 @@
 ---
-title: Projektumbenennungsoperator - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird der Projektumbenennungsoperator in Azure Data Explorer beschrieben.
+title: 'Project-Rename-Operator: Azure Daten-Explorer'
+description: In diesem Artikel wird der Projekt Umbenennungs Operator in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1f7fbf2efbfd3ed1dfac9129ec21f5a13c51481c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 68581cfe4b3828823ced7d4704eb08df5d2aefa7
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510862"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373174"
 ---
 # <a name="project-rename-operator"></a>project-rename-Operator
 
-Benennt Spalten in der Ergebnisausgabe um.
+Benennt Spalten in der Ergebnis Ausgabe um.
 
 ```kusto
 T | project-rename new_column_name = column_name
@@ -25,21 +25,22 @@ T | project-rename new_column_name = column_name
 
 **Syntax**
 
-*T* `| project-rename` *NewColumnName* = *ExistingColumnName* [`,` ...]
+*T* `| project-rename` *newcolumnname*  =  *existingcolumnname* [ `,` ...]
 
 **Argumente**
 
-* *T*: Die Eingabetabelle.
-* *NewColumnName:* Der neue Name einer Spalte. 
-* *ExistingColumnName:* Der vorhandene Name einer Spalte. 
+* *T*: die Eingabe Tabelle.
+* *Newcolumnname:* Der neue Name einer Spalte. 
+* *Existingcolumnname:* Der vorhandene Name einer Spalte. 
 
 **Rückgabe**
 
-Eine Tabelle mit den Spalten in der gleichen Reihenfolge wie in einer vorhandenen Tabelle, deren Spalten umbenannt werden.
+Eine Tabelle, in der die Spalten in derselben Reihenfolge wie in einer vorhandenen Tabelle mit umbenannten Spalten vorhanden sind.
 
 
 **Beispiele**
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print a='a', b='b', c='c'
 |  project-rename new_b=b, new_a=a

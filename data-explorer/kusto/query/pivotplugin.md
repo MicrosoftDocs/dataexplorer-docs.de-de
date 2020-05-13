@@ -1,6 +1,6 @@
 ---
-title: Pivot-Plugin - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird das Pivot-Plugin in Azure Data Explorer beschrieben.
+title: 'Pivot-Plug-in: Azure Daten-Explorer'
+description: Dieser Artikel beschreibt das Pivot-Plug-in in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: e4ec5a94483ade822280ee4a71106c214bb4b9a5
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a046cc369dd466defa50916ee78b2c29f5f88ea0
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81511100"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373219"
 ---
 # <a name="pivot-plugin"></a>Pivot-Plugin
 
-Dreht eine Tabelle, indem die eindeutigen Werte aus einer Spalte in der Eingabetabelle in mehrere Spalten in der Ausgabetabelle umgewandelt werden, und führt Aggregationen aus, bei denen sie für alle verbleibenden Spaltenwerte erforderlich sind, die in der endgültigen Ausgabe gewünscht werden.
+Rotiert eine Tabelle, indem die eindeutigen Werte aus einer Spalte in der Eingabe Tabelle in mehrere Spalten in der Ausgabe Tabelle umgewandelt werden, und führt Aggregationen aus, bei denen Sie für alle verbleibenden Spaltenwerte erforderlich sind, die in der endgültigen Ausgabe erwünscht sind.
 
 ```kusto
 T | evaluate pivot(PivotColumn)
@@ -25,28 +25,29 @@ T | evaluate pivot(PivotColumn)
 
 **Syntax**
 
-`T | evaluate pivot(`*pivotColumn*`[, `*aggregationFunktionsspalte1*`] [,`*column1* `[,` *Spalte2* ...`]])`
+`T | evaluate pivot(`*PivotColumn* `[, ` *AggregationFunction* `] [,` *column1* `[,` *Column2* ...`]])`
 
 **Argumente**
 
-* *pivotColumn*: Die zu drehende Spalte. Jeder eindeutige Wert aus dieser Spalte ist eine Spalte in der Ausgabetabelle.
-* *Aggregationsfunktion*: (optional) aggregiert mehrere Zeilen in der Eingabetabelle zu einer einzelnen Zeile in der Ausgabetabelle. Derzeit unterstützte `min()`Funktionen: `any()` `sum()`, `dcount()` `max()`, `variance()`, `count()` , , `count()` `avg()`, `stdev()`, und (Standard ist ).
-* *column1*, *column2*, ...: (optional) Spaltennamen. Die Ausgabetabelle enthält eine zusätzliche Spalte pro angegebener Spalte. Standard: alle Spalten außer der pivotierten Spalte und der Aggregationsspalte.
+* *PivotColumn*: die zu rolligende Spalte. jeder eindeutige Wert aus dieser Spalte ist eine Spalte in der Ausgabe Tabelle.
+* *Aggregations Funktion*: (optional) aggregiert mehrere Zeilen in der Eingabe Tabelle in eine einzelne Zeile in der Ausgabe Tabelle. Derzeit unterstützte Funktionen: `min()` , `max()` , `any()` , `sum()` , `dcount()` , `avg()` , `stdev()` , `variance()` und `count()` (Standardwert ist `count()` ).
+* *column1*, *Column2*,...: (optional) Spaltennamen. Die Ausgabe Tabelle enthält eine zusätzliche Spalte für jede angegebene Spalte. Standard: alle Spalten außer der pivotierten Spalte und der Aggregations Spalte.
 
 **Rückgabe**
 
-Pivot gibt die gedrehte Tabelle mit den angegebenen Spalten (*Spalte1*, *Spalte2*, ...) sowie alle eindeutigen Werte der Pivot-Spalten zurück. Jede Zelle für die pivotierten Spalten enthält die Aggregatfunktionsberechnung.
+Pivot gibt die gedrehte Tabelle mit angegebenen Spalten (*column1*, *Column2*,...) und allen eindeutigen Werten der Pivotspalten zurück. Jede Zelle für die pivotierten Spalten enthält die Berechnung der Aggregatfunktion.
 
 **Hinweis**
 
-Das Ausgabeschema `pivot` des Plugins basiert auf den Daten und daher kann die Abfrage unterschiedliche Schemas für zwei beliebige Durchläufe erzeugen. Dies bedeutet auch, dass Abfragen, die auf unverpackte Spalten verweisen, jederzeit "gebrochen" werden können. Aus diesem Grund - es wird nicht empfohlen, dieses Plugin für Automatisierungsaufträge zu verwenden.
+Das Ausgabe Schema des `pivot` Plug-ins basiert auf den Daten, sodass die Abfrage möglicherweise ein anderes Schema für zwei Ausführungen erzeugt. Dies bedeutet auch, dass die Abfrage, die auf entpackte Spalten verweist, jederzeit "beschädigt" werden kann. Aus diesem Grund empfiehlt es sich nicht, dieses Plug-in für Automatisierungs Aufträge zu verwenden.
 
 **Beispiele**
 
-### <a name="pivot-by-a-column"></a>Pivot durch eine Spalte
+### <a name="pivot-by-a-column"></a>Pivotieren durch eine Spalte
 
-Zählen Sie für jeden EventType und die Status, die mit 'AL' beginnen, die Anzahl der Ereignisse dieses Typs in diesem Status.
+Zählen Sie für jeden EventType und die Zustände, beginnend mit "Al", die Anzahl der Ereignisse dieses Typs in diesem Zustand.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | project State, EventType 
@@ -59,14 +60,15 @@ StormEvents
 |---|---|---|
 |Sturm|352|1|
 |Hoher Wind|0|95|
-|Extreme Kälte/Wind Chill|0|10|
+|Kalte Kälte/Wind Kühlung|0|10|
 |Starker Wind|22|0|
 
 
-### <a name="pivot-by-a-column-with-aggregation-function"></a>Pivot durch eine Spalte mit Aggregationsfunktion.
+### <a name="pivot-by-a-column-with-aggregation-function"></a>Pivotieren Sie nach einer Spalte mit einer Aggregations Funktion.
 
-Zeigen Sie für jeden EventType und die Zustände, die mit 'AR' beginnen, die Gesamtzahl der direkten Todesfälle an.
+Zeigen Sie für jeden EventType und die Zustände, beginnend mit "ar", die Gesamtzahl der direkten Todesfälle an.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents 
 | where State startswith "AR" 
@@ -75,20 +77,21 @@ StormEvents
 | evaluate pivot(State, sum(DeathsDirect))
 ```
 
-|EventType|Arkansas|Arizona|
+|EventType|ARKANSAS|Arizona|
 |---|---|---|
-|Heavy Rain|1|0|
+|Starker Regen|1|0|
 |Sturm|1|0|
-|Blitz|0|1|
+|Leichte|0|1|
 |Überschwemmung|0|6|
 |Starker Wind|1|0|
 |Hitze|3|0|
 
 
-### <a name="pivot-by-a-column-with-aggregation-function-and-a-single-additional-column"></a>Pivot durch eine Spalte mit Aggregationsfunktion und einer einzelnen zusätzlichen Spalte.
+### <a name="pivot-by-a-column-with-aggregation-function-and-a-single-additional-column"></a>Pivotieren Sie nach einer Spalte mit einer Aggregations Funktion und einer einzelnen zusätzlichen Spalte.
 
-Das Ergebnis ist identisch mit dem vorherigen Beispiel.
+Das Ergebnis ist mit dem vorherigen Beispiel identisch.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents 
 | where State startswith "AR" 
@@ -97,20 +100,21 @@ StormEvents
 | evaluate pivot(State, sum(DeathsDirect), EventType)
 ```
 
-|EventType|Arkansas|Arizona|
+|EventType|ARKANSAS|Arizona|
 |---|---|---|
-|Heavy Rain|1|0|
+|Starker Regen|1|0|
 |Sturm|1|0|
-|Blitz|0|1|
+|Leichte|0|1|
 |Überschwemmung|0|6|
 |Starker Wind|1|0|
 |Hitze|3|0|
 
 
-### <a name="specify-the-pivoted-column-aggregation-function-and-multiple-additional-columns"></a>Geben Sie die Pivoted-Spalte, die Aggregationsfunktion und mehrere zusätzliche Spalten an.
+### <a name="specify-the-pivoted-column-aggregation-function-and-multiple-additional-columns"></a>Geben Sie die pivotierte Spalte, die Aggregations Funktion und mehrere zusätzliche Spalten an.
 
-Summieren Sie für jeden Ereignistyp, jede Quelle und jeden Zustand die Anzahl der direkten Todesfälle.
+Addieren Sie für jeden Ereignistyp (Quelle und Zustand) die Anzahl der direkten Todesfälle.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents 
 | where State startswith "AR" 
@@ -118,13 +122,13 @@ StormEvents
 | evaluate pivot(State, sum(DeathsDirect), EventType, Source)
 ```
 
-|EventType|`Source`|Arkansas|Arizona|
+|EventType|`Source`|ARKANSAS|Arizona|
 |---|---|---|---|
-|Heavy Rain|Katastrophenschutz|1|0|
+|Starker Regen|Katastrophenschutz|1|0|
 |Sturm|Katastrophenschutz|1|0|
-|Blitz|Zeitung|0|1|
+|Leichte|Zeitung|0|1|
 |Überschwemmung|Ausgebildeter „Spotter“|0|2|
-|Überschwemmung|Broadcast-Medien|0|3|
+|Überschwemmung|Broadcast Medien|0|3|
 |Überschwemmung|Zeitung|0|1|
 |Starker Wind|Strafverfolgungsbehörden|1|0|
 |Hitze|Zeitung|3|0|

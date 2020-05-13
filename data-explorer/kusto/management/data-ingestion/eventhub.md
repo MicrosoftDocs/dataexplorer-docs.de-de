@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 6b2f3b2d75bd964401ae37093405e692cfd64feb
-ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
+ms.openlocfilehash: a9308fa762bf7bbda0f57a1c252cf2121253565a
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82861781"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373466"
 ---
 # <a name="ingest-from-event-hub"></a>Erfassung aus Event Hub
 
@@ -22,8 +22,8 @@ ms.locfileid: "82861781"
 ## <a name="data-format"></a>Datenformat
 
 * Daten werden aus dem Event Hub in Form von [EventData](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata?view=azure-dotnet) -Objekten gelesen.
-* Die Ereignis Nutzlast kann einen oder mehrere Datensätze enthalten, die erfasst werden sollen, und zwar in einem der Formate, die [von Azure Daten-Explorer unterstützt](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats)werden.
-* Daten können mithilfe `GZip` des Komprimierungs Algorithmus komprimiert werden. Muss als `Compression` Erfassungs [Eigenschaft](#ingestion-properties)angegeben werden.
+* Die Ereignis Nutzlast kann einen oder mehrere Datensätze enthalten, die erfasst werden sollen, und zwar in einem der Formate, die [von Azure Daten-Explorer unterstützt](../../../ingestion-supported-formats.md)werden.
+* Daten können mithilfe des `GZip` Komprimierungs Algorithmus komprimiert werden. Muss als Erfassungs `Compression` [Eigenschaft](#ingestion-properties)angegeben werden.
 
 > [!Note]
 > * Die Datenkomprimierung wird für komprimierte Formate (Avro, Parkett, Orc) nicht unterstützt.
@@ -31,14 +31,14 @@ ms.locfileid: "82861781"
 
 ## <a name="ingestion-properties"></a>Erfassungseigenschaften
 
-Erfassungs Eigenschaften weist den Erfassungsprozess an. Wo die Daten weitergeleitet werden und wie Sie verarbeitet werden. Mithilfe von [EventData. Properties](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)können Sie Erfassungs [Eigenschaften](https://docs.microsoft.com/azure/data-explorer/ingestion-properties) der Ereignis Erfassung angeben. Sie können die folgenden Eigenschaften festlegen:
+Erfassungs Eigenschaften weist den Erfassungsprozess an. Wo die Daten weitergeleitet werden und wie Sie verarbeitet werden. Mithilfe von [EventData. Properties](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)können Sie Erfassungs [Eigenschaften](../../../ingestion-properties.md) der Ereignis Erfassung angeben. Sie können die folgenden Eigenschaften festlegen:
 
 |Eigenschaft |Beschreibung|
 |---|---|
 | Tabelle | Name (Groß-/Kleinschreibung beachten) der vorhandenen Ziel Tabelle. Überschreibt das `Table`, das auf dem Blatt `Data Connection` festgelegt ist. |
 | Format | Datenformat. Überschreibt das `Data format`, das auf dem Blatt `Data Connection` festgelegt ist. |
 | Ingestionmappingreferenzierung | Der Name der vorhandenen Erfassungs [Zuordnung](../create-ingestion-mapping-command.md) , die verwendet werden soll. Überschreibt das `Column mapping`, das auf dem Blatt `Data Connection` festgelegt ist.|
-| Komprimierung | Datenkomprimierung `None` , (Standard) `GZip` oder Komprimierung.|
+| Komprimierung | Datenkomprimierung, `None` (Standard) oder `GZip` Komprimierung.|
 | Codieren |  Daten Codierung, der Standardwert ist UTF8. Kann eine beliebige von [.NET unterstützte Codierungen](https://docs.microsoft.com/dotnet/api/system.text.encoding?view=netframework-4.8#remarks)sein. |
 | Tags (Vorschau) | Eine Liste von [Tags](../extents-overview.md#extent-tagging) , die den erfassten Daten zugeordnet werden sollen, die als JSON-Array Zeichenfolge formatiert sind. Beachten Sie die Auswirkungen der Verwendung von Tags auf die [Leistung](../extents-overview.md#performance-notes-1) . |
 
@@ -47,11 +47,11 @@ Erfassungs Eigenschaften weist den Erfassungsprozess an. Wo die Daten weitergele
 
 ## <a name="events-routing"></a>Ereignis Routing
 
-Beim Einrichten einer Event Hub-Verbindung mit dem Azure Daten-Explorer-Cluster geben Sie die Ziel Tabellen Eigenschaften an (Tabellenname, Datenformat, Komprimierung und Zuordnung). Dies ist das Standard Routing für Ihre Daten, das auch als `static routing`bezeichnet wird.
+Beim Einrichten einer Event Hub-Verbindung mit dem Azure Daten-Explorer-Cluster geben Sie die Ziel Tabellen Eigenschaften an (Tabellenname, Datenformat, Komprimierung und Zuordnung). Dies ist das Standard Routing für Ihre Daten, das auch als bezeichnet wird `static routing` .
 Sie können auch die Ziel Tabellen Eigenschaften für jedes Ereignis mithilfe von Ereignis Eigenschaften angeben. Die Verbindung leitet die Daten dynamisch entsprechend der Angabe in [EventData. Properties](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties)weiter und überschreibt die statischen Eigenschaften für dieses Ereignis.
 
-Legen Sie im folgenden Beispiel Event Hub Details fest, und senden Sie Wetter Metrikdaten an Table `WeatherMetrics`.
-Die Daten sind `json` im Format. `mapping1`ist für die Tabelle `WeatherMetrics`vordefiniert:
+Legen Sie im folgenden Beispiel Event Hub Details fest, und senden Sie Wetter Metrikdaten an Table `WeatherMetrics` .
+Die Daten sind im `json` Format. `mapping1`ist für die Tabelle vordefiniert `WeatherMetrics` :
 
 ```csharp
 var eventHubNamespaceConnectionString=<connection_string>;
@@ -81,7 +81,7 @@ System Eigenschaften sind eine Sammlung zum Speichern von Eigenschaften, die vom
 > [!Note]
 > * System Eigenschaften werden für Single-Record-Ereignisse unterstützt.
 > * System Eigenschaften werden für komprimierte Daten nicht unterstützt.
-> * Für `csv` die Zuordnung werden Eigenschaften am Anfang des Datensatzes in der in der folgenden Tabelle aufgeführten Reihenfolge hinzugefügt. Für `json` die Zuordnung werden Eigenschaften gemäß den Eigenschaftsnamen in der folgenden Tabelle hinzugefügt.
+> * Für die `csv` Zuordnung werden Eigenschaften am Anfang des Datensatzes in der in der folgenden Tabelle aufgeführten Reihenfolge hinzugefügt. Für `json` die Zuordnung werden Eigenschaften gemäß den Eigenschaftsnamen in der folgenden Tabelle hinzugefügt.
 
 ### <a name="event-hub-expose-the-following-system-properties"></a>Event Hub macht die folgenden Systemeigenschaften verfügbar.
 
@@ -97,7 +97,7 @@ Wenn Sie im Abschnitt **Datenquelle** der Tabelle die Option **Ereignis Systemei
 
 **Beispiel für Tabellen Schema**
 
-Wenn die Daten drei`Timespan`Spalten (, `Metric`und `Value`) enthalten und die Eigenschaften, die Sie einschließen `x-opt-enqueued-time` , `x-opt-offset`und sind, erstellen oder ändern Sie das Tabellen Schema mit dem folgenden Befehl:
+Wenn die Daten drei Spalten ( `Timespan` , `Metric` und) enthalten `Value` und die Eigenschaften, die Sie einschließen `x-opt-enqueued-time` , und sind `x-opt-offset` , erstellen oder ändern Sie das Tabellen Schema mit dem folgenden Befehl:
 
 ```kusto
     .create-merge table TestTable (TimeStamp: datetime, Metric: string, Value: int, EventHubEnqueuedTime:datetime, EventHubOffset:long)
@@ -140,7 +140,7 @@ Daten werden mithilfe der System Eigenschaftsnamen hinzugefügt, die auf der Lis
 
 ### <a name="create-an-event-hub"></a>Erstellen eines Ereignis-Hubs
 
-Wenn Sie noch keine haben, [Erstellen Sie eine Event Hub](https://docs.microsoft.com/azure/event-hubs/event-hubs-create). Eine Vorlage finden Sie im Leitfaden How-to [Create an Event Hub](https://docs.microsoft.com/azure/data-explorer/ingest-data-event-hub#create-an-event-hub) .
+Wenn Sie noch keine haben, [Erstellen Sie eine Event Hub](https://docs.microsoft.com/azure/event-hubs/event-hubs-create). Eine Vorlage finden Sie im Leitfaden How-to [Create an Event Hub](../../../ingest-data-event-hub.md#create-an-event-hub) .
 
 > [!Note]
 > * Die Partitionenanzahl kann nicht geändert werden. Behalten Sie daher beim Festlegen der Partitionenanzahl die langfristige Skalierung im Hinterkopf.
@@ -148,10 +148,10 @@ Wenn Sie noch keine haben, [Erstellen Sie eine Event Hub](https://docs.microsoft
 
 ### <a name="data-ingestion-connection-to-azure-data-explorer"></a>Verbindung mit der Datenerfassung mit Azure Daten-Explorer
 
-* Über das Azure-Portal: stellen [Sie eine Verbindung zum Event Hub](https://docs.microsoft.com/azure/data-explorer/ingest-data-event-hub#connect-to-the-event-hub)her.
-* Verwenden des Azure Daten-Explorer Management .NET SDK: [Hinzufügen einer Event Hub-Datenverbindung](https://docs.microsoft.com/azure/data-explorer/data-connection-event-hub-csharp#add-an-event-hub-data-connection)
-* Verwenden des Azure Daten-Explorer Management python SDK: [Hinzufügen einer Event Hub-Datenverbindung](https://docs.microsoft.com/azure/data-explorer/data-connection-event-hub-python#add-an-event-hub-data-connection)
-* Mit Arm-Vorlage: [Azure Resource Manager Vorlage zum Hinzufügen einer Event Hub-Datenverbindung](https://docs.microsoft.com/azure/data-explorer/data-connection-event-hub-resource-manager#azure-resource-manager-template-for-adding-an-event-hub-data-connection)
+* Über das Azure-Portal: stellen [Sie eine Verbindung zum Event Hub](../../../ingest-data-event-hub.md#connect-to-the-event-hub)her.
+* Verwenden des Azure Daten-Explorer Management .NET SDK: [Hinzufügen einer Event Hub-Datenverbindung](../../../data-connection-event-hub-csharp.md#add-an-event-hub-data-connection)
+* Verwenden des Azure Daten-Explorer Management python SDK: [Hinzufügen einer Event Hub-Datenverbindung](../../../data-connection-event-hub-python.md#add-an-event-hub-data-connection)
+* Mit Arm-Vorlage: [Azure Resource Manager Vorlage zum Hinzufügen einer Event Hub-Datenverbindung](../../../data-connection-event-hub-resource-manager.md#azure-resource-manager-template-for-adding-an-event-hub-data-connection)
 
 > [!Note]
 > Wenn **meine Daten Routing Informationen enthalten** , *müssen* Sie die erforderlichen [Routing](#events-routing) Informationen als Teil der Ereignis Eigenschaften bereitstellen.

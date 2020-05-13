@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: f8cc5771890247291f6c9e1183a57fc7e1341874
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 9de01863ddb832421c5b6dbfe65b8ae451382fb7
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227739"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373369"
 ---
 # <a name="external-sql-table"></a>Externe SQL-Tabelle
 
@@ -81,7 +81,7 @@ with
 
 ## <a name="querying-an-external-table-of-type-sql"></a>Abfragen einer externen Tabelle vom Typ SQL 
 
-Das Abfragen einer externen SQL-Tabelle wird unterstützt. Weitere Informationen finden Sie unter [Abfragen externer Tabellen](https://docs.microsoft.com/azure/data-explorer/data-lake-query-data). 
+Das Abfragen einer externen SQL-Tabelle wird unterstützt. Weitere Informationen finden Sie unter [Abfragen externer Tabellen](../../data-lake-query-data.md). 
 
 > [!Note]
 > Die Implementierung der externen SQL-Tabellen Abfrage führt eine vollständige SELECT *-Abfrage (oder ausgewählte Spalten) aus der SQL-Tabelle aus. Der Rest der Abfrage wird auf der Kusto-Seite ausgeführt. 

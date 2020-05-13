@@ -1,5 +1,5 @@
 ---
-title: series_fit_2lines ()-Azure Daten-Explorer | Microsoft-Dokumentation
+title: series_fit_2lines ()-Azure Daten-Explorer
 description: In diesem Artikel wird series_fit_2lines () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 6c16b535962271a7aaf4acad63f52da028b49e33
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: d4b4be37f171439b47399ecfbb314b1a9b704afd
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618739"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372705"
 ---
 # <a name="series_fit_2lines"></a>series_fit_2lines()
 
@@ -42,8 +42,8 @@ Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe 
 
 Projekt `series_fit_2lines(` *x*`)`
 * Gibt alle oben erwähnten Spalten mit den folgenden Namen zurück: series_fit_2lines_x_rsquare, series_fit_2lines_x_split_idx und usw.
-Project (RS, Si, v) =`series_fit_2lines(`*x*`)`
-* Gibt die folgenden Spalten zurück: RS (r-Square), Si (Split Index), v (Varianz) und Rest sehen wie series_fit_2lines_x_rvariance, series_fit_2lines_x_line_fit und usw. erweitern (RS, Si, v) =`series_fit_2lines(`*x* .`)`
+Project (RS, Si, v) = `series_fit_2lines(` *x*`)`
+* Gibt die folgenden Spalten zurück: RS (r-Square), Si (Split Index), v (Varianz) und Rest sehen wie series_fit_2lines_x_rvariance, series_fit_2lines_x_line_fit und usw. erweitern (RS, Si, v) = `series_fit_2lines(` *x* .`)`
 * Gibt nur Folgendes zurück: rs (r-square), si (split index) und v (variance).
   
 **Argumente**
@@ -55,6 +55,7 @@ Project (RS, Si, v) =`series_fit_2lines(`*x*`)`
 
 **Beispiele**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 print id=' ', x=range(bin(now(), 1h)-11h, bin(now(), 1h), 1h), y=dynamic([1,2.2, 2.5, 4.7, 5.0, 12, 10.3, 10.3, 9, 8.3, 6.2])
 | extend (Slope,Interception,RSquare,Variance,RVariance,LineFit)=series_fit_line(y), (RSquare2, SplitIdx, Variance2,RVariance2,LineFit2)=series_fit_2lines(y)

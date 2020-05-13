@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 4ef02ab79b0701b4af74744a94e0ff795eb8c26a
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 4cec053990457a6b33c7446c5b32c63713320de9
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737248"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372764"
 ---
 # <a name="series_fill_linear"></a>series_fill_linear()
 
@@ -23,31 +23,33 @@ Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe 
 
 **Syntax**
 
-`series_fill_linear(`*x* `[,` *missing_value_placeholder*missing_value_placeholder` [,`*fill_edges*fill_edges` [,`*constant_value*`]]]))`
+`series_fill_linear(`*x* `[,` *missing_value_placeholder* ` [,` *fill_edges* ` [,` *constant_value*`]]]))`
 * Gibt die Reihen lineare interpolung von *x* unter Verwendung der angegebenen Parameter zurück.
  
 
 **Argumente**
 
 * *x*: Skalarausdruck des dynamischen Arrays, bei dem es sich um ein Array numerischer Werte handelt.
-* *missing_value_placeholder*: optionaler Parameter, der einen Platzhalter für die zu ersetzenden "fehlenden Werte" angibt. Der Standardwert `double`ist (*null*).
+* *missing_value_placeholder*: optionaler Parameter, der einen Platzhalter für die zu ersetzenden "fehlenden Werte" angibt. Der Standardwert ist `double` (*null*).
 * *fill_edges*: ein boolescher Wert, der angibt, ob *missing_value_placeholder* am Anfang und am Ende des Arrays durch den nächstgelegenen Wert ersetzt werden sollen. Standardmäßig " *true* ". Wenn *false*festgelegt ist, werden *missing_value_placeholder* am Anfang und am Ende des Arrays beibehalten.
-* *constant_value*: optionaler Parameter, der nur für Arrays relevant ist, besteht aus *null* -Werten. Dieser Parameter gibt einen konstanten Wert an, mit dem die Reihe aufgefüllt werden soll. Der Standardwert ist *0*. Wenn dieser Parameter auf ( `double`*null*) festgelegt wird, werden *null* -Werte in diesem Fall nicht angezeigt.
+* *constant_value*: optionaler Parameter, der nur für Arrays relevant ist, besteht aus *null* -Werten. Dieser Parameter gibt einen konstanten Wert an, mit dem die Reihe aufgefüllt werden soll. Der Standardwert ist *0*. Wenn dieser Parameter auf `double` (*null*) festgelegt wird, werden *null* -Werte in diesem Fall nicht angezeigt.
 
 **Hinweise**
 
 * Geben Sie *null* als Standardwert an, um nach der [make-Reihe](make-seriesoperator.md)Interpolations Funktionen anzuwenden: 
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 make-series num=count() default=long(null) on TimeStamp in range(ago(1d), ago(1h), 1h) by Os, Browser
 ```
 
-* Der *missing_value_placeholder* kann einen beliebigen Typ aufweisen, der in tatsächliche Elementtypen konvertiert wird. Daher haben entweder `double`(*null*), `long`(*null*) oder `int`(*null*) dieselbe Bedeutung.
-* Wenn *missing_value_placeholder* ( `double`*null*) ist (oder weggelassen wird, das die gleiche Bedeutung hat), kann ein Ergebnis *null* -Werte enthalten. Verwenden Sie andere Interpolations Funktionen, um diese *null* -Werte auszufüllen. Derzeit unterstützen nur [series_outliers ()](series-outliersfunction.md) *null* -Werte in Eingabe Arrays.
+* Der *missing_value_placeholder* kann einen beliebigen Typ aufweisen, der in tatsächliche Elementtypen konvertiert wird. Daher `double` haben entweder (*null*), `long` (*null*) oder `int` (*null*) dieselbe Bedeutung.
+* Wenn *missing_value_placeholder* `double` (*null*) ist (oder weggelassen wird, das die gleiche Bedeutung hat), kann ein Ergebnis *null* -Werte enthalten. Verwenden Sie andere Interpolations Funktionen, um diese *null* -Werte auszufüllen. Derzeit unterstützen nur [series_outliers ()](series-outliersfunction.md) *null* -Werte in Eingabe Arrays.
 * Die-Funktion behält den ursprünglichen Typ von Array Elementen bei. Wenn x nur int-oder Long-Elemente enthält, gibt die lineare interpolung gerundete, nicht exakte Werte zurück.
 
 **Beispiel**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let data = datatable(arr: dynamic)
 [

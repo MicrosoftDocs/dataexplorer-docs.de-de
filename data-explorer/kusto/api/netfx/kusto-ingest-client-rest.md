@@ -9,43 +9,39 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 02/19/2020
-ms.openlocfilehash: 2ea7fd33a6e6ed8728fb12d53fbe76eadf8fd6b6
-ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
+ms.openlocfilehash: 80fe504311ee847afa7244e179974d80485efe46
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82862070"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373558"
 ---
-# <a name="howto-data-ingestion-without-kustoingest-library"></a>Datenerfassung durch howto ohne Kusto. Erfassungs Bibliothek
+# <a name="ingestion-without-kustoingest-library"></a>Erfassung ohne Kusto. Erfassungs Bibliothek
 
-## <a name="when-to-consider-not-using-kustoingest-library"></a>Wann sollten Sie in Erwägung gezogen werden, die Kusto. Erfassungs Bibliothek zu verwenden?
-Im Allgemeinen sollte die Verwendung der Kusto. Erfassungs Bibliothek bevorzugt werden, wenn das Erfassen von Daten in Kusto berücksichtigt wird.<BR>
-Wenn dies nicht möglich ist (in der Regel aufgrund von Betriebssystem Einschränkungen), kann mit einem gewissen Aufwand fast die gleiche Funktionalität erreicht werden.<BR>
-In diesem Artikel wird beschrieben, wie Sie die Erfassung von Warteschlangen in Kusto implementieren, ohne dass eine Abhängigkeit vom Kusto. **Ingestion** -Paket besteht.
+Die Kusto. Erfassungs Bibliothek ist für das Erfassen von Daten in Azure Daten-Explorer bevorzugt. Sie können jedoch immer noch fast die gleiche Funktionalität erreichen, ohne vom Kusto. inerfassungs Paket abhängig zu sein.
+In diesem Artikel erfahren Sie, wie Sie mithilfe der in der *Warteschlange* befindlichen Erfassung in Azure Daten-Explorer für Pipelines auf Produktionsqualität anwenden.
 
->**Hinweis:** Der folgende Code ist in c# geschrieben und nutzt Azure Storage SDK, Adal Authentication Library und das newtonsoft. JSON-Paket, um den Beispielcode zu vereinfachen.<BR>Bei Bedarf kann der entsprechende Code durch entsprechende [Azure Storage Rest-API](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api) -Aufrufe, [Non-.net Adal-Paket](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-libraries) und beliebiges verfügbares JSON-Verarbeitungs Paket ersetzt werden.
+> [!NOTE]
+> Der folgende Code ist in c# geschrieben und nutzt das Azure Storage SDK, die Adal-Authentifizierungs Bibliothek und das newtonsoft. JSON-Paket, um den Beispielcode zu vereinfachen. Bei Bedarf kann der entsprechende Code durch entsprechende [Azure Storage Rest-API](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api) -Aufrufe, [Non-.net Adal-Paket](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-libraries)und beliebiges verfügbares JSON-Verarbeitungs Paket ersetzt werden.
 
-## <a name="overview"></a>Übersicht
-Im folgenden Codebeispiel wird die Datenerfassung in der Warteschlange (über die Kusto-Datenverwaltung Dienst) in Kusto ohne Verwendung der Kusto. Erfassungs Bibliothek veranschaulicht.<BR>
-Dies kann hilfreich sein, wenn auf vollständiges .net aufgrund der Umgebung oder anderer Einschränkungen nicht zugegriffen werden kann oder nicht verfügbar ist.<BR>
+In diesem Artikel wird der empfohlene Modus für die Erfassung behandelt. Die zugehörige Entität für die Kusto. Erfassungs Bibliothek ist die [ikustoqueuedingestclient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) -Schnittstelle. Hier interagiert der Client Code mit dem Azure Daten-Explorer Service, indem er Erfassungs Benachrichtigungs Meldungen an eine Azure-Warteschlange übermitteln. Verweise auf die Nachrichten werden vom Kusto-Datenverwaltung abgerufen (auch als Erfassungs Dienst bezeichnet). Die Interaktion mit dem Dienst muss mit Azure Active Directory (Azure AD) authentifiziert werden.
 
-> In diesem Artikel wird der empfohlene Modus für die Erfassung von Pipelines auf Produktionsqualität behandelt. Dies wird auch als Erfassung in der **Warteschlange** bezeichnet (in Bezug auf die Kusto. Erfassungs Bibliothek ist die zugehörige Entität die [ikustoqueuedingestclient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) -Schnittstelle). In diesem Modus interagiert der Client Code mit dem Kusto-Dienst, indem er Erfassungs Benachrichtigungs Meldungen an eine Azure-Warteschlange bereitstellt, auf die vom Kusto-Datenverwaltung (auch bekannt als Erfassungs Dienst. Die Interaktion mit dem Datenverwaltung-Dienst muss mit **Aad**authentifiziert werden.
+Der folgende Code zeigt, wie der Kusto-Datenverwaltung-Dienst die Erfassung von Daten in der Warteschlange verarbeitet, ohne die Kusto. Erfassung-Bibliothek zu verwenden. Dieses Beispiel ist möglicherweise hilfreich, wenn auf vollständiges .net aufgrund der Umgebung oder anderer Einschränkungen nicht zugegriffen werden kann oder nicht verfügbar ist.
 
-Der Umriss dieses Flows wird im folgenden Codebeispiel beschrieben und besteht aus folgendem:
-1. Erstellen eines Azure Storage Clients und Hochladen der Daten in ein BLOB
-1. Authentifizierungs Token für den Zugriff auf den Kusto-Erfassungs Dienst abrufen
-2. Fragen Sie den Kusto-Erfassungs Dienst ab, um Folgendes zu erhalten:
-    * Erfassungs Ressourcen (Warteschlangen und BLOB-Container)
-    * Kusto-Identitäts Token, das jeder Erfassungs Nachricht hinzugefügt wird
-3. Hochladen von Daten in ein BLOB in einem der BLOB-Container, die aus Kusto abgerufen wurden in (2)
-4. Erstellen Sie eine Erfassungs Nachricht, die die Zieldatenbank und-Tabelle identifiziert und auf das BLOB verweist (3).
-5. Stellen Sie die Erfassungs Nachricht, die wir in (4) erstellt haben, zu einer der Erfassungs Warteschlangen bereit, die in Kusto abgerufen wurden (2)
-6. Abrufen aller Fehler, die vom Dienst während der Erfassung aufgetreten sind
+Der Code enthält die Schritte zum Erstellen eines Azure Storage Clients und zum Hochladen der Daten in ein BLOB.
+Jeder Schritt wird nach dem Beispielcode ausführlicher beschrieben.
 
-In den nachfolgenden Abschnitten werden die einzelnen Schritte ausführlicher erläutert.
+1. [Abrufen eines Authentifizierungs Tokens für den Zugriff auf den Azure Daten-Explorer-Erfassungs Dienst](#obtain-authentication-evidence-from-azure-ad)
+1. Fragen Sie den Azure Daten-Explorer Erfassungs Dienst ab, um Folgendes zu erhalten:
+    * [Erfassungs Ressourcen (Warteschlangen und BLOB-Container)](#retrieve-azure-data-explorer-ingestion-resources)
+    * [Ein Kusto-Identitäts Token, das jeder Erfassungs Nachricht hinzugefügt wird.](#obtain-a-kusto-identity-token)
+1. [Hochladen von Daten in ein BLOB in einem der BLOB-Container, die aus Kusto abgerufen wurden in (2)](#upload-data-to-the-azure-blob-container)
+1. [Erstellen Sie eine Erfassungs Nachricht, die die Zieldatenbank und die Ziel Tabelle identifiziert und auf das BLOB verweist (3).](#compose-the-azure-data-explorer-ingestion-message)
+1. [Stellen Sie die Erfassungs Nachricht, die wir in (4) erstellt haben, in eine Erfassungs Warteschlange, die von Azure Daten-Explorer in (2)](#post-the-azure-data-explorer-ingestion-message-to-the-azure-data-explorer-ingestion-queue)**
+1. [Abrufen eines Fehlers, der vom Dienst während der Erfassung gefunden wurde](#check-for-error-messages-from-the-azure-queue)
 
 ```csharp
-// A container class for ingestion resources we are going to obtain from Kusto
+// A container class for ingestion resources we are going to obtain from Azure Data Explorer
 internal class IngestionResourcesSnapshot
 {
     public IList<string> IngestionQueues { get; set; } = new List<string>();
@@ -57,7 +53,7 @@ internal class IngestionResourcesSnapshot
 
 public static void IngestSingleFile(string file, string db, string table, string ingestionMappingRef)
 {
-    // Your Kusto ingestion service URI, typically ingest-<your cluster name>.kusto.windows.net
+    // Your Azure Data Explorer ingestion service URI, typically ingest-<your cluster name>.kusto.windows.net
     string DmServiceBaseUri = @"https://ingest-{serviceNameAndRegion}.kusto.windows.net";
 
     // 1. Authenticate the interactive user (or application) to access Kusto ingestion service
@@ -69,7 +65,7 @@ public static void IngestSingleFile(string file, string db, string table, string
     // 2b. Retrieve Kusto identity token
     string identityToken = RetrieveKustoIdentityToken(DmServiceBaseUri, bearerToken);
 
-    // 3. Upload file to one of the blob containers we got from Kusto.
+    // 3. Upload file to one of the blob containers we got from Azure Data Explorer.
     // This example uses the first one, but when working with multiple blobs,
     // one should round-robin the containers in order to prevent throttling
     long blobSizeBytes = 0;
@@ -80,7 +76,7 @@ public static void IngestSingleFile(string file, string db, string table, string
     // 4. Compose ingestion command
     string ingestionMessage = PrepareIngestionMessage(db, table, blobUriWithSas, blobSizeBytes, ingestionMappingRef, identityToken);
 
-    // 5. Post ingestion command to one of the ingestion queues we got from Kusto.
+    // 5. Post ingestion command to one of the ingestion queues we got from Azure Data Explorer.
     // This example uses the first one, but when working with multiple blobs,
     // one should round-robin the queues in order to prevent throttling
     PostMessageToQueue(ingestionResources.IngestionQueues.First(), ingestionMessage);
@@ -103,17 +99,21 @@ public static void IngestSingleFile(string file, string db, string table, string
 }
 ```
 
-## <a name="1-obtain-authentication-evidence-from-aad"></a>1. Abrufen von Authentifizierungs beweisen aus Aad
-Hier verwenden wir Adal zum Abrufen eines Aad-Tokens für den Zugriff auf den Kusto-Datenverwaltung-Dienst, um die Eingabe Warteschlangen anzufordern.
+## <a name="using-queued-ingestion-to-azure-data-explorer-for-production-grade-pipelines"></a>Verwenden der in die Warteschlange eingereihten Erfassung in Azure Daten-Explorer für Pipelines auf Produktionsqualität
+
+### <a name="obtain-authentication-evidence-from-azure-ad"></a>Abrufen von Authentifizierungs beweisen aus Azure AD
+
+Hier wird Adal verwendet, um ein Azure AD Token für den Zugriff auf den Kusto-Datenverwaltung Dienst abzurufen und Eingabe Warteschlangen anzufordern.
 Adal ist bei Bedarf auf [nicht-Windows-Plattformen](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-libraries) verfügbar.
+
 ```csharp
-// Authenticates the interactive user and retrieves AAD Access token for specified resource
+// Authenticates the interactive user and retrieves Azure AD Access token for specified resource
 internal static string AuthenticateInteractiveUser(string resource)
 {
-    // Create Auth Context for MSFT AAD:
-    AuthenticationContext authContext = new AuthenticationContext("https://login.microsoftonline.com/{AAD Tenant ID or name}");
+    // Create Auth Context for MSFT Azure AD:
+    AuthenticationContext authContext = new AuthenticationContext("https://login.microsoftonline.com/{Azure AD Tenant ID or name}");
 
-    // Acquire user token for the interactive user for Kusto:
+    // Acquire user token for the interactive user for Azure Data Explorer:
     AuthenticationResult result =
         authContext.AcquireTokenAsync(resource, "<your client app ID>", new Uri(@"<your client app URI>"),
                                         new PlatformParameters(PromptBehavior.Auto), UserIdentifier.AnyUser, "prompt=select_account").Result;
@@ -121,12 +121,13 @@ internal static string AuthenticateInteractiveUser(string resource)
 }
 ```
 
-## <a name="2-retrieve-kusto-ingestion-resources"></a>2. Abrufen von Kusto-Erfassungs Ressourcen
-An dieser Stelle werden die Dinge interessant. Hier erstellen Sie manuell eine HTTP POST-Anforderung an den Kusto-Datenverwaltung-Dienst, der anfordert, die Erfassungs Ressourcen zurückzugeben.
-Dazu zählen Warteschlangen, die der DM-Dienst überwacht, sowie BLOB-Container für das Hochladen von Daten.
+### <a name="retrieve-azure-data-explorer-ingestion-resources"></a>Abrufen von Azure Daten-Explorer Erfassungs Ressourcen
+
+Erstellen Sie manuell eine HTTP POST-Anforderung an den Datenverwaltung-Dienst, um die Rückgabe der Erfassungs Ressourcen anzufordern. Zu diesen Ressourcen zählen Warteschlangen, die der DM-Dienst überwacht, und BLOB-Container für das Hochladen von Daten.
 Der Datenverwaltung-Dienst verarbeitet alle Nachrichten, die Erfassungs Anforderungen enthalten, die in einer dieser Warteschlangen eintreffen.
+
 ```csharp
-// Retrieve ingestion resources (queues and blob containers) with SAS from specified Kusto Ingestion service using supplied Access token
+// Retrieve ingestion resources (queues and blob containers) with SAS from specified Azure Data Explorer Ingestion service using supplied Access token
 internal static IngestionResourcesSnapshot RetrieveIngestionResources(string ingestClusterBaseUri, string accessToken)
 {
     string ingestClusterUri = $"{ingestClusterBaseUri}/v1/rest/mgmt";
@@ -191,8 +192,10 @@ internal static WebResponse SendPostRequest(string uriString, string authToken, 
 }
 ```
 
-## <a name="obtaining-kusto-identity-token"></a>Abrufen von Kusto-Identitäts Token
-Ein wichtiger Schritt beim autorialisieren der Datenerfassung ist das Abrufen eines Identitäts Tokens und das Anfügen an jede Erfassungs Nachricht. Wenn Erfassungs Meldungen über einen nicht direkt Kanal (Azure Queue) an Kusto übergeben werden, gibt es keine Möglichkeit, die in-Band-Autorisierungs Überprüfung durchzuführen. Der Identitäts Token-Mechanismus ermöglicht dies durch Ausgeben eines Kusto-signierten Identitätsnachweises, der vom Kusto-Dienst überprüft werden kann, sobald er die Erfassungs Nachricht empfängt.
+### <a name="obtain-a-kusto-identity-token"></a>Abrufen eines Kusto-Identitäts Tokens
+
+Erfassungs Nachrichten werden an Azure Daten-Explorer über einen nicht direkten Kanal (Azure-Warteschlange) übergeben, sodass die in-Band-Autorisierungs Überprüfung für den Zugriff auf den Azure Daten-Explorer-Erfassungs Dienst nicht möglich ist. Die Lösung besteht darin, ein Identitäts Token an jede Erfassungs Nachricht anzufügen. Das Token ermöglicht die Überprüfung der in-Band-Autorisierung. Dieses signierte Token kann dann vom Azure Daten-Explorer Service überprüft werden, wenn es die Erfassungs Nachricht empfängt.
+
 ```csharp
 // Retrieves a Kusto identity token that will be added to every ingest message
 internal static string RetrieveKustoIdentityToken(string ingestClusterBaseUri, string accessToken)
@@ -213,8 +216,10 @@ internal static string RetrieveKustoIdentityToken(string ingestClusterBaseUri, s
 }
 ```
 
-## <a name="3-upload-data-to-azure-blob-container"></a>3. Hochladen von Daten in einen Azure-BLOB-Container
-In diesem Schritt wird eine lokale Datei in ein Azure-BLOB hochgeladen, die später für die Erfassung übergeben wird. In diesem Code wird Azure Storage SDK verwendet. wenn diese Abhängigkeit jedoch nicht möglich ist, kann Sie mit der [Rest-API des Azure-BLOB-Dienstanbieter](https://docs.microsoft.com/rest/api/storageservices/fileservices/blob-service-rest-api)identisch sein.
+### <a name="upload-data-to-the-azure-blob-container"></a>Hochladen von Daten in den Azure-BLOB-Container
+
+In diesem Schritt wird eine lokale Datei in ein Azure-BLOB hochgeladen, das für die Erfassung übergeben wird. In diesem Code wird das Azure Storage SDK verwendet. Wenn keine Abhängigkeit möglich ist, kann dies mit der [Rest-API des Azure-BLOB-Dienstanbieter](https://docs.microsoft.com/rest/api/storageservices/fileservices/blob-service-rest-api)erreicht werden
+
 ```csharp
 // Uploads a single local file to an Azure Blob container, returns blob URI and original data size
 internal static string UploadFileToBlobContainer(string filePath, string blobContainerUri, string containerName, string blobName, out long blobSize)
@@ -233,13 +238,21 @@ internal static string UploadFileToBlobContainer(string filePath, string blobCon
 }
 ```
 
-## <a name="4-compose-kusto-ingestion-message"></a>4. Verfassen der Kusto-Erfassungs Nachricht
-Hier verwenden wir das Newton Soft. JSON-Paket erneut, um eine gültige Erfassungs Anforderungs Nachricht zu verfassen, die an die Azure-Warteschlange gesendet wird, an die der entsprechende Kusto-Datenverwaltung Dienst lauscht.
-* Dies ist das absolute Minimum für die Erfassungs Nachricht.
-* Beachten Sie, dass dieses Identitäts Token obligatorisch ist und sich im `AdditionalProperties` JSON-Objekt befinden muss.
-* Bei Bedarf müssen `CsvMapping` auch eine `JsonMapping` -Eigenschaft oder eine-Eigenschaft bereitgestellt werden.
-* Weitere Informationen finden Sie [im Artikel zur vorab Erstellung der Erfassungs Zuordnung](../../management/create-ingestion-mapping-command.md) .
-* [Anhang A](#appendix-a-ingestion-message-internal-structure) enthält Erläuterungen zur Struktur der Erfassungs Nachricht.
+### <a name="compose-the-azure-data-explorer-ingestion-message"></a>Erstellen der Azure Daten-Explorer Erfassungs Nachricht
+
+Das Paket "newtonsoft. JSON" erstellt erneut eine gültige Erfassungs Anforderung, um die Zieldatenbank und die Ziel Tabelle zu identifizieren, und verweist auf das BLOB.
+Die Nachricht wird an die Azure-Warteschlange gesendet, an der der relevante Kusto-Datenverwaltung Dienst lauscht.
+
+Hier sind einige Punkte zu beachten.
+
+* Diese Anforderung ist das absolute Minimum für die Erfassungs Nachricht.
+
+> [!NOTE]
+> Das Identitäts Token ist obligatorisch und muss Teil des JSON-Objekts " **AdditionalProperties** " sein.
+
+* Wenn dies erforderlich ist, müssen auch csvmapping-oder jsonmapping-Eigenschaften bereitgestellt werden.
+* Weitere Informationen finden Sie im [Artikel zur vorab Erstellung der Erfassungs Zuordnung](../../management/create-ingestion-mapping-command.md).
+* Die [interne Struktur](#ingestion-message-internal-structure) der Erfassungs Nachricht des Abschnitts enthält eine Erläuterung der Erfassungs Nachrichtenstruktur.
 
 ```csharp
 internal static string PrepareIngestionMessage(string db, string table, string dataUri, long blobSizeBytes, string mappingRef, string identityToken)
@@ -264,10 +277,12 @@ internal static string PrepareIngestionMessage(string db, string table, string d
 }
 ```
 
-## <a name="5-post-kusto-ingestion-message-to-kusto-ingestion-queue"></a>5. Senden der Kusto-Erfassungs Nachricht an die Kusto-Erfassungs Warteschlange
-Und schließlich wird die von uns erstellte Nachricht lediglich in der von uns ausgewählten Warteschlange gepostet.<BR>
-Hinweis: bei Verwendung des .NET-Speicher Clients wird die Nachricht standardmäßig in Base64 codiert. Weitere Informationen finden Sie unter [Storage docs](https://docs.microsoft.com/dotnet/api/microsoft.azure.storage.queue.cloudqueue.encodemessage).<BR>
-Wenn Sie diesen Client nicht verwenden, stellen Sie sicher, dass Sie den Nachrichten Inhalt ordnungsgemäß codieren.
+### <a name="post-the-azure-data-explorer-ingestion-message-to-the-azure-data-explorer-ingestion-queue"></a>Veröffentlichen der Azure-Daten-Explorer Erfassungs Nachricht in der Warteschlange für die Azure-Daten-Explorer Erfassung
+
+Veröffentlichen Sie schließlich die erstellte Nachricht in der ausgewählten Erfassungs Warteschlange, die Sie aus Azure Daten-Explorer abgerufen haben.
+
+> [!NOTE]
+> Der .NET-Speicher Client codiert bei Verwendung die Nachricht standardmäßig in base64. Weitere Informationen finden Sie unter [Storage docs](https://docs.microsoft.com/dotnet/api/microsoft.windowsazure.storage.queue.cloudqueue.encodemessage?view=azure-dotnet#Microsoft_WindowsAzure_Storage_Queue_CloudQueue_EncodeMessage). Wenn Sie diesen Client nicht verwenden, stellen Sie sicher, dass Sie den Nachrichten Inhalt ordnungsgemäß codieren.
 
 ```csharp
 internal static void PostMessageToQueue(string queueUriWithSas, string message)
@@ -279,9 +294,9 @@ internal static void PostMessageToQueue(string queueUriWithSas, string message)
 }
 ```
 
-## <a name="6-pop-messages-from-an-azure-queue"></a>6. Pop-Nachrichten aus einer Azure-Warteschlange
-Nach der Erfassung wird diese Methode verwendet, um Fehlermeldungen aus der entsprechenden Warteschlange zu lesen, die von Kusto Datenverwaltung-Dienst geschrieben wird.<BR>
-[Anhang B](#appendix-b-ingestion-failure-message-structure) enthält Erläuterungen zur Struktur der Fehlermeldungen.
+### <a name="check-for-error-messages-from-the-azure-queue"></a>Überprüfen auf Fehlermeldungen aus der Azure-Warteschlange
+
+Nach der Erfassung überprüfen wir, ob Fehlermeldungen aus der relevanten Warteschlange auftreten, in die der Datenverwaltung schreibt. Weitere Informationen zur Fehler Meldungs Struktur finden Sie unter Erfassungs Fehler Meldungs [Struktur](#ingestion-failure-message-structure). 
 
 ```csharp
 internal static IEnumerable<string> PopTopMessagesFromQueue(string queueUriWithSas, int count)
@@ -299,10 +314,13 @@ internal static IEnumerable<string> PopTopMessagesFromQueue(string queueUriWithS
 }
 ```
 
-## <a name="appendix-a-ingestion-message-internal-structure"></a>Anhang A: interne Struktur der Erfassungs Nachricht
-Die Meldung, dass der Kusto-Datenverwaltung-Dienst aus der Azure-Eingabe Warteschlange lesen soll, ist ein JSON-Dokument im folgenden Format:
+## <a name="ingestion-messages---json-document-formats"></a>Erfassung von Nachrichten: JSON-Dokumentformate
 
-```json
+### <a name="ingestion-message-internal-structure"></a>Interne Struktur der Erfassungs Nachricht
+
+Die Meldung, dass der Kusto-Datenverwaltung-Dienst aus der Azure-Eingabe Warteschlange lesen soll, ist ein JSON-Dokument im folgenden Format.
+
+```JSON
 {
     "Id" : "<Id>",
     "BlobPath" : "https://<AccountName>.blob.core.windows.net/<ContainerName>/<PathToBlob>?<SasToken>",
@@ -318,36 +336,35 @@ Die Meldung, dass der Kusto-Datenverwaltung-Dienst aus der Azure-Eingabe Wartesc
 }
 ```
 
-
 |Eigenschaft | BESCHREIBUNG |
 |---------|-------------|
 |Id |Nachrichten-ID (GUID) |
-|BlobPath |BLOB-URI, einschließlich des SAS-Schlüssels, der Kusto-Berechtigungen zum Lesen/Schreiben/löschen gewährt (Lese-/Schreibberechtigungen sind erforderlich, wenn Kusto das BLOB nach dem Erfassen der Daten löschen soll) |
-|Rawdatasize |Größe der nicht komprimierten Daten in Bytes. Durch die Bereitstellung dieses Werts kann Kusto die Erfassung optimieren, indem mehrere blobvorgänge möglicherweise zusammen aggregierte werden. Diese Eigenschaft ist optional. Wenn Sie jedoch nicht angegeben wird, greift Kusto nur zum Abrufen der Größe auf das BLOB zu. |
+|BlobPath |Pfad (URI) zum BLOB, einschließlich des SAS-Schlüssels, dem Azure Daten-Explorer Berechtigungen zum Lesen/Schreiben/Löschen erteilt werden. Berechtigungen sind erforderlich, damit Azure Daten-Explorer das BLOB löschen kann, nachdem die Erfassung der Daten abgeschlossen ist.|
+|Rawdatasize |Größe der nicht komprimierten Daten in Bytes. Durch die Angabe dieses Werts kann Azure Daten-Explorer die Erfassung optimieren, indem möglicherweise mehrere blobdaten aggregierte werden. Diese Eigenschaft ist optional. Wenn Sie jedoch nicht angegeben wird, greift Azure Daten-Explorer nur zum Abrufen der Größe auf das BLOB zu. |
 |DatabaseName |Name der Zieldatenbank |
 |TableName |Name der Ziel Tabelle |
-|Retainblobonsuccess |Wenn der Wert `true`auf festgelegt ist, wird das BLOB nicht gelöscht, nachdem die Erfassung erfolgreich abgeschlossen wurde. Der Standardwert lautet `false`. |
+|Retainblobonsuccess |Wenn der Wert auf festgelegt `true` ist, wird das BLOB nicht gelöscht, nachdem die Erfassung erfolgreich abgeschlossen wurde. Die Standardeinstellung ist `false`. |
 |Format |Unkomprimiertes Datenformat |
-|Flushimmediately |Wenn diese Einstellung `true`auf festgelegt ist, wird jede Aggregation übersprungen. Der Standardwert lautet `false`. |
+|Flushimmediately |Wenn diese Einstellung auf festgelegt `true` ist, wird jede Aggregation übersprungen. Die Standardeinstellung ist `false`. |
 |Beim |Erfolgs-/Fehlerberichterstattungs-Ebene: 0-Fehler, 1-keine, 2-alle |
 |Report Method |Berichtsmechanismus: 0-Warteschlange, 1-Tabelle |
-|AdditionalProperties |Alle zusätzlichen Eigenschaften (Tags usw.) |
+|AdditionalProperties |Zusätzliche Eigenschaften, z. b. Tags |
 
+### <a name="ingestion-failure-message-structure"></a>Struktur der Erfassungs Fehlermeldung
 
-## <a name="appendix-b-ingestion-failure-message-structure"></a>Anhang B: Struktur der Erfassungs Fehlermeldung
-In der folgenden Tabelle wird die Meldung, dass der Kusto-Datenverwaltung-Dienst aus der Azure-Eingabe Warteschlange liest, ein JSON-Dokument im folgenden Format:
+Die Meldung, die der Datenverwaltung erwartet, aus der Azure-Eingabe Warteschlange zu lesen, ist ein JSON-Dokument im folgenden Format.
 
-|Eigenschaft | BESCHREIBUNG |
+|Eigenschaft | Beschreibung |
 |---------|-------------
 |OperationId |Vorgangs-ID (GUID), die zum Nachverfolgen des Vorgangs auf der Dienst Seite verwendet werden kann. |
 |Datenbank |Name der Zieldatenbank |
 |Tabelle |Name der Ziel Tabelle |
 |Failedon |Fehler Zeitstempel |
-|Ingestionsourceid |GUID, die den Datenblock identifiziert, den Kusto nicht erfassen konnte |
-|Ingestionsourcepath |Der Pfad (URI) zum Datenblock, den Kusto nicht erfassen konnte. |
+|Ingestionsourceid |GUID, die den Datenblock identifiziert, den Azure Daten-Explorer nicht erfassen konnte |
+|Ingestionsourcepath |Der Pfad (URI) zu dem Datenblock, den Azure Daten-Explorer nicht erfassen konnte. |
 |Details |Fehlermeldung |
-|ErrorCode |Kusto-Fehlercode ( [hier](kusto-ingest-client-errors.md#ingestion-error-codes)finden Sie alle Fehlercodes) |
+|ErrorCode |Azure Daten-Explorer-Fehlercode ( [hier](kusto-ingest-client-errors.md#ingestion-error-codes)finden Sie alle Fehlercodes). |
 |Failurestatus |Gibt an, ob der Fehler permanent oder vorübergehend ist. |
-|RootActivityId |Kusto-Korrelations Bezeichner (GUID), der zum Nachverfolgen des Vorgangs auf der Dienst Seite verwendet werden kann. |
+|RootActivityId |Azure Daten-Explorer Korrelations-ID (GUID), die zum Nachverfolgen des Vorgangs auf der Dienst Seite verwendet werden kann |
 |Originatesfromupdatepolicy |Gibt an, ob der Fehler durch eine fehlerhafte [Richtlinie für transaktionale Updates](../../management/updatepolicy.md) verursacht wurde. |
-|Schultern | Gibt an, ob die Erfassung erfolgreich durchgeführt werden kann, wenn der Vorgang unverändert erfolgt |
+|Schultern | Gibt an, ob die Erfassung erfolgreich ist, wenn der Vorgang wiederholt wird. |

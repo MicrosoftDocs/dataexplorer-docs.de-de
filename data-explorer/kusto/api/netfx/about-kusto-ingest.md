@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 03/24/2020
-ms.openlocfilehash: c43c6c09ad6da90685c56dc47ebe257a55eaede6
-ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
+ms.openlocfilehash: 5770c59ff7298567cad01bb3ed4cc6a684b2378a
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82862138"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373691"
 ---
 # <a name="kusto-ingest-client-library"></a>Kusto-Erfassungs Client Bibliothek
 
@@ -47,7 +47,7 @@ Das folgende Diagramm zeigt die Interaktion mit dem Erfassungs Client in der War
 ![alt text](../images/queued-ingest.jpg "in Warteschlange eingereiht")
 
 ### <a name="direct-ingestion"></a>Direkte Erfassung
-Dieser Modus wird von ikustodirectingestclient definiert und erzwingt eine direkte Interaktion mit dem Kusto-Engine-Dienst. In diesem Modus werden die Daten vom Kusto-Erfassungs Dienst nicht gemäßigt oder verwaltet. Jede Erfassungs Anforderung im direkten Modus wird schließlich in den `.ingest` Befehl übersetzt, der direkt auf dem Kusto-Engine-Dienst ausgeführt wird.
+Dieser Modus wird von ikustodirectingestclient definiert und erzwingt eine direkte Interaktion mit dem Kusto-Engine-Dienst. In diesem Modus werden die Daten vom Kusto-Erfassungs Dienst nicht gemäßigt oder verwaltet. Jede Erfassungs Anforderung im direkten Modus wird schließlich in den Befehl übersetzt, der `.ingest` direkt auf dem Kusto-Engine-Dienst ausgeführt wird.
 Im folgenden Diagramm wird die direkte Erfassung von Client Interaktionen mit Kusto erläutert:
 
 ![alt text](../images/direct-ingest.jpg "Direkte Erfassung")
@@ -72,10 +72,10 @@ Im folgenden Diagramm wird die direkte Erfassung von Client Interaktionen mit Ku
 [Bewährte Methoden](kusto-ingest-best-practices.md) für die Erfassung bieten COGS und Durchsatz-POV bei der Erfassung.
 
 ### <a name="thread-safety"></a>Threadsicherheit
-Kusto-Erfassungs Client Implementierungen sind Thread sicher und sollen wieder verwendet werden. Es ist nicht erforderlich, eine Instanz der `KustoQueuedIngestClient` -Klasse für jeden oder sogar mehrere Erfassungs Vorgänge zu erstellen. Pro Ziel-Kusto-Cluster pro Benutzer Prozess ist eine einzelne Instanz von `KustoQueuedIngestClient` erforderlich. Das Ausführen mehrerer Instanzen ist eine gegen produktive Produktivität und kann den Datenverwaltung Cluster in den Betrieb setzen.
+Kusto-Erfassungs Client Implementierungen sind Thread sicher und sollen wieder verwendet werden. Es ist nicht erforderlich, eine Instanz der- `KustoQueuedIngestClient` Klasse für jeden oder sogar mehrere Erfassungs Vorgänge zu erstellen. `KustoQueuedIngestClient`Pro Ziel-Kusto-Cluster pro Benutzer Prozess ist eine einzelne Instanz von erforderlich. Das Ausführen mehrerer Instanzen ist eine gegen produktive Produktivität und kann den Datenverwaltung Cluster in den Betrieb setzen.
 
 ### <a name="supported-data-formats"></a>Unterstützte Datenformate
-Wenn Sie die systemeigene Erfassung verwenden, wenn Sie nicht bereits vorhanden ist, laden Sie die Daten in mindestens einen Azure Storage blobmodus hoch. Zurzeit werden unterstützte BLOB-Formate im Thema [Unterstützte Datenformate](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats) dokumentiert.
+Wenn Sie die systemeigene Erfassung verwenden, wenn Sie nicht bereits vorhanden ist, laden Sie die Daten in mindestens einen Azure Storage blobmodus hoch. Zurzeit werden unterstützte BLOB-Formate im Thema [Unterstützte Datenformate](../../../ingestion-supported-formats.md) dokumentiert.
 
 ### <a name="schema-mapping"></a>Schemazuordnung
 [Schema](../../management/mappings.md) Zuordnungen helfen bei der deterministisch Bindung von Quelldaten Feldern an Ziel Tabellen Spalten.

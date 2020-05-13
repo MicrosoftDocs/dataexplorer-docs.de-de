@@ -1,6 +1,6 @@
 ---
-title: Bereichsoperator - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird der Bereichsoperator in Azure Data Explorer beschrieben.
+title: 'Bereichs Operator: Azure Daten-Explorer'
+description: Dieser Artikel beschreibt den Bereichs Operator in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f7ec559a23e28568ce7abd8365cdc502ad05a9b0
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 9dc64e6d91d6832dd57345bf58200848ad5a5db4
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510607"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373095"
 ---
 # <a name="range-operator"></a>range-Operator
 
@@ -23,25 +23,26 @@ Beachten Sie, dass keine Pipeline-Eingabe vorhanden ist.
 
 **Syntax**
 
-`range`*ColumnName* `from` `step` *start* `to` *Startstoppschritt* *step*
+`range`*ColumnName* `from` *starten* `to` Sie wird *beendet* `step` *Schritt*
 
 **Argumente**
 
-* *columnName*: Der Name der einzelnen Spalte in der Ausgabetabelle.
-* *start*: Der kleinste Wert in der Ausgabe.
-* *stop*: Der höchste Wert, der in der Ausgabe generiert wird (oder eine Begrenzung auf den höchsten Wert, wenn *Schrittschritte* über diesen Wert).
-* *Schritt*: Die Differenz zwischen zwei aufeinander folgenden Werten. 
+* *ColumnName*: der Name der einzelnen Spalte in der Ausgabe Tabelle.
+* *Start*: der kleinste Wert in der Ausgabe.
+* *stoppt*: der höchste Wert, der in der Ausgabe generiert wird (oder ein gebunden am höchsten Wert, wenn *Schritt* Schritte über diesem Wert).
+* *Step*: der Unterschied zwischen zwei aufeinander folgenden Werten. 
 
-Die Argumente müssen numerische Werte, Datums- oder TimeSpan-Werte sein. Sie können nicht auf die Spalten einer Tabelle verweisen. (Wenn Sie den Bereich basierend auf einer Eingabetabelle berechnen möchten, verwenden Sie die Bereichsfunktion, möglicherweise mit dem Operator mv-expand.) 
+Die Argumente müssen numerische Werte, Datums- oder TimeSpan-Werte sein. Sie können nicht auf die Spalten einer Tabelle verweisen. (Wenn Sie den Bereich basierend auf einer Eingabe Tabelle berechnen möchten, verwenden Sie die Range-Funktion, vielleicht mit dem MV-Expand-Operator.) 
 
 **Rückgabe**
 
-Eine Tabelle mit einer einzelnen Spalte namens *columnName*, deren Werte *start*, *start* `+` *step*, ... bis und bis *zum Anhalten*.
+Eine Tabelle mit einer einzelnen Spalte namens *ColumnName*, deren Werte *Start*, *Start* `+` *Schritt*,... bis zu und bis zum *Ende*.
 
 **Beispiel**  
 
 Eine Tabelle von Mitternacht der vergangenen sieben Tage. Die bin (floor)-Funktion reduziert jede Zeit auf den Anfang des Tages.
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 range LastWeek from ago(7d) to now() step 1d
 ```
@@ -56,11 +57,12 @@ range LastWeek from ago(7d) to now() step 1d
 
 Eine Tabelle mit einer einzelnen Spalte namens `Steps` vom Typ `long`, deren Werte `1`, `4` und `7` sind.
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 range Steps from 1 to 8 step 3
 ```
 
-Das nächste Beispiel `range` zeigt, wie der Operator verwendet werden kann, um eine kleine, ad-hoc-Dimensionstabelle zu erstellen, die dann verwendet wird, um Nullen einzuführen, bei denen die Quelldaten keine Werte haben.
+Im nächsten Beispiel wird gezeigt, wie der- `range` Operator verwendet werden kann, um eine kleine Ad-hoc-Dimensions Tabelle zu erstellen, die dann verwendet wird, um Nullen einzuführen, bei denen die Quelldaten keine Werte aufweisen.
 
 ```kusto
 range TIMESTAMP from ago(4h) to now() step 1m

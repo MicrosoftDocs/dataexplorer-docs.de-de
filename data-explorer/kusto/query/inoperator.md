@@ -1,6 +1,6 @@
 ---
-title: in- und notin-Operatoren - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden In- und Notin-Operatoren in Azure Data Explorer beschrieben.
+title: 'in-und NOTIN "-Operatoren: Azure Daten-Explorer'
+description: Dieser Artikel beschreibt die Operatoren in und NOTIN "in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2019
-ms.openlocfilehash: bd247de2bd211ae7be3da449e940899d2e8bb475
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: cd11362c15e5ecfb80eab57b57b22f190f47da05
+ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513803"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83271569"
 ---
 # <a name="in-and-in-operators"></a>in- und !in-Operatoren
 
-Filtert ein Recordset basierend auf dem angegebenen Wertesatz.
+Filtert ein Recordset basierend auf dem bereitgestellten Satz von Werten.
 
 ```kusto
 Table1 | where col in ('value1', 'value2')
@@ -25,44 +25,45 @@ Table1 | where col in ('value1', 'value2')
 
 **Syntax**
 
-*Syntax zu Groß-/Kleinschreibung:*
+*Groß-/Kleinschreibung beachten:*
 
-*T* `|` T `where` *col* `in` col `(` *Liste skalarer Ausdrücke*`)`   
-*T* `|` *col* `in` `(`kolularer *Ausdruck* `where``)`   
+*T* - `|` `where` *col* `in` `(` *Liste der Skalarausdrücke*`)`   
+*T* - `|` `where` *col* `in` `(` *Tabellen Ausdruck (Tabellen* )`)`   
  
-*T* `|` T `where` *col* `!in` col `(` *Liste skalarer Ausdrücke*`)`  
-*T* `|` *col* `!in` `(`kolularer *Ausdruck* `where``)`   
+*T* - `|` `where` *col* `!in` `(` *Liste der Skalarausdrücke*`)`  
+*T* - `|` `where` *col* `!in` `(` *Tabellen Ausdruck (Tabellen* )`)`   
 
-*Groß-/Kleinschreibung, bei der die Syntax nicht berücksichtigt wird:*
+*Syntax zur Groß-/Kleinschreibung*
 
-*T* `|` T `where` *col* `in~` col `(` *Liste skalarer Ausdrücke*`)`   
-*T* `|` *col* `in~` `(`kolularer *Ausdruck* `where``)`   
+*T* - `|` `where` *col* `in~` `(` *Liste der Skalarausdrücke*`)`   
+*T* - `|` `where` *col* `in~` `(` *Tabellen Ausdruck (Tabellen* )`)`   
  
-*T* `|` T `where` *col* `!in~` col `(` *Liste skalarer Ausdrücke*`)`  
-*T* `|` *col* `!in~` `(`kolularer *Ausdruck* `where``)`   
+*T* - `|` `where` *col* `!in~` `(` *Liste der Skalarausdrücke*`)`  
+*T* - `|` `where` *col* `!in~` `(` *Tabellen Ausdruck (Tabellen* )`)`   
 
 **Argumente**
 
-* *T* - Die tabellarische Eingabe, deren Datensätze gefiltert werden sollen.
-* *col* - die zu filternde Spalte.
-* *Liste der Ausdrücke* - eine durch Kommas getrennte Liste von tabellenförmigen, skalaren oder literalen Ausdrücken  
-* *Tabellarischer Ausdruck* - ein tabellarischer Ausdruck, der einen Satz von Werten enthält (in einem Fallausdruck, der mehrere Spalten enthält, wird die erste Spalte verwendet)
+* *T* : die tabellarische Eingabe, deren Datensätze gefiltert werden sollen.
+* *Col* : die zu filternde Spalte.
+* *Liste der Ausdrücke* : eine durch Trennzeichen getrennte Liste von tabellarischen, skalaren oder literalen Ausdrücken.  
+* *tabellarischer Ausdruck* : ein tabellarischer Ausdruck, der einen Satz von Werten aufweist (in einem Case-Ausdruck gibt es mehrere Spalten, die erste Spalte wird verwendet).
 
 **Rückgabe**
 
-Zeilen in *T,* für die das Prädikat`true`
+Zeilen in *T* , für die das Prädikat`true`
 
 **Hinweise**
 
-* Die Ausdrucksliste kann `1,000,000` bis zu Werten erzeugen    
-* Verschachtelte Arrays werden in eine einzige Werteliste `x in (dynamic([1,[2,3]]))` abgeflacht, z. B.`x in (1,2,3)` 
-* Bei tabellarischen Ausdrücken wird die erste Spalte des Resultsets   
-* Wenn Sie dem Operator ''' hinzufügen, `x in~ (expression)` `x !in~ (expression)`wird die Suchanfrage von Werten unbeachtet: oder .
+* Die Ausdrucks Liste kann bis zu Werte liefern. `1,000,000`    
+* Die schsted Arrays werden in einer einzelnen Werteliste vereinfacht, z. b. `x in (dynamic([1,[2,3]]))` in`x in (1,2,3)` 
+* Bei tabellarischen Ausdrücken wird die erste Spalte des Resultsets ausgewählt.   
+* Durch das Hinzufügen von ' ~ ' zum Operator wird die Groß-/Kleinschreibung nicht beachtet: `x in~ (expression)` oder `x !in~ (expression)` .
 
 **Beispiele:**  
 
-**Eine einfache Verwendung des 'in'-Operators:**  
+**Einfache Verwendung des "in"-Operators:**  
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents 
 | where State in ("FLORIDA", "GEORGIA", "NEW YORK") 
@@ -74,8 +75,9 @@ StormEvents
 |4775|  
 
 
-**Eine einfache Verwendung des Operators 'in'::**  
+**Einfache Verwendung von "in ~"-Operator:**  
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents 
 | where State in~ ("Florida", "Georgia", "New York") 
@@ -86,8 +88,9 @@ StormEvents
 |---|
 |4775|  
 
-**Eine einfache Verwendung des '!in'-Operators:**  
+**Einfache Verwendung des Operators "! in":**  
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents 
 | where State !in ("FLORIDA", "GEORGIA", "NEW YORK") 
@@ -99,7 +102,9 @@ StormEvents
 |54291|  
 
 
-**Verwenden eines dynamischen Arrays:**
+**Verwenden des dynamischen Arrays:**
+
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let states = dynamic(['FLORIDA', 'ATLANTIC SOUTH', 'GEORGIA']);
 StormEvents 
@@ -112,8 +117,9 @@ StormEvents
 |3218|
 
 
-**Ein Beispiel für eine Unterabfrage:**  
+**Beispiel für eine Unterabfrage:**  
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 // Using subquery
 let Top_5_States = 
@@ -125,8 +131,9 @@ StormEvents
 | count
 ```
 
-Die gleiche Abfrage kann wie:
+Dieselbe Abfrage kann wie folgt geschrieben werden:
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 // Inline subquery 
 StormEvents 
@@ -142,8 +149,9 @@ StormEvents
 |---|
 |14242|  
 
-**Top mit anderen Beispielen:**  
+**Top mit anderem Beispiel:**  
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let Lightning_By_State = materialize(StormEvents | summarize lightning_events = countif(EventType == 'Lightning') by State);
 let Top_5_States = Lightning_By_State | top 5 by lightning_events | project State; 
@@ -152,17 +160,18 @@ Lightning_By_State
 | summarize sum(lightning_events) by State 
 ```
 
-| State     | sum_lightning_events |
+| Bundesland/Kanton     | sum_lightning_events |
 |-----------|----------------------|
 | ALABAMA   | 29                   |
 | Wisconsin | 31                   |
 | TEXAS     | 55                   |
-| Florida   | 85                   |
+| Flori   | 85                   |
 | Georgien   | 106                  |
 | Andere     | 415                  |
 
 **Verwenden einer statischen Liste, die von einer Funktion zurückgegeben wird:**  
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents | where State in (InterestingStates()) | count
 
@@ -173,12 +182,13 @@ StormEvents | where State in (InterestingStates()) | count
 |4775|  
 
 
-Hier ist die Funktionsdefinition:  
+Dies ist die Funktionsdefinition:  
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 .show function InterestingStates
 ```
 
 |name|Parameter|Body|Ordner|DocString|
 |---|---|---|---|---|
-|InteressanteStaaten|()|• dynamic(["WASHINGTON", "FLORIDA", "GEORGIA", "NEW YORK"])
+|Interessantheits Zustände|()|{Dynamic (["Washington", "Florida", "Georgia", "New York"])}

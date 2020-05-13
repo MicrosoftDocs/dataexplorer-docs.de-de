@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/12/2020
-ms.openlocfilehash: c0ee38fe77c0957b9ba7fd589115eee20be6a649
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 646ec00531d528efd51b4a168fde3de660a85ced
+ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83224849"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83271093"
 ---
 # <a name="parse-where-operator"></a>parse-where-Operator
 
@@ -95,6 +95,7 @@ Einige der Zeichen folgen haben keine vollständige Entsprechung.
 
 Mithilfe von `parse` haben die berechneten Spalten Nullen.
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let Traces = datatable(EventText:string)
 [
@@ -121,6 +122,7 @@ Traces
 
 Durch die Verwendung von ' Analyse-WHERE ' werden nicht erfolgreich analysierte Zeichen folgen aus dem Ergebnis herausgefiltert.
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let Traces = datatable(EventText:string)
 [
@@ -145,6 +147,7 @@ Traces
 
 Verwenden Sie zum Abfragen von resourceName und totalslices die folgende Abfrage:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let Traces = datatable(EventText:string)
 [
@@ -167,6 +170,7 @@ Um das erforderliche Ergebnis zu erhalten, führen Sie `parse-where` mit dem Reg
 
 Es werden nur drei Zeichen folgen erfolgreich analysiert, sodass das Ergebnis drei Datensätze ist (einige totalslices enthalten ungültige ganze Zahlen).
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let Traces = datatable(EventText:string)
 [

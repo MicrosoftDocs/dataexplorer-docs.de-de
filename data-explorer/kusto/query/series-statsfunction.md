@@ -1,6 +1,6 @@
 ---
-title: series_stats() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird series_stats() in Azure Data Explorer beschrieben.
+title: series_stats ()-Azure Daten-Explorer
+description: In diesem Artikel wird series_stats () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,42 +8,43 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/10/2020
-ms.openlocfilehash: 07aa5df7351a5d4be1522d39456423197bde508d
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 3fe88a5d53faaca4512d614d3e62204ac26e6fc5
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81507921"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372444"
 ---
 # <a name="series_stats"></a>series_stats()
 
 `series_stats()`gibt Statistiken für eine Reihe in mehreren Spalten zurück.  
 
-Die `series_stats()` Funktion nimmt eine Spalte mit dynamischem numerischen Array als Eingabe und berechnet die folgenden Spalten:
-* `min`: Mindestwert im Eingabe-Array
-* `min_idx`: erste Position des Minimalwerts im Eingabe-Array
-* `max`: Maximalwert im Eingabe-Array
-* `max_idx`: erste Position des Maximalwerts im Eingabe-Array
-* `avg`: Durchschnittswert des Eingabe-Arrays
-* `variance`: Beispielvarianz des Eingabe-Arrays
-* `stdev`: Beispiel-Standardabweichung des Eingangsarrays
+Die `series_stats()` Funktion nimmt eine Spalte mit dynamischem numerischen Array als Eingabe an und berechnet die folgenden Spalten:
+* `min`: Minimalwert im Eingabe Array
+* `min_idx`: erste Position des minimal Werts im Eingabe Array
+* `max`: maximaler Wert im Eingabe Array
+* `max_idx`: erste Position des maximalen Werts im Eingabe Array
+* `avg`: Durchschnittlicher Wert des Eingabe Arrays
+* `variance`: Stichproben Varianz des Eingabe Arrays
+* `stdev`: Stichproben Standardabweichung des Eingabe Arrays
 
 > [!NOTE] 
-> Diese Funktion gibt mehrere Spalten zurück, sodass sie nicht als Argument für eine andere Funktion verwendet werden kann.
+> Diese Funktion gibt mehrere Spalten zurück, sodass Sie nicht als Argument für eine andere Funktion verwendet werden kann.
 
 **Syntax**
 
-project `series_stats(` *x* `[,` *ignore_nonfinite* `])` oder `series_stats(`extend *x* `)` Gibt alle oben genannten Spalten mit den folgenden Namen zurück: series_stats_x_min, series_stats_x_min_idx usw.
+Project `series_stats(` *x* `[,` *ignore_nonfinite* `])` oder Erweiterung `series_stats(` *x* `)` gibt alle oben erwähnten Spalten mit den folgenden Namen zurück: series_stats_x_min, series_stats_x_min_idx und usw.
  
-projekt (m,`series_stats(`mi)=*x* `)` or extend`series_stats(`(m, mi)=*x* `)` Gibt die folgenden Spalten zurück: m (min) und mi (min_idx).
+Project (m, Mi) = `series_stats(` *x* `)` oder Extend (m, Mi) = `series_stats(` *x* `)` gibt die folgenden Spalten zurück: m (min) und Mi (min_idx).
 
 **Argumente**
 
-* *x*: Dynamische Arrayzelle, die ein Array numerischer Werte ist. 
-* *ignore_nonfinite*: Boolean `false`(optional, default: ) Flag, das angibt, ob die Statistiken berechnet werden sollen, während nicht-endliche Werte ignoriert werden (*null*, *NaN*, *inf*, etc.). Wenn auf `false`gesetzt, werden `null` die zurückgegebenen Werte angezeigt, wenn nicht endliche Werte im Array vorhanden sind.
+* *x*: dynamische Array Zelle, bei der es sich um ein Array von numerischen Werten handelt. 
+* *ignore_nonfinite*: boolesches Flag (optional, Standard: `false` ), das angibt, ob die Statistiken beim ignorieren von nicht begrenzten Werten (*null*, *NaN*, *INF*usw.) berechnet werden sollen. Wenn der Wert auf festgelegt `false` ist, sind die zurückgegebenen Werte, `null` Wenn nicht endliche Werte im Array vorhanden sind.
 
 **Beispiel**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 print x=dynamic([23,46,23,87,4,8,3,75,2,56,13,75,32,16,29]) 
 | project series_stats(x)

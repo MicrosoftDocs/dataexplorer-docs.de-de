@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1d3c3939a5c8b3a5f1e6f1fa0b40f9b927ee5325
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: d2e42ce3de656a3e137245786596e454c36ccbef
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226056"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373608"
 ---
 # <a name="kustoingest-client-interfaces-and-factory-classes"></a>Kusto. Erfassen von Client Schnittstellen und Factoryklassen
 
@@ -359,7 +359,7 @@ Die kustoingestionproperties-Klasse enthält grundlegende Erfassungs Eigenschaft
 |Avromapping |Definiert für jede Spalte den Namen des Felds im Avro-Datensatz. **Obligatorisch für die Avro-Erfassung** |
 |Validationpolicy |Daten Validierungs Definitionen. Weitere Informationen finden Sie unter [TODO]. |
 |Format |Format der erfassten Daten |
-|AdditionalProperties | Andere Eigenschaften, die als Erfassungs [Eigenschaften](https://docs.microsoft.com/azure/data-explorer/ingestion-properties) an den Erfassungs Befehl übermittelt werden. Die Eigenschaften werden übermittelt, da nicht alle Erfassungs Eigenschaften in einem separaten Member dieser Klasse dargestellt werden.|
+|AdditionalProperties | Andere Eigenschaften, die als Erfassungs [Eigenschaften](../../../ingestion-properties.md) an den Erfassungs Befehl übermittelt werden. Die Eigenschaften werden übermittelt, da nicht alle Erfassungs Eigenschaften in einem separaten Member dieser Klasse dargestellt werden.|
 
 ```csharp
 public class KustoIngestionProperties
@@ -502,7 +502,7 @@ Die kustoqueuedingestionproperties-Klasse erweitert kustoingestionproperties dur
 
 |Eigenschaft   |Bedeutung    |
 |-----------|-----------|
-|Flushimmediately |Der Standardwert lautet `false`. Bei Festlegung auf `true` wird der Aggregations Mechanismus des Datenverwaltung Dienstanbieter umgangen. |
+|Flushimmediately |Wird standardmäßig auf `false` festgelegt. Bei Festlegung auf `true` wird der Aggregations Mechanismus des Datenverwaltung Dienstanbieter umgangen. |
 |Ingestionreportlevel |Steuert die Ebene der Erfassungs Status Berichterstattung (standardmäßig `FailuresOnly` ). Für eine gute Leistung und Speicherauslastung wird empfohlen, ingestionreportlevel nicht auf festzulegen.`FailuresAndSuccesses` |
 |Ingestionreportmethod |Steuert das Ziel der Erfassungs Status Berichterstattung. Folgende Optionen stehen zur Verfügung: Azure Queue, Azure Table oder beides. Der Standardwert lautet `Queue`.
 

@@ -1,6 +1,6 @@
 ---
-title: Projektneuordnungsoperator - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt den Projektneuordnungsoperator in Azure Data Explorer.
+title: 'Project-reorder-Operator: Azure-Daten-Explorer'
+description: Dieser Artikel beschreibt den Projekttyp-Operator in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: bf56a69891f83aaabc12dbbcd8f758ecb963b493
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 74acab0dc4f0fbdaf7c77e609db3e41f875f2cad
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510845"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373152"
 ---
 # <a name="project-reorder-operator"></a>project-reorder-Operator
 
-Ordnet Spalten in der Ergebnisausgabe neu an.
+Ordnet Spalten in der Ergebnis Ausgabe neu an.
 
 ```kusto
 T | project-reorder Col2, Col1, Col* asc
@@ -25,31 +25,32 @@ T | project-reorder Col2, Col1, Col* asc
 
 **Syntax**
 
-*T* `| project-reorder` *ColumnNameOrPattern* [`asc`|`desc`] [`,` ...]
+*T* `| project-reorder` *columnnameorpattern* [ `asc` | `desc` ] [ `,` ...]
 
 **Argumente**
 
-* *T*: Die Eingabetabelle.
-* *ColumnNameOrPattern:* Der Name des Spalten- oder Spaltenplatzhaltermusters, das der Ausgabe hinzugefügt wurde.
-* Für Platzhaltermuster: `asc` `desc` Geben sie Spalten mit ihren Namen in aufsteigender oder absteigender Reihenfolge an oder ordnet sie an. Wenn `asc` `desc` oder nicht angegeben, wird die Reihenfolge durch die übereinstimmenden Spalten bestimmt, wie sie in der Quelltabelle angezeigt werden.
+* *T*: die Eingabe Tabelle.
+* *Columnnameorpattern:* Der Name des Spalten-oder Spalten Platzhalter Musters, das der Ausgabe hinzugefügt wird.
+* Für Platzhalter Muster: angeben `asc` oder `desc` Sortieren von Spalten mit ihren Namen in aufsteigender oder absteigender Reihenfolge. Wenn `asc` oder `desc` nicht angegeben ist, wird die Reihenfolge durch die übereinstimmenden Spalten bestimmt, wie Sie in der Quell Tabelle angezeigt werden.
 
 **Rückgabe**
 
-Eine Tabelle, die Spalten in der von den Operatorargumenten angegebenen Reihenfolge enthält. `project-reorder`werden Spalten nicht umbenannt oder aus der Tabelle entfernt, daher werden alle Spalten, die in der Quelltabelle vorhanden waren, in der Ergebnistabelle angezeigt.
+Eine Tabelle, die Spalten in der von den Operator Argumenten angegebenen Reihenfolge enthält. `project-reorder`benennt oder entfernt keine Spalten aus der Tabelle. aus diesem Grund werden alle Spalten, die in der Quell Tabelle vorhanden waren, in der Ergebnistabelle angezeigt.
 
 **Hinweise**
 
-- Bei *mehrdeutigecolumncolumnnamensOrPattern-Übereinstimmung* wird die Spalte an der ersten Position angezeigt, die dem Muster entspricht.
-- Das Angeben von `project-reorder` Spalten für die ist optional. Spalten, die nicht angegeben sind, werden explizit als letzte Spalten der Ausgabetabelle angezeigt.
+- Bei einem mehrdeutigen *columnnameorpattern* -Abgleich wird die Spalte an der ersten Position angezeigt, die mit dem Muster übereinstimmt.
+- Das Angeben von Spalten für `project-reorder` ist optional. Spalten, die nicht explizit angegeben werden, werden als letzte Spalten der Ausgabe Tabelle angezeigt.
 
-* Verwenden [`project-away`](projectawayoperator.md) Sie diese Datei zum Entfernen von Spalten.
-* Verwenden [`project-rename`](projectrenameoperator.md) Sie diese Datei, um Spalten umzubenennen.
+* Verwenden [`project-away`](projectawayoperator.md) Sie, um Spalten zu entfernen.
+* Verwenden [`project-rename`](projectrenameoperator.md) Sie zum Umbenennen von Spalten.
 
 
 **Beispiele**
 
-Ordnen Sie eine Tabelle mit drei Spalten (a, b, c) neu an, damit zuerst die zweite Spalte (b) angezeigt wird.
+Ordnen Sie eine Tabelle mit drei Spalten (a, b, c) neu an, damit die zweite Spalte (b) zuerst angezeigt wird.
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print a='a', b='b', c='c'
 |  project-reorder b
@@ -59,8 +60,9 @@ print a='a', b='b', c='c'
 |---|---|---|
 |b|a|c|
 
-Ordnen Sie Spalten einer Tabelle neu `a` an, sodass Spalten, die mit beginnen, vor anderen Spalten angezeigt werden.
+Ordnen Sie Spalten einer Tabelle so an, dass Spalten, die mit beginnen, `a` vor anderen Spalten angezeigt werden.
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print b = 'b', a2='a2', a3='a3', a1='a1'
 |  project-reorder a* asc

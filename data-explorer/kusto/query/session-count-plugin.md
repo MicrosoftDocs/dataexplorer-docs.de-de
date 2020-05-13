@@ -1,5 +1,5 @@
 ---
-title: 'session_count-Plug-in: Azure Daten-Explorer | Microsoft-Dokumentation'
+title: 'session_count-Plug-in: Azure Daten-Explorer'
 description: In diesem Artikel wird session_count-Plug-in in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7ebbbc401f8fdee79aaa328d45c7758d9acb931e
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 6a9596b71afabe1e80e866fef7f2a22f6b288631
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82619045"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372407"
 ---
 # <a name="session_count-plugin"></a>session_count-Plug-In
 
@@ -25,7 +25,7 @@ T | evaluate session_count(id, datetime_column, startofday(ago(30d)), startofday
 
 **Syntax**
 
-*T* `| evaluate` `,` *dim2* *Start* `,` `,` *dim1* `,` *IdColumn* `,` `,` `,` *LookBackWindow* *Bin* *End* *TimelineColumn* idColumn`,` timelinecolenn Start Ende bin lookbackwindow [dim1 dim2...] `session_count(``)`
+*T* `| evaluate` `session_count(` *idColumn* `,` *timelinecolenn* `,` *Start* `,` *Ende* `,` *bin* `,` *lookbackwindow* [ `,` *dim1* `,` *dim2* `,` ...]`)`
 
 **Argumente**
 
@@ -35,7 +35,7 @@ T | evaluate session_count(id, datetime_column, startofday(ago(30d)), startofday
 * *Start*: Skalar mit dem Wert des Start Zeitraums der Analyse.
 * *End*: Skalar mit dem Wert des endzeitraums der Analyse.
 * *Bin*: skalare konstanter Wert der Sitzungs Analyseschritt Zeitraum.
-* *Lookbackwindow*: skalare Konstante Wert, der den Sitzungs Such Zeitraum darstellt. Wenn die ID von `IdColumn` in einem Zeitfenster innerhalb `LookBackWindow` von angezeigt wird, wird die Sitzung als vorhanden angesehen, wenn dies nicht der Fall ist. die Sitzung wird als neu eingestuft.
+* *Lookbackwindow*: skalare Konstante Wert, der den Sitzungs Such Zeitraum darstellt. Wenn die ID von `IdColumn` in einem Zeitfenster innerhalb von angezeigt `LookBackWindow` wird, wird die Sitzung als vorhanden angesehen, wenn dies nicht der Fall ist. die Sitzung wird als neu eingestuft.
 * *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, in denen die Berechnung der Sitzungs Anzahl in Slice ist.
 
 **Rückgabe**
@@ -56,12 +56,13 @@ Für das Beispiel machen wir Daten deterministisch: eine Tabelle mit zwei Spalte
 - Zeitachse: eine laufende Zahl zwischen 1 und 10.000
 - ID: ID des Benutzers von 1 bis 50
 
-`Id`wird am bestimmten `Timeline` Slot angezeigt, wenn es sich um einen unter Teiler von `Timeline` handelt (Timeline% ID = = 0).
+`Id`wird am bestimmten Slot angezeigt, `Timeline` Wenn es sich um einen unter Teiler von handelt `Timeline` (Timeline% ID = = 0).
 
-Dies bedeutet, dass das `Id==1` Ereignis mit an jedem `Timeline` Slot, Ereignis mit `Id==2` an jedem zweiten `Timeline` Slot usw. angezeigt wird.
+Dies bedeutet, dass das Ereignis mit `Id==1` an jedem `Timeline` Slot, Ereignis mit `Id==2` an jedem zweiten `Timeline` Slot usw. angezeigt wird.
 
 Im folgenden finden Sie einige 20 Zeilen der Daten:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let _data = range Timeline from 1 to 10000 step 1
 | extend __key = 1
@@ -97,10 +98,11 @@ _data
 |8|4|
 |8|8|
 
-Wir definieren eine Sitzung in den nächsten Begriffen: die Sitzung wird als aktiv betrachtet, solange der Benutzer`Id`() mindestens einmal an einem Zeitraum von 100 Zeit Slots angezeigt wird, während das Fenster für die Sitzungs Suche 41 Zeit Slots ist.
+Wir definieren eine Sitzung in den nächsten Begriffen: die Sitzung wird als aktiv betrachtet, solange der Benutzer ( `Id` ) mindestens einmal an einem Zeitraum von 100 Zeit Slots angezeigt wird, während das Fenster für die Sitzungs Suche 41 Zeit Slots ist.
 
 In der nächsten Abfrage wird die Anzahl der aktiven Sitzungen entsprechend der obigen Definition angezeigt.
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let _data = range Timeline from 1 to 9999 step 1
 | extend __key = 1

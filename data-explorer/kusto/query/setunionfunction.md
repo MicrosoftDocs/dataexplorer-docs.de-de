@@ -1,6 +1,6 @@
 ---
-title: set_union() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden set_union() in Azure Data Explorer beschrieben.
+title: set_union ()-Azure Daten-Explorer
+description: In diesem Artikel wird set_union () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/02/2019
-ms.openlocfilehash: de9220ea6f9e23e458dd379fb164317842a48c94
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 7e719ffa448ce3060a0a520de2c031b7d4b7d109
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81507666"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372336"
 ---
 # <a name="set_union"></a>set_union()
 
-Gibt `dynamic` ein (JSON) Array des Satzes aller unterschiedlichen Werte zurück, die sich in einem arrays befinden - (arr1, arr2x ...).
+Gibt ein `dynamic` -Array (JSON) der Menge aller unterschiedlichen Werte zurück, die in einem der Arrays vorhanden sind (Arr1 ∪ arr2 ∪...).
 
 **Syntax**
 
-`set_union(`*arr1*`, `*arr2*`[`,` *arr3*, ...]``)`
+`set_union(`*Arr1* `, ` *arr2* `[` ,` *arr3*, ...]``)`
 
 **Argumente**
 
-* *arr1... arrN*: Geben Sie Arrays ein, um einen Union-Satz (mindestens zwei Arrays) zu erstellen. Alle Argumente müssen dynamische Arrays sein (siehe [pack_array](packarrayfunction.md)). 
+* *Arr1... arrn*: Eingabe Arrays zum Erstellen eines Union-Satzes (mindestens zwei Arrays). Alle Argumente müssen dynamische Arrays sein (siehe [pack_array](packarrayfunction.md)). 
 
 **Rückgabe**
 
-Gibt ein dynamisches Array des Satzes aller unterschiedlichen Werte zurück, die sich in einem Array befinden. Siehe [`set_intersect()`](setintersectfunction.md) [`set_difference()`](setdifferencefunction.md)und .
+Gibt ein dynamisches Array der Menge aller unterschiedlichen Werte zurück, die in einem der Arrays vorhanden sind. Siehe [`set_intersect()`](setintersectfunction.md) und [`set_difference()`](setdifferencefunction.md) .
 
 **Beispiel**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 range x from 1 to 3 step 1
 | extend y = x * 2
@@ -44,6 +45,6 @@ range x from 1 to 3 step 1
 
 |Column1|
 |---|
-|[1,2,4,8]|
-|[2,4,8,16]|
-|[3,6,12,24]|
+|[1, 2, 4, 8]|
+|[2, 4, 8, 16]|
+|[3, 6, 12, 24]|

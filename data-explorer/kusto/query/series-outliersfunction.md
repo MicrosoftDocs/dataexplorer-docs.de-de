@@ -1,5 +1,5 @@
 ---
-title: series_outliers ()-Azure Daten-Explorer | Microsoft-Dokumentation
+title: series_outliers ()-Azure Daten-Explorer
 description: In diesem Artikel wird series_outliers () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/20/2019
-ms.openlocfilehash: 16e82ec68a463b97699f7d02e18c46df65221c7b
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 864638f8e03487a35eefa83fa3951d2ecefc27c7
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618654"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372535"
 ---
 # <a name="series_outliers"></a>series_outliers()
 
@@ -23,17 +23,17 @@ Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe 
 
 **Syntax**
 
-`series_outliers(`*x*`, `*kind*`, `*max_percentile* *min_percentile**ignore_val*x-ignore_val`, `min_percentile max_percentile`, ``)`
+`series_outliers(`*x* `, ` *Art* `, ` *ignore_val* `, ` *min_percentile* `, ` *max_percentile*`)`
 
 **Argumente**
 
 * *x*: dynamische Array Zelle, bei der es sich um ein Array von numerischen Werten handelt.
-* *Art*: Algorithmus der Ausreißererkennung. Unterstützt `"tukey"` derzeit (herkömmlicher Tukey `"ctukey"` ) und (benutzerdefinierter Tukey). Die Standardeinstellung ist `"ctukey"`.
-* *ignore_val*: numerischer Wert, der fehlende Werte in der Reihe anzeigt. der Standardwert ist "Double" (null). Das Ergebnis der Nullen und Werte ignorieren ist auf `0`festgelegt.
-* *min_percentile*: zur Berechnung des normalen zwischen quantilbereichs beträgt der Standardwert 10, unterstützte benutzerdefinierte Werte liegen im `[2.0, 98.0]` Bereich`ctukey` (nur). 
-* *max_percentile*: identisch, Standardwert 90, unterstützte benutzerdefinierte Werte liegen `[2.0, 98.0]` im Bereich (nur "ctukey"). 
+* *Art*: Algorithmus der Ausreißererkennung. Unterstützt derzeit `"tukey"` (herkömmlicher Tukey) und `"ctukey"` (benutzerdefinierter Tukey). Die Standardeinstellung ist `"ctukey"`.
+* *ignore_val*: numerischer Wert, der fehlende Werte in der Reihe anzeigt. der Standardwert ist "Double" (null). Das Ergebnis der Nullen und Werte ignorieren ist auf festgelegt `0` .
+* *min_percentile*: zur Berechnung des normalen zwischen quantilbereichs beträgt der Standardwert 10, unterstützte benutzerdefinierte Werte liegen im Bereich `[2.0, 98.0]` ( `ctukey` nur). 
+* *max_percentile*: identisch, Standardwert 90, unterstützte benutzerdefinierte Werte liegen im Bereich `[2.0, 98.0]` (nur "ctukey"). 
 
-In der folgenden Tabelle werden die `"tukey"` unter `"ctukey"`schiede zwischen und beschrieben:
+In der folgenden Tabelle werden die Unterschiede zwischen `"tukey"` und beschrieben `"ctukey"` :
 
 | Algorithmus | Quantil-Standardbereich | Unterstützt benutzerdefinierten Quantilbereich |
 |-----------|----------------------- |--------------------------------|
@@ -48,6 +48,7 @@ In der folgenden Tabelle werden die `"tukey"` unter `"ctukey"`schiede zwischen u
 
 Angenommen, Sie haben eine Zeitreihe mit einem Rausch, der Ausreißer erstellt, und Sie können diese Ausreißer (Rauschen) durch den durchschnittlichen Wert ersetzen, indem Sie series_outliers () verwenden, um die Ausreißer zu erkennen und Sie dann zu ersetzen:
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 range x from 1 to 100 step 1 
 | extend y=iff(x==20 or x==80, 10*rand()+10+(50-x)/2, 10*rand()+10) // generate a sample series with outliers at x=20 and x=80

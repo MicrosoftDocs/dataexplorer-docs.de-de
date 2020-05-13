@@ -1,5 +1,5 @@
 ---
-title: series_decompose_forecast ()-Azure Daten-Explorer | Microsoft-Dokumentation
+title: series_decompose_forecast ()-Azure Daten-Explorer
 description: In diesem Artikel wird series_decompose_forecast () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: 97f87a7390ab099886e84642b2eb46a8087b6da9
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 9676da9d12e2654cd4d92538f183a2630971d078
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618841"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372883"
 ---
 # <a name="series_decompose_forecast"></a>series_decompose_forecast()
 
@@ -23,7 +23,7 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
  
 **Syntax**
 
-`series_decompose_forecast(`*Series* `,` *Points* `[,` `,` *Trend* Trend`,` der *Saisonalität* für Reihen Punkte *Seasonality_threshold*`])`
+`series_decompose_forecast(`*Reihe* `,` *Punkte* `[,` *Saisonalität* `,` *Trend* `,` *Seasonality_threshold*`])`
 
 **Argumente**
 
@@ -37,7 +37,7 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
     * "Linefit": Trend Komponente mithilfe von linearer Regression extrahieren (Standard).    
     * "AVG": Hiermit wird die Trend Komponente als Durchschnitt (x) definiert.
     * "None": kein Trend, Extrahieren dieser Komponente überspringen.   
-* *Seasonality_threshold*: der Schwellenwert für die saisonalitätsbewertung, wenn *Saison alität* auf automatische Erkennung festgelegt ist, ist `0.6`der Standardwert für die Bewertung. Weitere Informationen finden Sie unter [series_periods_detect](series-periods-detectfunction.md).
+* *Seasonality_threshold*: der Schwellenwert für die saisonalitätsbewertung, wenn *Saison alität* auf automatische Erkennung festgelegt ist, ist der Standardwert für die Bewertung `0.6` . Weitere Informationen finden Sie unter [series_periods_detect](series-periods-detectfunction.md).
 
 **Hre**
 
@@ -52,8 +52,9 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
 
 **Beispiel**
 
-Im folgenden Beispiel generieren wir eine Reihe von 4 Wochen in stündlicher Abhängigkeit mit wöchentlicher Saison Abhängigkeit und einem kleinen Aufwärtstrend. Anschließend verwenden `make-series` wir und fügen der Reihe eine weitere leere Woche hinzu. `series_decompose_forecast`wird mit einer Woche (24 * 7 Punkte) aufgerufen und erkennt automatisch die Saisonalität und den Trend und generiert eine Vorhersage des gesamten Zeitraums von 5 Wochen. 
+Im folgenden Beispiel generieren wir eine Reihe von 4 Wochen in stündlicher Abhängigkeit mit wöchentlicher Saison Abhängigkeit und einem kleinen Aufwärtstrend. Anschließend verwenden wir `make-series` und fügen der Reihe eine weitere leere Woche hinzu. `series_decompose_forecast`wird mit einer Woche (24 * 7 Punkte) aufgerufen und erkennt automatisch die Saisonalität und den Trend und generiert eine Vorhersage des gesamten Zeitraums von 5 Wochen. 
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let ts=range t from 1 to 24*7*4 step 1 // generate 4 weeks of hourly data
 | extend Timestamp = datetime(2018-03-01 05:00) + 1h * t 

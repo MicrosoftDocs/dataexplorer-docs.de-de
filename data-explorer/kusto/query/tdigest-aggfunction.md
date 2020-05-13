@@ -1,5 +1,5 @@
 ---
-title: tdigest () (Aggregations Funktion)-Azure Daten-Explorer | Microsoft-Dokumentation
+title: tdigest () (Aggregations Funktion)-Azure Daten-Explorer
 description: In diesem Artikel wird tdigest () (Aggregations Funktion) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: 1a44945a22d08a1a5a55a5fc130f7ca4247f1fb8
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: b98c551cb1ded8da291d4510b45a86d560f325b1
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83224985"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83371025"
 ---
 # <a name="tdigest-aggregation-function"></a>tdigest () (Aggregations Funktion)
 
@@ -46,6 +46,7 @@ Die Zwischenergebnisse gewichteter Perzentilen von *expr* in der Gruppe.
 
 **Beispiele**
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | summarize tdigest(DamageProperty) by State

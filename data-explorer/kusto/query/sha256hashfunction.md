@@ -1,6 +1,6 @@
 ---
-title: hash_sha256() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird hash_sha256() in Azure Data Explorer beschrieben.
+title: hash_sha256 ()-Azure Daten-Explorer
+description: In diesem Artikel wird hash_sha256 () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2147f4e9f2bd3d7df8f75ac704a4e4808e69bb3c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 32fa2f3ffefdbf1f14ed87e8e89444de322408c3
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81507598"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372314"
 ---
 # <a name="hash_sha256"></a>hash_sha256()
 
-Gibt einen sha256-Hashwert für den Eingabewert zurück.
+Gibt einen SHA256-Hashwert für den Eingabe Wert zurück.
 
 **Syntax**
 
-`hash_sha256(`*Quelle*`)`
+`hash_sha256(`*Ausgangs*`)`
 
 **Argumente**
 
-* *quelle*: Der zu hashende Wert.
+* *Quelle*: der Wert, für den der Hashwert verwendet werden soll.
 
 **Rückgabe**
 
-Der sha256-Hashwert des angegebenen Skalars, kodiert als Hex-Zeichenfolge (eine Zeichenfolge, von denen jeweils zwei eine einzelne Hex-Zahl zwischen 0 und 255 darstellen).
+Der SHA256-Hashwert des angegebenen Skalars, der als hexadezimale Zeichenfolge (eine Zeichenfolge) codiert ist, die jeweils eine einzelne hexadezimal Zahl zwischen 0 und 255 darstellt.
 
 > [!WARNING]
-> Der von dieser Funktion verwendete Algorithmus (SHA256) wird garantiert in Zukunft nicht mehr geändert, ist aber sehr komplex zu berechnen. Benutzern, die für die Dauer einer einzelnen Abfrage eine "leichte" Hashfunktion benötigen, wird empfohlen, stattdessen den [Funktionshash()](./hashfunction.md) zu verwenden.
+> Der Algorithmus, der von dieser Funktion (SHA256) verwendet wird, wird in Zukunft garantiert nicht geändert, ist jedoch sehr komplex zu berechnen. Für Benutzer, die für die Dauer einer einzelnen Abfrage eine "einfache" Hash Funktion benötigen, wird empfohlen, stattdessen den Funktions [Hash ()](./hashfunction.md) zu verwenden.
 
 **Beispiele**
 
@@ -43,6 +43,7 @@ hash_sha256(datetime("2015-01-01"))    // e7ef5635e188f5a36fafd3557d382bbd00f699
 
 Im folgenden Beispiel wird die hash_sha256-Funktion verwendet, um eine Abfrage für die StartTime-Spalte der Daten auszuführen.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents 
 | where hash_sha256(StartTime) == 0

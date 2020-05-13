@@ -1,6 +1,6 @@
 ---
-title: Beitritt innerhalb des Zeitfensters - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt das Verbinden innerhalb des Zeitfensters in Azure Data Explorer.
+title: 'Beitreten innerhalb des Zeitfensters: Azure Daten-Explorer'
+description: In diesem Artikel wird das beitreten innerhalb des Zeitfensters in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,23 +8,24 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: aa3b81694714ef5af94407cdfdac263af0631e40
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 4741da4367bb1a350c7310ea21ebe5ce9b91b06b
+ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513361"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83271484"
 ---
-# <a name="joining-within-time-window"></a>Verbinden innerhalb des Zeitfensters
+# <a name="joining-within-time-window"></a>Beitreten innerhalb des Zeitfensters
 
-Es ist oft sinnvoll, zwei große Datensätze auf einem Schlüssel mit hoher Kardinalität (z. B. einer Vorgangs-ID oder einer Sitzungs-ID) zu verbinden und die Datensätze auf der rechten Seite (`$right`) weiter einzuschränken, die für jeden Datensatz auf der linken Seite (`$left`) übereinstimmen müssen, indem eine Einschränkung der "Zeitentfernung" zwischen `datetime` Spalten auf der linken und rechten Seite hinzugefügt wird. Dies unterscheidet sich von der üblichen Kusto-Join-Bedienung, da das System neben dem "Äqui-Join"-Teil (passend zum Hochkardinalschlüssel oder dem linken und rechten Datensatz) auch eine Distanzfunktion anwenden und damit die Verknüpfung erheblich beschleunigen kann. Beachten Sie, dass sich eine Entfernungsfunktion nicht `dist(x,y)` wie `dist(y,z)` Gleichheit verhält (d. h., wenn beide und wahr sind, folgt sie nicht, was `dist(x,z)` auch wahr ist.) *Intern bezeichnen wir dies manchmal als "diagonaljoin".*
+Häufig ist es hilfreich, zwischen zwei großen Datasets mit einem High-Cardinality-Schlüssel (z. b. eine Vorgangs-ID oder eine Sitzungs-ID) zu verknüpfen und die Datensätze auf der rechten Seite () weiter einzuschränken `$right` , die für jeden linksseitigen ( `$left` ) Datensatz abgeglichen werden müssen `datetime` Dies unterscheidet sich von einem normalen Kusto-Joinvorgang als. zusätzlich zum Teil "Equi-Join" (Übereinstimmung mit dem High-Cardinality-Schlüssel oder den linken und rechten Datasets) kann das System auch eine Entfernungs Funktion anwenden und verwenden, um den Join beträchtlich zu beschleunigen. Beachten Sie, dass sich eine Entfernungs Funktion nicht wie Gleichheit verhält (d. h., wenn sowohl als `dist(x,y)` `dist(y,z)` auch true ist, wird Sie nicht befolgt, da `dist(x,z)` auch true ist). *Intern wird dies als "diagonaler Join" bezeichnet.*
 
-Angenommen, wir möchten Ereignissequenzen innerhalb eines relativ kleinen Zeitfensters identifizieren. Um dieses Beispiel zu veranschaulichen, gehen wir davon aus, dass wir eine Tabelle `T` mit dem folgenden Schema haben:
+Nehmen wir beispielsweise an, dass wir Ereignis Sequenzen innerhalb eines relativ kleinen Zeitfensters identifizieren möchten. Um dieses Beispiel zu veranschaulichen, nehmen wir an, dass eine Tabelle `T` mit dem folgenden Schema vorhanden ist:
 
-- `SessionId`: Eine Spalte `string` des Typs mit Korrelations-IDs.
-- `EventType`: Eine Spalte `string` des Typs, die den Ereignistyp des Datensatzes identifiziert.
-- `Timestamp`: Eine Spalte `datetime` des Typs, die angibt, wann das vom Datensatz beschriebene Ereignis eingetreten ist.
+- `SessionId`: Eine Spalte vom Typ `string` mit Korrelations-IDs.
+- `EventType`: Eine Spalte vom Typ `string` , die den Ereignistyp des Datensatzes identifiziert.
+- `Timestamp`: Eine Spalte vom Typ, `datetime` die angibt, wann das durch den Datensatz beschriebene Ereignis aufgetreten ist.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let T = datatable(SessionId:string, EventType:string, Timestamp:datetime)
 [
@@ -50,13 +51,13 @@ T
 
 **Problembeschreibung**
 
-Unsere Anfrage soll mit unserer Anfrage die folgende Frage beantworten:
+Wir möchten, dass die Abfrage die folgende Frage beantwortet:
 
-   Suchen Sie alle Sitzungs-IDs, auf die `B` `1min` ein Ereignistyp `A` innerhalb des Zeitfensters gefolgt wurde.
+   Alle Sitzungs-IDs, in denen ein Ereignistyp auf `A` einen Ereignistyp folgt, finden Sie `B` im `1min` Zeitfenster.
 
-(In den obigen Beispieldaten ist `0`die einzige Sitzungs-ID .)
+(In den obigen Beispiel Daten ist nur diese Sitzungs-ID `0` .)
 
-Semantisch beantwortet die folgende Abfrage diese Frage, wenn auch ineffizient:
+Semantisch wird diese Frage von der folgenden Abfrage beantwortet, wenn dies ineffizient ist:
 
 ```kusto
 T 
@@ -77,12 +78,12 @@ T
 |---|---|---|
 |0|2017-10-01 00:00:00.0000000|2017-10-01 00:01:00.0000000|
 
-Um diese Abfrage zu optimieren, können wir sie wie unten beschrieben neu schreiben, sodass das Zeitfenster als Verknüpfungsschlüssel ausgedrückt wird.
+Um diese Abfrage zu optimieren, können wir Sie wie unten beschrieben umschreiben, damit das Zeitfenster als joinschlüssel ausgedrückt wird.
 
 **Umschreiben der Abfrage, um das Zeitfenster zu berücksichtigen**
 
-Die Idee ist, die Abfrage `datetime` so umzuschreiben, dass die Werte in Buckets "diskretisiert" werden, deren Größe halb so groß ist wie das Zeitfenster.
-Wir können dann Kustos Äqui-Join verwenden, um diese Bucket-IDs zu vergleichen.
+Die Idee besteht darin, die Abfrage so umzuschreiben, dass die `datetime` Werte in Bucket "diskretisiert" werden, deren Größe die Hälfte der Größe des Zeitfensters ist.
+Wir können dann den Gleichheitsjoin von Kusto verwenden, um diese Bucket-IDs zu vergleichen.
 
 ```kusto
 let lookupWindow = 1min;
@@ -113,9 +114,9 @@ T
 |---|---|---|
 |0|2017-10-01 00:00:00.0000000|2017-10-01 00:01:00.0000000|
 
+**RUNNABLE-Abfrage Verweis (mit Tabellen Inline)**
 
-**Runnable Query-Referenz (mit inder Tabelle)**
-
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let T = datatable(SessionId:string, EventType:string, Timestamp:datetime)
 [
@@ -150,10 +151,11 @@ T
 |0|2017-10-01 00:00:00.0000000|2017-10-01 00:01:00.0000000|
 
 
-**50M Datenabfrage**
+**50 Mio. Datenabfrage**
 
-Die nächste Abfrage emuliert einen Datensatz mit 50M-Datensätzen und 10M-IDs und führt die Abfrage mit der oben beschriebenen Technik aus.
+Die nächste Abfrage emuliert ein DataSet mit 50 Mio. Datensätzen und ~ 10M IDs und führt die Abfrage mit dem oben beschriebenen Verfahren aus.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let T = range x from 1 to 50000000 step 1
 | extend SessionId = rand(10000000), EventType = rand(3), Time=datetime(2017-01-01)+(x * 10ms)

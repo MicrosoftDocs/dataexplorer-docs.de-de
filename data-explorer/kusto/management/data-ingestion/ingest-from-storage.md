@@ -1,6 +1,6 @@
 ---
-title: Der Befehl .ingest in (Daten aus dem Speicher abrufen) - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt den Befehl .ingest in (Pull-Daten aus dem Speicher) in Azure Data Explorer.
+title: 'Der Befehl ". infassungs into" (Daten aus dem Speicher abrufen): Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird der Befehl zum Erfassen von Daten in Azure Daten-Explorer beschrieben (Pull Data from Storage).
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,59 +8,59 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1f304f9dc064094c6d55cb32f3fb453f32114979
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 05d62aaa7b123f7f6d02b784402fd06335e155b2
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81521436"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373425"
 ---
-# <a name="the-ingest-into-command-pull-data-from-storage"></a>Der Befehl .ingest in (Pull-Daten aus dem Speicher)
+# <a name="the-ingest-into-command-pull-data-from-storage"></a>Der. infassungs into-Befehl (Pull Data aus dem Speicher)
 
-Der `.ingest into` Befehl erfasst Daten in eine Tabelle, indem er die Daten aus einem oder mehreren Cloudspeicherartefakten "abzieht".
-Der Befehl kann z. B. 1000 CSV-formatierte Blobs aus Azure Blob Storage abrufen, analysieren und in einer einzelnen Zieltabelle aufnehmen.
-Daten werden an die Tabelle angehängt, ohne dass sich dies auf vorhandene Datensätze auswirkt und ohne das Schema der Tabelle zu ändern.
+`.ingest into`Mit dem Befehl werden Daten in einer Tabelle erfasst, indem die Daten aus einem oder mehreren cloudspeicherartefakten abgerufen werden.
+Beispielsweise können mit dem Befehl 1000 CSV-formatierte BLOB aus Azure BLOB Storage abgerufen, analysiert und in einer einzigen Ziel Tabelle erfasst werden.
+Daten werden an die Tabelle angehängt, ohne dass sich dies auf vorhandene Datensätze auswirkt, ohne das Schema der Tabelle zu ändern.
 
 **Syntax**
 
-`.ingest`[`async` `into` `table` ] *Tabellenname* *SourceDataLocator* `with` `(` [ *IngestionPropertyName* `=` `,` *IngestionPropertyValue* [ ...] `)`]
+`.ingest`[ `async` ] `into` `table` *TableName* *sourcedatalocator* [ `with` `(` *ingestionpropertyname* `=` *ingestionpropertyvalue* [ `,` ...] `)` ]
 
 **Argumente**
 
-* `async`: Wenn angegeben, wird der Befehl sofort zurückgegeben und die Aufnahme im Hintergrund fortgesetzt. Die Ergebnisse des Befehls `OperationId` enthalten einen Wert, `.show operation` der dann mit dem Befehl verwendet werden kann, um den Status und die Ergebnisse für den Abschluss der Aufnahme abzurufen.
+* `async`: Wenn dieser Wert angegeben wird, wird der Befehl sofort zurückgegeben, und die Erfassung im Hintergrund wird fortgesetzt. Die Ergebnisse des Befehls enthalten einen `OperationId` Wert, der dann mit dem Befehl verwendet werden kann `.show operation` , um den Erfassungs Status und die Ergebnisse abzurufen.
   
-* *TableName*: Der Name der Tabelle, in die Daten erfasst werden sollen.
-  Der Tabellenname ist immer relativ zur Datenbank im Kontext, und sein Schema ist das Schema, das für die Daten angenommen wird, wenn kein Schemazuordnungsobjekt bereitgestellt wird.
+* *TableName*: der Name der Tabelle, in der Daten erfasst werden sollen.
+  Der Tabellenname ist immer relativ zur Datenbank im Kontext, und sein Schema ist das Schema, das für die Daten angenommen wird, wenn kein Schema Zuordnungsobjekt bereitgestellt wird.
 
-* *SourceDataLocator*: Ein `string`Literal vom Typ oder eine durch Kommas `(` getrennte `)` Liste solcher Literale, die von und Zeichen umgeben sind, und die die Speicherartefakte angeben, die die zu ziehenden Daten enthalten. Siehe [Speicherverbindungszeichenfolgen](../../api/connection-strings/storage.md).
+* *Sourcedatalocator: ein Literaltyp* `string` oder eine durch Trennzeichen getrennte Liste mit solchen Literalen, die von `(` -und- `)` Zeichen umgeben sind, und gibt die Speicher Artefakte an, die die Daten enthalten, die abgerufen werden sollen. Siehe [Speicher Verbindungs](../../api/connection-strings/storage.md)Zeichenfolgen.
 
 > [!NOTE]
-> Es wird dringend empfohlen, [verschleierte Zeichenfolgenliterale](../../query/scalar-data-types/string.md#obfuscated-string-literals) für den *SourceDataPointer* zu verwenden, die tatsächliche Anmeldeinformationen enthalten.
-> Der Dienst wird sicher sein, Anmeldeinformationen in seinen internen Ablaufverfolgungen, Fehlermeldungen usw. zu schrubben.
+> Es wird dringend empfohlen, verborgene [Zeichen folgen Literale](../../query/scalar-data-types/string.md#obfuscated-string-literals) für den *sourcedatapointer* zu verwenden, der tatsächliche Anmelde Informationen enthält.
+> Der Dienst wird sicher sein, dass Anmelde Informationen in seinen internen Ablauf Verfolgungen, Fehlermeldungen usw. bereinigt werden.
 
-* *IngestionPropertyName*, *ingestionPropertyValue*: Eine beliebige Anzahl von [Aufnahmeeigenschaften,](https://docs.microsoft.com/azure/data-explorer/ingestion-properties) die sich auf den Aufnahmeprozess auswirken.
+* *Ingestionpropertyname*, *ingestionpropertyvalue*: eine beliebige Anzahl von Erfassungs [Eigenschaften](../../../ingestion-properties.md) , die sich auf den Erfassungs Vorgang auswirken.
 
 **Ergebnisse**
 
-Das Ergebnis des Befehls ist eine Tabelle mit so vielen Datensätzen, wie Datenshards ("Extents") vorhanden sind, die vom Befehl generiert werden.
-Wenn keine Datenshards generiert wurden, wird ein einzelner Datensatz mit einer leeren (Nullwert)-Ausdehnungs-ID zurückgegeben.
+Das Ergebnis des Befehls ist eine Tabelle mit so vielen Datensätzen, wie Daten-Shards ("Extents") vom Befehl generiert werden.
+Wenn keine datenshards generiert wurden, wird ein einzelner Datensatz mit einer leeren (Nullwert-) Block-ID zurückgegeben.
 
-|Name       |type      |BESCHREIBUNG                                                                |
+|Name       |type      |Beschreibung                                                                |
 |-----------|----------|---------------------------------------------------------------------------|
-|ExtentId   |`guid`    |Der eindeutige Bezeichner für den Datenshard, der durch den Befehl generiert wurde.|
-|ItemLoaded |`string`  |Mindestens ein Speicherartefakt, die mit diesem Datensatz verknüpft sind.             |
-|Duration   |`timespan`|Wie lange es gedauert hat, die Einnahme durchzuführen.                                     |
-|Haserrors  |`bool`    |Gibt an, ob dieser Datensatz einen Aufnahmefehler darstellt oder nicht.                |
-|OperationId|`guid`    |Eine eindeutige ID, die den Vorgang darstellt. Kann mit dem `.show operation` Befehl verwendet werden.|
+|Extentid   |`guid`    |Der eindeutige Bezeichner für den Daten-Shard, der durch den Befehl generiert wurde.|
+|Itemloaded |`string`  |Mindestens ein Speicher Artefakt, das mit diesem Datensatz verknüpft ist.             |
+|Duration   |`timespan`|Wie lange es gedauert hat, bis die Erfassung durchgeführt wurde.                                     |
+|HasErrors  |`bool`    |Gibt an, ob dieser Datensatz einen Erfassungs Fehler darstellt oder nicht.                |
+|OperationId|`guid`    |Eine eindeutige ID, die den Vorgang darstellt. Kann mit dem Befehl verwendet werden `.show operation` .|
 
 **Anmerkungen**
 
-Dieser Befehl ändert nicht das Schema der Tabelle, in die aufgenommen wird.
-Bei Bedarf werden die Daten während der Aufnahme in dieses Schema "genötigt" und nicht umgekehrt (zusätzliche Spalten werden ignoriert, und fehlende Spalten werden als NULL-Werte behandelt).
+Mit diesem Befehl wird das Schema der Tabelle, in der die Erfassung erfolgt, nicht geändert.
+Bei Bedarf werden die Daten während der Erfassung in dieses Schema umgewandelt, nicht umgekehrt (zusätzliche Spalten werden ignoriert, und fehlende Spalten werden als NULL-Werte behandelt).
 
 **Beispiele**
 
-Im nächsten Beispiel wird das Modul angewiesen, zwei Blobs aus Azure Blob Storage als `T`CSV-Dateien zu lesen und deren Inhalt in die Tabelle aufzunehmen. Der `...` stellt eine Azure Storage Shared Access Signature (SAS) dar, die Lesezugriff auf jedes Blob gewährt. Beachten Sie auch die Verwendung von verschleierten Zeichenfolgen (die `h` vor den Zeichenfolgenwerten), um sicherzustellen, dass die SAS nie aufgezeichnet wird.
+Im nächsten Beispiel wird die Engine angewiesen, zwei BLOB-Daten aus Azure BLOB Storage als CSV-Dateien zu lesen und ihren Inhalt in die-Tabelle zu erfassen `T` . `...`Stellt eine Azure Storage Shared Access Signature (SAS) dar, die jedem BLOB Lesezugriff gewährt. Beachten Sie auch die Verwendung von verborgenen Zeichen folgen (vor `h` den Zeichen folgen Werten), um sicherzustellen, dass die SAS nie aufgezeichnet wird.
 
 ```kusto
 .ingest into table T (
@@ -69,7 +69,7 @@ Im nächsten Beispiel wird das Modul angewiesen, zwei Blobs aus Azure Blob Stora
 )
 ```
 
-Das nächste Beispiel ist das Einsansinnen von Daten aus Azure Data Lake Storage Gen 2 (ADLSv2). Die hier verwendeten`...`Anmeldeinformationen ( ) sind die Speicherkontoanmeldeinformationen (gemeinsamer Schlüssel), und wir verwenden Die Zeichenfolgenverschleierung nur für den geheimen Teil der Verbindungszeichenfolge.
+Das nächste Beispiel ist das Erfassen von Daten aus Azure Data Lake Storage Gen 2 (Gen 2) (ADLSv2). Bei den hier verwendeten Anmelde Informationen ( `...` ) handelt es sich um die Anmelde Informationen für das Speicherkonto (Shared Key), und wir verwenden die Zeichen folgen Verschleierung nur für den geheimen Teil der Verbindungs Zeichenfolge.
 
 ```kusto
 .ingest into table T (
@@ -79,7 +79,7 @@ Das nächste Beispiel ist das Einsansinnen von Daten aus Azure Data Lake Storage
 ```
 
 Im nächsten Beispiel wird eine einzelne Datei aus Azure Data Lake Storage (ADLS) erfasst.
-Es verwendet die Anmeldeinformationen des Benutzers, um auf ADLS zuzugreifen (daher ist es nicht erforderlich, den Speicher-URI als mit einem geheimen Schlüssel zu behandeln). Außerdem wird gezeigt, wie Aufnahmeeigenschaften angegeben werden.
+Er verwendet die Anmelde Informationen des Benutzers für den Zugriff auf ADLS (es ist also nicht erforderlich, den Speicher-URI als einen geheimen Schlüssel zu behandeln). Außerdem wird gezeigt, wie Sie Erfassungs Eigenschaften angeben.
 
 ```kusto
 .ingest into table T ('adl://contoso.azuredatalakestore.net/Path/To/File/file1.ext;impersonate')

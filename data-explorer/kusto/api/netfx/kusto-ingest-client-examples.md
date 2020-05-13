@@ -1,6 +1,6 @@
 ---
-title: Kusto. Erfassungs Referenz-Erfassungs Code Beispiele-Azure Daten-Explorer | Microsoft-Dokumentation
-description: In diesem Artikel werden die Beispiele für die Erfassung von Verweis Erfassungs Code in Azure Daten-Explorer beschrieben.
+title: Kusto. Erfassung von Erfassungs Codebeispielen-Azure Daten-Explorer
+description: In diesem Artikel werden die Beispiele für die Erfassung von Erfassungs Code in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,25 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/15/2019
-ms.openlocfilehash: ba3232ca1c8a3f587f53ee1c3c6aad3fc12283ad
-ms.sourcegitcommit: 061eac135a123174c85fe1afca4d4208c044c678
+ms.openlocfilehash: caeebf0a94d4e8144f1d00f84ea78f8727947416
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/05/2020
-ms.locfileid: "82799678"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373648"
 ---
-# <a name="kustoingest-reference---ingestion-code-examples"></a>Kusto. Erfassungs Verweis-Code Beispiele für die Erfassung
-Dies ist eine Sammlung kurzer Code Ausschnitte, die verschiedene Techniken zum Erfassen von Daten in einer Kusto-Tabelle demonstrieren.
+# <a name="kustoingest-ingestion-code-examples"></a>Beispiele für die Erfassung von Erfassungs Code
 
->Erinnerung: Diese Beispiele sehen so aus, als ob der Erfassungs Client sofort nach der Erfassung zerstört wird. Verwenden Sie dies nicht wörtlich.<BR>Erfassungs Clients sind Wiedereinstiegs fähig, Thread sicher und sollten nicht in großen Zahlen erstellt werden. Die empfohlene Kardinalität der Erfassungs Client Instanzen ist eine pro Hostingprozess pro Ziel-Kusto-Cluster.
+Diese Auflistung kurzer Code Ausschnitte veranschaulicht verschiedene Techniken zum Erfassen von Daten in einer Kusto-Tabelle.
 
-### <a name="useful-references"></a>Hilfreiche Verweise
-* [Kusto. Erfassungs Client Verweis](kusto-ingest-client-reference.md)
-* [Kusto. Erfassungs Vorgangs Status](kusto-ingest-client-errors.md)
-* [Kusto. Erfassungs Ausnahmen](kusto-ingest-client-errors.md)
-* [Kusto-Verbindungszeichenfolgen](../connection-strings/kusto.md)
-* [Kusto-Autorisierungs Modell](../../management/security-roles.md)
+> [!NOTE]
+> Diese Beispiele sehen so aus, als ob der Erfassungs Client sofort nach der Erfassung zerstört wird. Verwenden Sie dies nicht wörtlich.
+> Erfassungs Clients sind Wiedereintritts fähige und Thread sicher und sollten nicht in großen Zahlen erstellt werden. Die empfohlene Kardinalität der Erfassungs Client Instanzen ist eine pro Hostingprozess pro Ziel-Kusto-Cluster.
 
-### <a name="async-ingestion-from-a-single-azure-blob-using-kustoqueuedingestclient-with-optional-retrypolicy"></a>Asynchrone Erfassung von einem einzelnen Azure-BLOB mithilfe von kustoqueuedingestclient mit (optional) retrypolicy:
+## <a name="async-ingestion-from-a-single-azure-blob"></a>Asynchrone Erfassung von einem einzelnen Azure-BLOB
+
+Verwenden Sie kustoqueuedingestclient mit optionaler retrypolicy für die asynchrone Erfassung von einem einzelnen Azure-BLOB.
+
 ```csharp
 //Create Kusto connection string with App Authentication
 var kustoConnectionStringBuilderDM =
@@ -56,9 +55,13 @@ await client.IngestFromStorageAsync(uri: @"BLOB-URI-WITH-SAS-KEY", ingestionProp
 client.Dispose();
 ```
 
-### <a name="ingest-from-local-file-using-kustodirectingestclient"></a>Erfassung aus lokaler Datei mithilfe von kustodirectingestclient 
+## <a name="ingest-from-local-file"></a>Erfassung aus lokaler Datei 
 
-Diese Methode wird für ein begrenztes Volume und eine Erfassung mit geringer Frequenz empfohlen.
+Verwenden Sie kustodirectingestclient zur Erfassung aus einer lokalen Datei.
+
+
+> [!NOTE]
+> Wir empfehlen diese Methode für ein begrenztes Volume und eine Erfassung mit geringer Frequenz.
 
 ```csharp
 // Create Kusto connection string with App Authentication
@@ -78,7 +81,10 @@ using (IKustoIngestClient client = KustoIngestFactory.CreateDirectIngestClient(k
 }
 ```
 
-### <a name="ingest-from-local-files-using-kustoqueuedingestclient-and-ingestion-validation"></a>Erfassung von lokalen Dateien mithilfe von kustoqueuedingestclient und Erfassungs Validierung 
+## <a name="ingest-from-local-files-and-validate-ingestion"></a>Erfassung aus lokalen Dateien und Überprüfen der Erfassung
+
+Verwenden Sie kustoqueuedingestclient zum erfassen aus lokalen Dateien, und überprüfen Sie dann die Erfassung.
+
 ```csharp
 // Create Kusto connection string with App Authentication
 var kustoConnectionStringBuilderDM =
@@ -110,7 +116,9 @@ Ensure.IsTrue((ingestionFailures.Count() > 0), "Failures expected");
 client.Dispose();
 ```
 
-### <a name="ingest-from-a-local-files-using-kustoqueuedingestclient-and-report-status-to-a-queue"></a>Erfassen von lokalen Dateien mithilfe von kustoqueuedingestclient und melden des Status an eine Warteschlange
+### <a name="ingest-from-local-files-and-report-status-to-a-queue"></a>Erfassen von lokalen Dateien und melden des Status in eine Warteschlange
+
+Verwenden Sie kustoqueuedingestclient, um lokale Dateien zu erfassen und den Status dann an eine Warteschlange zu melden.
 
 ```csharp
 // Create Kusto connection string with App Authentication
@@ -157,7 +165,9 @@ Ensure.ConditionIsMet((ingestionSuccesses.Count() > 0),
 client.Dispose();
 ```
 
-### <a name="ingest-from-a-local-file-using-kustoqueuedingestclient-and-report-status-to-a-table"></a>Erfassung aus einer lokalen Datei mithilfe von kustoqueuedingestclient und Berichts Status zu einer Tabelle
+### <a name="ingest-from-local-files-and-report-status-to-a-table"></a>Erfassen von lokalen Dateien und Berichts Status in einer Tabelle
+
+Verwenden Sie kustoqueuedingestclient, um von lokalen Dateien zu erfassen und den Status einer Tabelle zu melden.
 
 ```csharp
 // Create Kusto connection string with App Authentication
@@ -206,3 +216,11 @@ Ensure.ConditionIsMet(ingestionStatus.Status == Status.Succeeded,
 // Dispose of the client
 client.Dispose();
 ```
+
+## <a name="next-steps"></a>Nächste Schritte
+
+* [Kusto. Erfassungs Client Verweis](kusto-ingest-client-reference.md)
+* [Kusto. Erfassungs Vorgangs Status](kusto-ingest-client-errors.md)
+* [Kusto. Erfassungs Ausnahmen](kusto-ingest-client-errors.md)
+* [Kusto-Verbindungszeichenfolgen](../connection-strings/kusto.md)
+* [Kusto-Autorisierungs Modell](../../management/security-roles.md)

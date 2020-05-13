@@ -1,6 +1,6 @@
 ---
-title: series_iir() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird series_iir() in Azure Data Explorer beschrieben.
+title: series_iir ()-Azure Daten-Explorer
+description: In diesem Artikel wird series_iir () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/20/2019
-ms.openlocfilehash: 96452265e07a8a8b057dc70bec520be6ab298dd3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 8b03970aacafef932f6397e64afdf871dc086bc1
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81508295"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372626"
 ---
 # <a name="series_iir"></a>series_iir()
 
-Wendet einen Infinite Impulse Response-Filter auf eine Serie an.  
+Wendet einen unendlichen Impuls Antwort Filter auf eine Reihe an.  
 
-Nimmt einen Ausdruck, der dynamische summische Arrays enthält, als Eingabe und wendet einen [Infinite Impulse Response-Filter](https://en.wikipedia.org/wiki/Infinite_impulse_response) an. Durch die Angabe der Filterkoeffizienten kann es z. B. verwendet werden, um die kumulative Summe der Serie zu berechnen, Glättungsvorgänge sowie verschiedene [Hochpass-,](https://en.wikipedia.org/wiki/High-pass_filter) [Bandpass-](https://en.wikipedia.org/wiki/Band-pass_filter) und [Tiefpassfilter](https://en.wikipedia.org/wiki/Low-pass_filter) anzuwenden. Die Funktion nimmt die Spalte, die das dynamische Array und zwei statische dynamische Arrays der *a-* und *b-Koeffizienten* des Filters enthält, als Eingabe und wendet den Filter auf die Spalte an. Sie gibt eine neue dynamische Array-Spalte mit der gefilterten Ausgabe aus.  
+Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe und wendet einen [unendlichen Impuls Antwort](https://en.wikipedia.org/wiki/Infinite_impulse_response) Filter an. Durch die Angabe der Filterkoeffizienten kann Sie z. b. verwendet werden, um die kumulative Summe der Reihe zu berechnen, um Glättungs Vorgänge sowie verschiedene [High-Pass-](https://en.wikipedia.org/wiki/High-pass_filter), [Bandpass-](https://en.wikipedia.org/wiki/Band-pass_filter) und [Low-Pass-](https://en.wikipedia.org/wiki/Low-pass_filter) Filter zu verwenden. Die-Funktion übernimmt als Eingabe die Spalte, die das dynamische Array enthält, und zwei statische dynamische Arrays der *Filter-und* - *b* -Koeffizienten und wendet den Filter auf die Spalte an. Sie gibt eine neue dynamische Array-Spalte mit der gefilterten Ausgabe aus.  
  
 
 **Syntax**
@@ -28,27 +28,28 @@ Nimmt einen Ausdruck, der dynamische summische Arrays enthält, als Eingabe und 
 
 **Argumente**
 
-* *x*: Dynamische Arrayzelle, die ein Array numerischer Werte ist, in der Regel die resultierende Ausgabe von [Make-Series-](make-seriesoperator.md) oder make_list-Operatoren. [make_list](makelist-aggfunction.md)
-* *b*: Ein konstanter Ausdruck, der die Zählerkoeffizienten des Filters enthält (gespeichert als dynamisches Array numerischer Werte).
-* *a*: Ein konstanter Ausdruck, wie *b*. Enthält die Nennerkoeffizienten des Filters.
+* *x*: dynamische Array Zelle, bei der es sich um ein Array numerischer Werte handelt, normalerweise die resultierende Ausgabe von [make-Series-](make-seriesoperator.md) oder [make_list](makelist-aggfunction.md) -Operatoren.
+* *b*: ein konstanter Ausdruck, der die Zähler Koeffizienten des Filters (gespeichert als dynamisches Array numerischer Werte) enthält.
+* *a*: ein konstanter Ausdruck, wie z. *b. b*. Enthält die Nennerkoeffizienten des Filters.
 
 > [!IMPORTANT]
-> Das erste `a` Element von (d.h. `a[0]`) darf nicht Null sein (um eine Teilung durch 0 zu vermeiden; siehe die Formel unten).
+> Das erste Element von `a` (d. h. `a[0]` ) darf nicht NULL sein (um die Division durch 0 zu vermeiden; Weitere Informationen finden Sie in der folgenden Formel).
 
 **Weitere Informationen zur rekursiven Formel des Filters**
 
-* Bei einem Eingabe-Array X und Koeffizienten-Arrays a, b der Längen n_a bzw. n_b wird die Übertragungsfunktion des Filters, die das Ausgabe-Array Y generiert, durch (siehe auch in Wikipedia) definiert:
+* Wenn ein Eingabe Array X und Koeffizienten Arrays a, b der Längen n_a und n_b, wird die Übertragungsfunktion des Filters, die das Ausgabe Array Y erzeugt, von definiert (siehe auch in Wikipedia):
 
 <div align="center">
-Y<sub>i</sub> = a<sub>0</sub><sup>-1</sup>(b<sub>0</sub>X<sub>i</sub> 
- + b<sub>1</sub>X<sub>i-1</sub> + ... + b<sub>n<sub>b</sub>-1</sub>X<sub>i-n<sub>b</sub>-1</sub> 
- - a<sub>1</sub>Y<sub>i-1</sub>-a<sub>2</sub>Y<sub>i-2</sub> - ... - a<sub>n<sub>a</sub>-1</sub>Y<sub>i-n<sub>a</sub>-1</sub>)
+Y<sub>i</sub> = a<sub>0</sub><sup>-1</sup>(b<sub>0</sub>x<sub>i</sub> 
+ + b<sub>1</sub>x<sub>i-1</sub> + ... + b<sub>n<sub>b</sub>-1</sub>X<sub>i-n<sub>b</sub>-1</sub> 
+ - a<sub>1</sub>Y<sub>i-1</sub>-a<sub>2</sub>Y<sub>i-2</sub> - ...-a<sub>n<sub>a</sub>-1</sub>y<sub>i-n<sub>a</sub>-1</sub>)
 </div>
 
 **Beispiel**
 
-Die Berechnung der kumulativen Summe kann durch iir-Filter mit den Koeffizienten *a*=[1,-1] und *b*=[1] durchgeführt werden:  
+Das Berechnen der kumulativen Summe kann vom IIR-Filter mit Koeffizienten *a*= [1,-1] und *b*= [1] ausgeführt werden:  
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let x = range(1.0, 10, 1);
 print x=x, y = series_iir(x, dynamic([1]), dynamic([1,-1]))
@@ -62,8 +63,9 @@ print x=x, y = series_iir(x, dynamic([1]), dynamic([1,-1]))
 |3.0|6.0|
 |4,0|10,0|
 
-So wickeln Sie es in eine Funktion ein:
+Im folgenden wird beschrieben, wie Sie ihn in eine Funktion einschließen:
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let vector_sum=(x:dynamic)
 {

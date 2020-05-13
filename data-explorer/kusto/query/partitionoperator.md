@@ -1,6 +1,6 @@
 ---
-title: Partitionsoperator - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt den Partitionsoperator in Azure Data Explorer.
+title: 'Partitions Operator: Azure Daten-Explorer'
+description: Dieser Artikel beschreibt den Partitions Operator in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0a9ef31f68a989fffe42d9b54800e9305e51f4ed
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 417d4afb74e9170301baebde6be73d97df097f0f
+ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81511372"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83271535"
 ---
 # <a name="partition-operator"></a>partition-Operator
 
-Der Partitionsoperator partitioniert seine Eingabetabelle in mehrere Untertabellen entsprechend den Werten der angegebenen Spalte, führt eine Unterabfrage über jede Untertabelle aus und erzeugt eine einzelne Ausgabetabelle, die die Vereinigung der Ergebnisse aller Unterabfragen ist. 
+Der Partitions Operator partitioniert seine Eingabe Tabelle gemäß den Werten der angegebenen Spalte in mehrere untergeordnete Tabellen, führt eine Unterabfrage für jede untergeordnete Tabelle aus und erstellt eine einzelne Ausgabe Tabelle, die die Gesamtmenge der Ergebnisse aller Unterabfragen ist. 
 
 ```kusto
 T | partition by Col1 ( top 10 by MaxValue )
@@ -27,44 +27,45 @@ T | partition by Col1 { U | where Col2=toscalar(Col1) }
 
 **Syntax**
 
-*T* `|` T `partition` [*PartitionParameter*] `by` *Spalte* `(` *ContextualSubquery*`)`
+*T* `|` `partition` [*partitionparameters*] `by` *Spalte* `(` *contextualsubquery*`)`
 
-*T* `|` T `partition` [*PartitionParameters*] `by` *Spaltenunterabfrage* *Column* `{``}`
+*T* `|` `partition` [*partitionparameters*] `by` *Spalten* `{` *Unterabfrage*`}`
 
 **Argumente**
 
-* *T*: Die Tabellarische Quelle, deren Daten vom Operator verarbeitet werden sollen.
+* *T*: die tabellarische Quelle, deren Daten vom Operator verarbeitet werden sollen.
 
-* *Spalte*: Der Name einer Spalte in *T,* deren Werte bestimmen, wie die Eingabetabelle partitioniert werden soll. Siehe **Hinweise** unten.
+* *Column*: der Name einer Spalte in *T* , deren Werte bestimmen, wie die Eingabe Tabelle partitioniert werden soll. Siehe **Hinweise** weiter unten.
 
-* *ContextualSubquery*: Ein tabellarischer Ausdruck, `partition` dessen Quelle die Quelle des Operators ist und für einen einzelnen *Schlüsselwert* gilt.
+* *Contextualsubquery*: ein tabellarischer Ausdruck, bei dem es sich um die Quelle des `partition` Operators handelt, die für einen einzelnen *Schlüssel* Wert festgelegt ist.
 
-* *Unterabfrage*: Ein tabellarischer Ausdruck ohne Quelle. Der *Schlüsselwert* kann `toscalar()` per Anruf abgerufen werden.
+* *Unterabfrage*: ein tabellarischer Ausdruck ohne Quelle. Der *Schlüssel* Wert kann über den-Befehl abgerufen werden `toscalar()` .
 
-* *PartitionParameters*: Null oder mehr (raumgetrennte) Parameter in Form von: *Name* `=` *Value,* die das Verhalten des Operators steuern. Die folgenden Parameter werden unterstützt:
+* *Partitionparameters*: NULL oder mehr (durch Leerzeichen getrennte) Parameter in Form von: *Name* `=` *value* , die das Verhalten des Operators steuern. Die folgenden Parameter werden unterstützt:
 
-  |name               |Werte         |Beschreibung|
+  |Name               |Werte         |BESCHREIBUNG|
   |-------------------|---------------|-----------|
-  |`hint.materialized`|`true`,`false` |Wenn auf `true` gesetzt wird, wird `partition` die Quelle `false`des Operators materialisiert (Standard: )|
-  |`hint.concurrency`|*Anzahl*|Gibt das System an, wie `partition` viele gleichzeitige Unterabfragen des Operators parallel ausgeführt werden sollen. *Standard*: Anzahl der CPU-Kerne auf dem einzelnen Knoten des Clusters (2 bis 16).|
-  |`hint.spread`|*Anzahl*|Gibt das System an, wie viele Knoten`partition` von der gleichzeitigen Unterabfrageausführung verwendet werden sollen. *Standard :* 1.|
+  |`hint.materialized`|`true`,`false` |Wenn festgelegt ist, `true` wird die Quelle des Operators materialisiert `partition` (Standard: `false` ).|
+  |`hint.concurrency`|*Einigen*|Gibt an, wie viele gleichzeitige Unterabfragen des `partition` Operators parallel ausgeführt werden sollen. *Standard*Wert: CPU-Kerne auf dem einzelnen Knoten des Clusters (2 bis 16).|
+  |`hint.spread`|*Einigen*|Gibt an, wie viele Knoten von der gleichzeitigen Ausführung von `partition` Unterabfragen verwendet werden sollen. *Standard*Wert: 1.|
 
 **Rückgabe**
 
-Der Operator gibt eine Vereinigung der Ergebnisse der Anwendung der Unterabfrage auf jede Partition der Eingabedaten zurück.
+Der-Operator gibt eine Union der Ergebnisse der Anwendung der Unterabfrage auf jede Partition der Eingabedaten zurück.
 
 **Hinweise**
 
-* Der Partitionsoperator ist derzeit durch die Anzahl der Partitionen begrenzt.
-  Es können bis zu 64 verschiedene Partitionen erstellt werden.
-  Der Operator gibt einen Fehler ab, wenn die Partitionsspalte (*Spalte*) mehr als 64 unterschiedliche Werte aufweist.
+* Der Partitions Operator ist zurzeit durch die Anzahl der Partitionen beschränkt.
+  Es können bis zu 64 unterschiedliche Partitionen erstellt werden.
+  Der Operator führt zu einem Fehler, wenn die Partitions Spalte (*Spalte*) mehr als 64 unterschiedliche Werte aufweist.
 
-* Die Unterabfrage verweist implizit auf die Eingabepartition (es gibt keinen "Namen" für die Partition in der Unterabfrage). Um die Eingabepartition mehrmals innerhalb der Unterabfrage zu referenzieren, verwenden Sie den [as-Operator](asoperator.md), wie unter **Beispiel: Partitionsverweis** unten.
+* Die Unterabfrage verweist implizit auf die Eingabe Partition (in der Unterabfrage ist kein "Name" für die Partition vorhanden). Wenn Sie in der Unterabfrage mehrmals auf die Eingabe Partition verweisen möchten, verwenden Sie den [as-Operator](asoperator.md), wie im folgenden **Beispiel: Partitions Verweis** weiter unten.
 
-**Beispiel: top-nested-Fall**
+**Beispiel: Top-netsted Case**
 
-In einigen Fällen - es ist leistungsfähiger und `partition` einfacher, Abfrage mit Operator statt mit `summarize` [ `top-nested` ](topnestedoperator.md) `top` Operator schreiben Das nächste Beispiel führt eine Unterabfrage Berechnung und für jeden von Staaten beginnend mit `W`: (WYOMING, WASHINGTON, WEST VIRGINIA, WISCONSIN)
+In einigen Fällen ist es leistungsfähiger und einfacher, Abfragen mithilfe des Operators zu schreiben, `partition` anstatt den [ `top-nested` Operator](topnestedoperator.md) zu verwenden. im nächsten Beispiel wird eine Unterabfrage berechnet `summarize` und `top` für jeden der Zustände gestartet `W` : (Wyoming, Washington, West Virginia, Wisconsin)
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | where State startswith 'W'
@@ -75,25 +76,26 @@ StormEvents
 ) 
 
 ```
-|EventType|State|Ereignisse|Verletzungen|
+|EventType|Bundesland/Kanton|Ereignisse|Verletzungs|
 |---|---|---|---|
 |Hagel|Wyoming|108|0|
 |Hoher Wind|Wyoming|81|5|
-|Wintersturm|Wyoming|72|0|
-|Schwerer Schnee|Washington|82|0|
-|Hoher Wind|Washington|58|13|
-|Wildfire|Washington|29|0|
+|Winter Storm|Wyoming|72|0|
+|Starker Schnee|Washingtons|82|0|
+|Hoher Wind|Washingtons|58|13|
+|Wildfire|Washingtons|29|0|
 |Sturm|WEST VIRGINIA|180|1|
 |Hagel|WEST VIRGINIA|103|0|
-|Winterwetter|WEST VIRGINIA|88|0|
+|Winter Wetter|WEST VIRGINIA|88|0|
 |Sturm|Wisconsin|416|1|
-|Wintersturm|Wisconsin|310|0|
+|Winter Storm|Wisconsin|310|0|
 |Hagel|Wisconsin|303|1|
 
-**Beispiel: Abfrage nicht überlappender Datenpartitionen**
+**Beispiel: Abfragen von nicht überlappenden Daten Partitionen**
 
-Manchmal ist es (perf-weise) nützlich, eine komplexe Unterabfrage über nicht überlappende Datenpartitionen in einem Map/Reduce-Stil auszuführen. Das folgende Beispiel zeigt, wie Sie eine manuelle Verteilung der Aggregation über 10 Partitionen erstellen.
+Manchmal ist es hilfreich (perf-Weise), eine komplexe Unterabfrage über nicht überlappende Daten Partitionen in einem Map/Reduce-Stil auszuführen. Das folgende Beispiel zeigt, wie eine manuelle Verteilung von Aggregationen über 10 Partitionen erstellt wird.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | extend p = hash(EventId, 10)
@@ -111,12 +113,13 @@ StormEvents
 |Strafverfolgungsbehörden|8570|
 |Öffentlich|6157|
 |Katastrophenschutz|4900|
-|COOP-Beobachter|3039|
+|Coop-Beobachter|3039|
 
-**Beispiel: Abfragezeitpartitionierung**
+**Beispiel: Abfragezeit Partitionierung**
 
-Das folgende Beispiel zeigt, wie die Abfrage in N=10-Partitionen partitioniert werden kann, wobei jede Partition ihre eigene Anzahl berechnet und alle später in TotalCount zusammengefasst wird.
+Das folgende Beispiel zeigt, wie die Abfrage in N = 10 Partitionen partitioniert werden kann, wobei jede Partition ihre eigene Anzahl berechnet und später in totalCount zusammengefasst wird.
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let N = 10;                 // Number of query-partitions
 range p from 0 to N-1 step 1  // 
@@ -134,9 +137,9 @@ range p from 0 to N-1 step 1  //
 |59066|
 
 
-**Beispiel: Partitionsverweis**
+**Beispiel: Partitions Verweis**
 
-Das folgende Beispiel zeigt, wie man den [Operator as](asoperator.md) verwenden kann, um jeder Datenpartition einen "Namen" zu geben und diesen Namen dann in der Unterabfrage wiederzuverwenden:
+Im folgenden Beispiel wird gezeigt, wie der [as-Operator](asoperator.md) verwendet werden kann, um jeder Daten Partition einen "Namen" zuzuweisen und diesen Namen dann in der Unterabfrage wiederzuverwenden:
 
 ```kusto
 T
@@ -147,10 +150,11 @@ T
 )
 ```
 
-**Beispiel: komplexe Unterabfrage, die durch einen Funktionsaufruf ausgeblendet wird**
+**Beispiel: komplexe Unterabfrage, die durch einen Funktions aufrub ausgeblendet wird**
 
-Die gleiche Technik kann mit viel komplexeren Unterabfragen angewendet werden. Um die Syntax zu vereinfachen, kann man die Unterabfrage in einem Funktionsaufruf umschließen:
+Das gleiche Verfahren kann mit wesentlich komplexeren Unterabfragen angewendet werden. Um die Syntax zu vereinfachen, können Sie die Unterabfrage in einem Funktions aufruppe einschließen:
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let partition_function = (T:(Source:string)) 
 {
@@ -173,4 +177,4 @@ StormEvents
 |Strafverfolgungsbehörden|8570|
 |Öffentlich|6157|
 |Katastrophenschutz|4900|
-|COOP-Beobachter|3039|
+|Coop-Beobachter|3039|

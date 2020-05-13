@@ -1,6 +1,6 @@
 ---
-title: rolling_percentile-Plugin - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird rolling_percentile-Plugin in Azure Data Explorer beschrieben.
+title: 'rolling_percentile-Plug-in: Azure Daten-Explorer'
+description: In diesem Artikel wird rolling_percentile-Plug-in in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 02def4069c83eeec080ca059493132619fce30d5
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a41a45fb12fafe62fffd6c13e5ea9ecff55bb355
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510267"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373012"
 ---
-# <a name="rolling_percentile-plugin"></a>rolling_percentile Plugin
+# <a name="rolling_percentile-plugin"></a>Plug-in rolling_percentile
 
-Gibt eine Schätzung für das angegebene Perzentil der *ValueColumn-Population* in einem rollenden (gleitenden) *BinsPerWindow-Größenfenster* pro *BinSize*zurück.
+Gibt eine Schätzung für das angegebene Perzentil der *valuecolren* -Population in einem parallelen (gleitenden) *binsperwindow* size-Fenster pro *binsize*zurück.
 
 ```kusto
 T | evaluate rolling_percentile(ValueColumn, Percentile, IndexColumn, BinSize, BinsPerWindow)
@@ -25,35 +25,36 @@ T | evaluate rolling_percentile(ValueColumn, Percentile, IndexColumn, BinSize, B
 
 **Syntax**
 
-*T* `| evaluate` `,` `,` `,` `,` `,` `,` *ValueColumn* `,` *IndexColumn* *BinSize* *dim2* *Percentile* *dim1* *BinsPerWindow* ValueColumn Perzentil IndexSpalte BinSize BinsPerWindow [ dim1 dim2 ...] `rolling_percentile(``)`
+*T* `| evaluate` `rolling_percentile(` *valuecolenn* `,` *Percentile* `,` *indexcolumn* `,` *Binär Größe* `,` *binsperwindow* [ `,` *dim1* `,` *dim2* `,` ...]`)`
 
 **Argumente**
 
-* *T*: Der tabellarische Eingabeausdruck.
-* *ValueColumn*: Der Name der Spalte mit Werten, von der das Perzentil berechnet werden soll. 
-* *Perzentil*: Skalar mit dem zu berechnenden Perzentil.
-* *IndexColumn*: Der Name der Spalte, über die das rollende Fenster ausgeführt werden soll.
-* *BinSize*: Skalar mit der Größe der Lagerplätze, die über die *IndexColumn*angewendet werden sollen.
-* *BinsPerWindow*: Skalar mit der Anzahl der In-Bins, die in jedem Fenster enthalten sind.
-* *dim1*, *dim2*, ... : (optional) Liste der Dimensionsspalten, die geschnitten werden sollen.
+* *T*: der tabellarische Eingabe Ausdruck.
+* *Valuecolenumn*: der Name der Spalte mit Werten, deren Quantil berechnet werden soll. 
+* *Perzentil*: Skalar mit dem zu berechnenden Quantil.
+* *Indexcolumn*: der Name der Spalte, über die das parallele Fenster ausgeführt werden soll.
+* *Binsize*: Skalar mit der Größe der Container, die über die *indexcolumn*angewendet werden sollen.
+* *Binsperwindow*: Skalar mit der Anzahl der in jedem Fenster enthaltenen Behälter.
+* *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, nach denen die Segmente aufgeteilt werden sollen.
 
 **Rückgabe**
 
-Gibt eine Tabelle mit einer Zeile pro Lagerplatz (und, falls angegeben) einer Kombination von Dimensionen zurück, die das rollende Perzentil der Werte im Fenster hat, das am Lagerplatz endet (inklusive). unterschiedliche Zählwerte, unterschiedliche Anzahl neuer Werte, aggregierte eindeutige Anzahl für jedes Zeitfenster.
+Gibt eine Tabelle mit einer Zeile für jede einzelne bin (und ggf. eine Kombination von Dimensionen) zurück, die das parallele Quantil der Werte im Fenster enthält, das auf den bin (inklusiv) endet. unterschiedliche Anzahl Werte, unterschiedliche Anzahl neuer Werte, aggregierte eindeutige Anzahl für jedes Zeitfenster.
 
-Ausgabetabellenschema ist:
+Das Ausgabe Tabellen Schema ist:
 
 
-|IndexColumn|dim1|...|dim_n|rolling_BinsPerWindow_percentile_ValueColumn_Pct
+|Indexcolumn|dim1|...|dim_n|rolling_BinsPerWindow_percentile_ValueColumn_Pct
 |---|---|---|---|---|
 
 
 **Beispiele**
 
-### <a name="rolling-3-day-median-value-per-day"></a>Rollender 3-Tage-Medianwert pro Tag 
+### <a name="rolling-3-day-median-value-per-day"></a>Paralleler 3-Tage-Medianwert pro Tag 
 
-Die nächste Abfrage berechnet einen 3-Tage-Medianwert in täglicher Granularität. Jede Zeile in der Ausgabe stellt den Medianwert für die letzten 3 Abschnitte (Tage) dar, einschließlich des Lagerplatzs selbst.
+Die nächste Abfrage berechnet einen 3-tägigen Medianwert in täglicher Granularität. Jede Zeile in der Ausgabe stellt den Medianwert für die letzten drei Behälter (Tage) dar, einschließlich der bin selbst.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let T = 
 range idx from 0 to 24*10-1 step 1
@@ -76,10 +77,11 @@ range idx from 0 to 24*10-1 step 1
 |2018-01-09 00:00:00.0000000|   180|
 |2018-01-10 00:00:00.0000000|   204|
 
-### <a name="rolling-3-day-median-value-per-day-by-dimension"></a>Rolling 3-Tage-Medianwert pro Tag nach Dimension
+### <a name="rolling-3-day-median-value-per-day-by-dimension"></a>Paralleler 3-Tage-Medianwert pro Tag nach Dimension
 
-Das gleiche Beispiel von oben, aber jetzt auch berechnet das rollende Fenster für jeden Wert der Dimension partitioniert.
+Das gleiche Beispiel oben, aber jetzt auch das parallele Fenster berechnet, das für jeden Wert der Dimension partitioniert ist.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let T = 
 range idx from 0 to 24*10-1 step 1
@@ -101,13 +103,13 @@ range idx from 0 to 24*10-1 step 1
 |2018-01-08 00:00:00.0000000|   Sogar|   156|
 |2018-01-09 00:00:00.0000000|   Sogar|   180|
 |2018-01-10 00:00:00.0000000|   Sogar|   204|
-|2018-01-01 00:00:00.0000000|   Ungerade|    11|
-|2018-01-02 00:00:00.0000000|   Ungerade|    23|
-|2018-01-03 00:00:00.0000000|   Ungerade|    35|
-|2018-01-04 00:00:00.0000000|   Ungerade|    59|
-|2018-01-05 00:00:00.0000000|   Ungerade|    83|
-|2018-01-06 00:00:00.0000000|   Ungerade|    107|
-|2018-01-07 00:00:00.0000000|   Ungerade|    131|
-|2018-01-08 00:00:00.0000000|   Ungerade|    155|
-|2018-01-09 00:00:00.0000000|   Ungerade|    179|
-|2018-01-10 00:00:00.0000000|   Ungerade|    203|
+|2018-01-01 00:00:00.0000000|   Gelegentlich|    11|
+|2018-01-02 00:00:00.0000000|   Gelegentlich|    23|
+|2018-01-03 00:00:00.0000000|   Gelegentlich|    35|
+|2018-01-04 00:00:00.0000000|   Gelegentlich|    59|
+|2018-01-05 00:00:00.0000000|   Gelegentlich|    83|
+|2018-01-06 00:00:00.0000000|   Gelegentlich|    107|
+|2018-01-07 00:00:00.0000000|   Gelegentlich|    131|
+|2018-01-08 00:00:00.0000000|   Gelegentlich|    155|
+|2018-01-09 00:00:00.0000000|   Gelegentlich|    179|
+|2018-01-10 00:00:00.0000000|   Gelegentlich|    203|

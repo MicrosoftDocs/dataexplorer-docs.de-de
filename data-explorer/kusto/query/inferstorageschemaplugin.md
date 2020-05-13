@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1b4a917101ad3a35f8fdbc1cccb257b6f3724b69
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 5c430fd0ca18265c5800165b33bfe14126aee02a
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83224866"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373267"
 ---
 # <a name="infer_storage_schema-plugin"></a>Plug-in infer_storage_schema
 
@@ -41,10 +41,10 @@ Ein einzelnes *options* Argument ist ein konstanter Wert des Typs `dynamic` , de
 |Name                    |Erforderlich|BESCHREIBUNG|
 |------------------------|--------|-----------|
 |`StorageContainers`|Ja|Liste der [Speicher Verbindungs](../api/connection-strings/storage.md) Zeichenfolgen, die den Präfix-URI für gespeicherte Daten Artefakte darstellen|
-|`DataFormat`|Ja|Eines der unterstützten [Datenformate](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats).|
+|`DataFormat`|Ja|Eines der unterstützten [Datenformate](../../ingestion-supported-formats.md).|
 |`FileExtension`|Nein|Nur Dateien überprüfen, die mit dieser Dateierweiterung enden. Dies ist nicht erforderlich, aber die Angabe kann den Prozess beschleunigen (oder Daten Leseprobleme vermeiden).|
 |`FileNamePrefix`|Nein|Nur Dateien überprüfen, die mit diesem Präfix beginnen. Dies ist nicht erforderlich, aber die Angabe kann den Prozess beschleunigen.|
-|`Mode`|Nein|Strategie für die Schema Ableitung, eine der folgenden: `any` , `last` , `all` . Ableiten Sie das Datenschema aus einer beliebigen (ersten gefundenen) Datei, aus der letzten geschriebenen Datei bzw. aus allen Dateien. Standardwert: `last`.|
+|`Mode`|Nein|Strategie für die Schema Ableitung, eine der folgenden: `any` , `last` , `all` . Ableiten Sie das Datenschema aus einer beliebigen (ersten gefundenen) Datei, aus der letzten geschriebenen Datei bzw. aus allen Dateien. Der Standardwert ist `last`.|
 
 **Rückgabe**
 

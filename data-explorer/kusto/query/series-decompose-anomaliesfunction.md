@@ -1,5 +1,5 @@
 ---
-title: series_decompose_anomalies ()-Azure Daten-Explorer | Microsoft-Dokumentation
+title: series_decompose_anomalies ()-Azure Daten-Explorer
 description: In diesem Artikel wird series_decompose_anomalies () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/28/2019
-ms.openlocfilehash: 51ac499690323b1d2bafb4dc20ab7773f5c99c63
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 0cd2fc2e395ad47cff29589298ba7ae694fce941
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618893"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372904"
 ---
 # <a name="series_decompose_anomalies"></a>series_decompose_anomalies()
 
@@ -23,7 +23,7 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
 
 **Syntax**
 
-`series_decompose_anomalies (`*Series* `, ` *Test_points* `, ` *AD_method* *Trend* `,` *Seasonality_threshold* *Threshold* `,` *Seasonality* `,` Trend zur Saison Schwellenwert-Saisonalität Test_points AD_method Seasonality_threshold `[, ``])`
+`series_decompose_anomalies (`*Reihe* `[, ` *Schwellenwert* `,` *Saisonalität* `,` *Trend* `, ` *Test_points* `, ` *AD_method* `,` *Seasonality_threshold*`])`
 
 **Argumente**
 
@@ -41,7 +41,7 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
 * *AD_method*: eine Zeichenfolge, die die anomalieerkennungsmethode (siehe [series_outliers](series-outliersfunction.md)) für die restliche Zeitreihe steuert, die Folgendes enthält:    
     * "ctukey": [Tukey-Fence-Test](https://en.wikipedia.org/wiki/Outlier#Tukey's_fences) mit benutzerdefiniertem 10.90. Perzentil-Bereich [Standard]
     * "Tukey": [der "Tukey](https://en.wikipedia.org/wiki/Outlier#Tukey's_fences) "-Fence-Test mit dem standardmäßigen 25.75. Perzentil-Bereich
-* *Seasonality_threshold*: der Schwellenwert für die saisonalitätsbewertung, wenn *Saisonalität* auf Autodetect festgelegt ist, ist `0.6` der Standardwert für die Bewertung (Weitere Informationen finden Sie unter: [series_periods_detect](series-periods-detectfunction.md))
+* *Seasonality_threshold*: der Schwellenwert für die saisonalitätsbewertung, wenn *Saisonalität* auf Autodetect festgelegt ist, ist der Standardwert für die Bewertung `0.6` (Weitere Informationen finden Sie unter: [series_periods_detect](series-periods-detectfunction.md))
 
 
 **Hre**
@@ -65,6 +65,7 @@ Diese Funktion folgt den folgenden Schritten:
 
 Im folgenden Beispiel wird eine Reihe mit wöchentlicher Saison Abhängigkeit generiert. Anschließend fügen wir einige Ausreißer hinzu. `series_decompose_anomalies`erkennt die Saisonalität automatisch und generiert eine Baseline, die das sich wiederholende Muster erfasst. Die Ausreißer, die wir hinzugefügt haben, können in der ad_score Komponente eindeutig erkannt werden.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let ts=range t from 1 to 24*7*5 step 1 
 | extend Timestamp = datetime(2018-03-01 05:00) + 1h * t 
@@ -81,8 +82,9 @@ ts
 
 **2. erkennen von Anomalien in wöchentlicher Saisonalität mit Trend**
 
-In diesem Beispiel fügen wir der Reihe einen Trend aus dem vorherigen Beispiel hinzu. Zuerst führen `series_decompose_anomalies` wir mit den Standardparametern aus, bei denen der `avg` Standardwert des Trends nur den Mittelwert einnimmt und den Trend nicht berechnet. Wir können sehen, dass die generierte Baseline nicht den Trend enthält und im Vergleich zum vorherigen Beispiel weniger genau ist. Folglich werden einige der Ausreißer, die wir in die Daten eingefügt haben, aufgrund der höheren Varianz nicht erkannt.
+In diesem Beispiel fügen wir der Reihe einen Trend aus dem vorherigen Beispiel hinzu. Zuerst führen wir `series_decompose_anomalies` mit den Standardparametern aus, bei denen der `avg` Standardwert des Trends nur den Mittelwert einnimmt und den Trend nicht berechnet. Wir können sehen, dass die generierte Baseline nicht den Trend enthält und im Vergleich zum vorherigen Beispiel weniger genau ist. Folglich werden einige der Ausreißer, die wir in die Daten eingefügt haben, aufgrund der höheren Varianz nicht erkannt.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let ts=range t from 1 to 24*7*5 step 1 
 | extend Timestamp = datetime(2018-03-01 05:00) + 1h * t 
@@ -99,8 +101,9 @@ series_multiply(10, series_decompose_anomalies_y_ad_flag) // multiply by 10 for 
 
 :::image type="content" source="images/series-decompose-anomaliesfunction/weekly-seasonality-outliers-with-trend.png" alt-text="Wöchentliche saisonalitätsausreißer mit Trend" border="false":::
 
-Als nächstes führen wir das gleiche Beispiel aus, aber da wir einen Trend in der Reihe erwarten, legen `linefit` wir im Trend Parameter fest. Wir können sehen, dass sich die Baseline wesentlich näher an der Eingabe Reihe befindet. Alle Ausreißer, die Sie eingefügt haben, werden erkannt, ebenso wie einige falsch positive Ergebnisse (siehe das nächste Beispiel zum Optimieren des Schwellenwerts).
+Als nächstes führen wir das gleiche Beispiel aus, aber da wir einen Trend in der Reihe erwarten, legen wir `linefit` im Trend Parameter fest. Wir können sehen, dass sich die Baseline wesentlich näher an der Eingabe Reihe befindet. Alle Ausreißer, die Sie eingefügt haben, werden erkannt, ebenso wie einige falsch positive Ergebnisse (siehe das nächste Beispiel zum Optimieren des Schwellenwerts).
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let ts=range t from 1 to 24*7*5 step 1 
 | extend Timestamp = datetime(2018-03-01 05:00) + 1h * t 
@@ -121,6 +124,7 @@ series_multiply(10, series_decompose_anomalies_y_ad_flag) // multiply by 10 for 
 
 Im vorherigen Beispiel wurden einige Laute Punkte als Anomalien erkannt. in diesem Beispiel wird der Schwellenwert für die Anomalieerkennung von einem Standardwert von 1,5 auf 2,5 des interperentil-Bereichs erhöht, sodass nur stärkere Anomalien erkannt werden. Wir können sehen, dass jetzt nur die Ausreißer erkannt werden, die in die Daten eingefügt wurden.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let ts=range t from 1 to 24*7*5 step 1 
 | extend Timestamp = datetime(2018-03-01 05:00) + 1h * t 

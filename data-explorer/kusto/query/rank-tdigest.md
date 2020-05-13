@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: a849cd496d41ad473768b3f267639eaf8c467880
-ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
+ms.openlocfilehash: 29b35e5bd7265d89e65fe0129317a9f1672c7cad
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82741777"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373081"
 ---
 # <a name="rank_tdigest"></a>rank_tdigest()
 
-Berechnet den ungefähren Rang des Werts in einer Menge. Der Rang des `v` Werts in einer `S` Menge ist als Anzahl von Elementen von `S` definiert, die kleiner oder gleich `v`sind `S` , wird durch die `tdigest`dargestellt.
+Berechnet den ungefähren Rang des Werts in einer Menge. Der Rang des Werts `v` in einer Menge `S` ist als Anzahl von Elementen von definiert, `S` die kleiner oder gleich sind `v` , `S` wird durch die dargestellt `tdigest` .
 
 **Syntax**
 
@@ -34,12 +34,13 @@ Der Rang für foreach-Werte in einem DataSet.
 
 **Tipps**
 
-1) Die Werte, deren Rang Sie erhalten möchten, müssen vom gleichen Typ sein wie das `tdigest`.
+1) Die Werte, deren Rang Sie erhalten möchten, müssen vom gleichen Typ sein wie das `tdigest` .
 
 **Beispiele**
 
 In einer sortierten Liste (1-1000) ist der Rang von 685 der zugehörige Index:
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 range x from 1 to 1000 step 1
 | summarize t_x=tdigest(x)
@@ -52,6 +53,7 @@ range x from 1 to 1000 step 1
 
 Diese Abfrage berechnet den Rang des Werts $4490 für alle Schäden der Schadens Eigenschaften:
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | summarize tdigestRes = tdigest(DamageProperty)
@@ -65,6 +67,7 @@ StormEvents
 
 Erzielen des geschätzten Prozentsatzes des Rangs (durch Aufteilen durch die festgelegte Größe):
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | summarize tdigestRes = tdigest(DamageProperty), count()
@@ -79,6 +82,7 @@ StormEvents
 
 Das Quantil 85 der Kosten für die Schadens Eigenschaften beträgt $4490:
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 StormEvents
 | summarize tdigestRes = tdigest(DamageProperty)

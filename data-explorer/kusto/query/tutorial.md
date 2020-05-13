@@ -1,5 +1,5 @@
 ---
-title: 'Tutorial: Azure Daten-Explorer | Microsoft-Dokumentation'
+title: 'Tutorial: Azure Daten-Explorer'
 description: Dieser Artikel beschreibt das Tutorial in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 03/23/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 90d06064069a17d6b1394701bb4ea72483061b9c
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 8898f772af37e86ec33bff66e43779dfbaf4c053
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737605"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83370689"
 ---
 # <a name="tutorial"></a>Lernprogramm
 
@@ -34,11 +34,12 @@ Die beste Möglichkeit, um mehr über die Kusto-Abfragesprache zu erfahren, best
 
 ## <a name="count-rows"></a>Zeilen zählen
 
-Die Beispieldatenbank enthält eine Tabelle mit `StormEvents`dem Namen.
+Die Beispieldatenbank enthält eine Tabelle mit dem Namen `StormEvents` .
 Um herauszufinden, wie groß es ist, übergeben wir den Inhalt an einen Operator, der die Zeilen einfach zählt:
 
 * *Syntax:* Eine Abfrage ist eine Datenquelle (normalerweise ein Tabellenname), gefolgt von einem oder mehreren Paaren des Senk Zeichens und einem tabellarischen Operator.
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents | count
 ```
@@ -57,8 +58,9 @@ Verwenden Sie [Project](./projectoperator.md) , um nur die gewünschten Spalten 
 
 ## <a name="where-filtering-by-a-boolean-expression"></a>WHERE: Filtern nach einem booleschen Ausdruck
 
-Sehen wir uns im Februar `flood`-2007 `California` nur die e an:
+Sehen wir uns `flood` im `California` Februar-2007 nur die e an:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | where StartTime > datetime(2007-02-01) and StartTime < datetime(2007-03-01)
@@ -66,7 +68,7 @@ StormEvents
 | project StartTime, EndTime , State , EventType , EpisodeNarrative
 ```
 
-|StartTime|EndTime|Zustand|EventType|Episodenarrative|
+|StartTime|EndTime|Bundesland/Kanton|EventType|Episodenarrative|
 |---|---|---|---|---|
 |2007-02-19 00:00:00.0000000|2007-02-19 08:00:00.0000000|Kalifornische|Hochwasser|Ein frontaler System, das sich über den südlichen San-Joaquin Valley bewegt, hat in den frühen Morgenstunden des 19 Über Bundesland-Autobahn 166 in der Nähe von Taft wurde eine neben Überflutung|
 
@@ -74,13 +76,14 @@ StormEvents
 
 Betrachten Sie einige Daten: Was sehen Sie in 5 Beispielzeilen?
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | take 5
 | project  StartTime, EndTime, EventType, State, EventNarrative  
 ```
 
-|StartTime|EndTime|EventType|Zustand|EventNarrative|
+|StartTime|EndTime|EventType|Bundesland/Kanton|EventNarrative|
 |---|---|---|---|---|
 |2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|Starker Regen|Flori|Bis zu 9 Zoll in einem Zeitraum von 24 Stunden in Teilen des Küsten bauweiten Kreises.|
 |2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|Hüterin|Flori|Ein Tornado, der in der Stadt von Eustis am Nord Ende des West-kruklake liegt. Der Tornado hat sich schnell auf die EF1 Stärke verstärkt, als er Nord Nordwest durch Eustis verlagert hat. Die Nachverfolgung war direkt unter zwei km lang und hatte eine maximale Breite von 300 Meter.  Der Tornado hat 7 Häuser zerstört. 20 sieben Häuser erhielten größere Schäden, und 81 Häuser haben geringfügige Schäden gemeldet. Es sind keine schwerwiegenden Verletzungen aufgetreten, und der Eigenschafts Schaden wurde bei $6,2 Millionen festgelegt.|
@@ -93,18 +96,19 @@ Wenn [Sie jedoch](./takeoperator.md) Zeilen aus der Tabelle ohne bestimmte Reihe
 
 ## <a name="sort-and-top"></a>Sortieren und nach oben
 
-* *Syntax:* Einige Operatoren verfügen über Parameter, die von `by`Schlüsselwörtern wie eingeführt werden.
+* *Syntax:* Einige Operatoren verfügen über Parameter, die von Schlüsselwörtern wie eingeführt werden `by` .
 * `desc` = absteigende Reihenfolge, `asc` = aufsteigende Reihenfolge.
 
 Zeigen Sie die ersten n Zeilen, sortiert nach einer bestimmten Spalte an:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | top 5 by StartTime desc
 | project  StartTime, EndTime, EventType, State, EventNarrative  
 ```
 
-|StartTime|EndTime|EventType|Zustand|EventNarrative|
+|StartTime|EndTime|EventType|Bundesland/Kanton|EventNarrative|
 |---|---|---|---|---|
 |2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Winter Storm|MICHIGAN|Dieses schwere Schnee Ereignis wurde in den frühen Morgenstunden am Tag des neuen Jahrs fortgesetzt.|
 |2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Winter Storm|MICHIGAN|Dieses schwere Schnee Ereignis wurde in den frühen Morgenstunden am Tag des neuen Jahrs fortgesetzt.|
@@ -114,6 +118,7 @@ StormEvents
 
 Dies kann mithilfe des [Sortier](./sortoperator.md) -und anschließenden [Operators erreicht](./takeoperator.md) werden.
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | sort by StartTime desc
@@ -125,6 +130,7 @@ StormEvents
 
 Erstellen Sie eine neue Spalte, indem Sie in jeder Zeile einen Wert berechnen:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | limit 5
@@ -132,7 +138,7 @@ StormEvents
 | project StartTime, EndTime, Duration, EventType, State
 ```
 
-|StartTime|EndTime|Duration|EventType|Zustand|
+|StartTime|EndTime|Duration|EventType|Bundesland/Kanton|
 |---|---|---|---|---|
 |2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|22:00:00|Starker Regen|Flori|
 |2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|00:08:00|Hüterin|Flori|
@@ -141,8 +147,9 @@ StormEvents
 |2007-12-30 16:00:00.0000000|2007-12-30 16:05:00.0000000|00:05:00|Sturm|Georgien|
 
 Es ist möglich, den Spaltennamen wiederzuverwenden und das Berechnungs Ergebnis der gleichen Spalte zuzuweisen.
-Beispiel:
+Zum Beispiel:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 print x=1
 | extend x = x + 1, y = x
@@ -153,29 +160,31 @@ print x=1
 |---|---|
 |3|1|
 
-[Skalare Ausdrücke](./scalar-data-types/index.md) können alle üblichen Operatoren (`+`, `-`, `*`, `/`, `%`) enthalten, und es gibt eine Reihe nützlicher Funktionen.
+[Skalare Ausdrücke](./scalar-data-types/index.md) können alle üblichen Operatoren ( `+` , `-` , `*` , `/` ,) enthalten `%` , und es gibt eine Reihe nützlicher Funktionen.
 
 ## <a name="summarize-aggregate-groups-of-rows"></a>Zusammenfassung: Aggregieren von Zeilen Gruppen
 
 Zählen der Anzahl von Ereignissen aus jedem Land:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | summarize event_count = count() by State
 ```
 
-[fassen](./summarizeoperator.md) Sie Gruppen zusammen, die in der `by` -Klausel dieselben Werte aufweisen, und verwenden Sie dann die Aggregations Funktion `count`(z. b.), um die einzelnen Gruppen in einer einzelnen Zeile zu kombinieren. In diesem Fall gibt es eine Zeile für jeden Status und eine Spalte für die Anzahl der Zeilen in diesem Zustand.
+[fassen](./summarizeoperator.md) Sie Gruppen zusammen, die in der-Klausel dieselben Werte aufweisen `by` , und verwenden Sie dann die Aggregations Funktion (z `count` . b.), um die einzelnen Gruppen in einer einzelnen Zeile zu kombinieren. In diesem Fall gibt es eine Zeile für jeden Status und eine Spalte für die Anzahl der Zeilen in diesem Zustand.
 
 Es gibt eine Reihe von [Aggregations Funktionen](./summarizeoperator.md#list-of-aggregation-functions), die Sie in einem Zusammenfassungs Operator zum entwickeln mehrerer berechneter Spalten verwenden können. Wir könnten beispielsweise die Anzahl der Stürme in jedem Status und auch eine Summe der eindeutigen Art von Stürmen pro Bundesstaat erhalten.  
 dann könnten wir [Top](./topoperator.md) verwenden, um die meisten Storm-betroffenen Zustände zu erhalten:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents 
 | summarize StormCount = count(), TypeOfStorms = dcount(EventType) by State
 | top 5 by StormCount desc
 ```
 
-|Zustand|Stormcount|Typeofstorms|
+|Bundesland/Kanton|Stormcount|Typeofstorms|
 |---|---|---|
 |TEXAS|4701|27|
 |Kansas|3166|21|
@@ -191,9 +200,10 @@ Das Ergebnis von „summarize“ verfügt über Folgendes:
 
 ## <a name="summarize-by-scalar-values"></a>Zusammenfassen nach Skalarwerten
 
-Sie können Skalarwerte (numerisch, Zeit oder Intervall) in der `by` -Klausel verwenden, aber Sie sollten die Werte in Behälter platzieren.  
+Sie können Skalarwerte (numerisch, Zeit oder Intervall) in der- `by` Klausel verwenden, aber Sie sollten die Werte in Behälter platzieren.  
 Hierfür ist die [bin ()](./binfunction.md) -Funktion nützlich:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | where StartTime > datetime(2007-02-14) and StartTime < datetime(2007-02-21)
@@ -218,6 +228,7 @@ Dadurch werden alle Zeitstempel auf Intervalle von einem Tag reduziert:
 
 Projizieren Sie zwei Spalten, und verwenden Sie Sie als x-und y-Achse eines Diagramms:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents 
 | summarize event_count=count(), mid = avg(BeginLat) by State 
@@ -238,6 +249,7 @@ Streng genommen handelt es sich bei "Rendering" nicht um einen Teil der Abfrages
 
 Wenn wir zu numerischen Containern zurückkehren, zeigen wir eine Zeitreihe an:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | summarize event_count=count() by bin(StartTime, 1d)
@@ -250,6 +262,7 @@ StormEvents
 
 Verwenden Sie mehrere Werte in einer `summarize by` -Klausel, um eine separate Zeile für jede Kombination von Werten zu erstellen:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents 
 | where StartTime > datetime(2007-06-04) and StartTime < datetime(2007-06-10) 
@@ -259,11 +272,11 @@ StormEvents
 
 :::image type="content" source="images/tutorial/table-count-source.png" alt-text="Tabellen Anzahl nach Quelle":::
 
-Fügen Sie einfach den "Rendering"-Begriff `| render timechart`zum obigen hinzu:.
+Fügen Sie einfach den "Rendering"-Begriff zum obigen hinzu: `| render timechart` .
 
 :::image type="content" source="images/tutorial/line-count-source.png" alt-text="Liniendiagramm Anzahl nach Quelle":::
 
-Beachten Sie `render timechart` , dass die erste Spalte als x-Achse verwendet und die anderen Spalten dann als separate Zeilen anzeigt.
+Beachten Sie, dass `render timechart` die erste Spalte als x-Achse verwendet und die anderen Spalten dann als separate Zeilen anzeigt.
 
 ## <a name="daily-average-cycle"></a>Durchschnittlicher Tageszyklus
 
@@ -271,6 +284,7 @@ Wie unterscheidet sich die Aktivität über den durchschnittlichen Tag?
 
 Zählen Sie Ereignisse nach Zeit Modulo einen Tag, klassifiziert in Stunden. Beachten Sie, dass `floor` anstelle von "bin" verwendet wird:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | extend hour = floor(StartTime % 1d , 1h)
@@ -281,7 +295,7 @@ StormEvents
 
 :::image type="content" source="images/tutorial/time-count-hour.png" alt-text="Zeitdiagramm Anzahl nach Stunde":::
 
-Derzeit wird `render` die Dauer nicht ordnungsgemäß beschriftet, aber wir könnten `| render columnchart` stattdessen verwenden:
+Derzeit wird die `render` Dauer nicht ordnungsgemäß beschriftet, aber wir könnten `| render columnchart` stattdessen verwenden:
 
 :::image type="content" source="images/tutorial/column-count-hour.png" alt-text="Säulendiagramm Anzahl nach Stunde":::
 
@@ -289,6 +303,7 @@ Derzeit wird `render` die Dauer nicht ordnungsgemäß beschriftet, aber wir kön
 
 Wie unterscheidet sich die Aktivität im Laufe der Tageszeit in verschiedenen Zuständen?
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | extend hour= floor( StartTime % 1d , 1h)
@@ -301,6 +316,7 @@ StormEvents
 
 Dividieren `1h` Sie durch, um die x-Achse in Stundenzahl anstelle einer Dauer zu verwandeln:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | extend hour= floor( StartTime % 1d , 1h)/ 1h
@@ -317,6 +333,7 @@ Wie finde ich zwei angegebene EventTypes, in welchem Zustand beide aufgetreten s
 
 Sie können Storm-Ereignisse mit dem ersten EventType und mit dem zweiten EventType abrufen und dann die beiden Sätze für den Zustand verknüpfen.
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | where EventType == "Lightning"
@@ -331,14 +348,15 @@ StormEvents
 
 ## <a name="user-session-example-of-join"></a>Benutzer Sitzungs Beispiel für Join
 
-In diesem Abschnitt wird die `StormEvents` -Tabelle nicht verwendet.
+In diesem Abschnitt wird die- `StormEvents` Tabelle nicht verwendet.
 
 Angenommen, Sie verfügen über Daten, die Ereignisse enthalten, die den Beginn und das Ende jeder Benutzersitzung markieren, mit einer eindeutigen ID für jede Sitzung. 
 
 Wie lange dauert jede Benutzersitzung?
 
-Wenn Sie `extend` verwenden, um einen Alias für die beiden Zeitstempel anzugeben, können Sie die Sitzungsdauer berechnen.
+Wenn `extend` Sie verwenden, um einen Alias für die beiden Zeitstempel anzugeben, können Sie die Sitzungsdauer berechnen.
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 Events
 | where eventName == "session_started"
@@ -361,6 +379,7 @@ In den gleichen Klauseln benennen wir die Zeitstempelspalte um.
 
 Wie viele Stürme gibt es unterschiedliche Längen?
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | extend  duration = EndTime - StartTime
@@ -374,7 +393,7 @@ StormEvents
 
 :::image type="content" source="images/tutorial/event-count-duration.png" alt-text="Ereignis Anzahl Zeitdiagramm nach Dauer":::
 
-Oder verwenden `| render columnchart`Sie Folgendes:
+Oder verwenden Sie Folgendes `| render columnchart` :
 
 :::image type="content" source="images/tutorial/column-event-count-duration.png" alt-text="Säulendiagramm Ereignis Anzahl Zeitdiagramm nach Dauer":::
 
@@ -382,13 +401,13 @@ Oder verwenden `| render columnchart`Sie Folgendes:
 
 Welche Zeiträume von dauern decken verschiedene Prozentsätze von Stürmen ab?
 
-Verwenden Sie die obige Abfrage, aber `render` ersetzen Sie durch:
+Verwenden Sie die obige Abfrage, aber ersetzen Sie `render` durch:
 
 ```kusto
 | summarize percentiles(duration, 5, 20, 50, 80, 95)
 ```
 
-In diesem Fall haben wir keine `by` -Klausel bereitgestellt, sodass das Ergebnis eine einzelne Zeile ist:
+In diesem Fall haben wir keine- `by` Klausel bereitgestellt, sodass das Ergebnis eine einzelne Zeile ist:
 
 :::image type="content" source="images/tutorial/summarize-percentiles-duration.png" alt-text="Tabelle fasst Perzentilen nach Dauer zusammen":::
 
@@ -400,6 +419,7 @@ Daraus lässt sich Folgendes ablesen:
 
 Um eine separate Aufschlüsselung für jeden Zustand zu erhalten, müssen wir die Spalte State separat über beide Zusammenfassungs Operatoren hinzu bringen:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 StormEvents
 | extend  duration = EndTime - StartTime
@@ -417,6 +437,7 @@ StormEvents
 
 Verwenden [Sie Let](./letstatement.md) , um die Teile des Abfrage Ausdrucks im obigen Beispiel "Join" zu trennen. Die Ergebnisse sind wie folgt unverändert:
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let LightningStorms = 
     StormEvents

@@ -1,6 +1,6 @@
 ---
-title: externer Datenoperator - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird der externe Datenoperator in Azure Data Explorer beschrieben.
+title: 'externaldata-Operator: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt den externaldata-Operator in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,43 +8,43 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 0a4a151d1fd052e27e4daf76539ef6dbd9d94c83
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d46a8669c523955f74d3f489c7b10e5b0f7ccef6
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81515469"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373286"
 ---
 # <a name="externaldata-operator"></a>externaldata-Operator
 
-Der `externaldata` Operator gibt eine Tabelle zurück, deren Schema in der Abfrage selbst definiert ist und deren Daten aus einem externen Speicherartefakt (z. B. einem Blob in Azure Blob Storage) gelesen werden.
+Der `externaldata` -Operator gibt eine Tabelle zurück, deren Schema in der Abfrage selbst definiert ist und dessen Daten aus einem externen Speicher Element gelesen werden (z. b. ein BLOB in Azure BLOB Storage).
 
 > [!NOTE]
-> Dieser Operator verfügt nicht über eine Pipelineeingabe.
+> Dieser Operator hat keine Pipeline Eingabe.
 
 **Syntax**
 
-`externaldata``(` *ColumnName* `:` *ColumnType* [`,` .] `)` `]` `with` `(` `=` *Value1* `,` *Prop1* *StorageConnectionString* StorageConnectionString [ Prop1 Wert1 [ ...] `[` `)`]
+`externaldata``(` *ColumnName* `:` *ColumnType* [ `,` ...] `)` `[` *storageconnectionstring* `]` [ `with` `(` *Eigenschaft PROP1* `=` *value1* [ `,` ...] `)` ]
 
 **Argumente**
 
-* *ColumnName*, *ColumnType*: Definieren Sie das Schema der Tabelle.
-  Die Syntax ist die gleiche wie die Syntax, die beim Definieren einer Tabelle in [der .create-Tabelle](../management/create-table-command.md)verwendet wird.
+* *ColumnName*, *ColumnType*: definiert das Schema der Tabelle.
+  Die Syntax ist identisch mit der Syntax, die beim Definieren einer Tabelle in der [. Create](../management/create-table-command.md)-Tabelle verwendet wird.
 
-* *StorageConnectionString*: Die [Speicherverbindungszeichenfolge](../api/connection-strings/storage.md) beschreibt das Speicherartefakt, das die zurückzugebenden Daten enthält.
+* *Storageconnectionstring*: die [Speicher Verbindungs Zeichenfolge](../api/connection-strings/storage.md) beschreibt das Speicher Element, das die zurück zugebende Daten enthält.
 
-* *Prop1*, *Value1*, ...: Zusätzliche Eigenschaften, die beschreiben, wie die aus dem Speicher abgerufenen Daten interpretiert werden, wie unter [Aufnahmeeigenschaften](../management/data-ingestion/index.md)aufgeführt.
-    * Derzeit unterstützte `format` Eigenschaften: und `ignoreFirstRecord`.
-    * Unterstützte Datenformate: Alle [Erfassungsdatenformate](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats) werden `csv` `tsv`unterstützt, `parquet` `avro`einschließlich , , `json`, , .
+* *Eigenschaft PROP1*, *value1*,...: zusätzliche Eigenschaften, die beschreiben, wie die aus dem Speicher abgerufenen Daten interpretiert werden, wie unter Erfassungs [Eigenschaften](../management/data-ingestion/index.md)aufgeführt.
+    * Derzeit unterstützte Eigenschaften: `format` und `ignoreFirstRecord` .
+    * Unterstützte Datenformate: alle Erfassungs [Datenformate](../../ingestion-supported-formats.md) werden unterstützt, einschließlich `csv` , `tsv` , `json` , `parquet` , `avro` .
 
 **Rückgabe**
 
-Der `externaldata` Operator gibt eine Datentabelle des angegebenen Schemas zurück, dessen Daten aus dem angegebenen Speicherartefakt analysiert wurden, das durch die Speicherverbindungszeichenfolge angegeben ist.
+Der- `externaldata` Operator gibt eine Datentabelle des angegebenen Schemas zurück, dessen Daten aus dem angegebenen Speicher Element, das durch die Speicher Verbindungs Zeichenfolge angegeben wurde, analysiert wurden.
 
 **Beispiel**
 
-Das folgende Beispiel zeigt, wie Sie `UserID` alle Datensätze in einer Tabelle suchen, deren Spalte in einen bekannten Satz von IDs fällt, die (einer pro Zeile) in einem externen Blob gehalten werden.
-Da auf den Satz indirekt von der Abfrage verwiesen wird, kann er sehr groß sein.
+Im folgenden Beispiel wird gezeigt, wie alle Datensätze in einer Tabelle gesucht `UserID` werden, deren Spalte zu einem bekannten Satz von IDs gehört, der (eine pro Zeile) in einem externen BLOB aufbewahrt wird.
+Da die Abfrage indirekt auf den Satz verweist, kann Sie sehr groß sein.
 
 ```
 Users

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: 5394eefad37195833c0c5ebb94325bb540d1f520
-ms.sourcegitcommit: 9fe6ee7db15a5cc92150d3eac0ee175f538953d2
+ms.openlocfilehash: 4500ec5b58c93901e011ea6dd270563d3405ee01
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82907212"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372863"
 ---
 # <a name="series_decompose"></a>series_decompose()
 
@@ -23,7 +23,7 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
  
 **Syntax**
 
-`series_decompose(`*Series* `[,` *Trend* *Test_points* `,` *Seasonality_threshold* *Seasonality* `,` zur Saisonalität der Reihe Test_points Seasonality_threshold`,``])`
+`series_decompose(`*Reihe* `[,` *Saisonalität* `,` *Trend* `,` *Test_points* `,` *Seasonality_threshold*`])`
 
 **Argumente**
 
@@ -37,7 +37,7 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
     * "Linefit": Trend Komponente mithilfe von linearer Regression extrahieren.
     * "None": kein Trend, Extrahieren dieser Komponente überspringen.    
 * *Test_points*: 0 (Standard) oder positive ganze Zahl, die die Anzahl der Punkte am Ende der Reihe angibt, die vom Lernprozess (Regression) ausgeschlossen werden sollen. Dieser Parameter sollte für Vorhersagezwecke festgelegt werden.
-* *Seasonality_threshold*: der Schwellenwert für die saisonalitätsbewertung, wenn *Saison alität* auf Autodetect festgelegt ist, ist `0.6`der Standardwert für die Bewertung. Weitere Informationen finden Sie unter [series_periods_detect](series-periods-detectfunction.md).
+* *Seasonality_threshold*: der Schwellenwert für die saisonalitätsbewertung, wenn *Saison alität* auf Autodetect festgelegt ist, ist der Standardwert für die Bewertung `0.6` . Weitere Informationen finden Sie unter [series_periods_detect](series-periods-detectfunction.md).
 
 **Hre**
 
@@ -72,6 +72,7 @@ Diese Methode wird in der Regel auf Zeitreihen von Metriken angewendet, die das 
 
 Im folgenden Beispiel wird eine Reihe mit wöchentlicher Saison Abhängigkeit und ohne Trend generiert. Anschließend werden einige Ausreißer hinzugefügt. `series_decompose`findet und erkennt automatisch die Saisonalität und generiert eine Baseline, die fast identisch mit der Saison Komponente ist. Die Ausreißer, die wir hinzugefügt haben, können eindeutig in der Komponente Restwerte angezeigt werden.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let ts=range t from 1 to 24*7*5 step 1 
 | extend Timestamp = datetime(2018-03-01 05:00) + 1h * t 
@@ -88,8 +89,9 @@ ts
 
 **Wöchentliche Saisonalität mit Trend**
 
-In diesem Beispiel fügen wir der Reihe einen Trend aus dem vorherigen Beispiel hinzu. Zuerst führen `series_decompose` wir mit den Standardparametern aus. Der Standard `avg` Wert für den Trend übernimmt nur den Mittelwert und berechnet nicht den Trend. Die generierte Baseline enthält keinen Trend. Wenn Sie den Trend in den residuals beobachten, wird deutlich, dass dieses Beispiel weniger genau ist als im vorherigen Beispiel.
+In diesem Beispiel fügen wir der Reihe einen Trend aus dem vorherigen Beispiel hinzu. Zuerst führen wir `series_decompose` mit den Standardparametern aus. Der Standardwert für den Trend `avg` übernimmt nur den Mittelwert und berechnet nicht den Trend. Die generierte Baseline enthält keinen Trend. Wenn Sie den Trend in den residuals beobachten, wird deutlich, dass dieses Beispiel weniger genau ist als im vorherigen Beispiel.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let ts=range t from 1 to 24*7*5 step 1 
 | extend Timestamp = datetime(2018-03-01 05:00) + 1h * t 
@@ -104,8 +106,9 @@ ts
 
 :::image type="content" source="images/samples/series-decompose2.png" alt-text="Reihen Komposition 2":::
 
-Als nächstes führen wir das gleiche Beispiel erneut aus. Da wir einen Trend in der Reihe erwarten, legen `linefit` wir im Trend Parameter fest. Wir können sehen, dass der positive Trend erkannt wird und sich die Baseline wesentlich näher an der Eingabe Reihe befindet. Die Restwerte liegen nahe bei Null, und nur die Ausreißer sind hervorragend. Wir sehen alle Komponenten in der Reihe im Diagramm.
+Als nächstes führen wir das gleiche Beispiel erneut aus. Da wir einen Trend in der Reihe erwarten, legen wir `linefit` im Trend Parameter fest. Wir können sehen, dass der positive Trend erkannt wird und sich die Baseline wesentlich näher an der Eingabe Reihe befindet. Die Restwerte liegen nahe bei Null, und nur die Ausreißer sind hervorragend. Wir sehen alle Komponenten in der Reihe im Diagramm.
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 let ts=range t from 1 to 24*7*5 step 1 
 | extend Timestamp = datetime(2018-03-01 05:00) + 1h * t 

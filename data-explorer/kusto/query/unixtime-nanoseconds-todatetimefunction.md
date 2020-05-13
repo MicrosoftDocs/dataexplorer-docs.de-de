@@ -1,6 +1,6 @@
 ---
-title: unixtime_nanoseconds_todatetime() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird unixtime_nanoseconds_todatetime() in Azure Data Explorer beschrieben.
+title: unixtime_nanoseconds_todatetime ()-Azure Daten-Explorer
+description: In diesem Artikel wird unixtime_nanoseconds_todatetime () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/25/2019
-ms.openlocfilehash: cd9dadca7ab4455f8a90d5a7842293b2d6c8bcc2
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 6c56d588ec9635b8225161ffdd47dc90eabdca3d
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81505235"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83370497"
 ---
 # <a name="unixtime_nanoseconds_todatetime"></a>unixtime_nanoseconds_todatetime()
 
-Konvertiert unix-epoch nanoseconds in UTC datetime.
+Konvertiert Unix-Epoch Nanosekunden in UTC-DateTime.
 
 **Syntax**
 
@@ -25,24 +25,25 @@ Konvertiert unix-epoch nanoseconds in UTC datetime.
 
 **Argumente**
 
-* *nanoseconds*: Eine reelle Zahl stellt den Epochenzeitstempel in Nanosekunden dar. `Datetime`die vor der Epoche (1970-01-01 00:00:00) auftritt, hat einen negativen Zeitstempelwert.
+* *Nanosekunden*: eine reelle Zahl stellt einen Epochen Zeitstempel in Nanosekunden dar. `Datetime`Dies tritt auf, bevor die Epochen Zeit (1970-01-01 00:00:00) einen negativen Zeitstempelwert aufweist.
 
 **Rückgabe**
 
-Wenn die Konvertierung erfolgreich ist, ist das Ergebnis ein [datetime-Wert.](./scalar-data-types/datetime.md) Wenn die Konvertierung nicht erfolgreich ist, lautet das Ergebnis null.
+Wenn die Konvertierung erfolgreich ist, ist das Ergebnis ein [DateTime](./scalar-data-types/datetime.md) -Wert. Wenn die Konvertierung nicht erfolgreich ist, ist das Ergebnis NULL.
 
 **Siehe auch**
 
-* Konvertieren Sie unix-epoch Sekunden in UTC datetime mit [unixtime_seconds_todatetime()](unixtime-seconds-todatetimefunction.md).
-* Konvertieren Sie unix-epoch Millisekunden in UTC datetime mit [unixtime_milliseconds_todatetime()](unixtime-milliseconds-todatetimefunction.md).
-* Konvertieren Sie unix-epoch microseconds in UTC datetime mit [unixtime_microseconds_todatetime()](unixtime-microseconds-todatetimefunction.md).
+* Konvertieren Sie UNIX-Epoch seconds in UTC-DateTime mithilfe von [unixtime_seconds_todatetime ()](unixtime-seconds-todatetimefunction.md).
+* Konvertieren Sie UNIX-Epoch-Millisekunden in UTC-DateTime mithilfe von [unixtime_milliseconds_todatetime ()](unixtime-milliseconds-todatetimefunction.md).
+* Konvertieren Sie UNIX-Epoch-Mikrosekunden in UTC-DateTime mithilfe von [unixtime_microseconds_todatetime ()](unixtime-microseconds-todatetimefunction.md).
 
 **Beispiel**
 
+<!-- csl: https://help.kusto.windows.net/Samples  -->
 ```kusto
 print date_time = unixtime_nanoseconds_todatetime(1546300800000000000)
 ```
 
-|Date_time|
+|date_time|
 |---|
 |2019-01-01 00:00:00.0000000|

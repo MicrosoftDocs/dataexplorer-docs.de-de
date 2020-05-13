@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1614a04c5e5bff51f45df914174c967ff9c7d8a2
-ms.sourcegitcommit: 9fe6ee7db15a5cc92150d3eac0ee175f538953d2
+ms.openlocfilehash: 87b68e4a9de42a9a7085238db5919066d577ed1f
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/07/2020
-ms.locfileid: "82907078"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373540"
 ---
 # <a name="streaming-ingestion-http-request"></a>Streamingerfassung (http-Anforderung)
 
@@ -25,7 +25,7 @@ ms.locfileid: "82907078"
 
 ## <a name="request-parameters"></a>Anforderungsparameter
 
-| Parameter    | Beschreibung                                                                 | Erforderlich/optional |
+| Parameter    | Beschreibung                                                                 | Erforderlich/Optional |
 |--------------|-----------------------------------------------------------------------------|-------------------|
 | `{database}` |   Name der Zieldatenbank für die Erfassungs Anforderung                     |  Erforderlich         |
 | `{table}`    |   Name der Ziel Tabelle für die Erfassungs Anforderung                        |  Erforderlich         |
@@ -34,18 +34,18 @@ ms.locfileid: "82907078"
 
 Zusätzliche Parameter werden als URL-Abfrage `{name}={value}` Paare formatiert, getrennt durch das & Zeichen.
 
-| Parameter    | Beschreibung                                                                          | Erforderlich/optional   |
+| Parameter    | Beschreibung                                                                          | Erforderlich/Optional   |
 |--------------|--------------------------------------------------------------------------------------|---------------------|
-|`streamFormat`| Gibt das Format der Daten im Anforderungs Text an. Der Wert muss einer der folgenden Werte `CSV`sein `TSV`: `SCsv`, `SOHsv`, `PSV`, `JSON`, `MultiJSON`, `Avro`,,. Weitere Informationen finden Sie [unter Unterstützte Datenformate](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats).| Erforderlich |
-|`mappingName` | Der Name der vorab erstellten Erfassungs Zuordnung, die für die Tabelle definiert ist. Weitere Informationen finden Sie unter [Daten](../../management/mappings.md)Zuordnungen. Die Vorgehensweise zum Verwalten von vorab erstellten Zuordnungen in der Tabelle wird [hier](../../management/create-ingestion-mapping-command.md)beschrieben.| Optional, aber erforderlich, `streamFormat` wenn eine von `JSON`, `MultiJSON`oder ist.`Avro`|  |
+|`streamFormat`| Gibt das Format der Daten im Anforderungs Text an. Der Wert muss einer der folgenden Werte sein: `CSV` , `TSV` , `SCsv` , `SOHsv` , `PSV` , `JSON` , `MultiJSON` , `Avro` . Weitere Informationen finden Sie [unter Unterstützte Datenformate](../../../ingestion-supported-formats.md).| Erforderlich |
+|`mappingName` | Der Name der vorab erstellten Erfassungs Zuordnung, die für die Tabelle definiert ist. Weitere Informationen finden Sie unter [Daten](../../management/mappings.md)Zuordnungen. Die Vorgehensweise zum Verwalten von vorab erstellten Zuordnungen in der Tabelle wird [hier](../../management/create-ingestion-mapping-command.md)beschrieben.| Optional, aber erforderlich, wenn `streamFormat` eine von `JSON` , `MultiJSON` oder ist.`Avro`|  |
               
-Verwenden Sie zum Erfassen von CSV-formatierten Daten in eine `Logs` Tabelle in `Test`der-Datenbank beispielsweise Folgendes:
+Verwenden Sie zum Erfassen von CSV-formatierten Daten in eine Tabelle in der-Datenbank beispielsweise Folgendes `Logs` `Test` :
 
 ```
 POST https://help.kusto.windows.net/v1/rest/ingest/Test/Logs?streamFormat=Csv HTTP/1.1
 ```
 
-Verwenden Sie Folgendes, um JSON-formatierte Daten mit einer `mylogmapping`vorab erstellten Zuordnung zu erfassen:
+Verwenden Sie Folgendes, um JSON-formatierte Daten mit einer vorab erstellten Zuordnung zu erfassen `mylogmapping` :
 
 ```
 POST https://help.kusto.windows.net/v1/rest/ingest/Test/Logs?streamFormat=Json&mappingName=mylogmapping HTTP/1.1
@@ -55,20 +55,20 @@ POST https://help.kusto.windows.net/v1/rest/ingest/Test/Logs?streamFormat=Json&m
 
 In der folgenden Tabelle sind die allgemeinen Header für Abfrage-und Verwaltungsvorgänge enthalten.
 
-|Standard Header   | Beschreibung                                                                               | Erforderlich/optional | 
+|Standard Header   | Beschreibung                                                                               | Erforderlich/Optional | 
 |------------------|-------------------------------------------------------------------------------------------|-------------------|
-|`Accept`          | Legen Sie diesen Wert `application/json`auf fest.                                                     | Optional          |
-|`Accept-Encoding` | Unterstützte Codierungen `gzip` sind `deflate`und.                                             | Optional          | 
+|`Accept`          | Legen Sie diesen Wert auf fest `application/json` .                                                     | Optional          |
+|`Accept-Encoding` | Unterstützte Codierungen sind `gzip` und `deflate` .                                             | Optional          | 
 |`Authorization`   | Siehe [Authentifizierung](./authentication.md).                                                | Erforderlich          |
 |`Connection`      | `Keep-Alive`aktivieren.                                                                      | Optional          |
 |`Content-Length`  | Gibt die Länge des Anforderungs Texts an, sofern bekannt.                                              | Optional          |
-|`Content-Encoding`| Legen Sie `gzip` auf fest, aber der Text muss gzip-komprimiert sein.                                        | Optional          |
+|`Content-Encoding`| Legen Sie auf fest, `gzip` aber der Text muss gzip-komprimiert sein.                                        | Optional          |
 |`Expect`          | Legen Sie diese Option auf `100-Continue` fest.                                                                    | Optional          |
-|`Host`            | Legen Sie auf den Domänen Namen fest, an den die Anforderung gesendet wurde `help.kusto.windows.net`(z. b.). | Erforderlich          |
+|`Host`            | Legen Sie auf den Domänen Namen fest, an den die Anforderung gesendet wurde (z `help.kusto.windows.net` . b.). | Erforderlich          |
 
 In der folgenden Tabelle sind die allgemeinen benutzerdefinierten Header für Abfrage-und Verwaltungsvorgänge enthalten. Sofern nicht anders angegeben, dienen die Header nur zu telemetriezwecken und haben keine Auswirkungen auf die Funktionalität.
 
-|Benutzerdefinierter Header           |Beschreibung                                                                           | Erforderlich/optional |
+|Benutzerdefinierter Header           |Beschreibung                                                                           | Erforderlich/Optional |
 |------------------------|----------------------------------------------------------------------------------------------------------|
 |`x-ms-app`              |Der (benutzerfreundliche) Name der Anwendung, die die Anforderung sendet.                            | Optional          |
 |`x-ms-user`             |Der (benutzerfreundliche) Name des Benutzers, der die Anforderung sendet.                                   | Optional          |

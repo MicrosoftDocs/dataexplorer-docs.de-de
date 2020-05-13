@@ -1,6 +1,6 @@
 ---
-title: ipv4_is_match() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden ipv4_is_match() in Azure Data Explorer beschrieben.
+title: ipv4_is_match ()-Azure Daten-Explorer
+description: In diesem Artikel wird ipv4_is_match () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: aa0646321af2d467c1e4af07fba81ccdc58eff37
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b63a73efe73223ba7c6bd2b42c6e05a6c60e94b6
+ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513735"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83271450"
 ---
-# <a name="ipv4_is_match"></a>ipv4_is_match()
+# <a name="ipv4_is_match"></a>ipv4_is_match ()
 
-Entspricht zwei IPv4-Zeichenfolgen.
+Entspricht zwei IPv4-Zeichen folgen.
 
 ```kusto
 ipv4_is_match("127.0.0.1", "127.0.0.1") == true
@@ -28,35 +28,36 @@ ipv4_is_match('192.168.1.1', '192.168.1.255', 24) == true
 
 **Syntax**
 
-`ipv4_is_match(`*Expr1*`, `*Expr2*`[ ,`*PräfixMaske*`])`
+`ipv4_is_match(`*Expr1* `, ` *Expr2* `[ ,` *Prefixmask*`])`
 
 **Argumente**
 
-* *Expr1*, *Expr2*: Ein Zeichenfolgenausdruck, der eine IPv4-Adresse darstellt. IPv4-Zeichenfolgen können mithilfe der [IP-Präfixnotation](#ip-prefix-notation)maskiert werden.
-* *PrefixMask*: Eine ganze Zahl von 0 bis 32, die die Anzahl der wichtigsten Bits darstellt, die berücksichtigt werden.
+* *Expr1*, *expr2*: ein Zeichen folgen Ausdruck, der eine IPv4-Adresse darstellt. IPv4-Zeichen folgen können mithilfe der [IP-Präfix Notation](#ip-prefix-notation)maskiert werden.
+* *Prefixmask*: eine ganze Zahl zwischen 0 und 32, die die Anzahl der signifikantesten Bits darstellt, die berücksichtigt werden.
 
-### <a name="ip-prefix-notation"></a>IP-Präfixnotation
+### <a name="ip-prefix-notation"></a>IP-Präfix Notation
 
-Es ist üblich, IP-Adressen `IP-prefix notation` mit einem`/`Schrägstrich ( ) zu definieren. Die IP-Adresse des Schrägstrichs`/`( ) an die LINKE ist die Basis-IP-Adresse, und`/`die Zahl (1 bis 32) zum RECHTS des Schrägstrichs ( ) ist die Anzahl der zusammenhängenden 1 Bits in der Netzmaske. 
+Es ist üblich, IP-Adressen mithilfe `IP-prefix notation` eines Schrägstrichs () zu definieren `/` . Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse, und die Zahl (1 bis 32) rechts neben dem Schrägstrich ( `/` ) ist die Anzahl von zusammenhängenden 1 Bits in der netmask. 
 
-Beispiel: 192.168.2.0/24 enthält eine zugeordnete Netz-/Subnetzmaske mit 24 zusammenhängenden Bits oder 255.255.255.0 im gepunkteten Dezimalformat.
+Beispiel: 192.168.2.0/24 verfügt über eine zugeordnete net/Subnetmask mit 24 aufeinander folgenden Bits oder 255.255.255.0 im gepunkteten Dezimal Format.
 
 **Rückgabe**
 
-Die beiden IPv4-Zeichenfolgen werden analysiert und verglichen, während die kombinierte IP-Präfixmaske `PrefixMask` berücksichtigt wird, die aus Argumentpräfixen berechnet wird, und das optionale Argument.
+Die beiden IPv4-Zeichen folgen werden analysiert und verglichen, während die kombinierte IP-Präfix Maske, die aus den Argument Präfixen berechnet wurde, und das optionale Argument berücksichtigt werden `PrefixMask` .
 
 Rückgabewerte:
-* `true`: Wenn die lange Darstellung des ersten IPv4-Zeichenfolgenarguments gleich dem zweiten IPv4-Zeichenfolgenargument ist.
-*  `false`: Andernfalls.
+* `true`: Wenn die lange Darstellung des ersten IPv4-Zeichen folgen Arguments gleich dem zweiten IPv4-Zeichen folgen Argument ist.
+*  `false`Sonst.
 
-Wenn die Konvertierung für eine der beiden IPv4-Zeichenfolgen nicht erfolgreich war, wird `null`das Ergebnis .
+Wenn die Konvertierung für eine der beiden IPv4-Zeichen folgen nicht erfolgreich war, ist das Ergebnis `null` .
 
 **Beispiele**
 
-## <a name="ipv4-comparison-equality-cases"></a>IPv4-Vergleichsgleichheitsfälle
+## <a name="ipv4-comparison-equality-cases"></a>Gleichheits Fälle für IPv4-Vergleiche
 
-Im folgenden Beispiel werden verschiedene IPs mit IP-Präfixnotation verglichen, die in den IPv4-Zeichenfolgen angegeben sind.
+Im folgenden Beispiel werden verschiedene IPS mit IP-Präfix Notation verglichen, die in den IPv4-Zeichen folgen angegeben sind.
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 datatable(ip1_string:string, ip2_string:string)
 [
@@ -75,8 +76,9 @@ datatable(ip1_string:string, ip2_string:string)
 |192.168.1.1|192.168.1.255/24|1|
 |192.168.1.1/30|192.168.1.255/24|1|
 
-Im folgenden Beispiel werden verschiedene IPs mit IP-Präfixnotation verglichen, die in `ipv4_is_match()` den IPv4-Zeichenfolgen angegeben sind, sowie als zusätzliches Argument für die Funktion.
+Im folgenden Beispiel werden verschiedene IPS mithilfe der in den IPv4-Zeichen folgen angegebenen IP-Präfix Notation und als zusätzliches Argument der- `ipv4_is_match()` Funktion verglichen.
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 datatable(ip1_string:string, ip2_string:string, prefix:long)
 [

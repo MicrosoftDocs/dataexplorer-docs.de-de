@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: f41304ae4ac51081cd61c41856ed5e7e08ed6f7a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: f0fb68395ec5ed647e1f28cc1c93d46083d405c6
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81490377"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373442"
 ---
 # <a name="data-ingestion"></a>Datenerfassung
 
@@ -41,8 +41,8 @@ Der Datenerfassungsprozess umfasst mehrere Schritte:
 > Für Daten, die in einer Tabelle in Kusto erfasst werden, gilt die effektive **Aufbewahrungsrichtlinie** der Tabelle.
 > Wurde für eine Tabelle nicht explizit eine effektive Aufbewahrungsrichtlinie festgelegt, wird sie von der Aufbewahrungsrichtlinie der Datenbank abgeleitet. Daher sollten Sie beim Erfassen von Daten in Kusto sicherstellen, dass die Aufbewahrungsrichtlinie der Datenbank Ihren Anforderungen entspricht. Ist dies nicht der Fall, überschreiben Sie sie explizit auf Tabellenebene. Ansonsten werden die Daten aufgrund der Aufbewahrungsrichtlinie der Datenbank unter Umständen automatisch gelöscht. Weitere Informationen finden Sie in [Aufbewahrungsrichtlinie](https://kusto.azurewebsites.net/docs/concepts/retentionpolicy.html).
 
-Informationen zu den Eigenschaften der Datenerfassung finden Sie unter [Eigenschaften der Datenerfassung](https://docs.microsoft.com/azure/data-explorer/ingestion-properties).
-Eine Liste der unterstützten Formate für die Datenerfassung finden Sie unter [Datenformate](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats).
+Informationen zu den Eigenschaften der Datenerfassung finden Sie unter [Eigenschaften der Datenerfassung](../../../ingestion-properties.md).
+Eine Liste der unterstützten Formate für die Datenerfassung finden Sie unter [Datenformate](../../../ingestion-supported-formats.md).
 
 
 

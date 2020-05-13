@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 5dec95e8d4a73bcff4e8ad037577c51a20fcc64c
-ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
+ms.openlocfilehash: 6c1f836596c27f0e2901e9f7b109d96aab89cdff
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82741957"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373506"
 ---
 # <a name="sandboxes"></a>Sandboxes
 
@@ -26,7 +26,7 @@ Flows, die in Sandkästen ausgeführt werden, sind nicht nur isoliert, sondern a
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
-* Für die Daten-Engine darf die Datenträger [Verschlüsselung](https://docs.microsoft.com/azure/data-explorer/security#data-encryption) **nicht** aktiviert sein.
+* Für die Daten-Engine darf die Datenträger [Verschlüsselung](../../security.md#data-encryption) **nicht** aktiviert sein.
   * Die Unterstützung für die parallele Ausführung beider Features wird in Zukunft erwartet.
 * Die erforderlichen Pakete (Images) zum Ausführen der Sandkästen werden für alle Knoten der Daten-Engine bereitgestellt und erfordern dedizierten SSD-Speicherplatz, um ausgeführt werden zu können.
   * Die geschätzte Größe beträgt 20 GB, z. b. etwa 2,5% der SSD-Kapazität einer D14_v2-VM oder 0,7% der SSD-Kapazität einer L16_v1-VM.
@@ -52,9 +52,9 @@ Einige dieser Einschränkungen können mithilfe einer [Sandbox-Richtlinie](../ma
   * Anforderungen, bei denen es sich um einen Status handelt, bei dem keine verfügbare Sandbox verfügbar ist, werden gedrosselt
 * **Netzwerk:** Ein Sandkasten kann nicht mit einer Ressource auf dem virtuellen Computer oder außerhalb der VM interagieren.
   * Ein Sandkasten kann nicht mit einem anderen Sandkasten interagieren.
-* **CPU:** Die maximale CPU-Rate, die ein Sandkasten von seinen Host Prozessoren belegen kann, ist begrenzt ( `50%`standardmäßig auf).
+* **CPU:** Die maximale CPU-Rate, die ein Sandkasten von seinen Host Prozessoren belegen kann, ist begrenzt (standardmäßig auf `50%` ).
   * Wenn dieser Grenzwert erreicht wird, wird die CPU-Auslastung des Sandkastens gedrosselt, die Ausführung wird jedoch fortgesetzt.
-* Arbeits **Speicher:** Die maximale RAM-Größe, die ein Sandkasten für den Arbeitsspeicher seines Hosts belegen kann, ist `20GB`begrenzt (standardmäßig auf).
+* Arbeits **Speicher:** Die maximale RAM-Größe, die ein Sandkasten für den Arbeitsspeicher seines Hosts belegen kann, ist begrenzt (standardmäßig auf `20GB` ).
   * Das Erreichen dieses Limits führt zu einem Abbruch des Sandkastens (und einem Fehler bei der Abfrage Ausführung).
 * Datenträger **:** Einem Sandkasten ist ein eindeutiges Verzeichnis angefügt, für das er nicht auf das Dateisystem des Hosts zugreifen kann.
   * Dieser Ordner ermöglicht den Zugriff auf das Image/Paket, das mit der Art der Sandbox übereinstimmt (z. b. das nicht anpassbare python-oder R-Paket).
@@ -62,7 +62,7 @@ Einige dieser Einschränkungen können mithilfe einer [Sandbox-Richtlinie](../ma
 
 > [!NOTE]
 > Die Ressourcennutzung von Sandbox hängt nicht nur von der Größe der Daten ab, die als Teil der Anforderung verarbeitet werden, sondern auch von der Logik, die in der Sandbox ausgeführt wird, und von der Implementierung der Bibliotheken, die von ihr verwendet werden.
-> (z. b. `python` für `r` die-und-Plug-ins bezeichnet das letztere das vom Benutzer bereitgestellte Skript und die python-oder R-Bibliotheken, die zur Laufzeit genutzt werden
+> (z. b. für die `python` -und-Plug `r` -ins bezeichnet das letztere das vom Benutzer bereitgestellte Skript und die python-oder R-Bibliotheken, die zur Laufzeit genutzt werden
 
 ## <a name="errors"></a>Fehler
 

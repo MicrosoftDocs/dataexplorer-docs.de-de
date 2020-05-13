@@ -1,6 +1,6 @@
 ---
-title: T-SQL - Azure-Daten-Explorer | Microsoft Docs
-description: In diesem Artikel wird T-SQL in Azure Data Explorer beschrieben.
+title: T-SQL-Azure-Daten-Explorer
+description: In diesem Artikel wird T-SQL in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,40 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: d262d8b7587296c02a2a31d850919af0931bcde6
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1115414358a1025d4931484b81d6eda76109e6cd
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523408"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373527"
 ---
-# <a name="t-sql"></a>T-SQL
+# <a name="t-sql-support"></a>T-SQL-Unterstützung
 
-Der Kusto-Dienst kann T-SQL-Abfragen mit einigen Spracheinschränkungen interpretieren und ausführen.
-Während die [Kusto-Abfragesprache](../../query/index.md) die bevorzugte Sprache für Kusto ist, ist eine solche Unterstützung nützlich für bestehende Tools, die nicht einfach konvertiert werden können, um die bevorzugte Abfragesprache zu verwenden, und für die gelegentliche Verwendung von Kusto durch Personen, die mit SQL vertraut sind.
+Die [Kusto-Abfragesprache (kql)](../../query/index.md) ist die bevorzugte Abfragesprache.
+Die T-SQL-Unterstützung ist jedoch nützlich für Tools, die nicht problemlos zur Verwendung von kql konvertiert werden können.  
+Die T-SQL-Unterstützung ist auch nützlich für die gelegentliche Verwendung durch Benutzer, die mit SQL vertraut sind.
+
+Mithilfe von Kusto können T-SQL-Abfragen mit einigen Spracheinschränkungen interpretiert und ausgeführt werden.
 
 > [!NOTE]
-> Kusto unterstützt einen DDL-Befehl auf diese Weise `SELECT` nicht, nur T-SQL-Anweisungen werden unterstützt. Weitere Informationen zu den wichtigsten Unterschieden zwischen SQL Server und Kusto in Bezug auf T-SQL finden Sie unter [SQL-bekannte Probleme.](./sqlknownissues.md)
+> Kusto unterstützt keine DDL-Befehle. Nur T-SQL- `select` Anweisungen werden unterstützt. Weitere Informationen zu den Haupt unterschieden in Bezug auf T-SQL finden Sie unter [bekannte SQL-Probleme](./sqlknownissues.md).
 
-## <a name="querying-kusto-from-kustoexplorer-with-t-sql"></a>Abfragen von Kusto aus Kusto.Explorer mit T-SQL
+## <a name="querying-from-kustoexplorer-with-t-sql"></a>Abfragen von "Kusto. Explorer" mit T-SQL
 
-Das Kusto.Explorer-Tool unterstützt das Senden von T-SQL-Abfragen an Kusto.
-Um Kusto.Explorer anzuweisen, eine Abfrage in diesem Modus auszuführen, stellen Sie der Abfrage eine leere T-SQL-Kommentarzeile vor. Beispiel:
+Das Tool Kusto. Explorer unterstützt T-SQL-Abfragen zu Kusto.
+Um Kusto. Explorer anzuweisen, eine Abfrage auszuführen, starten Sie die Abfrage mit einer leeren T-SQL-Kommentarzeile ( `--` ). Zum Beispiel:
 
 ```sql
 --
 select * from StormEvents
 ```
 
-## <a name="from-t-sql-to-kusto-query-language"></a>Von T-SQL zur Kusto-Abfragesprache
+## <a name="from-t-sql-to-kusto-query-language"></a>Von T-SQL zu Kusto-Abfragesprache
 
-Kusto unterstützt das Übersetzen von T-SQL-Abfragen in die Kusto-Abfragesprache. Dies kann z. B. von SQL-Vertrauten verwendet werden, die die Kusto-Abfragesprache besser verstehen möchten. Um die entsprechende Kusto-Abfragesprache in `SELECT` eine T-SQL-Anweisung zurückzubekommen, fügen Sie `EXPLAIN` einfach vor der Abfrage hinzu.
+Kusto unterstützt die Übersetzung von T-SQL-Abfragen in die Kusto-Abfragesprache (kql). Diese Übersetzung kann Benutzern helfen, die mit SQL vertraut sind, um kql besser zu verstehen.
+Um die entsprechende kql aus einer T-SQL-Anweisung zurückzugeben `select` , fügen Sie `explain` vor der Abfrage hinzu.
 
-Beispiel: Die folgende T-SQL-Abfrage:
+Beispielsweise die folgende T-SQL-Abfrage:
 
 ```sql
 --
@@ -47,7 +51,7 @@ from StormEvents
 order by DamageProperty desc
 ```
 
-Erzeugt diese Ausgabe:
+erzeugt die folgende Ausgabe:
 
 ```kusto
 StormEvents

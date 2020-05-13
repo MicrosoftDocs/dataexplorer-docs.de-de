@@ -1,6 +1,6 @@
 ---
-title: Kusto.Ingest-Referenz - Fehler und Ausnahmen - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird Kusto.Ingest Reference - Errors and Exceptions in Azure Data Explorer beschrieben.
+title: 'Kusto. inerfassungs-Fehler und Ausnahmen: Azure Daten-Explorer'
+description: In diesem Artikel werden Kusto. inerfassungs Fehler und Ausnahmen in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,222 +8,220 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: f8f50322a79dea8890b4a4ad5eaa78f0b8fe3bc0
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 4af09c0b29b77edd7a4e62c7a6abbbae7e918610
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81524343"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373661"
 ---
-# <a name="kustoingest-reference---errors-and-exceptions"></a>Kusto.Ingest Reference - Fehler und Ausnahmen
-Jeder Fehler während der Erfassungsbehandlung auf der Clientseite wird über eine C-Ausnahme für den Benutzercode verfügbar gemacht.
+# <a name="kustoingest-errors-and-exceptions"></a>Kusto. Erfassungs Fehler und Ausnahmen
+Jeder Fehler während der Erfassungs Behandlung auf der Clientseite wird durch eine c#-Ausnahme angegeben.
 
-## <a name="failures-overview"></a>Fehlerübersicht
+## <a name="failures"></a>Fehler
 
-### <a name="kustodirectingestclient-exceptions"></a>KustoDirectIngestClient-Ausnahmen
-Beim Versuch, aus mehreren Quellen zu erfassen, können Fehler während der Einnahme einiger dieser Quellen auftreten, während andere erfolgreich aufgenommen werden können. Wenn eine Aufnahme für eine bestimmte Quelle fehlschlägt, wird sie protokolliert, und der Client nimmt weiterhin die verbleibenden Quellen für die Aufnahme auf. Nachdem alle Quellen für die Einnahme `IngestClientAggregateException` übergegangen sind, `IList<IngestClientException> IngestionErrors`wird ein ausgelöst, das ein Member enthält.
-`IngestClientException`und seine abgeleiteten `IngestionSource` Klassen `Error` enthalten ein Feld und ein Feld, die zusammen eine Zuordnung aus der Quelle bilden, die nicht zu dem Fehler aufgenommen wurde, der beim Versuch, ihn aufzunehmen, aufgetreten ist. Sie können die Informationen in der Liste IngestionErrors verwenden, um zu untersuchen, welche Quellen nicht aufgenommen wurden und warum. `IngestClientAggregateException`Ausnahme enthält auch eine `GlobalError`boolesche Eigenschaft , die angibt, ob ein Fehler für alle Quellen aufgetreten ist.
+### <a name="kustodirectingestclient-exceptions"></a>Kustodirectingestclient-Ausnahmen
 
-### <a name="failures-ingesting-from-files-or-blobs"></a>Fehler beim Einleiten von Dateien oder Blobs 
-Wenn beim Versuch, die Aufnahme aus blob-datei zu erfassen, ein Aufnahmefehler aufgetreten ist, werden die Aufnahmequellen nicht gelöscht, auch wenn das `deleteSourceOnSuccess` Flag auf `true`festgelegt ist.
-Die Quellen bleiben für die weitere Analyse erhalten. Sobald der Fehler der Ursache des Fehlers verstanden wurde und der Fehler nicht von der Aufnahmequelle selbst stammt, kann der Benutzer des Clients versuchen, ihn erneut aufzunehmen.
+Beim Versuch, aus mehreren Quellen zu erfassen, können während des Erfassungs Vorgangs Fehler auftreten. Wenn eine Erfassung für eine der Quellen fehlschlägt, wird Sie protokolliert, und der Client nimmt weiterhin die verbleibenden Quellen an. Nachdem Sie alle Quellen für die Erfassung überlaufen haben, wird eine ausgelöst `IngestClientAggregateException` , die den `IList<IngestClientException> IngestionErrors` Member enthält.
 
-### <a name="failures-ingesting-from-idatareader"></a>Fehler beim Einsingen von IDataReader
-Während der Aufnahme von DataReader werden die zu erfassenden Daten in `<Temp Path>\Ingestions_<current date and time>`einem temporären Ordner gespeichert, dessen Standardspeicherort ist. Dieser Ordner wird nach erfolgreicher Einnahme immer gelöscht.<BR>
-In `IngestFromDataReader` der `IngestFromDataReaderAsync` und `retainCsvOnFailure` Methoden bestimmt das `false`Flag, dessen Standardwert ist , ob die Dateien nach einer fehlgeschlagenen Aufnahme beibehalten werden sollen. Wenn dieses Flag `false`auf festgelegt ist, werden Daten, die die Aufnahme fehlschlägt, nicht beibehalten, sodass es schwer zu verstehen ist, was schief gelaufen ist.
+`IngestClientException`und die abgeleiteten Klassen enthalten ein Feld `IngestionSource` und ein `Error` Feld. Die beiden Felder erstellen eine Zuordnung von der Quelle, bei der ein Fehler aufgetreten ist, zu dem Fehler, der während der Erfassung aufgetreten ist. Die Informationen können in der Liste verwendet werden `IngestionErrors` , um zu ermitteln, bei welchen Quellen die Erfassung fehlgeschlagen ist und warum. Die `IngestClientAggregateException` Ausnahme enthält auch eine boolesche Eigenschaft `GlobalError` , die angibt, ob für alle Quellen ein Fehler aufgetreten ist.
 
-## <a name="kustoqueuedingestclient-exceptions"></a>KustoQueuedIngestClient-Ausnahmen
-KustoQueuedIngestClient erfasst Daten, indem Nachrichten in eine Azure-Warteschlange hochgeladen werden. Wenn vor und während des Warteschlangenvorgangs ein Fehler auftritt, wird am Ende der Ausführung eine `IngestClientAggregateException` Auflistung `IngestClientException` ausgelöst, die die Quelle enthält, die nicht in der Warteschlange (bei jedem Fehler) und dem Fehler aufgetreten ist, der beim Senden der Nachricht aufgetreten ist.
+### <a name="failures-ingesting-from-files-or-blobs"></a>Fehler beim Erfassen von Dateien oder blobdateien
 
-### <a name="posting-to-queue-failures-with-file-or-blob-as-a-source"></a>Buchen in Warteschlangenfehler mit Datei oder Blob als Quelle
-Wenn bei der Verwendung der IngestFromFile/IngestFromBlob-Methoden von KustoQueuedIngestClient ein Fehler `deleteSourceOnSuccess` aufgetreten ist, werden die Quellen nicht gelöscht, auch wenn das Flag auf `true`festgelegt ist, sondern für die weitere Analyse beibehalten. Nachdem der Benutzer des Clients den Ursprung des Fehlers erkannt hat und der Fehler nicht von der Quelle selbst stammt, kann er versuchen, die Daten mithilfe der entsprechenden IngestFromFile/IngestFromBlob-Methoden mit der fehlerhaften Quelle erneut in die Warteschlange zu stellen. 
+Wenn beim Erfassen eines BLOBs oder einer Datei ein Erfassungs Fehler auftritt, werden die Erfassungs Quellen auch dann nicht gelöscht, wenn das- `deleteSourceOnSuccess` Flag auf festgelegt ist `true` . Die Quellen werden zur weiteren Analyse beibehalten. Wenn der Ursprung des Fehlers erkannt wird und der Fehler nicht von der Erfassungs Quelle selbst stammt, kann der Benutzer des Clients versuchen, ihn wiederherzustellen.
 
-### <a name="posting-to-queue-failures-with-idatareader-as-a-source"></a>Buchen von Warteschlangenfehlern mit IDataReader als Quelle
-Bei Verwendung einer DataReader-Quelle werden die in der Warteschlange zu veröffentlichenden Daten in einem temporären Ordner gespeichert, dessen Standardspeicherort ist. `<Temp Path>\Ingestions_<current date and time>`
-Dieser Ordner wird immer gelöscht, nachdem die Daten erfolgreich in die Warteschlange gesendet wurden.
-In `IngestFromDataReader` der `IngestFromDataReaderAsync` und `retainCsvOnFailure` Methoden bestimmt das `false`Flag, dessen Standardwert ist , ob die Dateien nach einer fehlgeschlagenen Aufnahme beibehalten werden sollen. Wenn dieses Flag `false`auf festgelegt ist, werden Daten, die die Aufnahme fehlschlägt, nicht beibehalten, sodass es schwer zu verstehen ist, was schief gelaufen ist.
+### <a name="failures-ingesting-from-idatareader"></a>Fehler beim Erfassen von IDataReader
+
+Während der Erfassung aus DataReader werden die zu erfasbenden Daten in einem temporären Ordner gespeichert, dessen Standard Speicherort ist `<Temp Path>\Ingestions_<current date and time>` . Dieser Standardordner wird nach einer erfolgreichen Erfassung immer gelöscht.
+
+In der `IngestFromDataReader` - `IngestFromDataReaderAsync` Methode und der-Methode bestimmt das- `retainCsvOnFailure` Flag, dessen Standardwert ist `false` ,, ob die Dateien nach einer fehlgeschlagenen Erfassung aufbewahrt werden sollen. Wenn dieses Flag auf festgelegt ist `false` , werden Daten, bei denen die Erfassung fehlschlägt, nicht persistent gespeichert, sodass es schwer zu verstehen ist, was schief gelaufen ist.
+
+## <a name="kustoqueuedingestclient-exceptions"></a>Kustoqueuedingestclient-Ausnahmen
+
+`KustoQueuedIngestClient`erfasst Daten, indem Nachrichten in eine Azure-Warteschlange hochgeladen werden. Wenn ein Fehler vor oder während des Warteschlangen Prozesses auftritt, `IngestClientAggregateException` wird am Ende des Prozesses eine ausgelöst. Die ausgelöste Ausnahme enthält eine Auflistung von `IngestClientException` , die die Quelle der einzelnen Fehler enthält und die nicht an die Warteschlange gesendet wurde. Der Fehler, der beim Versuch aufgetreten ist, die Nachricht zu veröffentlichen, wird ebenfalls ausgelöst.
+
+### <a name="posting-to-queue-failures-with-a-file-or-blob-as-a-source"></a>Veröffentlichen in Warteschlangen Fehlern mit einer Datei oder einem BLOB als Quelle
+
+Wenn ein Fehler auftritt, während die `KustoQueuedIngestClient` - `IngestFromFile/IngestFromBlob` Methoden verwendet werden, werden die Quellen nicht gelöscht, auch wenn das- `deleteSourceOnSuccess` Flag auf festgelegt ist `true` . Stattdessen werden die Quellen zur weiteren Analyse beibehalten. 
+
+Wenn der Ursprung des Fehlers erkannt wird und der Fehler nicht von der Erfassungs Quelle selbst stammt, kann der Benutzer des Clients versuchen, die Daten mithilfe der relevanten `IngestFromFile/IngestFromBlob` Methoden mit der fehlgeschlagenen Quelle zu übermitteln. 
+
+### <a name="posting-to-queue-failures-with-idatareader-as-a-source"></a>Veröffentlichen in Warteschlangen Fehlern mit IDataReader als Quelle
+
+Wenn eine DataReader-Quelle verwendet wird, werden die Daten, die in die Warteschlange eingereiht werden, in einem temporären Ordner gespeichert, dessen Standard Speicherort ist `<Temp Path>\Ingestions_<current date and time>` . Dieser Ordner wird immer gelöscht, nachdem die Daten erfolgreich an die Warteschlange gesendet wurden.
+In der `IngestFromDataReader` - `IngestFromDataReaderAsync` Methode und der-Methode bestimmt das- `retainCsvOnFailure` Flag, dessen Standardwert ist `false` ,, ob die Dateien nach einer fehlgeschlagenen Erfassung aufbewahrt werden sollen. Wenn dieses Flag auf festgelegt ist `false` , werden Daten, bei denen die Erfassung fehlschlägt, nicht persistent gespeichert, sodass es schwer zu verstehen ist, was schief gelaufen ist.
 
 ### <a name="common-failures"></a>Häufige Fehler
-|Fehler|`Reason`|Minderung|
-|------------------------------|----|------------|
-|Datenbankname <database name> ist nicht vorhanden| Die Datenbank ist nicht vorhanden.|Überprüfen Sie den Datenbanknamen unter kustoIngestionProperties/Create the database |
-|Der Entitätsname 'Tabellenname, der nicht vorhanden ist' der Art 'Tabelle' wurde nicht gefunden.|Die Tabelle ist nicht vorhanden, und es gibt keine CSV-Zuordnung.| CSV-Zuordnung hinzufügen / die erforderliche Tabelle erstellen |
-|Blob <blob path> aus Gründen ausgeschlossen: json-Muster muss mit jsonMapping-Parameter aufgenommen werden| Json-Aufnahme, wenn keine json-Zuordnung bereitgestellt wird.|Bereitstellen einer JSON-Zuordnung |
-|Fehler beim Herunterladen von Blob: 'Der Remoteserver hat einen Fehler zurückgegeben: (404) Nicht gefunden.'| Der Blob ist nicht vorhanden.|Überprüfen Sie, ob der Blob vorhanden ist, falls vorhanden, und wenden Sie sich an das Kusto-Team. |
-|Die Json-Spaltenzuordnung ist ungültig: Zwei oder mehr Zuordnungselemente verweisen auf dieselbe Spalte.| JSON-Zuordnung hat 2 Spalten mit unterschiedlichen Pfaden|Korrektur der JSON-Zuordnung |
-|EngineError - [UtilsException] IngestionDownloader.Download: Eine oder mehrere Dateien konnten nicht<GUID1>heruntergeladen werden (Suche KustoLogs nach ActivityID: , RootActivityId:<GUID2>)| Mindestens eine Datei konnte nicht heruntergeladen werden. |Wiederholen |
-|Fehler beim Analysieren: Stream<stream name>mit id ' ' hat ein fehlerhaftes Csv-Format, das nach der ValidationOptions-Richtlinie fehlschlägt |Falsch formatierte csv-Datei (z. B. nicht die gleiche Anzahl von Spalten in jeder Zeile). Schlägt nur fehl, wenn die Validierungsrichtlinie auf ValidationOptions festgelegt ist. ValidateCsvInputConstantColumns |Überprüfen Sie Ihre csv-Dateien. Diese Meldung gilt nur für csv/tsv-Dateien |
-|IngestClientAggregateException mit Fehlermeldung 'Fehlende obligatorische Parameter für gültige Shared Access Signature' |Die verwendete SAS ist vom Dienst und nicht vom Speicherkonto |Verwenden der SAS des Speicherkontos |
+|Fehler                         |`Reason`           |Minderung                                   |
+|------------------------------|-----------------|---------------------------------------------|
+|Der Daten <database name> Bankname ist nicht vorhanden| Die Datenbank ist nicht vorhanden.|Überprüfen Sie den Datenbanknamen unter `kustoIngestionProperties` /Create the Database. |
+|Die Entität "der Tabellenname, der nicht vorhanden ist" der Art "Table" wurde nicht gefunden.|Die Tabelle ist nicht vorhanden, und es gibt keine CSV-Zuordnung.| CSV-Zuordnung hinzufügen/erforderliche Tabelle erstellen |
+|BLOB <blob path> ausgeschlossen aus Grund: das JSON-Muster muss mit dem jsonmapping-Parameter erfasst werden.| JSON-Erfassung, wenn keine JSON-Zuordnung bereitgestellt wird.|Bereitstellen einer JSON-Zuordnung |
+|Fehler beim Herunterladen des BLOBs: "der Remote Server hat einen Fehler zurückgegeben: (404) nicht gefunden."| Das Blob ist nicht vorhanden.|Überprüfen Sie, ob das BLOB vorhanden ist. Falls vorhanden, versuchen Sie es erneut, und wenden Sie sich an das Kusto-Team |
+|Die JSON-Spalten Zuordnung ist ungültig: zwei oder mehr Mapping-Elemente zeigen auf dieselbe Spalte.| Die JSON-Zuordnung verfügt über zwei Spalten mit unterschiedlichen Pfaden.|JSON-Zuordnung korrigieren |
+|EngineError-[utilsexception] `IngestionDownloader.Download` : mindestens eine Datei konnte nicht heruntergeladen werden (suchen Sie nach "kustologs" nach "ActivityID:" <GUID1> , rootactivityid: <GUID2> ).| Mindestens eine Datei konnte nicht heruntergeladen werden. |Wiederholen |
+|Fehler beim Analysieren: der Stream mit der ID " <stream name> " weist ein falsch formatiertes CSV-Format auf, das für die Richtlinie "validationoptions" nicht |Falsch formatierte CSV-Datei (z. b., nicht über die gleiche Anzahl von Spalten in jeder Zeile). Schlägt nur fehl, wenn die Validierungs Richtlinie auf festgelegt ist `ValidationOptions` . Validatecsvinputconstantcolumns |Überprüfen Sie die CSV-Dateien. Diese Meldung gilt nur für CSV/TSV-Dateien. |
+|`IngestClientAggregateException`mit der Fehlermeldung "fehlende obligatorische Parameter für gültiges Shared Access Signature" |Die verwendete SAS ist der Dienst und nicht das Speicherkonto. |Verwenden Sie die SAS des Speicher Kontos. |
 
-### <a name="ingestion-error-codes"></a>Aufnahmefehlercodes
+### <a name="ingestion-error-codes"></a>Erfassungs Fehlercodes
 
-Um Erfassungsfehler programmgesteuert zu behandeln, werden Fehlerinformationen mit einem numerischen Fehlercode (IngestionErrorCode-Enumeration) angereichert.
+Um Erfassungs Fehler Programm gesteuert zu behandeln, werden Fehlerinformationen durch einen numerischen Fehlercode ( `IngestionErrorCode enumeration` ) erweitert.
 
-|ErrorCode|`Reason`|
-|-----------|-------|
-|Unknown| Unbekannter Fehler ist aufgetreten|
-|Stream_LowMemoryCondition| Der Vorgang war nicht mehr speicherverfügbar|
-|Stream_WrongNumberOfFields| CSV-Dokument weist eine inkonsistente Anzahl von Feldern auf|
-|Stream_InputStreamTooLarge| Das zur Aufnahme übermittelte Dokument hat die zulässige Größe überschritten.|
-|Stream_NoDataToIngest| Es wurden keine zu erfassenden Datenströme gefunden.|
-|Stream_DynamicPropertyBagTooLarge| Eine der dynamischen Spalten in den aufgenommenen Daten enthält zu viele eindeutige Eigenschaften|
-|Download_SourceNotFound| Fehler beim Herunterladen der Quelle aus Azure-Speicher - Quelle wurde nicht gefunden|
-|Download_AccessConditionNotSatisfied| Fehler beim Herunterladen der Quelle aus Azure-Speicher - Zugriff verweigert|
-|Download_Forbidden| Fehler beim Herunterladen der Quelle aus Azure-Speicher - Zugriff verboten|
-|Download_AccountNotFound| Fehler beim Herunterladen der Quelle aus Azure-Speicher - Konto wurde nicht gefunden|
-|Download_BadRequest| Fehler beim Herunterladen der Quelle aus Azure-Speicher - ungültige Anforderung|
-|Download_NotTransient| Fehler beim Herunterladen der Quelle aus Azure-Speicher - kein vorübergehender Fehler|
-|Download_UnknownError| Fehler beim Herunterladen der Quelle aus Azure-Speicher - unbekannter Fehler|
-|UpdatePolicy_QuerySchemaDoesNotMatchTableSchema| Fehler beim Aufrufen der Aktualisierungsrichtlinie. Abfrageschema stimmt nicht mit Tabellenschema überein|
-|UpdatePolicy_FailedDescendantTransaction| Fehler beim Aufrufen der Aktualisierungsrichtlinie. Fehlgeschlagene abhängige Transaktionsaktualisierungsrichtlinie|
-|UpdatePolicy_IngestionError| Fehler beim Aufrufen der Aktualisierungsrichtlinie. Aufnahmefehler aufgetreten|
-|UpdatePolicy_UnknownError| Fehler beim Aufrufen der Aktualisierungsrichtlinie. Unbekannter Fehler ist aufgetreten|
-|BadRequest_MissingJsonMappingtFailure| Json-Muster wurde nicht mit jsonMapping-Parameter aufgenommen|
-|BadRequest_InvalidOrEmptyBlob| Blob ist ungültig oder leeres ZIP-Archiv|
-|BadRequest_DatabaseNotExist| Die Datenbank ist nicht vorhanden.|
-|BadRequest_TableNotExist| Tabelle ist nicht vorhanden|
-|BadRequest_InvalidKustoIdentityToken| Ungültiges kusto-Identitätstoken|
-|BadRequest_UriMissingSas| Blobpfad ohne SAS aus unbekanntem Blobspeicher|
-|BadRequest_FileTooLarge| Es wird versucht, zu große Dateien aufzunehmen|
-|BadRequest_NoValidResponseFromEngine| Keine gültige Antwort vom Ingest-Befehl|
-|BadRequest_TableAccessDenied| Der Zugriff auf die Tabelle wird verweigert|
-|BadRequest_MessageExhausted| Nachricht ist erschöpft|
-|General_BadRequest| Allgemeine fehlerhafte Anforderung (kann Aufhinweise für die Aufnahme in nicht vorhandene Datenbank/Tabelle)|
-|General_InternalServerError| Interner Serverfehler aufgetreten|
+|ErrorCode                                      |`Reason`                                                        |
+|-----------------------------------------------|--------------------------------------------------------------|
+|Unknown                                        | Unbekannter Fehler ist aufgetreten|
+|Stream_LowMemoryCondition                      | Nicht genügend Arbeitsspeicher für den Vorgang.|
+|Stream_WrongNumberOfFields                     | CSV-Dokument enthält inkonsistente Anzahl von Feldern|
+|Stream_InputStreamTooLarge                     | Das für die Erfassung übermittelte Dokument hat die zulässige Größe überschritten.|
+|Stream_NoDataToIngest                          | Es wurden keine Datenströme für die Erfassung gefunden.|
+|Stream_DynamicPropertyBagTooLarge              | Eine der dynamischen Spalten in den erfassten Daten enthält zu viele eindeutige Eigenschaften.|
+|Download_SourceNotFound                        | Fehler beim Herunterladen der Quelle von Azure Storage-Quelle nicht gefunden.|
+|Download_AccessConditionNotSatisfied           | Fehler beim Herunterladen der Quelle aus Azure Storage: Zugriff verweigert.|
+|Download_Forbidden                             | Fehler beim Herunterladen der Quelle aus Azure Storage: der Zugriff ist nicht zulässig.|
+|Download_AccountNotFound                       | Fehler beim Herunterladen der Quelle von Azure Storage-das Konto wurde nicht gefunden.|
+|Download_BadRequest                            | Fehler beim Herunterladen der Quelle aus Azure Storage-ungültige Anforderung.|
+|Download_NotTransient                          | Fehler beim Herunterladen der Quelle aus Azure Storage: vorübergehender Fehler.|
+|Download_UnknownError                          | Fehler beim Herunterladen der Quelle aus Azure Storage-unbekannter Fehler.|
+|UpdatePolicy_QuerySchemaDoesNotMatchTableSchema| Fehler beim Aufrufen der Update Richtlinie. Das Abfrage Schema stimmt nicht mit dem Tabellen Schema.|
+|UpdatePolicy_FailedDescendantTransaction       | Fehler beim Aufrufen der Update Richtlinie. Fehler bei der nachfolgenden Richtlinie für transaktionale Updates|
+|UpdatePolicy_IngestionError                    | Fehler beim Aufrufen der Update Richtlinie. Erfassungs Fehler|
+|UpdatePolicy_UnknownError                      | Fehler beim Aufrufen der Update Richtlinie. Unbekannter Fehler ist aufgetreten|
+|BadRequest_MissingJsonMappingtFailure          | Das JSON-Muster konnte nicht mit dem jsonmapping-Parameter erfasst werden.|
+|BadRequest_InvalidOrEmptyBlob                  | Das BLOB ist ungültig oder ein leeres ZIP-Archiv.|
+|BadRequest_DatabaseNotExist                    | Die Datenbank ist nicht vorhanden|
+|BadRequest_TableNotExist                       | Tabelle ist nicht vorhanden.|
+|BadRequest_InvalidKustoIdentityToken           | Ungültiges Kusto-Identitäts Token.|
+|BadRequest_UriMissingSas                       | BLOB-Pfad ohne SAS aus unbekanntem BLOB-Speicher|
+|BadRequest_FileTooLarge                        | Es wird versucht, zu große Dateien zu erfassen.|
+|BadRequest_NoValidResponseFromEngine           | Keine gültige Antwort vom Erfassungs Befehl.|
+|BadRequest_TableAccessDenied                   | Der Zugriff auf die Tabelle wurde verweigert.|
+|BadRequest_MessageExhausted                    | Nachricht ist erschöpft.|
+|General_BadRequest                             | Allgemeine ungültige Anforderung. Hinweise zur Erfassung an eine nicht vorhandene Datenbank/Tabelle|
+|General_InternalServerError                    | Interner Server Fehler.|
 
-## <a name="detailed-kustoingest-exceptions-reference"></a>Detaillierte Kusto.Ingest Exceptions Referenz
+## <a name="detailed-exceptions-reference"></a>Ausführliche Ausnahmen Referenz
 
-### <a name="cloudqueuesnotfoundexception"></a>CloudQueuesNotFoundException
-Wird ausgelöst, wenn keine Warteschlangen aus dem Datenverwaltungscluster zurückgegeben wurden
+### <a name="cloudqueuesnotfoundexception"></a>Cloudqueuesnotfoundexception
 
-Basisklasse: [Ausnahme](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
+Wird ausgelöst, wenn keine Warteschlangen vom Datenverwaltung Cluster zurückgegeben wurden.
 
-Felder:
+Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
 
-|Name|type|Bedeutung
-|-----------|----|------------------------------|
-|Fehler| `String`| Der Fehler, der beim Versuch aufgetreten ist, Warteschlangen von der DM abzurufen
+|Feldname |type     |Bedeutung
+|-----------|---------|------------------------------|
+|Fehler      | Zeichenfolge  | Der Fehler, der beim Versuch aufgetreten ist, Warteschlangen aus der DM abzurufen.
                             
-Zusätzliche Informationen:
-
-Nur bei Verwendung des [Kusto Queued Ingest Client](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)relevant.
-Während des Aufnahmevorgangs werden mehrere Versuche unternommen, die mit der DM verknüpften Azure-Warteschlangen abzurufen. Wenn diese Versuche fehlschlagen, wird die Ausnahme ausgelöst, die den Grund für den Fehler im Feld 'Fehler' und möglicherweise eine innere Ausnahme im Feld 'InnerException' enthält.
+Nur relevant, wenn der in der [Warteschlange](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)befindliche Erfassungs Client verwendet wird.
+Während des Erfassungs Vorgangs werden mehrere Versuche unternommen, die mit der DM verknüpften Azure-Warteschlangen abzurufen. Wenn diese Versuche fehlschlagen, wird die Ausnahme, die den Grund für den Fehler enthält, im Feld "Error" ausgelöst. Möglicherweise wird auch eine innere Ausnahme im Feld "InnerException" ausgelöst.
 
 
-### <a name="cloudblobcontainersnotfoundexception"></a>CloudBlobContainersNotFoundException
-Wird ausgelöst, wenn keine Blobcontainer aus dem Datenverwaltungscluster zurückgegeben wurden
+### <a name="cloudblobcontainersnotfoundexception"></a>Cloudblobcontainersnotfoundexception
 
-Basisklasse: [Ausnahme](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
+Wird ausgelöst, wenn keine BLOB-Container vom Datenverwaltung Cluster zurückgegeben wurden.
 
-Felder:
+Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
 
-|Name|type|Bedeutung       
-|-----------|----|------------------------------|
-|KustoEndpoint| `String`| Der Endpunkt der jeweiligen DM
+|Feldname   |type     |Bedeutung       
+|-------------|---------|------------------------------|
+|Kustoendpoint| Zeichenfolge  | Der Endpunkt der relevanten DM
                             
-Zusätzliche Informationen:
+Nur relevant, wenn der in der [Warteschlange](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)befindliche Erfassungs Client verwendet wird.  
+Beim Erfassen von Quellen, die sich noch nicht in einem Azure-Container befinden (z. b. Dateien, DataReader oder Stream), werden die Daten zur Erfassung in ein temporäres BLOB hochgeladen. Diese Ausnahme wird ausgelöst, wenn keine Container gefunden werden, in die die Daten hochgeladen werden.
 
-Nur bei Verwendung des [Kusto Queued Ingest Client](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)relevant.  
-Beim Einziehen von Quellen, die sich NICHT bereits in einem Azure-Container befinden, d. h. Dateien, DataReader oder Stream, werden die Daten zur Aufnahme in ein temporäres Blob hochgeladen. Die Ausnahme wird ausgelöst, wenn keine Container zum Hochladen der Daten gefunden werden.
+### <a name="duplicateingestionpropertyexception"></a>Dupliereingestionpropertyexception
 
-### <a name="duplicateingestionpropertyexception"></a>DuplicateIngestionPropertyException
-Wird ausgelöst, wenn eine Aufnahmeeigenschaft mehr als einmal konfiguriert wird
+Wird ausgelöst, wenn eine Erfassungs Eigenschaft mehrmals konfiguriert ist.
 
-Basisklasse: [Ausnahme](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
+Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
 
-Felder:
-
-|Name|type|Bedeutung       
-|-----------|----|------------------------------|
-|PropertyName| `String`| Der Name der duplizierten Eigenschaft
+|Feldname   |type     |Bedeutung       
+|-------------|---------|------------------------------------|
+|PropertyName | Zeichenfolge  | Der Name der doppelten Eigenschaft.
                             
-### <a name="postmessagetoqueuefailedexception"></a>PostMessageToQueueFailedException
-Ausgelöst, wenn das Senden einer Nachricht in der Warteschlange fehlgeschlagen ist
+### <a name="postmessagetoqueuefailedexception"></a>Postmessageto queuefailedexception
 
-Basisklasse: [Ausnahme](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
+Wird ausgelöst, wenn eine Nachricht an die Warteschlange zurückgestellt wird.
 
-Felder:
+Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
 
-|Name|type|Bedeutung       
-|-----------|----|------------------------------|
-|QueueUri| `String`| Der URI der Warteschlange
-|Fehler| `String`| Die Fehlermeldung, die beim Senden in der Warteschlange generiert wurde
+|Feldname   |type     |Bedeutung       
+|-------------|---------|---------------------------------|
+|Queueuri     | Zeichenfolge  | Der URI der Warteschlange.
+|Fehler        | Zeichenfolge  | Die Fehlermeldung, die generiert wurde, während versucht wurde, in die Warteschlange zu schreiben.
                             
-Zusätzliche Informationen:
+Nur relevant, wenn der in der [Warteschlange](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)befindliche Erfassungs Client verwendet wird.  
+Der in die Warteschlange eingereihte Erfassungs Client erfasst Daten, indem er eine Nachricht in die relevante Azure-Warteschlange hochlädt. Wenn ein Post-Fehler auftritt, wird die Ausnahme ausgelöst. Sie enthält den Warteschlangen-URI, den Grund für den Fehler im Feld "Error" und möglicherweise eine innere Ausnahme im Feld "InnerException".
 
-Nur bei Verwendung des [Kusto Queued Ingest Client](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)relevant.  
-Der in der Warteschlange eingesende Client erfasst Daten, indem er eine Nachricht in die entsprechende Azure-Warteschlange hochlädt. Im Falle eines Postfehlers wird die Ausnahme ausgelöst, die den Warteschlangen-URI, den Grund für den Fehler im Feld 'Fehler' und möglicherweise eine innere Ausnahme im Feld 'InnerException' enthält.
+### <a name="dataformatnotspecifiedexception"></a>Dataformatnotspecifiedexception
 
-### <a name="dataformatnotspecifiedexception"></a>DataFormatNotSpecifiedException
-Wird ausgelöst, wenn ein Datenformat erforderlich ist, aber nicht in IngestionProperties angegeben ist
+Wird ausgelöst, wenn ein Datenformat erforderlich ist, aber nicht in`IngestionProperties`
 
-Basisklasse: IngestClientException
+Basisklasse: ingestcliumtexception
 
-Zusätzliche Informationen:
+Beim erfassen aus einem Stream muss in den [ingestionproperties](kusto-ingest-client-reference.md#class-kustoingestionproperties)ein Datenformat angegeben werden, damit die Daten ordnungsgemäß erfasst werden. Diese Ausnahme wird ausgelöst, wenn `IngestionProperties.Format` nicht angegeben ist.
 
-Beim Einleiten aus einem Stream muss in den [IngestionProperties](kusto-ingest-client-reference.md#class-kustoingestionproperties) ein Datenformat angegeben werden, um die Daten ordnungsgemäß aufnehmen zu können. Diese Ausnahme wird ausgelöst, wenn das IngestionProperties.Format nicht angegeben ist.
+### <a name="invaliduriingestclientexception"></a>Invaliduriingestcliumtexception
 
-### <a name="invaliduriingestclientexception"></a>InvalidUriIngestClientException
-Wird ausgelöst, wenn ein ungültiger Blob-URI als Aufnahmequelle übermittelt wurde
+Wird ausgelöst, wenn ein ungültiger BLOB-URI als Erfassungs Quelle übermittelt wird.
 
-Basisklasse: IngestClientException
+Basisklasse: ingestcliumtexception
 
-### <a name="compressfileingestclientexception"></a>CompressFileIngestClientException
-Wird ausgelöst, wenn der Aufnahmeclient die für die Aufnahme bereitgestellte Datei nicht komprimieren konnte.
+### <a name="compressfileingestclientexception"></a>Compressfileinstcliumtexception
 
-Basisklasse: IngestClientException
+Wird ausgelöst, wenn der Erfassungs Client die zur Erfassung bereitgestellte Datei nicht komprimieren kann.
 
-Zusätzliche Informationen:
+Basisklasse: ingestcliumtexception
 
-Dateien werden vor ihrer Einnahme komprimiert. Diese Ausnahme wird ausgelöst, wenn der Versuch, die Datei zu komprimieren, fehlgeschlagen ist.
+Dateien werden vor deren Erfassung komprimiert. Diese Ausnahme wird ausgelöst, wenn ein Versuch, die Datei zu komprimieren, fehlschlägt.
 
-### <a name="uploadfiletotempblobingestclientexception"></a>UploadFileToTempBlobIngestClientException
-Wird ausgelöst, wenn der Aufnahmeclient die für die Aufnahme bereitgestellte Quelle nicht in ein temporäres Blob hochladen konnte.
+### <a name="uploadfiletotempblobingestclientexception"></a>Uploadfiledetempblobingestcliumtexception
 
-Basisklasse: IngestClientException
+Wird ausgelöst, wenn der Erfassungs Client die zur Erfassung bereitgestellte Quelle nicht in ein temporäres BLOB hochladen kann.
 
-### <a name="sizelimitexceededingestclientexception"></a>SizeLimitExceededIngestClientException
-Erhöht, wenn eine Aufnahmequelle zu groß ist
+Basisklasse: ingestcliumtexception
 
-Basisklasse: IngestClientException
+### <a name="sizelimitexceededingestclientexception"></a>Sizelimitexceededingestclientexception
 
-Felder:
+Wird ausgelöst, wenn eine Erfassungs Quelle zu groß ist.
 
-|Name|type|Bedeutung       
-|-----------|----|------------------------------|
-|Size| `long`| Die Größe der Aufnahmequelle
-|MaxSize| `long`| Die maximal zulässige Größe für die Einnahme
+Basisklasse: ingestcliumtexception
 
-Zusätzliche Informationen:
+|Feldname   |type     |Bedeutung       
+|-------------|---------|-----------------------|
+|Size         | long    | Die Größe der Erfassungs Quelle
+|MaxSize      | long    | Die maximal zulässige Größe für die Erfassung.
 
-Wenn eine Aufnahmequelle die maximale Größe von 4 GB überschreitet, wird die Ausnahme ausgelöst. Die Größenüberprüfung kann durch das IgnoreSizeLimit-Flag in der [IngestionProperties-Klasse](kusto-ingest-client-reference.md#class-kustoingestionproperties)überschrieben werden, es wird jedoch nicht empfohlen, [einzelne Quellen zu erfassen,](about-kusto-ingest.md#ingestion-best-practices)die größer als 1 GB sind.
+Wenn eine Erfassungs Quelle die maximale Größe von 4 GB überschreitet, wird die Ausnahme ausgelöst. Die Größen Validierung kann durch das- `IgnoreSizeLimit` Flag in der [ingestionproperties-Klasse](kusto-ingest-client-reference.md#class-kustoingestionproperties)überschrieben werden. Es wird jedoch nicht empfohlen, [einzelne Quellen, die größer als 1 GB](about-kusto-ingest.md#ingestion-best-practices)sind, zu erfassen.
 
-### <a name="uploadfiletotempblobingestclientexception"></a>UploadFileToTempBlobIngestClientException
-Wird ausgelöst, wenn der Aufnahmeclient die für die Aufnahme bereitgestellte Datei nicht in ein temporäres Blob hochladen konnte.
+### <a name="uploadfiletotempblobingestclientexception"></a>Uploadfiledetempblobingestcliumtexception
 
-Basisklasse: IngestClientException
+Wird ausgelöst, wenn der Erfassungs Client die zur Erfassung bereitgestellte Datei nicht in ein temporäres BLOB hochladen kann.
 
-### <a name="directingestclientexception"></a>DirectIngestClientException
-Wird ausgelöst, wenn ein allgemeiner Fehler bei der Direkten Aufnahme aufgetreten ist
+Basisklasse: ingestcliumtexception
 
-Basisklasse: IngestClientException
+### <a name="directingestclientexception"></a>Directingestcliumtexception
 
-### <a name="queuedingestclientexception"></a>QueuedIngestClientException
-Ausgelöst, wenn beim Ausführen einer Aufnahme in der Warteschlange ein Fehler aufgetreten ist
+Wird ausgelöst, wenn bei einer direkten Erfassung ein allgemeiner Fehler auftritt.
 
-Basisklasse: IngestClientException
+Basisklasse: ingestcliumtexception
 
-### <a name="ingestclientaggregateexception"></a>IngestClientAggregateException
-Wird ausgelöst, wenn ein oder mehrere Fehler während einer Einnahme aufgetreten sind
+### <a name="queuedingestclientexception"></a>Queuedingestcliumtexception
+
+Wird ausgelöst, wenn ein Fehler beim erfassen in der Warteschlange auftritt.
+
+Basisklasse: ingestcliumtexception
+
+### <a name="ingestclientaggregateexception"></a>Ingestclientaggregateexception
+
+Wird ausgelöst, wenn während einer Erfassung mindestens ein Fehler auftritt.
 
 Basisklasse: [AggregateException](https://msdn.microsoft.com/library/system.aggregateexception(v=vs.110).aspx)
 
-Felder:
+|Feldname      |type                             |Bedeutung       
+|----------------|---------------------------------|-----------------------|
+|Ingestionerrors | IList<IngestClientException>    | Die Fehler, die auftreten, wenn versucht wird, zu erfassen, und die damit verbundenen Quellen
+|Isglobalerror   | bool                            | Gibt an, ob die Ausnahme für alle Quellen aufgetreten ist.
 
-|Name|type|Bedeutung       
-|-----------|----|------------------------------|
-|IngestionErrors| `IList<IngestClientException>`| Die Fehler, die beim Versuch, zu erfassen aufgetreten sind, und die damit verbundenen Quellen
-|IsGlobalError| `bool`| Gibt an, ob die Ausnahme für alle Quellen aufgetreten ist
+## <a name="next-steps"></a>Nächste Schritte
 
-## <a name="errors-in-native-code"></a>Fehler in nativem Code
-Die Kusto-Engine ist in systemeigenem Code geschrieben. Weitere Informationen zu Fehlern im systemeigenen Code finden Sie unter [Fehler im systemeigenen Code](../../concepts/errorsinnativecode.md)
+Weitere Informationen zu Fehlern in nativem Code finden Sie unter [Fehler in](../../concepts/errorsinnativecode.md)System eigenem Code.

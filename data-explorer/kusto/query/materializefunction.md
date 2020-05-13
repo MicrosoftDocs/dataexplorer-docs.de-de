@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/21/2019
-ms.openlocfilehash: e721e5809d3b0445fecc0609668332b66ef39db8
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 0cf510a8a7a6042d99587b51ee62eb30d4b7b7a7
+ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737333"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83271297"
 ---
 # <a name="materialize"></a>materialize()
 
@@ -50,6 +50,7 @@ Wir möchten einen zufälligen Satz von Werten generieren und möchten Folgendes
 
 Dieser Vorgang kann mithilfe von [Batches](batches.md) und materialisieren ausgeführt werden:
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
  ```kusto
 let randomSet = materialize(range x from 1 to 30000000 step 1
 | project value = rand(10000000));

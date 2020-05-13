@@ -1,5 +1,5 @@
 ---
-title: series_periods_validate ()-Azure Daten-Explorer | Microsoft-Dokumentation
+title: series_periods_validate ()-Azure Daten-Explorer
 description: In diesem Artikel wird series_periods_validate () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -8,20 +8,20 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2019
-ms.openlocfilehash: 89ac06f2d2bbb376f08cf3fd88d316a7fcab0594
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: b157c7fef0b9b4d98f08f5e5020803eea3960097
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618603"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83372487"
 ---
 # <a name="series_periods_validate"></a>series_periods_validate()
 
 Überprüft, ob eine Zeitreihe periodische Muster mit angegebenen Längen enthält.  
 
-Sehr häufig ist eine Metrik, die den Datenverkehr einer Anwendung misst, durch eine wöchentliche und/oder tägliche Zeitspanne gekennzeichnet. Dies kann bestätigt werden, indem `series_periods_validate()` Sie die Überprüfung wöchentlich und täglicher Zeiträume ausführen.
+Sehr häufig ist eine Metrik, die den Datenverkehr einer Anwendung misst, durch eine wöchentliche und/oder tägliche Zeitspanne gekennzeichnet. Dies kann bestätigt werden, indem Sie die `series_periods_validate()` Überprüfung wöchentlich und täglicher Zeiträume ausführen.
 
-Die Funktion nutzt als Eingabe eine Spalte, die ein dynamisches Array von Zeitreihen (in der Regel die resultierende Ausgabe des Operators " [make-Series](make-seriesoperator.md) ") `real` enthält, und eine oder mehrere Zahlen, die die Längen der zu validierenden Zeiträume definieren. 
+Die Funktion nutzt als Eingabe eine Spalte, die ein dynamisches Array von Zeitreihen (in der Regel die resultierende Ausgabe des Operators " [make-Series](make-seriesoperator.md) ") enthält, und eine oder mehrere `real` Zahlen, die die Längen der zu validierenden Zeiträume definieren. 
 
 Die Funktion gibt 2 Spalten aus:
 * *Zeiträume*: ein dynamisches Array mit den zu validierenden Punkten (in der Eingabe angegeben)
@@ -29,7 +29,7 @@ Die Funktion gibt 2 Spalten aus:
 
 **Syntax**
 
-`series_periods_validate(`*x* `,` *period1* [ `,` *period2* period2 `,` . . . ] `)`
+`series_periods_validate(`*x* `,` *period1* [ `,` *period2* `,` . . . ] `)`
 
 **Argumente**
 
@@ -48,6 +48,7 @@ Die Funktion gibt 2 Spalten aus:
 
 Die folgende Abfrage bettet eine Momentaufnahme eines Monats für den Datenverkehr einer Anwendung ein, die zweimal pro Tag aggregiert wird (d. h. die Größe der Größe beträgt 12 Stunden).
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 print y=dynamic([80,139,87,110,68,54,50,51,53,133,86,141,97,156,94,149,95,140,77,61,50,54,47,133,72,152,94,148,105,162,101,160,87,63,53,55,54,151,103,189,108,183,113,175,113,178,90,71,62,62,65,165,109,181,115,182,121,178,114,170])
 | project x=range(1, array_length(y), 1), y  
@@ -56,14 +57,15 @@ print y=dynamic([80,139,87,110,68,54,50,51,53,133,86,141,97,156,94,149,95,140,77
 
 :::image type="content" source="images/series-periods/series-periods.png" alt-text="Reihen Zeiträume":::
 
-Das `series_periods_validate()` Ausführen von auf dieser Reihe zum Überprüfen eines wöchentlichen Zeitraums (14 Punkte) führt zu einer hohen Bewertung und mit einer Bewertung von **0** (null) bei der Überprüfung eines Zeitraums von fünf Tagen (10 Punkte).
+`series_periods_validate()`Das Ausführen von auf dieser Reihe zum Überprüfen eines wöchentlichen Zeitraums (14 Punkte) führt zu einer hohen Bewertung und mit einer Bewertung von **0** (null) bei der Überprüfung eines Zeitraums von fünf Tagen (10 Punkte).
 
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 print y=dynamic([80,139,87,110,68,54,50,51,53,133,86,141,97,156,94,149,95,140,77,61,50,54,47,133,72,152,94,148,105,162,101,160,87,63,53,55,54,151,103,189,108,183,113,175,113,178,90,71,62,62,65,165,109,181,115,182,121,178,114,170])
 | project x=range(1, array_length(y), 1), y  
 | project series_periods_validate(y, 14.0, 10.0)
 ```
 
-| Reihen\_Zeiträume\_\_validieren\_y-Zeiträume  | Reihen\_Zeiträume\_\_validieren\_von y-Bewertungen |
+| Reihen \_ Zeiträume \_ validieren \_ y- \_ Zeiträume  | Reihen \_ Zeiträume \_ Validieren von \_ y- \_ Bewertungen |
 |-------------|-------------------|
 | [14,0, 10,0] | [0,84, 0,0]  |

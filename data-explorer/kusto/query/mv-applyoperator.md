@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: bb0ab7fd0f3508388a29d4931cea770c8619e083
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 80e38c1782a4476181fe73c5f77d6460f2ef539f
+ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226430"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83271229"
 ---
 # <a name="mv-apply-operator"></a>mv-apply-Operator
 
@@ -99,6 +99,7 @@ und die *Unterabfrage* haben dieselbe Syntax wie jede beliebige Abfrage Anweisun
 
 ## <a name="getting-the-largest-element-from-the-array"></a>Das größte Element wird aus dem Array erhalten.
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let _data =
 range x from 1 to 8 step 1
@@ -117,6 +118,7 @@ _data
 
 ## <a name="calculating-the-sum-of-the-largest-two-elements-in-an-array"></a>Berechnen der Summe der größten zwei Elemente in einem Array
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let _data =
 range x from 1 to 8 step 1
@@ -137,6 +139,7 @@ _data
 
 ## <a name="using-with_itemindex-for-working-with-a-subset-of-the-array"></a>Verwenden `with_itemindex` von zum Arbeiten mit einer Teilmenge des Arrays
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 let _data =
 range x from 1 to 10 step 1
@@ -159,6 +162,7 @@ _data
 
 ## <a name="using-the-mv-apply-operator-to-sort-the-output-of-makelist-aggregate-by-some-key"></a>Verwenden des `mv-apply` Operators zum Sortieren der Ausgabe des `makelist` Aggregats nach einem Schlüssel
 
+<!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
 datatable(command:string, command_time:datetime, user_id:string)
 [

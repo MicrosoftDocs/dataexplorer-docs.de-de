@@ -1,6 +1,6 @@
 ---
-title: Kusto.Ingest-Referenz - Erfassungsstatusberichte - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird Kusto.Ingest Reference - Ingestion Status Reporting in Azure Data Explorer beschrieben.
+title: Kusto. Erfassung der Erfassungs Status Berichterstattung-Azure Daten-Explorer
+description: Dieser Artikel beschreibt die Erfassung von Erfassungs Statusberichten in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,23 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 1a3eed1db0ec7d3dd4bc83c0a65f342020b2a387
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 76ae07e2e7bdbb15900385b1e2feab0c9ff97d01
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523714"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373631"
 ---
-# <a name="kustoingest-reference---ingestion-status-reporting"></a>Kusto.Ingest Reference - Aufnahmestatusberichte
-In diesem Artikel wird erläutert, wie Sie [IKustoQueuedIngestClient-Funktionen](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) zum Nachverfolgen des Status einer Aufnahmeanforderung verwenden.
+# <a name="kustoingest-ingestion-status-reporting"></a>Kusto. Erfassung der Erfassungs Statusberichte
 
-## <a name="sourcedescription-datareaderdescription-streamdescription-filedescription-and-blobdescription"></a>SourceDescription, DataReaderDescription, StreamDescription, FileDescription und BlobDescription
-Diese verschiedenen Beschreibungsklassen enthalten wichtige Details zu den zu verführenden Quelldaten und können und sollten sogar für den Aufnahmevorgang bereitgestellt werden.
-Alle diese Klassen werden von `SourceDescription` der abstrakten Klasse abgeleitet und zum Instanziieren eines eindeutigen Bezeichners für jede Datenquelle verwendet.
-Der bereitgestellte Bezeichner ist für die nachfolgende Vorgangsstatusverfolgung vorgesehen und wird in allen Berichten, Ablaufverfolgungen und Ausnahmen im Zusammenhang mit dem entsprechenden Vorgang angezeigt.
+In diesem Artikel wird erläutert, wie Sie die [ikustoqueuedingestclient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) -Features verwenden, um den Status einer Erfassungs Anforderung zu verfolgen.
 
-### <a name="class-sourcedescription"></a>Klassen-SourceDescription
->Bei der Einnahme eines großen Datasets (z. B. eines DataReaders über 1 GB) werden die Daten in 1 GB-Blöcke aufgeteilt und separat aufgenommen.<BR>In diesem Fall gilt dieselbe SourceId für alle Aufnahmevorgänge, die aus demselben Dataset stammen.   
+## <a name="description-classes"></a>Beschreibungs Klassen
+
+Diese Beschreibungs Klassen enthalten wichtige Details zu den zu erfassenden Quelldaten und sollten beim Erfassungs Vorgang verwendet werden. 
+
+* SourceDescription
+* Datareaderdescription
+* Streamdescription
+* FileDescription
+* Blobdescription
+
+Die Klassen werden alle von der abstrakten-Klasse abgeleitet `SourceDescription` und zum Instanziieren eines eindeutigen Bezeichners für jede Datenquelle verwendet. Jeder Bezeichner wird dann für die Status Nachverfolgung verwendet und in allen Berichten, Ablauf Verfolgungen und Ausnahmen angezeigt, die mit dem entsprechenden Vorgang in Zusammenhang stehen.
+
+### <a name="class-sourcedescription"></a>Klasse sourcedescription
+
+Große Datasets werden in 1-GB-Segmente aufgeteilt, und jeder Teil wird separat erfasst. Dieselbe SourceID wird dann auf alle Erfassungs Vorgänge angewendet, die aus demselben Dataset stammen.   
 
 ```csharp
 public abstract class SourceDescription
@@ -33,7 +42,8 @@ public abstract class SourceDescription
 }
 ```
 
-### <a name="class-datareaderdescription"></a>Klasse DataReaderDescription
+### <a name="class-datareaderdescription"></a>Class datareaderdescription
+
 ```csharp
 public class DataReaderDescription : SourceDescription
 {
@@ -41,7 +51,8 @@ public class DataReaderDescription : SourceDescription
 }
 ```
 
-### <a name="class-streamdescription"></a>Klasse StreamDescription
+### <a name="class-streamdescription"></a>Class streamdescription
+
 ```csharp
 public class StreamDescription : SourceDescription
 {
@@ -49,7 +60,8 @@ public class StreamDescription : SourceDescription
 }
 ```
 
-### <a name="class-filedescription"></a>KlassendateiBeschreibung
+### <a name="class-filedescription"></a>Class File Description
+
 ```csharp
 public class FileDescription : SourceDescription
 {
@@ -57,7 +69,8 @@ public class FileDescription : SourceDescription
 }
 ```
 
-### <a name="class-blobdescription"></a>Klasse BlobDescription
+### <a name="class-blobdescription"></a>Klassenblobbeschreibung
+
 ```csharp
 public class BlobDescription : SourceDescription
 {
@@ -67,10 +80,12 @@ public class BlobDescription : SourceDescription
 }
 ```
 
-## <a name="ingestion-result-representation"></a>AufnahmeergebnisDarstellung
+## <a name="ingestion-result-representation"></a>Darstellung der Erfassungs Ergebnisse
 
-### <a name="interface-ikustoingestionresult"></a>Schnittstelle IKustoIngestionResult
-Diese Schnittstelle erfasst das Ergebnis eines einzelnen Aufnahmevorgangs in der `SourceId`Warteschlange und ermöglicht deren Abruf durch .
+### <a name="interface-ikustoingestionresult"></a>Ikustoingestionresult-Schnittstelle
+
+Diese Schnittstelle erfasst das Ergebnis eines einzelnen Erfassungs Vorgangs in der Warteschlange und kann von abgerufen werden `SourceId` .
+
 ```csharp
 public interface IKustoIngestionResult
 {
@@ -82,8 +97,10 @@ public interface IKustoIngestionResult
 }
 ```
 
-### <a name="class-ingestionstatus"></a>Klassenerfassungsstatus
-IngestionStatus kapselt den vollständigen Status eines einzelnen Aufnahmevorgangs.
+### <a name="class-ingestionstatus"></a>Class ingestionstatus
+
+Ingestionstatus enthält den gesamten Status eines einzelnen Erfassungs Vorgangs.
+
 ```csharp
 public class IngestionStatus
 {
@@ -121,25 +138,27 @@ public class IngestionStatus
 ```
 
 ### <a name="status-enumeration"></a>Statusenumeration
-|Wert |Bedeutung |
-|------------|------------|
-|Ausstehend |Temporäre. Kann sich im Laufe der Einnahme auf der Grundlage des Ergebnisses der Aufnahmeoperation ändern |
-|Erfolgreich |permanent sind. die Daten wurden erfolgreich aufgenommen |
-|Fehler |permanent sind. Verunstesung fehlgeschlagen |
-|In Warteschlange |permanent sind. Die Daten wurden für die Aufnahme in die Warteschlange gestellt. |
-|Ausgelassen |permanent sind. Es wurden keine Daten bereitgestellt, und der Aufnahmevorgang wurde übersprungen. |
-|TeilweiseErfolgreich |permanent sind. Ein Teil der Daten wurde erfolgreich aufgenommen, während einige fehlgeschlagensind |
 
-## <a name="tracking-ingestion-status-kustoqueuedingestclient"></a>Nachverfolgen des Erfassungsstatus (KustoQueuedIngestClient)
-[IKustoQueuedIngestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) ist ein "fire-and-forget"-Client - der Aufnahmevorgang auf der Clientseite endet mit dem Posten einer Nachricht an eine Azure-Warteschlange, nach der der Clientauftrag ausgeführt wird. KustoQueuedIngestClient bietet einen Mechanismus zum Nachverfolgen des individuellen Aufnahmestatus. Dies ist nicht für den Masseneinsatz an Durchsatz-Erfassungspipelines gedacht, sondern für die "Präzisionsaufnahme", wenn die Rate relativ niedrig ist und die Tracking-Anforderungen sehr streng sind.
+|Wert              |Bedeutung                                                                                     |Temporär/permanent
+|-------------------|-----------------------------------------------------------------------------------------------------|---------|
+|Pending            |Der Wert ändert sich möglicherweise während der Erfassung, basierend auf dem Ergebnis der Erfassungs Operation. |Temporäre Prozeduren|
+|Erfolgreich          |Die Daten wurden erfolgreich erfasst.                                                              |Dauerhaft| 
+|Fehler             |Fehler bei der Erfassung                                                                                     |Dauerhaft|
+|In Warteschlange             |Die Daten wurden zur Erfassung in die Warteschlange eingereiht.                                                               |Dauerhaft|
+|Ausgelassen            |Es wurden keine Daten bereitgestellt, und der Erfassungs Vorgang wurde übersprungen.                                            |Dauerhaft|
+|"Partiallysucceeded" |Ein Teil der Daten wurde erfolgreich erfasst, während einige fehlgeschlagen sind.                                        |Dauerhaft|
+
+## <a name="tracking-ingestion-status-kustoqueuedingestclient"></a>Status der Überwachungs Erfassung (kustoqueuedingestclient)
+
+[Ikustoqueuedingestclient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) ist ein "Fire-and-Forget"-Client. Der Erfassungs Vorgang auf der Clientseite wird beendet, indem eine Nachricht an eine Azure-Warteschlange übermitteln wird. Nach der Bereitstellung wird der Client Auftrag abgeschlossen. Zur Unterstützung des Client Benutzers bietet kustoqueuedingestclient einen Mechanismus zum Überwachen des individuellen Erfassungs Status. Dieser Mechanismus ist nicht für die Massen Verwendung bei Erfassungs Pipelines mit hohem Durchsatz vorgesehen. Dieser Mechanismus dient der Genauigkeits Erfassung, wenn die Rate relativ niedrig ist und die nach Verfolgungs Anforderungen streng sind.
 
 > [!WARNING]
-> Das Aktivieren positiver Benachrichtigungen für jede Aufnahmeanforderung für Datenströme mit großem Volumen sollte vermieden werden, da dies die zugrunde liegenden xStore-Ressourcen extrem belastet, > was zu einer erhöhten Aufnahmelatenz und sogar zur vollständigen Cluster-Nichtreaktion führen kann.
+> Das Aktivieren von positiven Benachrichtigungen für jede Erfassungs Anforderung für große volumedatenströme sollte vermieden werden, da dadurch die zugrunde liegenden XStore-Ressourcen extrem hochgeladen werden können, was zu einer längeren Erfassungs Latenz und sogar zum Vervollständigen der nicht Reaktionsfähigkeit von Clustern führen kann.
 
+Die folgenden Eigenschaften (festgelegt auf [kustoqueuedingestionproperties](kusto-ingest-client-reference.md#class-kustoqueuedingestionproperties)) steuern die Ebene und den Transport für erfolgreiche Erfassungs-oder Fehler Benachrichtigungen.
 
-Die folgenden Eigenschaften (auf [KustoQueuedIngestionProperties](kusto-ingest-client-reference.md#class-kustoqueuedingestionproperties)festgelegt) steuern die Ebene und den Transport für Aufnahmeerfolgs- oder Fehlerbenachrichtigungen:
+### <a name="ingestionreportlevel-enumeration"></a>Ingestionreportlevel-Enumeration
 
-### <a name="ingestionreportlevel-enumeration"></a>IngestionReportLevel-Enumeration
 ```csharp
 public enum IngestionReportLevel
 {
@@ -149,7 +168,8 @@ public enum IngestionReportLevel
 }
 ```
 
-### <a name="ingestionreportmethod-enumeration"></a>IngestionReportMethod-Enumeration
+### <a name="ingestionreportmethod-enumeration"></a>Ingestionreportmethod-Enumeration
+
 ```csharp
 public enum IngestionReportMethod
 {
@@ -159,41 +179,45 @@ public enum IngestionReportMethod
 }
 ```
 
-Um den Status Ihrer Aufnahme nachverfolgen zu können, stellen Sie sicher, dass Sie dem [IKustoQueuedIngestClient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) Folgendes zur Verfügung stellen, mit dem Sie den Aufnahmevorgang ausführen:
-1.  Legen `IngestionReportLevel`Sie die Eigenschaft auf die gewünschte Berichtsebene fest – entweder FailuresOnly (der Standardwert) oder FailuresAndSuccesses.
-Wenn auf Keine festgelegt, wird am Ende der Einnahme nichts gemeldet.
-2.  Geben Sie `IngestionReportMethod` die gewünschte - Warteschlange, Tabelle oder beides an.
+Um den Status ihrer Erfassung zu verfolgen, stellen Sie Folgendes für [ikustoqueuedingestclient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) bereit, mit dem Sie den Erfassungs Vorgang ausführen:
+1.  Legen `IngestionReportLevel` Sie die Eigenschaft auf die erforderliche Berichts Ebene fest. Entweder `FailuresOnly` (der Standardwert) oder `FailuresAndSuccesses` .
+Wenn diese Einstellung auf festgelegt `None` ist, wird am Ende der Erfassung nichts gemeldet.
+1.  Geben Sie `IngestionReportMethod`  -  `Queue` , `Table` oder an `both` .
 
-Ein Anwendungsbeispiel finden Sie auf der Seite [Kusto.Ingest Examples.](kusto-ingest-client-examples.md)
+Ein Verwendungs Beispiel finden Sie auf der Seite " [Kusto.](kusto-ingest-client-examples.md) Erfassungs Beispiele".
 
-### <a name="ingestion-status-in-azure-table"></a>Erfassungsstatus in Azure-Tabelle
-Die `IKustoIngestionResult` Schnittstelle, die von jedem Aufnahmevorgang zurückgegeben wird, enthält Funktionen, die zum Abfragen des Status der Aufnahme verwendet werden können.
-Achten Sie besonders `Status` auf die `IngestionStatus` Eigenschaft der zurückgegebenen Objekte:
-* `Pending`gibt an, dass die Quelle für die Aufnahme in die Warteschlange gestellt wurde und noch nicht aktualisiert werden muss. Verwenden Sie die Funktion erneut, um den Status der Quelle abzufragen
-* `Succeeded`Gibt an, dass die Quelle erfolgreich aufgenommen wurde
-* `Failed`Gibt an, dass die Quelle nicht aufgenommen wurde
+### <a name="ingestion-status-in-the-azure-table"></a>Erfassungs Status in der Azure-Tabelle
 
->Beachten Sie, `Queued` dass das `IngestionReportMethod` Abrufen eines Status angibt, dass der Beim Standardwert "Warteschlange" belassen wurde. Dies ist ein permanenter Status, und das erneute Aufrufen der Funktionen GetIngestionStatusBySourceId oder GetIngestionStatusCollection führt immer zum gleichen "Queued"-Status.<BR>Um den Status einer Aufnahme in einer Azure-Tabelle überprüfen zu können, überprüfen `IngestionReportMethod` Sie vor der Aufnahme, ob die `Table` Eigenschaft `QueueAndTable` der [KustoQueuedIngestionProperties](kusto-ingest-client-reference.md#class-kustoqueuedingestionproperties) auf (oder wenn Sie auch möchten, dass der Aufnahmestatus an eine Warteschlange gemeldet wird) festgelegt ist.
+Die `IKustoIngestionResult` Schnittstelle, die von jedem Erfassungs Vorgang zurückgegeben wird, enthält Funktionen, die verwendet werden können, um den Status der Erfassung abzufragen.
+Achten Sie besonders auf die- `Status` Eigenschaft der zurückgegebenen- `IngestionStatus` Objekte:
+* `Pending`Gibt an, dass die Quelle zur Erfassung in die Warteschlange eingereiht wurde und noch nicht aktualisiert werden muss. Verwenden Sie die Funktion erneut, um den Status der Quelle abzufragen.
+* `Succeeded`Gibt an, dass die Quelle erfolgreich erfasst wurde.
+* `Failed`Gibt an, dass die Quelle nicht erfasst werden konnte.
 
-### <a name="ingestion-status-in-azure-queue"></a>Erfassungsstatus in Azure-Warteschlange
-Die `IKustoIngestionResult` Methoden sind nur für die Überprüfung eines Status in einer Azure-Tabelle relevant. Um Status abzufragen, die an eine Azure-Warteschlange gemeldet wurden, verwenden Sie die folgenden Methoden von [IKustoQueuedIngestClient:](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)
+> [!NOTE]
+> Das erhalten eines `Queued` Status gibt an, dass der `IngestionReportMethod` Standardwert von "Queue" beibehalten wurde. Dies ist ein dauerhafter Status und der erneute Aufruf der- `GetIngestionStatusBySourceId` Funktion oder der- `GetIngestionStatusCollection` Funktion führt immer zu demselben Status in der Warteschlange.
+> Überprüfen Sie, ob die- `IngestionReportMethod` Eigenschaft von [kustoqueuedingestionproperties](kusto-ingest-client-reference.md#class-kustoqueuedingestionproperties) auf festgelegt ist, um den Status einer Erfassung in einer Azure-Tabelle zu überprüfen `Table` . Wenn Sie auch den Erfassungs Status an eine Warteschlange melden möchten, legen Sie den Status auf fest `QueueAndTable` .
 
-|Methode |Zweck |
-|------------|------------|
-|PeekTopIngestionFehler |Async-Methode, die Informationen zu den frühesten Aufnahmefehlern zurückgibt, die nicht verworfen wurden, entsprechend dem Limit für angeforderte Nachrichten |
-|GetAndDiscardTopIngestionFailures |Async-Methode, die die frühesten Aufnahmefehler zurückgibt und verwirft, die nicht verworfen wurden, entsprechend dem Limit für angeforderte Nachrichten |
-|GetAndDiscardTopIngestionSuccesses |Async-Methode, die die frühesten Aufnahmeerfolge zurückgibt und verwirft, die nicht verworfen wurden, `IngestionReportLevel` entsprechend dem Limit der angeforderten Nachrichten (nur relevant, wenn die auf`FailuresAndSuccesses` |
+### <a name="ingestion-status-in-azure-queue"></a>Erfassungs Status in der Azure-Warteschlange
 
+Die `IKustoIngestionResult` Methoden sind nur für das Überprüfen eines Status in einer Azure-Tabelle relevant. Verwenden Sie zum Abfragen von Statusberichten, die an eine Azure-Warteschlange gesendet wurden, die folgenden [ikustoqueuedingestclient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) -Methoden.
 
-### <a name="ingestion-failures-retrieved-from-azure-queue"></a>Aus Azure-Warteschlange abgerufene Aufnahmefehler
-Die Aufnahmefehler werden durch `IngestionFailure` ein Objekt dargestellt, das nützliche Informationen zum Fehler enthält:
+|Methode                                  |Zweck     |
+|----------------------------------------|------------|
+|"Peer Failure"-Fehler                |Async-Methode, die Informationen zu den frühesten Erfassungs Fehlern zurückgibt, die aufgrund des Limits für angeforderte Nachrichten nicht bereits verworfen wurden |
+|Getandverwerdtopingestionfailure       |Async-Methode, die die frühesten Erfassungs Fehler zurückgibt und verwirft, die aufgrund des Limits für angeforderte Nachrichten nicht bereits verworfen wurden. |
+|Getandverwerdtopingestionerfolge      |Async-Methode, die die frühesten Erfassungs Erfolge zurückgibt und verwirft, die aufgrund des Limits für angeforderte Nachrichten nicht bereits verworfen wurden. Diese Methode ist nur relevant, wenn `IngestionReportLevel` auf festgelegt ist.`FailuresAndSuccesses` |
 
-|Eigenschaft |Bedeutung |
-|------------|------------|
-|Datenbank& Tabelle |Die beabsichtigten Datenbank- und Tabellennamen |
-|IngestionSourcePath |Der Pfad des aufgenommenen Blobs. Will enthält den ursprünglichen Dateinamen im Falle der Dateiaufnahme. Wird zufällig im Falle der DataReader-Aufnahme sein |
-|FailureStatus |`Permanent`(es wird kein Wiederholungsversuch ausgeführt), `Transient` (Wiederholung wird `Exhausted` ausgeführt) oder (mehrere Wiederholungen wurden ebenfalls fehl) |
-|OperationId & RootActivityId |Betriebs-ID und RootActivity-ID der Aufnahme (nützlich für weitere Fehlerbehebung) |
-|FailedOn |UTC-Zeit des Fehlers. Ist größer als der Zeitpunkt, zu dem die Aufnahmemethode aufgerufen wurde, da die Daten vor der Ausführung der Aufnahme aggregiert werden |
-|Details |Weitere Einzelheiten zum Ausfall (falls vorhanden) |
-|ErrorCode |`IngestionErrorCode`Enumeration, die den Aufnahmefehlercode darstellt, falls der Fehler vorhanden ist|
+### <a name="ingestion-failures-retrieved-from-the-azure-queue"></a>Von der Azure-Warteschlange abgerufene Erfassungs Fehler
+
+Die Erfassungs Fehler werden durch das- `IngestionFailure` Objekt dargestellt, das nützliche Informationen über den Fehler enthält.
+
+|Eigenschaft                      |Bedeutung     |
+|------------------------------|------------|
+|Daten Bank & Tabelle              |Die gewünschte Datenbank und die Tabellennamen |
+|Ingestionsourcepath           |Der Pfad des erfassten BLOBs. Enthält den ursprünglichen Dateinamen, wenn die Datei erfasst wird. Wird zufällig, wenn DataReader erfasst wird |
+|Failurestatus                 |`Permanent`(es werden keine Wiederholungen ausgeführt), `Transient` (Wiederholungs Versuche werden ausgeführt) oder `Exhausted` (mehrere Wiederholungen sind ebenfalls fehlgeschlagen). |
+|OperationId & rootactivityid  |Vorgangs-ID und RootActivity-ID der Erfassung (nützlich für die weitere Problembehandlung) |
+|Failedon                      |Die UTC-Zeit des Fehlers. Ist größer als die Zeit, zu der die Erfassungs Methode aufgerufen wurde, da die Daten vor dem Ausführen der Erfassung aggregiert werden. |
+|Details                       |Weitere Details zu dem Fehler (falls vorhanden) |
+|ErrorCode                     |`IngestionErrorCode`Enumeration stellt den Erfassungs Fehlercode dar, wenn ein Fehler aufgetreten ist. |
