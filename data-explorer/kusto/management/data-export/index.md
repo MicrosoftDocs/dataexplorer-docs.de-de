@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/09/2019
-ms.openlocfilehash: e779571251baa6e87953e546d71adb98e7cfde61
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 88bb9e6541d9dc5c934affc8f777f836aad86ae1
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81490394"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373493"
 ---
 # <a name="data-export"></a>Datenexport
 
@@ -21,10 +21,7 @@ Der Datenexport umfasst die Ausführung einer Kusto-Abfrage und das Schreiben de
 
 Für den Datenexport stehen mehrere Methoden zur Verfügung:
 
-* **Clientseitiger Export:** In seiner einfachsten Form kann der Datenexport auf der Clientseite durchgeführt werden. In diesem Fall führt der Client eine Abfrage für den Dienst aus, liest die Ergebnisse und schreibt sie anschließend. Diese Art des Datenexports hängt vom verwendeten Clienttool ab. Als Ziel für den Export wird meistens das lokale Dateisystem verwendet, in dem das Tool ausgeführt wird. Dieses Modell wird unter anderem von [Kusto.Explorer](../../tools/kusto-explorer.md) und von der [Webbenutzeroberfläche](https://docs.microsoft.com/azure/data-explorer/web-query-data) 
-
-
- unterstützt.
+* **Clientseitiger Export:** In seiner einfachsten Form kann der Datenexport auf der Clientseite durchgeführt werden. In diesem Fall führt der Client eine Abfrage für den Dienst aus, liest die Ergebnisse und schreibt sie anschließend. Diese Art des Datenexports hängt vom verwendeten Clienttool ab. Als Ziel für den Export wird meistens das lokale Dateisystem verwendet, in dem das Tool ausgeführt wird. Dieses Modell wird unter anderem von [Kusto.Explorer](../../tools/kusto-explorer.md) und von der [Webbenutzeroberfläche](../../../web-query-data.md) unterstützt.
 
 * **Dienstseitiger Export (Pull):** Wenn es sich beim Ziel des Exports um eine Kusto-Tabelle handelt (im gleichen Cluster/in der gleichen Datenbank wie die Abfrage oder in einem anderen Cluster/einer anderen Datenbank), verwenden Sie den Ablauf „Erfassung aus einer Abfrage“ für die Zieltabelle. Hierbei wird eine Abfrage ausgeführt, und deren Ergebnisse werden sofort in einer Kusto-Tabelle erfasst. Weitere Informationen finden Sie unter [Datenerfassung](../data-ingestion/index.md).
 
