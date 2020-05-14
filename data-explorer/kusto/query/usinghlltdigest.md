@@ -1,5 +1,5 @@
 ---
-title: 'Partitionierung und Zusammenstellung von Zwischenergebnissen von Aggregationen: Azure Daten-Explorer'
+title: 'Kusto-Partition & Verfassen von zwischen Aggregations Ergebnissen: Azure Daten-Explorer'
 description: Dieser Artikel beschreibt die Partitionierung und Zusammenstellung von Zwischenergebnissen von Aggregationen in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
@@ -10,16 +10,16 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 8085f2347501c313c857a262bc9de6ec7280c90c
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: ce86e24fbd13221fe333f281dac3ba3b6ac73a1f
+ms.sourcegitcommit: da7c699bb62e1c4564f867d4131d26286c5223a8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83224543"
+ms.lasthandoff: 05/14/2020
+ms.locfileid: "83404245"
 ---
 # <a name="partitioning-and-composing-intermediate-results-of-aggregations"></a>Partitionierung und Zusammenstellung von Zwischenergebnissen von Aggregationen
 
-Wenn Sie die Anzahl der unterschiedlichen Benutzer in den letzten sieben Tagen jeden Tag berechnen möchten. Sie können einmal täglich ausführen `summarize dcount(user)` , wobei eine Spanne in den letzten sieben Tagen gefiltert wurde. Diese Methode ist ineffizient, da jedes Mal, wenn die Berechnung ausgeführt wird, eine überschneidende 6-Tage-Überlappung mit der vorherigen Berechnung vorliegt. Sie können auch ein Aggregat für jeden Tag berechnen und diese Aggregate dann kombinieren. Diese Methode erfordert, dass Sie die letzten sechs Ergebnisse "Speichern", aber es ist viel effizienter.
+Angenommen, Sie möchten die Anzahl der unterschiedlichen Benutzer jeden Tag in den letzten sieben Tagen berechnen. Sie können einmal täglich ausführen `summarize dcount(user)` , wobei eine Spanne in den letzten sieben Tagen gefiltert wurde. Diese Methode ist ineffizient, da bei jeder Berechnung der Berechnung sechs Tage mit der vorherigen Berechnung vorhanden sind. Sie können auch ein Aggregat für jeden Tag berechnen und diese Aggregate dann kombinieren. Diese Methode erfordert, dass Sie die letzten sechs Ergebnisse "Speichern", aber es ist viel effizienter.
 
 Das Partitionieren von Abfragen wie beschrieben ist für einfache Aggregate, z `count()` . b. und, leicht `sum()` . Sie kann auch für komplexe Aggregate nützlich sein, z `dcount()` . b `percentiles()` . und. In diesem Thema wird erläutert, wie Kusto solche Berechnungen unterstützt.
 
@@ -39,7 +39,7 @@ range x from 1 to 1000000 step 1
 |---|
 |1,0000524520874|
 
-Wenn Sie dies in eine Tabelle einfügen, bevor Sie diese Art von Richtlinie anwenden, wird NULL erfasst:
+Wenn Sie dieses Objekt in eine Tabelle einfügen, bevor Sie diese Art von Richtlinie anwenden, wird NULL erfasst:
 
 ```kusto
 .set-or-append MyTable <| range x from 1 to 1000000 step 1
@@ -143,7 +143,7 @@ Um dieses Problem zu beheben, können neu hinzugefügte Daten einer temporären 
 
 ::: zone-end
 
-Wenn Sie die endgültigen Ergebnisse dieser Werte erhalten müssen, verwenden die Abfragen möglicherweise HLL/tdigest-Fusionen:. [`hll-merge()`](hll-merge-aggfunction.md) / [`tdigest_merge()`](tdigest-merge-aggfunction.md) nachdem Sie die zusammengeführten Werte erhalten haben, können Sie dann für [`percentile_tdigest()`](percentile-tdigestfunction.md)  /  [`dcount_hll()`](dcount-hllfunction.md) Diese zusammengeführten Werte aufgerufen werden, um das Endergebnis von `dcount` oder Perzentilen zu erhalten.
+Wenn Sie die endgültigen Ergebnisse dieser Werte erhalten müssen, verwenden die Abfragen möglicherweise `hll` / `tdigest` Fusionen: [`hll-merge()`](hll-merge-aggfunction.md) / [`tdigest_merge()`](tdigest-merge-aggfunction.md) . Nachdem die zusammengeführten Werte erhalten wurden, [`percentile_tdigest()`](percentile-tdigestfunction.md)  /  [`dcount_hll()`](dcount-hllfunction.md) wird möglicherweise für diese zusammengeführten Werte aufgerufen, um das Endergebnis von `dcount` oder Perzentilen zu erhalten.
 
 Angenommen, es gibt eine Tabelle, in der die Daten täglich erfasst werden, jeden Tag, an dem Sie die unterschiedliche Anzahl von Seiten berechnen möchten, die pro Minute nach dem Date = DateTime (2016-05-01 18:00:00.0000000) angezeigt werden.
 
@@ -176,7 +176,7 @@ PageViewsHllTDigest
 |2016-05-02 00:00:00.0000000|83486|64135183|
 |2016-05-03 00:00:00.0000000|72247|13685621|
 
-Dies sollte leistungsfähiger sein, und die Abfrage wird über eine kleinere Tabelle ausgeführt (in diesem Beispiel wird die erste Abfrage über ungefähr 215 Mio. Datensätze ausgeführt, während die zweite nur über 32 Datensätze ausgeführt wird).
+Diese Abfrage sollte leistungsfähiger sein, da Sie über eine kleinere Tabelle ausgeführt wird. In diesem Beispiel wird die erste Abfrage über ungefähr 215 Mio. Datensätze ausgeführt, während die zweite Abfrage über nur 32 Datensätze läuft:
 
 **Beispiel**
 
@@ -220,7 +220,7 @@ on $left.Day1 == $right.Day
  
 Die obige Abfrage hat ungefähr 18 Sekunden gedauert.
 
-Wenn Sie die Funktionen von [`hll()`](hll-aggfunction.md) , [`hll_merge()`](hll-merge-aggfunction.md) und verwenden [`dcount_hll()`](dcount-hllfunction.md) , endet die entsprechende Abfrage nach ungefähr 1,3 Sekunden und zeigt, dass `hll` Functions die obige Abfrage um ~ 14 mal beschleunigt:
+Wenn Sie die [`hll()`](hll-aggfunction.md) Funktionen, [`hll_merge()`](hll-merge-aggfunction.md) und verwenden [`dcount_hll()`](dcount-hllfunction.md) , endet die entsprechende Abfrage nach ungefähr 1,3 Sekunden und zeigt an, dass die- `hll` Funktion die oben genannte Abfrage um ~ 14 mal beschleunigt:
 
 ```kusto
 let Stats=PageViewsSample | summarize pagehll=hll(Page, 2) by day=startofday(Timestamp); // saving the hll values (intermediate results of the dcount values)
@@ -248,4 +248,4 @@ Stats
 |2016-05-02 00:00:00.0000000|2016-05-03 00:00:00.0000000|14.5160020350006|
 
 > [!NOTE] 
-> Die Ergebnisse der Abfragen sind aufgrund des Fehlers der Funktionen nicht 100% genau `hll` . ( Weitere Informationen zu Fehlern finden Sie unter [`dcount()`](dcount-aggfunction.md) .
+> Die Ergebnisse der Abfragen sind aufgrund des Fehlers der Funktionen nicht 100% genau `hll` . Weitere Informationen zu den Fehlern finden Sie unter [`dcount()`](dcount-aggfunction.md) .

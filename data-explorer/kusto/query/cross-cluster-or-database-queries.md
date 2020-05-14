@@ -1,5 +1,5 @@
 ---
-title: 'Datenbankübergreifende und Cluster übergreifende Abfragen: Azure Daten-Explorer | Microsoft-Dokumentation'
+title: 'Datenbankübergreifende &-Cluster übergreifende Abfragen: Azure Daten-Explorer'
 description: Dieser Artikel beschreibt datenbankübergreifende und Cluster übergreifende Abfragen in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
@@ -10,20 +10,20 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 834fd81e1832b8ab624da8d99cb5cc32407db84f
-ms.sourcegitcommit: 4f68d6dbfa6463dbb284de0aa17fc193d529ce3a
+ms.openlocfilehash: bb25fd556ab59dc5bdf5c533435f99deb6b32fdb
+ms.sourcegitcommit: da7c699bb62e1c4564f867d4131d26286c5223a8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82741760"
+ms.lasthandoff: 05/14/2020
+ms.locfileid: "83404224"
 ---
 # <a name="cross-database-and-cross-cluster-queries"></a>Datenbankübergreifende und clusterübergreifende Abfragen
 
 ::: zone pivot="azuredataexplorer"
 
 Jede Kusto-Abfrage wird im Kontext des aktuellen Clusters und der Standarddatenbank durchführt.
-* Im [Kusto-Explorer](../tools/kusto-explorer.md) ist die Standarddatenbank die im [Verbindungs Panel](../tools/kusto-explorer.md#connections-panel) ausgewählte Datenbank, und der aktuelle Cluster ist die Verbindung, die diese Datenbank enthält.
-* Wenn die [Kusto-Client Bibliothek](../api/netfx/about-kusto-data.md) verwendet wird, werden der aktuelle Cluster und die Standard `Data Source` Datenbank `Initial Catalog` durch die-Eigenschaft und die-Eigenschaft der [Kusto-Verbindungs](../api/connection-strings/kusto.md) Zeichenfolgen angegeben.
+* Im [Kusto-Explorer](../tools/kusto-explorer.md)ist die Standarddatenbank die im [Verbindungs Panel](../tools/kusto-explorer.md#connections-panel) ausgewählte Datenbank, und der aktuelle Cluster ist die Verbindung, die diese Datenbank enthält.
+* Wenn die [Kusto-Client Bibliothek](../api/netfx/about-kusto-data.md)verwendet wird, werden der aktuelle Cluster und die Standarddatenbank durch die `Data Source` -Eigenschaft und die-Eigenschaft `Initial Catalog` der [Kusto-Verbindungs](../api/connection-strings/kusto.md) Zeichenfolgen angegeben.
 
 ## <a name="queries"></a>Abfragen
 Für den Zugriff auf Tabellen aus einer anderen Datenbank als der Standardeinstellung muss die *qualifizierte namens* Syntax verwendet werden: für den Zugriff auf die Datenbank im aktuellen Cluster:
@@ -38,9 +38,9 @@ cluster("<cluster name>").database("<database name>").<table name>
 beim *Datenbanknamen* wird Groß-/Kleinschreibung
 
 beim *Cluster Namen* wird die Groß-/Kleinschreibung nicht beachtet, und Sie können eine der folgenden Formen aufweisen:
-* Wohlgeformte URL: Beispiel `http://contoso.kusto.windows.net:1234/`: nur http-und HTTPS-Schemas werden unterstützt.
-* Vollständig qualifizierter Domänen Name (Fully Qualified Domain Name, `contoso.kusto.windows.net` FQDN): beispielsweise.`https://`**`contoso.kusto.windows.net`**`:443/`
-* Kurzname (hostname [und Region] ohne den `contoso` Domänen Teil): beispielsweise, der als `https://` **`contoso`** `.kusto.windows.net:443/`oder `contoso.westus` interpretiert wird, das als`https://`**`contoso.westus`**`.kusto.windows.net:443/`
+* Wohlgeformte URL, z. b `http://contoso.kusto.windows.net:1234/` .. Nur http-und HTTPS-Schemas werden unterstützt.
+* Vollständig qualifizierter Domänen Name (FQDN), z `contoso.kusto.windows.net` . b.. Diese Zeichenfolge entspricht `https://` **`contoso.kusto.windows.net`** `:443/` .
+* Kurzname (hostname [und Region] ohne Domänen Teil), z `contoso` . b `contoso.westus` . oder. Diese Zeichen folgen werden als `https://` **`contoso`** `.kusto.windows.net:443/` und interpretiert `https://` **`contoso.westus`** `.kusto.windows.net:443/` .
 
 > [!NOTE]
 > Der datenbankübergreifende Zugriff unterliegt den üblichen Berechtigungs Überprüfungen.
@@ -81,7 +81,7 @@ Im obigen Beispiel wird der Abfrage Zugriff auf die folgenden Entitäten eingesc
 
 ## <a name="functions-and-views"></a>Funktionen und Ansichten
 
-Funktionen und Sichten (persistent und erstellt Inline) können Tabellen über Daten Bank-und Cluster Grenzen hinweg referenzieren. Folgendes ist gültig:
+Funktionen und Sichten (persistent und erstellt Inline) können über Daten Bank-und Cluster Grenzen hinweg auf Tabellen verweisen. Der folgende Code ist gültig:
 
 ```kusto
 let MyView = Table1 join database("OtherDb").Table2 on Key | join cluster("OtherCluster").database("SomeDb").Table3 on Key;
@@ -90,13 +90,13 @@ MyView | where ...
 
 Auf persistente Funktionen und Sichten kann von einer anderen Datenbank im gleichen Cluster zugegriffen werden:
 
-Tabellarische Funktion (Sicht) `OtherDb`in:
+Tabellarische Funktion (Sicht) in `OtherDb` :
 
 ```kusto
 .create function MyView(v:string) { Table1 | where Column1 has v ...  }  
 ```
 
-Skalarfunktion in `OtherDb`:
+Skalarfunktion in `OtherDb` :
 ```kusto
 .create function MyCalc(a:double, b:double, c:double) { (a + b) / c }  
 ```
@@ -109,7 +109,7 @@ database("OtherDb").MyView("exception") | extend CalCol=database("OtherDb").MyCa
 
 ## <a name="limitations-of-cross-cluster-function-calls"></a>Einschränkungen von Cluster übergreifenden Funktionsaufrufen
 
-Auf tabellarische Funktionen oder Sichten kann Cluster übergreifend verwiesen werden. Die folgenden Einschränkungen gelten:
+Auf tabellarische Funktionen oder Sichten kann Cluster übergreifend verwiesen werden. Es gelten die folgenden Einschränkungen:
 
 1. Die Remote Funktion muss ein tabellarisches Schema zurückgeben. Auf skalare Funktionen kann nur im gleichen Cluster zugegriffen werden.
 2. Die Remote Funktion kann nur skalare Parameter akzeptieren. Auf Funktionen, die mindestens ein Tabellen Argument abrufen, kann nur im gleichen Cluster zugegriffen werden.
@@ -121,24 +121,24 @@ Der folgende Cluster übergreifende aufrufswert ist **gültig**:
 cluster("OtherCluster").database("SomeDb").MyView("exception") | count
 ```
 
-Die folgende Abfrage ruft die Remote-Skalarfunktion `MyCalc`auf.
-Dies verstößt gegen Regel #1 und ist daher **ungültig**:
+Die folgende Abfrage ruft die Remote-Skalarfunktion auf `MyCalc` .
+Dieser Rückruf verstößt gegen die Regel #1, daher ist er **ungültig**:
 
 ```kusto
 MyTable | extend CalCol=cluster("OtherCluster").database("OtherDb").MyCalc(Col1, Col2, Col3) | limit 10
 ```
 
-Die folgende Abfrage ruft die Remote `MyCalc` Funktion auf und stellt einen tabellarischen Parameter bereit.
-Dies verstößt gegen Regel #2 und ist daher **ungültig**:
+Die folgende Abfrage ruft die Remote Funktion auf `MyCalc` und stellt einen tabellarischen Parameter bereit.
+Dieser Rückruf verstößt gegen die Regel #2, daher ist er **ungültig**:
 
 ```kusto
 cluster("OtherCluster").database("OtherDb").MyCalc(datatable(x:string, y:string)["x","y"] ) 
 ```
 
-Die folgende Abfrage ruft eine Remote `SomeTable` Funktion auf, die über eine Variable Schema Ausgabe `tablename`auf Grundlage des-Parameters verfügt.
-Dies verstößt gegen Regel #3 und ist daher **ungültig**:
+Die folgende Abfrage ruft eine Remote Funktion `SomeTable` auf, die über eine Variable Schema Ausgabe auf Grundlage des-Parameters verfügt `tablename` .
+Dieser Rückruf verstößt gegen die Regel #3, daher ist er **ungültig**:
 
-Tabellarische Funktion `OtherDb`in:
+Tabellarische Funktion in `OtherDb` :
 ```kusto
 .create function SomeTable(tablename:string) { table(tablename)  }  
 ```
@@ -148,10 +148,10 @@ In der Standarddatenbank:
 cluster("OtherCluster").database("OtherDb").SomeTable("MyTable")
 ```
 
-Die folgende Abfrage ruft eine Remote `GetDataPivot` Funktion auf, die auf der Grundlage des Data ([Pivot ()-Plug](pivotplugin.md) -ins auf der Grundlage der dynamischen Ausgabe eine Variable Schema Ausgabe aufweist
-Dies verstößt gegen Regel #3 und ist daher **ungültig**:
+Die folgende Abfrage ruft eine Remote Funktion `GetDataPivot` auf, die auf der Grundlage des Data ([Pivot ()-Plug](pivotplugin.md) -ins auf der Grundlage der dynamischen Ausgabe eine Variable Schema Ausgabe aufweist
+Dieser Rückruf verstößt gegen die Regel #3, daher ist er **ungültig**:
 
-Tabellarische Funktion `OtherDb`in:
+Tabellarische Funktion in `OtherDb` :
 ```kusto
 .create function GetDataPivot() { T | evaluate pivot(PivotColumn) }  
 ```
@@ -163,7 +163,7 @@ cluster("OtherCluster").database("OtherDb").GetDataPivot()
 
 ## <a name="displaying-data"></a>Anzeigen von Daten
 
-Anweisungen, die Daten an den Client zurückgeben, werden implizit durch die Anzahl der zurückgegebenen Datensätze begrenzt, auch wenn es keine `take` bestimmte Verwendung des Operators gibt. Um diese Begrenzung aufzuheben, verwenden Sie die Clientanforderungsoption `notruncation` .
+Anweisungen, die Daten an den Client zurückgeben, werden implizit durch die Anzahl der zurückgegebenen Datensätze begrenzt, auch wenn es keine bestimmte Verwendung des `take` Operators gibt. Um diese Begrenzung aufzuheben, verwenden Sie die Clientanforderungsoption `notruncation` .
 
 Verwenden Sie den [Rendering-Operator](renderoperator.md), um Daten in grafischer Form anzuzeigen.
 
@@ -171,6 +171,6 @@ Verwenden Sie den [Rendering-Operator](renderoperator.md), um Daten in grafische
 
 ::: zone pivot="azuremonitor"
 
-Diese Funktion wird in Azure Monitor nicht unterstützt.
+Datenbankübergreifende und Cluster übergreifende Abfragen werden in Azure Monitor nicht unterstützt.
 
 ::: zone-end

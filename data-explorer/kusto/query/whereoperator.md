@@ -1,6 +1,6 @@
 ---
-title: 'Where-Operator: Azure Daten-Explorer | Microsoft-Dokumentation'
-description: In diesem Artikel wird beschrieben, wo der Operator (has, enthält, StartWith, EndsWith, Regex) in Azure Daten-Explorer.
+title: 'Where-Operator in der Kusto-Abfragesprache: Azure Daten-Explorer'
+description: Dieser Artikel beschreibt den Where-Operator in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: fadf8aa8c21dac364793c73a38e68d55fc2a6f6d
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 7dc9d7166a1f286e14c81f269f32f894cbe9ff9d
+ms.sourcegitcommit: da7c699bb62e1c4564f867d4131d26286c5223a8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83370368"
+ms.lasthandoff: 05/14/2020
+ms.locfileid: "83404177"
 ---
 # <a name="where-operator"></a>where-Operator
 
@@ -61,9 +61,9 @@ Traces
     and ActivityId == SubActivityId 
 ```
 
-Datensätze, die nicht älter als 1 Stunde sind und aus der Quelle mit dem Namen "mycluster" stammen und zwei Spalten desselben Werts haben. 
+In diesem Beispiel werden Datensätze abgerufen, die nicht älter als 1 Stunde sind, aus einer Quelle `MyCluster` mit dem Namen stammen und zwei Spalten mit dem gleichen Wert aufweisen. 
 
-Beachten Sie, dass wir den Vergleich zwischen zwei Spalten an das Ende stellen, da der Index nicht genutzt werden kann und ein Scan erzwungen wird.
+Beachten Sie, dass der Vergleich zwischen zwei Spalten zuletzt durchgesetzt wurde, da der Index nicht verwendet werden kann und eine Überprüfung erzwungen wird.
 
 **Beispiel**
 
