@@ -1,5 +1,5 @@
 ---
-title: Datenerfassung durch howto ohne Kusto. Erfassungs Bibliothek-Azure Daten-Explorer | Microsoft-Dokumentation
+title: 'Kusto-Datenerfassung ohne Erfassungs Bibliothek: Azure-Daten-Explorer'
 description: In diesem Artikel wird die Beschreibung der Datenerfassung ohne Kusto. Erfassungs Bibliothek in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 02/19/2020
-ms.openlocfilehash: 80fe504311ee847afa7244e179974d80485efe46
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 96409849823850ef9fd939f9e359d75d3e6d5bf1
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373558"
+ms.locfileid: "83382147"
 ---
 # <a name="ingestion-without-kustoingest-library"></a>Erfassung ohne Kusto. Erfassungs Bibliothek
 

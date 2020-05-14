@@ -1,6 +1,6 @@
 ---
-title: Anforderungseigenschaften, ClientRequestProperties - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt Anforderungseigenschaften, ClientRequestProperties in Azure Data Explorer.
+title: Eigenschaften von Kusto-Anforderungen & clientrequestproperties-Azure Daten-Explorer
+description: In diesem Artikel werden Anforderungs Eigenschaften, clientrequestproperties in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,83 +8,83 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/23/2019
-ms.openlocfilehash: 0aa496e6011fce98db5a304b9748f27f07590b4f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 52b1f73e539e57f82d3ec911a3ea69dcd6848e4a
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81524326"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83382164"
 ---
-# <a name="request-properties-clientrequestproperties"></a>Anforderungseigenschaften, ClientRequestProperties
+# <a name="request-properties-clientrequestproperties"></a>Anforderungs Eigenschaften, clientrequestproperties
 
-Wenn Sie eine Anforderung von Kusto über das .NET SDK stellen Sie im Allgemeinen die folgenden Werte bereit:
+Beim Erstellen einer Anforderung von Kusto über das .NET SDK bietet eine in der Regel die folgenden Werte:
 
-1. Eine Verbindungszeichenfolge, die den Dienstendpunkt angibt, mit dem eine Verbindung hergestellt werden soll, Authentifizierungsparameter und ähnliche verbindungsbezogene Informationen. Programmgesteuert wird die Verbindungszeichenfolge durch `KustoConnectionStringBuilder` die Klasse dargestellt.
+1. Eine Verbindungs Zeichenfolge, die den Dienst Endpunkt angibt, mit dem eine Verbindung hergestellt werden soll, sowie Authentifizierungs Parameter und ähnliche verbindungsbezogene Informationen. Programm gesteuert wird die Verbindungs Zeichenfolge durch die- `KustoConnectionStringBuilder` Klasse dargestellt.
 
-2. Der Name der Datenbank, die verwendet wird, um den "Bereich" der Anforderung zu beschreiben.
+2. Der Name der Datenbank, in der der "Bereich" der Anforderung beschrieben wird.
 
 3. Der Text der Anforderung (Abfrage oder Befehl) selbst.
 
-4. Zusätzliche Eigenschaften, die der Client bereitstellt und auf die Anforderung angewendet wird. Programmgesteuert werden diese Eigenschaften von einer `ClientRequestProperties`Klasse namens gehalten.
+4. Zusätzliche Eigenschaften, die der Client für den Dienst bereitstellt und auf die Anforderung angewendet wird. Diese Eigenschaften werden Programm gesteuert von einer Klasse mit dem Namen gespeichert `ClientRequestProperties` .
 
-Die Clientanforderungseigenschaften haben viele Verwendungen. Einige von ihnen werden verwendet, um das Debuggen zu vereinfachen (z. B. durch bereitstellen von Korrelationszeichenfolgen, die zum Nachverfolgen von Client-/Dienstinteraktionen verwendet werden können), andere werden verwendet, um zu beeinflussen, welche Grenzwerte und Richtlinien auf die Anforderung angewendet werden, während eine dritte Kategorie solcher Eigenschaften [Abfrageparameter](../../query/queryparametersstatement.md)sind. Eine vollständige Liste der unterstützten Eigenschaften wird auf dieser Seite angezeigt.
+Die Eigenschaften der Client Anforderung haben viele Verwendungsmöglichkeiten. Einige davon werden verwendet, um das Debuggen zu vereinfachen (z. b. durch Bereitstellen von Korrelations Zeichenfolgen, die zum Nachverfolgen von Client-/Dienstinteraktionen verwendet werden können), andere werden verwendet, um zu beeinflussen, welche Beschränkungen und Richtlinien auf die Anforderung angewendet werden, während eine dritte Kategorie dieser Eigenschaften [Abfrage Parameter](../../query/queryparametersstatement.md) Auf dieser Seite wird eine vollständige Liste der unterstützten Eigenschaften angezeigt.
 
-Die `Kusto.Data.Common.ClientRequestProperties` Klasse enthält drei Arten von Daten:
+Die- `Kusto.Data.Common.ClientRequestProperties` Klasse enthält drei Arten von Daten:
 
 * Benannte Eigenschaften.
 
-* Optionen (Zuordnung eines Optionsnamens zu einem Optionswert).
+* Optionen (eine Zuordnung eines Options namens zu einem Optionswert).
 
-* Parameter (Zuordnung eines Abfrageparameternamens zu einem Abfrageparameterwert).
+* Parameter (eine Zuordnung eines Abfrage Parameter namens zu einem Abfrage Parameterwert).
 
 > [!NOTE]
-> Einige benannte Eigenschaften sind als "nicht verwenden" gekennzeichnet. Solche Eigenschaften sollten nicht von Clients angegeben werden und keine Auswirkungen auf den Dienst haben.
+> Einige benannte Eigenschaften sind als "nicht verwenden" gekennzeichnet. Solche Eigenschaften sollten nicht von Clients angegeben werden und haben keine Auswirkung auf den Dienst.
 
-## <a name="the-clientrequestid-x-ms-client-request-id-named-property"></a>Die ClientRequestId (x-ms-client-request-id) benannte Eigenschaft
+## <a name="the-clientrequestid-x-ms-client-request-id-named-property"></a>Die benannte Eigenschaft "clientrequestid (x-MS-Client-Request-ID)"
 
-Diese benannte Eigenschaft enthält die vom Client angegebene Identität der Anforderung. Es wird dringend empfohlen, dass ein eindeutiger Wert pro Anforderung von Clients bei jeder anforderung angegeben wird, die sie senden, da dies das Debuggen von Fehlern vereinfacht (und in einigen Szenarien erforderlich ist, z. B. bei abfrageabbruch).
+Diese benannte Eigenschaft enthält die vom Client angegebene Identität der Anforderung. Es wird dringend empfohlen, dass ein eindeutiger Anforderungs basierter Wert von Clients mit jeder gesendeten Anforderung angegeben wird, da debuggingfehler einfacher werden (und in einigen Szenarios erforderlich sind, wie z. b. Abfrage Abbruch).
 
-Der programmgesteuerte Name `ClientRequestId`dieser Eigenschaft ist , und `x-ms-client-request-id`es wird in den HTTP-Header übersetzt.
+Der programmgesteuerte Name dieser Eigenschaft ist `ClientRequestId` , und Sie wird in den-HTTP-Header übersetzt `x-ms-client-request-id` .
 
 Diese Eigenschaft wird vom SDK auf einen (zufälligen) Wert festgelegt, wenn der Client keinen eigenen Wert angibt.
 
-Der Inhalt dieser Eigenschaft kann eine beliebige druckbare eindeutige Zeichenfolge sein, z. B. eine GUID.
+Der Inhalt dieser Eigenschaft kann eine beliebige Druck Bare eindeutige Zeichenfolge sein, z. b. eine GUID.
 Es wird jedoch empfohlen, dass Clients die folgende Vorlage verwenden:
 
 *ApplicationName* `.` *ActivityName* `;` *UniqueId*
 
-Wenn *ApplicationName* die Clientanwendung identifiziert, die die Anforderung ausstellt, identifiziert *ActivityName* die Art der Aktivität, für die die Clientanwendung die Clientanforderung ausgibt, und *UniqueId* identifiziert die spezifische Anforderung.
+Wenn *ApplicationName* die Client Anwendung identifiziert, die die Anforderung sendet, identifiziert *ActivityName* die Art der Aktivität, für die die Client Anwendung die Client Anforderung ausgibt, und *UniqueId* identifiziert die jeweilige Anforderung.
 
-## <a name="the-application-x-ms-app-named-property"></a>Die Application (x-ms-app) benannte Eigenschaft
+## <a name="the-application-x-ms-app-named-property"></a>Die benannte Eigenschaft der Anwendung (x-ms-APP)
 
-Diese benannte Eigenschaft enthält den Namen der Clientanwendung, die die Anforderung zu Ablaufverfolgungszwecken stellt.
+Diese benannte Eigenschaft enthält den Namen der Client Anwendung, die die Anforderung zur Ablauf Verfolgung vornimmt.
 
-Der programmgesteuerte Name `Application`dieser Eigenschaft ist , und `x-ms-app`es wird in den HTTP-Header übersetzt. Sie kann in der Kusto-Verbindungszeichenfolge als `Application Name for Tracing`angegeben werden.
+Der programmgesteuerte Name dieser Eigenschaft ist `Application` , und Sie wird in den-HTTP-Header übersetzt `x-ms-app` . Sie kann in der Kusto-Verbindungs Zeichenfolge als angegeben werden `Application Name for Tracing` .
 
-Diese Eigenschaft wird auf den Namen des Prozesses festgelegt, der das SDK hostet, wenn der Client keinen eigenen Wert angibt.
+Diese Eigenschaft wird auf den Namen des Prozesses festgelegt, der das SDK verwendet, wenn der Client keinen eigenen Wert angibt.
 
-## <a name="the-user-x-ms-user-named-property"></a>Die Nameeigenschaft "Benutzer" (x-ms-user)
+## <a name="the-user-x-ms-user-named-property"></a>Die benannte Eigenschaft des Benutzers (x-MS-User)
 
-Diese benannte Eigenschaft enthält die Identität des Benutzers, der die Anforderung zu Ablaufverfolgungszwecken stellt.
+Diese benannte Eigenschaft enthält die Identität des Benutzers, der die Anforderung zur Ablauf Verfolgung vornimmt.
 
-Der programmgesteuerte Name `User`dieser Eigenschaft ist , und `x-ms-user`es wird in den HTTP-Header übersetzt. Sie kann in der Kusto-Verbindungszeichenfolge als `User Name for Tracing`angegeben werden.
+Der programmgesteuerte Name dieser Eigenschaft ist `User` , und Sie wird in den-HTTP-Header übersetzt `x-ms-user` . Sie kann in der Kusto-Verbindungs Zeichenfolge als angegeben werden `User Name for Tracing` .
 
-## <a name="controlling-request-properties-using-the-rest-api"></a>Steuern von Anforderungseigenschaften mithilfe der REST-API
+## <a name="controlling-request-properties-using-the-rest-api"></a>Steuern von Anforderungs Eigenschaften mit der Rest-API
 
-Verwenden Sie beim Ausstellen einer HTTP-Anforderung an den Kusto-Dienst den `properties` Steckplatz im JSON-Dokument, das der POST-Anforderungstext ist, um Anforderungseigenschaften bereitzustellen. Beachten Sie, dass einige der Eigenschaften (z. B. die "Clientanforderungs-ID", d. h. die Korrelations-ID, die der Client dem Dienst zum Identifizieren der Anforderung bereitstellt) im HTTP-Header bereitgestellt werden können und daher auch festgelegt werden können, wenn HTTP GET verwendet wird.
-Weitere Informationen finden Sie [im Kusto REST-API-Anforderungsobjekt.](../rest/request.md)
+Wenn Sie eine HTTP-Anforderung an den Kusto-Dienst ausgeben, verwenden `properties` Sie den Slot im JSON-Dokument, der der Post-Anforderungs Text ist, um Anforderungs Eigenschaften bereitzustellen. Beachten Sie, dass einige der Eigenschaften (z. b. die "Clientanforderungs-ID", die die Korrelations-ID ist, die der Client für den Dienst zur Identifizierung der Anforderung bereitstellt) im-HTTP-Header bereitgestellt werden können. Sie können daher auch festgelegt werden, wenn HTTP GET verwendet wird.
+Weitere Informationen finden Sie [im Kusto-Rest-API-Anforderungs Objekt](../rest/request.md) .
 
-## <a name="providing-values-for-query-parametrization-as-request-properties"></a>Bereitstellen von Werten für die Abfrageparametrisierung als Anforderungseigenschaften
+## <a name="providing-values-for-query-parameterization-as-request-properties"></a>Angeben von Werten für die Abfrage Parametrisierung als Anforderungs Eigenschaften
 
-Kusto-Abfragen können auf Abfrageparameter verweisen, indem eine spezielle [Declare-Query-Parameters-Anweisung](../../query/queryparametersstatement.md) im Abfragetext verwendet wird. Auf diese Weise können Clientanwendungen Kusto-Abfragen auf sichere Weise auf der Grundlage von Benutzereingaben parametrisieren (ohne Angst vor Injektionsangriffen).
+Kusto-Abfragen können auf Abfrage Parameter verweisen, indem eine spezialisierte [Declare Query-Parameters-](../../query/queryparametersstatement.md) Anweisung im Abfragetext verwendet wird. Dies ermöglicht es Client Anwendungen, Kusto-Abfragen auf sichere Weise auf der Grundlage von Benutzereingaben zu parametrisieren (ohne Angst vor Injection-Angriffen).
 
-Programmgesteuert können Eigenschaftenwerte mithilfe der `ClearParameter`, `SetParameter`und `HasParameter` Methoden festgelegt werden.
+Programm gesteuert können Eigenschaftswerte mithilfe der `ClearParameter` Methoden, und festgelegt werden `SetParameter` `HasParameter` .
 
-In der REST-API werden Abfrageparameter in derselben JSON-codierten Zeichenfolge wie die anderen Anforderungseigenschaften angezeigt.
+In der Rest-API werden Abfrage Parameter in derselben JSON-codierten Zeichenfolge wie die anderen Anforderungs Eigenschaften angezeigt.
 
-## <a name="sample-code-for-using-request-properties"></a>Beispielcode für die Verwendung von Anforderungseigenschaften
+## <a name="sample-code-for-using-request-properties"></a>Beispielcode für die Verwendung von Anforderungs Eigenschaften
 
-Hier ist ein Beispiel für Clientcode:
+Im folgenden finden Sie ein Beispiel für den Client Code:
 
 ```csharp
 public static System.Data.IDataReader QueryKusto(
@@ -139,7 +139,7 @@ public static System.Data.IDataReader QueryKusto(
 }
 ```
 
-## <a name="list-of-clientrequestproperties"></a>Liste der ClientRequestProperties
+## <a name="list-of-clientrequestproperties"></a>Liste der clientrequestproperties
 
 <!-- The following is auto-generated by running the following command: -->
 <!-- Kusto.Cli.exe -execute:"#crp -doc"                                -->
@@ -148,49 +148,49 @@ public static System.Data.IDataReader QueryKusto(
 
 <!-- The following text can be re-produced by running the Kusto.Cli.exe directive '#crp -doc' -->
 
-* `debug_query_externaldata_projection_fusion_disabled`(*OptionDebugQueryDisableExternalDataProjectionFusion*): Wenn festgelegt, sichern Sie die Projektion nicht in den ExternalData-Operator. [Boolesche]
-* `debug_query_fanout_threads_percent_external_data`(*OptionDebugQueryFanoutThreadsPercentExternalData*): Der Prozentsatz der Threads, an die die Ausführung für externe Datenknoten fanout. [Int]
-* `deferpartialqueryfailures`(*OptionDeferPartialQueryFailures*): Wenn true, deaktiviert das Melden von teilgestellten Abfragefehlern als Teil des Resultsets. [Boolesche]
-* `max_memory_consumption_per_query_per_node`(*OptionMaxMemoryConsumptionPerQueryPerNode*): Überschreibt die standardmäßige maximale Speichermenge, die eine ganze Abfrage pro Knoten zuweisen kann. [UInt64]
-* `maxmemoryconsumptionperiterator`(*OptionMaxMemoryConsumptionPerIterator*): Überschreibt die standardmäßige maximale Speichermenge, die ein Abfrageoperator zuweisen kann. [UInt64]
-* `maxoutputcolumns`(*OptionMaxOutputColumns*): Überschreibt die standardmäßige maximale Anzahl von Spalten, die eine Abfrage erzeugen darf. [Lang]
-* `norequesttimeout`(*OptionNoRequestTimeout*): Aktiviert das Festlegen des Anforderungstimeouts auf den maximalen Wert. [Boolesche]
-* `notruncation`(*OptionNoTruncation*): Aktiviert das Unterdrücken des Abschneidens der Abfrageergebnisse, die an den Aufrufer zurückgegeben werden. [Boolesche]
-* `push_selection_through_aggregation`(*OptionPushSelectionThroughAggregation*): Wenn true, drücken Sie einfache Auswahl durch Aggregation [Boolean]
-* `query_admin_super_slacker_mode`(*OptionAdminSuperSlackerMode*): Wenn true, delegieren Sie die Ausführung der Abfrage an einen anderen Knoten [Boolean]
-* `query_bin_auto_at`(*QueryBinAutoAt*): Beim Auswerten der bin_auto() Funktion wird der zu verwendende Startwert verwendet. [LiteralExpression]
-* `query_bin_auto_size`(*QueryBinAutoSize*): Beim Auswerten der bin_auto()-Funktion wird der zu verwendende Wert für die Lagerplatzgröße verwendet. [LiteralExpression]
-* `query_cursor_after_default`(*OptionQueryCursorAfterDefault*): Der Standardparameterwert der cursor_after()-Funktion, wenn er ohne Parameter aufgerufen wird. [string]
-* `query_cursor_before_or_at_default`(*OptionQueryCursorBeforeOrAtDefault*): Der Standardparameterwert der cursor_before_or_at()-Funktion, wenn er ohne Parameter aufgerufen wird. [string]
-* `query_cursor_current`(*OptionQueryCursorCurrent*): Überschreibt den Cursorwert, der von den Funktionen cursor_current() oder current_cursor() zurückgegeben wird. [string]
-* `query_cursor_scoped_tables`(*OptionQueryCursorScopedTables*): Liste der Tabellennamen, die auf cursor_after_default . cursor_before_or_at_default (obere Grenze ist optional). [dynamisch]
-* `query_datascope`(*OptionQueryDataScope*): Steuert das Datascope der Abfrage - unabhängig davon, ob die Abfrage auf alle Daten oder nur einen Teil davon zutrifft. ['default', 'all' oder 'hotcache']
-* `query_datetimescope_column`(*OptionQueryDateTimeScopeColumn*): Steuert den Spaltennamen für den Datumszeitbereich der Abfrage (query_datetimescope_to / query_datetimescope_from). [String]
-* `query_datetimescope_from`(*OptionQueryDateTimeScopeFrom*): Steuert den Datumszeitbereich der Abfrage (frühestens) -- wird als automatisch angewendeter Filter nur für query_datetimescope_column (falls definiert) verwendet. [DateTime]
-* `query_datetimescope_to`(*OptionQueryDateTimeScopeTo*): Steuert den Datumszeitbereich der Abfrage (zuletzt) -- wird als automatisch angewendeter Filter nur für query_datetimescope_column verwendet (falls definiert). [DateTime]
-* `query_distribution_nodes_span`(*OptionQueryDistributionNodesSpanSize*): Wenn festgelegt, steuert die Funktionsweise der Unterabfragezusammenführung: Der ausführende Knoten führt eine zusätzliche Ebene in der Abfragehierarchie für jede Untergruppe von Knoten ein. Die Größe der Untergruppe wird durch diese Option festgelegt. [Int]
-* `query_fanout_nodes_percent`(*OptionQueryFanoutNodesPercent*): Der Prozentsatz der Knoten, an die die Ausflüftung sanatausgeführt werden soll. [Int]
-* `query_fanout_threads_percent`(*OptionQueryFanoutThreadsPercent*): Der Prozentsatz der Threads, auf die die Ausführung fanouten soll. [Int]
-* `query_language`(*OptionQueryLanguage*): Steuert, wie der Abfragetext interpretiert werden soll. ['csl','kql' oder 'sql']
-* `query_max_entities_in_union`(*OptionMaxEntitiesToUnion*): Überschreibt die standardmäßige maximale Anzahl von Spalten, die eine Abfrage erzeugen darf. [Lang]
-* `query_now`(*OptionQueryNow*): Überschreibt den datetime-Wert, der von der now(0s)-Funktion zurückgegeben wird. [DateTime]
-* `query_python_debug`(*OptionDebugPython*): Wenn festgelegt, generieren Sie python debug query für den aufgezählten Python-Knoten (Standard zuerst). [Booleleoder oder Int]
-* `query_results_apply_getschema`(*OptionQueryResultsApplyGetSchema*): Wenn festgelegt, ruft das Schema der einzelnen Tabellendaten in den Ergebnissen der Abfrage anstelle der Daten selbst ab. [Boolesche]
-* `query_results_cache_max_age`(*OptionQueryResultsCacheMaxAge*): Wenn positiv, steuert das maximale Alter der zwischengespeicherten Abfrageergebnisse, die Kusto zurückgeben darf [TimeSpan]
-* `query_results_progressive_row_count`(*OptionProgressiveQueryMinRowCountPerUpdate*): Hinweis für Kusto, wie viele Datensätze in jeder Aktualisierung gesendet werden sollen (wird nur wirksam, wenn OptionResultsProgressiveEnabled gesetzt ist)
-* `query_results_progressive_update_period`(*OptionProgressiveProgressReportPeriod*): Hinweis für Kusto, wie oft Fortschrittsframes gesendet werden (wird nur wirksam, wenn OptionResultsProgressiveEnabled gesetzt ist)
-* `query_shuffle_broadcast_join`(*ShuffleBroadcastJoin*): Aktiviert das Shuffling über Broadcast-Join.
-* `query_take_max_records`(*OptionTakeMaxRecords*): Ermöglicht das Beschränken von Abfrageergebnissen auf diese Anzahl von Datensätzen. [Lang]
-* `queryconsistency`(*OptionQueryConsistency*): Steuert die Abfragekonsistenz. ['strongconsistency' oder 'normalconsistency' oder 'weakconsistency']
-* `request_callout_disabled`(*OptionRequestCalloutDisabled*): Wenn angegeben, gibt die Anforderung an, dass sie nicht an einen vom Benutzer bereitgestellten Dienst aufrufen kann. [Boolesche]
-* `request_description`(*OptionRequestDescription*): Beliebiger Text, den der Autor der Anforderung als Anforderungsbeschreibung einfügen möchte. [String]
-* `request_external_table_disabled`(*OptionRequestExternalTableDisabled*): Wenn angegeben, gibt die Anforderung an, dass der Code in der ExternalTable nicht aufgerufen werden kann. [Boolesche]
-* `request_readonly`(*OptionRequestReadOnly*): Wenn angegeben, gibt an, dass die Anforderung nichts schreiben kann. [Boolesche]
-* `request_remote_entities_disabled`(*OptionRequestRemoteEntitiesDisabled*): Wenn angegeben, gibt die Anforderung an, dass die Anforderung nicht auf entfernte Datenbanken und Cluster zugreifen kann. [Boolesche]
-* `request_sandboxed_execution_disabled`(*OptionRequestSandboxedExecutionDisabled*): Wenn angegeben, gibt die Anforderung an, dass die Anforderung keinen Code in der Sandbox aufrufen kann. [Boolesche]
-* `results_progressive_enabled`(*OptionResultsProgressiveEnabled*): Wenn festgelegt, aktiviert den progressiven Abfragestream
-* `servertimeout`(*OptionServerTimeout*): Überschreibt das Standardanforderungstimeout. [TimeSpan]
-* `truncationmaxrecords`(*OptionTruncationMaxRecords*): Überschreibt die standardmäßige maximale Anzahl von Datensätzen, die eine Abfrage an den Aufrufer zurückgeben darf (Abschneiden). [Lang]
-* `truncationmaxsize`(*OptionTruncationMaxSize*): Überschreibt die maximale Datengröße von dfefault, die eine Abfrage an den Aufrufer zurückgeben darf (Abschneiden). [Lang]
-* `validate_permissions`(*OptionValidatePermissions*): Überprüft die Berechtigungen des Benutzers zum Ausführen der Abfrage und führt die Abfrage nicht selbst aus. [Boolesche]
+* `debug_query_externaldata_projection_fusion_disabled`(*Optiondebugquerydisableexternaldataprojectionfusion*): Wenn dieser Wert festgelegt ist, wird die Projektion nicht in den externaldata-Operator integriert. Booleschen
+* `debug_query_fanout_threads_percent_external_data`(*Optiondebugqueryfanoutthreadspercentexternaldata*): der Prozentsatz der Threads, die für externe Datenknoten ausgeführt werden sollen. Wartenden
+* `deferpartialqueryfailures`(*Optiondeferpartialqueryfailure*): Wenn der Wert true ist, werden die Fehler bei partiellen Abfragen von Teil Fehlern als Teil des Resultsets deaktiviert. Booleschen
+* `max_memory_consumption_per_query_per_node`(*Optionmaxmemoryconsumptionperquerypernode*): überschreibt die maximale Standardgröße des Arbeitsspeichers, die eine gesamte Abfrage pro Knoten zuordnen kann. UInt64
+* `maxmemoryconsumptionperiterator`(*Optionmaxmemoryconsumptionperiterator*): überschreibt die standardmäßige maximale Speichermenge, die ein Abfrage Operator zuordnen kann. UInt64
+* `maxoutputcolumns`(*Optionmaxoutputcolumns*): überschreibt die standardmäßige maximale Anzahl von Spalten, die von einer Abfrage erzeugt werden dürfen. Lange
+* `norequesttimeout`(*Optionnorequesttimeout*): ermöglicht das Festlegen des Anforderungs Timeouts auf den maximalen Wert. Booleschen
+* `notruncation`(*Optionnotrunation*): ermöglicht das Abschneiden der Abrufergebnisse der Abfrageergebnisse, die an den Aufrufer zurückgegeben werden. Booleschen
+* `push_selection_through_aggregation`(*Optionpushselectiondurchsatz Aggregation*): bei "true" wird eine einfache Auswahl über die Aggregation durchlaufen [Boolean]
+* `query_admin_super_slacker_mode`(*Optionadminsuperslackermode*): bei "true" wird die Ausführung der Abfrage an einen anderen Knoten delegiert [Boolean]
+* `query_bin_auto_at`(*Querybinautoat*): der zu verwendende Startwert beim Auswerten der bin_auto ()-Funktion. [Literalexpression]
+* `query_bin_auto_size`(*Querybinautosize*): bei der Auswertung der bin_auto ()-Funktion wird der Wert für die bin-Größe verwendet. [Literalexpression]
+* `query_cursor_after_default`(*Optionquerycurrsorafterdefault*): der Standardparameter Wert der cursor_after ()-Funktion, wenn Sie ohne Parameter aufgerufen wird. [string]
+* `query_cursor_before_or_at_default`(*Optionquerycurrsorbeforeoratdefault*): der Standardparameter Wert der cursor_before_or_at ()-Funktion, wenn Sie ohne Parameter aufgerufen wird. [string]
+* `query_cursor_current`(*Optionquerycursorcurrent*): überschreibt den Cursor Wert, der von den Funktionen "cursor_current ()" oder "current_cursor ()" zurückgegeben wird. [string]
+* `query_cursor_scoped_tables`(*Optionquerycurrsorscopedtables*): Liste der Tabellennamen, die auf cursor_after_default festgelegt werden sollen. cursor_before_or_at_default (obere Grenze ist optional). schem
+* `query_datascope`(*Optionquerydatascope*): steuert das Datascope der Abfrage, unabhängig davon, ob die Abfrage für alle Daten oder nur einen Teil davon gilt. [' default ', ' all ' oder ' hotcache ']
+* `query_datetimescope_column`(*Optionquerydatetimescopecolren*): steuert den Spaltennamen für den DateTime-Gültigkeitsbereich der Abfrage (query_datetimescope_to/query_datetimescope_from). [String]
+* `query_datetimescope_from`(*Optionquerydatetimescopefrom*): steuert den DateTime-Gültigkeitsbereich der Abfrage (frühestens), der als automatisch angewendete Filter für query_datetimescope_column verwendet wird (sofern definiert). [DateTime]
+* `query_datetimescope_to`(*Optionquerydatetimescopeto*): steuert den DateTime-Gültigkeitsbereich der Abfrage (Latest), der als automatisch angewendete Filter auf query_datetimescope_column (sofern definiert) verwendet wird. [DateTime]
+* `query_distribution_nodes_span`(*Optionquerydistributionnodesspansize*): steuert die Art und Weise, wie sich die Unterabfrage Zusammenführung verhält: der ausgeführte Knoten führt in der Abfrage Hierarchie für jede Untergruppe von Knoten eine zusätzliche Ebene ein. die Größe der Untergruppe wird mit dieser Option festgelegt. Wartenden
+* `query_fanout_nodes_percent`(*Optionqueryfanoutnodespercent*): der Prozentsatz der Knoten, an denen die Ausführung verzweigen werden soll. Wartenden
+* `query_fanout_threads_percent`(*Optionqueryfanoutthreadspercent*): der Prozentsatz der Threads, die ausgeführt werden sollen. Wartenden
+* `query_language`(*Optionquerylanguage*): steuert, wie der Abfragetext interpretiert werden soll. [' CSL ', ' kql ' oder ' SQL ']
+* `query_max_entities_in_union`(*Optionmaxentitiestounion*): überschreibt die standardmäßige maximale Anzahl von Spalten, die von einer Abfrage erzeugt werden dürfen. Lange
+* `query_now`(*Optionquerynow*): überschreibt den DateTime-Wert, der von der Now (0s)-Funktion zurückgegeben wird. [DateTime]
+* `query_python_debug`(*Optiondebugpython*): Wenn festgelegt, generieren Sie eine python-debugabfrage für den aufgezählten python-Knoten (Standard zuerst). [Boolean oder int]
+* `query_results_apply_getschema`(*Optionqueryresultapplygetschema*): Wenn dieser Wert festgelegt ist, wird das Schema aller tabellarischen Daten in den Ergebnissen der Abfrage anstelle der eigentlichen Daten abgerufen. Booleschen
+* `query_results_cache_max_age`(*Optionqueryresultscachemaxage*): Wenn dies positiv ist, steuert das maximale Alter der zwischengespeicherten Abfrageergebnisse, die Kusto zurückgeben darf [TimeSpan]
+* `query_results_progressive_row_count`(*Optionprogressivequeryminrowzähltperupdate*): ein Hinweis für Kusto, wie viele Datensätze in jedem Update gesendet werden sollen (wird nur wirksam, wenn optionresultsprogressiveaktivierte festgelegt ist).
+* `query_results_progressive_update_period`(*Optionprogressiveprogressreportperiod*): Hinweis für Kusto, wie oft Status Rahmen gesendet werden sollen (wird nur wirksam, wenn optionresultsprogressiveaktivierte festgelegt ist)
+* `query_shuffle_broadcast_join`(*Shufflebroadcastjoin*): ermöglicht das herunter-und durchlaufen von Broadcast Joins.
+* `query_take_max_records`(*Optiontakemaxrecords*): ermöglicht das Einschränken von Abfrage Ergebnissen auf diese Anzahl von Datensätzen. Lange
+* `queryconsistency`(*Optionquerykonsistenz*): steuert die Abfrage Konsistenz. [' strongkonsistenz ' oder ' normalkonsistenz ' oder ' weakkonsistenz ']
+* `request_callout_disabled`(*Optionrequestcalloutdeaktiviert*): Wenn angegeben, gibt an, dass die Anforderung einen vom Benutzer bereitgestellten Dienst nicht aufrufen kann. Booleschen
+* `request_description`(*Optionrequestdescription*): beliebiger Text, den der Autor der Anforderung als Anforderungsbeschreibung einschließen möchte. [String]
+* `request_external_table_disabled`(*Optionrequestexternaltabledeaktiviert*): gibt an, dass die Anforderung keinen Code in der externaltable aufrufen kann, wenn Sie angegeben ist. Booleschen
+* `request_readonly`(*Optionrequestread only*): Wenn angegeben, gibt an, dass die Anforderung nichts schreiben darf. Booleschen
+* `request_remote_entities_disabled`(*Optionrequestremoteentitiesdeaktiviert*): Wenn angegeben, gibt an, dass die Anforderung nicht auf Remote Datenbanken und Cluster zugreifen kann. Booleschen
+* `request_sandboxed_execution_disabled`(*Optionrequestsandboxedexecutiondeaktiviert*): gibt an, dass die Anforderung keinen Code in der Sandbox aufrufen kann, wenn Sie angegeben ist. Booleschen
+* `results_progressive_enabled`(*Optionresultsprogressiveaktiviert*): Wenn festgelegt, wird der Progressive Abfrage Datenstrom aktiviert.
+* `servertimeout`(*Optionservertimeout*): überschreibt das standardmäßige Anforderungs Timeout. TimeSpan
+* `truncationmaxrecords`(*Optiontruncationmaxrecords*): überschreibt die standardmäßige maximale Anzahl von Datensätzen, die eine Abfrage an den Aufrufer zurückgeben darf (Abschneiden). Lange
+* `truncationmaxsize`(*Optiontruncationmaxsize*): überschreibt die standardmäßige maximale Datengröße, die eine Abfrage an den Aufrufer zurückgeben darf (Abschneiden). Lange
+* `validate_permissions`(*Optionvalidateberechtigungen*): überprüft die Berechtigungen des Benutzers, um die Abfrage auszuführen, und führt die Abfrage nicht selbst aus. Booleschen
 

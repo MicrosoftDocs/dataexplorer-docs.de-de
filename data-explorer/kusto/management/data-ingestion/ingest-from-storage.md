@@ -1,5 +1,5 @@
 ---
-title: 'Der Befehl ". infassungs into" (Daten aus dem Speicher abrufen): Azure Daten-Explorer | Microsoft-Dokumentation'
+title: 'Kusto. Einzug in den Befehl (Daten aus dem Speicher abrufen): Azure-Daten-Explorer'
 description: In diesem Artikel wird der Befehl zum Erfassen von Daten in Azure Daten-Explorer beschrieben (Pull Data from Storage).
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 05d62aaa7b123f7f6d02b784402fd06335e155b2
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: fcab02ee032d1009cf31e36963c44cc6b12358e3
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373425"
+ms.locfileid: "83382011"
 ---
 # <a name="the-ingest-into-command-pull-data-from-storage"></a>Der. infassungs into-Befehl (Pull Data aus dem Speicher)
 
@@ -45,7 +45,7 @@ Daten werden an die Tabelle angehängt, ohne dass sich dies auf vorhandene Daten
 Das Ergebnis des Befehls ist eine Tabelle mit so vielen Datensätzen, wie Daten-Shards ("Extents") vom Befehl generiert werden.
 Wenn keine datenshards generiert wurden, wird ein einzelner Datensatz mit einer leeren (Nullwert-) Block-ID zurückgegeben.
 
-|Name       |type      |Beschreibung                                                                |
+|Name       |Typ      |Beschreibung                                                                |
 |-----------|----------|---------------------------------------------------------------------------|
 |Extentid   |`guid`    |Der eindeutige Bezeichner für den Daten-Shard, der durch den Befehl generiert wurde.|
 |Itemloaded |`string`  |Mindestens ein Speicher Artefakt, das mit diesem Datensatz verknüpft ist.             |

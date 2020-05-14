@@ -1,5 +1,5 @@
 ---
-title: 'Richtlinien Verwaltung für die streamingansung: Azure Daten-Explorer | Microsoft-Dokumentation'
+title: Verwaltungsrichtlinien Verwaltung für Kusto-Streaming-Azure Daten-Explorer
 description: In diesem Artikel wird die Richtlinien Verwaltung für die Streaminglösung in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 76844b764a8e21629c7d936f4c269d7d3ab1ec8c
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 1c3ce0c0d383d07375333b08de336503d1578b1a
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373331"
+ms.locfileid: "83381994"
 ---
 # <a name="streaming-ingestion-policy-management"></a>Richtlinien Verwaltung für die streamingansung
 
@@ -34,7 +34,7 @@ Der `.show policy streamingingestion` Befehl zeigt die Richtlinie für die strea
 
 Dieser Befehl gibt eine Tabelle mit den folgenden Spalten zurück:
 
-|Spalte    |type    |Beschreibung
+|Spalte    |Typ    |Beschreibung
 |---|---|---
 |PolicyName|`string`|Der Richtlinien Name: streamingingestionpolicy
 |EntityName|`string`|Datenbank-oder Tabellenname
@@ -53,7 +53,7 @@ Dieser Befehl gibt eine Tabelle mit den folgenden Spalten zurück:
 
 ### <a name="streaming-ingestion-policy-object"></a>Richtlinien Objekt für die streamingerfassung
 
-|Eigenschaft  |type    |Beschreibung                                                       |
+|Eigenschaft  |Typ    |Beschreibung                                                       |
 |----------|--------|------------------------------------------------------------------|
 |"Zahlofrowstores" |`int`  |Die Anzahl der Zeilen Speicher, die der Entität zugewiesen sind.|
 |Versiesageintervallimit|`TimeSpan?`|Optionales Limit für die Intervalle zwischen versiegelvorgängen in der Tabelle. Der gültige Bereich liegt zwischen 1 und 24 Stunden. Standardwert: 24 Stunden.|

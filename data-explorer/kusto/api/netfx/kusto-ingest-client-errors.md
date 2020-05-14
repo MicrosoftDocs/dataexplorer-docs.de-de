@@ -1,5 +1,5 @@
 ---
-title: 'Kusto. inerfassungs-Fehler und Ausnahmen: Azure Daten-Explorer'
+title: 'Kusto. Erfassungs Fehler & Ausnahmen: Azure Daten-Explorer'
 description: In diesem Artikel werden Kusto. inerfassungs Fehler und Ausnahmen in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 4af09c0b29b77edd7a4e62c7a6abbbae7e918610
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 97798fa62d588769636966c7155dc5f398bd001a
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373661"
+ms.locfileid: "83382317"
 ---
 # <a name="kustoingest-errors-and-exceptions"></a>Kusto. Erfassungs Fehler und Ausnahmen
 Jeder Fehler während der Erfassungs Behandlung auf der Clientseite wird durch eine c#-Ausnahme angegeben.
@@ -107,9 +107,9 @@ Wird ausgelöst, wenn keine Warteschlangen vom Datenverwaltung Cluster zurückge
 
 Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
 
-|Feldname |type     |Bedeutung
+|Feldname |Typ     |Bedeutung
 |-----------|---------|------------------------------|
-|Fehler      | Zeichenfolge  | Der Fehler, der beim Versuch aufgetreten ist, Warteschlangen aus der DM abzurufen.
+|Fehler      | String  | Der Fehler, der beim Versuch aufgetreten ist, Warteschlangen aus der DM abzurufen.
                             
 Nur relevant, wenn der in der [Warteschlange](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)befindliche Erfassungs Client verwendet wird.
 Während des Erfassungs Vorgangs werden mehrere Versuche unternommen, die mit der DM verknüpften Azure-Warteschlangen abzurufen. Wenn diese Versuche fehlschlagen, wird die Ausnahme, die den Grund für den Fehler enthält, im Feld "Error" ausgelöst. Möglicherweise wird auch eine innere Ausnahme im Feld "InnerException" ausgelöst.
@@ -121,9 +121,9 @@ Wird ausgelöst, wenn keine BLOB-Container vom Datenverwaltung Cluster zurückge
 
 Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
 
-|Feldname   |type     |Bedeutung       
+|Feldname   |Typ     |Bedeutung       
 |-------------|---------|------------------------------|
-|Kustoendpoint| Zeichenfolge  | Der Endpunkt der relevanten DM
+|Kustoendpoint| String  | Der Endpunkt der relevanten DM
                             
 Nur relevant, wenn der in der [Warteschlange](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)befindliche Erfassungs Client verwendet wird.  
 Beim Erfassen von Quellen, die sich noch nicht in einem Azure-Container befinden (z. b. Dateien, DataReader oder Stream), werden die Daten zur Erfassung in ein temporäres BLOB hochgeladen. Diese Ausnahme wird ausgelöst, wenn keine Container gefunden werden, in die die Daten hochgeladen werden.
@@ -134,9 +134,9 @@ Wird ausgelöst, wenn eine Erfassungs Eigenschaft mehrmals konfiguriert ist.
 
 Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
 
-|Feldname   |type     |Bedeutung       
+|Feldname   |Typ     |Bedeutung       
 |-------------|---------|------------------------------------|
-|PropertyName | Zeichenfolge  | Der Name der doppelten Eigenschaft.
+|PropertyName | String  | Der Name der doppelten Eigenschaft.
                             
 ### <a name="postmessagetoqueuefailedexception"></a>Postmessageto queuefailedexception
 
@@ -144,10 +144,10 @@ Wird ausgelöst, wenn eine Nachricht an die Warteschlange zurückgestellt wird.
 
 Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
 
-|Feldname   |type     |Bedeutung       
+|Feldname   |Typ     |Bedeutung       
 |-------------|---------|---------------------------------|
-|Queueuri     | Zeichenfolge  | Der URI der Warteschlange.
-|Fehler        | Zeichenfolge  | Die Fehlermeldung, die generiert wurde, während versucht wurde, in die Warteschlange zu schreiben.
+|Queueuri     | String  | Der URI der Warteschlange.
+|Fehler        | String  | Die Fehlermeldung, die generiert wurde, während versucht wurde, in die Warteschlange zu schreiben.
                             
 Nur relevant, wenn der in der [Warteschlange](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient)befindliche Erfassungs Client verwendet wird.  
 Der in die Warteschlange eingereihte Erfassungs Client erfasst Daten, indem er eine Nachricht in die relevante Azure-Warteschlange hochlädt. Wenn ein Post-Fehler auftritt, wird die Ausnahme ausgelöst. Sie enthält den Warteschlangen-URI, den Grund für den Fehler im Feld "Error" und möglicherweise eine innere Ausnahme im Feld "InnerException".
@@ -186,9 +186,9 @@ Wird ausgelöst, wenn eine Erfassungs Quelle zu groß ist.
 
 Basisklasse: ingestcliumtexception
 
-|Feldname   |type     |Bedeutung       
+|Feldname   |Typ     |Bedeutung       
 |-------------|---------|-----------------------|
-|Size         | long    | Die Größe der Erfassungs Quelle
+|Größe         | long    | Die Größe der Erfassungs Quelle
 |MaxSize      | long    | Die maximal zulässige Größe für die Erfassung.
 
 Wenn eine Erfassungs Quelle die maximale Größe von 4 GB überschreitet, wird die Ausnahme ausgelöst. Die Größen Validierung kann durch das- `IgnoreSizeLimit` Flag in der [ingestionproperties-Klasse](kusto-ingest-client-reference.md#class-kustoingestionproperties)überschrieben werden. Es wird jedoch nicht empfohlen, [einzelne Quellen, die größer als 1 GB](about-kusto-ingest.md#ingestion-best-practices)sind, zu erfassen.
@@ -217,7 +217,7 @@ Wird ausgelöst, wenn während einer Erfassung mindestens ein Fehler auftritt.
 
 Basisklasse: [AggregateException](https://msdn.microsoft.com/library/system.aggregateexception(v=vs.110).aspx)
 
-|Feldname      |type                             |Bedeutung       
+|Feldname      |Typ                             |Bedeutung       
 |----------------|---------------------------------|-----------------------|
 |Ingestionerrors | IList<IngestClientException>    | Die Fehler, die auftreten, wenn versucht wird, zu erfassen, und die damit verbundenen Quellen
 |Isglobalerror   | bool                            | Gibt an, ob die Ausnahme für alle Quellen aufgetreten ist.

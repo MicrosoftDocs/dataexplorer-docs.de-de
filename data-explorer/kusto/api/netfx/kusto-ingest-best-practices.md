@@ -1,5 +1,5 @@
 ---
-title: Kusto-Erfassungs Client Bibliothek-bewährte Methoden-Azure Daten-Explorer
+title: Bewährte Methoden für die Erfassung von Client Bibliotheken in Kusto-Azure Daten-Explorer
 description: In diesem Artikel werden bewährte Methoden für die Kusto-Erfassungs Client Bibliothek beschrieben.
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/16/2019
-ms.openlocfilehash: 615bb1ef9400f3671b88e2108d4e6cad0469978b
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: d02d030a6deb468a4804c68965466e1917858be9
+ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373678"
+ms.locfileid: "83382334"
 ---
 # <a name="kusto-ingest-client-library---best-practices"></a>Kusto-Erfassungs Client Bibliothek-bewährte Methoden
 
