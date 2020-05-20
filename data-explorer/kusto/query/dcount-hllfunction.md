@@ -1,5 +1,5 @@
 ---
-title: dcount_hll ()-Azure Daten-Explorer | Microsoft-Dokumentation
+title: dcount_hll ()-Azure Daten-Explorer
 description: In diesem Artikel wird dcount_hll () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/15/2019
-ms.openlocfilehash: d4a76a30526f5fecbafafd735cf72de92aae7644
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 1b1b0c2313f32044a7988e0992c00786885ce2aa
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225189"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550298"
 ---
 # <a name="dcount_hll"></a>dcount_hll()
 
-Berechnet die DCount aus HLL-Ergebnissen (die von [HLL](hll-aggfunction.md) oder [hll_merge](hll-merge-aggfunction.md)generiert wurden).
+Berechnet den DCount-Wert aus HLL-Ergebnissen (die von [HLL](hll-aggfunction.md) oder [hll_merge](hll-merge-aggfunction.md)generiert wurden).
 
 Erfahren Sie mehr über den [zugrunde liegenden Algorithmus (*H*yper*L*og*l*OG) und die Schätzung der Schätzung](dcount-aggfunction.md#estimation-accuracy).
 

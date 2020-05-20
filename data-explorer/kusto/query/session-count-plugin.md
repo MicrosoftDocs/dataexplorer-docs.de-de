@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6a9596b71afabe1e80e866fef7f2a22f6b288631
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 1e173dcba48e8748562bad61e0f16786e957ca83
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372407"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550553"
 ---
 # <a name="session_count-plugin"></a>session_count-Plug-In
 
@@ -31,11 +31,11 @@ T | evaluate session_count(id, datetime_column, startofday(ago(30d)), startofday
 
 * *T*: der tabellarische Eingabe Ausdruck.
 * *IdColumn*: der Name der Spalte mit ID-Werten, die die Benutzeraktivität darstellen. 
-* *Timelinecolren*: der Name der Spalte, die die Zeitachse darstellt.
+* *Timelinecolumzun*: der Name der Spalte, die die Zeitachse darstellt.
 * *Start*: Skalar mit dem Wert des Start Zeitraums der Analyse.
 * *End*: Skalar mit dem Wert des endzeitraums der Analyse.
 * *Bin*: skalare konstanter Wert der Sitzungs Analyseschritt Zeitraum.
-* *Lookbackwindow*: skalare Konstante Wert, der den Sitzungs Such Zeitraum darstellt. Wenn die ID von `IdColumn` in einem Zeitfenster innerhalb von angezeigt `LookBackWindow` wird, wird die Sitzung als vorhanden angesehen, wenn dies nicht der Fall ist. die Sitzung wird als neu eingestuft.
+* *Lookbackwindow*: skalare Konstante Wert, der den Sitzungs Such Zeitraum darstellt. Wenn die ID von `IdColumn` in einem Zeitfenster in angezeigt wird `LookBackWindow` , wird die Sitzung als eine vorhandene Sitzung betrachtet. Wenn die ID nicht angezeigt wird, gilt die Sitzung als neu.
 * *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, in denen die Berechnung der Sitzungs Anzahl in Slice ist.
 
 **Rückgabe**
@@ -51,14 +51,13 @@ Das Ausgabe Tabellen Schema ist:
 
 **Beispiele**
 
-
-Für das Beispiel machen wir Daten deterministisch: eine Tabelle mit zwei Spalten:
+In diesem Beispiel sind die Daten deterministisch, und wir verwenden eine Tabelle mit zwei Spalten:
 - Zeitachse: eine laufende Zahl zwischen 1 und 10.000
 - ID: ID des Benutzers von 1 bis 50
 
-`Id`wird am bestimmten Slot angezeigt, `Timeline` Wenn es sich um einen unter Teiler von handelt `Timeline` (Timeline% ID = = 0).
+`Id`wird an einem bestimmten `Timeline` Slot angezeigt, wenn es sich um einen unter Teiler von handelt `Timeline` (Timeline% ID = = 0).
 
-Dies bedeutet, dass das Ereignis mit `Id==1` an jedem `Timeline` Slot, Ereignis mit `Id==2` an jedem zweiten `Timeline` Slot usw. angezeigt wird.
+Ein Ereignis mit `Id==1` wird an jedem `Timeline` Slot, einem Ereignis mit `Id==2` jedem zweiten `Timeline` Slot usw. angezeigt.
 
 Im folgenden finden Sie einige 20 Zeilen der Daten:
 

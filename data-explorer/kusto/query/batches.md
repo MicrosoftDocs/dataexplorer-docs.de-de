@@ -1,6 +1,6 @@
 ---
-title: Batches - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden Batches in Azure Data Explorer beschrieben.
+title: 'Batches: Azure-Daten-Explorer'
+description: Dieser Artikel beschreibt Batches in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,25 +8,25 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: bd695a1e7ffd9980de2750d38ad9538eeb877538
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: e5a38d53fb9b28fc7da0ddf71132e3a047e8188e
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518019"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550332"
 ---
 # <a name="batches"></a>Batches
 
-Eine Abfrage kann mehrere tabellentabellarische Ausdrucksanweisungen enthalten, sofern`;`sie durch ein Semikolon ( ) begrenzt sind. Die Abfrage gibt dann mehrere tabellarische Ergebnisse zurück, die von den Tabellenausdrucksanweisungen erzeugt und entsprechend der Reihenfolge der Anweisungen im Abfragetext sortiert werden.
+Eine Abfrage kann mehrere tabellarische Ausdrucks Anweisungen enthalten, solange Sie durch ein Semikolon () getrennt sind `;` . Die Abfrage gibt dann mehrere tabellarische Ergebnisse zurück. Die Ergebnisse werden von den Anweisungen für tabellarische Ausdrücke erzeugt und entsprechend der Reihenfolge der Anweisungen im Abfragetext sortiert.
 
-Die folgende Abfrage erzeugt z. B. zwei Tabellenergebnisse. Benutzer-Agent-Tools können dann diese Ergebnisse mit`Count of events in Florida` dem `Count of events in Guam`entsprechenden Namen anzeigen, der jedem (bzw. ) zugeordnet ist.
+Die folgende Abfrage erzeugt beispielsweise zwei tabellarische Ergebnisse. Benutzer-Agent-Tools können diese Ergebnisse dann mit dem entsprechenden Namen anzeigen, der den einzelnen ( `Count of events in Florida` `Count of events in Guam` bzw.) zugeordnet ist.
 
 ```kusto
 StormEvents | where State == "FLORIDA" | count | as ['Count of events in Florida'];
 StormEvents | where State == "GUAM" | count | as ['Count of events in Guam']
 ```
 
-Batch ist besonders nützlich für Szenarien, in denen es eine gemeinsame Berechnung gibt, die von mehreren Unterabfragen gemeinsam genutzt wird, z. B. für Dashboards. Wenn die allgemeine Berechnung komplex ist, wird empfohlen, die Abfrage so zu konstruieren, dass sie nur einmal ausgeführt wird, indem die [Funktion materialize()](./materializefunction.md)verwendet wird:
+Batch ist nützlich für Szenarien, in denen eine gängige Berechnung von mehreren Unterabfragen, z. b. für Dashboards, gemeinsam genutzt wird. Wenn die allgemeine Berechnung Komplex ist, verwenden Sie die [Materialize ()-Funktion](./materializefunction.md) , und erstellen Sie die Abfrage so, dass Sie nur einmal ausgeführt wird:
 
 ```kusto
 let m = materialize(StormEvents | summarize n=count() by State);
@@ -35,4 +35,4 @@ m | where n < 10
 ```
 
 Notizen:
-* Bevorzugen Sie [`materialize`](materializefunction.md) Batching und über die Verwendung des [Gabel-Operators](forkoperator.md).
+* Ziehen Sie die Batch Verarbeitung und [`materialize`](materializefunction.md) die Verwendung des [Fork-Operators](forkoperator.md)vor.

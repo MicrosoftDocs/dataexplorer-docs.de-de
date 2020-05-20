@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 714c6c15443420abbc973593acb2f311a5507dc4
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 28a44365d6d79bf30ec188146d989f2af2ad12c1
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225665"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550655"
 ---
 # <a name="array_shift_right"></a>array_shift_right()
 
@@ -21,17 +21,17 @@ ms.locfileid: "83225665"
 
 **Syntax**
 
-`array_shift_right(`*arr*, *shift_count* [, *fill_value* ]`)`
+`array_shift_right(`*`arr`*, *`shift_count`* [, *`fill_value`* ]`)`
 
 **Argumente**
 
-* *arr*: das zu teilende Eingabe Array muss ein dynamisches Array sein.
-* *shift_count*: ganze Zahl, die die Anzahl der Positionen angibt, die Array Elemente nach rechts verschoben werden. Wenn der Wert negativ ist, werden die Elemente nach links verschoben.
-* *fill_value*: Skalarwert, der zum Einfügen von Elementen anstelle der verschobenen und entfernten Elemente verwendet wird. Standard: NULL-Wert oder eine leere Zeichenfolge (abhängig vom *arr* -Typ).
+* *`arr`*: Das Eingabe Array, das geteilt werden soll, muss ein dynamisches Array sein.
+* *`shift_count`*: Ganze Zahl, die die Anzahl der Positionen angibt, die Array Elemente nach rechts verschoben werden. Wenn der Wert negativ ist, werden die Elemente nach links verschoben.
+* *`fill_value`*: Skalarwert, der zum Einfügen von Elementen anstelle der verschobenen und entfernten Elemente verwendet wird. Standard: NULL-Wert oder eine leere Zeichenfolge (abhängig vom *arr* -Typ).
 
 **Rückgabe**
 
-Dynamisches Array, das die gleiche Menge an Elementen wie im ursprünglichen Array enthält, wobei jedes Element gemäß *shift_count*verschoben wurde. Neue Elemente, die anstelle der entfernten-Elemente hinzugefügt werden, haben den Wert *fill_value*.
+Dynamisches Array, das die gleiche Menge an Elementen wie im ursprünglichen Array enthält. Jedes Element wurde nach verschoben *`shift_count`* . Neue Elemente, die anstelle der entfernten Elemente hinzugefügt werden, haben den Wert *`fill_value`* .
 
 **Siehe auch**
 
@@ -64,7 +64,6 @@ Dynamisches Array, das die gleiche Menge an Elementen wie im ursprünglichen Arr
     |r|arr_shift|
     |---|---|
     |[1, 2, 3, 4, 5]|[-1,-1, 1, 2, 3]|
-
 
 * Verschieben nach links um zwei Positionen mithilfe eines negativen shift_count Werts:
 

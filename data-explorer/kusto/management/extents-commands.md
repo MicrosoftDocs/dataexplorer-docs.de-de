@@ -1,6 +1,6 @@
 ---
-title: Verwaltung von Ausdehnungen (Datenshards) - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt die Verwaltung von Ausdehnungen (Datenshards) in Azure Data Explorer.
+title: 'Verwaltung von Blöcken (datenshards): Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird die Verwaltung von Blöcken (Data Shards) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,93 +8,93 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: e94b830809bf079e612b477292d00d2dbe85e60e
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.openlocfilehash: ca66beaad41796dff38a5bd5ce1fad2e0f41fc72
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744728"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550502"
 ---
-# <a name="extents-data-shards-management"></a>Extents (Data Shards) Management
+# <a name="extents-data-shards-management"></a>Verwaltung von Blöcken (datenshards)
 
-Datenshards werden in Kusto **als Ausdehnungen** bezeichnet, und alle Befehle verwenden "Extent" oder "Extents" als Synonym.
+Datenshards werden in Kusto als **Blöcke** bezeichnet, und alle Befehle verwenden "Block" oder "Blöcke" als Synonym.
 
-## <a name="show-extents"></a>.zeigen Ausdehnungen
+## <a name="show-extents"></a>. Anzeigen von Blöcken
 
-**Clusterebene**
+**Cluster Ebene**
 
 `.show` `cluster` `extents` [`hot`]
 
-Zeigt Informationen zu Ausdehnungen (Datenshards) an, die im Cluster vorhanden sind.
-Wenn `hot` angegeben ist - zeigt nur Ausdehnungen an, die sich voraussichtlich im heißen Cache befinden.
+Zeigt Informationen zu Blöcken (datenshards) an, die im Cluster vorhanden sind.
+Wenn `hot` angegeben wird, werden nur Blöcke angezeigt, die im aktiven Cache erwartet werden.
 
 **Datenbankebene**
 
-`.show``database` *DatabaseName* `extents` `(`[*ExtentId1*`,`... `,` *ExtentIdN*`)`]`hot`[`where` `tags` `has`|`contains`|`!has`|`!contains`] [`and` `tags` (`has`|`contains`|`!has`|`!contains`) *Tag1* [ ( ) *Tag2*...]]
+`.show``database` *DatabaseName* `extents` [ `(` *ExtentId1* `,` ... `,` *Extentidn* `)` ] [ `hot` ] [ `where` `tags` ( `has` | `contains` | `!has` | `!contains` ) *Tag1* [ `and` `tags` ( `has` | `contains` | `!has` | `!contains` ) *Tag2*...]]
 
-Zeigt Informationen zu Ausdehnungen (Datenshards) an, die in der angegebenen Datenbank vorhanden sind.
-Wenn `hot` angegeben ist - zeigt nur Ausdehnungen an, die im heißen Cache erwartet werden.
+Zeigt Informationen zu Blöcken (datenshards) an, die in der angegebenen Datenbank vorhanden sind.
+Wenn `hot` angegeben wird, werden nur Blöcke angezeigt, die im aktiven Cache erwartet werden.
 
 **Tabellenebene**
 
-`.show``table` *Tabellenname* `extents` `(`[*ExtentId1*`,`... `,` *ExtentIdN*`)`]`hot`[`where` `tags` `has`|`contains`|`!has`|`!contains`] [`and` `tags` (`has`|`contains`|`!has`|`!contains`) *Tag1* [ ( ) *Tag2*...]]
+`.show``table` *TableName* `extents` [ `(` *ExtentId1* `,` ... `,` *Extentidn* `)` ] [ `hot` ] [ `where` `tags` ( `has` | `contains` | `!has` | `!contains` ) *Tag1* [ `and` `tags` ( `has` | `contains` | `!has` | `!contains` ) *Tag2*...]]
 
-`.show``tables` `,`TableName1 ... *TableName1* `(` `,` *TableNameN* `)` `extents` `(`[*ExtentId1*`,`... `,` *ExtentIdN*`)`]`hot`[`where` `tags` `has`|`contains`|`!has`|`!contains`] [`and` `tags` (`has`|`contains`|`!has`|`!contains`) *Tag1* [ ( ) *Tag2*...]]
+`.show``tables` `(` *TableName1* `,` ... `,` *TableNameN* `)` `extents`[ `(` *ExtentId1* `,` . `,` .. *Extentidn* `)` ] [ `hot` ] [ `where` `tags` ( `has` | `contains` | `!has` | `!contains` ) *Tag1* [ `and` `tags` ( `has` | `contains` | `!has` | `!contains` ) *Tag2*...]]
 
-Zeigt Informationen zu Ausdehnungen (Datenshards) an, die in den angegebenen Tabellen vorhanden sind (die Datenbank wird aus dem Kontext des Befehls übernommen).
-Wenn `hot` angegeben ist - zeigt nur Ausdehnungen an, die im heißen Cache erwartet werden.
+Zeigt Informationen zu Blöcken (datenshards) an, die in der angegebenen Tabelle (n) vorhanden sind (die Datenbank wird aus dem Kontext des Befehls entnommen).
+Wenn `hot` angegeben wird, werden nur Blöcke angezeigt, die im aktiven Cache erwartet werden.
 
 **Hinweise**
 
-* Die Verwendung von Befehlen auf Datenbank- und/oder Tabellenebene ist viel schneller als das Filtern (Hinzufügen) `| where DatabaseName == '...' and TableName == '...'`der Ergebnisse eines Befehls auf Clusterebene.
-* Wenn die optionale Liste der Ausdehnungs-IDs bereitgestellt wird, ist der zurückgegebene Datensatz nur auf diese Erweiterungen beschränkt.
-    * Auch dies ist viel schneller `| where ExtentId in(...)` als das Filtern (Hinzufügen) der Ergebnisse von "bare"-Befehlen.
-* Falls `tags` Filter angegeben werden:
-  * Die zurückgegebene Liste ist auf die Ausdehnungen beschränkt, deren Tags-Auflistung *allen* bereitgestellten Tags-Filtern gehorcht.
-    * Auch dies ist viel schneller `| where Tags has '...' and Tags contains '...'`als das Filtern (Hinzufügen) der Ergebnisse von "bare" Befehlen.
-  * `has`Filter sind Gleichheitsfilter: Ausdehnungen, die nicht mit einem der angegebenen Tags markiert sind, werden herausgefiltert.
-  * `!has`Filter sind Gleichheitsnegativfilter: Ausdehnungen, die mit einem der angegebenen Tags markiert sind, werden herausgefiltert.
-  * `contains`Bei Filtern handelt es sich um Talsothringfilter ohne Groß-/Kleinschreibung: Ausdehnungen, die nicht über die angegebenen Zeichenfolgen als Teilzeichenfolge eines ihrer Tags verfügen, werden herausgefiltert. 
-  * `!contains`Bei Filtern handelt es sich um negativer Filter ohne Groß-/Kleinschreibung: Ausdehnungen, die die angegebenen Zeichenfolgen als Teilzeichenfolge eines ihrer Tags aufweisen, werden herausgefiltert. 
+* Die Verwendung von Befehlen auf Datenbank-und/oder Tabellenebene ist wesentlich schneller als das Filtern (hinzufügen `| where DatabaseName == '...' and TableName == '...'` ) der Ergebnisse eines Befehls auf Cluster Ebene.
+* Wenn die optionale Liste der Block-IDs angegeben wird, ist das zurückgegebene DataSet nur auf diese Blöcke beschränkt.
+    * Dies ist viel schneller als das Filtern (hinzufügen `| where ExtentId in(...)` zu) der Ergebnisse von "Bare"-Befehlen.
+* Für den Fall, dass `tags` Filter angegeben werden:
+  * Die zurückgegebene Liste ist auf die Blöcke beschränkt, deren Tags-Auflistung *alle* bereitgestellten Tagfilter befolgt.
+    * Dies ist viel schneller als das Filtern (hinzufügen `| where Tags has '...' and Tags contains '...'` ) der Ergebnisse von "Bare"-Befehlen.
+  * `has`Filter sind Gleichheits Filter: Blöcke, die nicht mit einem der angegebenen Tags gekennzeichnet sind, werden herausgefiltert.
+  * `!has`Filter sind negative Gleichheits Filter: Blöcke, die mit einem der angegebenen Tags gekennzeichnet sind, werden herausgefiltert.
+  * `contains`bei Filtern werden unter Zeichen folgen Filter ohne Beachtung der Groß-/Kleinschreibung beachtet: Blöcke, die die angegebenen Zeichen folgen nicht als Teil Zeichenfolge ihrer Tags aufweisen, werden herausgefiltert. 
+  * `!contains`bei Filtern wird die Groß-/Kleinschreibung von negativen Filtern ohne Berücksichtigung der Groß-/Kleinschreibung beachtet: Blöcke mit den angegebenen Zeichen folgen als Teil Zeichenfolge ihrer Tags werden herausgefiltert. 
   
   * **Beispiele**
-    * Die `E` Ausdehnung in der `aaa` `BBB` Tabelle `ccc` `T` ist mit Tags und gekennzeichnet.
-    * Diese Abfrage `E`gibt zurück: 
+    * `E`Der Block in der Tabelle `T` wird mit den Tags `aaa` und markiert `BBB` `ccc` .
+    * Diese Abfrage gibt Folgendes zurück `E` : 
     
     ```kusto 
     .show table T extents where tags has 'aaa' and tags contains 'bb' 
     ``` 
     
-    * Diese Abfrage *not* wird `E` nicht zurückgegeben (da sie nicht mit `aa`einem Tag markiert ist, der gleich ist):
+    * Diese Abfrage gibt *nicht* zurück `E` (da Sie nicht mit einem Tag gekennzeichnet ist, das entspricht `aa` ):
     
     ```kusto 
     .show table T extents where tags has 'aa' and tags contains 'bb' 
     ``` 
     
-    * Diese Abfrage `E`gibt zurück: 
+    * Diese Abfrage gibt Folgendes zurück `E` : 
     
     ```kusto 
     .show table T extents where tags contains 'aaa' and tags contains 'bb' 
     ``` 
 
-|Ausgabeparameter |type |BESCHREIBUNG 
+|Output-Parameter |Typ |BESCHREIBUNG 
 |---|---|---
-|ExtentId |Guid |ID der Ausdehnung 
-|DatabaseName |String |Datenbank, zu der die Ausdehnung gehört, 
-|TableName |String |Tabelle, zu der Ausdehnungen gehören 
-|MaxCreatedOn |Datetime |Datums-/Uhrzeit, zu dem die Ausdehnung erstellt wurde (für eine zusammengeführte Ausdehnung - das Maximum der Erstellungszeiten zwischen Quellausdehnungen) 
-|OriginalGröße |Double |Originalgröße in Bytes der Ausdehnungsdaten 
-|ExtentSize |Double |Größe der Ausdehnung im Arbeitsspeicher (komprimiert + Index) 
-|CompressedSize |Double |Komprimierte Größe der Ausdehnungsdaten im Arbeitsspeicher 
-|IndexSize |Double |Indexgröße der Ausdehnungsdaten 
-|Blöcke |Long |Menge der Datenblöcke in der Ausdehnung 
-|Segmente |Long |Menge des Datensegments in der Ausdehnung 
-|AssignedDataNodes |String | Veraltet (eine leere Zeichenfolge)
-|LoadedDataNodes |String |Veraltet (eine leere Zeichenfolge)
-|ExtentContainerId |String | ID des Ausdehnungsbehälters ist die Ausdehnung in
-|RowCount |Long |Anzahl der Zeilen in der Ausdehnung
-|MinCreatedOn |Datetime |Datums-/Uhrzeit, zu dem die Ausdehnung erstellt wurde (für eine zusammengeführte Ausdehnung - das Minimum der Erstellungszeiten zwischen Quellausdehnungen) 
-|`Tags`|String|Tags, falls vorhanden, für die Ausdehnung definiert 
+|Extentid |Guid |ID des Wertebereichs 
+|DatabaseName |String |Datenbank, zu der der Block gehört 
+|TableName |String |Tabelle, zu der Blöcke gehören 
+|Maxkreatedon |Datetime |Datum und Uhrzeit, zu der der Block erstellt wurde (für einen zusammengeführten Block: die maximale Erstellungszeit zwischen den Quell Blöcken) 
+|OriginalSize |Double |Ursprüngliche Größe in Byte der Blockdaten 
+|Extentsize |Double |Größe des Wertebereichs im Arbeitsspeicher (komprimiert + Index) 
+|CompressedSize |Double |Komprimierte Größe der Blockdaten im Arbeitsspeicher 
+|IndexSize |Double |Index Größe der Blockdaten 
+|Blöcke |Long |Umfang der Datenblöcke im Block 
+|Segmente |Long |Umfang des Datensegments im Block 
+|Assigneddatanodes |String | Veraltet (leere Zeichenfolge)
+|Loadeddatanodes |String |Veraltet (leere Zeichenfolge)
+|Extentcontainerid |String | ID des Block Blocks, in dem sich der Block befindet
+|RowCount |Long |Zeilen Anzahl im Block
+|Minkreatedon |Datetime |Datum und Uhrzeit der Erstellung des Wertebereichs (für einen zusammengeführten Block: die minimalen Erstellungs Zeiten zwischen den Quell Blöcken) 
+|Tags|String|Tags, sofern vorhanden, für den Block definiert 
  
 **Beispiele**
 
@@ -120,339 +120,378 @@ Wenn `hot` angegeben ist - zeigt nur Ausdehnungen an, die im heißen Cache erwar
 .show tables (TaggingGames1,TaggingGames2) extents where tags has 'tag1' and tags has 'tag2'
 ``` 
  
-## <a name="merge-extents"></a>.merge-Ausdehnungen
+## <a name="merge-extents"></a>. Merge-Blöcke
 
 **Syntax**
 
-`.merge``[async | dryrun]` *TableName* `(` *GUID1* [`,` *GUID2* ...] `)``[with(rebuild=true)]`
+`.merge``[async | dryrun]` *TableName* `(` *guid1* [ `,` *GUID2* ...] `)``[with(rebuild=true)]`
 
-Dieser Befehl führt die Ausdehnungen (siehe: [Extents (Data Shards) Overview](extents-overview.md)) zusammen, die durch ihre IDs in der angegebenen Tabelle angegeben sind.
+Mit diesem Befehl werden die Blöcke zusammengeführt (siehe: [Übersicht über die Blöcke (Daten-Shards)](extents-overview.md)), die durch ihre IDs in der angegebenen Tabelle angegeben werden.
 
-Es gibt 2 Varianten für Mergevorgänge: *Merge* (das Indizes neu erstellt) und *Rebuild* (wodurch die Daten vollständig wieder aufgenommen werden).
+Es gibt zwei Arten von Merge-Vorgängen: *Merge* (bei dem Indizes neu erstellt werden) und *neu erstellen* (wodurch die Daten vollständig wieder hergestellt werden).
 
-* `async`: Der Vorgang wird asynchron ausgeführt - das Ergebnis ist eine Operation `.show operations <operation ID>` ID (GUID), mit der man ausführen kann, um den Status des Befehls & Status anzuzeigen.
-* `dryrun`: Der Vorgang listet nur die Ausdehnungen auf, die zusammengeführt werden sollen, führt sie jedoch nicht zusammen. 
-* `with(rebuild=true)`: Die Ausdehnungen werden neu erstellt (Daten werden neu verwendet) anstatt zusammengeführt (Indizes werden neu erstellt).
+* `async`: Der Vorgang wird asynchron ausgeführt. das Ergebnis ist eine Vorgangs-ID (GUID), die mit dem Befehl ausgeführt werden kann `.show operations <operation ID>` , um den Status & Status des Befehls anzuzeigen.
+* `dryrun`: Mit dem Vorgang werden nur die Blöcke aufgelistet, die zusammengeführt werden sollen, aber Sie werden nicht tatsächlich zusammengeführt. 
+* `with(rebuild=true)`: die Blöcke werden neu erstellt (die Daten werden erneut erstellt) anstatt zusammengeführt (Indizes werden neu erstellt).
 
-**Return-Ausgabe**
+**Ausgabe zurückgeben**
 
-Ausgabeparameter |type |BESCHREIBUNG 
+Output-Parameter |Typ |BESCHREIBUNG 
 ---|---|---
-OriginalExtentId |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für die ursprüngliche Ausdehnung in der Quelltabelle, der mit der Zielausdehnung zusammengeführt wurde. 
-ResultExtentId |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für die Ergebnisausdehnung, die aus den Quellausdehnungen erstellt wurde. Nach einem Fehler - "Fehlgeschlagen" oder "Verlassen".
-Duration |Zeitraum |Der Zeitraum, der zum Abschließen des Zusammenführungsvorgangs benötigte.
+Originalextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den ursprünglichen Block in der Quell Tabelle, der in den Zielblock zusammengeführt wurde. 
+Resultextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den Ergebnis Block, der aus den Quell Blöcken erstellt wurde. Bei Fehler: "failed" oder "abgebrochen".
+Duration |Zeitraum |Der Zeitraum, der für den Abschluss des MERGE-Vorgangs benötigt wird.
 
 **Beispiele**
 
-Erstellt zwei spezifische Ausdehnungen in `MyTable`, die asynchron ausgeführt werden
+Erstellt zwei spezifische Blöcke in neu `MyTable` , die asynchron ausgeführt werden.
 ```kusto
 .merge async MyTable (e133f050-a1e2-4dad-8552-1f5cf47cab69, 0d96ab2d-9dd2-4d2c-a45e-b24c65aa6687) with(rebuild=true)
 ```
 
-Führt zwei spezifische Ausdehnungen in `MyTable`zusammen, die synchron ausgeführt werden
+Führt zwei spezifische Blöcke in zusammen `MyTable` , die synchron ausgeführt werden.
 ```kusto
 .merge MyTable (12345050-a1e2-4dad-8552-1f5cf47cab69, 98765b2d-9dd2-4d2c-a45e-b24c65aa6687)
 ```
 
 **Hinweise**
-- Im Allgemeinen `.merge` sollten Befehle selten manuell ausgeführt werden, und sie werden kontinuierlich automatisch im Hintergrund des Kusto-Clusters ausgeführt (gemäß den [Mergerichtlinien,](mergepolicy.md) die für Tabellen und Datenbanken darin definiert sind).  
-  - Allgemeine Überlegungen zu den Kriterien für die Zusammenführung mehrerer Ausdehnungen zu einer einzigen werden unter [Merge-Richtlinie](mergepolicy.md)dokumentiert.
-- `.merge`Vorgänge haben einen möglichen `Abandoned` Endzustand von (der bei der Ausführung `.show operations` mit der Vorgangs-ID angezeigt werden kann) - dieser Zustand deutet darauf hin, dass die Quellausdehnungen nicht zusammengeführt wurden, da einige der Quellausdehnungen in der Quelltabelle nicht mehr vorhanden sind.
-  - Ein solcher Zustand wird voraussichtlich in Fällen wie:
-     - Die Quellausdehnungen wurden als Teil der Aufbewahrung der Tabelle gelöscht.
-     - Die Quellausdehnungen wurden in eine andere Tabelle verschoben.
-     - Die Quelltabelle wurde vollständig gelöscht oder umbenannt.
+- Im allgemeinen `.merge` sollten Befehle nur selten manuell ausgeführt werden, und Sie werden automatisch im Hintergrund des Kusto-Clusters ausgeführt (entsprechend den für Tabellen und Datenbanken in der Datenbank definierten [Zusammenstellungs Richtlinien](mergepolicy.md) ).  
+  - Allgemeine Überlegungen zu den Kriterien für das Zusammenführen mehrerer Blöcke zu einer einzigen Erweiterung sind unter [mergerichtlinie](mergepolicy.md)dokumentiert.
+- `.merge`Vorgänge haben einen möglichen Endzustand von `Abandoned` (was bei Ausführung `.show operations` mit der Vorgangs-ID angezeigt werden kann): dieser Status weist darauf hin, dass die Quell Blöcke nicht zusammengeführt wurden, da einige der Quell Tabellen nicht mehr in der Quell Tabelle vorhanden sind.
+  - Ein solcher Status sollte in folgenden Fällen auftreten:
+     - Die Quell Blöcke wurden im Rahmen der Beibehaltungs Dauer der Tabelle gelöscht.
+     - Die Quell Blöcke wurden in eine andere Tabelle verschoben.
+     - Die Quell Tabelle wurde vollständig gelöscht oder umbenannt.
 
-## <a name="move-extents"></a>.move-Ausdehnungen
+## <a name="move-extents"></a>Verschiebungs Blöcke verschieben
 
 **Syntax**
 
-`.move`[`async` `extents` `all` `from` ] `table` *SourceTableName* `to` `table` *DestinationTableName*
+`.move`[ `async` ] `extents` `all` `from` `table` *SourceTableName* `to` `table` *DestinationTableName*
 
-`.move`[`async` `extents` `(` ] *GUID1* [`,` *GUID2* ...] `)` `table` *DestinationTableName* *SourceTableName* SourceTableName `to` DestinationTableName `from` `table` 
+`.move`[ `async` ] `extents` `(` *Guid1* [ `,` *GUID2* ...] `)` `from` `table` *SourceTableName* `to` `table` *DestinationTableName* 
 
-`.move`[`async` `extents` `to` `table` ] *DestinationTableName-Abfrage* <| *query*
+`.move`[ `async` ] `extents` `to` `table` *DestinationTableName*-  <|  *Abfrage*
 
-Dieser Befehl wird im Kontext einer bestimmten Datenbank ausgeführt und verschiebt die angegebenen Ausdehnungen aus der Quelltabelle in die Zieltabelle transaktional.
-Erfordert [Die Berechtigung "Tabellenadministrator"](../management/access-control/role-based-authorization.md) für die Quell- und Zieltabellen.
+Dieser Befehl wird im Kontext einer bestimmten Datenbank ausgeführt und verschiebt die angegebenen Werte Blöcke aus der Quell Tabelle in die Ziel Tabelle, die transaktional ist.
+Erfordert die [Table admin-Berechtigung](../management/access-control/role-based-authorization.md) für die Quell-und Ziel Tabellen.
 
-* `async`(optional) gibt an, ob der Befehl asynchron ausgeführt wird (in diesem Fall wird eine Operation ID (Guid) zurückgegeben, und der Status des Vorgangs kann mit dem Befehl [.show operations](operations.md#show-operations) überwacht werden).
-    * Falls diese Option verwendet wird, können die Ergebnisse einer erfolgreichen Ausführung mit dem Befehl [.show operation details](operations.md#show-operation-details) abgerufen werden).
+* `async`(optional) gibt an, ob der Befehl asynchron ausgeführt wird (in diesem Fall wird eine Vorgangs-ID (GUID) zurückgegeben, und der Status des Vorgangs kann mithilfe des Befehls " [. Show Operations](operations.md#show-operations) " überwacht werden.)
+    * Wenn diese Option verwendet wird, können die Ergebnisse einer erfolgreichen Ausführung mit dem Befehl " [Vorgangs Details anzeigen](operations.md#show-operation-details) " abgerufen werden.
 
-Es gibt drei Möglichkeiten, anzugeben, welche Ausdehnungen verschoben werden sollen:
-1. Alle Ausdehnungen einer bestimmten Tabelle sind zu verschieben.
-2. Durch explizite Angabe der Ausdehnungs-IDs in der Quelltabelle.
-3. Durch Bereitstellen einer Abfrage, deren Ergebnisse die Ausdehnungs-IDs in der Quelltabelle(n) angeben.
+Es gibt drei Möglichkeiten, um anzugeben, welche Blöcke verschoben werden sollen:
+1. Alle Blöcke einer bestimmten Tabelle müssen verschoben werden.
+2. Durch explizites angeben der Block-IDs in der Quell Tabelle.
+3. Durch Bereitstellen einer Abfrage, deren Ergebnisse die Block-IDs in den Quell Tabellen angeben.
 
 **Einschränkungen**
-- Sowohl Quell- als auch Zieltabellen müssen sich in der Kontextdatenbank befinden. 
-- Es wird erwartet, dass alle Spalten in der Quelltabelle in der Zieltabelle mit demselben Namen und Datentyp vorhanden sind.
+- Sowohl die Quell-als auch die Ziel Tabelle müssen sich in der Kontext Datenbank befinden. 
+- Es wird erwartet, dass alle Spalten in der Quell Tabelle in der Ziel Tabelle mit demselben Namen und demselben Datentyp vorhanden sind.
 
-**Angeben von Ausdehnungen mit einer Abfrage**
+**Angeben von Blöcken mit einer Abfrage**
 
 ```kusto 
 .move extents to table TableName <| ...query... 
 ```
 
-Die Ausdehnungen werden mithilfe einer Kusto-Abfrage angegeben, die ein Recordset mit einer Spalte namens "ExtentId" zurückgibt. 
+Die Blöcke werden mithilfe einer Kusto-Abfrage angegeben, die ein Recordset mit einer Spalte mit dem Namen "extentid" zurückgibt. 
 
-**Return-Ausgabe** (für Sync-Ausführung)
+**Rückgabe Ausgabe** (für die Synchronisierungs Ausführung)
 
-Ausgabeparameter |type |BESCHREIBUNG 
+Output-Parameter |Typ |BESCHREIBUNG 
 ---|---|---
-OriginalExtentId |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für die ursprüngliche Ausdehnung in der Quelltabelle, die in die Zieltabelle verschoben wurde. 
-ResultExtentId |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für die Ergebnisausdehnung, die von der Quelltabelle in die Zieltabelle verschoben wurde. Nach einem Fehler - "Fehlgeschlagen".
+Originalextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den ursprünglichen Block in der Quell Tabelle, der in die Ziel Tabelle verschoben wurde. 
+Resultextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den Ergebnis Block, der aus der Quell Tabelle in die Ziel Tabelle verschoben wurde. Bei Fehler: "failed".
 Details |Zeichenfolge |Schließt die Fehlerdetails ein, falls der Vorgang fehlschlägt.
 
 **Beispiele**
 
-Verschiebt alle Ausdehnungen in der Tabelle `MyTable` in die Tabelle `MyOtherTable`.
+Verschiebt alle Blöcke in der Tabelle in `MyTable` die Tabelle `MyOtherTable` .
 ```kusto
 .move extents all from table MyTable to table MyOtherTable
 ```
 
-Verschiebt 2 spezifische Ausdehnungen (nach ihrer `MyTable` Ausdehnungs-IDs) von Tabelle zu Tabelle `MyOtherTable`.
+Verschiebt 2 bestimmte Blöcke (durch ihre Block-IDs) von der Tabelle `MyTable` in die Tabelle `MyOtherTable` .
 ```kusto
 .move extents (AE6CD250-BE62-4978-90F2-5CB7A10D16D7,399F9254-4751-49E3-8192-C1CA78020706) from table MyTable to table MyOtherTable
 ```
 
-Verschiebt alle Ausdehnungen`MyTable1`von `MyTable2`2 `MyOtherTable`spezifischen Tabellen ( , ) in die Tabelle .
+Verschiebt alle Blöcke von 2 bestimmten Tabellen ( `MyTable1` , `MyTable2` ) in die-Tabelle `MyOtherTable` .
 ```kusto
 .move extents to table MyOtherTable <| .show tables (MyTable1,MyTable2) extents
 ```
 
 **Beispielausgabe** 
 
-|OriginalExtentId |ResultExtentId| Details
+|Originalextentid |Resultextentid| Details
 |---|---|---
 |e133f050-a1e2-4dad-8552-1f5cf47cab69 |0d96ab2d-9dd2-4d2c-a45e-b24c65aa6687| 
 |cdbeb35b-87ea-499f-b545-defbae091b57 |a90a303c-8a14-4207-8f35-d8ea94ca45be| 
-|4fcb4598-9a31-4614-903c-0c67c286da8c |97aafea1-59ff-4312-b06b-08f42187872f| 
-|2dfdef64-62a3-4950-a130-96b5b1083b5a |0fb7f3da-5e28-4f09-a000-e62eb41592df| 
+|4fcb4598-9a31-4614-903c-0c67c286da8c |97aafea1-59ff-4312-b06b-08F 42187872f| 
+|2dfdef64-62a3-4950-A130-96b5b1083b5a |0F-7F -5e28-4b09-A000-e62eb41592df| 
 
-## <a name="drop-extents"></a>.drop Ausdehnungen
+## <a name="drop-extents"></a>. Drop-Blöcke
 
-Löscht Ausdehnungen aus der angegebenen Datenbank / Tabelle. Dieser Befehl hat mehrere Varianten: In einer Variante werden die zu fallende Ausdehnung durch eine Kusto-Abfrage angegeben, während in den anderen Varianten Ausdehnungen mit einer unten beschriebenen Minisprache angegeben werden. 
+Löscht Blöcke aus der angegebenen Datenbank/Tabelle. Dieser Befehl weist mehrere Varianten auf: in einer Variante werden die Blöcke, die gelöscht werden sollen, durch eine Kusto-Abfrage angegeben, während in den anderen Varianten Blöcke mithilfe einer unten beschriebenen Mini Sprache angegeben werden. 
  
-### <a name="specifying-extents-with-a-query"></a>Angeben von Ausdehnungen mit einer Abfrage
+### <a name="specifying-extents-with-a-query"></a>Angeben von Blöcken mit einer Abfrage
 
-Erfordert [Die Berechtigung "Tabellenadministrator"](../management/access-control/role-based-authorization.md) für jede der Tabellen, deren Ausdehnungen von der bereitgestellten Abfrage zurückgegeben werden.
+Erfordert die [Table admin-Berechtigung](../management/access-control/role-based-authorization.md) für jede der Tabellen, die von der bereitgestellten Abfrage zurückgegebene Blöcke enthalten.
 
-Drops Ausdehnungen (oder meldet sie `whatif` einfach, ohne tatsächlich fallen zu lassen, wenn verwendet wird):
+Löscht Blöcke (oder meldet Sie nur, ohne tatsächlich zu löschen, wenn `whatif` verwendet wird):
 
 **Syntax**
 
-`.drop``extents` [`whatif`] <| *Abfrage*
+`.drop``extents`[ `whatif` ] <| *Abfrage*
 
-Die Ausdehnungen werden mithilfe einer Kusto-Abfrage angegeben, die ein Recordset mit einer Spalte namens "ExtentId" zurückgibt. 
+Die Blöcke werden mithilfe einer Kusto-Abfrage angegeben, die ein Recordset mit einer Spalte mit dem Namen "extentid" zurückgibt. 
  
-### <a name="dropping-a-specific-extent"></a>Löschen einer bestimmten Ausdehnung
+### <a name="dropping-a-specific-extent"></a>Löschen eines bestimmten Wertebereichs
 
-Erfordert [Table admin-Berechtigung,](../management/access-control/role-based-authorization.md) falls der Tabellenname angegeben ist.
+Erfordert die [Table admin-Berechtigung](../management/access-control/role-based-authorization.md) , wenn der Tabellenname angegeben ist.
 
-Erfordert [Datenbankadministratorberechtigung,](../management/access-control/role-based-authorization.md) falls der Tabellenname nicht angegeben ist.
-
-**Syntax**
-
-`.drop``extent` *ExtentId* `from` [ *Tabellenname*]
-
-### <a name="dropping-specific-multiple-extents"></a>Löschen bestimmter mehrfacher Ausdehnungen
-
-Erfordert [Table admin-Berechtigung,](../management/access-control/role-based-authorization.md) falls der Tabellenname angegeben ist.
-
-Erfordert [Datenbankadministratorberechtigung,](../management/access-control/role-based-authorization.md) falls der Tabellenname nicht angegeben ist.
+Erfordert die [Administrator Berechtigung](../management/access-control/role-based-authorization.md) für den Fall, dass der Tabellenname nicht angegeben wird.
 
 **Syntax**
 
-`.drop``extents` `,`ExtentId1 ... *ExtentId1* `(` *ExtentIdN* `)` `from` [ *Tabellenname*]
+`.drop``extent` *Extentid* [ `from` *TableName*]
 
-### <a name="specifying-extents-by-properties"></a>Angeben von Ausdehnungen nach Eigenschaften
+### <a name="dropping-specific-multiple-extents"></a>Löschen bestimmter mehrerer Blöcke
 
-Erfordert [Table admin-Berechtigung,](../management/access-control/role-based-authorization.md) falls der Tabellenname angegeben ist.
+Erfordert die [Table admin-Berechtigung](../management/access-control/role-based-authorization.md) , wenn der Tabellenname angegeben ist.
 
-Erfordert [Datenbankadministratorberechtigung,](../management/access-control/role-based-authorization.md) falls der Tabellenname nicht angegeben ist.
+Erfordert die [Administrator Berechtigung](../management/access-control/role-based-authorization.md) für den Fall, dass der Tabellenname nicht angegeben wird.
 
-`.drop``extents` [`older` *N* N`days` | `hours`( `from` )] (`trim` `by` `extentsize` | *TableName*  |  `all` `tables`) [`limit` (`datasize`) *N* (`MB` | `GB` | `bytes`)] [ *LimitCount*]
+**Syntax**
 
-* `older`: Nur Ausdehnungen, die älter als *N* Tage/Stunden sind, werden verworfen. 
-* `trim`: Der Vorgang schneidet die Daten in der Datenbank, bis die Summe der Ausdehnungen mit der gewünschten Größe übereinstimmt (MaxSize) 
-* `limit`: Der Vorgang wird *LimitCount* auf die ersten LimitCount-Ausdehnungen angewendet 
+`.drop``extents` `(` *ExtentId1* `,` ... *Erweitertidn* `)` [ `from` *TableName*]
 
-Der Befehl unterstützt`.drop-pretend` den `.drop`Emulationsmodus (anstelle von ) , der eine Ausgabe erzeugt, als ob der Befehl ausgeführt hätte, ohne ihn tatsächlich auszuführen.
+### <a name="specifying-extents-by-properties"></a>Angeben von Blöcken nach Eigenschaften
+
+Erfordert die [Table admin-Berechtigung](../management/access-control/role-based-authorization.md) , wenn der Tabellenname angegeben ist.
+
+Erfordert die [Administrator Berechtigung](../management/access-control/role-based-authorization.md) für den Fall, dass der Tabellenname nicht angegeben wird.
+
+`.drop``extents`[ `older` *N* ( `days`  |  `hours` )] `from` (*TableName*  |  `all` `tables` ) [ `trim` `by` ( `extentsize`  |  `datasize` ) *N* ( `MB`  |  `GB`  |  `bytes` )] [ `limit` *limitanzahl*]
+
+* `older`: Nur Blöcke, die älter als *N* Tage/Stunden sind, werden gelöscht. 
+* `trim`: Der Vorgang schneidet die Daten in der Datenbank ab, bis die Summe der Blöcke der gewünschten Größe entspricht (MaxSize). 
+* `limit`: Der Vorgang wird auf die Werte für die erste *limitanzahl* angewendet. 
+
+Der-Befehl unterstützt den Emulations `.drop-pretend` Modus (anstelle von `.drop` ), der eine Ausgabe erzeugt, als ob der Befehl ausgeführt würde, ohne dass er tatsächlich ausgeführt würde.
 
 **Beispiele**
 
-Entfernen aller Vor mehr als 10 Tage erstellten Erweiterungen aus allen Tabellen in der Datenbank`MyDatabase`
+Entfernen Sie alle Blöcke, die vor mehr als 10 Tagen erstellt wurden, aus allen Tabellen in der Datenbank.`MyDatabase`
 
 ```kusto
 .drop extents <| .show database MyDatabase extents | where CreatedOn < now() - time(10d)
 ```
 
-Entfernt alle Ausdehnungen `Table1` `Table2`in Tabellen und , deren Erstellungszeit vor über 10 Tagen liegt:
+Entfernt alle Blöcke in Tabellen `Table1` und `Table2` , deren Erstellungszeit vor mehr als 10 Tagen betrug:
 
 ```kusto
 .drop extents older 10 days from tables (Table1, Table2)
 ```
 
-Emulationsmodus: zeigt an, welche Ausdehnungen durch den Befehl entfernt würden (der Parameter "Ausdehnungs-ID" ist für diesen Befehl nicht anwendbar):
+Emulations Modus: zeigt an, welche Blöcke vom Befehl entfernt werden (Parameter für die Block-ID sind für diesen Befehl nicht zutreffend):
 
 ```kusto
 .drop-pretend extents older 10 days from all tables
 ```
 
-Entfernt alle Ausdehnungen aus 'TestTable':
+Entfernt alle Blöcke aus "testtable":
 
 ```kusto
 .drop extents from TestTable
 ```
  
-**Return-Ausgabe**
+**Ausgabe zurückgeben**
 
-|Ausgabeparameter |type |BESCHREIBUNG 
+|Output-Parameter |Typ |BESCHREIBUNG 
 |---|---|---
-|ExtentId |String |ExtentId, die als Ergebnis des Befehls gelöscht wurde 
-|TableName |String |Tabellenname, wo die Ausdehnung gehörte  
-|CreatedOn |Datetime |Zeitstempel, der Informationen darüber enthält, wann die Ausdehnung ursprünglich erstellt wurde 
+|Extentid |String |Extentid, die als Ergebnis des Befehls gelöscht wurde 
+|TableName |String |Tabellenname, wobei Block zu gehört  
+|CreatedOn |Datetime |Zeitstempel, der Informationen darüber enthält, wann der Block anfänglich erstellt wurde 
  
 **Beispielausgabe** 
 
-|Extent-ID |Tabellenname |Erstellt am 
+|Block-ID |Tabellenname |Erstellt am 
 |---|---|---
-|43c6e03f-1713-4ca7-a52a-5db8a4e8b87d |TestTable |2015-01-12 12:48:49.4298178 
+|43c6e03f -1713-4ca7-a52a-5db8a4e8b87d |TestTable |2015-01-12 12:48:49.4298178 
 
-## <a name="replace-extents"></a>.ersetzen Ausdehnungen
+## <a name="replace-extents"></a>. Replace Blöcke
 
 **Syntax**
 
-`.replace`[`async` `extents` `in` `table` ] *DestinationTableName-Abfrage* `<| 
-{` *für Ausdehnungen,*`},{`die aus der Tabellenabfrage für*Erweiterungen gelöscht werden sollen,* die in eine Tabelle verschoben werden sollen`}`
+`.replace`[ `async` ] `extents` `in` `table` *DestinationTableName* - `<| 
+{` *Abfrage für Blöcke, die aus der Tabellen*Abfrage für Blöcke gelöscht werden sollen, die `},{` *in die Tabelle verschoben werden* sollen`}`
 
-Dieser Befehl wird im Kontext einer bestimmten Datenbank ausgeführt, verschiebt die angegebenen Ausdehnungen aus den Quelltabellen in die Zieltabelle und löscht die angegebenen Ausdehnungen aus der Zieltabelle.
-Alle Ablage- und Verschiebungsvorgänge werden in einer einzigen Transaktion ausgeführt.
+Dieser Befehl wird im Kontext einer bestimmten Datenbank ausgeführt, verschiebt die angegebenen Blöcke aus den Quell Tabellen in die Ziel Tabelle und löscht die angegebenen Blöcke aus der Ziel Tabelle.
+Alle Drop-und Move-Vorgänge werden in einer einzelnen Transaktion durchgeführt.
 
-Erfordert [Die Berechtigung "Tabellenadministrator"](../management/access-control/role-based-authorization.md) für die Quell- und Zieltabellen.
+Erfordert die [Table admin-Berechtigung](../management/access-control/role-based-authorization.md) für die Quell-und Ziel Tabellen.
 
-* `async`(optional) gibt an, ob der Befehl asynchron ausgeführt wird (in diesem Fall wird eine Operation ID (Guid) zurückgegeben, und der Status des Vorgangs kann mit dem Befehl [.show operations](operations.md#show-operations) überwacht werden).
-    * Falls diese Option verwendet wird, können die Ergebnisse einer erfolgreichen Ausführung mit dem Befehl [.show operation details](operations.md#show-operation-details) abgerufen werden).
+* `async`(optional) gibt an, ob der Befehl asynchron ausgeführt wird (in diesem Fall wird eine Vorgangs-ID (GUID) zurückgegeben, und der Status des Vorgangs kann mithilfe des Befehls " [. Show Operations](operations.md#show-operations) " überwacht werden.)
+    * Wenn diese Option verwendet wird, können die Ergebnisse einer erfolgreichen Ausführung mit dem Befehl " [Vorgangs Details anzeigen](operations.md#show-operation-details) " abgerufen werden.
 
-Angeben, welche Ausdehnungen gelöscht oder verschoben werden sollen, wird durch Bereitstellen von 2 Abfragen ausgeführt.
-- *Abfrage für Ausdehnungen,* die aus der Tabelle gelöscht werden sollen - die Ergebnisse dieser Abfrage geben die Ausdehnungs-IDs an  
-die aus der Zieltabelle gelöscht werden sollten.
-- *Abfrage für Erweiterungen,* die in die Tabelle verschoben werden sollen – die Ergebnisse dieser Abfrage geben die Ausdehnungs-IDs in der Quelltabelle(n) an, die in die Zieltabelle verschoben werden sollen.
+Die Angabe, welche Blöcke gelöscht oder verschoben werden sollen, erfolgt durch das Bereitstellen von 2 Abfragen.
+- *Abfrage für Blöcke, die aus der Tabelle gelöscht werden sollen* : die Ergebnisse dieser Abfrage geben die Block-IDs an.  
+, der aus der Ziel Tabelle gelöscht werden soll.
+- *Abfrage für Blöcke, die in die Tabelle verschoben werden* sollen: die Ergebnisse dieser Abfrage geben die Block-IDs in den Quell Tabellen an, die in die Ziel Tabelle verschoben werden sollen.
 
-Beide Abfragen sollten ein Recordset mit einer Spalte namens "ExtentId" zurückgeben.
+Beide Abfragen sollten ein Recordset mit einer Spalte mit dem Namen "extentid" zurückgeben.
 
 **Einschränkungen**
-- Sowohl Quell- als auch Zieltabellen müssen sich in der Kontextdatenbank befinden. 
-- Es wird erwartet, dass alle aus der Abfrage angegebenen Ausdehnungen *für Ausdehnungen, die aus der Tabelle gelöscht werden sollen,* zur Zieltabelle gehören.
-- Es wird erwartet, dass alle Spalten in den Quelltabellen in der Zieltabelle mit demselben Namen und Datentyp vorhanden sind.
+- Sowohl die Quell-als auch die Ziel Tabelle müssen sich in der Kontext Datenbank befinden. 
+- Alle Blöcke, die von der *Abfrage für Blöcke angegeben werden, die aus der Tabelle gelöscht werden* sollen, werden in der Ziel Tabelle erwartet.
+- Es wird erwartet, dass alle Spalten in den Quell Tabellen in der Ziel Tabelle mit demselben Namen und demselben Datentyp vorhanden sind.
 
-**Return-Ausgabe** (für Sync-Ausführung)
+**Rückgabe Ausgabe** (für die Synchronisierungs Ausführung)
 
-Ausgabeparameter |type |BESCHREIBUNG 
+Output-Parameter |Typ |BESCHREIBUNG 
 ---|---|---
-OriginalExtentId |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für die ursprüngliche Ausdehnung in der Quelltabelle, die in die Zieltabelle verschoben wurde, oder - die Ausdehnung in der Zieltabelle, die gelöscht wurde.
-ResultExtentId |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für die Ergebnisausdehnung, die von der Quelltabelle in die Zieltabelle verschoben wurde, oder - leer, falls die Ausdehnung aus der Zieltabelle gelöscht wurde. Nach einem Fehler - "Fehlgeschlagen".
+Originalextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den ursprünglichen Block in der Quell Tabelle, der in die Ziel Tabelle verschoben wurde, oder-der Block in der Ziel Tabelle, der gelöscht wurde.
+Resultextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den Ergebnis Block, der aus der Quell Tabelle in die Ziel Tabelle verschoben wurde, oder-leer, wenn der Wertebereich aus der Ziel Tabelle gelöscht wurde. Bei Fehler: "failed".
 Details |Zeichenfolge |Schließt die Fehlerdetails ein, falls der Vorgang fehlschlägt.
+
+> [!NOTE]
+> Der Befehl schlägt fehl, wenn die Blöcke, die von den Blöcken zurückgegeben *werden, die aus der Tabellen Abfrage gelöscht werden,* in der Ziel Tabelle nicht vorhanden sind. Dies kann vorkommen, wenn die Blöcke zusammengeführt wurden, bevor der Replace-Befehl ausgeführt wurde. Um sicherzustellen, dass der Befehl für fehlende Blöcke fehlschlägt, überprüfen Sie, ob die Abfrage die erwarteten extentids zurückgibt. Der folgende Beispiel #1 schlägt fehl, wenn der zu löschende Block nicht in der Tabelle "myothertable" vorhanden ist. Beispiel #2 ist jedoch auch dann erfolgreich, wenn der zu löschte Block nicht vorhanden ist, da die abzurufte Abfrage keine Block-IDs zurückgegeben hat. 
 
 **Beispiele**
 
-Verschiebt alle Ausdehnungen`MyTable1`von `MyTable2`2 `MyOtherTable`spezifischen Tabellen ( , `MyOtherTable` ) `drop-by:MyTag`in die Tabelle und löscht alle Ausdehnungen mit dem Tag:
+Der folgende Befehl verschiebt alle Blöcke aus 2 bestimmten Tabellen ( `MyTable1` , `MyTable2` ) in eine Tabelle `MyOtherTable` und löscht alle Blöcke, die `MyOtherTable` mit markiert sind `drop-by:MyTag` :
 
 ```kusto
 .replace extents in table MyOtherTable <|
-    {.show table MyOtherTable extents where tags has 'drop-by:MyTag'},
-    {.show tables (MyTable1,MyTable2) extents}
+    {
+        .show table MyOtherTable extents where tags has 'drop-by:MyTag'
+    },
+    {
+        .show tables (MyTable1,MyTable2) extents
+    }
 ```
 
 **Beispielausgabe** 
 
-|OriginalExtentId |ResultExtentId |Details
+|Originalextentid |Resultextentid |Details
 |---|---|---
 |e133f050-a1e2-4dad-8552-1f5cf47cab69 |0d96ab2d-9dd2-4d2c-a45e-b24c65aa6687| 
 |cdbeb35b-87ea-499f-b545-defbae091b57 |a90a303c-8a14-4207-8f35-d8ea94ca45be| 
-|4fcb4598-9a31-4614-903c-0c67c286da8c |97aafea1-59ff-4312-b06b-08f42187872f| 
-|2dfdef64-62a3-4950-a130-96b5b1083b5a |0fb7f3da-5e28-4f09-a000-e62eb41592df| 
+|4fcb4598-9a31-4614-903c-0c67c286da8c |97aafea1-59ff-4312-b06b-08F 42187872f| 
+|2dfdef64-62a3-4950-A130-96b5b1083b5a |0F-7F -5e28-4b09-A000-e62eb41592df| 
 
-*HINWEIS*: 
-> [!NOTE]
-> Der Befehl schlägt fehl, wenn Ausdehnungen, die von den Ausdehnungen zurückgegeben werden, die *aus der Tabellenabfrage gelöscht werden sollen,* in der Zieltabelle nicht vorhanden sind. Dies kann passieren, wenn die Ausdehnungen zusammengeführt wurden, bevor der Befehl replace ausgeführt wurde. Um sicherzustellen, dass der Befehl bei fehlenden Ausdehnungen fehlschlägt, überprüfen Sie, ob die Abfrage die erwarteten ExtentIds zurückgibt. Beispiel #1 unten schlägt fehl, wenn die zu löschende Ausdehnung in der Tabelle MyOtherTable nicht vorhanden ist. Beispiel #2 wird jedoch erfolgreich sein, obwohl die Zufallausdehnung nicht vorhanden ist, da die zu löschende Abfrage keine Ausdehnungs-IDs zurückgegeben hat. 
 
-Beispiel 1: 
+Mit den folgenden Befehlen werden alle Blöcke von einer bestimmten Tabelle ( `MyTable1` ) in eine Tabelle verschoben `MyOtherTable` und ein bestimmter Block in `MyOtherTable` mit der ID gelöscht:
+
 
 ```kusto
 .replace extents in table MyOtherTable <|
-     { datatable(ExtentId:guid)[ "2cca5844-8f0d-454e-bdad-299e978be5df"] }, { .show table MyTable1 extents }
+    {
+        print ExtentId = "2cca5844-8f0d-454e-bdad-299e978be5df"
+    },
+    {
+        .show table MyTable1 extents 
+    }
 ```
-
-Beispiel 2:
 
 ```kusto
 .replace extents in table MyOtherTable  <|
-     { .show table MyOtherTable extents | where ExtentId == guid(2cca5844-8f0d-454e-bdad-299e978be5df) }, { .show table MyTable1 extents }
+    {
+        .show table MyOtherTable extents
+        | where ExtentId == guid(2cca5844-8f0d-454e-bdad-299e978be5df) 
+    },
+    {
+        .show table MyTable1 extents 
+    }
 ```
 
+Der folgende Befehl implementiert eine idempotente Logik, sodass Werte Blöcke nur dann aus der Tabelle gelöscht `t_dest` werden, wenn Bereiche zum Verschieben von der Tabelle `t_source` in die Tabelle vorhanden sind `t_dest` :
 
+```kusto
+.replace async extents in table t_dest <|
+{
+    let any_extents_to_move = toscalar( 
+        t_source
+        | where extent_tags() has 'drop-by:blue'
+        | summarize count() > 0
+    );
+    let extents_to_drop =
+        t_dest
+        | where any_extents_to_move and extent_tags() has 'drop-by:blue'
+        | summarize by ExtentId = extent_id()
+    ;
+    extents_to_drop
+},
+{
+    let extents_to_move = 
+        t_source
+        | where extent_tags() has 'drop-by:blue'
+        | summarize by ExtentId = extent_id()
+    ;
+    extents_to_move
+}
+```
 
-## <a name="drop-extent-tags"></a>.drop-Ausdehnungs-Tags
+## <a name="drop-extent-tags"></a>. Drop Block-Tags
 
 **Syntax**
 
-`.drop`[`async` `extent` `tags` `from` ] `table` *Tabellenname* `(`'`,`*Tag1*'[ '*Tag2*'`,`... `,`'*TagN*']`)`
+`.drop`[ `async` ] `extent` `tags` `from` `table` *TableName* `(` '*Tag1*' [ `,` '*Tag2*' `,` ... `,` ' *TAGN*']`)`
 
-`.drop`[`async` `extent` `tags`  <| ] *Abfrage*
+`.drop`[ `async` ] `extent` `tags`  <|  *Abfrage*
 
-* `async`(optional) gibt an, ob der Befehl asynchron ausgeführt wird (in diesem Fall wird eine Operation ID (Guid) zurückgegeben, und der Status des Vorgangs kann mit dem Befehl [.show operations](operations.md#show-operations) überwacht werden).
-    * Falls diese Option verwendet wird, können die Ergebnisse einer erfolgreichen Ausführung mit dem Befehl [.show operation details](operations.md#show-operation-details) abgerufen werden).
+* `async`(optional) gibt an, ob der Befehl asynchron ausgeführt wird (in diesem Fall wird eine Vorgangs-ID (GUID) zurückgegeben, und der Status des Vorgangs kann mithilfe des Befehls " [. Show Operations](operations.md#show-operations) " überwacht werden.)
+    * Wenn diese Option verwendet wird, können die Ergebnisse einer erfolgreichen Ausführung mit dem Befehl " [Vorgangs Details anzeigen](operations.md#show-operation-details) " abgerufen werden.
 
-Der Befehl wird im Kontext einer bestimmten Datenbank ausgeführt und löscht die [bereitgestellten Ausdehnungs-Tags](extents-overview.md#extent-tagging) aus einer beliebigen Ausdehnung in der bereitgestellten Datenbank und Tabelle, die eines der Tags enthält.  
+Der Befehl wird im Kontext einer bestimmten Datenbank ausgeführt und löscht die angegebenen Block- [Tag (e)](extents-overview.md#extent-tagging) aus einem beliebigen Block in der bereitgestellten Datenbank und Tabelle, der alle Tags enthält.  
 
-Es gibt zwei Möglichkeiten, anzugeben, welche Tags aus welchen Ausdehnungen entfernt werden sollen:
+Es gibt zwei Möglichkeiten, um anzugeben, welche Tags aus welchen Blöcken entfernt werden sollen:
 
-1. Durch explizite Angabe der Tags, die aus allen Ausdehnungen in der angegebenen Tabelle entfernt werden sollen.
-2. Durch Bereitstellen einer Abfrage, deren Ergebnisse die Ausdehnungs-IDs in der Tabelle und für jede Ausdehnung angeben - die Tags, die entfernt werden sollen.
+1. Durch explizites angeben der Tags, die aus allen Blöcken in der angegebenen Tabelle entfernt werden sollen.
+2. Durch Bereitstellen einer Abfrage, deren Ergebnisse den Block-IDs in der Tabelle und den Foreach-Block angeben: die Tags, die entfernt werden sollen.
 
 **Einschränkungen**
-- Alle Ausdehnungen müssen sich in der Kontextdatenbank befinden und zur gleichen Tabelle gehören. 
+- Alle Blöcke müssen sich in der Kontext Datenbank befinden und müssen derselben Tabelle angehören. 
 
-**Angeben von Ausdehnungen mit einer Abfrage**
+**Angeben von Blöcken mit einer Abfrage**
 
-Erfordert [Die Berechtigung "Tabellenadministrator"](../management/access-control/role-based-authorization.md) für alle beteiligten Quell- und Zieltabellen.
+Erfordert die [Table admin-Berechtigung](../management/access-control/role-based-authorization.md) für alle Beteiligten Quell-und Ziel Tabellen.
 
 ```kusto 
 .drop extent tags <| ...query... 
 ```
 
-Die Ausdehnungen und die absendenden Tags werden mithilfe einer Kusto-Abfrage angegeben, die ein Recordset mit einer Spalte namens "ExtentId" und einer Spalte namens "Tags" zurückgibt. 
+Die Blöcke und die zu löschenden Tags werden mithilfe einer Kusto-Abfrage angegeben, die ein Recordset mit einer Spalte mit dem Namen "extentid" und einer Spalte mit dem Namen "Tags" zurückgibt. 
 
-*HINWEIS*: Wenn Sie die [Kusto .NET-Clientbibliothek](../api/netfx/about-kusto-data.md)verwenden, können Sie die folgenden Methoden verwenden, um den gewünschten Befehl zu generieren:
+*Hinweis*: Wenn Sie die [Kusto .NET-Client Bibliothek](../api/netfx/about-kusto-data.md)verwenden, können Sie die folgenden Methoden verwenden, um den gewünschten Befehl zu generieren:
 - `CslCommandGenerator.GenerateExtentTagsDropByRegexCommand(string tableName, string regex)`
 - `CslCommandGenerator.GenerateExtentTagsDropBySubstringCommand(string tableName, string substring)`
 
-**Return-Ausgabe**
+**Ausgabe zurückgeben**
 
-Ausgabeparameter |type |BESCHREIBUNG 
+Output-Parameter |Typ |BESCHREIBUNG 
 ---|---|---
-OriginalExtentId |Zeichenfolge |Eine eindeutige Bezeichnerin (GUID) für die ursprüngliche Ausdehnung, deren Tags geändert wurden (und als Teil des Vorgangs gelöscht werden) 
-ResultExtentId |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für die Ergebnisausdehnung, die Tags geändert hat (und als Teil des Vorgangs erstellt und hinzugefügt wird). Nach einem Fehler - "Fehlgeschlagen".
-ResultExtentTags |Zeichenfolge |Die Auflistung von Tags, mit denen die Ergebnisausdehnung markiert ist (falls vorhanden), oder "null", falls der Vorgang fehlschlägt.
+Originalextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den ursprünglichen Block, dessen Tags geändert wurden (und im Rahmen des Vorgangs gelöscht werden). 
+Resultextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den Ergebnis Block, der Tags geändert hat (und als Teil des Vorgangs erstellt und hinzugefügt wird). Bei Fehler: "failed".
+Resultextenttags |Zeichenfolge |Die Auflistung von Tags, mit denen der Ergebnis Block markiert ist (falls vorhanden), oder "Null", wenn der Vorgang fehlschlägt.
 Details |Zeichenfolge |Schließt die Fehlerdetails ein, falls der Vorgang fehlschlägt.
 
 **Beispiele**
 
-Löscht `drop-by:Partition000` das Tag aus `MyOtherTable` einer beliebigen Ausdehnung in der Tabelle, die mit ihm markiert ist.
+Löscht das `drop-by:Partition000` Tag aus einem beliebigen Block in einer Tabelle `MyOtherTable` , die mit diesem versehen ist.
 
 ```kusto
 .drop extent tags from table MyOtherTable ('drop-by:Partition000')
 ```
 
-Löscht die `drop-by:20160810104500` `a random tag`Tags , `drop-by:20160810` , und/oder `My Table` aus einer beliebigen Ausdehnung in der Tabelle, die mit einem der beiden Tags markiert ist.
+Löscht die Tags `drop-by:20160810104500` , `a random tag` und/oder `drop-by:20160810` aus einem beliebigen Block in einer Tabelle, `My Table` die mit einem der beiden Tags markiert ist.
 
 ```kusto
 .drop extent tags from table [My Table] ('drop-by:20160810104500','a random tag','drop-by:20160810')
 ```
 
-Löscht `drop-by` alle Tags aus `MyTable`Ausdehnungen in der Tabelle .
+Löscht alle `drop-by` Tags aus den Blöcken in der Tabelle `MyTable` .
 
 ```kusto
 .drop extent tags <| 
@@ -463,7 +502,7 @@ Löscht `drop-by` alle Tags aus `MyTable`Ausdehnungen in der Tabelle .
   | where Tags startswith 'drop-by'
 ```
 
-Löscht alle Tags, `drop-by:StreamCreationTime_20160915(\d{6})` die regex `MyTable`entsprechen, aus Ausdehnungen in der Tabelle .
+Löscht alle Tags, die Regex entsprechen, `drop-by:StreamCreationTime_20160915(\d{6})` aus Blöcken in der Tabelle `MyTable` .
 
 ```kusto
 .drop extent tags <| 
@@ -476,49 +515,49 @@ Löscht alle Tags, `drop-by:StreamCreationTime_20160915(\d{6})` die regex `MyTab
 
 **Beispielausgabe** 
 
-|OriginalExtentId |ResultExtentId | ResultExtentTags | Details
+|Originalextentid |Resultextentid | Resultextenttags | Details
 |---|---|---|---
 |e133f050-a1e2-4dad-8552-1f5cf47cab69 |0d96ab2d-9dd2-4d2c-a45e-b24c65aa6687 | Partition001 |
 |cdbeb35b-87ea-499f-b545-defbae091b57 |a90a303c-8a14-4207-8f35-d8ea94ca45be | |
-|4fcb4598-9a31-4614-903c-0c67c286da8c |97aafea1-59ff-4312-b06b-08f42187872f | Partition001 Partition002 |
-|2dfdef64-62a3-4950-a130-96b5b1083b5a |0fb7f3da-5e28-4f09-a000-e62eb41592df | |
+|4fcb4598-9a31-4614-903c-0c67c286da8c |97aafea1-59ff-4312-b06b-08F 42187872f | Partition001 Partition002 |
+|2dfdef64-62a3-4950-A130-96b5b1083b5a |0F-7F -5e28-4b09-A000-e62eb41592df | |
 
-## <a name="alter-extent-tags"></a>.alter Ausdehnungs-Tags
+## <a name="alter-extent-tags"></a>. Alter Block-Tags
 
 **Syntax**
 
-`.alter`[`async` `extent` `tags` `(`] '*Tag1*`,`'[`,`'*Tag2*' ... `,`'*TagN*`)` <| *']-Abfrage*
+`.alter`[ `async` ] `extent` `tags` `(` '*Tag1*' [ `,` '*Tag2*' `,` ... `,` ' *TAGN*'] `)`  <|  *Abfrage*
 
-Der Befehl wird im Kontext einer bestimmten Datenbank ausgeführt und ändert die [Ausdehnungs-Tag(s)](extents-overview.md#extent-tagging) aller von der angegebenen Abfrage zurückgegebenen Ausdehnungen in den bereitgestellten Satz von Tags.
+Der Befehl wird im Kontext einer bestimmten Datenbank ausgeführt und ändert die Block- [Tag (n)](extents-overview.md#extent-tagging) aller Blöcke, die von der angegebenen Abfrage zurückgegeben werden, in den bereitgestellten Satz von Tags.
 
-Die Zu ändernden Ausdehnungen und Tags werden mithilfe einer Kusto-Abfrage angegeben, die ein Recordset mit einer Spalte namens "ExtentId" zurückgibt.
+Die Blöcke und die zu ändernden Tags werden mithilfe einer Kusto-Abfrage angegeben, die ein Recordset mit einer Spalte mit dem Namen "extentid" zurückgibt.
 
-* `async`(optional) gibt an, ob der Befehl asynchron ausgeführt wird (in diesem Fall wird eine Operation ID (Guid) zurückgegeben, und der Status des Vorgangs kann mit dem Befehl [.show operations](operations.md#show-operations) überwacht werden).
-    * Falls diese Option verwendet wird, können die Ergebnisse einer erfolgreichen Ausführung mit dem Befehl [.show operation details](operations.md#show-operation-details) abgerufen werden).
+* `async`(optional) gibt an, ob der Befehl asynchron ausgeführt wird (in diesem Fall wird eine Vorgangs-ID (GUID) zurückgegeben, und der Status des Vorgangs kann mithilfe des Befehls " [. Show Operations](operations.md#show-operations) " überwacht werden.)
+    * Wenn diese Option verwendet wird, können die Ergebnisse einer erfolgreichen Ausführung mit dem Befehl " [Vorgangs Details anzeigen](operations.md#show-operation-details) " abgerufen werden.
 
-Erfordert [die Berechtigung "Tabellenadministrator"](../management/access-control/role-based-authorization.md) für alle beteiligten Tabellen.
+Erfordert die [Table admin-Berechtigung](../management/access-control/role-based-authorization.md) für alle beteiligten Tabellen.
 
 **Einschränkungen**
-- Alle Ausdehnungen müssen sich in der Kontextdatenbank befinden und zur gleichen Tabelle gehören. 
+- Alle Blöcke müssen sich in der Kontext Datenbank befinden und müssen derselben Tabelle angehören. 
 
-**Return-Ausgabe**
+**Ausgabe zurückgeben**
 
-Ausgabeparameter |type |BESCHREIBUNG 
+Output-Parameter |Typ |BESCHREIBUNG 
 ---|---|---
-OriginalExtentId |Zeichenfolge |Eine eindeutige Bezeichnerin (GUID) für die ursprüngliche Ausdehnung, deren Tags geändert wurden (und als Teil des Vorgangs gelöscht werden) 
-ResultExtentId |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für die Ergebnisausdehnung, die Tags geändert hat (und als Teil des Vorgangs erstellt und hinzugefügt wird). Nach einem Fehler - "Fehlgeschlagen".
-ResultExtentTags |Zeichenfolge |Die Auflistung von Tags, mit denen die Ergebnisausdehnung markiert ist, oder "null", falls der Vorgang fehlschlägt.
+Originalextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den ursprünglichen Block, dessen Tags geändert wurden (und im Rahmen des Vorgangs gelöscht werden). 
+Resultextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den Ergebnis Block, der Tags geändert hat (und als Teil des Vorgangs erstellt und hinzugefügt wird). Bei Fehler: "failed".
+Resultextenttags |Zeichenfolge |Die Auflistung von Tags, mit denen der Ergebnis Block gekennzeichnet ist, oder "Null" für den Fall, dass der Vorgang fehlschlägt.
 Details |Zeichenfolge |Schließt die Fehlerdetails ein, falls der Vorgang fehlschlägt.
 
 **Beispiele**
 
-Ändert Tags aller Ausdehnungen `MyTable` `MyTag`in der Tabelle in .
+Ändert die Tags aller Blöcke in der Tabelle in `MyTable` `MyTag` .
 
 ```kusto
 .alter extent tags ('MyTag') <| .show table MyTable extents
 ```
 
-Ändert Tags aller Ausdehnungen `MyTable`in Tabelle `drop-by:MyTag` `drop-by:MyNewTag` , `MyOtherNewTag`mit dem mit und markiert.
+Ändert die Tags aller Blöcke in der Tabelle `MyTable` , die mit gekennzeichnet sind, in `drop-by:MyTag` `drop-by:MyNewTag` und `MyOtherNewTag` .
 
 ```kusto
 .alter extent tags ('drop-by:MyNewTag','MyOtherNewTag') <| .show table MyTable extents where tags has 'drop-by:MyTag'
@@ -526,10 +565,10 @@ Details |Zeichenfolge |Schließt die Fehlerdetails ein, falls der Vorgang fehlsc
 
 **Beispielausgabe** 
 
-|OriginalExtentId |ResultExtentId | ResultExtentTags | Details
+|Originalextentid |Resultextentid | Resultextenttags | Details
 |---|---|---|---
-|e133f050-a1e2-4dad-8552-1f5cf47cab69 |0d96ab2d-9dd2-4d2c-a45e-b24c65aa6687 | Drop-by:MyNewTag MyOtherNewTag| 
-|cdbeb35b-87ea-499f-b545-defbae091b57 |a90a303c-8a14-4207-8f35-d8ea94ca45be | Drop-by:MyNewTag MyOtherNewTag| 
-|4fcb4598-9a31-4614-903c-0c67c286da8c |97aafea1-59ff-4312-b06b-08f42187872f | Drop-by:MyNewTag MyOtherNewTag| 
-|2dfdef64-62a3-4950-a130-96b5b1083b5a |0fb7f3da-5e28-4f09-a000-e62eb41592df | Drop-by:MyNewTag MyOtherNewTag| 
+|e133f050-a1e2-4dad-8552-1f5cf47cab69 |0d96ab2d-9dd2-4d2c-a45e-b24c65aa6687 | Drop-by: mynewtag myothernewtag| 
+|cdbeb35b-87ea-499f-b545-defbae091b57 |a90a303c-8a14-4207-8f35-d8ea94ca45be | Drop-by: mynewtag myothernewtag| 
+|4fcb4598-9a31-4614-903c-0c67c286da8c |97aafea1-59ff-4312-b06b-08F 42187872f | Drop-by: mynewtag myothernewtag| 
+|2dfdef64-62a3-4950-A130-96b5b1083b5a |0F-7F -5e28-4b09-A000-e62eb41592df | Drop-by: mynewtag myothernewtag| 
 

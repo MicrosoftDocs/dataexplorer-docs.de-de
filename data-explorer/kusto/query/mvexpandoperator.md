@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2019
-ms.openlocfilehash: a0d19f3466381bef3848365c2af27109e9699087
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: f8cf59e3aa263aef224301d871a2e1e15e1a290b
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271314"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550520"
 ---
 # <a name="mv-expand-operator"></a>mv-expand-Operator
 
@@ -32,22 +32,22 @@ Erweitert das Array oder den Eigenschaften Behälter mit mehreren Werten.
 * *ColumnName:* Im Ergebnis werden Arrays in der benannten Spalte auf mehrere Zeilen erweitert. 
 * *ArrayExpression:* Ein Ausdruck, der ein Array zurückgibt. Bei Verwendung dieses Formulars wird eine neue Spalte hinzugefügt, und die vorhandene wird beibehalten.
 * *Name:* Ein Name für die neue Spalte.
-* *Typname:* Gibt den zugrunde liegenden Typ der Elemente des Arrays an, der zum Typ der vom Operator erzeugten Spalte wird.
-    Beachten Sie, dass Werte im-Array, die nicht diesem Typ entsprechen, nicht konvertiert werden. Stattdessen nehmen Sie einen `null` Wert an.
+* *Typname:* Gibt den zugrunde liegenden Typ der Elemente des Arrays an, der zum Typ der vom Operator erzeugten Spalte wird. Nicht konforme Werte im Array werden nicht konvertiert. Stattdessen nehmen diese Werte einen `null` Wert an.
 * *RowLimit:* Die maximale Anzahl von Zeilen, die aus jeder ursprünglichen Zeile generiert werden. Der Standardwert ist 2147483647. 
-*Hinweis*: die Legacy-und veraltete Form des Operators `mvexpand` haben das Standardzeilen Limit von 128.
+  > [!Note] 
+  > Die Legacy-und veraltete Form des-Operators `mvexpand` haben ein Standardzeilen Limit von 128.
 * *Indexcolumnname:* Wenn `with_itemindex` angegeben ist, enthält die Ausgabe eine zusätzliche Spalte (mit dem Namen *indexcolumnname*), die den Index (beginnend bei 0) des Elements in der ursprünglichen erweiterten Auflistung enthält. 
 
 **Rückgabe**
 
-Mehrere Zeilen für alle Werte in jedem Array in der benannten Spalte oder im Arrayausdruck.
-Wenn mehrere Spalten oder Ausdrücke angegeben werden, werden Sie parallel erweitert, sodass für jede Eingabezeile so viele Ausgabezeilen vorhanden sind, wie es Elemente im längsten erweiterten Ausdruck gibt (kürzere Listen werden mit Nullen aufgefüllt). Wenn der Wert in einer Zeile ein leeres Array ist, wird die Zeile in "Nothing" (wird nicht im Resultset angezeigt) erweitert. Wenn es sich bei dem Wert in einer Zeile nicht um ein Array handelt, wird die Zeile unverändert im Resultset gespeichert. 
+Mehrere Zeilen für jeden der Werte in einem Array, die in der benannten Spalte oder im Array Ausdruck vorhanden sind.
+Wenn mehrere Spalten oder Ausdrücke angegeben werden, werden Sie parallel erweitert. Für jede Eingabezeile gibt es so viele Ausgabezeilen, wie Elemente im längsten erweiterten Ausdruck vorhanden sind (kürzere Listen werden mit Nullen aufgefüllt). Wenn der Wert in einer Zeile ein leeres Array ist, wird die Zeile zu "Nothing" erweitert (wird im Resultset nicht angezeigt). Wenn der Wert in einer Zeile jedoch kein Array ist, wird die Zeile unverändert im Resultset gespeichert. 
 
 Die erweiterte Spalte ist immer dynamisch typisiert. Verwenden Sie eine Umwandlung wie `todatetime()` oder `tolong()`, wenn Sie Werte berechnen oder aggregieren möchten.
 
 Zwei Erweiterungsmodi für Eigenschaftenbehälter werden unterstützt:
-* `bagexpansion=bag`: Eigenschaftenbehälter werden zu Eigenschaftenbehältern mit einem einzelnen Eintrag erweitert. Dies ist die Standarderweiterung.
-* `bagexpansion=array`: Eigenschaften Behälter werden in `[` Array Strukturen mit *zwei Elementen erweitert* `,` *value* `]` , sodass der einheitliche Zugriff auf Schlüssel und Werte ermöglicht wird (und z. b. die Ausführung einer eindeutigen Anzahl von Aggregationen über Eigenschaftsnamen). 
+* `bagexpansion=bag`: Eigenschaftenbehälter werden zu Eigenschaftenbehältern mit einem einzelnen Eintrag erweitert. Bei diesem Modus handelt es sich um die Standard Erweiterung.
+* `bagexpansion=array`: Eigenschaften Behälter werden in `[` Array Strukturen mit *zwei Elementen erweitert* `,` *value* `]` , sodass ein einheitlicher Zugriff auf Schlüssel und Werte möglich ist (z. b. das Ausführen einer Aggregation mit unterschiedlicher Anzahl über Eigenschaftsnamen). 
 
 **Beispiele**
 
@@ -59,11 +59,10 @@ datatable (a:int, b:dynamic)[1,dynamic({"prop1":"a", "prop2":"b"})]
 | mv-expand b 
 ```
 
-|a|b|
+|a|k|
 |---|---|
 |1|{"Eigenschaft PROP1": "a"}|
 |1|{"Prop2": "b"}|
-
 
 Wenn Sie zwei Spalten erweitern, werden die entsprechenden Spalten zuerst "zip" und dann erweitert:
 
@@ -73,7 +72,7 @@ datatable (a:int, b:dynamic, c:dynamic)[1,dynamic({"prop1":"a", "prop2":"b"}), d
 | mv-expand b, c 
 ```
 
-|a|b|c|
+|a|k|c|
 |---|---|---|
 |1|{"Eigenschaft PROP1": "a"}|5|
 |1|{"Prop2": "b"}||
@@ -87,7 +86,7 @@ datatable (a:int, b:dynamic, c:dynamic)[1,dynamic({"prop1":"a", "prop2":"b"}), d
 | mv-expand c
 ```
 
-|a|b|c|
+|a|k|c|
 |---|---|---|
 |1|{"Eigenschaft PROP1": "a"}|5|
 |1|{"Prop2": "b"}|5|
@@ -117,5 +116,5 @@ Siehe [Diagramm Anzahl der Live Aktivitäten im Zeit](./samples.md#concurrent-ac
 **Siehe auch**
 
 - [MV-Apply-](./mv-applyoperator.md) Operator.
-- [fassen Sie make_list ()](makelist-aggfunction.md) zusammen, der die entgegengesetzte Funktion ausführt.
+- [fassen Sie make_list ()](makelist-aggfunction.md)zusammen, der die entgegengesetzte Funktion übernimmt.
 - [bag_unpack ()](bag-unpackplugin.md) -Plug-in zum Erweitern dynamischer JSON-Objekte in Spalten mithilfe von Eigenschaften Behälter Schlüsseln.

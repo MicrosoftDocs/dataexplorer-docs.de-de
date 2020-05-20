@@ -1,6 +1,6 @@
 ---
-title: Tabellen - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden Tabellen in Azure Data Explorer beschrieben.
+title: 'Tabellen: Azure-Daten-Explorer'
+description: In diesem Artikel werden die Tabellen in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,52 +8,53 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: fd47a8f59c716148dfc5f89ac1d4c7aca45a8e9c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: f51e05abac44b85ab328e7df5645eeab51d2a274
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81509281"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550621"
 ---
 # <a name="tables"></a>Tabellen
 
-Tabellen sind benannte Entitäten, die Daten enthalten. Eine Tabelle enthält einen geordneten Satz von [Spalten](./columns.md)und null oder mehr Datenzeilen, wobei jede Zeile einen Datenwert für jede der Spalten der Tabelle enthält. Die Reihenfolge der Zeilen in der Tabelle ist unbekannt und wirkt sich im Allgemeinen nicht auf Abfragen aus, mit Ausnahme einiger tabellarischer Operatoren (z. B. des [top-Operators](../topoperator.md)), die von Natur aus unbestimmt sind.
+Tabellen sind benannte Entitäten, die Daten enthalten. Eine Tabelle verfügt über einen geordneten Satz von [Spalten](./columns.md)und NULL oder mehr Daten Zeilen. Jede Zeile enthält einen Datenwert für jede Spalte der Tabelle. Die Reihenfolge der Zeilen in der Tabelle ist unbekannt und wirkt sich nicht allgemein auf Abfragen aus, mit Ausnahme einiger tabellarischer Operatoren (z. b. des [Top-Operators](../topoperator.md)), die grundsätzlich nicht bestimmt sind.
 
-Tabellen belegen denselben Namespace wie [gespeicherte Funktionen,](./stored-functions.md)wenn also eine gespeicherte Funktion und eine Tabelle denselben Namen haben, wird die gespeicherte Funktion ausgewählt.
+Tabellen belegen denselben Namespace wie [gespeicherte Funktionen](./stored-functions.md).
+Wenn eine gespeicherte Funktion und eine Tabelle denselben Namen aufweisen, wird die gespeicherte Funktion ausgewählt.
 
 **Hinweise**  
 
-* Bei Den Tabellennamen wird die Groß-/Kleinschreibung beachtet.
-* Tabellennamen folgen den Regeln für [Entitätsnamen](./entity-names.md).
-* Die maximale Anzahl von Tabellen pro Datenbank beträgt 10.000.
+* Bei Tabellennamen wird die Groß-/Kleinschreibung beachtet.
+* Tabellennamen entsprechen den Regeln für [Entitäts Namen](./entity-names.md).
+* Die maximal zulässige Anzahl von Tabellen pro Datenbank beträgt 10.000.
 
 
-Details zum Erstellen und Verwalten von Tabellen finden Sie unter Verwalten von [Tabellen](../../management/tables.md)
+Ausführliche Informationen zum Erstellen und Verwalten von Tabellen finden Sie unter [Verwalten von Tabellen](../../management/tables.md) .
 
-## <a name="table-references"></a>Tabellenreferenzen
+## <a name="table-references"></a>Tabellen Verweise
 
-Die einfachste Möglichkeit, auf eine Tabelle zu verweisen, besteht darin, ihren Namen zu verwenden. Dies kann für alle Tabellen erfolgen, die sich im Kontext in der Datenbank befinden. So zählt z. B. die folgende Abfrage die `StormEvents` Datensätze der aktuellen Datenbanktabelle:
+Die einfachste Möglichkeit, auf eine Tabelle zu verweisen, ist die Verwendung des Namens. Dieser Verweis kann für alle Tabellen erfolgen, die sich in der-Datenbank im Kontext befinden. Die folgende Abfrage zählt z. b. die Datensätze der Tabelle der aktuellen Datenbank `StormEvents` :
 
 ```kusto
 StormEvents
 | count
 ```
 
-Beachten Sie, dass eine gleichwertige Möglichkeit zum Schreiben der obigen Abfrage darin besteht, den Tabellennamen zu entkommen:
+Eine entsprechende Methode zum Schreiben der obigen Abfrage besteht darin, den Tabellennamen zu beenden:
 
 ```kusto
 ["StormEvents"]
 | count
 ```
 
-Tabellen können auch referenziert werden, indem explizit die Datenbank (oder Datenbank und Cluster) notiert wird, in der sie sich befinden, sodass Abfragen erstellt werden können, die Daten aus mehreren Datenbanken und Clustern kombinieren. Die folgende Abfrage funktioniert z. B. mit jeder Datenbank im Kontext, solange der Aufrufer Zugriff auf die Zieldatenbank hat:
+Auf Tabellen kann auch verwiesen werden, indem die Datenbank (oder Datenbank und der Cluster) explizit notiert werden. Anschließend können Sie Abfragen erstellen, die Daten aus mehreren Datenbanken und Clustern kombinieren. Beispielsweise kann die folgende Abfrage mit jeder Datenbank im Kontext verwendet werden, solange der Aufrufer Zugriff auf die Zieldatenbank hat:
 
 ```kusto
 cluster("https://help.kusto.windows.net").database("Samples").StormEvents
 | count
 ```
 
-Es ist auch möglich, auf eine Tabelle zu verweisen, indem Sie die [spezielle Funktion table()](../tablefunction.md)verwenden, solange das Argument für diese Funktion zu einer Konstante ausgewertet wird. Beispiel:
+Es ist auch möglich, mithilfe der " [Table ()](../tablefunction.md)"-Funktion auf eine Tabelle zu verweisen, solange das Argument für diese Funktion zu einer Konstanten ausgewertet wird. Beispiel:
 
 ```kusto
 let counter=(TableName:string) { table(TableName) | count };

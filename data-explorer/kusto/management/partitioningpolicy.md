@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: fc3fa6b081e48e09ed246144cd72785446395883
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: e6f103d8957416c55a4562fb646e8ccb17ddf1e5
+ms.sourcegitcommit: 9810acae3f1c83b8efe7b952d3bada2ff496b024
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373343"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83444714"
 ---
 # <a name="data-partitioning-policy-preview"></a>Richtlinie für die Daten Partitionierung (Vorschau)
 
@@ -178,7 +178,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
   * Maximales Ziel für die Summe der Zeilen Anzahl der Quell Blöcke eines einzelnen Daten Partitionierungs Vorgangs.
   * Diese Eigenschaft ist *optional*, wobei der Standardwert ist `0` (in diesem Fall ist ein Standardziel von 5 Millionen Datensätzen wirksam).
 
-## <a name="notes"></a>Hinweise
+## <a name="notes"></a>Notizen
 
 ### <a name="the-data-partitioning-process"></a>Der Daten Partitionierungs Prozess
 
@@ -212,8 +212,8 @@ Die Ausgabe umfasst Folgendes:
 
 ### <a name="outliers-in-partitioned-columns"></a>Ausreißer in partitionierten Spalten
 
-* Wenn ein Hash Partitions Schlüsselwerte enthält, die signifikanter als andere sind, z. b. eine leere Zeichenfolge, ein generischer Wert (z. b. `null` oder `N/A` ), oder Sie stellen eine Entität dar (z. b.), die im DataSet `tenant_id` häufiger vorkommt, was zu einer unausgeglichenen Verteilung der Daten über die Knoten des Clusters und zur Beeinträchtigung der Abfrageleistung beitragen kann
-* Wenn ein einheitlicher Bereich für einen DateTime-Partitions Schlüssel einen ausreichenden Prozentsatz an Werten aufweist, die "weit" von den meisten Werten in der Spalte (z. b. DateTime-Werte aus der entfernten Vergangenheit oder Zukunft) liegen, kann dies zu einer höheren Anzahl von Daten Partitionierungs Prozessen führen und zu vielen kleinen Blöcken führen, die der Cluster nachverfolgen muss.
+* Wenn ein Hash Partitions Schlüsselwerte enthält, die wesentlich häufiger als andere sind, z. b. eine leere Zeichenfolge, ein generischer Wert (z. b. `null` oder `N/A` ), oder Sie stellen eine Entität dar (z. b.), die im DataSet `tenant_id` häufiger vorkommt, was zu einer unausgeglichenen Verteilung der Daten über die Knoten des Clusters und zur Beeinträchtigung der Abfrageleistung beitragen kann.
+* Wenn ein einheitlicher Bereich für einen DateTime-Partitions Schlüssel einen ausreichenden Prozentsatz an Werten aufweist, die "weit" von den meisten Werten in der Spalte (z. b. DateTime-Werte aus der entfernten Vergangenheit oder Zukunft) liegen, kann der mehr Aufwand für den Daten Partitionierungs Prozess verbessern und zu vielen kleinen Blöcken führen, die der Cluster nachverfolgen muss.
 
 In beiden Fällen sollten Sie die Daten entweder "korrigieren" oder vor oder während der Erfassungs Zeit (z. b. mithilfe einer [Update Richtlinie](updatepolicy.md)) irrelevante Datensätze in den Daten herausfiltern, um den mehr Aufwand für die Daten Partitionierung im Cluster zu verringern.
 

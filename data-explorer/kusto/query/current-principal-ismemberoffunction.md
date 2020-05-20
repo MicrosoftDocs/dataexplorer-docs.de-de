@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 03/09/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 521165f5b0af31207d587f3d9514e7538d284258
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: fdd062abc02ff1d98ba935fc9016d0a1505e69c3
+ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227339"
+ms.lasthandoff: 05/18/2020
+ms.locfileid: "83550400"
 ---
 # <a name="current_principal_is_member_of"></a>current_principal_is_member_of()
 
@@ -37,7 +37,7 @@ print current_principal_is_member_of(
 
 **Argumente**
 
-* eine *Liste von Ausdrücken* : eine durch Trennzeichen getrennte Liste von Zeichenfolgenliteralen, wobei jedes Literale eine voll qualifizierte fqn-Zeichenfolge (Uniform-Qualified-Name) ist, die als:  
+* *Liste der Ausdrücke* : eine durch Trennzeichen getrennte Liste von Zeichenfolgenliteralen, wobei jedes Literale eine voll qualifizierte voll qualifizierte namens Zeichenfolge (fqn) ist:  
 *Principlatype* `=` *Principalid* `;` *Tenantid*
 
 | Principaltype   | Voll qualifizierte Präfix  |
@@ -47,11 +47,11 @@ print current_principal_is_member_of(
 | Aad-Anwendung | `aadapp=`   |
 
 **Rückgabe**
-
+  
 Die Funktion gibt Folgendes zurück:
 * `true`:, wenn der aktuelle Prinzipal, der die Abfrage ausgeführt hat, mit mindestens einem Eingabe Argument erfolgreich abgeglichen wurde.
 * `false`: Wenn der aktuelle Prinzipal, der die Abfrage ausgeführt, kein Member eines `aadgroup=` fqn-Arguments war und nicht mit einem der- `aaduser=` oder `aadapp=` fqn-Argumente übereinstimmt.
-* `(null)`: Wenn der aktuelle Prinzipal, der die Abfrage ausgeführt, kein Member eines `aadgroup=` fqn-Arguments war und nicht mit einem der fqn `aaduser=` `aadapp=` -Argumente oder übereinstimmt und mindestens ein fqn-Argument nicht erfolgreich aufgelöst wurde (wurde nicht in Aad vorgegeben). 
+* `(null)`: Wenn der aktuelle Prinzipal, der die Abfrage ausgeführt, kein Member eines `aadgroup=` fqn-Arguments war und nicht mit einem `aaduser=` der `aadapp=` -oder fqn-Argumente übereinstimmt, und mindestens ein fqn-Argument nicht erfolgreich aufgelöst wurde (wurde nicht in Azure AD gedrückt). 
 
 > [!NOTE]
 > Da die Funktion einen Tri-State-Wert zurückgibt ( `true` , `false` und `null` ), ist es wichtig, sich nur auf positive Rückgabewerte zu verlassen, um eine erfolgreiche Mitgliedschaft zu bestätigen. Mit anderen Worten: die folgenden Ausdrücke sind nicht identisch:

@@ -1,42 +1,60 @@
 ---
-title: Microsoft Logic App und Kusto - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden Microsoft Logic App und Kusto in Azure Data Explorer beschrieben.
-services: data-explorer
+title: Verwenden von Logic Apps zum automatischen Ausführen von Kusto-Abfragen
+description: Erfahren Sie, wie Sie mit Logic Apps die Kusto-Abfragen und-Befehle automatisch ausführen und planen.
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: docohe
 ms.service: data-explorer
-ms.topic: reference
-ms.date: 10/30/2019
-ms.openlocfilehash: f7d719ece5df6eb3f6d4060a2fb07e7092902601
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.topic: conceptual
+ms.date: 04/14/2020
+ms.openlocfilehash: 8765635e0eea8c1d41640bc0393d39a0afa5f971
+ms.sourcegitcommit: e66c5f4b833b4f6269bb7bfa5695519fcb11d9fa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523816"
+ms.lasthandoff: 05/19/2020
+ms.locfileid: "83630191"
 ---
-# <a name="microsoft-logic-app-and-kusto"></a>Microsoft Logic App und Kusto
+# <a name="microsoft-logic-app-and-azure-data-explorer"></a>Microsoft Logic APP und Azure Daten-Explorer
 
-Mit dem Azure Kusto Logic App-Connector können Benutzer Kusto-Abfragen und -Befehle automatisch als Teil einer geplanten oder ausgelösten Aufgabe mithilfe von [Microsoft Logic App](https://docs.microsoft.com/azure/logic-apps/logic-apps-what-are-logic-apps)ausführen.
+Der Azure Kusto Logic App-Connector ermöglicht das automatische Ausführen von Kusto-Abfragen und-Befehlen im Rahmen einer geplanten oder ausgelösten Aufgabe mithilfe des [Microsoft Logic App](https://docs.microsoft.com/azure/logic-apps/logic-apps-what-are-logic-apps) -Connector.
 
-Die Logic App- und Flow-Connectors basieren auf demselben Connector, daher gelten für beide, wie auf der [Seite Flow-Dokumentation](flow.md)erwähnt, dieselben [Einschränkungen,](flow.md#limitations) [Aktionen,](flow.md#azure-kusto-flow-actions) [Authentifizierungs-](flow.md#authentication) und [Verwendungsbeispiele.](flow.md#usage-examples)
+Logik-APP und Flow werden auf demselben Connector erstellt. Daher gelten die für Flow geltenden [Einschränkungen](flow.md#limitations), [Aktionen](flow.md#azure-kusto-flow-actions), [Authentifizierungs](flow.md#authentication) -und [Verwendungs Beispiele](flow.md#azure-kusto-flow-actions) auch für Logic apps, wie auf der [Seite zur Fluss Dokumentation](flow.md)erwähnt.
 
+## <a name="how-to-create-a-logic-app-with-azure-data-explorer"></a>Erstellen einer Logik-App mit Azure Daten-Explorer
 
-## <a name="how-to-create-a-logic-app-with-azure-kusto"></a>Erstellen einer Logik-App mit Azure Kusto
+1. Öffnen Sie die [Microsoft Azure-Portal](https://ms.portal.azure.com/). 
+1. Suchen Sie nach, `logic app` und wählen Sie es aus.
 
-Öffnen Sie das Azure-Portal, und klicken Sie auf Erstellen einer neuen Logik-App-Ressource.
-Fügen Sie den gewünschten Namen, das Abonnement, die Resoure-Gruppe und den Speicherort hinzu, und klicken Sie auf Erstellen.
+    [![](./Images/logicapps/logicapp-search.png "Search for logic app")](./Images/logicapps/logicapp-search.png#lightbox)
 
-![Erstellen einer Logik-App](./Images/KustoTools-LogicApp/logicapp-createlogicapp.png "logicapp-createlogicapp")
+1. Wählen Sie **+ Hinzufügen** aus.
 
-Nachdem die Logik-App erstellt wurde, klicken Sie auf die Schaltfläche Bearbeiten
+    ![Logik-app hinzufügen](./Images/logicapps/logicapp-add.png)
 
-![Bearbeiten des Logik-App-Designers](./Images/KustoTools-LogicApp/logicapp-editdesigner.png "logicapp-editdesigner")
+1. Geben Sie die erforderlichen Details zum Formular ein:
+    * Subscription
+    * Resource group
+    * Name der Logik-App
+    * Region oder Integrationsdienstumgebung
+    * Standort
+    * Protokollanalyse ein-oder ausschalten
+1. Klicken Sie auf **Überprüfen + erstellen**.
 
-Erstellen einer leeren Logik-App
+    ![Erstellen einer Logik-App](./Images/logicapps/logicapp-create-new.png)
 
-![Leere Vorlage für Logik-App](./Images/KustoTools-LogicApp/logicapp-blanktemplate.png "logicapp-blanktemplate")
+1. Wenn die Logik-App erstellt wurde, wählen Sie **Bearbeiten**aus.
 
-Wiederholungsaktion hinzufügen und dann "Azure Kusto" auswählen
+    ![Logik-App-Designer bearbeiten](./Images/logicapps/logicapp-editdesigner.png "logicapp-editdesigner")
 
-![Logik-App Kusto Flow-Anschluss](./Images/KustoTools-LogicApp/logicapp-kustoconnector.png "logicapp-kustoconnector")
+1. Erstellen Sie eine leere Logik-app.
+
+    ![Leere Vorlage für Logik-App](./Images/logicapps/logicapp-blanktemplate.png "logicapp-blanktemplate")
+
+1. Fügen Sie eine Wiederholungs Aktion hinzu, und wählen Sie **Azure Kusto**.
+
+    ![Kusto-Flow-Connector für Logik-apps](./Images/logicapps/logicapp-kustoconnector.png "logicapp-kustoconnector")
+
+## <a name="next-steps"></a>Nächste Schritte
+
+* Weitere Informationen zum Konfigurieren einer Wiederholungs Aktion finden Sie auf der Daten [Fluss-Dokumentationsseite](flow.md) .
+* Werfen Sie einen Blick auf einige [Verwendungs Beispiele](flow.md#azure-kusto-flow-actions) für Ideen zum Konfigurieren ihrer Logik-App-Aktionen.
