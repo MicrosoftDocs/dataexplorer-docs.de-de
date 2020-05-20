@@ -272,6 +272,8 @@
               href: flow.md
             - name: "Verwendungsbeispiele für den Microsoft\_Flow-Connector"
               href: flow-usage.md
+        - name: Logic Apps
+          href: kusto/tools/logicapps.md
         - name: Apache Spark-Connector
           href: spark-connector.md
         - name: Herstellen einer Databricks-Verbindung unter Verwendung von Python
