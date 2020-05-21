@@ -4,22 +4,22 @@ description: In diesem Artikel werden Daten Zuordnungen in Azure Daten-Explorer 
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: ohbitton
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 03/30/2020
-ms.openlocfilehash: 2a3b402c04d5d1af85b2c2a042a23fbade7e2524
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.date: 05/19/2020
+ms.openlocfilehash: c4a64db6d1103aa2a004b816969ab73c7ba19943
+ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617645"
+ms.lasthandoff: 05/21/2020
+ms.locfileid: "83722064"
 ---
 # <a name="data-mappings"></a>Daten Zuordnungen
 
 Daten Zuordnungen werden während der Erfassung verwendet, um eingehende Datenspalten in Kusto-Tabellen zuzuordnen.
 
-Kusto unterstützt verschiedene Typen von Zuordnungen, `row-oriented` sowohl (CSV, JSON und Avro) als `column-oriented` auch (Parkett).
+Kusto unterstützt verschiedene Typen von Zuordnungen, sowohl `row-oriented` (CSV, JSON und Avro) als auch `column-oriented` (Parkett).
 
 Jedes Element in der Zuordnung Liste wird aus drei Eigenschaften erstellt:
 
@@ -30,7 +30,7 @@ Jedes Element in der Zuordnung Liste wird aus drei Eigenschaften erstellt:
 |`Properties`|Optionale Eigenschaften Auflistung, die Eigenschaften enthält, die für jede Zuordnung spezifisch sind, wie in den folgenden Abschnitten beschrieben.
 
 
-Alle Zuordnungen können [vorab erstellt](create-ingestion-mapping-command.md) werden, und auf Sie kann über den Erfassungs Befehl mithilfe `ingestionMappingReference` von Parametern verwiesen werden.
+Alle Zuordnungen können [vorab erstellt](create-ingestion-mapping-command.md) werden, und auf Sie kann über den Erfassungs Befehl mithilfe von `ingestionMappingReference` Parametern verwiesen werden.
 
 ## <a name="csv-mapping"></a>CSV-Zuordnung
 
@@ -65,9 +65,9 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 ```
 
 > [!NOTE]
-> Wenn die oben genannte Zuordnung als Teil des `.ingest` Control-Befehls bereitgestellt wird, wird Sie als JSON-Zeichenfolge serialisiert.
+> Wenn die oben genannte Zuordnung als Teil des Control-Befehls bereitgestellt wird, `.ingest` wird Sie als JSON-Zeichenfolge serialisiert.
 
-* Wenn die zuvor erstellte Zuordnung [vorab erstellt wurde](create-ingestion-mapping-command.md) , kann im Befehl `.ingest` Control auf Sie verwiesen werden:
+* Wenn die zuvor erstellte Zuordnung [vorab erstellt wurde](create-ingestion-mapping-command.md) , kann im Befehl Control auf Sie verwiesen werden `.ingest` :
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -78,7 +78,7 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
     )
 ```
 
-* Wenn die oben genannte Zuordnung als Teil des `.ingest` Control-Befehls bereitgestellt wird, wird Sie als JSON-Zeichenfolge serialisiert:
+* Wenn die oben genannte Zuordnung als Teil des Control-Befehls bereitgestellt wird, `.ingest` wird Sie als JSON-Zeichenfolge serialisiert:
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -93,7 +93,7 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
     )
 ```
 
-**Hinweis:** Das folgende Zuordnungsformat, `Properties` ohne den Eigenschaften Behälter, wird zurzeit unterstützt, ist aber in Zukunft möglicherweise veraltet.
+**Hinweis:** Das folgende Mapping-Format, ohne den `Properties` Eigenschaften Behälter, ist veraltet.
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -116,7 +116,7 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 
 |Eigenschaft|BESCHREIBUNG|
 |----|--|
-|`path`|Wenn mit `$`: JSON-Pfad zu dem Feld beginnt, das zum Inhalt der Spalte im JSON-Dokument wird (JSON-Pfad, der das gesamte Dokument bezeichnet `$`). Wenn der Wert nicht mit `$`beginnt: ein konstanter Wert wird verwendet.|
+|`path`|Wenn mit `$` : JSON-Pfad zu dem Feld beginnt, das zum Inhalt der Spalte im JSON-Dokument wird (JSON-Pfad, der das gesamte Dokument bezeichnet `$` ). Wenn der Wert nicht mit beginnt `$` : ein konstanter Wert wird verwendet.|
 |`transform`|Optionale Transformation, die auf den Inhalt mit Mapping- [Transformationen](#mapping-transformations)angewendet werden soll.|
 
 ### <a name="example-of-json-mapping"></a>Beispiel für JSON-Zuordnung
@@ -138,7 +138,7 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 ```
 
 > [!NOTE]
-> Wenn die oben genannte Zuordnung als Teil des `.ingest` Control-Befehls bereitgestellt wird, wird Sie als JSON-Zeichenfolge serialisiert.
+> Wenn die oben genannte Zuordnung als Teil des Control-Befehls bereitgestellt wird, `.ingest` wird Sie als JSON-Zeichenfolge serialisiert.
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -149,7 +149,7 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
     )
 ```
 
-**Hinweis:** Das folgende Zuordnungsformat, `Properties` ohne den Eigenschaften Behälter, wird zurzeit unterstützt, ist aber in Zukunft möglicherweise veraltet.
+**Hinweis:** Das folgende Mapping-Format, ohne den `Properties` Eigenschaften Behälter, ist veraltet.
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2") 
@@ -173,13 +173,13 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 |Eigenschaft|BESCHREIBUNG|
 |----|--|
 |`Field`|Der Name des Felds im Avro-Datensatz.|
-|`Path`|Eine Alternative zur `field` Verwendung von, die die Verwendung des inneren Teils eines Avro-Daten Satz Felds ermöglicht, falls erforderlich. Der Wert bezeichnet einen JSON-Pfad vom Stamm des Datensatzes. Weitere Informationen finden Sie in den Hinweisen unten. |
+|`Path`|Eine Alternative zur Verwendung `field` von, die die Verwendung des inneren Teils eines Avro-Daten Satz Felds ermöglicht, falls erforderlich. Der Wert bezeichnet einen JSON-Pfad vom Stamm des Datensatzes. Weitere Informationen finden Sie in den Hinweisen unten. |
 |`transform`|Optionale Transformation, die auf den Inhalt mit [unterstützten Transformationen](#mapping-transformations)angewendet werden soll.|
 
 **Hinweise**
 >[!NOTE]
 > * `field`und `path` können nicht gleichzeitig verwendet werden, es ist nur eine zulässig. 
-> * `path`kann nicht nur auf `$` root verweisen, sondern muss mindestens eine Pfad Ebene aufweisen.
+> * `path`kann nicht nur auf root verweisen `$` , sondern muss mindestens eine Pfad Ebene aufweisen.
 
 Die folgenden beiden Alternativen sind gleich:
 
@@ -211,7 +211,7 @@ Die folgenden beiden Alternativen sind gleich:
 ``` 
 
 > [!NOTE]
-> Wenn die oben genannte Zuordnung als Teil des `.ingest` Control-Befehls bereitgestellt wird, wird Sie als JSON-Zeichenfolge serialisiert.
+> Wenn die oben genannte Zuordnung als Teil des Control-Befehls bereitgestellt wird, `.ingest` wird Sie als JSON-Zeichenfolge serialisiert.
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -222,7 +222,7 @@ Die folgenden beiden Alternativen sind gleich:
     )
 ```
 
-**Hinweis:** Das folgende Zuordnungsformat, `Properties` ohne den Eigenschaften Behälter, wird zurzeit unterstützt, ist aber in Zukunft möglicherweise veraltet.
+**Hinweis:** Das folgende Mapping-Format, ohne den `Properties` Eigenschaften Behälter, ist veraltet.
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2") 
@@ -245,7 +245,7 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 
 |Eigenschaft|BESCHREIBUNG|
 |----|--|
-|`path`|Wenn beginnt mit `$`: JSON-Pfad zum Feld, das zum Inhalt der Spalte im Parkett Dokument wird (JSON-Pfad, der das gesamte Dokument bezeichnet `$`). Wenn der Wert nicht mit `$`beginnt: ein konstanter Wert wird verwendet.|
+|`path`|Wenn beginnt mit `$` : JSON-Pfad zum Feld, das zum Inhalt der Spalte im Parkett Dokument wird (JSON-Pfad, der das gesamte Dokument bezeichnet `$` ). Wenn der Wert nicht mit beginnt `$` : ein konstanter Wert wird verwendet.|
 |`transform`|Optionale [Mapping von Transformationen](#mapping-transformations) , die auf den Inhalt angewendet werden sollen.
 
 
@@ -266,9 +266,9 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 ```      
 
 > [!NOTE]
-> Wenn die oben genannte Zuordnung als Teil des `.ingest` Control-Befehls bereitgestellt wird, wird Sie als JSON-Zeichenfolge serialisiert.
+> Wenn die oben genannte Zuordnung als Teil des Control-Befehls bereitgestellt wird, `.ingest` wird Sie als JSON-Zeichenfolge serialisiert.
 
-* Wenn die zuvor erstellte Zuordnung [vorab erstellt wurde](create-ingestion-mapping-command.md) , kann im Befehl `.ingest` Control auf Sie verwiesen werden:
+* Wenn die zuvor erstellte Zuordnung [vorab erstellt wurde](create-ingestion-mapping-command.md) , kann im Befehl Control auf Sie verwiesen werden `.ingest` :
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -279,7 +279,7 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
     )
 ```
 
-* Wenn die oben genannte Zuordnung als Teil des `.ingest` Control-Befehls bereitgestellt wird, wird Sie als JSON-Zeichenfolge serialisiert:
+* Wenn die oben genannte Zuordnung als Teil des Control-Befehls bereitgestellt wird, `.ingest` wird Sie als JSON-Zeichenfolge serialisiert:
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2") 
@@ -302,7 +302,7 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 
 |Eigenschaft|BESCHREIBUNG|
 |----|--|
-|`path`|Wenn beginnt mit `$`: JSON-Pfad zum Feld, das zum Inhalt der Spalte im Orc-Dokument wird (JSON-Pfad, der das gesamte Dokument bezeichnet `$`). Wenn der Wert nicht mit `$`beginnt: ein konstanter Wert wird verwendet.|
+|`path`|Wenn beginnt mit `$` : JSON-Pfad zum Feld, das zum Inhalt der Spalte im Orc-Dokument wird (JSON-Pfad, der das gesamte Dokument bezeichnet `$` ). Wenn der Wert nicht mit beginnt `$` : ein konstanter Wert wird verwendet.|
 |`transform`|Optionale [Mapping von Transformationen](#mapping-transformations) , die auf den Inhalt angewendet werden sollen.
 
 ### <a name="example-of-orc-mapping"></a>Beispiel für Orc-Zuordnung
@@ -322,7 +322,7 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 ```      
 
 > [!NOTE]
-> Wenn die oben genannte Zuordnung als Teil des `.ingest` Control-Befehls bereitgestellt wird, wird Sie als JSON-Zeichenfolge serialisiert.
+> Wenn die oben genannte Zuordnung als Teil des Control-Befehls bereitgestellt wird, `.ingest` wird Sie als JSON-Zeichenfolge serialisiert.
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2") 
@@ -343,8 +343,8 @@ Einige der Datenformat Zuordnungen (Parkett, JSON und Avro) unterstützen einfac
 
 |Pfad abhängige Transformation|BESCHREIBUNG|Bedingungen|
 |--|--|--|
-|`PropertyBagArrayToDictionary`|Wandelt das JSON-Array von Eigenschaften (z. b. {Events: [{"N1": "V1"}, {"N2": "V2"}]}) in das Wörterbuch um und serialisiert es in ein gültiges JSON-Dokument (z. b. {"N1": "V1", "N2": "V2"}).|Kann nur angewendet werden, `path` wenn verwendet wird.|
-|`GetPathElement(index)`|Extrahiert ein Element aus dem angegebenen Pfad gemäß dem angegebenen Index (z. b. Path: $. a. b. c, getpathelement (0) = = "c", getpathelement (-1) = = "b", Type String|Kann nur angewendet werden, `path` wenn verwendet wird.|
+|`PropertyBagArrayToDictionary`|Wandelt das JSON-Array von Eigenschaften (z. b. {Events: [{"N1": "V1"}, {"N2": "V2"}]}) in das Wörterbuch um und serialisiert es in ein gültiges JSON-Dokument (z. b. {"N1": "V1", "N2": "V2"}).|Kann nur angewendet werden, wenn `path` verwendet wird.|
+|`GetPathElement(index)`|Extrahiert ein Element aus dem angegebenen Pfad gemäß dem angegebenen Index (z. b. Path: $. a. b. c, getpathelement (0) = = "c", getpathelement (-1) = = "b", Type String|Kann nur angewendet werden, wenn `path` verwendet wird.|
 |`SourceLocation`|Der Name des Speicher Artefakts, von dem die Daten bereitgestellt wurden, geben Sie Zeichenfolge ein (z. b. das Feld "baseUri" des BLOBs).|
 |`SourceLineNumber`|Offset relativ zu diesem Speicher Element, Typ Long (beginnend mit "1" und Inkrementieren pro neuem Datensatz).|
 |`DateTimeFromUnixSeconds`|Konvertiert eine Zahl, die UNIX-Zeit (Sekunden seit 1970-01-01) darstellt, in die UTC-DateTime|
