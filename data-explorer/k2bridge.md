@@ -7,12 +7,12 @@ ms.reviewer: guregini
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/12/2020
-ms.openlocfilehash: 7389bfdf437d5fc6e4872f9f35ed40d5cb7b2f16
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.openlocfilehash: 8a4a4e68333255c322708993b1c9429a89ae7a00
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108370"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373767"
 ---
 # <a name="visualize-data-from-azure-data-explorer-in-kibana-with-the-k2bridge-open-source-connector"></a>Visualisieren von Daten aus Azure Data Explorer in Kibana mit dem Open-Source-Connector K2Bridge
 
@@ -46,7 +46,7 @@ Bevor Sie Daten aus Azure Data Explorer in Kibana visualisieren können, halten 
 
 * Azure AD-Dienstprinzipal (Azure Active Directory), der berechtigt ist, Daten in Azure Data Explorer anzuzeigen, einschließlich der Client-ID und des geheimen Clientschlüssels
 
-    Wir empfehlen die Verwendung eines Dienstprinzipals mit Anzeigeberechtigung und raten von der Verwendung höherer Berechtigungen ab. [Legen Sie die Anzeigeberechtigung des Clusters für den Azure AD-Dienstprinzipal fest](https://docs.microsoft.com/azure/data-explorer/manage-database-permissions#manage-permissions-in-the-azure-portal).
+    Wir empfehlen die Verwendung eines Dienstprinzipals mit Anzeigeberechtigung und raten von der Verwendung höherer Berechtigungen ab. [Legen Sie die Anzeigeberechtigung des Clusters für den Azure AD-Dienstprinzipal fest](manage-database-permissions.md#manage-permissions-in-the-azure-portal).
 
     Weitere Informationen über den Azure AD-Dienstprinzipal finden Sie unter [Erstellen eines Azure AD-Dienstprinzipals](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#create-an-azure-active-directory-application).
 

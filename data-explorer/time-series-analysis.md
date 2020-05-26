@@ -7,12 +7,12 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/07/2019
-ms.openlocfilehash: 600c5421af21f8d10f3575854a38f1d95ec27160
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 3019cfd85fa2e62a18536fe22353d81b93e64c26
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492402"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83374343"
 ---
 # <a name="time-series-analysis-in-azure-data-explorer"></a>Zeitreihenanalysen in Azure Data Explorer
 
@@ -289,5 +289,5 @@ Diese erweiterte Funktionalität und die hohe Verarbeitungsgeschwindigkeit von A
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-* Informationen zu [Anomalieerkennung in Zeitreihen und Vorhersage](/azure/data-explorer/anomaly-detection) in Azure Data Explorer.
-* Informationen zu [Machine Learning-Funktionen](/azure/data-explorer/machine-learning-clustering) in Azure Data Explorer.
+* Informationen zu [Anomalieerkennung in Zeitreihen und Vorhersage](anomaly-detection.md) in Azure Data Explorer.
+* Informationen zu [Machine Learning-Funktionen](machine-learning-clustering.md) in Azure Data Explorer.

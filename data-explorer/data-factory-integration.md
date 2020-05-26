@@ -8,12 +8,12 @@ ms.reviewer: tomersh26
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/20/2020
-ms.openlocfilehash: 5b8e9844894df9c49c1abd703ebc5a14b4c7050c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b3ff40f04ba9152fa1b12b7211bf7a7cf07c69bb
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493142"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373931"
 ---
 # <a name="integrate-azure-data-explorer-with-azure-data-factory"></a>Integration von Azure Data Explorer und Azure Data Factory
 
@@ -51,7 +51,7 @@ Die [Azure Data Factory-Vorlage zum Massenkopieren aus einer Datenbank in Azure 
 
 1. Erstellen Sie den [Zuordnungsdatenfluss](/azure/data-factory/data-flow-create).
 1. [Exportieren Sie die Daten in Azure-Blob](/azure/data-factory/data-flow-sink). 
-1. Definieren Sie [Event Grid](/azure/data-explorer/ingest-data-event-grid) oder die [ADF-Kopieraktivität](/azure/data-explorer/data-factory-load-data), um die Daten in Azure Data Explorer zu erfassen.
+1. Definieren Sie [Event Grid](ingest-data-event-grid.md) oder die [ADF-Kopieraktivität](data-factory-load-data.md), um die Daten in Azure Data Explorer zu erfassen.
 
 ## <a name="select-between-copy-and-azure-data-explorer-command-activities-when-copy-data"></a>Auswählen zwischen Kopier- und Azure Data Explorer-Befehlsaktivitäten beim Kopieren von Daten 
 
@@ -216,7 +216,7 @@ Der ausgegebene Wert:
 * Erfahren Sie, wie Sie [Daten mithilfe von Azure Data Factory in Azure Data Explorer kopieren](data-factory-load-data.md).
 * Erfahren Sie, wie Sie die [Azure Data Factory-Vorlage zum Massenkopieren aus der Datenbank in Azure Data Explorer](data-factory-template.md) verwenden.
 * Erfahren Sie, wie Sie die [Azure Data Factory-Befehlsaktivität zum Ausführen von Azure Data Explorer-Steuerungsbefehlen](data-factory-command-activity.md) verwenden.
-* Erfahren Sie mehr über [Azure Data Explorer-Abfragen](/azure/data-explorer/web-query-data) zum Abfragen von Daten.
+* Erfahren Sie mehr über [Azure Data Explorer-Abfragen](web-query-data.md) zum Abfragen von Daten.
 
 
 

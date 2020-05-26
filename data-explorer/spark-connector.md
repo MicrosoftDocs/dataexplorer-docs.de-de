@@ -7,12 +7,12 @@ ms.reviewer: michazag
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 1/14/2020
-ms.openlocfilehash: 6e7879948fb7683210859c84970f31bc5adb4a90
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.openlocfilehash: 28dee67b6ac412a9c0497d5713a69c9617d3ae55
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108319"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83370465"
 ---
 # <a name="azure-data-explorer-connector-for-apache-spark"></a>Azure Data Explorer-Connector für Apache Spark
 
@@ -29,7 +29,7 @@ In diesem Thema wird beschrieben, wie Sie den Azure Data Explorer-Connector für
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
-* [Erstellen eines Azure Data Explorer-Clusters und einer Datenbank](/azure/data-explorer/create-cluster-database-portal) 
+* [Erstellen eines Azure Data Explorer-Clusters und einer Datenbank](create-cluster-database-portal.md) 
 * Erstellen eines Spark-Clusters
 * Installieren Sie die Azure Data Explorer-Connectorbibliothek:
     * Vorgefertigte Bibliotheken für [Spark 2.4, Scala 2.11](https://github.com/Azure/azure-kusto-spark/releases) 

@@ -7,16 +7,16 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/12/2020
-ms.openlocfilehash: 900bf815917a4b7c9841860d663a2183b1ab71b3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 523330f5ace4d9f2d652eccbd746b039d66df749
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493602"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83374298"
 ---
 # <a name="configure-managed-identities-for-your-azure-data-explorer-cluster"></a>Konfigurieren verwalteter Identitäten für Ihren Azure Data Explorer-Cluster
 
-Durch eine [verwaltete Entität aus Azure Active Directory](/azure/active-directory/managed-identities-azure-resources/overview) kann Ihr Cluster problemlos auf andere durch AAD geschützte Ressourcen wie Azure Key Vault zugreifen. Da die Identität von der Azure-Plattform verwaltet wird, müssen Sie keine Geheimnisse bereitstellen oder rotieren. In diesem Artikel erfahren Sie, wie Sie eine verwaltete Identität für Azure Data Explorer-Cluster erstellen. Die Konfiguration der verwalteten Identität wird zurzeit nur für die [Aktivierung von kundenseitig verwalteten Schlüsseln für Ihren Cluster](/azure/data-explorer/security#customer-managed-keys-with-azure-key-vault) unterstützt.
+Durch eine [verwaltete Entität aus Azure Active Directory](/azure/active-directory/managed-identities-azure-resources/overview) kann Ihr Cluster problemlos auf andere durch AAD geschützte Ressourcen wie Azure Key Vault zugreifen. Da die Identität von der Azure-Plattform verwaltet wird, müssen Sie keine Geheimnisse bereitstellen oder rotieren. In diesem Artikel erfahren Sie, wie Sie eine verwaltete Identität für Azure Data Explorer-Cluster erstellen. Die Konfiguration der verwalteten Identität wird zurzeit nur für die [Aktivierung von kundenseitig verwalteten Schlüsseln für Ihren Cluster](security.md#customer-managed-keys-with-azure-key-vault) unterstützt.
 
 > [!Note]
 > Verwaltete Identitäten für Azure Data Explorer verhalten sich nicht wie erwartet, wenn Ihr Azure Data Explorer-Cluster abonnement- oder mandantenübergreifend migriert wird. Die App muss eine neue Identität abrufen. Zu diesem Zweck kann die Funktion [deaktiviert](#disable-a-system-assigned-identity) und dann [erneut aktiviert](#add-a-system-assigned-identity) werden. Darüber hinaus müssen auch Zugriffsrichtlinien nachgeschalteter Ressourcen aktualisiert werden, um die neue Identität zu verwenden.
@@ -33,7 +33,7 @@ Weisen Sie eine vom System zugewiesene Identität zu, die an Ihren Cluster gebun
 
 #### <a name="new-azure-data-explorer-cluster"></a>Neuer Azure Data Explorer-Cluster
 
-1. [Erstellen eines Azure Data Explorer-Clusters](/azure/data-explorer/create-cluster-database-portal#create-a-cluster) 
+1. [Erstellen eines Azure Data Explorer-Clusters](create-cluster-database-portal.md#create-a-cluster) 
 1. Wählen Sie auf der Registerkarte **Sicherheit** für **Systemseitig zugewiesene Identität** die Option **Ein** aus. Um die systemseitig zugewiesene Identität zu entfernen, wählen Sie **Aus** aus.
 2. Wählen Sie **Weiter:Tags>** oder **Überprüfen und erstellen** aus, um den Cluster zu erstellen.
 

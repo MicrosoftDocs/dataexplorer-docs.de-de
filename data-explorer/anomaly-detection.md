@@ -7,12 +7,12 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/24/2019
-ms.openlocfilehash: eac1237e098b90f526e441ef89f0902f72abde53
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: e48b3356d01248eb34857c936f9ff2c8dfb7662a
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492754"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83374011"
 ---
 # <a name="anomaly-detection-and-forecasting-in-azure-data-explorer"></a>Anomalieerkennung und Vorhersage in Azure Data Explorer
 
@@ -22,7 +22,7 @@ In diesem Artikel werden die Funktionen in Azure Data Explorer zu Anomalieerkenn
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
-In [Zeitreihenanalysen in Azure Data Explorer](/azure/data-explorer/time-series-analysis) finden Sie eine Übersicht über Zeitreihenfunktionen.
+In [Zeitreihenanalysen in Azure Data Explorer](time-series-analysis.md) finden Sie eine Übersicht über Zeitreihenfunktionen.
 
 ## <a name="time-series-decomposition-model"></a>Zeitreihenanalyse-Modell
 
@@ -131,4 +131,4 @@ In diesem Dokument werden die nativen Funktionen von Azure Data Explorer zur Ano
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-Informationen zu [Machine Learning-Funktionen](/azure/data-explorer/machine-learning-clustering) in Azure Data Explorer.
+Informationen zu [Machine Learning-Funktionen](machine-learning-clustering.md) in Azure Data Explorer.

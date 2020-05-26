@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 0ecdee4171cb6deaa4cc6c233b8951c4eb54953c
-ms.sourcegitcommit: 9810acae3f1c83b8efe7b952d3bada2ff496b024
+ms.openlocfilehash: 4a2b18f28840291fc02002239297b45f38be00be
+ms.sourcegitcommit: 4e46b497d518884693a142f4ae21ea497db81861
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/18/2020
-ms.locfileid: "83444697"
+ms.lasthandoff: 05/25/2020
+ms.locfileid: "83824916"
 ---
 # <a name="capacity-policy"></a>Kapazitätsrichtlinie
 
@@ -31,7 +31,7 @@ Die Kapazitäts Richtlinie besteht aus:
 
 ## <a name="ingestion-capacity"></a>Erfassungs Kapazität
 
-|Eigenschaft                           |Typ    |BESCHREIBUNG                                                                                                                                                                               |
+|Eigenschaft                           |Type    |BESCHREIBUNG                                                                                                                                                                               |
 |-----------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |Clustermaximumconcurrentoperations |long    |Ein maximaler Wert für die Anzahl von gleichzeitigen Erfassungs Vorgängen in einem Cluster.                                                                                                            |
 |Coreutilizationkoeffizienten         |double  |Ein Koeffizienten für den Prozentsatz der Kerne, die beim Berechnen der Erfassungs Kapazität verwendet werden sollen (das Ergebnis der Berechnung wird immer von normalisiert `ClusterMaximumConcurrentOperations` ). |                                                                                                                             |
@@ -45,7 +45,7 @@ Minimal ( `ClusterMaximumConcurrentOperations` , `Number of nodes in cluster` * 
 
 ## <a name="extents-merge-capacity"></a>Erweitert die Zusammenfassungs Kapazität
 
-|Eigenschaft                           |Typ    |BESCHREIBUNG                                                                                    |
+|Eigenschaft                           |Type    |BESCHREIBUNG                                                                                    |
 |-----------------------------------|--------|-----------------------------------------------------------------------------------------------|
 |Maximumconcurrentoperationspernode |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Vorgänge zum Zusammenführen und Neuerstellen von Blöcken auf einem einzelnen Knoten. |
 
@@ -59,7 +59,7 @@ Die Gesamt Zusammenfassungs Kapazität des Clusters (wie von angezeigt [. Show C
 
 ## <a name="extents-purge-rebuild-capacity"></a>Erweiterbare Lösch Kapazität für Lösch Blöcke
 
-|Eigenschaft                           |Typ    |BESCHREIBUNG                                                                                                                           |
+|Eigenschaft                           |Type    |BESCHREIBUNG                                                                                                                           |
 |-----------------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------|
 |Maximumconcurrentoperationspernode |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Rebuild-Blöcke für Löschvorgänge auf einem einzelnen Knoten. |
 
@@ -72,7 +72,7 @@ Die Gesamtanzahl der Blöcke zum Löschen von Blöcken im Cluster Gesamt (wie vo
 
 ## <a name="export-capacity"></a>Exportieren von Kapazität
 
-|Eigenschaft                           |Typ    |BESCHREIBUNG                                                                                                                                                                            |
+|Eigenschaft                           |Type    |BESCHREIBUNG                                                                                                                                                                            |
 |-----------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |Clustermaximumconcurrentoperations |long    |Ein maximaler Wert für die Anzahl von gleichzeitigen Export Vorgängen in einem Cluster.                                                                                                           |
 |Coreutilizationkoeffizienten         |double  |Ein Koeffizienten für den Prozentsatz der Kerne, die beim Berechnen der Exportkapazität verwendet werden sollen. Das Ergebnis der Berechnung wird immer von normalisiert `ClusterMaximumConcurrentOperations` . |
@@ -86,7 +86,7 @@ Minimal ( `ClusterMaximumConcurrentOperations` , `Number of nodes in cluster` * 
 
 ## <a name="extents-partition-capacity"></a>Erweitert die Partitions Kapazität
 
-|Eigenschaft                           |Typ    |BESCHREIBUNG                                                                             |
+|Eigenschaft                           |Type    |BESCHREIBUNG                                                                             |
 |-----------------------------------|--------|----------------------------------------------------------------------------------------|
 |Clustermaximumconcurrentoperations |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Erweiterungs Vorgänge in einem Cluster. |
 
@@ -121,7 +121,7 @@ Die standardmäßige Kapazitäts Richtlinie weist die folgende JSON-Darstellung 
 ## <a name="control-commands"></a>Steuerungsbefehle
 
 > [!WARNING]
-> Es wird nur selten empfohlen, eine Kapazitäts Richtlinie aufgrund der möglichen Auswirkungen auf die verfügbaren Ressourcen des Clusters zu ändern.
+> Wenden Sie sich an das Azure Daten-Explorer-Team, bevor Sie eine Kapazitäts Richtlinie ändern.
 
 * Verwenden Sie [. zeigen Sie die Kapazität der Cluster Richtlinie](capacity-policy.md#show-cluster-policy-capacity) an, um die aktuelle Kapazitäts Richtlinie des Clusters anzuzeigen.
 

@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 09/24/2019
-ms.openlocfilehash: ee9d740a3bd9748611b4e822f5204eee2633b1bf
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 0d02b5916cabc3645a3d61a9154ed31061c762aa
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492810"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373899"
 ---
 # <a name="create-database-and-table-policies-for-azure-data-explorer-by-using-c"></a>Erstellen von Datenbank- und Tabellenrichtlinien für Azure Data Explorer mithilfe von C#
 
@@ -37,7 +37,7 @@ Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Un
 * Installieren Sie das [NuGet-Paket Microsoft.IdentityModel.Clients.ActiveDirectory](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory/) für die Authentifizierung.
 
 ## <a name="authentication"></a>Authentifizierung
-Um die Beispiele in diesem Artikel ausführen zu können, benötigen Sie eine Azure Active Directory-Anwendung (Azure AD) und einen Dienstprinzipal, der auf Ressourcen zugreifen kann. Sie können dieselbe Azure AD-Anwendung für die Authentifizierung aus einem [Testcluster und einer Datenbank](create-cluster-database-csharp.md#authentication) verwenden. Wenn Sie eine andere Azure AD Anwendung verwenden möchten, finden Sie weitere Informationen unter [Erstellen einer Azure AD-Anwendung](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal), um eine kostenlose Azure AD-Anwendung zu erstellen und die Rollenzuweisung im Abonnementbereich hinzuzufügen. Dieser Artikel zeigt außerdem, wie Sie die Angaben `Directory (tenant) ID`, `Application ID` und `Client secret` abrufen. Möglicherweise müssen Sie die neue Azure AD-Anwendung als Prinzipal in der Datenbank hinzufügen. Weitere Informationen finden Sie unter [Verwalten der Berechtigungen für Datenbanken in Azure Data Explorer](https://docs.microsoft.com/azure/data-explorer/manage-database-permissions).
+Um die Beispiele in diesem Artikel ausführen zu können, benötigen Sie eine Azure Active Directory-Anwendung (Azure AD) und einen Dienstprinzipal, der auf Ressourcen zugreifen kann. Sie können dieselbe Azure AD-Anwendung für die Authentifizierung aus einem [Testcluster und einer Datenbank](create-cluster-database-csharp.md#authentication) verwenden. Wenn Sie eine andere Azure AD Anwendung verwenden möchten, finden Sie weitere Informationen unter [Erstellen einer Azure AD-Anwendung](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal), um eine kostenlose Azure AD-Anwendung zu erstellen und die Rollenzuweisung im Abonnementbereich hinzuzufügen. Dieser Artikel zeigt außerdem, wie Sie die Angaben `Directory (tenant) ID`, `Application ID` und `Client secret` abrufen. Möglicherweise müssen Sie die neue Azure AD-Anwendung als Prinzipal in der Datenbank hinzufügen. Weitere Informationen finden Sie unter [Verwalten der Berechtigungen für Datenbanken in Azure Data Explorer](manage-database-permissions.md).
 
 ## <a name="alter-database-retention-policy"></a>Ändern der Aufbewahrungsrichtlinie für die Datenbank
 Legt eine Aufbewahrungsrichtlinie mit einem vorläufigen Löschzeitraum von 10 Tagen fest.

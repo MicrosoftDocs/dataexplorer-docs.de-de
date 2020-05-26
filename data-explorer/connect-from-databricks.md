@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 11/27/2018
-ms.openlocfilehash: 7e1c7dd313f42884132fe014367c0402418be708
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1853b85215da63a753a7867cb9d4354c5b99731a
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492906"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373965"
 ---
 # <a name="connect-to-azure-data-explorer-from-azure-databricks-by-using-python"></a>Herstellen einer Verbindung mit dem Azure Data Explorer von Azure Databricks mit Python
 
@@ -20,7 +20,7 @@ ms.locfileid: "81492906"
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
-- [Erstellen eines Azure Data Explorer-Clusters und einer Datenbank](/azure/data-explorer/create-cluster-database-portal)
+- [Erstellen eines Azure Data Explorer-Clusters und einer Datenbank](create-cluster-database-portal.md)
 - [Erstellen eines Azure Databricks-Arbeitsbereichs](/azure/azure-databricks/quickstart-create-databricks-workspace-portal#create-an-azure-databricks-workspace). Wählen Sie unter **Azure Databricks-Dienst** in der Dropdownliste **Tarif** die Option **Premium**. Wenn Sie diese Option wählen, können Sie mit Azure Databricks-Geheimnissen Ihre Anmeldeinformationen speichern und dann in Notebooks und Aufträgen darauf verweisen.
 
 - [Erstellen Sie einen Cluster](https://docs.azuredatabricks.net/user-guide/clusters/create.html) in Azure Databricks mit den folgenden Spezifikationen (minimale Einstellungen, die zum Ausführen des Beispielnotebooks erforderlich sind):

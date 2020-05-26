@@ -7,12 +7,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/17/2019
-ms.openlocfilehash: aa1cdb647190c804c5dc18d1575a6030f166a845
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b7ca4a41bb15e9fb8a4f55a9d674b1536dddd5ae
+ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493330"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83226396"
 ---
 # <a name="query-data-in-azure-data-lake-using-azure-data-explorer"></a>Abfragen von Daten in Azure Data Lake mit Azure Data Explorer
 
@@ -46,7 +46,7 @@ Azure Data Explorer ist in Azure Blob Storage und Azure Data Lake Storage (Gen1 
     > * Wenn Sie eine externe Tabelle mit Partitionen definieren, wird davon ausgegangen, dass die Speicherstruktur identisch ist.
 Wenn die Tabelle z. B. mit einer DateTime-Partition im Format JJJJ/MM/TT (Standard) definiert ist, sollte der Dateipfad des URI-Speichers *container1/JJJJ/MM/TT/all_exported_blobs* lauten. 
     > * Wenn die externe Tabelle durch eine datetime-Spalte partitioniert ist, müssen Sie in der Abfrage immer einen Zeitfilter für einen geschlossenen Bereich einschließen (z.B. sollte die Abfrage `ArchivedProducts | where Timestamp between (ago(1h) .. 10m)` bessere Leistung aufweisen als diese Abfrage (mit offenem Bereich): `ArchivedProducts | where Timestamp > ago(1h)`). 
-    > * Alle [unterstützten Erfassungsformate](ingest-data-overview.md#supported-data-formats) können mithilfe externer Tabellen abgefragt werden.
+    > * Alle [unterstützten Erfassungsformate](ingestion-supported-formats.md) können mithilfe externer Tabellen abgefragt werden.
 
 1. Die externe Tabelle ist im linken Bereich der Webbenutzeroberfläche sichtbar.
 

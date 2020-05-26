@@ -7,18 +7,18 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/30/2019
-ms.openlocfilehash: 219a9014b120e0df74f8d9d286253fa933c8f05a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: c0373d2e380f1a9fb826d0e40ffcc0284f6db09a
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493650"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373782"
 ---
 # <a name="streaming-ingestion-preview"></a>Streamingerfassung (Vorschauversion)
 
 Verwenden Sie die Streamingerfassung, wenn Sie eine geringe Wartezeit mit einer Erfassungsdauer von weniger als zehn Sekunden für Daten mit unterschiedlichem Volumen benötigen. Sie dient zur Optimierung der operativen Verarbeitung vieler Tabellen in einer oder mehreren Datenbanken, bei denen der Datenstrom für die einzelnen Tabellen jeweils relativ klein (wenige Datensätze pro Sekunde), das Gesamtvolumen der Datenerfassung aber hoch ist (mehrere tausend Datensätze pro Sekunde). 
 
-Sollte die Datenmenge mehr als 1 MB pro Sekunde und Tabelle betragen, verwenden Sie anstelle der Streamingerfassung die Massenerfassung. Weitere Informationen zu den verschiedenen Erfassungsmethoden finden Sie in der [Übersicht über die Datenerfassung](/azure/data-explorer/ingest-data-overview).
+Sollte die Datenmenge mehr als 1 MB pro Sekunde und Tabelle betragen, verwenden Sie anstelle der Streamingerfassung die Massenerfassung. Weitere Informationen zu den verschiedenen Erfassungsmethoden finden Sie in der [Übersicht über die Datenerfassung](ingest-data-overview.md).
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -48,7 +48,7 @@ Sollte die Datenmenge mehr als 1 MB pro Sekunde und Tabelle betragen, verwenden
 Es werden zwei Streamingerfassungstypen unterstützt:
 
 
-* [**Event Hub**](/azure/data-explorer/ingest-data-event-hub) (wird als Datenquelle verwendet)
+* [**Event Hub**](ingest-data-event-hub.md) (wird als Datenquelle verwendet)
 * Für die **benutzerdefinierte Erfassung** muss eine Anwendung geschrieben werden, die eine der Azure Data Explorer-Clientbibliotheken verwendet. Eine Beispielanwendung finden Sie [hier](https://github.com/Azure/azure-kusto-samples-dotnet/tree/master/client/StreamingIngestionSample).
 
 ### <a name="choose-the-appropriate-streaming-ingestion-type"></a>Auswählen des geeigneten Streamingerfassungstyps

@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/01/2020
-ms.openlocfilehash: e9918452aaeefc2c4f144c60e2e7bdb70ac87f2b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 8d4eeb47abb8eac2b042b64e65b55dac7e91d6c9
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81494510"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83374053"
 ---
 # <a name="install-and-use-lightingest"></a>Installieren und Verwenden von LightIngest
 
@@ -73,7 +73,7 @@ Das Hilfsprogramm kann Quelldaten aus einem lokalen Ordner oder aus einem Azure 
 |-prefix               |             |Zeichenfolge  |Optional  |Wenn sich die zu erfassenden Quelldaten in Blob Storage befinden, wird dieses URL-Präfix in allen Blobs gemeinsam genutzt, mit Ausnahme des Containernamens. <br>Wenn sich die Daten beispielsweise in `MyContainer/Dir1/Dir2` befinden, sollte das Präfix `Dir1/Dir2` lauten. Es empfiehlt sich, das Argument in doppelte Anführungszeichen einzuschließen. |
 |-pattern              |             |Zeichenfolge  |Optional  |Muster, nach dem Quelldateien oder Blobs ausgewählt werden. Unterstützt Platzhalter. Beispiel: `"*.csv"`. Es empfiehlt sich, das Argument in doppelte Anführungszeichen einzuschließen. |
 |-zipPattern           |             |Zeichenfolge  |Optional  |Regulärer Ausdruck, der zum Auswählen der zu erfassenden Dateien in einem ZIP-Archiv verwendet werden soll.<br>Alle anderen Dateien im Archiv werden ignoriert, z. B. `"*.csv"`. Es wird empfohlen, den regulären Ausdruck in doppelte Anführungszeichen einzuschließen. |
-|-format               |-f           |Zeichenfolge  |Optional  |Format der Quelldaten. Muss in einem der [unterstützten Formate](https://docs.microsoft.com/azure/data-explorer/ingestion-supported-formats) vorliegen. |
+|-format               |-f           |Zeichenfolge  |Optional  |Format der Quelldaten. Muss in einem der [unterstützten Formate](ingestion-supported-formats.md) vorliegen. |
 |-ingestionMappingPath |-mappingPath |Zeichenfolge  |Optional  |Pfad zur Spaltenzuordnungsdatei für die Erfassung (obligatorisch für JSON- und Avro-Formate). Siehe [Datenzuordnungen](kusto/management/mappings.md). |
 |-ingestionMappingRef  |-mappingRef  |Zeichenfolge  |Optional  |Name einer vorab erstellten Spaltenzuordnung für die Erfassung (obligatorisch für JSON- und Avro-Formate). Siehe [Datenzuordnungen](kusto/management/mappings.md). |
 |-creationTimePattern  |             |Zeichenfolge  |Optional  |Wenn das Argument festgelegt ist, wird es zum Extrahieren der CreationTime-Eigenschaft aus dem Datei- oder Blobpfad verwendet. Siehe [Verwenden des Arguments „CreationTimePattern“](#using-creationtimepattern-argument). |

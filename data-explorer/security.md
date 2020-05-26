@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/06/2020
-ms.openlocfilehash: 786950011f10e25d6bcb72061212c1878e79d45a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d8220055549c3bfa2892e7267521b08c0591f817
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492366"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83370270"
 ---
 # <a name="secure-azure-data-explorer-clusters-in-azure"></a>Schützen von Azure Data Explorer-Clustern in Azure
 
@@ -34,10 +34,10 @@ Das Feature für verwaltete Identitäten für Azure-Ressourcen in Azure Active D
 
 Standardmäßig werden Daten mit von Microsoft verwalteten Schlüsseln verschlüsselt. Für zusätzliche Kontrolle über die Verschlüsselungsschlüssel können Sie kundenseitig verwaltete Schlüssel für die Datenverschlüsselung bereitstellen. Sie können die Verschlüsselung Ihrer Daten auf der Speicherebene mit Ihren eigenen Schlüsseln verwalten. Ein kundenseitig verwalteter Schlüssel wird verwendet, um den Zugriff auf den Stammverschlüsselungsschlüssel zu schützen, der wiederum zur Ver- und Entschlüsselung sämtlicher Daten verwendet wird. Vom Kunden verwaltete Schlüssel bieten größere Flexibilität beim Erstellen, Rotieren, Deaktivieren und Widerrufen von Zugriffssteuerungen. Außerdem können Sie die zum Schutz Ihrer Daten verwendeten Verschlüsselungsschlüssel überwachen.
 
-Verwenden Sie Azure Key Vault, um Ihre kundenseitig verwalteten Schlüssel zu speichern. Sie können Ihre eigenen Schlüssel erstellen und in einem Schlüsseltresor speichern oder eine Azure Key Vault-API verwenden, um Schlüssel zu generieren. Der Azure Data Explorer-Cluster und die Azure Key Vault-Instanz müssen sich in der gleichen Region befinden, können aber zu verschiedenen Abonnements gehören. Weitere Informationen zum Azure Key Vault finden Sie unter [What is Azure Key Vault? (Was ist der Azure Key Vault?)](/azure/key-vault/key-vault-overview). Eine ausführliche Erläuterung zu kundenseitig verwalteten Schlüsseln finden Sie unter [Azure Storage-Verschlüsselung für ruhende Daten](/azure/storage/common/storage-service-encryption). Konfigurieren von kundenseitig verwalteten Schlüsseln in Ihrem Azure Data Explorer-Cluster mithilfe von [C#](/azure/data-explorer/customer-managed-keys-csharp) oder der [Azure Resource Manager-Vorlage](/azure/data-explorer/customer-managed-keys-resource-manager)
+Verwenden Sie Azure Key Vault, um Ihre kundenseitig verwalteten Schlüssel zu speichern. Sie können Ihre eigenen Schlüssel erstellen und in einem Schlüsseltresor speichern oder eine Azure Key Vault-API verwenden, um Schlüssel zu generieren. Der Azure Data Explorer-Cluster und die Azure Key Vault-Instanz müssen sich in der gleichen Region befinden, können aber zu verschiedenen Abonnements gehören. Weitere Informationen zum Azure Key Vault finden Sie unter [What is Azure Key Vault? (Was ist der Azure Key Vault?)](/azure/key-vault/key-vault-overview). Eine ausführliche Erläuterung zu kundenseitig verwalteten Schlüsseln finden Sie unter [Azure Storage-Verschlüsselung für ruhende Daten](/azure/storage/common/storage-service-encryption). Konfigurieren von kundenseitig verwalteten Schlüsseln in Ihrem Azure Data Explorer-Cluster mithilfe von [C#](customer-managed-keys-csharp.md) oder der [Azure Resource Manager-Vorlage](customer-managed-keys-resource-manager.md)
 
 > [!Note]
-> Von Kunden verwaltete Schlüssel basieren auf verwalteten Identitäten für Azure-Ressourcen, einem Feature von Azure Active Directory (Azure AD). Wenn Sie kundenseitig verwaltete Schlüssel im Azure-Portal konfigurieren möchten, müssen Sie für Ihren Cluster eine verwaltete Identität vom Typ **SystemAssigned** konfigurieren, wie in [Konfigurieren verwalteter Identitäten für Ihren Azure Data Explorer-Cluster](/azure/data-explorer/managed-identities) beschrieben.
+> Von Kunden verwaltete Schlüssel basieren auf verwalteten Identitäten für Azure-Ressourcen, einem Feature von Azure Active Directory (Azure AD). Wenn Sie kundenseitig verwaltete Schlüssel im Azure-Portal konfigurieren möchten, müssen Sie für Ihren Cluster eine verwaltete Identität vom Typ **SystemAssigned** konfigurieren, wie in [Konfigurieren verwalteter Identitäten für Ihren Azure Data Explorer-Cluster](managed-identities.md) beschrieben.
 
 #### <a name="store-customer-managed-keys-in-azure-key-vault"></a>Speichern von kundenseitig verwalteten Schlüsseln in Azure Key Vault
 
@@ -56,7 +56,7 @@ Zum Widerrufen des Zugriffs auf von Kunden verwaltete Schlüssel können Sie Pow
 
 ## <a name="role-based-access-control"></a>Rollenbasierte Zugriffssteuerung
 
-Mithilfe der [rollenbasierten Zugriffssteuerung](/azure/role-based-access-control/overview) (Role-Based Access Control, RBAC) können Sie Aufgaben in Ihrem Team verteilen und den Zugriff von Clusterbenutzern auf das Nötigste beschränken. Sie haben die Möglichkeit, nur bestimmte Aktionen zuzulassen, anstatt allen Benutzern uneingeschränkten Zugriff auf den virtuellen Computer zu gewähren. Sie können die [Zugriffssteuerung für die Datenbanken](/azure/data-explorer/manage-database-permissions) über das [Azure-Portal](/azure/role-based-access-control/role-assignments-portal), mithilfe der [Azure-Befehlszeilenschnittstelle](/azure/role-based-access-control/role-assignments-cli) oder mit [Azure PowerShell](/azure/role-based-access-control/role-assignments-powershell) konfigurieren.
+Mithilfe der [rollenbasierten Zugriffssteuerung](/azure/role-based-access-control/overview) (Role-Based Access Control, RBAC) können Sie Aufgaben in Ihrem Team verteilen und den Zugriff von Clusterbenutzern auf das Nötigste beschränken. Sie haben die Möglichkeit, nur bestimmte Aktionen zuzulassen, anstatt allen Benutzern uneingeschränkten Zugriff auf den virtuellen Computer zu gewähren. Sie können die [Zugriffssteuerung für die Datenbanken](manage-database-permissions.md) über das [Azure-Portal](/azure/role-based-access-control/role-assignments-portal), mithilfe der [Azure-Befehlszeilenschnittstelle](/azure/role-based-access-control/role-assignments-cli) oder mit [Azure PowerShell](/azure/role-based-access-control/role-assignments-powershell) konfigurieren.
 
 ## <a name="next-steps"></a>Nächste Schritte
 

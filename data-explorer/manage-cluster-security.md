@@ -7,12 +7,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/20/2019
-ms.openlocfilehash: 0f935999b68a7283c032d43c42d688b273d5c450
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 3daf9f5af46338a450a1f1a4e9c80a6c83841343
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492598"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83374018"
 ---
 # <a name="secure-your-cluster-in-azure-data-explorer---azure-portal"></a>Sichern Ihres Clusters in Azure Data Explorer – Azure-Portal
 
@@ -35,4 +35,4 @@ Sie können die Datenträgerverschlüsselung in Ihrem Cluster über die Einstell
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-[Überprüfen der Clusterintegrität](/azure/data-explorer/check-cluster-health)
+[Überprüfen der Clusterintegrität](check-cluster-health.md)

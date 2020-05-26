@@ -7,16 +7,16 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/29/2019
-ms.openlocfilehash: e2adedec36696c7974ecb2e7f7c62d65329c368f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: abef0650485ac1feb53d43f42559c5a7fdfb75c3
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81494490"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83374033"
 ---
 # <a name="machine-learning-capability-in-azure-data-explorer"></a>Machine Learning-Funktion in Azure Data Explorer
 
-Azure Data Explorer, eine Big Data-Analyseplattform, dient zur Überwachung von Dienstintegrität, QoS oder fehlerhaften Geräten auf anormales Verhalten mithilfe der integrierten Funktionen zur [Erkennung und Prognose von Anomalien](/azure/data-explorer/anomaly-detection). Sobald ein anomales Muster erkannt wird, wird eine Ursachenanalyse (Root Cause Analysis, RCA) durchgeführt, um die Anomalie abzuschwächen oder zu beheben.
+Azure Data Explorer, eine Big Data-Analyseplattform, dient zur Überwachung von Dienstintegrität, QoS oder fehlerhaften Geräten auf anormales Verhalten mithilfe der integrierten Funktionen zur [Erkennung und Prognose von Anomalien](anomaly-detection.md). Sobald ein anomales Muster erkannt wird, wird eine Ursachenanalyse (Root Cause Analysis, RCA) durchgeführt, um die Anomalie abzuschwächen oder zu beheben.
 
 Der komplexe und langwierige Diagnoseprozess wird von Domänenexperten durchgeführt. Der Prozess umfasst das Abrufen und Verknüpfen zusätzlicher Daten aus verschiedenen Quellen für denselben Zeitrahmen, die Suche nach Änderungen in der Verteilung der Werte auf mehrere Dimensionen, die Darstellung zusätzlicher Variablen und andere Techniken auf der Grundlage von Informationen über die Domäne und Intuition. Da diese Diagnoseszenarien in Azure Data Explorer gängig sind, stehen Machine Learning-Plug-Ins zur Verfügung, um die Diagnosephase zu vereinfachen und die Dauer der RCA zu verkürzen.
 
@@ -38,7 +38,7 @@ demo_clustering1
 
 ![Zeitdiagramm von Dienstausnahmen](media/machine-learning-clustering/service-exceptions-timechart.png)
 
-Die Anzahl der Dienstausnahmen korreliert mit dem gesamten Dienstdatenverkehr. Sie erkennen deutlich das tägliche Muster für Arbeitstage von Montag bis Freitag mit einem Anstieg der Anzahl der Dienstausnahmen mittags und einem Abfall während der Nacht. Am Wochenende ist die Anzahl gering. Ausnahmespitzen können mithilfe der [Anomalieerkennung in Zeitreihen](/azure/data-explorer/anomaly-detection?#time-series-anomaly-detection) in Azure Data Explorer erkannt werden.
+Die Anzahl der Dienstausnahmen korreliert mit dem gesamten Dienstdatenverkehr. Sie erkennen deutlich das tägliche Muster für Arbeitstage von Montag bis Freitag mit einem Anstieg der Anzahl der Dienstausnahmen mittags und einem Abfall während der Nacht. Am Wochenende ist die Anzahl gering. Ausnahmespitzen können mithilfe der [Anomalieerkennung in Zeitreihen](anomaly-detection.md#time-series-anomaly-detection) in Azure Data Explorer erkannt werden.
 
 Die zweite Spitze in den Daten tritt Dienstagnachmittag auf. Mit der folgenden Abfrage wird diese Spitze näher diagnostiziert. Verwenden Sie die Abfrage, um das Diagramm um die Spitze herum in höherer Auflösung (acht Stunden in einminütigen Intervallen) neu zu zeichnen, um zu überprüfen, ob es sich um eine scharfe Spitze handelt, und ihre Ränder anzuzeigen.
 

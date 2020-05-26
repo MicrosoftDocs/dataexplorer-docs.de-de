@@ -6,13 +6,13 @@ ms.author: orspodek
 ms.reviewer: kerend
 ms.service: data-explorer
 ms.topic: tutorial
-ms.date: 01/29/2020
-ms.openlocfilehash: 59a42c2a3e4efa8c8642bccf96b0040767753e65
-ms.sourcegitcommit: e1e35431374f2e8b515bbe2a50cd916462741f49
+ms.date: 05/19/2020
+ms.openlocfilehash: 0808d0dadd410ae6d220b03ef54191192b925a21
+ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82108336"
+ms.lasthandoff: 05/21/2020
+ms.locfileid: "83722183"
 ---
 # <a name="tutorial-ingest-and-query-monitoring-data-in-azure-data-explorer"></a>Tutorial: Erfassen und Abfragen von Überwachungsdaten in Azure Data Explorer 
 
@@ -196,7 +196,7 @@ Azure-Aktivitätsprotokolle sind Protokolle auf Abonnementebene, die einen Einbl
 
 ## <a name="set-up-an-ingestion-pipeline-in-azure-data-explorer"></a>Einrichten einer Erfassungspipeline in Azure Data Explorer
 
-Das Einrichten einer Azure Data Explorer-Pipeline umfasst mehrere Schritte, z. B. die [Tabellenerstellung und Datenerfassung](/azure/data-explorer/ingest-sample-data#ingest-data). Sie können die Daten auch ändern, zuordnen und aktualisieren.
+Das Einrichten einer Azure Data Explorer-Pipeline umfasst mehrere Schritte, z. B. die [Tabellenerstellung und Datenerfassung](ingest-sample-data.md#ingest-data). Sie können die Daten auch ändern, zuordnen und aktualisieren.
 
 ### <a name="connect-to-the-azure-data-explorer-web-ui"></a>Herstellen einer Verbindung mit der Azure Data Explorer-Webbenutzeroberfläche
 
@@ -290,7 +290,7 @@ Verwenden Sie die Azure Data Explorer-Webbenutzeroberfläche, um die Zieltabelle
 Verwenden Sie die folgende Abfrage, um die Daten der Diagnosemetrik- und -protokolldaten der Tabelle zuzuordnen:
 
 ```kusto
-.create table DiagnosticRawRecords ingestion json mapping 'DiagnosticRawRecordsMapping' '[{"column":"Records","path":"$.records"}]'
+.create table DiagnosticRawRecords ingestion json mapping 'DiagnosticRawRecordsMapping' '[{"column":"Records","Properties":{"path":"$.records"}}]'
 ```
 
 # <a name="activity-logs"></a>[Aktivitätsprotokolle](#tab/activity-logs)
@@ -299,7 +299,7 @@ Verwenden Sie die folgende Abfrage, um die Daten der Diagnosemetrik- und -protok
 Verwenden Sie die folgende Abfrage, um die Daten der Aktivitätsprotokolle der Tabelle zuzuordnen:
 
 ```kusto
-.create table ActivityLogsRawRecords ingestion json mapping 'ActivityLogsRawRecordsMapping' '[{"column":"Records","path":"$.records"}]'
+.create table ActivityLogsRawRecords ingestion json mapping 'ActivityLogsRawRecordsMapping' '[{"column":"Records","Properties":{"path":"$.records"}}]'
 ```
 ---
 
@@ -336,7 +336,7 @@ Verwenden Sie die folgende Abfrage, um die Daten der Aktivitätsprotokolle der T
 # <a name="diagnostic-logs"></a>[Diagnoseprotokolle](#tab/diagnostic-logs)
 #### <a name="create-data-update-policy-for-diagnostics-logs"></a>Erstellen einer Datenaktualisierungsrichtlinie für Diagnoseprotokolle
 
-1. Erstellen Sie eine [Funktion](kusto/management/functions.md), mit der die Sammlung an Diagnoseprotokolldatensätzen so erweitert wird, dass jeder Wert der Sammlung in einer separaten Zeile angeordnet wird. Sie aktivieren Datenerfassungsprotokolle in einem Azure Data Explorer-Cluster und verwenden das [Erfassungsprotokollschema](/azure/data-explorer/using-diagnostic-logs#diagnostic-logs-schema). Sie erstellen eine Tabelle für erfolgreiche und für fehlgeschlagene Datenerfassung. Für die erfolgreiche Erfassung bleiben einige der Felder leer (z. B. ErrorCode). Verwenden Sie den Operator [`mv-expand`](kusto/query/mvexpandoperator.md):
+1. Erstellen Sie eine [Funktion](kusto/management/functions.md), mit der die Sammlung an Diagnoseprotokolldatensätzen so erweitert wird, dass jeder Wert der Sammlung in einer separaten Zeile angeordnet wird. Sie aktivieren Datenerfassungsprotokolle in einem Azure Data Explorer-Cluster und verwenden das [Erfassungsprotokollschema](using-diagnostic-logs.md#diagnostic-logs-schema). Sie erstellen eine Tabelle für erfolgreiche und für fehlgeschlagene Datenerfassung. Für die erfolgreiche Erfassung bleiben einige der Felder leer (z. B. ErrorCode). Verwenden Sie den Operator [`mv-expand`](kusto/query/mvexpandoperator.md):
 
     ```kusto
     .create function DiagnosticLogsExpand() {

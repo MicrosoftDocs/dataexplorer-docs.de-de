@@ -7,12 +7,12 @@ ms.reviewer: gabilehner
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 11/07/2019
-ms.openlocfilehash: 4c385551f8983219dddf840f7a2d590809b030a3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 35fd37db22b2f07dcee9d7f67c700414a4cfc5d3
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492758"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373849"
 ---
 # <a name="use-follower-database-to-attach-databases-in-azure-data-explorer"></a>Verwenden der Follower-Datenbank zum Anfügen von Datenbanken in Azure Data Explorer
 
@@ -29,8 +29,8 @@ Das Anfügen einer Datenbank an einen anderen Cluster mithilfe der Follower-Funk
 ## <a name="prerequisites"></a>Voraussetzungen
 
 1. Wenn Sie kein Azure-Abonnement besitzen, können Sie ein [kostenloses Konto](https://azure.microsoft.com/free/) erstellen, bevor Sie beginnen.
-1. [Erstellen Sie Cluster und Datenbank](/azure/data-explorer/create-cluster-database-portal) für den Leader und den Follower.
-1. [Erfassen Sie Daten](/azure/data-explorer/ingest-sample-data) in der Leader-Datenbank mithilfe einer der verschiedenen Methoden, die unter [Übersicht über die Datenerfassung](/azure/data-explorer/ingest-data-overview) erläutert werden.
+1. [Erstellen Sie Cluster und Datenbank](create-cluster-database-portal.md) für den Leader und den Follower.
+1. [Erfassen Sie Daten](ingest-sample-data.md) in der Leader-Datenbank mithilfe einer der verschiedenen Methoden, die unter [Übersicht über die Datenerfassung](/azure/data-explorer/ingest-data-overview) erläutert werden.
 
 ## <a name="attach-a-database"></a>Anfügen einer Datenbank
 
@@ -370,7 +370,7 @@ Weitere Informationen zur Verwendung von Steuerungsbefehlen zum Konfigurieren de
 
 ### <a name="manage-permissions"></a>Verwalten von Berechtigungen
 
-Das Verwalten der Berechtigung für schreibgeschützte Datenbanken entspricht der Vorgehensweise bei allen Datenbanktypen. Informationen dazu finden Sie unter [Verwalten von Berechtigungen im Azure-Portal](/azure/data-explorer/manage-database-permissions#manage-permissions-in-the-azure-portal).
+Das Verwalten der Berechtigung für schreibgeschützte Datenbanken entspricht der Vorgehensweise bei allen Datenbanktypen. Informationen dazu finden Sie unter [Verwalten von Berechtigungen im Azure-Portal](manage-database-permissions.md#manage-permissions-in-the-azure-portal).
 
 ### <a name="configure-caching-policy"></a>Konfigurieren der Cacherichtlinie
 
@@ -379,8 +379,8 @@ Der Administrator der Follower-Datenbank kann die [Cacherichtlinie](kusto/manage
 ## <a name="limitations"></a>Einschränkungen
 
 * Die Leader- und Follower-Cluster müssen sich in derselben Region befinden.
-* Die [Streamingerfassung](/azure/data-explorer/ingest-data-streaming) kann für eine Datenbank, der gefolgt wird, nicht verwendet werden.
-* Datenverschlüsselung mithilfe von [kundenseitig verwalteten Schlüsseln](/azure/data-explorer/security#customer-managed-keys-with-azure-key-vault) wird auf Leader- und Follower-Clustern nicht unterstützt. 
+* Die [Streamingerfassung](ingest-data-streaming.md) kann für eine Datenbank, der gefolgt wird, nicht verwendet werden.
+* Datenverschlüsselung mithilfe von [kundenseitig verwalteten Schlüsseln](security.md#customer-managed-keys-with-azure-key-vault) wird auf Leader- und Follower-Clustern nicht unterstützt. 
 * Sie können eine Datenbank, die an einen anderen Cluster angefügt ist, erst nach dem Trennen löschen.
 * Sie können einen Cluster mit einer Datenbank, die an einen anderen Cluster angefügt ist, erst nach dem Trennen löschen.
 * Sie können einen Cluster, der über angefügte Follower- oder Leader-Datenbanken verfügt, nicht beenden. 

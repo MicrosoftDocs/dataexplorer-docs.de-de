@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/24/2020
-ms.openlocfilehash: b50b971a3b1980ad35a1a939bdf25f1c9e6ac7ba
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: bbbf120c0a24a7ed14bc558b7dcd739bf2cae595
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81494002"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83374272"
 ---
 # <a name="troubleshoot-access-ingestion-and-operation-of-your-azure-data-explorer-cluster-in-your-virtual-network"></a>Behandlung von Problemen im Zusammenhang mit dem Zugriff, der Erfassung und dem Betrieb Ihres Azure Data Explorer-Clusters in Ihrem virtuellen Netzwerk
 
@@ -29,7 +29,7 @@ Der erste Schritt ist die Überprüfung der TCP-Konnektivität mithilfe von Wind
 # <a name="windows"></a>[Windows](#tab/windows)
 
    1. Laden Sie [TCping](https://www.elifulkerson.com/projects/tcping.php) auf den Computer herunter, der eine Verbindung mit dem Cluster herstellt.
-   2. Pingen Sie das Ziel vom Quellcomputer aus mit folgendem Befehl:
+   1. Pingen Sie das Ziel vom Quellcomputer aus mit folgendem Befehl:
 
     ```cmd
      C:\> tcping -t yourcluster.kusto.windows.net 443 
@@ -47,7 +47,7 @@ Der erste Schritt ist die Überprüfung der TCP-Konnektivität mithilfe von Wind
     $ apt-get install netcat
      ```
 
-   2. Pingen Sie das Ziel vom Quellcomputer aus mit folgendem Befehl:
+   1. Pingen Sie das Ziel vom Quellcomputer aus mit folgendem Befehl:
 
      ```bash
      $ netcat -z -v yourcluster.kusto.windows.net 443
@@ -72,7 +72,7 @@ Wenn bei der Erfassung Probleme auftreten und Sie vermuten, dass sie im Zusammen
 
 ### <a name="check-ingestion-health"></a>Überprüfen der Erfassungsintegrität
 
-Überprüfen Sie, ob die [Clustererfassungsmetriken](/azure/data-explorer/using-metrics#ingestion-health-and-performance-metrics) einen fehlerfreien Status aufweisen.
+Überprüfen Sie, ob die [Clustererfassungsmetriken](using-metrics.md#ingestion-health-and-performance-metrics) einen fehlerfreien Status aufweisen.
 
 ### <a name="check-security-rules-on-data-source-resources"></a>Überprüfen von Sicherheitsregeln für Datenquellenressourcen
 
@@ -150,7 +150,7 @@ Wenn die Eigenschaft *Findings* (Ergebnisse) ein leeres Ergebnis anzeigt, bedeut
 
 ### <a name="check-network-security-group-nsg"></a>Überprüfen der Netzwerksicherheitsgruppe (NSG)
 
-Vergewissern Sie sich, dass die [Netzwerksicherheitsgruppe](/azure/virtual-network/security-overview) entsprechend den Anleitungen in [Abhängigkeiten für die VNET-Bereitstellung](/azure/data-explorer/vnet-deployment#dependencies-for-vnet-deployment) ordnungsgemäß konfiguriert wurde.
+Vergewissern Sie sich, dass die [Netzwerksicherheitsgruppe](/azure/virtual-network/security-overview) entsprechend den Anleitungen in [Abhängigkeiten für die VNET-Bereitstellung](vnet-deployment.md#dependencies-for-vnet-deployment) ordnungsgemäß konfiguriert wurde.
 
 ### <a name="check-route-table"></a>Überprüfen der Routingtabelle
 
@@ -158,4 +158,4 @@ Wenn beim Subnetz des Clusters eine Tunnelerzwingung zur Firewall eingerichtet w
 
 ### <a name="check-firewall-rules"></a>Überprüfen von Firewallregeln
 
-Wenn Sie den ausgehenden Datenverkehr des Tunnelsubnetzes an eine Firewall erzwingen, vergewissern Sie sich, dass alle Abhängigkeiten mit FQDN (z. B. *.blob.core.windows.net*) in der Firewallkonfiguration zulässig sind, wie in [Sichern von ausgehendem Datenverkehr mit Firewall](/azure/data-explorer/vnet-deployment#securing-outbound-traffic-with-firewall) beschrieben wird.
+Wenn Sie den ausgehenden Datenverkehr des Tunnelsubnetzes an eine Firewall erzwingen, vergewissern Sie sich, dass alle Abhängigkeiten mit FQDN (z. B. *.blob.core.windows.net*) in der Firewallkonfiguration zulässig sind, wie in [Sichern von ausgehendem Datenverkehr mit Firewall](vnet-deployment.md#securing-outbound-traffic-with-firewall) beschrieben wird.
