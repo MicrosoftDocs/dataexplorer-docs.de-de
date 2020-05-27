@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/22/2020
-ms.openlocfilehash: 7f74732ed38d0b41a857fc549f549ce54ad4dce6
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
+ms.openlocfilehash: a3d95d3cb90b6a834b1f1538aa28da1f1ac2a97f
+ms.sourcegitcommit: a562ce255ac706ca1ca77d272a97b5975235729d
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 05/26/2020
-ms.locfileid: "83863709"
+ms.locfileid: "83867051"
 ---
 # <a name="external-tables"></a>Externe Tabellen
 
@@ -21,7 +21,7 @@ Eine **externe Tabelle** ist eine Kusto-Schema Entität, die auf Daten verweist,
 
 Ähnlich wie [Tabellen](tables.md)weist eine externe Tabelle ein klar definiertes Schema auf (eine geordnete Liste von Spaltenname-und Datentyp Paaren). Im Gegensatz zu Tabellen werden Daten außerhalb des Kusto-Clusters gespeichert und verwaltet. In den meisten Fällen werden die Daten in einem Standardformat, z. b. CSV, Parkett und Avro, gespeichert und nicht von Kusto erfasst.
 
-Eine **externe Tabelle** wird einmal erstellt (siehe [Allgemeine Steuerungsbefehle für externe Tabellen](../../management/externaltables.md), [Erstellen und ändern externer SQL-Tabellen](../../management/external-sql-tables.md)und [Erstellen und Ändern von Tabellen im Speicher](../../management/external-tables-azurestorage-azuredatalake.md)). auf Sie kann mit dem Namen mithilfe der [external_table ()](../../query/externaltablefunction.md) -Funktion verwiesen werden. 
+Eine **externe Tabelle** wird einmal erstellt (siehe [Allgemeine Steuerungsbefehle für externe Tabellen](../../management/externaltables.md), [Erstellen und ändern externer SQL-Tabellen](../../management/external-sql-tables.md)und [Erstellen und Ändern von Tabellen in Azure Storage oder Azure Data Lake](../../management/external-tables-azurestorage-azuredatalake.md)). der Name kann mithilfe der [external_table ()](../../query/externaltablefunction.md) -Funktion mit dem Namen referenziert werden. 
 
 **Hinweise**
 
