@@ -8,12 +8,12 @@ ms.reviewer: jasonh
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/05/2019
-ms.openlocfilehash: ced839f671a94744799e8a6cde4dbee2a8f17cc3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: cf6724a0f363eda510b5aa9cde195ec4fd3db65b
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493194"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373869"
 ---
 # <a name="azure-devops-task-for-azure-data-explorer"></a>Azure DevOps-Aufgabe für Azure Data Explorer
 
@@ -26,9 +26,9 @@ Dieses Dokument beschreibt ein einfaches Beispiel für die Verwendung der Aufgab
 
 * Wenn Sie über kein Azure-Abonnement verfügen, können Sie ein [kostenloses Azure-Konto](https://azure.microsoft.com/free/) erstellen, bevor Sie beginnen.
 * Setup eines Azure Data Explorer-Clusters:
-    * Ein [Azure Data Explorer-Cluster und eine Datenbank](/azure/data-explorer/create-cluster-database-portal)
+    * Ein [Azure Data Explorer-Cluster und eine Datenbank](create-cluster-database-portal.md)
     * Erstellen Sie eine Azure Active Directory (Azure AD)-App mit [Bereitstellung einer Azure AD-Anwendung](kusto/management/access-control/how-to-provision-aad-app.md).
-    * Gewährleisten Sie den Zugriff auf Ihre Azure AD-App in Ihrer Azure Data Explorer-Datenbank, indem Sie [die Berechtigungen der Azure Data Explorer-Datenbank verwalten](/azure/data-explorer/manage-database-permissions).
+    * Gewährleisten Sie den Zugriff auf Ihre Azure AD-App in Ihrer Azure Data Explorer-Datenbank, indem Sie [die Berechtigungen der Azure Data Explorer-Datenbank verwalten](manage-database-permissions.md).
 * Azure DevOps-Setup:
     * [Für eine kostenlose Organisation registrieren](/azure/devops/user-guide/sign-up-invite-teammates?view=azure-devops)
     * [Eine Organisation erstellen](/azure/devops/organizations/accounts/create-organization?view=azure-devops)

@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/19/2020
-ms.openlocfilehash: 93451dd1237905754ac834cb335f5d8a02157ac7
-ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
+ms.openlocfilehash: c591c4f774f3af99004d398898b288256861bb75
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "82030054"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83373722"
 ---
 # <a name="data-formats-supported-by-azure-data-explorer-for-ingestion"></a>Von Azure Data Explorer für die Erfassung unterstützte Datenformate.
 
@@ -34,6 +34,7 @@ Bei der Datenerfassung werden Daten einer Tabelle hinzugefügt und für Abfragen
 |TSV      |`.tsv`      |Eine Textdatei mit durch Tabstopps getrennten Werten (`\t`).|
 |TSVE     |`.tsv`      |Eine Textdatei mit durch Tabstopps getrennten Werten (`\t`). Als Escapezeichen wird ein umgekehrter Schrägstrich (`\`) verwendet.|
 |TXT      |`.txt`      |Eine Textdatei mit durch `\n` getrennten Zeilen. Leere Zeilen werden übersprungen.|
+|W3CLOGFILE |`.log`    |Vom W3C standardisiertes Format der [Webprotokolldatei](https://www.w3.org/TR/WD-logfile.html)|
 
 ## <a name="supported-data-compression-formats"></a>Unterstützte Datenkomprimierungsformate
 
@@ -57,5 +58,5 @@ Blob- oder Dateinamen, die nicht die Formaterweiterungen, sondern nur die Kompri
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-* Erfahren Sie mehr über die [Datenerfassung](/azure/data-explorer/ingest-data-overview).
+* Erfahren Sie mehr über die [Datenerfassung](ingest-data-overview.md).
 * Erfahren Sie mehr über die [Datenerfassungseigenschaften von Azure Data Explorer](ingestion-properties.md).

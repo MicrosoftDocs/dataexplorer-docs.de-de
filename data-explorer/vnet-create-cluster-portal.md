@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/24/2020
-ms.openlocfilehash: 80936da3e56fe0a73dcf146ba61630ceeb4bcb2a
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 097e175ff28d334532e85715f1f6401a96fa8f8c
+ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618512"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83374333"
 ---
 # <a name="create-an-azure-data-explorer-cluster-in-your-virtual-network"></a>Erstellen eines Azure Data Explorer-Clusters in Ihrem virtuellen Netzwerk
 
@@ -68,7 +68,7 @@ So erstellen Sie die Netzwerksicherheitsgruppe:
     | Name | AllowAzureDataExplorerManagement
     | | |
     
-1. Wiederholen Sie die beiden vorherigen Schritte für alle ein- und ausgehenden Abhängigkeiten gemäß [Abhängigkeiten für die VNET-Bereitstellung](/azure/data-explorer/vnet-deployment#dependencies-for-vnet-deployment). Alternativ können die Ausgangsregeln durch eine einzelne Regel ersetzt werden, um *Internet* für die Ports 443 und 80 zuzulassen.
+1. Wiederholen Sie die beiden vorherigen Schritte für alle ein- und ausgehenden Abhängigkeiten gemäß [Abhängigkeiten für die VNET-Bereitstellung](vnet-deployment.md#dependencies-for-vnet-deployment). Alternativ können die Ausgangsregeln durch eine einzelne Regel ersetzt werden, um *Internet* für die Ports 443 und 80 zuzulassen.
     
     Die NSG-Regeln für ein- und ausgehende Abhängigkeiten sollten wie folgt aussehen:
 
@@ -121,7 +121,7 @@ So erstellen Sie das virtuelle Netzwerk und das Subnetz:
     | | | |
 
     > [!NOTE]
-    > Orientieren Sie sich bei der Planung der Subnetzgröße für Produktionsworkloads an [Planen der Subnetzgröße in Ihrem VNET](/azure/data-explorer/vnet-deployment#plan-subnet-size-in-your-vnet).
+    > Orientieren Sie sich bei der Planung der Subnetzgröße für Produktionsworkloads an [Planen der Subnetzgröße in Ihrem VNET](vnet-deployment.md#plan-subnet-size-in-your-vnet).
 
 1. Wählen Sie **Bewerten + erstellen**, um Ihre Clusterdetails zu überprüfen, und dann **Erstellen**, um den Cluster bereitzustellen.
 

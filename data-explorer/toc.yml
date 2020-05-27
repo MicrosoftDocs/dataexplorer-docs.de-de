@@ -220,8 +220,6 @@
               href: language-extensions.md
         - name: Datenbank
           items:
-            - name: Follower-Datenbanken
-              href: follower.md
             - name: Verwalten von Datenbankberechtigungen
               href: manage-database-permissions.md
             - name: Hinzufügen eines Datenbankprinzipals
@@ -254,6 +252,12 @@
           href: using-metrics.md
         - name: Überwachen der Clusterintegrität mithilfe von Resource Health
           href: monitor-with-resource-health.md
+    - name: Freigeben von Daten
+      items:
+        - name: Verwenden von Azure Data Share
+          href: data-share.md
+        - name: Follower-Datenbanken
+          href: follower.md
     - name: Integration in andere Tools
       items:
         - name: Azure Data Factory
@@ -1248,11 +1252,11 @@
                   href: ./kusto/management/show-table-schema-command.md
             - name: Externe Tabellen
               items:
-                - name: Steuerungsbefehle für externe Tabellen
+                - name: Allgemeine Steuerungsbefehle für externe Tabellen
                   href: ./kusto/management/externaltables.md
-                - name: Externe SQL-Tabellen
+                - name: Erstellen und Ändern externer SQL-Tabellen
                   href: ./kusto/management/external-sql-tables.md
-                - name: Externe Tabellen in Azure Storage oder Azure Data Lake
+                - name: Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake
                   href: ./kusto/management/external-tables-azurestorage-azuredatalake.md
             - name: Spalten
               items:
@@ -1561,9 +1565,12 @@
         - name: Ad-hoc-Abfrage
           items:
             - name: Kusto.Explorer
-              href: ./kusto/tools/kusto-explorer.md
               items:
-                - name: Optionen in Kusto-Explorer
+                - name: Installation und Benutzeroberfläche von Kusto.Explorer
+                  href: ./kusto/tools/kusto-explorer.md
+                - name: Verwenden von Kusto.Explorer
+                  href: ./kusto/tools/kusto-explorer-using.md
+                - name: Optionen von Kusto.Explorer
                   href: ./kusto/tools/kusto-explorer-options.md
                 - name: Tastenkombinationen
                   href: ./kusto/tools/kusto-explorer-shortcuts.md
@@ -1573,6 +1580,8 @@
                   href: ./kusto/tools/kusto-explorer-codenav.md
                 - name: Codeanalyse
                   href: ./kusto/tools/kusto-explorer-code-analyzer.md
+                - name: Problembehandlung für Kusto.Explorer
+                  href: ./kusto/tools/kusto-explorer-troubleshooting.md
             - name: Web-Benutzeroberfläche
               href: ./web-query-data.md
             - name: Kusto.Cli

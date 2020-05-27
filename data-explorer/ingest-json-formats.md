@@ -6,17 +6,17 @@ ms.author: orspodek
 ms.reviewer: kerend
 ms.service: data-explorer
 ms.topic: conceptual
-ms.date: 01/27/2020
-ms.openlocfilehash: 36c7616ee3d79cebaea96ca67787466cbd401cab
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.date: 05/19/2020
+ms.openlocfilehash: 856749fc15a89ffe18c6b0cba92b62579c3ea8b0
+ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663178"
+ms.lasthandoff: 05/21/2020
+ms.locfileid: "83722132"
 ---
 # <a name="ingest-json-formatted-sample-data-into-azure-data-explorer"></a>Erfassen von Beispieldaten im JSON-Format in Azure Data Explorer
 
-In diesem Artikel wird das Erfassen von Daten im JSON-Format in einer Azure Data Explorer-Datenbank veranschaulicht. Sie beginnen mit einfachen Beispielen für unformatierten und zugeordneten JSON-Code, fahren dann mit mehrzeiligem JSON-Code fort und beschäftigen sich schließlich mit komplexeren JSON-Schemas, die Arrays und Wörterbücher enthalten.  Anhand der Beispiele wird der Prozess zur Erfassung von Daten im JSON-Format per Kusto-Abfragesprache (KQL), C# oder Python ausführlich beschrieben. Die `ingest`-Steuerbefehle der Kusto-Abfragesprache werden direkt für den Endpunkt der Engine ausgeführt. In Produktionsszenarien wird die Erfassung für den Datenverwaltungsdienst ausgeführt, indem Clientbibliotheken oder Datenverbindungen verwendet werden. Informationen zur exemplarischen Vorgehensweise bei der Erfassung von Daten mit diesen Clientbibliotheken finden Sie unter [Erfassen von Daten mit der Azure Data Explorer-Bibliothek für Python](/azure/data-explorer/python-ingest-data) und [Erfassen von Daten mit dem .NET Standard SDK für Azure Data Explorer](/azure/data-explorer/net-standard-ingest-data).
+In diesem Artikel wird das Erfassen von Daten im JSON-Format in einer Azure Data Explorer-Datenbank veranschaulicht. Sie beginnen mit einfachen Beispielen für unformatierten und zugeordneten JSON-Code, fahren dann mit mehrzeiligem JSON-Code fort und beschäftigen sich schließlich mit komplexeren JSON-Schemas, die Arrays und Wörterbücher enthalten.  Anhand der Beispiele wird der Prozess zur Erfassung von Daten im JSON-Format per Kusto-Abfragesprache (KQL), C# oder Python ausführlich beschrieben. Die `ingest`-Steuerbefehle der Kusto-Abfragesprache werden direkt für den Endpunkt der Engine ausgeführt. In Produktionsszenarien wird die Erfassung für den Datenverwaltungsdienst ausgeführt, indem Clientbibliotheken oder Datenverbindungen verwendet werden. Informationen zur exemplarischen Vorgehensweise bei der Erfassung von Daten mit diesen Clientbibliotheken finden Sie unter [Erfassen von Daten mit der Azure Data Explorer-Bibliothek für Python](python-ingest-data.md) und [Erfassen von Daten mit dem .NET Standard SDK für Azure Data Explorer](net-standard-ingest-data.md).
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -30,7 +30,7 @@ Azure Data Explorer unterstützt zwei JSON-Dateiformate:
 
 ### <a name="ingest-and-map-json-formatted-data"></a>Erfassen und Zuordnen von Daten im JSON-Format
 
-Für die Erfassung von Daten im JSON-Format müssen Sie das *Format* angeben, indem Sie die [Erfassungseigenschaft](ingestion-properties.md) verwenden. Für die Erfassung von JSON-Daten ist eine [Zuordnung](kusto/management/mappings.md) erforderlich, bei der ein JSON-Quelleintrag der Zielspalte zugeordnet wird. Verwenden Sie beim Erfassen von Daten die vordefinierte `jsonMappingReference`-Erfassungseigenschaft, oder geben Sie die `jsonMapping`-Erfassungseigenschaft an. In diesem Artikel wird die `jsonMappingReference`-Erfassungseigenschaft verwendet, die in der für die Erfassung verwendeten Tabelle vordefiniert ist. In den folgenden Beispielen erfassen wir zunächst JSON-Datensätze als Rohdaten in einer einzelnen Tabellenspalte. Anschließend verwenden wir die Zuordnung, um jede Eigenschaft in ihrer zugeordneten Spalte zu erfassen. 
+Für die Erfassung von Daten im JSON-Format müssen Sie das *Format* angeben, indem Sie die [Erfassungseigenschaft](ingestion-properties.md) verwenden. Für die Erfassung von JSON-Daten ist eine [Zuordnung](kusto/management/mappings.md) erforderlich, bei der ein JSON-Quelleintrag der Zielspalte zugeordnet wird. Verwenden Sie bei der Datenerfassung die Eigenschaft `IngestionMapping` mit der Erfassungseigenschaft `ingestionMappingReference` (für eine vordefinierte Zuordnung) oder mit der Eigenschaft `IngestionMappings`. In diesem Artikel wird die `ingestionMappingReference`-Erfassungseigenschaft verwendet, die in der für die Erfassung verwendeten Tabelle vordefiniert ist. In den folgenden Beispielen erfassen wir zunächst JSON-Datensätze als Rohdaten in einer einzelnen Tabellenspalte. Anschließend verwenden wir die Zuordnung, um jede Eigenschaft in ihrer zugeordneten Spalte zu erfassen. 
 
 ### <a name="simple-json-example"></a>Einfaches JSON-Beispiel
 
@@ -71,7 +71,7 @@ Verwenden Sie die Kusto-Abfragesprache (KQL), um Daten im JSON-Rohformat zu erfa
 1. Erstellen Sie die JSON-Zuordnung.
 
     ```kusto
-    .create table RawEvents ingestion json mapping 'RawEventMapping' '[{"column":"Event","path":"$"}]'
+    .create table RawEvents ingestion json mapping 'RawEventMapping' '[{"column":"Event","Properties":{"path":"$"}}]'
     ```
 
     Mit diesem Befehl wird eine Zuordnung erstellt und der JSON-Stammpfad `$` der Spalte `Event` zugeordnet.
@@ -79,7 +79,7 @@ Verwenden Sie die Kusto-Abfragesprache (KQL), um Daten im JSON-Rohformat zu erfa
 1. Erfassen Sie Daten in der Tabelle `RawEvents`.
 
     ```kusto
-    .ingest into table RawEvents h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D' with (format=json, jsonMappingReference=RawEventMapping)
+    .ingest into table RawEvents (h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D') with '{"format":json, "ingestionMappingReference":"DiagnosticRawRecordsMapping"}'
     ```
 
 # <a name="c"></a>[C#](#tab/c-sharp)
@@ -118,13 +118,14 @@ Verwenden Sie C#, um Daten im JSON-Rohformat zu erfassen.
     ```csharp
     var tableMapping = "RawEventMapping";
     var command =
-        CslCommandGenerator.GenerateTableJsonMappingCreateCommand(
+        CslCommandGenerator.GenerateTableMappingCreateCommand(
+            Data.Ingestion.IngestionMappingKind.Json,
             tableName,
             tableMapping,
-            new[]
-            {
-                new JsonColumnMapping {ColumnName = "Events", JsonPath = "$"},
-            });
+            new[] {
+            new ColumnMapping {ColumnName = "Events", Properties = new Dictionary<string, string>() {
+                {"path","$"} }
+            } });
 
     kustoClient.ExecuteControlCommand(command);
     ```
@@ -150,10 +151,13 @@ Verwenden Sie C#, um Daten im JSON-Rohformat zu erfassen.
         new KustoQueuedIngestionProperties(database, table)
         {
             Format = DataSourceFormat.json,
-            IngestionMappingReference = tableMapping
+            IngestionMapping = new IngestionMapping()
+            {
+                IngestionMappingReference = tableMapping
+            }
         };
 
-    ingestClient.IngestFromSingleBlob(blobPath, deleteSourceOnSuccess: false, ingestionProperties: properties);
+    ingestClient.IngestFromStorageAsync(blobPath, properties);
     ```
 
 > [!NOTE]
@@ -219,7 +223,7 @@ In diesem Beispiel erfassen Sie die Daten von JSON-Datensätzen. Jede JSON-Eigen
 1. Erstellen Sie die JSON-Zuordnung.
 
     ```kusto
-    .create table Events ingestion json mapping 'FlatEventMapping' '[{"column":"Time","path":"$.timestamp"},{"column":"Device","path":"$.deviceId"},{"column":"MessageId","path":"$.messageId"},{"column":"Temperature","path":"$.temperature"},{"column":"Humidity","path":"$.humidity"}]'
+    .create table Events ingestion json mapping 'FlatEventMapping' '[{"column":"Time","Properties":{"path":"$.timestamp"}},{"column":"Device","Properties":{"path":"$.deviceId"}},{"column":"MessageId","Properties":{"path":"$.messageId"}},{"column":"Temperature","Properties":{"path":"$.temperature"}},{"column":"Humidity","Properties":{"path":"$.humidity"}}]'
     ```
 
     In dieser Zuordnung werden die `timestamp`-Einträge – wie im Tabellenschema definiert – in der Spalte `Time` mit dem Datentyp `datetime` erfasst.
@@ -227,7 +231,7 @@ In diesem Beispiel erfassen Sie die Daten von JSON-Datensätzen. Jede JSON-Eigen
 1. Erfassen Sie Daten in der Tabelle `Events`.
 
     ```kusto
-    .ingest into table Events h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D' with (format=json, jsonMappingReference=FlatEventMapping)
+    .ingest into table Events (h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D') with '{"format":"json", "ingestionMappingReference":"FlatEventMapping"}'
     ```
 
     Die Datei „simple.json“ enthält einige JSON-Datensätze, die nach Zeilen getrennt sind. Das Format lautet `json`, und im Erfassungsbefehl wird das von Ihnen erstellte `FlatEventMapping`-Element für die Zuordnung genutzt.
@@ -258,16 +262,17 @@ In diesem Beispiel erfassen Sie die Daten von JSON-Datensätzen. Jede JSON-Eigen
     ```csharp
     var tableMapping = "FlatEventMapping";
     var command =
-        CslCommandGenerator.GenerateTableJsonMappingCreateCommand(
-            tableName,
+         CslCommandGenerator.GenerateTableMappingCreateCommand(
+            Data.Ingestion.IngestionMappingKind.Json,
+            "",
             tableMapping,
             new[]
             {
-                        new JsonColumnMapping {ColumnName = "Time", JsonPath = "$.timestamp"},
-                        new JsonColumnMapping {ColumnName = "Device", JsonPath = "$.deviceId"},
-                        new JsonColumnMapping {ColumnName = "MessageId", JsonPath = "$.messageId"},
-                        new JsonColumnMapping {ColumnName = "Temperature", JsonPath = "$.temperature"},
-                        new JsonColumnMapping {ColumnName = "Humidity", JsonPath = "$.humidity"},
+               new ColumnMapping() {ColumnName = "Time", Properties = new Dictionary<string, string>() {{ MappingConsts.Path, "$.timestamp"} } },
+               new ColumnMapping() {ColumnName = "Device", Properties = new Dictionary<string, string>() {{ MappingConsts.Path, "$.deviceId" } } },
+               new ColumnMapping() {ColumnName = "MessageId", Properties = new Dictionary<string, string>() {{ MappingConsts.Path, "$.messageId" } } },
+               new ColumnMapping() {ColumnName = "Temperature", Properties = new Dictionary<string, string>() {{ MappingConsts.Path, "$.temperature" } } },
+               new ColumnMapping() { ColumnName= "Humidity", Properties = new Dictionary<string, string>() {{ MappingConsts.Path, "$.humidity" } } },
             });
 
     kustoClient.ExecuteControlCommand(command);
@@ -283,10 +288,13 @@ In diesem Beispiel erfassen Sie die Daten von JSON-Datensätzen. Jede JSON-Eigen
         new KustoQueuedIngestionProperties(database, table)
         {
             Format = DataSourceFormat.json,
-            IngestionMappingReference = tableMapping
+            IngestionMapping = new IngestionMapping()
+            {
+                IngestionMappingReference = tableMapping
+            }
         };
 
-    ingestClient.IngestFromSingleBlob(blobPath, deleteSourceOnSuccess: false, ingestionProperties: properties);
+    ingestClient.IngestFromStorageAsync(blobPath, properties);
     ```
 
     Die Datei „simple.json“ enthält einige JSON-Datensätze, die nach Zeilen getrennt sind. Das Format lautet `json`, und im Erfassungsbefehl wird das von Ihnen erstellte `FlatEventMapping`-Element für die Zuordnung genutzt.
@@ -306,7 +314,7 @@ In diesem Beispiel erfassen Sie die Daten von JSON-Datensätzen. Jede JSON-Eigen
 
     ```python
     MAPPING = "FlatEventMapping"
-    CREATE_MAPPING_COMMAND = ".create table Events ingestion json mapping '" + MAPPING + """' '[{"column":"Time","path":"$.timestamp"},{"column":"Device","path":"$.deviceId"},{"column":"MessageId","path":"$.messageId"},{"column":"Temperature","path":"$.temperature"},{"column":"Humidity","path":"$.humidity"}]'""" 
+    CREATE_MAPPING_COMMAND = ".create table Events ingestion json mapping '" + MAPPING + """' '[{"column":"Time","Properties":{"path":"$.timestamp"}},{"column":"Device","Properties":{"path":"$.deviceId"}},{"column":"MessageId","Properties":{"path":"$.messageId"}},{"column":"Temperature","Properties":{"path":"$.temperature"}},{"column":"Humidity","Properties":{"path":"$.humidity"}}]'""" 
     RESPONSE = KUSTO_CLIENT.execute_mgmt(DATABASE, CREATE_MAPPING_COMMAND)
     dataframe_from_result_table(RESPONSE.primary_results[0])
     ```
@@ -334,7 +342,7 @@ In diesem Beispiel erfassen Sie mehrzeilige JSON-Datensätze. Jede JSON-Eigensch
 Erfassen Sie Daten in der Tabelle `Events`.
 
 ```kusto
-.ingest into table Events h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/multilined.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D' with (format=multijson, jsonMappingReference=FlatEventMapping)
+.ingest into table Events (h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/multilined.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D') with '{"format":"multijson", "ingestionMappingReference":"FlatEventMapping"}'
 ```
 
 # <a name="c"></a>[C#](#tab/c-sharp)
@@ -348,10 +356,13 @@ var properties =
     new KustoQueuedIngestionProperties(database, table)
     {
         Format = DataSourceFormat.multijson,
-        IngestionMappingReference = tableMapping
+        IngestionMapping = new IngestionMapping()
+        {
+            IngestionMappingReference = tableMapping
+        }
     };
 
-ingestClient.IngestFromSingleBlob(blobPath, deleteSourceOnSuccess: false, ingestionProperties: properties);
+ingestClient.IngestFromStorageAsync(blobPath, properties);
 ```
 
 # <a name="python"></a>[Python](#tab/python)
@@ -427,7 +438,7 @@ Arraydatentypen sind eine geordnete Sammlung von Werten. Die Erfassung eines JSO
 1. Erfassen Sie Daten in der Tabelle `RawEvents`.
 
     ```kusto
-    .ingest into table RawEvents h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/array.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D' with (format=multijson, jsonMappingReference=RawEventMapping)
+    .ingest into table RawEvents (h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/array.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D') with '{"format":"multijson", "ingestionMappingReference":"RawEventMapping"}'
     ```
 
 1. Sehen Sie sich die Daten in der Tabelle `Events` an.
@@ -482,10 +493,13 @@ Arraydatentypen sind eine geordnete Sammlung von Werten. Die Erfassung eines JSO
         new KustoQueuedIngestionProperties(database, table)
         {
             Format = DataSourceFormat.multijson,
-            IngestionMappingReference = tableMapping
+            IngestionMapping = new IngestionMapping()
+            {
+                IngestionMappingReference = tableMapping
+            }
         };
 
-    ingestClient.IngestFromSingleBlob(blobPath, deleteSourceOnSuccess: false, ingestionProperties: properties);
+    ingestClient.IngestFromStorageAsync(blobPath, properties);
     ```
     
 1. Sehen Sie sich die Daten in der Tabelle `Events` an.
@@ -575,13 +589,13 @@ JSON-Code mit einer Wörterbuchstruktur enthält Schlüssel-Wert-Paare. Für JSO
 1. Erstellen Sie eine JSON-Zuordnung.
 
     ```kusto
-    .create table Events ingestion json mapping 'KeyValueEventMapping' '[{"column":"Time","path":"$.event[?(@.Key == 'timestamp')]"},{"column":"Device","path":"$.event[?(@.Key == 'deviceId')]"},{"column":"MessageId","path":"$.event[?(@.Key == 'messageId')]"},{"column":"Temperature","path":"$.event[?(@.Key == 'temperature')]"},{"column":"Humidity","path":"$.event[?(@.Key == 'humidity')]"}]'
+    .create table Events ingestion json mapping 'KeyValueEventMapping' '[{"column":"a","Properties":{"path":"$.event[?(@.Key == \'timestamp\')]"}},{"column":"b","Properties":{"path":"$.event[?(@.Key == \'deviceId\')]"}},{"column":"c","Properties":{"path":"$.event[?(@.Key == \'messageId\')]"}},{"column":"d","Properties":{"path":"$.event[?(@.Key == \'temperature\')]"}},{"column":"Humidity","datatype":"string","Properties":{"path":"$.event[?(@.Key == \'humidity\')]"}}]'
     ```
 
 1. Erfassen Sie Daten in der Tabelle `Events`.
 
     ```kusto
-    .ingest into table Events h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/dictionary.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D' with (format=multijson, jsonMappingReference=KeyValueEventMapping)
+    .ingest into table Events (h'https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/dictionary.json?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D') with '{"format":"multijson", "ingestionMappingReference":"KeyValueEventMapping"}'
     ```
 
 # <a name="c"></a>[C#](#tab/c-sharp)
@@ -592,16 +606,29 @@ JSON-Code mit einer Wörterbuchstruktur enthält Schlüssel-Wert-Paare. Für JSO
     var tableName = "Events";
     var tableMapping = "KeyValueEventMapping";
     var command =
-        CslCommandGenerator.GenerateTableJsonMappingCreateCommand(
-            tableName,
+         CslCommandGenerator.GenerateTableMappingCreateCommand(
+            Data.Ingestion.IngestionMappingKind.Json,
+            "",
             tableMapping,
             new[]
             {
-                        new JsonColumnMapping {ColumnName = "Time", JsonPath = "$.event[?(@.Key == 'timestamp')]"},
-                        new JsonColumnMapping {ColumnName = "Device", JsonPath = "$.event[?(@.Key == 'deviceId')]"},
-                        new JsonColumnMapping {ColumnName = "MessageId", JsonPath = "$.event[?(@.Key == 'messageId')]"},
-                        new JsonColumnMapping {ColumnName = "Temperature", JsonPath = "$.event[?(@.Key == 'temperature')]"},
-                        new JsonColumnMapping {ColumnName = "Humidity", JsonPath = "$.event[?(@.Key == 'humidity')]"},
+                new ColumnMapping() { ColumnName = "Time", Properties = new Dictionary<string, string>() { {
+                    MappingConsts.Path,
+                    "$.event[?(@.Key == 'timestamp')]"
+                } } },
+                    new ColumnMapping() { ColumnName = "Device", Properties = new Dictionary<string, string>() { {
+                    MappingConsts.Path,
+                    "$.event[?(@.Key == 'deviceId')]"
+                } } }, new ColumnMapping() { ColumnName = "MessageId", Properties = new Dictionary<string, string>() { {
+                    MappingConsts.Path,
+                    "$.event[?(@.Key == 'messageId')]"
+                } } }, new ColumnMapping() { ColumnName = "Temperature", Properties = new Dictionary<string, string>() { {
+                    MappingConsts.Path,
+                    "$.event[?(@.Key == 'temperature')]"
+                } } }, new ColumnMapping() { ColumnName = "Humidity", Properties = new Dictionary<string, string>() { {
+                    MappingConsts.Path,
+                    "$.event[?(@.Key == 'humidity')]"
+                } } },
             });
 
     kustoClient.ExecuteControlCommand(command);
@@ -615,10 +642,12 @@ JSON-Code mit einer Wörterbuchstruktur enthält Schlüssel-Wert-Paare. Für JSO
         new KustoQueuedIngestionProperties(database, table)
         {
             Format = DataSourceFormat.multijson,
-            IngestionMappingReference = tableMapping
+            IngestionMapping = new IngestionMapping()
+            {
+                IngestionMappingReference = tableMapping
+            }
         };
-
-    ingestClient.IngestFromSingleBlob(blobPath, deleteSourceOnSuccess: false, ingestionProperties: properties);
+    ingestClient.IngestFromStorageAsync(blobPath, properties);
     ```
 
 # <a name="python"></a>[Python](#tab/python)
