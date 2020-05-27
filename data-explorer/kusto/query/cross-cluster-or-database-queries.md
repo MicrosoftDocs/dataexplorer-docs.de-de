@@ -10,20 +10,20 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: bb25fd556ab59dc5bdf5c533435f99deb6b32fdb
-ms.sourcegitcommit: da7c699bb62e1c4564f867d4131d26286c5223a8
+ms.openlocfilehash: 26c6d660cb254ec2df6600e90437d7db7ca748f4
+ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/14/2020
-ms.locfileid: "83404224"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83863148"
 ---
 # <a name="cross-database-and-cross-cluster-queries"></a>Datenbankübergreifende und clusterübergreifende Abfragen
 
 ::: zone pivot="azuredataexplorer"
 
 Jede Kusto-Abfrage wird im Kontext des aktuellen Clusters und der Standarddatenbank durchführt.
-* Im [Kusto-Explorer](../tools/kusto-explorer.md)ist die Standarddatenbank die im [Verbindungs Panel](../tools/kusto-explorer.md#connections-panel) ausgewählte Datenbank, und der aktuelle Cluster ist die Verbindung, die diese Datenbank enthält.
-* Wenn die [Kusto-Client Bibliothek](../api/netfx/about-kusto-data.md)verwendet wird, werden der aktuelle Cluster und die Standarddatenbank durch die `Data Source` -Eigenschaft und die-Eigenschaft `Initial Catalog` der [Kusto-Verbindungs](../api/connection-strings/kusto.md) Zeichenfolgen angegeben.
+* Im [Kusto-Explorer](../tools/kusto-explorer.md) ist die Standarddatenbank die im [Verbindungs Panel](../tools/kusto-explorer.md#connections-panel) ausgewählte Datenbank, und der aktuelle Cluster ist die Verbindung, die diese Datenbank enthält.
+* Wenn die [Kusto-Client Bibliothek](../api/netfx/about-kusto-data.md) verwendet wird, werden der aktuelle Cluster und die Standarddatenbank durch die `Data Source` -Eigenschaft und die-Eigenschaft `Initial Catalog` der [Kusto-Verbindungs](../api/connection-strings/kusto.md) Zeichenfolgen angegeben.
 
 ## <a name="queries"></a>Abfragen
 Für den Zugriff auf Tabellen aus einer anderen Datenbank als der Standardeinstellung muss die *qualifizierte namens* Syntax verwendet werden: für den Zugriff auf die Datenbank im aktuellen Cluster:

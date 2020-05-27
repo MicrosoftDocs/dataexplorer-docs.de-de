@@ -1,27 +1,23 @@
 ---
-title: 'Befehle für externe Tabellen Steuerelemente: Azure Daten-Explorer'
-description: In diesem Artikel werden Befehle der externen Tabellensteuerung in Azure Daten-Explorer beschrieben.
+title: 'Allgemeine Kusto-Tabellen Steuerungsbefehle: Azure Daten-Explorer'
+description: In diesem Artikel werden allgemeine Befehle der externen Tabellensteuerung beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 03/24/2020
-ms.openlocfilehash: 580f675360b96d56d43e1100cbba97d09a95c945
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.date: 05/26/2020
+ms.openlocfilehash: a08f1f154c0efa17164d15a075456e2b6fab3212
+ms.sourcegitcommit: a562ce255ac706ca1ca77d272a97b5975235729d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227705"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83867085"
 ---
-# <a name="external-table-control-commands"></a>Befehle für externe Tabellen Steuerelemente
+# <a name="external-table-general-control-commands"></a>Externe Tabelle (allgemeine Steuerungsbefehle)
 
-Eine Übersicht über externe Tabellen finden Sie unter [externe Tabellen](../query/schema-entities/externaltables.md) . 
-
-## <a name="common-external-tables-control-commands"></a>Allgemeine Befehle zum Steuern externer Tabellen
-
-Die folgenden Befehle sind für _jede_ externe Tabelle (eines beliebigen Typs) relevant.
+Eine Übersicht über externe Tabellen finden Sie unter [externe Tabellen](../query/schema-entities/externaltables.md) . Die folgenden Befehle sind für _jede_ externe Tabelle (eines beliebigen Typs) relevant.
 
 ## <a name="show-external-tables"></a>. anzeigen externer Tabellen
 
@@ -32,11 +28,11 @@ Die folgenden Befehle sind für _jede_ externe Tabelle (eines beliebigen Typs) r
 
 `.show` `external` `tables`
 
-`.show``external` `table` *TableName*
+`.show` `external` `table` *TableName*
 
 **Ausgabe**
 
-| Output-Parameter | type   | Beschreibung                                                         |
+| Output-Parameter | type   | BESCHREIBUNG                                                         |
 |------------------|--------|---------------------------------------------------------------------|
 | TableName        | Zeichenfolge | Name der externen Tabelle                                             |
 | TableType        | Zeichenfolge | Typ externer Tabelle                                              |
@@ -54,7 +50,7 @@ Die folgenden Befehle sind für _jede_ externe Tabelle (eines beliebigen Typs) r
 
 | TableName | TableType | Ordner         | DocString | Eigenschaften |
 |-----------|-----------|----------------|-----------|------------|
-| T         | Blob      | Externaltables | Docs      | {}         |
+| T         | Blob      | Externaltables | Dokumente      | {}         |
 
 
 ## <a name="show-external-table-schema"></a>. Anzeigen eines externen Tabellen Schemas
@@ -66,11 +62,11 @@ Die folgenden Befehle sind für _jede_ externe Tabelle (eines beliebigen Typs) r
 
 `.show``external` `table` *TableName* `schema` `as` ( `json`  |  `csl` )
 
-`.show``external` `table` *TableName*`cslschema`
+`.show` `external` `table` *TableName* `cslschema`
 
 **Ausgabe**
 
-| Output-Parameter | type   | Beschreibung                        |
+| Output-Parameter | type   | BESCHREIBUNG                        |
 |------------------|--------|------------------------------------|
 | TableName        | Zeichenfolge | Name der externen Tabelle            |
 | Schema           | Zeichenfolge | Das Tabellen Schema in einem JSON-Format. |
@@ -95,14 +91,14 @@ Die folgenden Befehle sind für _jede_ externe Tabelle (eines beliebigen Typs) r
 
 | TableName | Schema    | DatabaseName | Ordner         | DocString |
 |-----------|----------------------------------|--------------|----------------|-----------|
-| T         | {"Name": "externalblob",<br>"Folder": "externaltables",<br>"DocString": "docs",<br>"Orderedcolumns": [{"Name": "x", "Type": "System. Int64", "csltype": "Long", "DocString": ""}, {"Name": "s", "Type": "System. String", "csltype": "String", "DocString": ""}]} | DB           | Externaltables | Docs      |
+| T         | {"Name": "externalblob",<br>"Folder": "externaltables",<br>"DocString": "docs",<br>"Orderedcolumns": [{"Name": "x", "Type": "System. Int64", "csltype": "Long", "DocString": ""}, {"Name": "s", "Type": "System. String", "csltype": "String", "DocString": ""}]} | DB           | Externaltables | Dokumente      |
 
 
 *CSL*
 
 | TableName | Schema          | DatabaseName | Ordner         | DocString |
 |-----------|-----------------|--------------|----------------|-----------|
-| T         | x:Long, s:Zeichenfolge | DB           | Externaltables | Docs      |
+| T         | x:Long, s:Zeichenfolge | DB           | Externaltables | Dokumente      |
 
 ## <a name="drop-external-table"></a>. externe Tabelle löschen
 
@@ -112,7 +108,7 @@ Die folgenden Befehle sind für _jede_ externe Tabelle (eines beliebigen Typs) r
 
 **Syntax:**  
 
-`.drop``external` `table` *TableName*
+`.drop` `external` `table` *TableName*
 
 **Ausgabe**
 
@@ -126,5 +122,9 @@ Gibt die Eigenschaften der gelöschten Tabelle zurück. Weitere Informationen fi
 
 | TableName | TableType | Ordner         | DocString | Schema       | Eigenschaften |
 |-----------|-----------|----------------|-----------|-----------------------------------------------------|------------|
-| T         | Blob      | Externaltables | Docs      | [{"Name": "x", "csltype": "Long"},<br> {"Name": "s", "csltype": "String"}] | {}         |
+| T         | Blob      | Externaltables | Dokumente      | [{"Name": "x", "csltype": "Long"},<br> {"Name": "s", "csltype": "String"}] | {}         |
 
+## <a name="next-steps"></a>Nächste Schritte
+
+* [Erstellen und ändern externer Tabellen in Azure Storage oder Azure Data Lake](external-tables-azurestorage-azuredatalake.md)
+* [Erstellen und ändern externer SQL-Tabellen](external-sql-tables.md)

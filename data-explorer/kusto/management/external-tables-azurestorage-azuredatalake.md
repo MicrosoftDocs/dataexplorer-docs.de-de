@@ -1,6 +1,6 @@
 ---
-title: Externe Tabellen in Azure Storage oder Azure Data Lake-Azure-Daten-Explorer
-description: In diesem Artikel wird die Verwaltung externer Tabellen in Azure Daten-Explorer beschrieben.
+title: Erstellen und ändern externer Tabellen in Azure Storage oder Azure Data Lake-Azure-Daten-Explorer
+description: Dieser Artikel beschreibt das Erstellen und ändern externer Tabellen in Azure Storage oder Azure Data Lake
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1c7670dfb06e95f227a4b828a86b980005eeeac9
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 2ef238d863f2f3fe181814ac14e3605de21a5aff
+ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373356"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83863369"
 ---
-# <a name="external-tables-in-azure-storage-or-azure-data-lake"></a>Externe Tabellen in Azure Storage oder Azure Data Lake
+# <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>Erstellen und ändern externer Tabellen in Azure Storage oder Azure Data Lake
 
 Mit dem folgenden Befehl wird beschrieben, wie eine externe Tabelle erstellt wird. Die Tabelle kann sich in Azure BLOB Storage, Azure Data Lake Store Gen1 oder Azure Data Lake Store Gen2 befinden. 
 [Speicher Verbindungs](../api/connection-strings/storage.md) Zeichenfolgen beschreiben das Erstellen der Verbindungs Zeichenfolge für jede dieser Optionen. 
@@ -60,7 +60,7 @@ Erstellt oder ändert eine neue externe Tabelle in der Datenbank, in der der Bef
 
 **Optionale Eigenschaften**:
 
-| Eigenschaft         | type     | Beschreibung       |
+| Eigenschaft         | type     | BESCHREIBUNG       |
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | Tabellen Ordner                                                                     |
 | `docString`      | `string` | Zeichenfolge, die die Tabelle dokumentiert                                                       |
@@ -170,7 +170,7 @@ with
 
 |TableName|TableType|Ordner|DocString|Eigenschaften|ConnectionStrings|Partitionen|
 |---|---|---|---|---|---|---|
-|Externalmultiplepartitions|Blob|Externaltables|Docs|{"Format": "CSV", "Compressed": false, "compressionType": NULL, "File Extension": "CSV", "includeheaders": "None", "Encoding": NULL, "NamePrefix": NULL}|["https://storageaccount.blob.core.windows.net/container1;*******"]}|[{"StringFormat": "CustomerName = {0} ", "ColumnName": "CustomerName", "Ordinal": 0}, partitionby ":" 1,00:00:00 "," ColumnName ":" timestamp "," Ordinal ": 1}]|
+|Externalmultiplepartitions|Blob|Externaltables|Dokumente|{"Format": "CSV", "Compressed": false, "compressionType": NULL, "File Extension": "CSV", "includeheaders": "None", "Encoding": NULL, "NamePrefix": NULL}|["https://storageaccount.blob.core.windows.net/container1;*******"]}|[{"StringFormat": "CustomerName = {0} ", "ColumnName": "CustomerName", "Ordinal": 0}, partitionby ":" 1,00:00:00 "," ColumnName ":" timestamp "," Ordinal ": 1}]|
 
 ### <a name="artifact-filtering-logic"></a>Logik zum Filtern von Artefakten
 
@@ -217,13 +217,13 @@ dataformat=parquet
 
 **Syntax:** 
 
-`.show``external` `table` *TableName*`artifacts`
+`.show` `external` `table` *TableName* `artifacts`
 
 **Ausgabe**
 
 | Output-Parameter | type   | Beschreibung                       |
 |------------------|--------|-----------------------------------|
-| URI              | string | URI des externen Speicher Artefakts |
+| URI              | Zeichenfolge | URI des externen Speicher Artefakts |
 
 **Beispiele:**
 
@@ -233,7 +233,7 @@ dataformat=parquet
 
 **Ausgabe:**
 
-| URI                                                                     |
+| Uri                                                                     |
 |-------------------------------------------------------------------------|
 | `https://storageaccount.blob.core.windows.net/container1/folder/file.csv` |
 
@@ -251,7 +251,7 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 **Beispielausgabe**
 
-| name     | Variante | Zuordnung                                                           |
+| Name     | Art | Zuordnung                                                           |
 |----------|------|-------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "ColumnType": "int", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "ColumnType": "", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -269,7 +269,7 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 **Beispielausgabe**
 
-| name     | Variante | Zuordnung                                                                |
+| Name     | Art | Zuordnung                                                                |
 |----------|------|------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "ColumnType": "", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "ColumnType": "", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -291,7 +291,7 @@ Zeigt die Zuordnungen an (alle oder die durch den Namen angegebenen).
 
 **Beispielausgabe**
 
-| name     | Variante | Zuordnung                                                                         |
+| Name     | Art | Zuordnung                                                                         |
 |----------|------|---------------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "ColumnType": "", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "ColumnType": "", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -306,3 +306,7 @@ Löscht die Zuordnung aus der Datenbank.
 ```kusto
 .drop external table MyExternalTable JSON mapping "Mapping1" 
 ```
+## <a name="next-steps"></a>Nächste Schritte
+
+* [Externe Tabelle (allgemeine Steuerungsbefehle)](externaltables.md)
+* [Erstellen und ändern externer SQL-Tabellen](external-sql-tables.md)

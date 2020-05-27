@@ -1,6 +1,6 @@
 ---
-title: Broadcast-Beitritt - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird Broadcast Join in Azure Data Explorer beschrieben.
+title: 'Broadcast-Join: Azure-Daten-Explorer'
+description: In diesem Artikel wird der Broadcast Beitritt in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 72c89bf2160f8f5b735fd8c93f9519feae9114d9
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: e64413047ceb83860f7ea47a1540ae99faa7ec55
+ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517305"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83863216"
 ---
 # <a name="broadcast-join"></a>Broadcastjoin
 
-Heute werden die regulären Verknüpfungen auf einem einzelnen Clusterknoten ausgeführt.
-Broadcast-Join ist eine Ausführungsstrategie der Verknüpfung, die sie über Clusterknoten verteilt, und es ist nützlich, wenn die linke Seite der Verknüpfung klein ist (bis zu 100K-Datensätze), in diesem Fall ist die Verknüpfung leistungsfähiger als die reguläre Verknüpfung.
+Heute werden reguläre Joins auf einem einzelnen Cluster Knoten ausgeführt.
+Broadcast Join ist eine Ausführungs Strategie von Join, mit der es über Cluster Knoten verteilt wird. Diese Strategie ist nützlich, wenn die linke Seite des Joins klein ist (bis zu 100 K Datensätze). In diesem Fall ist der Broadcast Join leistungsfähiger als regulärer Join.
 
-Wenn die linke Seite der Verknüpfung ein kleines Dataset ist, können Sie Join im Broadcast-Modus mit der folgenden Syntax ausführen (hint.strategy = Broadcast):
+Wenn die linke Seite des Joins ein kleines DataSet ist, können Sie Join im Broadcast Modus ausführen, indem Sie die folgende Syntax verwenden (Hint. Strategy = Broadcast):
 
 ```kusto
 lookupTable 
 | join hint.strategy = broadcast (factTable) on key
 ```
 
-Die Leistungsverbesserung wird in Szenarien, in denen auf `summarize`die Verknüpfung von anderen Operatoren wie gefolgt wird, deutlicher. z. B. in dieser Abfrage:
+Die Leistungsverbesserung wird in Szenarien, in denen der Join von anderen Operatoren wie folgt, deutlicher bemerkbar machen `summarize` . beispielsweise in dieser Abfrage:
 
 ```kusto
 lookupTable 

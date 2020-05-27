@@ -8,12 +8,12 @@ ms.reviewer: ohbitton
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/19/2020
-ms.openlocfilehash: 3a89af281b2376e7fc06d07643af8e95a6c97cd2
-ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
+ms.openlocfilehash: 49a689b88e508285f2876f2e86208afceda0872b
+ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83722098"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83863250"
 ---
 # <a name="kustoingest-client-interfaces-and-classes"></a>Kusto. Erfassen von Client Schnittstellen und-Klassen
 
@@ -23,7 +23,7 @@ Die Haupt Schnittstellen und Klassen in der Kusto. Erfassungs Bibliothek sind:
 * [Klasse extendedkustoingestclient](#class-extendedkustoingestclient): Erweiterungen zur Haupt Erfassungs Schnittstelle.
 * [Klasse kustoingestfactory](#class-kustoingestfactory): die hauptfactory für die Erfassung von Clients.
 * [Class kustoingestionproperties](#class-kustoingestionproperties): Klasse, die verwendet wird, um allgemeine Erfassungs Eigenschaften bereitzustellen.
-* Class ingestionmapping: Klasse, mit der die Datenzuordnung für die Erfassung beschrieben wird.
+* [Class ingestionmapping](#class-ingestionmapping): Klasse, mit der die Datenzuordnung für die Erfassung beschrieben wird.
 * [Enum datasourceformat](#enum-datasourceformat): unterstützte Datenquellen Formate (z. b. CSV, JSON)
 * [Schnittstelle ikustoqueuedingestclient](#interface-ikustoqueuedingestclient): die Schnittstelle beschreibt Vorgänge, die nur für die Erfassung in der Warteschlange gelten.
 * [Class kustoqueuedingestionproperties](#class-kustoqueuedingestionproperties): Eigenschaften, die nur für die Erfassung in der Warteschlange gelten.
@@ -377,6 +377,28 @@ public class KustoIngestionProperties
 }
 ```
 
+## <a name="class-ingestionmapping"></a>Class ingestionmapping
+
+Enthält einen Verweis auf eine vorhandene Zuordnung oder eine Liste von Spalten Zuordnungen.
+
+|Eigenschaft   |Bedeutung    |
+|-----------|-----------|
+|Ingestionmappings | Spalten Zuordnungen, die jeweils die Ziel Spaltendaten und ihre Quelle beschreiben |
+|Ingestionmappingkind | Art der Zuordnung, die in der Eigenschaft ingestionmappings beschrieben wird: einer der folgenden: CSV, JSON, Avro, Parkett, sstream, Orc, apacheavro oder W3CLogFile |
+|Ingestionmappingreferenzierung | Der vorab erstellte Mapping-Name |
+
+```csharp
+public class IngestionMapping
+{
+    public IEnumerable<ColumnMapping> IngestionMappings { get; set; }
+    public IngestionMappingKind IngestionMappingKind { get; set; }
+    public string IngestionMappingReference { get; set; }
+
+    public IngestionMapping()
+    public IngestionMapping(IngestionMapping ingestionMapping)
+}
+```
+
 ## <a name="enum-datasourceformat"></a>Enum datasourceformat
 
 ```csharp
@@ -416,7 +438,6 @@ var kustoIngestionProperties = new KustoIngestionProperties("TargetDatabase", "T
             Properties = new Dictionary<string, string>() {
             { MappingConsts.Ordinal, "1"} }
         } },
-        // IngestionMappingReference = mappingName, the pre-created mapping name
     },
     ValidationPolicy = new ValidationPolicy { ValidationImplications = ValidationImplications.Fail, ValidationOptions = ValidationOptions.ValidateCsvInputConstantColumns },
     Format = DataSourceFormat.csv

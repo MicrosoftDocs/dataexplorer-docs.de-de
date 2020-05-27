@@ -1,6 +1,6 @@
 ---
-title: 'Externe SQL-Tabelle: Azure-Daten-Explorer'
-description: Dieser Artikel beschreibt die Erstellung externer SQL-Tabellen in Azure Daten-Explorer.
+title: 'Erstellen und ändern externer SQL-Tabellen: Azure Daten-Explorer'
+description: In diesem Artikel wird beschrieben, wie Sie externe SQL-Tabellen erstellen und ändern.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 9de01863ddb832421c5b6dbfe65b8ae451382fb7
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 235c68a8a04fd76dd3a9e25abac63db09e00919a
+ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373369"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83863335"
 ---
-# <a name="external-sql-table"></a>Externe SQL-Tabelle
+# <a name="create-and-alter-external-sql-tables"></a>Erstellen und ändern externer SQL-Tabellen
 
 Erstellt oder ändert eine externe SQL-Tabelle in der Datenbank, in der der Befehl ausgeführt wird.  
 
@@ -40,12 +40,12 @@ Erstellt oder ändert eine externe SQL-Tabelle in der Datenbank, in der der Befe
 
 ## <a name="optional-properties"></a>Optionale Eigenschaften
 
-| Eigenschaft            | type            | Beschreibung                          |
+| Eigenschaft            | type            | BESCHREIBUNG                          |
 |---------------------|-----------------|---------------------------------------------------------------------------------------------------|
 | `folder`            | `string`        | Der Ordner der Tabelle.                  |
 | `docString`         | `string`        | Eine Zeichenfolge, die die Tabelle dokumentiert.      |
-| `firetriggers`      | `true`/`false`  | Wenn `true` , wird das Zielsystem angewiesen, INSERT-Trigger auszulösen, die für die SQL-Tabelle definiert sind. Der Standardwert ist `false`. (Weitere Informationen finden Sie unter [Bulk Insert](https://msdn.microsoft.com/library/ms188365.aspx) und [System. Data. SqlClient. SqlBulkCopy](https://msdn.microsoft.com/library/system.data.sqlclient.sqlbulkcopy(v=vs.110).aspx)). |
-| `createifnotexists` | `true`/ `false` | Wenn `true` , wird die SQL-Ziel Tabelle erstellt, wenn Sie nicht bereits vorhanden `primarykey` ist. die-Eigenschaft muss in diesem Fall angegeben werden, um die Ergebnisspalte anzugeben, die der Primärschlüssel ist. Der Standardwert ist `false`.  |
+| `firetriggers`      | `true`/`false`  | Wenn `true` , wird das Zielsystem angewiesen, INSERT-Trigger auszulösen, die für die SQL-Tabelle definiert sind. Der Standardwert lautet `false`. (Weitere Informationen finden Sie unter [Bulk Insert](https://msdn.microsoft.com/library/ms188365.aspx) und [System. Data. SqlClient. SqlBulkCopy](https://msdn.microsoft.com/library/system.data.sqlclient.sqlbulkcopy(v=vs.110).aspx)). |
+| `createifnotexists` | `true`/ `false` | Wenn `true` , wird die SQL-Ziel Tabelle erstellt, wenn Sie nicht bereits vorhanden `primarykey` ist. die-Eigenschaft muss in diesem Fall angegeben werden, um die Ergebnisspalte anzugeben, die der Primärschlüssel ist. Der Standardwert lautet `false`.  |
 | `primarykey`        | `string`        | Wenn `createifnotexists` `true` den Wert hat, wird der resultierende Spaltenname als Primärschlüssel der SQL-Tabelle verwendet, wenn er mit diesem Befehl erstellt wird.                  |
 
 > [!NOTE]
@@ -77,7 +77,7 @@ with
 
 | TableName   | TableType | Ordner         | DocString | Eigenschaften                            |
 |-------------|-----------|----------------|-----------|---------------------------------------|
-| Externalsql | Sql       | Externaltables | Docs      | {<br>  "Targetentitykind": "sqltable" ",<br>  "Targetentityname": "mysqltable",<br>  "Targetentityconnectionstring": "Server = TCP:myserver. Database. Windows. net, 1433; Authentication = Active Directory integriert; anfangs Katalog = MyDatabase; ",<br>  "FireTriggers": true,<br>  "Kreateif NotExists": true,<br>  "PrimaryKey": "x"<br>} |
+| Externalsql | Sql       | Externaltables | Dokumente      | {<br>  "Targetentitykind": "sqltable" ",<br>  "Targetentityname": "mysqltable",<br>  "Targetentityconnectionstring": "Server = TCP:myserver. Database. Windows. net, 1433; Authentication = Active Directory integriert; anfangs Katalog = MyDatabase; ",<br>  "FireTriggers": true,<br>  "Kreateif NotExists": true,<br>  "PrimaryKey": "x"<br>} |
 
 ## <a name="querying-an-external-table-of-type-sql"></a>Abfragen einer externen Tabelle vom Typ SQL 
 
@@ -95,3 +95,8 @@ external_table('MySqlExternalTable') | count
 Kusto führt eine Abfrage vom Typ "Select * from table" für die SQL-Datenbank aus, gefolgt von einer Anzahl auf Kusto-Seite. In solchen Fällen wird erwartet, dass die Leistung besser ist, wenn Sie in T-SQL direkt geschrieben wird ("SELECT count (1) from table") und mit dem [sql_request-Plug](../query/sqlrequestplugin.md)-in ausgeführt wird, anstatt die externe Tabellen Funktion zu verwenden. Ebenso werden Filter nicht an die SQL-Abfrage übermittelt.  
 
 Verwenden Sie die externe Tabelle, um die SQL-Tabelle abzufragen, wenn die Abfrage das Lesen der gesamten Tabelle (oder relevanter Spalten) für die weitere Ausführung auf Kusto-Seite erfordert. Wenn eine SQL-Abfrage in T-SQL optimiert werden kann, verwenden Sie das [sql_request-Plug](../query/sqlrequestplugin.md)-in.
+
+## <a name="next-steps"></a>Nächste Schritte
+
+* [Externe Tabelle (allgemeine Steuerungsbefehle)](externaltables.md)
+* [Erstellen und ändern externer Tabellen in Azure Storage oder Azure Data Lake](external-tables-azurestorage-azuredatalake.md)

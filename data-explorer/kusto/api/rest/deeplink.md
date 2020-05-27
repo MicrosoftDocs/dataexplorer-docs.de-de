@@ -1,6 +1,6 @@
 ---
-title: Ui-Tiefenverknüpfungen - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden die Tiefenverknüpfungen der Benutzeroberfläche in Azure Data Explorer beschrieben.
+title: 'Deep-Links für die Benutzeroberfläche: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt Deep-Links für die Benutzeroberfläche in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,79 +8,79 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: c9535ced274ccdbe38f8d9a765e98d11e7b381e5
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: aa47811bfe8004037cb04e642c234003087617a1
+ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523680"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83863233"
 ---
-# <a name="ui-deep-links"></a>UI-Tiefenverknüpfungen
+# <a name="ui-deep-links"></a>Deep-Links für UI
 
-Die REST-API bietet eine Deep `GET` Link-Funktionalität, mit der HTTP-Anforderungen den Aufrufer an ein UI-Tool umleiten können. Sie können z. B. einen URI erstellen, der das Werkzeug Kusto.Explorer öffnet, es automatisch für einen bestimmten Cluster und eine bestimmte Datenbank konfiguriert, eine bestimmte Abfrage ausführt und deren Ergebnisse dem Benutzer anzeigt.
+Die Rest-API bietet eine Deep Link-Funktion, die es HTTP-Anforderungen ermöglicht, den Aufrufer `GET` zu einem UI-Tool umzuleiten Beispielsweise können Sie einen URI erstellen, der das Tool Kusto. Explorer öffnet, das Tool für einen bestimmten Cluster und eine bestimmte Datenbank automatisch konfiguriert, eine bestimmte Abfrage ausführt und die Ergebnisse für den Benutzer anzeigt.
 
-Die UI-Tiefenverknüpfungen REST-API:
+Die Rest-API für Deep Links für die Benutzeroberfläche:
 
-* Cluster (obligatorisch) wird häufig implizit als der Dienst definiert, der die REST-API implementiert, `uri`kann jedoch durch Angabe des URI-Abfrageparameters überschrieben werden.
+* Der Cluster (obligatorisch) wird häufig implizit definiert, wie der Dienst, der die Rest-API implementiert, kann jedoch durch Angabe des URI-Abfrage Parameters überschrieben werden `uri` .
 
-* Die Datenbank (optional) wird als erstes und einziges Fragment des URI-Pfads angegeben. Die Datenbank ist für Abfragen obligatorisch und für Steuerbefehle optional.
+* Die Datenbank (optional) wird als erstes und einziges Fragment des URI-Pfads angegeben. Die Datenbank ist für Abfragen und optional für Steuerungsbefehle obligatorisch.
 
-* Der Abfrage- oder Steuerungsbefehl (optional) wird `query`mithilfe des URI-Abfrageparameters oder des URI-Abfrageparameters `querysrc` (der auf eine Webressource verweist, die die Abfrage enthält) angegeben.
-  `query`kann im Text der Abfrage oder des Steuerbefehls selbst verwendet werden (kodiert mit der HTTP-Abfrageparametercodierung). Alternativ kann es in der base64-Codierung des gzip des Abfrage- oder Steuerbefehlstextes verwendet werden (so dass lange Abfragen so komprimiert werden können, dass sie den standardmäßigen URI-Längenbeschränkungen des Browsers entsprechen).
+* Der Abfrage-oder Steuerungs Befehl (optional) wird mithilfe des URI-Abfrage Parameters `query` oder des URI-Abfrage Parameters `querysrc` (der auf eine Webressource verweist, die die Abfrage enthält) angegeben.
+  `query`kann im Text des Abfrage-oder Steuerelement Befehls selbst verwendet werden (codiert mithilfe der HTTP-Abfrage Parameter Codierung). Alternativ kann Sie in der Base64-Codierung der GZIP-Datei des Abfrage-oder Steuerungs Befehls Texts verwendet werden (sodass lange Abfragen komprimiert werden können, sodass Sie den standardmäßigen Browser-URI-Längen Limits entsprechen).
 
-* Der Name der Clusterverbindung (optional) wird mithilfe `name`des URI-Abfrageparameters angegeben.
+* Der Name der Cluster Verbindung (optional) wird mithilfe des URI-Abfrage Parameters angegeben `name` .
 
-* Das UI-Tool wird `web` mithilfe des optionalen URI-Abfrageparameters angegeben.
-  `web=0`zeigt die Desktopanwendung Kusto.Explorer an. `web=1`zeigt die Kusto.WebExplorer-Webanwendung an.
-  `web=2`ist die alte Version von Kusto.WebExplorer (basierend auf Application Insights Analytics). `web=3`ist der Kusto.WebExplorer mit einem leeren Profil (es sind keine zuvor geöffneten Registerkarten oder Cluster verfügbar). Zuletzt kann `web` der Abfrageparameter `saw=1` ersetzt werden, um die SAW-Version von Kusto.Explorer anzugeben.
+* Das UI-Tool wird mit dem `web` optionalen URI-Abfrage Parameter angegeben.
+  `web=0`Gibt die Desktop Anwendung "Kusto. Explorer" an. `web=1`Gibt die Webanwendung "Kusto. Webexplorer" an.
+  `web=2`ist die alte Version von Kusto. Webexplorer (basierend auf Application Insights Analytics). `web=3`ist Kusto. Webexplorer mit einem leeren Profil (es sind keine zuvor geöffneten Registerkarten oder Cluster verfügbar). Zuletzt kann der `web` Abfrage Parameter durch ersetzt werden, um `saw=1` die erkannte Version von Kusto. Explorer anzugeben.
 
-Hier sind einige Beispiele für Links:
+Hier sind einige Beispiele für Verknüpfungen:
 
-* `https://help.kusto.windows.net/`: Wenn ein Benutzer-Agent (z. `GET /` B. ein Browser) eine Anforderung ausgibt, `help` wird sie an das Standard-UI-Tool umgeleitet, das für die Abfrage des Clusters konfiguriert ist.
-* `https://help.kusto.windows.net/Samples`: Wenn ein Benutzer-Agent (z. `GET /Samples` B. ein Browser) eine Anforderung ausgibt, `help` wird `Samples` er an das Standard-UI-Tool umgeleitet, das für die Abfrage der Clusterdatenbank konfiguriert ist.
-* `http://help.kusto.windows.net/Samples?query=StormEvents`: Wenn ein Benutzer (z. `GET /Samples?query=StormEvents` B. ein Browser) eine Anforderung ausstellt, wird `help` `Samples` er an das `StormEvents` Standard-UI-Tool umgeleitet, das für die Abfrage der Clusterdatenbank konfiguriert ist, und die Abfrage.
+* `https://help.kusto.windows.net/`: Wenn ein Benutzer-Agent (z. b. ein Browser) eine `GET /` Anforderung ausgibt, wird er an das Standardbenutzer Oberflächen Tool umgeleitet, das zum Abfragen des Clusters konfiguriert ist `help` .
+* `https://help.kusto.windows.net/Samples`: Wenn ein Benutzer-Agent (z. b. ein Browser) eine `GET /Samples` Anforderung ausgibt, wird er an das Standardbenutzer Oberflächen Tool umgeleitet, das zum Abfragen der `help` Cluster Datenbank konfiguriert ist `Samples` .
+* `http://help.kusto.windows.net/Samples?query=StormEvents`: Wenn ein Benutzer (z. b. ein Browser) eine `GET /Samples?query=StormEvents` Anforderung ausgibt, wird er zum Standardbenutzer Oberflächen Tool umgeleitet, das zum Abfragen der `help` Cluster Datenbank konfiguriert `Samples` ist, und die `StormEvents` Abfrage ausstellen.
 
 > [!NOTE]
-> Die Deep Link-URIs erfordern keine Authentifizierung, da die Authentifizierung vom UI-Tool ausgeführt wird, das für die Umleitung verwendet wird.
-> Jeder `Authorization` HTTP-Header wird, sofern angegeben, ignoriert.
+> Die Deep-Link-URIs erfordern keine Authentifizierung, da die Authentifizierung über das für die Umleitung verwendete UI-Tool ausgeführt wird.
+> Jeder `Authorization` http-Header wird, falls vorhanden, ignoriert.
 
 > [!IMPORTANT]
-> Aus Sicherheitsgründen führen UI-Tools keine Steuerbefehle `query` `querysrc` automatisch aus, auch wenn oder dies in der Tiefenverknüpfung angegeben ist.
+> Aus Sicherheitsgründen werden Steuerungsbefehle von UI-Tools nicht automatisch ausgeführt, auch wenn `query` oder `querysrc` im Deep-Link angegeben sind.
 
-## <a name="deep-linking-to-kustoexplorer"></a>Tiefenverknüpfung mit Kusto.Explorer
+## <a name="deep-linking-to-kustoexplorer"></a>Deep-Link zu Kusto. Explorer
 
-Diese REST-API führt eine Umleitung durch, die das Kusto.Explorer-Desktopclienttool mit speziell gestalteten Startparametern installiert und ausführt, die eine Verbindung zu einem bestimmten Kusto-Modulcluster öffnen und eine Abfrage für diesen Cluster ausführen.
+Diese Rest-API führt die Umleitung aus, die das Desktop Client Tool Kusto. Explorer mit speziell erstellten Start Parametern installiert und ausführt, die eine Verbindung mit einem bestimmten Kusto-Engine-Cluster herstellen und eine Abfrage für diesen Cluster ausführen.
 
-* Pfad: `/` [*Datenbankname*']
-* Verb:`GET`
-* Abfragezeichenfolge:`web=0`
-
-> [!NOTE]
-> Eine Beschreibung der UMleitungs-URI-Syntax zum Starten von Kusto.Explorer finden Sie unter [Deep-linking with Kusto.Explorer.](../../tools/kusto-explorer.md#deep-linking-queries)
-
-## <a name="deep-linking-to-kustowebexplorer"></a>Tiefenverknüpfung mit Kusto.WebExplorer
-
-Diese REST-API führt eine Umleitung zu Kusto.WebExplorer, einer Webanwendung, durch.
-
-* Pfad: `/` [*Datenbankname*']
-* Verb:`GET`
-* Abfragezeichenfolge:`web=1`
-
-## <a name="specifying-the-query-or-control-command-in-the-uri"></a>Angeben des Abfrage- oder Steuerbefehls im URI
-
-Wenn der PARAMETER `query` URI-Abfragezeichenfolge angegeben wird, muss er gemäß den HTML-Regeln der URI-Abfragezeichenfolge codiert werden. Alternativ kann der Text des Abfrage- oder Steuerbefehls durch gzip komprimiert und dann über base64-Codierung codiert werden. Auf diese Weise können Sie längere Abfragen oder Steuerbefehle senden (da letztere Codierungsmethode zu kürzeren URIs führt).
-
-## <a name="specifying-the-query-or-control-command-by-indirection"></a>Angeben des Abfrage- oder Steuerungsbefehls durch Indirektion
-
-Wenn der Abfrage- oder Steuerungsbefehl sehr lang ist, überschreitet selbst die Codierung mit gzip/base64 die maximale URI-Länge des Benutzer-Agents. Alternativ wird der URI-Abfragezeichenfolgenparameter `querysrc` bereitgestellt, und sein Wert ist ein kurzer URI, der auf eine Webressource verweist, die den Abfrage- oder Steuerbefehlstext enthält.
-
-Dies kann z. B. der URI für eine Datei sein, die von Azure Blob Storage gehostet wird.
+* Pfad: `/` [*DatabaseName*']
+* Ben`GET`
+* Abfrage Zeichenfolge:`web=0`
 
 > [!NOTE]
-> Wenn sich der Deep Link mit dem Benutzeroberflächentool für Webanwendungen befindet, muss der `querysrc` Webdienst, der den Abfrage- `dataexplorer.azure.com`oder Steuerelementbefehl bereitstellt (d. h. der Dienst, der den URI bereitstellt), so konfiguriert werden, dass er CORS für unterstützt.
+> Eine Beschreibung der Umleitungs-URI-Syntax zum Starten von Kusto. Explorer finden Sie unter [Deep-Linking with Kusto. Explorer](../../tools/kusto-explorer-using.md#deep-linking-queries) .
+
+## <a name="deep-linking-to-kustowebexplorer"></a>Deep-Link zu Kusto. Webexplorer
+
+Diese Rest-API führt die Umleitung zu Kusto. Webexplorer, einer Webanwendung, durch.
+
+* Pfad: `/` [*DatabaseName*']
+* Ben`GET`
+* Abfrage Zeichenfolge:`web=1`
+
+## <a name="specifying-the-query-or-control-command-in-the-uri"></a>Angeben des Abfrage-oder Steuerungs Befehls im URI
+
+Wenn der URI-Abfrage Zeichenfolgen-Parameter `query` angegeben wird, muss er gemäß der URI-Abfrage Zeichenfolge für HTML-Regeln codiert werden. Alternativ kann der Text des Abfrage-oder Steuerungs Befehls mit gzip komprimiert und anschließend über Base64-Codierung codiert werden. Dies ermöglicht es Ihnen, längere Abfragen oder Steuerungsbefehle zu senden (da die letztere Codierungsmethode zu kürzeren URIs führt).
+
+## <a name="specifying-the-query-or-control-command-by-indirection"></a>Angeben des Abfrage-oder Steuerungs Befehls durch Dereferenzierung
+
+Wenn der Abfrage-oder Steuerelement Befehl sehr lang ist, überschreitet auch das Codieren mit gzip/Base64 die maximale URI-Länge des Benutzer-Agents. Alternativ wird der URI-Abfrage Zeichenfolgen `querysrc` -Parameter bereitgestellt, und sein Wert ist ein kurzer URI, der auf eine Webressource zeigt, die den Abfrage-oder Steuerungs Befehls Text enthält.
+
+Dies kann z. b. der URI für eine Datei sein, die von Azure BLOB Storage gehostet wird.
+
+> [!NOTE]
+> Wenn der Deep-Link zum Webanwendungs-UI-Tool gehört, muss der Webdienst, der den Abfrage-oder Steuerungs Befehl bereitstellt (d. h. der Dienst, der den URI bereitstellt), für die `querysrc` Unterstützung von cors `dataexplorer.azure.com`
 >
-> Wenn authentifizierungs-/Autorisierungsinformationen von diesem Dienst benötigt werden, müssen diese außerdem als Teil des URI selbst bereitgestellt werden.
+> Wenn außerdem Authentifizierungs-/Autorisierungsinformationen für diesen Dienst erforderlich sind, muss dieser Teil des URI selbst bereitgestellt werden.
 >
-> Wenn `querysrc` beispielsweise auf ein Blob in Azure Blob Storage verweist, muss das Speicherkonto für die Unterstützung von CORS konfiguriert werden, und entweder das Blob selbst öffentlich machen (damit es ohne Sicherheitsansprüche heruntergeladen werden kann) oder dem URI eine entsprechende Azure Storage SAS hinzufügen. Die CORS-Konfiguration kann über das [Azure-Portal](https://portal.azure.com/) oder über [Azure Storage Explorer](https://azure.microsoft.com/features/storage-explorer/)erfolgen.
-> Weitere Informationen finden Sie unter [CORS-Unterstützung in Azure Storage](https://docs.microsoft.com/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services).
+> Wenn z. b. `querysrc` auf ein BLOB in Azure BLOB Storage verweist, muss das Speicherkonto für die Unterstützung von cors konfiguriert werden, und entweder muss das BLOB selbst öffentlich gemacht werden (sodass es ohne Sicherheitsansprüche heruntergeladen werden kann), oder es wird eine entsprechende Azure Storage-SAS zum URI hinzugefügt. Die cors-Konfiguration kann über die [Azure-Portal](https://portal.azure.com/) oder [Azure Storage-Explorer](https://azure.microsoft.com/features/storage-explorer/)ausgeführt werden.
+> Informationen finden Sie [unter cors-Unterstützung in Azure Storage](https://docs.microsoft.com/rest/api/storageservices/cross-origin-resource-sharing--cors--support-for-the-azure-storage-services).
 
