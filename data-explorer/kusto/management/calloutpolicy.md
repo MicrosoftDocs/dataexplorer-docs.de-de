@@ -1,6 +1,6 @@
 ---
-title: Callout-Richtlinie - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt die Callout-Richtlinie in Azure Data Explorer.
+title: 'Legende-Richtlinie: Azure Daten-Explorer'
+description: In diesem Artikel wird die Legenden Richtlinie in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,73 +8,70 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: df57c4901cef74d574108d2c6e75672d1faba75c
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.openlocfilehash: 42254e00e629a19dfceeef2d4a6c2d1877400c05
+ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744518"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84011549"
 ---
 # <a name="callout-policy"></a>Aufrufrichtlinie
 
-## <a name="overview"></a>Übersicht
+Azure Daten-Explorer-Cluster können in vielen verschiedenen Szenarien mit externen Diensten kommunizieren.
+Cluster Administratoren können die autorisierten Domänen für externe Aufrufe verwalten, indem Sie die Legenden Richtlinien des Clusters aktualisieren.
 
-Azure Data Explorer-Cluster können in vielen verschiedenen Szenarien mit externen Diensten kommunizieren.
-Clusteradministratoren können die zulässigen Domänen für externe Anrufe verwalten, indem sie die Legendenrichtlinie des Clusters aktualisieren.
+Callout-Richtlinien werden auf Cluster Ebene verwaltet und in die folgenden Typen eingeteilt.
+* `kusto`-Steuert Azure Daten-Explorer-Cluster übergreifende Abfragen.
+* `sql`-Steuert das [SQL-Plug](../query/sqlrequestplugin.md)-in.
 
-Legendenrichtlinien werden auf Clusterebene verwaltet und in die folgenden Typen eingeteilt:
-* `kusto`- steuert Azure Data Explorer-clusterübergreifende Abfragen.
-* `sql`- steuert das [SQL-Plugin](../query/sqlrequestplugin.md).
+* `webapi`-Steuert andere externe Webaufrufe.
+* `sandbox_artifacts`-Steuert Sandbox-Plug-ins ([python](../query/pythonplugin.md)  |  [R](../query/rplugin.md)).
 
+Die Legenden Richtlinie besteht aus folgendem:
 
-* `webapi`- steuert andere externe Webaufrufe.
-* `sandbox_artifacts`- steuert sandkastened plugins ([python](../query/pythonplugin.md) | [R](../query/rplugin.md)).
+* **Callouttype** : definiert den Typ der Legende und kann `kusto` , oder sein. `sql``webapi`
+* **Callouturiregex** : gibt den zulässigen regulären Ausdruck der Legenden Domäne an.
+* **Cancall:** gibt an, ob die Legende zulässige externe Aufrufe ist.
 
-Die Legendenrichtlinie besteht aus den folgenden Komponenten:
-* **CalloutType** definiert den Typ der Legenden und kann einer der folgenden sein: kusto, sql oder webapi
-* **CalloutUriRegex** gibt den zulässigen Regex der Domäne des Callouts an.
-* **CanCall** gibt an, ob die Legenden externe Anrufe zulässt.
+## <a name="predefined-callout-policies"></a>Vordefinierte Legenden Richtlinien
 
-## <a name="predefined-callout-policies"></a>Vordefinierte Callout-Richtlinien
-
-Es gibt eine Reihe vordefinierter Legendenrichtlinien, die in allen Azure Data Explorer-Clustern unveränderlich vorkonfiguriert sind, um Callouts für die Auswahl von Diensten zu erleichtern.
+Die Tabelle enthält eine Reihe vordefinierter Legenden Richtlinien, die für alle Azure Daten-Explorer-Cluster vorkonfiguriert werden, um die Auswahl von Aufrufen von Diensten zu ermöglichen.
 
 |Dienst      |Cloud        |Bezeichnung  |Zulässige Domänen |
 |-------------|-------------|-------------|-------------|
-|Kusto |Öffentliches Azure |Clusterübergreifende Abfragen |`^[^.]*\.kusto\.windows\.net$` <br> `^[^.]*\.kustomfa\.windows\.net$` |
-|Kusto |Schwarzwald |Clusterübergreifende Abfragen |`^[^.]*\.kusto\.cloudapi\.de$` <br> `^[^.]*\.kustomfa\.cloudapi\.de$` |
-|Kusto |Fairfax |Clusterübergreifende Abfragen |`^[^.]*\.kusto\.usgovcloudapi\.net$` <br> `^[^.]*\.kustomfa\.usgovcloudapi\.net$` |
-|Kusto |Mooncake |Clusterübergreifende Abfragen |`^[^.]*\.kusto\.chinacloudapi\.cn$` <br> `^[^.]*\.kustomfa\.chinacloudapi\.cn$` |
-|Azure DB |Öffentliches Azure |SQL-Anforderungen |`^[^.]*\.database\.windows\.net$` <br> `^[^.]*\.databasemfa\.windows\.net$` |
-|Azure DB |Schwarzwald |SQL-Anforderungen |`^[^.]*\.database\.cloudapi\.de$` <br> `^[^.]*\.databasemfa\.cloudapi\.de$` |
-|Azure DB |Fairfax |SQL-Anforderungen |`^[^.]*\.database\.usgovcloudapi\.net$` <br> `^[^.]*\.databasemfa\.usgovcloudapi\.net$` |
-|Azure DB |Mooncake |SQL-Anforderungen |`^[^.]*\.database\.chinacloudapi\.cn$` <br> `^[^.]*\.databasemfa\.chinacloudapi\.cn$` |
-|Baselining-Service |Öffentliches Azure |Baselining-Anforderungen |`baseliningsvc-int.azurewebsites.net` <br> `baseliningsvc-ppe.azurewebsites.net` <br> `baseliningsvc-prod.azurewebsites.net` |
-
+|Kusto |`Public Azure` |Cluster übergreifende Abfragen |`^[^.]*\.kusto\.windows\.net$` <br> `^[^.]*\.kustomfa\.windows\.net$` |
+|Kusto |`Black Forest` |Cluster übergreifende Abfragen |`^[^.]*\.kusto\.cloudapi\.de$` <br> `^[^.]*\.kustomfa\.cloudapi\.de$` |
+|Kusto |`Fairfax` |Cluster übergreifende Abfragen |`^[^.]*\.kusto\.usgovcloudapi\.net$` <br> `^[^.]*\.kustomfa\.usgovcloudapi\.net$` |
+|Kusto |`Mooncake` |Cluster übergreifende Abfragen |`^[^.]*\.kusto\.chinacloudapi\.cn$` <br> `^[^.]*\.kustomfa\.chinacloudapi\.cn$` |
+|Azure-DB |`Public Azure` |SQL-Anforderungen |`^[^.]*\.database\.windows\.net$` <br> `^[^.]*\.databasemfa\.windows\.net$` |
+|Azure-DB |`Black Forest` |SQL-Anforderungen |`^[^.]*\.database\.cloudapi\.de$` <br> `^[^.]*\.databasemfa\.cloudapi\.de$` |
+|Azure-DB |`Fairfax` |SQL-Anforderungen |`^[^.]*\.database\.usgovcloudapi\.net$` <br> `^[^.]*\.databasemfa\.usgovcloudapi\.net$` |
+|Azure-DB |`Mooncake` |SQL-Anforderungen |`^[^.]*\.database\.chinacloudapi\.cn$` <br> `^[^.]*\.databasemfa\.chinacloudapi\.cn$` |
+|Baselining-Dienst |Öffentliches Azure |Baselining-Anforderungen |`baseliningsvc-int.azurewebsites.net` <br> `baseliningsvc-ppe.azurewebsites.net` <br> `baseliningsvc-prod.azurewebsites.net` |
 
 ## <a name="control-commands"></a>Steuerungsbefehle
 
-Die Befehle erfordern [AllDatabasesAdmin-Berechtigungen.](access-control/role-based-authorization.md)
+Die Befehle erfordern [alldatabasesadmin](access-control/role-based-authorization.md) -Berechtigungen.
 
-**Alle konfigurierten Legendenrichtlinien anzeigen**
+**Alle konfigurierten Legenden Richtlinien anzeigen**
 
 ```kusto
 .show cluster policy callout
 ```
 
-**Ändern der beendenden Callout-Richtlinien**
+**Ändern von Legenden Richtlinien**
 
 ```kusto
 .alter cluster policy callout @'[{"CalloutType": "webapi","CalloutUriRegex": "en\\.wikipedia\\.org","CanCall": true}]'
 ```
 
-**Hinzufügen einer Reihe zulässiger Legenden**
+**Hinzufügen eines Satzes zulässiger Legenden Aufrufe**
 
 ```kusto
 .alter-merge cluster policy callout @'[{"CalloutType": "webapi","CalloutUriRegex": "en\\.wikipedia\\.org","CanCall": true}, {"CalloutType": "webapi","CalloutUriRegex": "bing\\.com","CanCall": true}]'
 ```
 
-**Löschen aller nicht unveränderlichen Legendenrichtlinien**
+**Alle nicht unveränderlichen Legenden Richtlinien löschen**
 
 ```kusto
 .delete cluster policy callout

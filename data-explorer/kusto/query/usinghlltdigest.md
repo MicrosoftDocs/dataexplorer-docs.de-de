@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: ce86e24fbd13221fe333f281dac3ba3b6ac73a1f
-ms.sourcegitcommit: da7c699bb62e1c4564f867d4131d26286c5223a8
+ms.openlocfilehash: 3f1371fe298b2d0e066fc3a278cc3b560050416c
+ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/14/2020
-ms.locfileid: "83404245"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84011583"
 ---
 # <a name="partitioning-and-composing-intermediate-results-of-aggregations"></a>Partitionierung und Zusammenstellung von Zwischenergebnissen von Aggregationen
 
@@ -133,7 +133,7 @@ Kusto-Limits werden mit zu großen Datasets erreicht, bei denen Sie regelmäßig
 
 ::: zone pivot="azuredataexplorer"
 
-Um dieses Problem zu beheben, können neu hinzugefügte Daten einer temporären Tabelle als-oder-Werte hinzugefügt werden, `hll` `tdigest` indem verwendet [`hll()`](hll-aggfunction.md) wird, wenn der erforderliche Vorgang ist, `dcount` oder [`tdigest()`](tdigest-aggfunction.md) Wenn der erforderliche Vorgang mithilfe von oder Perzentil ist [`set/append`](../management/data-ingestion/index.md) [`update policy`](../management/updatepolicy.md) . In diesem Fall werden die Zwischenergebnisse von `dcount` oder `tdigest` in einem anderen Dataset gespeichert, das kleiner als das große Ziel ist.
+Um dieses Problem zu beheben, können neu hinzugefügte Daten einer temporären Tabelle als-oder-Werte hinzugefügt werden, `hll` `tdigest` indem verwendet [`hll()`](hll-aggfunction.md) wird, wenn der erforderliche Vorgang ist, `dcount` oder [`tdigest()`](tdigest-aggfunction.md) Wenn der erforderliche Vorgang mithilfe von oder Perzentil ist [`set/append`](../../ingest-data-overview.md) [`update policy`](../management/updatepolicy.md) . In diesem Fall werden die Zwischenergebnisse von `dcount` oder `tdigest` in einem anderen Dataset gespeichert, das kleiner als das große Ziel ist.
 
 ::: zone-end
 

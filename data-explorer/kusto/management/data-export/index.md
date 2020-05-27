@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/09/2019
-ms.openlocfilehash: 88bb9e6541d9dc5c934affc8f777f836aad86ae1
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: f8c05967d684f9723dd26085eddda7261a7eb19b
+ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373493"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84011396"
 ---
 # <a name="data-export"></a>Datenexport
 
@@ -23,7 +23,7 @@ Für den Datenexport stehen mehrere Methoden zur Verfügung:
 
 * **Clientseitiger Export:** In seiner einfachsten Form kann der Datenexport auf der Clientseite durchgeführt werden. In diesem Fall führt der Client eine Abfrage für den Dienst aus, liest die Ergebnisse und schreibt sie anschließend. Diese Art des Datenexports hängt vom verwendeten Clienttool ab. Als Ziel für den Export wird meistens das lokale Dateisystem verwendet, in dem das Tool ausgeführt wird. Dieses Modell wird unter anderem von [Kusto.Explorer](../../tools/kusto-explorer.md) und von der [Webbenutzeroberfläche](../../../web-query-data.md) unterstützt.
 
-* **Dienstseitiger Export (Pull):** Wenn es sich beim Ziel des Exports um eine Kusto-Tabelle handelt (im gleichen Cluster/in der gleichen Datenbank wie die Abfrage oder in einem anderen Cluster/einer anderen Datenbank), verwenden Sie den Ablauf „Erfassung aus einer Abfrage“ für die Zieltabelle. Hierbei wird eine Abfrage ausgeführt, und deren Ergebnisse werden sofort in einer Kusto-Tabelle erfasst. Weitere Informationen finden Sie unter [Datenerfassung](../data-ingestion/index.md).
+* **Dienstseitiger Export (Pull):** Wenn es sich beim Ziel des Exports um eine Kusto-Tabelle handelt (im gleichen Cluster/in der gleichen Datenbank wie die Abfrage oder in einem anderen Cluster/einer anderen Datenbank), verwenden Sie den Ablauf „Erfassung aus einer Abfrage“ für die Zieltabelle. Hierbei wird eine Abfrage ausgeführt, und deren Ergebnisse werden sofort in einer Kusto-Tabelle erfasst. Weitere Informationen finden Sie unter [Datenerfassung](../../../ingest-data-overview.md).
 
 
 

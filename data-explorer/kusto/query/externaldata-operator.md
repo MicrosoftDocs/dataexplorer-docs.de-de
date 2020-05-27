@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: d46a8669c523955f74d3f489c7b10e5b0f7ccef6
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: e35245cf767e3cf82ab61d5ce0704015d996cd7c
+ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373286"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84011372"
 ---
 # <a name="externaldata-operator"></a>externaldata-Operator
 
@@ -33,7 +33,7 @@ Der `externaldata` -Operator gibt eine Tabelle zurück, deren Schema in der Abfr
 
 * *Storageconnectionstring*: die [Speicher Verbindungs Zeichenfolge](../api/connection-strings/storage.md) beschreibt das Speicher Element, das die zurück zugebende Daten enthält.
 
-* *Eigenschaft PROP1*, *value1*,...: zusätzliche Eigenschaften, die beschreiben, wie die aus dem Speicher abgerufenen Daten interpretiert werden, wie unter Erfassungs [Eigenschaften](../management/data-ingestion/index.md)aufgeführt.
+* *Eigenschaft PROP1*, *value1*,...: zusätzliche Eigenschaften, die beschreiben, wie die aus dem Speicher abgerufenen Daten interpretiert werden, wie unter Erfassungs [Eigenschaften](../../ingestion-properties.md)aufgeführt.
     * Derzeit unterstützte Eigenschaften: `format` und `ignoreFirstRecord` .
     * Unterstützte Datenformate: alle Erfassungs [Datenformate](../../ingestion-supported-formats.md) werden unterstützt, einschließlich `csv` , `tsv` , `json` , `parquet` , `avro` .
 

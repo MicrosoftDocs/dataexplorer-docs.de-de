@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 4a2b18f28840291fc02002239297b45f38be00be
-ms.sourcegitcommit: 4e46b497d518884693a142f4ae21ea497db81861
+ms.openlocfilehash: 21514de40910691e878dbc6d237d810a13676b40
+ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/25/2020
-ms.locfileid: "83824916"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84011532"
 ---
 # <a name="capacity-policy"></a>Kapazitätsrichtlinie
 
@@ -131,7 +131,7 @@ Die standardmäßige Kapazitäts Richtlinie weist die folgende JSON-Darstellung 
 
 Kusto schränkt die Anzahl gleichzeitiger Anforderungen für die folgenden vom Benutzer initiierten Befehle ein:
 
-* Ingestionen (enthält alle [hier](../management/data-ingestion/index.md)aufgeführten Befehle)
+* Ingestionen (enthält alle [hier](../../ingest-data-overview.md)aufgeführten Befehle)
    * Der Grenzwert wird in der [Kapazitäts Richtlinie](#capacity-policy)definiert.
 * Löscht
    * Global ist derzeit auf einem Cluster pro Cluster korrigiert.

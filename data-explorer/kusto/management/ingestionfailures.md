@@ -1,6 +1,6 @@
 ---
-title: Verunstumungsfehler - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt Erfassungsfehler in Azure Data Explorer.
+title: 'Erfassungs Fehler: Azure-Daten-Explorer'
+description: In diesem Artikel werden Erfassungs Fehler in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,52 +8,55 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/20/2019
-ms.openlocfilehash: 699fd01e9a284179bf2749b58581392d2170f0ca
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 7684ea11b03113051580e3e19aef0d9ac3f13585
+ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81520943"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84011481"
 ---
-# <a name="ingestion-failures"></a>Ver- und Verscheidungsfehler
+# <a name="ingestion-failures"></a>Erfassungs Fehler
 
-## <a name="show-ingestion-failures"></a>.zeigen Einnahmefehler
+## <a name="show-ingestion-failures"></a>. einerfassungs Fehler anzeigen
 
-Dieser Befehl gibt eine Ergebnismenge zurück, die alle Erfassungsfehler enthält, die während der Ausführung von [Datenerfassungssteuerungsbefehlen](data-ingestion/index.md)aufgetreten sind.
 
-*Hinweise*: 
-- Aufnahmefehler, die während anderer Teile des Aufnahmeflusses auftreten (z. B. bevor Datenerfassungssteuerungsbefehle an Kustos Data Engine-Dienst gesendet werden), werden im Resultset dieses Befehls nicht angezeigt.
-- Für Überwachungsfehler, die in Flows auftreten, die die Aufnahme in die [Warteschlange](../api/netfx/about-kusto-ingest.md#queued-ingestion)beinhalten, wird empfohlen, [diesem Handbuch](../api/netfx/kusto-ingest-client-status.md)zu folgen.
+Dieser Befehl gibt ein Resultset mit allen Erfassungs Fehlern zurück, die auftreten, wenn die Befehle zur Erfassung der [Daten](../../ingest-data-overview.md#kusto-query-language-ingest-control-commands) Erfassung ausgeführt werden.
+
+
+> [!NOTE]
+> Erfassungs Fehler, die während anderer Teile des Erfassungs Flusses auftreten, werden nicht im Resultset dieses Befehls angezeigt. Ein solcher Fehler kann z. b. auftreten, bevor Befehle zur Erfassung von Daten an den Kusto-Datenmodul Dienst gesendet werden.
+
+> Weitere Informationen zum Überwachen von Fehlern, die in Flows auftreten, die eine in der [Warteschlange](../api/netfx/about-kusto-ingest.md#queued-ingestion)befindliche Erfassung betreffen, finden Sie in [diesem Handbuch](../api/netfx/kusto-ingest-client-status.md).
 
 **Syntax**
 
 |||
 |---|---| 
-|`.show` `ingestion` `failures`                                       |Gibt alle aufgezeichneten Aufnahmefehler zurück  
-|`.show` `ingestion` `failures` <code>&#124;</code> `where` ...       |Gibt einen gefilterten Satz von Aufnahmefehlern zurück
-|`.show``ingestion` `failures` *OperationId* OperationId `with(OperationId="``")` |Gibt Aufnahmefehler für bestimmte Vorgangs-ID zurück
+|`.show` `ingestion` `failures`                                       |Gibt alle aufgezeichneten Erfassungs Fehler zurück.  
+|`.show` `ingestion` `failures` <code>&#124;</code> `where` ...       |Gibt einen gefilterten Satz von Erfassungs Fehlern zurück.
+|`.show``ingestion` `failures` `with(OperationId="` *OperationId*`")` |Gibt Erfassungs Fehler für eine bestimmte Vorgangs-ID zurück.
 
 **Ergebnisse**
  
-|Ausgabeparameter |type |BESCHREIBUNG 
-|---|---|---
-|OperationId |String |Operation Identifier. Dieser Parameter kann verwendet werden, um zusätzliche Vorgangsdetails anzuzeigen, indem der Befehl [.show operations](operations.md) ausgeführt wird. 
-|Datenbank |String |Datenbank, bei der der Fehler aufgetreten ist
-|Tabelle |String |Tabelle, auf der der Fehler aufgetreten ist
-|FailedOn |Datetime |Datum/Uhrzeit (in UTC), wenn der Fehler registriert wurde 
-|IngestionSourcePath |String |Identifiziert die Aufnahmequelle (normalerweise ein Azure Blob-URI) 
-|Details |String |Fehlerdetails. Bietet Einblick in die tatsächliche Ursache des Aufnahmefehlers
-|FailureKind |String |Typ des Fehlers (Permanent/Transient)
-|RootActivityId |String |Stammaktivitäts-ID.
-|OperationKind |String |Der Aufnahmevorgangstyp (Phase), in dem der Fehler registriert wurde
-|OriginatesFromUpdatePolicy |Boolean | Gibt an, ob der Fehler beim Ausführen einer [Aktualisierungsrichtlinie](update-policy.md) registriert wurde
+|Output-Parameter           |Type     |BESCHREIBUNG                                                                              |
+|---------------------------|---------|-----------------------------------------------------------------------------------------|
+|OperationId                |String   |Vorgangs Bezeichner, der zum Anzeigen zusätzlicher Vorgangs Details verwendet werden kann. <br> Befehl zum [Anzeigen von Vorgängen](operations.md) </br> 
+|Datenbank                   |String   |Datenbank, auf der der Fehler aufgetreten ist
+|Tabelle                      |String   |Tabelle, in der der Fehler aufgetreten ist
+|Failedon                   |Datetime |Datum/Uhrzeit (in UTC), als der Fehler registriert wurde 
+|Ingestionsourcepath        |String   |Identifiziert die Erfassungs Quelle (in der Regel ein Azure-BLOB-URI). 
+|Details                    |String   |Fehlerdetails. Bietet Einblicke in die tatsächliche Erfassungs Fehlerursache
+|Failurekind                |String   |Typ des Fehlers (permanent/vorübergehend)
+|RootActivityId             |String   |Stamm Aktivitäts-ID.
+|Operationkind              |String   |Der Typ der Erfassungs Operation (Phase), in dem der Fehler registriert wurde
+|Originatesfromupdatepolicy |Boolescher Wert | Gibt an, ob der Fehler beim Ausführen einer [Update Richtlinie](update-policy.md) registriert wurde.
  
 **Beispiel**
  
-|OperationId |Datenbank |Tabelle |FailedOn |IngestionSourcePath |Details |FailureKind |RootActivityId |OperationKind |OriginatesFromUpdatePolicy
+|OperationId |Datenbank |Tabelle |Failedon |Ingestionsourcepath |Details |Failurekind |RootActivityId |Operationkind |Originatesfromupdatepolicy
 |--|--|--|--|--|--|--|--|--|--
-|3827def6-0773-4f2a-859e-c02cf395deaf |DB1 |Table1 |2017-02-14 22:25:03.1147331 |... Url... |Stream mit id '*****.csv' hat ein fehlerhaftes Csv-Format |Dauerhaft |3c883942-e446-4999-9b00-d4c664f06ef6 |DataIngestPull | 0
-|841fafa4-076a-4cba-9300-4836da0d9c75 |DB1 |Table1 |2017-02-14 22:34:11.2565943 |... Url... |Stream mit id '*****.csv' hat ein fehlerhaftes Csv-Format |Dauerhaft |48571bdb-b714-4f32-8ddc-4001838a956c |DataIngestPull | 0
-|e198c519-5263-4629-a158-8d68f7a1022f |DB1 |Table1 |2017-02-14 22:34:44.5824741 |... Url... |Stream mit id '*****.csv' hat ein fehlerhaftes Csv-Format |Dauerhaft |5e31ab3c-e2c7-489a-827e-e89d2d691ec4 |DataIngestPull | 0
-|a9f287a1-f3e6-4154-ad18-b86438da0929 |DB1 |Table1 |2017-02-14 22:36:26.5525250 |... Url... |Unbekannter Fehler: Ausnahme vom Typ 'System.Exception' wurde ausgelöst |Kurzlebig |9b7bb017-471e-48f6-9c96-d16fcf938d2a |DataIngestPull | 0
-|9edb3ecc-f4b4-4738-87e1-648eed2bd998 |DB1 |Table1 |2017-02-14 23:52:31.5460071 |... Url... |Fehler beim Herunterladen von Blob: Der Client konnte den Vorgang nicht innerhalb des angegebenen Timeouts beenden. |Dauerhaft |21fa0dd6-cd7d-4493-b6f7-78916ce0d617 |DataIngestPull | 0
+|3827def6-0773-4f2a-859e-c02cf395gehörlos |DB1 |Table1 |2017-02-14 22:25:03.1147331 |... URL... |Der Stream mit der ID "* * * * *. csv" weist ein falsch formatiertes CSV-Format auf. * |Dauerhaft |3c883942-e446-4999-9b00-d4c664f 06ef6 |Dataingestpull | 0
+|841-Datei-4-076a-4cba-9300-4836da0d9c75 |DB1 |Table1 |2017-02-14 22:34:11.2565943 |... URL... |Der Stream mit der ID "* * * * *. csv" weist ein falsch formatiertes CSV-Format auf. * |Dauerhaft |48571bdb-B714-4f 32-8ddc-4001838a956c |Dataingestpull | 0
+|e198c519-5263-4629-a158-8d68f7a1022f |DB1 |Table1 |2017-02-14 22:34:44.5824741 |... URL... |Der Stream mit der ID "* * * * *. csv" weist ein falsch formatiertes CSV-Format auf. * |Dauerhaft |5e31ab3c-e2c7-489a-827e-e89d2d691ec4 |Dataingestpull | 0
+|a9f287a1-f3e6-4154-ad18-b86438da0929 |DB1 |Table1 |2017-02-14 22:36:26.5525250 |... URL... |Unbekannter Fehler: Ausnahme vom Typ "System. Exception". |Transient (vorübergehend) |9b7bb017-471e-48f6-9c96-d16fcf938d2a |Dataingestpull | 0
+|9edb3ecc-f 4b4-4738-87e1-648eed2bd998 |DB1 |Table1 |2017-02-14 23:52:31.5460071 |... URL... |Fehler beim Herunterladen des BLOBs: der Client konnte den Vorgang nicht innerhalb des angegebenen Timeouts beenden. |Dauerhaft |21fa0dd6-cd7d-4493-b6f7-78916ce0d617 |Dataingestpull | 0

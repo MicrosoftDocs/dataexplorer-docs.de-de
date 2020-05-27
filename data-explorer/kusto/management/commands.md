@@ -1,6 +1,6 @@
 ---
-title: Befehlsverwaltung - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die Befehlsverwaltung in Azure Data Explorer beschrieben.
+title: 'Befehls Verwaltung: Azure Daten-Explorer'
+description: In diesem Artikel wird die Verwaltung von Befehlen in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,29 +8,29 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5685833431529af22aa4d8778d121f5a4dec16d1
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.openlocfilehash: e6a31e2c79ae658cceecfdad0ce307e2522bb55b
+ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744302"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84011413"
 ---
-# <a name="commands-management"></a>Befehlsverwaltung
+# <a name="commands-management"></a>Befehls Verwaltung
 
-## <a name="show-commands"></a>.show Befehle 
+## <a name="show-commands"></a>. Show-Befehle 
 
-`.show``commands` Befehl gibt eine Tabelle mit Admin-Befehlen zurück, die einen endgültigen Status erreicht haben. Diese Befehle können 30 Tage lang abgefragt werden.
+`.show commands`gibt eine Tabelle mit admin-Befehlen zurück, die einen Endzustand erreicht haben. Diese Befehle stehen für 30 Tage zur Abfrage zur Verfügung.
 
-Die Tabelle "Befehle" enthält zwei Spalten mit Ressourcenverbrauchsdetails für jeden abgeschlossenen Befehl:
-* TotalCpu: Die gesamte CPU-Taktzeit (Benutzermodus + Kernelmodus), die von diesem Befehl verbraucht wird.
-* ResourceUtilization: Ein Objekt, das alle Ressourcennutzungsinformationen enthält, die sich auf diesen Befehl beziehen (einschließlich der TotalCpu).
+Die Befehls Tabelle verfügt über zwei Spalten mit Details zu den Ressourcenverbrauch aller abgeschlossenen Befehle.
 
-Der nachverfolgte Ressourcenverbrauch umfasst Datenaktualisierungen sowie alle Abfragen, die dem aktuellen Admin-Befehl zugeordnet sind.
-Derzeit werden nur einige der Admin-Befehle von der Tabelle Commands abgedeckt (.ingest, .set, .append, .set-or-replace, .set-or-append), und nach und nach werden in Zukunft weitere Befehle hinzugefügt.
+* Totalcpu: die CPU-Gesamtzeit (Benutzermodus + Kernel Modus), die von diesem Befehl genutzt wird.
+* Resourceutilization: enthält alle Ressourcen Verwendungs Informationen, die mit diesem Befehl verknüpft sind, einschließlich totalcpu.
 
+Der Ressourcenverbrauch, der nachverfolgt wird, umfasst Datenaktualisierungen und alle dem aktuellen Administrator Befehl zugeordneten Abfragen.
+Zurzeit werden nur einige der Admin-Befehle von der Befehls Tabelle abgedeckt ( `.ingest` , `.set` , `.append` , `.set-or-replace` , `.set-or-append` ). Nach und nach werden der Befehls Tabelle weitere Befehle hinzugefügt.
 
-* Ein [Datenbankadministrator oder Datenbankmonitor](../management/access-control/role-based-authorization.md) kann jeden Befehl sehen, der in seiner Datenbank aufgerufen wurde.
-* Andere Benutzer können nur Befehle sehen, die von ihnen aufgerufen wurden.
+* Ein [Datenbankadministrator oder Daten Bank Monitor](../management/access-control/role-based-authorization.md) kann jeden Befehl sehen, der in der Datenbank aufgerufen wurde.
+* Andere Benutzer können nur Befehle sehen, die von Ihnen aufgerufen wurden.
 
 **Syntax**
 
@@ -38,16 +38,17 @@ Derzeit werden nur einige der Admin-Befehle von der Tabelle Commands abgedeckt (
  
 **Beispiel**
  
-|ClientActivityId |CommandType |Text |Datenbank |StartedOn |LastUpdatedOn |Duration |State |RootActivityId |Benutzer |FailureReason |Application |Prinzipal |TotalCpu |ResourceUtilization
+|Clientactivityid |CommandType |Text |Datenbank |Startedon |Lastupdatedon |Duration |State |RootActivityId |Benutzer |FailureReason |Anwendung |Prinzipal |Totalcpu |ResourceUtilization
 |--|--|--|--|--|--|--|--|--|--|--|--|--|--|--
-|KD2RunCommand;a069f9e3-6062-4a0e-aa82-75a1b5e16fb4 |ExtentsMerge   |.merge async Operationen ...    |DB1    |2017-09-05 11:08:07.5738569    |2017-09-05 11:08:09.1051161    |00:00:01.5312592   |Abgeschlossen  |b965d809-3f3e-4f44-bd2b-5e1f49ac46c5   |AAD app id=5ba8cec2-9a70-e92c98cad651  |   |Kusto.Azure.DM.Svc |aadapp=5ba8cec2-9a70-e92c98cad651  |00:00:03.5781250   |• "ScannedExtentsStatistics": "MinDataScannedTime": null, "MaxDataScannedTime": null, "CacheStatistics": "Memory": "Misses": 2, "Hits": 20 , "Disk": " Misses": 2, "Hits": 0 , "MemoryPeak": 159620640, "TotalCpu": "00:00:03.5781250" 
-|Ke. RunCommand;710e08ca-2cd3-4d2d-b7bd-2738d335aa50 |DataIngestPull |.ingest in MyTableName ...   |TestDB |2017-09-04 16:00:37.0915452    |2017-09-04 16:04:37.2834555    |00:04:00.1919103   |Fehler |a8986e9e-943f-81b0270d6fae4    |cooper@fabrikam.com    |Die Socketverbindung wurde verworfen.   |Kusto.Explorer |aaduser=...    |00:00:00   |" "ScannedExtentsStatistics": "MinDataScannedTime": null, "MaxDataScannedTime": null , "CacheStatistics": " Memory": " Misses": 0, Hits": 0, "Disk": " Misses": 0, "Hits": 0 , "MemoryPeak": 0, "TotalCpu": "00:00:00". 
-|KD2RunCommand;97db47e6-93e2-4306-8b7d-670f2c3307ff |ExtentsRebuild |.merge async Operationen ...    |DB2    |2017-09-18 13:29:38.5945531    |2017-09-18 13:29:39.9451163    |00:00:01.3505632   |Abgeschlossen  |d5ebb755-d5df-4e94-b240-9accdf06c2d1   |AAD app id=5ba8cec2-9a70-e92c98cad651  |   |Kusto.Azure.DM.Svc |aadapp=5ba8cec2-9a70-e92c98cad651  |00:00:00.8906250   |• "ScannedExtentsStatistics": "MinDataScannedTime": null, "MaxDataScannedTime": null, "CacheStatistics": "Memory": "Misses": 0, "Hits": 1 , "Disk": " Misses": 0, "Hits": 0 , "MemoryPeak": 88828560, "TotalCpu": "00:00:00.8906250". 
+|KD2RunCommand;a069f9e3-6062-4a0e-aa82-75a1b5e16fb4 |Extentsmerge   |. asynchrone Vorgänge werden zusammengeführt...    |DB1    |2017-09-05 11:08:07.5738569    |2017-09-05 11:08:09.1051161    |00:00:01.5312592   |Abgeschlossen  |b965d809-3f3e-4f44-bd2b-5e1f49ac46c5   |Aad-APP-ID = 5ba8cec2-9a70-e92c98cad651  |   |Kusto. Azure. DM. svc |aadapp = 5ba8cec2-9a70-e92c98cad651  |00:00:03.5781250   |{"Scannetdextentsstatistics": {"mindatascannedtime": NULL, "maxdatascannedtime": NULL}, "cachestatistics": {memory ": {" Fehler ": 2," Treffer ": 20}," Disk ": {" Fehler ": 2," Treffer ": 0}}," memorypeak ": 159620640," totalcpu ":" 00:00:03.5781250 "} 
+|KE. RunCommand; 710e08ca-2cd3-4 D2D-b7bd-2738d335aa50    |Dataingestpull |. Erfassung in myTableName...   |TestDB |2017-09-04 16:00:37.0915452    |2017-09-04 16:04:37.2834555    |00:04:00.1919103   |Failed |a8986e9e-943f-81b0270d6fae4    |cooper@fabrikam.com    |Die Socketverbindung wurde verworfen.   |Kusto.Explorer |aaduser =...    |00:00:00   |{"Scannetdextentsstatistics": {"mindatascannedtime": NULL, "maxdatascannedtime": NULL}, "cachestatistics": {"Memory": {"fehl Treffer": 0, Treffer ": 0}", "Datenträger": {"Fehler": 0, "Treffer": 0}}, "memorypeak": 0, "totalcpu": "00:00:00"} 
+|KD2RunCommand; 97db47e6-93e2-4306-8b7d-670F 2c3307ff |Extentsrebuild |. asynchrone Vorgänge werden zusammengeführt...    |DB2    |2017-09-18 13:29:38.5945531    |2017-09-18 13:29:39.9451163    |00:00:01.3505632   |Abgeschlossen  |d5ebb755-d5df-4e94-b240-9accdf06c2d1   |Aad-APP-ID = 5ba8cec2-9a70-e92c98cad651  |   |Kusto. Azure. DM. svc |aadapp = 5ba8cec2-9a70-e92c98cad651  |00:00:00.8906250   |{"Scannetdextentsstatistics": {"mindatascannedtime": NULL, "maxdatascannedtime": NULL}, "cachestatistics": {memory ": {" fehl Treffer ": 0," Treffer ": 1}," Disk ": {" Fehler ": 0," Treffer ": 0}}," memorypeak ": 88828560," totalcpu ":" 00:00:00.8906250 "} 
 
-**Beispiel: Extrahieren bestimmter Daten aus der Spalte ResourceUtilization**
+**Beispiel: Extrahieren bestimmter Daten aus der resourceutilization-Spalte**
 
-Der Zugriff auf eine der Eigenschaften in der Spalte ResourceUtilization erfolgt durch Aufrufen ResourcesUtilization.xxx (wobei xxx der Eigenschaftsname ist).
-Beachten Sie, dass die ResourceUtilization eine dynamische Spalte ist, und daher sollte man sie, um mit ihren Werten zu arbeiten, zuerst in einen bestimmten Datentyp konvertieren (mit einer Konvertierungsfunktion wie: tolong, toint, totimespan, ...).  
+Der Zugriff auf eine der Eigenschaften in der resourceutilization-Spalte erfolgt durch Aufrufen von ResourcesUtilization.xxx (wobei xxx der Eigenschaftsname ist).
+> [!NOTE] 
+> `ResourceUtilization`ist eine dynamische Spalte. Um mit ihren Werten zu arbeiten, sollten Sie Sie zuerst in einen bestimmten Datentyp konvertieren. Verwenden Sie eine Konvertierungs Funktion `tolong` , `toint` z `totimespan` . b.,,.  
 
 Beispiel:
 
@@ -60,20 +61,21 @@ Beispiel:
 | project StartedOn, MemoryPeak, TotalCpu, Text
 ```
 
-|StartedOn |MemoryPeak |TotalCpu |Text
+|Startedon |Memorypeak |Totalcpu |Text
 |--|--|--|--
-| 2017-09-28 12:11:27.8155381   | 800396032 | 00:00:04.5312500  | .append Server_Boots \| <bootStartsSourceTable = SessionStarts; ...
-| 2017-09-28 11:21:26.7304547   | 750063056 | 00:00:03.8218750  | .set-or-append WebUsage \| <Datenbank('CuratedDB'). WebUsage_v2 | Zusammenfassen... | Projekt...
-| 2017-09-28 12:16:17.4762522   | 676289120 | 00:00:00.0625000  | .set-or-append AtlasClusterEventStats mit(..) <\| Atlas_Temp(datetime(2017-09-28 12:13:28.7621737),datetime(2017-09-28 12:14:28.8168492))
+| 2017-09-28 12:11:27.8155381   | 800396032 | 00:00:04.5312500 |. Append Server_Boots <\| Let bootstartssourcetable = Sessionstarts;...
+| 2017-09-28 11:21:26.7304547   | 750063056 | 00:00:03.8218750 |. Set-oder-Append webusage <\| Datenbank (' Cursor-DB '). WebUsage_v2 | zusammenfassen... | Projekt...
+| 2017-09-28 12:16:17.4762522   | 676289120 | 00:00:00.0625000 |. Set-oder-Append atlasclustereventstats with (...) <\| Atlas_Temp (DateTime (2017-09-28 12:13:28.7621737), DateTime (2017-09-28 12:14:28.8168492))
 
 ## <a name="investigating-performance-issues"></a>Untersuchen von Leistungsproblemen
 
-`.show``commands` kann verwendet werden, um Leistungsprobleme zu untersuchen, da sie es ermöglichen, die von den einzelnen Steuerelementbefehlen verbrauchten Ressourcen anzuzeigen.
-Die folgenden Beispiele sind einfache und nützliche Abfragen für solche Untersuchungen.
+`.show``commands`kann verwendet werden, um Leistungsprobleme zu untersuchen, da Sie die von den einzelnen Steuerungs Befehlen genutzten Ressourcen anzeigen.
 
-### <a name="querying-the-totalcpu-column"></a>Abfragen der TotalCpu-Spalte
+Die folgenden Beispiele sind einfache und nützliche Abfragen für diese Untersuchungen.
 
-Top 10 CPU verbrauchende Abfragen am letzten Tag:
+### <a name="query-the-totalcpu-column"></a>Abfragen der totalcpu-Spalte
+
+Die 10 wichtigsten Abfragen mit CPU-Auslastung am letzten Tag.
 
 ```kusto
 .show commands
@@ -82,7 +84,7 @@ Top 10 CPU verbrauchende Abfragen am letzten Tag:
 | project StartedOn, CommandType, ClientActivityId, TotalCpu 
 ```
 
-Alle Abfragen in den letzten 10 Stunden, die ihre TotalCpu die 3 Minuten überschritten hat:
+Alle Abfragen in den letzten 10 Stunden, deren totalcpu 3 Minuten vergangen ist.
 
 ```kusto
 .show commands
@@ -91,7 +93,7 @@ Alle Abfragen in den letzten 10 Stunden, die ihre TotalCpu die 3 Minuten übersc
 | order by TotalCpu 
 ```
 
-Alle Abfragen in den letzten 24 Stunden, deren TotalCpu über 5 Minuten lag, gruppiert nach Benutzer und Prinzipal:
+Alle Abfragen in den letzten 24 Stunden, deren totalcpu 5 Minuten beträgt, gruppiert nach Benutzer und Prinzipal.
 
 ```kusto
 .show commands  
@@ -102,7 +104,7 @@ Alle Abfragen in den letzten 24 Stunden, deren TotalCpu über 5 Minuten lag, gru
 | project User, Principal, CountAboveThreshold, TotalCount, PercentageAboveThreshold, MaxTotalCpu, AverageCpu, 50th_Percentile_TotalCpu, 95th_Percentile_TotalCpu
 ```
 
-Zeitdiagramm: Durchschnittliche CPU vs 95th Perzentil vs Max CPU :
+Zeitdiagramm: durchschnittliche CPU-Leistung im Vergleich zum 95. Perzentil im Vergleich zur maximalen CPU.
 
 ```kusto
 .show commands 
@@ -111,9 +113,9 @@ Zeitdiagramm: Durchschnittliche CPU vs 95th Perzentil vs Max CPU :
 | render timechart
 ```
 
-## <a name="querying-the-memorypeak"></a>Abfragen des MemoryPeak
+## <a name="query-the-memorypeak"></a>Abfragen von memorypeak
 
-Die 10 wichtigsten Abfragen des letzten Tages mit den höchsten MemoryPeak-Werten:
+Die ersten 10 Abfragen am letzten Tag mit den höchsten memorypeak-Werten.
 
 ```kusto
 .show commands
@@ -123,7 +125,7 @@ Die 10 wichtigsten Abfragen des letzten Tages mit den höchsten MemoryPeak-Werte
 | top 10 by MemoryPeak  
 ```
 
-Zeitdiagramm von Average MemoryPeak vs 95th Perzentil vs Max MemoryPeak:
+Zeitdiagramm von Average memorymaximum im Vergleich zum 95. Perzentil im Vergleich zu Max memorypeak.
 
 ```kusto
 .show commands 
