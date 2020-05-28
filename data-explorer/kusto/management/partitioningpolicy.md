@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: e6f103d8957416c55a4562fb646e8ccb17ddf1e5
-ms.sourcegitcommit: 9810acae3f1c83b8efe7b952d3bada2ff496b024
+ms.openlocfilehash: b2bb03511afed386e4c7519471481b7ecf5b6291
+ms.sourcegitcommit: e82e1bcfcb456e89a1afb19fc6e874ca9d70c575
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/18/2020
-ms.locfileid: "83444714"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84110902"
 ---
 # <a name="data-partitioning-policy-preview"></a>Richtlinie für die Daten Partitionierung (Vorschau)
 
@@ -24,14 +24,14 @@ Die Partitionierungs Richtlinie definiert, ob und wie Blöcke [(datenshards)](..
 
 Der Hauptzweck der Richtlinie besteht darin, die Leistung von Abfragen zu verbessern, die bekanntermaßen zu einer kleinen Teilmenge von Werten in den partitionierten Spalten (n) und/oder Aggregat/Join für eine Spalte mit hoher kardinalitätszeichenfolge reduziert werden. Ein sekundärer potenzieller Vorteil ist eine bessere Komprimierung der Daten.
 
-> [!WARNING]
+> [!CAUTION]
 > Es sind zwar keine hart codierten Grenzwerte für die Tabellen Menge festgelegt, für die die Richtlinie definiert ist, aber jede zusätzliche Tabelle erhöht den mehr Aufwand für den Hintergrunddaten Partitionierungs Prozess, der auf den Knoten des Clusters ausgeführt wird, und erfordert möglicherweise zusätzliche Ressourcen aus dem Cluster (siehe [Kapazität](#capacity)).
 
 ## <a name="partition-keys"></a>Partitionsschlüssel
 
 Die folgenden Arten von Partitions Schlüsseln werden unterstützt:
 
-|Variante                                                   |Spaltentyp |Partitionseigenschaften                    |Partitions Wert                                        |
+|Art                                                   |Spaltentyp |Partitionseigenschaften                    |Partitions Wert                                        |
 |-------------------------------------------------------|------------|----------------------------------------|-------------------------------------------------------|
 |[Hash](#hash-partition-key)                            |`string`    |`Function`, `MaxPartitionCount`, `Seed` | `Function`(`ColumnName`, `MaxPartitionCount`, `Seed`) |
 |[Einheitlicher Bereich](#uniform-range-datetime-partition-key) |`datetime`  |`RangeSize`, `Reference`                | `bin_at`(`ColumnName`, `RangeSize`, `Reference`)      |
@@ -178,7 +178,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
   * Maximales Ziel für die Summe der Zeilen Anzahl der Quell Blöcke eines einzelnen Daten Partitionierungs Vorgangs.
   * Diese Eigenschaft ist *optional*, wobei der Standardwert ist `0` (in diesem Fall ist ein Standardziel von 5 Millionen Datensätzen wirksam).
 
-## <a name="notes"></a>Notizen
+## <a name="notes"></a>Hinweise
 
 ### <a name="the-data-partitioning-process"></a>Der Daten Partitionierungs Prozess
 
@@ -187,7 +187,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
 * Die Daten Partitionierung wird nur für heiße Blöcke ausgeführt, unabhängig vom Wert der- `EffectiveDateTime` Eigenschaft in der Richtlinie.
   * Wenn die Partitionierung von kalten Blöcken erforderlich ist, müssen Sie die [Cachingrichtlinie](cachepolicy.md) entsprechend anpassen.
 
-#### <a name="monitoring"></a>Überwachung
+#### <a name="monitoring"></a>Monitoring
 
 * Sie können den Status/Status der Partitionierung in einem Cluster überwachen, indem Sie den Befehl " [Diagnose" anzeigen](../management/diagnostics.md#show-diagnostics) :
 
