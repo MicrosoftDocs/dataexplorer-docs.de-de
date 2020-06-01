@@ -1,6 +1,6 @@
 ---
-title: Kusto CLI - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird Kusto CLI in Azure Data Explorer beschrieben.
+title: 'Kusto-CLI: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird die Kusto-CLI in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,83 +8,83 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 7443ad32b78a48f6b35be4f4b680ac6c728aedd2
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: ab82698054e4bcb851f9f05acdd62af569e0704b
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81524241"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84258112"
 ---
-# <a name="kusto-cli"></a>Kusto CLI
+# <a name="kusto-cli"></a>Kusto-CLI
 
-Kusto.Cli ist ein Befehlszeilendienstprogramm, das verwendet werden kann, um Anfragen an Kusto zu senden und deren Ergebnisse anzuzeigen. Kusto.Cli kann in einem von mehreren Modi ausgeführt werden:
+Kusto. CLI ist ein Befehlszeilen-Hilfsprogramm, das zum Senden von Anforderungen an Kusto und zum Anzeigen der Ergebnisse verwendet werden kann. Kusto. CLI kann in einem von mehreren Modi ausgeführt werden:
 
-* *REPL-Modus*: Der Benutzer gibt Abfragen und Befehle ein, die für Kusto ausgeführt werden sollen, und das Tool zeigt die Ergebnisse an und wartet dann auf die nächste Benutzerabfrage/den nächsten Befehl.
-  ("REPL" steht für "read/eval/print/loop".)
+* *Repl-Modus*: der Benutzer gibt Abfragen und Befehle ein, die für Kusto ausgeführt werden, und das Tool zeigt die Ergebnisse an und wartet dann auf den nächsten Benutzer Abfrage/-Befehl.
+  ("Repl" steht für "Read/eval/Print/Loop".)
 
-* *Ausführungsmodus*: Der Benutzer stellt eine oder mehrere Abfragen und Befehle bereit, die als Befehlszeilenargumente für das Tool ausgeführt werden sollen. Diese werden automatisch nacheinander ausgeführt und ihre Ergebnisse werden an die Konsole ausgegeben. Optional, nachdem alle Eingabeabfragen und Befehle ausgeführt werden, wechselt das Tool in den REPL-Modus.
+* *Ausführungs Modus*: der Benutzer stellt eine oder mehrere Abfragen und Befehle bereit, die als Befehlszeilenargumente für das Tool ausgeführt werden. Diese werden automatisch nacheinander ausgeführt, und ihre Ergebnisse werden in der Konsole ausgegeben. Wenn Sie alle Eingabe Abfragen und-Befehle ausführen, wechselt das Tool in den repl-Modus.
 
-* *Skriptmodus*: Ähnlich wie im Ausführungsmodus, jedoch mit den Abfragen und Befehlen, die durch eine Datei angegeben werden (als "Skript" bezeichnet).
+* *Skript Modus*: vergleichbar mit dem Ausführungs Modus, aber mit den Abfragen und Befehlen, die durch eine Datei (mit dem Namen "Script") angegeben werden.
 
-Kusto.Cli wird in erster Linie für die Automatisierung von Aufgaben für einen Kusto-Dienst bereitgestellt, der normalerweise Code schreiben müsste (z. B. ein C-Programm oder ein PowerShell-Skript).
+Kusto. CLI wird hauptsächlich für die Automatisierung von Aufgaben für einen Kusto-Dienst bereitgestellt, der normalerweise erforderlich wäre, um Code zu schreiben (z. b. ein c#-Programm oder ein PowerShell-Skript).
 
-## <a name="getting-the-tool"></a>Abrufen des Tools
+## <a name="getting-the-tool"></a>Holen Sie sich das Tool
 
-Kusto.Cli ist Teil des `Microsoft.Azure.Kusto.Tools`NuGet-Pakets , das [hier](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Tools/)heruntergeladen werden kann.
-Nach dem Herunterladen kann `tools` der Ordner des Pakets in den Zielordner extrahiert werden. Es ist keine zusätzliche Installation erforderlich (d.h. sie ist xcopy-installable).
+Kusto. CLI ist Teil des nuget-Pakets `Microsoft.Azure.Kusto.Tools` , das [hier](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Tools/)heruntergeladen werden kann.
+Nach dem herunterladen kann der `tools` Ordner des Pakets in den Zielordner extrahiert werden. es ist keine weitere Installation erforderlich (d. h. er ist "xcopy-Installable").
 
 
 
 ## <a name="running-the-tool"></a>Ausführen des Tools
 
-Kusto.Cli erfordert mindestens ein Befehlszeilenargument, um ausgeführt zu werden. Normalerweise ist dieses Argument die Verbindungszeichenfolge zum Kusto-Dienst, mit der das Tool eine Verbindung herstellen soll. siehe [Kusto-Verbindungszeichenfolgen](../api/connection-strings/kusto.md). Das Ausführen des Tools ohne Befehlszeilenargumente oder mit einem `/help` unbekannten Satz von Argumenten oder mit dem Switch führt dazu, dass eine Hilfemeldung an die Konsole gesendet wird.
+Kusto. CLI erfordert mindestens ein Befehlszeilenargument, um ausgeführt werden zu können. Normalerweise ist dieses Argument die Verbindungs Zeichenfolge für den Kusto-Dienst, mit dem das Tool eine Verbindung herstellen soll. siehe [Kusto-Verbindungs](../api/connection-strings/kusto.md)Zeichenfolgen. Wenn Sie das Tool ohne Befehlszeilenargumente oder mit einem unbekannten Satz von Argumenten oder mit dem `/help` Schalter ausführen, wird eine Hilfe Meldung an die Konsole ausgegeben.
 
-Verwenden Sie beispielsweise den folgenden Befehl, um Kusto.Cli auszuführen und eine Verbindung mit dem `help` Kusto-Dienst herzustellen, und legen Sie den Datenbankkontext auf die `Samples` Datenbank fest:
+Verwenden Sie beispielsweise den folgenden Befehl, um "Kusto. CLI" auszuführen und eine Verbindung mit dem `help` Kusto-Dienst herzustellen, und legen Sie den Daten Bank Kontext auf die `Samples` Datenbank fest:
 
 ```
 Kusto.Cli.exe "https://help.kusto.windows.net/Samples;Fed=true"
 ```
 
 > [!NOTE]
-> Wir haben Anführungszeichen um die Verbindungszeichenfolge verwendet, um zu verhindern,`;`dass Shellanwendungen wie PowerShell das Semikolon ( ) und ähnliche Zeichen in der Verbindungszeichenfolge interpretieren.
+> Wir haben in der Verbindungs Zeichenfolge Anführungszeichen verwendet, um zu verhindern, dass Shellanwendungen, z. b. PowerShell, das Semikolon ( `;` ) und ähnliche Zeichen in der Verbindungs Zeichenfolge interpretieren.
 
 ## <a name="command-line-arguments"></a>Befehlszeilenargumente
 
-`Kusto.Cli.exe`*ConnectionString* [*Schalter*]
+`Kusto.Cli.exe`*ConnectionString* [*Switches*]
 
-*Connectionstring*
-* Die [Kusto-Verbindungszeichenfolge,](../api/connection-strings/kusto.md) die alle Kusto-Verbindungsinformationen enthält.
-  Der Standardwert lautet `net.tcp://localhost/NetDefaultDB`.
+*ConnectionString*
+* Die [Kusto-Verbindungs Zeichenfolge](../api/connection-strings/kusto.md) , die alle Kusto-Verbindungsinformationen enthält.
+  Dies ist standardmäßig `net.tcp://localhost/NetDefaultDB`.
 
-`-execute:`*QueryOrCommand*
-* Wenn angegeben, wird Kusto.Cli im Ausführungsmodus ausgeführt; die angegebene Abfrage oder der angegebene Befehl wird ausgeführt. Dieser Schalter kann wiederholt werden, in diesem Fall werden die Abfragen/Befehle sequenziell in der Reihenfolge der Darstellung ausgeführt.
-  Dieser Schalter kann nicht `-script` `-scriptml`zusammen mit oder verwendet werden.
+`-execute:`*Queryorcommand*
+* Wenn angegeben, wird die Befehlszeilenschnittstelle im Ausführungs Modus ausgeführt. die angegebene Abfrage oder der angegebene Befehl wird ausgeführt. Dieser Schalter kann wiederholt werden. in diesem Fall werden die Abfragen/Befehle sequenziell in der Reihenfolge der Darstellung ausgeführt.
+  Dieser Switch kann nicht in Verbindung mit `-script` oder verwendet werden `-scriptml` .
 
-`-keepRunning:`*EnableKeepRunning*
-* Wenn `true` angegeben (entweder `false`oder ), wird der Wechsel in `-script` `-execute` den REPL-Modus aktiviert oder deaktiviert, nachdem alle Werte verarbeitet wurden.
+`-keepRunning:`*Enablekeeprunning*
+* Wenn dies angegeben wird (entweder als `true` oder `false` ), aktiviert oder deaktiviert den Wechsel zum repl-Modus, nachdem alle- `-script` oder- `-execute` Werte verarbeitet wurden.
 
 `-script:`*ScriptFile*
-* Wenn angegeben, wird Kusto.Cli im Skriptmodus ausgeführt; Die angegebene Skriptdatei wird geladen, und die darin enthaltenen Abfragen oder Befehle werden sequenziell ausgeführt.
-  Zeilenlinien werden verwendet, um Abfragen/Befehle zu `&` begrenzen, es sei denn, Zeilen enden mit oder `&&` Kombinationen, wie unten erläutert.
-  Dieser Schalter kann nicht `-execute`zusammen mit verwendet werden.
+* Wenn angegeben, wird die Befehlszeilenschnittstelle im Skript Modus ausgeführt. die angegebene Skriptdatei wird geladen, und die Abfragen oder Befehle in der Datei werden nacheinander ausgeführt.
+  Zeilenumbrüche werden verwendet, um Abfragen/Befehle zu begrenzen, es sei denn, Zeilenenden mit den `&` `&&` Kombinationen von oder, wie unten erläutert.
+  Dieser Switch kann nicht in Verbindung mit verwendet werden `-execute` .
 
 `-scriptml:`*ScriptFile*
-* Wenn angegeben, wird Kusto.Cli im Skriptmodus ausgeführt; Die angegebene Skriptdatei wird geladen, und die darin enthaltenen Abfragen oder Befehle werden sequenziell ausgeführt.
-  Die gesamte Skriptdatei wird als einzelne Abfrage oder befehl betrachtet.
-  Dieser Schalter kann nicht `-execute`zusammen mit verwendet werden.
+* Wenn angegeben, wird die Befehlszeilenschnittstelle im Skript Modus ausgeführt. die angegebene Skriptdatei wird geladen, und die Abfragen oder Befehle in der Datei werden nacheinander ausgeführt.
+  Die gesamte Skriptdatei wird als einzelne Abfrage oder Befehl behandelt.
+  Dieser Switch kann nicht in Verbindung mit verwendet werden `-execute` .
 
-`-echo:`*EnableEchoMode*
-* Wenn angegeben (als entweder `true` oder `false`), aktiviert oder deaktiviert Echo-Modus.
-  Wenn der Echomodus aktiviert ist, wird jede Abfrage oder jeder Befehl in der Ausgabe wiederholt.
+`-echo:`*Enableechomode*
+* Wenn dies angegeben wird (entweder als `true` oder `false` ), wird der Echo Modus aktiviert oder deaktiviert.
+  Wenn der Echo-Modus aktiviert ist, wird jede Abfrage bzw. jeder Befehl in der Ausgabe wiederholt.
 
-`-transcript:`*TranscriptFile*  
-* Wenn angegeben, schreibt die Programmausgabe in *TranscriptFile*.
+`-transcript:`*"Transcriptfile"*  
+* Wenn angegeben, wird die Programmausgabe in *transcriptfile*geschrieben.
 
-`-logToConsole:`*EnableLogToConsole*
-* Wenn angegeben `true` (entweder `false`oder ), wird das Schreiben der Programmausgabe an die Konsole aktiviert oder deaktiviert.
+`-logToConsole:`*Enablelogdeconsole*
+* Wenn angegeben (entweder als `true` oder `false` ), wird das Schreiben der Programmausgabe in die Konsole aktiviert oder deaktiviert.
 
-`-lineMode:`*EnableLineMode*
-* Wenn angegeben, wechselt zwischen dem Zeileneingabemodus (Standardmodus oder wenn auf ) und `true`dem Blockeingangsmodus (wenn auf `false`gesetzt). Siehe unten für eine Erklärung dieser beiden Modi, die bestimmen, wie Neulinien behandelt werden.
+`-lineMode:`*Enablelinemode*
+* Wenn angegeben, wechselt zwischen dem Zeilen Eingabemodus (dem Standardwert oder, wenn auf festgelegt `true` ) und dem Block Eingabemodus (bei Festlegung auf `false` ). Im folgenden finden Sie eine Erläuterung dieser beiden Modi, die bestimmen, wie Zeilenumbrüche behandelt werden.
 
 **Beispiel**
 
@@ -92,82 +92,82 @@ Kusto.Cli.exe "https://help.kusto.windows.net/Samples;Fed=true"
 Kusto.Cli.exe "https://kustolab.kusto.windows.net/;Fed=true" -script:"c:\mycommands.txt"
 ```
 
-Bitte beachten Sie, dass zwischen dem Doppelpunkt und dem Argumentwert kein Leerzeichen vorhanden sein sollte.
+Bitte beachten Sie, dass kein Leerzeichen zwischen dem Doppelpunkt und dem Argument Wert vorhanden sein sollte.
 
 ## <a name="directives"></a>Anweisungen
 
-Kusto.Cli unterstützt eine Reihe von Direktiven, die im Tool ausgeführt werden, anstatt zur Verarbeitung an den Dienst gesendet zu werden:
+"Kusto. CLI" unterstützt eine Reihe von Direktiven, die im Tool ausgeführt werden und nicht zur Verarbeitung an den Dienst gesendet werden:
 
-|Direktive                      |Beschreibung|
+|Anweisung                      |Beschreibung|
 |-------------------------------|-----------|
-|`?`<br>`#h`<br>`#help`         |Erhalten Sie eine kurze Hilfenachricht.|
-|`q`<br>`#quit`<br>`#exit`      |Beenden Sie das Werkzeug.|
-|`#a`<br>`#abort`               |Beenden Sie das Werkzeug abrupt.|
+|`?`<br>`#h`<br>`#help`         |Erhalten Sie eine kurze Hilfe Nachricht.|
+|`q`<br>`#quit`<br>`#exit`      |Beenden Sie das Tool.|
+|`#a`<br>`#abort`               |Beenden Sie das Tool abgebrochen.|
 |`#clip`                        |Die Ergebnisse der nächsten Abfrage oder des nächsten Befehls werden in die Zwischenablage kopiert.|
 |`#cls`                         |Löschen Sie den Konsolenbildschirm.|
-|`#connect`*[ConnectionString*]|Stellt eine Verbindung mit einem anderen Kusto-Dienst her (wenn *ConnectionString* weggelassen wird, wird der aktuelle angezeigt.)|
-|`#crp`[*Name* Name`=` [ *Wert*]]   |Legt den Wert einer Clientanforderungseigenschaft fest (oder zeigt sie einfach an oder zeigt alle Werte an).|
-|`#crp` (`-list` | `-doc`) [*Präfix*]|Listet Clientanforderungseigenschaften auf (nach Präfix oder alle).|
-|`#dbcontext`[*Datenbankname*]  |Ändert die von Abfragen und Befehlen verwendete "Kontext"-Datenbank in *DatabaseName* (wenn nicht angegeben, wird der aktuelle Kontext angezeigt).|
-|`ke`*Text*                    |Sendet den angegebenen Text an einen ausgeführten Kusto.Explorer-Prozess.|
-|`#loop`*Count* *Text*         |Führt den Text mehrmals aus.|
-|`#qp`[*Name* Name`=` [ *Wert*]]   |Legt den Wert eines Abfrageparamters fest (oder zeigt ihn einfach an oder zeigt alle Werte an). Einzel-/Doppelanführungszeichen von Anfang/Ende werden gekürzt.|
-|`#save`*Dateiname*             |Die Ergebnisse der nächsten Abfrage oder des nächsten Befehls werden in der angegebenen CSV-Datei gespeichert.|
-|`#script`*Dateiname*           |Führt das angegebene Skript aus.|
-|`#scriptml`*Dateiname*         |Führt das angegebene mehrzeilige Skript aus.|
+|`#connect`*[ConnectionString*]|Stellt eine Verbindung mit einem anderen Kusto-Dienst her (wenn " *ConnectionString* " weggelassen wird, wird der aktuelle angezeigt.)|
+|`#crp`[*Name* [ `=` *Wert*]]   |Legt den Wert einer Client Anforderungs Eigenschaft fest (oder zeigt ihn einfach an oder zeigt alle Werte an).|
+|`#crp`( `-list` \| `-doc` ) [*Präfix*]|Listet Client Anforderungs Eigenschaften (durch Präfix oder alle) auf.|
+|`#dbcontext`[*DatabaseName*]  |Ändert die "Kontext"-Datenbank, die von Abfragen und Befehlen in *DatabaseName* verwendet wird (falls nicht angegeben, wird der aktuelle Kontext angezeigt.)|
+|`ke` *Text*                    |Sendet den angegebenen Text an einen laufenden Kusto. Explorer-Prozess.|
+|`#loop`*Count* *Text* zählen         |Führt den Text mehrmals aus.|
+|`#qp`[*Name* [ `=` *Wert*]]   |Legt den Wert eines Abfrage paramters fest (oder zeigt ihn einfach an oder zeigt alle Werte an). Einfache und doppelte Anführungszeichen am Anfang/Ende werden gekürzt.|
+|`#save`*Dateiname*             |Die Ergebnisse der nächsten Abfrage oder des nächsten Befehls werden in der angegeben CSV-Datei gespeichert.|
+|`#script`*Dateiname*           |Führt das gekennzeichnete Skript aus.|
+|`#scriptml`*Dateiname*         |Führt das gekennzeichnete mehrzeilige Skript aus.|
 
-## <a name="line-input-mode-and-block-input-mode"></a>Line-Eingabemodus und Block-Eingabemodus
+## <a name="line-input-mode-and-block-input-mode"></a>Zeilen Eingabemodus und Block Eingabemodus
 
-Standardmäßig wird Kusto.Cli im **Zeileneingabemodus**ausgeführt: Jedes Zeilenumlaufzeichen wird als Trennzeichen zwischen Abfragen/Befehlen interpretiert, und die Zeile wird sofort zur Ausführung gesendet.
+Standardmäßig wird "Kusto. CLI" im **Zeilen Eingabemodus**ausgeführt: jedes neue Zeilen Trennzeichen wird als Trennzeichen zwischen Abfragen/Befehlen interpretiert, und die Zeile wird sofort zur Ausführung gesendet.
 
-In diesem Modus ist es möglich, eine lange Abfrage oder einen Befehl in mehrere Zeilen aufzuteilen. Das Aussehen `&` des Zeichens als letztes Zeichen einer Zeile (vor der Zeile) bewirkt, dass Kusto.Cli die nächste Zeile weiter liest. Das Erscheinungsbild `&&` des Zeichens als letztes Zeichen einer Zeile (vor der Zeile) bewirkt, dass Kusto.Cli die Newline ignoriert und die nächste Zeile weiterliest.
+In diesem Modus ist es möglich, eine lange Abfrage oder einen Befehl in mehrere Zeilen zu unterbrechen. Die Darstellung des `&` Zeichens als letztes Zeichen einer Zeile (vor dem Zeilen Vorstrich) bewirkt, dass Kusto. CLI das Lesen der nächsten Zeile fortsetzt. Die Darstellung des `&&` Zeichens als letztes Zeichen einer Zeile (vor dem Zeilen Vorstrich) bewirkt, dass Kusto. CLI den Zeilen Vorstrich ignoriert und das Lesen der nächsten Zeile fortsetzt.
 
-Alternativ unterstützt Kusto.Cli auch das Ausführen im **Blockeingabemodus:** Durch `-lineMode:false` die Verwendung `#blockmode`des Befehlszeilenschalters oder mit dem Befehl kann man Kusto.Cli anweisen, davon auszugehen, dass jede Zeile eine Fortsetzung der vorherigen Zeile ist, so dass Abfragen und Befehle nur durch eine leere Eingabezeile getrennt werden.
+Alternativ unterstützt Kusto. CLI auch das Ausführen im **Block Eingabemodus**: entweder mithilfe des Befehls Zeilenschalters `-lineMode:false` oder mithilfe des Befehls `#blockmode` , kann Kusto. CLI davon ausgehen, dass jede Zeile eine Fortsetzung der vorherigen Zeile ist, sodass Abfragen und Befehle nur durch eine leere Eingabezeile getrennt werden.
 
 ## <a name="comments"></a>Kommentare
 
-Kusto.Cli interpretiert `//` eine Zeichenfolge, die eine neue Zeile als Kommentarzeile beginnt. Es ignoriert den Rest der Zeile und liest die nächste Zeile weiter.
+Kusto. CLI interpretiert eine `//` Zeichenfolge, die eine neue Zeile startet, als Kommentarzeile. Der Rest der Zeile wird ignoriert, und das Lesen der nächsten Zeile wird fortgesetzt.
 
-## <a name="tool-only-options"></a>Nur-Werkzeug-Optionen
+## <a name="tool-only-options"></a>Tool-only-Optionen
 
-Befehle                        | Wirkung                                                                            | Derzeit
+Befehle                        | Wirkung                                                                            | Aktuell
 --------------------------------|-----------------------------------------------------------------------------------|-----------
-#timeon|#timeoff                | Aktivierungs-/Deaktivieren-Option 'Timing': Anzeige der Zeitanforderungen                    | TRUE
-#tableon|#tableoff              | Aktivierungs-/Deaktivieren-Option 'tableView': Format-Ergebnissätze als Tabellen                  | TRUE
-#marson|#marsoff                | Aktivierungs-/Deaktivieren-Option 'marsView': Anzeige der 2.bis-letzten Resultsets             | FALSE
-#resultson|#resultsoff          | Aktivierungs-/Deaktivieren-Option 'outputResultsSet': Anzeige der Resultsets                 | TRUE
-#prettyon|#prettyoff            | Aktivierungs-/Deaktivieren-Option 'prettyErrors': Entfernen Sie unnötigen Goo von Fehlern          | TRUE
-#markdownon|#markdownoff        | aktivierungs-/deaktivieren-Option 'markdownView': Tabellen als MarkDown formatieren                   | FALSE
-#progressiveon|#progressiveoff  | Aktivierungs-/Deaktivieren-Option 'progressiveView': Progressive Ergebnisse anfordern und anzeigen  | FALSE
-#linemode|#blockmode            | Aktivierungs-/Deaktivieren-Option 'lineMode': einzeilige Eingabemodus                          | TRUE
+#timeon|#timeoff                | Option "Timing" aktivieren/deaktivieren: zeigt die benötigte Zeit an                    | TRUE
+#tableon|#tableoff              | Aktivieren/Deaktivieren der Option "tableView": Formatieren von Resultsets als Tabellen                  | TRUE
+#marson|#marsoff                | Option "Mars View" aktivieren/deaktivieren: zeigt die 2. bis letzten Resultsets an             | FALSE
+#resultson|#resultsoff          | Option "outputresultset" aktivieren/deaktivieren: zeigt die Resultsets an                 | TRUE
+#prettyon|#prettyoff            | Option "prettyerrors" aktivieren/deaktivieren: unnötige Goo aus Fehlern entfernen          | TRUE
+#markdownon|#markdownoff        | Aktivieren/Deaktivieren der Option "markdownview": Formatieren von Tabellen als markdown                   | FALSE
+#progressiveon|#progressiveoff  | Aktivieren/Deaktivieren der Option ' progressiveview ': anfordern und anzeigen progressiver Ergebnisse  | FALSE
+#linemode|#blockmode            | Aktivieren/Deaktivieren der Option "Linemode": einzeiligen Eingabemodus                          | TRUE
 
 Befehle                              | Wirkung                                                                                                         | Standard
 --------------------------------------|----------------------------------------------------------------------------------------------------------------|-----------
-#cridon|#cridoff                      | (ermöglichen|Deaktivieren der Option 'crid': Anzeige der ClientRequestId vor dem Senden der Anforderung)                         | FALSE
-#csvheaderson|#csvheadersoff          | (ermöglichen|deaktivieren Option 'csvHeaders': Header in CSV-Ausgabe einschließen)                                            | TRUE
-#focuson|#focusoff                    | (ermöglichen|Deaktivieren Sie die Option 'Fokus': Entfernen Sie alle zusätzlichen Flaum und konzentrieren Sie sich auf die richtigen Sachen)                       | FALSE
-#linemode|#blockmode                  | (ermöglichen|Deaktivieren Sie die Option 'lineMode': einzeiligen Eingabemodus)                                                     | TRUE
-#markdownon|#markdownoff              | (ermöglichen|Deaktivieren der Option 'markdownView': Formattabellen als MarkDown)                                              | FALSE
-#marson|#marsoff                      | (ermöglichen|Deaktivieren Sie die Option 'marsView': Anzeige der 2.bis-letzten Resultsets)                                        | FALSE
-#prettyon|#prettyoff                  | (ermöglichen|Deaktivieren der Option 'prettyErrors': Entfernen Sie unnötigen Goo von Fehlern)                                     | TRUE
-#querystreamingon|#querystreamingoff  | (ermöglichen|Deaktivieren der Option 'queryStreaming': Verwenden Sie den queryStreaming-Endpunkt (nur Kusto-Team))                    | FALSE
-#resultson|#resultsoff                | (ermöglichen|Deaktivieren Sie die Option 'outputResultsSet': Anzeige der Resultsets)                                            | TRUE
-#tableon|#tableoff                    | (ermöglichen|Deaktivieren der Option 'tableView': Format-Ergebnissätze als Tabellen)                                             | TRUE
-#timeon|#timeoff                      | (ermöglichen|Deaktivieren Der Option 'Timing': Anzeige der Zeitanforderungen)                                               | TRUE
-#typeon|#typeoff                      | (ermöglichen|Deaktivieren der Option 'typeView': Anzeige des Typs jeder Spalte in der Tabellenansicht (wird Streaming=true erzwingen))  | TRUE
-#v2protocolon|#v2protocoloff          | (ermöglichen|deaktivieren Option 'v2protocol': verwenden Sie das v2-Abfrageprotokoll, nicht v1)                                        | TRUE
+#cridon|#cridoff                      | (aktivieren|Option "CRID" deaktivieren: zeigt die clientrequestid vor dem Senden der Anforderung an.)                         | FALSE
+#csvheaderson|#csvheadersoff          | (aktivieren|Option "csvheaders" deaktivieren: Header in CSV-Ausgabe einschließen)                                            | TRUE
+#focuson|#focusoff                    | (aktivieren|Option ' Fokus ' deaktivieren: Entfernen Sie alle zusätzlichen zielgerichtete, und konzentrieren Sie sich auf die richtigen Dinge.)                       | FALSE
+#linemode|#blockmode                  | (aktivieren|Option ' Linemode ' deaktivieren: einzeiligen Eingabemodus)                                                     | TRUE
+#markdownon|#markdownoff              | (aktivieren|Deaktivieren der Option "markdownview": Formatieren von Tabellen als markdown)                                              | FALSE
+#marson|#marsoff                      | (aktivieren|Option ' Mars View ' deaktivieren: zeigt die 2. bis letzten Resultsets an                                        | FALSE
+#prettyon|#prettyoff                  | (aktivieren|Option "prettyerrors" deaktivieren: unnötige Goo aus Fehlern entfernen)                                     | TRUE
+#querystreamingon|#querystreamingoff  | (aktivieren|Option ' querystreaming ' deaktivieren: Verwenden Sie den querystreaming-Endpunkt (nur Kusto-Team)).                    | FALSE
+#resultson|#resultsoff                | (aktivieren|Option "outputresultset" deaktivieren: zeigt die Resultsets an)                                            | TRUE
+#tableon|#tableoff                    | (aktivieren|Option "tableView" deaktivieren: Ergebnissätze als Tabellen formatieren)                                             | TRUE
+#timeon|#timeoff                      | (aktivieren|Option "Timing" deaktivieren: zeigt die benötigte Zeit an.                                               | TRUE
+#typeon|#typeoff                      | (aktivieren|Option "typeview" deaktivieren: zeigt den Typ der einzelnen Spalten in der Tabellenansicht an (zwingt Streaming = true))  | TRUE
+#v2protocolon|#v2protocoloff          | (aktivieren|Option ' v2protocol ' deaktivieren: Verwenden Sie das v2-Abfrageprotokoll, nicht v1).                                        | TRUE
 
-## <a name="using-kustocli-to-export-results-as-csv"></a>Verwenden von Kusto.Cli zum Exportieren von Ergebnissen als CSV
+## <a name="using-kustocli-to-export-results-as-csv"></a>Verwenden von Kusto. CLI zum Exportieren von Ergebnissen als CSV
 
-Kusto.Cli unterstützt einen speziellen clientseitigen Befehl , `#save`um die **nächsten** Abfrageergebnisse in eine lokale Datei im CSV-Format zu exportieren. Der folgende Aufruf von Kusto.Cli exportiert beispielsweise 10 `StormEvents` Datensätze aus `help.kusto.windows.net` der`Samples` Tabelle im Cluster (Datenbank):
+Kusto. CLI unterstützt einen speziellen Client seitigen Befehl, `#save` , um die **nächsten** Abfrageergebnisse in eine lokale Datei im CSV-Format zu exportieren. Beispielsweise exportiert der folgende Aufruf von Kusto. CLI 10 Datensätze aus der `StormEvents` Tabelle im `help.kusto.windows.net` Cluster (- `Samples` Datenbank):
 
 ```
 Kusto.Cli.exe @help/Samples -execute:"#save c:\temp\test.log" -execute:"StormEvents | take 10"
 ```
 
-## <a name="using-kustocli-to-control-a-running-instance-of-kustoexplorer"></a>Verwenden von Kusto.Cli zum Steuern einer laufenden Instanz von Kusto.Explorer
+## <a name="using-kustocli-to-control-a-running-instance-of-kustoexplorer"></a>Verwenden von Kusto. CLI zum Steuern einer laufenden Instanz von Kusto. Explorer
 
-Es ist möglich, Kusto.Cli anzuweisen, mit der "primären" Instanz von Kusto.Explorer zu kommunizieren, die auf dem Computer ausgeführt wird, und es Abfragen zur Ausführung zu senden. Dies kann sehr nützlich für Programme sein, die eine Reihe von Kusto-Abfragen ausführen möchten, aber den Kusto.Explorer-Prozess nicht immer wieder starten möchten. Im folgenden Beispiel wird Kusto.Cli verwendet, um eine Abfrage erneut auszuführen, den Hilfecluster:
+Es ist möglich, Kusto. CLI anzuweisen, mit der "primären" Instanz von Kusto. Explorer zu kommunizieren, die auf dem Computer ausgeführt wird, und IT-Abfragen zur Ausführung zu senden. Dies kann für Programme sehr nützlich sein, die eine Reihe von Kusto-Abfragen ausführen möchten, aber den Kusto. Explorer-Prozess nicht erneut starten möchten. Im folgenden Beispiel wird Kusto. CLI verwendet, um eine Abfrage für den Hilfe Cluster auszuführen:
 
 ```
 #connect cluster('help').database('Samples')
@@ -175,5 +175,5 @@ Es ist möglich, Kusto.Cli anzuweisen, mit der "primären" Instanz von Kusto.Exp
 #ke StormEvents | count
 ```
 
-Die Syntax ist `#ke`sehr einfach: , gefolgt von Leerzeichen und der auszuführenden Abfrage.
-Die Abfrage wird dann an die primäre Instanz von Kusto.Explorer gesendet (falls vorhanden) mit dem aktuellen Cluster/Datenbanksatz in Kusto.Cli.
+Die Syntax ist sehr einfach: `#ke` , gefolgt von Leerzeichen und der Abfrage, die ausgeführt werden soll.
+Die Abfrage wird dann an die primäre Instanz von Kusto. Explorer (sofern vorhanden) mit dem aktuellen Cluster/Daten Bank Satz in Kusto. CLI gesendet.

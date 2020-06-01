@@ -8,107 +8,113 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 1c3ce0c0d383d07375333b08de336503d1578b1a
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: 55ed390a1c98a307d2bb38476458f29fc9c92997
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83381994"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84258010"
 ---
 # <a name="streaming-ingestion-policy-management"></a>Richtlinien Verwaltung für die streamingansung
 
-Die Richtlinie für die streamingansung kann an eine Datenbank oder eine Tabelle angehängt werden, um die streamingerfassung an diese Standorte zuzulassen. Die Richtlinie definiert auch die Zeilen Speicher, die für die streamingansung verwendet werden.
+Die Richtlinie für die streamingansung kann für eine Tabelle festgelegt werden, um die streamingerfassung in diese Tabelle zuzulassen. Die Richtlinie kann auch auf Datenbankebene festgelegt werden, um dieselbe Einstellung auf aktuelle und zukünftige Tabellen anzuwenden.
 
-Weitere Informationen zur streamingansung finden Sie unter Streaming-Erfassung [(Vorschau)](../../ingest-data-streaming.md). Weitere Informationen zur Richtlinie für die streamingansung finden Sie unter Streaming-Erfassungs [Richtlinie](streamingingestionpolicy.md).
+Weitere Informationen finden Sie unter [streamingansung](../../ingest-data-streaming.md). Weitere Informationen zur Richtlinie für die streamingansung finden Sie unter Streaming-Erfassungs [Richtlinie](streamingingestionpolicy.md).
 
-## <a name="show-policy-streamingingestion"></a>. Anzeigen der Richtlinie "streamingingestion"
+## <a name="display-the-policy"></a>Anzeigen der Richtlinie
 
 Der `.show policy streamingingestion` Befehl zeigt die Richtlinie für die streamingansung der Datenbank oder Tabelle an.
-
+ 
 **Syntax**
 
-`.show``database` `policy` `streamingingestion` 
- MyDatabase `.show` `table`MyTable `policy``streamingingestion`
+`.show``{database|table}` &lt; Entitäts Name &gt; `policy``streamingingestion`
 
 **Rückgabe**
 
 Dieser Befehl gibt eine Tabelle mit den folgenden Spalten zurück:
 
-|Spalte    |Typ    |Beschreibung
+|Spalte    |Type    |BESCHREIBUNG
 |---|---|---
 |PolicyName|`string`|Der Richtlinien Name: streamingingestionpolicy
 |EntityName|`string`|Datenbank-oder Tabellenname
-|Richtlinie    |`string`|Ein JSON-Objekt, das die Richtlinie für die streamingansung definiert, die als [Richtlinien Objekt für die streamingerfassung](#streaming-ingestion-policy-object)
+|-Richtlinie    |`string`|[Richtlinien Objekt für die streamingerfassung](#streaming-ingestion-policy-object)
 
-**Beispiel**
+**Beispiele**
 
 ```kusto
-.show database DB1 policy streamingingestion 
-.show table T1 policy streamingingestion 
+.show database DB1 policy streamingingestion
+
+.show table T1 policy streamingingestion
 ```
 
-|PolicyName|EntityName|Richtlinie|Childentities|EntityType|
+|PolicyName|EntityName|-Richtlinie|Childentities|EntityType|
 |---|---|---|---|---|
-|Streamingingestionpolicy|DB1|{"Zahlofrowstores": 4}
+|Streamingingestionpolicy|DB1|{"Isaktivierte": true, "hintallocatedrate": NULL}
 
-### <a name="streaming-ingestion-policy-object"></a>Richtlinien Objekt für die streamingerfassung
+## <a name="change-the-policy"></a>Ändern der Richtlinie
 
-|Eigenschaft  |Typ    |Beschreibung                                                       |
-|----------|--------|------------------------------------------------------------------|
-|"Zahlofrowstores" |`int`  |Die Anzahl der Zeilen Speicher, die der Entität zugewiesen sind.|
-|Versiesageintervallimit|`TimeSpan?`|Optionales Limit für die Intervalle zwischen versiegelvorgängen in der Tabelle. Der gültige Bereich liegt zwischen 1 und 24 Stunden. Standardwert: 24 Stunden.|
-|Versieher oldbytes|`int?`|Optionales Limit für die Datenmenge, die für einen einzelnen Versiegelung-Vorgang in der Tabelle benötigt wird. Der gültige Bereich für den Wert liegt zwischen 10 und 200 MB. Standard: 200 MSB.|
-
-## <a name="alter-policy-streamingingestion"></a>. Alter Policy streamingingestion
-
-`.alter policy streamingingestion`Mit dem Befehl wird die streamingingestion-Richtlinie der Datenbank oder der Tabelle festgelegt.
+Die- `.alter[-merge] policy streamingingestion` Befehls Familie bietet die Möglichkeit zum Ändern der Richtlinie für die streamingansung der Datenbank oder Tabelle.
 
 **Syntax**
 
-* `.alter``database`MyDatabase `policy` `streamingingestion` *Streamingingestionpolicyobject*
+* `.alter``{database|table}` &lt; Entitäts &gt; `policy` Name `streamingingestion``[enable|disable]`
 
-* `.alter``database`MyDatabase `policy` `streamingingestion``enable`
+* `.alter``{database|table}` &lt; &gt; `policy` `streamingingestion` &lt; [Richtlinien Objekt](#streaming-ingestion-policy-object) zur Erfassung von Entitäts Namen Streaming&gt;
 
-* `.alter``database`MyDatabase `policy` `streamingingestion``disable`
+* `.alter-merge``{database|table}` &lt; &gt; `policy` `streamingingestion` &lt; [Richtlinien Objekt](#streaming-ingestion-policy-object) zur Erfassung von Entitäts Namen Streaming&gt;
 
-* `.alter``table`MyTable `policy` `streamingingestion` *Streamingingestionpolicyobject*
-
-* `.alter``table`MyTable `policy` `streamingingestion``enable`
-
-* `.alter``table`MyTable `policy` `streamingingestion``disable`
-
-**Hinweise**
-
-1. *Streamingingestionpolicyobject* ist ein JSON-Objekt, für das das Richtlinien Objekt für die streamingerfassung definiert ist.
-
-2. `enable`-Legen Sie die Richtlinie für die streamingansung auf 4 rowstores fest, wenn die Richtlinie nicht definiert ist oder bereits mit 0 rowstores definiert ist. andernfalls führt der Befehl nichts aus.
-
-3. `disable`-Legen Sie die Richtlinie für die streamingansung auf 0 rowstores fest, wenn die Richtlinie bereits mit positiven rowstores definiert ist, andernfalls führt der Befehl keine Aktion aus.
-
-**Beispiel**
-
-```kusto
-.alter database MyDatabase policy streamingingestion '{  "NumberOfRowStores": 4}'
-
-.alter table MyTable policy streamingingestion '{  "NumberOfRowStores": 4}'
-```
-
-## <a name="delete-policy-streamingingestion"></a>. Löschen der Richtlinie "streamingingestion"
-
-Der `.delete policy streamingingestion` Befehl löscht die streamingingestion-Richtlinie aus der Datenbank oder Tabelle.
-
-**Syntax** 
-
-`.delete``database`MyDatabase `policy``streamingingestion`
-
-`.delete``table`MyTable `policy``streamingingestion`
+> [!Note]
+>
+> * Ermöglicht das Ändern des aktivierten/deaktivierten Zustands der streamingerfassung, ohne andere Eigenschaften der Richtlinie zu ändern oder die Eigenschaften auf die Standardwerte festzulegen, wenn die Richtlinie zuvor nicht in der Entität definiert
+>
+> * Ermöglicht das Ersetzen der gesamten streamingaberfassungs-Richtlinie für die Entität. Das [Richtlinien Objekt für die streamingansung](#streaming-ingestion-policy-object) muss alle obligatorischen Eigenschaften enthalten.
+>
+> * Ermöglicht das ersetzen nur der angegebenen Eigenschaften der streamingerfassungs Richtlinie für die Entität. Das [Richtlinien Objekt für die streamingerfassung](#streaming-ingestion-policy-object) kann einige oder keine der obligatorischen Eigenschaften enthalten.
 
 **Rückgabe**
 
-Mit dem Befehl wird das Richtlinien Objekt "Table" oder "Database streamingingestion" gelöscht und anschließend die Ausgabe des entsprechenden Befehls " [. Show Policy streamingingestion](#show-policy-streamingingestion) " zurückgegeben.
+Der Befehl ändert das Tabellen-oder Daten Bank `streamingingestion` Richtlinien [ `.show policy` `streamingingestion` ](#display-the-policy) Objekt und gibt dann die Ausgabe des entsprechenden Befehls zurück.
 
-**Beispiel**
+**Beispiele**
 
 ```kusto
-.delete database MyDatabase policy streamingingestion 
+.alter database DB1 policy streamingingestion enable
+
+.alter table T1 policy streamingingestion disable
+
+.alter database DB1 policy streamingingestion '{"IsEnabled": true, "HintAllocatedRate": 2.1}'
+
+.alter table T1 streamingingestion '{"IsEnabled": true}'
+
+.alter-merge database DB1 policy streamingingestion '{"IsEnabled": false}'
+
+.alter-merge table T1 policy streamingingestion '{"HintAllocatedRate": 1.5}'
 ```
+
+## <a name="delete-the-policy"></a>Löschen der Richtlinie
+
+Der `.delete policy streamingingestion` Befehl löscht die streamingingestion-Richtlinie aus der Datenbank oder Tabelle.
+
+**Syntax**
+
+`.delete``{database|table}` &lt; Entitäts Name &gt; `policy``streamingingestion`
+
+**Rückgabe**
+
+Mit dem Befehl wird das Richtlinien Objekt "Table" oder "Database streamingingestion" gelöscht und anschließend die Ausgabe des entsprechenden Befehls " [. Show Policy streamingingestion](#display-the-policy) " zurückgegeben.
+
+**Beispiele**
+
+```kusto
+.delete database DB1 policy streamingingestion
+
+.delete table T1 policy streamingingestion
+```
+
+### <a name="streaming-ingestion-policy-object"></a>Richtlinien Objekt für die streamingerfassung
+
+In der Eingabe und Ausgabe von Verwaltungs Befehlen ist das Richtlinien Objekt für die streamingerfassung eine JSON-formatierte Zeichenfolge, die die folgenden Eigenschaften enthält.
+|Eigenschaft  |Type    |BESCHREIBUNG                                                       |Erforderlich/optional |
+|----------|--------|------------------------------------------------------------------|-------|
+|IsEnabled |`bool`  |Ist die streamingansung für die Entität aktiviert| Erforderlich|
+|Hintallocatedrate|`double`|Geschätzte Datenübertragungsrate in GB/Stunde| Optional|

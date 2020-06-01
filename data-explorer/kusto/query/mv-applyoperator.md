@@ -8,21 +8,24 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 80e38c1782a4476181fe73c5f77d6460f2ef539f
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: 8fd83615de466c238a590273b228c118e2cd1b46
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271229"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84257839"
 ---
 # <a name="mv-apply-operator"></a>mv-apply-Operator
 
-Der- `mv-apply` Operator erweitert jeden Datensatz in der Eingabe Tabelle in eine untergeordnete Tabelle, wendet eine Unterabfrage auf jede unter Tabelle an und gibt die Gesamtmenge der Ergebnisse aller Unterabfragen zurück.
+Wendet eine Unterabfrage auf jeden Datensatz an und gibt die Vereinigung der Ergebnisse aller Unterabfragen zurück.
 
 Nehmen Sie beispielsweise an, eine Tabelle `T` enthält eine Spalte `Metric` vom Typ, `dynamic` deren Werte `real` Zahlen Arrays sind. Mit der folgenden Abfrage werden die beiden größten Werte in jedem `Metric` Wert gesucht und die Datensätze zurückgegeben, die diesen Werten entsprechen.
 
 ```kusto
-T | mv-apply Metric to typeof(real) on (top 2 by Metric desc)
+T | mv-apply Metric to typeof(real) on 
+(
+   top 2 by Metric desc
+)
 ```
 
 Der `mv-apply` Operator verfügt über die folgenden Verarbeitungsschritte:

@@ -8,51 +8,43 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/20/2020
-ms.openlocfilehash: a0141482e3714ed710dbdc6fa00e3b8b396e77e6
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 312e6cad984491b39bd9a77f0b34d142798e922e
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373311"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84257993"
 ---
 # <a name="streaming-ingestion-policy"></a>Streamingerfassungsrichtlinie
 
 ## <a name="streaming-ingestion-target-scenario"></a>Szenario für streamingingserfassung
 
-Die Streamingerfassung ist für Szenarien vorgesehen, in denen eine geringe Wartezeit mit einer Erfassungsdauer von weniger als zehn Sekunden für unterschiedliche Volumedaten benötigt wird. Sie wird verwendet, um die operative Verarbeitung von vielen Tabellen in einer oder mehreren Datenbanken zu optimieren, bei denen der Datenstrom in jeder Tabelle relativ klein ist (wenige Datensätze pro Sekunde), das Gesamtvolumen der Datenerfassung jedoch hoch (Tausende von Datensätzen pro Sekunde).
+Die streamingangserfassung ist für Szenarien vorgesehen, die eine geringe Latenz erfordern, mit einer Erfassungs Zeit von weniger als 10 Sekunden für verschiedene Volumedaten. Sie wird verwendet, um die operative Verarbeitung von vielen Tabellen in einer oder mehreren Datenbanken zu optimieren, bei denen der Datenstrom in jeder Tabelle relativ klein ist (einige wenige Datensätze pro Sekunde), das Gesamtvolumen der Datenerfassung jedoch hoch (Tausende von Datensätzen pro Sekunde) ist.
 
-Wenn die Datenmenge mehr als 1 MB pro Sekunde und Tabelle beträgt, verwenden Sie anstelle der Streamingerfassung die klassische (Massen-)Erfassung. 
+Verwenden Sie die klassische (Massen-) Erfassung anstelle der streamingerfassung, wenn die Datenmenge auf mehr als 4 GB pro Stunde und Tabelle anwächst. 
 
 * Informationen zum Implementieren dieses Features finden Sie unter [Streaming](../../ingest-data-streaming.md)-Erfassung.
-* Weitere Informationen über Befehle zum Steuern der streamingansung finden [Sie Untersteuern von Befehlen zum Verwalten der streamingerfassungs-Richtlinie](../management/streamingingestion-policy.md) .
-
+* Weitere Informationen über Befehle zum Steuern der streamingansung finden Sie unter [Steuern von Befehlen für die Verwaltung der streamingerfassungs-Richtlinie](streamingingestion-policy.md)
+ 
 ## <a name="streaming-ingestion-policy-definition"></a>Richtlinien Definition für die streamingerfassung
 
-Die Richtlinie für die streamingansung kann für eine Tabelle oder eine Datenbank definiert werden. Wenn Sie diese Richtlinie auf Datenbankebene definieren, werden die gleichen Einstellungen auf alle vorhandenen und zukünftigen Tabellen in der Datenbank angewendet. Wenn die Richtlinie für die streamingerfassung auf Tabellen-und Datenbankebene festgelegt ist, hat die Einstellung auf Tabellenebene Vorrang.
+Die Richtlinie für die streamingansung enthält die folgenden Eigenschaften:
+
+* **Isaktiviert**:
+  * definiert den Status der streamingerfassungs-Funktionalität für die Tabelle/Datenbank.
+  * obligatorisch, kein Standardwert, muss explizit auf " *true* " oder " *false* " festgelegt werden.
+* **Hintallocatedrate**:
+  * Wenn Set ein Hinweis auf die stündliche Datenmenge in Gigabyte ist, die für die Tabelle erwartet wird. Dieser Hinweis unterstützt das System beim Anpassen der Menge an Ressourcen, die einer Tabelle zur Unterstützung der streamingerfassung zugewiesen werden.
+  * Standardwert *null* (nicht festgelegt)
+
+Um die streamingansung für eine Tabelle zu aktivieren, definieren Sie die Richtlinie für die streamingerfassung mit *aktiviertem isenable* auf *true*. Diese Definition kann für eine Tabelle selbst oder für die Datenbank festgelegt werden.
+Wenn Sie diese Richtlinie auf Datenbankebene definieren, werden die gleichen Einstellungen auf alle vorhandenen und zukünftigen Tabellen in der Datenbank angewendet. Wenn die Richtlinie für die streamingerfassung sowohl auf der Tabellen-als auch auf der Datenbankebene festgelegt ist, hat die Einstellung auf Tabellenebene Vorrang Diese Einstellung bedeutet, dass die streamingerfassung in der Regel für die Datenbank aktiviert, aber speziell für bestimmte Tabellen oder umgekehrt deaktiviert werden kann.
 
 > [!NOTE]
-> Wenn eine Tabelle die streamingerfassung nicht direkt durchführt, sondern nur über eine Update Richtlinie, muss für diese Tabelle keine Richtlinie für die streamingansung definiert werden. 
+> Wenn eine Tabelle die streamingerfassung nicht direkt durchführt, sondern nur über eine Update Richtlinie, muss für diese Tabelle keine Richtlinie für die streamingansung definiert werden.
 
-Mit der Richtlinie für die streaminganterzierung wird die maximale Anzahl von Zeilen speichern festgelegt, an die die Streamingdaten der Tabelle verteilt werden. Die Verteilung wird sowohl für die Verfügbarkeit als auch für die Datenraten Unterstützung benötigt.
 
-## <a name="setting-the-number-of-row-stores"></a>Festlegen der Anzahl von Zeilen speichern
-
-Die Anzahl der in der Richtlinie für die Streaminglösung festgelegten Zeilen Speicher muss definiert werden. Diese Zahl sollte auf der streamingdatenrate pro Tabelle basieren (grobe Schätzung ist ausreichend).
-Die empfohlene Mindestanzahl von Zeilen speichern für jede Tabelle ist vier. Die maximal unterstützte Anzahl von Zeilen speichern beträgt 64.
-Je höher der streamingdatensatz für die Tabelle ist, desto höher ist die erforderliche Anzahl von Zeilen speichern, die in der zugeordneten Richtlinie zur streamingerfassung benötigt werden.
-In der folgenden Tabelle sind die empfohlenen Einstellungen für die empfohlenen Einstellungen (falls zweifelhafte Verwendung einer höheren Zahl) verwendet:
-
-|Geschätzte Spitzen Zahl der stündlichen Streamingdaten (pro Tabelle)|Anzahl von Zeilen speichern|
-|----------|------|
-|< 1 GB/Stunde |4|
-|1-2 GB/Stunde |4-8|
-|2-3 GB/Stunde |8-12|
-|3-4 GB/Stunde |12-16|
-| > 4 GB/Stunde |
-
- Weitere Ratschläge hierzu erhalten Sie, wenn Sie ein [Support Ticket](https://ms.portal.azure.com/#blade/Microsoft_Azure_Support/HelpAndSupportBlade/overview) öffnen.
-
-Für eine optimale Abfrage Wartezeit sollten Sie die oben beschriebene Empfehlung nicht wesentlich überschreiten.
-
-> [!NOTE]
-> Wenn Sie die streamingaberstellungs-Richtlinie für die Datenbank festlegen, weisen Sie die Anzahl der für die Tabelle benötigten Zeilen Speicher mit der höchsten Datenrate zu. 
+## <a name="set-the-data-rate-hint"></a>Festlegen des Datenraten Hinweises
+Die Richtlinie für die streamingansung kann einen Hinweis auf die stündliche Datenmenge enthalten, die für die Tabelle erwartet wird. Mithilfe dieses Hinweises kann das System die Menge der Ressourcen anpassen, die für diese Tabelle zur Unterstützung der streamingerfassung reserviert werden.
+Legen Sie den Hinweis fest, wenn die Rate der Streamingdaten in die Tabelle 1 GB/Stunde überschreitet.
+Wenn Sie _hintallocatedrate_ in der streamingerfassungs-Richtlinie für die Datenbank festlegen, legen Sie Sie durch die Tabelle mit der höchsten erwarteten Datenrate fest. Es wird nicht empfohlen, den effektiven Hinweis für eine Tabelle auf einen Wert festzulegen, der wesentlich höher als die erwartete Spitzen Zahl für stündlich ist. Diese Einstellung kann sich negativ auf die Abfrageleistung auswirken.

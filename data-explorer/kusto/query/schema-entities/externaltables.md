@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/22/2020
-ms.openlocfilehash: a3d95d3cb90b6a834b1f1538aa28da1f1ac2a97f
-ms.sourcegitcommit: a562ce255ac706ca1ca77d272a97b5975235729d
+ms.openlocfilehash: 2b03f4e0ef426b07f88d7c179caecca6e7dd3034
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83867051"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84257823"
 ---
 # <a name="external-tables"></a>Externe Tabellen
 
@@ -29,4 +29,5 @@ Eine **externe Tabelle** wird einmal erstellt (siehe [Allgemeine Steuerungsbefeh
 * Externe Tabellennamen dürfen sich nicht mit den Kusto-Tabellennamen überlappen.
 * Externe Tabellennamen entsprechen den Regeln für [Entitäts Namen](./entity-names.md).
 * Der maximale Grenzwert externer Tabellen pro Datenbank beträgt 1.000.
-* Kusto unterstützt das [Exportieren von Daten in eine externe Tabelle](../../management/data-export/export-data-to-an-external-table.md) sowie das [Abfragen externer Tabellen](../../../data-lake-query-data.md).
+* Kusto unterstützt den [Export](../../management/data-export/export-data-to-an-external-table.md) und den [fortlaufenden Export](../../management/data-export/continuous-data-export.md) in eine externe Tabelle sowie das [Abfragen externer Tabellen](../../../data-lake-query-data.md).
+    * Das Löschen von [Daten](../../concepts/data-purge.md) wird nicht auf externe Tabellen angewendet. Datensätze werden nie aus externen Tabellen gelöscht.

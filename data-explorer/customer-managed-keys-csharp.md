@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/06/2020
-ms.openlocfilehash: e394d928774624ac3c7faacab7726570272da82a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: ff2edd1e64aa3ef44c96ecf15d6a859eadd49e69
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492994"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84257874"
 ---
 # <a name="configure-customer-managed-keys-using-c"></a>Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#
 
@@ -20,6 +20,7 @@ ms.locfileid: "81492994"
 > * [Portal](customer-managed-keys-portal.md)
 > * [C#](customer-managed-keys-csharp.md)
 > * [Azure Resource Manager-Vorlage](customer-managed-keys-resource-manager.md)
+> * [BEFEHLSZEILENSCHNITTSTELLE (CLI)](customer-managed-keys-cli.md)
 
 [!INCLUDE [data-explorer-configure-customer-managed-keys](includes/data-explorer-configure-customer-managed-keys.md)]
 
@@ -41,9 +42,9 @@ In diesem Abschnitt wird gezeigt, wie Sie die Verschlüsselung von kundenseitig 
 
 * Installieren Sie das [NuGet-Paket Microsoft.IdentityModel.Clients.ActiveDirectory](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory/) für die Authentifizierung.
 
-### <a name="authentication"></a>Authentication
+### <a name="authentication"></a>Authentifizierung
 
-Zum Ausführen der Beispiele in diesem Artikel [erstellen Sie eine Azure AD-Anwendung](/azure/active-directory/develop/howto-create-service-principal-portal) und einen Dienstprinzipal, der auf Ressourcen zugreifen kann. Sie können eine Rollenzuweisung im Abonnementbereich hinzufügen und die erforderlichen Werte für `Directory (tenant) ID`, `Application ID` und `Client Secret` abrufen.
+Zum Ausführen der Beispiele in diesem Artikel [erstellen Sie eine Azure AD-Anwendung](/azure/active-directory/develop/howto-create-service-principal-portal) und einen Dienstprinzipal, der auf Ressourcen zugreifen kann. Sie können eine Rollenzuweisung im Abonnementbereich hinzufügen und die erforderliche `Directory (tenant) ID`, `Application ID`und `Client Secret` abrufen.
 
 ### <a name="configure-cluster"></a>Konfigurieren des Clusters
 
@@ -91,9 +92,9 @@ Wenn Sie eine neue Version eines Schlüssels erstellen, müssen Sie den Cluster 
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-* [Schützen von Azure Data Explorer-Clustern in Azure](security.md)
-* [Konfigurieren verwalteter Identitäten für Ihren Azure Data Explorer-Cluster](managed-identities.md)
-* [Sichern Ihres Clusters in Azure Data Explorer – Azure-Portal](manage-cluster-security.md) durch Aktivieren der Verschlüsselung ruhender Daten
+* [Schützen von Azure Data Explorer-Clustern in Azure](security.md)
+* [Konfigurieren von verwalteten Identitäten für Ihren Azure Data Explorer-Cluster](managed-identities.md)
+* [Sichern Ihres Clusters in Azure Data Explorer – Azure-Portal](manage-cluster-security.md) durch Aktivieren der Verschlüsselung ruhender Daten
 * [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resource Manager-Vorlage](customer-managed-keys-resource-manager.md)
 
 

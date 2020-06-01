@@ -1,6 +1,6 @@
 ---
-title: Diagnoseinformationen - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden Diagnoseinformationen in Azure Data Explorer beschrieben.
+title: Diagnoseinformationen-Azure Daten-Explorer
+description: Dieser Artikel beschreibt die Diagnoseinformationen in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,38 +8,43 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ae8efdf99b7ed91285e90defed7568d2a440240d
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 505e5443e18007f41ca3fb67046df31fcbae2ba2
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81521266"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84257942"
 ---
 # <a name="diagnostic-information"></a>Diagnoseinformationen
 
-Die nächsten Befehle können verwendet werden, um Systemdiagnoseinformationen anzuzeigen.
+Diese Befehle können verwendet werden, um Systemdiagnoseinformationen anzuzeigen.
 
-## <a name="show-cluster"></a>.show-Cluster
+* [. Cluster anzeigen](#show-cluster)
+* [. Diagnose anzeigen](#show-diagnostics)
+* [. Anzeigen der Kapazität](#show-capacity)
+* [. Show-Vorgänge](#show-operations)
+
+## <a name="show-cluster"></a>. Cluster anzeigen
 
 ```kusto
 .show cluster
 ```
 
-Gibt einen Satz mit einem Datensatz pro Knoten zurück, der derzeit im Cluster aktiv ist.  
+Gibt eine Menge zurück, die einen Datensatz für jeden Knoten enthält, der derzeit im Cluster aktiv ist.  
 
-**Ergebnisse**
+**Ergebnisse** 
 
-|Ausgabespalte |type |BESCHREIBUNG 
+|Ausgabe Spalte |Type |BESCHREIBUNG
 |---|---|---|
-|NodeId|String|Identifiziert den Knoten (dies ist die Azure RoleId des Knotens, wenn der Cluster in Azure bereitgestellt wird). |
-|Adresse|String |Der interne Endpunkt, der vom Cluster für die Kommunikation zwischen Knoten verwendet wird. 
-|name |String |Ein interner Name für den Knoten (einschließlich des Computernamens, des Prozessnamens und der Prozess-ID). 
-|StartTime |Datetime |Das genaue Datum/die uhrgenaue Uhrzeit (in UTC), mit dem die aktuelle Kusto-Instanziierung im Knoten gestartet wurde. Dies kann verwendet werden, um zu erkennen, ob der Knoten (oder Kusto, der auf dem Knoten ausgeführt wird) vor kurzem neu gestartet wurde. 
-|IsAdmin |Boolean |Gibt an, ob dieser Knoten derzeit der "Leader" des Clusters ist. 
-|MachineTotalMemory  |Int64 |Die RAM-Menge, über die der Knoten verfügt. 
-|MachineAvailableMemory  |Int64 |Die Menge an RAM, die derzeit auf dem Knoten "verfügbar" ist. 
-|ProcessorCount  |Int32 |Die Anzahl der Prozessoren auf dem Knoten. 
-|UmweltBeschreibung  |Zeichenfolge |Zusätzliche Informationen zur Umgebung des Knotens (z. B. Upgrade/Fault Domains), serialisiert als JSON. 
+|NodeId|Zeichenfolge|Identifiziert den Knoten. Bei der Knoten-ID handelt es sich um die Azure-RoleID des Knotens, wenn der Cluster in Azure bereitgestellt wird.
+|Adresse|Zeichenfolge |Der interne Endpunkt, der vom Cluster für die Kommunikation zwischen Knoten verwendet wird.
+|Name |Zeichenfolge |Ein interner Name für den Knoten. Der Name enthält den Computernamen, den Prozessnamen und die Prozess-ID.
+|StartTime |Datetime |Das Datum und die Uhrzeit (in UTC), zu der die aktuelle Kusto-Instanziierung im Knoten gestartet wurde. Dieser Wert kann verwendet werden, um zu ermitteln, ob der Knoten (oder Kusto, der auf dem Knoten ausgeführt wird) kürzlich neu gestartet wurde.
+|IsAdmin |Boolesch |Wenn dieser Knoten derzeit die "Führungskraft" des Clusters ist 
+|Machinetotalmemory  |Int64 |Der RAM-Wert des Knotens.
+|Machineavailablememory  |Int64 |Der RAM-Betrag, der derzeit für die Verwendung auf dem Knoten verfügbar ist.
+|ProcessorCount  |Int32 |Die Anzahl der Prozessoren auf dem Knoten.
+|Umgebungs Beschreibung  |Zeichenfolge |Zusätzliche Informationen zur Umgebung des Knotens, die als JSON serialisiert ist. Beispielsweise als Upgrade/fehlerdomänen
 
 **Beispiel**
 
@@ -47,112 +52,112 @@ Gibt einen Satz mit einem Datensatz pro Knoten zurück, der derzeit im Cluster a
 .show cluster
 ```
 
-NodeId|Adresse|name|StartTime|IsAdmin|MachineTotalMemory|MachineAvailableMemory|ProcessorCount|UmweltBeschreibung
+NodeId|Adresse|Name|StartTime|IsAdmin|Machinetotalmemory|Machineavailablememory|ProcessorCount|Umgebungs Beschreibung
 ---|---|---|---|---|---|---|---|---
-Kusto.Azure.Svc_IN_1|net.tcp://100.112.150.30:23107/|Kusto.Azure.Svc_IN_4/RD000D3AB1E9BD/WaWorkerHost/3820|2016-01-15 02:00:22.6522152|True|274877435904|247797796864|16|"UpdateDomain":0, "FaultDomain":0"
-Kusto.Azure.Svc_IN_3|net.tcp://100.112.154.34:23107/|Kusto.Azure.Svc_IN_3/RD000D3AB1E062/WaWorkerHost/2760|2016-01-15 05:52:52.1434683|False|274877435904|258740346880|16|"UpdateDomain":1, "FaultDomain":1
-Kusto.Azure.Svc_IN_2|net.tcp://100.112.128.40:23107/|Kusto.Azure.Svc_IN_2/RD000D3AB1E054/WaWorkerHost/3776|2016-01-15 07:17:18.0699790|False|274877435904|244232339456|16|"UpdateDomain":2, "FaultDomain":2
-Kusto.Azure.Svc_IN_0|net.tcp://100.112.138.15:23107/|Kusto.Azure.Svc_IN_0/RD000D3AB0D6C6/WaWorkerHost/3208|2016-01-15 09:46:36.9865016|False|274877435904|238414581760|16|"UpdateDomain":3, "FaultDomain":3
+Kusto. Azure. Svc_IN_1|NET. TCP://100.112.150.30:23107/|Kusto. Azure. Svc_IN_4/rd000d3ab1e9bd/waworkerhost/3820|2016-01-15 02:00:22.6522152|True|274877435904|247797796864|16|{"Updatedomain": 0, "Fehler Domäne": 0}
+Kusto. Azure. Svc_IN_3|NET. TCP://100.112.154.34:23107/|Kusto. Azure. Svc_IN_3/rd000d3ab1e062/waworkerhost/2760|2016-01-15 05:52:52.1434683|False|274877435904|258740346880|16|{"Updatedomain": 1, "Fehler Domäne": 1}
+Kusto. Azure. Svc_IN_2|NET. TCP://100.112.128.40:23107/|Kusto. Azure. Svc_IN_2/rd000d3ab1e054/waworkerhost/3776|2016-01-15 07:17:18.0699790|False|274877435904|244232339456|16|{"Updatedomain": 2, "Fehler Domäne": 2}
+Kusto. Azure. Svc_IN_0|NET. TCP://100.112.138.15:23107/|Kusto. Azure. Svc_IN_0/rd000d3ab0d6c6/waworkerhost/3208|2016-01-15 09:46:36.9865016|False|274877435904|238414581760|16|{"Updatedomain": 3, "Fehler Domäne": 3}
 
 
-## <a name="show-diagnostics"></a>.show Diagnose
+## <a name="show-diagnostics"></a>. Diagnose anzeigen
 
 ```kusto
 .show diagnostics
 ```
 
-Gibt Informationen zum Kusto-Clusterstatus zurück.
+Gibt Informationen zum Kusto-Cluster Integritäts Status zurück.
  
 **Rückgabe**
 
-|Ausgabeparameter |type |BESCHREIBUNG|
+|Output-Parameter |Type |BESCHREIBUNG|
 |-----------------|-----|-----------| 
-|IsHealthy|Boolean|Gibt an, ob der Cluster als fehlerfrei gilt oder nicht.
-|IsScaleOutRequired|Boolean|Gibt an, ob der Cluster vergrößert werden soll (weitere Computerknoten hinzufügen). 
-|MaschinenTotal|Int64|Die Anzahl der Computer im Cluster.
-|MaschinenOffline|Int64|Die Anzahl der Computer, die derzeit offline sind (nicht reagieren).
-|NodeLastRestartedOn|Datetime|Das letzte Mal, dass einer der Knoten im Cluster neu gestartet wurde.
-|AdminLastElectedOn|Datetime|Das letzte Mal, dass der Besitz der Clusteradministratorrolle geändert wurde.
-|MemoryLoadFactor|Double|Die Datenmenge, die der Cluster im Verhältnis zu seiner Kapazität (die 100,0 beträgt)
-|ExtentsTotal|Int64|Die Gesamtanzahl der Datenerweiterungen, die der Cluster derzeit in allen Datenbanken und Tabellen hat.
+|Ishealthy|Boolesch|Wenn der Cluster fehlerfrei ist oder nicht
+|Isscaleumquired|Boolesch|Wenn die Größe des Clusters durch Hinzufügen von weiteren Computer Knoten erhöht werden soll
+|Machinestotal|Int64|Die Anzahl der Computer im Cluster
+|Machinesoffline|Int64|Die Anzahl von Computern, die zurzeit offline sind
+|Nodelastrestartedon|Datetime|Das letzte Datum/die Uhrzeit, zu der ein Knoten im Cluster neu gestartet wurde
+|Adminlastelectedon|Datetime|Der letzte Datums-/Uhrzeit-Besitz der Cluster Administrator Rolle wurde geändert.
+|Memoryloadfactor|Double|Die Menge der vom Cluster gehaltenen Daten relativ zur maximalen Kapazität von 100,0
+|Extentstotal|Int64|Die Gesamtanzahl der Datenblöcke, die der Cluster derzeit umfasst, über alle Datenbanken und alle Tabellen hinweg
 |Reserved|Int64|
 |Reserved|Int64|
-|InstanzenTargetBasedOnDataCapacity|Int64| Die Anzahl der Instanzen, die erforderlich sind, um den ClusterDataCapacityFactor unter 80 zu bringen (gültig nur, wenn alle Computer gleich dimensioniert sind).
-|TotalOriginalDataSize|Int64|Gesamtgröße der ursprünglich aufgenommenen Daten
-|TotalExtentSize|Int64|Gesamtgröße der gespeicherten Daten (nach Komprimierung und Indizierung)
-|IngestionsLoadFactor|Double|Der Auslastungsprozentsatz der Clustererfassungskapazität (kann mit dem Befehl .show capacity angezeigt werden)
-|IngestionsInProgress|Int64|Die Anzahl der derzeit durchgeführten Aufnahmevorgänge.
-|IngestionsSuccessRate|Double|Der Prozentsatz der Aufnahmevorgänge, die in den letzten 10 Minuten erfolgreich abgeschlossen wurden.
-|MergesInProgress|Int64|Die Anzahl der Erweiterungen, die derzeit ausgeführt werden.
-|BuildVersion|String|Die Im Cluster bereitgestellte Kusto-Softwareversion.
-|BuildTime|Datetime|Die Buildzeit dieser Kusto-Softwareversion.
-|ClusterDataCapacityFactor|Double|Der Prozentsatz der Clusterdatenkapazitätsauslastung. Er wird als SUMME (Extent Size Data) / SUM (SSD Cache Size) berechnet.
-|IsDataWarmingErforderlich|Boolean|Intern: Gibt an, ob die Erwärmungsabfragen des Clusters ausgeführt werden sollen (um Daten in den lokalen SSD-Cache zu bringen). 
-|DatawarmingLastRunon|Datetime|Das letzte Mal, dass .warm-Daten auf dem Cluster ausgeführt wurden
-|MergesSuccessRate|Double|Der Prozentsatz der Zusammenführungsvorgänge, die in den letzten 10 Minuten erfolgreich abgeschlossen wurden.
-|NotHealthyReason|String|Zeichenfolge, die den Grund für die Fehlerwartin des Clusters angibt, ist nicht fehlerfrei. 
-|IsAttentionRequired|Boolean|Ob Cluster die Aufmerksamkeit des Operation-Teams erfordert
-|AchtungRequiredReason|String|Zeichenfolge, die den Grund für den Cluster angibt, der Aufmerksamkeit erfordert
-|ProductVersion|String|String mit Produktinformationen (Zweig, Version, etc.)
-|FailedIngestOperations|Int64|Anzahl der fehlgeschlagenen Aufnahmevorgänge nach 10 Minuten
-|FailedMergeOperations|Int64|Anzahl fehlgeschlagener Zusammenführungsvorgänge nach 1 Stunde
-|MaxExtentsInSingleTable|Int64|Maximale Anzahl von Ausdehnungen in der Tabelle (TableWithMaxExtents)
-|TableWithMaxExtents|String|Tabelle mit der maximalen Anzahl von Ausdehnungen (MaxExtentsInSingleTable)
-|WarmExtentSize|Double|Gesamtgröße der Ausdehnungen im hot Cache
-|NumberOfDatabases|Int32|Anzahl der Datenbanken im Cluster
+|Instancestargetbasedondatacapacity|Int64|Die Anzahl der Instanzen, die erforderlich sind, um den clusterdatacapacityfactor unter 80 zu verschieben. Dieser Wert ist nur gültig, wenn alle Computer gleich groß sind.
+|Totaloriginaldatasize|Int64|Gesamtgröße der ursprünglich erfassten Daten
+|Totalextentsize|Int64|Gesamtgröße der gespeicherten Daten nach der Komprimierung und Indizierung
+|IngestionsLoadFactor|Double|Der Prozentsatz der verwendeten Cluster Erfassungs Kapazität. Die maximale Kapazität kann mit dem Befehl eingesehen werden. `.show capacity`
+|Ingestionsinprogress|Int64|Die Anzahl der Erfassungs Vorgänge, die zurzeit ausgeführt werden.
+|Ingestionserfolgreiches Rate|Double|Der Prozentsatz der Erfassungs Vorgänge, die in den letzten 10 Minuten erfolgreich abgeschlossen wurden.
+|Mergesinprogress|Int64|Die Anzahl der zurzeit durchgeführten Blöcke zum Zusammenführen von Blöcken.
+|BuildVersion|Zeichenfolge|Die im Cluster bereitgestellte Kusto-Softwareversion
+|Buildtime|Datetime|Das Datum und die Uhrzeit der Buildversion der Kusto-Software.
+|ClusterDataCapacityFactor|Double|Der Prozentsatz der verwendeten Cluster Datenkapazität. Der Prozentsatz wird als Summe (Blockgrößen Daten)/Sum (SSD-Cache Größe) berechnet.
+|Isdatawarmingrequired|Boolesch|Intern: Wenn die Aufwärm Abfragen des Clusters ausgeführt werden sollen, um Daten in den lokalen SSD-Cache zu bringen 
+|Datawarminglastrauunon|Datetime|Das letzte Datum/die Uhrzeit, zu der die warmdaten auf dem Cluster ausgeführt wurden.
+|Mergessuccess Rate|Double|Der Prozentsatz der Merge-Vorgänge, die in den letzten 10 Minuten erfolgreich abgeschlossen wurden.
+|Noderalthyreason|Zeichenfolge|Gibt an, warum der Cluster nicht fehlerfrei ist. 
+|Isattentionrequired|Boolesch|Wenn für den Cluster ein Eingreifen des Betriebsteams erforderlich ist
+|Attentionrequirements dreason|Zeichenfolge|Gibt den Grund für den Cluster an, der Eingreifen erfordert.
+|ProductVersion|Zeichenfolge|Gibt Produktinformationen an (Branch, Version usw.).
+|Failedingestoperations|Int64|Anzahl der fehlgeschlagenen Erfassungs Vorgänge in den letzten 10 Minuten
+|Failedmergeoperations|Int64|Anzahl fehlgeschlagener Zusammenarbeits Vorgänge in der letzten 1 Stunde
+|Maxextentsinsingletable|Int64|Maximale Anzahl von Blöcken in der Tabelle (tablewithmaxextents)
+|Tablewithmaxextents|Zeichenfolge|Tabelle mit der maximalen Anzahl von Blöcken (maxextentsinsingletable)
+|Warmextentsize|Double|Gesamtgröße der Blöcke im aktiven Cache
+|Anzahl von Datenbanken|Int32|Anzahl der Datenbanken im Cluster
 
-## <a name="show-capacity"></a>.show Kapazität 
+## <a name="show-capacity"></a>. Anzeigen der Kapazität
 
 ```kusto
 .show capacity
 ```
 
-Gibt eine Berechnung für eine geschätzte Clusterkapazität für jede Ressource zurück. 
+Gibt die Ergebnisse einer Berechnung für eine geschätzte Cluster Kapazität für jede Ressource zurück.
  
 **Ergebnisse**
 
-|Ausgabeparameter |type |BESCHREIBUNG 
+|Output-Parameter |Type |BESCHREIBUNG 
 |---|---|---
-|Resource |String |Der Name der Ressource. 
-|Gesamt |Int64 |Die Menge der verfügbaren Gesamtressourcen des Typs 'Ressource' (z. B. Menge der gleichzeitigen Einnahme) 
-|Consumed |Int64 |Die Anzahl der Ressourcen des Typs 'Ressource', die jetzt verbraucht werden 
-|Verbleibend |Int64 |Die Menge der verbleibenden Ressourcen vom Typ 'Ressource' 
+|Resource |Zeichenfolge |Der Name der Ressource 
+|Gesamt |Int64 |Die Gesamtmenge der Ressourcen vom Typ "Resource", die verfügbar sind. Beispielsweise die Anzahl der gleichzeitigen Ingestionen.
+|Consumed |Int64 |Momentan verbrauchte Ressourcen Menge des Typs "Ressource"
+|Verbleibend |Int64 |Die Menge der verbleibenden Ressourcen vom Typ "Resource".
  
 **Beispiel**
 
-|Resource |Gesamt |Consumed |Verbleibend 
+|Resource |Gesamt |Consumed |Verbleibend
 |---|---|---|---
-|Einnahme |576 |1 |575 
+|Ingestionen |576 |1 |575
 
-## <a name="show-operations"></a>.show-Vorgänge 
+## <a name="show-operations"></a>. Show-Vorgänge
 
-Gibt eine Tabelle mit allen administrativen Vorgängen seit der Wahl des neuen Admin-Knotens zurück. 
+Dieser Befehl gibt eine Tabelle zurück, die alle administrativen Vorgänge enthält, seit der neue Administrator Knoten gewählt wurde.
 
 |||
 |---|---| 
-|`.show` `operations`              |Gibt alle Vorgänge zurück, die der Cluster verarbeitet hat oder verarbeitet 
-|`.show``operations` *OperationId*|Gibt den Vorgangsstatus für eine bestimmte ID zurück 
-|`.show``operations` `,` *OperationId2* `,` *OperationId1* OperationId1 OperationId2 ...) `(`|Gibt den Status von Vorgängen für bestimmte IDs zurück
+|`.show` `operations`              |Gibt alle Vorgänge zurück, die vom Cluster verarbeitet oder verarbeitet wurden.
+|`.show` `operations` *OperationId*|Gibt den Vorgangs Status für eine bestimmte ID zurück.
+|`.show``operations` `(` *OperationId1* `,` *OperationId2* `,` ...)|Gibt den Vorgangs Status für bestimmte IDs zurück.
 
 **Ergebnisse**
  
-|Ausgabeparameter |type |BESCHREIBUNG 
+|Output-Parameter |Type |BESCHREIBUNG
 |---|---|---
-|Id |String |Operation Identifier. 
-|Vorgang |String |Admin-Befehlsalias 
-|NodeId |String |Wenn der Befehl eine Remoteausführung hat (z.B. DataIngestPull) - NodeId enthält die ID des ausrichtenden Remoteknotens 
-|StartedOn |Datetime |Datum/Uhrzeit (in UTC), wenn der Vorgang gestartet wurde 
-|LastUpdatedOn |Datetime |Datum/Uhrzeit (in UTC), wenn der Vorgang zuletzt aktualisiert wurde (kann entweder ein Schritt innerhalb des Vorgangs oder ein Abschlussschritt sein) 
-|Duration |Datetime |TimeSpan zwischen LastUpdateOn und StartedOn 
-|State |String |Befehlsstatus: kann Werte von "InProgress", "Completed" oder "Failed" haben 
-|Status |String |Zusätzliche Hilfezeichenfolge, die entweder Fehler bei fehlgeschlagenen Vorgängen enthält 
+|id |Zeichenfolge |Vorgangs Bezeichner
+|Vorgang |Zeichenfolge |Administrator befehlsalias
+|NodeId |Zeichenfolge |, Wenn der Befehl etwas Remote ausgeführt wird, z. b. dataingestpull. Die Knoten-ID enthält die ID des Remote Knotens, auf dem ausgeführt wird.
+|Startedon |Datetime |Datum/Uhrzeit (in UTC), zu der der Vorgang gestartet wurde 
+|Lastupdatedon |Datetime |Datum/Uhrzeit (in UTC), als der Vorgang zuletzt aktualisiert wurde. Der Vorgang kann entweder ein Schritt innerhalb des Vorgangs oder ein Abschluss Schritt sein.
+|Duration |Datetime |Zeitspanne zwischen "lastupdateon" und "startedon"
+|Zustand |Zeichenfolge |Befehls Zustand mit den Werten "InProgress", "abgeschlossen" oder "failed"
+|Status |Zeichenfolge |Zusätzliche Hilfe Zeichenfolge, die die Fehler für fehlgeschlagene Vorgänge enthält
  
 **Beispiel**
  
-|Id |Vorgang |Knoten-ID |Started On |Zuletzt aktualisiert |Duration |State |Status 
+|Id |Vorgang |Knoten-ID |Gestartet am |Zuletzt aktualisiert am |Duration |Zustand |Status 
 |--|--|--|--|--|--|--|--
-|3827def6-0773-4f2a-859e-c02cf395deaf |SchemaShow | |2015-01-06 08:47:01.0000000 |2015-01-06 08:47:01.0000000 |0001-01-01 00:00:00.0000000 |Abgeschlossen | 
-|841fafa4-076a-4cba-9300-4836da0d9c75 |DataIngestPull |Kusto.Azure.Svc_IN_1 |2015-01-06 08:47:02.0000000 |2015-01-06 08:48:19.0000000 |0001-01-01 00:01:17.0000000 |Abgeschlossen | 
-|e198c519-5263-4629-a158-8d68f7a1022f |OperationsShow | |2015-01-06 08:47:18.0000000 |2015-01-06 08:47:18.0000000 |0001-01-01 00:00:00.0000000 |Abgeschlossen | 
-|a9f287a1-f3e6-4154-ad18-b86438da0929 |ExtentsDrop | |2015-01-11 08:41:01.0000000 |0001-01-01 00:00:00.0000000 |0001-01-01 00:00:00.0000000 |InProgress | 
-|9edb3ecc-f4b4-4738-87e1-648eed2bd998 |DataIngestPull | |2015-01-10 14:57:41.0000000 |2015-01-10 14:57:41.0000000 |0001-01-01 00:00:00.0000000 |Fehler |Die Auflistung wurde geändert; Enumerationsvorgang wird möglicherweise nicht ausgeführt. 
+|3827def6-0773-4f2a-859e-c02cf395gehörlos |Schemashow | |2015-01-06 08:47:01.0000000 |2015-01-06 08:47:01.0000000 |0001-01-01 00:00:00.0000000 |Abgeschlossen | 
+|841-Datei-4-076a-4cba-9300-4836da0d9c75 |Dataingestpull |Kusto. Azure. Svc_IN_1 |2015-01-06 08:47:02.0000000 |2015-01-06 08:48:19.0000000 |0001-01-01 00:01:17.0000000 |Abgeschlossen | 
+|e198c519-5263-4629-a158-8d68f7a1022f |Operationsshow | |2015-01-06 08:47:18.0000000 |2015-01-06 08:47:18.0000000 |0001-01-01 00:00:00.0000000 |Abgeschlossen |
+|a9f287a1-f3e6-4154-ad18-b86438da0929 |Extentsdrop | |2015-01-11 08:41:01.0000000 |0001-01-01 00:00:00.0000000 |0001-01-01 00:00:00.0000000 |InProgress |
+|9edb3ecc-f 4b4-4738-87e1-648eed2bd998 |Dataingestpull | |2015-01-10 14:57:41.0000000 |2015-01-10 14:57:41.0000000 |0001-01-01 00:00:00.0000000 |Failed |Die Sammlung wurde geändert. Enumerationsvorgang kann nicht ausgeführt werden. |

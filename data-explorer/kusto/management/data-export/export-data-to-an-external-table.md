@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 7b4bade1ca874157ec843103a8bcf5236b49abfe
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 28aca460089c6dc3b70aecaff11b26cfe1c1baf4
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227790"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84258061"
 ---
 # <a name="export-data-to-an-external-table"></a>Exportieren von Daten in eine externe Tabelle
 
@@ -27,11 +27,11 @@ Die Tabellen Eigenschaften werden beim [Erstellen der externen Tabelle](../exter
 
 **Ausgabe:**
 
-|Output-Parameter |type |Beschreibung
+|Output-Parameter |Type |BESCHREIBUNG
 |---|---|---
-|Externaltablename  |String |Der Name der externen Tabelle.
-|`Path`|String|Ausgabepfad.
-|Numrecords|String| Anzahl der Datensätze, die in den Pfad exportiert werden.
+|Externaltablename  |Zeichenfolge |Der Name der externen Tabelle.
+|Pfad|Zeichenfolge|Ausgabepfad.
+|Numrecords|Zeichenfolge| Anzahl der Datensätze, die in den Pfad exportiert werden.
 
 **Hinweise:**
 * Das Export Abfrage-Ausgabe Schema muss mit dem Schema der externen Tabelle, einschließlich aller von den Partitionen definierten Spalten, identisch sein. Wenn die Tabelle beispielsweise nach *DateTime*partitioniert wird, muss das Abfrageausgabe Schema über eine timestamp-Spalte verfügen, die mit *timestampcolumnname*übereinstimmt. Dieser Spaltenname wird in der Partitionierungs Definition der externen Tabelle definiert.
@@ -42,7 +42,8 @@ Die Tabellen Eigenschaften werden beim [Erstellen der externen Tabelle](../exter
 * Die folgenden Eigenschaften werden als Teil des Export-Befehls unterstützt. Weitere Informationen finden Sie im Abschnitt [Exportieren in den Speicher](export-data-to-storage.md) : 
    * `sizeLimit`, `parquetRowGroupSize`, `distributed`.
 
-   * Wenn die externe Tabelle partitioniert ist, werden exportierte Artefakte gemäß den Partitions Definitionen, wie im [Beispiel](#partitioned-external-table-example)gezeigt, in ihre jeweiligen Verzeichnisse geschrieben. 
+* Wenn die externe Tabelle partitioniert ist, werden exportierte Artefakte gemäß den Partitions Definitionen, wie im [Beispiel](#partitioned-external-table-example)gezeigt, in ihre jeweiligen Verzeichnisse geschrieben. 
+  * Wenn ein Partitions Wert NULL bzw. leer ist oder ein ungültiger Verzeichnis Wert ist, wird er gemäß den Definitionen des Ziel Speichers durch den Standardwert ersetzt `__DEFAULT_PARTITION__` . 
 
 * Die Anzahl der pro Partition geschriebenen Dateien hängt von den Einstellungen ab:
    * Wenn die externe Tabelle nur DateTime-Partitionen oder überhaupt keine Partitionen enthält, sollte die Anzahl der geschriebenen Dateien (für jede Partition, falls vorhanden) die Anzahl der Knoten im Cluster betragen (oder mehr, wenn `sizeLimit` erreicht wird). Wenn der Export Vorgang verteilt wird, werden alle Knoten im Cluster gleichzeitig exportiert. Um die Verteilung zu deaktivieren, sodass nur ein einziger Knoten die Schreibvorgänge ausführt, legen `distributed` Sie auf false fest. Durch diesen Vorgang werden weniger Dateien erstellt, die Exportleistung wird jedoch verringert.
@@ -58,7 +59,7 @@ Externalblob ist eine nicht partitionierte externe Tabelle.
 .export to table ExternalBlob <| T
 ```
 
-|Externaltablename|`Path`|Numrecords|
+|Externaltablename|Pfad|Numrecords|
 |---|---|---|
 |Externalblob|http://storage1.blob.core.windows.net/externaltable1cont1/1_58017c550b384c0db0fea61a8661333e.csv|10|
 
@@ -82,7 +83,7 @@ dataformat=csv
 .export to table PartitionedExternalBlob <| T
 ```
 
-|Externaltablename|`Path`|Numrecords|
+|Externaltablename|Pfad|Numrecords|
 |---|---|---|
 |Externalblob|http://storageaccount.blob.core.windows.net/container1/CustomerName=customer1/2019/01/01/fa36f35c-c064-414d-b8e2-e75cf157ec35_1_58017c550b384c0db0fea61a8661333e.csv|10|
 |Externalblob|http://storageaccount.blob.core.windows.net/container1/CustomerName=customer2/2019/01/01/fa36f35c-c064-414d-b8e2-e75cf157ec35_2_b785beec2c004d93b7cd531208424dc9.csv|10|

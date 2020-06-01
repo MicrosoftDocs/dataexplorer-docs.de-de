@@ -1,6 +1,6 @@
 ---
-title: RowOrder-Richtlinie - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt die RowOrder-Richtlinie in Azure Data Explorer.
+title: 'RowOrder-Richtlinie: Azure-Daten-Explorer'
+description: Dieser Artikel beschreibt die rowOrder-Richtlinie in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: cda4c9a6017071878832fab376a0376d250f3ed6
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 63aad71854c73a3d1f1837c3665a152db8b48d13
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81520246"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84258027"
 ---
 # <a name="roworder-policy"></a>RowOrder-Richtlinie
 
-In diesem Artikel werden Steuerbefehle beschrieben, die zum Erstellen und Ändern der [Zeilenreihenfolgerichtlinie](../management/roworderpolicy.md)verwendet werden.
+In diesem Artikel werden Steuerungsbefehle zum Erstellen und Ändern der [Richtlinie für die Zeilen Reihenfolge](../management/roworderpolicy.md)beschrieben
 
 ## <a name="show-roworder-policy"></a>RowOrder-Richtlinie anzeigen
 
@@ -33,7 +33,7 @@ In diesem Artikel werden Steuerbefehle beschrieben, die zum Erstellen und Änder
 .delete table <table_name> policy roworder
 ```
 
-## <a name="alter-roworder-policy"></a>Alter RowOrder-Richtlinie
+## <a name="alter-roworder-policy"></a>Alter rowOrder-Richtlinie
 
 ```kusto
 .alter table <table_name> policy roworder (<row_order_policy>)
@@ -43,9 +43,9 @@ In diesem Artikel werden Steuerbefehle beschrieben, die zum Erstellen und Änder
 .alter-merge table <table_name> policy roworder (<row_order_policy>)
 ```
 
-**Beispiele**
+**Beispiele** 
 
-Im folgenden Beispiel wird die Zeilenreihenfolgerichtlinie als Primärschlüssel in der `TenantId` Spalte `Timestamp` (aufsteigend) und in der Spalte (aufsteigend) als sekundärer Schlüssel festgelegt. anschließend wird die Richtlinie abgefragt:
+Im folgenden Beispiel wird die Richtlinie für die Zeilen Reihenfolge für die `TenantId` Spalte (aufsteigend) als Primärschlüssel und für die `Timestamp` Spalte (aufsteigend) als sekundär Schlüssel festgelegt. Die Richtlinie wird dann abgefragt.
 
 ```kusto
 .alter table events policy roworder (TenantId asc, Timestamp desc)
@@ -55,6 +55,6 @@ Im folgenden Beispiel wird die Zeilenreihenfolgerichtlinie als Primärschlüssel
 .show table events policy roworder 
 ```
 
-|TableName|RowOrderPolicy| 
+|TableName|Roworderpolicy| 
 |---|---|
-|events|(TenantId asc, Timestamp desc)| 
+|events|(Tenantid ASC, timestamp Entsc)|
