@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/19/2020
-ms.openlocfilehash: c66d7e11b3f64633a0dda33f7a3fa2f974536caa
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 25e80458dc4f0432e0f9e4c385fb71c4b8bf3997
+ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373731"
+ms.lasthandoff: 05/27/2020
+ms.locfileid: "84011566"
 ---
 # <a name="azure-data-explorer-data-ingestion-properties"></a>Datenerfassungseigenschaften von Azure Data Explorer 
 
@@ -36,7 +36,7 @@ In der folgenden Tabelle sind die von Azure Data Explorer unterstützten Eigens
 |`policy_ingestiontime`|Ein boolescher Wert, der angibt, ob die [IngestionTime-Richtlinie](kusto/management/ingestiontimepolicy.md) für eine Tabelle aktiviert werden soll, die durch diesen Befehl erstellt wird. Der Standardwert lautet `true`.|`with (policy_ingestiontime=false)`|
 |`recreate_schema` |Ein boolescher Wert, der angibt, ob der Befehl das Schema der Tabelle neu erstellen darf. Diese Eigenschaft gilt nur für den Befehl `.set-or-replace`. Sie hat Vorrang vor der `extend_schema`-Eigenschaft, wenn beide festgelegt sind.|`with (recreate_schema=true)`|
 |`tags`|Eine Liste der [Tags](kusto/management/extents-overview.md#extent-tagging), die den erfassten Daten zugeordnet werden sollen (formatiert als JSON-Zeichenfolge). |`with (tags="['Tag1', 'Tag2']")`|
-|`validationPolicy`|Eine JSON-Zeichenfolge, die angibt, welche Überprüfungen im Rahmen der Erfassung ausgeführt werden sollen. Eine Beschreibung der verschiedenen Optionen finden Sie unter [Datenerfassung](kusto/management/data-ingestion/index.md).| `with (validationPolicy='{"ValidationOptions":1, "ValidationImplications":1}')` (Standardrichtlinie)|
+|`validationPolicy`|Eine JSON-Zeichenfolge, die angibt, welche Überprüfungen im Rahmen der Erfassung ausgeführt werden sollen. Eine Beschreibung der verschiedenen Optionen finden Sie unter [Datenerfassung](ingest-data-overview.md).| `with (validationPolicy='{"ValidationOptions":1, "ValidationImplications":1}')` (Standardrichtlinie)|
 |`zipPattern`|Verwenden Sie diese Eigenschaft, wenn Sie Daten aus einem Speicher erfassen, der ein ZIP-Archiv enthält. Dieser Zeichenfolgenwert gibt den regulären Ausdruck an, der zum Auswählen der zu erfassenden Dateien im ZIP-Archiv verwendet werden soll.  Alle anderen Dateien im Archiv werden ignoriert.|`with (zipPattern="*.csv")`|
 
 ## <a name="next-steps"></a>Nächste Schritte
