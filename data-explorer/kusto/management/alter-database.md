@@ -1,6 +1,6 @@
 ---
-title: .alter-Datenbank hübschname - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird .alter database prettyname in Azure Data Explorer beschrieben.
+title: . Alter Database Prettyname-Azure Daten-Explorer
+description: In diesem Artikel wird der Befehl für den `.alter` Datenbankrecht Namen beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,27 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1b362b547dc980676108ec169a0abb97f189375b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 0fc445a7d85f52d672b92163cc358d8f3a741c68
+ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81522592"
+ms.lasthandoff: 06/02/2020
+ms.locfileid: "84294507"
 ---
-# <a name="alter-database-prettyname"></a>.alter Datenbank hübschname
+# <a name="alter-database-prettyname"></a>. Alter Database Prettyname
 
 Ändert den hübschen (freundlichen) Namen einer Datenbank.
 
-Erfordert [DatabaseAdmin-Berechtigung](../management/access-control/role-based-authorization.md).
+Erfordert die [databaseadmin-Berechtigung](../management/access-control/role-based-authorization.md).
 
 **Syntax**
 
-`.alter``database` *DatabaseName* `prettyname` DatabaseName `'` *DatabasePrettyName*`'`
+`.alter``database` *DatabaseName* `prettyname` `'` *Databaseprettyname*`'`
 
-**Return-Ausgabe**
+**Ausgabe zurückgeben**
  
-|Ausgabeparameter |type |BESCHREIBUNG 
+|Output-Parameter |type |BESCHREIBUNG 
 |---|---|---
-|DatabaseName |String |Der Name der Datenbank.
-|PrettyName |String |Der hübsche Name der Datenbank.
-
+|DatabaseName |Zeichenfolge |Der Name der Datenbank.
+|Prettyname |Zeichenfolge |Der Recht Name der Datenbank

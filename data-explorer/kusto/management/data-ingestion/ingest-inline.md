@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 2ac3a9a414d31492917cfb1768ce7bb1d7d8abb1
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: 35098d2605a637832fd513da62a956382183a47c
+ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84257925"
+ms.lasthandoff: 06/02/2020
+ms.locfileid: "84294541"
 ---
 # <a name="ingest-inline-command-push"></a>. inerfassungs-Inline Befehl (Push)
 
-Mit diesem Befehl werden Daten in einer Tabelle erfasst, indem die Daten, die Inline eingebettet sind, per Push in den Befehls Text selbst übertragen werden.
+Mit diesem Befehl werden Daten in einer Tabelle erfasst, indem die Daten, die Inline eingebettet sind, in den Befehls Text selbst übertragen werden.
 
 > [!NOTE]
 > Dieser Befehl wird für manuelle Ad-hoc-Tests verwendet.
@@ -30,23 +30,23 @@ Mit diesem Befehl werden Daten in einer Tabelle erfasst, indem die Daten, die In
 **Argumente**
 
 * *TableName* ist der Name der Tabelle, in der Daten erfasst werden sollen.
-  Der Name ist immer relativ zur Datenbank im Kontext.
+  Der Name bezieht sich immer auf die Datenbank im Kontext.
   Das Tabellen Schema ist das Schema, das für die Daten angenommen wird, wenn kein Schema Zuordnungsobjekt bereitgestellt wird.
 
 * *Daten* sind die Daten, die erfasst werden sollen. Wenn diese Inhalte nicht anderweitig durch die Erfassungs Eigenschaften geändert werden, werden diese Inhalte als CSV-Daten analysiert.
  
-> [!NOTE]
-> Im Gegensatz zu den meisten Steuerungs Befehlen und-Abfragen muss der Text des *Daten* Teils des Befehls nicht den syntaktischen Konventionen der Sprache entsprechen. Leerzeichen sind z. b. wichtig, oder die `//` Kombination wird nicht als Kommentar behandelt.
+ > [!NOTE]
+ > Im Gegensatz zu den meisten Steuerungs Befehlen und-Abfragen muss der Text des *Daten* Teils des Befehls nicht den syntaktischen Konventionen der Sprache entsprechen. Leerzeichen sind z. b. wichtig, oder die `//` Kombination wird nicht als Kommentar behandelt.
 
 * *Ingestionpropertyname*, *ingestionpropertyvalue*: eine beliebige Anzahl von Erfassungs [Eigenschaften](../../../ingestion-properties.md) , die sich auf den Erfassungs Vorgang auswirken.
 
 **Ergebnisse**
 
-Das Ergebnis des Befehls ist eine Tabelle mit so vielen Datensätzen wie generierte datenshards ("Extents").
+Das Ergebnis ist eine Tabelle mit so vielen Datensätzen wie die Anzahl der generierten datenshards ("Extents").
 Wenn keine datenshards generiert werden, wird ein einzelner Datensatz mit einer leeren (Nullwert-) Block-ID zurückgegeben.
 
-|Name       |Type      |BESCHREIBUNG                                                 |
-|-----------|----------|------------------------------------------------------------|
+|Name       |type      |BESCHREIBUNG                                                               |
+|-----------|----------|--------------------------------------------------------------------------|
 |Extentid   |`guid`    |Der eindeutige Bezeichner für den Daten-Shard, der durch den Befehl generiert wurde.|
 
 **Beispiele**
@@ -63,7 +63,7 @@ Wide Shoes,50
 
 <!--
 You can generate inline ingests commands using the Kusto.Data client library. 
-(Note that compression does let you embed new lines in quoted fields) 
+Compression lets you embed new lines in quoted fields.
 
     Kusto.Data.Common.CslCommandGenerator.GenerateTableIngestPushCommand(tableName, compressed: true, csvData: csvStream);
 

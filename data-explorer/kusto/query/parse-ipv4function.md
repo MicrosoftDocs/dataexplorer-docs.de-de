@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 2bfea891b6057b5d43b65fa045e2b01d5e025a82
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: 459b94d4fdb8dbd9d294367b2cee49aab9800406
+ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271246"
+ms.lasthandoff: 06/02/2020
+ms.locfileid: "84294592"
 ---
 # <a name="parse_ipv4"></a>parse_ipv4()
 
@@ -26,21 +26,23 @@ parse_ipv4('192.1.168.1') < parse_ipv4('192.1.168.2') == true
 
 **Syntax**
 
-`parse_ipv4(`*Expr*`)`
+`parse_ipv4(`*`Expr`*`)`
 
 **Argumente**
 
-* *Expr*: Zeichen folgen Ausdruck, der IPv4 darstellt, der in Long konvertiert wird. Die Zeichenfolge kann eine Netzwerk Maske mit [IP-Präfix Notation](#ip-prefix-notation)enthalten.
+* *`Expr`*: Zeichen folgen Ausdruck, der IPv4 darstellt, der in Long konvertiert wird. Die Zeichenfolge kann eine Netzwerk Maske mit [IP-Präfix Notation](#ip-prefix-notation)enthalten.
 
-### <a name="ip-prefix-notation"></a>IP-Präfix Notation
+## <a name="ip-prefix-notation"></a>IP-Präfix Notation
 
-Es ist üblich, IP-Adressen mithilfe `IP-prefix notation` eines Schrägstrichs () zu definieren `/` .
-Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse, und die Zahl (1 bis 32) rechts neben dem Schrägstrich (/) ist die Anzahl von zusammenhängenden 1 Bits in der netmask. Daher verfügt 192.168.2.0/24 über ein zugeordnetes net/Subnetmask, das 24 aufeinander folgende Bits oder 255.255.255.0 im gepunkteten Dezimal Format enthält.
+IP-Adressen können `IP-prefix notation` mithilfe eines Schrägstrichs ( `/` ) definiert werden.
+Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse. Die Zahl (1 bis 32) rechts vom Schrägstrich (/) ist die Anzahl von zusammenhängenden 1 Bit in der netmask. 
+
+**Beispiel:** 192.168.2.0/24 verfügt über eine zugeordnete net/Subnetmask mit 24 aufeinander folgenden Bits oder 255.255.255.0 im gepunkteten Dezimal Format.
 
 **Rückgabe**
 
 Wenn die Konvertierung erfolgreich ist, wird das Ergebnis eine lange Zahl sein.
-Wenn die Konvertierung nicht erfolgreich ist, wird das Ergebnis zurückgeben `null` .
+Wenn die Konvertierung nicht erfolgreich ist, lautet das Ergebnis `null` .
  
 **Beispiel**
 

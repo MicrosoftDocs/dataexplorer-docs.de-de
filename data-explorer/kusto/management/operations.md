@@ -1,5 +1,5 @@
 ---
-title: 'Operations Management: Azure Daten-Explorer | Microsoft-Dokumentation'
+title: 'Operations Management: Azure Daten-Explorer'
 description: Dieser Artikel beschreibt die Operations Management in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 40103d399feb61e994639c9447510ef90fef652d
-ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
+ms.openlocfilehash: ac3d44fadf614606bc63e6a9aa3b8318419d0c70
+ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "84011464"
+ms.lasthandoff: 06/02/2020
+ms.locfileid: "84294388"
 ---
 # <a name="operations-management"></a>Operations Management
 
-## <a name="show-operations"></a>. Show-Vorgänge
+## <a name="show-operations"></a>. Show-Vorgänge 
 
 `.show`der `operations` Befehl gibt eine Tabelle mit allen administrativen Vorgängen zurück, die ausgeführt werden, und die in den letzten zwei Wochen ausgeführt wurden (zurzeit die Konfiguration der Beibehaltungs Dauer).
 
@@ -31,20 +31,20 @@ ms.locfileid: "84011464"
 
 **Ergebnisse**
  
-|Output-Parameter |Type |BESCHREIBUNG
+|Output-Parameter |type |BESCHREIBUNG
 |---|---|---
-|id |String |Vorgangs Bezeichner
-|Vorgang |String |Administrator befehlsalias
-|NodeId |String |Wenn der Befehl eine Remote Ausführung aufweist (z. b. dataingestpull), enthält NodeId die ID des ausgeführten Remote Knotens.
+|id |Zeichenfolge |Vorgangs Bezeichner
+|Vorgang |Zeichenfolge |Administrator befehlsalias
+|NodeId |Zeichenfolge |Wenn der Befehl eine Remote Ausführung aufweist (z. b. dataingestpull), enthält NodeId die ID des ausgeführten Remote Knotens.
 |Startedon |Datetime |Datum/Uhrzeit (in UTC), zu der der Vorgang gestartet wurde
 |Lastupdatedon |Datetime |Datum/Uhrzeit (in UTC), als der Vorgang zuletzt aktualisiert wurde (kann entweder ein Schritt innerhalb des Vorgangs oder ein Abschluss Schritt sein)
 |Duration |Datetime |TimeSpan zwischen lastupdateon und startedon
-|State |String |Befehlsstatus: die Werte "InProgress", "abgeschlossen" oder "failed" sind möglich.
-|Status |String |Zusätzliche Hilfe Zeichenfolge, die Fehler fehlgeschlagener Vorgänge enthält
+|Zustand |Zeichenfolge |Befehlsstatus: die Werte "InProgress", "abgeschlossen" oder "failed" sind möglich.
+|Status |Zeichenfolge |Zusätzliche Hilfe Zeichenfolge, die Fehler fehlgeschlagener Vorgänge enthält
  
 **Beispiel**
  
-|id |Vorgang |Knoten-ID |Gestartet am |Zuletzt aktualisiert am |Duration |State |Status 
+|Id |Vorgang |Knoten-ID |Gestartet am |Zuletzt aktualisiert am |Duration |Zustand |Status 
 |--|--|--|--|--|--|--|--
 |3827def6-0773-4f2a-859e-c02cf395gehörlos |Schemashow | |2015-01-06 08:47:01.0000000 |2015-01-06 08:47:01.0000000 |0001-01-01 00:00:00.0000000 |Abgeschlossen |
 |841-Datei-4-076a-4cba-9300-4836da0d9c75 |Dataingestpull |Kusto. Azure. Svc_IN_1 |2015-01-06 08:47:02.0000000 |2015-01-06 08:48:19.0000000 |0001-01-01 00:01:17.0000000 |Abgeschlossen |
@@ -57,7 +57,7 @@ ms.locfileid: "84011464"
 Vorgänge können (optional) ihre Ergebnisse beibehalten, und die Ergebnisse können nach Abschluss des Vorgangs mithilfe von abgerufen werden `.show` `operation` `details` .
 
 > [!NOTE]
-> Nicht alle Steuerelement Befehle speichern Ihre Ergebnisse. Die Befehle, die dies ausführen, werden in der Regel standardmäßig für asynchrone Ausführungen verwendet, wobei das- `async` Schlüsselwort verwendet wird. Weitere Informationen finden Sie in der Befehls spezifischen Dokumentation. Beispielsweise siehe [Datenexport](data-export/index.md)).
+> Nicht alle Steuerelement Befehle speichern Ihre Ergebnisse. Die Befehle, die dies ausführen, werden in der Regel standardmäßig für asynchrone Ausführungen verwendet, wobei das- `async` Schlüsselwort verwendet wird. Lesen Sie die Dokumentation für den jeweiligen Befehl, und prüfen Sie, ob dies der Fall ist. Beispielsweise siehe [Datenexport](data-export/index.md)).
 > Das Ausgabe Schema des `.show` `operations` `details` Befehls ist das gleiche Schema, das von der synchronen Ausführung des Befehls zurückgegeben wird.
 > Der `.show` `operation` `details` Befehl kann nur aufgerufen werden, nachdem der Vorgang erfolgreich abgeschlossen wurde. Verwenden Sie den [Befehl Show Operations (Vorgänge anzeigen](#show-operations)), um den Status des Vorgangs zu überprüfen, bevor Sie diesen Befehl ausführen.
 
@@ -81,7 +81,6 @@ Die *operationId* im Beispiel gibt eine asynchrone Ausführung eines der [Datene
     h@"https://storage1.blob.core.windows.net/containerName2;secretKey" 
   ) 
   <| myLogs 
-
 ```
 
 Der Async-Export Befehl hat die folgende Vorgangs-ID zurückgegeben:
@@ -96,9 +95,7 @@ Diese Vorgangs-ID kann verwendet werden, wenn der Befehl zum Abfragen der export
 .show operation 56e51622-eb49-4d1a-b896-06a03178efcd details 
 ```
 
-**Ergebnisse**
-
-|Pfad|Numrecords|
+|Pfad|Numrecords |
 |---|---|
 |http://storage1.blob.core.windows.net/containerName/1_d08afcae2f044c1092b279412dcb571b.csv|10|
 |http://storage1.blob.core.windows.net/containerName/2_454c0f1359e24795b6529da8a0101330.csv|15|

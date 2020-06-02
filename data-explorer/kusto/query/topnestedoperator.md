@@ -8,62 +8,86 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f87606442dcc5d7c9e7e0fceec379c37169757c3
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: a2a8f4fa92a7b8722097ec3595674b855a90f216
+ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83370765"
+ms.lasthandoff: 06/02/2020
+ms.locfileid: "84294660"
 ---
 # <a name="top-nested-operator"></a>top-nested operator
 
-Erzeugt oberste, hierarchische Ergebnisse, wobei jede Ebene einen Drilldown, basierend auf Werten der vorherigen Ebene, darstellt. 
+Erzeugt eine hierarchische Aggregations-und Top Values-Auswahl, wobei jede Ebene eine Verfeinerung der vorherigen Ebene ist.
 
 ```kusto
 T | top-nested 3 of Location with others="Others" by sum(MachinesNumber), top-nested 4 of bin(Timestamp,5m) by sum(MachinesNumber)
 ```
 
-Dies ist nützlich für dashboardvisualisierungs Szenarien oder, wenn es erforderlich ist, auf eine Frage zu antworten, die wie folgt aussieht: "Suchen nach den Top-N-Werten von K1 (unter Verwendung einiger Aggregationen); Suchen Sie für jeden dieser Elemente die Top-M-Werte von K2 (mit einer anderen Aggregation). ..."
+Der `top-nested` -Operator akzeptiert Tabellendaten als Eingabe und mindestens eine Aggregations Klausel.
+Die erste Aggregations Klausel (linksbündig) unterteilt die Eingabedaten Sätze gemäß den eindeutigen Werten eines Ausdrucks über diese Datensätze in Partitionen. Die-Klausel speichert dann eine bestimmte Anzahl von Datensätzen, die diesen Ausdruck für die Datensätze maximieren oder minimieren. Die nächste Aggregations Klausel wendet dann eine ähnliche Funktion in einer geschachtelte-Funktion an. Jede folgende Klausel wird auf die Partition angewendet, die von der vorherigen Klausel erstellt wurde. Dieser Vorgang wird für alle Aggregations Klauseln fortgesetzt.
+
+Der-Operator kann z. b. `top-nested` verwendet werden, um die folgende Frage zu beantworten: "für eine Tabelle mit Umsatzzahlen, wie z. b. Land, Vertriebsmitarbeiter und verkauftem Betrag: Was sind die fünf größten Länder nach Verkäufen? Was sind die ersten drei Vertriebsmitarbeiter in jedem dieser Länder? "
 
 **Syntax**
 
-*T* `|` `top-nested` [*N1*] `of` *expression1* [ `with others=` *ConstExpr1*] `by` [*AggName1* `=` ] *Aggregation1* [ `asc`  |  `desc` ] [ `,` ...]
+*T* `|` `top-nested` *TopNestedClause2* [ `,` *TopNestedClause2*...]
+
+Where *topnetstedclause* weist die folgende Syntax auf:
+
+[*N*] `of` [ *`ExprName`* `=` ] *`Expr`* [] [] `with` `others` `=` *`ConstExpr`* `by` *`AggName`* `=` *`Aggregation`* [ `asc`  |  `desc` ]
 
 **Argumente**
 
-für jede Top-netsted-Regel gilt Folgendes:
-* *N1*: die Anzahl der Top-Werte, die für jede Hierarchieebene zurückgegeben werden sollen. Optional (wenn kein Wert weggelassen wird, werden alle unterschiedlichen Werte zurückgegeben).
-* *Expression1*: ein Ausdruck, nach dem die obersten Werte ausgewählt werden. In der Regel handelt es sich dabei entweder um einen Spaltennamen in *T*oder um einen Klassifizierungs Vorgang (z. b. `bin()` ) in einer solchen Spalte. 
-* *ConstExpr1*: Wenn angegeben, wird für die anwendbare Schachtelungs Ebene eine zusätzliche Zeile angehängt, die das aggregierte Ergebnis für die anderen Werte enthält, die nicht in den obersten Werten enthalten sind.
-* *Aggregation1*: ein aufrufungs Vorgang einer Aggregations Funktion, bei der es sich um Folgendes handeln kann: [Sum ()](sum-aggfunction.md), [count ()](count-aggfunction.md), [Max ()](max-aggfunction.md), [Min ()](min-aggfunction.md), [DCount ()](dcountif-aggfunction.md), [AVG ()](avg-aggfunction.md), [Percentile ()](percentiles-aggfunction.md), [percentilew ()](percentiles-aggfunction.md)oder eine beliebige algebric-Kombination dieser Aggregationen.
-* Unter Umständen wird `asc` oder `desc` (Standard) angezeigt, um zu steuern, ob die tatsächliche Auswahl vom „unteren“ oder „oberen“ Ende des Bereichs erfolgt.
+Für jede *topnetstedclause*:
+
+* *`N`*: Ein Literaltyp `long` , der angibt, wie viele Top-Werte für diese Hierarchieebene zurückgegeben werden.
+  Wenn der Wert weggelassen wird, werden alle unterschiedlichen Werte zurückgegeben.
+
+* *`ExprName`*: Wenn angegeben, wird der Name der Ausgabe Spalte festgelegt, die den Werten von entspricht *`Expr`* .
+
+* *`Expr`*: Ein Ausdruck über den Eingabedaten Satz, der angibt, welcher Wert für diese Hierarchieebene zurückgegeben werden soll.
+  In der Regel handelt es sich um einen Spalten Verweis für die tabellarische Eingabe (*T*) oder eine Berechnung (z `bin()` . b.) über eine solche Spalte.
+
+* *`ConstExpr`*: Wenn dieser Wert angegeben wird, wird für jeden Hierarchieebene 1-Datensatz mit dem Wert hinzugefügt, der die Aggregation für alle Datensätze ist, deren Anfang nicht war.
+
+* *`AggName`*: Wenn dieser Wert angegeben ist, legt dieser Bezeichner den Spaltennamen in der Ausgabe für den Wert der *Aggregation*fest.
+
+* *`Aggregation`*: Ein numerischer Ausdruck, der die Aggregation angibt, die auf alle Datensätze angewendet werden soll, die denselben Wert haben *`Expr`* . Der Wert dieser Aggregation bestimmt, welche der resultierenden Datensätze "Top" sind.
+  
+  Die folgenden Aggregations Funktionen werden unterstützt:
+   * [Sum ()](sum-aggfunction.md),
+   * [count ()](count-aggfunction.md),
+   * [Max ()](max-aggfunction.md),
+   * [Min ()](min-aggfunction.md),
+   * [DCount ()](dcountif-aggfunction.md),
+   * [AVG ()](avg-aggfunction.md),
+   * [Perzentil ()](percentiles-aggfunction.md), und
+   * [percentilew ()](percentiles-aggfunction.md). Jede algebraische Kombination der Aggregationen wird ebenfalls unterstützt.
+
+* `asc`oder `desc` (der Standardwert) wird möglicherweise angezeigt, um zu steuern, ob die Auswahl tatsächlich von der "untersten" oder "Top" des Bereichs der aggregierten Werte ist.
 
 **Rückgabe**
 
-Hierarchische Tabelle mit Eingabe Spalten, und für jede einzelne Spalte wird eine neue Spalte erstellt, um das Ergebnis der Aggregation für die gleiche Ebene für jedes Element einzuschließen.
-Die Spalten werden in derselben Reihenfolge der Eingabe Spalten angeordnet, und die neu erstellte Spalte wird in der Nähe der aggregierten Spalte angeordnet. Jeder Datensatz verfügt über eine hierarchische Struktur, in der jeder Wert ausgewählt wird, nachdem alle oben genannten Regeln auf allen vorherigen Ebenen angewendet wurden, und dann die Regel der aktuellen Ebene auf diese Ausgabe angewendet wurde.
-Dies bedeutet, dass die obersten n Werte für Ebene i für jeden Wert in Ebene i-1 berechnet werden.
- 
-**Tipps**
+Dieser Operator gibt eine Tabelle mit zwei Spalten für jede Aggregations Klausel zurück:
 
-* Spalten umbenennen in für *Aggregations* Ergebnisse verwenden: T | Top-netsted 3 of Location by machinesnumforlocation = Sum (machinesnumber)...
+* Eine Spalte enthält die unterschiedlichen Werte der Berechnung der Klausel *`Expr`* (mit dem Spaltennamen " *exprname* ", falls angegeben).
 
-* Die Anzahl der zurückgegebenen Datensätze kann sehr groß sein. bis zu (*N1*+ 1) \* (*N2*+ 1) \* ... \* (*nm*+ 1) (wobei m die Anzahl der Ebenen und *NI* die oberste Anzahl für Ebene i ist).
+* Eine Spalte enthält das Ergebnis der *Aggregations* Berechnung (bei Angabe des Spaltennamens *aggregationname* ).
 
-* Die Aggregation muss eine numerische Spalte mit einer Aggregations Funktion empfangen, bei der es sich um eine der oben genannten handelt.
+**Kommentare**
 
-* Verwenden Sie die- `with others=` Option, um den aggregierten Wert aller anderen Werte zu erhalten, bei denen es sich nicht um die obersten N-Werte auf einer bestimmten Ebene handelt.
+Eingabe Spalten, die nicht als Werte angegeben werden, werden *`Expr`* nicht ausgegeben.
+Um alle Werte auf einer bestimmten Ebene zu erhalten, fügen Sie eine Anzahl von Aggregationen hinzu:
 
-* Wenn Sie `with others=` für eine bestimmte Ebene nicht interessiert sind, werden NULL-Werte angehängt (für die aggregierte Spalte und den Levelschlüssel, siehe Beispiel unten).
+* Lässt den Wert von *N* aus.
+* Verwendet den Spaltennamen als Wert von.*`Expr`*
+* Verwendet `Ignore=max(1)` als Aggregation und ignoriert die Spalte anschließend (oder entfernt Sie) `Ignore` .
 
+Die Anzahl der Datensätze vergrößert sich möglicherweise exponentiell mit der Anzahl von Aggregations Klauseln ((N1 + 1) \* (N2 + 1) \* ...). Die Daten Satz Vergrößerung ist noch schneller, wenn kein *N* -Limit angegeben wird. Berücksichtigen Sie, dass dieser Operator möglicherweise eine beträchtliche Menge an Ressourcen beansprucht.
 
-* Es ist möglich, zusätzliche Spalten für die ausgewählten Top-netsted-Kandidaten zurückzugeben, indem Sie zusätzliche Top-netsted-Anweisungen anfügen (siehe Beispiele unten):
+In Fällen, in denen die Verteilung der Aggregation beträchtlich nicht einheitlich ist, begrenzen Sie die Anzahl der unterschiedlichen Werte, die zurückgegeben werden (mithilfe von *N*), und verwenden Sie die `with others=` Option *constexpr* , um eine Angabe für die Gewichtung aller anderen Fälle zu erhalten.
 
-```kusto
-top-nested 2 of ...., ..., ..., top-nested of <additionalRequiredColumn1> by max(1), top-nested of <additionalRequiredColumn2> by max(1)
-```
-
-**Beispiel**
+**Beispiele**
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -73,7 +97,7 @@ StormEvents
   top-nested 1 of EndLocation by sum(BeginLat)
 ```
 
-|Bundesland/Kanton|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
+|Zustand|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
 |---|---|---|---|---|---|
 |Kansas|87771.2355000001|Strafverfolgungsbehörden|18744,823|FT Scott|264,858|
 |Kansas|87771.2355000001|Öffentlich|22855,6206|Bucklin|488,2457|
@@ -82,8 +106,7 @@ StormEvents
 |TEXAS|123400,5101|Strafverfolgungsbehörden|37228,5966|Perryton|289,3178|
 |TEXAS|123400,5101|Ausgebildeter „Spotter“|13997,7124|Claude|421,44|
 
-
-* Mit anderen Beispielen:
+Verwenden Sie die Option "with others":
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -95,7 +118,7 @@ StormEvents
 
 ```
 
-|Bundesland/Kanton|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
+|Zustand|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
 |---|---|---|---|---|---|
 |Kansas|87771.2355000001|Strafverfolgungsbehörden|18744,823|FT Scott|264,858|
 |Kansas|87771.2355000001|Öffentlich|22855,6206|Bucklin|488,2457|
@@ -128,7 +151,7 @@ Die folgende Abfrage zeigt die gleichen Ergebnisse für die erste Ebene, die im 
 |1149279,5923|
 
 
-Eine weitere Spalte (EventType) wird für das am häufigsten eingefügte Ergebnis angefordert: 
+Fordern Sie eine weitere Spalte (EventType) für das Top-netsted-Ergebnis an: 
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -137,7 +160,7 @@ StormEvents
 | project-away tmp
 ```
 
-|Bundesland/Kanton|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|EventType|
+|Zustand|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|EventType|
 |---|---|---|---|---|---|---|
 |Kansas|87771.2355000001|Ausgebildeter „Spotter“|21279,7083|Sharon-Spgs|388,7404|Sturm|
 |Kansas|87771.2355000001|Ausgebildeter „Spotter“|21279,7083|Sharon-Spgs|388,7404|Hagel|
@@ -150,7 +173,7 @@ StormEvents
 |TEXAS|123400,5101|Strafverfolgungsbehörden|37228,5966|Perryton|289,3178|Hochwasser|
 |TEXAS|123400,5101|Strafverfolgungsbehörden|37228,5966|Perryton|289,3178|Überschwemmung|
 
-Um das Ergebnis nach der letzten (in diesem Beispiel nach endLocation) gruppierten Ebene zu sortieren, und geben Sie für jeden Wert auf dieser Ebene (pro Gruppe) eine Sortierreihenfolge für den Index an:
+Geben Sie für jeden Wert auf dieser Ebene (pro Gruppe) eine Sortierreihenfolge für den Index an, um das Ergebnis nach der letzten auf der Ebene (in diesem Beispiel nach endLocation) zu sortieren:
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -162,7 +185,7 @@ StormEvents
 | mv-expand EndLocations, endLocationSums, indicies
 ```
 
-|Bundesland/Kanton|`Source`|Endpunkte|endlocationsums|Indizes|
+|Zustand|`Source`|Endpunkte|endlocationsums|Indizes|
 |---|---|---|---|---|
 |TEXAS|Ausgebildeter „Spotter“|Claude|421,44|0|
 |TEXAS|Ausgebildeter „Spotter“|Amarillo|316,8892|1|
