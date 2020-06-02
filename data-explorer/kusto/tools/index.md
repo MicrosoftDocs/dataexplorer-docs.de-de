@@ -8,19 +8,21 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: ce7751d7ac60d23f9ffa0fc84992050fe1036131
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: b6bc95158c1dd161a17572342c6a99bdf9d37235
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83370486"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84257908"
 ---
 # <a name="azure-data-explorer-tools"></a>Azure Data Explorer-Tools
 
 ## <a name="ad-hoc-query-tools"></a>Ad-hoc-Abfragetools
 
-
-* [Kusto.Explorer](./kusto-explorer.md): Das primäre Desktoptool zum Abfragen und Steuern von Kusto
+* Kusto.Explorer
+   * [Installation und Benutzeroberfläche von Kusto.Explorer:](./kusto-explorer.md) Das primäre Desktoptool zum Abfragen und Steuern von Kusto
+   * [Verwenden von Kusto.Explorer](./kusto-explorer-using.md)
+   * [Problembehandlung für Kusto.Explorer](kusto-explorer-troubleshooting.md)
 * [Webbenutzeroberfläche](../../web-query-data.md): Webbenutzeroberfläche zum Abfragen von Kusto
 
 ## <a name="visualizations-dashboards-and-reporting-tools"></a>Visualisierungen, Dashboards und Berichterstellungstools
@@ -39,6 +41,7 @@ ms.locfileid: "83370486"
    * [Power BI-SQL-Abfrage](../../power-bi-sql-query.md)
 
 * [Grafana](../../grafana.md)
+* [Open-Source-Connector K2Bridge:](../../k2bridge.md) Visualisieren von Daten aus Azure Data Explorer in Kibana
 
 ## <a name="orchestration-tools"></a>Orchestrierungstools
 
@@ -54,8 +57,8 @@ ms.locfileid: "83370486"
 
 
 * [LightIngest](../../lightingest.md): Hilfsprogramm für die Ad-hoc-Datenerfassung in Azure Data Explorer
- 
-
+* [1-Klick-Erfassung:](../../ingest-data-one-click.md): Tool zum schnellen Erfassen von Daten und automatischen Vorschlagen von Tabellen und Zuordnungsstrukturen
+* [Azure Data Factory](azure-data-factory.md)
 
 
 ## <a name="source-control-integration-tools"></a>Tools für die Integration der Quellcodeverwaltung
