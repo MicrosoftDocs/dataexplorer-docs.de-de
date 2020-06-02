@@ -8,19 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: b2bb03511afed386e4c7519471481b7ecf5b6291
-ms.sourcegitcommit: e82e1bcfcb456e89a1afb19fc6e874ca9d70c575
+ms.openlocfilehash: 829e23fc087e732db4a555f3007f760249df15fe
+ms.sourcegitcommit: d660e39f24bd9a0e1c788cb86d4da9afd981cfc9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "84110902"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84268070"
 ---
 # <a name="data-partitioning-policy-preview"></a>Richtlinie für die Daten Partitionierung (Vorschau)
 
 Die Partitionierungs Richtlinie definiert, ob und wie Blöcke [(datenshards)](../management/extents-overview.md) für eine bestimmte Tabelle partitioniert werden sollen.
-
-> [!NOTE]
-> Die Daten Partitionierungsfunktion befindet sich in der *Vorschau*Phase.
 
 Der Hauptzweck der Richtlinie besteht darin, die Leistung von Abfragen zu verbessern, die bekanntermaßen zu einer kleinen Teilmenge von Werten in den partitionierten Spalten (n) und/oder Aggregat/Join für eine Spalte mit hoher kardinalitätszeichenfolge reduziert werden. Ein sekundärer potenzieller Vorteil ist eine bessere Komprimierung der Daten.
 
@@ -187,7 +184,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
 * Die Daten Partitionierung wird nur für heiße Blöcke ausgeführt, unabhängig vom Wert der- `EffectiveDateTime` Eigenschaft in der Richtlinie.
   * Wenn die Partitionierung von kalten Blöcken erforderlich ist, müssen Sie die [Cachingrichtlinie](cachepolicy.md) entsprechend anpassen.
 
-#### <a name="monitoring"></a>Monitoring
+#### <a name="monitoring"></a>Überwachung
 
 * Sie können den Status/Status der Partitionierung in einem Cluster überwachen, indem Sie den Befehl " [Diagnose" anzeigen](../management/diagnostics.md#show-diagnostics) :
 
