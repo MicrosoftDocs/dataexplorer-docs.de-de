@@ -1,5 +1,5 @@
 ---
-title: '. Erstellen einer Erfassungs Zuordnung: Azure Daten-Explorer | Microsoft-Dokumentation'
+title: '. Erstellen einer Erfassungs Zuordnung: Azure-Daten-Explorer'
 description: Dieser Artikel beschreibt das Erstellen einer Erfassungs Zuordnung in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: 84ab277f5b0d4d1b2e09d31fb7c1254786affe6d
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 3855d56ad31bbf98a6a075feb44a598b3bdbf52a
+ms.sourcegitcommit: f7101c6b41ec250d05f4cb6092e2939958b37b40
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617730"
+ms.lasthandoff: 06/03/2020
+ms.locfileid: "84329060"
 ---
 # <a name="create-ingestion-mapping"></a>.create ingestion mapping
 
@@ -25,7 +25,7 @@ Erstellt eine Erfassungs Zuordnung, die einer bestimmten Tabelle und einem besti
 
 > [!NOTE]
 > * Nachdem die Zuordnung erstellt wurde, kann Ihr Name in Erfassungs Befehlen referenziert werden, anstatt die gesamte Zuordnung als Teil des Befehls anzugeben.
-> * Gültige Werte für _mappingkind_ sind: `CSV`, `JSON`, `avro`, `parquet`und.`orc`
+> * Gültige Werte für _mappingkind_ sind: `CSV` , `JSON` , `avro` , `parquet` und.`orc`
 > * Wenn für die Tabelle bereits eine Zuordnung mit dem gleichen Namen vorhanden ist:
 >    * `.create`schlägt fehl
 >    * `.create-or-alter`ändert die vorhandene Zuordnung.
@@ -48,9 +48,9 @@ Erstellt eine Erfassungs Zuordnung, die einer bestimmten Tabelle und einem besti
 
 **Beispielausgabe**
 
-| Name     | Variante | Zuordnung                                                                                                                                                                          |
+| Name     | Art | Zuordnung                                                                                                                                                                          |
 |----------|------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| mapping1 | CSV  | [{"Name": "RowNumber", "DataType": "int", "csvdatatype": NULL, "Ordinal": 0, "constvalue": NULL}, {"Name": "ROWGUID", "DataType": "String", "csvdatatype": NULL, "Ordinal": 1, "constvalue": NULL}] |
+| mapping1 | CSV  | `[{"Name":"rownumber","DataType":"int","CsvDataType":null,"Ordinal":0,"ConstValue":null},{"Name":"rowguid","DataType":"string","CsvDataType":null,"Ordinal":1,"ConstValue":null}]` |
 
 ## <a name="next-steps"></a>Nächste Schritte
 Weitere Informationen zur Erfassung von Zuordnungen finden Sie unter [Daten](mappings.md)Zuordnungen.

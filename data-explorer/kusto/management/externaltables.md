@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/26/2020
-ms.openlocfilehash: a08f1f154c0efa17164d15a075456e2b6fab3212
-ms.sourcegitcommit: a562ce255ac706ca1ca77d272a97b5975235729d
+ms.openlocfilehash: 293ee468f31fafafdf08da1632c93b04b0a8adf2
+ms.sourcegitcommit: f7101c6b41ec250d05f4cb6092e2939958b37b40
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83867085"
+ms.lasthandoff: 06/03/2020
+ms.locfileid: "84329009"
 ---
 # <a name="external-table-general-control-commands"></a>Externe Tabelle (allgemeine Steuerungsbefehle)
 
@@ -126,5 +126,5 @@ Gibt die Eigenschaften der gelöschten Tabelle zurück. Weitere Informationen fi
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-* [Erstellen und ändern externer Tabellen in Azure Storage oder Azure Data Lake](external-tables-azurestorage-azuredatalake.md)
-* [Erstellen und ändern externer SQL-Tabellen](external-sql-tables.md)
+* [Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake](external-tables-azurestorage-azuredatalake.md)
+* [Erstellen und Ändern externer SQL-Tabellen](external-sql-tables.md)
