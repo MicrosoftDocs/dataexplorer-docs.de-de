@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/13/2020
-ms.openlocfilehash: aa3dec658ae3b817223c7946d55555cf6562cfb4
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
+ms.openlocfilehash: 8fe86f16eef79fca0db22fd3048cc3841c57d189
+ms.sourcegitcommit: 8953d09101f4358355df60ab09e55e71bc255ead
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83865981"
+ms.lasthandoff: 06/04/2020
+ms.locfileid: "84420899"
 ---
 # <a name="troubleshooting"></a>Problembehandlung
 
@@ -61,6 +61,7 @@ Das Programm kann nicht gestartet werden und zeigt einen der folgenden Fehler an
 * `Value does not fall within the expected range`
 * `The application binding data format is invalid.` 
 * `Exception from HRESULT: 0x800736B2`
+* `The referenced assembly is not installed on your system. (Exception from HRESULT: 0x800736B3)`
 
 Sie können die Fehlerdetails durch Klicken `Details` auf das folgende Fehler Dialogfeld Durchsuchen:
 
@@ -172,7 +173,7 @@ Wenn erforderlich, können Sie Kusto. Explorer vollständig zurücksetzen. Im fo
 
 Es ist auch möglich, zu einer bestimmten Version von Kusto. Explorer zurückzukehren:
 
-1. Führen Sie `appwiz.cpl` aus.
+1. Führen Sie aus `appwiz.cpl`.
 1. Wählen Sie **Kusto. Explorer** und anschließend **Deinstallieren/ändern**aus.
 1. Wählen Sie **Wiederherstellen des vorherigen Zustands der Anwendung**aus.
 

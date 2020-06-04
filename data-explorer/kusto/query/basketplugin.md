@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/26/2019
-ms.openlocfilehash: f3e53e02dbcbf8cb7521214e97dd146acd82f1ee
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: a43275aa6d2938631cad052cfbdd9a185db487b2
+ms.sourcegitcommit: 8953d09101f4358355df60ab09e55e71bc255ead
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225291"
+ms.lasthandoff: 06/04/2020
+ms.locfileid: "84420848"
 ---
 # <a name="basket-plugin"></a>Basket-Plugin
 
@@ -29,7 +29,7 @@ Mit „Basket“ werden alle häufigen Muster diskreter Attribute (Dimensionen) 
 
 **Rückgabe**
 
-Der Basket gibt alle häufigen Muster zurück, die über dem Verhältnisschwellenwert (Standard: 0,05) der Zeilen liegen. Jede Zeile in den Ergebnissen steht für ein Muster.
+Basket gibt alle häufigen Muster zurück, die oberhalb des Schwellenwerts für das Verhältnis (Standard: 0,05) der Zeilen angezeigt werden. Jede Zeile in den Ergebnissen steht für ein Muster.
 
 Die erste Spalte ist die Segment-ID. Die nächsten beiden Spalten sind die Anzahl und der Prozentsatz der Zeilen aus der ursprünglichen Abfrage, die vom Muster aufgezeichnet werden. Die restlichen Spalten stammen aus der ursprünglichen Abfrage. Sie enthalten als Wert entweder einen bestimmten Wert aus der Spalte oder einen Platzhalterwert (standardmäßig NULL) – also variable Werte.
 
@@ -45,19 +45,19 @@ Verfügbare Argumente:
 
     Legt das minimale Verhältnis der Zeilen fest, das als häufig angesehen werden soll (Muster mit einem geringeren Verhältnis werden nicht zurückgegeben).
     
-    Ein Beispiel: `T | evaluate basket(0.02)`
+    Beispiel: `T | evaluate basket(0.02)`
 
 * WeightColumn - *column_name*
 
     Berücksichtigt jede Zeile in der Eingabe gemäß dem angegebenen Gewicht (standardmäßig verfügt jede Spalte über eine Gewichtung von „1“). Das Argument muss ein Name einer numerischen Spalte sein (z.B. int, long, real). Eine übliche Nutzung einer Gewichtungsspalte besteht darin, die Stichprobenerstellung oder die Bucket-Zuordnung/Aggregation der Daten zu berücksichtigen, die bereits in die einzelnen Zeilen eingebettet sind.
     
-    Ein Beispiel: `T | evaluate basket('~', sample_Count)`
+    Beispiel: `T | evaluate basket('~', sample_Count)`
 
 * Maxdimensions-1 < *int* [Standardwert: 5]
 
     Legt die maximale Anzahl von nicht korrelierten Dimensionen pro Basket fest – standardmäßig begrenzt, um die Abfragelaufzeit zu verringern.
 
-    Ein Beispiel: `T | evaluate basket('~', '~', 3)`
+    Beispiel: `T | evaluate basket('~', '~', 3)`
 
 * Customwildcard- *"any_value_per_type"*
 
@@ -65,7 +65,7 @@ Verfügbare Argumente:
     Der Standard ist „null“, da der Standard eine leere Zeichenfolge ist. Wenn der Standardwert ein in den Daten funktionierender Wert ist, sollte ein anderer Platzhalter Wert verwendet werden (z. b. `*` ).
     Unten finden Sie ein Beispiel hierzu.
 
-    Ein Beispiel: `T | evaluate basket('~', '~', '~', '*', int(-1), double(-1), long(0), datetime(1900-1-1))`
+    Beispiel: `T | evaluate basket('~', '~', '~', '*', int(-1), double(-1), long(0), datetime(1900-1-1))`
 
 **Beispiel**
 
@@ -78,7 +78,7 @@ StormEvents
 | evaluate basket(0.2)
 ```
 
-|SegmentId|Anzahl|Percent|Bundesland/Kanton|EventType|Damage|DamageCrops|
+|SegmentId|Anzahl|Percent|Staat|EventType|Damage|DamageCrops|
 |---|---|---|---|---|---|---|---|---|
 |0|4.574|77,7|||Nein|0
 |1|2278|38,7||Hagel|Nein|0
@@ -100,7 +100,7 @@ StormEvents
 | evaluate basket(0.2, '~', '~', '*', int(-1))
 ```
 
-|SegmentId|Anzahl|Percent|Bundesland/Kanton|EventType|Damage|DamageCrops|
+|SegmentId|Anzahl|Percent|Staat|EventType|Damage|DamageCrops|
 |---|---|---|---|---|---|---|---|---|
 |0|4.574|77,7|\*|\*|Nein|0
 |1|2278|38,7|\*|Hagel|Nein|0
