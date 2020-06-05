@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: fe44323dabb246438f18c9ab01eec0008ad4fe97
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: ffb14b110904bcf94a69d3abeed2fc0b542b0448
+ms.sourcegitcommit: 31af2dfa75b5a2f59113611cf6faba0b45d29eb5
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372962"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84454132"
 ---
 # <a name="samples"></a>Beispiele
 
@@ -38,12 +38,11 @@ StormEvents
 
 :::image type="content" source="images/samples/060.png" alt-text="060":::
 
-<a name="activities"></a>
 ## <a name="get-sessions-from-start-and-stop-events"></a>Abrufen von Sitzungen aus Start- und Stop-Ereignissen
 
 Beispiel: Sie verfügen über ein Protokoll mit Ereignissen, bei denen einige Ereignisse den Anfang oder das Ende einer erweiterten Aktivität oder der Sitzung kennzeichnen. 
 
-|name|City|SessionID|Timestamp|
+|Name|City|SessionID|Timestamp|
 |---|---|---|---|
 |Start|London|2817330|2015-12-09T10:12:02.32|
 |Game|London|2817330|2015-12-09T10:12:52.45|
@@ -104,7 +103,7 @@ Anschließend gruppieren wir nach Startzeit und IP, um eine Gruppe für jede Sit
 
 :::image type="content" source="images/samples/040.png" alt-text="040"::: 
 
-Anschließend können wir Code hinzufügen, um die Dauer in Containern zu zählen, die sich in Containern befinden. Wir haben eine geringfügige Vorliebe für ein Balkendiagramm, daher teilen wir durch `1s` , um die Zeiträume in Zahlen zu konvertieren. 
+Anschließend können wir Code hinzufügen, um die Dauer in Containern mit einfacher Größenordnung zu zählen. Wir haben eine geringfügige Vorliebe für ein Balkendiagramm, daher teilen wir durch `1s` , um die Zeiträume in Zahlen zu konvertieren. 
 
 
       // Count the frequency of each duration:
@@ -185,7 +184,6 @@ on UnitOfWorkId
 | extend SaveFactor = sum_NormalizedLoad / sum_CurrentLoad 
 ```
 
-<a name="concurrent-activities"><a/>
 ## <a name="chart-concurrent-sessions-over-time"></a>Erstellen eines Diagramms für gleichzeitige Sitzungen im Verlauf der Zeit
 
 Angenommen, Sie haben eine Tabelle der Aktivitäten mit den jeweiligen Start- und Endzeiten.  Wir möchten ein Diagramm im Verlauf der Zeit anzeigen, das angibt, wie viele zu einem beliebigen Zeitpunkt gleichzeitig ausgeführt werden.
@@ -195,7 +193,7 @@ Nachfolgend sehen Sie eine Beispieleingabe, der wir den Namen „ `X`“ geben:
 |SessionID | StartTime | StopTime |
 |---|---|---|
 | a | 10:01:03 | 10:10:08 |
-| b | 10:01:29 | 10:03:10 |
+| k | 10:01:29 | 10:03:10 |
 | c | 10:03:02 | 10:05:20 |
 
 Wir möchten ein Diagramm in 1-Minuten-Containern. Daher möchten wir etwas erstellen, das für jede laufende Aktivität gezählt werden kann.
@@ -211,7 +209,7 @@ X | extend samples = range(bin(StartTime, 1m), StopTime, 1m)
 |SessionID | StartTime | StopTime  | Beispiele|
 |---|---|---|---|
 | a | 10:01:33 | 10:06:31 | [10:01:00,10:02:00,...10:06:00]|
-| b | 10:02:29 | 10:03:45 | [10:02:00,10:03:00]|
+| k | 10:02:29 | 10:03:45 | [10:02:00,10:03:00]|
 | c | 10:03:12 | 10:04:30 | [10:03:00,10:04:00]|
 
 Anstatt diese Arrays beizubehalten, erweitern wir Sie mithilfe von [MV-Expand](./mvexpandoperator.md):
@@ -228,8 +226,8 @@ X | mv-expand samples = range(bin(StartTime, 1m), StopTime , 1m)
 | a | 10:01:33 | 10:06:31 | 10:04:00|
 | a | 10:01:33 | 10:06:31 | 10:05:00|
 | a | 10:01:33 | 10:06:31 | 10:06:00|
-| b | 10:02:29 | 10:03:45 | 10:02:00|
-| b | 10:02:29 | 10:03:45 | 10:03:00|
+| k | 10:02:29 | 10:03:45 | 10:02:00|
+| k | 10:02:29 | 10:03:45 | 10:03:00|
 | c | 10:03:12 | 10:04:30 | 10:03:00|
 | c | 10:03:12 | 10:04:30 | 10:04:00|
 
@@ -473,7 +471,7 @@ Devices
 | project FriendlyName, Count
 ```
 
-Ergebnis: 
+Ergebnis:
 
 |FriendlyName |Anzahl 
 |---|---
@@ -545,7 +543,7 @@ datatable(id:string, timestamp:datetime, bla:string)           // (1)
 | project-away dummy0, dummy1, dummy2                          // (5)
 ```
 
-Hinweise
+Notizen
 1. Der `datatable` ist nur eine Möglichkeit, um zu Demonstrationszwecken einige Testdaten zu entwickeln. Natürlich haben Sie die Daten hier.
 2. Diese Zeile bedeutet im Wesentlichen, dass alle unterschiedlichen Werte von zurückgegeben werden `id` .
 3. Diese Zeile gibt dann für die obersten 2 Datensätze, die die `timestamp` Spalte maximieren, die Spalten der vorherigen Ebene (hier, einfach `id` ) und die auf dieser Ebene (hier) angegebene Spalte zurück `timestamp` .
@@ -559,14 +557,14 @@ Wenn eine Tabelle einen tabellarischen Ausdruck enthält, der eine numerische Sp
 |Someseries|Someint|
 |----------|-------|
 |Foo       |    100|
-|Balkendiagramm       |    200|
+|Balken       |    200|
 
 Und Sie möchten diese Tabelle wie folgt anzeigen:
 
 |Someseries|Someint|P |
 |----------|-------|----|
 |Foo       |    100|33,3|
-|Balkendiagramm       |    200|66,6|
+|Balken       |    200|66,6|
 
 Zu diesem Zweck muss die Summe (Summe) der `SomeInt` Spalte berechnet werden, und dann werden die einzelnen Werte dieser Spalte durch die Gesamtsumme dividiert. Sie können dies für beliebige Ergebnisse tun, indem Sie diesen Ergebnissen einen Namen mit dem [as-Operator](asoperator.md)geben:
 
@@ -686,8 +684,8 @@ A; B
 |2019-01-01 00:00:00.0000000|x|Ax1|
 |2019-01-01 00:00:00.0000000|z|Az1|
 |2019-01-01 00:00:01.0000000|x|Ax2|
-|2019-01-01 00:00:02.0000000|y|Ay1|
-|2019-01-01 00:00:05.0000000|y|Ay2|
+|2019-01-01 00:00:02.0000000|Y|Ay1|
+|2019-01-01 00:00:05.0000000|Y|Ay2|
 
 </br>
 
@@ -695,7 +693,7 @@ A; B
 |---|---|---|
 |2019-01-01 00:00:03.0000000|x|B|
 |2019-01-01 00:00:04.0000000|x|B|
-|2019-01-01 00:00:04.0000000|y|B|
+|2019-01-01 00:00:04.0000000|Y|B|
 |2019-01-01 00:02:00.0000000|z|B|
 
 Erwartete Ausgabe: 
@@ -704,7 +702,7 @@ Erwartete Ausgabe:
 |---|---|---|---|---|
 |x|2019-01-01 00:00:03.0000000|B|2019-01-01 00:00:01.0000000|Ax2|
 |x|2019-01-01 00:00:04.0000000|B|2019-01-01 00:00:01.0000000|Ax2|
-|y|2019-01-01 00:00:04.0000000|B|2019-01-01 00:00:02.0000000|Ay1|
+|Y|2019-01-01 00:00:04.0000000|B|2019-01-01 00:00:02.0000000|Ay1|
 |z|2019-01-01 00:02:00.0000000|B|2019-01-01 00:00:00.0000000|Az1|
 
 Es gibt zwei verschiedene Ansätze, die für dieses Problem vorgeschlagen werden. Sie sollten beide in Ihrem speziellen DataSet testen, um das für Sie am besten geeignete DataSet zu finden (die unterschiedlichen Datensätze können unterschiedlich sein). 
@@ -758,5 +756,5 @@ B_events
 |---|---|---|---|---|
 |x|2019-01-01 00:00:03.0000000|2019-01-01 00:00:01.0000000|B|Ax2|
 |x|2019-01-01 00:00:04.0000000|2019-01-01 00:00:01.0000000|B|Ax2|
-|y|2019-01-01 00:00:04.0000000|2019-01-01 00:00:02.0000000|B|Ay1|
+|Y|2019-01-01 00:00:04.0000000|2019-01-01 00:00:02.0000000|B|Ay1|
 |z|2019-01-01 00:02:00.0000000||B||
