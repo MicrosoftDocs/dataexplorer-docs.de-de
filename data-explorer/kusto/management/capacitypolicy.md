@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 21514de40910691e878dbc6d237d810a13676b40
-ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
+ms.openlocfilehash: bb3ee687e995af7d4161ca111f9efbe91c1b9ca0
+ms.sourcegitcommit: a60ad8da32f16c5d9ce35b62e7331d7439081e3d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "84011532"
+ms.lasthandoff: 06/06/2020
+ms.locfileid: "84466305"
 ---
 # <a name="capacity-policy"></a>Kapazitätsrichtlinie
 
@@ -31,7 +31,7 @@ Die Kapazitäts Richtlinie besteht aus:
 
 ## <a name="ingestion-capacity"></a>Erfassungs Kapazität
 
-|Eigenschaft                           |Type    |BESCHREIBUNG                                                                                                                                                                               |
+|Eigenschaft                           |type    |BESCHREIBUNG                                                                                                                                                                               |
 |-----------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |Clustermaximumconcurrentoperations |long    |Ein maximaler Wert für die Anzahl von gleichzeitigen Erfassungs Vorgängen in einem Cluster.                                                                                                            |
 |Coreutilizationkoeffizienten         |double  |Ein Koeffizienten für den Prozentsatz der Kerne, die beim Berechnen der Erfassungs Kapazität verwendet werden sollen (das Ergebnis der Berechnung wird immer von normalisiert `ClusterMaximumConcurrentOperations` ). |                                                                                                                             |
@@ -45,21 +45,24 @@ Minimal ( `ClusterMaximumConcurrentOperations` , `Number of nodes in cluster` * 
 
 ## <a name="extents-merge-capacity"></a>Erweitert die Zusammenfassungs Kapazität
 
-|Eigenschaft                           |Type    |BESCHREIBUNG                                                                                    |
-|-----------------------------------|--------|-----------------------------------------------------------------------------------------------|
-|Maximumconcurrentoperationspernode |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Vorgänge zum Zusammenführen und Neuerstellen von Blöcken auf einem einzelnen Knoten. |
+|Eigenschaft                           |type    |BESCHREIBUNG                                                                                                |
+|-----------------------------------|--------|-----------------------------------------------------------------------------------------------------------|
+|Minimumconcurrentoperationspernode |long    |Ein Minimalwert für die Anzahl der gleichzeitigen Vorgänge zum Zusammenführen und Neuerstellen von Blöcken auf einem einzelnen Knoten. Standardwert: 1 |
+|Maximumconcurrentoperationspernode |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Vorgänge zum Zusammenführen und Neuerstellen von Blöcken auf einem einzelnen Knoten. Standardwert: 5 |
 
 Die Gesamt Zusammenfassungs Kapazität des Clusters (wie von angezeigt [. Show Capacity](../management/diagnostics.md#show-capacity)) wird berechnet durch:
 
-`Number of nodes in cluster`Stuben`MaximumConcurrentOperationsPerNode`
+`Number of nodes in cluster`Stuben`Concurrent operations per node`
+
+Der effektive Wert für `Concurrent operations per node` wird automatisch vom System im Bereich [ `MinimumConcurrentOperationsPerNode` , `MaximumConcurrentOperationsPerNode` ] angepasst.
+
 
 > [!Note]
-> * `MaximumConcurrentOperationsPerNode`wird automatisch vom System im Bereich [1, 5] angepasst, es sei denn, es wurde auf einen höheren Wert festgelegt.
 > * In Clustern mit drei oder mehr Knoten ist der Administrator Knoten nicht an der Ausführung von Merge-Vorgängen beteiligt. Der `Number of nodes in cluster` wird um 1 reduziert.
 
 ## <a name="extents-purge-rebuild-capacity"></a>Erweiterbare Lösch Kapazität für Lösch Blöcke
 
-|Eigenschaft                           |Type    |BESCHREIBUNG                                                                                                                           |
+|Eigenschaft                           |type    |BESCHREIBUNG                                                                                                                           |
 |-----------------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------|
 |Maximumconcurrentoperationspernode |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Rebuild-Blöcke für Löschvorgänge auf einem einzelnen Knoten. |
 
@@ -72,7 +75,7 @@ Die Gesamtanzahl der Blöcke zum Löschen von Blöcken im Cluster Gesamt (wie vo
 
 ## <a name="export-capacity"></a>Exportieren von Kapazität
 
-|Eigenschaft                           |Type    |BESCHREIBUNG                                                                                                                                                                            |
+|Eigenschaft                           |type    |BESCHREIBUNG                                                                                                                                                                            |
 |-----------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |Clustermaximumconcurrentoperations |long    |Ein maximaler Wert für die Anzahl von gleichzeitigen Export Vorgängen in einem Cluster.                                                                                                           |
 |Coreutilizationkoeffizienten         |double  |Ein Koeffizienten für den Prozentsatz der Kerne, die beim Berechnen der Exportkapazität verwendet werden sollen. Das Ergebnis der Berechnung wird immer von normalisiert `ClusterMaximumConcurrentOperations` . |
@@ -86,16 +89,16 @@ Minimal ( `ClusterMaximumConcurrentOperations` , `Number of nodes in cluster` * 
 
 ## <a name="extents-partition-capacity"></a>Erweitert die Partitions Kapazität
 
-|Eigenschaft                           |Type    |BESCHREIBUNG                                                                             |
-|-----------------------------------|--------|----------------------------------------------------------------------------------------|
-|Clustermaximumconcurrentoperations |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Erweiterungs Vorgänge in einem Cluster. |
+|Eigenschaft                           |type    |BESCHREIBUNG                                                                                         |
+|-----------------------------------|--------|----------------------------------------------------------------------------------------------------|
+|Clusterminimumconcurrentoperations |long    |Ein Minimalwert für die Anzahl der gleichzeitigen Erweiterungs Vorgänge in einem Cluster. Standardwert: 1  |
+|Clustermaximumconcurrentoperations |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Erweiterungs Vorgänge in einem Cluster. Standardwert: 16 |
 
-Die gesamte Partitions Kapazität des Clusters (wie von angezeigt [. Show Capacity](../management/diagnostics.md#show-capacity)) wird durch eine einzelne Eigenschaft definiert: `ClusterMaximumConcurrentOperations` .
+Die Gesamtwerte für die Partitions Kapazität des Clusters (wie von angezeigt [. zeigen Sie Kapazität](../management/diagnostics.md#show-capacity)an).
 
-> [!Note]
-> `ClusterMaximumConcurrentOperations`wird automatisch vom System im Bereich [1, 16] angepasst, es sei denn, es wurde auf einen höheren Wert festgelegt.
+Der effektive Wert für `Concurrent operations` wird automatisch vom System im Bereich [ `ClusterMinimumConcurrentOperations` , `ClusterMaximumConcurrentOperations` ] angepasst.
 
-## <a name="defaults"></a>Standardeinstellungen
+## <a name="defaults"></a>der Arbeitszeittabelle
 
 Die standardmäßige Kapazitäts Richtlinie weist die folgende JSON-Darstellung auf:
 
