@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 459b94d4fdb8dbd9d294367b2cee49aab9800406
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: b0377cd8af302d2680c0ee451d05f4b4b083ccec
+ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84294592"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84512604"
 ---
 # <a name="parse_ipv4"></a>parse_ipv4()
 
@@ -35,9 +35,11 @@ parse_ipv4('192.1.168.1') < parse_ipv4('192.1.168.2') == true
 ## <a name="ip-prefix-notation"></a>IP-Präfix Notation
 
 IP-Adressen können `IP-prefix notation` mithilfe eines Schrägstrichs ( `/` ) definiert werden.
-Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse. Die Zahl (1 bis 32) rechts vom Schrägstrich (/) ist die Anzahl von zusammenhängenden 1 Bit in der netmask. 
+Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse. Die Zahl (1 bis 32) rechts vom Schrägstrich (/) ist die Anzahl von zusammenhängenden 1 Bit in der netmask.
 
-**Beispiel:** 192.168.2.0/24 verfügt über eine zugeordnete net/Subnetmask mit 24 aufeinander folgenden Bits oder 255.255.255.0 im gepunkteten Dezimal Format.
+**Beispiel**
+
+192.168.2.0/24 verfügt über ein zugeordnetes net/Subnetmask, das 24 aufeinander folgende Bits oder 255.255.255.0 im gepunkteten Dezimal Format enthält.
 
 **Rückgabe**
 

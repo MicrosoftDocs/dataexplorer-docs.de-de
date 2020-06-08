@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/06/2020
-ms.openlocfilehash: ff2edd1e64aa3ef44c96ecf15d6a859eadd49e69
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: 1d562939430aa5040dc2ab96ae59611d2685e057
+ms.sourcegitcommit: a7e040fc844098323aa1c00e254bcbcd41fe587f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84257874"
+ms.lasthandoff: 06/04/2020
+ms.locfileid: "84426546"
 ---
 # <a name="configure-customer-managed-keys-using-c"></a>Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#
 
@@ -21,6 +21,7 @@ ms.locfileid: "84257874"
 > * [C#](customer-managed-keys-csharp.md)
 > * [Azure Resource Manager-Vorlage](customer-managed-keys-resource-manager.md)
 > * [BEFEHLSZEILENSCHNITTSTELLE (CLI)](customer-managed-keys-cli.md)
+> * [PowerShell](customer-managed-keys-powershell.md)
 
 [!INCLUDE [data-explorer-configure-customer-managed-keys](includes/data-explorer-configure-customer-managed-keys.md)]
 
@@ -95,6 +96,6 @@ Wenn Sie eine neue Version eines Schlüssels erstellen, müssen Sie den Cluster 
 * [Schützen von Azure Data Explorer-Clustern in Azure](security.md)
 * [Konfigurieren von verwalteten Identitäten für Ihren Azure Data Explorer-Cluster](managed-identities.md)
 * [Sichern Ihres Clusters in Azure Data Explorer – Azure-Portal](manage-cluster-security.md) durch Aktivieren der Verschlüsselung ruhender Daten
-* [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resource Manager-Vorlage](customer-managed-keys-resource-manager.md)
+* [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resource Manager-Vorlage](customer-managed-keys-resource-manager.md)
 
 

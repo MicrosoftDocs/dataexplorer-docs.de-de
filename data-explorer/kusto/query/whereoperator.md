@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7dc9d7166a1f286e14c81f269f32f894cbe9ff9d
-ms.sourcegitcommit: da7c699bb62e1c4564f867d4131d26286c5223a8
+ms.openlocfilehash: 116f585fe8a09b4befddd7d1429229ad1bac886f
+ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/14/2020
-ms.locfileid: "83404177"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84512469"
 ---
 # <a name="where-operator"></a>where-Operator
 
@@ -38,7 +38,9 @@ T | where fruit=="apple"
 
 Zeilen in *T*, für die *Predicate* auf `true` festgelegt ist.
 
-**Hinweise** NULL-Werte: alle Filterfunktionen geben false zurück, wenn Sie mit NULL-Werten verglichen werden. Sie können spezielle NULL-fähige Funktionen verwenden, um Abfragen zu schreiben, die NULL-Werte in das Konto aufnehmen: [IsNull ()](./isnullfunction.md), [IsNotNull ()](./isnotnullfunction.md), [IsEmpty ()](./isemptyfunction.md), [isnotempty ()](./isnotemptyfunction.md). 
+**Hinweise** NULL-Werte: alle Filterfunktionen geben false zurück, wenn Sie mit NULL-Werten verglichen werden. Sie können spezielle NULL-fähige Funktionen verwenden, um Abfragen zu schreiben, die NULL-Werte verarbeiten.
+
+[IsNull ()](./isnullfunction.md), [IsNotNull ()](./isnotnullfunction.md), [IsEmpty ()](./isemptyfunction.md), [isnotempty ()](./isnotemptyfunction.md). 
 
 **Tipps**
 
@@ -72,3 +74,4 @@ Traces | where * has "Kusto"
 ```
 
 Alle Zeilen, in denen das Wort "Kusto" in einer beliebigen Spalte angezeigt wird.
+ 

@@ -1,6 +1,6 @@
 ---
-title: Abfragekonsistenz - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die Abfragekonsistenz in Azure Data Explorer beschrieben.
+title: 'Abfrage Konsistenz: Azure-Daten-Explorer'
+description: Dieser Artikel beschreibt die Konsistenz der Abfrage in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,21 +8,21 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/20/2019
-ms.openlocfilehash: b66540af2d2d4bef4571249474cd618e69eb2261
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 8b4d1df4dc9a035764f9d50a4f9c4dcf452da67e
+ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523102"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84512264"
 ---
 # <a name="query-consistency"></a>Abfragekonsistenz
 
-Kusto unterstützt zwei Abfragekonsistenzmodelle: **stark** und **schwach.**
+Kusto unterstützt zwei Abfrage Konsistenz Modelle: **stark** und **schwach**.
 
-Stark konsistente Abfragen (Standard) haben eine "Read-my-changes"-Garantie. Ein Client, der einen Steuerelementbefehl sendet und eine positive Bestätigung erhält, dass der Befehl erfolgreich abgeschlossen wurde, wird garantiert, dass jede unmittelbar folgende Abfrage die Ergebnisse des Befehls beobachtet.
+Stark konsistente Abfragen (Standard) haben eine "Read-My-Changes"-Garantie. Wenn Sie einen Befehls Steuerungs Befehl senden und Bestätigung erhalten, dass der Befehl erfolgreich abgeschlossen wurde, werden Sie sicherstellen, dass jede unmittelbar nachfolgende Abfrage die Ergebnisse des Befehls berücksichtigt.
 
-Schwach konsistente Abfragen (muss vom Client explizit aktiviert werden) geben die Garantie nicht aus. Clients, die Abfragen durchführen, können eine gewisse Latenz (in der Regel 1-2 Minuten) zwischen Änderungen und Abfragen beobachten, die diese Änderungen widerspiegeln.
+Schwach konsistente Abfragen, die explizit vom Client aktiviert werden müssen, verfügen nicht über diese Garantie. Bei Clients, die Abfragen ausführen, wird möglicherweise eine Latenzzeit (in der Regel 1-2 Minuten) zwischen den Änderungen und den Abfragen beobachtet
 
-Der Vorteil von schwach konsistenten Abfragen besteht darin, dass die Auslastung des Clusterknotens, der Datenbankänderungen verarbeitet, verringert wird. Im Allgemeinen wird empfohlen, dass Kunden zuerst das stark konsistente Modell ausprobieren und bei unbedingt erforderlicher Verwendung schwacher Konsistenz verwenden.
+Der Vorteil von schwach konsistenten Abfragen ist, dass die Auslastung des Cluster Knotens, der Daten Bank Änderungen verarbeitet, reduziert wird. Im Allgemeinen wird empfohlen, zuerst das stark konsistente Modell zu testen. Wechseln Sie zur Verwendung von schwach konsistenten Abfragen, wenn dies erforderlich ist.
 
-Das Wechseln zu schwach konsistenten `queryconsistency` Abfragen erfolgt durch Festlegen der Eigenschaft beim Ausführen eines [REST-API-Aufrufs](../api/rest/request.md). Benutzer des Kusto .NET-Clients können sie auch in der [Kusto-Verbindungszeichenfolge](../api/connection-strings/kusto.md) oder als Flag in den [Clientanforderungseigenschaften](../api/netfx/request-properties.md)festlegen.
+Wenn Sie zu schwach konsistenten Abfragen wechseln möchten, legen Sie die-Eigenschaft fest, `queryconsistency` Wenn Sie einen [Rest-API](../api/rest/request.md)-Befehl Benutzer des .NET-Clients können Sie auch in der [Kusto-Verbindungs Zeichenfolge](../api/connection-strings/kusto.md) oder als Flag in den [Eigenschaften der Client Anforderung](../api/netfx/request-properties.md)festlegen.

@@ -8,20 +8,28 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 41a9851405ff85210bba7728a3737fc3b0a57f70
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: 9706cce08a99989441aa657c5d85465294be837e
+ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382385"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84512417"
 ---
 # <a name="query-result-set-has-exceeded-the-internal--limit"></a>Das Resultset der Abfrage hat den internen Wert überschritten... ans
 
 Ein *Abfrageresultset hat den internen... "Limit* " ist ein [Teil eines Abfrage Fehlers](partialqueryfailures.md) , der auftritt, wenn das Ergebnis der Abfrage einen von zwei Grenzwerten überschritten hat:
 * Ein Grenzwert für die Anzahl der Datensätze ( `record count limit` standardmäßig auf 500.000 festgelegt).
-* Ein Grenzwert für die Gesamtmenge der Daten ( `data size limit` , standardmäßig auf 67.108.864 (64 MB) festgelegt). 
+* Ein Grenzwert für die Gesamtmenge der Daten ( `data size limit` , standardmäßig auf 67.108.864 (64 MB) festgelegt).
 
-Es gibt mehrere mögliche Vorgehensweisen, wenn dies geschieht:
-* Ändern Sie die Abfrage so, dass weniger Ressourcen beansprucht werden. Beispielsweise können Sie versuchen, die Anzahl der von der Abfrage zurückgegebenen Datensätze (mit dem [Take-Operator](../query/takeoperator.md) oder durch Hinzufügen zusätzlicher [WHERE-Klauseln](../query/whereoperator.md)) zu begrenzen oder die Anzahl der von der Abfrage zurückgegebenen Spalten (entweder mithilfe des [Projekt Operators](../query/projectoperator.md) oder des [Projekt entfernten Operators](../query/projectawayoperator.md)) zu begrenzen oder den Zusammenfassungs [Operator](../query/summarizeoperator.md) zu verwenden, um aggregierte Daten usw. zu erhalten.
-* Erhöhen Sie das relevante Abfragelimit für diese Abfrage temporär (Weitere Informationen finden Sie unter **Abschneiden** von Ergebnissen unter [Abfrage Limits](querylimits.md)).  
-  Beachten Sie, dass dies im Allgemeinen nicht empfohlen wird, da die Grenzwerte für den Schutz des Clusters spezifisch sind, um sicherzustellen, dass eine einzelne Abfrage im Cluster ausgeführte Abfragen nicht unterbricht.
+Es gibt mehrere mögliche Aktions Kurse:
+
+* Ändern Sie die Abfrage so, dass weniger Ressourcen beansprucht werden. 
+  Beispielsweise können Sie folgende Aktionen ausführen:
+  * Begrenzen der Anzahl der von der Abfrage zurückgegebenen Datensätze mit dem [Take-Operator](../query/takeoperator.md) oder Hinzufügen zusätzlicher [WHERE-Klauseln](../query/whereoperator.md)
+  * Versuchen Sie, die Anzahl der von der Abfrage zurückgegebenen Spalten zu verringern. Verwenden des [Project-Operators](../query/projectoperator.md)oder des [Projekt entfernten Operators](../query/projectawayoperator.md))
+  * Verwenden Sie den Zusammenfassungs [Operator](../query/summarizeoperator.md) , um aggregierte Daten zu erhalten.
+* Erhöhen Sie das relevante Abfragelimit für diese Abfrage vorübergehend. Weitere Informationen finden Sie unter **Abschneiden** von Ergebnissen unter [Abfrage Limits](querylimits.md)).
+
+ > [!NOTE] 
+ > Es wird nicht empfohlen, das Abfragelimit zu erhöhen, da die Grenzwerte zum Schutz des Clusters vorhanden sind. Durch die Grenzwerte wird sichergestellt, dass bei einer einzelnen Abfrage nicht gleichzeitige Abfragen im Cluster unterbrochen werden.
+  

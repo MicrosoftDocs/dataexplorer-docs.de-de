@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/20/2019
-ms.openlocfilehash: 864638f8e03487a35eefa83fa3951d2ecefc27c7
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 80e20e70bc51045f68fd3ef2068f099d750b2b3f
+ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372535"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84512434"
 ---
 # <a name="series_outliers"></a>series_outliers()
 
 Bewertet anomaliepunkte in einer Reihe.
 
-Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe und generiert ein dynamisches numerisches Array mit derselben Länge. Jeder Wert des Arrays gibt eine Bewertung möglicher Anomalien mit [dem Tukey-Test](https://en.wikipedia.org/wiki/Outlier#Tukey.27s_test)an. Ein Wert, der höher als 1,5 oder kleiner als -1,5 ist, weist auf einen Anstieg bzw. einen Abfall der Anomalie in demselben Element der Eingabe hin.   
+Die Funktion nimmt einen Ausdruck mit einem dynamischen numerischen Array als Eingabe an und generiert ein dynamisches numerisches Array mit derselben Länge. Jeder Wert des Arrays gibt mithilfe von ["Tukey es Test"](https://en.wikipedia.org/wiki/Outlier#Tukey.27s_test)eine Bewertung einer möglichen Anomalie an. Ein Wert, der größer als 1,5 im selben Element der Eingabe ist, deutet auf eine Erhöhung oder ablehnen-Anomalie hin. Ein Wert kleiner als-1,5 gibt eine Ablehnungs Anomalie an.
 
 **Syntax**
 
@@ -27,11 +27,11 @@ Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe 
 
 **Argumente**
 
-* *x*: dynamische Array Zelle, bei der es sich um ein Array von numerischen Werten handelt.
-* *Art*: Algorithmus der Ausreißererkennung. Unterstützt derzeit `"tukey"` (herkömmlicher Tukey) und `"ctukey"` (benutzerdefinierter Tukey). Die Standardeinstellung ist `"ctukey"`.
-* *ignore_val*: numerischer Wert, der fehlende Werte in der Reihe anzeigt. der Standardwert ist "Double" (null). Das Ergebnis der Nullen und Werte ignorieren ist auf festgelegt `0` .
-* *min_percentile*: zur Berechnung des normalen zwischen quantilbereichs beträgt der Standardwert 10, unterstützte benutzerdefinierte Werte liegen im Bereich `[2.0, 98.0]` ( `ctukey` nur). 
-* *max_percentile*: identisch, Standardwert 90, unterstützte benutzerdefinierte Werte liegen im Bereich `[2.0, 98.0]` (nur "ctukey"). 
+* *x*: dynamische Array Zelle, die ein Array numerischer Werte ist.
+* *Art*: Algorithmus der Ausreißererkennung. Unterstützt derzeit `"tukey"` (herkömmliches "Tukey") und `"ctukey"` (benutzerdefiniertes "Tukey"). Die Standardeinstellung ist `"ctukey"`.
+* *ignore_val*: numerischer Wert, der fehlende Werte in der Reihe angibt. Der Standardwert ist "Double" (null). Das Ergebnis der Nullen und Werte ignorieren ist auf festgelegt.`0`
+* *min_percentile*: zum Berechnen des normalen zwischen quantifilbereichs. Der Standardwert ist 10, unterstützte benutzerdefinierte Werte liegen im Bereich `[2.0, 98.0]` ( `ctukey` nur).
+* *max_percentile*: identisch, Standardwert 90, unterstützte benutzerdefinierte Werte liegen im Bereich `[2.0, 98.0]` (nur "ctukey").
 
 In der folgenden Tabelle werden die Unterschiede zwischen `"tukey"` und beschrieben `"ctukey"` :
 
@@ -40,13 +40,12 @@ In der folgenden Tabelle werden die Unterschiede zwischen `"tukey"` und beschrie
 | `"tukey"` | 25%/75%              | Nein                             |
 | `"ctukey"`| 10%/90%              | Ja                            |
 
-
 > [!TIP]
-> Die einfachste Methode, diese Funktion zu verwenden, ist die Anwendung auf die Ergebnisse des Operators " [make-Series](make-seriesoperator.md) ".
+> Die beste Möglichkeit, diese Funktion zu verwenden, besteht darin, Sie auf die Ergebnisse des Operators " [make-Series](make-seriesoperator.md) " anzuwenden.
 
 **Beispiel**
 
-Angenommen, Sie haben eine Zeitreihe mit einem Rausch, der Ausreißer erstellt, und Sie können diese Ausreißer (Rauschen) durch den durchschnittlichen Wert ersetzen, indem Sie series_outliers () verwenden, um die Ausreißer zu erkennen und Sie dann zu ersetzen:
+Eine Zeitreihe mit etwas Rauschen erstellt Ausreißer. Wenn Sie diese Ausreißer (Rauschen) durch den durchschnittlichen Wert ersetzen möchten, verwenden Sie series_outliers (), um die Ausreißer zu erkennen, und ersetzen Sie Sie dann.
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

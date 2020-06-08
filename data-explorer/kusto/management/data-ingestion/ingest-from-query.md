@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: bfa44859987d8f3c4f11221fd8370290f08f9a67
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: cd9d0f9156387f3a42d41b000aefc9eac0793f9d
+ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382045"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84512502"
 ---
 # <a name="ingest-from-query-set-append-set-or-append-set-or-replace"></a>Erfassung von Abfragen (. Set,. Append,. Set-oder-Append,. Set-or-Replace)
 
@@ -38,7 +38,7 @@ Diese Befehle führen eine Abfrage oder einen Steuerungs Befehl aus und erfassen
 
 **Argumente**
 
-* `async`: Wenn dieser Wert angegeben wird, wird der Befehl sofort zurückgegeben, und die Erfassung im Hintergrund wird fortgesetzt. Die Ergebnisse des Befehls enthalten einen `OperationId` Wert, der dann mit dem Befehl verwendet werden kann `.show operation` , um den Erfassungs Status und die Ergebnisse abzurufen.
+* `async`: Wenn dieser Wert angegeben wird, wird der Befehl sofort zurückgegeben, und die Erfassung im Hintergrund wird fortgesetzt. Die Ergebnisse des Befehls enthalten einen `OperationId` Wert, der dann mit dem Befehl verwendet werden kann `.show operations` , um den Erfassungs Status und die Ergebnisse abzurufen.
 * *TableName*: der Name der Tabelle, in der Daten erfasst werden sollen.
   Der Tabellenname ist immer relativ zur Datenbank im Kontext.
 * *PropertyName*, *PropertyValue*: eine beliebige Anzahl von Erfassungs Eigenschaften, die sich auf den Erfassungsprozess auswirken.
@@ -58,7 +58,7 @@ Diese Befehle führen eine Abfrage oder einen Steuerungs Befehl aus und erfassen
 
   Außerdem gibt es eine Eigenschaft, die das Verhalten des Befehls selbst steuert:
 
-|Eigenschaft        |Typ    |Beschreibung|
+|Eigenschaft        |type    |Beschreibung|
 |----------------|--------|-----------------------------------------------------------------------------------------------------------------------------|
 |`distributed`   |`bool`  |Gibt an, dass der Befehl von allen Knoten erfasst wird, die die Abfrage parallel ausführen. (Der Standardwert ist `false` .)  Siehe folgende Hinweise.|
 

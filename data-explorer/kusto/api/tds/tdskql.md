@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/09/2019
-ms.openlocfilehash: 55864dd408f35c59398ea1b93f18c0834a611a90
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: 071658bf2277dd0ddb4734aaf0b59a7a44c8fe27
+ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84258095"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84512349"
 ---
 # <a name="kql-over-tds"></a>KQL über TDS
 
@@ -25,7 +25,7 @@ Kusto ermöglicht das Ausführen [gespeicherter Funktionen](../../query/schema-e
 
 Beispielsweise ist die gespeicherte Funktion MyFunction:
 
-|Name |Parameter|Text|Ordner|DocString
+|Name |Parameter|Body|Ordner|DocString
 |---|---|---|---|---
 |MyFunction |(mylimit: Long)| {Stormevents &#124; Limit von mylimit}|MyFolder|Demo Funktion mit Parameter||
 
@@ -49,7 +49,8 @@ kann wie folgt aufgerufen werden:
   }
 ```
 
-> [! Hinweis:] ruft gespeicherte Funktionen mit einem expliziten Schema mit dem Namen `kusto` auf, um zwischengespeicherten Kusto-Funktionen und gespeicherten gespeicherten SQL-System Prozeduren zu unterscheiden.
+> [!NOTE]
+> Ruft gespeicherte Funktionen mit einem expliziten Schema mit dem Namen `kusto` auf, um zwischengespeicherten Kusto-Funktionen und gespeicherten gespeicherten SQL-System Prozeduren zu unterscheiden.
 
 Sie können auch von T-SQL gespeicherte Funktionen mit Kusto (wie tabellarische SQL-Funktionen) abrufen:
 

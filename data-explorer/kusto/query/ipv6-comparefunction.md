@@ -8,14 +8,14 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: d666a819f777ab87ce0bfc3822278e8f60ec3985
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: 7d63ce48ba54377fa79ccd13484b2b9b08794bc6
+ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84301298"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84512366"
 ---
-# <a name="ipv6_compare"></a>ipv6_compare ()
+# <a name="ipv6_compare"></a>ipv6_compare()
 
 Vergleicht zwei IPv6-oder IPv4-Netzwerk Adress Zeichenfolgen. Die beiden IPv6-Zeichen folgen werden analysiert und verglichen, während die kombinierte IP-Präfix Maske, die aus den Argument Präfixen berechnet wurde, und das optionale Argument berücksichtigt werden `PrefixMask` .
 
@@ -130,9 +130,3 @@ datatable(ip1_string:string, ip2_string:string, prefix:long)
 |:: FFFF: c0a8:0101|192.168.1.255|120|0|
 |:: 192.168.1.1/30|192.168.1.255/24|127|0|
 
-## <a name="next-steps"></a>Nächste Schritte
-
-Weitere ähnliche Funktionen finden Sie unter:
-
-* [ipv6_is_match ()](ipv6-is-matchfunction.md)
-* [ipv4_compare ()](ipv4-comparefunction.md)
