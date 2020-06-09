@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: f17bd3736d2a154dd287459bd779088517eebcbc
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: e8125c6d0c327c98b80c4aeed6c587df12fdf91d
+ms.sourcegitcommit: aaada224e2f8824b51e167ddb6ff0bab92e5485f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84294490"
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84626651"
 ---
 # <a name="data-partitioning-policy-preview"></a>Richtlinie für die Daten Partitionierung (Vorschau)
 
@@ -201,6 +201,17 @@ Die Ausgabe umfasst Folgendes:
   * `MinPartitioningPercentageInSingleTable`: Der minimale Prozentsatz partitionierter Daten in allen Tabellen, die über eine Richtlinie zur Daten Partitionierung im Cluster verfügen.
       * Wenn dieser Prozentsatz konstant weiterhin unter 90% liegt, sollten Sie die Partitions Kapazität des Clusters auswerten (siehe [Kapazität](partitioningpolicy.md#capacity)).
   * `TableWithMinPartitioningPercentage`: Der voll qualifizierte Name der Tabelle, deren Partitionierungs Prozentsatz oben angezeigt wird.
+
+* Um die Partitionierungs Befehle und deren Ressourcenverwendung zu überwachen, können Sie die [Befehle. Show](commands.md)verwenden. Beispiel:
+
+```kusto
+.show commands 
+| where StartedOn > ago(1d)
+| where CommandType == "ExtentsPartition"
+| parse Text with ".partition async table " TableName " extents" *
+| summarize count(), sum(TotalCpu), avg(tolong(ResourcesUtilization.MemoryPeak)) by TableName, bin(StartedOn, 15m)
+| render timechart with(ysplit = panels)
+```
 
 #### <a name="capacity"></a>Capacity
 

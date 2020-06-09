@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a2a8f4fa92a7b8722097ec3595674b855a90f216
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: 3fc4cfa307a283c4eb21ba60e3b83ba89b574757
+ms.sourcegitcommit: aaada224e2f8824b51e167ddb6ff0bab92e5485f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84294660"
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84626679"
 ---
 # <a name="top-nested-operator"></a>top-nested operator
 
@@ -48,7 +48,7 @@ Für jede *topnetstedclause*:
 * *`Expr`*: Ein Ausdruck über den Eingabedaten Satz, der angibt, welcher Wert für diese Hierarchieebene zurückgegeben werden soll.
   In der Regel handelt es sich um einen Spalten Verweis für die tabellarische Eingabe (*T*) oder eine Berechnung (z `bin()` . b.) über eine solche Spalte.
 
-* *`ConstExpr`*: Wenn dieser Wert angegeben wird, wird für jeden Hierarchieebene 1-Datensatz mit dem Wert hinzugefügt, der die Aggregation für alle Datensätze ist, deren Anfang nicht war.
+* *`ConstExpr`*: Wenn angegeben, wird für jede Hierarchieebene 1 Datensatz mit dem Wert hinzugefügt, der die Aggregation für alle Datensätze ist, deren Anfang nicht war.
 
 * *`AggName`*: Wenn dieser Wert angegeben ist, legt dieser Bezeichner den Spaltennamen in der Ausgabe für den Wert der *Aggregation*fest.
 
@@ -72,7 +72,7 @@ Dieser Operator gibt eine Tabelle mit zwei Spalten für jede Aggregations Klause
 
 * Eine Spalte enthält die unterschiedlichen Werte der Berechnung der Klausel *`Expr`* (mit dem Spaltennamen " *exprname* ", falls angegeben).
 
-* Eine Spalte enthält das Ergebnis der *Aggregations* Berechnung (bei Angabe des Spaltennamens *aggregationname* ).
+* Eine Spalte enthält das Ergebnis der *Aggregations* Berechnung (mit dem Spaltennamen *aggregationname* , falls angegeben).
 
 **Kommentare**
 
@@ -85,7 +85,7 @@ Um alle Werte auf einer bestimmten Ebene zu erhalten, fügen Sie eine Anzahl von
 
 Die Anzahl der Datensätze vergrößert sich möglicherweise exponentiell mit der Anzahl von Aggregations Klauseln ((N1 + 1) \* (N2 + 1) \* ...). Die Daten Satz Vergrößerung ist noch schneller, wenn kein *N* -Limit angegeben wird. Berücksichtigen Sie, dass dieser Operator möglicherweise eine beträchtliche Menge an Ressourcen beansprucht.
 
-In Fällen, in denen die Verteilung der Aggregation beträchtlich nicht einheitlich ist, begrenzen Sie die Anzahl der unterschiedlichen Werte, die zurückgegeben werden (mithilfe von *N*), und verwenden Sie die `with others=` Option *constexpr* , um eine Angabe für die Gewichtung aller anderen Fälle zu erhalten.
+Wenn die Verteilung der Aggregation beträchtlich nicht einheitlich ist, begrenzen Sie die Anzahl der unterschiedlichen Werte, die zurückgegeben werden (mithilfe von *N*), und verwenden Sie die `with others=` Option *constexpr* , um eine Angabe für die Gewichtung aller anderen Fälle zu erhalten.
 
 **Beispiele**
 
@@ -97,7 +97,7 @@ StormEvents
   top-nested 1 of EndLocation by sum(BeginLat)
 ```
 
-|Zustand|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
+|State|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
 |---|---|---|---|---|---|
 |Kansas|87771.2355000001|Strafverfolgungsbehörden|18744,823|FT Scott|264,858|
 |Kansas|87771.2355000001|Öffentlich|22855,6206|Bucklin|488,2457|
@@ -118,7 +118,7 @@ StormEvents
 
 ```
 
-|Zustand|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
+|State|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
 |---|---|---|---|---|---|
 |Kansas|87771.2355000001|Strafverfolgungsbehörden|18744,823|FT Scott|264,858|
 |Kansas|87771.2355000001|Öffentlich|22855,6206|Bucklin|488,2457|
@@ -136,8 +136,7 @@ StormEvents
 |TEXAS|123400,5101|||Alle anderen endspeicher Orte|58523.2932000001|
 |Alle anderen Zustände|1149279,5923|||Alle anderen endspeicher Orte|1149279,5923|
 
-
-Die folgende Abfrage zeigt die gleichen Ergebnisse für die erste Ebene, die im obigen Beispiel verwendet wird:
+Die folgende Abfrage zeigt die gleichen Ergebnisse für die erste Ebene, die im obigen Beispiel verwendet wurde.
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -151,7 +150,7 @@ Die folgende Abfrage zeigt die gleichen Ergebnisse für die erste Ebene, die im 
 |1149279,5923|
 
 
-Fordern Sie eine weitere Spalte (EventType) für das Top-netsted-Ergebnis an: 
+Fordern Sie eine weitere Spalte (EventType) für das Top-netsted-Ergebnis an.
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -160,7 +159,7 @@ StormEvents
 | project-away tmp
 ```
 
-|Zustand|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|EventType|
+|State|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|EventType|
 |---|---|---|---|---|---|---|
 |Kansas|87771.2355000001|Ausgebildeter „Spotter“|21279,7083|Sharon-Spgs|388,7404|Sturm|
 |Kansas|87771.2355000001|Ausgebildeter „Spotter“|21279,7083|Sharon-Spgs|388,7404|Hagel|
@@ -185,7 +184,7 @@ StormEvents
 | mv-expand EndLocations, endLocationSums, indicies
 ```
 
-|Zustand|`Source`|Endpunkte|endlocationsums|Indizes|
+|State|`Source`|Endpunkte|endlocationsums|Kei|
 |---|---|---|---|---|
 |TEXAS|Ausgebildeter „Spotter“|Claude|421,44|0|
 |TEXAS|Ausgebildeter „Spotter“|Amarillo|316,8892|1|
