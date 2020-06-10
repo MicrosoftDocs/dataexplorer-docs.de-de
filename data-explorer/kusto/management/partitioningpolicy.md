@@ -7,20 +7,17 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 03/30/2020
-ms.openlocfilehash: e8125c6d0c327c98b80c4aeed6c587df12fdf91d
-ms.sourcegitcommit: aaada224e2f8824b51e167ddb6ff0bab92e5485f
+ms.date: 06/10/2020
+ms.openlocfilehash: 768f07307a6f43c2af2db79bc1221c140b7c9a6f
+ms.sourcegitcommit: be1bbd62040ef83c08e800215443ffee21cb4219
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84626651"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664974"
 ---
-# <a name="data-partitioning-policy-preview"></a>Richtlinie für die Daten Partitionierung (Vorschau)
+# <a name="data-partitioning-policy"></a>Daten Partitionierungs Richtlinie
 
 Die Partitionierungs Richtlinie definiert, ob und wie Blöcke [(datenshards)](../management/extents-overview.md) für eine bestimmte Tabelle partitioniert werden sollen.
-
-> [!NOTE]
-> Die Daten Partitionierungsfunktion befindet sich in der *Vorschau*Phase.
 
 Der Hauptzweck der Richtlinie besteht darin, die Leistung von Abfragen zu verbessern, die bekanntermaßen den Datensatz von Werten in den partitionierten Spalten eingrenzen, oder Aggregat/Join für eine Spalte mit hoher kardinalitätszeichenfolge. Die Richtlinie kann auch zu einer besseren Komprimierung der Daten führen.
 
@@ -188,21 +185,21 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
 
 #### <a name="monitoring"></a>Überwachung
 
-* Sie können den Status oder den Status der Partitionierung in einem Cluster überwachen. Verwenden Sie den Befehl [. Show Diagnostics](../management/diagnostics.md#show-diagnostics) .
+Verwenden Sie den Befehl [. Show Diagnostics](../management/diagnostics.md#show-diagnostics) , um den Status oder den Status der Partitionierung in einem Cluster zu überwachen.
 
-```kusto
-.show diagnostics
-| project MinPartitioningPercentageInSingleTable,
-          TableWithMinPartitioningPercentage
-```
+    ```kusto
+    .show diagnostics
+    | project MinPartitioningPercentageInSingleTable,
+              TableWithMinPartitioningPercentage
+    ```
 
-Die Ausgabe umfasst Folgendes:
+    The output includes:
 
-  * `MinPartitioningPercentageInSingleTable`: Der minimale Prozentsatz partitionierter Daten in allen Tabellen, die über eine Richtlinie zur Daten Partitionierung im Cluster verfügen.
+    * `MinPartitioningPercentageInSingleTable`: Der minimale Prozentsatz partitionierter Daten in allen Tabellen, die über eine Richtlinie zur Daten Partitionierung im Cluster verfügen.
       * Wenn dieser Prozentsatz konstant weiterhin unter 90% liegt, sollten Sie die Partitions Kapazität des Clusters auswerten (siehe [Kapazität](partitioningpolicy.md#capacity)).
-  * `TableWithMinPartitioningPercentage`: Der voll qualifizierte Name der Tabelle, deren Partitionierungs Prozentsatz oben angezeigt wird.
+    * `TableWithMinPartitioningPercentage`: Der voll qualifizierte Name der Tabelle, deren Partitionierungs Prozentsatz oben angezeigt wird.
 
-* Um die Partitionierungs Befehle und deren Ressourcenverwendung zu überwachen, können Sie die [Befehle. Show](commands.md)verwenden. Beispiel:
+Verwenden Sie [. Show-Befehle](commands.md) , um die Partitionierungs Befehle und deren Ressourcenverwendung zu überwachen. Beispiel:
 
 ```kusto
 .show commands 

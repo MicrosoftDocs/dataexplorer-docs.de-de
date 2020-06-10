@@ -1,6 +1,6 @@
 ---
-title: Prinzipale und Identitätsanbieter - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden Prinzipale und Identitätsanbieter in Azure Data Explorer beschrieben.
+title: 'Prinzipale und Identitäts Anbieter: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt Prinzipale und Identitäts Anbieter in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,49 +8,48 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a0638ba0031162dadbb4b9a2815940e66d4dcfb3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 4e34c724799cffe38db93869e96fcfae83a92b55
+ms.sourcegitcommit: be1bbd62040ef83c08e800215443ffee21cb4219
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81522643"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664992"
 ---
-# <a name="principals-and-identity-providers"></a>Prinzipale und Identitätsanbieter
+# <a name="principals-and-identity-providers"></a>Prinzipale und Identitäts Anbieter
 
-Das Kusto-Autorisierungsmodell unterstützt mehrere Identitätsanbieter (IdPs) und mehrere Prinzipaltypen.
-In diesem Artikel werden die unterstützten Prinzipaltypen überprüft und ihre Verwendung mit [Rollenzuweisungsbefehlen](../../management/security-roles.md)veranschaulicht.
+Das Kusto-Autorisierungs Modell unterstützt mehrere Identitäts Anbieter (IDPs) und mehrere Prinzipal Typen.
+In diesem Artikel werden die unterstützten Prinzipal Typen überprüft und ihre Verwendung mit [Rollen Zuweisungs Befehlen](../../management/security-roles.md)veranschaulicht.
 
 ### <a name="azure-active-directory"></a>Azure Active Directory
-Azure Active Directory (AAD) ist Azures bevorzugter mehrinstanzenfähiger Cloudverzeichnisdienst und Identitätsanbieter, der Sicherheitsprinzipale authentifizieren oder sich mit anderen Identitätsanbietern, z. B. Microsofts Active Directory, zusammenschließt.
+Azure Active Directory (AAD) ist der bevorzugte mehr Instanzen fähige cloudverzeichnisdienst und Identitäts Anbieter von Azure, der die Sicherheits Prinzipale oder den Verbund mit anderen Identitäts Anbietern, wie z. b. dem Active Directory von Microsoft, authentifizieren kann.
 
-AAD ist die bevorzugte Methode für die Authentifizierung in Kusto. Diese Lösung unterstützt eine Reihe von Authentifizierungsszenarien:
+Aad ist die bevorzugte Methode für die Authentifizierung bei Kusto. Diese Lösung unterstützt eine Reihe von Authentifizierungsszenarien:
 * **Benutzerauthentifizierung** (interaktive Anmeldung): Dient zur Authentifizierung menschlicher Prinzipale.
 * **Anwendungsauthentifizierung** (nicht interaktive Anmeldung): Dient zur Authentifizierung von Diensten und Anwendungen, die ohne Interaktion mit einem menschlichen Benutzer ausgeführt/authentifiziert werden müssen.
 
->HINWEIS: Azure Active Directory lässt keine Authentifizierung von Dienstkonten zu (die definitionsgemäß ON-Prem AD-Entitäten sind).
-Das AAD-Äquivalent des AD-Dienstkontos ist die AAD-Anwendung.
+> [!NOTE]
+> Azure Active Directory lässt keine Authentifizierung von Dienst Konten zu (die durch lokale Ad-Entitäten definiert werden).
+Die Aad-Entsprechung des AD-Dienst Kontos ist die Aad-Anwendung.
 
-#### <a name="aad-group-principals"></a>AAD-Gruppenleiter
-Kusto unterstützt nur Die Prinzipale der Sicherheitsgruppe (und nicht die Prinzipale der Verteilergruppe). Der Versuch, den Zugriff für eine GD in einem Kusto-Cluster einzurichten, führt zu einem Fehler.
+#### <a name="aad-group-principals"></a>Aad-Gruppen Prinzipale
+Kusto unterstützt nur Sicherheitsgruppen Prinzipale (und nicht Verteiler Gruppen). Der Versuch, den Zugriff für eine GD in einem Kusto-Cluster einzurichten, führt zu einem Fehler.
 
-#### <a name="aad-tenants"></a>AAD Mieter
+#### <a name="aad-tenants"></a>Aad-Mandanten
 
+Wenn der Aad-Mandant nicht explizit angegeben wird, versucht Kusto, ihn aus dem UPN (universalprincipalname, z. b.) aufzulösen, `johndoe@fabrikam.com` Falls angegeben. Wenn Ihr Prinzipal die Mandanten Informationen nicht enthält (nicht im UPN-Format), müssen Sie ihn explizit erwähnen, indem Sie die Mandanten-ID oder den Namen an den Prinzipal Deskriptor anhängen.
 
->Wenn AAD-Mandant nicht explizit angegeben ist, versucht Kusto, ihn aus dem UPN `johndoe@fabrikam.com`(UniversalPrincipalName, z. B. ) aufzulösen, falls angegeben.
-Wenn Ihr Prinzipal die Mandanteninformationen (nicht in UPN-Form) nicht enthält, müssen Sie diese explizit erwähnen, indem Sie die Mandanten-ID oder den Namen an den Hauptdeskriptor anhängen.
+**Beispiele für Aad-Prinzipale**
 
-**Beispiele für AAD-Prinzipale**
-
-|AAD Mieter |type |Syntax |
+|Aad-Mandant |type |Syntax |
 |-----------|-----|-------|
-|Implizit (UPN)  |Benutzer  |`aaduser=`*UserEmailAddress*
-|Explizit (ID)   |Benutzer  |`aaduser=`*UserEmailAddress*`;`*TenantId* oder `aaduser=` *ObjectID*`;`*TenantId*
-|Explizit (Name) |Benutzer  |`aaduser=`*UserEmailAddress*`;`*TenantName* oder `aaduser=` *ObjectID*`;`*TenantName*
-|Implizit (UPN)  |Group |`aadgroup=`*GroupEmailAddress*
-|Explizit (ID)   |Group |`aadgroup=`*GroupObjectId*`;`*TenantId* oder`aadgroup=`*GroupDisplayName*`;`*TenantId*
-|Explizit (Name) |Group |`aadgroup=`*GroupObjectId*`;`*TenantName* oder`aadgroup=`*GroupDisplayName*`;`*TenantName*
-|Explizit (UPN)  |App   |`aadapp`=*ApplicationDisplayName*`;`*TenantId*
-|Explizit (Name) |App   |`aadapp=`*ApplicationId*`;`*TenantName*
+|Implizit (UPN)  |Benutzer  |`aaduser=`*Useremailaddress*
+|Explizit (ID)   |Benutzer  |`aaduser=`*Useremailaddress* `;` *Tenantid* oder `aaduser=` *objectID* `;` *tenantid*
+|Explizit (Name) |Benutzer  |`aaduser=`*Useremailaddress* `;` *Tenantname* oder `aaduser=` *objectID* `;` *tenantname*
+|Implizit (UPN)  |Gruppieren |`aadgroup=`*Grouetmailaddress*
+|Explizit (ID)   |Gruppieren |`aadgroup=`*Groupobjectid* `;` *Tenantid* oder `aadgroup=` *groupdisplayname* `;` *tenantid*
+|Explizit (Name) |Gruppieren |`aadgroup=`*Groupobjectid* `;` *Tenantname* oder `aadgroup=` *groupdisplayname* `;` *tenantname*
+|Explizit (UPN)  |App   |`aadapp`=*ApplicationDisplayName* `;` *Tenantid*
+|Explizit (Name) |App   |`aadapp=`*ApplicationId* `;` *Tenantname*
 
 ```kusto
 // No need to specify AAD tenant for UPN, as Kusto performs the resolution by itself
@@ -70,7 +69,7 @@ Wenn ein MSA-Prinzipal für eine Kusto-Ressource konfiguriert ist, versucht Kust
 
 **Beispiele für MSA-Prinzipale**
 
-|IdP-  |type  |Syntax |
+|IdP  |type  |Syntax |
 |-----|------|-------|
 |Live.com |Benutzer  |`msauser=`john.doe@live.com`
 

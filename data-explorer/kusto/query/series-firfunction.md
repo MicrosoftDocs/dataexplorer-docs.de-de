@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2019
-ms.openlocfilehash: 0cb1f2b414c22220f8cdc81475c5cb0a3d9aedcf
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 616fee7b0a1b6852f66d3db22846b2645e03135f
+ms.sourcegitcommit: be1bbd62040ef83c08e800215443ffee21cb4219
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372751"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84665009"
 ---
 # <a name="series_fir"></a>series_fir()
 
-Wendet einen endlichen Impuls Antwort Filter auf eine Reihe an.  
+Wendet einen FIR-Filter (Finite Impulse Response) auf eine Reihe an.  
 
-Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe und wendet einen [endlichen Impuls Antwort](https://en.wikipedia.org/wiki/Finite_impulse_response) Filter an. Durch die Angabe der Koeffizienten `filter` kann Sie zum Berechnen des gleitenden Durchschnitts, der Glättung, der Änderungs Erkennung und von vielen weiteren Anwendungsfällen verwendet werden. Die Funktion verwendet die Spalte mit dem dynamischen Array und einem statischen, dynamischen Array der Filterkoeffizienten als Eingabe und wendet die Filter auf die Spalte an. Sie gibt eine neue dynamische Array-Spalte mit der gefilterten Ausgabe aus.  
+Die Funktion nimmt einen Ausdruck, der ein dynamisches numerisches Array enthält, als Eingabe an und wendet einen [endlichen Impuls Antwort](https://en.wikipedia.org/wiki/Finite_impulse_response) Filter an. Durch die Angabe der Koeffizienten `filter` kann Sie zum Berechnen eines gleitenden Durchschnitts, Glättung, Änderungs Erkennung und vielen weiteren Anwendungsfällen verwendet werden. Die-Funktion übernimmt die-Spalte mit dem dynamischen Array und ein statisches dynamisches Array der Filterkoeffizienten als Eingabe und wendet den Filter auf die Spalte an. Sie gibt eine neue dynamische Array-Spalte mit der gefilterten Ausgabe aus.  
 
 **Syntax**
 
@@ -27,15 +27,15 @@ Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe 
 
 **Argumente**
 
-* *x*: dynamische Array Zelle, bei der es sich um ein Array numerischer Werte handelt, normalerweise die resultierende Ausgabe von [make-Series-](make-seriesoperator.md) oder [make_list](makelist-aggfunction.md) -Operatoren.
+* *x*: dynamische Array Zelle numerischer Werte. In der Regel die resultierende Ausgabe von [make-Series-](make-seriesoperator.md) oder [make_list](makelist-aggfunction.md) -Operatoren.
 * *Filter*: ein konstanter Ausdruck, der die Koeffizienten des Filters (gespeichert als dynamisches Array numerischer Werte) enthält.
-* *normalisieren*: Optionaler boolescher Wert, der angibt, ob der Filter normalisiert werden soll (d. h. dividiert durch die Summe der Koeffizienten). Wenn der *Filter* negative Werte enthält, muss *normalisieren* als angegeben werden `false` . andernfalls ist das Ergebnis `null` . Wenn der Wert nicht angegeben wird, wird der Standardwert *normalisieren* abhängig vom vorhanden sein negativer Werte im *Filter*angenommen: Wenn *Filter* mindestens einen negativen Wert enthält, wird als *normalisieren* angenommen `false` .  
-Normalisierung ist eine bequeme Möglichkeit, um sicherzustellen, dass die Summe der Koeffizienten 1 ist, sodass der Filter die Reihe nicht verstärkt oder abgleicht. Beispielsweise könnte der gleitende Durchschnitt von 4 Containern durch *Filter*= [1, 1, 1, 1] und *normalisiert*= true angegeben werden. Dies ist einfacher als die Eingabe von [0,25, 0.25.0.25, 0,25].
-* *Center*: ein optionaler boolescher Wert, der angibt, ob der Filter symmetrisch in einem Zeitfenster vor und nach dem aktuellen Punkt oder in einem Zeitfenster vom aktuellen Punkt aus angewendet wird. Standardmäßig ist „center“ auf „false“ festgelegt, was zum Szenario für das Streaming von Daten passt, wo wir den Filter nur auf aktuelle und ältere Punkte anwendet können. Allerdings können Sie den Wert bei der Ad-hoc-Verarbeitung auf „true“ festlegen, um diese mit der Zeitreihe zu synchronisieren (siehe folgende Beispiele). Technisch gesehen steuert dieser Parameter die [Gruppenverzögerung](https://en.wikipedia.org/wiki/Group_delay_and_phase_delay)des Filters.
+* *normalisieren*: Optionaler boolescher Wert, der angibt, ob der Filter normalisiert werden soll. Das heißt, dividiert durch die Summe der Koeffizienten. Wenn der Filter negative Werte enthält, muss *normalisieren* als angegeben werden `false` . andernfalls ist das Ergebnis `null` . Wenn kein Wert angegeben wird, wird der Standardwert *normalisieren* angenommen, abhängig davon, ob negative Werte im *Filter*vorhanden sind. Wenn der *Filter* mindestens einen negativen Wert enthält, wird bei *normalisieren* angenommen `false` .  
+Normalisierung ist eine bequeme Möglichkeit, um sicherzustellen, dass die Summe der Koeffizienten 1 ist. Der Filter wird die Reihe nicht verstärken oder dämpfen. Beispielsweise könnte der gleitende Durchschnitt von vier Containern durch *Filter*= [1, 1, 1, 1] und *normalisiert*= true angegeben werden. Dies ist einfacher als die Eingabe von [0,25, 0.25.0.25, 0,25].
+* *Center*: ein optionaler boolescher Wert, der angibt, ob der Filter symmetrisch in einem Zeitfenster vor und nach dem aktuellen Punkt oder in einem Zeitfenster vom aktuellen Punkt aus angewendet wird. Standardmäßig ist "Center" auf "false" fest, was dem Szenario für das Streaming von Daten entspricht, bei dem der Filter nur auf die aktuellen und die älteren Punkte angewendet werden kann. Bei der Ad-hoc-Verarbeitung können Sie Sie jedoch auf festlegen `true` , sodass Sie mit der Zeitreihe synchronisiert bleibt. Siehe folgende Beispiele. Dieser Parameter steuert die [Gruppenverzögerung](https://en.wikipedia.org/wiki/Group_delay_and_phase_delay)des Filters.
 
 **Beispiele**
 
-* Das Berechnen eines gleitenden Durchschnitts von 5 Punkten kann durch Festlegen von *Filter*= [1, 1, 1, 1, 1] und *normalisieren* = `true` (Standard) erfolgen. Beachten Sie die Auswirkung von *Center* = `false` (Standard) im Vergleich zu `true` :
+* Berechnen Sie einen gleitenden Durchschnitt von fünf Punkten, indem Sie *Filter*= [1, 1, 1, 1, 1] und *normalisieren* = `true` (Standard) festlegen. Beachten Sie die Auswirkung von *Center* = `false` (Standard) im Vergleich zu `true` :
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -48,12 +48,12 @@ range t from bin(now(), 1h)-23h to bin(now(), 1h) step 1h
 ```
 
 Diese Abfrage gibt Folgendes zurück:  
-*5h_MovingAvg*: 5 Punkte Filter für den gleitenden Durchschnitt. Die Spitze wird geglättet und um (5-1)/2 = 2 Stunden verschoben.  
-*5h_MovingAvg_centered*: identisch, aber wenn Sie Center = true festlegen, verbleibt die Spitze an Ihrem ursprünglichen Speicherort.
+*5h_MovingAvg*: fünf Punkte gleitenden Durchschnitt Filter. Die Spitze wird geglättet und um (5-1)/2 = 2 Stunden verschoben.  
+*5h_MovingAvg_centered*: identisch, aber durch Festlegen von `center=true` bleibt die Spitze am ursprünglichen Speicherort.
 
 :::image type="content" source="images/series-firfunction/series-fir.png" alt-text="Reihe FIR" border="false":::
 
-* Das Berechnen der Differenz zwischen einem Punkt und dem vorhergehenden Punkt kann durch Festlegen von *Filter*= [1,-1] erfolgen:
+* Um den Unterschied zwischen einem Punkt und dem vorangehenden Punkt zu berechnen, legen Sie *Filter*= [1,-1] fest.
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
