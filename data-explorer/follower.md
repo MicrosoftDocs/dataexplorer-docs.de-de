@@ -7,12 +7,12 @@ ms.reviewer: gabilehner
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 11/07/2019
-ms.openlocfilehash: 35fd37db22b2f07dcee9d7f67c700414a4cfc5d3
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 942c0577b8fb784af74cf09aec4c8a68a7be8dda
+ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373849"
+ms.lasthandoff: 06/02/2020
+ms.locfileid: "84294558"
 ---
 # <a name="use-follower-database-to-attach-databases-in-azure-data-explorer"></a>Verwenden der Follower-Datenbank zum Anfügen von Datenbanken in Azure Data Explorer
 
@@ -34,7 +34,7 @@ Das Anfügen einer Datenbank an einen anderen Cluster mithilfe der Follower-Funk
 
 ## <a name="attach-a-database"></a>Anfügen einer Datenbank
 
-Es gibt verschiedene Methoden zum Anfügen einer Datenbank. In diesem Artikel wird das Anfügen einer Datenbank mithilfe von C# oder einer Azure Resource Manager-Vorlage erläutert. Zum Anfügen einer Datenbank müssen Sie über Berechtigungen für den Leader-Cluster und den Follower-Cluster verfügen. Weitere Informationen zu Berechtigungen finden Sie unter [Verwalten von Berechtigungen](#manage-permissions).
+Es gibt verschiedene Methoden zum Anfügen einer Datenbank. In diesem Artikel wird das Anfügen einer Datenbank mithilfe von C#, Python oder einer Azure Resource Manager-Vorlage erläutert. Zum Anfügen einer Datenbank benötigen Sie einen Benutzer, eine Gruppe, einen Dienstprinzipal oder eine verwaltete Identität mit mindestens der Rolle „Mitwirkender“ für den Leader-Cluster und den Follower-Cluster. Sie können Rollenzuweisungen mit dem [Azure-Portal](/azure/role-based-access-control/role-assignments-portal), [PowerShell](/azure/role-based-access-control/role-assignments-powershell), der [Azure CLI](/azure/role-based-access-control/role-assignments-cli) und einer [ARM-Vorlage](/azure/role-based-access-control/role-assignments-template) hinzufügen oder entfernen. Weitere Informationen zur rollenbasierten Zugriffssteuerung in Azure (Role-Based Access Control, RBAC) und zu den verschiedenen Rollen finden Sie [hier](/azure/role-based-access-control/overview) und [hier](/azure/role-based-access-control/rbac-and-directory-admin-roles). 
 
 ### <a name="attach-a-database-using-c"></a>Anfügen einer Datenbank mithilfe von C#
 
@@ -208,7 +208,7 @@ Sie können die Azure Resource Manager-Vorlage über das [Azure-Portal](https://
 |Datenbankname     |      Der Name der zu folgenden Datenbank. Wenn Sie allen Datenbanken des Leaders folgen möchten, verwenden Sie „*“.   |
 |Leader-Clusterressourcen-ID    |   Die Ressourcen-ID des Leader-Clusters.      |
 |Standardänderungsart für Prinzipale    |   Die Standardänderungsart für Prinzipale. Dies kann `Union`, `Replace` oder `None` sein. Weitere Informationen zur Standardänderungsart für Prinzipale finden Sie unter [Steuerungsbefehl für Prinzipaländerungsart](kusto/management/cluster-follower.md#alter-follower-database-principals-modification-kind).      |
-|Position   |   Der Speicherort aller Ressourcen. Der Leader und der Follower müssen sich am gleichen Speicherort befinden.       |
+|Standort   |   Der Speicherort aller Ressourcen. Der Leader und der Follower müssen sich am gleichen Speicherort befinden.       |
  
 ### <a name="verify-that-the-database-was-successfully-attached"></a>Überprüfen, ob die Datenbank erfolgreich angehängt wurde
 
@@ -252,6 +252,9 @@ var attachedDatabaseConfigurationsName = "uniqueName";
 resourceManagementClient.AttachedDatabaseConfigurations.Delete(followerResourceGroupName, followerClusterName, attachedDatabaseConfigurationsName);
 ```
 
+Zum Trennen einer Datenbank aufseiten des Followers benötigen Sie einen Benutzer, eine Gruppe, einen Dienstprinzipal oder eine verwaltete Identität mit mindestens der Rolle „Mitwirkender“ für den Follower-Cluster.
+Im obigen Beispiel wird ein Dienstprinzipal verwendet.
+
 ### <a name="detach-the-attached-follower-database-from-the-leader-cluster"></a>Trennen der angefügten Follower-Datenbank vom Leader-Cluster
 
 Vom Leader-Cluster kann jede angefügte Datenbank wie folgt getrennt werden:
@@ -281,6 +284,8 @@ var followerDatabaseDefinition = new FollowerDatabaseDefinition()
 
 resourceManagementClient.Clusters.DetachFollowerDatabases(leaderResourceGroupName, leaderClusterName, followerDatabaseDefinition);
 ```
+
+Zum Trennen einer Datenbank aufseiten des Leaders benötigen Sie einen Benutzer, eine Gruppe, einen Dienstprinzipal oder eine verwaltete Identität mit mindestens der Rolle „Mitwirkender“ für den Leader-Cluster. Im obigen Beispiel wird ein Dienstprinzipal verwendet.
 
 ## <a name="detach-the-follower-database-using-python"></a>Trennen der Follower-Datenbank mithilfe von Python
 
@@ -314,6 +319,8 @@ attached_database_configurationName = "uniqueName"
 #Returns an instance of LROPoller, see https://docs.microsoft.com/python/api/msrest/msrest.polling.lropoller?view=azure-python
 poller = kusto_management_client.attached_database_configurations.delete(follower_resource_group_name, follower_cluster_name, attached_database_configurationName)
 ```
+Zum Trennen einer Datenbank aufseiten des Followers benötigen Sie einen Benutzer, eine Gruppe, einen Dienstprinzipal oder eine verwaltete Identität mit mindestens der Rolle „Mitwirkender“ für den Follower-Cluster.
+Im obigen Beispiel wird ein Dienstprinzipal verwendet.
 
 ### <a name="detach-the-attached-follower-database-from-the-leader-cluster"></a>Trennen der angefügten Follower-Datenbank vom Leader-Cluster
 
@@ -353,6 +360,9 @@ cluster_resource_id = "/subscriptions/" + follower_subscription_id + "/resourceG
 #Returns an instance of LROPoller, see https://docs.microsoft.com/python/api/msrest/msrest.polling.lropoller?view=azure-python
 poller = kusto_management_client.clusters.detach_follower_databases(resource_group_name = leader_resource_group_name, cluster_name = leader_cluster_name, cluster_resource_id = cluster_resource_id, attached_database_configuration_name = attached_database_configuration_name)
 ```
+
+Zum Trennen einer Datenbank aufseiten des Leaders benötigen Sie einen Benutzer, eine Gruppe, einen Dienstprinzipal oder eine verwaltete Identität mit mindestens der Rolle „Mitwirkender“ für den Leader-Cluster.
+Im obigen Beispiel wird ein Dienstprinzipal verwendet.
 
 ## <a name="manage-principals-permissions-and-caching-policy"></a>Verwalten von Prinzipalen, Berechtigungen und Cacherichtlinie
 

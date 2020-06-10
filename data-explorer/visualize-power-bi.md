@@ -1,20 +1,20 @@
 ---
-title: 'Tutorial: Visualisieren von Daten aus Azure Data Explorer in Power BI'
+title: 'Tutorial: Visualisieren von Daten über Azure Data Explorer in Power BI'
 description: In diesem Tutorial erfahren Sie, wie Sie Azure Data Explorer mit Power BI verbinden und Daten visualisieren.
 author: orspod
 ms.author: orspodek
 ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: tutorial
-ms.date: 09/24/2018
-ms.openlocfilehash: d37cef094bfc1200182f7cf23dc68d396c126eb2
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.date: 06/02/2020
+ms.openlocfilehash: bde567a3c41a226ca0a8304d7ab4ed42f3fa65bf
+ms.sourcegitcommit: 8953d09101f4358355df60ab09e55e71bc255ead
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81491955"
+ms.lasthandoff: 06/04/2020
+ms.locfileid: "84420916"
 ---
-# <a name="tutorial-visualize-data-from-azure-data-explorer-in-power-bi"></a>Tutorial: Visualisieren von Daten aus Azure Data Explorer in Power BI
+# <a name="tutorial-visualize-data-from-azure-data-explorer-in-power-bi"></a>Tutorial: Visualisieren von Daten über Azure Data Explorer in Power BI
 
 Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Power BI ist eine Business Analytics-Lösung, mit der Sie Ihre Daten visualisieren und die Ergebnisse in Ihrer Organisation teilen können. In diesem Tutorial erfahren Sie zunächst, wie Sie Visuals in Azure Data Explorer rendern. Anschließend stellen Sie mit Power BI eine Verbindung mit Azure Data Explorer her, erstellen einen Bericht anhand von Beispieldaten und veröffentlichen den Bericht im Power BI-Dienst.
 
@@ -85,7 +85,7 @@ Jetzt stellen Sie in Power BI Desktop eine Verbindung mit Azure Data Explorer he
 
     ![Datensammlung](media/visualize-power-bi/get-data-more.png)
 
-1. Suchen Sie nach *Azure Data Explorer*, und wählen Sie dann **Azure Data Explorer (Beta)** und anschließend **Verbinden** aus.
+1. Suchen Sie nach *Azure Data Explorer*, und wählen Sie **Azure Data Explorer** und dann **Verbinden** aus.
 
     ![Suchen und Abrufen von Daten](media/visualize-power-bi/search-get-data.png)
 

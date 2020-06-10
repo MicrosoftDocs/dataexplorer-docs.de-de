@@ -7,19 +7,29 @@ ms.author: orspodek
 ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: conceptual
-ms.date: 01/30/2020
-ms.openlocfilehash: b1d888471c93409826abe523ae6ae4df39e120c3
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.date: 06/02/2020
+ms.openlocfilehash: b1351ceb9fe4b81a818ca41728a588dddfb4c5a2
+ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83374258"
+ms.lasthandoff: 06/02/2020
+ms.locfileid: "84294677"
 ---
 # <a name="data-visualization-with-azure-data-explorer"></a>Datenvisualisierung mit Azure Data Explorer 
 
 Azure Data Explorer ist ein schneller und hochgradig skalierbarer Dienst für die Untersuchung von Protokoll- und Telemetriedaten, die zum Erstellen von komplexen Analyselösungen für große Datenmengen verwendet werden. Azure Data Explorer wird in verschiedene Visualisierungstools integriert, damit Sie Ihre Daten visualisieren und die Ergebnisse unternehmensweit freigeben können. Diese Daten können in umfassende Einblicke hinsichtlich der Auswirkungen auf Ihr Unternehmen transformiert werden.
 
 Datenvisualisierung und Berichterstellung ist ein wichtiger Schritt im Datenanalyseprozess. Azure Data Explorer unterstützt viele BI-Dienste, damit Sie denjenigen nutzen können, der für Ihr Szenario und Budget am besten geeignet ist.
+
+## <a name="azure-data-explorer-dashboards"></a>Azure Data Explorer-Dashboards
+
+Bei den Azure Data Explorer-Dashboards handelt es sich um eine Webanwendung, die Ihnen das Ausführen von Abfragen und Erstellen von Dashboards in der eigenständigen Webanwendung ([Webbenutzeroberfläche](web-query-data.md)) ermöglicht. Azure Data Explorer-Dashboards bieten drei wichtige Vorteile:
+
+* Natives Exportieren von Abfragen aus der Webbenutzeroberfläche in Azure Data Explorer-Dashboards 
+* Untersuchen der Daten auf der Webbenutzeroberfläche
+* Optimieren der Dashboardrenderingleistung
+
+Weitere Informationen finden Sie unter [Visualisieren von Daten mit Azure Data Explorer-Dashboards](azure-data-explorer-dashboards.md).
 
 ## <a name="kusto-query-language-visualizations"></a>Visualisierungen mit der Kusto-Abfragesprache
 
@@ -45,7 +55,7 @@ Azure Data Explorer ermöglicht es, eine Verbindung mit [Microsoft Excel](https:
 
 ## <a name="kibana"></a>Kibana
 
-Azure Data Explorer ermöglicht das Herstellen einer Verbindung mit [Kibana (Seite „Ermitteln“)](https://www.elastic.co/guide/en/kibana/6.8/discover.html) mithilfe des Open Source-Connectors K2Bridge. Sie [richten Azure Data Explorer als Datenquelle für Kibana ein und visualisieren anschließend die Daten](k2bridge.md).
+Azure Data Explorer ermöglicht das Herstellen einer Verbindung mit [Kibana](https://www.elastic.co/guide/en/kibana/6.8/discover.html) mithilfe des Open Source-Connectors K2Bridge. Sie [richten Azure Data Explorer als Datenquelle für Kibana ein und visualisieren anschließend die Daten](k2bridge.md).
 
 ## <a name="odbc-connector"></a>ODBC-Connector
 
