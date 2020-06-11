@@ -1,66 +1,75 @@
 ---
-title: Datenerfassung im Azure-Daten-Explorer
+title: Übersicht über die Datenerfassung in Azure Data Explorer
 description: Erfahren Sie mehr über die verschiedenen Möglichkeiten, wie Sie Daten im Azure-Daten-Explorer erfassen (laden) können.
 author: orspod
 ms.author: orspodek
-ms.reviewer: mblythe
+ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
-ms.date: 02/18/2019
-ms.openlocfilehash: 9a438b7d55c94acd64064e9cbd2b53c2ac31435b
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.date: 05/18/2020
+ms.openlocfilehash: 6fa60c3c82a889d1161b30529586b225cee3efbd
+ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373791"
+ms.lasthandoff: 05/26/2020
+ms.locfileid: "83863273"
 ---
-# <a name="azure-data-explorer-data-ingestion"></a>Datenerfassung im Azure-Daten-Explorer
+# <a name="azure-data-explorer-data-ingestion-overview"></a>Übersicht über die Datenerfassung in Azure Data Explorer 
 
-Die Datenerfassung ist der Prozess, mit dem Datensätze aus einer oder mehreren Quellen geladen werden, um eine Tabelle im Azure-Daten-Explorer zu erstellen oder zu aktualisieren. Nach der Erfassung sind die Daten für Abfragen verfügbar. Das folgende Diagramm zeigt den vollständigen Ablauf für die Arbeit im Azure-Daten-Explorer, einschließlich der Datenerfassung.
+Die Datenerfassung ist der Prozess, mit dem Datensätze aus einer oder mehreren Quellen geladen werden, um Daten in eine Tabelle in Azure Data Explorer zu importieren. Nach der Erfassung sind die Daten für Abfragen verfügbar.
 
-![Datenfluss](media/ingest-data-overview/data-flow.png)
+Das folgende Diagramm zeigt den vollständigen Flow für die Arbeit in Azure Data Explorer, einschließlich der unterschiedlichen Erfassungsmethoden.
 
-Der Datenverwaltungsdienst von Azure-Daten-Explorer, der für die Datenerfassung zuständig ist, bietet die folgenden Funktionen:
+:::image type="content" source="media/data-ingestion-overview/data-management-and-ingestion-overview.png" alt-text="Übersichtsschema der Datenerfassung und -verwaltung":::
 
-1. **Datenabruf**: Abrufen von Daten aus externen Quellen (Event Hubs) oder Lesen von Erfassungsanforderungen aus einer Azure-Warteschlange.
+Der Datenverwaltungsdienst von Azure Data Explorer, der für die Datenerfassung zuständig ist, implementiert die folgenden Prozesse:
 
-1. **Batchverarbeitung**: Batchdaten, die an dieselbe Datenbank und Tabelle gesendet werden, um den Durchsatz der Datenerfassung zu optimieren.
+Azure Data Explorer pullt Daten aus einer externen Quelle und liest Anforderungen aus einer ausstehenden Azure-Warteschlange. Die Daten werden in einem Batch oder Stream an Data Manager übermittelt. Batchdaten, die an dieselbe Datenbank und Tabelle gesendet werden, sind für den Durchsatz der Datenerfassung optimiert. Azure Data Explorer führt eine erste Überprüfung der Daten durch und konvertiert ggf. Datenformate. Die weitere Datenbearbeitung umfasst den Schemaabgleich sowie die Organisation, Indizierung, Codierung und Komprimierung der Daten. Die Daten werden gemäß der festgelegten Aufbewahrungsrichtlinie im Speicher gespeichert. Der Data Manager committet anschließend die Datenerfassung in der-Engine, wo sie dann für Abfragen bereitstehen. 
 
-1. **Validierung**: Vorläufige Validierung und Formatkonvertierung, falls erforderlich.
+## <a name="supported-data-formats-properties-and-permissions"></a>Unterstützte Datenformate, Eigenschaften und Berechtigungen
 
-1. **Datenbearbeitung**: Abgleich des Schemas, Organisation, Indizierung, Codierung und Komprimierung der Daten.
+* **[Unterstützte Datenformate](ingestion-supported-formats.md)** 
 
-1. **Persistenzpunkt im Erfassungsablauf**: Verwalten der Erfassungslast der Engine und Verarbeiten von Wiederholungsversuchen bei vorübergehenden Ausfällen.
+* **[Erfassungseigenschaften:](ingestion-properties.md)** Eigenschaften, die Einfluss auf die Datenerfassung haben (z. B. Tagging, Zuordnung, Erstellungszeit).
 
-1. **Committen der Datenerfassung**: Stellt die Daten für Abfragen zur Verfügung.
+* **Berechtigungen**: Zum Erfassen von Daten benötigt der Prozess [Berechtigungen auf Ebene der Datenbankerfassung](kusto/management/access-control/role-based-authorization.md). Für andere Aktionen wie z. B. Abfragen sind möglicherweise die Berechtigungen „Datenbankadministrator“, „Datenbankbenutzer“ oder „Tabellenadministrator“ erforderlich.
 
-## <a name="ingestion-methods"></a>Erfassungsmethoden
 
-Azure-Daten-Explorer unterstützt mehrere Erfassungsmethoden mit jeweils eigenen Zielszenarien, Vor- und Nachteilen. Azure-Daten-Explorer bietet Pipelines und Konnektoren für gängige Dienste, programmgesteuerte Erfassung über SDKs und direkten Zugriff auf die Engine für Untersuchungszwecke.
+## <a name="batching-vs-streaming-ingestion"></a>Batcherfassung und Streamingerfassung
 
-### <a name="ingestion-using-pipelines-connectors-and-plugins"></a>Erfassung mit Pipelines, Connectors und Plug-Ins
+* Bei der Batcherfassung werden die Daten in Batches zusammengefasst und für einen hohen Erfassungsdurchsatz optimiert. Diese Methode stellt die bevorzugte und leistungsfähigste Art der Erfassung dar. Die Daten werden gemäß den Erfassungseigenschaften in Batches zusammengefasst. Anschließend werden kleine Datenbatches zusammengeführt und für schnelle Abfrageergebnisse optimiert. Die Richtlinie für die [Batcherfassung](kusto/management/batchingpolicy.md) kann für Datenbanken oder Tabellen festgelegt werden. Standardmäßig beträgt der Maximalwert für Batches 5 Minuten, 1.000 Elemente oder eine Gesamtgröße von 500 MB.
 
-Azure Data Explorer unterstützt derzeit Folgendes:
+* Die [Streamingerfassung](ingest-data-streaming.md) erfolgt durch eine fortlaufende Datenerfassung aus einer Streamingquelle. Durch die Streamingerfassung sinkt die Latenz bei kleinen Datensätzen pro Tabelle auf nahezu Echtzeit. Die Daten werden anfänglich im Zeilenspeicher erfasst und dann in Spaltenspeichererweiterungen verschoben. Die Streamingerfassung kann mithilfe einer Azure Data Explorer-Clientbibliothek oder einer der unterstützten Datenpipelines erfolgen. 
 
-* Event Grid-Pipeline, die mit dem Verwaltungs-Assistenten im Azure-Portal verwaltet werden kann. Weitere Informationen finden Sie unter [Erfassen von Azure-Blobs in Azure Data Explorer](ingest-data-event-grid.md).
+## <a name="ingestion-methods-and-tools"></a>Erfassungsmethoden und -tools
 
-* Event Hub-Pipeline, die mit dem Verwaltungs-Assistenten im Azure-Portal verwaltet werden kann. Weitere Informationen finden Sie unter [Erfassen von Daten aus Event Hub in Azure Data Explorer](ingest-data-event-hub.md).
+Azure Data Explorer unterstützt mehrere Erfassungsmethoden mit jeweils eigenen Zielszenarien. Diese Methoden umfassen Erfassungstools, Connectors und Plug-Ins für verschiedene Dienste, verwaltete Pipelines, die programmgesteuerte Erfassung mithilfe von SDKs und Direktzugriff auf die Erfassung.
 
-* Logstash-Plug-In, siehe [Erfassen von Daten aus Logstash in Azure Data Explorer](ingest-data-logstash.md).
+### <a name="ingestion-using-managed-pipelines"></a>Erfassung mit verwalteten Pipelines
 
-* Kafka-Connector, siehe [Erfassen von Daten aus Kafka in Azure Data Explorer](ingest-data-kafka.md).
+Für Organisationen, die eine Verwaltung (Drosselung, Wiederholungen, Überwachungen, Warnungen usw.) über einen externen Dienst durchführen möchten, stellt die Verwendung eines Connectors wahrscheinlich die geeignetste Lösung dar. Die Erfassung in der Warteschlange eignet sich für große Datenmengen. Azure Data Explorer unterstützt die folgenden Azure Pipelines:
 
-### <a name="ingestion-using-integration-services"></a>Erfassung mit Integrationsdiensten
+* **[Event Grid:](https://azure.microsoft.com/services/event-grid/)** Eine Pipeline, die auf Azure Storage lauscht und Azure Data Explorer aktualisiert, um Informationen zu pullen, wenn abonnierte Ereignisse auftreten. Weitere Informationen finden Sie unter [Erfassen von Azure-Blobs in Azure Data Explorer](ingest-data-event-grid.md).
 
-* Azure Data Factory (ADF) ist ein vollständig verwalteter Datenintegrationsdienst für Analyseworkloads in Azure, mit dem mithilfe [unterstützter Datenspeicher und -formate](/azure/data-factory/copy-activity-overview#supported-data-stores-and-formats) Daten in und aus Azure Data Explorer kopiert werden können. Weitere Informationen finden Sie unter [Copy data to Azure Data Explorer using Azure Data Factory (Kopieren von Daten aus Azure Data Factory in Azure Data Explorer)](data-factory-load-data.md).
+* **[Event Hub:](https://azure.microsoft.com/services/event-hubs/)** Eine Pipeline, die Ereignisse von Diensten an Azure Data Explorer überträgt. Weitere Informationen finden Sie unter [Erfassen von Daten aus Event Hub in Azure Data Explorer](ingest-data-event-hub.md).
 
-### <a name="programmatic-ingestion"></a>Programmgesteuerte Erfassung
+* **[IoT Hub](https://azure.microsoft.com/services/iot-hub/)** : Eine Pipeline, die für die Übertragung von Daten von unterstützten IoT-Geräten an Azure Data Explorer verwendet wird. Weitere Informationen finden Sie unter [Erfassen von IoT Hub](ingest-data-iot-hub.md).
+
+### <a name="ingestion-using-connectors-and-plugins"></a>Erfassung mit Konnektoren und Plug-Ins
+
+* **Logstash-Plug-In**, siehe [Erfassen von Daten aus Logstash in Azure Data Explorer](ingest-data-logstash.md).
+
+* **Kafka-Connector**, siehe [Erfassen von Daten aus Kafka in Azure Data Explorer](ingest-data-kafka.md).
+
+* **[Power Automate:](https://flow.microsoft.com/)** Eine automatisierte Workflow-Pipeline zu Azure Data Explorer. Mit Power Automate können Sie eine Abfrage ausführen und vordefinierte Aktionen ausführen, für die Sie die Abfrageergebnisse als Trigger verwenden. Weitere Informationen finden Sie unter [Azure Data Explorer-Connector für Power Automate (Vorschauversion)](flow.md).
+
+* **Apache Spark-Connector:**  Ein Open-Source-Projekt, das in jedem Spark-Cluster ausgeführt werden kann. Er implementiert Datenquellen und Datensenken zum Verschieben von Daten zwischen Azure Data Explorer und Spark-Clustern. Sie können damit schnelle und skalierbare Anwendungen für datengesteuerte Szenarien erstellen. Weitere Informationen finden Sie unter [Azure Data Explorer-Connector für Apache Spark](spark-connector.md).
+
+### <a name="programmatic-ingestion-using-sdks"></a>Programmgesteuerte Erfassung mit SDKs
 
 Azure-Daten-Explorer bietet SDKs, die für Abfragen und die Datenerfassung verwendet werden können. Die programmgesteuerte Erfassung ist dafür optimiert, die Erfassungskosten (COGs) zu senken, indem Speichertransaktionen während und nach dem Erfassungsprozess minimiert werden.
 
-**Verfügbare SDKs und Open-Source-Projekte**:
-
-Kusto bietet Client SDKs, die zum Erfassen und Abfragen von Daten mit folgenden Programmen genutzt werden können:
+**Verfügbare SDKs und Open-Source-Projekte**
 
 * [Python SDK](kusto/api/python/kusto-python-client-library.md)
 
@@ -72,89 +81,84 @@ Kusto bietet Client SDKs, die zum Erfassen und Abfragen von Daten mit folgenden 
 
 * [REST-API](kusto/api/netfx/kusto-ingest-client-rest.md)
 
-**Techniken der programmgesteuerten Erfassung**:
+* [GO-API](kusto/api/golang/kusto-golang-client-library.md)
 
-* Erfassen von Daten über den Datenverwaltungsdienst von Azure-Daten-Explorer (hoher Durchsatz und zuverlässige Erfassung):
+### <a name="tools"></a>Tools
 
-    [**Batch-Erfassung**](kusto/api/netfx/kusto-ingest-queued-ingest-sample.md) (bereitgestellt vom SDK): Der Client lädt die Daten auf den Azure Blob Storage hoch (der vom Datenverwaltungsdienst des Azure-Daten-Explorers angegeben wird) und sendet eine Benachrichtigung an eine Azure-Warteschlange. Batch-Erfassung ist die empfohlene Technik für die hochvolumige, zuverlässige und kostengünstige Datenerfassung.
+* **Azure Data Factory (ADF):** Ein vollständig verwalteter Datenintegrationsdienst für analytische Workloads in Azure. Azure Data Factory stellt eine Verbindung mit über 90 unterstützten Quellen her, um eine effiziente und resiliente Datenübertragung zu ermöglichen. ADF führt die Vorbereitung, Transformation und Anreicherung der Daten durch, um Erkenntnisse zu erhalten, die auf unterschiedliche Art und Weise überwacht werden können. Dieser Dienst kann als einmalige Lösung verwendet, periodisch ausgeführt oder durch bestimmte Ereignisse ausgelöst werden. 
+  * [Integrieren von Azure Data Explorer und Azure Data Factory](data-factory-integration.md)
+  * [Kopieren von Daten aus unterstützten Quellen in Azure Data Explorer mithilfe von Azure Data Factory](/azure/data-explorer/data-factory-load-data)
+  * [Massenkopieren aus einer Datenbank in Azure Data Explorer mithilfe der Azure Data Factory-Vorlage](data-factory-template.md)
+  * [Verwenden der Azure Data Factory-Befehlsaktivität zum Ausführen von Azure Data Explorer-Steuerungsbefehlen](data-factory-command-activity.md)
 
-* Erfassen von Daten direkt in die Azure-Daten-Explorer-Engine (am besten geeignet für Untersuchungen und Prototyping):
+* **[1-Klick-Erfassung:](ingest-data-one-click.md)** Ermöglicht das schnelle Erfassen von Daten durch Erstellen und Anpassen von Tabellen aus einer breiten Palette von Quelltypen. Bei der 1-Klick-Erfassung werden basierend auf der Datenquelle in Azure Data Explorer automatisch Tabellen und Zuordnungsstrukturen vorschlagen. Sie können die 1-Klick-Erfassung für die einmalige Erfassung verwenden oder zum Definieren einer kontinuierlichen Erfassung über Event Grid in dem Container, in dem die Daten erfasst wurden.
 
-  * **Inline-Erfassung**: Der Steuerbefehl (.ingest inline) mit In-Band-Daten ist für Ad-hoc-Tests vorgesehen.
+* **[LightIngest:](lightingest.md)** Ein Befehlszeilen-Hilfsprogramm für die Ad-hoc-Datenerfassung in Azure Data Explorer. Das Hilfsprogramm kann Quelldaten aus einem lokalen Ordner oder aus einem Azure Blob Storage-Container abrufen.
 
-  * **Erfassen aus der Abfrage**: Der Steuerbefehl (.set,.set,.set-or-append,.set-or-replace), der auf Abfrageergebnisse verweist, wird zum Erzeugen von Berichten oder kleinen temporären Tabellen verwendet.
+### <a name="kusto-query-language-ingest-control-commands"></a>Befehle zur Steuerung der Erfassung in der Kusto-Abfragesprache
 
-  * **Erfassen aus dem Speicher**:Der Steuerbefehl (.ingest in) mit extern gespeicherten Daten (beispielsweise Azure Blob Storage) ermöglicht eine effiziente Sammelerfassung von Daten.
+Es gibt eine Reihe von Methoden, mit denen Daten mithilfe von KQL-Befehlen (Kusto Query Language) direkt in der Engine erfasst werden können. Da diese Methode die Datenverwaltungsdienste umgeht, eignet sie sich nur für die Erkundung und Prototyperstellung. Verwenden Sie diese Methode nicht in Produktionsszenarien oder Szenarien mit hohem Volumen.
 
-**Latenz der verschiedenen Methoden**:
+  * **Inlineerfassung:**  An die Engine wird ein Steuerungsbefehl ([.ingest inline](kusto/management/data-ingestion/ingest-inline.md)) gesendet, und die zu erfassenden Daten werden direkt im Befehlstext angegeben. Diese Methode ist für improvisierte Testzwecke vorgesehen.
 
-| Methode | Latency |
-| --- | --- |
-| **Inline-Erfassung** | Unmittelbar |
-| **Erfassen aus der Abfrage** | Abfragezeit + Verarbeitungszeit |
-| **Erfassung aus dem Speicher** | Downloadzeit + Verarbeitungszeit |
-| **Erfassen aus der Warteschlange** | Batchverarbeitungszeit + Verarbeitungszeit |
-| |
+  * **Erfassung aus einer Abfrage:** An die Engine wird ein Steuerungsbefehl ([„.set“, „.append“, „.set-or-append“ oder „.set-or-replace“](kusto/management/data-ingestion/ingest-from-query.md)) gesendet, und die Daten werden indirekt als die Ergebnisse einer Abfrage oder eines Befehls angegeben.
 
-Verarbeitungszeit hängt von der Größe der Daten ab – weniger als einige Sekunden. Die Batchverarbeitungszeit beträgt standardmäßig fünf Minuten.
+  * **Erfassung aus dem Speicher (Pull):** An die Engine wird ein Steuerungsbefehl ([.ingest into](kusto/management/data-ingestion/ingest-from-storage.md)) gesendet, und die Daten sind in einem externen Speicher (beispielsweise in Azure Blob Storage) gespeichert, auf den die Engine zugreifen kann und auf den durch den Befehl verwiesen wird.
 
-## <a name="choosing-the-most-appropriate-ingestion-method"></a>Auswählen der optimalen Erfassungsmethode
+## <a name="comparing-ingestion-methods-and-tools"></a>Vergleich der Erfassungsmethoden und -tools
 
-Bevor Sie mit der Datenerfassung beginnen, sollten Sie sich folgende Fragen stellen.
+| Erfassungsname | Datentyp | Maximale Dateigröße | Streaming, Batch, direkt | Häufige Szenarien | Überlegungen |
+| --- | --- | --- | --- | --- | --- |
+| [**1-Klick-Erfassung**](ingest-data-one-click.md) | *sv, JSON | 1 GB unkomprimiert (siehe Hinweis)| Batcherfassung in Container, lokale Datei und Blob bei direkter Erfassung | Einmalig, Tabellenschema erstellen, kontinuierliche Erfassung mit Event Grid definieren, Massenerfassung mit Container (bis zu 10.000 Blobs) | 10.000 Blobs werden nach dem Zufallsprinzip aus dem Container ausgewählt|
+| [**LightIngest**](lightingest.md) | Alle Formate unterstützt | 1 GB unkomprimiert (siehe Hinweis) | Batcherfassung über DM oder direkte Erfassung in Engine |  Datenmigration, Verlaufsdaten mit angepassten Erfassungszeitstempeln, Massenerfassung (keine Größenbeschränkung)| Beachtung von Groß-/Kleinschreibung, platzintensiv |
+| [**ADX Kafka**](ingest-data-kafka.md) | | | | |
+| [**ADX in Apache Spark**](spark-connector.md) | | | | |
+| [**LogStash**](ingest-data-logstash.md) | | | | |
+| [**Azure Data Factory**](kusto/tools/azure-data-factory.md) | [Unterstützte Datenformate](/azure/data-factory/copy-activity-overview#supported-data-stores-and-formats) | unbegrenzt *(nach ADF-Einschränkungen) | Batcherfassung oder mit ADF-Trigger | Unterstützt Formate, die in der Regel nicht unterstützt werden, große Dateien, kann von über 90 Quellen kopieren, von lokal in die Cloud | Zeit der Erfassung |
+|[ **Azure Data Flow**](kusto/tools/flow.md) | | | | Erfassungsbefehle als Teil des Flows| Erfordert Antwortzeit mit hoher Leistung |
+| [**IoT Hub**](kusto/management/data-ingestion/iothub.md) | [Unterstützte Datenformate](kusto/management/data-ingestion/iothub.md#data-format)  | – | Batcherfasung, Streaming | IoT-Nachrichten, IoT-Ereignisse, IoT-Eigenschaften | |
+| [**Event Hub**](kusto/management/data-ingestion/eventhub.md) | [Unterstützte Datenformate](kusto/management/data-ingestion/eventhub.md#data-format) | – | Batcherfasung, Streaming | Nachrichten, Ereignisse | |
+| [**Event Grid**](kusto/management/data-ingestion/eventgrid.md) | [Unterstützte Datenformate](kusto/management/data-ingestion/eventgrid.md#data-format) | 1 GB unkomprimiert | Batching | Kontinuierliche Erfassung aus Azure Storage, externe Daten in Azure Storage | 100 KB als optimale Dateigröße, für Blobumbenennung und -erstellung verwendet |
+| [**Net Std**](net-standard-ingest-data.md) | Alle Formate unterstützt | 1 GB unkomprimiert (siehe Hinweis) | Batcherfassung, Streaming, direkt | Schreiben von eigenem Code nach Anforderungen der Organisation |
+| [**Python**](python-ingest-data.md) | Alle Formate unterstützt | 1 GB unkomprimiert (siehe Hinweis) | Batcherfassung, Streaming, direkt | Schreiben von eigenem Code nach Anforderungen der Organisation |
+| [**Node.js**](node-ingest-data.md) | Alle Formate unterstützt | 1 GB unkomprimiert (siehe Hinweis) | Batcherfassung, Streaming, direkt | Schreiben von eigenem Code nach Anforderungen der Organisation |
+| [**Java**](kusto/api/java/kusto-java-client-library.md) | Alle Formate unterstützt | 1 GB unkomprimiert (siehe Hinweis) | Batcherfassung, Streaming, direkt | Schreiben von eigenem Code nach Anforderungen der Organisation |
+| [**REST**](kusto/api/netfx/kusto-ingest-client-rest.md) | Alle Formate unterstützt | 1 GB unkomprimiert (siehe Hinweis) | Batcherfassung, Streaming, direkt| Schreiben von eigenem Code nach Anforderungen der Organisation |
+| [**Go**](kusto/api/golang/kusto-golang-client-library.md) | Alle Formate unterstützt | 1 GB unkomprimiert (siehe Hinweis) | Batcherfassung, Streaming, direkt | Schreiben von eigenem Code nach Anforderungen der Organisation |
 
-* Wo befinden sich meine Daten? 
-* In welchem Format liegen die Daten vor und kann das geändert werden? 
-* Welche Felder müssen abgefragt werden? 
-* Wie hoch ist die erwartete Datenmenge und die Geschwindigkeit? 
-* Wie viele Ereignistypen werden erwartet (entsprechend der Anzahl von Tabellen)? 
-* Wie oft wird eine Änderung des Ereignisschemas erwartet? 
-* Wie viele Knoten werden die Daten generieren? 
-* Welches Quell-BS wird verwendet? 
-* Wie lauten die Latenzanforderungen? 
-* Kann eine der vorhandenen verwalteten Erfassungspipelines verwendet werden? 
+> [!Note] 
+> Wenn in der obigen Tabelle darauf verwiesen wird, unterstützt die Erfassung eine maximale Dateigröße von 5 GB. Es wird empfohlen, Dateien zwischen 100 MB und 1 GB zu erfassen.
 
-Für Organisationen mit einer vorhandenen Infrastruktur, die auf einem Messagingdienst wie Event Hub und IoT Hub basieren, ist die Verwendung eines Connectors wahrscheinlich die am besten geeignete Lösung. Die Erfassung in der Warteschlange eignet sich für große Datenmengen.
+## <a name="ingestion-process"></a>Erfassungsprozess
 
-## <a name="supported-data-formats"></a>Unterstützte Datenformate
+Nachdem Sie die am besten geeignete Erfassungsmethode für Ihre Anforderungen ausgewählt haben, führen Sie die folgenden Schritte aus:
 
-Formatieren Sie die Daten für alle Erfassungsmethoden außer Erfassen aus der Abfrage so, dass sie von Azure Data Explorer analysiert werden können. 
-* Die folgenden Datenformate werden unterstützt: TXT, CSV, TSV, TSVE, PSV, SCSV, SOH, JSON (getrennte Zeilen, mehrzeilig), Avro, Orc und Parquet. 
-* Unterstützt ZIP- und GZIP-Komprimierung.
+1. **Festlegen der Aufbewahrungsrichtlinie**
 
-> [!NOTE]
-> Beim Erfassen von Daten werden Datentypen aus den Spalten der Zieltabelle abgeleitet. Wenn ein Datensatz unvollständig ist oder ein Feld nicht als erforderlicher Datentyp analysiert werden kann, werden die entsprechenden Tabellenspalten mit Nullwerten gefüllt.
+    Für Daten, die in einer Tabelle in Azure Data Explorer erfasst werden, gilt die effektive Aufbewahrungsrichtlinie der Tabelle. Wurde für eine Tabelle nicht explizit eine effektive Aufbewahrungsrichtlinie festgelegt, wird sie von der Aufbewahrungsrichtlinie der Datenbank abgeleitet. Die heiße Speicherebene für die Aufbewahrung ist eine Funktion aus der Clustergröße und Ihrer Aufbewahrungsrichtlinie. Wenn Sie mehr Daten erfassen, als Speicherplatz verfügbar ist, werden die zuerst erfassten Daten in die kalte Aufbewahrung überführt.
+    
+    Stellen Sie sicher, dass die Aufbewahrungsrichtlinie der Datenbank Ihren Anforderungen entspricht. Ist dies nicht der Fall, überschreiben Sie sie explizit auf Tabellenebene. Weitere Informationen finden Sie unter [Aufbewahrungsrichtlinie](kusto/management/retentionpolicy.md). 
+    
+1. **Erstellen einer Tabelle**
 
-## <a name="ingestion-recommendations-and-limitations"></a>Erfassungsempfehlungen und -einschränkungen
+    Um Daten zu erfassen, muss vorab eine Tabelle erstellt werden. Nutzen Sie eine der folgenden Optionen:
+   * Erstellen einer Tabelle [mit einem Befehl](kusto/management/create-table-command.md) 
+   * Erstellen einer Tabelle mit der [1-Klick-Erfassung](one-click-ingestion-new-table.md)
 
-* Die effektive Aufbewahrungsrichtlinie der erfassten Daten wird von der Aufbewahrungsrichtlinie der Datenbank abgeleitet. Weitere Informationen finden Sie in [Aufbewahrungsrichtlinie](kusto/management/retentionpolicy.md). Für das Erfassen von Daten sind Berechtigungen für einen **Tabelleningestor** oder einen **Datenbankingestor** erforderlich.
-* Erfassung unterstützt eine maximale Dateigröße von 5 GB. Es wird empfohlen, Dateien zwischen 100 MB und 1 GB zu erfassen.
+    > [!Note]
+    > Wenn ein Datensatz unvollständig ist oder ein Feld nicht als erforderlicher Datentyp analysiert werden kann, werden die entsprechenden Tabellenspalten mit Nullwerten gefüllt.
 
-## <a name="schema-mapping"></a>Schemazuordnung
+1. **Erstellen einer Schemazuordnung**
 
-Die Schemazuordnung hilft dabei, Quelldatenfelder an Spalten der Zieltabelle zu binden.
+    Die [Schemazuordnung](kusto/management/mappings.md) hilft dabei, Quelldatenfelder an Spalten der Zieltabelle zu binden. Die Zuordnung ermöglicht Ihnen, Daten aus verschiedenen Quellen basierend auf den definierten Attributen in dieselbe Tabelle zu übernehmen. Es werden unterschiedliche Zuordnungstypen unterstützt – sowohl zeilenorientiert (CSV, JSON und Avro) als auch spaltenorientiert (Parquet). Bei den meisten Methoden können Zuordnungen auch [vorab in der Tabelle erstellt](kusto/management/create-ingestion-mapping-command.md) und vom Erfassungsbefehlsparameter referenziert werden.
 
-* [CSV-Zuordnung](kusto/management/mappings.md#csv-mapping) (optional) funktioniert mit allen ordinalbasierten Formaten. Sie kann über den Erfassungsbefehlsparameter vorgenommen oder [in der Tabelle vorab erstellt](kusto/management/create-ingestion-mapping-command.md) und vom Erfassungsbefehlsparameter referenziert werden.
-* Die [JSON-Zuordnung](kusto/management/mappings.md#json-mapping) (obligatorisch) und die [Avro-Zuordnung](kusto/management/mappings.md#avro-mapping) (obligatorisch) können mit dem Erfassungsbefehlsparameter durchgeführt werden. Diese Vorgänge können auch [in der Tabelle vorab erstellt](kusto/management/create-ingestion-mapping-command.md) und vom Erfassungsbefehlsparameter referenziert werden.
+1. **Einrichten einer Updaterichtlinie** (optional)
+
+   Einige der Datenformatzuordnungen (Parquet, JSON und Avro) unterstützen einfache und nützliche Transformationen während der Erfassung. Wenn für das Szenario eine komplexere Verarbeitung zur Erfassungszeit erforderlich ist, verwenden Sie eine Updaterichtlinie, die eine einfache Verarbeitung mithilfe von Befehlen der Kusto-Abfragesprache ermöglicht. Die Updaterichtlinie führt automatisch Extraktionen und Transformationen der erfassten Daten in der ursprünglichen Tabelle aus und erfasst die resultierenden Daten in einer oder mehreren Zieltabellen. Legen Sie Ihre [Updaterichtlinie](kusto/management/update-policy.md) fest.
+
+
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-> [!div class="nextstepaction"]
-> [Erfassen von Daten aus Event Hub in Azure Data Explorer](ingest-data-event-hub.md)
-
-> [!div class="nextstepaction"]
-> [Erfassen von Azure-Blobs in Azure Data Explorer durch Abonnieren von Event Grid-Benachrichtigungen](ingest-data-event-grid.md)
-
-> [!div class="nextstepaction"]
-> [Erfassen von Daten aus Kafka in Azure Data Explorer](ingest-data-kafka.md)
-
-> [!div class="nextstepaction"]
-> [Erfassen von Daten mit der Azure Data Explorer-Bibliothek für Python](python-ingest-data.md)
-
-> [!div class="nextstepaction"]
-> [Erfassen von Daten mit der Azure Data Explorer-Bibliothek für Node](node-ingest-data.md)
-
-> [!div class="nextstepaction"]
-> [Erfassen von Daten mit dem .NET Standard SDK für Azure Data Explorer (Vorschauversion)](net-standard-ingest-data.md)
-
-> [!div class="nextstepaction"]
-> [Erfassen von Daten aus Logstash in Azure Data Explorer](ingest-data-logstash.md)
+* [Unterstützte Datenformate](ingestion-supported-formats.md)
+* [Unterstützte Erfassungseigenschaften](ingestion-properties.md)

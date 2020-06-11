@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/07/2019
-ms.openlocfilehash: 7b43218d3d1894341ce997f4cfddcc3abbf1e39c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 4490310664a7c27a319ce758a63b1dc90be8bef0
+ms.sourcegitcommit: 3cdb365c0174e517fb5cb16784da278ceb801b23
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493558"
+ms.lasthandoff: 05/29/2020
+ms.locfileid: "84214412"
 ---
 # <a name="write-queries-for-azure-data-explorer"></a>Schreiben von Abfragen für den Azure-Daten-Explorer
 
@@ -31,7 +31,7 @@ Sie können die Abfragen in diesem Artikel auf zwei Arten ausführen:
 
 ## <a name="overview-of-the-query-language"></a>Übersicht der Abfragesprache
 
-Eine Abfrage in Azure-Daten-Explorer ist eine schreibgeschützte Anforderung, Daten zu verarbeiten und Ergebnisse zurückzugeben. Die Anforderung wird in unformatiertem Text formuliert, wobei ein Datenflussmodell verwendet wird, das darauf ausgelegt ist, die Lesbarkeit, das Verfassen und die Automatisierung der Syntax zu vereinfachen. Die Abfrage verwendet Schemaentitäten, die in einer SQL-ähnlichen Hierarchie organisiert sind: Datenbanken, Tabellen und Spalten.
+Eine Abfrage in Azure Data Explorer ist eine schreibgeschützte Anforderung, Daten zu verarbeiten und Ergebnisse zurückzugeben. Die Anforderung wird in unformatiertem Text formuliert, wobei ein Datenflussmodell verwendet wird, das darauf ausgelegt ist, die Lesbarkeit, das Verfassen und die Automatisierung der Syntax zu vereinfachen. Die Abfrage verwendet Schemaentitäten, die in einer SQL-ähnlichen Hierarchie organisiert sind: Datenbanken, Tabellen und Spalten.
 
 Die Abfrage besteht aus einer Abfolge von Abfrageanweisungen, getrennt durch ein Semikolon (`;`), mit mindestens einer tabellarischen Ausdrucksanweisung, bei der es sich um eine Anweisung handelt, die Daten in einem tabellenähnlichen Raster aus Spalten und Zeilen erzeugt. Die tabellarischen Ausdrucksanweisungen der Abfrage erzeugen die Ergebnisse der Abfrage.
 

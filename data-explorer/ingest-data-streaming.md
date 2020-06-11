@@ -7,18 +7,18 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/30/2019
-ms.openlocfilehash: c0373d2e380f1a9fb826d0e40ffcc0284f6db09a
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 4bbb076b4c21ac2f93b2bdaf775d513483332934
+ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373782"
+ms.lasthandoff: 06/01/2020
+ms.locfileid: "84257959"
 ---
 # <a name="streaming-ingestion-preview"></a>Streamingerfassung (Vorschauversion)
 
 Verwenden Sie die Streamingerfassung, wenn Sie eine geringe Wartezeit mit einer Erfassungsdauer von weniger als zehn Sekunden für Daten mit unterschiedlichem Volumen benötigen. Sie dient zur Optimierung der operativen Verarbeitung vieler Tabellen in einer oder mehreren Datenbanken, bei denen der Datenstrom für die einzelnen Tabellen jeweils relativ klein (wenige Datensätze pro Sekunde), das Gesamtvolumen der Datenerfassung aber hoch ist (mehrere tausend Datensätze pro Sekunde). 
 
-Sollte die Datenmenge mehr als 1 MB pro Sekunde und Tabelle betragen, verwenden Sie anstelle der Streamingerfassung die Massenerfassung. Weitere Informationen zu den verschiedenen Erfassungsmethoden finden Sie in der [Übersicht über die Datenerfassung](ingest-data-overview.md).
+Sollte die Datenmenge mehr als 4 GB pro Stunde und Tabelle betragen, verwenden Sie anstelle der Streamingerfassung die Sammelerfassung. Weitere Informationen zu den verschiedenen Erfassungsmethoden finden Sie in der [Übersicht über die Datenerfassung](ingest-data-overview.md).
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -47,9 +47,8 @@ Sollte die Datenmenge mehr als 1 MB pro Sekunde und Tabelle betragen, verwenden
 
 Es werden zwei Streamingerfassungstypen unterstützt:
 
-
-* [**Event Hub**](ingest-data-event-hub.md) (wird als Datenquelle verwendet)
-* Für die **benutzerdefinierte Erfassung** muss eine Anwendung geschrieben werden, die eine der Azure Data Explorer-Clientbibliotheken verwendet. Eine Beispielanwendung finden Sie [hier](https://github.com/Azure/azure-kusto-samples-dotnet/tree/master/client/StreamingIngestionSample).
+* [**Event Hub**](ingest-data-event-hub.md) (wird als Datenquelle verwendet).
+* Für die **benutzerdefinierte Erfassung** muss eine Anwendung geschrieben werden, die eine der [Clientbibliotheken](kusto/api/client-libraries.md) von Azure Data Explorer verwendet. Eine Beispielanwendung finden Sie [hier](https://github.com/Azure/azure-kusto-samples-dotnet/tree/master/client/StreamingIngestionSample).
 
 ### <a name="choose-the-appropriate-streaming-ingestion-type"></a>Auswählen des geeigneten Streamingerfassungstyps
 
@@ -64,7 +63,7 @@ Es werden zwei Streamingerfassungstypen unterstützt:
 > Die Deaktivierung der Streamingerfassung kann mehrere Stunden dauern.
 
 1. Entfernen Sie die [Streamingerfassungsrichtlinie](kusto/management/streamingingestionpolicy.md) aus allen relevanten Tabellen und Datenbanken. Wenn Sie die Streamingerfassungsrichtlinie entfernen, werden die Streamingerfassungsdaten aus dem anfänglichen Speicher in den permanenten Speicher im Spaltenspeicher (Erweiterungen oder Shards) verschoben. Die Datenverschiebung kann zwischen einigen Sekunden und mehreren Stunden dauern. Dies ist abhängig von der Datenmenge im anfänglichen Speicher sowie davon, wie die CPU und der Arbeitsspeicher vom Cluster genutzt werden.
-1. Navigieren Sie im Azure-Portal zum Azure Data Explorer-Cluster. Wählen Sie unter **Einstellungen** die Option **Konfigurationen** aus. 
+1. Navigieren Sie im Azure-Portal zum Azure Data Explorer-Cluster. Wählen Sie unter **Einstellungen** die Option **Konfigurationen** aus.
 1. Wählen Sie im Bereich **Konfigurationen** die Option **Off** aus, um die **Streamingerfassung** zu aktivieren.
 1. Wählen Sie **Speichern** aus.
 
@@ -72,10 +71,11 @@ Es werden zwei Streamingerfassungstypen unterstützt:
 
 ## <a name="limitations"></a>Einschränkungen
 
-* [Datenbankcursor](kusto/management/databasecursor.md) und [Datenzuordnung](kusto/management/mappings.md) werden von der Streamingerfassung nicht unterstützt. Es wird nur die [vorab erstellte](kusto/management/create-ingestion-mapping-command.md) Datenzuordnung unterstützt. 
-* Leistung und Kapazität der Streamingerfassung werden für größere virtuelle Computer und Cluster skaliert. Gleichzeitige Erfassungen sind auf sechs Erfassungen pro Kern beschränkt. Beispielsweise besteht die maximale unterstützte Last bei 16-Kern-SKUs (z.B. D14 und L16) aus 96 gleichzeitigen Erfassungen. Bei 2-Kern-SKUs (z. B. D11) besteht die maximale unterstützte Last aus 12 gleichzeitigen Erfassungen.
-* Die Datengröße pro Erfassungsanforderung ist auf 4 MB beschränkt.
-* Schemaaktualisierungen wie etwa die Erstellung und Änderung von Tabellen und Erfassungszuordnungen können für den Streamingerfassungsdienst bis zu fünf Minuten dauern.
+* [Datenbankcursor](kusto/management/databasecursor.md) werden für die Datenbank nicht unterstützt, wenn für diese selbst oder für eine Ihrer Tabellen eine [Richtlinie für die Streamingerfassung](kusto/management/streamingingestionpolicy.md) definiert und aktiviert wurde.
+* Die [Datenzuordnung](kusto/management/mappings.md) muss [vorab erstellt](kusto/management/create-ingestion-mapping-command.md) werden, damit sie bei der Streamingerfassung verwendet werden kann. Individuelle Anforderungen zur Streamingerfassung bieten keine Inlinedatenzuordnungen.
+* Leistung und Kapazität der Streamingerfassung werden für größere virtuelle Computer und Cluster skaliert. Die Anzahl der gleichzeitigen Erfassungsanforderungen ist auf sechs pro Kern beschränkt. Beispielsweise besteht die maximale unterstützte Last bei SKUs mit 16 Kernen (z. B. D14 und L16) aus 96 gleichzeitigen Erfassungsanforderungen. Bei SKUs mit 2 Kernen (z. B. D11) werden als maximale Last 12 gleichzeitige Erfassungsanfragen unterstützt.
+* Die Datengröße für Anforderungen zur Streamingerfassung ist auf 4 MB beschränkt.
+* Es kann bis zu fünf Minuten dauern, bis Schemaaktualisierungen für den Streamingerfassungsdienst verfügbar werden. Beispiele für diese Aktualisierungen sind das Erstellen und Ändern von Tabellen und Erfassungszuordnungen. 
 * Wenn die Streamingerfassung in einem Cluster aktiviert wird, wird ein Teil des lokalen SSD-Datenträgers der Clustercomputer für Streamingerfassungsdaten genutzt, wodurch sich der verfügbare Speicherplatz für den aktiven Cache verringert. Dies gilt auch, wenn gar keine Daten per Streaming erfasst werden.
 * [Erweiterungstags](kusto/management/extents-overview.md#extent-tagging) können für die Streamingerfassungsdaten nicht festgelegt werden.
 
