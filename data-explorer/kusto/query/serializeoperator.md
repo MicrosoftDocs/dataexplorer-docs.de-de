@@ -1,6 +1,6 @@
 ---
-title: Serialisierungsoperator - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird der Serialisierungsoperator in Azure Data Explorer beschrieben.
+title: 'Serialisieren-Operator: Azure Daten-Explorer'
+description: In diesem Artikel wird der serialisierungsoperator in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5402d1e1fcceb42f02643bf24918ed07beddaed7
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 708a5ccd5f8402dedb074a6ab8c17b1d7762839c
+ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81509111"
+ms.lasthandoff: 06/11/2020
+ms.locfileid: "84717120"
 ---
 # <a name="serialize-operator"></a>serialize-Operator
 
-Markiert, dass die Reihenfolge des Eingabezeilensatzes für die Verwendung von Fensterfunktionen sicher ist.
+Markiert, dass die Reihenfolge des Eingabezeilen Satzes sicher für Fenster Funktionen verwendet werden kann.
 
-Der Operator hat eine deklarative Bedeutung und markiert den Eingabezeilensatz als serialisiert (geordnet), sodass [Fensterfunktionen](./windowsfunctions.md) darauf angewendet werden können.
+Der Operator hat eine deklarative Bedeutung. Dadurch wird der Eingabezeilen Satz als serialisiert (geordnet) markiert, sodass [Fenster Funktionen](./windowsfunctions.md) darauf angewendet werden können.
 
 ```kusto
 T | serialize rn=row_number()
@@ -27,9 +27,9 @@ T | serialize rn=row_number()
 
 **Syntax**
 
-`serialize`[*Name1* `=` *Expr1* [`,` *Name2* `=` *Expr2*]...]
+`serialize`[*Name1* `=` *Expr1* [ `,` *name2* `=` *expr2*]...]
 
-* Die *Name*/*Expr-Paare* ähneln denen im [Extend-Operator](./extendoperator.md).
+* Die *Name*- / *expr* -Paare ähneln diesen Paaren im Erweiterungs [Operator](./extendoperator.md).
 
 **Beispiel**
 
@@ -43,12 +43,12 @@ Traces
 | serialize rn = row_number()
 ```
 
-Der Ausgabezeilensatz der folgenden Operatoren wird als serialisiert markiert:
+Der Ausgabezeilen Satz der folgenden Operatoren ist als serialisiert markiert.
 
-[bereich](./rangeoperator.md), [sortieren](./sortoperator.md), [bestellen](./orderoperator.md), [top](./topoperator.md), [top-hitters](./tophittersoperator.md), [getschema](./getschemaoperator.md).
+[Range](./rangeoperator.md), [Sort](./sortoperator.md), [Order](./orderoperator.md), [Top](./topoperator.md), [Top-Hitters](./tophittersoperator.md), [GetSchema](./getschemaoperator.md).
 
-Der Ausgabezeilensatz der folgenden Operatoren ist als nicht serialisiert gekennzeichnet:
+Der Ausgabezeilen Satz der folgenden Operatoren ist als nicht serialisiert markiert.
 
-[Beispiel](./sampleoperator.md), [Sample-distinct](./sampledistinctoperator.md), [distinct](./distinctoperator.md), [join](./joinoperator.md), [top-nested](./topnestedoperator.md), [count](./countoperator.md), [summarize](./summarizeoperator.md), [facet](./facetoperator.md), [mv-expand](./mvexpandoperator.md), [evaluate](./evaluateoperator.md) [, reduce by](./reduceoperator.md), [make-series](./make-seriesoperator.md)
+[Sample](./sampleoperator.md), [Sample-verschieden](./sampledistinctoperator.md), [verschieden](./distinctoperator.md), [Join](./joinoperator.md), [Top-netsted](./topnestedoperator.md), [count](./countoperator.md), zusammen [fassen](./summarizeoperator.md), [Facetten](./facetoperator.md), [MV-Expand](./mvexpandoperator.md), [evaluieren](./evaluateoperator.md), [verringern nach](./reduceoperator.md), [make-Series](./make-seriesoperator.md)
 
-Alle anderen Operatoren behalten die Serialisierungseigenschaft bei (wenn der Eingabezeilensatz serialisiert wird, ebenso wie der Ausgabezeilensatz).
+Alle anderen Operatoren behalten die serialisierungseigenschaft bei. Wenn der Eingabezeilen Satz serialisiert wird, wird auch der Ausgabezeilen Satz serialisiert.

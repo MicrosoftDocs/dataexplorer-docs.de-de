@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 88160a55ba8342e3ed6bce90ec77c5a370ab7358
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 054d4be758001609fbc3100a4a6c8698ef8f69f6
+ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372471"
+ms.lasthandoff: 06/11/2020
+ms.locfileid: "84717307"
 ---
 # <a name="series_seasonal"></a>series_seasonal()
 
-Berechnet die Saison Komponente einer Reihe entsprechend der erkannten oder angegebenen saisonalen Zeitspanne.
+Berechnet die Saison Komponente einer Reihe entsprechend der erkannten oder gegebenen saisonalen Zeitspanne.
 
 **Syntax**
 
@@ -27,24 +27,19 @@ Berechnet die Saison Komponente einer Reihe entsprechend der erkannten oder ange
 
 * *Series*: Eingabe eines numerischen dynamischen Arrays
 * *Period* (optional): ganzzahlige Anzahl von Containern in jedem saisonalen Zeitraum, mögliche Werte:
-    *  -1 (Standard): Automatisches Erkennen des Zeitraums mithilfe von [series_periods_detect ()](series-periods-detectfunction.md) mit einem Schwellenwert von *0,7*. gibt Nullen zurück, wenn Saisonalität nicht erkannt wird.
-    * positive ganze Zahl: wird als Zeitraum für die Saison Komponente verwendet.
-    * beliebiger anderer Wert: Saisonalität ignorieren und eine Reihe von Nullen zurückgeben
+    *  -1 (Standard): erkennt den Zeitraum automatisch mithilfe von [series_periods_detect ()](series-periods-detectfunction.md) mit einem Schwellenwert von *0,7*. Gibt Nullen zurück, wenn Saisonalität nicht erkannt wird.
+    * Positive ganze Zahl: wird als Zeitraum für die Saison Komponente verwendet.
+    * Beliebiger anderer Wert: ignoriert Saisonalität und gibt eine Reihe von Nullen zurück.
 
 **Rückgabe**
 
-Dynamisches Array mit derselben Länge wie die *Reihen* Eingabe, die die berechnete Saison Komponente der Reihe enthält. Die Saison Komponente wird als Mittelwert aller Werte berechnet *, die dem* Speicherort des bin über die Zeiträume entsprechen.
+Dynamisches Array mit derselben Länge wie die *Reihen* Eingabe, die die berechnete Saison Komponente der Reihe enthält. Die Saison Komponente wird in den Zeiträume als *Median* aller Werte berechnet, die dem Speicherort der bin entsprechen.
 
-**Siehe auch:**
+## <a name="examples"></a>Beispiele
 
-* [series_periods_detect()](series-periods-detectfunction.md)
-* [series_periods_validate()](series-periods-validatefunction.md)
+### <a name="auto-detect-the-period"></a>Den Zeitraum automatisch erkennen
 
-**Beispiele**
-
-**1. erkennen Sie den Zeitraum automatisch.**
-
-Im folgenden Beispiel wird der Zeitraum der Reihe automatisch erkannt, der Zeitraum der ersten Reihe als 6 Container und die zweiten fünf Behälter, der Zeitraum der dritten Reihe ist zu kurz, um erkannt zu werden, und gibt eine Reihe von Nullen zurück (siehe das nächste Beispiel, wie Sie den Zeitraum erzwingen).
+Im folgenden Beispiel wird der Zeitraum der Reihe automatisch erkannt. Der Zeitraum der ersten Reihe wird als sechs und die zweiten fünf Behälter erkannt. Der Zeitraum der dritten Reihe ist zu kurz, um erkannt zu werden, und gibt eine Reihe von Nullen zurück. Weitere Informationen zum [Erzwingen des Zeitraums finden Sie](#force-a-period)im nächsten Beispiel.
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -60,11 +55,9 @@ print s=dynamic([2,5,3,4,3,2,1,2,3,4,3,2,1,2,3,4,3,2,1,2,3,4,3,2,1])
 |[8, 12, 14, 12, 10, 10, 12, 14, 12, 10, 10, 12, 14, 12, 10, 10, 12, 14, 12, 10]|[10.0, 12.0, 14,0, 12.0, 10.0, 10.0, 12.0, 14,0, 12.0, 10.0, 10.0, 12.0, 14,0, 12.0, 10.0, 10.0, 12.0, 14,0, 12.0, 10.0]|
 |[1, 3, 5, 2, 4, 6, 1, 3, 5, 2, 4, 6]|[0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0, 0,0]|
 
+### <a name="force-a-period"></a>Erzwingen eines Zeitraums
 
-
-**2. Erzwingen eines Zeitraums**
-
-Im folgenden Beispiel ist der Zeitraum der Reihe zu kurz, um von [series_periods_detect ()](series-periods-detectfunction.md) erkannt zu werden. daher erzwingen wir den Zeitraum explizit, um das saisonale Muster zu erhalten.
+In diesem Beispiel ist der Zeitraum der Reihe zu kurz, um von [series_periods_detect ()](series-periods-detectfunction.md)erkannt zu werden. daher erzwingen wir explizit den Zeitraum, um das saisonale Muster zu erhalten.
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -77,3 +70,8 @@ print s=dynamic([1,3,5,1,3,5,2,4,6])
 |---|---|
 |[1, 3, 5, 1, 3, 5, 2, 4, 6]|[1.0, 3.0, 5.0, 1.0, 3.0, 5.0, 1.0, 3.0, 5.0]|
 |[1, 3, 5, 2, 4, 6, 1, 3, 5, 2, 4, 6]|[1.5, 3,5, 5.5, 1.5, 3,5, 5.5, 1.5, 3,5, 5.5, 1.5, 3.5, 5.5]|
+ 
+## <a name="next-steps"></a>Nächste Schritte
+
+* [series_periods_detect()](series-periods-detectfunction.md)
+* [series_periods_validate()](series-periods-validatefunction.md)

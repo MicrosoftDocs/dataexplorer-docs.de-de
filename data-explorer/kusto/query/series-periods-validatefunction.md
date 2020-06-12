@@ -8,24 +8,24 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2019
-ms.openlocfilehash: b157c7fef0b9b4d98f08f5e5020803eea3960097
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 0e93383cf1c9ff11fdf4a14ebad5d83c0dfa7a74
+ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372487"
+ms.lasthandoff: 06/11/2020
+ms.locfileid: "84717409"
 ---
 # <a name="series_periods_validate"></a>series_periods_validate()
 
 Überprüft, ob eine Zeitreihe periodische Muster mit angegebenen Längen enthält.  
 
-Sehr häufig ist eine Metrik, die den Datenverkehr einer Anwendung misst, durch eine wöchentliche und/oder tägliche Zeitspanne gekennzeichnet. Dies kann bestätigt werden, indem Sie die `series_periods_validate()` Überprüfung wöchentlich und täglicher Zeiträume ausführen.
+Häufig ist eine Metrik, die den Datenverkehr einer Anwendung misst, durch einen wöchentlichen oder einen Tages Zeitraum gekennzeichnet. Dieser Zeitraum kann bestätigt werden, indem Sie Ausführen `series_periods_validate()` , der einen wöchentlichen und einen Tages Zeitraum prüft.
 
-Die Funktion nutzt als Eingabe eine Spalte, die ein dynamisches Array von Zeitreihen (in der Regel die resultierende Ausgabe des Operators " [make-Series](make-seriesoperator.md) ") enthält, und eine oder mehrere `real` Zahlen, die die Längen der zu validierenden Zeiträume definieren. 
+Die Funktion nutzt als Eingabe eine Spalte, die ein dynamisches Array von Zeitreihen (in der Regel die resultierende Ausgabe des Operators " [make-Series](make-seriesoperator.md) ") enthält, und eine oder mehrere Zahlen, die `real` die Längen der zu validierenden Zeiträume definieren.
 
-Die Funktion gibt 2 Spalten aus:
-* *Zeiträume*: ein dynamisches Array mit den zu validierenden Punkten (in der Eingabe angegeben)
-* *Bewertungen*: ein dynamisches Array, das eine Bewertung zwischen 0 und 1 enthält, mit der die Bedeutung eines Punkts an der jeweiligen Position im *Zeit* Array gemessen wird.
+Die Funktion gibt zwei Spalten aus:
+* *Zeiträume*: ein dynamisches Array, das die zu validierenden Zeiträume enthält (in der Eingabe angegeben).
+* *Bewertungen*: ein dynamisches Array, das eine Bewertung zwischen 0 und 1 enthält. Das Ergebnis zeigt die Bedeutung eines Zeitraums an der jeweiligen Position im *Zeit* Array.
 
 **Syntax**
 
@@ -34,19 +34,18 @@ Die Funktion gibt 2 Spalten aus:
 **Argumente**
 
 * *x*: Skalarausdruck des dynamischen Arrays, bei dem es sich um ein Array numerischer Werte handelt, in der Regel die resultierende Ausgabe der " [make-Series"-](make-seriesoperator.md) oder [make_list](makelist-aggfunction.md)
-* *period1*, *period2*usw.: `real` Zahlen, die die zu validierenden Zeiträume in Einheiten der bin-Größe angeben. Wenn sich die Reihe z. b. in 1-Stunden-Containern befindet, beträgt die wöchentliche Zeit 168 Behälter.
+* *period1*, *period2*usw.: Zahlen, `real` die die zu validierenden Zeiträume in Einheiten der bin-Größe angeben. Wenn sich die Reihe z. b. in 1-Stunden-Containern befindet, beträgt die wöchentliche Zeit 168 Behälter.
 
 > [!IMPORTANT]
-> * Der minimale Wert für jedes der *Period* -Argumente beträgt **4** , und der Höchstwert ist die Hälfte der Länge der Eingabe Reihe. bei einem *Period* -Argument außerhalb dieser Begrenzungen ist das Ausgabe Ergebnis **0**.
+> * Der minimale Wert für jedes der *Period* -Argumente beträgt **4** , und der Höchstwert ist die Hälfte der Länge der Eingabe Reihe. Bei einem *Period* -Argument außerhalb dieser Begrenzungen ist das Ausgabe Ergebnis **0**.
 >
-> * Die Eingabe Zeitreihe muss regulär sein, d. h., Sie wird in konstanten Containern aggregiert (was immer der Fall ist, wenn Sie mithilfe von [make-Series](make-seriesoperator.md)erstellt wurde). Andernfalls ist die Ausgabe bedeutungslos.
+> * Die Eingabe Zeitreihen muss regulär sein, d. h. in konstanten Containern aggregiert werden, und ist immer der Fall, wenn Sie mithilfe von [make-Series](make-seriesoperator.md)erstellt wurde. Andernfalls ist die Ausgabe bedeutungslos.
 > 
 > * Die-Funktion akzeptiert bis zu 16 Zeiträume für die Validierung.
 
-
 **Beispiel**
 
-Die folgende Abfrage bettet eine Momentaufnahme eines Monats für den Datenverkehr einer Anwendung ein, die zweimal pro Tag aggregiert wird (d. h. die Größe der Größe beträgt 12 Stunden).
+Die folgende Abfrage bettet eine Momentaufnahme eines Monats für den Datenverkehr einer Anwendung ein, die zweimal pro Tag aggregiert wird (die bin-Größe beträgt 12 Stunden).
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -57,7 +56,7 @@ print y=dynamic([80,139,87,110,68,54,50,51,53,133,86,141,97,156,94,149,95,140,77
 
 :::image type="content" source="images/series-periods/series-periods.png" alt-text="Reihen Zeiträume":::
 
-`series_periods_validate()`Das Ausführen von auf dieser Reihe zum Überprüfen eines wöchentlichen Zeitraums (14 Punkte) führt zu einer hohen Bewertung und mit einer Bewertung von **0** (null) bei der Überprüfung eines Zeitraums von fünf Tagen (10 Punkte).
+Wenn Sie `series_periods_validate()` Diese Serie ausführen, um einen wöchentlichen Zeitraum (14 Punkte) zu überprüfen, ergibt dies eine hohe Bewertung, bei der **eine** Bewertung von fünf Tagen (10 Punkte) durchgeführt wird.
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/20/2020
-ms.openlocfilehash: e81afc50c752ac1b673bcaac38a77c2712ce9ff4
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: a06bd3719fba4f9f61cf7b1c9501f96b17a48d58
+ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82619011"
+ms.lasthandoff: 06/11/2020
+ms.locfileid: "84717222"
 ---
 # <a name="summarize-operator"></a>summarize-Operator
 
@@ -33,12 +33,12 @@ Eine Tabelle, die zeigt, wie viele Elemente in jedem Intervall [0, 10,0][10,0, 2
 
 **Syntax**
 
-*T* `| summarize` [[*Spalte* `=`] *Aggregation* [`,` ...]] [`by` [*Column* `=`] *groupexpression* [`,` ...]]
+*T* `| summarize` [[*Column* `=` ] *Aggregation* [ `,` ...]] [ `by` [*Column* `=` ] *groupexpression* [ `,` ...]]
 
 **Argumente**
 
 * *Column:* Optionaler Name für eine Ergebnisspalte. Nimmt standardmäßig den vom Ausdruck abgeleiteten Namen an.
-* *Aggregation:* Ein Aufrufe einer [Aggregations Funktion](summarizeoperator.md#list-of-aggregation-functions) , z `count()` . `avg()`b. oder, mit Spaltennamen als Argumente. Weitere Informationen finden Sie [in der Liste der Aggregations Funktionen](summarizeoperator.md#list-of-aggregation-functions).
+* *Aggregation:* Ein Aufrufe einer [Aggregations Funktion](summarizeoperator.md#list-of-aggregation-functions) , z `count()` `avg()` . b. oder, mit Spaltennamen als Argumente. Weitere Informationen finden Sie [in der Liste der Aggregations Funktionen](summarizeoperator.md#list-of-aggregation-functions).
 * *GroupExpression:* Ein Ausdruck für die Spalten, der einen Satz von unterschiedlichen Werten bereitstellt. Normalerweise handelt es sich entweder um einen Spaltennamen, der bereits einen eingeschränkten Satz von Werten bereitstellt, oder um `bin()` mit einer numerischen Spalte oder Zeitspalte als Argument. 
 
 > [!NOTE]
@@ -51,7 +51,7 @@ Eine Tabelle, die zeigt, wie viele Elemente in jedem Intervall [0, 10,0][10,0, 2
 
 Die Eingabezeilen sind in Gruppen mit denselben Werten der `by` -Ausdrücke angeordnet. Anschließend werden die angegebenen Aggregationsfunktionen über jede Gruppe berechnet, dabei wird eine Zeile für jede Gruppe erzeugt. Das Ergebnis enthält die `by` -Spalten und auch mindestens eine Spalte für jedes berechnete Aggregat. (Einige Aggregationsfunktionen geben mehrere Spalten zurück.)
 
-Das Ergebnis verfügt über so viele Zeilen, wie es unterschiedliche `by` Kombinationen von Werten gibt (die NULL sein können). Wenn keine Gruppenschlüssel bereitgestellt werden, verfügt das Ergebnis über einen einzelnen Datensatz.
+Das Ergebnis verfügt über so viele Zeilen, wie es unterschiedliche Kombinationen von `by` Werten gibt (die NULL sein können). Wenn keine Gruppenschlüssel bereitgestellt werden, verfügt das Ergebnis über einen einzelnen Datensatz.
 
 Um Bereiche numerischer Werte zusammenzufassen, verwenden `bin()` Sie, um Bereiche auf diskrete Werte zu reduzieren.
 
@@ -69,9 +69,9 @@ Um Bereiche numerischer Werte zusammenzufassen, verwenden `bin()` Sie, um Bereic
 |[arg_min()](arg-min-aggfunction.md)|Gibt einen oder mehrere Ausdrücke zurück, wenn das Argument minimiert wird.|
 |[AVG ()](avg-aggfunction.md)|Gibt einen durchschnittlichen Wert in der Gruppe zurück.|
 |[avgif()](avgif-aggfunction.md)|Gibt einen durchschnittlichen Wert über die Gruppe zurück (mit Prädikat).|
-|[binary_all_and](binary-all-and-aggfunction.md)|Gibt den aggregierten Wert mithilfe der `AND` Binärdatei der Gruppe zurück.|
-|[binary_all_or](binary-all-or-aggfunction.md)|Gibt den aggregierten Wert mithilfe der `OR` Binärdatei der Gruppe zurück.|
-|[binary_all_xor](binary-all-xor-aggfunction.md)|Gibt den aggregierten Wert mithilfe der `XOR` Binärdatei der Gruppe zurück.|
+|[binary_all_and](binary-all-and-aggfunction.md)|Gibt den aggregierten Wert mithilfe der Binärdatei der Gruppe zurück. `AND`|
+|[binary_all_or](binary-all-or-aggfunction.md)|Gibt den aggregierten Wert mithilfe der Binärdatei der Gruppe zurück. `OR`|
+|[binary_all_xor](binary-all-xor-aggfunction.md)|Gibt den aggregierten Wert mithilfe der Binärdatei der Gruppe zurück. `XOR`|
 |[buildschema()](buildschema-aggfunction.md)|Gibt das minimale Schema zurück, das alle Werte der `dynamic` Eingabe zulässt.|
 |[count ()](count-aggfunction.md)|Gibt die Anzahl der Gruppe zurück.|
 |[countif()](countif-aggfunction.md)|Gibt eine Anzahl mit dem Prädikat der Gruppe zurück.|
@@ -82,7 +82,7 @@ Um Bereiche numerischer Werte zusammenzufassen, verwenden `bin()` Sie, um Bereic
 |[make_list()](makelist-aggfunction.md)|Gibt eine Liste aller Werte in der Gruppe zurück.|
 |[make_list_if()](makelistif-aggfunction.md)|Gibt eine Liste aller Werte in der Gruppe zurück (mit Prädikat).|
 |[make_list_with_nulls()](make-list-with-nulls-aggfunction.md)|Gibt eine Liste aller Werte in der Gruppe zurück, einschließlich NULL-Werten.|
-|[make_set()](makeset-aggfunction.md)|Gibt einen Satz unterschiedlicher Werte in der Gruppe zurück.|
+|[MAKE_SET ()](makeset-aggfunction.md)|Gibt einen Satz unterschiedlicher Werte in der Gruppe zurück.|
 |[make_set_if()](makesetif-aggfunction.md)|Gibt einen Satz unterschiedlicher Werte in der Gruppe zurück (mit Prädikat).|
 |[Max ()](max-aggfunction.md)|Gibt den maximalen Wert in der Gruppe zurück.|
 |[maxif()](maxif-aggfunction.md)|Gibt den maximalen Wert für die Gruppe (mit Prädikat) zurück.|
@@ -117,7 +117,7 @@ Operator       |Standardwert
 
 **Beispiel**
 
-Bestimmen Sie, welche eindeutigen `ActivityType` Kombi `CompletionStatus` Nationen von und in einer Tabelle vorhanden sind. Es gibt keine Aggregations Funktionen, sondern nur Gruppieren nach Schlüsseln. In der Ausgabe werden nur die Spalten für diese Ergebnisse angezeigt:
+Bestimmen Sie, welche eindeutigen Kombinationen von `ActivityType` und `CompletionStatus` in einer Tabelle vorhanden sind. Es gibt keine Aggregations Funktionen, sondern nur Gruppieren nach Schlüsseln. In der Ausgabe werden nur die Spalten für diese Ergebnisse angezeigt:
 
 ```kusto
 Activities | summarize by ActivityType, completionStatus
@@ -177,11 +177,10 @@ Activities | summarize count() by ActivityType, length=bin(Duration, 10m)
 
 Wenn die Eingabe des `summarize` Operators mindestens einen leeren Group-by-Schlüssel aufweist, ist das Ergebnis ebenfalls leer.
 
-Wenn die Eingabe des `summarize` Operators keinen leeren Group-by-Schlüssel hat, sind das Ergebnis die Standardwerte der Aggregate, die in verwendet `summarize`werden:
+Wenn die Eingabe des `summarize` Operators keinen leeren Group-by-Schlüssel hat, sind das Ergebnis die Standardwerte der Aggregate, die in verwendet werden `summarize` :
 
 ```kusto
-range x from 1 to 10 step 1
-| where 1 == 2
+datatable(x:long)[]
 | summarize any(x), arg_max(x, x), arg_min(x, x), avg(x), buildschema(todynamic(tostring(x))), max(x), min(x), percentile(x, 55), hll(x) ,stdev(x), sum(x), sumif(x, x > 0), tdigest(x), variance(x)
 ```
 
@@ -190,8 +189,7 @@ range x from 1 to 10 step 1
 |||||||||||||||||
 
 ```kusto
-range x from 1 to 10 step 1
-| where 1 == 2
+datatable(x:long)[]
 | summarize  count(x), countif(x > 0) , dcount(x), dcountif(x, x > 0)
 ```
 
@@ -200,8 +198,7 @@ range x from 1 to 10 step 1
 |0|0|0|0|
 
 ```kusto
-range x from 1 to 10 step 1
-| where 1 == 2
+datatable(x:long)[]
 | summarize  make_set(x), make_list(x)
 ```
 

@@ -8,24 +8,24 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 876eeaa4550a5433354d50dd44fae3920177d335
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: f0401a5b10d2feb74c629e6b04b127e6d36057ad
+ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372681"
+ms.lasthandoff: 06/11/2020
+ms.locfileid: "84717172"
 ---
 # <a name="series_fit_line"></a>series_fit_line()
 
 Wendet die lineare Regression für eine Reihe an und gibt mehrere Spalten zurück.  
 
-Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe und führt eine [lineare Regression](https://en.wikipedia.org/wiki/Line_fitting) durch, um die am besten geeignete Zeile zu finden. Diese Funktion sollte für Zeitreihenarrays, die der Ausgabe des Operators „make-series“ entsprechen, verwendet werden. Die folgenden Spalten werden generiert:
-* `rsquare`: [r-Square](https://en.wikipedia.org/wiki/Coefficient_of_determination) ist ein Standardmeasure der fit-Qualität. Es ist eine Zahl im Bereich [0-1], wobei 1 die beste Option ist und 0 bedeutet, dass die Daten unsortiert sind und nicht in jede beliebige Zeile passen. 
-* `slope`: Steigung der angeschätzten Linie (Dies ist ein von y = ax + b)
-* `variance`: Varianz der Eingabedaten
-* `rvariance`: verbleibende Varianz, bei der es sich um die Varianz zwischen den Eingabedaten Werten handelt
-* `interception`: Abfangen der näherenden Linie (Dies ist b von y = ax + b)
-* `line_fit`: numerisches Array, das eine Reihe von Werten der am besten angepassten Linie enthält. Die Reihenlänge entspricht der Länge des Eingabearrays. Sie wird hauptsächlich für Diagramme verwendet.
+Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe und führt eine [lineare Regression](https://en.wikipedia.org/wiki/Line_fitting) aus, um die am besten geeignete Zeile zu finden. Diese Funktion sollte für Zeitreihenarrays, die der Ausgabe des Operators „make-series“ entsprechen, verwendet werden. Die-Funktion generiert die folgenden Spalten:
+* `rsquare`: [r-Square](https://en.wikipedia.org/wiki/Coefficient_of_determination) ist ein Standardmeasure der fit-Qualität. Der Wert ist eine Zahl im Bereich [0-1], wobei 1 der bestmögliche Wert ist, und 0 bedeutet, dass die Daten unsortiert sind und nicht in eine beliebige Zeile passen. 
+* `slope`: Steigung der ungefäb enden Zeile ("a" von y = ax + b).
+* `variance`: Varianz der Eingabedaten.
+* `rvariance`: Verbleibende Varianz, bei der es sich um die Varianz zwischen den Eingabedaten Werten handelt
+* `interception`: Abfangen der näherenden Zeile ("b" von y = ax + b).
+* `line_fit`: Numerisches Array, das eine Reihe von Werten der am besten angepassten Linie enthält. Die Reihenlänge entspricht der Länge des Eingabearrays. Der Wert, der für die Diagramm Erstellung verwendet wird.
 
 **Syntax**
 
@@ -36,7 +36,7 @@ Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe 
 * *x*: dynamisches Array numerischer Werte.
 
 > [!TIP]
-> Die einfachste Methode, diese Funktion zu verwenden, ist die Anwendung auf die Ergebnisse des Operators " [make-Series](make-seriesoperator.md) ".
+> Die einfachste Methode, diese Funktion zu verwenden, besteht darin, Sie auf die Ergebnisse des Operators " [make-Series](make-seriesoperator.md) " anzuwenden.
 
 **Beispiele**
 

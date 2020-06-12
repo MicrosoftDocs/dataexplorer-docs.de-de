@@ -145,7 +145,11 @@
     - name: Visualisieren von Daten
       items:
         - name: Azure Data Explorer-Dashboards
-          href: azure-data-explorer-dashboards.md
+          items:
+            - name: Verwenden von Dashboards
+              href: azure-data-explorer-dashboards.md
+            - name: Verwenden von Dashboardparametern
+              href: dashboard-parameters.md
         - name: Power BI
           items:
             - name: Bewährte Methoden

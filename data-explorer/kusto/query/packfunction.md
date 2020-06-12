@@ -1,6 +1,6 @@
 ---
-title: pack() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt Pack() in Azure Data Explorer.
+title: Pack ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: Dieser Artikel beschreibt Pack () in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,27 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a7b43be96f272ab929434f10cac910bd4072e650
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a94629ae8f4795e28cbfb0c41f06596731cdd8d9
+ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81511831"
+ms.lasthandoff: 06/11/2020
+ms.locfileid: "84717324"
 ---
 # <a name="pack"></a>pack()
 
-Erstellt `dynamic` ein Objekt (Eigenschaftsbeutel) aus einer Liste von Namen und Werten.
+Erstellt ein `dynamic` -Objekt (Eigenschaften Behälter) aus einer Liste von Namen und Werten.
 
-Alias `pack_dictionary()` zu funktionieren.
+Alias für die `pack_dictionary()` Funktion.
 
 **Syntax**
 
-`pack(`*schlüssel1* `,` *wert1* `,` *schlüssel2 wert2* `,` *value2*`,... )`
+`pack(`*key1* `,` *value1* `,` *key2* `,` *value2*`,... )`
 
 **Argumente**
 
-* Eine abwechselnde Liste von Schlüsseln und Werten (die Gesamtlänge der Liste muss gerade sein)
-* Alle Schlüssel müssen nicht leere konstante Zeichenfolgen sein.
+* Eine abwechselnde Liste von Schlüsseln und Werten (die Gesamtlänge der Liste muss gleich sein).
+* Alle Schlüssel müssen nicht leere Konstante Zeichen folgen sein.
 
 **Beispiele**
 
@@ -38,22 +38,22 @@ Das folgende Beispiel gibt `{"Level":"Information","ProcessID":1234,"Data":{"url
 pack("Level", "Information", "ProcessID", 1234, "Data", pack("url", "www.bing.com"))
 ```
 
-Nehmen Sie 2 Tabellen, SmsMessages und MmsMessages:
+Es sind 2 Tabellen, smsmess Ages und mmsmess erforderlich:
 
-Tabelle SmsMessages 
+Tabellen-smsmess 
 
-|SourceNumber |TargetNumber| CharsCount
+|Sourcennummer |Targetnumber| Charscount
 |---|---|---
 |555-555-1234 |555-555-1212 | 46 
 |555-555-1234 |555-555-1213 | 50 
 |555-555-1212 |555-555-1234 | 32 
 
-Tabelle MmsMessages 
+Tabellen-mmsmess 
 
-|SourceNumber |TargetNumber| AttachmnetSize | AttachmnetType | AttachmnetName
+|Sourcennummer |Targetnumber| Attachmentsize | AttachmentType | AttachmentName
 |---|---|---|---|---
-|555-555-1212 |555-555-1213 | 200 | JPEG | Bild1
-|555-555-1234 |555-555-1212 | 250 | JPEG | Pic2
+|555-555-1212 |555-555-1213 | 200 | jpeg | Pic1
+|555-555-1234 |555-555-1212 | 250 | jpeg | Pic2
 |555-555-1234 |555-555-1213 | 300 | png | Pic3
 
 Diese Abfrage
@@ -62,15 +62,15 @@ SmsMessages
 | extend Packed=pack("CharsCount", CharsCount) 
 | union withsource=TableName kind=inner 
 ( MmsMessages 
-  | extend Packed=pack("AttachmnetSize", AttachmnetSize, "AttachmnetType", AttachmnetType, "AttachmnetName", AttachmnetName))
+  | extend Packed=pack("AttachmentSize", AttachmentSize, "AttachmentType", AttachmentType, "AttachmentName", AttachmentName))
 | where SourceNumber == "555-555-1234"
 ``` 
 
 Rückgabewerte:
 
-|TableName |SourceNumber |TargetNumber | Verpackt
+|TableName |Sourcennummer |Targetnumber | Stop
 |---|---|---|---
-|SmsMessages|555-555-1234 |555-555-1212 | "CharsCount": 46
-|SmsMessages|555-555-1234 |555-555-1213 | "CharsCount": 50
-|MmsMessages|555-555-1234 |555-555-1212 | "AttachmnetSize": 250, "AttachmnetType": "jpg", "AttachmnetName": "Pic2""
-|MmsMessages|555-555-1234 |555-555-1213 | "AttachmnetSize": 300, "AttachmnetType": "png", "AttachmnetName": "Pic3""
+|Smsmess|555-555-1234 |555-555-1212 | {"Charscount": 46}
+|Smsmess|555-555-1234 |555-555-1213 | {"Charscount": 50}
+|Mmsmess Ages|555-555-1234 |555-555-1212 | {"Attachmentsize": 250, "AttachmentType": "JPEG", "attachmentName": "pic2"}
+|Mmsmess Ages|555-555-1234 |555-555-1213 | {"Attachmentsize": 300, "AttachmentType": "PNG", "attachmentName": "pic3"}

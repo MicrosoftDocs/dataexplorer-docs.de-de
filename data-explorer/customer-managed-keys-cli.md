@@ -7,12 +7,12 @@ ms.reviewer: astauben
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 06/01/2020
-ms.openlocfilehash: 570ec818a330074cdf46075571d831c718273e64
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: bc8ce7a3d85a64a2a19e4194e7c9e6ab23b0fef6
+ms.sourcegitcommit: a7e040fc844098323aa1c00e254bcbcd41fe587f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84262115"
+ms.lasthandoff: 06/04/2020
+ms.locfileid: "84426529"
 ---
 # <a name="configure-customer-managed-keys-using-azure-cli"></a>Verwenden der Azure-Befehlszeilenschnittstelle zum Konfigurieren von kundenseitig verwalteten Schlüsseln
 
@@ -21,11 +21,11 @@ ms.locfileid: "84262115"
 > * [C#](customer-managed-keys-csharp.md)
 > * [Azure Resource Manager-Vorlage](customer-managed-keys-resource-manager.md)
 > * [BEFEHLSZEILENSCHNITTSTELLE (CLI)](customer-managed-keys-cli.md)
+> * [PowerShell](customer-managed-keys-powershell.md)
 
 [!INCLUDE [data-explorer-configure-customer-managed-keys](includes/data-explorer-configure-customer-managed-keys.md)]
 
-## <a name="enable-encryption-with-customer-managed-keys-in-the-azure-portal"></a>Aktivieren der Verschlüsselung mit von Kunden verwalteten Schlüsseln im Azure-Portal
-
+## <a name="enable-encryption-with-customer-managed-keys-using-azure-cli"></a>Aktivieren der Verschlüsselung mit kundenseitig verwalteten Schlüsseln mithilfe der Azure CLI
 In diesem Artikel erfahren Sie, wie Sie die Verschlüsselung mit kundenseitig verwalteten Schlüsseln über den Azure-Befehlszeilenschnittstellenclient aktivieren. Die Azure Data Explorer-Verschlüsselung verwendet standardmäßig von Microsoft verwaltete Schlüssel. Konfigurieren Sie Ihren Azure Data Explorer-Cluster für die Verwendung von kundenseitig verwalteten Schlüsseln, und geben Sie den Schlüssel an, der dem Cluster zugeordnet werden soll.
 
 1. Führen Sie den folgenden Befehl aus, um sich bei Azure anzumelden:

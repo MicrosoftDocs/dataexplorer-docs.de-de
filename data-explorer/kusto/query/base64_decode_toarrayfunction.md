@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/22/2019
-ms.openlocfilehash: eda367dfeaab15dc5249fd860596964c597a1bcd
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: df10ea2bbdf4e48d32c087d35eb9361fc4d697b8
+ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225410"
+ms.lasthandoff: 06/11/2020
+ms.locfileid: "84717205"
 ---
 # <a name="base64_decode_toarray"></a>base64_decode_toarray()
 
@@ -25,14 +25,14 @@ Decodiert eine base64-Zeichenfolge in ein Array von Long-Werten.
 
 **Argumente**
 
-* *String*: die Eingabe Zeichenfolge, die von Base64 in UTF8-8-Zeichenfolge decodiert werden soll.
+* *String*: Eingabe Zeichenfolge, die von Base64 in UTF8-Zeichenfolge decodiert werden soll.
 
 **Rückgabe**
 
-Gibt ein Array von Long-Werten aus der base64-Zeichenfolge zurück
+Gibt ein Array von langen Werten zurück, die aus einer base64-Zeichenfolge decodiert wurden.
 
-* Zum Decodieren von Base64-Zeichen folgen in eine UTF-8-Zeichenfolge siehe [base64_decode_tostring ()](base64_decode_tostringfunction.md)
-* Informationen zum Codieren von Zeichen folgen in Base64-Zeichen folgen [base64_encode_tostring](base64_encode_tostringfunction.md) finden Sie unter
+* Informationen zum Decodieren von Base64-Zeichen folgen in eine UTF-8-Zeichenfolge finden Sie unter [base64_decode_tostring ()](base64_decode_tostringfunction.md)
+* Informationen zum Codieren von Zeichen folgen in eine base64-Zeichenfolge finden Sie unter [base64_encode_tostring ()](base64_encode_tostringfunction.md)
 
 **Beispiel**
 
@@ -46,7 +46,7 @@ print Quine=base64_decode_toarray("S3VzdG8=")
 |-----|
 |[75.117.115.116.111]|
 
-Beim Decodieren einer base64-Zeichenfolge, die aus einer ungültigen UTF-8-Codierung generiert wurde, wird NULL zurückgegeben:
+Wenn Sie versuchen, eine base64-Zeichenfolge zu decodieren, die aus einer ungültigen UTF-8-Codierung generiert wurde, wird "Null" zurückgegeben:
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

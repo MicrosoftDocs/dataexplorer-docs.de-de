@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/22/2019
-ms.openlocfilehash: 332ff6bedd268dd79be020ff1dc4d0591ed486f7
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: c414f1bdb83850bc6ec6065314bc7c8662ab0ed2
+ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225308"
+ms.lasthandoff: 06/11/2020
+ms.locfileid: "84717086"
 ---
 # <a name="base64_encode_tostring"></a>base64_encode_tostring()
 
@@ -31,8 +31,8 @@ Codiert eine Zeichenfolge als base64-Zeichenfolge.
 
 Gibt die als base64-Zeichenfolge codierte Zeichenfolge zurück
 
-* Zum Decodieren von Base64-Zeichen folgen in eine UTF-8-Zeichenfolge siehe [base64_decode_tostring ()](base64_decode_tostringfunction.md)
-* Informationen zum Decodieren von Base64-Zeichen folgen in ein Array mit langen Werten finden Sie [base64_decode_toarray ()](base64_decode_toarrayfunction.md)
+* Informationen zum Decodieren von Base64-Zeichen folgen in UTF-8-Zeichen folgen finden Sie unter [base64_decode_tostring ()](base64_decode_tostringfunction.md)
+* Informationen zum Decodieren von Base64-Zeichen folgen in ein Array von Long-Werten finden Sie unter [base64_decode_toarray ()](base64_decode_toarrayfunction.md)
 
 
 **Beispiel**
@@ -45,3 +45,4 @@ print Quine=base64_encode_tostring("Kusto")
 |Quin   |
 |--------|
 |S3VzdG8 =|
+
