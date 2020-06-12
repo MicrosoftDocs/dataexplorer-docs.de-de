@@ -329,6 +329,10 @@
               href: ./kusto/query/schema-entities/index.md
             - name: Entitätsnamen
               href: ./kusto/query/schema-entities/entity-names.md
+            - name: Entitätsverweise
+              href: ./kusto/query/schema-entities/entity-references.md
+            - name: Datenbanken
+              href: ./kusto/query/schema-entities/databases.md
             - name: Tabellen
               href: ./kusto/query/schema-entities/tables.md
             - name: Spalten
@@ -363,6 +367,8 @@
               href: ./kusto/query/scalar-data-types/timespan.md
             - name: NULL-Werte
               href: ./kusto/query/scalar-data-types/null-values.md
+            - name: Nicht unterstützte skalare Datentypen
+              href: /kusto/query/scalar-data-types/unsupported-data-types.md
         - name: Functions
           items:
             - name: Funktionstypen
@@ -1237,7 +1243,7 @@
                 - name: Übersicht über Tabellen
                   href: ./kusto/management/tables.md
                 - name: .alter merge table
-                  href: ./kusto/management/alter-table-command.md
+                  href: ./kusto/management/alter-merge-table-command.md
                 - name: .alter table
                   href: ./kusto/management/alter-table-command.md
                 - name: .alter table docstring
@@ -1256,6 +1262,8 @@
                   href: ./kusto/management/create-table-command.md
                 - name: .create tables
                   href: ./kusto/management/create-tables-command.md
+                - name: .create-merge tables
+                  href: ./kusto/management/create-merge-tables-command.md
                 - name: .drop table(s)
                   href: ./kusto/management/drop-table-command.md
                 - name: .rename table
