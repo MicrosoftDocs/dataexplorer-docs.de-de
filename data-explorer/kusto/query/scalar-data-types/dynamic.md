@@ -1,6 +1,6 @@
 ---
-title: Der dynamische Datentyp - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird der dynamische Datentyp in Azure Data Explorer beschrieben.
+title: 'Der dynamische Datentyp: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird der dynamische Datentyp in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,71 +8,68 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: e1cdb6e5af20b326198a7447c50c24e5f632d237
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 606d48c4bda583ad82404a1b25119ec9beb4c5a9
+ms.sourcegitcommit: 6f56b169fda0b74f9569004555a574d8973b1021
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81509876"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84748942"
 ---
-# <a name="the-dynamic-data-type"></a>Der dynamische Datentyp
+# <a name="the-dynamic-data-type"></a>Der dynamische Datentyp.
 
-Der `dynamic` skalare Datentyp ist insofern besonders, als er einen beliebigen Wert anderer skalarer Datentypen aus der Liste unten sowie Arrays und Eigenschaftssäcke annehmen kann. Ein `dynamic` Wert kann insbesondere sein:
+Der `dynamic` skalare Datentyp ist ein spezieller Wert, da er einen beliebigen Wert von anderen skalaren Datentypen aus der nachstehenden Liste sowie Arrays und Eigenschaften Behälter annehmen kann. Ein `dynamic` Wert kann wie folgt lauten:
 
-* Null.
-* Ein Wert eines der primitiven skalaren `bool` `datetime`Datentypen: , `string`, `timespan` `guid`, `int` `long`, `real`, , , und .
-* Ein Array `dynamic` von Werten, das null oder mehr Werte mit nullbasierter Indizierung hält.
-* Eine Eigenschaftstasche, `string` die `dynamic` eindeutige Werte Werten zuordnet.
-  Der Eigenschaftenbeutel hat null oder mehr solcher Zuordnungen (sogenannte `string` "Slots"), die durch die eindeutigen Werte indiziert werden. Die Slots sind ungeordnet.
-
-> [!NOTE]
-> Die Werte `dynamic` des Typs sind auf 1 MB (2 x 20) begrenzt.
+* Normal.
+* Ein Wert eines beliebigen primitiven skalaren Datentyps: `bool` , `datetime` , `guid` , `int` , `long` , `real` , `string` und `timespan` .
+* Ein Array von- `dynamic` Werten, das 0 (null) oder mehr Werte mit NULL basierter Indizierung enthält.
+* Ein Eigenschaften Behälter, der Werte eindeutigen Werten zuordnet `string` `dynamic` .
+  Der Eigenschaften Behälter weist keine oder mehrere solcher Zuordnungen (als "Slots" bezeichnet) auf, die von den eindeutigen Werten indiziert werden `string` . Die Slots sind nicht geordnet.
 
 > [!NOTE]
-> Obwohl `dynamic` der Typ JSON-like erscheint, kann er Werte enthalten, die das JSON-Modell nicht darstellt, `long` `real`da `datetime` `timespan`sie `guid`in JSON nicht vorhanden sind (z. B. , , , , und ).
-> Daher werden beim `dynamic` Serialisieren von Werten in eine JSON-Darstellung Werte, `string` die JSON nicht darstellen kann, in Werte serialisiert. Umgekehrt analysiert Kusto Zeichenfolgen als stark typisierte Werte, wenn sie als solche analysiert werden können.
-> Dies `datetime`gilt `real` `long`für `guid` , , und Typen. Weitere Informationen zum JSON-Objektmodell finden Sie unter [json.org](https://json.org/).
-
-> [!NOTE]
-> Kusto versucht nicht, die Reihenfolge der Name-zu-Wert-Zuordnungen in einem Eigenschaftenbeutel beizubehalten, und Sie können daher nicht davon ausgehen, dass die Reihenfolge beibehalten werden soll. Es ist durchaus möglich, dass zwei Eigenschaftssäcke mit demselben Satz von `string` Zuordnungen unterschiedliche Ergebnisse liefern, wenn sie z. B. als Werte dargestellt werden.
+> * Werte des Typs `dynamic` sind auf 1 MB (2 ^ 20) beschränkt.
+> * Obwohl der `dynamic` Typ JSON-ähnlich erscheint, kann er Werte enthalten, die das JSON-Modell nicht darstellt, weil Sie nicht in JSON (z. b.,,, `long` `real` `datetime` `timespan` und `guid` ) vorhanden sind.
+>   Bei der Serialisierung von `dynamic` Werten in eine JSON-Darstellung werden Werte, die JSON nicht darstellen kann, in-Werte serialisiert `string` . Umgekehrt analysiert Kusto Zeichen folgen als stark typisierte Werte, wenn Sie als solche analysiert werden können.
+>   Dies gilt für `datetime` die `real` Typen,, `long` und `guid` . 
+>   Weitere Informationen zum JSON-Objektmodell finden Sie unter [JSON.org](https://json.org/).
+> * Kusto versucht nicht, die Reihenfolge der Name-zu-Wert-Zuordnungen in einem Eigenschaften Behälter beizubehalten, sodass Sie nicht davon ausgehen können, dass die Reihenfolge beibehalten werden muss. Es ist durchaus möglich, dass zwei Eigenschaften Behälter mit demselben Satz von Zuordnungen unterschiedliche Ergebnisse liefern, wenn Sie `string` z. b. als Werte dargestellt werden.
 
 ## <a name="dynamic-literals"></a>Dynamische Literale
 
-Ein Literal `dynamic` des Typs sieht wie folgt aus:
+Ein Literaltyp `dynamic` sieht wie folgt aus:
 
-`dynamic(`*Wert*`)`
+`dynamic(` *Wert* `)`
 
-*Wert* kann sein:
+Der *Wert* kann wie folgt lauten:
 
-* `null`, in diesem Fall stellt das `dynamic(null)`Literal den dynamischen NULLwert dar: .
-* Ein weiteres skalares Datentypliteral, in `dynamic` diesem Fall stellt das Literal das Literal des Typs "inner" dar. Beispielsweise ist `dynamic(4)` ein dynamischer Wert, der den Wert 4 des langen skalaren Datentyps enthält.
-* Ein Array dynamischer oder `[` anderer Literale: *ListOfValues* `]`. Beispielsweise `dynamic([1, 2, "hello"])` handelt es sich um ein `long` dynamisches `string` Array aus drei Elementen, zwei Werten und einem Wert.
-* Eine Immobilientasche: `{` *Namenswert* `=` *Value* ... `}`. Beispielsweise `dynamic({"a":1, "b":{"a":2}})` handelt es sich um eine `a`Eigenschaftstasche mit zwei Steckplätzen , und `b`, wobei der zweite Steckplatz eine weitere Eigenschaftstasche ist.
+* `null`, wobei das Literale den dynamischen NULL-Wert darstellt: `dynamic(null)` .
+* Ein anderer skalare Datentyp Literale. in diesem Fall stellt das Literale das `dynamic` Literale des "inneren" Typs dar. Beispielsweise `dynamic(4)` ist ein dynamischer Wert, der den Wert 4 des langen skalaren Datentyps enthält.
+* Ein Array dynamischer oder anderer Literale: `[` *listOf Values* `]` . Beispielsweise `dynamic([1, 2, "hello"])` ist ein dynamisches Array aus drei Elementen, zwei `long` Werten und einem `string` Wert.
+* Ein Eigenschaften Behälter: `{` *Name* - `=` *Wert* ... `}` . Beispielsweise `dynamic({"a":1, "b":{"a":2}})` ist ein Eigenschaften Behälter mit zwei Slots, `a` und `b` , wobei der zweite Slot ein weiterer Eigenschaften Behälter ist.
 
 ```kusto
 print o=dynamic({"a":123, "b":"hello", "c":[1,2,3], "d":{}})
 | extend a=o.a, b=o.b, c=o.c, d=o.d
 ```
 
-Der Einfachheit `dynamic` halber können Literale, die im Abfragetext selbst angezeigt `datetime` werden, `timespan` auch andere Kusto-Literale (z. B. Literale, Literale usw.) enthalten. Diese Erweiterung über JSON ist beim Analysieren von Zeichenfolgen (z. B. bei verwendung der `parse_json` Funktion oder beim Übertragen von Daten) nicht verfügbar, aber sie ermöglicht Ihnen dies:
+Zur einfacheren Handhabung `dynamic` können Literale, die im Abfragetext selbst angezeigt werden, auch andere Kusto-Literale enthalten (z `datetime` . b. Literale, `timespan` Literale usw.). Diese JSON-Erweiterung ist nicht verfügbar, wenn Zeichen folgen (z. b. bei Verwendung der- `parse_json` Funktion oder beim Erfassen von Daten) verarbeitet werden, dies ermöglicht Ihnen jedoch Folgendes:
 
 ```kusto
 print d=dynamic({"a": datetime(1970-05-11)})
 ```
 
-Um einen `string` Wert, der den JSON-Codierungsregeln folgt, in einen `dynamic` Wert zu analysieren, verwenden Sie die `parse_json` Funktion. Beispiel:
+Verwenden Sie die-Funktion, um einen Wert zu analysieren, `string` der den JSON-Codierungsregeln in einen- `dynamic` Wert folgt `parse_json` . Beispiel:
 
 * `parse_json('[43, 21, 65]')` : ein Array mit Zahlen
-* `parse_json('{"name":"Alan", "age":21, "address":{"street":432,"postcode":"JLK32P"}}')`- ein Wörterbuch
+* `parse_json('{"name":"Alan", "age":21, "address":{"street":432,"postcode":"JLK32P"}}')`-ein Wörterbuch
 * `parse_json('21')` : ein einzelner Wert vom Typ „dynamic“ mit einer Zahl
 * `parse_json('"21"')` : ein einzelner Wert vom Typ „dynamic“ mit einer Zeichenfolge
-* `parse_json('{"a":123, "b":"hello", "c":[1,2,3], "d":{}}')`- gibt den `o` gleichen Wert wie im obigen Beispiel.
+* `parse_json('{"a":123, "b":"hello", "c":[1,2,3], "d":{}}')`-gibt denselben Wert wie `o` im obigen Beispiel an.
 
 > [!NOTE]
-> Im Gegensatz zu JavaScript schreibt JSON die`"`Verwendung von Doppelanführungszeichen ( ) um Zeichenfolgen und Eigenschaftsnamen vor.
-> Daher ist es im Allgemeinen einfacher, ein JSON-codiertes Zeichenfolgenliteral mit einem Single-Quote -`'`) -Zeichen zu zitieren.
+> Anders als bei JavaScript schreibt JSON die Verwendung von doppelten Anführungszeichen () für Zeichen folgen und Eigenschaften Namen für Eigenschaften Behälter dar `"` .
+> Daher ist es im Allgemeinen einfacher, ein JSON-codiertes Zeichenfolgenliteralzeichen mit einem einfachen Anführungs `'` Zeichen () anzugeben.
   
-Das folgende Beispiel zeigt, wie Sie `dynamic` eine Tabelle definieren `datetime` können, die eine Spalte (sowie eine Spalte) enthält, und dann einen einzelnen Datensatz darin aufnehmen können. Außerdem wird veranschaulicht, wie Sie JSON-Zeichenfolgen in CSV-Dateien kodieren können:
+Im folgenden Beispiel wird gezeigt, wie Sie eine Tabelle definieren können, die eine `dynamic` Spalte (und eine `datetime` Spalte) enthält, und dann einen einzelnen Datensatz erfassen. Außerdem wird veranschaulicht, wie sie JSON-Zeichen folgen in CSV-Dateien codieren können:
 
 ```kusto
 // dynamic is just like any other type:
@@ -92,47 +89,47 @@ Das folgende Beispiel zeigt, wie Sie `dynamic` eine Tabelle definieren `datetime
 
 |Timestamp                   | Trace                                                 |
 |----------------------------|-------------------------------------------------------|
-|2015-01-01 00:00:00.0000000 | "EventType":"Demo","EventValue":"Doppelte Quote Liebe!"|
+|2015-01-01 00:00:00.0000000 | {"EventType": "Demo", "eventvalue": "Double-Quote Love!"}|
 
-## <a name="dynamic-object-accessors"></a>Dynamische Objektaccessoren
+## <a name="dynamic-object-accessors"></a>Dynamische objektaccessoren
 
-Um ein Wörterbuch zu unterschreiben,`dict.key`verwenden Sie entweder die`dict["key"]`Punktnotation ( ) oder die Klammern notation ( ).
-Wenn es sich bei dem Subskript um eine Zeichenfolgenkonstante handelt, sind beide Optionen äquivalent.
+Verwenden Sie zum Abonnieren eines Wörterbuchs entweder die Punkt Notation ( `dict.key` ) oder die eckige Klammer ( `dict["key"]` ).
+Wenn der Index eine Zeichen folgen Konstante ist, sind beide Optionen Äquivalent.
 
 > [!NOTE] 
-> Um einen Ausdruck als Subskript zu verwenden, verwenden Sie die Klammernnotation. Bei verwendungsarithmetischen Ausdrücken muss der Ausdruck innerhalb der Klammern in Klammern eingeschlossen werden.
+> Wenn Sie einen Ausdruck als Index verwenden möchten, verwenden Sie die Notation mit Klammern. Wenn arithmetische Ausdrücke verwendet werden, muss der Ausdruck innerhalb der Klammern in Klammern eingeschlossen werden.
 
-In den `dict` folgenden `arr` Beispielen und sind Spalten des dynamischen Typs:
+In den folgenden Beispielen `dict` und `arr` sind Spalten des dynamischen Typs:
 
-|Ausdruck                        | Accessor-Ausdruckstyp | Bedeutung                                                                              | Kommentare                                      |
+|expression                        | Accessor-Ausdruckstyp | Bedeutung                                                                              | Kommentare                                      |
 |----------------------------------|--------------------------|--------------------------------------------------------------------------------------|-----------------------------------------------|
-|dict[col]                         | Entitätsname (Spalte)     | Subskriptiiert ein Wörterbuch mit `col` den Werten der Spalte als Schlüssel              | Spalte muss vom Typ string sein                 | 
-|arr[index]                        | Entitätsindex (Spalte)    | Subskriptiiert ein Array unter `index` Verwendung der Werte der Spalte als Index              | Die Spalte muss vom Typ Integer oder boolesche     | 
-|arr[-index]                       | Entitätsindex (Spalte)    | Ruft den 'index'-ten Wert vom Ende des Arrays ab                             | Die Spalte muss vom Typ Integer oder boolesche     |
-|arr[(-1)]                         | Entitätsindex             | Ruft den letzten Wert im Array ab                                                |                                               |
-|arr[toint(indexAsString)]         | Funktionsaufruf             | Gibt die Werte `indexAsString` der Spalte in int um und verwendet sie, um ein Array zu subskriptieren |                                               |
-|dik[['where']]                   | Schlüsselwort, das als Entitätsname verwendet wird (Spalte) | Subskriptiatiert ein Wörterbuch `where` mit den Werten der Spalte als Schlüssel    | Entitätsnamen, die mit einigen Schlüsselwörtern in der Abfragesprache identisch sind, müssen zitiert werden. | 
-|dik.['where'] oder dict['where']   | Konstante                 | Subskriptiatiert `where` ein Wörterbuch mit Zeichenfolge als Schlüssel                              |                                               |
+|dict [Col]                         | Entitäts Name (Spalte)     | Abonniert ein Wörterbuch mit den Werten der Spalte `col` als Schlüssel.              | Die Spalte muss den Typ "String" aufweisen.                 | 
+|arr [index]                        | Entitäts Index (Spalte)    | Gibt ein Array mit den Werten der Spalte `index` als Index an.              | Spalte muss vom Typ "Integer" oder "booleschen" sein.     | 
+|arr [-index]                       | Entitäts Index (Spalte)    | Ruft den Indexwert vom Ende des Arrays ab.                             | Spalte muss vom Typ "Integer" oder "booleschen" sein.     |
+|arr [(-1)]                         | Entitäts Index             | Ruft den letzten Wert im Array ab.                                                |                                               |
+|arr [zu int (indexasstring)]         | Funktionsaufruf            | Wandelt die Werte der Spalte `indexAsString` in int um und verwendet Sie, um ein Array zu indizieren. |                                               |
+|dict [[' WHERE ']]                   | Als Entitäts Name verwendetes Schlüsselwort (Spalte) | Abonniert ein Wörterbuch mit den Werten der Spalte `where` als Schlüssel.    | In Anführungszeichen gesetzte Entitäts Namen müssen in Anführungszeichen eingeschlossen werden. | 
+|dict. [' WHERE '] oder dict [' WHERE ']   | Konstante                 | Abonniert ein Wörterbuch mithilfe `where` der Zeichenfolge als Schlüssel.                              |                                               |
 
-**Leistungstipp:** Bevorzugen Sie konstante Subskriptionen, wenn möglich
+**Leistungs Tipp:** Ziehen Sie nach Möglichkeit die Verwendung konstanter Indizes vor
 
-Der Zugriff auf ein `dynamic` Unterobjekt eines `dynamic` Werts ergibt einen anderen Wert, auch wenn das Unterobjekt einen anderen zugrunde liegenden Typ hat. Verwenden `gettype` Sie die Funktion, um den tatsächlichen zugrunde liegenden Typ des Werts zu ermitteln, und eine der unten aufgeführten Umwandlungsfunktionen, um ihn in den tatsächlichen Typ umzuteilen.
+Der Zugriff auf ein untergeordnetes Objekt eines `dynamic` Werts ergibt einen anderen `dynamic` Wert, auch wenn das untergeordnete Objekt einen anderen zugrunde liegenden Typ aufweist. Verwenden Sie die `gettype` -Funktion, um den eigentlichen zugrunde liegenden Typ des Werts und eine der unten aufgeführten Umwandlungs Funktionen zu ermitteln, um Sie in den eigentlichen Typ umzuwandeln.
 
-## <a name="casting-dynamic-objects"></a>Gießen dynamischer Objekte
+## <a name="casting-dynamic-objects"></a>Umwandeln dynamischer Objekte
 
-> Nachdem Sie ein dynamisches Objekt subskriptisiert haben, müssen Sie den Wert in einen einfachen Typ umlegen.
+> Nachdem Sie ein dynamisches Objekt abonniert haben, müssen Sie den Wert in einen einfachen Typ umwandeln.
 
-|Ausdruck | Wert | type|
+|expression | Wert | type|
 |---|---|---|
-| X | parse_json('[100,101,102]')| array|
-|X[0]|parse_json('100')|dynamisch|
-|toint(X[1])|101| INT|
-| J | parse_json('''a1':100, "a b c":"2015-01-01"')| dictionary|
-|Y.a1|parse_json('100')|dynamisch|
-|Y["a b c"]| parse_json("2015-01-01")|dynamisch|
-|todate(Y["a b c"])|datum(2015-01-01)| datetime|
+| X | parse_json ("[100101102]")| array|
+|X [0]|parse_json ("100")|dynamisch|
+|"zu int" (X [1])|101| INT|
+| J | parse_json ("{" a1 ": 100," a b c ":" 2015-01-01 "}")| dictionary|
+|Y. a1|parse_json ("100")|dynamisch|
+|J ["a b c"]| parse_json ("2015-01-01")|dynamisch|
+|Date (Y ["a b c"])|DateTime (2015-01-01)| datetime|
 
-Cast-Funktionen sind:
+Umwandlungs Funktionen sind:
 
 * `tolong()`
 * `todouble()`
@@ -142,26 +139,26 @@ Cast-Funktionen sind:
 * `toguid()`
 * `todynamic()`
 
-## <a name="building-dynamic-objects"></a>Erstellen dynamischer Objekte
+## <a name="building-dynamic-objects"></a>Dynamische Objekte werden aufgebaut.
 
-Mit mehreren Funktionen können `dynamic` Sie neue Objekte erstellen:
+Mehrere Funktionen ermöglichen es Ihnen, neue `dynamic` Objekte zu erstellen:
 
-* [pack()](../packfunction.md) erstellt einen Eigenschaftsbeutel aus Name/Wert-Paaren.
-* [pack_array()](../packarrayfunction.md) erstellt ein Array aus Name/Wert-Paaren.
-* [range()](../rangefunction.md) erstellt ein Array mit einer arithmetischen Zahlenreihe.
-* [zip()](../zipfunction.md) paart "parallele" Werte aus zwei Arrays zu einem einzigen Array.
-* [repeat()](../repeatfunction.md) erstellt ein Array mit einem wiederholten Wert.
+* [Pack ()](../packfunction.md) erstellt einen Eigenschaften Behälter aus Name/Wert-Paaren.
+* [pack_array ()](../packarrayfunction.md) erstellt ein Array aus Name/Wert-Paaren.
+* [Range ()](../rangefunction.md) erstellt ein Array mit einer arithmetischen Reihe von Zahlen.
+* [ZIP ()](../zipfunction.md) kombiniert Parallele Werte von zwei Arrays in ein einzelnes Array.
+* [Repeat ()](../repeatfunction.md) erstellt ein Array mit einem wiederholten Wert.
 
-Darüber hinaus gibt es mehrere `dynamic` Aggregatfunktionen, die Arrays erstellen, die aggregierte Werte enthalten:
+Außerdem gibt es mehrere Aggregatfunktionen, die `dynamic` Arrays erstellen, die aggregierte Werte enthalten:
 
-* [buildschema()](../buildschema-aggfunction.md) gibt das Aggregatschema mehrerer `dynamic` Werte zurück.
-* [make_bag()](../make-bag-aggfunction.md) gibt einen Eigenschaftensack mit dynamischen Werten innerhalb der Gruppe zurück.
-* [make_bag_if()](../make-bag-if-aggfunction.md) gibt einen Eigenschaftensack mit dynamischen Werten innerhalb der Gruppe zurück (mit einem Prädikat).
-* [make_list()](../makelist-aggfunction.md) gibt ein Array zurück, das alle Werte nacheinander hält.
-* [make_list_if()](../makelistif-aggfunction.md) gibt ein Array zurück, das alle Werte in der Reihenfolge (mit einem Prädikat) hält.
-* [make_list_with_nulls()](../make-list-with-nulls-aggfunction.md) gibt ein Array zurück, das alle Werte in der Reihenfolge, einschließlich NULL-Werten, hält.
-* [make_set()](../makeset-aggfunction.md) gibt ein Array zurück, das alle eindeutigen Werte hält.
-* [make_set_if()](../makesetif-aggfunction.md) gibt ein Array zurück, das alle eindeutigen Werte (mit einem Prädikat) hält.
+* [Buildschema ()](../buildschema-aggfunction.md) gibt das aggregierte Schema mehrerer `dynamic` Werte zurück.
+* [make_bag ()](../make-bag-aggfunction.md) gibt einen Eigenschaften Behälter dynamischer Werte in der Gruppe zurück.
+* [make_bag_if ()](../make-bag-if-aggfunction.md) gibt einen Eigenschaften Behälter dynamischer Werte innerhalb der Gruppe (mit einem Prädikat) zurück.
+* [make_list ()](../makelist-aggfunction.md) gibt ein Array zurück, das alle Werte in der Reihenfolge enthält.
+* [make_list_if ()](../makelistif-aggfunction.md) gibt ein Array zurück, das alle Werte in der Sequenz (mit einem Prädikat) enthält.
+* [make_list_with_nulls ()](../make-list-with-nulls-aggfunction.md) gibt ein Array zurück, das alle Werte nacheinander enthält, einschließlich NULL-Werte.
+* [MAKE_SET ()](../makeset-aggfunction.md) gibt ein Array zurück, das alle eindeutigen Werte enthält.
+* [make_set_if ()](../makesetif-aggfunction.md) gibt ein Array zurück, das alle eindeutigen Werte (mit einem Prädikat) enthält.
 
 ## <a name="operators-and-functions-over-dynamic-types"></a>Operatoren und Funktionen auf dynamischen Typen
 
@@ -170,16 +167,16 @@ Darüber hinaus gibt es mehrere `dynamic` Aggregatfunktionen, die Arrays erstell
 | *value* `in` *array*| TRUE, wenn ein Element von *array* vorhanden ist, das *value* entspricht<br/>`where City in ('London', 'Paris', 'Rome')`
 | *value* `!in` *array*| TRUE, wenn kein Element von *array* vorhanden ist, das *value* entspricht
 |[`array_length(`array`)`](../arraylengthfunction.md)| Null, wenn es sich nicht um ein Array handelt.
-|[`bag_keys(`Tasche`)`](../bagkeysfunction.md)| Zählt alle Stammschlüssel in einem dynamischen Property-Bag-Objekt auf.
-|[`extractjson(`pfad,Objekt`)`](../extractjsonfunction.md)|Verwendet den Pfad zum Navigieren in das Objekt.
-|[`parse_json(`Quelle`)`](../parsejsonfunction.md)| Wandelt eine JSON-Zeichenfolge in ein dynamisches Objekt um.
-|[`range(`von,to,schritt`)`](../rangefunction.md)| Ein Array von Werten
-|[`mv-expand`listColumn](../mvexpandoperator.md) | Repliziert eine Zeile für jeden Wert in einer Liste in eine angegebene Zelle.
-|[`summarize buildschema(`Spalte`)`](../buildschema-aggfunction.md) |Leitet das Typschema aus dem Spalteninhalt ab.
-|[`summarize make_bag(`Spalte`)`](../make-bag-aggfunction.md) | Führt die Eigenschaftsbeutelwerte (Wörterbuchwerte) in der Spalte in einer Eigenschaftstasche zusammen, ohne dass die Schlüsselduplizierung zu verwenden ist.
-|[`summarize make_bag_if(`Spalte,Prädikat`)`](../make-bag-if-aggfunction.md) | Führt die Eigenschaftsbeutelwerte (Wörterbuchwerte) in der Spalte in einem Eigenschaftenbeutel zusammen, ohne Schlüsselduplizierung (mit Prädikat).
-|[`summarize make_list(`Spalte`)`](../makelist-aggfunction.md)| Reduziert die Zeilengruppen und setzt die Werte der Spalte in ein Array.
-|[`summarize make_list_if(`Spalte,Prädikat`)`](../makelistif-aggfunction.md)| Flattens Gruppen von Zeilen und legt die Werte der Spalte in einem Array (mit Prädikat).
-|[`summarize make_list_with_nulls(`Spalte`)`](../make-list-with-nulls-aggfunction.md)| Verflacht Gruppen von Zeilen und legt die Werte der Spalte in ein Array, einschließlich NULL-Werte, ab.
-|[`summarize make_set(`Spalte`)`](../makeset-aggfunction.md) | Reduziert die Zeilengruppen und setzt die Werte der Spalte in ein Array ohne Duplizierung.
-|[`summarize make_bag(`Spalte`)`](../make-bag-aggfunction.md) | Führt die Eigenschaftsbeutelwerte (Wörterbuchwerte) in der Spalte in einer Eigenschaftstasche zusammen, ohne dass die Schlüsselduplizierung zu verwenden ist.
+|[`bag_keys(`Beut`)`](../bagkeysfunction.md)| Listet alle Stamm Schlüssel in einem dynamischen Eigenschaften Behälter Objekt auf.
+|[`extractjson(`Pfad, Objekt`)`](../extractjsonfunction.md)|Verwendet den Pfad zum Navigieren in das Objekt.
+|[`parse_json(`Ausgangs`)`](../parsejsonfunction.md)| Wandelt eine JSON-Zeichenfolge in ein dynamisches Objekt um.
+|[`range(`von, bis, Schritt`)`](../rangefunction.md)| Ein Array von Werten
+|[`mv-expand`ListColumn](../mvexpandoperator.md) | Repliziert eine Zeile für jeden Wert in einer Liste in eine angegebene Zelle.
+|[`summarize buildschema(`Kolumne`)`](../buildschema-aggfunction.md) |Leitet das Typschema aus dem Spalteninhalt ab.
+|[`summarize make_bag(`Kolumne`)`](../make-bag-aggfunction.md) | Führt die Eigenschaften Behälter Werte (Wörterbuch) in der Spalte in einem Eigenschaften Behälter ohne Schlüssel Duplizierung zusammen.
+|[`summarize make_bag_if(`Spalte, Prädikat`)`](../make-bag-if-aggfunction.md) | Führt die Eigenschaften Behälter Werte (Wörterbuch) in der Spalte zu einem Eigenschaften Behälter zusammen, ohne Schlüssel Duplizierung (mit Prädikat).
+|[`summarize make_list(`Spalte `)`](../makelist-aggfunction.md)| Reduziert die Zeilengruppen und setzt die Werte der Spalte in ein Array.
+|[`summarize make_list_if(`Spalte, Prädikat `)`](../makelistif-aggfunction.md)| Vereinfacht Zeilen Gruppen und legt die Werte der Spalte in ein Array (mit Prädikat) ab.
+|[`summarize make_list_with_nulls(`Spalte `)`](../make-list-with-nulls-aggfunction.md)| Vereinfachen Sie Zeilen Gruppen, und fügen Sie die Werte der Spalte in ein Array ein, einschließlich NULL-Werten.
+|[`summarize make_set(`Kolumne`)`](../makeset-aggfunction.md) | Reduziert die Zeilengruppen und setzt die Werte der Spalte in ein Array ohne Duplizierung.
+|[`summarize make_bag(`Kolumne`)`](../make-bag-aggfunction.md) | Führt die Eigenschaften Behälter Werte (Wörterbuch) in der Spalte in einem Eigenschaften Behälter ohne Schlüssel Duplizierung zusammen.
