@@ -1,6 +1,6 @@
 ---
-title: schema_merge-Plugin - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird schema_merge-Plugin in Azure Data Explorer beschrieben.
+title: 'schema_merge-Plug-in: Azure Daten-Explorer'
+description: In diesem Artikel wird schema_merge-Plug-in in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,20 +8,20 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2020
-ms.openlocfilehash: 67326a0e7a92d064613ee3a3de2851addb502fc9
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b1f3ef10ac5cee3eb9bc1c1dca4c0de26bd85477
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81509247"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780200"
 ---
-# <a name="schema_merge-plugin"></a>schema_merge Plugin
+# <a name="schema_merge-plugin"></a>Plug-in schema_merge
 
-Führt tabellarische Schemadefinitionen in ein einheitliches Schema zusammen. 
+Führt tabellarische Schema Definitionen in einem vereinheitlichten Schema zusammen. 
 
-Schemadefinitionen werden voraussichtlich im Format sein, wie sie vom [getschema-Operator](./getschemaoperator.md) erstellt wurden.
+Schema Definitionen werden in dem vom Operator erzeugten Format erwartet [`getschema`](./getschemaoperator.md) .
 
-Der Schemazusammenführungsvorgang verbindet Spalten, die in Eingabeschemas angezeigt werden, und versucht, Datentypen auf einen gemeinsamen Datentyp zu reduzieren (falls Datentypen nicht reduziert werden können, wird ein Fehler in einer problematischen Spalte angezeigt).
+Der `schema merge` Vorgang verbindet Spalten in Eingabe Schemas und versucht, die Datentypen auf allgemeine Datentypen zu reduzieren. Wenn die Datentypen nicht reduziert werden können, wird ein Fehler in der problematischen Spalte angezeigt.
 
 ```kusto
 let Schema1=Table1 | getschema;
@@ -31,19 +31,19 @@ union Schema1, Schema2 | evaluate schema_merge()
 
 **Syntax**
 
-`T``|` `evaluate` *PreserveOrder* PreserveOrder `schema_merge(``)`
+`T``|` `evaluate` `schema_merge(` *Preserveorder*`)`
 
 **Argumente**
 
-* *PreserveOrder*: (Optional) `true`Wenn auf festgelegt, wird an das Plugin geleitet, um die Spaltenreihenfolge zu überprüfen, wie im ersten tabellarischen Schema definiert. Mit anderen Worten, wenn dieselbe Spalte in mehreren Schemas angezeigt wird, muss die Spaltenordinal wie im ersten Schema sein, das sie angezeigt hat. Der Standardwert ist `true`sein.
+* *Preserveorder*: (optional) Wenn Sie auf festgelegt `true` ist, weist das Plug-in an, die Spaltenreihenfolge zu validieren, wie vom ersten tabellarischen Schema definiert. Wenn dieselbe Spalte in mehreren Schemas enthalten ist, muss die Spalten Ordnungszahl wie die Spalten Ordnungszahl des ersten Schemas lauten, in dem Sie enthalten war. Der Standardwert ist `true`.
 
 **Rückgabe**
 
-Das `schema_merge` Plugin gibt Ausgabe-Simiar zurück, was [getschema-Operator](./getschemaoperator.md) zurückgibt.
+Das `schema_merge` Plug-in gibt eine Ausgabe ähnlich der [`getschema`](./getschemaoperator.md) Rückgabe des Operators zurück.
 
 **Beispiele**
 
-Zusammenführen mit einem Schema, an das eine neue Spalte angehängt wurde:
+Zusammenführen mit einem Schema, dem eine neue Spalte angefügt wurde.
 
 ```kusto
 let schema1 = datatable(Uri:string, HttpStatus:int)[] | getschema;
@@ -56,10 +56,10 @@ union schema1, schema2 | evaluate schema_merge()
 |ColumnName | ColumnOrdinal | DataType | ColumnType|
 |---|---|---|---|
 |Uri|0|System.String|Zeichenfolge|
-|HttpStatus|1|System. Int32|INT|
+|HttpStatus|1|System.Int32|INT|
 |Referrer|2|System.String|Zeichenfolge|
 
-Zusammenführen mit einem Schema mit`HttpStatus` einer anderen Spaltenreihenfolge (Ordinale Änderungen von `1` zu `2` in der neuen Variante):
+Führen Sie eine Zusammenführung mit einem Schema aus, das eine andere Spalten Sortierung aufweist ( `HttpStatus` ordinaländerungen von in `1` `2` in der neuen Variante).
 
 ```kusto
 let schema1 = datatable(Uri:string, HttpStatus:int)[] | getschema;
@@ -73,9 +73,9 @@ union schema1, schema2 | evaluate schema_merge()
 |---|---|---|---|
 |Uri|0|System.String|Zeichenfolge|
 |Referrer|1|System.String|Zeichenfolge|
-|HttpStatus|-1|ERROR(unbekannter CSL-Typ:ERROR(Spalten sind nicht in Ordnung))|ERROR(Spalten sind nicht in Ordnung)|
+|HttpStatus|-1|Fehler (Unbekannter CSL-Typ: Fehler (Spalten sind nicht in der richtigen Reihenfolge))|Fehler (Spalten sind nicht in der richtigen Reihenfolge)|
 
-Führen Sie mit einem Schema zusammen, `PreserveOrder` das `false` eine andere Spaltenreihenfolge aufweist, jedoch mit einer Zeiteinstellung:
+Führen Sie eine Zusammenführung mit einem Schema aus, das eine andere Spalten Reihenfolge aufweist `PreserveOrder` `false`
 
 ```kusto
 let schema1 = datatable(Uri:string, HttpStatus:int)[] | getschema;
@@ -89,4 +89,4 @@ union schema1, schema2 | evaluate schema_merge(PreserveOrder = false)
 |---|---|---|---|
 |Uri|0|System.String|Zeichenfolge
 |Referrer|1|System.String|Zeichenfolge
-|HttpStatus|2|System. Int32|INT|
+|HttpStatus|2|System.Int32|INT|

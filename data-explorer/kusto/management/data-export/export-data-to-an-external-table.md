@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 28aca460089c6dc3b70aecaff11b26cfe1c1baf4
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: ebead1ee5dbe458fc9c517d6bf20fc99ca27dd66
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84258061"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780676"
 ---
 # <a name="export-data-to-an-external-table"></a>Exportieren von Daten in eine externe Tabelle
 
@@ -27,11 +27,11 @@ Die Tabellen Eigenschaften werden beim [Erstellen der externen Tabelle](../exter
 
 **Ausgabe:**
 
-|Output-Parameter |Type |BESCHREIBUNG
+|Output-Parameter |type |BESCHREIBUNG
 |---|---|---
-|Externaltablename  |Zeichenfolge |Der Name der externen Tabelle.
-|Pfad|Zeichenfolge|Ausgabepfad.
-|Numrecords|Zeichenfolge| Anzahl der Datensätze, die in den Pfad exportiert werden.
+|Externaltablename  |String |Der Name der externen Tabelle.
+|Pfad|String|Ausgabepfad.
+|Numrecords|String| Anzahl der Datensätze, die in den Pfad exportiert werden.
 
 **Hinweise:**
 * Das Export Abfrage-Ausgabe Schema muss mit dem Schema der externen Tabelle, einschließlich aller von den Partitionen definierten Spalten, identisch sein. Wenn die Tabelle beispielsweise nach *DateTime*partitioniert wird, muss das Abfrageausgabe Schema über eine timestamp-Spalte verfügen, die mit *timestampcolumnname*übereinstimmt. Dieser Spaltenname wird in der Partitionierungs Definition der externen Tabelle definiert.
@@ -42,19 +42,20 @@ Die Tabellen Eigenschaften werden beim [Erstellen der externen Tabelle](../exter
 * Die folgenden Eigenschaften werden als Teil des Export-Befehls unterstützt. Weitere Informationen finden Sie im Abschnitt [Exportieren in den Speicher](export-data-to-storage.md) : 
    * `sizeLimit`, `parquetRowGroupSize`, `distributed`.
 
-* Wenn die externe Tabelle partitioniert ist, werden exportierte Artefakte gemäß den Partitions Definitionen, wie im [Beispiel](#partitioned-external-table-example)gezeigt, in ihre jeweiligen Verzeichnisse geschrieben. 
-  * Wenn ein Partitions Wert NULL bzw. leer ist oder ein ungültiger Verzeichnis Wert ist, wird er gemäß den Definitionen des Ziel Speichers durch den Standardwert ersetzt `__DEFAULT_PARTITION__` . 
+* Wenn die externe Tabelle partitioniert ist, werden exportierte Artefakte gemäß den Partitions Definitionen in ihre jeweiligen Verzeichnisse geschrieben, wie im Beispiel für eine [partitionierte externe Tabelle](#partitioned-external-table-example)zu sehen. 
+  * Wenn ein Partitions Wert nach den Definitionen des Ziel Speichers NULL/leer ist oder ein ungültiger Verzeichnis Wert ist, wird der Partitions Wert durch den Standardwert ersetzt `__DEFAULT_PARTITION__` . 
 
 * Die Anzahl der pro Partition geschriebenen Dateien hängt von den Einstellungen ab:
-   * Wenn die externe Tabelle nur DateTime-Partitionen oder überhaupt keine Partitionen enthält, sollte die Anzahl der geschriebenen Dateien (für jede Partition, falls vorhanden) die Anzahl der Knoten im Cluster betragen (oder mehr, wenn `sizeLimit` erreicht wird). Wenn der Export Vorgang verteilt wird, werden alle Knoten im Cluster gleichzeitig exportiert. Um die Verteilung zu deaktivieren, sodass nur ein einziger Knoten die Schreibvorgänge ausführt, legen `distributed` Sie auf false fest. Durch diesen Vorgang werden weniger Dateien erstellt, die Exportleistung wird jedoch verringert.
+   * Wenn die externe Tabelle nur DateTime-Partitionen oder keine Partitionen enthält, sollte die Anzahl der geschriebenen Dateien (für jede Partition, falls vorhanden) der Anzahl der Knoten im Cluster ähneln (oder wenn `sizeLimit` erreicht ist). Wenn der Export Vorgang verteilt wird, werden alle Knoten im Cluster gleichzeitig exportiert. Um die Verteilung zu deaktivieren, sodass nur ein einziger Knoten die Schreibvorgänge durchführt, legen `distributed` Sie auf false fest. Durch diesen Vorgang werden weniger Dateien erstellt, die Exportleistung wird jedoch reduziert.
 
-   * Wenn die externe Tabelle eine Partition durch eine Zeichen folgen Spalte enthält, muss die Anzahl der exportierten Dateien eine einzelne Datei pro Partition (oder mehr, wenn `sizeLimit` erreicht wird) sein. Alle Knoten sind immer noch Teil des Exports (der Vorgang ist verteilt), jede Partition wird jedoch einem bestimmten Knoten zugewiesen. `distributed`Wenn in diesem Fall auf false festgelegt wird, bewirkt dies, dass nur ein einziger Knoten den Export ausführt, aber das Verhalten bleibt unverändert (eine einzelne Datei, die pro Partition geschrieben wird).
+   * Wenn die externe Tabelle eine Partition durch eine Zeichen folgen Spalte enthält, muss die Anzahl der exportierten Dateien eine einzelne Datei pro Partition (oder mehr, wenn `sizeLimit` erreicht wird) sein. Alle Knoten sind immer noch Teil des Exports (der Vorgang ist verteilt), jede Partition wird jedoch einem bestimmten Knoten zugewiesen. Wenn `distributed` auf false festgelegt wird, bewirkt dies, dass nur ein einziger Knoten den Export durchführt, aber das Verhalten bleibt unverändert (eine einzelne Datei, die pro Partition geschrieben wird).
 
 ## <a name="examples"></a>Beispiele
 
 ### <a name="non-partitioned-external-table-example"></a>Beispiel für eine nicht partitionierte externe Tabelle
 
 Externalblob ist eine nicht partitionierte externe Tabelle. 
+
 ```kusto
 .export to table ExternalBlob <| T
 ```

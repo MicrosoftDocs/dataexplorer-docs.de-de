@@ -1,6 +1,6 @@
 ---
-title: indexof_regex() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird indexof_regex() in Azure Data Explorer beschrieben.
+title: indexof_regex ()-Azure Daten-Explorer
+description: In diesem Artikel wird indexof_regex () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,40 +8,47 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6da0523e85bab4883c50708ffe3f7d087fdd8c8f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 72797b54c3ba431b4a846f9e9661e9693359cceb
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513888"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780455"
 ---
 # <a name="indexof_regex"></a>indexof_regex()
 
-Function meldet den nullbasierten Index des ersten Vorkommens einer angegebenen Zeichenfolge innerhalb der Eingabezeichenfolge. Einfache Zeichenfolgenübereinstimmungen überlappen sich nicht. 
+Die Funktion meldet den NULL basierten Index des ersten Vorkommens einer angegebenen Zeichenfolge in der Eingabe Zeichenfolge. Einfache Zeichen folgen Übereinstimmungen überlappen nicht.
 
 Siehe [`indexof()`](indexoffunction.md).
 
 **Syntax**
 
-`indexof_regex(`*Quellsuche*`,``[,`*lookup*`[,`*start_index-Längen-Vorkommen*`[,`*occurrence* *start_index*`]]])`
+`indexof_regex(`*Quelle* `,` *Suche* `[,` *start_index* `[,` *Länge* `[,` *vorkommen*`]]])`
 
 **Argumente**
 
-* *Quelle*: Eingabezeichenfolge.  
-* *Lookup*: Zeichenfolge zu suchen.
-* *start_index*: Startposition suchen (optional).
-* *Länge*: Anzahl der zu untersuchenden Zeichenpositionen, -1 Definition unbegrenzter Länge (optional).
-* *Vorkommen*: ist das Vorkommen Standard 1 (optional).
+|Argumente     | BESCHREIBUNG                                     |Erforderlich oder optional|
+|--------------|-------------------------------------------------|--------------------|
+|source        | Eingabezeichenfolge                                    |Erforderlich            |
+|lookup        | Zu suchender Zeichenfolge                                  |Erforderlich            |
+|start_index   | Startposition der Suche                           |Optional            |
+|length        | Anzahl der zu überprüfenden Zeichen Positionen. -1 definiert eine unbegrenzte Länge. |Optional            |
+|occurrence    | Suchen Sie nach dem Index der N-ten Darstellung des Musters. 
+                 Der Standardwert ist 1, der Index des ersten Vorkommens. |Optional            |
 
 **Rückgabe**
 
-Nullbasierte Indexposition der *Suche*.
+Null basierte Indexposition von *Suche*.
 
-Gibt -1 zurück, wenn die Zeichenfolge in der Eingabe nicht gefunden wird.
-Bei irrelevantem (weniger als 0) *start_index*gibt *der Vorkommen* oder (weniger als -1) *Längenparameter* *null*zurück.
+* Gibt-1 zurück, wenn die Zeichenfolge nicht in der Eingabe gefunden wurde.
+* Gibt *null* zurück, wenn:
+     * start_index ist kleiner als 0 (null).
+     * Das Vorkommen ist kleiner als 0 (null).
+     * der length-Parameter ist kleiner als-1.
 
 
 **Beispiele**
+
 ```kusto
 print
  idx1 = indexof_regex("abcabc", "a.c") // lookup found in input string
@@ -51,6 +58,6 @@ print
  , idx5 = indexof_regex("abcabc", "a|ab", -1)  // invalid input
 ```
 
-|idx1|idx2|idx3|idx4|idx5
-|----|----|----|----|----
-|0   |3   |-1  |-1  |    
+|idx1|idx2|idx3|idx4|idx5|
+|----|----|----|----|----|
+|0   |3   |-1  |-1  |    |

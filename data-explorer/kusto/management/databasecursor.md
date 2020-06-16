@@ -1,6 +1,6 @@
 ---
-title: Datenbankcursor - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden Datenbankcursor in Azure Data Explorer beschrieben.
+title: 'Datenbankcursorn: Azure Daten-Explorer'
+description: Dieser Artikel beschreibt Datenbankcursorn in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,39 +8,41 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 90ec677a7eaf1f326509828b5415b022742fd9ed
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 75dc0aa0ff23bfb4f08be9fac84fa34cf9526508
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81521317"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780625"
 ---
-# <a name="database-cursors"></a>Datenbankcursor
+# <a name="database-cursors"></a>Daten Bank Cursor
 
-Ein **Datenbankcursor** ist ein Objekt auf Datenbankebene, das es ermöglicht, eine Datenbank mehrmals abzufragen und konsistente Ergebnisse zu erzielen, selbst wenn parallel zu den Abfragen laufende Vorgänge zum Anfügen von Daten/Datenaufbewahrung stattfinden.
+Ein **Daten Bank Cursor** ist ein Objekt auf Datenbankebene, mit dem Sie eine Datenbank mehrmals Abfragen können. Sie erhalten auch dann konsistente Ergebnisse, wenn- `data-append` oder- `data-retention` Vorgänge parallel zu den Abfragen ausgeführt werden.
 
-Datenbankcursor sind so konzipiert, dass sie zwei wichtige Szenarien behandeln:
+Datenbankcursorn sind für zwei wichtige Szenarien konzipiert:
 
-* Die Möglichkeit, dieselbe Abfrage mehrmals zu wiederholen und die gleichen Ergebnisse zu erhalten, solange die Abfrage den "gleichen Datensatz" angibt.
+* Die Möglichkeit, dieselbe Abfrage mehrmals zu wiederholen und die gleichen Ergebnisse zu erhalten, solange die Abfrage "dasselbe Dataset" angibt.
 
-* Die Möglichkeit, eine "genau einmalige" Abfrage auszuführen (eine Abfrage, die nur die Daten "sieht", die eine vorherige Abfrage nicht gesehen hat, weil die Daten damals nicht verfügbar waren).
-   Dies ermöglicht es beispielsweise, alle neu angekommenen Daten in einer Tabelle zu durchlaufen, ohne Angst zu haben, denselben Datensatz zweimal zu verarbeiten oder Datensätze versehentlich zu überspringen.
+* Die Möglichkeit, eine "genau einmal"-Abfrage zu erstellen. Diese Abfrage "sieht" nur die Daten, die von einer vorherigen Abfrage nicht angezeigt wurden, weil die Daten nicht verfügbar waren.
+   Mit der Abfrage können Sie z. b. alle neu eingegangenen Daten in einer Tabelle durchlaufen, ohne zu befürchten, dass derselbe Datensatz zweimal verarbeitet oder Datensätze versehentlich übersprungen werden.
 
-Der Datenbankcursor wird in der Abfragesprache als Skalarwert des Typs `string`dargestellt. Der tatsächliche Wert sollte als undurchsichtig betrachtet werden, und es gibt keine Unterstützung für einen anderen Vorgang als das Speichern des Werts und/oder die Verwendung der unten aufgeführten Cursorfunktionen.
+Der Daten Bank Cursor wird in der Abfragesprache als Skalarwert des Typs dargestellt `string` . Der tatsächliche Wert sollte als nicht transparent angesehen werden, und es gibt keine Unterstützung für andere Vorgänge als zum Speichern des Werts oder zum Verwenden der unten aufgeführten Cursor Funktionen.
 
-## <a name="cursor-functions"></a>Cursorfunktionen
+## <a name="cursor-functions"></a>Cursor Funktionen
 
-Kusto bietet drei Funktionen, um die beiden oben genannten Szenarien zu implementieren:
+Kusto bietet drei Funktionen, die die Implementierung der beiden oben genannten Szenarien unterstützen:
 
-* [cursor_current()](../query/cursorcurrent.md): Verwenden Sie diese Funktion, um den aktuellen Wert des Datenbankcursors abzurufen.
+* [cursor_current ()](../query/cursorcurrent.md): Verwenden Sie diese Funktion, um den aktuellen Wert des Daten Bank Cursors abzurufen.
    Sie können diesen Wert als Argument für die beiden anderen Funktionen verwenden.
-   Diese Funktion hat auch `current_cursor()`ein Synonym, .
+   Diese Funktion verfügt auch über das Synonym `current_cursor()` .
 
-* [cursor_after(rhs:string)](../query/cursorafterfunction.md): Diese spezielle Funktion kann für Tabellendatensätze verwendet werden, für die die [IngestionTime-Richtlinie](ingestiontime-policy.md) aktiviert ist. Es gibt einen skalaren `bool` Wert des Typs `ingestion_time()` zurück, der angibt, ob der Datenbankcursorwert des Datensatzes hinter dem `rhs` Datenbankcursorwert liegt.
+* [cursor_after (RHS: String)](../query/cursorafterfunction.md): diese spezielle Funktion kann für Tabellendaten Sätze verwendet werden, für die die [ingestiontime-Richtlinie](ingestiontime-policy.md) aktiviert ist. Es gibt einen Skalarwert des Typs zurück, der `bool` angibt, ob der `ingestion_time()` Daten Bank Cursor Wert des Datensatzes nach dem `rhs` Wert des Daten Bank Cursors liegt.
 
-* [cursor_before_or_at(rhs:string)](../query/cursorbeforeoratfunction.md): Diese spezielle Funktion kann für die Tabellendatensätze verwendet werden, für die die [IngestionTime-Richtlinie](ingestiontime-policy.md) aktiviert ist. Es gibt einen skalaren `bool` Wert des Typs `ingestion_time()` zurück, der angibt, ob der Datenbankcursorwert des Datensatzes hinter dem `rhs` Datenbankcursorwert liegt.
+* [cursor_before_or_at (RHS: String)](../query/cursorbeforeoratfunction.md): diese spezielle Funktion kann für die Tabellendaten Sätze verwendet werden, für die die [ingestiontime-Richtlinie](ingestiontime-policy.md) aktiviert ist. Es gibt einen Skalarwert des Typs zurück, der `bool` angibt, ob der `ingestion_time()` Daten Bank Cursor Wert des Datensatzes nach dem `rhs` Wert des Daten Bank Cursors liegt.
 
-Die beiden speziellen`cursor_after` `cursor_before_or_at`Funktionen ( und ) haben auch einen Nebeneffekt: Wenn sie verwendet werden, `@ExtendedProperties` gibt Kusto den aktuellen Wert des **Datenbankcursors** an das Resultset der Abfrage aus. Der Eigenschaftsname für `Cursor`den Cursor ist `string`, und sein Wert ist ein einzelner . Beispiel:
+Die beiden speziellen Funktionen ( `cursor_after` und `cursor_before_or_at` ) haben ebenfalls einen Nebeneffekt: Wenn Sie verwendet werden, gibt Kusto den **aktuellen Wert des Daten Bank Cursors** an das `@ExtendedProperties` Resultset der Abfrage aus. Der Eigenschaftsname für den Cursor ist `Cursor` , und sein Wert ist eine einzelne `string` . 
+
+Beispiel:
 
 ```json
 {"Cursor" : "636040929866477946"}
@@ -48,17 +50,17 @@ Die beiden speziellen`cursor_after` `cursor_before_or_at`Funktionen ( und ) habe
 
 ## <a name="restrictions"></a>Beschränkungen
 
-Datenbankcursor können nur für Tabellen verwendet werden, für die die [IngestionTime-Richtlinie](ingestiontime-policy.md) aktiviert wurde. Jeder Datensatz in einer solchen Tabelle ist mit dem Wert des Datenbankcursors verknüpft, der bei der Aufnahme des Datensatzes wirksam war, und daher kann die [ingestion_time()-Funktion](../query/ingestiontimefunction.md) verwendet werden.
+Datenbankcursorn können nur mit Tabellen verwendet werden, für die die [ingestiontime-Richtlinie](ingestiontime-policy.md) aktiviert wurde. Jeder Datensatz in einer solchen Tabelle ist mit dem Wert des Daten Bank Cursors verknüpft, der beim Erfassen des Datensatzes wirksam war.
+Daher kann die [ingestion_time ()](../query/ingestiontimefunction.md) -Funktion verwendet werden.
 
-Das Datenbankcursorobjekt enthält keinen aussagekräftigen Wert, es sei denn, die Datenbank verfügt über mindestens eine Tabelle, für die eine [IngestionTime-Richtlinie](ingestiontime-policy.md) definiert ist.
-Darüber hinaus ist nur gewährleistet, dass dieser Wert nach Bedarf durch den Erfassungsverlauf in solche Tabellen aktualisiert wird und die Abfragen ausgeführt werden, die auf solche Tabellen verweisen. In anderen Fällen kann es aktualisiert werden oder nicht.
+Das Daten Bank Cursor Objekt enthält keinen sinnvollen Wert, es sei denn, die Datenbank enthält mindestens eine Tabelle, für die eine [ingestiontime-Richtlinie](ingestiontime-policy.md) definiert ist.
+Dieser Wert wird garantiert, wenn er vom Erfassungs Verlauf benötigt wird, in Tabellen und die Abfragen ausgeführt, die auf diese Tabellen verweisen. In anderen Fällen wird dies möglicherweise aktualisiert.
 
-Der Erfassungsprozess überträgt zuerst die Daten (so dass sie für Abfragen verfügbar sind) und weist jedem Datensatz erst dann einen tatsächlichen Cursorwert zu. Dies bedeutet, dass, wenn man versucht, Daten unmittelbar nach dem Abschluss der Aufnahme mit einem Datenbankcursor abzufragen, die Ergebnisse möglicherweise noch nicht die letzten hinzugefügten Datensätze enthalten, da ihnen der Cursorwert noch nicht zugewiesen wurde. Ebenso kann das wiederholte Abrufen des aktuellen Datenbankcursorwerts denselben Wert zurückgeben (auch wenn die Aufnahme zwischendurch erfolgt ist), da nur cursor commit seinen Wert aktualisiert.
+Der Erfassungsprozess führt zuerst einen Commit für die Daten aus, sodass er für Abfragen verfügbar ist, und weist nur dann jedem Datensatz einen tatsächlichen Cursor Wert zu. Wenn Sie versuchen, Daten unmittelbar nach dem Erfassungs Abschluss mithilfe eines Daten Bank Cursors abzufragen, enthalten die Ergebnisse möglicherweise noch nicht die letzten hinzugefügten Datensätze, da Ihnen noch nicht der Cursor Wert zugewiesen wurde. Außerdem kann das Abrufen des aktuellen Daten Bank Cursor Werts wiederholt denselben Wert zurückgeben, auch wenn die Erfassung dazwischen erfolgt ist, da nur ein Cursor Commit seinen Wert aktualisieren kann.
 
-## <a name="example-processing-of-records-exactly-once"></a>Beispiel: Bearbeitung von Datensätzen genau einmal
+## <a name="example-processing-records-exactly-once"></a>Beispiel: genaue Verarbeitung von Datensätzen
 
-Angenommen `Employees` Tabelle `[Name, Salary]`mit Schema .
-Um neue Datensätze kontinuierlich zu verarbeiten, während sie in die Tabelle aufgenommen werden, gehen Sie wie folgt vor:
+Verwenden Sie für eine Tabelle `Employees` mit Schema `[Name, Salary]` den folgenden Prozess, um neue Datensätze fortlaufend zu verarbeiten, wenn Sie in der Tabelle erfasst werden:
 
 ```kusto
 // [Once] Enable the IngestionTime policy on table Employees

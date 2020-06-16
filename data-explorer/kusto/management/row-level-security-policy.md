@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/25/2020
-ms.openlocfilehash: f8f6f820090bde91b9ed6479e0677a893a682983
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 3f36fa4c35ceb88c82b4dfcb7557e4839fed4aa2
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617373"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780540"
 ---
 # <a name="rowlevelsecurity-policy-preview"></a>Rowlevelsecurity-Richtlinie (Vorschau)
 
@@ -48,15 +48,15 @@ Auch wenn die Richtlinie deaktiviert ist, können Sie erzwingen, dass Sie auf ei
 Dies ist nützlich, wenn Sie verschiedene Abfragen für row_level_security ausprobieren möchten, aber nicht möchten, dass es für Benutzer tatsächlich wirksam wird. Wenn Sie in der Abfrage sicher sind, aktivieren Sie die Richtlinie.
 
 > [!NOTE]
-> Die folgenden Einschränkungen gelten für `query`:
+> Die folgenden Einschränkungen gelten für `query` :
 >
 > * Die Abfrage sollte genau das gleiche Schema wie die Tabelle ergeben, in der die Richtlinie definiert ist. Das heißt, das Ergebnis der Abfrage sollte genau die gleichen Spalten wie die ursprüngliche Tabelle in derselben Reihenfolge mit denselben Namen und Typen zurückgeben.
-> * In der Abfrage können nur die folgenden Operatoren `extend`verwendet `where`werden `project`: `project-away`, `project-rename`, `project-reorder` , `union`, und.
-> * Die Abfrage kann nicht auf Tabellen verweisen, die nicht auf die Tabellen verweisen, für die die Richtlinie definiert ist.
+> * In der Abfrage können nur die folgenden Operatoren verwendet `extend` werden:, `where` , `project` , `project-away` , `project-rename` , `project-reorder` `join` und `union` .
+> * Die Abfrage kann nicht auf andere Tabellen verweisen, für die RLS aktiviert ist.
 > * Bei der Abfrage kann es sich um eine der folgenden oder um eine Kombination der folgenden Elemente handeln:
->    * Abfrage (z. b `<table_name> | extend CreditCardNumber = "****"`.)
->    * Function (z. b `AnonymizeSensitiveData`.)
->    * Datdatababel (z. `datatable(Col1:datetime, Col2:string) [...]`b.)
+>    * Abfrage (z. b. `<table_name> | extend CreditCardNumber = "****"` )
+>    * Function (z. b. `AnonymizeSensitiveData` )
+>    * Datdatababel (z. b. `datatable(Col1:datetime, Col2:string) [...]` )
 
 > [!TIP]
 > Diese Funktionen sind häufig für row_level_security Abfragen nützlich:

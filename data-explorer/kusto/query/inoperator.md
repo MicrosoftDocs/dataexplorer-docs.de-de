@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2019
-ms.openlocfilehash: cd11362c15e5ecfb80eab57b57b22f190f47da05
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: 3f45f579ad47dbdc9bf1fca707826948a598f63d
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271569"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780166"
 ---
 # <a name="in-and-in-operators"></a>in- und !in-Operatoren
 
-Filtert ein Recordset basierend auf dem bereitgestellten Satz von Werten.
+Filtert einen Daten Satz Satz basierend auf dem bereitgestellten Satz von Werten.
 
 ```kusto
 Table1 | where col in ('value1', 'value2')
@@ -25,7 +25,7 @@ Table1 | where col in ('value1', 'value2')
 
 **Syntax**
 
-*Groß-/Kleinschreibung beachten:*
+*Syntax der Groß-/Kleinschreibung:*
 
 *T* - `|` `where` *col* `in` `(` *Liste der Skalarausdrücke*`)`   
 *T* - `|` `where` *col* `in` `(` *Tabellen Ausdruck (Tabellen* )`)`   
@@ -45,18 +45,18 @@ Table1 | where col in ('value1', 'value2')
 
 * *T* : die tabellarische Eingabe, deren Datensätze gefiltert werden sollen.
 * *Col* : die zu filternde Spalte.
-* *Liste der Ausdrücke* : eine durch Trennzeichen getrennte Liste von tabellarischen, skalaren oder literalen Ausdrücken.  
-* *tabellarischer Ausdruck* : ein tabellarischer Ausdruck, der einen Satz von Werten aufweist (in einem Case-Ausdruck gibt es mehrere Spalten, die erste Spalte wird verwendet).
+* eine *Liste von Ausdrücken* : eine durch Trennzeichen getrennte Liste von tabellarischen, skalaren oder literalen Ausdrücken.
+* *tabellarischer Ausdruck* : ein tabellarischer Ausdruck, der über einen Satz von Werten verfügt. Wenn der Ausdruck über mehrere Spalten verfügt, wird die erste Spalte verwendet.
 
 **Rückgabe**
 
-Zeilen in *T* , für die das Prädikat`true`
+Zeilen in *T* , für die das Prädikat ist `true` .
 
-**Hinweise**
+**Notizen**
 
-* Die Ausdrucks Liste kann bis zu Werte liefern. `1,000,000`    
-* Die schsted Arrays werden in einer einzelnen Werteliste vereinfacht, z. b. `x in (dynamic([1,[2,3]]))` in`x in (1,2,3)` 
-* Bei tabellarischen Ausdrücken wird die erste Spalte des Resultsets ausgewählt.   
+* Die Ausdrucks Liste kann bis zu `1,000,000` Werte liefern.
+* In einer einzelnen Werteliste werden die in der Liste befindlichen Arrays vereinfacht. `x in (dynamic([1,[2,3]]))` wird beispielsweise zu `x in (1,2,3)`.
+* In tabellarischen Ausdrücken wird die erste Spalte des Resultsets ausgewählt.
 * Durch das Hinzufügen von ' ~ ' zum Operator wird die Groß-/Kleinschreibung nicht beachtet: `x in~ (expression)` oder `x !in~ (expression)` .
 
 **Beispiele:**  
@@ -160,7 +160,7 @@ Lightning_By_State
 | summarize sum(lightning_events) by State 
 ```
 
-| Bundesland/Kanton     | sum_lightning_events |
+| Zustand     | sum_lightning_events |
 |-----------|----------------------|
 | ALABAMA   | 29                   |
 | Wisconsin | 31                   |
@@ -181,14 +181,13 @@ StormEvents | where State in (InterestingStates()) | count
 |---|
 |4775|  
 
-
-Dies ist die Funktionsdefinition:  
+Die Funktionsdefinition.
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 .show function InterestingStates
 ```
 
-|name|Parameter|Body|Ordner|DocString|
+|Name|Parameter|Text|Ordner|DocString|
 |---|---|---|---|---|
 |Interessantheits Zustände|()|{Dynamic (["Washington", "Florida", "Georgia", "New York"])}

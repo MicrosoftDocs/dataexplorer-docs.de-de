@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a046cc369dd466defa50916ee78b2c29f5f88ea0
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 4662b1bd9f68778cab1f799f564499e23add5812
+ms.sourcegitcommit: 6a0bd5b84f9bd739510c6a75277dec3a9e851edd
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373219"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84788901"
 ---
 # <a name="pivot-plugin"></a>Pivot-Plugin
 
@@ -30,7 +30,7 @@ T | evaluate pivot(PivotColumn)
 **Argumente**
 
 * *PivotColumn*: die zu rolligende Spalte. jeder eindeutige Wert aus dieser Spalte ist eine Spalte in der Ausgabe Tabelle.
-* *Aggregations Funktion*: (optional) aggregiert mehrere Zeilen in der Eingabe Tabelle in eine einzelne Zeile in der Ausgabe Tabelle. Derzeit unterstützte Funktionen: `min()` , `max()` , `any()` , `sum()` , `dcount()` , `avg()` , `stdev()` , `variance()` und `count()` (Standardwert ist `count()` ).
+* *Aggregations Funktion*: (optional) aggregiert mehrere Zeilen in der Eingabe Tabelle in eine einzelne Zeile in der Ausgabe Tabelle. Derzeit unterstützte Funktionen: `min()` , `max()` , `any()` , `sum()` , `dcount()` , `avg()` , `stdev()` , `variance()` , `make_list()` , `make_bag()` , `make_set()` , `count()` (Standardwert ist `count()` ).
 * *column1*, *Column2*,...: (optional) Spaltennamen. Die Ausgabe Tabelle enthält eine zusätzliche Spalte für jede angegebene Spalte. Standard: alle Spalten außer der pivotierten Spalte und der Aggregations Spalte.
 
 **Rückgabe**
