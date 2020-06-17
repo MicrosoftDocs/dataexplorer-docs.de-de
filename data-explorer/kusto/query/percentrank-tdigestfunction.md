@@ -8,16 +8,17 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: 8220c52b70eec8a0a297c5826fff3a6e2a0483b3
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: cafb52b7254041a18a9cae956ed338f45bc67a54
+ms.sourcegitcommit: 3848b8db4c3a16bda91c4a5b7b8b2e1088458a3a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373242"
+ms.lasthandoff: 06/16/2020
+ms.locfileid: "84818569"
 ---
 # <a name="percentrank_tdigest"></a>percentrank_tdigest()
 
-Berechnet den ungefähren Rang des Werts in einer Menge, wobei Rang als Prozentsatz der Größe des Satzes ausgedrückt wird. Diese Funktion kann als Umkehrung des Perzentils angezeigt werden.
+Berechnet den ungefähren Rang des Werts in einer Menge, wobei Rang als Prozentsatz der Größe des Satzes ausgedrückt wird.
+Diese Funktion kann als Umkehrung des Perzentils angezeigt werden.
 
 **Syntax**
 
@@ -34,7 +35,7 @@ Der Prozentsatz des Werts in einem DataSet.
 
 **Tipps**
 
-1) Der Typ des zweiten Parameters und der Typ der Elemente im tdigest müssen identisch sein.
+1) Der Typ des zweiten Parameters und der Typ der Elemente in müssen `tdigest` identisch sein.
 
 2) Der erste Parameter muss tdigest sein, der von [tdigest ()](tdigest-aggfunction.md) oder [tdigest_merge ()](tdigest-merge-aggfunction.md) generiert wurde.
 

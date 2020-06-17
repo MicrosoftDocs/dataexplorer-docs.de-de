@@ -1,6 +1,6 @@
 ---
-title: make_string() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird make_string() in Azure Data Explorer beschrieben.
+title: make_string ()-Azure Daten-Explorer
+description: In diesem Artikel wird make_string () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: d5af7cab9106088064048c1077ec3f9b1950ec08
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 035be5910d173c75e585baa0b093dc6276bd4d63
+ms.sourcegitcommit: 3848b8db4c3a16bda91c4a5b7b8b2e1088458a3a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81512630"
+ms.lasthandoff: 06/16/2020
+ms.locfileid: "84818584"
 ---
 # <a name="make_string"></a>make_string()
 
-Gibt die Zeichenfolge zurück, die von den Unicode-Zeichen generiert wird.
+Gibt die von den Unicode-Zeichen generierte Zeichenfolge zurück.
     
 **Syntax**
 
-`make_string (`*Arg1* [, *ArgN*]...`)`
+`make_string (`*Arg1*[, *argN*]...`)`
 
 **Argumente**
 
-* *Arg1* ... *ArgN* : Ausdrücke, die ganze Zahlen (int oder long) oder ein dynamischer Wert mit einem Array von integralen Zahlen sind.
+* *Arg1* ... *ArgN*: Ausdrücke, bei denen es sich um ganze Zahlen (int oder Long) handelt, oder ein dynamischer Wert, der ein Array ganzzahliger Zahlen enthält.
 
-* Diese Funktion empfängt bis zu 64 Argumente. 
+* Diese Funktion empfängt bis zu 64 Argumente.
 
 **Rückgabe**
 
-Gibt die Zeichenfolge aus den Unicode-Zeichen zurück, deren Codepointwert von den Argumenten für diese Funktion bereitgestellt wird. Die Eingabe muss aus gültigen Unicode-Codepoints bestehen.
-Wenn ein Argument keinem Unicode-Zeichen zugeordnet ist, gibt die Funktion NULL zurück.
+Gibt die Zeichenfolge zurück, die aus den Unicode-Zeichen besteht, deren codepointwert von den Argumenten für diese Funktion bereitgestellt wird. Die Eingabe muss aus gültigen Unicode-Code Punkten bestehen.
+Wenn ein beliebiges Argument keinem Unicode-Zeichen zugeordnet ist, gibt die Funktion zurück `null` .
 
 **Beispiele**
 
@@ -43,7 +43,7 @@ print str = make_string(75, 117, 115, 116, 111)
 |str|
 |---|
 |Kusto|
-    
+
 ```kusto
 print str = make_string(dynamic([75, 117, 115, 116, 111]))
 ```

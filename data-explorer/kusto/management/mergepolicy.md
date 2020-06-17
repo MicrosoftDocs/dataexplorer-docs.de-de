@@ -1,5 +1,5 @@
 ---
-title: 'Extents-Zusammenschluss Richtlinie: Azure Daten-Explorer | Microsoft-Dokumentation'
+title: 'Extents-Merge-Richtlinie: Azure Daten-Explorer'
 description: Dieser Artikel beschreibt die Extents-Zusammenschluss Richtlinie in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
@@ -8,61 +8,64 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: f0398fbc19842b3cce7fe69c8cb61258d0aeaaa6
-ms.sourcegitcommit: a562ce255ac706ca1ca77d272a97b5975235729d
+ms.openlocfilehash: 1f0a95e095dfaa11afdea3b66597ff3d98f0449b
+ms.sourcegitcommit: 3848b8db4c3a16bda91c4a5b7b8b2e1088458a3a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83867034"
+ms.lasthandoff: 06/16/2020
+ms.locfileid: "84818618"
 ---
 # <a name="extents-merge-policy"></a>Extents-Merge-Richtlinie
+
 Die Merge-Richtlinie definiert, ob und wie [Blöcke (Daten-Shards)](../management/extents-overview.md) im Kusto-Cluster zusammengeführt werden sollen.
 
-Es gibt zwei Arten von Merge-Vorgängen: `Merge` (wodurch Indizes neu erstellt werden) und `Rebuild` (wodurch die Daten vollständig wieder hergestellt werden).
+Es gibt zwei Typen von Merge-Vorgängen: `Merge` , die Indizes neu erstellen, und `Rebuild` , wodurch die Daten vollständig neu erstellt werden.
 
-Beide Vorgangs Arten führen zu einem einzelnen Block, der die Quell Blöcke ersetzt.
+Beide Vorgangs Typen führen zu einem einzelnen Block, der die Quell Blöcke ersetzt.
 
-Standardmäßig werden Neuerstellungs Vorgänge bevorzugt. nur wenn verbleibende Blöcke vorhanden sind, die nicht den Kriterien für die Neuerstellung entsprechen, werden Sie zusammengeführt.  
+Standardmäßig werden Rebuild-Vorgänge bevorzugt. Wenn Blöcke vorhanden sind, die nicht den Kriterien für die Neuerstellung entsprechen, wird versucht, Sie zusammenzuführen.  
 
-*Hinweise:*
-- Das Markieren von Blöcken mit *verschiedenen* `drop-by` Tags bewirkt, dass solche Blöcke nicht zusammengeführt werden, auch wenn eine mergerichtlinie festgelegt wurde (siehe Block- [Tagging](../management/extents-overview.md#extent-tagging)).
-- Blöcke, deren Union-Tags die Länge von 1 Mio. Zeichen überschreiten, werden nicht zusammengeführt.
-- Die [Sharding-Richtlinie](./shardingpolicy.md) der Datenbank/Tabelle wirkt sich auch darauf aus, wie Blöcke zusammengeführt werden.
+> [!NOTE]
+> * Das Markieren von Blöcken mit *unterschiedlichen* `drop-by` Tags bewirkt, dass solche Blöcke nicht zusammengeführt werden, auch wenn eine Merge-Richtlinie festgelegt wurde. Weitere Informationen finden Sie Unterblock- [Tagging](../management/extents-overview.md#extent-tagging).
+> * Blöcke, deren Union-Tags die Länge von 1 Mio. Zeichen überschreiten, werden nicht zusammengeführt.
+> * Die [Sharding-Richtlinie](./shardingpolicy.md) der Datenbank oder der Tabelle wirkt sich auch darauf aus, wie Blöcke zusammengeführt werden.
+
+## <a name="merge-policy-properties"></a>Richtlinien Eigenschaften für Zusammenführen
 
 Die Merge-Richtlinie enthält die folgenden Eigenschaften:
 
-- **Rowzähltupperboundformerge**:
-    - Standardwerte:
-      - 0 (unbegrenzt) für Richtlinien, die vor dem 2020. Juni festgelegt wurden.
-      - 16 Millionen für Richtlinien, die ab dem 2020. Juni festgelegt wurden.
-    - Maximal zulässige Zeilen Anzahl des zusammengeführten Wertebereichs.
-    - Gilt für Merge-Vorgänge, nicht für die erneute Erstellung.  
-- **Originalsizembupperboundformerge**:
-    - Der Standardwert ist 0 (unbegrenzt).
-    - Die maximal zulässige ursprüngliche Größe (in MB) des zusammengeführten Wertebereichs.
-    - Gilt für Merge-Vorgänge, nicht für die erneute Erstellung.  
-- **Maxextentstomerge**:
-    - Der Standardwert ist 100.
-    - Maximal zulässige Anzahl von Blöcken, die in einem einzelnen Vorgang zusammengeführt werden sollen.
-    - Gilt für Merge-Vorgänge.
-- **Schleifen Zeitraum**:
-    - Der Standardwert ist 01:00:00 (1 Stunde).
-    - Die maximale Wartezeit zwischen dem Starten von zwei aufeinander folgenden Iterationen von Merge/Rebuild-Vorgängen (durch den Datenverwaltung-Dienst ausgeführt).
-    - Gilt für Merge-und Rebuild-Vorgänge.
-- **Zuordnung**:
-    - Der Standardwert ist "true".
-    - Definiert `Rebuild` , ob Vorgänge aktiviert sind (in diesem Fall werden Sie gegenüber `Merge` Vorgängen bevorzugt).
-- **AllowMerge**:
-    - Der Standardwert ist "true".
-    - Definiert `Merge` , ob Vorgänge aktiviert sind (in diesem Fall sind Sie weniger bevorzugt als `Rebuild` Vorgänge).
-- **Maxrangeingehours**:
-    - Der Standardwert ist 8.
-    - Maximal zulässige Differenz (in Stunden) zwischen den Erstellungs Zeiten zweier verschiedener Blöcke, sodass Sie immer noch zusammengeführt werden können.
-    - Timestamps sind die Werte für die Block Erstellung und stehen nicht in Beziehung zu den tatsächlichen Daten, die in den Blöcken enthalten sind.
-    - Gilt für Merge-und Rebuild-Vorgänge.
-    - Eine bewährte Vorgehensweise besteht darin, dass dieser Wert mit dem *Software Update*Punkt der [Beibehaltungs Richtlinie](./retentionpolicy.md)der Datenbank/Tabelle oder der *datahotspan* (der unteren der beiden) der [Cache Richtlinie](./cachepolicy.md)korreliert wird, sodass er zwischen 2-3% der letzteren liegt.
+* **Rowzähltupperboundformerge**:
+    * Standardwerte:
+      * 0 (unbegrenzt) für Richtlinien, die vor dem 2020. Juni festgelegt wurden.
+      * 16 Millionen für Richtlinien, die ab dem 2020. Juni festgelegt wurden.
+    * Maximal zulässige Zeilen Anzahl des zusammengeführten Wertebereichs.
+    * Gilt für Merge-Vorgänge, nicht für die erneute Erstellung.  
+* **Originalsizembupperboundformerge**:
+    * Der Standardwert ist 0 (unbegrenzt).
+    * Die maximal zulässige ursprüngliche Größe (in MB) des zusammengeführten Wertebereichs.
+    * Gilt für Merge-Vorgänge, nicht für die erneute Erstellung.  
+* **Maxextentstomerge**:
+    * Der Standardwert ist 100.
+    * Maximal zulässige Anzahl von Blöcken, die in einem einzelnen Vorgang zusammengeführt werden sollen.
+    * Gilt für Merge-Vorgänge.
+* **Schleifen Zeitraum**:
+    * Der Standardwert ist 01:00:00 (1 Stunde).
+    * Die maximale Wartezeit zwischen dem Starten von zwei aufeinander folgenden Iterationen von Merge-oder Rebuild-Vorgängen durch den Datenverwaltung-Dienst.
+    * Gilt für Merge-und Rebuild-Vorgänge.
+* **Zuordnung**:
+    * Der Standardwert ist "true".
+    * Definiert `Rebuild` , ob Vorgänge aktiviert sind (in diesem Fall werden Sie gegenüber `Merge` Vorgängen bevorzugt).
+* **AllowMerge**:
+    * Der Standardwert ist "true".
+    * Definiert `Merge` , ob Vorgänge aktiviert werden. in diesem Fall werden Sie weniger bevorzugt als `Rebuild` Vorgänge.
+* **Maxrangeingehours**:
+    * Der Standardwert ist 8.
+    * Maximal zulässige Differenz (in Stunden) zwischen den Erstellungs Zeiten zweier verschiedener Blöcke, sodass Sie weiterhin gemergt werden können.
+    * Timestamps sind von der Block Erstellung und stehen nicht in Beziehung zu den tatsächlichen Daten, die in den Blöcken enthalten sind.
+    * Gilt für Merge-und Rebuild-Vorgänge.
+    * Dieser Wert sollte gemäß den Werten für die effektive [Beibehaltungs Richtlinie](./retentionpolicy.md) " *Software Update Period*" oder " [Cache Policy](./cachepolicy.md) *datahotspan* " festgelegt werden. Nehmen Sie den niedrigeren Wert von " *Soft-teperiod* " und " *datahotspan*" an. Legen Sie den Wert für *maxrangeinhours* auf einen Wert zwischen 2-3% fest. Sehen Sie sich die [Beispiele](#maxrangeinhours-examples) an.
 
-**`MaxRangeInHours`Beispiele**
+## <a name="maxrangeinhours-examples"></a>Maxrangeingehours-Beispiele
 
 |min (Software Update Period (Aufbewahrungs Richtlinie), datahotspan (Cache Richtlinie))|Maximaler Bereich in Stunden (Merge-Richtlinie)|
 |--------------------------------------------------------------------|---------------------------------|
@@ -77,6 +80,6 @@ Die Merge-Richtlinie enthält die folgenden Eigenschaften:
 > [!WARNING]
 > Wenden Sie sich an das Azure Daten-Explorer-Team, bevor Sie eine Blöcke-Zusammenführung ändern.
 
-Wenn eine Datenbank erstellt wird, wird Sie mit der standardmäßigen Zusammenstellungs Richtlinie (einer Richtlinie mit den oben erwähnten Standardwerten) festgelegt, die standardmäßig von allen in der Datenbank erstellten Tabellen geerbt wird (es sei denn, Ihre Richtlinien werden explizit auf Tabellenebene überschrieben).
+Wenn eine Datenbank erstellt wird, wird Sie mit den oben erwähnten Standardwerten für die Merge-Richtlinie festgelegt. Die Richtlinie wird standardmäßig von allen Tabellen geerbt, die in der Datenbank erstellt wurden, es sei denn, Ihre Richtlinien werden explizit auf Tabellenebene überschrieben.
 
-Steuerungsbefehle, die das Verwalten von Merge-Richtlinien für Datenbanken/Tabellen erlauben, finden Sie [hier](../management/merge-policy.md).
+Weitere Informationen finden Sie unter [Steuern von Befehlen, die Ihnen das Verwalten von Merge-Richtlinien für Datenbanken oder Tabellen ermöglichen](../management/merge-policy.md).
