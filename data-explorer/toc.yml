@@ -325,6 +325,8 @@
               href: ./kusto/query/best-practices.md
             - name: Datenbankübergreifende und clusterübergreifende Abfragen
               href: ./kusto/query/cross-cluster-or-database-queries.md
+            - name: Abfrageergebniscache
+              href: ./kusto/query/query-results-cache.md
         - name: Entitäten
           items:
             - name: Entitätstypen
@@ -1447,6 +1449,13 @@
               href: ./kusto/management/data-export/continuous-data-export.md
         - name: Datenbankcursor
           href: ./kusto/management/databasecursor.md
+        - name: Abfrageergebniscache
+          href: ./kusto/management/query-results-cache-commands.md
+          items:
+            - name: Anzeigen des Cache
+              href: ./kusto/management/show-query-results-cache-command.md
+            - name: Löschen des Cache
+              href: ./kusto/management/clear-query-results-cache-command.md
         - name: Systeminformationen
           href: ./kusto/management/systeminfo.md
           items:
