@@ -8,19 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: e35245cf767e3cf82ab61d5ce0704015d996cd7c
-ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
+ms.openlocfilehash: f8878a3c4589dca3cfacf935a787e8c754ab3ede
+ms.sourcegitcommit: a8575e80c65eab2a2118842e59f62aee0ff0e416
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "84011372"
+ms.lasthandoff: 06/17/2020
+ms.locfileid: "84942674"
 ---
 # <a name="externaldata-operator"></a>externaldata-Operator
 
 Der `externaldata` -Operator gibt eine Tabelle zurück, deren Schema in der Abfrage selbst definiert ist und dessen Daten aus einem externen Speicher Element gelesen werden (z. b. ein BLOB in Azure BLOB Storage).
-
-> [!NOTE]
-> Dieser Operator hat keine Pipeline Eingabe.
 
 **Syntax**
 
@@ -35,18 +32,21 @@ Der `externaldata` -Operator gibt eine Tabelle zurück, deren Schema in der Abfr
 
 * *Eigenschaft PROP1*, *value1*,...: zusätzliche Eigenschaften, die beschreiben, wie die aus dem Speicher abgerufenen Daten interpretiert werden, wie unter Erfassungs [Eigenschaften](../../ingestion-properties.md)aufgeführt.
     * Derzeit unterstützte Eigenschaften: `format` und `ignoreFirstRecord` .
-    * Unterstützte Datenformate: alle Erfassungs [Datenformate](../../ingestion-supported-formats.md) werden unterstützt, einschließlich `csv` , `tsv` , `json` , `parquet` , `avro` .
+    * Unterstützte Datenformate: alle Erfassungs [Datenformate](../../ingestion-supported-formats.md) werden unterstützt, einschließlich `CSV` , `TSV` , `JSON` , `Parquet` , `Avro` .
+
+> [!NOTE]
+> Dieser Operator hat keine Pipeline Eingabe.
 
 **Rückgabe**
 
 Der- `externaldata` Operator gibt eine Datentabelle des angegebenen Schemas zurück, dessen Daten aus dem angegebenen Speicher Element, das durch die Speicher Verbindungs Zeichenfolge angegeben wurde, analysiert wurden.
 
-**Beispiel**
+**Beispiele**
 
 Im folgenden Beispiel wird gezeigt, wie alle Datensätze in einer Tabelle gesucht `UserID` werden, deren Spalte zu einem bekannten Satz von IDs gehört, der (eine pro Zeile) in einem externen BLOB aufbewahrt wird.
-Da die Abfrage indirekt auf den Satz verweist, kann Sie sehr groß sein.
+Da auf die Gruppe indirekt von der Abfrage verwiesen wird, kann Sie sehr groß sein.
 
-```
+```kusto
 Users
 | where UserID in ((externaldata (UserID:string) [
     @"https://storageaccount.blob.core.windows.net/storagecontainer/users.txt"
@@ -54,3 +54,21 @@ Users
     ]))
 | ...
 ```
+
+Im folgenden Beispiel werden mehrere Datendateien abgefragt, die im externen Speicher gespeichert sind.
+
+```kusto
+externaldata(Timestamp:datetime, ProductId:string, ProductDescription:string)
+[
+  h@"https://mycompanystorage.blob.core.windows.net/archivedproducts/2019/01/01/part-00000-7e967c99-cf2b-4dbb-8c53-ce388389470d.csv.gz?...SAS...",
+  h@"https://mycompanystorage.blob.core.windows.net/archivedproducts/2019/01/02/part-00000-ba356fa4-f85f-430a-8b5a-afd64f128ca4.csv.gz?...SAS...",
+  h@"https://mycompanystorage.blob.core.windows.net/archivedproducts/2019/01/03/part-00000-acb644dc-2fc6-467c-ab80-d1590b23fc31.csv.gz?...SAS..."
+]
+with(format="csv")
+| summarize count() by ProductId
+```
+
+Das obige Beispiel kann als schnelle Möglichkeit angesehen werden, mehrere Datendateien abzufragen, ohne eine [externe Tabelle](schema-entities/externaltables.md)zu definieren. 
+
+>[!NOTE]
+>Die Daten Partitionierung wird vom- `externaldata()` Operator nicht erkannt.
