@@ -4,20 +4,21 @@ description: In diesem Artikel wird der Analyse Operator in Azure Daten-Explorer
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8255f3d0c3dc0006029f06c7a0da4b41dfbaa1b7
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: 07318a64781678410374f902ff8fe5514a4bdd17
+ms.sourcegitcommit: f9d3f54114fb8fab5c487b6aea9230260b85c41d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271334"
+ms.lasthandoff: 06/18/2020
+ms.locfileid: "85071897"
 ---
 # <a name="parse-operator"></a>parse-Operator
 
-Wertet einen Zeichenfolgenausdruck aus und analysiert dessen Wert in eine oder mehrere berechnete Spalten. Bei nicht erfolgreich analysierten Zeichen folgen weisen berechnete Spalten Nullen auf.
+Wertet einen Zeichenfolgenausdruck aus und analysiert dessen Wert in eine oder mehrere berechnete Spalten. Bei nicht erfolgreich analysierten Zeichen folgen weisen berechnete Spalten Nullen auf. 
+
 Weitere Informationen finden Sie unter Analyse [-Where-](parsewhereoperator.md) Operator, der nicht erfolgreich analysierte Zeichen folgen filtert.
 
 ```kusto

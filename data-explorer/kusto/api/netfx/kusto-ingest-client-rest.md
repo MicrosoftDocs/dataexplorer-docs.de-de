@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 02/19/2020
-ms.openlocfilehash: 96409849823850ef9fd939f9e359d75d3e6d5bf1
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: 83af540389087f0e1d9fdbd04266ab7ecaca0c5a
+ms.sourcegitcommit: b12e03206c79726d5b4055853ec3fdaa8870c451
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382147"
+ms.lasthandoff: 06/18/2020
+ms.locfileid: "85069154"
 ---
 # <a name="ingestion-without-kustoingest-library"></a>Erfassung ohne Kusto. Erfassungs Bibliothek
 
@@ -22,7 +22,7 @@ Die Kusto. Erfassungs Bibliothek ist für das Erfassen von Daten in Azure Daten-
 In diesem Artikel erfahren Sie, wie Sie mithilfe der in der *Warteschlange* befindlichen Erfassung in Azure Daten-Explorer für Pipelines auf Produktionsqualität anwenden.
 
 > [!NOTE]
-> Der folgende Code ist in c# geschrieben und nutzt das Azure Storage SDK, die Adal-Authentifizierungs Bibliothek und das newtonsoft. JSON-Paket, um den Beispielcode zu vereinfachen. Bei Bedarf kann der entsprechende Code durch entsprechende [Azure Storage Rest-API](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api) -Aufrufe, [Non-.net Adal-Paket](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-libraries)und beliebiges verfügbares JSON-Verarbeitungs Paket ersetzt werden.
+> Der folgende Code ist in c# geschrieben und nutzt das Azure Storage SDK, die Adal-Authentifizierungs Bibliothek und die NewtonSoft.JSfür das Paket, um den Beispielcode zu vereinfachen. Bei Bedarf kann der entsprechende Code durch entsprechende [Azure Storage Rest-API](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api) -Aufrufe, [Non-.net Adal-Paket](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-libraries)und beliebiges verfügbares JSON-Verarbeitungs Paket ersetzt werden.
 
 In diesem Artikel wird der empfohlene Modus für die Erfassung behandelt. Die zugehörige Entität für die Kusto. Erfassungs Bibliothek ist die [ikustoqueuedingestclient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) -Schnittstelle. Hier interagiert der Client Code mit dem Azure Daten-Explorer Service, indem er Erfassungs Benachrichtigungs Meldungen an eine Azure-Warteschlange übermitteln. Verweise auf die Nachrichten werden vom Kusto-Datenverwaltung abgerufen (auch als Erfassungs Dienst bezeichnet). Die Interaktion mit dem Dienst muss mit Azure Active Directory (Azure AD) authentifiziert werden.
 
@@ -240,7 +240,7 @@ internal static string UploadFileToBlobContainer(string filePath, string blobCon
 
 ### <a name="compose-the-azure-data-explorer-ingestion-message"></a>Erstellen der Azure Daten-Explorer Erfassungs Nachricht
 
-Das Paket "newtonsoft. JSON" erstellt erneut eine gültige Erfassungs Anforderung, um die Zieldatenbank und die Ziel Tabelle zu identifizieren, und verweist auf das BLOB.
+Die NewtonSoft.JSfür das Paket verfassen erneut eine gültige Erfassungs Anforderung, um die Zieldatenbank und die Ziel Tabelle zu identifizieren, und die auf das BLOB verweist.
 Die Nachricht wird an die Azure-Warteschlange gesendet, an der der relevante Kusto-Datenverwaltung Dienst lauscht.
 
 Hier sind einige Punkte zu beachten.
@@ -265,14 +265,15 @@ internal static string PrepareIngestionMessage(string db, string table, string d
     message.Add("DatabaseName", db);
     message.Add("TableName", table);
     message.Add("RetainBlobOnSuccess", true);   // Do not delete the blob on success
-    message.Add("Format", "json");              // Data is in JSON format
     message.Add("FlushImmediately", true);      // Do not aggregate
     message.Add("ReportLevel", 2);              // Report failures and successes (might incur perf overhead)
     message.Add("ReportMethod", 0);             // Failures are reported to an Azure Queue
 
     message.Add("AdditionalProperties", new JObject(
                                             new JProperty("authorizationContext", identityToken),
-                                            new JProperty("jsonMappingReference", mappingRef)));
+                                            new JProperty("jsonMappingReference", mappingRef),
+                                            // Data is in JSON format
+                                            new JProperty("format", "json")));
     return message.ToString();
 }
 ```
@@ -354,7 +355,7 @@ Die Meldung, dass der Kusto-Datenverwaltung-Dienst aus der Azure-Eingabe Wartesc
 
 Die Meldung, die der Datenverwaltung erwartet, aus der Azure-Eingabe Warteschlange zu lesen, ist ein JSON-Dokument im folgenden Format.
 
-|Eigenschaft | Beschreibung |
+|Eigenschaft | BESCHREIBUNG |
 |---------|-------------
 |OperationId |Vorgangs-ID (GUID), die zum Nachverfolgen des Vorgangs auf der Dienst Seite verwendet werden kann. |
 |Datenbank |Name der Zieldatenbank |

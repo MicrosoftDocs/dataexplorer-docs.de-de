@@ -4,20 +4,21 @@ description: In diesem Artikel wird der Operator "Analyse-where" in Azure Daten-
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/12/2020
-ms.openlocfilehash: 646ec00531d528efd51b4a168fde3de660a85ced
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: 48231d24ca1e49938629dd9912804c5858d11ae1
+ms.sourcegitcommit: f9d3f54114fb8fab5c487b6aea9230260b85c41d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271093"
+ms.lasthandoff: 06/18/2020
+ms.locfileid: "85071889"
 ---
 # <a name="parse-where-operator"></a>parse-where-Operator
 
-Wertet einen Zeichen folgen Ausdruck aus und analysiert seinen Wert in mindestens eine berechnete Spalte. Das Ergebnis ist nur die erfolgreich analysierten Zeichen folgen.
+Wertet einen Zeichen folgen Ausdruck aus und analysiert seinen Wert in mindestens eine berechnete Spalte. Das Ergebnis ist nur die erfolgreich analysierten Zeichen folgen. 
+
 Weitere Informationen finden Sie unter Analyse [Operator](parseoperator.md), der Nullen für nicht erfolgreich analysierte Zeichen folgen erzeugt.
 
 ```kusto
