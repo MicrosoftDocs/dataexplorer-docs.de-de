@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: f1307b54c9f0b7a948925dd4eaa4d1f2e89d8070
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 6c6d9aedee17592ac1eb1b43e93dead80eb9fc61
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81490309"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128851"
 ---
-# <a name="functions"></a>Functions
+# <a name="function-types"></a>Funktionstypen
 
 **Funktionen** sind wiederverwendbare Abfragen oder Abfrageteile. Kusto unterstützt verschiedene Arten von Funktionen:
 

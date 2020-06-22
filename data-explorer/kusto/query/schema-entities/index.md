@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/19/2019
-ms.openlocfilehash: d31765d72d37b0146cf7ba8a42e02722296bf80e
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: a69362b590acee99fbe9b57d9303099f0033d458
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663468"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128494"
 ---
-# <a name="entities"></a>Entitäten
+# <a name="entity-types"></a>Entitätstypen
 
 Kusto-Abfragen werden im Kontext einer Kusto-Datenbank ausgeführt, die an einen Kusto-Cluster angefügt ist. Die Daten in der Datenbank sind als Tabellen strukturiert, auf die die Abfrage verweisen kann. Innerhalb der Tabelle sind die Daten als rechteckiges Raster mit Spalten und Zeilen angeordnet. Darüber hinaus können Abfragen auf gespeicherte Funktionen in der Datenbank verweisen. Dabei handelt es sich um wiederverwendbare Abfragefragmente.
 
