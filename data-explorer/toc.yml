@@ -310,23 +310,20 @@
           href: troubleshoot-database-table.md
 - name: Verweis
   items:
-    - name: Abfragesprache
-      href: ./kusto/query/index.md
+    - name: Kusto-Abfrage
       items:
         - name: Übersicht
-          items:
-            - name: Kusto-Abfrage
-              href: ./kusto/query/index.md
-            - name: Lernprogramm
-              href: ./kusto/query/tutorial.md
-            - name: Beispiele
-              href: ./kusto/query/samples.md
-            - name: Bewährte Methoden
-              href: ./kusto/query/best-practices.md
-            - name: Datenbankübergreifende und clusterübergreifende Abfragen
-              href: ./kusto/query/cross-cluster-or-database-queries.md
-            - name: Abfrageergebniscache
-              href: ./kusto/query/query-results-cache.md
+          href: ./kusto/query/index.md
+        - name: Lernprogramm
+          href: ./kusto/query/tutorial.md
+        - name: Beispiele
+          href: ./kusto/query/samples.md
+        - name: Bewährte Methoden
+          href: ./kusto/query/best-practices.md
+        - name: Datenbankübergreifende und clusterübergreifende Abfragen
+          href: ./kusto/query/cross-cluster-or-database-queries.md
+        - name: Abfrageergebniscache
+          href: ./kusto/query/query-results-cache.md
         - name: Entitäten
           items:
             - name: Entitätstypen
@@ -347,7 +344,7 @@
               href: ./kusto/query/schema-entities/externaltables.md
         - name: Datentypen
           items:
-            - name: Übersicht über skalare Datentypen
+            - name: Skalare Datentypen
               href: ./kusto/query/scalar-data-types/index.md
             - name: bool
               href: ./kusto/query/scalar-data-types/bool.md
@@ -372,7 +369,7 @@
             - name: NULL-Werte
               href: ./kusto/query/scalar-data-types/null-values.md
             - name: Nicht unterstützte skalare Datentypen
-              href: /kusto/query/scalar-data-types/unsupported-data-types.md
+              href: ./kusto/query/scalar-data-types/unsupported-data-types.md
         - name: Functions
           items:
             - name: Funktionstypen
@@ -401,7 +398,7 @@
               href: ./kusto/query/batches.md
         - name: Tabellarische Operatoren
           items:
-            - name: Tabellendaten
+            - name: Abfrageoperatoren
               href: ./kusto/query/queries.md
             - name: as-Operator
               href: ./kusto/query/asoperator.md
@@ -415,7 +412,7 @@
               href: ./kusto/query/distinctoperator.md
             - name: evaluate-Operator
               items:
-                - name: evaluate-Plug-In-Operator
+                - name: evaluate-Operator-Plug-Ins
                   href: ./kusto/query/evaluateoperator.md
                 - name: autocluster
                   href: ./kusto/query/autoclusterplugin.md
@@ -465,9 +462,9 @@
               href: ./kusto/query/invokeoperator.md
             - name: join-Operator
               items:
-                - name: Übersicht über den join-Operator
+                - name: join-Operator
                   href: ./kusto/query/joinoperator.md
-                - name: Shuffle
+                - name: Shuffleabfrage
                   href: ./kusto/query/shufflequery.md
                 - name: Clusterübergreifender Join
                   href: ./kusto/query/joincrosscluster.md
