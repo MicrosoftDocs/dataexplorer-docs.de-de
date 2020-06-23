@@ -7,24 +7,36 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/29/2019
-ms.openlocfilehash: abef0650485ac1feb53d43f42559c5a7fdfb75c3
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 4665064a645ad0001251a0c7246c9d799ff6e638
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83374033"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780489"
 ---
 # <a name="machine-learning-capability-in-azure-data-explorer"></a>Machine Learning-Funktion in Azure Data Explorer
 
-Azure Data Explorer, eine Big Data-Analyseplattform, dient zur Überwachung von Dienstintegrität, QoS oder fehlerhaften Geräten auf anormales Verhalten mithilfe der integrierten Funktionen zur [Erkennung und Prognose von Anomalien](anomaly-detection.md). Sobald ein anomales Muster erkannt wird, wird eine Ursachenanalyse (Root Cause Analysis, RCA) durchgeführt, um die Anomalie abzuschwächen oder zu beheben.
+Azure Data Explorer ist eine Big Data-Analyseplattform. Sie wird verwendet, um die Dienstintegrität, QoS oder fehlerhafte Geräte zu überwachen. Die integrierten [Anomalieerkennungs- und -vorhersage](anomaly-detection.md)funktionen überprüfen auf anomales Verhalten. Sobald ein solches Muster erkannt wird, wird eine Ursachenanalyse (Root Cause Analysis, RCA) durchgeführt, um die Anomalie abzuschwächen oder zu beheben.
 
-Der komplexe und langwierige Diagnoseprozess wird von Domänenexperten durchgeführt. Der Prozess umfasst das Abrufen und Verknüpfen zusätzlicher Daten aus verschiedenen Quellen für denselben Zeitrahmen, die Suche nach Änderungen in der Verteilung der Werte auf mehrere Dimensionen, die Darstellung zusätzlicher Variablen und andere Techniken auf der Grundlage von Informationen über die Domäne und Intuition. Da diese Diagnoseszenarien in Azure Data Explorer gängig sind, stehen Machine Learning-Plug-Ins zur Verfügung, um die Diagnosephase zu vereinfachen und die Dauer der RCA zu verkürzen.
+Der komplexe und langwierige Diagnoseprozess wird von Domänenexperten durchgeführt. Der Prozess umfasst:
+* Abrufen und Verknüpfen zusätzlicher Daten aus unterschiedlichen Quellen für denselben Zeitrahmen
+* Suchen nach Änderungen bei der Verteilung von Werten in mehreren Dimensionen
+* Diagrammerstellung für zusätzliche Variablen
+* Andere Methoden, die auf Domänenkenntnissen und Intuition basieren
 
-Azure Data Explorer verfügt über drei Machine Learning-Plug-Ins: [`autocluster`](kusto/query/autoclusterplugin.md), [`basket`](kusto/query/basketplugin.md) und [`diffpatterns`](kusto/query/diffpatternsplugin.md). Alle Plug-Ins implementieren Clusteringalgorithmen. Die Plug-Ins `autocluster` und `basket` gruppieren eine einzelne Datensatzgruppe und das Plug-in `diffpatterns` gruppiert die Unterschiede zwischen zwei Datensatzgruppen.
+Da diese Diagnoseszenarien in Azure Data Explorer gängig sind, stehen Machine Learning-Plug-Ins zur Verfügung, um die Diagnosephase zu vereinfachen und die Dauer der RCA zu verkürzen.
+
+Azure Data Explorer verfügt über drei Machine Learning-Plug-Ins: [`autocluster`](kusto/query/autoclusterplugin.md), [`basket`](kusto/query/basketplugin.md) und [`diffpatterns`](kusto/query/diffpatternsplugin.md). Alle Plug-Ins implementieren Clusteringalgorithmen. Die Plug-Ins `autocluster` und `basket` gruppieren eine einzelne Datensatzgruppe, und das Plug-In `diffpatterns` gruppiert die Unterschiede zwischen zwei Datensatzgruppen.
 
 ## <a name="clustering-a-single-record-set"></a>Gruppieren einer einzelnen Datensatzgruppe
 
-Ein gängiges Szenario enthält ein nach bestimmten Kriterien wie z.B. einem Zeitfenster ausgewähltes Dataset, das anormales Verhalten, hohe Temperaturmesswerte bei Geräten, lange Befehlsausführungsdauer und intensive Nutzung durch Benutzer aufweist. Wir suchen eine einfache und schnelle Möglichkeit, um allgemeine Muster (Segmente) in den Daten zu finden. Muster sind eine Teilmenge des Datasets, deren Datensätze gleiche Werte in mehreren Dimensionen (Kategoriespalten) aufweisen. Die folgende Abfrage erstellt und zeigt eine Zeitreihe von Dienstausnahmen im Laufe einer Woche in Zehn-Minuten-Intervallen:
+Ein gängiges Szenario umfasst ein Dataset, das durch ein bestimmtes Kriterium ausgewählt wurde, z. B.:
+* Zeitfenster, in dem anomales Verhalten auftritt
+* Gerätemesswerte mit hoher Temperatur
+* Befehle mit langer Ausführungsdauer
+* Benutzer mit den höchsten Ausgaben Sie suchen eine einfache und schnelle Möglichkeit, um allgemeine Muster (Segmente) in den Daten zu finden. Muster sind eine Teilmenge des Datasets, deren Datensätze gleiche Werte in mehreren Dimensionen (Kategoriespalten) aufweisen. 
+
+Die folgende Abfrage erstellt und zeigt eine Zeitreihe von Dienstausnahmen über den Zeitraum einer Woche in Zehn-Minuten-Intervallen:
 
 **\[** [**Zum Ausführen der Abfrage klicken**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA5XPsaoCQQyF4d6nCFa7oHCtZd9B0F6G8ajByWTJZHS5+PDOgpVgYRn485EkOAnno9NAriWGFKw7QfQYUy0O43zZ0JNKFQnG/5jrbmeIXHBgwd6DjH2/JVqk2QrTL1aYvlifa4tni29YlzaiUK4yRK3Zu54006dBZ1N5/+X6PqpRI23+pFGGfIKRtz5egzk92K+dsycMyz3szhGEKWJ01lxI760O9ABuq0bMcvV2hqFoqnOz7F9BdSHlSgEAAA==) **\]**
 
@@ -38,9 +50,9 @@ demo_clustering1
 
 ![Zeitdiagramm von Dienstausnahmen](media/machine-learning-clustering/service-exceptions-timechart.png)
 
-Die Anzahl der Dienstausnahmen korreliert mit dem gesamten Dienstdatenverkehr. Sie erkennen deutlich das tägliche Muster für Arbeitstage von Montag bis Freitag mit einem Anstieg der Anzahl der Dienstausnahmen mittags und einem Abfall während der Nacht. Am Wochenende ist die Anzahl gering. Ausnahmespitzen können mithilfe der [Anomalieerkennung in Zeitreihen](anomaly-detection.md#time-series-anomaly-detection) in Azure Data Explorer erkannt werden.
+Die Anzahl der Dienstausnahmen korreliert mit dem gesamten Dienstdatenverkehr. Das tägliche Muster für die Geschäftstage Montag bis Freitag lässt sich eindeutig sehen. Es gibt eine Zunahme bei der Anzahl der Dienstausnahmen zur Mittagszeit und sinkende Anzahlen während der Nacht. Am Wochenende ist die Anzahl gering. Ausnahmespitzen können mithilfe der [Anomalieerkennung in Zeitreihen](anomaly-detection.md#time-series-anomaly-detection) in Azure Data Explorer erkannt werden.
 
-Die zweite Spitze in den Daten tritt Dienstagnachmittag auf. Mit der folgenden Abfrage wird diese Spitze näher diagnostiziert. Verwenden Sie die Abfrage, um das Diagramm um die Spitze herum in höherer Auflösung (acht Stunden in einminütigen Intervallen) neu zu zeichnen, um zu überprüfen, ob es sich um eine scharfe Spitze handelt, und ihre Ränder anzuzeigen.
+Die zweite Spitze in den Daten tritt Dienstagnachmittag auf. Mit der folgenden Abfrage wird eine weitere Diagnose ausgeführt und überprüft, ob es sich um eine scharfe Spitze handelt. Die Abfrage zeichnet das Diagramm um die Spitze herum in einer höheren Auflösung von acht Stunden in einminütigen Intervallen neu. Anschließend können Sie deren Grenzen untersuchen.
 
 **\[** [**Zum Ausführen der Abfrage klicken**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAAyXNwQrCMBAE0Hu/YvHUooWkghSl/yDoyUsJyWpCk2xJNnjx403pbeYwbzwyBBdnnoxiZBewHYS89GLshzNIeRWiuzUGA83al8yYXPzI5gdBLdjnWjFDLGHSVCK3HVCEe0LtMj4r9mAVVngnCvsLMO3hOFqo2goyVCxhNJhgu9dWJYavY9uyY4/T4UV1XVm2CEM0kFe34AnkBhXGOs7kCzuKh+4P3/XM5M8AAAA=) **\]**
 
@@ -53,7 +65,7 @@ demo_clustering1
 
 ![Zeitdiagramm mit Konzentration auf die Spitze](media/machine-learning-clustering/focus-spike-timechart.png)
 
-Wir sehen eine schmale Zwei-Minuten-Spitze zwischen 15:00 Uhr und 15:02 Uhr. In der folgenden Abfrage werden die Ausnahmen in diesem Fenster von zwei Minuten gezählt:
+Sie sehen eine schmale Zwei-Minuten-Spitze von 15:00 Uhr bis 15:02 Uhr. In der folgenden Abfrage werden die Ausnahmen in diesem Fenster von zwei Minuten gezählt:
 
 **\[** [**Zum Ausführen der Abfrage klicken**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA8tJLVHIzcyLL0hNzI4vsU1JLEktycxN1TAyMDTTNbDQNTJWMDS1MjDQtObKASlNrCCk1AioNCU1Nz8+Oae0uCS1KDMv3ZCrRqE8I7UoVSGgKDU5szg1BKgvuCQxt0AhKbWkPDU1TwPhBj09hCWaQI3J+aV5JQACnQoRpwAAAA==) **\]**
 
@@ -106,7 +118,7 @@ demo_clustering1
 
 ### <a name="use-autocluster-for-single-record-set-clustering"></a>Verwenden von „autocluster()“ zum Gruppieren einer einzelnen Datensatzgruppe
 
-Auch wenn weniger als eintausend Ausnahmen vorhanden sind, ist es weiterhin schwierig, allgemeine Segmente zu finden, da in jeder Spalte mehrere Werte vorhanden sind. Sie können mit dem [`autocluster()`](kusto/query/autoclusterplugin.md)-Plug-In sofort eine kleine Liste allgemeiner Segmente extrahieren und die interessanten Cluster innerhalb der zwei Minuten der Spitze suchen, wie in der folgenden Abfrage gezeigt:
+Auch wenn weniger als eintausend Ausnahmen vorhanden sind, ist es weiterhin schwierig, allgemeine Segmente zu finden, da in jeder Spalte mehrere Werte vorhanden sind. Sie können mit dem [`autocluster()`](kusto/query/autoclusterplugin.md)-Plug-In sofort eine kurze Liste allgemeiner Segmente extrahieren und die interessanten Cluster innerhalb der zwei Minuten der Spitze suchen, wie in der folgenden Abfrage gezeigt:
 
 **\[** [**Zum Ausführen der Abfrage klicken**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA4WOsQrCMBRF937FG5OhJYkoovQfBN1DbC8aTNqSvlgHP94IQkf3c+65AUzRD3aCe1hue8dgHyGM0rta7WuzIb09KCWPVfii7vUPNQXtEUfbhTwzkh9uunrTckcCnRI6P+NSvDO7ONEVvACDWD80zRqRRcTThVxa5DKPv00hP81KL1+4AAAA) **\]**
 
@@ -126,9 +138,9 @@ demo_clustering1
 | 3 | 68 | 6.99588477366255 | scus | su3 | 90d3d2fc7ecc430c9621ece335651a01 |  |
 | 4 | 55 | 5.65843621399177 | weu | su4 | be1d6d7ac9574cbc9a22cb8ee20f16fc |  |
 
-Sie können in den obigen Ergebnissen erkennen, dass das dominanteste Segment 65,74% der gesamten Ausnahmedatensätze enthält und vier Dimensionen verwendet. Das nächste Segment tritt deutlich seltener auf, enthält nur 9,67% der Datensätze und verwendet drei Dimensionen. Die anderen Segmente treten sogar noch seltener auf. 
+Sie können in den obigen Ergebnissen erkennen, dass das dominanteste Segment 65,74 % der gesamten Ausnahmedatensätze enthält und vier Dimensionen verwendet. Das nächste Segment tritt deutlich seltener auf. Es enthält nur 9,67 % der Datensätze und verwendet drei Dimensionen. Die anderen Segmente treten sogar noch seltener auf.
 
-Autocluster verwendet einen proprietären Algorithmus zum Mining mehrerer Dimensionen und Extrahieren interessanter Segmente. „Interessant“ bedeutet, dass jedes Segment sowohl die Datensatzgruppe als auch die Featuregruppe signifikant abdeckt. Die Segmente sind auch abweichend, was bedeutet, dass sie sich erheblich voneinander unterscheiden. Ein oder mehrere dieser Segmente können für den RCA-Prozess relevant sein. Um Segmentprüfung und -bewertung zu minimieren, extrahiert Autocluster nur eine kleine Segmentliste.
+Autocluster verwendet einen proprietären Algorithmus zum Mining mehrerer Dimensionen und Extrahieren interessanter Segmente. „Interessant“ bedeutet, dass jedes Segment sowohl die Datensatzgruppe als auch die Featuregruppe signifikant abdeckt. Die Segmente sind auch abweichend, was bedeutet, dass sie sich voneinander unterscheiden. Ein oder mehrere dieser Segmente können für den RCA-Prozess relevant sein. Um Segmentprüfung und -bewertung zu minimieren, extrahiert Autocluster nur eine kleine Segmentliste.
 
 ### <a name="use-basket-for-single-record-set-clustering"></a>Verwenden von „basket()“ zum Gruppieren einer einzelnen Datensatzgruppe
 
@@ -160,15 +172,15 @@ demo_clustering1
 | 11 | 90 | 9.25925925925926 |  |  |  | 10007006 |  |
 | 12 | 57 | 5.8641975308642 |  |  |  |  | 00000000-0000-0000-0000-000000000000 |
 
-Basket implementiert den Apriori-Algorithmus zum Mining der Elementgruppe und extrahiert alle Segmente, deren Abdeckung der Datensatzgruppe einen Schwellenwert (Standardwert 5%) überschreitet. Sie können sehen, dass weitere Segmente mit ähnlichen Prozentwerten (z.B. Segmente 0,1 oder 2,3) extrahiert wurden.
+Basket implementiert den *„Apriori“* -Algorithmus zum Mining der Elementgruppe. Die Funktion extrahiert alle Segmente, deren Abdeckung der Datensatzgruppe einen Schwellenwert (Standardwert 5 %) überschreitet. Sie können sehen, dass mehr Segmente mit ähnlichen Prozentwerten (z. B. die Segmente 0, 1 oder 2, 3) extrahiert wurden.
 
-Beide Plug-Ins sind leistungsstark und benutzerfreundlich, ihre erhebliche Einschränkung besteht jedoch darin, dass sie eine einzelne Datensatzgruppe in einer nicht überwachten Weise (ohne Bezeichnungen) gruppieren. Darum ist unklar, ob die extrahierten Muster die ausgewählte Datensatzgruppe (die anomalen Einträge) oder die globale Datensatzgruppe charakterisieren.
+Beide Plug-Ins sind leistungsstark und bedienfreundlich. Ihre Einschränkung besteht jedoch darin, dass sie eine einzelne Datensatzgruppe in einer nicht überwachten Weise (ohne Bezeichnungen) gruppieren. Es ist unklar, ob die extrahierten Muster die ausgewählte Datensatzgruppe, anomale Datensätze oder die globale Datensatzgruppe charakterisieren.
 
 ## <a name="clustering-the-difference-between-two-records-sets"></a>Clustering des Unterschieds zwischen zwei Datensatzgruppen
 
-Das [`diffpatterns()`](kusto/query/diffpatternsplugin.md)-Plug-In überwindet die Einschränkung von `autocluster` und `basket`. `Diffpatterns` nimmt zwei Datensatzgruppen und extrahiert die wichtigsten Segmente, die zwischen ihnen unterschiedlich sind. Eine Gruppe enthält in der Regel die anomale Datensatzgruppe, die untersucht wird (eine wird von `autocluster` und die andere von `basket` analysiert). Die andere Gruppe enthält die Referenz-Datensatzgruppe (Baseline). 
+Das [`diffpatterns()`](kusto/query/diffpatternsplugin.md)-Plug-In überwindet die Einschränkung von `autocluster` und `basket`. `Diffpatterns` nimmt zwei Datensatzgruppen und extrahiert die wichtigsten Segmente, die unterschiedlich sind. Eine Gruppe enthält in der Regel die anomale Datensatzgruppe, die untersucht wird. Eine wird von `autocluster` analysiert, die andere von `basket`. Die andere Gruppe enthält die Referenz-Datensatzgruppe, die Baseline.
 
-In der folgenden Abfrage verwenden wir `diffpatterns`, um interessante Cluster innerhalb der zwei Minuten der Spitze zu finden, die sich von Clustern innerhalb der Baseline unterscheiden. Wir definieren das Baselinefenster als die acht Minuten vor 15:00 Uhr (als die Spitze begann). Wir müssen auch um eine binäre Spalte (AB) erweitern, die angibt, ob ein bestimmter Datensatz zur Baseline oder der anomalen Gruppe gehört. `Diffpatterns` implementiert einen überwachten Lernalgorithmus, in dem die zwei Klassenbezeichnungen durch das anomale im Vergleich zum Baselineflag (AB) generiert wurden.
+In der folgenden Abfrage findet `diffpatterns` interessante Cluster innerhalb der zwei Minuten der Spitze, die sich von den Clustern innerhalb der Baseline unterscheiden. Das Baselinefenster ist als die acht Minuten vor 15:00 Uhr (dem Beginn der Spitze) definiert. Sie erweitern um eine binäre Spalte (AB) und geben an, ob ein bestimmter Datensatz zur Baseline oder der anomalen Gruppe gehört. `Diffpatterns` implementiert einen überwachten Lernalgorithmus, in dem die zwei Klassenbezeichnungen durch das anomale im Vergleich zum Baselineflag (AB) generiert wurden.
 
 **\[** [**Zum Ausführen der Abfrage klicken**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA42QzU+DQBDF7/wVcwOi5UtrmhJM4OzBRO9kWqbtpssuYacfGv94t0CrxFTd02by5jfvPUkMtVBlQ7gtOauQiUVNXhLFD5NoNknuIJ7Oo8hPHXmS4vEvaXKWWuoCDUmh6Jr8fj79Tv6HfOanEIbwRLgnQFhjAwviA5EC3hCcCYCq6gamEVsC1oB7LfoRt6iMYKEVvGtFQXfeNFKc7mXe2MjNVzl+mARR6lRU63Ipd4apFWodOx9w2FBL4D23tBSGXi3mhbG+OPPGVQTB+ITvg24dGN7vlN5JTxhc+dYAHZls4LzIxGr1k/B4iXcLbq50jfLNtd9i8OB2jD3KnW0dKstokG08Zby8uLbyCfX/tG46AgAA) **\]**
 
@@ -195,7 +207,7 @@ demo_clustering1
 | 5 | 55 | 252 | 5.66 | 20.45 | 14.8 | weu | su4 | be1d6d7ac9574cbc9a22cb8ee20f16fc |  |
 | 6 | 57 | 204 | 5.86 | 16.56 | 10.69 |  |  |  |  |
 
-Das dominanteste Segment ist das gleiche Segment, das von `autocluster` extrahiert wurde, seine Abdeckung im anomalen Fenster beträgt auch 65,74%. Aber seine Abdeckung im Acht-Minuten-Baseline-Fenster beträgt nur 1,7%. Der Unterschied beträgt 64,04%. Dieser Unterschied scheint mit der anomalen Spitze in Zusammenhang zu stehen. Sie können diese Annahme überprüfen, indem Sie das ursprüngliche Diagramm in die Datensätze, die zu diesem problematischen Segment gehören, und die anderen Segmente aufteilen, wie in der folgenden Abfrage dargestellt:
+Das dominanteste Segment ist dasselbe Segment, das von `autocluster` extrahiert wurde. Seine Abdeckung im anomalen Fenster von 2 Minuten beträgt ebenfalls 65,74 %. Aber seine Abdeckung im Acht-Minuten-Baselinefenster beträgt nur 1,7 %. Der Unterschied beträgt 64,04%. Dieser Unterschied scheint mit der anomalen Spitze in Zusammenhang zu stehen. Um diese Annahme zu überprüfen, teilen Sie das ursprüngliche Diagramm in die Datensätze auf, die zu diesem problematischen Segment gehören, und in Datensätze aus den anderen Segmenten. Siehe folgende Abfrage.
 
 **\[** [**Zum Ausführen der Abfrage klicken**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA5WRsWrDMBCG9zzF4cmGGuJUjh2Ktw7tUkLTzuEsnRNRnRQkuSQlD185yRTo0EWIO913/J8MRWBttxE6iC5INOhzRey20owhktd2V8EZwsiMXv/Q9Dpfe5I60Idm2kTkQ1E8AczMxMLjf1h4/IN1PzY7Ax0jWQWBdomvhyF/p512FroOMsIxA0zdTdpKn1bHSzmMzbX8TAfjTkw2vqpLp69VpYQaatEogXOBsqrbtl5WDake6yabXWjkv7WkFxeuPGqG5VzWqhQrIUqx6B/L1WKB6aBViy01imT2ANnau94QT9c35xlNVqQAjF9UhpSHAtiRO+lGG/MCUoZ7CTB4x7ePie5mNbk4QDVn6E+ThUT0SQh5iGlM7tHHX4WFgLHOAQAA) **\]**
 
@@ -215,6 +227,6 @@ In diesem Diagramm können wir sehen, dass die Spitze am Dienstagnachmittag aufg
 
 ## <a name="summary"></a>Zusammenfassung
 
-Die Machine Learning-Plug-Ins von Azure Data Explorer sind für viele Szenarien hilfreich. `autocluster` und `basket` implementieren einen nicht überwachten Lernalgorithmus und sind benutzerfreundlich. `Diffpatterns` implementiert einen überwachten Lernalgorithmus und ist zwar komplexer, aber leistungsfähiger beim Extrahieren von Differenzierungssegmenten für die RCA.
+Die Machine Learning-Plug-Ins von Azure Data Explorer sind für viele Szenarien hilfreich. `autocluster` und `basket` implementieren einen nicht überwachten Lernalgorithmus und sind bedienfreundlich. `Diffpatterns` implementiert einen überwachten Lernalgorithmus und ist zwar komplexer, aber leistungsfähiger beim Extrahieren von Differenzierungssegmenten für die RCA.
 
-Diese Plug-Ins werden interaktiv in Ad-hoc-Szenarien und in automatischen, nahezu in Echtzeit ablaufenden Überwachungsdiensten verwendet. In Azure Data Explorer folgt auf die Anomalieerkennung in Zeitreihen ein Diagnoseprozess, der stark optimiert ist, um die erforderlichen Leistungsstandards zu erfüllen.
+Diese Plug-Ins werden interaktiv in Ad-hoc-Szenarien und in automatischen, nahezu in Echtzeit ablaufenden Überwachungsdiensten verwendet. In Azure Data Explorer folgt auf die Anomalieerkennung in Zeitreihen ein Diagnoseprozess. Der Prozess ist stark optimiert, um notwendige Leistungsstandards zu erfüllen.

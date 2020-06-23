@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/26/2020
-ms.openlocfilehash: 46e3821514ca5b06852f7e8428b12cf9f80e29a4
-ms.sourcegitcommit: a562ce255ac706ca1ca77d272a97b5975235729d
+ms.openlocfilehash: 7f012b5b99cdf12ab1ace452838860aff312a28d
+ms.sourcegitcommit: b0cbb89e88b64a36880e6d34b4d6779283174456
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83867797"
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84633749"
 ---
 # <a name="visualize-data-with-azure-data-explorer-dashboards"></a>Visualisieren von Daten mit Azure Data Explorer-Dashboards
 
@@ -56,7 +56,7 @@ Fügen Sie die erforderlichen Datenquellen für die Dashboards hinzu.
 
 ## <a name="use-parameters"></a>Verwenden von Parametern
 
-Parameter ermöglichen die Verwendung von Dashboardfiltern. Parameter verbessern die Renderingleistung von Dashboards erheblich und ermöglichen Ihnen, Filterwerte so früh wie möglich in der Abfrage zu verwenden.
+Parameter ermöglichen die Verwendung von Dashboardfiltern. Parameter verbessern die Renderingleistung von Dashboards erheblich und ermöglichen Ihnen, Filterwerte so früh wie möglich in der Abfrage zu verwenden. Weitere Informationen zur Verwendung von Parametern finden Sie unter [Verwenden von Parametern in Azure Data Explorer-Dashboards](dashboard-parameters.md).
 
 1. Wählen Sie auf der oberen Leiste **Parameter** aus. Wählen Sie im Bereich **Parameter** die Schaltfläche **Neuer Parameter** aus.
 
@@ -102,4 +102,5 @@ Bei **Abfrage hinzufügen** werden Ausschnitte in der Kusto-Abfragesprache zum A
 
 ## <a name="next-steps"></a>Nächste Schritte
 
+* [Verwenden von Parametern in Azure Data Explorer-Dashboards](dashboard-parameters.md)
 * [Abfragen von Daten in Azure Data Explorer](web-query-data.md)

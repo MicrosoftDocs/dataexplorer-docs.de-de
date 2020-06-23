@@ -6,13 +6,13 @@ ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
-ms.date: 07/04/2019
-ms.openlocfilehash: 145e452a3a914e1026d6da11f2ce38e85fa724f0
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.date: 06/15/2020
+ms.openlocfilehash: 05c9a805e1391a34fe2d751c33178fcac16d15a9
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81491295"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780132"
 ---
 # <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>Schnellstart: Abfragen von Daten auf der Azure Data Explorer-Webbenutzeroberfläche
 
@@ -163,25 +163,62 @@ Nun, da Sie wissen, wie grundlegende Abfragen funktionieren, sehen wir uns an, w
 
 ## <a name="share-queries"></a>Freigeben von Abfragen
 
-Häufig möchten Sie die erstellten Abfragen freigeben. Sie können einen Deep-Link angeben, damit andere Benutzer mit Zugriff auf den Cluster die Abfragen ausführen können.
+Häufig möchten Sie die erstellten Abfragen freigeben. 
 
 1. Wählen Sie im Abfragefenster die erste Abfrage aus, die Sie hineinkopiert haben.
 
-1. Wählen Sie oben im Abfragefenster **Freigeben** aus.
+1. Wählen Sie oben im Abfragefenster **Freigeben** aus. 
 
-1. Wählen Sie **Link, query to clipboard** (Link und Abfrage in Clipboard kopieren) aus.
+:::image type="content" source="media/web-query-data/share-menu.png" alt-text="Menü „Freigeben“":::
+
+Die folgenden Optionen sind im Dropdown verfügbar:
+* Link in Zwischenablage
+* [Link und Abfrage in Zwischenablage](#provide-a-deep-link)
+* Link, Abfrage und Ergebnisse in Zwischenablage
+* [An Dashboard anheften](#pin-to-dashboard)
+* [Abfrage an Power BI](power-bi-imported-query.md)
+
+### <a name="provide-a-deep-link"></a>Deep-Link bereitstellen
+
+Sie können einen Deep-Link angeben, damit andere Benutzer mit Zugriff auf den Cluster die Abfragen ausführen können.
+
+1. Wählen Sie in **Freigeben** den Eintrag **Link und Abfrage in Clipboard**  aus.
 
 1. Kopieren Sie den Link und die Abfrage in eine Textdatei.
 
 1. Fügen Sie den Link in einem neuen Browserfenster ein. Das Ergebnis sollte nach dem Ausführen der Abfrage dem folgenden ähneln.
 
-    ![Freigegebene Abfrage](media/web-query-data/shared-query.png)
+    :::image type="content" source="media/web-query-data/shared-query.png" alt-text="Freigegebener Deep-Link der Abfrage":::
+
+### <a name="pin-to-dashboard"></a>An Dashboard anheften
+
+Wenn Sie die Datenuntersuchung mithilfe von Abfragen in der Webbenutzeroberfläche durchführen und die benötigten Daten finden, können Sie sie an ein Dashboard anheften, um sie fortlaufend zu überwachen. 
+
+So heften Sie eine Abfrage an
+
+1. Wählen Sie in **Freigeben** den Befehl **An Dashboard anheften** aus.
+
+1. Im Bereich **An Dashboard anheften**:
+    1. Geben Sie einen **Abfragenamen** ein.
+    1. Wählen Sie **Vorhandenes verwenden** oder **Neu erstellen** aus.
+    1. Geben Sie einen **Dashboardnamen** an.
+    1. Aktivieren Sie das Kontrollkästchen **Dashboard nach Erstellung anzeigen** (wenn es sich um ein neues Dashboard handelt).
+    1. Wählen Sie **Anheften**aus
+
+    :::image type="content" source="media/web-query-data/pin-to-dashboard.png" alt-text="Bereich „An Dashboard anheften“":::
+    
+> [!NOTE]
+> Mit **An Dashboard anheften** wird nur die ausgewählte Abfrage angeheftet. Um die Dashboarddatenquelle zu erstellen und Renderbefehle in ein visuelles Element im Dashboard zu übersetzen, muss die relevante Datenbank in der Datenbankliste ausgewählt werden.
+
+## <a name="export-query-results"></a>Exportieren von Abfrageergebnissen
+
+Um die Abfrageergebnisse in eine CSV-Datei zu exportieren, wählen Sie **Datei** > **Nach CSV exportieren** aus.
+
+:::image type="content" source="media/web-query-data/export-results.png" alt-text="Exportieren von Ergebnissen in eine CSV-Datei":::
 
 ## <a name="provide-feedback"></a>Feedback geben
 
-Der Daten-Explorer befindet sich derzeit in der Vorschauphase, und wir freuen uns über Feedback zu Ihren Erfahrungen. Sie können uns dies nun mitteilen oder warten, bis Sie mehr Zeit damit verbracht haben.
-
-1. Wählen Sie rechts oben in der Anwendung das Feedbacksymbol aus: ![Feedbacksymbol](media/web-query-data/icon-feedback.png)erforderlich.
+1. Wählen Sie rechts oben in der Anwendung das Feedbacksymbol aus. ![Feedbacksymbol](media/web-query-data/icon-feedback.png)erforderlich.
 
 1. Geben Sie Ihr Feedback ein, und wählen Sie dann **Senden** aus.
 

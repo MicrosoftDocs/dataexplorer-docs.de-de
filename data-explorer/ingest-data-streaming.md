@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/30/2019
-ms.openlocfilehash: 4bbb076b4c21ac2f93b2bdaf775d513483332934
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: 66118ad7b91d1bcfdd52679d4bfa3dc5ebc4c281
+ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84257959"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84780234"
 ---
 # <a name="streaming-ingestion-preview"></a>Streamingerfassung (Vorschauversion)
 
@@ -75,7 +75,7 @@ Es werden zwei Streamingerfassungstypen unterstützt:
 * Die [Datenzuordnung](kusto/management/mappings.md) muss [vorab erstellt](kusto/management/create-ingestion-mapping-command.md) werden, damit sie bei der Streamingerfassung verwendet werden kann. Individuelle Anforderungen zur Streamingerfassung bieten keine Inlinedatenzuordnungen.
 * Leistung und Kapazität der Streamingerfassung werden für größere virtuelle Computer und Cluster skaliert. Die Anzahl der gleichzeitigen Erfassungsanforderungen ist auf sechs pro Kern beschränkt. Beispielsweise besteht die maximale unterstützte Last bei SKUs mit 16 Kernen (z. B. D14 und L16) aus 96 gleichzeitigen Erfassungsanforderungen. Bei SKUs mit 2 Kernen (z. B. D11) werden als maximale Last 12 gleichzeitige Erfassungsanfragen unterstützt.
 * Die Datengröße für Anforderungen zur Streamingerfassung ist auf 4 MB beschränkt.
-* Es kann bis zu fünf Minuten dauern, bis Schemaaktualisierungen für den Streamingerfassungsdienst verfügbar werden. Beispiele für diese Aktualisierungen sind das Erstellen und Ändern von Tabellen und Erfassungszuordnungen. 
+* Schemaaktualisierungen wie etwa die Erstellung und Änderung von Tabellen und Erfassungszuordnungen können für den Streamingerfassungsdienst bis zu fünf Minuten dauern. Weitere Informationen finden Sie unter [Streamingerfassung und Schemaänderungen](kusto/management/data-ingestion/streaming-ingestion-schema-changes.md).
 * Wenn die Streamingerfassung in einem Cluster aktiviert wird, wird ein Teil des lokalen SSD-Datenträgers der Clustercomputer für Streamingerfassungsdaten genutzt, wodurch sich der verfügbare Speicherplatz für den aktiven Cache verringert. Dies gilt auch, wenn gar keine Daten per Streaming erfasst werden.
 * [Erweiterungstags](kusto/management/extents-overview.md#extent-tagging) können für die Streamingerfassungsdaten nicht festgelegt werden.
 

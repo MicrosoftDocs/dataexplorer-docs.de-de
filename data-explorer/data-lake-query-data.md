@@ -6,200 +6,218 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: conceptual
-ms.date: 07/17/2019
-ms.openlocfilehash: b7ca4a41bb15e9fb8a4f55a9d674b1536dddd5ae
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.date: 06/17/2020
+ms.openlocfilehash: 65e766530be51527e167cb7ea4e7df580f398a35
+ms.sourcegitcommit: a8575e80c65eab2a2118842e59f62aee0ff0e416
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226396"
+ms.lasthandoff: 06/17/2020
+ms.locfileid: "84942657"
 ---
 # <a name="query-data-in-azure-data-lake-using-azure-data-explorer"></a>Abfragen von Daten in Azure Data Lake mit Azure Data Explorer
 
 Azure Data Lake Storage ist eine hochgradig skalierbare und kostengünstige Data Lake-Lösung für Big Data-Analysen. Dank des leistungsstarken Dateisystems kombiniert mit immenser Skalierbarkeit und Profitabilität können Sie in kurzer Zeit aufschlussreiche Erkenntnisse gewinnen. Data Lake Storage Gen2 erweitert die Funktionen von Azure Blob Storage und ist für Analyseworkloads optimiert.
  
-Azure Data Explorer ist in Azure Blob Storage und Azure Data Lake Storage (Gen1 und Gen2) integriert und bietet schnellen, zwischengespeicherten und indizierten Zugriff auf Daten im Lake. Sie können Daten im Lake analysieren und abfragen, ohne sie vorher in Azure Data Explorer erfassen zu müssen. Sie können auch erfasste und nicht erfasste native Lake-Daten gleichzeitig abfragen.  
+Azure Data Explorer ist in Azure Blob Storage und Azure Data Lake Storage (Gen1 und Gen2) integriert und bietet schnellen, zwischengespeicherten und indizierten Zugriff auf Daten, die in externen Speichern gespeichert sind. Sie können Daten analysieren und abfragen, ohne sie vorher in Azure Data Explorer erfassen zu müssen. Sie können auch erfasste und nicht erfasste externe Daten gleichzeitig abfragen.  
 
 > [!TIP]
-> Zur Erzielung der besten Abfrageleistung ist die Datenerfassung in Azure Data Explorer erforderlich. Die Möglichkeit, externe Daten ohne vorherige Erfassung abzufragen, sollte nur für Verlaufsdaten oder selten abgefragte Daten genutzt werden. [Optimieren Sie die Abfrageleistung im Lake](#optimize-your-query-performance), um optimale Ergebnisse zu erzielen.
+> Zur Erzielung der besten Abfrageleistung ist die Datenerfassung in Azure Data Explorer erforderlich. Die Möglichkeit, externe Daten ohne vorherige Erfassung abzufragen, sollte nur für Verlaufsdaten oder selten abgefragte Daten genutzt werden. [Optimieren Sie Ihre Abfrageleistung von externen Daten](#optimize-your-query-performance), um optimale Ergebnisse zu erzielen.
  
-
 ## <a name="create-an-external-table"></a>Erstellen einer externen Tabelle
 
- > [!NOTE]
- > Derzeit werden die Speicherkonten Azure Blob Storage und Azure Data Lake Storage (Gen1 und Gen2) unterstützt.
+Nehmen wir an, Sie haben viele CSV-Dateien, die historische Informationen zu Produkten enthalten, die in einem Lagerhaus aufbewahrt werden, und Sie möchten eine schnelle Analyse durchführen, um die fünf beliebtesten Produkte des letzten Jahres zu finden. In diesem Beispiel sehen die CSV-Dateien wie folgt aus:
 
-1. Verwenden Sie den Befehl `.create external table`, um eine externe Tabelle in Azure Data Explorer zu erstellen. Weitere Befehle für externe Tabellen wie `.show`, `.drop` und `.alter` sind unter [Befehle für externe Tabellen](kusto/management/externaltables.md) dokumentiert.
+| Timestamp | ProductId   | ProductDescription |
+|-----------|-------------|--------------------|
+| 2019-01-01 11:21:00 | TO6050 | 3,5“ DS/HD Diskette |
+| 2019-01-01 11:30:55 | YDX1   | Yamaha DX1 Synthesizer  |
+| ...                 | ...    | ...                     |
 
-    ```Kusto
-    .create external table ArchivedProducts(
-    Timestamp:datetime,
-    ProductId:long, ProductDescription:string) 
-    kind=blob
-    partition by bin(Timestamp, 1d) 
-    dataformat=csv (h@'http://storageaccount.blob.core.windows.net/container1;secretKey') 
-    with (compressed = true)  
-    ```
-    
-    > [!NOTE]
-    > * Durch eine differenziertere Partitionierung können Sie eine höhere Leistung erwarten. Beispielsweise verzeichnen Abfragen über externe Tabellen mit täglichen Partitionen eine bessere Leistung als Abfragen mit monatlich partitionierten Tabellen.
-    > * Wenn Sie eine externe Tabelle mit Partitionen definieren, wird davon ausgegangen, dass die Speicherstruktur identisch ist.
-Wenn die Tabelle z. B. mit einer DateTime-Partition im Format JJJJ/MM/TT (Standard) definiert ist, sollte der Dateipfad des URI-Speichers *container1/JJJJ/MM/TT/all_exported_blobs* lauten. 
-    > * Wenn die externe Tabelle durch eine datetime-Spalte partitioniert ist, müssen Sie in der Abfrage immer einen Zeitfilter für einen geschlossenen Bereich einschließen (z.B. sollte die Abfrage `ArchivedProducts | where Timestamp between (ago(1h) .. 10m)` bessere Leistung aufweisen als diese Abfrage (mit offenem Bereich): `ArchivedProducts | where Timestamp > ago(1h)`). 
-    > * Alle [unterstützten Erfassungsformate](ingestion-supported-formats.md) können mithilfe externer Tabellen abgefragt werden.
+Die Dateien werden im Azure Blob Storage `mycompanystorage` in einem Container namens `archivedproducts` gespeichert, partitioniert nach Datum:
 
-1. Die externe Tabelle ist im linken Bereich der Webbenutzeroberfläche sichtbar.
+```
+https://mycompanystorage.blob.core.windows.net/archivedproducts/2019/01/01/part-00000-7e967c99-cf2b-4dbb-8c53-ce388389470d.csv.gz
+https://mycompanystorage.blob.core.windows.net/archivedproducts/2019/01/01/part-00001-ba356fa4-f85f-430a-8b5a-afd64f128ca4.csv.gz
+https://mycompanystorage.blob.core.windows.net/archivedproducts/2019/01/01/part-00002-acb644dc-2fc6-467c-ab80-d1590b23fc31.csv.gz
+https://mycompanystorage.blob.core.windows.net/archivedproducts/2019/01/01/part-00003-cd5fad16-a45e-4f8c-a2d0-5ea5de2f4e02.csv.gz
+https://mycompanystorage.blob.core.windows.net/archivedproducts/2019/01/02/part-00000-ffc72d50-ff98-423c-913b-75482ba9ec86.csv.gz
+...
+```
 
-    ![Externe Tabelle auf der Webbenutzeroberfläche](media/data-lake-query-data/external-tables-web-ui.png)
+Um eine KQL-Abfrage direkt mit diesen CSV-Dateien auszuführen, verwenden Sie den Befehl `.create external table`, um eine externe Tabelle in Azure Data Explorer zu definieren. Weitere Informationen zu den Optionen des Befehls zum Erstellen externer Tabellen finden Sie unter [Befehle für externe Tabellen](kusto/management/external-tables-azurestorage-azuredatalake.md).
 
-### <a name="create-an-external-table-with-json-format"></a>Erstellen einer externen Tabelle mit JSON-Format
+```Kusto
+.create external table ArchivedProducts(Timestamp:datetime, ProductId:string, ProductDescription:string)   
+kind=blob            
+partition by (Date:datetime = bin(Timestamp, 1d))   
+dataformat=csv   
+(   
+  h@'https://mycompanystorage.blob.core.windows.net/archivedproducts;StorageSecretKey'
+)    
+```
 
-Sie können eine externe Tabelle mit JSON-Format erstellen. Weitere Informationen finden Sie unter [External tables commands (preview)](kusto/management/externaltables.md) (Befehle für externe Tabellen (Vorschauversion)).
+Die externe Tabelle ist jetzt im linken Bereich der Webbenutzeroberfläche sichtbar:
 
-1. Verwenden Sie den Befehl `.create external table`, um eine Tabelle namens *ExternalTableJson* zu erstellen:
-
-    ```kusto
-    .create external table ExternalTableJson (rownumber:int, rowguid:guid) 
-    kind=blob
-    dataformat=json
-    ( 
-       h@'http://storageaccount.blob.core.windows.net/container1;secretKey'
-    )
-    with 
-    (
-       docstring = "Docs",
-       folder = "ExternalTables",
-       namePrefix="Prefix"
-    ) 
-    ```
+:::image type="content" source="media/data-lake-query-data/external-tables-web-ui.png" alt-text="Externe Tabelle in der Webbenutzeroberfläche":::
  
-1. Beim JSON-Format müssen in einem zweiten Schritt Spaltenzuordnungen erstellt werden, wie im Anschluss zu sehen. Erstellen Sie mithilfe der folgenden Abfrage eine spezifische JSON-Zuordnung namens *mappingName*:
-
-    ```kusto
-    .create external table ExternalTableJson json mapping "mappingName" '[{ "column" : "rownumber", "datatype" : "int", "path" : "$.rownumber"},{ "column" : "rowguid", "path" : "$.rowguid" }]' 
-    ```
-
 ### <a name="external-table-permissions"></a>Berechtigungen für externe Tabellen
  
 * Der Datenbankbenutzer kann eine externe Tabelle erstellen. Der Ersteller der Tabelle wird automatisch zum Tabellenadministrator.
 * Der Cluster-, Datenbank- oder Tabellenadministrator kann eine vorhandene Tabelle bearbeiten.
 * Alle Datenbankbenutzer oder -leser können eine externe Tabelle abfragen.
+
+## <a name="querying-an-external-table"></a>Abfragen einer externen Tabelle
  
-## <a name="query-an-external-table"></a>Abfragen einer externen Tabelle
- 
-Wenn Sie eine externe Tabelle abfragen möchten, verwenden Sie die Funktion `external_table()`, und geben Sie den Tabellennamen als Funktionsargument an. Bei dem Rest der Abfrage handelt es sich um die Kusto-Standardabfragesprache.
+Sobald eine externe Tabelle definiert ist, kann die `external_table()`-Funktion verwendet werden, um darauf zu verweisen. Bei dem Rest der Abfrage handelt es sich um die standardmäßige Kusto-Abfragesprache (KQL).
 
 ```Kusto
-external_table("ArchivedProducts") | take 100
+external_table("ArchivedProducts")   
+| where Timestamp > ago(365d)   
+| summarize Count=count() by ProductId,   
+| top 5 by Count
 ```
 
-> [!TIP]
-> IntelliSense wird derzeit in Abfragen für externe Tabellen nicht unterstützt.
-
-### <a name="query-an-external-table-with-json-format"></a>Abfragen einer externen Tabelle mit JSON-Format
-
-Wenn Sie eine externe Tabelle mit JSON-Format abfragen möchten, verwenden Sie die Funktion `external_table()`, und geben Sie als Funktionsargumente sowohl den Tabellennamen als auch den Zuordnungsnamen an. Wenn in der folgenden Abfrage *mappingName* nicht angegeben wird, wird eine Zuordnung verwendet, die Sie zuvor erstellt haben:
-
-```kusto
-external_table('ExternalTableJson', 'mappingName')
-```
-
-## <a name="query-external-and-ingested-data-together"></a>Gemeinsames Abfragen von externen und erfassten Daten
+## <a name="querying-external-and-ingested-data-together"></a>Gemeinsames Abfragen externer und erfasster Daten
 
 Externe Tabellen und Tabellen mit erfassten Daten können in derselben Abfrage abgefragt werden. Mit [`join`](kusto/query/joinoperator.md) oder [`union`](kusto/query/unionoperator.md) können Sie die externe Tabelle mit zusätzlichen Daten aus Azure Data Explorer, SQL Server-Instanzen oder anderen Quellen verknüpfen. Verwenden Sie eine [`let( ) statement`](kusto/query/letstatement.md), um einem externen Tabellenverweis einen Kurznamen zuzuweisen.
 
-Im folgenden Beispiel ist *Products* eine Tabelle mit erfassten Daten, und *ArchivedProducts* ist eine externe Tabelle, die Daten aus Azure Data Lake Storage Gen2 enthält:
+Im folgenden Beispiel ist *Products* eine Tabelle mit erfassten Daten, und *ArchivedProducts* ist eine externe Tabelle, die wir zuvor definiert haben:
 
 ```kusto
-let T1 = external_table("ArchivedProducts") |  where TimeStamp > ago(100d);
-let T = Products; //T is an internal table
+let T1 = external_table("ArchivedProducts") |  where TimeStamp > ago(100d);   
+let T = Products; //T is an internal table   
 T1 | join T on ProductId | take 10
 ```
 
+## <a name="querying-hierarchical-data-formats"></a>Abfragen hierarchischer Datenformate
+
+Azure Data Explorer ermöglicht das Abfragen hierarchischer Formate, z. B. `JSON`, `Parquet`, `Avro` und `ORC`. Um ein hierarchisches Datenschema einem externen Tabellenschema (falls es abweicht) zuzuordnen, verwenden Sie [Befehle für die Zuordnung externer Tabellen](kusto/management/external-tables-azurestorage-azuredatalake.md#create-external-table-mapping). Wenn Sie beispielsweise JSON-Protokolldateien im folgenden Format abfragen möchten:
+
+```JSON
+{
+  "timestamp": "2019-01-01 10:00:00.238521",   
+  "data": {    
+    "tenant": "e1ef54a6-c6f2-4389-836e-d289b37bcfe0",   
+    "method": "RefreshTableMetadata"   
+  }   
+}   
+{
+  "timestamp": "2019-01-01 10:00:01.845423",   
+  "data": {   
+    "tenant": "9b49d0d7-b3e6-4467-bb35-fa420a25d324",   
+    "method": "GetFileList"   
+  }   
+}
+...
+```
+
+Die Definition der externen Tabelle sieht wie folgt aus:
+
+```kusto
+.create external table ApiCalls(Timestamp: datetime, TenantId: guid, MethodName: string)
+kind=blob
+dataformat=multijson
+( 
+   h@'https://storageaccount.blob.core.windows.net/container1;StorageSecretKey'
+)
+```
+
+Definieren Sie eine JSON-Zuordnung, die Datenfelder zu den Definitionsfeldern der externen Tabelle zuordnet:
+
+```kusto
+.create external table ApiCalls json mapping 'MyMapping' '[{"Column":"Timestamp","Properties":{"Path":"$.time"}},{"Column":"TenantId","Properties":{"Path":"$.data.tenant"}},{"Column":"MethodName","Properties":{"Path":"$.data.method"}}]'
+```
+
+Wenn Sie die externe Tabelle abfragen, wird die Zuordnung aufgerufen, und relevante Daten werden den externen Tabellenspalten zugeordnet:
+
+```kusto
+external_table('ApiCalls') | take 10
+```
+
+Weitere Informationen zur Zuordnungssyntax finden Sie unter [Datenzuordnungen](kusto/management/mappings.md).
+
 ## <a name="query-taxirides-external-table-in-the-help-cluster"></a>Abfragen der externen Tabelle *TaxiRides* im Cluster „help“
 
-Das Beispiel-DataSet *TaxiRides* enthält New Yorker Taxidaten der [New York City Taxi and Limousine Commission (TLC)](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page).
+Verwenden Sie den Testcluster namens *help*, um verschiedene Azure Data Explorer-Funktionen auszuprobieren. Der Cluster *help* enthält eine externe Tabellendefinition für ein [New York City Taxi-Dataset](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page), das Milliarden von Taxifahrten enthält.
 
 ### <a name="create-external-table-taxirides"></a>Erstellen der externen Tabelle *TaxiRides* 
 
-> [!NOTE]
-> In diesem Abschnitt wird die zum Erstellen der externen Tabelle *TaxiRides* im Cluster *help* verwendete Abfrage beschrieben. Da diese Tabelle bereits erstellt wurde, können Sie diesen Abschnitt überspringen und zum Abschnitt [Abfragen von Daten der externen Tabelle *TaxiRides*](#query-taxirides-external-table-data) wechseln. 
+In diesem Abschnitt wird Abfragen angezeigt, mit der externe Tabelle *TaxiRides* im Cluster *help* erstellt wurde. Da diese Tabelle bereits erstellt wurde, können Sie diesen Abschnitt überspringen und direkt zum Abschnitt [Abfragen von Daten der externen Tabelle *TaxiRides*](#query-taxirides-external-table-data) wechseln.
 
-1. Die folgende Abfrage wurde verwendet, um die externe Tabelle *TaxiRides* im Cluster „help“ zu erstellen. 
+```kusto
+.create external table TaxiRides
+(
+  trip_id: long,
+  vendor_id: string, 
+  pickup_datetime: datetime,
+  dropoff_datetime: datetime,
+  store_and_fwd_flag: string,
+  rate_code_id: int,
+  pickup_longitude: real,
+  pickup_latitude: real,
+  dropoff_longitude: real,
+  dropoff_latitude: real,
+  passenger_count: int,
+  trip_distance: real,
+  fare_amount: real,
+  extra: real,
+  mta_tax: real,
+  tip_amount: real,
+  tolls_amount: real,
+  ehail_fee: real,
+  improvement_surcharge: real,
+  total_amount: real,
+  payment_type: string,
+  trip_type: int,
+  pickup: string,
+  dropoff: string,
+  cab_type: string,
+  precipitation: int,
+  snow_depth: int,
+  snowfall: int,
+  max_temperature: int,
+  min_temperature: int,
+  average_wind_speed: int,
+  pickup_nyct2010_gid: int,
+  pickup_ctlabel: string,
+  pickup_borocode: int,
+  pickup_boroname: string,
+  pickup_ct2010: string,
+  pickup_boroct2010: string,
+  pickup_cdeligibil: string,
+  pickup_ntacode: string,
+  pickup_ntaname: string,
+  pickup_puma: string,
+  dropoff_nyct2010_gid: int,
+  dropoff_ctlabel: string,
+  dropoff_borocode: int,
+  dropoff_boroname: string,
+  dropoff_ct2010: string,
+  dropoff_boroct2010: string,
+  dropoff_cdeligibil: string,
+  dropoff_ntacode: string,
+  dropoff_ntaname: string,
+  dropoff_puma: string
+)
+kind=blob 
+partition by bin(pickup_datetime, 1d)
+dataformat=csv
+( 
+    h@'https://storageaccount.blob.core.windows.net/container1;secretKey'
+)
+```
 
-    ```kusto
-    .create external table TaxiRides
-    (
-    trip_id: long,
-    vendor_id: string, 
-    pickup_datetime: datetime,
-    dropoff_datetime: datetime,
-    store_and_fwd_flag: string,
-    rate_code_id: int,
-    pickup_longitude: real,
-    pickup_latitude: real,
-    dropoff_longitude: real,
-    dropoff_latitude: real,
-    passenger_count: int,
-    trip_distance: real,
-    fare_amount: real,
-    extra: real,
-    mta_tax: real,
-    tip_amount: real,
-    tolls_amount: real,
-    ehail_fee: real,
-    improvement_surcharge: real,
-    total_amount: real,
-    payment_type: string,
-    trip_type: int,
-    pickup: string,
-    dropoff: string,
-    cab_type: string,
-    precipitation: int,
-    snow_depth: int,
-    snowfall: int,
-    max_temperature: int,
-    min_temperature: int,
-    average_wind_speed: int,
-    pickup_nyct2010_gid: int,
-    pickup_ctlabel: string,
-    pickup_borocode: int,
-    pickup_boroname: string,
-    pickup_ct2010: string,
-    pickup_boroct2010: string,
-    pickup_cdeligibil: string,
-    pickup_ntacode: string,
-    pickup_ntaname: string,
-    pickup_puma: string,
-    dropoff_nyct2010_gid: int,
-    dropoff_ctlabel: string,
-    dropoff_borocode: int,
-    dropoff_boroname: string,
-    dropoff_ct2010: string,
-    dropoff_boroct2010: string,
-    dropoff_cdeligibil: string,
-    dropoff_ntacode: string,
-    dropoff_ntaname: string,
-    dropoff_puma: string
-    )
-    kind=blob 
-    partition by bin(pickup_datetime, 1d)
-    dataformat=csv
-    ( 
-        h@'http://storageaccount.blob.core.windows.net/container1;secretKey''
-    )
-    ```
-1. Die daraus resultierende Tabelle wurde im Cluster *help* erstellt:
+Sie finden die erstellte Tabelle **TaxiRides**, indem Sie sich den linken Bereich der Webbenutzeroberfläche ansehen:
 
-    ![Externe Tabelle „TaxiRides“](media/data-lake-query-data/taxirides-external-table.png) 
+:::image type="content" source="media/data-lake-query-data/taxirides-external-table.png" alt-text="Externe Tabelle „TaxiRides“":::
 
 ### <a name="query-taxirides-external-table-data"></a>Abfragen von Daten der externen Tabelle *TaxiRides* 
 
-Melden Sie sich bei [https://dataexplorer.azure.com/clusters/help/databases/Samples](https://dataexplorer.azure.com/clusters/help/databases/Samples) an, um die externe Tabelle *TaxiRides* abzufragen. 
+Melden Sie sich bei [https://dataexplorer.azure.com/clusters/help/databases/Samples](https://dataexplorer.azure.com/clusters/help/databases/Samples) an. 
 
 #### <a name="query-taxirides-external-table-without-partitioning"></a>Abfragen der externen Tabelle *TaxiRides* ohne Partitionierung
 
-[Führen Sie diese Abfrage](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAAx3LSwqAMAwFwL3gHYKreh1xL7F9YrCtElP84OEV9zM4DZo5DsZjhGt6PqWTgL1p6+qhvaTEKjeI/FqyuZbGiwJf63QAi9vEL2UbAhtMEv6jyAH6+VhS9jOr1dULfUgAm2cAAAA=) für die externe Tabelle *TaxiRides* aus, um die Fahrten für jeden Wochentag für das gesamte DataSet darzustellen. 
+[Führen Sie diese Abfrage](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAAx3LSwqAMAwFwL3gHYKreh1xL7F9YrCtElP84OEV9zM4DZo5DsZjhGt6PqWTgL1p6+qhvaTEKjeI/FqyuZbGiwJf63QAi9vEL2UbAhtMEv6jyAH6+VhS9jOr1dULfUgAm2cAAAA=) für die externe Tabelle *TaxiRides* aus, um die Fahrten für jeden Wochentag für das gesamte Dataset anzuzeigen. 
 
 ```kusto
 external_table("TaxiRides")
@@ -207,13 +225,13 @@ external_table("TaxiRides")
 | render columnchart
 ```
 
-Diese Abfrage zeigt den Wochentag mit den meisten Fahrten. Weil die Daten nicht partitioniert sind, kann es lange (mehrere Minuten) dauern, bis diese Abfrage Ergebnisse zurückgibt.
+Diese Abfrage zeigt den Wochentag mit den meisten Fahrten. Da die Daten nicht partitioniert sind, kann es bis zu mehrere Minuten dauern, bis die Abfrage Ergebnisse zurückgibt.
 
-![Rendern einer nicht partitionierten Abfrage](media/data-lake-query-data/taxirides-no-partition.png)
+:::image type="content" source="media/data-lake-query-data/taxirides-no-partition.png" alt-text="Rendern einer nicht partitionierten Abfrage":::
 
 #### <a name="query-taxirides-external-table-with-partitioning"></a>Abfragen der externen Tabelle „TaxiRides“ mit Partitionierung 
 
-[Führen Sie diese Abfrage](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA13NQQqDMBQE0L3gHT6ukkVF3fQepXv5SQYMNWmIP6ilh68WuinM6jHMYBPkyPMobGao5s6bv3mHpdF19aZ1QgYlbx8ljY4F4gPIQFYgkvqJGrr+eun6I5ralv58OP27t5QQOPsXiOyzRFGazE6WzSh7wtnIiA75uISdOEtdfQDLWmP+ogAAAA==) für die externe Tabelle *TaxiRides* aus, um die im Januar 2017 genutzten Taxiarten (gelb oder grün) darzustellen. 
+[Führen Sie diese Abfrage](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAAA13NQQqDMBQE0L3gHT6ukkVF3fQepXv5SQYMNWmIP6ilh68WuinM6jHMYBPkyPMobGao5s6bv3mHpdF19aZ1QgYlbx8ljY4F4gPIQFYgkvqJGrr+eun6I5ralv58OP27t5QQOPsXiOyzRFGazE6WzSh7wtnIiA75uISdOEtdfQDLWmP+ogAAAA==) für die externe Tabelle *TaxiRides* aus, um die im Januar 2017 genutzten Taxiarten (gelb oder grün) darzustellen. 
 
 ```kusto
 external_table("TaxiRides")
@@ -224,7 +242,7 @@ external_table("TaxiRides")
 
 Diese Abfrage verwendet Partitionierung, wodurch Ausführungszeit und Leistung optimiert werden. Die Abfrage filtert eine partitionierte Spalte („pickup_datetime“) und gibt die Ergebnisse in wenigen Sekunden zurück.
 
-![Rendern einer partitionierten Abfrage](media/data-lake-query-data/taxirides-with-partition.png)
+:::image type="content" source="media/data-lake-query-data/taxirides-with-partition.png" alt-text="Rendern einer partitionierten Abfrage":::
   
 Sie können weitere Abfragen zur Ausführung für die externe Tabelle *TaxiRides* schreiben und weitere Erkenntnisse über die Daten gewinnen. 
 
@@ -234,26 +252,26 @@ Optimieren Sie die Abfrageleistung im Lake anhand der folgenden bewährten Metho
  
 ### <a name="data-format"></a>Datenformat
  
-Verwenden Sie aus folgenden Gründen ein Spaltenformat für analytische Abfragen:
-* Nur die für eine Abfrage relevanten Spalten können gelesen werden. 
-* Die Codierungsverfahren für Spalten können die Datengröße erheblich verringern.  
-Azure Data Explorer unterstützt die Spaltenformate Parquet und ORC. Das Parquet-Format wird aufgrund der optimierten Implementierung empfohlen. 
+* Verwenden Sie aus folgenden Gründen ein Spaltenformat für analytische Abfragen:
+    * Nur die für eine Abfrage relevanten Spalten können gelesen werden. 
+    * Die Codierungsverfahren für Spalten können die Datengröße erheblich verringern.  
+* Azure Data Explorer unterstützt die Spaltenformate Parquet und ORC. Das Parquet-Format wird wegen seiner optimierten Implementierung empfohlen. 
  
 ### <a name="azure-region"></a>Azure-Region 
  
-Stellen Sie sicher, dass sich die externen Daten in derselben Azure-Region wie Ihr Azure Data Explorer-Cluster befinden. Dies reduziert die Kosten und die Zeit für den Datenabruf.
+Überprüfen Sie, ob sich die externen Daten in derselben Azure-Region wie Ihr Azure Data Explorer-Cluster befinden. Diese Einrichtung reduziert die Kosten und die Zeit für den Datenabruf.
  
 ### <a name="file-size"></a>Dateigröße
  
-Die optimale Dateigröße beträgt Hunderte MB (bis zu 1 GB) pro Datei. Vermeiden Sie eine große Anzahl kleiner Dateien, die unnötigen Mehraufwand bedeuten, z. B. durch eine Verlangsamung der Dateienumeration und Einschränkungen bei der Verwendung des Spaltenformats. Beachten Sie, dass die Anzahl der Dateien größer als die Anzahl der CPU-Kerne in Ihrem Azure Data Explorer-Cluster sein sollte. 
+Die optimale Dateigröße beträgt Hunderte MB (bis zu 1 GB) pro Datei. Vermeiden Sie eine große Anzahl kleiner Dateien, die unnötigen Mehraufwand bedeuten, z. B. durch eine Verlangsamung der Dateienumeration und Einschränkungen bei der Verwendung des Spaltenformats. Die Anzahl der Dateien sollte größer als die Anzahl der CPU-Kerne in Ihrem Azure Data Explorer-Cluster sein. 
  
 ### <a name="compression"></a>Komprimierung
  
-Verwenden Sie Komprimierung, um die Datenmenge zu reduzieren, die vom Remotespeicher abgerufen wird. Verwenden Sie für das Parquet-Format den internen Parquet-Komprimierungsmechanismus, der Spaltengruppen separat komprimiert, sodass sie einzeln gelesen werden können. Wenn Sie die Verwendung des Komprimierungsmechanismus überprüfen möchten, vergewissern Sie sich, dass die Dateien wie folgt benannt wurden: „<filename>.gz.parquet“ oder „<filename>.snappy.parquet“ und nicht „<filename>.parquet.gz“. 
+Verwenden Sie Komprimierung, um die Datenmenge zu reduzieren, die vom Remotespeicher abgerufen wird. Verwenden Sie für das Parquet-Format den internen Parquet-Komprimierungsmechanismus, der Spaltengruppen separat komprimiert, sodass sie einzeln gelesen werden können. Wenn Sie die Verwendung des Komprimierungsmechanismus überprüfen möchten, vergewissern Sie sich, dass die Dateien wie folgt benannt wurden: *&lt;Dateiname&gt;.gz.parquet* oder *&lt;Dateiname&gt;.snappy.parquet* und nicht *&lt;Dateiname&gt;.parquet.gz*. 
  
 ### <a name="partitioning"></a>Partitionierung
  
-Organisieren Sie Ihre Daten mithilfe von „Ordnerpartitionen“, mit deren Hilfe bei der Abfrage irrelevante Pfade übersprungen werden können. Berücksichtigen Sie bei der Partitionierung die Dateigröße und allgemeine Filter in Ihren Abfragen, wie z. B. Zeitstempel oder Mandanten-ID.
+Organisieren Sie Ihre Daten mithilfe von „Ordner“partitionen, mit deren Hilfe bei der Abfrage irrelevante Pfade übersprungen werden können. Berücksichtigen Sie bei der Partitionierung die Dateigröße und allgemeine Filter in Ihren Abfragen, wie z. B. Zeitstempel oder Mandanten-ID.
  
 ### <a name="vm-size"></a>Größe des virtuellen Computers
  
@@ -261,4 +279,4 @@ Wählen Sie VM-SKUs mit mehr Kernen und höherem Netzwerkdurchsatz aus (Arbeitss
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-Fragen Sie Ihre Daten in Azure Data Lake mit Azure Data Explorer ab. Erfahren Sie, wie Sie [Abfragen schreiben](write-queries.md) und weitere Erkenntnisse aus Ihren Daten ableiten.
+* Fragen Sie Ihre Daten in Azure Data Lake mit Azure Data Explorer ab. Erfahren Sie, wie Sie [Abfragen schreiben](write-queries.md) und weitere Erkenntnisse aus Ihren Daten ableiten.
