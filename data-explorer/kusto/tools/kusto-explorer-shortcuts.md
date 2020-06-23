@@ -1,6 +1,6 @@
 ---
-title: Kusto.Explorer-Tastenkombinationen (Hotkeys) - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden Kusto.Explorer-Tastaturbefehle (Hotkeys) in Azure Data Explorer beschrieben.
+title: 'Kusto. Explorer-Tastenkombinationen (Hot-Keys): Azure Daten-Explorer'
+description: In diesem Artikel werden die Tastenkombinationen für Kusto. Explorer (Hot-Keys) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,169 +8,171 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/22/2020
-ms.openlocfilehash: 81d99d14831905681c2dbbc45aea4b63134a06a8
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a5bda2079adc06ea1bca5af65d89418ef5c293f6
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523918"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264673"
 ---
-# <a name="kustoexplorer-keyboard-shortcuts-hot-keys"></a>Kusto.Explorer Tastenkombinationen (Hotkeys)
+# <a name="kustoexplorer-keyboard-shortcuts-hot-keys"></a>Kusto. Explorer-Tastenkombinationen (Hot-Keys)
 
 ## <a name="application-level"></a>Anwendungsebene
 
 Die folgenden Tastenkombinationen können aus jedem Kontext verwendet werden:
 
-|Hot Key|Beschreibung|
+|Abkürzungs Taste|BESCHREIBUNG|
 |-------|-----------|
 |`F1`     | Öffnet die Hilfe|
-|`F11`    | Umschalten des Vollansichtsmodus|
-|`Ctrl`+`F1`| Umschalten des Farbbandauftritts |
-|`Ctrl`+`+`| Erhöht die Schriftart "Abfrage- und Datenergebnisse"|
-|`Ctrl`+`-`| Verringert Abfrage- und Datenergebnisschriftart|
-|`Ctrl`+`0`| Zurücksetzt Abfrage- und Datenergebnisschriftart|
-|`Ctrl`+`1` .. `7`| Wechselt zum Abfragebedienfeld mit der entsprechenden Nummer (1..7)|
-|`Ctrl`+`F2`|Umbenennung des Headers des Abfrage-Editor-Bedienfelds|
-|`Ctrl`+`N` |Öffnet einen neuen Abfrageeditor|
-|`Ctrl`+`O` |Öffnen des Abfrage-Editor-Skripts in einem neuen Abfrageeditor|
-|`Ctrl`+`W` |Schließt den aktiven Abfrageeditor|
-|`Ctrl`+`S` |Speichert Abfrage in einer Datei|
-|`Shift`+`F3` | Öffnet Analytical Report Gallery|
-|`Shift`+`F12`| Schaltet Licht/Dunkel-Thema der Anwendung um|
-|`Ctrl`+`Shift`+`O`|Öffnet Kusto.Explorer-Optionen und -Einstellungen Dialog|
-|`Esc`|Ausführen der Abfrage abbrechen|
-|`Shift`+`F5`|Ausführen der Abfrage abbrechen|
+|`F11`    | Vollbildmodus umschalten|
+|`Ctrl`+`F1`| Menü Band Darstellung umschalten |
+|`Ctrl`+`+`| Vergrößert die Schriftart für Abfrage-und Daten Ergebnisse.|
+|`Ctrl`+`-`| Verringerung der Abfrage-und Daten Ergebnis Schriftart|
+|`Ctrl`+`0`| Zurücksetzen der Abfrage-und Daten Ergebnis Schriftart|
+|`Ctrl`+`1` .. `7`| Wechselt zum Abfrage Dokumentbereich mit der entsprechenden Zahl (1.. 7).|
+|`Ctrl`+`F2`|Benennt den Header des Abfrage-Editor-Panels.|
+|`Ctrl`+`N` |Öffnet einen neuen Abfrage-Editor.|
+|`Ctrl`+`O` |Öffnen des Abfrage-Editor-Skripts in einem neuen Abfrage-Editor|
+|`Ctrl`+`W` |Schließt den aktiven Abfrage-Editor.|
+|`Ctrl`+`S` |Speichert die Abfrage in einer Datei.|
+|`Shift`+`F3` | Öffnet den analytischen Berichts Katalog|
+|`Shift`+`F12`| Schaltet das helle/dunkle Design der Anwendung um.|
+|`Ctrl`+`Shift`+`O`|Öffnet das Dialogfeld "Optionen und Einstellungen" von Kusto. Explorer|
+|`Esc`|Ausführung der Abfrage abbrechen|
+|`Shift`+`F5`|Ausführung der Abfrage abbrechen|
 
-## <a name="query-and-results-view"></a>Abfrage- und Ergebnisansicht
+## <a name="query-and-results-view"></a>Abfrage-und Ergebnis Ansicht
 
-Die folgenden Tastenkombinationen können beim Bearbeiten einer Abfrage im Abfrageeditor oder beim Kontext in der Ergebnisansicht verwendet werden:
+Sie können die folgenden Tastenkombinationen mit dem Abfrage-Editor verwenden, oder wenn sich der Kontext in der Ergebnis Ansicht befindet:
 
-|Hot Key|Beschreibung|
+|Abkürzungs Taste|BESCHREIBUNG|
 |-------|-----------|
-|`Ctrl`+`Shift`+`C`|Kopiert Abfrage, Deep-Link und Daten in die Zwischenablage|
-|`Alt`+`Shift`+`C` |Kopiert die Abfrage und die Deep-Link-Zwischenablage im HTML-Format|
-|`Alt`+`Shift`+`R` |Kopiert Abfrage, Deep-Link und Daten der Zwischenablage im Markdown-Format|
-|`Alt`+`Shift`+`M` |Kopiert die Abfrage und die Deep-Link-Zwischenablage im Markdown-Format|
-|`Ctrl`+`~` |Kopiert Abfragen und Daten in die Zwischenablage im Markdown-Format |
-|`Ctrl`+`Shift`+`D`|Umschalten des Modus zum Ausblenden doppelter Zeilen in der Datenansicht|
-|`Ctrl`+`Shift`+`H`|Umschalten des Modus zum Ausblenden leerer Spalten in der Datenansicht|
-|`Ctrl`+`Shift`+`J`|Umschalten des Modus des Reduzierens von Spalten mit einem einzelnen Wert in der Datenansicht|
-|`Ctrl`+`Shift`+`A`|Öffnet ein Query Analyzer-Tool in einem neuen Abfragebereich|
-|`Alt`+`C`  |Rendert Säulendiagramm über vorhandene Daten|
-|`Alt`+`T`  |Rendert Zeitleistendiagramm über vorhandene Daten|
-|`Alt`+`A`  |Rendert Anomalie-Zeitachsendiagramm über vorhandene Daten|
-|`Alt`+`P`  |Rendert Kreisdiagramm über vorhandene Daten|
-|`Alt`+`L`  |Rendert Ladder-Timeline-Diagramm über vorhandene Daten|
-|`Alt`+`V`  |Rendert Pivot-Diagramm über vorhandene Daten|
-|`Ctrl`+`Shift`+`V`|Zeigt Timeline-Pivot über vorhandene Daten|
-|`Ctrl`+`F9`  | / `highlight matching rows` `Ctrl`+`F`Schaltet Modi für Client-Textsuche ( ) Verhalten im Datenraster `show only matching rows` um. |
-|`Ctrl`+`F10` |Zeigt das Detailbedienfeld an, in dem die ausgewählte Zeile als Eigenschaftsraster dargestellt wird|
-|`Ctrl`+`F`  | Zeigt das Suchfeld für das Bedienfeld an, das sich derzeit im Fokus befindet. Unterstützt `Connetions`in `Data Results`, `Query Editor` und Panels|
-|`Ctrl`+`Tab`| Zeigt das Dialogfeld Abfrage-Editor-Dokumentauswahl an. Sie können `Ctrl` Dokumente mit`Tab` |
-|`Ctrl`+`J`|Umschalten des Erscheinungsbilds des Ergebnisfensters|
-|`Ctrl`+`E`|Schaltet das Erscheinungsbild des Abfrage-Editors und des Ergebnisfensters im Zyklus von:`Query Editor and Results` -> `Query Editor` -> `Query Editor and Results` -> `Results` |
-|`Ctrl`+`Shift`+`E`|Schaltet das Erscheinungsbild des Abfrage-Editors und des Ergebnisfensters im Zyklus von:`Query Editor and Results` -> `Results` -> `Query Editor and Results` -> `Query Editor` |
-|`Ctrl`+`Shift`+`R` | Fokussiert auf das Ergebnispanel |
-|`Ctrl`+`Shift`+`T` | Fokussiert auf das Connections-Bedienfeld |
+|`Ctrl`+`Shift`+`C`|Kopiert Abfragen, Deep-Link und Daten in die Zwischenablage.|
+|`Alt`+`Shift`+`C` |Kopiert die Abfrage und die Tiefe Verknüpfung der Zwischenablage im HTML-Format.|
+|`Alt`+`Shift`+`R` |Kopiert Abfragen, Deep-Link und legt Daten in der Zwischenablage im Markdown-Format ab.|
+|`Alt`+`Shift`+`M` |Kopiert Abfragen und Deep-Link der Zwischenablage im Markdown-Format.|
+|`Ctrl`+`~` |Kopieren von Abfragen und Daten in die Zwischenablage im Markdown-Format |
+|`Ctrl`+`Shift`+`D`|Schaltet den Modus zum Ausblenden doppelter Zeilen in der Datenansicht um.|
+|`Ctrl`+`Shift`+`H`|Schaltet den Modus zum Ausblenden leerer Spalten in der Datenansicht um.|
+|`Ctrl`+`Shift`+`J`|Schaltet den Modus der reduzierenden Spalten mit einem einzelnen Wert in der Daten Sicht um.|
+|`Ctrl`+`Shift`+`A`|Öffnet ein Abfrage Analysetool in einem neuen Abfrage Panel.|
+|`Alt`+`C`  |Rendert ein Säulendiagramm über vorhandene Daten.|
+|`Alt`+`T`  |Rendert ein Zeitachsen Diagramm über vorhandene Daten|
+|`Alt`+`A`  |Rendert ein anomaliezeitachse für vorhandene Daten|
+|`Alt`+`P`  |Rendert ein Kreis Diagramm über vorhandene Daten.|
+|`Alt`+`L`  |Rendert das Achsen Diagramm der Achsen über vorhandene Daten|
+|`Alt`+`V`  |Rendert ein PivotChart über vorhandene Daten|
+|`Ctrl`+`Shift`+`V`|Zeigt die Zeitachse Pivot über vorhandene Daten|
+|`Ctrl`+`F9`  | Schaltet `show only matching rows` / `highlight matching rows` Modi für das Verhalten der Client Text Suche ( `Ctrl` + `F` ) im Datenraster um. |
+|`Ctrl`+`F10` |Zeigt das Detail Panel an, in dem die ausgewählte Zeile als Eigenschaften Raster angezeigt wird.|
+|`Ctrl`+`F`  | Zeigt das Suchfeld für den Bereich an, der gerade den Fokus besitzt. Unterstützt in den Bereichen `Connetions` , `Data Results` und `Query Editor`|
+|`Ctrl`+`Tab`| Zeigt das Dokument Auswahl Dialogfeld des Abfrage-Editors. Sie können `Ctrl` Dokumente mit`Tab` |
+|`Ctrl`+`J`|Schaltet die Darstellung des Ergebnis Bereichs um.|
+|`Ctrl`+`E`|Schaltet die Darstellung des Abfrage-Editors und des Ergebnis Bereichs in einem der folgenden Zyklen um:`Query Editor and Results` -> `Query Editor` -> `Query Editor and Results` -> `Results` |
+|`Ctrl`+`Shift`+`E`|Schaltet die Darstellung des Abfrage-Editors und des Ergebnis Bereichs in einem der folgenden Zyklen um:`Query Editor and Results` -> `Results` -> `Query Editor and Results` -> `Query Editor` |
+|`Ctrl`+`Shift`+`R` | Schwerpunktbereich im Bereich "Ergebnisse" |
+|`Ctrl`+`Shift`+`T` | Konzentriert sich auf das Verbindungs Panel |
 |`Ctrl`+`Shift`+`Y` | Konzentriert sich auf den Abfrage-Editor |
-|`Ctrl`+`Shift`+`P` | Fokussiert auf Diagramm-Panel |
-|`Ctrl`+`Shift`+`I` | Konzentriert sich auf das Abfrageinformationsbedienfeld |
-|`Ctrl`+`Shift`+`S` | Konzentriert sich auf das Bedienfeld Abfragestatistik |
-|`Ctrl`+`Shift`+`K` | Konzentriert sich auf das Fehlerbedienfeld |
-|`Alt`+`Ctrl`+`L`|Sperrt den aktuellen Verbindungskontext in den Abfrage-Editor, sodass das Ändern ausgewählter Zeilen im Kontext "Connetion" keine Auswirkungen auf den Kontext des Abfrage-Editors hat. |
+|`Ctrl`+`Shift`+`P` | Fokus auf Diagramm Panel |
+|`Ctrl`+`Shift`+`I` | Schwerpunktbereich im Bereich "Abfrage Informationen" |
+|`Ctrl`+`Shift`+`S` | Konzentriert sich auf Abfrage Statistik Panel |
+|`Ctrl`+`Shift`+`K` | Konzentriert sich auf das Fehler Panel |
+|`Alt`+`Ctrl`+`L`|Sperrt den aktuellen Verbindungs Kontext zum Abfrage-Editor, sodass das Ändern der ausgewählten Zeile im Verbindungs Panel keine Auswirkung auf den Kontext des Abfrage-Editors hat. |
 
-## <a name="results-table-viewer"></a>Ergebnisse Tabellenanzeige
+## <a name="results-table-viewer"></a>Ergebnistabellen-Viewer
 
-Die folgenden Tastenkombinationen können verwendet werden, wenn sich die Ergebnisansicht (Tabelle) im aktiven Tastaturfokus befindet:
+Die folgenden Tastenkombinationen können verwendet werden, wenn sich die Ergebnis Ansicht (Tabelle) im aktiven Tastaturfokus befindet:
 
-|Hot Key|Beschreibung|
+|Abkürzungs Taste|BESCHREIBUNG|
 |-----------|-----------|
-|`Ctrl`+`Q` |Aktuelles Spaltenkontextmenü anzeigen|
-|`Ctrl`+`S` |Umschalten der aktuellen Spaltensortierung|
-|`Ctrl`+`U` |Öffnet ein Bedienfeld mit aktuellen Spaltenwerten mit clientseitig erfilterung|
-|`Ctrl`+`F` | Zeigt das Suchfeld für die Ergebnisse an|
-|`Ctrl`+`F3`| / `highlight matching rows` `Ctrl`+`F`Schaltet Modi für Client-Textsuche ( ) Verhalten im Datenraster `show only matching rows` um. |
+|`Ctrl`+`Q` |Kontextmenü der aktuellen Spalte anzeigen|
+|`Ctrl`+`S` |Ändern der aktuellen Spalten Sortierung|
+|`Ctrl`+`U` |Öffnet einen Bereich, in dem die aktuellen Spaltenwerte mit Client seitiger Filterung angezeigt werden.|
+|`Ctrl`+`F` | Zeigt das Suchfeld für die Ergebnisse an.|
+|`Ctrl`+`F3`| Schaltet `show only matching rows` / `highlight matching rows` Modi für das Verhalten der Client Text Suche ( `Ctrl` + `F` ) im Datenraster um. |
 
 ## <a name="query-editor"></a>Abfrage-Editor
 
-Die folgenden Tastenkombinationen können beim Bearbeiten einer Abfrage im Abfrageeditor verwendet werden:
+Die folgenden Tastenkombinationen können verwendet werden, um eine Abfrage im Abfrage-Editor zu bearbeiten:
 
-|Hot Key|Beschreibung|
+|Abkürzungs Taste|BESCHREIBUNG|
 |-------|-----------|
-|`F1`|Wenn der Cursor auf einen Operator oder eine Funktion zeigt, öffnet sich ein Hilfefenster mit Informationen über den Operator oder die Funktion. Wenn das Hilfethema nicht vorhanden ist - öffnet eine Hilfe-URL|
+|`F1`|Wenn der Cursor auf einen Operator oder eine Funktion zeigt, öffnet ein Hilfefenster mit Informationen über den Operator oder die Funktion. Wenn das Hilfethema nicht vorhanden ist, wird eine Hilfe-URL geöffnet.|
 |`F5`|Aktuell ausgewählte Abfrage ausführen|
 |`Shift`+`Enter`|Aktuell ausgewählte Abfrage ausführen|
-|`F8`|Abrufen von Abfrageergebnissen aus dem lokalen Cache. Wenn keine Ergebnisse vorhanden sind - Führen Sie die aktuell ausgewählte Abfrage aus.|
-|`F6`|Aktuell ausgewählte Abfrage `Progressive Results` im Modus ausführen|
-|`Ctrl`+`F5` | Vorschauergebnisse der ausgewählten Abfrage (zeigt nur wenige Ergebnisse und Gesamtanzahl)|
-|`Ctrl`+`Shift`+`Space`| Einfügen von Datenzellenauswahlals als Filter in die Abfrage|
-|`Ctrl`+`Space`| IntelliSense-Regeln überprüfen. Mögliche Optionen werden in jeder Regel angezeigt, die |
-|`Ctrl`+`Enter`| Fügt `pipe` Ein Symbol hinzu und wechselt zu einer neuen Zeile|
+|`F8`|Abrufen von Abfrage Ergebnissen aus dem lokalen Cache. Wenn die Ergebnisse nicht vorhanden sind: aktuell ausgewählte Abfrage ausführen|
+|`F6`|Momentan ausgewählte Abfrage im- `Progressive Results` Modus ausführen|
+|`Ctrl`+`F5` | Vorschau der Ergebnisse der ausgewählten Abfrage (zeigt nur wenige Ergebnisse und Gesamtanzahl)|
+|`Ctrl`+`Shift`+`Space`| Daten Zellen Auswahl als Filter in die Abfrage einfügen|
+|`Ctrl`+`Space`| Überprüfung der IntelliSense-Regeln erzwingen Mögliche Optionen werden in jeder übereinstimmenden Regel angezeigt. |
+|`Ctrl`+`Enter`| Fügt `pipe` ein Symbol hinzu und wechselt zu einer neuen Zeile.|
 |`Ctrl`+`Z`| Rückgängig |
-|`Ctrl`+`Y`| Re-do |
-|`Ctrl`+`L`| Löscht die aktuelle Zeile|
-|`Ctrl`+`D`| Löscht die aktuelle Zeile| 
-|`Ctrl`+`F`| Öffnet `Find and Replace` Dialog |
-|`Ctrl`+`G`| Öffnet `Go-to line` Dialog |
-|`Ctrl`+`F8` | Meine Anfragen der letzten 3 Tage anzeigen |
-|`Ctrl`+ Halterung | Wenn sich der Cursor `(` `)` in `[` `]` Klammern `{` `}` befindet: , , , , - bewegt den Cursor in die passende öffnende oder schließende Klammer |
-|`Ctrl`+`Shift`+`Q` | Prettify aktuelle Abfrage |
-|`Ctrl`+`Shift`+`L` | Aktuelle Abfrage oder Auswahl kleinbeistellen |
-|`Ctrl`+`Shift`+`U` |  Aktuelle Abfrage oder Auswahl großbuchstaben |
-|`Ctrl`+`Mouse wheel up`| Erhöht die Schriftart des qupery-Editors| 
-|`Ctrl`+`Mouse wheel down`| Verringert die Schriftart des Abfrageeditors|
-|`Alt`+`P` | Öffnet Abfrageparameter-Dialog |
-|`F2`| Aktuelle Zeile / markierten Text im Editor-Dialog öffnen |
-|`Ctrl`+`F6`| Führt die statische KQL-Abfrageanalyse aus, um häufig auftretende Probleme zu erkennen |
-|`F12`| Navigieren zur Definition des Symbols |
-|`Ctrl`+`F12`| Alle Verweise auf das aktuelle Symbol finden |
-|`Alt`+`Home`| Navigieren zur Definition des Symbols |
-|`Alt`+`Ctrl`+`M`| Extrahieren sie den aktuell ausgewählten Literal- oder Tabellarischen Ausdruck als let-Anweisung |
-|`Ctrl`+`.`| Extrahieren sie den aktuell ausgewählten Literal- oder Tabellarischen Ausdruck als let-Anweisung |
-|`Ctrl`+`R`, `Ctrl`+`R` | Umbenennung des aktuellen Symbols |
-|`Ctrl`+`K`, `Ctrl`+`D` | Fügt den aktuellen Zeitstempel als detatime-Literal ein |
-|`Ctrl`+`K`, `Ctrl`+`R` | Einsätze `range x from 1 to 1 step 1` Snippet |
-|`Ctrl`+`K`, `Ctrl`+`C` | Kommentieren der aktuellen Zeile oder ausgewählter Linien |
-|`Ctrl`+`K`, `Ctrl`+`F` | Prettify aktuelle Abfrage |
-|`Ctrl`+`K`, `Ctrl`+`V` | Aktuelle Abfrage duplizieren (an das Ende des aktuellen Abfragedokuments anhängen) |
-|`Ctrl`+`K`, `Ctrl`+`U` | Abmelden der aktuellen Zeile oder ausgewählter Zeilen |
-|`Ctrl`+`K`, `Ctrl`+`S` | Drehen Sie die aktuelle Linie oder ausgewählte Linien in ein mehrzeiliges Zeichenfolgenliteral |
-|`Ctrl`+`K`, `Ctrl`+`M` | Entfernen sie mehrzeilige Stirng-Literalmarken (Rückseite `Ctrl` + `K`von , `Ctrl` + `S`) |
-|`Ctrl`+`M`, `Ctrl`+`M` | Umschalten der Gliederungserweiterung der aktuellen Abfrage |
-|`Ctrl`+`M`, `Ctrl`+`L` | Umschalten der Gliederung sumrissen Erweiterung aller Abfragen im Dokument |
+|`Ctrl`+`Y`| Wiederholen |
+|`Ctrl`+`L`| Löscht die aktuelle Zeile.|
+|`Ctrl`+`D`| Löscht die aktuelle Zeile.| 
+|`Ctrl`+`F`| Öffnet das `Find and Replace` Dialogfeld |
+|`Ctrl`+`G`| Öffnet das `Go-to line` Dialogfeld |
+|`Ctrl`+`F8` | Meine Abfragen in den letzten 3 Tagen anzeigen |
+|`Ctrl`+ eckige Klammer | Wenn sich der Cursor an geschweiften Klammern befindet: `(` , `)` , `[` , `]` , `{` , `}` -Verschiebt den Cursor an die passende öffnende oder schließende Klammer. |
+|`Ctrl`+`Shift`+`Q` | Aktuelle Abfrage prettify |
+|`Ctrl`+`Shift`+`L` | Aktuelle Abfrage oder Auswahl in Kleinbuchstaben erstellen |
+|`Ctrl`+`Shift`+`U` |  Aktuelle Abfrage oder Auswahl in Großbuchstaben erstellen |
+|`Ctrl`+`Mouse wheel up`| Vergrößert die Schriftart des Abfrage-Editors.|
+|`Ctrl`+`Mouse wheel down`| Verringert die Schriftart des Abfrage-Editors.|
+|`Alt`+`P` | Dialogfeld "Abfrage Parameter öffnen" |
+|`F2`| Aktuellen Zeilen-/ausgewähltem Text im Editor-Dialogfeld Öffnen |
+|`Ctrl`+`F6`| Führt die statische kql-Abfrage Analyse aus, um häufige Probleme zu erkennen |
+|`F12`| Navigieren Sie zur Definition des Symbols. |
+|`Ctrl`+`F12`| Alle Verweise des aktuellen Symbols suchen |
+|`Alt`+`Home`| Navigieren Sie zur Definition des Symbols. |
+|`Alt`+`Ctrl`+`M`| Aktuell ausgewählten Literalen oder tabellarischen Ausdruck als Let-Anweisung extrahieren |
+|`Ctrl`+`.`| Aktuell ausgewählten Literalen oder tabellarischen Ausdruck als Let-Anweisung extrahieren |
+|`Ctrl`+`R`, `Ctrl`+`R` | Benennt das aktuelle Symbol um. |
+|`Ctrl`+`K`, `Ctrl`+`D` | Fügt den aktuellen Zeitstempel als datetime-Literale ein. |
+|`Ctrl`+`K`, `Ctrl`+`R` | `range x from 1 to 1 step 1`Ausschnitt einfügen |
+|`Ctrl`+`K`, `Ctrl`+`C` | Aktuelle Zeile oder ausgewählte Zeilen kommentieren |
+|`Ctrl`+`K`, `Ctrl`+`F` | Aktuelle Abfrage prettify |
+|`Ctrl`+`K`, `Ctrl`+`V` | Aktuelle Abfrage duplizieren (am Ende des aktuellen Abfrage Dokuments anfügen) |
+|`Ctrl`+`K`, `Ctrl`+`U` | Auskommentierung der aktuellen Zeile oder ausgewählter Zeilen aufheben |
+|`Ctrl`+`K`, `Ctrl`+`S` | Umwandeln der aktuellen Zeile oder ausgewählter Zeilen in mehrzeilige Zeichenfolgenliterale |
+|`Ctrl`+`K`, `Ctrl`+`M` | Mehrzeilige zeichenfolgenliteralmarkierungen entfernen (Umkehrung von `Ctrl` + `K` , `Ctrl` + `S` ) |
+|`Ctrl`+`M`, `Ctrl`+`M` | Gliederung der Erweiterung der aktuellen Abfrage umschalten |
+|`Ctrl`+`M`, `Ctrl`+`L` | Gliederung der Erweiterung aller Abfragen im Dokument umschalten |
 
 ## <a name="json-viewer"></a>JSON-Viewer
 
-Die folgenden Tastatur-Shorcuts können innerhalb des Ergebnisses JSON-Viewer verwendet werden (angezeigt, wenn man auf einen JSON-ähnlichen Wert in der Ergebnisansichtszelle doppelklickt):
+Die folgenden Tastenkombinationen können im Ergebnis-JSON-Viewer verwendet werden.
+Sie werden angezeigt, wenn Sie auf einen JSON-ähnlichen Wert in der Ergebnis Ansichts Zelle doppelklicken:
 
-|Hot Key|Beschreibung|
+|Abkürzungs Taste|BESCHREIBUNG|
 |-------|-----------|
-|`Ctrl`+`Up Arrow`|Navigieren zu übergeordneten|
-|`Ctrl`+`Right Arrow`|Erweitern des aktuellen Knotens (eine Ebene)|
-|`Ctrl`+`Left Arrow`|Aktueller Knoten reduzieren (eine Ebene)|
-|`Ctrl`+`.`|Umschalten der Erweiterung des aktuellen Knotens (alle untergeordneten Ebenen erweitert/reduziert)
-|`Ctrl`+`Shift`+`.`|Umschalten der Erweiterung des aktuellen übergeordneten Knotens (alle untergeordneten Ebenen erweitert/reduziert)|
+|`Ctrl`+`Up Arrow`|Zum übergeordneten Element navigieren|
+|`Ctrl`+`Right Arrow`|Aktuellen Knoten erweitern (eine Ebene)|
+|`Ctrl`+`Left Arrow`|Aktuellen Knoten zuklappen (eine Ebene)|
+|`Ctrl`+`.`|Erweiterung des aktuellen Knotens umschalten (alle untergeordneten Ebenen erweitert/reduziert)
+|`Ctrl`+`Shift`+`.`|Erweiterung des übergeordneten Knotens (alle untergeordneten Ebenen erweitert/reduziert) umschalten|
 
-## <a name="connection-panel"></a>Anschlusspanel
+## <a name="connection-panel"></a>Verbindungs Panel
 
-Die folgenden Tastatur-Shorcuts können innerhalb des Ergebnisses JSON-Viewer verwendet werden (angezeigt, wenn man auf einen JSON-ähnlichen Wert in der Ergebnisansichtszelle doppelklickt):
+Die folgenden Tastenkombinationen können im Ergebnis-JSON-Viewer verwendet werden.
+Sie werden angezeigt, wenn Sie auf einen JSON-ähnlichen Wert in der Ergebnis Ansichts Zelle doppelklicken:
 
-|Hot Key|Beschreibung|
+|Abkürzungs Taste|BESCHREIBUNG|
 |-------|-----------|
-|`Ctrl`+`Up`Pfeil|Navigieren zu übergeordneten|
-|`Ctrl`+`Right`Pfeil|Erweitern des aktuellen Knotens (eine Ebene)|
-|`Ctrl`+`Left`Pfeil|Aktueller Knoten reduzieren (eine Ebene)|
+|`Ctrl`+`Up`Gift|Zum übergeordneten Element navigieren|
+|`Ctrl`+`Right`Gift|Aktuellen Knoten erweitern (eine Ebene)|
+|`Ctrl`+`Left`Gift|Aktuellen Knoten zuklappen (eine Ebene)|
 |`Ctrl`+`Shift`+`L`|Alle Ebenen reduzieren|
-|`Ctrl`+`R`|Aktualisieren der aktuell ausgewählten Verbindung|
-|`Insert`|Hinzufügen einer neuen Verbindung|
+|`Ctrl`+`R`|Aktuell ausgewählte Verbindung aktualisieren|
+|`Insert`|Neue Verbindung hinzufügen|
 |`Del`|Aktuelle Verbindung löschen|
-|`Ctrl`+`E`|Bearbeiten der aktuell ausgewählten Verbindung|
-|`Ctrl`+`T`|Öffnen eines neuen Abfrage-Editors unter Verwendung der aktuell ausgewählten Verbindung|
+|`Ctrl`+`E`|Aktuell ausgewählte Verbindung bearbeiten|
+|`Ctrl`+`T`|Öffnet einen neuen Abfrage-Editor mithilfe der aktuell ausgewählten Verbindung.|
 
 ## <a name="diagnostics-and-monitoring"></a>Diagnose und Überwachung
 
-Die folgenden Tastenkombinationen `Monitoring` sind über das Menüband verfügbar.
+Die folgenden Tastenkombinationen sind über das `Monitoring` Menüband verfügbar.
 
-|Hot Key|Beschreibung|
+|Abkürzungs Taste|BESCHREIBUNG|
 |-----------|-----------|
-|`Ctrl`+`Shift`+`F1`|Ausführen des Clusterdiagnoseflusses|
+|`Ctrl`+`Shift`+`F1`|Ausführen des Cluster Diagnose Flusses|

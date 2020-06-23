@@ -1,6 +1,6 @@
 ---
-title: reverse() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird Reverse() in Azure Data Explorer beschrieben.
+title: Reverse ()-Azure Daten-Explorer
+description: Dieser Artikel beschreibt Reverse () in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,29 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: e95246e0586dff7dd89dc2658c7fae08b1bbaddf
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 22fe505eb8fd391e7a61120dbf42c214cb61c120
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510301"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264826"
 ---
 # <a name="reverse"></a>reverse()
 
-Funktion macht umgekehrt von Eingabezeichenfolge.
-
-Wenn der Eingabewert nicht vom Zeichenfolgentyp ist, wird der Wert von der Funktion zwangsweise in string umgeworfen.
+Funktion kehrt die Reihenfolge der Eingabe Zeichenfolge um.
+Wenn der Eingabe Wert nicht vom Typ `string` ist, wandelt die Funktion den Wert in den Typ um `string` .
 
 **Syntax**
 
-`reverse(`*Quelle*`)`
+`reverse(`*Ausgangs*`)`
 
 **Argumente**
 
-* *Quelle*: Eingabewert.  
+* *Quelle*: Eingabe Wert.  
 
 **Rückgabe**
 
-Die umgekehrte Reihenfolge eines Zeichenfolgenwerts.
+Die umgekehrte Reihenfolge eines Zeichen folgen Werts.
 
 **Beispiele**
 
@@ -40,9 +39,9 @@ print str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 | extend rstr = reverse(str)
 ```
 
-|str|Rstr|
+|str|RSTR|
 |---|---|
-|ABCDEFGHIJKLMNOPQRSTUVWXYZ|ZYXWVUTSRQPONMLKJIHGFEDCBA|
+|ABCDEFGHIJKLMNOPQRSTUVWXYZ|Zyxwvutsrqponmlkjihgfedcba|
 
 
 ```kusto
@@ -54,9 +53,4 @@ rdatetime = reverse(['datetime']), rtimespan = reverse(['timespan'])
 
 |rint|rdouble|rdatetime|rtimespan|
 |---|---|---|---|
-|54321|54.321|Z0000000.00:00:21T51-01-7102|00:00:30|
-
-
-
-
- 
+|54321|54,321|Z 0000000.00:00:21t51-01-7102|00:00:30|

@@ -1,6 +1,6 @@
 ---
-title: indexof() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt indexof() in Azure Data Explorer.
+title: IndexOf ()-Azure Daten-Explorer
+description: In diesem Artikel wird IndexOf () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,40 +8,40 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 698cc7c13c3d665f9f5cfe25a31269dc763c51fb
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 2d5accaa0e6f6c4c6e5d5261a9709ba965de6965
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513939"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264961"
 ---
 # <a name="indexof"></a>indexof()
 
-Function meldet den nullbasierten Index des ersten Vorkommens einer angegebenen Zeichenfolge innerhalb der Eingabezeichenfolge.
+Meldet den NULL basierten Index des ersten Vorkommens einer angegebenen Zeichenfolge in der Eingabe Zeichenfolge.
 
-Wenn Die Such- oder Eingabezeichenfolge nicht vom Zeichenfolgentyp ist, wird der Wert zwangsweise in string umgeworfen.
+Wenn die Suche oder die Eingabe Zeichenfolge nicht vom Typ " *String* " ist, wandelt die Funktion den Wert in eine *Zeichenfolge*um.
 
-Siehe [`indexof_regex()`](indexofregexfunction.md).
+Weitere Informationen finden Sie unter [`indexof_regex()`](indexofregexfunction.md).
 
 **Syntax**
 
-`indexof(`*Quellsuche*`,``[,`*lookup*`[,`*start_index-Längen-Vorkommen*`[,`*occurrence* *start_index*`]]])`
+`indexof(`*Quelle* `,` *Suche* `[,` *start_index* `[,` *Länge* `[,` *vorkommen*`]]])`
 
 **Argumente**
 
-* *Quelle*: Eingabezeichenfolge.  
-* *Lookup*: Zeichenfolge zu suchen.
-* *start_index*: Startposition suchen (optional).
-* *Länge*: Anzahl der zu untersuchenden Zeichenpositionen, -1 Definition unbegrenzter Länge (optional).
-* *Vorkommen*: ist das Vorkommen Standard 1 (optional).
+* *Quelle*: Eingabe Zeichenfolge.  
+* *Suche*: Zeichenfolge, die gesucht werden soll.
+* *start_index*: Startposition der Suche. Optional.
+* *length*: Anzahl der zu überprüfenden Zeichen Positionen. Der Wert-1 bedeutet eine unbegrenzte Länge. Optional.
+* *vorkommen*: die Anzahl der vorkommen. Standardwert „1“. Optional.
 
 **Rückgabe**
 
-Nullbasierte Indexposition der *Suche*.
+Null basierte Indexposition von *Suche*.
 
-Gibt -1 zurück, wenn die Zeichenfolge in der Eingabe nicht gefunden wird.
+Gibt-1 zurück, wenn die Zeichenfolge nicht in der Eingabe gefunden wurde.
 
-Bei irrelevantem (weniger als 0) *start_index*gibt *der Vorkommen* oder (weniger als -1) *Längenparameter* *null*zurück.
+Wenn irrelevant (kleiner als 0) *start_index*, *vorkommen*oder (kleiner als-1) *length* -Parameter, wird *null*zurückgegeben.
 
 **Beispiele**
 ```kusto

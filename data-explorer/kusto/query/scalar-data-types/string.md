@@ -1,6 +1,6 @@
 ---
-title: Der Zeichenfolgendatentyp - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt den Zeichenfolgendatentyp in Azure Data Explorer.
+title: 'Der Zeichen folgen-Datentyp: Azure Daten-Explorer'
+description: Dieser Artikel beschreibt den String-Datentyp in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,34 +8,34 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8c040045ba7146cf56487ca3a8729372084d3bf2
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: e7c043a9b4d8b141d2dc45e88022e191e6483c35
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81509621"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264809"
 ---
-# <a name="the-string-data-type"></a>Der Zeichenfolgendatentyp
+# <a name="the-string-data-type"></a>Der Zeichen folgen-Datentyp.
 
-Der `string` Datentyp stellt eine Unicode-Zeichenfolge dar. (Kusto-Zeichenfolgen sind in UTF-8 codiert und standardmäßig auf 1 MB begrenzt.)
+Der- `string` Datentyp stellt eine Unicode-Zeichenfolge dar. Kusto-Zeichen folgen werden in UTF-8 codiert und sind standardmäßig auf 1 MB beschränkt.
 
 ## <a name="string-literals"></a>Zeichenfolgenliterale
 
-Es gibt mehrere Möglichkeiten, Literale `string` des Datentyps zu codieren:
+Es gibt mehrere Möglichkeiten, Literale des `string` Datentyps zu codieren.
 
-* Durch Einschließen der Zeichenfolge in`"`Doppelanführungszeichen ( ):`"This is a string literal. Single quote characters (') do not require escaping. Double quote characters (\") are escaped by a backslash (\\)"`
-* Durch Einschließen der Zeichenfolge in`'`einfache Anführungszeichen ( ):`'Another string literal. Single quote characters (\') require escaping by a backslash (\\). Double quote characters (") do not require escaping.'`
+* Schließen Sie die Zeichenfolge in doppelte Anführungszeichen ( `"` ) ein:`"This is a string literal. Single quote characters (') don't require escaping. Double quote characters (\") are escaped by a backslash (\\)"`
+* Schließen Sie die Zeichenfolge in einfache Anführungszeichen ( `'` ) ein:`'Another string literal. Single quote characters (\') require escaping by a backslash (\\). Double quote characters (") do not require escaping.'`
 
-In den beiden obigen Darstellungen`\`zeigt das umgekehrte Schrägstrich ( ) das Entkommen an.
-Es wird verwendet, um die einschließenden`\t`Zitatzeichen zu`\n`entkommen,`\\`Tab-Zeichen ( ), Zeilenumzufolge - und sich selbst ( ).
+In den beiden obigen Darstellungen gibt der umgekehrte Schrägstrich ( `\` ) Escapezeichen an.
+Es wird verwendet, um die einschließenden Anführungszeichen, Tabstopp Zeichen (), Zeilen vorzeichenfolge ( `\t` `\n` ) und selbst () mit Escapezeichen zu versehen `\\` .
 
-Verbatim String-Literale werden ebenfalls unterstützt. In dieser Form steht das`\`umgekehrte Schrägstrichzeichen ( ) für sich selbst, nicht als Escape-Zeichen:
+Ausführliche Zeichen folgen Literale werden ebenfalls unterstützt. In dieser Form steht der umgekehrte Schrägstrich ( `\` ) für sich selbst und nicht als Escapezeichen.
 
-* In Doppelnotierungen`"`( )`@"This is a verbatim string literal that ends with a backslash\"`
-* Eingeschlossen in einfache`'`Notierungen ( ):`@'This is a verbatim string literal that ends with a backslash\'`
+* In doppelte Anführungszeichen () einschließen `"` :`@"This is a verbatim string literal that ends with a backslash\"`
+* In einfache Anführungszeichen () einschließen `'` :`@'This is a verbatim string literal that ends with a backslash\'`
 
-Zwei Zeichenfolgenliterale im Abfragetext, deren Verbindung nichts enthält oder nur durch Leerzeichen und Kommentare getrennt ist, werden automatisch zu einem neuen Zeichenfolgenliteral verkettet (bis eine solche Ersetzung nicht vorgenommen werden kann).
-Die folgenden Ausdrücke ergeben `13`z. B. alle:
+Zwei Zeichen folgen Literale in der Abfrage, für die nichts zwischen Ihnen besteht oder die nur durch Leerräume und Kommentare getrennt sind, werden automatisch mit einem neuen zeichenfolgenliteralvorgang verknüpft.
+Die folgenden Ausdrücke geben beispielsweise alle die Länge zurück `13` .
 
 ```kusto
 print strlen("Hello"', '@"world!"); // Nothing between them
@@ -64,18 +64,20 @@ print myPath1 = @'C:\Folder\filename.txt'
 print s = '\\n.*(>|\'|=|\")[a-zA-Z0-9/+]{86}=='
 ```
 
-Wie man sieht, erfordert das Single-Quote (`"``'`)-Zeichen keine Flucht und umgekehrt, wenn eine Zeichenfolge in Doppelanführungszeichen ( eingeschlossen ist. Dies erleichtert das Anzitieren von Zeichenfolgen nach Kontext.
+Wenn eine Zeichenfolge in doppelten Anführungszeichen () eingeschlossen ist `"` , muss das einfache Anführungszeichen () nicht mit Escapezeichen versehen werden `'` . Diese Methode vereinfacht das Anführungszeichen von Zeichen folgen gemäß Kontext.
 
-## <a name="obfuscated-string-literals"></a>Verschleierte Stringliterale
+## <a name="obfuscated-string-literals"></a>Verborgene Zeichen folgen Literale
 
-Das System verfolgt Abfragen und speichert sie zu Telemetrie- und Analysezwecken.
-Der Abfragetext kann z. B. dem Clusterbesitzer zur Verfügung gestellt werden. Wenn der Abfragetext geheime Informationen (z. B. Kennwörter) enthält, kann dies Informationen austreten, die vertraulich behandelt werden sollten. Um dies zu verhindern, kann der Abfrageautor bestimmte Zeichenfolgenliterale als **verschleierte Zeichenfolgenliterale**markieren.
-Solche Literale im Abfragetext werden automatisch durch`*`eine Anzahl von Sternzeichen ( ) ersetzt, sodass sie für eine spätere Analyse nicht verfügbar sind.
+Das System verfolgt Abfragen und speichert Sie zu Telemetrie-und Analysezwecken.
+Beispielsweise kann der Abfragetext dem Cluster Besitzer zur Verfügung gestellt werden. Wenn der Abfragetext geheime Informationen (z. b. Kenn Wörter) enthält, werden möglicherweise Informationen, die privat aufbewahrt werden sollten, nicht berücksichtigt. Um zu verhindern, dass ein derartiger Vorgang durchgeführt wird, kennzeichnet der Abfrage Autor möglicherweise bestimmte Zeichenfolgenliterale als verborgene **Zeichen folgen Literale**.
+Solche Literale im Abfragetext werden automatisch durch eine Reihe von Stern `*` Zeichen () ersetzt, sodass Sie für die spätere Analyse nicht verfügbar sind.
 
 > [!IMPORTANT]
-> Es wird **dringend empfohlen,** alle Zeichenfolgenliterale, die geheime Informationen enthalten, als verschleierte Zeichenfolgenliterale zu kennzeichnet.
+> Markieren Sie alle Zeichen folgen Literale, die geheime Informationen enthalten, als verborgene Zeichen folgen Literale.
 
-Ein verschleiertes Zeichenfolgenliteral kann gebildet werden, indem ein "reguläres" `h` Zeichenfolgenliteral verwendet wird und ein oder ein `H` Zeichen davor voransteht. Beispiel:
+Ein verborgenes Zeichenfolgenliteralzeichen kann gebildet werden, indem ein reguläres Zeichenfolgenliteralzeichen als vorangestellt wird `h` `H` . 
+
+Beispiel:
 
 ```kusto
 h'hello'
@@ -84,7 +86,9 @@ h"hello"
 ```
 
 > [!NOTE]
-> In vielen Fällen ist nur ein Teil des Zeichenfolgenliterals geheim. In diesen Fällen ist es sehr nützlich, das Literal in einen nicht geheimen Teil und einen geheimen Teil aufzuteilen und dann nur den geheimen Teil als verschleiert zu markieren. Beispiel:
+> In vielen Fällen ist nur ein Teil des Zeichenfolgenliterals geheim. Teilen Sie in diesen Fällen das Literale in einen nicht geheimen Teil und einen geheimen Teil auf. Markieren Sie dann nur den geheimen Teil als verborgen.
+
+Beispiel:
 
 ```kusto
 print x="https://contoso.blob.core.windows.net/container/blob.txt?"

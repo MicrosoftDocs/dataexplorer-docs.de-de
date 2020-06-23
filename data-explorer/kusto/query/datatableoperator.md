@@ -1,6 +1,6 @@
 ---
-title: Datentabellenoperator - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird der Datatable-Operator in Azure Data Explorer beschrieben.
+title: 'databel-Operator: Azure Daten-Explorer'
+description: Dieser Artikel beschreibt den Datenträger Operator in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,42 +10,44 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 182f8030e3263ee5bf6bee4ca7444b0d5596e7d6
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: 2a5881eacd0702720b7ea4b9a3237731a56a5180
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765396"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85265038"
 ---
 # <a name="datatable-operator"></a>datatable-Operator
 
 Gibt eine Tabelle zurück, deren Schema und Werte in der Abfrage selbst definiert sind.
 
-Beachten Sie, dass dieser Operator über keine Pipelineeingabe verfügt.
+> [!NOTE]
+> Dieser Operator hat keine Pipeline Eingabe.
 
 **Syntax**
 
-`datatable``(` *ColumnName* `:` *ColumnType* [`,` .] `)` *ScalarValue* `,` *ScalarValue* ScalarValue [ ScalarValue ...] `[``]`
+`datatable``(` *ColumnName* `:` *ColumnType* [ `,` ...] `)` `[` *scalarvalue* [ `,` *scalarvalue* ...]`]`
 
 **Argumente**
 
 ::: zone pivot="azuredataexplorer"
 
-* *ColumnName*, *ColumnType*: Diese definieren das Schema der Tabelle. Die verwendete Syntax entspricht genau der Syntax, die beim Definieren einer Tabelle verwendet wird (siehe [.create-Tabelle](../management/create-table-command.md)).
-* *ScalarValue*: Ein konstanter Skalarwert, der in die Tabelle eingefügt werden soll. Die Anzahl der Werte muss ein ganzzahliges Vielfaches der Spalten in der Tabelle sein, *n* % und der n'th-Wert muss einen Typ haben, der der Spalte n*NumColumns*entspricht. *n*
+* *ColumnName*, *ColumnType*: diese Argumente definieren das Schema der Tabelle. Die Argumente verwenden dieselbe Syntax, die beim Definieren einer Tabelle verwendet wird.
+  Weitere Informationen finden Sie unter [. Create Table](../management/create-table-command.md)).
+* *Scalarvalue*: ein konstanter Skalarwert, der in die Tabelle eingefügt werden soll. Die Anzahl der Werte muss ein ganzzahliges Vielfaches der Spalten in der Tabelle sein. Der *n*' th-Wert muss einen Typ aufweisen, der der Spalte *n*'  %  *NumColumns*' entspricht.
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
-* *ColumnName*, *ColumnType*: Diese definieren das Schema der Tabelle.
-* *ScalarValue*: Ein konstanter Skalarwert, der in die Tabelle eingefügt werden soll. Die Anzahl der Werte muss ein ganzzahliges Vielfaches der Spalten in der Tabelle sein, *n* % und der n'th-Wert muss einen Typ haben, der der Spalte n*NumColumns*entspricht. *n*
+* *ColumnName*, *ColumnType*: diese Argumente definieren das Schema der Tabelle.
+* *Scalarvalue*: ein konstanter Skalarwert, der in die Tabelle eingefügt werden soll. Die Anzahl der Werte muss ein ganzzahliges Vielfaches der Spalten in der Tabelle sein. Der *n*' th-Wert muss einen Typ aufweisen, der der Spalte *n*'  %  *NumColumns*' entspricht.
 
 ::: zone-end
 
 **Rückgabe**
 
-Dieser Operator gibt eine Datentabelle des angegebenen Schemas und der angegebenen Daten zurück.
+Dieser Operator gibt eine Datentabelle des angegebenen Schemas und der Daten zurück.
 
 **Beispiel**
 

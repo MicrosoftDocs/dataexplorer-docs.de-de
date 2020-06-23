@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/02/2019
-ms.openlocfilehash: 23b751dce38f5b595ba081c9a29e1b1a5442c96f
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: f611f660a791117159ad5fce4c024914d9e6909b
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372357"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264741"
 ---
 # <a name="set_intersect"></a>set_intersect()
 
-Gibt ein `dynamic` -Array (JSON) der Menge aller unterschiedlichen Werte zurück, die sich in allen Arrays befinden-(Arr1 ∩ arr2 ∩...).
+Gibt ein `dynamic` Array der Menge aller unterschiedlichen Werte zurück, die sich in allen Arrays befinden-(Arr1 ∩ arr2 ∩...).
 
 **Syntax**
 
@@ -45,7 +45,7 @@ range x from 1 to 3 step 1
 
 |Column1|
 |---|
-|[1]|
+| [1]|
 |2,2|
 |€|
 

@@ -1,6 +1,6 @@
 ---
-title: 'externaldata-Operator: Azure Daten-Explorer | Microsoft-Dokumentation'
-description: Dieser Artikel beschreibt den externaldata-Operator in Azure Daten-Explorer.
+title: 'externaldata-Operator: Azure Daten-Explorer'
+description: Dieser Artikel beschreibt den externen Daten Operator in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: f8878a3c4589dca3cfacf935a787e8c754ab3ede
-ms.sourcegitcommit: a8575e80c65eab2a2118842e59f62aee0ff0e416
+ms.openlocfilehash: 4534705156669447a89cb5d85c360071dfcb2b2a
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/17/2020
-ms.locfileid: "84942674"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264996"
 ---
 # <a name="externaldata-operator"></a>externaldata-Operator
 
-Der `externaldata` -Operator gibt eine Tabelle zurück, deren Schema in der Abfrage selbst definiert ist und dessen Daten aus einem externen Speicher Element gelesen werden (z. b. ein BLOB in Azure BLOB Storage).
+Der `externaldata` -Operator gibt eine Tabelle zurück, deren Schema in der Abfrage selbst definiert ist und dessen Daten aus einem externen Speicher Element, z. b. einem BLOB in Azure BLOB Storage, gelesen werden.
 
 **Syntax**
 
@@ -25,7 +25,7 @@ Der `externaldata` -Operator gibt eine Tabelle zurück, deren Schema in der Abfr
 
 **Argumente**
 
-* *ColumnName*, *ColumnType*: definiert das Schema der Tabelle.
+* *ColumnName*, *ColumnType*: die Argumente definieren das Schema der Tabelle.
   Die Syntax ist identisch mit der Syntax, die beim Definieren einer Tabelle in der [. Create](../management/create-table-command.md)-Tabelle verwendet wird.
 
 * *Storageconnectionstring*: die [Speicher Verbindungs Zeichenfolge](../api/connection-strings/storage.md) beschreibt das Speicher Element, das die zurück zugebende Daten enthält.
@@ -39,7 +39,7 @@ Der `externaldata` -Operator gibt eine Tabelle zurück, deren Schema in der Abfr
 
 **Rückgabe**
 
-Der- `externaldata` Operator gibt eine Datentabelle des angegebenen Schemas zurück, dessen Daten aus dem angegebenen Speicher Element, das durch die Speicher Verbindungs Zeichenfolge angegeben wurde, analysiert wurden.
+Der- `externaldata` Operator gibt eine Datentabelle des angegebenen Schemas zurück, dessen Daten aus dem angegebenen Speicher Element analysiert wurden, angegeben durch die Speicher Verbindungs Zeichenfolge.
 
 **Beispiele**
 
@@ -68,7 +68,7 @@ with(format="csv")
 | summarize count() by ProductId
 ```
 
-Das obige Beispiel kann als schnelle Möglichkeit angesehen werden, mehrere Datendateien abzufragen, ohne eine [externe Tabelle](schema-entities/externaltables.md)zu definieren. 
+Das obige Beispiel ist eine schnelle Möglichkeit, mehrere Datendateien abzufragen, ohne eine [externe Tabelle](schema-entities/externaltables.md)zu definieren.
 
->[!NOTE]
->Die Daten Partitionierung wird vom- `externaldata()` Operator nicht erkannt.
+> [!NOTE]
+> Die Daten Partitionierung wird vom-Operator nicht erkannt `externaldata()` .

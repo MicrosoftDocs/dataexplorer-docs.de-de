@@ -1,5 +1,5 @@
 ---
-title: 'Zeichen folgen Operatoren: Azure Daten-Explorer | Microsoft-Dokumentation'
+title: 'Zeichen folgen Operatoren: Azure Daten-Explorer'
 description: In diesem Artikel werden Zeichen folgen Operatoren in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: e16d90c8307392536b5971758ce7df15a9ea1b46
-ms.sourcegitcommit: ef009294b386cba909aa56d7bd2275a3e971322f
+ms.openlocfilehash: 6718ad614166d5328dcd412d09405c1db8cc14dc
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82977132"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85265081"
 ---
 # <a name="string-operators"></a>Zeichenfolgenoperatoren
 
@@ -25,47 +25,48 @@ Operator        |BESCHREIBUNG                                                   
 `!=`            |Not Equals                                                        |Ja           |`"abc" != "ABC"`
 `=~`            |Equals                                                            |Nein            |`"abc" =~ "ABC"`
 `!~`            |Not Equals                                                        |Nein            |`"aBc" !~ "xyz"`
-`has`           |Rechte Seite (RS) ist ein ganzer Begriff innerhalb der linken Seite (LS)     |Nein             |`"North America" has "america"`
-`!has`          |RS ist kein vollständiger Begriff innerhalb der LS                                     |Nein             |`"North America" !has "amer"` 
+`has`           |Rechte Seite (RS) ist ein ganzer Begriff innerhalb der linken Seite (LS)     |Nein            |`"North America" has "america"`
+`!has`          |RHS ist kein vollständiger Begriff in LHS                                     |Nein            |`"North America" !has "amer"` 
 `has_cs`        |Rechte Seite (RS) ist ein ganzer Begriff innerhalb der linken Seite (LS)     |Ja           |`"North America" has_cs "America"`
-`!has_cs`       |RS ist kein vollständiger Begriff innerhalb der LS                                     |Ja           |`"North America" !has_cs "amer"` 
-`hasprefix`     |RHS ist ein Begriffs Präfix in LHS                                       |Nein             |`"North America" hasprefix "ame"`
-`!hasprefix`    |RHS ist kein Begriffs Präfix in LHS                                   |Nein             |`"North America" !hasprefix "mer"` 
+`!has_cs`       |RHS ist kein vollständiger Begriff in LHS                                     |Ja           |`"North America" !has_cs "amer"` 
+`hasprefix`     |RHS ist ein Begriffs Präfix in LHS                                       |Nein            |`"North America" hasprefix "ame"`
+`!hasprefix`    |RHS ist kein Begriffs Präfix in LHS                                   |Nein            |`"North America" !hasprefix "mer"` 
 `hasprefix_cs`  |RHS ist ein Begriffs Präfix in LHS                                       |Ja           |`"North America" hasprefix_cs "Ame"`
 `!hasprefix_cs` |RHS ist kein Begriffs Präfix in LHS                                   |Ja           |`"North America" !hasprefix_cs "CA"` 
-`hassuffix`     |RHS ist ein Begriff Suffix in LHS                                       |Nein             |`"North America" hassuffix "ica"`
-`!hassuffix`    |RHS ist kein Begriffs Suffix in LHS                                   |Nein             |`"North America" !hassuffix "americ"`
+`hassuffix`     |RHS ist ein Begriff Suffix in LHS                                       |Nein            |`"North America" hassuffix "ica"`
+`!hassuffix`    |RHS ist kein Begriffs Suffix in LHS                                   |Nein            |`"North America" !hassuffix "americ"`
 `hassuffix_cs`  |RHS ist ein Begriff Suffix in LHS                                       |Ja           |`"North America" hassuffix_cs "ica"`
 `!hassuffix_cs` |RHS ist kein Begriffs Suffix in LHS                                   |Ja           |`"North America" !hassuffix_cs "icA"`
-`contains`      |RS tritt als Untersequenz der LS auf                                |Nein             |`"FabriKam" contains "BRik"`
-`!contains`     |RS tritt nicht in LS auf                                         |Nein             |`"Fabrikam" !contains "xyz"`
+`contains`      |RS tritt als Untersequenz der LS auf                                |Nein            |`"FabriKam" contains "BRik"`
+`!contains`     |Rechte Seite kommt auf linker Seite nicht vor                                         |Nein            |`"Fabrikam" !contains "xyz"`
 `contains_cs`   |RS tritt als Untersequenz der LS auf                                |Ja           |`"FabriKam" contains_cs "Kam"`
-`!contains_cs`  |RS tritt nicht in LS auf                                         |Ja           |`"Fabrikam" !contains_cs "Kam"`
-`startswith`    |Rechte Seite ist eine öffnende Teilsequenz von linker Seite                              |Nein             |`"Fabrikam" startswith "fab"`
-`!startswith`   |RHS ist keine anfängliche unter Sequenz von LHS                          |Nein             |`"Fabrikam" !startswith "kam"`
+`!contains_cs`  |Rechte Seite kommt auf linker Seite nicht vor                                         |Ja           |`"Fabrikam" !contains_cs "Kam"`
+`startswith`    |Rechte Seite ist eine öffnende Teilsequenz von linker Seite                              |Nein            |`"Fabrikam" startswith "fab"`
+`!startswith`   |Rechte Seite ist keine öffnende Teilsequenz von linker Seite                          |Nein            |`"Fabrikam" !startswith "kam"`
 `startswith_cs` |Rechte Seite ist eine öffnende Teilsequenz von linker Seite                              |Ja           |`"Fabrikam" startswith_cs "Fab"`
-`!startswith_cs`|RHS ist keine anfängliche unter Sequenz von LHS                          |Ja           |`"Fabrikam" !startswith_cs "fab"`
-`endswith`      |Rechte Seite ist eine schließende Teilsequenz von linker Seite                               |Nein             |`"Fabrikam" endswith "Kam"`
-`!endswith`     |RHS ist keine schließende unter Sequenz von LHS                           |Nein             |`"Fabrikam" !endswith "brik"`
+`!startswith_cs`|Rechte Seite ist keine öffnende Teilsequenz von linker Seite                          |Ja           |`"Fabrikam" !startswith_cs "fab"`
+`endswith`      |Rechte Seite ist eine schließende Teilsequenz von linker Seite                               |Nein            |`"Fabrikam" endswith "Kam"`
+`!endswith`     |Rechte Seite ist keine schließende Teilsequenz von linker Seite                           |Nein            |`"Fabrikam" !endswith "brik"`
 `endswith_cs`   |Rechte Seite ist eine schließende Teilsequenz von linker Seite                               |Ja           |`"Fabrikam" endswith "Kam"`
-`!endswith_cs`  |RHS ist keine schließende unter Sequenz von LHS                           |Ja           |`"Fabrikam" !endswith "brik"`
+`!endswith_cs`  |Rechte Seite ist keine schließende Teilsequenz von linker Seite                           |Ja           |`"Fabrikam" !endswith "brik"`
 `matches regex` |LS enthält eine Übereinstimmung für RS                                      |Ja           |`"Fabrikam" matches regex "b.*k"`
 `in`            |Entspricht einem der Elemente                                     |Ja           |`"abc" in ("123", "345", "abc")`
 `!in`           |Entspricht keinem der Elemente                                 |Ja           |`"bca" !in ("123", "345", "abc")`
-`in~`           |Entspricht einem der Elemente                                     |Nein             |`"abc" in~ ("123", "345", "ABC")`
-`!in~`          |Entspricht keinem der Elemente                                 |Nein             |`"bca" !in~ ("123", "345", "ABC")`
-`has_any`       |Identisch mit `has` , funktioniert aber an einem der Elemente                    |Nein             |`"North America" has_any("south", "north")`
+`in~`           |Entspricht einem der Elemente                                     |Nein            |`"abc" in~ ("123", "345", "ABC")`
+`!in~`          |Entspricht keinem der Elemente                                 |Nein            |`"bca" !in~ ("123", "345", "ABC")`
+`has_any`       |Identisch `has` mit, funktioniert aber an einem der Elemente                    |Nein            |`"North America" has_any("south", "north")`
 
 ## <a name="performance-tips"></a>Leistungstipps
 
 Verwenden Sie für eine bessere Leistung bei zwei Operatoren, die dieselbe Aufgabe ausführen, die Groß-/Kleinschreibung.
 Beispiel:
 
-* Verwenden Sie `=~`anstelle von`==`
-* Verwenden Sie `in~`anstelle von`in`
-* Verwenden Sie `contains`anstelle von`contains_cs`
+* Verwenden Sie anstelle von `=~``==`
+* Verwenden Sie anstelle von `in~``in`
+* Verwenden Sie anstelle von `contains``contains_cs`
 
-Wenn Sie das vorhanden sein eines Symbols oder eines alphanumerischen Worts testen möchten, das durch nicht-alphanumerische Zeichen (oder den Anfang oder das Ende eines Felds) gebunden ist, verwenden `has` Sie oder. `in` `has`führt eine schnellere `contains`Leistung `startswith`als, `endswith`oder aus.
+Wenn Sie das vorhanden sein eines Symbols oder eines alphanumerischen Worts, das durch nicht-alphanumerische Zeichen gebunden ist, oder durch den Anfang oder das Ende eines Felds testen möchten, verwenden Sie `has` oder `in` . 
+`has`funktioniert schneller als `contains` , `startswith` oder `endswith` .
 
 Beispielsweise wird die erste dieser Abfragen schneller ausgeführt:
 
@@ -76,14 +77,17 @@ EventLog | where continent contains "nor" | count
 
 ## <a name="understanding-string-terms"></a>Verstehen von Zeichen folgen Begriffen
 
-Standardmäßig indiziert Kusto alle Spalten, einschließlich Spalten vom Typ `string`.
-Tatsächlich werden für diese Spalten mehrere Indizes erstellt, abhängig von den tatsächlichen Daten. Für den Benutzer werden diese Indizes nicht direkt verfügbar gemacht (mit Ausnahme ihrer positiven Auswirkung auf die Abfrage `string` Leistung), mit Ausnahme der Operatoren, die `has` als Teil Ihres Namens vorliegen: `has`, `!has`, `hasprefix`, `!hasprefix`usw. Diese Operatoren sind ein besonderes Zeichen dafür, dass ihre Semantik durch die Art der Codierung der Spalte vorgegeben ist. anstatt eine "einfache" Teil Zeichenfolge abzugleichen, entsprechen diese Operatoren **den Begriffen**.
+Standardmäßig indiziert Kusto alle Spalten, einschließlich Spalten vom Typ `string` .
+Abhängig von den eigentlichen Daten werden mehrere Indizes für diese Spalten erstellt. Diese Indizes sind nicht direkt verfügbar (mit Ausnahme ihrer positiven Auswirkung auf die Abfrageleistung), mit Ausnahme der `string` Operatoren, die `has` als Teil Ihres Namens vorliegen, z `has` . b.,, `!has` `hasprefix` , `!hasprefix` .
+Diese Operatoren sind speziell, da ihre Semantik durch die Art der Codierung der Spalte vorgegeben wird. Anstatt eine "einfache" Teil Zeichenfolge abzugleichen, entsprechen diese Operatoren **den Begriffen**.
 
-Zum besseren Verständnis der Begriffs basierten Übereinstimmung muss zunächst ein grundlegendes Verständnis der Begriffe sein. Standardmäßig wird jeder `string` Wert von Kusto in maximale Folge von alphanumerischen ASCII-Zeichen umgewandelt, die jeweils in einen Begriff umgewandelt werden. Im folgenden `string`sind `Kusto`die Begriffe z. b., `WilliamGates3rd`und die folgenden Teil Zeichenfolgen: `ad67d136`, `c1db`, `4f9f`, `88ef`, `d94f3b6b0b5a`:
+Um die Begriffs basierte Übereinstimmung zu verstehen, müssen Sie zuerst verstehen, was ein Begriff ist. Standardmäßig wird jeder `string` Wert in maximale Sequenz von alphanumerischen ASCII-Zeichen unterteilt, und jede dieser Sequenzen wird in einen Begriff umgewandelt.
+
+Im folgenden sind die Begriffe z. b. `string` `Kusto` , `WilliamGates3rd` und die folgenden Teil Zeichenfolgen: `ad67d136` , `c1db` , `4f9f` , `88ef` , `d94f3b6b0b5a` .
 
 ```
 Kusto:  ad67d136-c1db-4f9f-88ef-d94f3b6b0b5a;;WilliamGates3rd
 ```
 
-Standardmäßig erstellt Kusto einen Begriffs Index, der aus allen Begriffen mit **vier oder mehr Zeichen**besteht, und dieser Index wird von `has`, `!has`usw. verwendet, wenn Begriffe gesucht werden, die auch aus vier Zeichen bestehen. (Wenn die Abfrage nach einem Begriff sucht, der kleiner als vier Zeichen ist, oder wie `contains` z. b. einen Operator verwendet, kehrt Kusto das Scannen der Werte in der Spalte zurück, wenn keine Entsprechung festgestellt werden kann, was weitaus langsamer ist als der Begriff im Begriff Index nach oben.)
-
+Standardmäßig erstellt Kusto einen Begriffs Index, der aus allen Begriffen mit **vier oder mehr Zeichen**besteht, und dieser Index wird von `has` , usw. verwendet `!has` , wenn Begriffe gesucht werden, die auch aus vier Zeichen bestehen.
+Wenn die Abfrage nach einem Begriff sucht, der kleiner als vier Zeichen ist, oder einen `contains` Operator verwendet, kehrt Kusto das Scannen der Werte in der Spalte wieder, wenn keine Entsprechung ermittelt werden kann. Diese Methode ist viel langsamer als der Begriff im Begriffs Index.

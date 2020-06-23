@@ -1,6 +1,6 @@
 ---
-title: strcat_delim() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden strcat_delim() in Azure Data Explorer beschrieben.
+title: strcat_delim ()-Azure Daten-Explorer
+description: In diesem Artikel wird strcat_delim () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f944af741cd5f655c2c9b090ddebc6cc35a47766
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: f6a78a5abb92aa93fe8b1ae15ea8968f71bde07c
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506935"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264554"
 ---
 # <a name="strcat_delim"></a>strcat_delim()
 
-Verkettet zwischen 2 und 64 Argumente mit Trennzeichen, die als erstes Argument angeführt werden.
+Verkettet zwischen zwei und 64 Argumenten mit Trennzeichen, die als erstes Argument bereitgestellt werden.
 
- * Wenn Argumente nicht vom Zeichenfolgentyp sind, werden sie zwangsweise in Zeichenfolgen konvertiert.
+ * Wenn Argumente nicht vom Typ "String" sind, werden Sie zwangsweise in eine Zeichenfolge konvertiert.
 
 **Syntax**
 
-`strcat_delim(`*Trennzeichen*,*Argument1*,*Argument2* [, *argumentN*]`)`
+`strcat_delim(`*Trennzeichen*, *Argument1*, *Argument2*[, *argumentn*]`)`
 
 **Argumente**
 
-* *Trennzeichen*: Zeichenfolgenausdruck, der als Trennzeichen verwendet wird.
-* *Argument1* ... *argumentN* : Ausdrücke, die verkettet werden sollen.
+* *Trennzeichen*: Zeichen folgen Ausdruck, der als Trennzeichen verwendet wird.
+* *Argument1* ... *argumentn*: Ausdrücke, die verkettet werden sollen.
 
 **Rückgabe**
 
-Argumente, verkettet auf eine einzelne Zeichenfolge mit *Trennzeichen*.
+Argumente, die zu einer einzelnen Zeichenfolge mit einem *Trenn*Zeichen verkettet sind.
 
 **Beispiele**
 

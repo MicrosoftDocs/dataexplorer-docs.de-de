@@ -2,48 +2,46 @@
 title: bag_merge ()-Azure Daten-Explorer
 description: In diesem Artikel wird bag_merge () in Azure Daten-Explorer beschrieben.
 services: data-explorer
-author: elgevork
-ms.author: elgevork
-ms.reviewer: ''
+author: orspod
+ms.author: orspod
+ms.reviewer: elgevork
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 06/14/2020
-ms.openlocfilehash: f5ca4888b0c3aad976d78c10bbbfa0810483c75b
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.date: 06/18/2020
+ms.openlocfilehash: 0a23f6ece8be3ba451c1f61a90eb65452b68f9ce
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84784598"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85265058"
 ---
-# <a name="bag_merge"></a>bag_merge ()
+# <a name="bag_merge"></a>bag_merge()
 
-Führt dynamische Eigenschaften Behälter Objekte der Eingabe in einem dynamischen Eigenschaften Behälter Objekt zusammen.
+Führt `dynamic` Eigenschafts Behälter in einem Eigenschaften Behälter `dynamic` zusammen, wobei alle Eigenschaften zusammengeführt werden.
 
 **Syntax**
 
-`bag_merge(`*dynamisches Objekt* `,` *dynamisches Objekt*`)`
+`bag_merge(`*bag1* `, ` *BAG2* `[` ,` *bag3*, ...])`
 
 **Argumente**
 
-* Eingabe dynamischer Objekte, getrennt durch Kommas. Die Funktion unterstützt 2 bis 64 dynamische Eingabe Objekte.
+* *bag1... Bagn*: Eingabe `dynamic` Eigenschaft-Taschen. Die-Funktion akzeptiert zwischen 2 und 64 Argumente.
 
 **Rückgabe**
 
-Gibt einen `dynamic` Eigenschaften Behälter zurück. Ergebnisse aus der Zusammenführung aller Eingabe Eigenschaften Behälter-Objekte.
-Wenn ein Schlüssel in mehr als einem Eingabe Objekt angezeigt wird, wird ein beliebiger Wert (aus den möglichen Werten für diesen Schlüssel) ausgewählt.
+Gibt einen `dynamic` Eigenschaften Behälter zurück. Ergebnisse aus der Zusammenführung aller Eingabe Eigenschaften Behälter-Objekte. Wenn ein Schlüssel in mehr als einem Eingabe Objekt angezeigt wird, wird ein beliebiger Wert (aus den möglichen Werten für diesen Schlüssel) ausgewählt.
 
 **Beispiel**
 
 Ausdruck:
 
-`print result = bag_merge(dynamic({ 'A1':12, 'B1':2, 'C1':3}), dynamic({ 'A2':81, 'B2':82, 'A1':1}))`
+<!-- csl: https://help.kusto.windows.net:443/Samples -->
+```kusto
+print result = bag_merge(
+   dynamic({'A1':12, 'B1':2, 'C1':3}),
+   dynamic({'A2':81, 'B2':82, 'A1':1}))
+```
 
-Ergibt:
-
-`{
-  "A1": 12,
-  "B1": 2,
-  "C1": 3,
-  "A2": 81,
-  "B2": 82
-}`
+|result|
+|---|
+|{<br>  "A1": 12,<br>  "B1": 2,<br>  "C1": 3,<br>  "A2": 81,<br>  "B2": 82<br>}|

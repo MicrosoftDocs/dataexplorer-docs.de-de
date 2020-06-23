@@ -1,6 +1,6 @@
 ---
-title: .drop-Tabelle und .drop-Tabellen - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden .drop-Tabellen und .drop-Tabellen in Azure Data Explorer beschrieben.
+title: . DROP TABLE-und Drop Tables-Azure-Daten-Explorer
+description: In diesem Artikel wird beschrieben, wie Tabellen-und Drop-Tabellen in Azure Daten-Explorer abgelegt werden.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2020
-ms.openlocfilehash: 5f3a488aba5a6785ceb6ad4a093c520ec0509e5e
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.openlocfilehash: 3e1eb57741302d34664f6cd8f256612a6e70bdd1
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744753"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264486"
 ---
-# <a name="drop-table-and-drop-tables"></a>.drop-Tabelle und .drop-Tabellen
+# <a name="drop-table-and-drop-tables"></a>. DROP TABLE-und Drop-Tabellen
 
-Entfernt eine Tabelle (oder mehrere Tabellen) aus der Datenbank.
+Entfernt eine Tabelle oder mehrere Tabellen aus der Datenbank.
 
-Erfordert [die Berechtigung des Tabellenadministrators](../management/access-control/role-based-authorization.md).
+Erfordert die [Table admin-Berechtigung](../management/access-control/role-based-authorization.md).
 
 > [!NOTE]
-> Der `.drop` `table` Befehl nur soft löscht die Daten (d. h. Daten können nicht abgefragt werden, können aber dennoch aus persistentem Speicher wiederhergestellt werden). Die zugrunde liegenden Speicherartefakte werden entsprechend `recoverability` der Eigenschaft in der [Aufbewahrungsrichtlinie,](../management/retentionpolicy.md) die zum Zeitpunkt der Aufnahme der Daten in die Tabelle galt, hart gelöscht.
+> Mit dem `.drop` `table` Befehl werden die Daten nur vorläufig gelöscht. Das heißt, dass Daten nicht abgefragt werden können, aber dennoch aus dem permanenten Speicher wiederherstellbar sind. Die zugrunde liegenden Speicher Artefakte werden gemäß der `recoverability` Eigenschaft in der [Beibehaltungs Richtlinie](../management/retentionpolicy.md) fest gelöscht, die zum Zeitpunkt der Erfassung der Daten in der Tabelle wirksam war.
 
 **Syntax**
 
-`.drop``table` *Tabellenname* `ifexists`[ ]
+`.drop``table` *Tabellenname* [ `ifexists` ]
 
-`.drop``tables` (*TableName1*, *TableName2*,..) [ifexists]
+`.drop``tables`(*TableName1*, *TableName2*,..) [ifist vorhanden]
 
 > [!NOTE]
-> Wenn `ifexists` angegeben, schlägt der Befehl nicht fehl, wenn eine Tabelle nicht vorhanden ist.
+> Wenn `ifexists` angegeben wird, schlägt der Befehl nicht fehl, wenn eine nicht vorhandene Tabelle vorhanden ist.
 
 **Beispiel**
 
@@ -42,9 +42,9 @@ Erfordert [die Berechtigung des Tabellenadministrators](../management/access-con
 
 **Rückgabe**
 
-Dieser Befehl gibt eine Liste der verbleibenden Tabellen in der Datenbank zurück. 
+Mit diesem Befehl wird eine Liste der verbleibenden Tabellen in der Datenbank zurückgegeben.
 
-| Ausgabeparameter | type   | BESCHREIBUNG                             |
+| Output-Parameter | type   | BESCHREIBUNG                             |
 |------------------|--------|-----------------------------------------|
 | TableName        | String | Der Name der Tabelle.                  |
 | DatabaseName     | String | Die Datenbank, zu der die Tabelle gehört. |
