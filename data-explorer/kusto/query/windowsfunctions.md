@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/20/2019
-ms.openlocfilehash: d876f26de796008e83b620e4511a31cdb4e23888
-ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
+ms.openlocfilehash: 1e93764058c6d890568e90f67472ec4306a092f8
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/18/2020
-ms.locfileid: "83550689"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128698"
 ---
-# <a name="window-functions"></a>Fensterfunktionen
+# <a name="window-functions-overview"></a>Übersicht über Fensterfunktionen
 
 Fenster Funktionen arbeiten mit mehreren Zeilen (Datensätzen) in einem Zeilen Satz gleichzeitig. Im Gegensatz zu Aggregations Funktionen erfordern Fenster Funktionen, dass die Zeilen im Rowset serialisiert werden (für diese eine bestimmte Reihenfolge). Fenster Funktionen sind möglicherweise abhängig von der Reihenfolge, um das Ergebnis zu bestimmen.
 

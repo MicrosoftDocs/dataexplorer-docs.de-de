@@ -1,6 +1,6 @@
 ---
-title: Bitweise (Binäre) Operatoren - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden Bitweise (Binär-)Operatoren in Azure Data Explorer beschrieben.
+title: 'Bitweise (binäre) Operatoren: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel werden bitweise (binäre) Operatoren in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 216008d66bf80e391cef375d2218ee0c5ff1c99c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 6038ee8214ef06a7feb88e95d68f4688fc8a88f4
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517407"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128919"
 ---
-# <a name="bitwise-binary-operators"></a>Bitweise (Binäre) Operatoren
+# <a name="bitwise-binary-operators"></a>Bitweise (binäre) Operatoren
 
-Kusto unterstützt eine Reihe von bitweisen (binären) Operatoren zwischen ganzzahlwenigen:
+Kusto unterstützt eine Reihe von bitweisen (binären) Operatoren zwischen ganzen Zahlen:
 
 * [binary_and](binary-andfunction.md)
 * [binary_not](binary-notfunction.md)

@@ -10,18 +10,18 @@ ms.topic: reference
 ms.date: 12/10/2019
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 6e383ce9fdcf373452c0b7d710302669e7987395
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 778b8c276d6264b890c0b0be7b127f578663a64d
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737843"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85129055"
 ---
-# <a name="query-statements"></a>Abfrageanweisungen
+# <a name="query-statement-types"></a>Abfrageanweisungstypen
 
 ::: zone pivot="azuredataexplorer"
 
-Eine Abfrage besteht aus einer oder mehreren **Abfrage Anweisungen**, getrennt durch ein Semikolon (`;`).
+Eine Abfrage besteht aus einer oder mehreren **Abfrage Anweisungen**, getrennt durch ein Semikolon ( `;` ).
 Mindestens eine dieser Abfrage Anweisungen muss eine [tabellarische Ausdrucks Anweisung](./tabularexpressionstatements.md)sein.
 Die tabellarische Ausdrucks Anweisung generiert ein oder mehrere tabellarische Ergebnisse.
 Wenn die Abfrage mehr als eine tabellarische Ausdrucks Anweisung enthält, enthält die Abfrage einen [Batch](./batches.md) von Tabellen Ausdrucks Anweisungen, und die von diesen Anweisungen generierten tabellarischen Ergebnisse werden von der Abfrage zurückgegeben.

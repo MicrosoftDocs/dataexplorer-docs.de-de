@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4741da4367bb1a350c7310ea21ebe5ce9b91b06b
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: d23d76fdcc592435a8ec7fa24ef5d0dfd5186c68
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271484"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128457"
 ---
-# <a name="joining-within-time-window"></a>Beitreten innerhalb des Zeitfensters
+# <a name="time-window-join"></a>Zeitfenster-Join
 
 Häufig ist es hilfreich, zwischen zwei großen Datasets mit einem High-Cardinality-Schlüssel (z. b. eine Vorgangs-ID oder eine Sitzungs-ID) zu verknüpfen und die Datensätze auf der rechten Seite () weiter einzuschränken `$right` , die für jeden linksseitigen ( `$left` ) Datensatz abgeglichen werden müssen `datetime` Dies unterscheidet sich von einem normalen Kusto-Joinvorgang als. zusätzlich zum Teil "Equi-Join" (Übereinstimmung mit dem High-Cardinality-Schlüssel oder den linken und rechten Datasets) kann das System auch eine Entfernungs Funktion anwenden und verwenden, um den Join beträchtlich zu beschleunigen. Beachten Sie, dass sich eine Entfernungs Funktion nicht wie Gleichheit verhält (d. h., wenn sowohl als `dist(x,y)` `dist(y,z)` auch true ist, wird Sie nicht befolgt, da `dist(x,z)` auch true ist). *Intern wird dies als "diagonaler Join" bezeichnet.*
 

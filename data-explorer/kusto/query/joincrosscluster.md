@@ -10,20 +10,20 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 10c31a249ddd0ad8151f8a6e4a76fde7f87c2400
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
+ms.openlocfilehash: dc22d44bd861a02d0db7fd0d8f7cc80ddcb5c8d4
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83863165"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128455"
 ---
-# <a name="cross-cluster-join"></a>Cluster übergreifender Join
+# <a name="cross-cluster-join"></a>Clusterübergreifender Join
 
 ::: zone pivot="azuredataexplorer"
 
 Allgemeine Erörterung von Cluster übergreifenden Abfragen finden Sie unter [Cluster übergreifende oder datenbankübergreifende Abfragen](cross-cluster-or-database-queries.md) .
 
-Es ist möglich, einen Join-Vorgang für Datasets in verschiedenen Clustern durchzuführen. Beispiel:
+Es ist möglich, einen Join-Vorgang für Datasets in verschiedenen Clustern durchzuführen. Zum Beispiel:
 
 ```kusto
 T | ... | join (cluster("SomeCluster").database("SomeDB").T2 | ...) on Col1 // (1)

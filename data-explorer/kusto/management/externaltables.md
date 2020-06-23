@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/26/2020
-ms.openlocfilehash: 293ee468f31fafafdf08da1632c93b04b0a8adf2
-ms.sourcegitcommit: f7101c6b41ec250d05f4cb6092e2939958b37b40
+ms.openlocfilehash: 8e419d471419a291b3680c4b91d3e6908b2e7f2e
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/03/2020
-ms.locfileid: "84329009"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128834"
 ---
 # <a name="external-table-general-control-commands"></a>Externe Tabelle (allgemeine Steuerungsbefehle)
 
@@ -32,7 +32,7 @@ Eine Übersicht über externe Tabellen finden Sie unter [externe Tabellen](../qu
 
 **Ausgabe**
 
-| Output-Parameter | type   | BESCHREIBUNG                                                         |
+| Output-Parameter | type   | Beschreibung                                                         |
 |------------------|--------|---------------------------------------------------------------------|
 | TableName        | Zeichenfolge | Name der externen Tabelle                                             |
 | TableType        | Zeichenfolge | Typ externer Tabelle                                              |
@@ -50,7 +50,7 @@ Eine Übersicht über externe Tabellen finden Sie unter [externe Tabellen](../qu
 
 | TableName | TableType | Ordner         | DocString | Eigenschaften |
 |-----------|-----------|----------------|-----------|------------|
-| T         | Blob      | Externaltables | Dokumente      | {}         |
+| T         | Blob      | Externaltables | Docs      | {}         |
 
 
 ## <a name="show-external-table-schema"></a>. Anzeigen eines externen Tabellen Schemas
@@ -66,7 +66,7 @@ Eine Übersicht über externe Tabellen finden Sie unter [externe Tabellen](../qu
 
 **Ausgabe**
 
-| Output-Parameter | type   | BESCHREIBUNG                        |
+| Output-Parameter | type   | Beschreibung                        |
 |------------------|--------|------------------------------------|
 | TableName        | Zeichenfolge | Name der externen Tabelle            |
 | Schema           | Zeichenfolge | Das Tabellen Schema in einem JSON-Format. |
@@ -91,14 +91,14 @@ Eine Übersicht über externe Tabellen finden Sie unter [externe Tabellen](../qu
 
 | TableName | Schema    | DatabaseName | Ordner         | DocString |
 |-----------|----------------------------------|--------------|----------------|-----------|
-| T         | {"Name": "externalblob",<br>"Folder": "externaltables",<br>"DocString": "docs",<br>"Orderedcolumns": [{"Name": "x", "Type": "System. Int64", "csltype": "Long", "DocString": ""}, {"Name": "s", "Type": "System. String", "csltype": "String", "DocString": ""}]} | DB           | Externaltables | Dokumente      |
+| T         | {"Name": "externalblob",<br>"Folder": "externaltables",<br>"DocString": "docs",<br>"Orderedcolumns": [{"Name": "x", "Type": "System. Int64", "csltype": "Long", "DocString": ""}, {"Name": "s", "Type": "System. String", "csltype": "String", "DocString": ""}]} | DB           | Externaltables | Docs      |
 
 
 *CSL*
 
 | TableName | Schema          | DatabaseName | Ordner         | DocString |
 |-----------|-----------------|--------------|----------------|-----------|
-| T         | x:Long, s:Zeichenfolge | DB           | Externaltables | Dokumente      |
+| T         | x:Long, s:Zeichenfolge | DB           | Externaltables | Docs      |
 
 ## <a name="drop-external-table"></a>. externe Tabelle löschen
 
@@ -108,7 +108,7 @@ Eine Übersicht über externe Tabellen finden Sie unter [externe Tabellen](../qu
 
 **Syntax:**  
 
-`.drop` `external` `table` *TableName*
+`.drop``external` `table` *Tabellenname* [ `ifexists` ]
 
 **Ausgabe**
 
@@ -122,7 +122,7 @@ Gibt die Eigenschaften der gelöschten Tabelle zurück. Weitere Informationen fi
 
 | TableName | TableType | Ordner         | DocString | Schema       | Eigenschaften |
 |-----------|-----------|----------------|-----------|-----------------------------------------------------|------------|
-| T         | Blob      | Externaltables | Dokumente      | [{"Name": "x", "csltype": "Long"},<br> {"Name": "s", "csltype": "String"}] | {}         |
+| T         | Blob      | Externaltables | Docs      | [{"Name": "x", "csltype": "Long"},<br> {"Name": "s", "csltype": "String"}] | {}         |
 
 ## <a name="next-steps"></a>Nächste Schritte
 

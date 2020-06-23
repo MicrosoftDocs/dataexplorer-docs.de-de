@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: fb842bcda70c2986bd754f55184413eec594d412
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: a93a8b493959b6d335f01b9d3fcda24ae7c31748
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373112"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128936"
 ---
-# <a name="queries"></a>Abfragen
+# <a name="query-operators"></a>Abfrageoperatoren
 
 Eine Abfrage ist ein Schreib geschützter Vorgang für die erfassten Daten eines Kusto-Engine-Clusters. Abfragen werden immer im Kontext einer bestimmten Datenbank im Cluster ausgeführt (Sie können auch auf Daten in einer anderen Datenbank oder sogar in einem anderen Cluster verweisen).
 

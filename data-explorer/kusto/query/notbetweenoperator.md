@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: e951e56589824acd6dd74160c9ab61778fbce45e
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: 213b69d1458d234e987c8a378ade82441e578d5e
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271552"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128613"
 ---
-# <a name="between-operator"></a>! between-Operator
+# <a name="not-between-operator-between"></a>not-between-Operator (!between)
 
 Entspricht der Eingabe, die außerhalb des inklusiven Bereichs liegt.
 
@@ -39,7 +39,7 @@ Wenn der *expr* -Ausdruck "DateTime" ist, wird eine andere syntaktische Sugar-Sy
 * *T* : die tabellarische Eingabe, deren Datensätze abgeglichen werden sollen.
 * *expr* -der Ausdruck, der gefiltert werden soll.
 * *leftrange* -Ausdruck des linken Bereichs (inklusiv).
-* *rightrange* -Ausdruck des rihgt-Bereichs (einschließlich).
+* *rightrange* -Ausdruck des rechten Bereichs (inklusiv).
 
 **Rückgabe**
 

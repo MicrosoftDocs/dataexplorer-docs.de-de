@@ -10,14 +10,14 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 3f1371fe298b2d0e066fc3a278cc3b560050416c
-ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
+ms.openlocfilehash: 8da464bca228df5a813f50e68fab5ddb2aa926cf
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "84011583"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128664"
 ---
-# <a name="partitioning-and-composing-intermediate-results-of-aggregations"></a>Partitionierung und Zusammenstellung von Zwischenergebnissen von Aggregationen
+# <a name="using-hll-and-tdigest"></a>Verwenden von „hll()“ und „tdigest()“
 
 Angenommen, Sie möchten die Anzahl der unterschiedlichen Benutzer jeden Tag in den letzten sieben Tagen berechnen. Sie können einmal täglich ausführen `summarize dcount(user)` , wobei eine Spanne in den letzten sieben Tagen gefiltert wurde. Diese Methode ist ineffizient, da bei jeder Berechnung der Berechnung sechs Tage mit der vorherigen Berechnung vorhanden sind. Sie können auch ein Aggregat für jeden Tag berechnen und diese Aggregate dann kombinieren. Diese Methode erfordert, dass Sie die letzten sechs Ergebnisse "Speichern", aber es ist viel effizienter.
 
@@ -211,7 +211,7 @@ on $left.Day1 == $right.Day
 | project Day1, Day2, Percentage = count_*100.0/count_1
 ```
 
-|Tag1|Tag2|Prozentsatz|
+|Tag1|Tag2|Prozentwert|
 |---|---|---|
 |2016-05-01 00:00:00.0000000|2016-05-02 00:00:00.0000000|34.0645725975255|
 |2016-05-01 00:00:00.0000000|2016-05-03 00:00:00.0000000|16.618368960101|
@@ -241,7 +241,7 @@ Stats
 | project day1, day2, Percentage = intersection_size*100.0 / pages1
 ```
 
-|"Day1|"day2|Prozentsatz|
+|"Day1|"day2|Prozentwert|
 |---|---|---|
 |2016-05-01 00:00:00.0000000|2016-05-02 00:00:00.0000000|33.2298494510578|
 |2016-05-01 00:00:00.0000000|2016-05-03 00:00:00.0000000|16.9773830213667|

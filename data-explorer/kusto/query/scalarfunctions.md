@@ -8,14 +8,14 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: ccbd01faae3e71941c1bf4542f473410753155cf
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: 640c331b177642735d875f615772dcdbb6ec68d8
+ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84294575"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85128868"
 ---
-# <a name="scalar-functions"></a>Skalarfunktionen
+# <a name="scalar-function-types"></a>Skalarfunktionstypen
 
 ## <a name="binary-functions"></a>Binäre Funktionen
 
@@ -144,14 +144,13 @@ ms.locfileid: "84294575"
 |[pow()](powfunction.md)|Gibt das Ergebnis der Erhöhung der Stromversorgung zurück.|
 |[radians()](radiansfunction.md)|Konvertiert den Winkelwert in Grad in den Wert im Bogenmaß mit Formel Bogenmaß = (PI/180) * Winkel in Grad.|
 |[rand()](randfunction.md)|Gibt eine Zufallszahl zurück.|
-|[Bereich ()](rangefunction.md)|Generiert ein dynamisches Array, das eine Reihe von gleichmäßig getrennten Werten enthält.|
+|[range()](rangefunction.md)|Generiert ein dynamisches Array, das eine Reihe von gleichmäßig getrennten Werten enthält.|
 |[round()](roundfunction.md)|Gibt die abgerundete Quelle auf die angegebene Genauigkeit zurück.|
 |[sign()](signfunction.md)|Zeichen eines numerischen Ausdrucks.|
 |[sin()](sinfunction.md)|Gibt die Sinusfunktion zurück.|
 |[sqrt()](sqrtfunction.md)|Gibt die Quadratwurzel Funktion zurück.|
 |[tan()](tanfunction.md)|Gibt die Tangens Funktion zurück.|
 |[welch_test()](welch-testfunction.md)|Berechnet den p-Wert der [Welch-Test-Funktion](https://en.wikipedia.org/wiki/Welch%27s_t-test).|
-
 
 ## <a name="metadata-functions"></a>Metadatenfunktionen
 
@@ -169,7 +168,6 @@ ms.locfileid: "84294575"
 |[extent_tags()](extenttagsfunction.md)|Gibt ein dynamisches Array mit den Tags des datenshards ("Block") zurück, in dem sich der aktuelle Datensatz befindet.|
 |[ingestion_time()](ingestiontimefunction.md)|Ruft die $IngestionTime verborgene datetime-Spalte des Datensatzes oder NULL ab.|
 
-
 ## <a name="rounding-functions"></a>Rundungs Funktionen
 
 |Funktionsname     |BESCHREIBUNG                                          |
@@ -178,7 +176,6 @@ ms.locfileid: "84294575"
 |[bin_at()](binatfunction.md)|Rundet Werte auf einen "bin" mit fester Größe, wobei die Steuerung über dem Ausgangspunkt der bin gesteuert wird. (Siehe auch bin-Funktion.)|
 |[ceiling()](ceilingfunction.md)|Berechnet die kleinste Ganzzahl, die größer oder gleich dem angegebenen numerischen Ausdruck ist.|
 |[floor()](floorfunction.md)|Rundet Werte auf eine ganze Zahl ab, die ein Vielfaches der angegebenen bin-Größe ist.|
-
 
 ## <a name="conditional-functions"></a>Bedingte Funktionen
 
@@ -249,13 +246,13 @@ ms.locfileid: "84294575"
 |[parse_csv()](parsecsvfunction.md)|Teilt eine angegebene Zeichenfolge, die durch Trennzeichen getrennte Werte darstellt, und gibt ein Zeichen folgen Array mit diesen Werten zurück.|
 |[parse_ipv4()](parse-ipv4function.md)|Konvertiert Eingaben in eine Long-Darstellung (signed 64-Bit).|
 |[parse_ipv4_mask()](parse-ipv4-maskfunction.md)|Konvertiert die Eingabe Zeichenfolge und die IP-Präfix Maske in eine Long-Darstellung (signed 64-Bit).|
-|[parse_ipv6 ()](parse-ipv6function.md)|Konvertiert IPv6-oder IPv4-Zeichen folgen in eine kanonische IPv6-Zeichen folgen Darstellung.|
-|[parse_ipv6_mask ()](parse-ipv6-maskfunction.md)|Konvertiert IPv6-oder IPv4-Zeichen folgen und Netzmaske in eine kanonische IPv6-Zeichen folgen Darstellung.|
+|[parse_ipv6()](parse-ipv6function.md)|Konvertiert IPv6-oder IPv4-Zeichen folgen in eine kanonische IPv6-Zeichen folgen Darstellung.|
+|[parse_ipv6_mask()](parse-ipv6-maskfunction.md)|Konvertiert IPv6-oder IPv4-Zeichen folgen und Netzmaske in eine kanonische IPv6-Zeichen folgen Darstellung.|
 |[parse_json()](parsejsonfunction.md)|Interpretiert eine Zeichenfolge als JSON-Wert und gibt den Wert als Dynamic zurück.|
 |[parse_url()](parseurlfunction.md)|Analysiert eine absolute URL Zeichenfolge und gibt ein dynamisches Objekt zurück, das alle Teile der URL enthält.|
 |[parse_urlquery()](parseurlqueryfunction.md)|Analysiert eine URL-Abfrage Zeichenfolge und gibt ein dynamisches Objekt zurück, das die Abfrage Parameter enthält.|
 |[parse_version()](parse-versionfunction.md)|Konvertiert die Darstellung der Eingabe Zeichenfolge in eine vergleichbare Dezimalzahl.|
-|[Replace ()](replacefunction.md)|Ersetzen Sie alle regex-Übereinstimmungen mit einer anderen Zeichenfolge.|
+|[replace()](replacefunction.md)|Ersetzen Sie alle regex-Übereinstimmungen mit einer anderen Zeichenfolge.|
 |[reverse()](reversefunction.md)|Die Funktion bewirkt eine Umkehrung der Eingabe Zeichenfolge.|
 |[split()](splitfunction.md)|Teilt eine angegebene Zeichenfolge gemäß einem angegebenen Trennzeichen und gibt ein Zeichen folgen Array mit den enthaltenen Teil Zeichenfolgen zurück.|
 |[strcat()](strcatfunction.md)|Verkettet zwischen 1 und 64 Argumenten.|
@@ -269,21 +266,21 @@ ms.locfileid: "84294575"
 |[trim()](trimfunction.md)|Entfernt alle führenden und nachfolgenden Übereinstimmungen des angegebenen regulären Ausdrucks.|
 |[trim_end()](trimendfunction.md)|Entfernt die nachfolgende Entsprechung des angegebenen regulären Ausdrucks.|
 |[trim_start()](trimstartfunction.md)|Entfernt die führende Entsprechung des angegebenen regulären Ausdrucks.|
-|[url_decode ()](urldecodefunction.md)|Die-Funktion konvertiert die codierte URL in eine reguläre URL-Darstellung.|
-|[url_encode ()](urlencodefunction.md)|Die-Funktion konvertiert Zeichen der Eingabe-URL in ein Format, das über das Internet übermittelt werden kann.|
+|[url_decode()](urldecodefunction.md)|Die-Funktion konvertiert die codierte URL in eine reguläre URL-Darstellung.|
+|[url_encode()](urlencodefunction.md)|Die-Funktion konvertiert Zeichen der Eingabe-URL in ein Format, das über das Internet übermittelt werden kann.|
 
 ## <a name="ipv4ipv6-functions"></a>IPv4/IPv6-Funktionen
 
 |Funktionsname     |BESCHREIBUNG                                          |
 |-------------------------|--------------------------------------------------------|
-|[ipv4_compare ()](ipv4-comparefunction.md)|Vergleicht zwei IPv4-Zeichen folgen.|
-|[ipv4_is_match ()](ipv4-is-matchfunction.md)|Entspricht zwei IPv4-Zeichen folgen.|
+|[ipv4_compare()](ipv4-comparefunction.md)|Vergleicht zwei IPv4-Zeichen folgen.|
+|[ipv4_is_match()](ipv4-is-matchfunction.md)|Entspricht zwei IPv4-Zeichen folgen.|
 |[parse_ipv4()](parse-ipv4function.md)|Konvertiert die Eingabe Zeichenfolge in eine Long-Darstellung (signed 64-Bit).|
 |[parse_ipv4_mask()](parse-ipv4-maskfunction.md)|Konvertiert die Eingabe Zeichenfolge und die IP-Präfix Maske in eine Long-Darstellung (signed 64-Bit).|
-|[ipv6_compare ()](ipv6-comparefunction.md)|Vergleicht zwei IPv4-oder IPv6-Zeichen folgen.|
-|[ipv6_is_match ()](ipv6-is-matchfunction.md)|Entspricht zwei IPv4-oder IPv6-Zeichen folgen.|
-|[parse_ipv6 ()](parse-ipv6function.md)|Konvertiert IPv6-oder IPv4-Zeichen folgen in eine kanonische IPv6-Zeichen folgen Darstellung.|
-|[parse_ipv6_mask ()](parse-ipv6-maskfunction.md)|Konvertiert IPv6-oder IPv4-Zeichen folgen und Netzmaske in eine kanonische IPv6-Zeichen folgen Darstellung.|
+|[ipv6_compare()](ipv6-comparefunction.md)|Vergleicht zwei IPv4-oder IPv6-Zeichen folgen.|
+|[ipv6_is_match()](ipv6-is-matchfunction.md)|Entspricht zwei IPv4-oder IPv6-Zeichen folgen.|
+|[parse_ipv6()](parse-ipv6function.md)|Konvertiert IPv6-oder IPv4-Zeichen folgen in eine kanonische IPv6-Zeichen folgen Darstellung.|
+|[parse_ipv6_mask()](parse-ipv6-maskfunction.md)|Konvertiert IPv6-oder IPv4-Zeichen folgen und Netzmaske in eine kanonische IPv6-Zeichen folgen Darstellung.|
 
 ## <a name="type-functions"></a>Typfunktionen
 
