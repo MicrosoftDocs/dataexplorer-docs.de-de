@@ -10,24 +10,24 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 094cec5b467c35eb9dbeeb756362bd13c77873ce
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 8476680ad5b8206dcd7dfe98bf116bb5b6dcefdc
+ms.sourcegitcommit: 085e212fe9d497ee6f9f477dd0d5077f7a3e492e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737775"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85133450"
 ---
 # <a name="restrict-statement"></a>restrict-Anweisung
 
 ::: zone pivot="azuredataexplorer"
 
-Die Einschränkungs Anweisung schränkt den Satz von Tabellen-/ansichtentitäten ein, die für die folgenden Abfrage Anweisungen sichtbar sind. In einer Datenbank, die zwei Tabellen`A`(, `B`) enthält, kann die Anwendung z. b. verhindern, dass der Rest der `B` Abfrage auf eine begrenzte Form einer Tabelle `A` zugreift, indem eine Sicht verwendet wird.
+Die Einschränkungs Anweisung schränkt den Satz von Tabellen-/ansichtentitäten ein, die für die folgenden Abfrage Anweisungen sichtbar sind. In einer Datenbank, die zwei Tabellen ( `A` , `B` ) enthält, kann die Anwendung z. b. verhindern, dass der Rest der Abfrage auf eine begrenzte Form einer Tabelle zugreift, `B` `A` indem eine Sicht verwendet wird.
 
-Das Hauptszenario der Einschränkungs Anweisung ist für Anwendungen der mittleren Ebene, die Abfragen von Benutzern akzeptieren und einen Sicherheitsmechanismus auf Zeilenebene über diese Abfragen anwenden möchten. Die Anwendung der mittleren Ebene kann der Abfrage des Benutzers ein **Logisches Modell**, eine Reihe von Let-Anweisungen, die Ansichten definieren, die den Zugriff des Benutzers auf Daten einschränken (z `T | where UserId == "..."`. b.). Die letzte hinzugefügte Anweisung schränkt den Zugriff des Benutzers auf das logische Modell ein.
+Das Hauptszenario der Einschränkungs Anweisung ist für Anwendungen der mittleren Ebene, die Abfragen von Benutzern akzeptieren und einen Sicherheitsmechanismus auf Zeilenebene über diese Abfragen anwenden möchten. Die Anwendung der mittleren Ebene kann der Abfrage des Benutzers ein **Logisches Modell**, eine Reihe von Let-Anweisungen, die Ansichten definieren, die den Zugriff des Benutzers auf Daten einschränken (z `T | where UserId == "..."` . b.). Die letzte hinzugefügte Anweisung schränkt den Zugriff des Benutzers auf das logische Modell ein.
 
 **Syntax**
 
-`restrict``access` `,` [Entityspecifier [...]]*EntitySpecifier* `to` `(``)`
+`restrict``access` `to` `(` [*Entityspecifier* [ `,` ...]]`)`
 
 Where *entityspecifier* ist einer der folgenden:
 * Ein Bezeichner, der durch eine Let-Anweisung als tabellarische Ansicht definiert ist.
@@ -36,14 +36,14 @@ Where *entityspecifier* ist einer der folgenden:
 
 Alle Tabellen, Tabellen Sichten oder Muster, die nicht von der Einschränkungs Anweisung angegeben werden, werden für den Rest der Abfrage "unsichtbar". 
 
-**Hinweise**
+**Notizen**
 
 Die Einschränkungs Anweisung kann verwendet werden, um den Zugriff auf Entitäten in einer anderen Datenbank oder in einem Cluster einzuschränken (Platzhalter werden in Cluster Namen nicht unterstützt).
 
 **Argumente**
 
 Die Einschränkungs Anweisung kann einen oder mehrere Parameter abrufen, die die Einschränkungs Einschränkung während der Namensauflösung der Entität definieren. Die Entität kann folgende sein:
-- [Let-Anweisung](./letstatement.md) wird `restrict` vor der-Anweisung angezeigt. 
+- [Let-Anweisung](./letstatement.md) wird vor der- `restrict` Anweisung angezeigt. 
 
 ```kusto
 // Limit access to 'Test' let statement only
@@ -105,7 +105,7 @@ RestrictedData | summarize IrsLovesMe=sum(Salary) by Year, Month
 restrict access to (database().Table1);
 Table1 | count
 
-// Restricting acess to Table1 in the current database and Table2 in database 'DB2'
+// Restricting access to Table1 in the current database and Table2 in database 'DB2'
 restrict access to (database().Table1, database('DB2').Table2);
 union 
     (Table1),

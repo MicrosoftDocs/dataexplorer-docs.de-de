@@ -1,6 +1,6 @@
 ---
-title: .create-or-alter-Funktion - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die .create-or-alter-Funktion in Azure Data Explorer beschrieben.
+title: . Create-or-Alter Function-Azure Daten-Explorer
+description: In diesem Artikel wird die Funktion ". Create-or-Alter" in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,22 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/11/2020
-ms.openlocfilehash: 9e9c24f7fda44d6c44b8f78d8622b525268a341a
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.openlocfilehash: f19ca38f344f10b9dd8e4491b467eaad5ca022bc
+ms.sourcegitcommit: a034b6a795ed5e62865fcf9340906f91945b3971
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744294"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85197241"
 ---
 # <a name="create-or-alter-function"></a>.create-or-alter function
 
-Erstellt eine gespeicherte Funktion oder ändert eine vorhandene Funktion und speichert sie in den Datenbankmetadaten.
+Erstellt eine gespeicherte Funktion oder ändert eine vorhandene Funktion und speichert Sie in den Daten Bank Metadaten.
 
 ```kusto
 .create-or-alter function [with (docstring = '<description>', folder='<name>')] [FunctionName] ([paramName:paramType], ...) { CSL-statement }
 ```
 
-Wenn die Funktion mit dem bereitgestellten *FunctionName* in den Datenbankmetadaten nicht vorhanden ist, erstellt der Befehl eine neue Funktion. Wenn die Funktion bereits vorhanden ist, wird diese Funktion geändert.
+Wenn die Funktion mit dem angegebenen *FunctionName* nicht in den Daten Bank Metadaten vorhanden ist, erstellt der Befehl eine neue Funktion. Andernfalls wird diese Funktion geändert.
 
 **Beispiel**
 
@@ -34,6 +34,6 @@ Wenn die Funktion mit dem bereitgestellten *FunctionName* in den Datenbankmetada
 } 
 ```
 
-|Name|Parameter|Body|Ordner|DocString|
+|Name|Parameter|Text|Ordner|DocString|
 |---|---|---|---|---|
-|TestFunction|(myLimit:int)|• StormEvents &#124; myLimit nehmen|Myfolder|Demofunktion mit Parameter|
+|TestFunction|(mylimit: int)|{Stormevents &#124; nehmen Sie mylimit}|MyFolder|Demo Funktion mit Parameter|

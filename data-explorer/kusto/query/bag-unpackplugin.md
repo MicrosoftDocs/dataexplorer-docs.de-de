@@ -8,32 +8,32 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/15/2020
-ms.openlocfilehash: 1823a9d875c6294f360fbce77fcb5e1d2c968019
-ms.sourcegitcommit: 3848b8db4c3a16bda91c4a5b7b8b2e1088458a3a
+ms.openlocfilehash: 45dc0a02aae7cc39c7a287036055e9ca447187f3
+ms.sourcegitcommit: 085e212fe9d497ee6f9f477dd0d5077f7a3e492e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/16/2020
-ms.locfileid: "84818562"
+ms.lasthandoff: 06/22/2020
+ms.locfileid: "85133464"
 ---
 # <a name="bag_unpack-plugin"></a>Plug-in bag_unpack
 
-Das `bag_unpack` Plug-in entpackt eine einzelne Spalte vom Typ, `dynamic` indem die einzelnen Eigenschaften Behälter auf oberster Ebene als Spalte behandelt werden.
+Das `bag_unpack` Plug-in entpackt eine einzelne Spalte vom Typ `dynamic` , indem die einzelnen Eigenschaften Behälter auf oberster Ebene als Spalte behandelt werden.
 
     T | evaluate bag_unpack(col1)
 
 **Syntax**
 
-*T* - `|` `evaluate` `bag_unpack(` *Spalte* [ `,` *outputcolumnprefix* ] [ `,` *columnssublict* ] [ `,` *ignoredproperties* ]`)`
+*T* - `|` `evaluate` `bag_unpack(` *Spalte* [ `,` *outputcolumnprefix* ] [ `,` *columnsconflict* ] [ `,` *ignoredproperties* ]`)`
 
 **Argumente**
 
 * *T*: die tabellarische Eingabe, deren Spalten *Spalte* entpackt werden soll.
 * *Column*: die Spalte von *T* , die entpackt werden soll. Der Wert muss vom Typ `dynamic` sein.
 * *Outputcolumnprefix*: ein gängiges Präfix, das allen Spalten hinzugefügt wird, die vom Plug-in erzeugt werden. Dieses Argument ist optional.
-* *columnsconfiguration*: eine Richtung für die Auflösung von Spalten Konflikten. Dieses Argument ist optional. Wenn Argument angegeben wird, wird erwartet, dass es sich um ein Zeichenfolgenliteral handelt, das einem der folgenden Werte entspricht:
-    - `error`-die Abfrage erzeugt einen Fehler (Standard).
+* *columnsconflict*: eine Richtung für die Auflösung von Spalten Konflikten. Dieses Argument ist optional. Wenn Argument angegeben wird, wird erwartet, dass es sich um ein Zeichenfolgenliteral handelt, das einem der folgenden Werte entspricht:
+    - `error`-Die Abfrage erzeugt einen Fehler (Standard).
     - `replace_source`-Quell Spalte wird ersetzt
-    - `keep_source`-die Quell Spalte wird beibehalten.
+    - `keep_source`-Die Quell Spalte wird beibehalten.
 * *ignoredproperties*: Optionaler Satz von Behälter Eigenschaften, die ignoriert werden sollen. Wenn Argument angegeben wird, wird davon ausgegangen, dass es sich um eine Konstante des `dynamic` Arrays mit mindestens einem Zeichenfolgenliteralen handelt.
 
 **Rückgabe**
@@ -41,22 +41,22 @@ Das `bag_unpack` Plug-in entpackt eine einzelne Spalte vom Typ, `dynamic` indem 
 Das `bag_unpack` Plug-in gibt eine Tabelle mit so vielen Datensätzen zurück wie die Tabellen Eingabe (*T*). Das Schema der Tabelle ist identisch mit dem Schema der Tabellen Eingabe mit den folgenden Änderungen:
 
 * Die angegebene Eingabe Spalte (*Spalte*) wird entfernt.
-
-* Das Schema wird mit so vielen Spalten erweitert, wie es unterschiedliche Slots in den Eigenschaften Behälter Werten der obersten Ebene von *T*gibt. Der Name jeder Spalte entspricht dem Namen der einzelnen Slots. optional wird das *Präfix outputcolumnprefix*vorangestellt. Der Typ ist entweder der Typ des Slots (wenn alle Werte desselben Slots denselben Typ aufweisen) oder `dynamic` (wenn sich die Werte im Typ unterscheiden).
+* Das Schema wird mit so vielen Spalten erweitert, wie es unterschiedliche Slots in den Eigenschaften Behälter Werten der obersten Ebene von *T*gibt. Der Name jeder Spalte entspricht dem Namen der einzelnen Slots. optional wird das *Präfix outputcolumnprefix*vorangestellt. Der Typ ist entweder der Typ des Slots, wenn alle Werte desselben Slots denselben Typ aufweisen oder `dynamic` , wenn sich die Werte im Typ unterscheiden.
 
 **Notizen**
 
-Das Ausgabe Schema des Plug-ins hängt von den Datenwerten ab und macht es als "unvorhersehbare" Daten selbst. Daher können mehrere Ausführungen des Plug-ins mit unterschiedlichen Dateneingaben zu einem anderen Ausgabe Schema führen.
+Das Ausgabe Schema des Plug-ins hängt von den Datenwerten ab und macht es als "unvorhersehbare" Daten selbst. Mehrere Ausführungen des Plug-ins mit unterschiedlichen Dateneingaben können ein anderes Ausgabe Schema ergeben.
 
 Die Eingabedaten für das Plug-in müssen so lauten, dass das Ausgabe Schema allen Regeln für ein tabellarisches Schema folgt. Dies gilt insbesondere für:
 
-1. Der Name einer Ausgabe Spalte darf nicht mit einer vorhandenen Spalte in der tabellarischen Eingabe *T* identisch sein, es sei denn, es handelt sich um die Spalte, für die das Entpacken (*Spalte*) selbst ausgeführt werden soll, da dadurch zwei Spalten mit demselben Namen erstellt werden.
+* Der Name einer Ausgabe Spalte darf nicht mit einer vorhandenen Spalte in der tabellarischen Eingabe *t*identisch sein, es sei denn, es handelt sich um die Spalte, deren Verpackung entpackt werden soll (*Spalte*), da dadurch zwei Spalten mit demselben Namen erstellt werden.
 
-2. Alle slotnamen, bei vorangestellten *outputcolumnprefix*, müssen gültige Entitäts Namen sein und den [bezeichnerbenennungs Regeln](./schema-entities/entity-names.md#identifier-naming-rules)entsprechen.
+* Alle slotnamen, bei vorangestellten *outputcolumnprefix*, müssen gültige Entitäts Namen sein und den [bezeichnerbenennungs Regeln](./schema-entities/entity-names.md#identifier-naming-rules)entsprechen.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
-Erweitern eines Behälters:
+### <a name="expand-a-bag"></a>Einen Behälter erweitern
+
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -75,7 +75,10 @@ datatable(d:dynamic)
 |David  |40 |
 |Jasmine|30 |
 
-Erweitern eines Behälters und Verwenden der `OutputColumnPrefix` Option zum Entwickeln von Spaltennamen, die mit dem Präfix "Property_" beginnen:
+
+### <a name="expand-a-bag-with-outputcolumnprefix"></a>Erweitern eines Behälters mit outputcolumnprefix
+
+Erweitern Sie einen Behälter, und verwenden `OutputColumnPrefix` Sie die Option, um Spaltennamen zu verwenden, die mit dem Präfix ' Property_ ' beginnen.
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -94,7 +97,9 @@ datatable(d:dynamic)
 |David|40|
 |Jasmine|30|
 
-Erweitern eines Behälters und verwenden `columnsConlict` der Option zum Auflösen von Konflikten zwischen vorhandenen Spalten und Spalten, die vom-Operator erzeugt werden `bag_unpack()` .
+### <a name="expand-a-bag-with-columnsconflict"></a>Erweitern eines Behälters mit columnsconflict
+
+Erweitern Sie einen Behälter, und verwenden `columnsConflict` Sie die Option, um Konflikte zwischen vorhandenen Spalten und Spalten aufzulösen, die vom-Operator erzeugt werden `bag_unpack()` .
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -104,7 +109,7 @@ datatable(Name:string, d:dynamic)
     'Old_name', dynamic({"Name": "Dave", "Age":40}),
     'Old_name', dynamic({"Name": "Jasmine", "Age":30}),
 ]
-| evaluate bag_unpack(d, columnsConlict='replace_source') // Use new name
+| evaluate bag_unpack(d, columnsConflict='replace_source') // Use new name
 ```
 
 |Name|Age|
@@ -121,7 +126,7 @@ datatable(Name:string, d:dynamic)
     'Old_name', dynamic({"Name": "Dave", "Age":40}),
     'Old_name', dynamic({"Name": "Jasmine", "Age":30}),
 ]
-| evaluate bag_unpack(d, columnsConlict='keep_source') // Keep old name
+| evaluate bag_unpack(d, columnsConflict='keep_source') // Keep old name
 ```
 
 |Name|Age|
@@ -130,7 +135,9 @@ datatable(Name:string, d:dynamic)
 |Old_name|40|
 |Old_name|30|
 
-Erweitern eines Behälters und verwenden `ignoredProperties` der Option zum Ignorieren bestimmter Eigenschaften, die im Eigenschaften Behälter vorhanden sind.
+### <a name="expand-a-bag-with-ignoredproperties"></a>Einen Behälter mit ignoredproperties erweitern
+
+Erweitern Sie einen Behälter, und verwenden `ignoredProperties` Sie die Option, um bestimmte Eigenschaften im Eigenschaften Behälter zu ignorieren.
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
