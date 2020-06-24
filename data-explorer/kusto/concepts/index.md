@@ -8,26 +8,35 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0a56878c8b79e651afcd1b8ce18a3220dc304211
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
+ms.openlocfilehash: 6c09bea9cfe25ea7ebe86170f71593db4db7d9a2
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83863386"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264350"
 ---
 # <a name="getting-started-with-kusto"></a>Erste Schritte mit Kusto
 
 Azure Data Explorer ist ein Dienst zum Speichern und Ausführen interaktiver Analysen für Big Data.
 
-Er basiert auf Managementsystemen für relationale Datenbanken und unterstützt Entitäten wie Datenbanken, Tabellen und Spalten. Komplexe analytische Abfragen werden mithilfe der Kusto-Abfragesprache ausgeführt. Zu den Abfrageoperatoren zählen u. a. berechnete Spalten, Such- und Filterfunktionen für Zeilen sowie Gruppierungsaggregate und Joins.
+Er basiert auf Managementsystemen für relationale Datenbanken und unterstützt Entitäten wie Datenbanken, Tabellen und Spalten. Komplexe analytische Abfragen werden mithilfe der Kusto-Abfragesprache ausgeführt. Zu den Abfrageoperatoren zählt u. a. Folgendes:
+* Berechnete Spalten
+* Such- und Filterfunktionen für Zeilen
+* Gruppierungsaggregate
+* Verknüpfungsfunktionen
 
-Der Dienst bietet eine erstklassige Datenerfassungs- und Abfrageleistung. Dazu wird auf die Möglichkeit verzichtet, direkte Aktualisierungen einzelner Zeilen oder tabellenübergreifende Einschränkungen/Transaktionen durchzuführen. Herkömmliche Managementsysteme für relationale Datenbanken werden dadurch in Szenarien wie OLTP und Data Warehousing vielmehr ergänzt als ersetzt.
-
-Der Dienst eignet sich gleichermaßen für die Verarbeitung strukturierter Daten, teilweise strukturierter Daten (etwa JSON-ähnliche geschachtelte Typen) und unstrukturierter Daten (Freitext).
+Der Dienst bietet eine ausgezeichnete Datenerfassung und Abfrageleistung: 
+* Dazu wird auf die Möglichkeit verzichtet, direkte Aktualisierungen einzelner Zeilen und tabellenübergreifende Einschränkungen oder Transaktionen durchzuführen. 
+* Herkömmliche Managementsysteme für relationale Datenbanken werden durch den Dienst in Szenarien wie OLTP und Data Warehousing vielmehr ergänzt als ersetzt.
+* Der Dienst eignet sich gleichermaßen für die Verarbeitung strukturierter Daten, teilweise strukturierter Daten (etwa JSON-ähnliche geschachtelte Typen) und unstrukturierter Daten (Freitext).
 
 ## <a name="interacting-with-azure-data-explorer"></a>Interaktion mit Azure Data Explorer
 
-Benutzer interagieren mit Kusto in erster Linie über eines der zahlreichen verfügbaren [Clienttools](../tools/index.md). [SQL-Abfragen](../api/tds/t-sql.md) werden zwar unterstützt, für die Interaktion werden jedoch hauptsächlich die [Kusto-Abfragesprache](../query/index.md) (zum Senden von Datenabfragen) und [Steuerungsbefehle](../management/index.md) (zum Verwalten von Entitäten, Ermitteln von Metadaten und Ähnlichem) verwendet. Sowohl Abfragen als auch Steuerungsbefehle sind im Grunde kurze „Textprogramme“.
+Für die Interaktion mit Azure Data Explorer (Kusto) verwenden Benutzer in erster Linie Folgendes:
+* Eins der vielen verfügbaren [Clienttools](../tools/index.md) 
+* [SQL-Abfragen](../api/tds/t-sql.md)
+*  Für die Interaktion wird hauptsächlich die [Kusto-Abfragesprache](../query/index.md) verwendet. KQL ermöglicht das Senden von Datenabfragen und das Verwenden von [Steuerungsbefehlen](../management/index.md) zum Verwalten von Entitäten, Ermitteln von Metadaten und Ähnlichem.
+Sowohl Abfragen als auch Steuerungsbefehle sind kurze „Textprogramme“.
 
 ## <a name="kusto-queries"></a>Kusto-Abfragen
 
@@ -39,7 +48,8 @@ Logs
 | count
 ```
 
-Abfragen dürfen nicht mit einem Punkt (`.`) oder einer Raute (`#`) beginnen.
+> [!NOTE]
+> Abfragen dürfen nicht mit einem Punkt (`.`) oder einer Raute (`#`) beginnen.
 
 ## <a name="control-commands"></a>Steuerungsbefehle
 
@@ -49,7 +59,7 @@ Steuerungsbefehle sind Anforderungen an Kusto, um Daten oder Metadaten zu verarb
 .create table Logs (Level:string, Text:string)
 ```
 
-Steuerungsbefehle haben eine eigene Syntax. (Diese ist nicht Teil der Syntax der Kusto-Abfragesprache, auch wenn es bei zahlreichen Konzepten Überschneidungen gibt.) Im Gegensatz zu Abfragen beginnen Steuerungsbefehle mit einem Punkt (`.`).
+Steuerungsbefehle haben eine eigene Syntax. Diese ist nicht Teil der Syntax der Kusto-Abfragesprache, auch wenn es bei zahlreichen Konzepten Überschneidungen gibt. Im Gegensatz zu Abfragen beginnen Steuerungsbefehle mit einem Punkt (`.`).
 Diese Unterscheidung verhindert viele Arten von Sicherheitsangriffen, da es somit nicht möglich ist, Steuerungsbefehle einfach in Abfragen einzubetten.
 
-Nicht alle Steuerungsbefehle ändern Daten oder Metadaten. Eine große Klasse von Befehlen (Befehle, die mit `.show` beginnen) dient zum Anzeigen von Metadaten oder Daten. Der Befehl `.show tables` gibt beispielsweise eine Liste mit allen Tabellen in der aktuellen Datenbank zurück.
+Nicht alle Steuerungsbefehle ändern Daten oder Metadaten. Eine große Klasse von Befehlen, die mit `.show` beginnen, dient zum Anzeigen von Metadaten oder Daten. Der Befehl `.show tables` gibt beispielsweise eine Liste mit allen Tabellen in der aktuellen Datenbank zurück.
