@@ -414,37 +414,37 @@
               items:
                 - name: evaluate-Operator-Plug-Ins
                   href: ./kusto/query/evaluateoperator.md
-                - name: autocluster
+                - name: autocluster-Plug-In
                   href: ./kusto/query/autoclusterplugin.md
-                - name: bag_unpack
+                - name: Plug-In „bag_unpack“
                   href: ./kusto/query/bag-unpackplugin.md
-                - name: basket
+                - name: basket-Plug-In
                   href: ./kusto/query/basketplugin.md
-                - name: dcount_intersect
+                - name: Plug-In „dcount_intersect“
                   href: ./kusto/query/dcount-intersect-plugin.md
-                - name: diffpatterns
+                - name: diffpatterns-Plug-In
                   href: ./kusto/query/diffpatternsplugin.md
-                - name: diffpatterns_text
+                - name: Plug-In „diffpatterns_text“
                   href: ./kusto/query/diffpatterns-textplugin.md
-                - name: infer_storage_schema
+                - name: Plug-In „infer_storage_schema“
                   href: ./kusto/query/inferstorageschemaplugin.md
-                - name: narrow
+                - name: narrow-Plug-In
                   href: ./kusto/query/narrowplugin.md
-                - name: pivot
+                - name: pivot-Plug-In
                   href: ./kusto/query/pivotplugin.md
-                - name: preview
+                - name: preview-Plug-In
                   href: ./kusto/query/previewplugin.md
-                - name: Python
+                - name: python-Plug-In
                   href: ./kusto/query/pythonplugin.md
-                - name: R
+                - name: R-Plug-In
                   href: ./kusto/query/rplugin.md
-                - name: rolling_percentile
+                - name: Plug-In „rolling_percentile“
                   href: ./kusto/query/rolling-percentile-plugin.md
-                - name: schema_merge
+                - name: Plug-In „schema_merge“
                   href: ./kusto/query/schemamergeplugin.md
-                - name: sql_request
+                - name: Plug-In „sql_request“
                   href: ./kusto/query/sqlrequestplugin.md
-                - name: sequence_detect
+                - name: Plug-In „sequence_detect“
                   href: ./kusto/query/sequence-detect-plugin.md
             - name: extend-Operator
               href: ./kusto/query/extendoperator.md
@@ -1060,10 +1060,6 @@
               href: ./kusto/query/rownumberfunction.md
             - name: row_window_session()
               href: ./kusto/query/row-window-session-function.md
-        - name: Rollierende Zeitfensteraggregationen
-          items:
-            - name: rolling_percentile()
-              href: ./kusto/query/rolling-percentile-plugin.md
         - name: Zeitreihenanalyse
           items:
             - name: Übersicht über die Zeitreihenanalyse
@@ -1132,13 +1128,13 @@
               href: ./kusto/query/series-subtractfunction.md
         - name: Machine Learning
           items:
-            - name: autocluster
+            - name: autocluster-Plug-In
               href: ./kusto/query/autoclusterplugin.md
-            - name: basket
+            - name: basket-Plug-In
               href: ./kusto/query/basketplugin.md
-            - name: diffpatterns
+            - name: diffpatterns-Plug-In
               href: ./kusto/query/diffpatternsplugin.md
-            - name: diffpatterns_text
+            - name: Plug-In „diffpatterns_text“
               href: ./kusto/query/diffpatterns-textplugin.md
         - name: Geodaten
           items:
@@ -1164,23 +1160,23 @@
           items:
             - name: Benutzeranalyse-Plug-Ins
               href: ./kusto/query/useranalytics.md
-            - name: Anzahl aktiver Benutzer
+            - name: Plug-In für die Anzahl aktiver Benutzer
               href: ./kusto/query/active-users-count-plugin.md
-            - name: 'Aktivitätszählermetriken (Gesamtwerte, unterschiedliche Werte, neue Werte)'
+            - name: Plug-In für Aktivitätszählermetriken
               href: ./kusto/query/activity-counts-metrics-plugin.md
-            - name: 'Aktivitätsbeteiligung (DAU, WAU, MAU)'
+            - name: Aktivitätsbeteiligungs-Plug-In
               href: ./kusto/query/activity-engagement-plugin.md
-            - name: 'Aktivitätsmetriken (Bindung, Abwanderung, neue Werte)'
+            - name: Aktivitätsmetriken-Plug-In
               href: ./kusto/query/activity-metrics-plugin.md
-            - name: 'Aktivitätsmetriken: Neu (Bindung, Abwanderung, neue Werte)'
+            - name: 'Aktivitätsmetriken-Plug-In: Neu'
               href: ./kusto/query/new-activity-metrics-plugin.md
-            - name: Trichtersequenzabschluss
+            - name: Plug-In für Trichtersequenzabschluss
               href: ./kusto/query/funnel-sequence-completion-plugin.md
-            - name: Trichtersequenz
+            - name: Trichtersequenz-Plug-In
               href: ./kusto/query/funnel-sequence-plugin.md
-            - name: Sitzungsanzahl
+            - name: Plug-In für Sitzungsanzahl
               href: ./kusto/query/session-count-plugin.md
-            - name: Zählungen für gleitendes Fenster
+            - name: Plug-In für Zählungen für gleitendes Fenster
               href: ./kusto/query/sliding-window-counts-plugin.md
         - name: Referenzmaterial für die Kusto-Abfragesprache
           items:
