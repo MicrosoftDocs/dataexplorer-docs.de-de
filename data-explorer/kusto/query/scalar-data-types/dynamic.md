@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 606d48c4bda583ad82404a1b25119ec9beb4c5a9
-ms.sourcegitcommit: 6f56b169fda0b74f9569004555a574d8973b1021
+ms.openlocfilehash: 8a979d91b008be7a93626aa7f58865cb5466076b
+ms.sourcegitcommit: c3bbb9a6bfd7c5506f05afb4968fdc2043a9fbbf
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84748942"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85332582"
 ---
 # <a name="the-dynamic-data-type"></a>Der dynamische Datentyp.
 
@@ -57,7 +57,7 @@ Zur einfacheren Handhabung `dynamic` können Literale, die im Abfragetext selbst
 print d=dynamic({"a": datetime(1970-05-11)})
 ```
 
-Verwenden Sie die-Funktion, um einen Wert zu analysieren, `string` der den JSON-Codierungsregeln in einen- `dynamic` Wert folgt `parse_json` . Beispiel:
+Verwenden Sie die-Funktion, um einen Wert zu analysieren, `string` der den JSON-Codierungsregeln in einen- `dynamic` Wert folgt `parse_json` . Zum Beispiel:
 
 * `parse_json('[43, 21, 65]')` : ein Array mit Zahlen
 * `parse_json('{"name":"Alan", "age":21, "address":{"street":432,"postcode":"JLK32P"}}')`-ein Wörterbuch
@@ -119,12 +119,12 @@ Der Zugriff auf ein untergeordnetes Objekt eines `dynamic` Werts ergibt einen an
 
 > Nachdem Sie ein dynamisches Objekt abonniert haben, müssen Sie den Wert in einen einfachen Typ umwandeln.
 
-|expression | Wert | type|
+|expression | Wert | Type|
 |---|---|---|
 | X | parse_json ("[100101102]")| array|
 |X [0]|parse_json ("100")|dynamisch|
 |"zu int" (X [1])|101| INT|
-| J | parse_json ("{" a1 ": 100," a b c ":" 2015-01-01 "}")| dictionary|
+| „Y“ zugeordnet ist | parse_json ("{" a1 ": 100," a b c ":" 2015-01-01 "}")| dictionary|
 |Y. a1|parse_json ("100")|dynamisch|
 |J ["a b c"]| parse_json ("2015-01-01")|dynamisch|
 |Date (Y ["a b c"])|DateTime (2015-01-01)| datetime|
@@ -168,6 +168,7 @@ Außerdem gibt es mehrere Aggregatfunktionen, die `dynamic` Arrays erstellen, di
 | *value* `!in` *array*| TRUE, wenn kein Element von *array* vorhanden ist, das *value* entspricht
 |[`array_length(`array`)`](../arraylengthfunction.md)| Null, wenn es sich nicht um ein Array handelt.
 |[`bag_keys(`Beut`)`](../bagkeysfunction.md)| Listet alle Stamm Schlüssel in einem dynamischen Eigenschaften Behälter Objekt auf.
+|[`bag_merge(`bag1,..., Bagn`)`](../bag-merge-function.md)| Führt dynamische Eigenschaften Behälter in einem dynamischen Eigenschaften Behälter zusammen, wobei alle Eigenschaften zusammengeführt werden.
 |[`extractjson(`Pfad, Objekt`)`](../extractjsonfunction.md)|Verwendet den Pfad zum Navigieren in das Objekt.
 |[`parse_json(`Ausgangs`)`](../parsejsonfunction.md)| Wandelt eine JSON-Zeichenfolge in ein dynamisches Objekt um.
 |[`range(`von, bis, Schritt`)`](../rangefunction.md)| Ein Array von Werten
@@ -179,4 +180,3 @@ Außerdem gibt es mehrere Aggregatfunktionen, die `dynamic` Arrays erstellen, di
 |[`summarize make_list_if(`Spalte, Prädikat `)`](../makelistif-aggfunction.md)| Vereinfacht Zeilen Gruppen und legt die Werte der Spalte in ein Array (mit Prädikat) ab.
 |[`summarize make_list_with_nulls(`Spalte `)`](../make-list-with-nulls-aggfunction.md)| Vereinfachen Sie Zeilen Gruppen, und fügen Sie die Werte der Spalte in ein Array ein, einschließlich NULL-Werten.
 |[`summarize make_set(`Kolumne`)`](../makeset-aggfunction.md) | Reduziert die Zeilengruppen und setzt die Werte der Spalte in ein Array ohne Duplizierung.
-|[`summarize make_bag(`Kolumne`)`](../make-bag-aggfunction.md) | Führt die Eigenschaften Behälter Werte (Wörterbuch) in der Spalte in einem Eigenschaften Behälter ohne Schlüssel Duplizierung zusammen.

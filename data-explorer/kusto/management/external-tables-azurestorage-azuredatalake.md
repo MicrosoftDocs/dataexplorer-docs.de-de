@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 7bcba1cbcbcbd712278696d897febaee5714703f
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: 828f2450db7f6afabf33f72d813af6f0007ada6b
+ms.sourcegitcommit: c3bbb9a6bfd7c5506f05afb4968fdc2043a9fbbf
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780591"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85332599"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake
 
@@ -89,7 +89,7 @@ Dateipfad-Format für externe Daten, das zusätzlich zu Partitionen angegeben we
 
 &nbsp;&nbsp;[*Stringseparator*] *Partition* [*stringseparator*] [*Partition* [*stringseparator*]...]  
 
-Dabei verweist *Partition* auf eine in-Klausel deklarierte Partition `partition` `by` , und *stringseparator* ist ein beliebiger Text, der in Anführungszeichen eingeschlossen ist.
+Dabei verweist *Partition* auf eine in-Klausel deklarierte Partition `partition` `by` , und *stringseparator* ist ein beliebiger Text, der in Anführungszeichen eingeschlossen ist. Aufeinander folgende Partitions Elemente müssen mithilfe von *stringseparator*getrennt festgelegt werden.
 
 Das ursprüngliche Dateipfad-Präfix kann mithilfe von Partitions Elementen erstellt werden, die als Zeichen folgen gerendert und mit entsprechenden Text Trennzeichen Zum Angeben des Formats, das zum Rendern eines DateTime-Partitions Werts verwendet wird, kann das folgende Makro verwendet werden:
 
@@ -133,7 +133,7 @@ Weitere Informationen finden Sie unter [Speicher Verbindungs](../api/connection-
 <a name="properties"></a>
 *Optionale Eigenschaften*
 
-| Eigenschaft         | type     | BESCHREIBUNG       |
+| Eigenschaft         | Type     | Beschreibung       |
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | Tabellen Ordner                                                                     |
 | `docString`      | `string` | Zeichenfolge, die die Tabelle dokumentiert                                                       |
@@ -236,6 +236,9 @@ dataformat=parquet
 )
 ```
 
+> [!NOTE]
+> Derzeit werden virtuelle Spalten für die folgenden Datenformate nicht unterstützt: `CSV` , `TSV` , `TSVE` , `SCsv` , `SOHsv` , `PSV` `RAW` und `TXT` .
+
 <a name="file-filtering"></a>
 **Logik zum Filtern von Dateien**
 
@@ -269,7 +272,7 @@ Dabei ist " *maxResults* " ein optionaler Parameter, der so festgelegt werden ka
 
 **Ausgabe**
 
-| Output-Parameter | type   | Beschreibung                       |
+| Output-Parameter | Type   | Beschreibung                       |
 |------------------|--------|-----------------------------------|
 | URI              | Zeichenfolge | URI der externen Speicher Datendatei |
 
@@ -302,7 +305,7 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 **Beispielausgabe**
 
-| Name     | Art | Zuordnung                                                           |
+| name     | Variante | Zuordnung                                                           |
 |----------|------|-------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -320,7 +323,7 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 **Beispielausgabe**
 
-| Name     | Art | Zuordnung                                                                |
+| name     | Variante | Zuordnung                                                                |
 |----------|------|------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -342,7 +345,7 @@ Zeigt die Zuordnungen an (alle oder die durch den Namen angegebenen).
 
 **Beispielausgabe**
 
-| Name     | Art | Zuordnung                                                                         |
+| name     | Variante | Zuordnung                                                                         |
 |----------|------|---------------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "Properties": {"Path": "$. ROWGUID"}}] |
 

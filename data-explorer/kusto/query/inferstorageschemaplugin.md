@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 5c430fd0ca18265c5800165b33bfe14126aee02a
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 5fd6221e4b877d066050f932a564f71d56d8c168
+ms.sourcegitcommit: c3bbb9a6bfd7c5506f05afb4968fdc2043a9fbbf
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373267"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85332561"
 ---
-# <a name="infer_storage_schema-plugin"></a>Plug-in infer_storage_schema
+# <a name="infer_storage_schema-plugin"></a>Plug-In „infer_storage_schema“
 
 Dieses Plug-in leitet das Schema externer Daten ab und gibt es als CSL-Schema Zeichenfolge zurück. Die Zeichenfolge kann beim [Erstellen externer Tabellen](../management/external-tables-azurestorage-azuredatalake.md#create-or-alter-external-table)verwendet werden.
 
@@ -51,6 +51,7 @@ Ein einzelnes *options* Argument ist ein konstanter Wert des Typs `dynamic` , de
 Das `infer_storage_schema` Plug-in gibt eine einzelne Ergebnistabelle zurück, die eine einzelne Zeile/Spalte mit der CSL-Schema Zeichenfolge enthält
 
 > [!NOTE]
+> * Geheime Schlüssel für Speicher Container-URI müssen neben *Lesen*über die Berechtigungen für die *Liste* verfügen.
 > * Die Strategie "All" für die Schema Rückschluss Strategie ist ein sehr kostengünstiger Vorgang, da Sie das Lesen aus *allen* gefundenen Artefakten und das Zusammenführen Ihres Schemas impliziert.
 > * Einige zurückgegebene Typen sind möglicherweise nicht die tatsächlichen Typen, die durch einen falschen Typ (oder als Ergebnis des Schema Zusammenführung Prozesses) verursacht werden. Aus diesem Grund sollten Sie das Ergebnis sorgfältig überprüfen, bevor Sie eine externe Tabelle erstellen.
 
