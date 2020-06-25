@@ -8,14 +8,12 @@ ms.reviewer: amitof
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/16/2020
-zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
-zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 7373af48ef581e4b64f1cfc34ece0c16a416fc08
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: 4bfc7b591683940e10d2737ec776421f65d1427a
+ms.sourcegitcommit: 93510ef1e5570ce4da2cbf76eb77946c93a7dec8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128902"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85372467"
 ---
 # <a name="query-results-cache"></a>Abfrageergebniscache
 
@@ -23,7 +21,7 @@ Kusto enthält einen Abfrageergebnis Cache. Sie können auswählen, ob zwischeng
 
 ## <a name="use-the-cache"></a>Verwenden des Caches
 
-Legen `query_results_cache_max_age` Sie die Option als Teil der Abfrage fest, um den Abfrageergebnis Cache zu verwenden. Sie können diese Option im Abfragetext oder als Client Anforderungs Eigenschaft festlegen. Zum Beispiel:
+Legen `query_results_cache_max_age` Sie die Option als Teil der Abfrage fest, um den Abfrageergebnis Cache zu verwenden. Sie können diese Option im Abfragetext oder als Client Anforderungs Eigenschaft festlegen. Beispiel:
 
 ```kusto
 set query_results_cache_max_age = time(5m);
@@ -38,7 +36,7 @@ Der Optionswert ist eine `timespan` , die das maximale "Alter" des Ergebnis Cach
 
 ### <a name="identical-queries"></a>Identische Abfragen
 
-Die query_results_cache gibt nur Ergebnisse für Abfragen zurück, die mit einer vorherigen zwischengespeicherten Abfrage als "identisch" angesehen werden. Zwei Abfragen werden als identisch angesehen, wenn alle der folgenden Bedingungen erfüllt sind:
+Der Abfrageergebnis Cache gibt Ergebnisse nur für Abfragen zurück, die mit einer vorherigen zwischengespeicherten Abfrage als "identisch" angesehen werden. Zwei Abfragen werden als identisch angesehen, wenn alle der folgenden Bedingungen erfüllt sind:
 
 * Die beiden Abfragen haben dieselbe Darstellung (wie UTF-8-Zeichen folgen).
 * Die beiden Abfragen werden an dieselbe Datenbank durchgeführt.

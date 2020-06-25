@@ -1,6 +1,6 @@
 ---
-title: 'Richtlinie für die Daten Partitionierung (Vorschau): Azure Daten-Explorer'
-description: Dieser Artikel beschreibt die Richtlinie zur Daten Partitionierung (Vorschauversion) in Azure Daten-Explorer.
+title: 'Richtlinie für die Daten Partitionierung: Azure Daten-Explorer'
+description: Dieser Artikel beschreibt die Richtlinie zur Daten Partitionierung in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 2a54d6e8bdb891500778f2043f2b1aa4094162d2
-ms.sourcegitcommit: 743e8b1def28bc8f875b22b857ec345eeb7e5acc
+ms.openlocfilehash: 3ab402833e4aebd5499fcb383dd803e9a6a815ed
+ms.sourcegitcommit: 93510ef1e5570ce4da2cbf76eb77946c93a7dec8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84671443"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85372484"
 ---
 # <a name="data-partitioning-policy"></a>Daten Partitionierungs Richtlinie
 
@@ -28,7 +28,7 @@ Der Hauptzweck der Richtlinie besteht darin, die Leistung von Abfragen zu verbes
 
 Die folgenden Arten von Partitions Schlüsseln werden unterstützt.
 
-|Art                                                   |Spaltentyp |Partitionseigenschaften                    |Partitions Wert                                        |
+|Variante                                                   |Spaltentyp |Partitionseigenschaften                    |Partitions Wert                                        |
 |-------------------------------------------------------|------------|----------------------------------------|----------------------|
 |[Hash](#hash-partition-key)                            |`string`    |`Function`, `MaxPartitionCount`, `Seed` | `Function`(`ColumnName`, `MaxPartitionCount`, `Seed`) |
 |[Einheitlicher Bereich](#uniform-range-datetime-partition-key) |`datetime`  |`RangeSize`, `Reference`                | `bin_at`(`ColumnName`, `RangeSize`, `Reference`)      |
@@ -173,6 +173,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
 * **Maxrowzählperoperation**:
   * Maximales Ziel für die Summe der Zeilen Anzahl der Quell Blöcke eines einzelnen Daten Partitionierungs Vorgangs.
   * Diese Eigenschaft ist optional. Der Standardwert ist `0` mit einem Standardziel von 5 Millionen Datensätzen.
+    * Sie können in Erwägung gezogen, einen Wert unter 5 Mio. festzulegen. Sie sehen, dass die Partitionierungs Vorgänge eine sehr große Menge an Arbeitsspeicher/CPU pro Vorgang beanspruchen (siehe #Monitoring).
 
 ## <a name="notes"></a>Notizen
 
@@ -198,7 +199,7 @@ Die Ausgabe umfasst Folgendes:
     * Wenn dieser Prozentsatz konstant weiterhin unter 90% liegt, sollten Sie die Partitions Kapazität des Clusters auswerten (siehe [Kapazität](partitioningpolicy.md#capacity)).
   * `TableWithMinPartitioningPercentage`: Der voll qualifizierte Name der Tabelle, deren Partitionierungs Prozentsatz oben angezeigt wird.
 
-Verwenden Sie [. Show-Befehle](commands.md) , um die Partitionierungs Befehle und deren Ressourcenverwendung zu überwachen. Zum Beispiel:
+Verwenden Sie [. Show-Befehle](commands.md) , um die Partitionierungs Befehle und deren Ressourcenverwendung zu überwachen. Beispiel:
 
 ```kusto
 .show commands 
