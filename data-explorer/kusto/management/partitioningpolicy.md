@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 3ab402833e4aebd5499fcb383dd803e9a6a815ed
-ms.sourcegitcommit: 93510ef1e5570ce4da2cbf76eb77946c93a7dec8
+ms.openlocfilehash: 433d8786ad3664d02387efacd7dcd3865b4deb13
+ms.sourcegitcommit: ddafa58deb79417bd6f36e8bb3ad106d375b63e1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85372484"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85448501"
 ---
 # <a name="data-partitioning-policy"></a>Daten Partitionierungs Richtlinie
 
@@ -22,7 +22,7 @@ Die Partitionierungs Richtlinie definiert, ob und wie Blöcke [(datenshards)](..
 Der Hauptzweck der Richtlinie besteht darin, die Leistung von Abfragen zu verbessern, die bekanntermaßen den Datensatz von Werten in den partitionierten Spalten eingrenzen, oder Aggregat/Join für eine Spalte mit hoher kardinalitätszeichenfolge. Die Richtlinie kann auch zu einer besseren Komprimierung der Daten führen.
 
 > [!CAUTION]
-> Es sind keine hart codierten Grenzwerte für die Anzahl der Tabellen festgelegt, für die die Richtlinie definiert werden kann. Allerdings erhöht jede zusätzliche Tabelle den Aufwand für den Hintergrunddaten Partitionierungs Prozess, der auf den Knoten des Clusters ausgeführt wird. Dies kann dazu führen, dass mehr Cluster Ressourcen verwendet werden. Weitere Informationen finden Sie unter [Capacity](#capacity).
+> Es sind keine hart codierten Grenzwerte für die Anzahl der Tabellen festgelegt, für die die Richtlinie definiert werden kann. Allerdings erhöht jede zusätzliche Tabelle den Aufwand für den Hintergrunddaten Partitionierungs Prozess, der auf den Knoten des Clusters ausgeführt wird. Dies kann dazu führen, dass mehr Cluster Ressourcen verwendet werden. Weitere Informationen finden Sie unter [Überwachung](#monitoring) und [Kapazität](#capacity).
 
 ## <a name="partition-keys"></a>Partitionsschlüssel
 
@@ -175,7 +175,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
   * Diese Eigenschaft ist optional. Der Standardwert ist `0` mit einem Standardziel von 5 Millionen Datensätzen.
     * Sie können in Erwägung gezogen, einen Wert unter 5 Mio. festzulegen. Sie sehen, dass die Partitionierungs Vorgänge eine sehr große Menge an Arbeitsspeicher/CPU pro Vorgang beanspruchen (siehe #Monitoring).
 
-## <a name="notes"></a>Notizen
+## <a name="notes"></a>Hinweise
 
 ### <a name="the-data-partitioning-process"></a>Der Daten Partitionierungs Prozess
 
