@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/13/2020
-ms.openlocfilehash: 8fe86f16eef79fca0db22fd3048cc3841c57d189
-ms.sourcegitcommit: 8953d09101f4358355df60ab09e55e71bc255ead
+ms.openlocfilehash: 19ffbe2f5e14a2c003c24d145b713970e6bb31b8
+ms.sourcegitcommit: 4eb64e72861d07cedb879e7b61a59eced74517ec
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84420899"
+ms.lasthandoff: 06/29/2020
+ms.locfileid: "85517765"
 ---
 # <a name="troubleshooting"></a>Problembehandlung
 
@@ -165,7 +165,7 @@ Wenn erforderlich, können Sie Kusto. Explorer vollständig zurücksetzen. Im fo
 1. Wählen Sie alle Elemente aus, die mit beginnen `Kusto.Explorer` .
 1. Wählen Sie **Deinstallieren** aus.
 
-   Wenn bei der Deinstallation der Anwendung (ein bekanntes Problem mit ClickOnce-Anwendungen) ein Fehler auftritt, finden Sie weitere Informationen unter [dieser Stapelüberlauf Artikel, in dem erläutert wird, wie Sie vorgehen
+   Wenn diese Vorgehensweise die Anwendung nicht deinstallieren kann (ein bekanntes Problem bei ClickOnce-Anwendungen), finden Sie in [diesem Artikel Anweisungen](https://stackoverflow.com/questions/10896223/how-do-i-completely-uninstall-a-clickonce-application-from-my-computer).
 
 1. Löschen Sie den Ordner `%LOCALAPPDATA%\Kusto.Explorer` , der alle Verbindungen, den Verlauf usw. entfernt.
 
@@ -173,7 +173,7 @@ Wenn erforderlich, können Sie Kusto. Explorer vollständig zurücksetzen. Im fo
 
 Es ist auch möglich, zu einer bestimmten Version von Kusto. Explorer zurückzukehren:
 
-1. Führen Sie aus `appwiz.cpl`.
+1. Führen Sie `appwiz.cpl` aus.
 1. Wählen Sie **Kusto. Explorer** und anschließend **Deinstallieren/ändern**aus.
 1. Wählen Sie **Wiederherstellen des vorherigen Zustands der Anwendung**aus.
 

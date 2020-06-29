@@ -1,6 +1,6 @@
 ---
-title: take-Operator - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird der Take-Operator in Azure Data Explorer beschrieben.
+title: 'Take Operator: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt die Übernahme des Operators in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,49 +8,49 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0c8f724e139e13bf9ece00d5af09f2a3cf25b03a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 98586f8f8380d4c1fc36a88b288b47798c10e09e
+ms.sourcegitcommit: 4eb64e72861d07cedb879e7b61a59eced74517ec
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506595"
+ms.lasthandoff: 06/29/2020
+ms.locfileid: "85517919"
 ---
 # <a name="take-operator"></a>take-Operator
 
-Zurück zur angegebenen Anzahl von Zeilen.
+Gibt die angegebene Anzahl von Zeilen zurück.
 
 ```kusto
 T | take 5
 ```
 
-Es gibt keine Garantie, welche Datensätze zurückgegeben werden, es sei denn, die Quelldaten werden sortiert.
+Es gibt keine Garantie, welche Datensätze zurückgegeben werden, es sei denn, die Quelldaten sind sortiert.
 
 **Syntax**
 
-`take`*NumberOfRows* 
- `limit` *NumberOfRows*
+`take`*Nummeriofrows* 
+ `limit` *Nummeriofrows*
 
-(`take` `limit` und sind Synonyme.)
+( `take` und `limit` sind Synonyme.)
 
-**Hinweise**
+**Notizen**
 
-`take`ist eine einfache, schnelle und effiziente Möglichkeit, eine kleine Stichprobe von Datensätzen anzuzeigen, wenn Sie Daten interaktiv durchsuchen, aber beachten Sie, dass sie keine Konsistenz in ihren Ergebnissen garantiert, wenn sie mehrmals ausgeführt wird, auch wenn sich der Datensatz nicht geändert hat.
+`take`ist eine einfache, schnelle und effiziente Möglichkeit, eine kleine Stichprobe von Datensätzen anzuzeigen, wenn Daten interaktiv durchsucht werden, aber beachten Sie, dass es keine Konsistenz der Ergebnisse gewährleistet, wenn es mehrmals ausgeführt wird, selbst wenn das DataSet nicht geändert wurde.
 
-Auch wenn die Anzahl der von der Abfrage zurückgegebenen `take` Zeilen nicht explizit durch die Abfrage eingeschränkt wird (kein Operator wird verwendet), schränkt Kusto diese Zahl standardmäßig ein.
-Weitere Informationen finden Sie unter [Kusto-Abfragelimits.](../concepts/querylimits.md)
+Auch wenn die Anzahl der Zeilen, die von der Abfrage zurückgegeben werden, nicht explizit durch die Abfrage begrenzt ist (kein `take` Operator verwendet), schränkt Kusto diese Anzahl standardmäßig ein.
+Weitere Informationen finden Sie unter [Kusto-Abfrage Grenzwerte](../concepts/querylimits.md) .
 
-Siehe: [Sortieroperator](sortoperator.md)
-[Topoperator](topoperator.md)
-[top-nested Operator](topnestedoperator.md)
+Siehe: [Sort](sortoperator.md) 
+ -Operator[Top](topoperator.md) 
+ [-Operator Top-netsted Operator](topnestedoperator.md)
 
-## <a name="does-kusto-support-paging-of-query-results"></a>Unterstützt Kusto das Paging von Abfrageergebnissen?
+## <a name="does-kusto-support-paging-of-query-results"></a>Unterstützt Kusto das Paging von Abfrage Ergebnissen?
 
 Kusto bietet keinen integrierten Paging-Mechanismus.
 
-Kusto ist ein komplexer Service, der die gespeicherten Daten kontinuierlich optimiert, um eine hervorragende Abfrageleistung über riesige Datensätze zu bieten. Während Paging ein nützlicher Mechanismus für zustandslose Clients mit begrenzten Ressourcen ist, verlagert es die Last auf den Back-End-Dienst, der Clientstatusinformationen nachverfolgen muss. In der Folge sind die Leistung und Skalierbarkeit des Back-End-Dienstes stark eingeschränkt.
+Kusto ist ein komplexer Dienst, der kontinuierlich die Daten optimiert, die er speichert, um eine hervorragende Abfrageleistung für große Datasets bereitzustellen. Paging ist zwar ein nützlicher Mechanismus für Zustands lose Clients mit eingeschränkten Ressourcen, die Belastung wird jedoch auf den Back-End-Dienst verlagert, der Client Zustandsinformationen nachverfolgen muss. Anschließend ist die Leistung und Skalierbarkeit des Back-End-Dienstanbieter stark eingeschränkt.
 
-Implementieren Sie für die Pagingunterstützung eines der folgenden Features:
+Implementieren Sie für Paging-Unterstützung eine der folgenden Funktionen:
 
 * Exportieren des Ergebnisses einer Abfrage in einen externen Speicher und Paging durch die generierten Daten.
 
-* Schreiben einer Anwendung der mittleren Ebene, die eine zustandsbehaftete Paging-API bereitstellt, indem die Ergebnisse einer Kusto-Abfrage zwischenspeichern werden.
+* Schreiben einer Anwendung der mittleren Ebene, die eine Zustands behaftete Paging-API bereitstellt, indem die Ergebnisse einer Kusto-Abfrage zwischengespeichert werden.

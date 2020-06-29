@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: 640c331b177642735d875f615772dcdbb6ec68d8
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: 4cff1107ca0c071e92530d9fd05c3de4d654559d
+ms.sourcegitcommit: 4eb64e72861d07cedb879e7b61a59eced74517ec
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128868"
+ms.lasthandoff: 06/29/2020
+ms.locfileid: "85517934"
 ---
 # <a name="scalar-function-types"></a>Skalarfunktionstypen
 
@@ -92,14 +92,13 @@ ms.locfileid: "85128868"
 |[set_intersect()](setintersectfunction.md)|Gibt ein Array der Menge aller unterschiedlichen Werte zurück, die in allen Arrays vorliegen.|
 |[set_union()](setunionfunction.md)|Gibt ein Array der Menge aller unterschiedlichen Werte zurück, die in einem der angegebenen Arrays enthalten sind.|
 |[treepath()](treepathfunction.md)|Listet alle Path-Ausdrücke auf, die Verzweigungen in einem dynamischen Objekt identifizieren.|
-|[zip()](zipfunction.md)|Die ZIP-Funktion akzeptiert eine beliebige Anzahl dynamischer Arrays. Gibt ein Array zurück, dessen Elemente jeweils ein Array mit den Elementen der Eingabe Arrays desselben Indexes sind.|
-
+|[zip ()](zipfunction.md)|Die ZIP-Funktion akzeptiert eine beliebige Anzahl dynamischer Arrays. Gibt ein Array zurück, dessen Elemente jeweils ein Array mit den Elementen der Eingabe Arrays desselben Indexes sind.|
 
 ## <a name="window-scalar-functions"></a>Skalare Fenster Funktionen
 
 |Funktionsname     |BESCHREIBUNG                                          |
 |-------------------------|--------------------------------------------------------|
-|[next()](nextfunction.md)|Für den serialisierten Zeilen Satz wird der Wert einer angegebenen Spalte aus der nachfolgenden Zeile entsprechend dem Offset zurückgegeben.|
+|[Next ()](nextfunction.md)|Für den serialisierten Zeilen Satz wird der Wert einer angegebenen Spalte aus der nachfolgenden Zeile entsprechend dem Offset zurückgegeben.|
 |[prev()](prevfunction.md)|Für das serialisierte Zeilen Satz gibt den Wert einer angegebenen Spalte aus der früheren Zeile entsprechend dem Offset zurück.|
 |[row_cumsum()](rowcumsumfunction.md)|Berechnet die kumulierte Summe einer Spalte.|
 |[row_number()](rownumberfunction.md)|Gibt die Nummer einer Zeile in den serialisierten Zeilen Satz-aufeinander folgenden Zahlen zurück, beginnend mit einem angegebenen Index oder standardmäßig von 1.|
@@ -129,13 +128,13 @@ ms.locfileid: "85128868"
 |[exp10()](exp10-function.md)|Die exponentielle Base-10-Funktion von x, die 10 auf Power x: 10 ^ x fest.|
 |[exp2()](exp2-function.md)|Die exponentielle Base-2-Funktion von x, die 2 für Power x: 2 ^ x ist.|
 |[gamma()](gammafunction.md)|Berechnet die Gamma Funktion.|
-|[hash()](hashfunction.md)|Gibt einen Hashwert für den Eingabe Wert zurück.|
+|[Hash ()](hashfunction.md)|Gibt einen Hashwert für den Eingabe Wert zurück.|
 |[hash_combine()](hash_combinefunction.md)|Kombiniert zwei oder mehr Hashwerte.|
 |[hash_many()](hash_manyfunction.md)|Gibt einen kombinierten Hashwert mit mehreren Werten zurück.|
 |[isfinite()](isfinitefunction.md)|Gibt zurück, ob die Eingabe ein endlicher Wert (nicht unendlich oder NaN) ist.|
 |[isinf()](isinffunction.md)|Gibt zurück, ob die Eingabe ein unendlicher (positiver oder negativer) Wert ist.|
 |[isnan()](isnanfunction.md)|Gibt zurück, ob die Eingabe ein NaN-Wert (not-a-Number) ist.|
-|[log()](log-function.md)|Gibt die natürliche Logarithmus Funktion zurück.|
+|[Log ()](log-function.md)|Gibt die natürliche Logarithmus Funktion zurück.|
 |[log10()](log10-function.md)|Gibt die allgemeine Logarithmus Funktion (Basis 10) zurück.|
 |[log2()](log2-function.md)|Gibt die Logarithmus Funktion der Basis 2 zurück.|
 |[loggamma()](loggammafunction.md)|Berechnet das Protokoll des absoluten Werts der Gamma Funktion.|
@@ -144,7 +143,7 @@ ms.locfileid: "85128868"
 |[pow()](powfunction.md)|Gibt das Ergebnis der Erhöhung der Stromversorgung zurück.|
 |[radians()](radiansfunction.md)|Konvertiert den Winkelwert in Grad in den Wert im Bogenmaß mit Formel Bogenmaß = (PI/180) * Winkel in Grad.|
 |[rand()](randfunction.md)|Gibt eine Zufallszahl zurück.|
-|[range()](rangefunction.md)|Generiert ein dynamisches Array, das eine Reihe von gleichmäßig getrennten Werten enthält.|
+|[Bereich ()](rangefunction.md)|Generiert ein dynamisches Array, das eine Reihe von gleichmäßig getrennten Werten enthält.|
 |[round()](roundfunction.md)|Gibt die abgerundete Quelle auf die angegebene Genauigkeit zurück.|
 |[sign()](signfunction.md)|Zeichen eines numerischen Ausdrucks.|
 |[sin()](sinfunction.md)|Gibt die Sinusfunktion zurück.|
@@ -241,8 +240,9 @@ ms.locfileid: "85128868"
 |[indexof()](indexoffunction.md)|Die Funktion meldet den NULL basierten Index des ersten Vorkommens einer angegebenen Zeichenfolge in der Eingabe Zeichenfolge.|
 |[isempty()](isemptyfunction.md)|Gibt "true" zurück, wenn das Argument eine leere Zeichenfolge oder NULL ist.|
 |[isnotempty()](isnotemptyfunction.md)|Gibt true zurück, wenn das Argument keine leere Zeichenfolge oder NULL ist.|
-|[IsNotNull ()](isnotnullfunction.md)|Gibt "true" zurück, wenn das Argument nicht NULL ist.|
+|[isnotnull()](isnotnullfunction.md)|Gibt "true" zurück, wenn das Argument nicht NULL ist.|
 |[isnull()](isnullfunction.md)|Wertet das einzige Argument aus und gibt einen booleschen Wert zurück, der angibt, ob das Argument zu einem NULL-Wert ausgewertet wird.|
+|[parse_command_line ()](parse-command-line.md)|Analysiert eine Unicode-Befehlszeilen Zeichenfolge und gibt ein Array mit den Befehlszeilen Argumenten zurück.|
 |[parse_csv()](parsecsvfunction.md)|Teilt eine angegebene Zeichenfolge, die durch Trennzeichen getrennte Werte darstellt, und gibt ein Zeichen folgen Array mit diesen Werten zurück.|
 |[parse_ipv4()](parse-ipv4function.md)|Konvertiert Eingaben in eine Long-Darstellung (signed 64-Bit).|
 |[parse_ipv4_mask()](parse-ipv4-maskfunction.md)|Konvertiert die Eingabe Zeichenfolge und die IP-Präfix Maske in eine Long-Darstellung (signed 64-Bit).|
