@@ -4,21 +4,20 @@ ms.service: data-explorer
 ms.topic: include
 ms.date: 30/03/2020
 ms.author: orspodek
-ms.openlocfilehash: 02af5b17f62d45771ee2765dca9d989d409dd99f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 5087cd5d7f9147d2232016007fea44eba678b651
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81491285"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85265180"
 ---
-## <a name="query-data"></a>Daten abfragen
+## <a name="quick-queries-and-tools"></a>Schnellabfragen und Tools
 
-1. Wählen Sie die Schaltfläche **v** aus, um die Abfrage zu öffnen. Kopieren Sie die Abfrage auf die Webbenutzeroberfläche, um sie zu bearbeiten.
-
-1. Wählen Sie im Menü auf der rechten Seite **Schnellabfragen** und **Tools** aus: 
+1. Wählen Sie im Menü auf der rechten Seite **Schnellabfragen** oder **Tools** aus: 
 
     * **Schnellabfragen** enthält Links zur Webbenutzeroberfläche mit Beispielabfragen.
     * **Tools** enthält einen Link zur Webbenutzeroberfläche mit **Drop-Befehlen**, die Ihnen die Problembehandlung durch Ausführen der entsprechenden `.drop`-Befehle ermöglichen.
 
-    > [!TIP]
+    > [!NOTE]
     > Wenn Sie `.drop`-Befehle verwenden, gehen möglicherweise Daten verloren. Verwenden Sie sie daher mit Vorsicht.
+    > Durch Befehle zum Verwerfen werden lediglich die Änderungen durch den Erfassungsfluss (neue Erweiterungen und Spalten) zurückgesetzt. Andere Vorgänge werden nicht verworfen.

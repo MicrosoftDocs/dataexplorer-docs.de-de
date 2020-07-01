@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/24/2020
-ms.openlocfilehash: 097e175ff28d334532e85715f1f6401a96fa8f8c
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 753c2a21812c850613c2c2462394b6b0bde8b740
+ms.sourcegitcommit: 4eb64e72861d07cedb879e7b61a59eced74517ec
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83374333"
+ms.lasthandoff: 06/29/2020
+ms.locfileid: "85517952"
 ---
 # <a name="create-an-azure-data-explorer-cluster-in-your-virtual-network"></a>Erstellen eines Azure Data Explorer-Clusters in Ihrem virtuellen Netzwerk
 
@@ -97,9 +97,7 @@ So erstellen Sie die öffentlichen IP-Adressen für Abfragen (Engine):
 
 1. Wählen Sie **Erstellen** aus, um die öffentliche IP-Adresse zu erstellen.
 
-1. Führen Sie zum Erstellen der öffentlichen IP-Adresse für die Erfassung (Datenverwaltung) die gleichen Schritte aus, und verwenden Sie dabei Folgendes: 
-    * **SKU**: Basic
-    * **IP-Adresszuweisung**: statischen
+1. Befolgen Sie zum Erstellen der öffentlichen IP-Adresse für die Erfassung (Datenverwaltung) die gleichen Anweisungen.
 
 ## <a name="create-virtual-network-and-subnet"></a>Erstellen eines virtuellen Netzwerks und eines Subnetzes
 

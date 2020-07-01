@@ -7,18 +7,26 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 03/29/2020
-ms.openlocfilehash: 16db3eb2d925d12ba8eefa605b27566e9b4c1b04
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 26b1633a13aa6ffbd98109e94113679620845160
+ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373819"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85264509"
 ---
-# <a name="what-is-one-click-ingestion"></a>Was ist die 1-Klick-Erfassung? 
+# <a name="what-is-one-click-ingestion"></a>Was ist die 1-Klick-Erfassung?
 
-Mit der 1-Klick-Erfassung können Sie Daten schnell erfassen und basierend auf einer Datenquelle in Azure Data Explorer automatisch Tabellen und Zuordnungsstrukturen vorschlagen. 
+Die 1-Klick-Erfassung ermöglicht eine einfache, schnelle und intuitive Datenerfassung. Dank der 1-Klick-Erfassung können Sie schnell mit dem Erfassen von Daten, dem Erstellen von Datenbanktabellen und dem Zuordnen von Strukturen beginnen. Wählen Sie Daten aus unterschiedlichen Arten von Quellen in verschiedenen Datenformaten aus – entweder als einmaligen oder als kontinuierlichen Erfassungsprozess.
 
-Über die Azure Data Explorer-Webbenutzeroberfläche können Sie Daten aus Speicher (Blobdatei), aus einer lokalen Datei oder aus einem Container (bis zu 10.000 Blobs) erfassen. Für eine fortlaufende Erfassung können Sie darüber hinaus ein Ereignisraster für einen Container definieren. Die Daten können in einer vorhandenen oder neuen Tabelle im JSON-, CSV- oder einem [anderen Format](#file-formats) erfasst werden. Die 1-Klick-Erfassung kann basierend auf der Datenquelle eine Struktur für eine neue Tabelle und Tabellenzuordnung vorschlagen und eine intuitive Plattform bieten, um die Tabellenzuordnung und die Tabellenstruktur einer vorhandenen oder neuen Tabelle anzupassen. Bei der 1-Klick-Erfassung werden die Daten innerhalb weniger Minuten in die Tabelle übernommen.
+Die 1-Klick-Erfassung ist aufgrund der folgenden Funktionen überaus nützlich:
+
+* Intuitiver Ablauf im Rahmen des Erfassungs-Assistenten
+* Erfassung von Daten innerhalb weniger Minuten
+* Erfassung von Daten aus verschiedenen Arten von Quellen: lokale Datei, Blobs und Container (bis zu 10.000 Blobs)
+* Erfassung von Daten in verschiedenen [Formaten](#file-formats)
+* Erfassung von Daten in neuen oder vorhandenen Tabellen
+* Empfehlung und einfache Änderung von Tabellenzuordnung und -schema
+* Einfache und schnelle Fortsetzung der Erfassung aus einem Container mit Event Grid
 
 Die 1-Klick-Erfassung ist besonders nützlich, wenn Daten erstmalig erfasst werden oder Sie nicht mit dem Schema Ihrer Daten vertraut sind.
 
@@ -39,40 +47,76 @@ Die 1-Klick-Erfassung unterstützt das Erfassen einer neuen Tabelle aus Quelldat
 * TSVE
 * PSV
 
+## <a name="ingest-new-data"></a>Erfassen neuer Daten
+
+Der Assistent für die 1-Klick-Erfassung leitet Sie durch die 1-Klick-Erfassung.
+
+* Wenn Sie über den Startbildschirm **Welcome to Azure Data Explorer** (Willkommen bei Azure Data Explorer) in Ihrem Cluster auf den Assistenten für die 1-Klick-Erfassung zugreifen möchten, führen Sie die beiden ersten Schritte ([Clustererstellung und Datenbankerstellung](#prerequisites)) aus, und wählen Sie dann **Neue Daten erfassen** aus.
+
+    :::image type="content" source="media/ingest-data-one-click/welcome-ingestion.png" alt-text="Erfassen neuer Daten über den Startbildschirm von Azure Data Explorer":::
+
+* Um den Assistenten über die [Azure Data Explorer-Webbenutzeroberfläche](https://dataexplorer.azure.com/) zu starten, klicken Sie im linken Menü der Azure Data Explorer-Webbenutzeroberfläche mit der rechten Maustaste auf die Zeile **Datenbank** oder **Tabelle**, und wählen Sie **Neue Daten erfassen (Vorschau)** aus.
+
+    :::image type="content" source="media/ingest-data-one-click/one-click-ingestion-in-webui.png" alt-text="Auswählen der 1-Klick-Erfassung auf der Webbenutzeroberfläche":::
+
+<!-- TODO either change the local file tutorial to blob storage or create another one to show users how to do this-->
+
 ## <a name="one-click-ingestion-wizard"></a>Assistent für die 1-Klick-Erfassung
 
-Der Assistent für die 1-Klick-Erfassung leitet Sie durch die 1-Klick-Erfassung. 
+> [!NOTE]
+> In diesem Abschnitt werden die allgemeinen Optionen des Assistenten beschrieben. Die ausgewählten Optionen hängen davon ab, welches Datenformat und welche Art von Datenquelle erfasst wird und ob die Erfassung in einer neuen oder vorhandenen Tabelle erfolgt.
+>
+> Beispielszenarien finden Sie unter folgenden Links:
+> * Erfassen in einer [neuen Tabelle aus einem Container im CSV-Format](one-click-ingestion-new-table.md)
+> * Erfassen in einer [vorhandenen Tabelle aus einer lokalen Datei im JSON-Format](one-click-ingestion-existing-table.md) 
 
-> [!Note]
-> In diesem Abschnitt werden die allgemeinen Optionen des Assistenten beschrieben. Welche Optionen Sie auswählen, hängt davon ab, ob Sie Daten in einer neuen oder in einer vorhandenen Tabelle erfassen. Weitere Informationen finden Sie unter
-    > * Erfassung in einer [neuen Tabelle](one-click-ingestion-new-table.md)
-    > * Erfassung in einer [vorhandenen Tabelle](one-click-ingestion-existing-table.md) 
-    
-1. Um den Assistenten zu starten, klicken Sie im linken Menü der Azure Data Explorer-Webbenutzeroberfläche mit der rechten Maustaste auf die Zeile *Datenbank* oder *Tabelle*, und wählen Sie **Neue Daten erfassen (Vorschau)** aus.
-
-    ![Wählen Sie auf der Webbenutzeroberfläche die 1-Klick Erfassung aus.](media/ingest-data-one-click/one-click-ingestion-in-webui.png)   
-
-1. Der Assistent führt Sie durch die folgenden Optionen:
+* Der Assistent führt Sie durch die folgenden Optionen:
     * Erfassung in einer [vorhandenen Tabelle](one-click-ingestion-existing-table.md)
     * Erfassung in einer [neuen Tabelle](one-click-ingestion-new-table.md)
     * Erfassung von Daten aus:
       * Blob Storage
-      * einer lokalen Datei
-      * einem Container
-    * Geben Sie die Stichprobengröße ein (1 bis 10.000 Zeilen, nur bei Containern).
-       
-1. Nach erfolgreicher Auswahl der Datenquelle wird eine Vorschau der Daten angezeigt. 
-    Wenn Sie Daten aus einem Container erfassen, können Sie die Daten so filtern, dass nur Dateien mit bestimmten Präfixen oder Dateierweiterungen erfasst werden. Sie können z. B. nur Dateien erfassen, deren Dateinamen mit dem Begriff *Europa* beginnen, oder lediglich Dateien mit der Erweiterung *.json*. 
+      * [einer lokalen Datei](one-click-ingestion-existing-table.md)
+      * [einem Container](one-click-ingestion-new-table.md)
 
-1. Klicken Sie auf **Schema bearbeiten**. Überprüfen Sie die automatisch generierten Schema- und Erfassungseigenschaften (Datenformat, Zuordnungsname usw.), und passen Sie sie an.
+### <a name="schema-mapping"></a>Schemazuordnung
 
-1. Starten Sie den Vorgang zur Datenerfassung.
+* Der Dienst generiert automatisch Schema- und Erfassungseigenschaften, die Sie ändern können. Abhängig davon, ob die Erfassung in einer neuen oder einer vorhandenen Tabelle erfolgt, können Sie eine vorhandene Zuordnungsstruktur verwenden oder eine neue erstellen.
 
-> [!Note]
-> Wenn Sie einen Container als Datenquelle verwenden, sollten Sie Folgendes beachten: Azure Data Explorer verfügt über eine Aggregationsrichtlinie (Batching) für die Datenerfassung, die für die Optimierung des Erfassungsprozesses konzipiert ist. Da die Richtlinie standardmäßig mit fünf Minuten oder einem Datenvolumen von 500 MB konfiguriert ist, kann es zu Wartezeiten kommen. Aggregationsoptionen finden Sie unter [IngestionBatching policy](kusto/management/batchingpolicy.md) (IngestionBatching-Richtlinie). Beim Erfassen von Daten aus anderen Quellen wird die Erfassung sofort ausgeführt.
+* Auf der Registerkarte **Schema** können die folgenden Aktionen ausgeführt werden:
+    * Bestätigen Sie den automatisch generierten Komprimierungstyp.
+    * Wählen Sie das [Format Ihrer Daten](#file-formats) aus. Unterschiedliche Formate ermöglichen weitere Änderungen.
+      
+### <a name="editor-window"></a>Editor-Fenster
+
+Im Fenster **Editor** können Sie Datentabellenspalten nach Bedarf anpassen. 
+
+|Tabellentyp  |Verfügbare Spaltenanpassungen  |
+|---------|---------|
+|Neu     | Neue Spalte, Spalte löschen, Aufsteigend sortieren, Absteigend sortieren  |
+|Vorhanden     | Neue Spalte, Aufsteigend sortieren, Absteigend sortieren  |
+
+>[!NOTE]
+> Sie können jederzeit über dem Bereich **Editor** den [Befehls-Editor](one-click-ingestion-new-table.md#command-editor) öffnen. Im Befehls-Editor können Sie die aus Ihren Eingaben generierten automatischen Befehle anzeigen und kopieren.
+
+### <a name="data-ingestion"></a>Datenerfassung
+
+Wenn die Schemazuordnung und die Spaltenbearbeitung abgeschlossen sind, startet der Erfassungs-Assistent die Datenerfassung. 
+
+* Bei der Erfassung von Daten aus Quellen, die **keine Container** sind:
+    * Die Erfassung erfolgt sofort.
+
+* Wenn die Datenquelle ein **Container** ist:
+    * Die [Richtlinie für die Batchverarbeitung](kusto/management/batchingpolicy.md) von Azure Data Explorer aggregiert Ihre Daten. 
+    * Nach der Erfassung können Sie den Erfassungsbericht herunterladen und die Leistung jedes behandelten Blobs überprüfen. 
+    * Sie können eine **kontinuierliche Erfassung erstellen** und die [kontinuierliche Erfassung mit Event Grid](one-click-ingestion-new-table.md#continuous-ingestion---container-only) einrichten.
+ 
+### <a name="initial-data-exploration"></a>Anfängliche Datenuntersuchung
+   
+Nach der Erfassung bietet der Assistent Optionen zur Verwendung von **[Schnellbefehlen](one-click-ingestion-existing-table.md#quick-queries-and-tools)** für die erste Untersuchung Ihrer Daten.
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-* Legen Sie fest, ob Sie die 1-Klick-Erfassung zum Erfassen von Daten in einer [vorhandenen Tabelle](one-click-ingestion-existing-table.md) oder [neuen Tabelle](one-click-ingestion-new-table.md) verwenden
+* [Erfassen von JSON-Daten aus einer lokalen Datei in einer vorhandenen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-existing-table.md)
+* [Erfassen von CSV-Daten aus einem Container in einer neuen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-new-table.md)
 * [Abfragen von Daten auf der Azure Data Explorer-Webbenutzeroberfläche](web-query-data.md)
 * [Schreiben von Abfragen für Azure Data Explorer mithilfe der Kusto-Abfragesprache](write-queries.md)
