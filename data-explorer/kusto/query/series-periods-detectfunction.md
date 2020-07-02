@@ -8,21 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2019
-ms.openlocfilehash: a3f2a325b63306f7fec6b11eb3e684d3918bc7d5
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 876966391e67ad2f8f25a900dfc4c92bf0bfd11e
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372520"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763272"
 ---
 # <a name="series_periods_detect"></a>series_periods_detect()
 
 Sucht die signifikantesten Zeiträume, die in einer Zeitreihe vorhanden sind.  
 
-Häufig wird eine Metrik, die den Datenverkehr einer Anwendung misst, durch zwei bedeutende Zeiträume gekennzeichnet: wöchentlich und täglich. Bei einer solchen Zeit Reihe `series_periods_detect()` werden diese 2 dominanten Zeiträume von erkannt.  
-Die Funktion nimmt als Eingabe eine Spalte an, die ein dynamisches Array von Zeitreihen enthält (in der Regel die resultierende Ausgabe des Operators " [make-Series](make-seriesoperator.md) "), zwei `real` Zahlen, die die minimale und die maximale Zeitspanne definieren (d. h. die Anzahl von Containern, z. b. für einen 1 `long` Die Funktion gibt 2 Spalten aus:
-* *Zeiträume*: ein dynamisches Array mit den Punkten, die gefunden wurden (in Einheiten der bin-Größe), geordnet nach ihren Bewertungen
-* *Bewertungen*: ein dynamisches Array mit Werten zwischen 0 und 1, die jeweils die Bedeutung eines Punkts an der jeweiligen Position im *Zeit* Array messen.
+Häufig wird eine Metrik, die den Datenverkehr einer Anwendung misst, durch zwei bedeutende Zeiträume gekennzeichnet: wöchentlich und täglich. Die-Funktion `series_periods_detect()` erkennt diese beiden dominanten Zeiträume in einer Zeitreihe.  
+Die Funktion nimmt als Eingabe an:
+* Eine Spalte, die ein dynamisches Array von Zeitreihen enthält. In der Regel ist die Spalte die resultierende Ausgabe des Operators " [make-Series](make-seriesoperator.md) ".
+* Zwei `real` Zahlen, die den minimalen und maximalen Zeitraum definieren, die Anzahl der zu suchenden Container. Beispielsweise wäre für einen 1-Stunden-bin die Größe eines täglichen Zeitraums 24. 
+* Eine `long` Zahl, die die Gesamtzahl der Zeiträume für die zu durchsuchende Funktion definiert. 
+
+Die Funktion gibt zwei Spalten aus:
+* *Zeiträume*: ein dynamisches Array, das die Zeiträume enthält, die in Einheiten der bin-Größe gefunden wurden, geordnet nach ihren Ergebnissen.
+* *Bewertungen*: ein dynamisches Array mit Werten zwischen 0 und 1. Jedes Array misst die Bedeutung eines Punkts an der jeweiligen Position im *Zeit* Array.
  
 **Syntax**
 
@@ -33,19 +38,18 @@ Die Funktion nimmt als Eingabe eine Spalte an, die ein dynamisches Array von Zei
 * *x*: Skalarausdruck des dynamischen Arrays, bei dem es sich um ein Array numerischer Werte handelt, in der Regel die resultierende Ausgabe der " [make-Series"-](make-seriesoperator.md) oder [make_list](makelist-aggfunction.md)
 * *min_period*: eine `real` Zahl, die den minimalen Zeitraum angibt, nach dem gesucht werden soll.
 * *max_period*: eine `real` Zahl, die den maximalen Zeitraum angibt, nach dem gesucht werden soll.
-* *num_periods*: eine `long` Zahl, die die maximal zulässige Anzahl von Zeiträumen angibt. Dies ist die Länge der dynamischen Ausgabe Arrays.
+* *num_periods*: eine `long` Zahl, die die maximal zulässige Anzahl von Zeiträumen angibt. Diese Zahl ist die Länge der dynamischen Ausgabe Arrays.
 
 > [!IMPORTANT]
 > * Der Algorithmus kann Zeiträume mit mindestens 4 Punkten und höchstens der Hälfte der Reihen Länge erkennen. 
 >
-> * Legen Sie den *min_period* ein wenig weiter unten fest, und *max_period* Sie etwas oberhalb der Zeiträume, die Sie in der Zeitreihe erwarten. Wenn Sie z. b. ein stündliches, aggregiertes Signal haben und sowohl nach täglichen > als auch an wöchentlichen Perioden suchen (also 24 & 168), können Sie *min_period*= 0,8 \* 24, *max_period*= 1,2 168 festlegen und damit \* 20% Ränder um diese Zeiträume belassen.
+> * Legen Sie den *min_period* ein wenig weiter unten fest, und *max_period* ein wenig weiter oben, die Zeiträume, die in der Zeitreihe zu finden sind. Wenn Sie z. b. ein stündliches aggregiertes Signal haben und sowohl nach Tages-als auch wöchentlich (24 bis 168 Stunden) suchen, können Sie *min_period*= 0,8 \* 24, *max_period*= 1,2 \* 168 festlegen und 20% Ränder um diese Zeiträume belassen.
 >
-> * Die Eingabe Zeitreihe muss regulär sein, d. h., Sie wird in konstanten Containern aggregiert (was immer der Fall ist, wenn Sie mithilfe von [make-Series](make-seriesoperator.md)erstellt wurde). Andernfalls ist die Ausgabe bedeutungslos.
-
+> * Die Eingabe Zeitreihe muss regelmäßig sein. Das heißt, dass Sie in konstanten Containern aggregiert werden, was immer der Fall ist, wenn Sie mithilfe von [make-Series](make-seriesoperator.md)erstellt wurde. Andernfalls ist die Ausgabe bedeutungslos.
 
 **Beispiel**
 
-Die folgende Abfrage bettet eine Momentaufnahme eines Monats für den Datenverkehr einer Anwendung ein, die zweimal pro Tag aggregiert wird (d. h. die Größe der Größe beträgt 12 Stunden).
+Die folgende Abfrage bettet eine Momentaufnahme eines Monats für den Datenverkehr einer Anwendung ein, die zweimal täglich aggregiert wird. Die bin-Größe beträgt 12 Stunden.
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -56,7 +60,7 @@ print y=dynamic([80,139,87,110,68,54,50,51,53,133,86,141,97,156,94,149,95,140,77
 
 :::image type="content" source="images/series-periods/series-periods.png" alt-text="Reihen Zeiträume":::
 
-`series_periods_detect()`Die Ausführung für diese Serie führt zu einem wöchentlichen Zeitraum (14 Punkte lang):
+`series_periods_detect()`Die Ausführung für diese Serie ergibt sich im wöchentlichen Zeitraum, 14 Punkte.
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -70,4 +74,5 @@ print y=dynamic([80,139,87,110,68,54,50,51,53,133,86,141,97,156,94,149,95,140,77
 | [14.0, 0.0] | [0,84, 0,0]  |
 
 
-Beachten Sie, dass die tägliche Zeitspanne, die auch im Diagramm angezeigt werden kann, nicht gefunden wurde, weil die Stichprobenentnahme zu grob ist (12h bin size), sodass für einen täglichen Zeitraum von 2 Containern die minimale Dauer von 4 Punkten, die für den Algorithmus erforderlich sind, verniedrig ist.
+> [!NOTE] 
+> Die tägliche Zeitspanne, die auch im Diagramm angezeigt werden kann, wurde nicht gefunden, da die Stichprobenentnahme zu grob ist (12h bin size). Daher liegt ein täglicher Zeitraum von 2 Containern unter dem minimalen Zeitraum von 4 Punkten, der für den Algorithmus erforderlich ist.

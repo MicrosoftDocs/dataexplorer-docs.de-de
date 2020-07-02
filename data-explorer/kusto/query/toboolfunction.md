@@ -1,6 +1,6 @@
 ---
-title: tobool() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt tobool() in Azure Data Explorer.
+title: "\"-Daten-Explorer\" (): Azure-"
+description: In diesem Artikel wird "in Azure Daten-Explorer" beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 3e1867c99ae241b3f7e09ab8ee873d5ae5d374e0
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: f99406d94e1cd64da8605e5000aa99136c2b119a
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506357"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763761"
 ---
 # <a name="tobool"></a>tobool()
 
-Konvertiert Die Eingabe in eine boolesche (signierte 8-Bit) Darstellung.
+Konvertiert Eingaben in eine boolesche Darstellung (8-Bit-Darstellung mit Vorzeichen).
 
 ```kusto
 tobool("true") == true
@@ -28,15 +28,14 @@ tobool(123) == true
 
 **Syntax**
 
-`tobool(`*Expr*`)`
-`)` Expr (Alias)*Expr* `toboolean(`
+`tobool(`*Expr* `)` 
+ Expr `toboolean(` *Expr* `)` Alias
 
 **Argumente**
 
-* *Expr*: Ausdruck, der in boolesche umgewandelt wird. 
+* *Expr*: Ausdruck, der in einen booleschen Wert konvertiert wird. 
 
 **Rückgabe**
 
 Wenn die Konvertierung erfolgreich ist, ist das Ergebnis ein boolescher Wert.
-Wenn die Konvertierung nicht erfolgreich `null`ist, wird das Ergebnis .
- 
+Wenn die Konvertierung nicht erfolgreich ist, wird das Ergebnis zurückgeben `null` .

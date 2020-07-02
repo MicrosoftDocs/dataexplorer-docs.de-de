@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 4cec053990457a6b33c7446c5b32c63713320de9
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 4bf68800cc10bf301f6a5738d47e670905c2c46d
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372764"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763654"
 ---
 # <a name="series_fill_linear"></a>series_fill_linear()
 
@@ -34,13 +34,13 @@ Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe 
 * *fill_edges*: ein boolescher Wert, der angibt, ob *missing_value_placeholder* am Anfang und am Ende des Arrays durch den nächstgelegenen Wert ersetzt werden sollen. Standardmäßig " *true* ". Wenn *false*festgelegt ist, werden *missing_value_placeholder* am Anfang und am Ende des Arrays beibehalten.
 * *constant_value*: optionaler Parameter, der nur für Arrays relevant ist, besteht aus *null* -Werten. Dieser Parameter gibt einen konstanten Wert an, mit dem die Reihe aufgefüllt werden soll. Der Standardwert ist *0*. Wenn dieser Parameter auf `double` (*null*) festgelegt wird, werden *null* -Werte in diesem Fall nicht angezeigt.
 
-**Hinweise**
+**Notizen**
 
 * Geben Sie *null* als Standardwert an, um nach der [make-Reihe](make-seriesoperator.md)Interpolations Funktionen anzuwenden: 
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
-make-series num=count() default=long(null) on TimeStamp in range(ago(1d), ago(1h), 1h) by Os, Browser
+make-series num=count() default=long(null) on TimeStamp from ago(1d) to ago(1h) step 1h by Os, Browser
 ```
 
 * Der *missing_value_placeholder* kann einen beliebigen Typ aufweisen, der in tatsächliche Elementtypen konvertiert wird. Daher `double` haben entweder (*null*), `long` (*null*) oder `int` (*null*) dieselbe Bedeutung.

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 55ed390a1c98a307d2bb38476458f29fc9c92997
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: e8d02634ad0c56b2e1e369d4c2cd86c63bdad155
+ms.sourcegitcommit: 56bb7b69654900ed63310ac9537ae08b72bf7209
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84258010"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85814193"
 ---
 # <a name="streaming-ingestion-policy-management"></a>Richtlinien Verwaltung für die streamingansung
 
@@ -33,11 +33,11 @@ Der `.show policy streamingingestion` Befehl zeigt die Richtlinie für die strea
 
 Dieser Befehl gibt eine Tabelle mit den folgenden Spalten zurück:
 
-|Spalte    |Type    |BESCHREIBUNG
+|Spalte    |Typ    |BESCHREIBUNG
 |---|---|---
 |PolicyName|`string`|Der Richtlinien Name: streamingingestionpolicy
 |EntityName|`string`|Datenbank-oder Tabellenname
-|-Richtlinie    |`string`|[Richtlinien Objekt für die streamingerfassung](#streaming-ingestion-policy-object)
+|Policy    |`string`|[Richtlinien Objekt für die streamingerfassung](#streaming-ingestion-policy-object)
 
 **Beispiele**
 
@@ -47,7 +47,7 @@ Dieser Befehl gibt eine Tabelle mit den folgenden Spalten zurück:
 .show table T1 policy streamingingestion
 ```
 
-|PolicyName|EntityName|-Richtlinie|Childentities|EntityType|
+|PolicyName|EntityName|Policy|Childentities|EntityType|
 |---|---|---|---|---|
 |Streamingingestionpolicy|DB1|{"Isaktivierte": true, "hintallocatedrate": NULL}
 
@@ -114,7 +114,8 @@ Mit dem Befehl wird das Richtlinien Objekt "Table" oder "Database streaminginges
 ### <a name="streaming-ingestion-policy-object"></a>Richtlinien Objekt für die streamingerfassung
 
 In der Eingabe und Ausgabe von Verwaltungs Befehlen ist das Richtlinien Objekt für die streamingerfassung eine JSON-formatierte Zeichenfolge, die die folgenden Eigenschaften enthält.
-|Eigenschaft  |Type    |BESCHREIBUNG                                                       |Erforderlich/optional |
-|----------|--------|------------------------------------------------------------------|-------|
-|IsEnabled |`bool`  |Ist die streamingansung für die Entität aktiviert| Erforderlich|
-|Hintallocatedrate|`double`|Geschätzte Datenübertragungsrate in GB/Stunde| Optional|
+
+|Eigenschaft|Typ|BESCHREIBUNG|Erforderlich/optional
+|---|---|---|---
+|isEnabled|`bool`|Ist die streamingansung für die Entität aktiviert| Erforderlich
+|Hintallocatedrate|`double`|Geschätzte Datenübertragungsrate in GB/Stunde|Optional

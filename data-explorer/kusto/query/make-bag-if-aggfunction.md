@@ -1,6 +1,6 @@
 ---
-title: make_bag_if() (Aggregationsfunktion) - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird make_bag_if() (Aggregationsfunktion) in Azure Data Explorer beschrieben.
+title: make_bag_if () (Aggregations Funktion)-Azure Daten-Explorer
+description: In diesem Artikel wird make_bag_if () (Aggregations Funktion) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,38 +8,38 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 201de637df387bb8925995a5e52c048255d1535c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 2603aab066a7f77ff36553d8898bb713ace990b7
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81512970"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763803"
 ---
-# <a name="make_bag_if-aggregation-function"></a>make_bag_if() (Aggregationsfunktion)
+# <a name="make_bag_if-aggregation-function"></a>make_bag_if () (Aggregations Funktion)
 
-Gibt `dynamic` einen (JSON) Eigenschaftenbeutel (Wörterbuch) aller Werte von *Expr* in der Gruppe `true`zurück, für die *Predikat* ausgewertet wird.
+Gibt ein `dynamic` (JSON)-Eigenschaften Behälter (Wörterbuch) aller Werte von *' expr '* in der Gruppe zurück, für die das *Prädikat* ergibt `true` .
 
-* Kann nur im Kontext der Aggregation innerhalb [der Zusammenfassung](summarizeoperator.md) verwendet werden
+> [!NOTE]
+> Kann nur im Kontext der [Aggregation in zusammen](summarizeoperator.md)Fassung verwendet werden.
 
 **Syntax**
 
-`summarize``make_bag_if(` *Expr*, *Prädikat* [`,` *MaxSize*]`)`
+`summarize``make_bag_if(` *Expr*, *Prädikat* [ `,` *MaxSize*]`)`
 
 **Argumente**
 
-* *Expr*: Ausdruck `dynamic` des Typs, der für die Aggregationsberechnung verwendet wird.
-* *Prädikat*: Prädikat, das `true`auf ausgewertet werden muss, damit *Expr* dem Ergebnis hinzugefügt werden kann.
-* *MaxSize* ist ein optionaler Ganzzahlgrenzwert für die maximale Anzahl der zurückgegebenen Elemente (Standardwert ist *1048576*). Der MaxSize-Wert darf 1048576 nicht überschreiten.
+* *Expr*: ein Ausdruck vom Typ `dynamic` , der für die Aggregations Berechnung verwendet wird.
+* *Predicate*: ein Prädikat, das für ausgewertet `true` werden muss, damit *' expr '* dem Ergebnis hinzugefügt werden kann.
+* *MaxSize*: ein optionales ganzzahliges Limit für die maximale Anzahl von zurückgegebenen Elementen (Standardwert ist *1048576*). Der MaxSize-Wert darf 1048576 nicht überschreiten.
 
 **Rückgabe**
 
-Gibt `dynamic` einen (JSON) Eigenschaften-Beutel (Wörterbuch) aller Werte von *Expr* in der Gruppe zurück, die Eigenschafts-Taschen (Wörterbücher) sind, für die *Predikat* ausgewertet wird. `true`
-Nicht-Wörterbuchwerte werden übersprungen.
-Wenn ein Schlüssel in mehr als einer Zeile angezeigt wird, wird ein beliebiger Wert (aus den möglichen Werten für diesen Schlüssel) ausgewählt.
+Gibt ein `dynamic` (JSON)-Eigenschaften Behälter (Wörterbuch) aller Werte von *"expr"* in der Gruppe zurück, die Eigenschaften Behälter (Wörterbücher) sind, für die das *Prädikat* ausgewertet wird `true` .
+Nicht-Wörterbuch Werte werden übersprungen.
+Wenn ein Schlüssel in mehr als einer Zeile angezeigt wird, wird ein beliebiger Wert aus den möglichen Werten für diesen Schlüssel ausgewählt.
 
-**Siehe auch**
-
-[`make_bag`](./make-bag-aggfunction.md)Funktion, die dasselbe tut, ohne Prädikatsausdruck.
+> [!NOTE]
+> Die- [`make_bag`](./make-bag-aggfunction.md) Funktion ähnelt make_bag_if () ohne Prädikat Ausdruck.
 
 **Beispiele**
 
@@ -58,9 +58,9 @@ T
 
 |dict|
 |----|
-|" prop01": "val_a", "prop03": "val_c" |
+|{"prop01": "val_a", "prop03": "val_c"} |
 
-Verwenden Sie [bag_unpack()-Plugin,](bag-unpackplugin.md) um die Taschenschlüssel im make_bag_if()-Ausgang in Spalten umzuwandeln. 
+Verwenden Sie [bag_unpack ()](bag-unpackplugin.md) -Plug-in, um die Behälter Schlüssel in der make_bag_if ()-Ausgabe in Spalten umzuwandeln. 
 
 ```kusto
 let T = datatable(prop:string, value:string, predicate:bool)
@@ -72,7 +72,7 @@ let T = datatable(prop:string, value:string, predicate:bool)
 T
 | extend p = pack(prop, value)
 | summarize bag=make_bag_if(p, predicate)
-| evaluate bag_unpack(bag) 
+| evaluate bag_unpack(bag)
 
 ```
 

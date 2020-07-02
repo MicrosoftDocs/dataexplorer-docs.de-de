@@ -1,6 +1,6 @@
 ---
-title: welch_test() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird welch_test() in Azure Data Explorer beschrieben.
+title: welch_test ()-Azure Daten-Explorer
+description: In diesem Artikel wird welch_test () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a9f4b3d86bf3d679fd4fdd320b394956c71d3e97
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1bb995874bf6ac552350c602c6d3742a08b1273b
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81504487"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763675"
 ---
 # <a name="welch_test"></a>welch_test()
 
-Berechnet die p_value der [Welch-Testfunktion](https://en.wikipedia.org/wiki/Welch%27s_t-test)
+Berechnet den p_value der [Welch-Test-Funktion](https://en.wikipedia.org/wiki/Welch%27s_t-test)
 
 ```kusto
 // s1, s2 values are from https://en.wikipedia.org/wiki/Welch%27s_t-test
@@ -33,19 +33,19 @@ print
 
 **Syntax**
 
-`welch_test(`*mittel1*`, `*Varianz1*`, `*anzahl1*`, `*mittel2*`, `*varianz2*`, `*anzahl2*`)`
+`welch_test(`*mean1* `, ` *variance1* `, ` *count1* `, ` *mean2* `, ` *variance2* `, ` *COUNT2*`)`
 
 **Argumente**
 
-* *mean1*: Ausdruck, der den Mittelwert (Durchschnitt) der 1. Reihe darstellt
-* *Varianz1*: Ausdruck, der den Abweichungswert der 1. Reihe darstellt
-* *count1*: Ausdruck, der die Anzahl der Werte in der 1. Reihe darstellt
-* *mean2*: Ausdruck, der den Mittelwert (Durchschnitt) der 2. Reihe darstellt
-* *Varianz2*: Ausdruck, der den Abweichungswert der 2. Reihe darstellt
-* *count2*: Ausdruck, der die Anzahl der Werte in der 2. Reihe darstellt
+* *mean1*: Ausdruck, der den Mittelwert (Durchschnittswert) der ersten Reihe darstellt
+* *variance1*: Ausdruck, der den Varianz Wert der ersten Reihe darstellt
+* *count1*: Ausdruck, der die Anzahl der Werte in der ersten Reihe darstellt
+* *mean2*: Ausdruck, der den Mittelwert (Durchschnittswert) der zweiten Reihe darstellt
+* *variance2*: Ausdruck, der den Varianz Wert der zweiten Reihe darstellt
+* *COUNT2*: Ausdruck, der die Anzahl der Werte in der zweiten Reihe darstellt
 
 **Rückgabe**
 
-Aus [Wikipedia](https://en.wikipedia.org/wiki/Welch%27s_t-test):
+Von [Wikipedia](https://en.wikipedia.org/wiki/Welch%27s_t-test):
 
-In der Statistik ist Welchs t-Test, oder ungleiche Varianzen t-Test, ein Zwei-Probe-Standorttest, der verwendet wird, um die Hypothese zu testen, dass zwei Populationen gleiche Mittel haben. Welchs t-Test ist eine Adaption des T-Tests von Student, das heißt, er wurde mit Hilfe des T-Tests von Student abgeleitet und ist zuverlässiger, wenn die beiden Proben ungleiche Abweichungen und ungleiche Stichprobengrößen aufweisen. Diese Tests werden häufig als "ungepaarte" oder "unabhängige Stichproben" t-Tests bezeichnet, da sie in der Regel angewendet werden, wenn die statistischen Einheiten, die den beiden verglichenen Stichproben zugrunde liegen, nicht überlappend sind. Angesichts der Tatsache, dass Welchs T-Test weniger beliebt war als der T-Test von Student und den Lesern vielleicht weniger vertraut ist, ist ein informativerer Name "Welchs ungleiche Varianzen t-Test" oder "ungleiche Varianzen t-Test" für Kürze.
+In Statistics ist der t-Test von welch ein zwei-Stichproben-Location-Test, der verwendet wird, um die Hypothese zu testen, dass zwei Auffüllungen gleich sind. Der t-Test von welch ist eine Anpassung des Student-t-Tests und zuverlässiger, wenn die beiden Beispiele über ungleiche Abweichungen und ungleiche Stichprobengrößen verfügen. Diese Tests werden häufig als "nicht paarweise" oder "unabhängige Stichproben"-t-Tests bezeichnet. Die Tests werden in der Regel angewendet, wenn die statistischen Einheiten, die den zwei verglichenen Beispielen zugrunde liegen, sich nicht überlappen. Der t-Test von welch ist weniger beliebt als der Student-t-Test, und er kann den Lesern weniger vertraut sein. Der Test wird auch als "welch ungleiche Unterschiede bei t-Test" oder "Ungleicher Varianzen t-Test" bezeichnet.

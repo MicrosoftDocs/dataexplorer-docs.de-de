@@ -8,22 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: d23d76fdcc592435a8ec7fa24ef5d0dfd5186c68
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: 1ca7f38fa377be40cd290b04af65cc6fd59075cd
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128457"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763716"
 ---
 # <a name="time-window-join"></a>Zeitfenster-Join
 
-Häufig ist es hilfreich, zwischen zwei großen Datasets mit einem High-Cardinality-Schlüssel (z. b. eine Vorgangs-ID oder eine Sitzungs-ID) zu verknüpfen und die Datensätze auf der rechten Seite () weiter einzuschränken `$right` , die für jeden linksseitigen ( `$left` ) Datensatz abgeglichen werden müssen `datetime` Dies unterscheidet sich von einem normalen Kusto-Joinvorgang als. zusätzlich zum Teil "Equi-Join" (Übereinstimmung mit dem High-Cardinality-Schlüssel oder den linken und rechten Datasets) kann das System auch eine Entfernungs Funktion anwenden und verwenden, um den Join beträchtlich zu beschleunigen. Beachten Sie, dass sich eine Entfernungs Funktion nicht wie Gleichheit verhält (d. h., wenn sowohl als `dist(x,y)` `dist(y,z)` auch true ist, wird Sie nicht befolgt, da `dist(x,z)` auch true ist). *Intern wird dies als "diagonaler Join" bezeichnet.*
+Häufig ist es hilfreich, sich zwischen zwei großen Datasets mit einem High-Cardinality-Schlüssel zu verbinden. wie z. b. eine Vorgangs-ID oder eine Sitzungs-ID, und schränken Sie die Datensätze auf der rechten Seite ($right) weiter ein, die mit jedem linken $Left Datensatz abgeglichen werden müssen, indem Sie auf der linken Seite und auf der rechten Seite eine Einschränkung für den "Zeitabstand" zwischen DateTime-Spalten hinzufügen.
 
-Nehmen wir beispielsweise an, dass wir Ereignis Sequenzen innerhalb eines relativ kleinen Zeitfensters identifizieren möchten. Um dieses Beispiel zu veranschaulichen, nehmen wir an, dass eine Tabelle `T` mit dem folgenden Schema vorhanden ist:
+Die-Funktion ist in einem Join nützlich, wie im folgenden Szenario:
+* Verknüpfen von zwei großen Datasets gemäß einem High-Cardinality-Schlüssel, z. b. eine Vorgangs-ID oder eine Sitzungs-ID.
+* Schränken Sie die Datensätze auf der rechten Seite ($right) ein, die mit jedem linken ($Left) Datensatz abgeglichen werden müssen, indem Sie auf der linken Seite und auf der rechten Seite eine Einschränkung für den "Zeitabstand" zwischen DateTime-Spalten hinzufügen.
 
-- `SessionId`: Eine Spalte vom Typ `string` mit Korrelations-IDs.
-- `EventType`: Eine Spalte vom Typ `string` , die den Ereignistyp des Datensatzes identifiziert.
-- `Timestamp`: Eine Spalte vom Typ, `datetime` die angibt, wann das durch den Datensatz beschriebene Ereignis aufgetreten ist.
+Der obige Vorgang unterscheidet sich vom üblichen Kusto-Joinvorgang, da *`equi-join`* das System für den Teil der Übereinstimmung des High-Cardinality-Schlüssels zwischen den linken und rechten Datasets auch eine Entfernungs Funktion anwenden und verwenden kann, um den Join beträchtlich zu beschleunigen.
+
+> [!NOTE]
+> Eine Distance-Funktion verhält sich nicht wie Gleichheit (d. h., wenn sowohl dist (x, y) als auch dist (y, z) true sind, folgt nicht, dass dist (x, z) ebenfalls "true" ist.) Intern wird dies als "diagonaler Join" bezeichnet.
+
+Wenn Sie z. b. Ereignis Sequenzen innerhalb eines relativ kleinen Zeitfensters identifizieren möchten, gehen Sie davon aus, dass Sie über eine Tabelle `T` mit dem folgenden Schema verfügen:
+
+* `SessionId`: Eine Spalte vom Typ `string` mit Korrelations-IDs.
+* `EventType`: Eine Spalte vom Typ `string` , die den Ereignistyp des Datensatzes identifiziert.
+* `Timestamp`: Eine Spalte vom Typ `datetime` gibt an, wann das durch den Datensatz beschriebene Ereignis aufgetreten ist.
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -51,13 +60,14 @@ T
 
 **Problembeschreibung**
 
-Wir möchten, dass die Abfrage die folgende Frage beantwortet:
+Unsere Abfrage sollte die folgende Frage beantworten:
 
-   Alle Sitzungs-IDs, in denen ein Ereignistyp auf `A` einen Ereignistyp folgt, finden Sie `B` im `1min` Zeitfenster.
+   Alle Sitzungs-IDs ermitteln, in denen `A` ein Ereignistyp in `B` einem Zeitfenster auf den Ereignistyp folgt `1min` .
 
-(In den obigen Beispiel Daten ist nur diese Sitzungs-ID `0` .)
+> [!NOTE]
+> In den obigen Beispiel Daten ist nur diese Sitzungs-ID `0` .
 
-Semantisch wird diese Frage von der folgenden Abfrage beantwortet, wenn dies ineffizient ist:
+Semantisch wird diese Frage von der folgenden Abfrage beantwortet, wenn dies ineffizient ist.
 
 ```kusto
 T 
@@ -82,8 +92,7 @@ Um diese Abfrage zu optimieren, können wir Sie wie unten beschrieben umschreibe
 
 **Umschreiben der Abfrage, um das Zeitfenster zu berücksichtigen**
 
-Die Idee besteht darin, die Abfrage so umzuschreiben, dass die `datetime` Werte in Bucket "diskretisiert" werden, deren Größe die Hälfte der Größe des Zeitfensters ist.
-Wir können dann den Gleichheitsjoin von Kusto verwenden, um diese Bucket-IDs zu vergleichen.
+Schreiben Sie die Abfrage so um, dass die `datetime` Werte in Bucket diskretisiert werden, deren Größe der Hälfte der Größe des Zeitfensters entspricht. Verwenden Sie Kusto *`equi-join`* zum Vergleichen dieser Bucket-IDs.
 
 ```kusto
 let lookupWindow = 1min;

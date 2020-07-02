@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: 4cff1107ca0c071e92530d9fd05c3de4d654559d
-ms.sourcegitcommit: 4eb64e72861d07cedb879e7b61a59eced74517ec
+ms.openlocfilehash: c8733a9aaa1dbdfa504961cfc3676cd813d69952
+ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/29/2020
-ms.locfileid: "85517934"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85763732"
 ---
 # <a name="scalar-function-types"></a>Skalarfunktionstypen
 
@@ -92,7 +92,7 @@ ms.locfileid: "85517934"
 |[set_intersect()](setintersectfunction.md)|Gibt ein Array der Menge aller unterschiedlichen Werte zurück, die in allen Arrays vorliegen.|
 |[set_union()](setunionfunction.md)|Gibt ein Array der Menge aller unterschiedlichen Werte zurück, die in einem der angegebenen Arrays enthalten sind.|
 |[treepath()](treepathfunction.md)|Listet alle Path-Ausdrücke auf, die Verzweigungen in einem dynamischen Objekt identifizieren.|
-|[zip ()](zipfunction.md)|Die ZIP-Funktion akzeptiert eine beliebige Anzahl dynamischer Arrays. Gibt ein Array zurück, dessen Elemente jeweils ein Array mit den Elementen der Eingabe Arrays desselben Indexes sind.|
+|[zip()](zipfunction.md)|Die ZIP-Funktion akzeptiert eine beliebige Anzahl dynamischer Arrays. Gibt ein Array zurück, dessen Elemente jeweils ein Array mit den Elementen der Eingabe Arrays desselben Indexes sind.|
 
 ## <a name="window-scalar-functions"></a>Skalare Fenster Funktionen
 
@@ -113,7 +113,7 @@ ms.locfileid: "85517934"
 
 |Funktionsname     |BESCHREIBUNG                                          |
 |-------------------------|--------------------------------------------------------|
-|[abs()](abs-function.md)|Berechnet den absoluten Wert der Eingabe.|
+|[Abs ()](abs-function.md)|Berechnet den absoluten Wert der Eingabe.|
 |[acos()](acosfunction.md)|Gibt den Winkel zurück, dessen Kosinus die angegebene Zahl ist (die umgekehrte Operation von cos ()).|
 |[asin()](asinfunction.md)|Gibt den Winkel zurück, dessen Sinus die angegebene Zahl ist (die umgekehrte Operation von Sin ()).|
 |[atan()](atanfunction.md)|Gibt den Winkel zurück, dessen Tangens die angegebene Zahl ist (die umgekehrte Operation von Tan ()).|
@@ -124,17 +124,14 @@ ms.locfileid: "85517934"
 |[cos()](cosfunction.md)|Gibt die Cosinus-Funktion zurück.|
 |[cot()](cotfunction.md)|Berechnet den trigonometrischen Kotangens des angegebenen Winkels im Bogenmaße.|
 |[degrees()](degreesfunction.md)|Konvertiert den Winkelwert in Bogenmaß mit Formel Grad = (180/PI) * Winkel-in-Bogenmaß.|
-|[exp()](exp-function.md)|Die exponentielle base-e-Funktion von x, die e für Power x: e ^ x ausgelöst wird.|
+|[Exp ()](exp-function.md)|Die exponentielle base-e-Funktion von x, die e für Power x: e ^ x ausgelöst wird.|
 |[exp10()](exp10-function.md)|Die exponentielle Base-10-Funktion von x, die 10 auf Power x: 10 ^ x fest.|
 |[exp2()](exp2-function.md)|Die exponentielle Base-2-Funktion von x, die 2 für Power x: 2 ^ x ist.|
 |[gamma()](gammafunction.md)|Berechnet die Gamma Funktion.|
-|[Hash ()](hashfunction.md)|Gibt einen Hashwert für den Eingabe Wert zurück.|
-|[hash_combine()](hash_combinefunction.md)|Kombiniert zwei oder mehr Hashwerte.|
-|[hash_many()](hash_manyfunction.md)|Gibt einen kombinierten Hashwert mit mehreren Werten zurück.|
 |[isfinite()](isfinitefunction.md)|Gibt zurück, ob die Eingabe ein endlicher Wert (nicht unendlich oder NaN) ist.|
 |[isinf()](isinffunction.md)|Gibt zurück, ob die Eingabe ein unendlicher (positiver oder negativer) Wert ist.|
 |[isnan()](isnanfunction.md)|Gibt zurück, ob die Eingabe ein NaN-Wert (not-a-Number) ist.|
-|[Log ()](log-function.md)|Gibt die natürliche Logarithmus Funktion zurück.|
+|[log()](log-function.md)|Gibt die natürliche Logarithmus Funktion zurück.|
 |[log10()](log10-function.md)|Gibt die allgemeine Logarithmus Funktion (Basis 10) zurück.|
 |[log2()](log2-function.md)|Gibt die Logarithmus Funktion der Basis 2 zurück.|
 |[loggamma()](loggammafunction.md)|Berechnet das Protokoll des absoluten Werts der Gamma Funktion.|
@@ -144,10 +141,10 @@ ms.locfileid: "85517934"
 |[radians()](radiansfunction.md)|Konvertiert den Winkelwert in Grad in den Wert im Bogenmaß mit Formel Bogenmaß = (PI/180) * Winkel in Grad.|
 |[rand()](randfunction.md)|Gibt eine Zufallszahl zurück.|
 |[Bereich ()](rangefunction.md)|Generiert ein dynamisches Array, das eine Reihe von gleichmäßig getrennten Werten enthält.|
-|[round()](roundfunction.md)|Gibt die abgerundete Quelle auf die angegebene Genauigkeit zurück.|
-|[sign()](signfunction.md)|Zeichen eines numerischen Ausdrucks.|
+|[Round ()](roundfunction.md)|Gibt die abgerundete Quelle auf die angegebene Genauigkeit zurück.|
+|[Sign ()](signfunction.md)|Zeichen eines numerischen Ausdrucks.|
 |[sin()](sinfunction.md)|Gibt die Sinusfunktion zurück.|
-|[sqrt()](sqrtfunction.md)|Gibt die Quadratwurzel Funktion zurück.|
+|[SQRT ()](sqrtfunction.md)|Gibt die Quadratwurzel Funktion zurück.|
 |[tan()](tanfunction.md)|Gibt die Tangens Funktion zurück.|
 |[welch_test()](welch-testfunction.md)|Berechnet den p-Wert der [Welch-Test-Funktion](https://en.wikipedia.org/wiki/Welch%27s_t-test).|
 
@@ -173,15 +170,15 @@ ms.locfileid: "85517934"
 |-------------------------|--------------------------------------------------------|
 |[bin()](binfunction.md)|Rundet Werte auf eine ganze Zahl ab, die ein Vielfaches der angegebenen bin-Größe ist.|
 |[bin_at()](binatfunction.md)|Rundet Werte auf einen "bin" mit fester Größe, wobei die Steuerung über dem Ausgangspunkt der bin gesteuert wird. (Siehe auch bin-Funktion.)|
-|[ceiling()](ceilingfunction.md)|Berechnet die kleinste Ganzzahl, die größer oder gleich dem angegebenen numerischen Ausdruck ist.|
-|[floor()](floorfunction.md)|Rundet Werte auf eine ganze Zahl ab, die ein Vielfaches der angegebenen bin-Größe ist.|
+|[Ceiling ()](ceilingfunction.md)|Berechnet die kleinste Ganzzahl, die größer oder gleich dem angegebenen numerischen Ausdruck ist.|
+|[Floor ()](floorfunction.md)|Rundet Werte auf eine ganze Zahl ab, die ein Vielfaches der angegebenen bin-Größe ist.|
 
 ## <a name="conditional-functions"></a>Bedingte Funktionen
 
 |Funktionsname     |BESCHREIBUNG                                          |
 |-------------------------|--------------------------------------------------------|
 |[case()](casefunction.md)|Wertet eine Liste von Prädikaten aus und gibt den ersten Ergebnis Ausdruck zurück, dessen Prädikat erfüllt ist.|
-|[coalesce()](coalescefunction.md)|Wertet eine Liste von Ausdrücken aus und gibt den ersten Ausdruck zurück, der nicht NULL ist (oder nicht leer für eine Zeichenfolge).|
+|[COALESCE ()](coalescefunction.md)|Wertet eine Liste von Ausdrücken aus und gibt den ersten Ausdruck zurück, der nicht NULL ist (oder nicht leer für eine Zeichenfolge).|
 |[IIf ()/IFF ()](iiffunction.md)|Wertet das erste Argument (das Prädikat) aus und gibt den Wert des zweiten oder dritten Arguments zurück, abhängig davon, ob das Prädikat als true (Second) oder false (dritte) ausgewertet wurde.|
 |[max_of()](max-offunction.md)|Gibt den maximalen Wert von mehreren ausgewerteten numerischen Ausdrücken zurück.|
 |[min_of()](min-offunction.md)|Gibt den minimalen Wert von mehreren ausgewerteten numerischen Ausdrücken zurück.|
@@ -234,7 +231,7 @@ ms.locfileid: "85517934"
 |[base64_decode_tostring()](base64_decode_tostringfunction.md)|Decodiert eine base64-Zeichenfolge in eine UTF-8-Zeichenfolge.|
 |[base64_decode_toarray()](base64_decode_toarrayfunction.md)|Decodiert eine base64-Zeichenfolge in ein Array von Long-Werten.|
 |[count ()](cotfunction.md)|Zählt die Vorkommnisse einer Teilzeichenfolge in einer Zeichenfolge. Einfache Zeichen folgen Übereinstimmungen können sich überlappen die Regex-Übereinstimmungen sind nicht.|
-|[extract()](extractfunction.md)|Ruft eine Übereinstimmung für einen regulären Ausdruck aus einer Textzeichenfolge ab.|
+|[extrahieren ()](extractfunction.md)|Ruft eine Übereinstimmung für einen regulären Ausdruck aus einer Textzeichenfolge ab.|
 |[extract_all()](extractallfunction.md)|Alle Übereinstimmungen für einen regulären Ausdruck aus einer Text Zeichenfolge erhalten.|
 |[extractjson()](extractjsonfunction.md)|Rufen Sie ein angegebenes Element aus einem JSON-Text mit einem Pfadausdruck ab.|
 |[indexof()](indexoffunction.md)|Die Funktion meldet den NULL basierten Index des ersten Vorkommens einer angegebenen Zeichenfolge in der Eingabe Zeichenfolge.|
@@ -242,7 +239,7 @@ ms.locfileid: "85517934"
 |[isnotempty()](isnotemptyfunction.md)|Gibt true zurück, wenn das Argument keine leere Zeichenfolge oder NULL ist.|
 |[isnotnull()](isnotnullfunction.md)|Gibt "true" zurück, wenn das Argument nicht NULL ist.|
 |[isnull()](isnullfunction.md)|Wertet das einzige Argument aus und gibt einen booleschen Wert zurück, der angibt, ob das Argument zu einem NULL-Wert ausgewertet wird.|
-|[parse_command_line ()](parse-command-line.md)|Analysiert eine Unicode-Befehlszeilen Zeichenfolge und gibt ein Array mit den Befehlszeilen Argumenten zurück.|
+|[parse_command_line()](parse-command-line.md)|Analysiert eine Unicode-Befehlszeilen Zeichenfolge und gibt ein Array mit den Befehlszeilen Argumenten zurück.|
 |[parse_csv()](parsecsvfunction.md)|Teilt eine angegebene Zeichenfolge, die durch Trennzeichen getrennte Werte darstellt, und gibt ein Zeichen folgen Array mit diesen Werten zurück.|
 |[parse_ipv4()](parse-ipv4function.md)|Konvertiert Eingaben in eine Long-Darstellung (signed 64-Bit).|
 |[parse_ipv4_mask()](parse-ipv4-maskfunction.md)|Konvertiert die Eingabe Zeichenfolge und die IP-Präfix Maske in eine Long-Darstellung (signed 64-Bit).|
@@ -252,7 +249,7 @@ ms.locfileid: "85517934"
 |[parse_url()](parseurlfunction.md)|Analysiert eine absolute URL Zeichenfolge und gibt ein dynamisches Objekt zurück, das alle Teile der URL enthält.|
 |[parse_urlquery()](parseurlqueryfunction.md)|Analysiert eine URL-Abfrage Zeichenfolge und gibt ein dynamisches Objekt zurück, das die Abfrage Parameter enthält.|
 |[parse_version()](parse-versionfunction.md)|Konvertiert die Darstellung der Eingabe Zeichenfolge in eine vergleichbare Dezimalzahl.|
-|[replace()](replacefunction.md)|Ersetzen Sie alle regex-Übereinstimmungen mit einer anderen Zeichenfolge.|
+|[Replace ()](replacefunction.md)|Ersetzen Sie alle regex-Übereinstimmungen mit einer anderen Zeichenfolge.|
 |[reverse()](reversefunction.md)|Die Funktion bewirkt eine Umkehrung der Eingabe Zeichenfolge.|
 |[split()](splitfunction.md)|Teilt eine angegebene Zeichenfolge gemäß einem angegebenen Trennzeichen und gibt ein Zeichen folgen Array mit den enthaltenen Teil Zeichenfolgen zurück.|
 |[strcat()](strcatfunction.md)|Verkettet zwischen 1 und 64 Argumenten.|
@@ -260,7 +257,7 @@ ms.locfileid: "85517934"
 |[strcmp()](strcmpfunction.md)|Vergleicht zwei Zeichenfolgen.|
 |[strlen()](strlenfunction.md)|Gibt die Länge der Eingabe Zeichenfolge in Zeichen zurück.|
 |[strrep()](strrepfunction.md)|Wiederholt die angegebene Zeichenfolge mehrmals (Standardwert: 1).|
-|[substring()](substringfunction.md)|Extrahiert eine Teil Zeichenfolge aus einer Quell Zeichenfolge beginnend mit einem Index bis zum Ende der Zeichenfolge.|
+|[Teil Zeichenfolge ()](substringfunction.md)|Extrahiert eine Teil Zeichenfolge aus einer Quell Zeichenfolge beginnend mit einem Index bis zum Ende der Zeichenfolge.|
 |[toupper()](toupperfunction.md)|Konvertiert eine Zeichenfolge in Großbuchstaben.|
 |[translate()](translatefunction.md)|Ersetzt einen Zeichensatz ("SEARCHLIST") durch einen anderen Zeichensatz ("REPLACEMENTLIST") in einer angegebenen Zeichenfolge.|
 |[trim()](trimfunction.md)|Entfernt alle führenden und nachfolgenden Übereinstimmungen des angegebenen regulären Ausdrucks.|
@@ -286,7 +283,7 @@ ms.locfileid: "85517934"
 
 |Funktionsname     |BESCHREIBUNG                                          |
 |-------------------------|--------------------------------------------------------|
-|[gettype()](gettypefunction.md)|Gibt den Lauf Zeittyp des einzelnen Arguments zurück.|
+|[GetType ()](gettypefunction.md)|Gibt den Lauf Zeittyp des einzelnen Arguments zurück.|
 
 ## <a name="scalar-aggregation-functions"></a>Skalare Aggregations Funktionen
 
@@ -307,3 +304,13 @@ ms.locfileid: "85517934"
 |[geo_geohash_to_central_point()](geo-geohash-to-central-point-function.md)|Berechnet die räumlichen Koordinaten, die den Mittelpunkt eines GeoHash-rechteckigen Bereichs darstellen.|
 |[geo_point_in_circle()](geo-point-in-circle-function.md)|Berechnet, ob die georäumlichen Koordinaten sich innerhalb eines Kreises auf der Erde befinden.|
 |[geo_point_to_geohash()](geo-point-to-geohash-function.md)|Berechnet den GeoHash-Zeichen folgen Wert für einen geografischen Standort.|
+
+## <a name="hash-functions"></a>Hash Funktionen
+
+|Funktionsname|BESCHREIBUNG|
+|--------------------------------------------------------------------------|--------------------------------------------------------|
+|[Hash ()](hashfunction.md)|Gibt einen Hashwert für den Eingabe Wert zurück.|
+|[hash_combine()](hash_combinefunction.md)|Kombiniert zwei oder mehr Hashwerte.|
+|[hash_many()](hash_manyfunction.md)|Gibt einen kombinierten Hashwert mit mehreren Werten zurück.|
+|[hash_md5 ()](md5hashfunction.md)|Gibt einen MD5-Hashwert für den Eingabe Wert zurück.|
+|[hash_sha256()](sha256hashfunction.md)|Gibt einen SHA256-Hashwert für den Eingabe Wert zurück.|
