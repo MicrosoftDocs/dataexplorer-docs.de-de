@@ -20,7 +20,7 @@ ms.locfileid: "83373991"
 
 > [!Note]
 > * Im folgenden Verfahren wird der Python-Client in der Azure Notebooks-Umgebung zum Abfragen von Azure Data Explorer verwendet. Sie können Azure Data Explorer jedoch auch mit [KQLmagic](kqlmagic.md) abfragen.
-> * Einige Benutzer haben Probleme beim Authentifizieren mithilfe von Edge gemeldet. Bis diese Probleme behoben wurden, verwenden Sie einen anderen Browser.
+> * Einige Benutzer haben Probleme beim Authentifizieren mithilfe von Microsoft Edge gemeldet. Bis diese Probleme behoben wurden, verwenden Sie einen anderen Browser.
 
 ## <a name="create-a-project"></a>Erstellen eines Projekts
 
