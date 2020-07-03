@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 02/19/2020
-ms.openlocfilehash: 83af540389087f0e1d9fdbd04266ab7ecaca0c5a
-ms.sourcegitcommit: b12e03206c79726d5b4055853ec3fdaa8870c451
+ms.openlocfilehash: eb13b53ba5f6785c79aaa586de50478074901c8d
+ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/18/2020
-ms.locfileid: "85069154"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85901924"
 ---
 # <a name="ingestion-without-kustoingest-library"></a>Erfassung ohne Kusto. Erfassungs Bibliothek
 
@@ -283,7 +283,7 @@ internal static string PrepareIngestionMessage(string db, string table, string d
 Veröffentlichen Sie schließlich die erstellte Nachricht in der ausgewählten Erfassungs Warteschlange, die Sie aus Azure Daten-Explorer abgerufen haben.
 
 > [!NOTE]
-> Der .NET-Speicher Client codiert bei Verwendung die Nachricht standardmäßig in base64. Weitere Informationen finden Sie unter [Storage docs](https://docs.microsoft.com/dotnet/api/microsoft.windowsazure.storage.queue.cloudqueue.encodemessage?view=azure-dotnet#Microsoft_WindowsAzure_Storage_Queue_CloudQueue_EncodeMessage). Wenn Sie diesen Client nicht verwenden, stellen Sie sicher, dass Sie den Nachrichten Inhalt ordnungsgemäß codieren.
+> Der .NET-Speicher Client codiert bei Verwendung die Nachricht standardmäßig in base64. Weitere Informationen finden Sie unter [Storage docs](https://docs.microsoft.com/dotnet/api/microsoft.azure.storage.queue.cloudqueue.encodemessage?view=azure-dotnet-legacy#Microsoft_WindowsAzure_Storage_Queue_CloudQueue_EncodeMessage). Wenn Sie diesen Client nicht verwenden, stellen Sie sicher, dass Sie den Nachrichten Inhalt ordnungsgemäß codieren.
 
 ```csharp
 internal static void PostMessageToQueue(string queueUriWithSas, string message)
@@ -329,7 +329,6 @@ Die Meldung, dass der Kusto-Datenverwaltung-Dienst aus der Azure-Eingabe Wartesc
     "DatabaseName": "<DatabaseName>",
     "TableName" : "<TableName>",
     "RetainBlobOnSuccess" : "<RetainBlobOnSuccess>",
-    "Format" : "<csv|tsv|...>",
     "FlushImmediately": "<true|false>",
     "ReportLevel" : <0-Failures, 1-None, 2-All>,
     "ReportMethod" : <0-Queue, 1-Table>,
@@ -345,17 +344,16 @@ Die Meldung, dass der Kusto-Datenverwaltung-Dienst aus der Azure-Eingabe Wartesc
 |DatabaseName |Name der Zieldatenbank |
 |TableName |Name der Ziel Tabelle |
 |Retainblobonsuccess |Wenn der Wert auf festgelegt `true` ist, wird das BLOB nicht gelöscht, nachdem die Erfassung erfolgreich abgeschlossen wurde. Die Standardeinstellung ist `false`. |
-|Format |Unkomprimiertes Datenformat |
 |Flushimmediately |Wenn diese Einstellung auf festgelegt `true` ist, wird jede Aggregation übersprungen. Die Standardeinstellung ist `false`. |
 |Beim |Erfolgs-/Fehlerberichterstattungs-Ebene: 0-Fehler, 1-keine, 2-alle |
 |Report Method |Berichtsmechanismus: 0-Warteschlange, 1-Tabelle |
-|AdditionalProperties |Zusätzliche Eigenschaften, z. b. Tags |
+|AdditionalProperties |Zusätzliche Eigenschaften, z `format` `tags` . b., und `creationTime` . Weitere Informationen finden Sie unter [Eigenschaften](../../../ingestion-properties.md)für die Datenerfassung.|
 
 ### <a name="ingestion-failure-message-structure"></a>Struktur der Erfassungs Fehlermeldung
 
 Die Meldung, die der Datenverwaltung erwartet, aus der Azure-Eingabe Warteschlange zu lesen, ist ein JSON-Dokument im folgenden Format.
 
-|Eigenschaft | BESCHREIBUNG |
+|Eigenschaft | Beschreibung |
 |---------|-------------
 |OperationId |Vorgangs-ID (GUID), die zum Nachverfolgen des Vorgangs auf der Dienst Seite verwendet werden kann. |
 |Datenbank |Name der Zieldatenbank |

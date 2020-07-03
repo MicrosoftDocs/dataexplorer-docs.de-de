@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2fbc870eafc45c8c63bea98a64f492d161af4c9b
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 4d90bc3b6222896d45374d771ce5f87f4bdf6786
+ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226345"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85902023"
 ---
 # <a name="sliding_window_counts-plugin"></a>Plug-in sliding_window_counts
 
-Berechnet die Anzahl und die unterschiedliche Anzahl von Werten in einem gleitenden Fenster mithilfe des [hier](samples.md#performing-aggregations-over-a-sliding-window)beschriebenen Verfahrens in einem gleitenden Fenster.
+Berechnet die Anzahl und die unterschiedliche Anzahl von Werten in einem gleitenden Fenster mithilfe des [hier](samples.md#perform-aggregations-over-a-sliding-window)beschriebenen Verfahrens in einem gleitenden Fenster.
 
 Berechnen Sie beispielsweise für jeden *Tag*die Anzahl und die unterschiedliche Anzahl von Benutzern in der vorherigen *Woche*. 
 

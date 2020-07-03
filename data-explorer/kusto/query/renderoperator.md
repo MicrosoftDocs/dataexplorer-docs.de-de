@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 03/29/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 20e512d55568f39ea21d3ddcb383adaf0fa7dab3
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 90b2a08d4fdde6ab6a74b12632c9310029f8fc1b
+ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373034"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85902105"
 ---
 # <a name="render-operator"></a>render-Operator
 
@@ -42,7 +42,7 @@ Hierbei gilt:
 
 |*Visualisierung*     |Beschreibung|
 |--------------------|-|
-| `anomalychart`     | Vergleichbar mit timechart, [hebt jedoch Anomalien](./samples.md#get-more-out-of-your-data-in-kusto-using-machine-learning) mithilfe [series_decompose_anomalies](./series-decompose-anomaliesfunction.md) Funktion hervor. |
+| `anomalychart`     | Vergleichbar mit timechart, [hebt jedoch Anomalien](./samples.md#get-more-out-of-your-data-in-kusto-with-machine-learning) mithilfe [series_decompose_anomalies](./series-decompose-anomaliesfunction.md) Funktion hervor. |
 | `areachart`        | Flächen Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten sind y-Achsen. |
 | `barchart`         | Die erste Spalte ist die x-Achse und kann "Text", "DateTime" oder "numeric" sein. Andere Spalten sind numerisch und werden als horizontale Striche angezeigt.|
 | `card`             | Der erste Ergebnisdaten Satz wird als Satz von skalaren Werten behandelt und als Karte angezeigt. |
@@ -110,7 +110,7 @@ Hierbei gilt:
 ::: zone-end
 
 Einige Visualisierungen können durch Bereitstellen der-Eigenschaft weiterentwickelt werden `kind` .
-Dies sind:
+Diese lauten wie folgt:
 
 |*Visualisierung*|`kind`             |Beschreibung                        |
 |---------------|-------------------|-----------------------------------|
@@ -170,6 +170,6 @@ range x from -2 to 2 step 0.1
 
 [Renderingbeispiele in diesem Tutorial](./tutorial.md#render-display-a-chart-or-table).
 
-[Anomalieerkennung](./samples.md#get-more-out-of-your-data-in-kusto-using-machine-learning)
+[Anomalieerkennung](./samples.md#get-more-out-of-your-data-in-kusto-with-machine-learning)
 
 ::: zone-end

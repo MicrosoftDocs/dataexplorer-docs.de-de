@@ -1,6 +1,6 @@
 ---
-title: parse_version() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird parse_version() in Azure Data Explorer beschrieben.
+title: parse_version ()-Azure Daten-Explorer
+description: In diesem Artikel wird parse_version () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5cb35c12849568f24a6bde42461e8af66058f48f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 5e4b318743380b13a26e90a7e83549c998926bd8
+ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81511712"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85902121"
 ---
 # <a name="parse_version"></a>parse_version()
 
-Konvertiert die Darstellung der Eingabezeichenfolge der Version in eine vergleichbare Dezimalzahl.
+Konvertiert die Darstellung der Eingabe Zeichenfolge von Version in eine vergleichbare Dezimalzahl.
 
 ```kusto
 parse_version("0.0.0.1")
@@ -29,22 +29,21 @@ parse_version("0.0.0.1")
 
 **Argumente**
 
-* *Expr*: Ein skalarer `string` Ausdruck des Typs, der die zu analysierende Version angibt.
+* *`Expr`*: Ein Skalarausdruck vom Typ `string` , der die Version angibt, die analysiert werden soll.
 
 **Rückgabe**
 
-Wenn die Konvertierung erfolgreich ist, wird das Ergebnis eine Dezimalstelle sein.
-Wenn die Konvertierung nicht erfolgreich `null`ist, wird das Ergebnis .
+Wenn die Konvertierung erfolgreich ist, ist das Ergebnis ein Dezimaltrennzeichen.
+Wenn die Konvertierung nicht erfolgreich ist, lautet das Ergebnis `null` .
 
-**Hinweise**
+**Notizen**
 
-Die Eingabezeichenfolge muss 1 bis 4 Versionsteile enthalten, als Zahlen dargestellt und durch Punkte ('.') getrennt.
+Die Eingabe Zeichenfolge muss eine bis vier Versions Bestandteile enthalten, die als Zahlen dargestellt und durch Punkte (".") getrennt sind.
 
-Jeder Teil der Version kann bis zu 8 Ziffern (max. Wert - 99999999) enthalten.
+Jeder Teil der Version kann bis zu acht Ziffern mit dem maximalen Wert bei 99999999 enthalten.
 
-Wenn die Teilemenge kleiner als 4 ist, werden alle fehlenden`1.0` == `1.0.0.0`Teile als nachgestellt betrachtet ( ).
+Wenn die Anzahl der Teile kleiner als vier ist, werden alle fehlenden Teile als nachfolgende ( `1.0`  ==  `1.0.0.0` ) betrachtet.
 
- 
 **Beispiel**
 ```kusto
 let dt = datatable(v:string)
@@ -86,7 +85,3 @@ dt | project v1=v, _key=1
 |99999999.0.0.0|1.2.3.4|99999999.0.0.0|
 |1.2.3.4|1|1.2.3.4|
 |99999999.0.0.0|1|99999999.0.0.0|
-
-
-
-

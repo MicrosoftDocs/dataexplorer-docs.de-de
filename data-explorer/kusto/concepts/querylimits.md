@@ -1,6 +1,6 @@
 ---
-title: Abfragelimits - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden Abfragelimits in Azure Data Explorer beschrieben.
+title: 'Abfrage Limits: Azure Daten-Explorer'
+description: In diesem Artikel werden die Abfrage Limits in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,60 +8,65 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 437e9781b9e29db7496292ba6a416f6e0c769e8b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 20b1b87778451245e7a886255ce3e83493b0d9e1
+ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523068"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85901934"
 ---
 # <a name="query-limits"></a>Abfragegrenzwerte
 
-Da Kusto ein Ad-hoc-Abfragemodul ist, das große Datensätze hostet und versucht, Abfragen zu erfüllen, indem alle relevanten Daten im Arbeitsspeicher gespeichert werden, besteht die Gefahr, dass Abfragen die Dienstressourcen ohne Grenzen monopolisieren. Kusto bietet eine Reihe integrierter Schutzvorrichtungen in Form von Standardabfragelimits.
+Kusto ist ein Ad-hoc-Abfrage Modul, das große Datasets hostet und versucht, Abfragen zu erfüllen, indem alle relevanten Daten im Arbeitsspeicher gehalten werden.
+Es gibt ein inhärentes Risiko, dass Abfragen die Dienst Ressourcen ohne Grenzen monopolisieren. Kusto bietet eine Reihe integrierter Schutzmaßnahmen in Form von standardmäßigen Abfrage Limits.
 
-## <a name="limit-on-query-concurrency"></a>Begrenzung der Abfrageparallelität
+## <a name="limit-on-query-concurrency"></a>Limit für Abfrage Parallelität
 
-**Abfrageparallelität** ist ein Grenzwert, den ein Cluster für eine Reihe von Abfragen auferlegt, die gleichzeitig ausgeführt werden.
-Der Standardwert des Abfrageparallelitätslimits hängt vom SKU-Cluster ab, `Cores-Per-Node x 10`auf dem er ausgeführt wird, und wird wie folgt berechnet: . Für einen Cluster, der auf D14v2-SKU eingerichtet ist und für den jeder Computer 16 vCores hat, lautet `16 cores x10 = 160`das standardmäßige Limit für die Abfrageparallelität .
-Der Standardwert kann durch Erstellen eines Supporttickets geändert werden. In Zukunft wird dieses Steuerelement auch über einen Steuerbefehl verfügbar gemacht.
+Die **Abfrage** Parallelität ist ein Limit, das ein Cluster für eine Reihe von Abfragen, die gleichzeitig ausgeführt werden, auferlegt.
 
-## <a name="limit-on-result-set-size-result-truncation"></a>Begrenzung der Ergebnissatzgröße (Ergebniskürzung)
+* Der Standardwert des Abfrage Parallelitäts Limits hängt von dem SKU-Cluster ab, auf dem er ausgeführt wird, und wird wie folgt berechnet: `Cores-Per-Node x 10` .
+  * Beispielsweise ist für einen Cluster, der auf der D14v2-SKU eingerichtet ist, wobei jeder Computer über 16 virtuelle Kerne verfügt, das Standard Limit für die Abfrage Parallelität `16 cores x10 = 160` .
+* Der Standardwert kann geändert werden, indem Sie ein Support Ticket erstellen. In Zukunft wird dieses Steuerelement auch über einen Steuerelement Befehl verfügbar gemacht.
 
-**Ergebniskürzungen** sind standardmäßig für das von der Abfrage zurückgegebene Resultset. Kusto begrenzt die Anzahl der an den Client zurückgegebenen Datensätze auf **500.000**und den Gesamtspeicher für diese Datensätze auf **64 MB**. Wenn einer dieser Grenzwerte überschritten wird, schlägt die Abfrage mit einem "teilabfragefehler" fehl. Durch das Überschreiten des Gesamtspeichers wird eine Ausnahme mit der Meldung generiert:
+## <a name="limit-on-result-set-size-result-truncation"></a>Grenzwert für die Größe des Resultsets (Ergebnis abschneiden)
+
+Das **Abschneiden** von Ergebnissen ist ein Standardmäßiges Limit für das Resultset, das von der Abfrage zurückgegeben wird. Kusto schränkt die Anzahl der an den Client zurückgegebenen Datensätze auf **500.000**und den gesamten Arbeitsspeicher für diese Datensätze auf **64 MB**ein. Wenn eine dieser Grenzwerte überschritten wird, tritt bei der Abfrage ein Fehler mit dem Fehler "partielle Abfrage Fehler" auf. Das Überschreiten des Gesamt Speichers generiert eine Ausnahme mit der folgenden Meldung:
 
 ```
 The Kusto DataEngine has failed to execute a query: 'Query result set has exceeded the internal data size limit 67108864 (E_QUERY_RESULT_SET_TOO_LARGE).'
 ```
 
-Wenn Sie die Anzahl der Datensätze überschreiten, schlägt dies mit einer Ausnahme fehl, die besagt:
+Das Überschreiten der Anzahl von Datensätzen schlägt mit einer Ausnahme fehl, die Folgendes besagt:
 
 ```
 The Kusto DataEngine has failed to execute a query: 'Query result set has exceeded the internal record count limit 500000 (E_QUERY_RESULT_SET_TOO_LARGE).'
 ```
 
-Es gibt eine Reihe von Strategien, um mit diesem Fehler umzugehen:
+Es gibt eine Reihe von Strategien für den Umgang mit diesem Fehler.
 
-* Verringern der Ergebnissatzgröße, indem Sie die Abfrage so ändern, dass keine uninteressanten Daten zurückgegeben werden. Dies ist häufig nützlich, wenn die anfängliche (fehlende) Abfrage zu "breit" ist (z. B. projiziert sie keine Nicht-Datenspalten, die nicht benötigt werden).
-* Verringern der Ergebnissatzgröße durch Verschieben der Verarbeitung nach der Abfrage (z. B. Aggregationen) in die Abfrage selbst. Dies ist in Szenarien nützlich, in denen die Ausgabe der Abfrage an ein anderes Verarbeitungssystem zugeführt wird, das dann zusätzliche Aggregationen ausführt. 
-* Wechseln von Abfragen zu [Datenexport](../management/data-export/index.md).
-   Dies ist sinnvoll, wenn Sie große Datensätze aus dem Dienst exportieren möchten.
-* Weisen Sie den Dienst an, diesen Abfragegrenzwert zu unterdrücken.
+* Reduzieren Sie die resultsetgröße, indem Sie die Abfrage so ändern, dass nur interessante Daten zurückgegeben werden Diese Strategie ist nützlich, wenn die anfängliche fehlerhafte Abfrage zu "breit" ist. Beispielsweise werden die Datenspalten, die nicht benötigt werden, von der Abfrage nicht entfernt.
+* Verringern Sie die Größe des Resultsets, indem Sie die Verarbeitung nach Abfrage, z. b. Aggregationen, in die Abfrage selbst verschieben. Die Strategie ist in Szenarios nützlich, in denen die Ausgabe der Abfrage an ein anderes Verarbeitungssystem weitergeleitet wird und dann zusätzliche Aggregationen durchführt.
+* Wechseln Sie von Abfragen zu mithilfe des [Datenexports](../management/data-export/index.md) , wenn Sie große Datenmengen aus dem Dienst exportieren möchten.
+* Weisen Sie den Dienst an, dieses Abfragelimit zu unterdrücken.
 
-Häufige Methoden zum Reduzieren der von der Abfrage erzeugten Ergebnissatzgröße sind:
+Zu den Methoden zum Verringern der von der Abfrage erzeugten resultsetgröße gehören:
 
-* Verwenden der [zusammengefassten Operatorgruppe](../query/summarizeoperator.md) und des Aggregats über ähnliche Datensätze in der Abfrageausgabe, wodurch möglicherweise einige Spalten mithilfe der [aggregationsvariablen Funktion](../query/any-aggfunction.md)abgegriffen werden.
-* Verwenden eines [take-Operators](../query/takeoperator.md) zum Beispiel der Abfrageausgabe.
-* Verwenden der [Teilzeichenfolgenfunktion](../query/substringfunction.md) zum Trimmen breiter Freitextspalten.
-* Verwenden des [Projektoperators,](../query/projectoperator.md) um eine uninteressante Spalte aus dem Resultset zu löschen.
+* Verwenden Sie die Gruppe zusammen [fassender Operator](../query/summarizeoperator.md) , und aggregieren Sie ähnliche Datensätze in der Abfrageausgabe. Möglicherweise werden einige Spalten mithilfe der [Aggregations Funktion](../query/any-aggfunction.md)als Stichprobe verwendet.
+* Verwenden [Sie einen Take-Operator](../query/takeoperator.md) , um Stichproben der Abfrageausgabe auszuführen.
+* Verwenden Sie die [Teil Zeichenfolge-Funktion](../query/substringfunction.md) , um Breite frei Textspalten zu kürzen.
+* Verwenden Sie den [Project-Operator](../query/projectoperator.md) , um alle nicht interessanten Spalten aus dem Resultset zu löschen.
 
-Man kann die Ergebniskürzung mit `notruncation` der Anforderungsoption deaktivieren. Es wird dringend empfohlen, dass in diesem Fall noch eine Form der Einschränkung eingeführt wird. Beispiel:
+Sie können die Ergebnis Verkürzung mithilfe der `notruncation` Option Request deaktivieren.
+Es wird empfohlen, dass eine bestimmte Art von Einschränkung immer noch vorhanden ist.
+
+Beispiel:
 
 ```kusto
 set notruncation;
 MyTable | take 1000000
 ```
 
-Es ist auch möglich, eine verfeinerte Kontrolle über die `truncationmaxsize` Ergebniskürzung zu haben, indem sie den `truncationmaxrecords` Wert von (maximale Datengröße in Bytes, Standardwerte auf 64 MB) und (maximale Anzahl von Datensätzen, Standardmäßig auf 500.000) festlegen. Die folgende Abfrage legt beispielsweise fest, dass die Ergebniskürzung entweder bei 1.105 Datensätzen oder bei 1 MB erfolgt, je nachdem, welcher Wert überschritten wird:
+Es ist auch möglich, eine präzisetere Kontrolle über das Abschneiden von Ergebnissen zu haben, indem der Wert von `truncationmaxsize` (maximale Datengröße in Bytes, standardmäßig 64 MB) und `truncationmaxrecords` (maximale Anzahl von Datensätzen, Standardwert 500.000) festgelegt wird. Mit der folgenden Abfrage wird z. b. das Abschneiden von Ergebnissen auf 1.105-oder 1 MB festgelegt, je nachdem, welcher Wert überschritten wird.
 
 ```kusto
 set truncationmaxsize=1048576;
@@ -69,13 +74,19 @@ set truncationmaxrecords=1105;
 MyTable | where User=="Ploni"
 ```
 
-Die Kusto-Clientbibliotheken gehen derzeit von dieser Grenze aus. Während Sie das Limit ohne Grenzen erhöhen können, erreichen Sie schließlich Client-Limits, die derzeit nicht konfigurierbar sind. Eine mögliche Problemumgehung besteht darin, direkt gegen den REST-API-Vertrag zu programmieren und einen Streaming-Parser für die Kusto-Abfrageergebnisse zu implementieren. Lassen Sie das Kusto-Team wissen, ob Sie auf dieses Problem stoßen, damit wir einen Streaming-Client entsprechend priorisieren können.
+Die Kusto-Client Bibliotheken nehmen zurzeit an, dass dieser Grenzwert vorhanden ist. Obwohl Sie den Grenzwert ohne Grenzen erhöhen können, erreichen Sie letztendlich Client Limits, die derzeit nicht konfigurierbar sind.
 
-Die Ergebniskürzung wird standardmäßig angewendet, nicht nur auf den Ergebnisstream, der an den Client zurückgegeben wird. Sie wird standardmäßig auch auf jede Unterabfrage angewendet, die ein Kusto-Cluster in einem anderen Kusto-Cluster in einer clusterübergreifenden Abfrage mit ähnlichen Auswirkungen ausgibt.
+Kunden, die nicht alle Daten in einem einzigen Massen Vorgang per Pull abrufen möchten, können diese Problem Umgehungen ausprobieren:
+* Wechseln einiger sdjs in den Streamingmodus (Streaming = true-Eigenschaft für kustoconnectionstringbuilder)
+* Wechseln Sie zur .NET v2-API, damit das Kusto-Team weiß, ob Sie dieses Problem beheben, sodass wir die Streaming-Client Priorität erhöhen können.
 
-## <a name="limit-on-memory-per-iterator"></a>Speicherbeschränkung pro Iterator
+Kusto bietet eine Reihe von Client Bibliotheken, die "unendlich große" Ergebnisse verarbeiten können, indem Sie an den Aufrufer gestreamt werden. Verwenden Sie eine dieser Bibliotheken, und konfigurieren Sie Sie für den Streamingmodus. Verwenden Sie z. b. den .NET Framework Client (Microsoft. Azure. Kusto. Data), und legen Sie entweder die Streaming-Eigenschaft der Verbindungs Zeichenfolge auf *true*fest, oder verwenden Sie den *ExecuteQueryV2Async ()* -Befehl, der immer Ergebnisse streamt.
 
-**Max. Arbeitsspeicher pro Resultset-Iterator** ist ein weiterer Grenzwert, der von Kusto zum Schutz vor "Runaway"-Abfragen verwendet wird. Dieser Grenzwert (dargestellt durch `maxmemoryconsumptionperiterator`die Anforderungsoption ) legt eine Obergrenze für die Speichermenge fest, die ein einzelner Abfrageplan-Ergebnissatz-Iterator enthalten kann. (Diese Grenze gilt für die spezifischen Iteratoren, `join`die nicht von Natur aus gestreamt werden, z. B. .) Hier sind einige Fehlermeldungen, die zurückgegeben werden, wenn dies geschieht:
+Die resulttrunzierung wird standardmäßig angewendet, nicht nur auf den resultstream, der an den Client zurückgegeben wird. Sie wird auch standardmäßig auf jede Unterabfrage angewendet, die ein Cluster mit ähnlichen Effekten an einen anderen Cluster in einer Cluster übergreifenden Abfrage ausgibt.
+
+## <a name="limit-on-memory-per-iterator"></a>Limit für Arbeitsspeicher pro Iterator
+
+Der **maximale Arbeitsspeicher pro resultsetiterator** ist ein weiterer Grenzwert, der von Kusto zum Schutz vor "Runaway"-Abfragen verwendet wird. Dieser Grenzwert, der durch die Option Request dargestellt `maxmemoryconsumptionperiterator` wird, legt eine obere Grenze für die Menge an Arbeitsspeicher fest, die ein einzelner Abfrageplan-resultsetiterator enthalten kann. Dieser Grenzwert gilt für die spezifischen Iteratoren, die nicht nach Natur gestreamt werden, z `join` . b..) Im folgenden finden Sie einige Fehlermeldungen, die zurückgegeben werden, wenn diese Situation auftritt:
 
 ```
 The ClusterBy operator has exceeded the memory budget during evaluation. Results may be incorrect or incomplete E_RUNAWAY_QUERY.
@@ -95,17 +106,18 @@ The TopNestedAggregator operator has exceeded the memory budget during evaluatio
 The TopNested operator has exceeded the memory budget during evaluation. Results may be incorrect or incomplete (E_RUNAWAY_QUERY).
 ```
 
-Standardmäßig ist dieser Wert auf 5 GB festgelegt. Man kann diesen Wert bis zur Hälfte des physischen Speichers der Maschine erhöhen:
+Standardmäßig ist dieser Wert auf 5 GB festgelegt. Sie können diesen Wert um die Hälfte des physischen Speichers des Computers erhöhen:
 
 ```kusto
 set maxmemoryconsumptionperiterator=68719476736;
 MyTable | ...
 ```
 
-Wenn Sie erwägen, diese Grenzwerte zu entfernen, stellen Sie zunächst fest, ob Sie dadurch tatsächlich einen Wert gewinnen. Insbesondere bedeutet das Entfernen des Ergebnisabschneidelimits, dass Sie beabsichtigen, Massendaten aus Kusto zu verschieben -- `.export` entweder zu Exportzwecken (in diesem Fall werden Sie aufgefordert, den Befehl stattdessen zu verwenden) oder für eine spätere Aggregation (in diesem Fall erwägen Sie die Aggregation mit Kusto).
-Lassen Sie das Kusto-Team wissen, ob Sie ein Geschäftsszenario haben, das von keiner dieser vorgeschlagenen Lösungen erfüllt werden kann.  
+Wenn Sie diese Grenzwerte entfernen, legen Sie zunächst fest, ob Sie tatsächlich einen Wert erhalten. Insbesondere bedeutet das Entfernen der Begrenzung der Ergebnis Verkürzung, dass Sie beabsichtigen, Massendaten aus Kusto zu verschieben.
+Sie können den Grenzwert für das Abschneiden von Ergebnissen entweder für Exportzwecke, mithilfe des- `.export` Befehls oder für eine spätere Aggregation entfernen. in diesem Fall sollten Sie eine Aggregation mithilfe von Kusto in Erwägung gezogen.
+Lassen Sie das Kusto-Team wissen, ob Sie über ein Geschäftsszenario verfügen, das von keiner dieser vorgeschlagenen Lösungen erreicht werden kann.  
 
-In vielen Fällen kann eine Überschreitung dieses Grenzwerts vermieden werden, indem der Datensatz auf 10 % abgesenkt wird. Die beiden folgenden Abfragen zeigen, wie dieses Sampling ausgeführt wird. Die erste ist eine statistische Stichprobe (mit Hilfe eines Zufallszahlengenerators). Die zweite ist deterministische Sampel (durch Hashing einer Spalte aus dem Datensatz, in der Regel eine ID):
+In vielen Fällen kann das Überschreiten dieses Limits vermieden werden, indem das DataSet Stichproben entnommen wird. Die folgenden beiden Abfragen zeigen, wie die Stichprobenentnahme durchzuführen ist. Der erste ist eine statistische Stichprobe, bei der ein Zufallszahlengenerator verwendet wird. Die zweite ist eine deterministische Stichprobe, durch die ein Hashwert für eine Spalte aus dem DataSet erfolgt (in der Regel eine ID).
 
 ```kusto
 T | where rand() < 0.1 | ...
@@ -113,20 +125,19 @@ T | where rand() < 0.1 | ...
 T | where hash(UserId, 10) == 1 | ...
 ```
 
-## <a name="limit-on-memory-per-node"></a>Beschränkung des Arbeitsspeichers pro Knoten
+## <a name="limit-on-memory-per-node"></a>Limit für Arbeitsspeicher pro Knoten
 
-**Der maximale Arbeitsspeicher pro Abfrage pro Knoten** ist ein weiterer Grenzwert, der von Kusto zum Schutz vor "Runaway"-Abfragen verwendet wird. Dieser Grenzwert (dargestellt durch `max_memory_consumption_per_query_per_node`die Anforderungsoption ) legt eine Obergrenze für die Speichermenge fest, die auf einem einzelnen Knoten für eine bestimmte Abfrage zugewiesen werden kann. 
-
+Der **maximale Arbeitsspeicher pro Abfrage pro Knoten** ist ein weiterer Grenzwert, der zum Schutz vor "Runaway"-Abfragen verwendet wird. Dieser Grenzwert, der durch die Option Request dargestellt wird `max_memory_consumption_per_query_per_node` , legt eine obere Grenze für die Menge an Arbeitsspeicher fest, die auf einem einzelnen Knoten für eine bestimmte Abfrage verwendet werden kann.
 
 ```kusto
 set max_memory_consumption_per_query_per_node=68719476736;
 MyTable | ...
 ```
 
-## <a name="limit-on-accumulated-string-sets"></a>Limit für akkumulierte Zeichenfolgensätze
+## <a name="limit-on-accumulated-string-sets"></a>Limit für akkumulierte Zeichen folgen Sätze
 
-Bei verschiedenen Abfragevorgängen muss Kusto Zeichenfolgenwerte "sammeln" und intern puffern, bevor die Ergebnisse erstellt werden können. Diese akkumulierten Zeichenfolgensätze sind in der Größe und in der Anzahl der Elemente, die sie aufnehmen können, begrenzt. Darüber hinaus darf jede einzelne Zeichenfolge einen bestimmten Grenzwert nicht überschreiten.
-Das Überschreiten einer dieser Grenzwerte führt zu einem der folgenden Fehler:
+In verschiedenen Abfrage Vorgängen muss Kusto Zeichen folgen Werte "erfassen" und intern Puffern, bevor die Ergebnisse erzeugt werden. Diese akkumulierten Zeichen folgen Sätze sind beschränkt auf die Größe und die Anzahl der Elemente, die Sie enthalten können. Außerdem sollte jede einzelne Zeichenfolge eine bestimmte Grenze nicht überschreiten.
+Wenn Sie eine dieser Grenzwerte überschreiten, führt dies zu einem der folgenden Fehler:
 
 ```
 Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too large and exceeds the limit of ...GB (see https://aka.ms/kustoquerylimits)')
@@ -136,49 +147,49 @@ Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too
 Runaway query (E_RUNAWAY_QUERY). (message: 'Single string size shouldn't exceed the limit of 2GB (see http://aka.ms/kustoquerylimits)')
 ```
 
-Derzeit gibt es keinen Schalter, um die maximale Größe des Zeichenfolgensatzes zu erhöhen.
-Um die summieren Sie die Abfrage, um die Datenmenge zu reduzieren, die gepuffert werden muss. Zum Beispiel, indem sie nicht benötigte Spalten vor dem Eingeben von Operatoren wie Join und Summarize "eintragen". Oder z. B. mithilfe der [Shuffle-Abfragestrategie.](../query/shufflequery.md)
+Zurzeit gibt es keinen Switch, um die maximale Größe der Zeichen folgen Menge zu erhöhen.
+Um dieses Problem zu umgehen, müssen Sie die Abfrage neu formulieren, um die Menge der Daten zu verringern, die gepuffert werden müssen. Nicht benötigte Spalten können entfernt werden, bevor Sie von Operatoren wie "Join" und "Zusammenfassung" verwendet werden. Oder Sie können die Strategie zum [Mischen von Abfragen](../query/shufflequery.md) verwenden.
 
-## <a name="limit-on-request-execution-time-timeout"></a>Limit bei Anforderung Ausführungszeit (Timeout)
+## <a name="limit-execution-timeout"></a>Ausführungs Timeout begrenzen
 
-**Das Servertimeout** ist ein dienstseitiges Timeout, das auf alle Anforderungen angewendet wird.
-Timeout für ausgeführte Anforderungen (Abfragen und Steuerbefehle) wird an mehreren Punkten erzwungen:
+**Server Timeout** ist ein Dienst seitiges Timeout, das auf alle Anforderungen angewendet wird.
+Timeout bei Ausführung von Anforderungen (Abfragen und Steuerungsbefehle) wird an mehreren Punkten im Kusto erzwungen:
 
-* In der Kusto-Clientbibliothek (falls verwendet)
-* Im Kusto-Serviceendpunkt, der die Anforderung annimmt
-* Im Kusto-Servicemodul, das die Anforderung verarbeitet
+* Client Bibliothek (sofern verwendet)
+* Dienst Endpunkt, der die Anforderung akzeptiert
+* die Dienst-Engine, die die Anforderung verarbeitet.
 
-Standardmäßig ist das Timeout für Abfragen auf vier Minuten und für Steuerbefehle auf zehn Minuten festgelegt. Dieser Wert kann bei Bedarf erhöht werden (begrenzt auf eine Stunde):
+Standardmäßig ist Timeout für Abfragen auf vier Minuten und für Steuerungsbefehle 10 Minuten festgelegt. Dieser Wert kann bei Bedarf (begrenzt auf eine Stunde) erweitert werden.
 
-* Wenn Sie mit Kusto.Explorer abfragen, verwenden Sie **Tools** &gt; **Options** *  &gt; **Connections** &gt; **Query Server Timeout**.
-* Legen Sie programmgesteuert `servertimeout` die Clientanforderungseigenschaft `System.TimeSpan`fest (ein Wert vom Typ bis zu einer Stunde).
+* Wenn Sie die Abfrage mithilfe von "Kusto. Explorer" durchführen **, verwenden Sie** Extras &gt; **Optionen** *  &gt; **Verbindungen** &gt; **Abfrage Server Timeout**.
+* Legen `servertimeout` Sie die Client Anforderungs Eigenschaft (einen Wert vom Typ) Programm gesteuert `System.TimeSpan` auf eine Stunde fest.
 
-Hinweise zu Timeouts:
+**Hinweise zu Timeouts**
 
-* Auf der Clientseite wird das Timeout von der zu erstellenden Anforderung bis zu dem Zeitpunkt angewendet, zu dem die Antwort beim Client eintrifft. Die Zeit, die zum Zurücklesen der Nutzlast am Client benötigt wird, wird nicht als Teil des Timeouts behandelt (da es davon abhängt, wie schnell der Aufrufer die Daten aus dem Stream abruft).
-* Auch auf der Clientseite ist der tatsächlich verwendete Timeoutwert etwas höher als der vom Benutzer angeforderte Servertimeoutwert. Dadurch können Netzwerklatenermöglicht werden.
-* Auf der Dienstseite berücksichtigen nicht alle Abfrageoperatoren den Timeoutwert.
-   Wir fügen diese Unterstützung schrittweise hinzu.
-* Damit Kusto das maximal zulässige Anforderungstimeout automatisch `norequesttimeout` `true`verwendet, legen Sie die Clientanforderungseigenschaft auf fest.
+* Auf der Clientseite wird das Timeout von der erstellten Anforderung bis zum Startzeitpunkt der Antwort an den Client angewendet. Die Zeit, die zum Lesen der Nutzlast auf dem Client benötigt wird, wird nicht als Teil des Timeouts behandelt. Dies hängt davon ab, wie schnell der Aufrufer die Daten aus dem Stream abruft.
+* Außerdem ist der tatsächliche Timeout Wert auf Clientseite geringfügig höher als der vom Benutzer angeforderte Server Timeout Wert. Dieser Unterschied besteht darin, Netzwerklatenzen zuzulassen.
+* Um das maximal zulässige Anforderungs Timeout automatisch zu verwenden, legen Sie die Client Anforderungs Eigenschaft `norequesttimeout` auf fest `true` .
 
 <!--
   Request timeout can also be set using a set statement, but we don't mention
-  it here as it should not be used in production scenarios.
+  it here since it shouldn't be used in production scenarios.
 -->
 
-## <a name="limit-on-query-cpu-resource-usage"></a>Begrenzung der CPU-Ressourcenauslastung von Abfragecpa
+## <a name="limit-on-query-cpu-resource-usage"></a>Limit für Abfrage-CPU-Ressourcennutzung
 
-Standardmäßig ermöglicht Kusto ausführenden Abfragen, so viele CPU-Ressourcen wie der Cluster zu verwenden, und versucht, einen fairen Roundrobin zwischen Abfragen auszuführen, wenn mehr als eine ausgeführt wird. In vielen Fällen liefert dies die beste Leistung für Ad-hoc-Abfragen.
-In anderen Fällen kann es vorkommen, dass die CPU-Ressourcen für eine bestimmte Abfrage eingeschränkt werden. Wenn man z. B. einen "Hintergrundjob" ausführt, kann man höhere Latenzen tolerieren, um gleichzeitigen Ad-hoc-Abfragen hohe Priorität einzuräumen.
+Kusto ermöglicht das Ausführen von Abfragen und das Verwenden von so viel CPU-Ressourcen wie der Cluster. Es wird versucht, einen angemessenen Roundrobin zwischen Abfragen durchzuführen, wenn mehr als eine ausgeführt wird. Diese Methode ergibt die beste Leistung bei Ad-hoc-Abfragen.
+Zu anderen Zeitpunkten können Sie die CPU-Ressourcen, die für eine bestimmte Abfrage verwendet werden, einschränken. Wenn Sie z. b. einen "Hintergrund Auftrag" ausführen, toleriert das System möglicherweise höhere Wartezeiten, um gleichzeitige Ad-hoc-Abfragen mit hoher Priorität zu versehen.
 
-Kusto unterstützt die Angabe von zwei [Clientanforderungseigenschaften](../api/netfx/request-properties.md) beim Ausführen einer Abfrage, **query_fanout_threads_percent** und **query_fanout_nodes_percent**.
-Beide sind ganze Zahlen, die standardmäßig den Maximalwert (100) haben, aber für eine bestimmte Abfrage auf einen bestimmten Wert reduziert werden können. Die erste steuert den Fanout-Faktor für die Threadverwendung. Wenn es 100 % beträgt, weist der Cluster der Abfrage alle CPUs auf jedem Knoten zu (z. B. auf einem Cluster, der auf Azure D14-Knoten bereitgestellt wird, 16 CPUs), wenn es 50 % mehr ist als die Hälfte der CPUs verwendet wird usw. (Die Zahlen werden auf eine ganze CPU aufgerundet, sodass es sicher ist, sie auf 0 festzulegen.) Der zweite steuert, wie viele Knoten im Cluster pro Unterabfrageverteilungsvorgang verwendet werden sollen, und funktioniert auf ähnliche Weise.
+Kusto unterstützt das Angeben von zwei [Client Anforderungs Eigenschaften](../api/netfx/request-properties.md) , wenn eine Abfrage ausgeführt wird. Die Eigenschaften sind *query_fanout_threads_percent* und *query_fanout_nodes_percent*.
+Beide Eigenschaften sind ganze Zahlen, die standardmäßig den maximalen Wert (100) aufweisen, jedoch für eine bestimmte Abfrage auf einen anderen Wert reduziert werden können. 
 
-## <a name="limit-on-query-complexity"></a>Begrenzung der Abfragekomplexität
+Der erste, *query_fanout_threads_percent*, steuert den Verzweigungen angibt-Faktor für die Thread Verwendung. Bei 100% weist der Cluster alle CPUs auf jedem Knoten zu. Beispielsweise 16 CPUs in einem Cluster, der auf Azure D14-Knoten bereitgestellt ist. Wenn der Wert 50% beträgt, wird die Hälfte der CPUs verwendet usw. Die Zahlen werden auf eine ganze CPU aufgerundet, sodass Sie sicher auf 0 festgelegt werden kann. Mit dem zweiten *query_fanout_nodes_percent*wird gesteuert, wie viele Abfrage Knoten im Cluster pro Unterabfrage-Verteilungs Vorgang verwendet werden sollen. Es funktioniert auf ähnliche Weise.
 
-Während der Abfrageausführung wird der Abfragetext in eine Struktur relationaler Operatoren umgewandelt, die die Abfrage darstellen.
-Falls die Baumtiefe einen internen Schwellenwert (mehrere tausend Ebenen) überschreitet, wird die Abfrage als zu komplex für die Verarbeitung betrachtet und schlägt fehl mit einem Fehlercode, der angibt, dass die Struktur für relationale Operatoren Die Grenzwerte überschreitet.
-In den meisten Fällen wird dies durch eine Abfrage verursacht, die eine lange Liste von binären Operatoren enthält, die miteinander verkettet sind, z. B.:
+## <a name="limit-on-query-complexity"></a>Beschränkung der Abfrage Komplexität
+
+Während der Abfrage Ausführung wird der Abfragetext in eine Struktur von relationalen Operatoren transformiert, die die Abfrage darstellen.
+Wenn die Baum Tiefe einen internen Schwellenwert von mehreren tausend Ebenen überschreitet, wird die Abfrage als zu komplex für die Verarbeitung betrachtet und schlägt mit einem Fehlercode fehl. Der Fehler zeigt an, dass die Struktur der relationalen Operatoren die Grenzen überschreitet.
+Limits werden aufgrund von Abfragen mit langen Listen binärer Operatoren, die miteinander verkettet sind, überschritten. Beispiel:
 
 ```kusto
 T 
@@ -188,7 +199,7 @@ T
         Column == "valueN"
 ```
 
-Für diesen speziellen Fall wird empfohlen, die [`in()`](../query/inoperator.md) Abfrage mithilfe des Operators neu zu schreiben. 
+Schreiben Sie für diesen speziellen Fall die Abfrage mit dem- [`in()`](../query/inoperator.md) Operator um.
 
 ```kusto
 T 

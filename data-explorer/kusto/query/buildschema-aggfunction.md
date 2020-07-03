@@ -1,6 +1,6 @@
 ---
-title: buildschema() (Aggregationsfunktion) - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt buildschema() (Aggregationsfunktion) in Azure Data Explorer.
+title: 'Buildschema () (Aggregations Funktion): Azure-Daten-Explorer'
+description: Dieser Artikel beschreibt Buildschema () (Aggregations Funktion) in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,37 +8,37 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: d0faceae970034ae96ced2b8958af4f16cb5dff4
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: cf21443beffb327e2708b8990017ac37fbbc8d21
+ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517288"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85902041"
 ---
-# <a name="buildschema-aggregation-function"></a>buildschema() (Aggregationsfunktion)
+# <a name="buildschema-aggregation-function"></a>Buildschema () (Aggregations Funktion)
 
-Gibt das minimale Schema zurück, das alle Werte von *DynamicExpr*zugibt.
+Gibt das minimale Schema zurück, das alle Werte von *dynamicexpr*zulässt.
 
-* Kann nur im Kontext der Aggregation innerhalb [der Zusammenfassung](summarizeoperator.md) verwendet werden
+* Kann nur im Kontext der Aggregation verwendet werden [, in zusammen](summarizeoperator.md) Fassung
 
 **Syntax**
 
-`buildschema(` *DynamicExpr* zusammenfassen`)`
+`buildschema(` *dynamicexpr* zusammenfassen`)`
 
 **Argumente**
 
-* *DynamicExpr*: Ausdruck, der für die Aggregationsberechnung verwendet wird. Der Parameterspaltentyp `dynamic`sollte . 
+* *Dynamicexpr*: Ausdruck, der für die Aggregations Berechnung verwendet wird. Der Parameter Spaltentyp muss lauten `dynamic` . 
 
 **Rückgabe**
 
-Der maximale Wert von *Expr* in der gesamten Gruppe.
+Der maximale Wert von *`Expr`* in der Gruppe.
 
 > [!TIP] 
-> Wenn `buildschema(json_column)` ein Syntaxfehler angezeigt wird: *Ist Ihre `json_column` Zeichenfolge eher eine Zeichenfolge als ein dynamisches Objekt?* Wenn ja, müssen `buildschema(parsejson(json_column))`Sie .
+> Wenn `buildschema(json_column)` einen Syntax Fehler ergibt: *ist eine `json_column` Zeichenfolge anstelle eines dynamischen Objekts?* Verwenden Sie dann `buildschema(parsejson(json_column))` .
 
 **Beispiel**
 
-Wenn die Eingabespalte drei dynamische Werte hat:
+Angenommen, die Eingabe Spalte hat drei dynamische Werte.
 
 ||
 |---|
@@ -58,11 +58,11 @@ Lautet das resultierende Schema folgendermaßen:
 
 Das Schema weist auf Folgendes hin:
 
-* Das Stammobjekt ist ein Container mit den vier Eigenschaften x, y, z und t.
-* Die Eigenschaft „x“ kann entweder den Typ „int“ oder „string“ haben.
-* Bei der Eigenschaft „y“ kann es sich entweder um den Typ „double“ handeln oder um einen anderen Container mit einer Eigenschaft namens „w“ vom Typ „string“.
+* Das Stamm Objekt ist ein Container mit vier Eigenschaften mit den Namen x, y, z und t.
+* Die Eigenschaft mit dem Namen "x", die vom Typ "int" oder vom Typ "String" sein kann.
+* Die Eigenschaft mit dem Namen "y", die den Typ "Double" aufweisen kann, oder ein anderer Container mit der Eigenschaft "w" vom Typ "String".
 * Das ``indexer`` -Schlüsselwort gibt an, dass „z“ und „t“ Arrays sind.
-* Jedes Element im Array „z“ ist entweder eine ganze Zahl oder eine Zeichenfolge (string).
+* Jedes Element im Array "z" ist vom Typ "int" oder vom Typ "String".
 * „t“ ist ein Array von Zeichenfolgen.
 * Jede Eigenschaft ist implizit optional, und jedes Array kann leer sein.
 
@@ -76,7 +76,7 @@ Die Syntax des zurückgegebenen Schemas lautet folgendermaßen:
     Union-type ::= '[' Type* ']';
     Primitive-type ::= "int" | "string" | ...;
 
-Sie entsprechen einer Teilmenge der Typscript-Typanmerkungen, die als dynamischer Kusto-Wert codiert sind. In TypeScript würde das Beispielschema folgendermaßen lauten:
+Die Werte entsprechen einer Teilmenge der typescript-Typanmerkungen, die als dynamischer Kusto-Wert codiert sind. In TypeScript würde das Beispielschema folgendermaßen lauten:
 
     var someobject: 
     { 
@@ -85,3 +85,4 @@ Sie entsprechen einer Teilmenge der Typscript-Typanmerkungen, die als dynamische
       z?: { [n:number] : (int | string)},
       t?: { [n:number]: string } 
     }
+    

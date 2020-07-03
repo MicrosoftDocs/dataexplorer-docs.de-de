@@ -8,21 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/05/2020
-ms.openlocfilehash: 0e6564e6c27c62621678ae350514bf1df39c73ae
-ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
+ms.openlocfilehash: 6963c118742593d2402d5ae81d8ff4373a2ff600
+ms.sourcegitcommit: d40fe44e7581d87f63cc0cb939f3aa9c3996fc08
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83722081"
+ms.lasthandoff: 07/02/2020
+ms.locfileid: "85839425"
 ---
 # <a name="data-ingestion-with-the-kustoingest-library"></a>Datenerfassung mit der Kusto. Erfassungs Bibliothek
 
-Dieser Artikel enthält Beispielcode, in dem die Kusto. Erfassungs-Client Bibliothek für die Datenerfassung verwendet wird. Der Code erläutert den empfohlenen Erfassungs Modus für Pipelines auf Produktionsbasis, die als Erfassung in der Warteschlange bezeichnet werden. Die zugehörige Entität für die Kusto. Erfassungs Bibliothek ist die [ikustoqueuedingestclient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) -Schnittstelle. Der Client Code interagiert mit dem Azure-Daten-Explorer Dienst, indem Erfassungs Benachrichtigungen an eine Azure-Warteschlange gesendet werden. Der Verweis auf die Warteschlange wird von der Datenverwaltung Entität abgerufen, die für die Erfassung verantwortlich ist. 
+Dieser Artikel enthält Beispielcode, in dem die Kusto. Erfassungs-Client Bibliothek für die Datenerfassung verwendet wird. Der Code erläutert den empfohlenen Erfassungs Modus für Pipelines auf Produktionsbasis, die als Erfassung in der Warteschlange bezeichnet werden. Die zugehörige Entität für die Kusto. Erfassungs Bibliothek ist die [ikustoqueuedingestclient-Schnittstelle](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient).
+Der Client Code interagiert mit dem Azure-Daten-Explorer Dienst, indem Erfassungs Benachrichtigungen an eine Azure-Warteschlange gesendet werden. Der Verweis auf die Warteschlange wird von der Datenverwaltung Entität abgerufen, die für die Erfassung verantwortlich ist. 
 
 > [!NOTE]
 > Die Interaktion mit dem Datenverwaltung-Dienst muss mithilfe Azure Active Directory (Azure AD) authentifiziert werden.
 
-Das Beispiel verwendet Azure AD Benutzerauthentifizierung und wird unter der Identität des interaktiven Benutzers ausgeführt.
+Der Beispielcode verwendet Azure AD Benutzerauthentifizierung und wird unter der Identität des interaktiven Benutzers ausgeführt.
 
 ## <a name="dependencies"></a>Abhängigkeiten
 
