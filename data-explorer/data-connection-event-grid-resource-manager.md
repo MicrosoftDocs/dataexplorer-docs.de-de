@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 11/28/2019
-ms.openlocfilehash: 813ba82ba80aa5057adec3e29101b99a8fb518fe
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a3b60f5a2dba8e3d8b9c7b299cb371cda9932bf0
+ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493110"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "86013854"
 ---
 # <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-azure-resource-manager-template"></a>Erstellen einer Event Grid-Datenverbindung für Azure Data Explorer mit einer Azure Resource Manager-Vorlage
 
@@ -30,8 +30,8 @@ Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Un
 * Wenn Sie über kein Azure-Abonnement verfügen, können Sie ein [kostenloses Azure-Konto](https://azure.microsoft.com/free/) erstellen, bevor Sie beginnen.
 * Erstellen eines [Clusters und einer Datenbank](create-cluster-database-portal.md)
 * Erstellen einer [Tabellen- und Spaltenzuordnung](ingest-data-event-grid.md#create-a-target-table-in-azure-data-explorer)
-* Erstellen eines [Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-create)
-* Erstellen eines [Speicherkontos mit einem Event Grid-Abonnement](ingest-data-event-grid.md#create-an-event-grid-subscription-in-your-storage-account)
+* Erstellen eines [Event Hubs](/azure/event-hubs/event-hubs-create)
+* Erstellen eines [Speicherkontos mit einem Event Grid-Abonnement](../data-explorer/kusto/management/data-ingestion/eventgrid.md#create-an-event-grid-subscription-in-your-storage-account)
 
 ## <a name="azure-resource-manager-template-for-adding-an-event-grid-data-connection"></a>Azure Resource Manager-Vorlage zum Hinzufügen einer Event Grid-Datenverbindung
 

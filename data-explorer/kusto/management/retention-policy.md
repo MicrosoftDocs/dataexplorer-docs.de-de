@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: e03e529e0c802f0d424deb4048c5809bbe845ddd
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: ebbd9aa5544d97ef1e980bcb3a53f74dbde66547
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617407"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967535"
 ---
-# <a name="retention-policy"></a>Aufbewahrungsrichtlinie
+# <a name="retention-policy-command"></a>Aufbewahrungsrichtlinienbefehl
 
 In diesem Artikel werden Steuerungsbefehle beschrieben, die zum Erstellen und Ändern der [Aufbewahrungs Richtlinie](retentionpolicy.md)verwendet werden.
 
@@ -32,7 +32,7 @@ In diesem Artikel werden Steuerungsbefehle beschrieben, die zum Erstellen und Ä
 
 **Beispiel**
 
-Die Beibehaltungs Richtlinie für die Datenbank mit `MyDatabase`dem Namen anzeigen:
+Die Beibehaltungs Richtlinie für die Datenbank mit dem Namen anzeigen `MyDatabase` :
 
 ```kusto
 .show database MyDatabase policy retention
@@ -53,7 +53,7 @@ Das Löschen der Daten Aufbewahrungs Richtlinie der Tabelle führt dazu, dass di
 
 **Beispiel**
 
-Löschen Sie die Beibehaltungs Richtlinie für die `MyTable1`Tabelle mit dem Namen:
+Löschen Sie die Beibehaltungs Richtlinie für die Tabelle mit dem Namen `MyTable1` :
 
 ```kusto
 .delete table MyTable policy retention
@@ -74,7 +74,7 @@ Löschen Sie die Beibehaltungs Richtlinie für die `MyTable1`Tabelle mit dem Nam
 
 * `entity_type`: Tabelle oder Datenbank
 * `database_or_table`: `database_name` oder `database_name.table_name` oder `table_name` (im Daten Bank Kontext)
-* `table_name`: Name einer Tabelle in einem Daten Bank Kontext.  Ein Platzhalter`*` (ist hier zulässig).
+* `table_name`: Name einer Tabelle in einem Daten Bank Kontext.  Ein Platzhalter ( `*` ist hier zulässig).
 * `retention_policy` :
 
 ```kusto
@@ -85,7 +85,7 @@ Löschen Sie die Beibehaltungs Richtlinie für die `MyTable1`Tabelle mit dem Nam
 
 **Beispiele**
 
-Die Beibehaltungs Richtlinie für die Datenbank mit `MyDatabase`dem Namen anzeigen:
+Die Beibehaltungs Richtlinie für die Datenbank mit dem Namen anzeigen `MyDatabase` :
 
 ```kusto
 .show database MyDatabase policy retention

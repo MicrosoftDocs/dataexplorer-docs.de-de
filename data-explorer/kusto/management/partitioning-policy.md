@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/04/2020
-ms.openlocfilehash: 51068a63adb16626c8b2812fde40782d2ac4a8f1
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: 4f5abfd5c7fffd126033baeb2bbb9243b4400f58
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780574"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967399"
 ---
-# <a name="data-partitioning-policy-management"></a>Richtlinien Verwaltung für die Daten Partitionierung
+# <a name="partitioning-policy-command"></a>Partitionierungsrichtlinienbefehl
 
 Die Richtlinie zur Daten Partitionierung wird [hier](../management/partitioningpolicy.md)ausführlich erläutert.
 
@@ -27,9 +27,9 @@ Die Richtlinie zur Daten Partitionierung wird [hier](../management/partitioningp
 
 Der `.show` Befehl zeigt die Partitionierungs Richtlinie an, die auf die Tabelle angewendet wird.
 
-### <a name="output"></a>Output
+### <a name="output"></a>Ausgabe
 
-|Richtlinienname | Name der Entität | Richtlinie | Untergeordnete Entitäten | Entitätstyp
+|Richtlinienname | Name der Entität | Policy | Untergeordnete Entitäten | Entitätstyp
 |---|---|---|---|---
 |Datapartitionierung | Tabellenname | JSON-Serialisierung des Policy-Objekts | NULL | Tabelle
 

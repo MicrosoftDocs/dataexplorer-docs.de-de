@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: e8d02634ad0c56b2e1e369d4c2cd86c63bdad155
-ms.sourcegitcommit: 56bb7b69654900ed63310ac9537ae08b72bf7209
+ms.openlocfilehash: 6f7efe2916bc5c5344bf4a6c4fa4a60bfaa167b7
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85814193"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967348"
 ---
-# <a name="streaming-ingestion-policy-management"></a>Richtlinien Verwaltung für die streamingansung
+# <a name="streaming-ingestion-policy-command"></a>Befehl zum Übernehmen der streamingrichtlinie
 
 Die Richtlinie für die streamingansung kann für eine Tabelle festgelegt werden, um die streamingerfassung in diese Tabelle zuzulassen. Die Richtlinie kann auch auf Datenbankebene festgelegt werden, um dieselbe Einstellung auf aktuelle und zukünftige Tabellen anzuwenden.
 
@@ -33,7 +33,7 @@ Der `.show policy streamingingestion` Befehl zeigt die Richtlinie für die strea
 
 Dieser Befehl gibt eine Tabelle mit den folgenden Spalten zurück:
 
-|Spalte    |Typ    |BESCHREIBUNG
+|Spalte    |type    |BESCHREIBUNG
 |---|---|---
 |PolicyName|`string`|Der Richtlinien Name: streamingingestionpolicy
 |EntityName|`string`|Datenbank-oder Tabellenname
@@ -115,7 +115,7 @@ Mit dem Befehl wird das Richtlinien Objekt "Table" oder "Database streaminginges
 
 In der Eingabe und Ausgabe von Verwaltungs Befehlen ist das Richtlinien Objekt für die streamingerfassung eine JSON-formatierte Zeichenfolge, die die folgenden Eigenschaften enthält.
 
-|Eigenschaft|Typ|BESCHREIBUNG|Erforderlich/optional
+|Eigenschaft|type|BESCHREIBUNG|Erforderlich/optional
 |---|---|---|---
 |isEnabled|`bool`|Ist die streamingansung für die Entität aktiviert| Erforderlich
 |Hintallocatedrate|`double`|Geschätzte Datenübertragungsrate in GB/Stunde|Optional

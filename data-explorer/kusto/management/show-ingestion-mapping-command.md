@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: 3c19426410046d7ff2357b4967333db8b039d9e6
-ms.sourcegitcommit: f7101c6b41ec250d05f4cb6092e2939958b37b40
+ms.openlocfilehash: 4a225c7d9cb1c5f99434c4595cbd798d020cfd9f
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/03/2020
-ms.locfileid: "84328992"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967433"
 ---
-# <a name="show-ingestion-mappings"></a>. Zuordnungs Zuordnungen anzeigen
+# <a name="show-ingestion-mapping"></a>.show ingestion mapping
 
 Zeigt die Erfassungs Zuordnungen an (alle oder die durch den Namen angegebenen).
 
@@ -39,6 +39,6 @@ Alle Erfassungs Zuordnungen von allen Zuordnungs Typen anzeigen:
 
 **Beispielausgabe**
 
-| Name     | Art | Zuordnung     |
+| Name     | Variante | Zuordnung     |
 |----------|------|-------------|
 | mapping1 | CSV  | `[{"Name":"rownumber","DataType":"int","CsvDataType":null,"Ordinal":0,"ConstValue":null},{"Name":"rowguid","DataType":"string","CsvDataType":null,"Ordinal":1,"ConstValue":null}]` |

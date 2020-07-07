@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: 3d0634819eda78b9cf5fa1d135c82b906363ef90
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 6e8bb6797200c3f3591fa8bf46e9b3ff7d4da49f
+ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492854"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "86013886"
 ---
 # <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-python"></a>Erstellen einer Event Grid-Datenverbindung für Azure Data Explorer mit Python
 
@@ -36,7 +36,7 @@ In diesem Artikel erstellen Sie eine Event Grid-Datenverbindung für Azure Data 
 
 * [Datenbank- und Tabellenrichtlinien](database-table-policies-csharp.md) (optional).
 
-* [Speicherkonto mit einem Event Grid-Abonnement](ingest-data-event-grid.md#create-an-event-grid-subscription-in-your-storage-account)
+* [Speicherkonto mit einem Event Grid-Abonnement](../data-explorer/kusto/management/data-ingestion/eventgrid.md#create-an-event-grid-subscription-in-your-storage-account)
 
 [!INCLUDE [data-explorer-data-connection-install-package-python](includes/data-explorer-data-connection-install-package-python.md)]
 

@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 9ba9f8b0f0a940357eab2277eb24e18b92718bc4
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: be9eea23373489faf44c70146109fe1488877269
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85901814"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967552"
 ---
-# <a name="restrictedviewaccess-policy"></a>Restrictedviewaccess-Richtlinie
+# <a name="restricted-view-access-policy"></a>RestrictedViewAccess-Richtlinie
 
 *Restrictedviewaccess* ist eine optionale Richtlinie, die für Tabellen einer Datenbank aktiviert werden kann.
 

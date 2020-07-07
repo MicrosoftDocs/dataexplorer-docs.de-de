@@ -1,6 +1,6 @@
 ---
-title: Spalte umbenennen - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt die Umbenennungsspalte in Azure Data Explorer.
+title: 'Spalte umbenennen: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird die Spalte umbenennen in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,23 +8,23 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/11/2020
-ms.openlocfilehash: 02e692e01bb8eb0abd49c9673b000b722734db90
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 25d0ff106d406c59c24d26542a8dad1e4992e311
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81520501"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967382"
 ---
-# <a name="rename-column"></a>Umbenennungsspalte
+# <a name="rename-column"></a>Umbenennen der Spalte
 
 Ändert den Namen einer vorhandenen Tabellenspalte.
-Um den Namen mehrerer Spalten zu ändern, siehe [unten](#rename-columns).
+Informationen zum Ändern des Namens mehrerer Spalten finden Sie [unten](#rename-columns).
 
 **Syntax**
 
-`.rename``column` [*DatabaseName* `.`] *TableName* `.` *ColumnExistingName* `to` *ColumnNewName*
+`.rename``column`[*DatabaseName* `.` ] *TableName* `.` *columnetxistingname* `to` *columnnewname*
 
-Wobei *DatabaseName*, *TableName*, *ColumnExistingName*und *ColumnNewName* die Namen der jeweiligen Entitäten sind und den [Idbezeichnerbenennungsregeln](../query/schema-entities/entity-names.md)folgen .
+Dabei sind *DatabaseName*, *TableName*, *columnxistingname*und *columnnewname* die Namen der jeweiligen Entitäten, und befolgen Sie die [Benennungs Regeln für den Bezeichner](../query/schema-entities/entity-names.md).
 
 ## <a name="rename-columns"></a>Umbenennen von Spalten
 
@@ -32,6 +32,6 @@ Wobei *DatabaseName*, *TableName*, *ColumnExistingName*und *ColumnNewName* die N
 
 **Syntax**
 
-`.rename``columns` *Col1* `=` [*Datenbankname* `.` [*Tabellenname* `.` *Col2*]] `,` ]] ...
+`.rename``columns` *Col1* `=` [*DatabaseName* `.` [*TableName* `.` *Col2*]] `,` ...
 
-Der Befehl kann verwendet werden, um die Namen von zwei Spalten zu tauschen (jede wird in den Namen der anderen umbenannt).
+Der Befehl kann verwendet werden, um die Namen von zwei Spalten auszutauschen (jeder wird in den Namen des anderen umbenannt).

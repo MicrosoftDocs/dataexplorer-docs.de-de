@@ -1,6 +1,6 @@
 ---
-title: Cache-Richtlinie - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die Cacherichtlinie in Azure Data Explorer beschrieben.
+title: 'Cache Richtlinie: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt die Cache Richtlinie in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,37 +8,37 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: ca14703b2548bdb23dc3e6e352aeaacbc17303b4
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.openlocfilehash: 319a71e5db7019ed28001f44a1d4a4bcb21984e9
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744471"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967246"
 ---
-# <a name="cache-policy"></a>Cacherichtlinie
+# <a name="cache-policy-command"></a>Cacherichtlinienbefehl
 
-In diesem Artikel werden Befehle beschrieben, die zum Erstellen und Ändern von [Cacherichtlinien](cachepolicy.md) verwendet werden. 
+In diesem Artikel werden Befehle zum Erstellen und Ändern von [Cache Richtlinien](cachepolicy.md) beschrieben. 
 
-## <a name="displaying-the-cache-policy"></a>Anzeigen der Cacherichtlinie
+## <a name="displaying-the-cache-policy"></a>Anzeigen der Cache Richtlinie
 
-Die Richtlinie kann für eine Daten oder eine Tabelle festgelegt werden und wird mit einem der folgenden Befehle angezeigt:
+Die Richtlinie kann für Daten oder Tabellen festgelegt werden und wird mit einem der folgenden Befehle angezeigt:
 
-* `.show``database` *Datenbankname* `policy``caching`
-* `.show``table` *DatabaseName-Tabellenname*`.`*TableName* `policy``caching`
+* `.show` `database` *DatabaseName* `policy` `caching`
+* `.show``table` *DatabaseName*( `.` *Tabellenname* `policy` )`caching`
 
-## <a name="altering-the-cache-policy"></a>Ändern der Cacherichtlinie
+## <a name="altering-the-cache-policy"></a>Ändern der Cache Richtlinie
 
 ```kusto
 .alter <entity_type> <database_or_table_name> policy caching hot = <timespan>
 ```
 
-Ändern der Cacherichtlinie für mehrere Tabellen (im gleichen Datenbankkontext):
+Ändern der Cache Richtlinie für mehrere Tabellen (im selben Daten Bank Kontext):
 
 ```kusto
 .alter tables (table_name [, ...]) policy caching hot = <timespan>
 ```
 
-Cache-Richtlinie:
+Cache Richtlinie:
 
 ```kusto
 {
@@ -52,12 +52,12 @@ Cache-Richtlinie:
 ```
 
 * `entity_type`: Tabelle, Datenbank oder Cluster
-* `database_or_table`: Wenn Entität Tabelle oder Datenbank ist, sollte ihr Name im Befehl wie folgt angegeben werden: 
+* `database_or_table`: Wenn die Entität eine Tabelle oder Datenbank ist, sollte Ihr Name wie folgt im Befehl angegeben werden: 
   - `database_name` oder 
   - `database_name.table_name` oder 
-  - `table_name`(bei Ausführung im Kontext der spezifischen Datenbank)
+  - `table_name`(bei Ausführung im Kontext einer bestimmten Datenbank)
 
-## <a name="deleting-the-cache-policy"></a>Löschen der Cacherichtlinie
+## <a name="deleting-the-cache-policy"></a>Löschen der Cache Richtlinie
 
 ```kusto
 .delete <entity_type> <database_or_table_name> policy caching
@@ -65,31 +65,31 @@ Cache-Richtlinie:
 
 **Beispiele**
 
-Cacherichtlinie für `MyTable` Tabelle `MyDatabase`in der Datenbank anzeigen:
+Cache Richtlinie für Tabelle `MyTable` in Datenbank anzeigen `MyDatabase` :
 
 ```kusto
 .show table MyDatabase.MyTable policy caching 
 ```
 
-Festlegen der Cacherichtlinie der Tabelle `MyTable` (im Datenbankkontext) auf 3 Tage:
+Cache Richtlinie der Tabelle `MyTable` (im Daten Bank Kontext) wird auf 3 Tage festgelegt:
 
 ```kusto
 .alter table MyTable policy caching hot = 3d
 ```
 
-Festlegen der Richtlinie für mehrere Tabellen (im Datenbankkontext) auf 3 Tage:
+Festlegen der Richtlinie für mehrere Tabellen (im Daten Bank Kontext) auf 3 Tage:
 
 ```kusto
 .alter tables (MyTable1, MyTable2, MyTable3) policy caching hot = 3d
 ```
 
-Löschen eines Richtliniensatzes für eine Tabelle:
+Löschen einer für eine Tabelle festgelegten Richtlinie:
 
 ```kusto
 .delete table MyTable policy caching
 ```
 
-Löschen eines Richtliniensatzes für eine Datenbank:
+Löschen einer für eine Datenbank festgelegten Richtlinie:
 
 ```kusto
 .delete database MyDatabase policy caching

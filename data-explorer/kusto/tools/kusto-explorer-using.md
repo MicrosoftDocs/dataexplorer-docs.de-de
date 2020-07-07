@@ -1,5 +1,5 @@
 ---
-title: Verwenden von Kusto. Explorer
+title: Verwenden von Kusto.Explorer
 description: Erfahren Sie, wie Sie Kusto. Explorer verwenden.
 author: orspod
 ms.author: orspodek
@@ -7,14 +7,14 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: 98a42fd72a28089e6add53aed5346ce2d0e5d993
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
+ms.openlocfilehash: fc8e34be3d61c690bc94795e6bd37f2559d247e0
+ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83866134"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "86013907"
 ---
-# <a name="using-kustoexplorer"></a>Verwenden von Kusto. Explorer
+# <a name="using-kustoexplorer"></a>Verwenden von Kusto.Explorer
 
 Kusto. Explorer ist eine Desktop Anwendung, mit der Sie Ihre Daten mithilfe der Kusto-Abfragesprache in einer benutzerfreundlichen Benutzeroberfläche untersuchen können. In diesem Artikel erfahren Sie, wie Sie Such-und Abfrage Modi verwenden, Ihre Abfragen freigeben und Cluster, Datenbanken und Tabellen verwalten.
 
@@ -164,9 +164,9 @@ https://help.kusto.windows.net/Samples?web=0&query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSs
 Paramete Abfragen können mit Deep-Linking verwendet werden.
 
 1. Erstellen Sie eine Abfrage, die als Parameterabfrage geformt werden soll (z. b. `KustoLogs | where Timestamp > ago({Period}) | count` ). 
-1. Geben Sie in diesem Fall einen Parameter für jeden Abfrage Parameter im URI an:
+1. Geben Sie einen Parameter für jeden Abfrage Parameter im URI an, z. b.:
 
-https://mycluster.kusto.windows.net/MyDatabase?web=0&query=KustoLogs+%7c+where+Timestamp+>+ago({Period})+%7c+count&Period=1h
+   `https://mycluster.kusto.windows.net/MyDatabase?web=0&query=KustoLogs+%7c+where+Timestamp+>+ago({Period})+%7c+count&Period=1h`
 
 ### <a name="getting-shorter-links"></a>Erhalten kürzerer Links
 
@@ -240,8 +240,8 @@ Klicken Sie im Bereich [Verbindungen](kusto-explorer.md#connections-tab)mit der 
 ## <a name="next-steps"></a>Nächste Schritte
 
 * [Kusto. Explorer-Tastenkombinationen](kusto-explorer-shortcuts.md)
-* [Kusto. Explorer-Optionen](kusto-explorer-options.md)
-* [Problembehandlung bei Kusto. Explorer](kusto-explorer-troubleshooting.md)
+* [Optionen von Kusto.Explorer](kusto-explorer-options.md)
+* [Problembehandlung für Kusto.Explorer](kusto-explorer-troubleshooting.md)
 
 Erfahren Sie mehr über die Tools und Hilfsprogramme von Kusto. Explorer:
 * [Kusto. Explorer-Code Analyse](kusto-explorer-code-analyzer.md)

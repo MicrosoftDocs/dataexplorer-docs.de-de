@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 05/19/2020
-ms.openlocfilehash: 15c9ff61067f25f8a0f63ce4078b158277740db3
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
-ms.translationtype: HT
+ms.openlocfilehash: 6c36ace478e9bc026c028bfb6393bcfdf4eebdfa
+ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83863557"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "86013927"
 ---
 # <a name="getting-started-with-kustoexplorer"></a>Getting Started with Kusto. Explorer
 
@@ -26,9 +26,9 @@ Mit Kusto. Explorer können Sie folgende Aktionen ausführen:
 
 ## <a name="installing-kustoexplorer"></a>Installieren von Kusto. Explorer
 
-* Installieren des [Kusto. Explorer-Tools](https://aka.ms/ke)
+* Installieren Sie das [Tool Kusto. Explorer](https://aka.ms/ke).
 
-* Greifen Sie stattdessen mit Ihrem Browser auf Ihren Kusto-Cluster zu: [https://<your_cluster>. Kusto.Windows.net](https://your_cluster.kusto.windows.net). Ersetzen Sie <your_cluster> durch den Namen Ihres Azure-Daten-Explorer Clusters.
+* Sie können mit Ihrem Browser unter auf Ihren Kusto-Cluster zugreifen `https://<your_cluster>.kusto.windows.net` . (Ersetzen `<your_cluster>` Sie durch den Namen Ihres Azure-Daten-Explorer Clusters.)
 
 ### <a name="using-chrome-and-kustoexplorer"></a>Verwenden von Chrome und Kusto. Explorer
 
@@ -51,11 +51,11 @@ Die Benutzeroberfläche "Kusto. Explorer" wurde mit einem Layout entworfen, das 
 
 Der Menübereich von Kusto. Explorer umfasst die folgenden Registerkarten:
 
-* [Start](#home-tab)
+* [Home](#home-tab)
 * [Datei](#file-tab)
 * [Verbindungen](#connections-tab)
 * [Ansicht](#view-tab)
-* [Tools](#tools-tab)
+* [Extras](#tools-tab)
 * [Überwachung](#monitoring-tab)
 * [Verwaltung](#management-tab)
 * [Hilfe](#help-tab)
@@ -67,7 +67,7 @@ Der Menübereich von Kusto. Explorer umfasst die folgenden Registerkarten:
 Auf der Registerkarte Home werden die zuletzt verwendeten Funktionen angezeigt, die in Abschnitte unterteilt sind:
 
 * [Abfrage](#query-section)
-* [Teilen](#share-section)
+* [Freigeben](#share-section)
 * [Visualisierungen](#visualizations-section)
 * [Ansicht](#view-section)
 * [Hilfe](#help-tab) 
@@ -219,11 +219,11 @@ Auf der Registerkarte Home werden die zuletzt verwendeten Funktionen angezeigt, 
 ||---------*Analy*---------|
 |Query Analyzer| Hiermit wird das Abfrage Analysetool gestartet.|
 |Abfrage Prüfung | Analysiert die aktuelle Abfrage und gibt eine Reihe von anwendbaren Verbesserungsempfehlungen aus.|
-|Calculator| Starten des Rechners|
+|Rechner| Starten des Rechners|
 ||---------*Analytik*---------|
 |Analytische Berichte| Öffnet ein Dashboard mit mehreren vorgefertigten Berichten für die Datenanalyse.|
 ||---------*Übersetzen*---------|
-|Abfrage zum Power BI| Übersetzt eine Abfrage in ein Format, das für die Verwendung von in geeignet ist Power BI|
+|Abfrage an Power BI| Übersetzt eine Abfrage in ein Format, das für die Verwendung von in geeignet ist Power BI|
 ||---------*Optionen*---------|
 |Optionen zurücksetzen| Legt die Anwendungseinstellungen auf die Standardwerte fest.|
 |Optionen| Öffnet ein Tool zum Konfigurieren von Anwendungseinstellungen. Weitere Informationen zu [Kusto. Explorer-Optionen](kusto-explorer-options.md).|
@@ -259,7 +259,7 @@ Auf der Registerkarte Home werden die zuletzt verwendeten Funktionen angezeigt, 
 |-----------------|---------|
 ||---------*Dokumentation*---------|
 |Hilfe             | Öffnet einen Link zur Kusto-Online Dokumentation.  | 
-|Neues       | Öffnet ein Dokument, in dem alle Änderungen an Kusto. Explorer aufgelistet sind.|
+|Neuigkeiten       | Öffnet ein Dokument, in dem alle Änderungen an Kusto. Explorer aufgelistet sind.|
 |Report Issue (Problem melden)      |Öffnet ein Dialogfeld mit zwei Optionen: <ul><li>Probleme im Zusammenhang mit dem Dienst melden</li><li>Melden von Problemen in der Client Anwendung</li></ul> | 
 |Feature vorschlagen  | Öffnet einen Link zum Kusto-Feedback Forum. | 
 |Updates überprüfen     | Prüft, ob Updates für Ihre Version von Kusto. Explorer vorhanden sind. | 
@@ -319,10 +319,10 @@ Um das Ausgabe Farbschema zu ändern oder dieses Verhalten zu deaktivieren, wäh
 
 Weitere Informationen zum Arbeiten mit "Kusto. Explorer" finden Sie hier:
 
-* [Verwenden von Kusto. Explorer](kusto-explorer-using.md)
+* [Verwenden von Kusto.Explorer](kusto-explorer-using.md)
 * [Kusto. Explorer-Tastenkombinationen](kusto-explorer-shortcuts.md)
-* [Kusto. Explorer-Optionen](kusto-explorer-options.md)
-* [Problembehandlung bei Kusto. Explorer](kusto-explorer-troubleshooting.md)
+* [Optionen von Kusto.Explorer](kusto-explorer-options.md)
+* [Problembehandlung für Kusto.Explorer](kusto-explorer-troubleshooting.md)
 
 Erfahren Sie mehr über die Tools und Hilfsprogramme von Kusto. Explorer:
 * [Kusto. Explorer-Code Analyse](kusto-explorer-code-analyzer.md)

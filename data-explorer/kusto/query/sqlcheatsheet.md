@@ -8,20 +8,20 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/22/2020
-ms.openlocfilehash: 693c639ab3240ac555916a5f6862e7d57dba65e5
-ms.sourcegitcommit: 085e212fe9d497ee6f9f477dd0d5077f7a3e492e
+ms.openlocfilehash: cc00da54cad69c36041e36fd60524c7e4ef0ba35
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85133429"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967144"
 ---
-# <a name="sql-to-kusto-query-translation"></a>SQL-zu-Kusto-Abfrage Übersetzung
+# <a name="sql-to-kusto-cheat-sheet"></a>Spickzettel zu SQL-zu-Kusto
 
 Kusto unterstützt eine Teilmenge der SQL-Sprache. Eine vollständige Liste der nicht unterstützten Funktionen finden Sie in der Liste der [bekannten SQL-Probleme](../api/tds/sqlknownissues.md) .
 
 Die primäre Sprache für die Interaktion mit Kusto ist kql (Kusto Query Language). Um das Übergangs-und Lernverfahren zu vereinfachen, können Sie Kusto verwenden, um SQL-Abfragen in kql zu übersetzen. Senden Sie eine SQL-Abfrage an Kusto, und stellen Sie Ihr das Verb "EXPLAIN" vorangestellt.
 
-Zum Beispiel:
+Beispiel:
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

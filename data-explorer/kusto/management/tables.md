@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/27/2020
-ms.openlocfilehash: ed70e01f7d955ba92806e7e11f740490e87cc664
-ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
+ms.openlocfilehash: 4de0e749ad47b8f2e3f2c0f26d5d18466efaff97
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "84011447"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967297"
 ---
 # <a name="tables-management"></a>Tabellen Verwaltung
 
-In diesem Thema wird der Lebenszyklus von Tabellen und zugehörigen Steuerungs Befehlen erläutert.
+In diesem Thema wird der Lebenszyklus von Tabellen und zugehörigen Steuerungs Befehlen erläutert, die zum Durchsuchen, erstellen und Ändern von Tabellen hilfreich sind.
 
 Wählen Sie in der Tabelle unten die Links aus, um weitere Informationen zu diesen zu finden.
 

@@ -1,33 +1,33 @@
 ---
-title: .create-Tabellen - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden .create-Tabellen in Azure Data Explorer beschrieben.
+title: '. Create Tables: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird beschrieben, wie Tabellen in Azure Daten-Explorer erstellt werden.
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 02/04/2020
-ms.openlocfilehash: f76c4d4a2780b58d9596537aea183d026d086fc5
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.date: 07/05/2020
+ms.openlocfilehash: ff8b3cfae6d3364b4d094f588c8130761fa5cb31
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744032"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85966991"
 ---
 # <a name="create-tables"></a>.create tables
 
-Erstellt neue leere Tabellen als Massenvorgang.
+Erstellt neue leere Tabellen als Massen Vorgang.
 
 Der Befehl muss im Kontext einer bestimmten Datenbank ausgeführt werden.
 
-Erfordert [Datenbankbenutzerberechtigung](../management/access-control/role-based-authorization.md).
+Erfordert die [Berechtigung für Datenbankbenutzer](../management/access-control/role-based-authorization.md).
 
 **Syntax**
 
-`.create``tables` *TableName1* ([columnName:columnType], ...) [`,` *TableName2* ([columnName:columnType], ...) ... ]
+`.create``tables` *TableName1* ([columnName: ColumnType],...) [ `,` *TableName2* ([columnName: ColumnType],...)...] [ `with` `(` `folder` `=` *FolderName*] `)` ]
 
-Wenn bereits eine Tabelle vorhanden ist, gibt der Befehl den Erfolg zurück.
+Wenn bereits eine Tabelle vorhanden ist, wird der Befehl erfolgreich zurückgegeben.
  
 **Beispiel** 
 
