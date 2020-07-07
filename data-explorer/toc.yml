@@ -295,7 +295,7 @@
           href: spark-connector.md
         - name: Cosmos DB
           href: 'https://github.com/Azure/azure-kusto-labs/tree/master/cosmosdb-adx-integration'
-        - name: Herstellen einer Databricks-Verbindung unter Verwendung von Python
+        - name: Herstellen einer Verbindung über Azure Databricks
           href: connect-from-databricks.md
         - name: Analysieren von Daten in Jupyter Notebooks und Kqlmagic
           href: kqlmagic.md
@@ -1163,25 +1163,25 @@
               href: kusto/query/geo-polygon-to-s2cells-function.md
         - name: Benutzeranalyse
           items:
-            - name: Benutzeranalyse-Plug-Ins
+            - name: Übersicht über Benutzeranalysen-Plug-Ins
               href: ./kusto/query/useranalytics.md
-            - name: Plug-In für die Anzahl aktiver Benutzer
+            - name: active_users_count-Plug-In
               href: ./kusto/query/active-users-count-plugin.md
-            - name: Plug-In für Aktivitätszählermetriken
+            - name: activity_counts_metrics-Plug-In
               href: ./kusto/query/activity-counts-metrics-plugin.md
-            - name: Aktivitätsbeteiligungs-Plug-In
+            - name: activity_engagement-Plug-In
               href: ./kusto/query/activity-engagement-plugin.md
-            - name: Aktivitätsmetriken-Plug-In
+            - name: activity_metrics-Plug-In
               href: ./kusto/query/activity-metrics-plugin.md
-            - name: 'Aktivitätsmetriken-Plug-In: Neu'
+            - name: new_activity_metrics-Plug-In
               href: ./kusto/query/new-activity-metrics-plugin.md
-            - name: Plug-In für Trichtersequenzabschluss
+            - name: funnel_sequence_completion-Plug-In
               href: ./kusto/query/funnel-sequence-completion-plugin.md
-            - name: Trichtersequenz-Plug-In
+            - name: funnel_sequence-Plug-In
               href: ./kusto/query/funnel-sequence-plugin.md
-            - name: Plug-In für Sitzungsanzahl
+            - name: session_count-Plug-In
               href: ./kusto/query/session-count-plugin.md
-            - name: Plug-In für Zählungen für gleitendes Fenster
+            - name: sliding_window_counts-Plug-In
               href: ./kusto/query/sliding-window-counts-plugin.md
         - name: Referenzmaterial für die Kusto-Abfragesprache
           items:
@@ -1221,34 +1221,33 @@
     - name: Verwaltung
       href: ./kusto/management/index.md
       items:
-        - name: Übersicht
+        - name: Übersicht über die Verwaltung (Steuerungsbefehle)
           href: ./kusto/management/index.md
           items:
-            - name: Bewährte Methoden
+            - name: Best Practices für das Schemadesign
               href: ./kusto/management/best-practices.md
         - name: Schema
-          href: ./kusto/management/schema.md
           items:
-            - name: Datenbanken
+            - name: Datenbankverwaltung
               href: ./kusto/management/databases.md
               items:
                 - name: .show databases
                   href: ./kusto/management/show-databases.md
                 - name: .show database
                   href: ./kusto/management/show-database.md
-                - name: .show cluster database
+                - name: .show cluster databases
                   href: ./kusto/management/show-cluster-database.md
-                - name: .alter database
+                - name: .alter database prettyname
                   href: ./kusto/management/alter-database.md
-                - name: .show database schema
+                - name: .show database(s) schema
                   href: ./kusto/management/show-schema-database.md
                 - name: .execute database script
                   href: ./kusto/management/execute-database-script.md
             - name: Tabellen
               items:
-                - name: Übersicht über Tabellen
+                - name: Tabellenverwaltung
                   href: ./kusto/management/tables.md
-                - name: .alter merge table
+                - name: .alter-merge table
                   href: ./kusto/management/alter-merge-table-command.md
                 - name: .alter table
                   href: ./kusto/management/alter-table-command.md
@@ -1268,13 +1267,15 @@
                   href: ./kusto/management/create-table-command.md
                 - name: .create tables
                   href: ./kusto/management/create-tables-command.md
+                - name: .create-merge table
+                  href: ./kusto/management/create-merge-table-command.md
                 - name: .create-merge tables
                   href: ./kusto/management/create-merge-tables-command.md
                 - name: .drop table(s)
                   href: ./kusto/management/drop-table-command.md
-                - name: .rename table
+                - name: .rename table(s)
                   href: ./kusto/management/rename-table-command.md
-                - name: .show table
+                - name: .show tables
                   href: ./kusto/management/show-tables-command.md
                 - name: .undo drop table
                   href: ./kusto/management/undo-drop-table-command.md
@@ -1292,7 +1293,7 @@
                   href: ./kusto/management/external-tables-azurestorage-azuredatalake.md
             - name: Spalten
               items:
-                - name: Übersicht über Spalten
+                - name: Spaltenverwaltung
                   href: ./kusto/management/columns.md
                 - name: .alter column
                   href: ./kusto/management/alter-column.md
@@ -1302,17 +1303,17 @@
                   href: ./kusto/management/drop-column.md
                 - name: .rename column(s)
                   href: ./kusto/management/rename-column.md
-            - name: Zuordnungen
+            - name: Datenzuordnungen
               href: ./kusto/management/mappings.md
             - name: Functions
               items:
-                - name: Übersicht über Funktionen
+                - name: Übersicht über die Verwaltung gespeicherter Funktionen
                   href: ./kusto/management/functions.md
                 - name: .alter function
                   href: ./kusto/management/alter-function.md
-                - name: .alter docstring function
+                - name: .alter function docstring
                   href: ./kusto/management/alter-docstring-function.md
-                - name: .alter folder function
+                - name: .alter function folder
                   href: ./kusto/management/alter-folder-function.md
                 - name: .create function
                   href: ./kusto/management/create-function.md
@@ -1320,98 +1321,96 @@
                   href: ./kusto/management/create-alter-function.md
                 - name: .drop function
                   href: ./kusto/management/drop-function.md
-                - name: .show function
+                - name: .show functions
                   href: ./kusto/management/show-function.md
         - name: Richtlinien
           items:
-            - name: Übersicht über Richtlinien
-              href: ./kusto/management/policies.md
-            - name: Cacherichtlinie
-              items:
-                - name: Cacherichtlinie
-                  href: ./kusto/management/cachepolicy.md
-                - name: Cacherichtlinienbefehl
-                  href: ./kusto/management/cache-policy.md
-            - name: IngestionTime-Richtlinie
-              items:
-                - name: IngestionTime-Richtlinie
-                  href: ./kusto/management/ingestiontimepolicy.md
-                - name: IngestionTime-Richtlinienbefehl
-                  href: ./kusto/management/ingestiontime-policy.md
-            - name: Aufbewahrungsrichtlinie
-              items:
-                - name: Aufbewahrungsrichtlinie
-                  href: ./kusto/management/retentionpolicy.md
-                - name: Aufbewahrungsrichtlinienbefehl
-                  href: ./kusto/management/retention-policy.md
-            - name: RowLevelSecurity-Richtlinie
-              items:
-                - name: Sicherheitsrichtlinie auf Zeilenebene
-                  href: ./kusto/management/rowlevelsecuritypolicy.md
-                - name: Richtlinienbefehl für „row_level_security“
-                  href: ./kusto/management/row-level-security-policy.md
-            - name: RowOrder-Richtlinie
-              items:
-                - name: Richtlinie für die Zeilenreihenfolge
-                  href: ./kusto/management/roworderpolicy.md
-                - name: RowOrder-Befehl
-                  href: ./kusto/management/roworder-policy.md
-            - name: Aktualisieren von Richtlinien
-              items:
-                - name: Aktualisieren von Richtlinien
-                  href: ./kusto/management/updatepolicy.md
-                - name: Updaterichtlinienbefehl
-                  href: ./kusto/management/update-policy.md
-            - name: Batch-Richtlinie
+            - name: Batchverarbeitung der Datenerfassung
               items:
                 - name: IngestionBatching-Richtlinie
                   href: ./kusto/management/batchingpolicy.md
                 - name: IngestionBatching-Richtlinienbefehl
                   href: ./kusto/management/batching-policy.md
-            - name: Zusammenführungsrichtlinie
+            - name: Cache
+              items:
+                - name: Cache-Richtlinie (Cache für heiße und kalte Daten)
+                  href: ./kusto/management/cachepolicy.md
+                - name: Cacherichtlinienbefehl
+                  href: ./kusto/management/cache-policy.md
+            - name: Legende
+              href: ./kusto/management/calloutpolicy.md
+            - name: Capacity
+              items:
+                - name: Kapazitätsrichtlinie
+                  href: ./kusto/management/capacitypolicy.md
+                - name: Kapazitätsrichtlinienbefehle
+                  href: ./kusto/management/capacity-policy.md
+            - name: IngestionTime
+              items:
+                - name: IngestionTime-Richtlinie
+                  href: ./kusto/management/ingestiontimepolicy.md
+                - name: IngestionTime-Richtlinienbefehl
+                  href: ./kusto/management/ingestiontime-policy.md
+            - name: Merge
               items:
                 - name: Zusammenführungsrichtlinie
                   href: ./kusto/management/mergepolicy.md
                 - name: Zusammenführungsrichtlinienbefehl
                   href: ./kusto/management/merge-policy.md
-            - name: Partitionierungsrichtlinie
+            - name: Partitionierung
               items:
                 - name: Partitionierungsrichtlinie
                   href: ./kusto/management/partitioningpolicy.md
                 - name: Partitionierungsrichtlinienbefehl
                   href: ./kusto/management/partitioning-policy.md
-            - name: RestrictedViewAccess-Richtlinie
+            - name: Aufbewahrung
+              items:
+                - name: Aufbewahrungsrichtlinie
+                  href: ./kusto/management/retentionpolicy.md
+                - name: Aufbewahrungsrichtlinienbefehl
+                  href: ./kusto/management/retention-policy.md
+            - name: RestrictedViewAccess
               items:
                 - name: RestrictedViewAccess-Richtlinie
                   href: ./kusto/management/restrictedviewaccesspolicy.md
                 - name: Richtlinienbefehl für „restricted_view_access“
                   href: ./kusto/management/restrictedviewaccess-policy.md
-            - name: Sandbox-Richtlinie
+            - name: Sicherheit auf Zeilenebene
+              items:
+                - name: Sicherheitsrichtlinie auf Zeilenebene
+                  href: ./kusto/management/rowlevelsecuritypolicy.md
+                - name: Richtlinienbefehl für „row_level_security“
+                  href: ./kusto/management/row-level-security-policy.md
+            - name: RowOrder
+              items:
+                - name: RowOrder-Richtlinie
+                  href: ./kusto/management/roworderpolicy.md
+                - name: RowOrder-Richtlinienbefehl
+                  href: ./kusto/management/roworder-policy.md
+            - name: Sandbox
               items:
                 - name: Sandbox-Richtlinie
                   href: ./kusto/management/sandboxpolicy.md
                 - name: Sandbox-Richtlinienbefehl
                   href: ./kusto/management/sandbox-policy.md
-            - name: Shardingrichtlinie
+            - name: Sharding (Horizontales Partitionieren)
               items:
                 - name: Shardingrichtlinie
                   href: ./kusto/management/shardingpolicy.md
                 - name: Shardingrichtlinienbefehl
                   href: ./kusto/management/sharding-policy.md
-            - name: Streamingerfassungsrichtlinie
+            - name: Streamingerfassung
               items:
                 - name: Streamingerfassungsrichtlinie
                   href: ./kusto/management/streamingingestionpolicy.md
                 - name: Streamingerfassungsrichtlinienbefehl
                   href: ./kusto/management/streamingingestion-policy.md
-            - name: Aufrufrichtlinie
-              href: ./kusto/management/calloutpolicy.md
-            - name: Kapazitätsrichtlinie
+            - name: Aktualisieren
               items:
-                - name: Kapazitätsrichtlinie
-                  href: ./kusto/management/capacitypolicy.md
-                - name: Kapazitätsrichtlinienbefehl
-                  href: ./kusto/management/capacity-policy.md
+                - name: Aktualisieren von Richtlinien
+                  href: ./kusto/management/updatepolicy.md
+                - name: Updaterichtlinienbefehl
+                  href: ./kusto/management/update-policy.md
         - name: Sicherheitsrollen
           href: ./kusto/management/security-roles.md
         - name: Datenerfassung
@@ -1531,7 +1530,7 @@
               href: ./kusto/api/tds/tdskql.md
             - name: Clients
               href: ./kusto/api/tds/clients.md
-            - name: Verknüpfter Server
+            - name: Verbindungsserver
               href: ./kusto/api/tds/linkedserver.md
             - name: AAD
               href: ./kusto/api/tds/aad.md

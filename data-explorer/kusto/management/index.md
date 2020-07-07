@@ -8,12 +8,11 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1277de1be577de7f9f6d4adf1b74460eac4a8c42
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
-ms.translationtype: HT
+ms.openlocfilehash: b42cf002382cf4f7b79f7f734b6c7137f42fcbc8
+ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81490343"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "85967025"
 ---
 # <a name="management-control-commands-overview"></a>Übersicht über die Verwaltung (Steuerungsbefehle)
 
@@ -41,6 +40,13 @@ Dabei werden verschiedene Szenarien unterstützt:
 Da die gesamte Kombination ein Steuerungsbefehl und keine Abfrage ist, muss der Text der Anforderung mit einem Punkt (`.`) beginnen, und die Anforderung muss an den Verwaltungsendpunkt des Diensts gesendet werden.
 
 Beachten Sie auch, dass [Abfrageanweisungen](../query/statements.md) innerhalb des Abfrageteils des Texts angegeben werden. (Sie können nicht vor dem eigentlichen Befehl platziert werden.)
+
+>[!NOTE]
+> Führen Sie Vorgänge vom Typ „[command-then-query]“ nicht zu häufig aus.
+> *command-then-query* leitet das Resultset des Steuerungsbefehl weiter und wendet Filter/Aggregationen darauf an.
+>  * Beispiel: `.show ... | where ... | summarize ...`
+>   * Bei der Ausführung von Befehlen wie: `.show cluster extents | count` (Schwerpunkt auf `| count`) bereitet Kusto zuerst eine Datentabelle vor, die alle Details aller Erweiterungen im Cluster enthält. Das System sendet dann diese speicherinterne Tabelle an die Kusto-Engine, um die Anzahl zu ermitteln. Das System arbeitet tatsächlich hart in einem nicht optimierten Pfad, um Ihnen eine solche einfache Antwort zu geben.
+
 
 **AdminThenQuery** kann auf zwei Arten angegeben werden:
 
@@ -72,3 +78,5 @@ $command_results | extend LastColumn=useless(TableName)
 let text="Hello, World!";
 print str=Text
 ```
+
+
