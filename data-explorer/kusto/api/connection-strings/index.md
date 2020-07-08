@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 53c3caecc373a646162016fc1717ce1b0b0b85d1
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 9cea718db64c3da998df8b832d886ebd87d0f241
+ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81490071"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86058761"
 ---
 # <a name="connection-strings"></a>Verbindungszeichenfolgen
 
@@ -27,3 +27,6 @@ Verbindungszeichenfolgen können unterschiedliche Formate haben:
 * [Storage-Verbindungszeichenfolgen](./storage.md) beschreiben, wie Kusto auf einen externen Speicherdienst wie Azure Blob Storage oder Azure Data Lake Storage verwiesen wird.
 * SQL-Verbindungszeichenfolgen werden vom [Kusto-Plug-In „sql_request“](../../query/sqlrequestplugin.md) verwendet, um Anforderungen an den Azure DB-Dienst auszugeben, sowie vom [Befehl zum Exportieren von Daten nach SQL](../../management/data-export/export-data-to-sql.md).  
   Diese Verbindungszeichenfolgen entsprechen der Spezifikation [SqlClient-Verbindungszeichenfolgen](https://docs.microsoft.com/dotnet/framework/data/adonet/connection-string-syntax#sqlclient-connection-strings).
+
+> [!NOTE]
+> Einige Verbindungszeichenfolgen können auf Sicherheitsprinzipale verweisen. Weitere Informationen zum Angeben von Sicherheitsprinzipalen in Verbindungszeichenfolgen finden Sie unter [Prinzipale und Identitätsanbieter](../../management/access-control/principals-and-identity-providers.md).
