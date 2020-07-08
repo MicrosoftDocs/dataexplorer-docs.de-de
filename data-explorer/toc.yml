@@ -70,9 +70,9 @@
           items:
             - name: Übersicht über die 1-Klick-Erfassung
               href: ingest-data-one-click.md
-            - name: 1-Klick-Erfassung in einer neuen Tabelle
+            - name: CSV-Daten aus Container in neue Tabelle
               href: one-click-ingestion-new-table.md
-            - name: 1-Klick-Erfassung in einer vorhandenen Tabelle
+            - name: JSON-Daten aus lokaler Datei in vorhandene Tabelle
               href: one-click-ingestion-existing-table.md
         - name: Streamingerfassung
           items:
@@ -1486,7 +1486,21 @@
             - name: Übersicht über Erweiterungen (Datenshards)
               href: ./kusto/management/extents-overview.md
             - name: Befehle für Erweiterungen
-              href: ./kusto/management/extents-commands.md
+              items:
+                - name: .alter extent
+                  href: ./kusto/management/alter-extent.md
+                - name: .drop extents
+                  href: ./kusto/management/drop-extents.md
+                - name: .drop extent tags
+                  href: ./kusto/management/drop-extent-tags.md
+                - name: .merge extents
+                  href: ./kusto/management/merge-extents.md
+                - name: .move extents
+                  href: ./kusto/management/move-extents.md
+                - name: .replace extents
+                  href: ./kusto/management/replace-extents.md
+                - name: .show extents
+                  href: ./kusto/management/show-extents.md
             - name: Cluster-Follower
               href: ./kusto/management/cluster-follower.md
             - name: Datenbereinigung
