@@ -7,12 +7,11 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: d2432d302640d20bb199972bc686dadab41278f1
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
-ms.translationtype: HT
+ms.openlocfilehash: 627c60b1d5c39aa3e5c84f6ee87340c418fa542e
+ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493094"
+ms.lasthandoff: 07/06/2020
+ms.locfileid: "86013870"
 ---
 # <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-c"></a>Erstellen einer Event Grid-Datenverbindung für Azure Data Explorer mit C#
 
@@ -32,7 +31,7 @@ Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Un
 * Erstellen eines [Clusters und einer Datenbank](create-cluster-database-csharp.md)
 * Erstellen einer [Tabelle und Spaltenzuordnung](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
 * Festlegen von [Datenbank- und Tabellenrichtlinien](database-table-policies-csharp.md) (optional)
-* Erstellen eines [Speicherkontos mit einem Event Grid-Abonnement](ingest-data-event-grid.md#create-an-event-grid-subscription-in-your-storage-account)
+* Erstellen eines [Speicherkontos mit einem Event Grid-Abonnement](../data-explorer/kusto/management/data-ingestion/eventgrid.md#create-an-event-grid-subscription-in-your-storage-account)
 
 [!INCLUDE [data-explorer-data-connection-install-nuget-csharp](includes/data-explorer-data-connection-install-nuget-csharp.md)]
 
@@ -97,16 +96,23 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
 
 ## <a name="generate-sample-data"></a>Generieren von Beispieldaten
 
-Nachdem nun eine Verbindung zwischen Azure Data Explorer und dem Speicherkonto besteht, können Sie Beispieldaten erstellen und in den Blobspeicher hochladen.
+Nachdem nun eine Verbindung zwischen Azure Data Explorer und dem Speicherkonto besteht, können Sie Beispieldaten erstellen und in den Speicher hochladen.
 
-Mit diesem Skript wird ein neuer Container in Ihrem Speicherkonto erstellt, eine vorhandene Datei wird in den Container hochgeladen (als Blob), und anschließend werden die Blobs im Container aufgeführt.
+> [!NOTE]
+> Azure Data Explorer löscht die Blobs nach der Erfassung nicht. Behalten Sie die Blobs für drei bis fünf Tage bei, indem Sie den [Azure Blob Storage-Lebenszyklus](/azure/storage/blobs/storage-lifecycle-management-concepts?tabs=azure-portal) zum Verwalten von Bloblöschungen verwenden.
+
+### <a name="upload-file-using-azure-blob-storage-sdk"></a>Hochladen einer Datei mit dem Azure Blob Storage SDK
+
+Mit dem folgenden Codeausschnitt wird ein neuer Container in Ihrem Speicherkonto erstellt, eine vorhandene Datei wird in den Container hochgeladen (als Blob), und anschließend werden die Blobs im Container aufgeführt.
 
 ```csharp
 var azureStorageAccountConnectionString=<storage_account_connection_string>;
 
-var containerName=<container_name>;
-var blobName=<blob_name>;
-var localFileName=<file_to_upload>;
+var containerName = <container_name>;
+var blobName = <blob_name>;
+var localFileName = <file_to_upload>;
+var uncompressedSizeInBytes = <uncompressed_size_in_bytes>;
+var mapping = <mappingReference>;
 
 // Creating the container
 var azureStorageAccount = CloudStorageAccount.Parse(azureStorageAccountConnectionString);
@@ -116,15 +122,49 @@ container.CreateIfNotExists();
 
 // Set metadata and upload file to blob
 var blob = container.GetBlockBlobReference(blobName);
-blob.Metadata.Add("rawSizeBytes", "4096‬"); // the uncompressed size is 4096 bytes
-blob.Metadata.Add("kustoIngestionMappingReference", "mapping_v2‬");
+blob.Metadata.Add("rawSizeBytes", uncompressedSizeInBytes);
+blob.Metadata.Add("kustoIngestionMappingReference", mapping);
 blob.UploadFromFile(localFileName);
 
 // List blobs
 var blobs = container.ListBlobs();
 ```
 
+### <a name="upload-file-using-azure-data-lake-sdk"></a>Hochladen einer Datei mit dem Azure Data Lake SDK
+
+Wenn Sie mit Data Lake Storage Gen2 arbeiten, können Sie das [Azure Data Lake SDK](https://www.nuget.org/packages/Azure.Storage.Files.DataLake/) verwenden, um Dateien in den Speicher hochzuladen. Mit dem folgenden Codeausschnitt wird ein neues Dateisystem in Ihrem Azure Data Lake-Speicher erstellt, und eine lokale Datei mit Metadaten wird in dieses Dateisystem hochgeladen.
+
+```csharp
+var accountName = <storage_account_name>;
+var accountKey = <storage_account_key>;
+var fileSystemName = <file_system_name>;
+var fileName = <file_name>;
+var localFileName = <file_to_upload>;
+var uncompressedSizeInBytes = <uncompressed_size_in_bytes>;
+var mapping = <mapping_reference>;
+
+var sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
+var dfsUri = "https://" + accountName + ".dfs.core.windows.net";
+var dataLakeServiceClient = new DataLakeServiceClient(new Uri(dfsUri), sharedKeyCredential);
+
+// Create the filesystem and an empty file
+var dataLakeFileSystemClient = dataLakeServiceClient.CreateFileSystem(fileSystemName).Value;
+var dataLakeFileClient = dataLakeFileSystemClient.CreateFile(fileName).Value;
+
+// Set metadata
+IDictionary<String, String> metadata = new Dictionary<string, string>();
+metadata.Add("rawSizeBytes", uncompressedSizeInBytes);
+metadata.Add("kustoIngestionMappingReference", mapping);
+dataLakeFileClient.SetMetadata(metadata);
+
+// Write to the file and close it
+var fileStream = File.OpenRead(localFileName);
+var fileSize = fileStream.Length;
+dataLakeFileClient.Append(fileStream, offset: 0);
+dataLakeFileClient.Flush(position: fileSize, close: true); // Note: This line triggers the event being processed by the data connection
+```
+
 > [!NOTE]
-> Azure Data Explorer löscht die Blobs nach der Erfassung nicht. Behalten Sie die Blobs für drei bis fünf Tage bei, indem Sie den [Azure Blob Storage-Lebenszyklus](https://docs.microsoft.com/azure/storage/blobs/storage-lifecycle-management-concepts?tabs=azure-portal) zum Verwalten von Bloblöschungen verwenden.
+> Wenn Sie das [Azure Data Lake SDK](https://www.nuget.org/packages/Azure.Storage.Files.DataLake/) zum Hochladen einer Datei verwenden, löst der erste Aufruf von [CreateFile](/dotnet/api/azure.storage.files.datalake.datalakefilesystemclient.createfile?view=azure-dotnet) ein Event Grid-Ereignis mit der Größe 0 aus, und dieses Ereignis wird von Azure Data Explorer ignoriert. Ein weiteres Ereignis wird ausgelöst, wenn „flush“ aufgerufen wird, wobei der Parameter „close“ auf „true“ festgelegt ist. Dieses Ereignis gibt an, dass dies das endgültige Update ist und der Dateistream geschlossen wurde. Dieses Ereignis wird von der Event Grid-Datenverbindung verarbeitet. Weitere Informationen zum Leeren finden Sie unter [Methode zum Leeren in Azure Data Lake](/dotnet/api/azure.storage.files.datalake.datalakefileclient.flush?view=azure-dotnet).
 
 [!INCLUDE [data-explorer-data-connection-clean-resources-csharp](includes/data-explorer-data-connection-clean-resources-csharp.md)]
