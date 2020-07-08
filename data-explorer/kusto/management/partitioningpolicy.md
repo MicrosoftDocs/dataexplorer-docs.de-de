@@ -8,12 +8,11 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 433d8786ad3664d02387efacd7dcd3865b4deb13
-ms.sourcegitcommit: ddafa58deb79417bd6f36e8bb3ad106d375b63e1
-ms.translationtype: MT
+ms.openlocfilehash: ca9d455bb1ca5a8736c279388d848ab1347c11e6
+ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85448501"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86058829"
 ---
 # <a name="data-partitioning-policy"></a>Daten Partitionierungs Richtlinie
 
@@ -173,7 +172,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
 * **Maxrowzählperoperation**:
   * Maximales Ziel für die Summe der Zeilen Anzahl der Quell Blöcke eines einzelnen Daten Partitionierungs Vorgangs.
   * Diese Eigenschaft ist optional. Der Standardwert ist `0` mit einem Standardziel von 5 Millionen Datensätzen.
-    * Sie können in Erwägung gezogen, einen Wert unter 5 Mio. festzulegen. Sie sehen, dass die Partitionierungs Vorgänge eine sehr große Menge an Arbeitsspeicher/CPU pro Vorgang beanspruchen (siehe #Monitoring).
+    * Sie können einen Wert kleiner als 5 Mio. festlegen, wenn Sie festzustellen, dass die Partitionierungs Vorgänge eine sehr große Menge an Arbeitsspeicher oder CPU pro Vorgang belegen. Weitere Informationen finden Sie unter [Überwachung](#monitoring).
 
 ## <a name="notes"></a>Hinweise
 
@@ -184,7 +183,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
 * Die Daten Partitionierung wird nur für heiße Blöcke ausgeführt, unabhängig vom Wert der- `EffectiveDateTime` Eigenschaft in der Richtlinie.
   * Wenn die Partitionierung von kalten Blöcken erforderlich ist, müssen Sie die [Cachingrichtlinie](cachepolicy.md)vorübergehend anpassen.
 
-#### <a name="monitoring"></a>Überwachung
+#### <a name="monitoring"></a>Monitoring
 
 Verwenden Sie den Befehl [. Show Diagnostics](../management/diagnostics.md#show-diagnostics) , um den Status oder den Status der Partitionierung in einem Cluster zu überwachen.
 
@@ -196,7 +195,7 @@ Verwenden Sie den Befehl [. Show Diagnostics](../management/diagnostics.md#show-
 Die Ausgabe umfasst Folgendes:
 
   * `MinPartitioningPercentageInSingleTable`: Der minimale Prozentsatz partitionierter Daten in allen Tabellen, die über eine Richtlinie zur Daten Partitionierung im Cluster verfügen.
-    * Wenn dieser Prozentsatz konstant weiterhin unter 90% liegt, sollten Sie die Partitions Kapazität des Clusters auswerten (siehe [Kapazität](partitioningpolicy.md#capacity)).
+    * Wenn dieser Prozentsatz konstant weiterhin unter 90% liegt, sollten Sie die Partitions [Kapazität](partitioningpolicy.md#capacity)des Clusters auswerten.
   * `TableWithMinPartitioningPercentage`: Der voll qualifizierte Name der Tabelle, deren Partitionierungs Prozentsatz oben angezeigt wird.
 
 Verwenden Sie [. Show-Befehle](commands.md) , um die Partitionierungs Befehle und deren Ressourcenverwendung zu überwachen. Beispiel:
@@ -222,7 +221,7 @@ Verwenden Sie [. Show-Befehle](commands.md) , um die Partitionierungs Befehle un
 * Wenn ein Hash Partitions Schlüsselwerte enthält, die wesentlich häufiger sind als andere, z. b. eine leere Zeichenfolge oder ein generischer Wert (z. b. `null` oder `N/A` ) oder eine Entität darstellen (z. b.), die im DataSet `tenant_id` allgemeinerer ist, kann dies zu einer unausgeglichenen Verteilung der Daten über die Knoten des Clusters beitragen und die Abfrageleistung beeinträchtigen.
 * Wenn ein einheitlicher Bereich für einen DateTime-Partitions Schlüssel einen ausreichenden Prozentsatz der Werte aufweist, die von der Mehrzahl der Werte in der Spalte "weit" sind (z. b. DateTime-Werte aus der entfernten Vergangenheit oder Zukunft), kann dies den mehr Aufwand des Daten Partitionierungs Vorgangs erhöhen und zu vielen kleinen Blöcken führen, die der Cluster nachverfolgen muss.
 
-In beiden Fällen sollten Sie die Daten entweder "korrigieren" oder vor oder während der Erfassungs Zeit irrelevante Datensätze in den Daten herausfiltern, um den mehr Aufwand für die Daten Partitionierung im Cluster zu verringern. Verwenden Sie z. b. eine [Update Richtlinie](updatepolicy.md).)
+In beiden Fällen sollten Sie die Daten entweder "korrigieren" oder vor oder während der Erfassungs Zeit irrelevante Datensätze in den Daten herausfiltern, um den mehr Aufwand für die Daten Partitionierung im Cluster zu verringern. Verwenden Sie z. b. eine [Update Richtlinie](updatepolicy.md).
 
 ## <a name="next-steps"></a>Nächste Schritte
 
