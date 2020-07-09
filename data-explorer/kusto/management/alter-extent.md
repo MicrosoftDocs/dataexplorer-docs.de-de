@@ -10,6 +10,7 @@ ms.topic: reference
 ms.date: 07/02/2020
 ms.openlocfilehash: 00c4cfbb4b6415afcd68e8e41864ca4a68cc097e
 ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 07/07/2020
 ms.locfileid: "86060616"
@@ -41,7 +42,7 @@ Alle Blöcke müssen sich in der Kontext Datenbank befinden und müssen derselbe
 
 ## <a name="return-output"></a>Ausgabe zurückgeben
 
-|Output-Parameter |Typ |Beschreibung|
+|Output-Parameter |type |BESCHREIBUNG|
 |---|---|---|
 |Originalextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den ursprünglichen Block, dessen Tags geändert wurden. Der Block wird als Teil des Vorgangs gelöscht.|
 |Resultextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den Ergebnis Block, der Tags geändert hat. Der Block wird erstellt und als Teil des Vorgangs hinzugefügt. Bei Fehler: "failed".|

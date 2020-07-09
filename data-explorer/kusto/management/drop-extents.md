@@ -10,11 +10,12 @@ ms.topic: reference
 ms.date: 07/02/2020
 ms.openlocfilehash: dfa462ca82cd5e94adff77b3893b3b02d60c6cdc
 ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 07/07/2020
 ms.locfileid: "86060637"
 ---
-# <a name="drop-extents"></a>. Drop-Blöcke
+# <a name="drop-extents"></a>.drop extents
 
 Löscht Blöcke aus einer angegebenen Datenbank oder Tabelle.
 
@@ -108,7 +109,7 @@ Entfernen Sie alle Blöcke in Tabellen `Table1` , `Table2` deren Erstellungszeit
 
 ## <a name="return-output"></a>Ausgabe zurückgeben
 
-|Output-Parameter |Typ |Beschreibung 
+|Output-Parameter |type |BESCHREIBUNG 
 |---|---|---
 |Extentid |String |Extentid, die aufgrund des Befehls gelöscht wurde
 |TableName |String |Tabellenname, wobei Block zu gehört  

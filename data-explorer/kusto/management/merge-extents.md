@@ -10,11 +10,12 @@ ms.topic: reference
 ms.date: 07/02/2020
 ms.openlocfilehash: 6b633358713b0ff48d14fc9c5ca2a907bad0afab
 ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 07/07/2020
 ms.locfileid: "86060661"
 ---
-# <a name="merge-extents"></a>. Merge-Blöcke
+# <a name="merge-extents"></a>.merge extents
 
 Mit diesem Befehl werden die Blöcke zusammengeführt, die von Ihren IDs in der angegebenen Tabelle angegeben werden. 
 
@@ -39,7 +40,7 @@ Es stehen drei Optionen zur Verfügung:
 
 ## <a name="return-output"></a>Ausgabe zurückgeben
 
-Output-Parameter |Typ |Beschreibung
+Output-Parameter |type |BESCHREIBUNG
 ---|---|---
 Originalextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den ursprünglichen Block in der Quell Tabelle, der in den Zielblock zusammengeführt wurde.
 Resultextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den Umfang, der aus den Quell Blöcken erstellt wurde. Bei Fehler: "failed" oder "abgebrochen".
@@ -59,7 +60,7 @@ Duration |Zeitraum |Der Zeitraum, der für den Abschluss des MERGE-Vorgangs ben�
 .merge MyTable (12345050-a1e2-4dad-8552-1f5cf47cab69, 98765b2d-9dd2-4d2c-a45e-b24c65aa6687)
 ```
 
-## <a name="notes"></a>Hinweise
+## <a name="notes"></a>Notizen
 
 * Im allgemeinen `.merge` sollten Befehle nicht manuell ausgeführt werden. Die Befehle werden fortlaufend und automatisch im Hintergrund des Clusters ausgeführt, gemäß den [Zusammenarbeits Richtlinien](mergepolicy.md) für Tabellen und Datenbanken.  
   * Weitere Informationen zu den Kriterien für das Zusammenführen mehrerer Blöcke zu einer einzigen Erweiterung finden Sie unter [Merge Policy](mergepolicy.md).

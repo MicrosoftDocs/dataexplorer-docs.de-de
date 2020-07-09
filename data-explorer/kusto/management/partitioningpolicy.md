@@ -8,11 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: ca9d455bb1ca5a8736c279388d848ab1347c11e6
-ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.openlocfilehash: 7f299a730b451f608e0d2c81fc78565d515fc029
+ms.sourcegitcommit: bcb87ed043aca7c322792c3a03ba0508026136b4
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86058829"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86127315"
 ---
 # <a name="data-partitioning-policy"></a>Daten Partitionierungs Richtlinie
 
@@ -34,7 +35,8 @@ Die folgenden Arten von Partitions Schlüsseln werden unterstützt.
 
 ### <a name="hash-partition-key"></a>Hash Partitions Schlüssel
 
-Das Anwenden eines Hash Partitions Schlüssels für eine `string` Spalte vom Typ in einer Tabelle ist sinnvoll, wenn die Mehrzahl der Abfragen Gleichheits Filter ( `==` , `in()` ) oder bei der Aggregation/Verknüpfung für eine bestimmte `string` typisierte Spalte der *großen Dimension* (Kardinalität von 10 m oder höher), wie z `application_ID` . b., oder `tenant_ID` `user_ID` , verwenden.
+> [!NOTE]
+> Das Anwenden eines Hash Partitions Schlüssels für eine `string` Spalte vom Typ in einer Tabelle ist **nur** geeignet, wenn die Mehrzahl der Abfragen Gleichheits Filter ( `==` , `in()` ) oder bei der Aggregation/Verknüpfung für eine bestimmte `string` typisierte Spalte der *großen Dimension* (Kardinalität von 10M oder höher), wie z `application_ID` . b., oder `tenant_ID` `user_ID` , verwenden.
 
 * Eine Hash-Modulo-Funktion wird verwendet, um die Daten zu partitionieren.
 * Alle homogenen (partitionierten) Blöcke, die derselben Partition angehören, werden demselben Datenknoten zugewiesen.
@@ -77,7 +79,10 @@ Sie verwendet die `XxHash64` Hash-Funktion mit dem `MaxPartitionCount` `256` und
 
 ### <a name="uniform-range-datetime-partition-key"></a>Einheitlicher Bereich DateTime-Partitions Schlüssel
 
-Das Anwenden eines Uniform Range-DateTime-Partitions Schlüssels für eine `datetime` typisierte Spalte in einer Tabelle eignet sich, wenn in der Tabelle erfasste Daten wahrscheinlich nicht nach dieser Spalte geordnet sind. Es kann hilfreich sein, die Daten zwischen Blöcken neu zu mischen, sodass jeder Block am Ende Datensätze aus einem begrenzten Zeitraum einschließt. Das erneute herunter setzen führt dazu, dass die Filter für die `datetime` Spalte zur Abfragezeit effizienter sind.
+> [!NOTE] 
+> Das Anwenden eines unidirektionförmigen DateTime-Partitions Schlüssels für eine `datetime` typisierte Spalte in einer Tabelle ist **nur** geeignet, wenn in der Tabelle erfasste Daten wahrscheinlich nicht nach dieser Spalte geordnet sind.
+
+In solchen Fällen kann es hilfreich sein, die Daten zwischen Blöcken neu zu mischen, sodass jeder Block am Ende Datensätze aus einem begrenzten Zeitraum einschließt. Dies führt dazu, dass Filter für diese `datetime` Spalte zur Abfragezeit effektiver werden.
 
 * Die verwendete Partitions Funktion ist [bin_at ()](../query/binatfunction.md) und kann nicht angepasst werden.
 
@@ -174,7 +179,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
   * Diese Eigenschaft ist optional. Der Standardwert ist `0` mit einem Standardziel von 5 Millionen Datensätzen.
     * Sie können einen Wert kleiner als 5 Mio. festlegen, wenn Sie festzustellen, dass die Partitionierungs Vorgänge eine sehr große Menge an Arbeitsspeicher oder CPU pro Vorgang belegen. Weitere Informationen finden Sie unter [Überwachung](#monitoring).
 
-## <a name="notes"></a>Hinweise
+## <a name="notes"></a>Notizen
 
 ### <a name="the-data-partitioning-process"></a>Der Daten Partitionierungs Prozess
 
@@ -183,7 +188,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
 * Die Daten Partitionierung wird nur für heiße Blöcke ausgeführt, unabhängig vom Wert der- `EffectiveDateTime` Eigenschaft in der Richtlinie.
   * Wenn die Partitionierung von kalten Blöcken erforderlich ist, müssen Sie die [Cachingrichtlinie](cachepolicy.md)vorübergehend anpassen.
 
-#### <a name="monitoring"></a>Monitoring
+#### <a name="monitoring"></a>Überwachung
 
 Verwenden Sie den Befehl [. Show Diagnostics](../management/diagnostics.md#show-diagnostics) , um den Status oder den Status der Partitionierung in einem Cluster zu überwachen.
 
