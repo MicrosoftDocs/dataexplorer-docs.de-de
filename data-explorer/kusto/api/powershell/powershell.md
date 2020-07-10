@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/29/2019
-ms.openlocfilehash: b454b9453c7afd0835041ac78d13318de73432e2
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: 6804b71ff3985de17460dddfa60f081f3bb910c0
+ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382065"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86188420"
 ---
 # <a name="using-the-net-client-libraries-from-powershell"></a>Verwenden der .NET-Client Bibliotheken von PowerShell
 
@@ -24,9 +24,10 @@ PowerShell-Skripts können Azure Daten-Explorer .NET-Client Bibliotheken über d
 So beginnen Sie mit der Arbeit mit den Azure Daten-Explorer .NET-Client Bibliotheken mithilfe von PowerShell.
 
 1. Laden Sie das [ `Microsoft.Azure.Kusto.Tools` nuget-Paket](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Tools/)herunter.
+    * Wenn Sie PowerShell 7 (oder höher) verwenden, laden Sie das [ `Microsoft.Azure.Kusto.Tools.NETCore` nuget-Paket](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Tools.NETCore/)herunter.
 1. Extrahieren Sie den Inhalt des Verzeichnisses "Tools" im Paket (verwenden Sie ein Archivierungs Tool wie `7-zip` ).
 1. `[System.Reflection.Assembly]::LoadFrom("path")`Wird von PowerShell aufgerufen, um die erforderliche Bibliothek zu laden. 
-    - Der- `path` Parameter für den-Befehl sollte den Speicherort der extrahierten Dateien angeben.
+    * Der- `path` Parameter für den-Befehl sollte den Speicherort der extrahierten Dateien angeben.
 1. Nachdem alle abhängigen .NET-Assemblys geladen wurden:
    1. Erstellen Sie eine Kusto-Verbindungs Zeichenfolge.
    1. Instanziieren Sie einen *Abfrage Anbieter* oder einen *Administrator Anbieter*.
@@ -65,6 +66,10 @@ $kcsb = New-Object Kusto.Data.KustoConnectionStringBuilder ($clusterUrl, $databa
 #     $applicationKey = "application key goes here"
 #     $authority = "authority goes here"
 #     $kcsb = $kcsb.WithAadApplicationKeyAuthentication($applicationId, $applicationKey, $authority)
+#
+#   NOTE: if you're running with Powershell 7 (or above) and the .NET Core library,
+#         AAD user authentication with prompt will not work, and you should choose
+#         a different authentication method.
 ```
 
 ### <a name="example-running-an-admin-command"></a>Beispiel: Ausführen eines Administrator Befehls
@@ -107,7 +112,7 @@ $dataView | Sort StartTime -Descending | Format-Table -AutoSize
 
 Und die Ausgabe lautet:
 
-|StartTime           |EndTime             |Episodeid |EventId |Bundesland/Kanton          |EventType         |Verletzen von Verletzungen |Verletzung indirekt |Deathsdirect |Deathsindirect
+|StartTime           |EndTime             |Episodeid |EventId |Zustand          |EventType         |Verletzen von Verletzungen |Verletzung indirekt |Deathsdirect |Deathsindirect
 |---------           |-------             |--------- |------- |-----          |---------         |-------------- |---------------- |------------ |--------------
 |2007-12-30 16:00:00 |2007-12-30 16:05:00 |    11749 |  64588 |Georgien        |Sturm |             0 |               0 |           0 |             0
 |2007-12-20 07:50:00 |2007-12-20 07:53:00 |    12554 |  68796 |Mississippi    |Sturm |             0 |               0 |           0 |             0

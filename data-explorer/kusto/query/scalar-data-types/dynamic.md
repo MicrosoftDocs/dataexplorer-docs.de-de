@@ -4,16 +4,16 @@ description: In diesem Artikel wird der dynamische Datentyp in Azure Daten-Explo
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 03/12/2020
-ms.openlocfilehash: 8a979d91b008be7a93626aa7f58865cb5466076b
-ms.sourcegitcommit: c3bbb9a6bfd7c5506f05afb4968fdc2043a9fbbf
+ms.date: 07/09/2020
+ms.openlocfilehash: 1ac715f06945e3db99de1a00b09237ae6f6e241d
+ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85332582"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86188556"
 ---
 # <a name="the-dynamic-data-type"></a>Der dynamische Datentyp.
 
@@ -51,13 +51,14 @@ print o=dynamic({"a":123, "b":"hello", "c":[1,2,3], "d":{}})
 | extend a=o.a, b=o.b, c=o.c, d=o.d
 ```
 
-Zur einfacheren Handhabung `dynamic` können Literale, die im Abfragetext selbst angezeigt werden, auch andere Kusto-Literale enthalten (z `datetime` . b. Literale, `timespan` Literale usw.). Diese JSON-Erweiterung ist nicht verfügbar, wenn Zeichen folgen (z. b. bei Verwendung der- `parse_json` Funktion oder beim Erfassen von Daten) verarbeitet werden, dies ermöglicht Ihnen jedoch Folgendes:
+Aus Gründen `dynamic` der Lesbarkeit können Literale, die im Abfragetext selbst angezeigt werden, auch andere Kusto-Literale mit Typen enthalten: `datetime` , `timespan` , `real` , `long` , `guid` , `bool` und `dynamic` .
+Diese JSON-Erweiterung ist nicht verfügbar, wenn Zeichen folgen (z. b. bei Verwendung der- `parse_json` Funktion oder beim Erfassen von Daten) verarbeitet werden, dies ermöglicht Ihnen jedoch Folgendes:
 
 ```kusto
 print d=dynamic({"a": datetime(1970-05-11)})
 ```
 
-Verwenden Sie die-Funktion, um einen Wert zu analysieren, `string` der den JSON-Codierungsregeln in einen- `dynamic` Wert folgt `parse_json` . Zum Beispiel:
+Verwenden Sie die-Funktion, um einen Wert zu analysieren, `string` der den JSON-Codierungsregeln in einen- `dynamic` Wert folgt `parse_json` . Beispiel:
 
 * `parse_json('[43, 21, 65]')` : ein Array mit Zahlen
 * `parse_json('{"name":"Alan", "age":21, "address":{"street":432,"postcode":"JLK32P"}}')`-ein Wörterbuch
@@ -87,7 +88,7 @@ Im folgenden Beispiel wird gezeigt, wie Sie eine Tabelle definieren können, die
   [2015-01-01,"{""EventType"":""Demo"", ""EventValue"":""Double-quote love!""}"]
 ```
 
-|Timestamp                   | Trace                                                 |
+|Zeitstempel                   | Trace                                                 |
 |----------------------------|-------------------------------------------------------|
 |2015-01-01 00:00:00.0000000 | {"EventType": "Demo", "eventvalue": "Double-Quote Love!"}|
 
@@ -101,7 +102,7 @@ Wenn der Index eine Zeichen folgen Konstante ist, sind beide Optionen Äquivalen
 
 In den folgenden Beispielen `dict` und `arr` sind Spalten des dynamischen Typs:
 
-|expression                        | Accessor-Ausdruckstyp | Bedeutung                                                                              | Kommentare                                      |
+|Ausdruck                        | Accessor-Ausdruckstyp | Bedeutung                                                                              | Kommentare                                      |
 |----------------------------------|--------------------------|--------------------------------------------------------------------------------------|-----------------------------------------------|
 |dict [Col]                         | Entitäts Name (Spalte)     | Abonniert ein Wörterbuch mit den Werten der Spalte `col` als Schlüssel.              | Die Spalte muss den Typ "String" aufweisen.                 | 
 |arr [index]                        | Entitäts Index (Spalte)    | Gibt ein Array mit den Werten der Spalte `index` als Index an.              | Spalte muss vom Typ "Integer" oder "booleschen" sein.     | 
@@ -119,12 +120,12 @@ Der Zugriff auf ein untergeordnetes Objekt eines `dynamic` Werts ergibt einen an
 
 > Nachdem Sie ein dynamisches Objekt abonniert haben, müssen Sie den Wert in einen einfachen Typ umwandeln.
 
-|expression | Wert | Type|
+|Ausdruck | Wert | Typ|
 |---|---|---|
 | X | parse_json ("[100101102]")| array|
 |X [0]|parse_json ("100")|dynamisch|
-|"zu int" (X [1])|101| INT|
-| „Y“ zugeordnet ist | parse_json ("{" a1 ": 100," a b c ":" 2015-01-01 "}")| dictionary|
+|"zu int" (X [1])|101| int|
+| J | parse_json ("{" a1 ": 100," a b c ":" 2015-01-01 "}")| dictionary|
 |Y. a1|parse_json ("100")|dynamisch|
 |J ["a b c"]| parse_json ("2015-01-01")|dynamisch|
 |Date (Y ["a b c"])|DateTime (2015-01-01)| datetime|

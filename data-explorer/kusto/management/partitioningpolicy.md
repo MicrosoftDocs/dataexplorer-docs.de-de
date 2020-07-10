@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 7f299a730b451f608e0d2c81fc78565d515fc029
-ms.sourcegitcommit: bcb87ed043aca7c322792c3a03ba0508026136b4
+ms.openlocfilehash: 0bf2960d1bf585efc6b356a1b7075a27ca6616da
+ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86127315"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86188369"
 ---
 # <a name="data-partitioning-policy"></a>Daten Partitionierungs Richtlinie
 
@@ -36,7 +36,9 @@ Die folgenden Arten von Partitions Schlüsseln werden unterstützt.
 ### <a name="hash-partition-key"></a>Hash Partitions Schlüssel
 
 > [!NOTE]
-> Das Anwenden eines Hash Partitions Schlüssels für eine `string` Spalte vom Typ in einer Tabelle ist **nur** geeignet, wenn die Mehrzahl der Abfragen Gleichheits Filter ( `==` , `in()` ) oder bei der Aggregation/Verknüpfung für eine bestimmte `string` typisierte Spalte der *großen Dimension* (Kardinalität von 10M oder höher), wie z `application_ID` . b., oder `tenant_ID` `user_ID` , verwenden.
+> Anwenden eines Hash Partitions Schlüssels auf eine `string` Typspalte in einer Tabelle nur in den folgenden Instanzen:
+> * Wenn die meisten Abfragen Gleichheits Filter ( `==` , `in()` ) verwenden.
+> * Der Großteil der Abfragen aggregiert/verknüpft eine bestimmte `string` typisierte Spalte der *großen Dimension* (Kardinalität von 10 m oder höher), wie z. b `application_ID` ., `tenant_ID` oder `user_ID` .
 
 * Eine Hash-Modulo-Funktion wird verwendet, um die Daten zu partitionieren.
 * Alle homogenen (partitionierten) Blöcke, die derselben Partition angehören, werden demselben Datenknoten zugewiesen.
@@ -80,11 +82,11 @@ Sie verwendet die `XxHash64` Hash-Funktion mit dem `MaxPartitionCount` `256` und
 ### <a name="uniform-range-datetime-partition-key"></a>Einheitlicher Bereich DateTime-Partitions Schlüssel
 
 > [!NOTE] 
-> Das Anwenden eines unidirektionförmigen DateTime-Partitions Schlüssels für eine `datetime` typisierte Spalte in einer Tabelle ist **nur** geeignet, wenn in der Tabelle erfasste Daten wahrscheinlich nicht nach dieser Spalte geordnet sind.
+> Anwenden eines unidirektionaldatetime-Partitions Schlüssels auf eine `datetime` typisierte Spalte in einer Tabelle, wenn in die Tabelle erfasste Daten wahrscheinlich nicht nach dieser Spalte geordnet sind.
 
 In solchen Fällen kann es hilfreich sein, die Daten zwischen Blöcken neu zu mischen, sodass jeder Block am Ende Datensätze aus einem begrenzten Zeitraum einschließt. Dies führt dazu, dass Filter für diese `datetime` Spalte zur Abfragezeit effektiver werden.
 
-* Die verwendete Partitions Funktion ist [bin_at ()](../query/binatfunction.md) und kann nicht angepasst werden.
+Die verwendete Partitions Funktion ist [bin_at ()](../query/binatfunction.md) und kann nicht angepasst werden.
 
 #### <a name="partition-properties"></a>Partitionseigenschaften
 
@@ -179,7 +181,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
   * Diese Eigenschaft ist optional. Der Standardwert ist `0` mit einem Standardziel von 5 Millionen Datensätzen.
     * Sie können einen Wert kleiner als 5 Mio. festlegen, wenn Sie festzustellen, dass die Partitionierungs Vorgänge eine sehr große Menge an Arbeitsspeicher oder CPU pro Vorgang belegen. Weitere Informationen finden Sie unter [Überwachung](#monitoring).
 
-## <a name="notes"></a>Notizen
+## <a name="notes"></a>Hinweise
 
 ### <a name="the-data-partitioning-process"></a>Der Daten Partitionierungs Prozess
 
