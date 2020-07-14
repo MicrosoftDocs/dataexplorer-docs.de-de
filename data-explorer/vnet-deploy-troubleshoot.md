@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/24/2020
-ms.openlocfilehash: bbbf120c0a24a7ed14bc558b7dcd739bf2cae595
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 6eab8ab3097876c74cc6aaa9116c8923ca9fc3db
+ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83374272"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86188403"
 ---
 # <a name="troubleshoot-access-ingestion-and-operation-of-your-azure-data-explorer-cluster-in-your-virtual-network"></a>Behandlung von Problemen im Zusammenhang mit dem Zugriff, der Erfassung und dem Betrieb Ihres Azure Data Explorer-Clusters in Ihrem virtuellen Netzwerk
 
@@ -28,43 +28,40 @@ Der erste Schritt ist die Überprüfung der TCP-Konnektivität mithilfe von Wind
 
 # <a name="windows"></a>[Windows](#tab/windows)
 
-   1. Laden Sie [TCping](https://www.elifulkerson.com/projects/tcping.php) auf den Computer herunter, der eine Verbindung mit dem Cluster herstellt.
-   1. Pingen Sie das Ziel vom Quellcomputer aus mit folgendem Befehl:
+1. Laden Sie [TCping](https://www.elifulkerson.com/projects/tcping.php) auf den Computer herunter, der eine Verbindung mit dem Cluster herstellt.
+1. Pingen Sie das Ziel vom Quellcomputer aus mit folgendem Befehl:
 
-    ```cmd
-     C:\> tcping -t yourcluster.kusto.windows.net 443 
-    
-     ** Pinging continuously.  Press control-c to stop **
-    
-     Probing 1.2.3.4:443/tcp - Port is open - time=100.00ms
-     ```
+   ```cmd
+   C:\> tcping -t yourcluster.kusto.windows.net 443 
+   ** Pinging continuously.  Press control-c to stop **
+   Probing 1.2.3.4:443/tcp - Port is open - time=100.00ms
+   ```
 
 # <a name="linux"></a>[Linux](#tab/linux)
 
-   1. Installieren Sie *netcat* auf dem Computer, der eine Verbindung mit dem Cluster herstellt.
+1. Installieren Sie *netcat* auf dem Computer, der eine Verbindung mit dem Cluster herstellt.
 
-    ```bash
-    $ apt-get install netcat
-     ```
+   ```bash
+   $ apt-get install netcat
+   ```
 
-   1. Pingen Sie das Ziel vom Quellcomputer aus mit folgendem Befehl:
+1. Pingen Sie das Ziel vom Quellcomputer aus mit folgendem Befehl:
 
-     ```bash
-     $ netcat -z -v yourcluster.kusto.windows.net 443
-    
-     Connection to yourcluster.kusto.windows.net 443 port [tcp/https] succeeded!
-     ```
+   ```bash
+   $ netcat -z -v yourcluster.kusto.windows.net 443
+   Connection to yourcluster.kusto.windows.net 443 port [tcp/https] succeeded!
+   ```
 ---
 
 Wenn der Test nicht erfolgreich war, setzen Sie den Vorgang mit den folgenden Schritten fort. Ist der Test aber erfolgreich, wurde das Problem nicht durch ein TCP-Konnektivitätsproblem verursacht. Wechseln Sie zu [Betriebsprobleme](#cluster-creation-and-operations-issues), um mehr zur Problembehandlung zu erfahren.
 
 ### <a name="check-the-network-security-group-nsg"></a>Überprüfen der Netzwerksicherheitsgruppe (NSG)
 
-   Überprüfen Sie, ob es bei der [Netzwerksicherheitsgruppe](/azure/virtual-network/security-overview) (NSG), die an das Subnetz des Clusters angefügt ist, eine eingehende Regel gibt, die den Zugriff auf die IP-Adresse des Clientcomputers für Port 443 zulässt.
+Überprüfen Sie, ob es bei der [Netzwerksicherheitsgruppe](/azure/virtual-network/security-overview) (NSG), die an das Subnetz des Clusters angefügt ist, eine eingehende Regel gibt, die den Zugriff auf die IP-Adresse des Clientcomputers für Port 443 zulässt.
 
 ### <a name="check-route-table"></a>Überprüfen der Routingtabelle
 
-   Wenn beim Subnetz des Clusters eine Tunnelerzwingung zur Firewall eingerichtet wurde (Subnetz mit einer [Routentabelle](/azure/virtual-network/virtual-networks-udr-overview), in der die Standardroute '0.0.0.0/0' enthalten ist), vergewissern Sie sich, dass es in der IP-Adresse des Computers eine Route mit [Typ des nächsten Hops](/azure/virtual-network/virtual-networks-udr-overview) zum virtuellen Netzwerk/Internet gibt. Diese Route ist erforderlich, um Probleme mit asymmetrischen Routen zu vermeiden.
+Wenn beim Subnetz des Clusters eine Tunnelerzwingung zur Firewall eingerichtet wurde (Subnetz mit einer [Routentabelle](/azure/virtual-network/virtual-networks-udr-overview), in der die Standardroute '0.0.0.0/0' enthalten ist), vergewissern Sie sich, dass es in der IP-Adresse des Computers eine Route mit [Typ des nächsten Hops](/azure/virtual-network/virtual-networks-udr-overview) zum virtuellen Netzwerk/Internet gibt. Diese Route ist erforderlich, um Probleme mit asymmetrischen Routen zu vermeiden.
 
 ## <a name="ingestion-issues"></a>Erfassungsprobleme
 
@@ -85,6 +82,10 @@ Vergewissern Sie sich, dass die NSG-, UDR- und Firewallregeln für das Subnetz d
 ## <a name="cluster-creation-and-operations-issues"></a>Probleme bei der Clustererstellung und dem Betrieb
 
 Wenn bei der Clustererstellung oder dem Betrieb Probleme auftreten und Sie vermuten, dass sie im Zusammenhang mit der Einrichtung des virtuellen Netzwerks stehen, führen Sie die folgenden Schritte zur Problembehandlung aus.
+
+### <a name="check-the-dns-servers-configuration"></a>Überprüfen der Konfiguration „DNS-Server“
+
+Benutzerdefinierte DNS-Server werden nicht unterstützt. Verwenden Sie die Standardoption im Konfigurationsabschnitt **DNS-Server** Ihrer Virtual Network-Instanz.
 
 ### <a name="diagnose-the-virtual-network-with-the-rest-api"></a>Diagnostizieren des virtuellen Netzwerks mit der REST-API
 

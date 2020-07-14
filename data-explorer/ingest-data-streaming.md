@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/30/2019
-ms.openlocfilehash: 66118ad7b91d1bcfdd52679d4bfa3dc5ebc4c281
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: bda9afdda9d922df6188a3b9170aa4d4926f8ca3
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780234"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280414"
 ---
 # <a name="streaming-ingestion-preview"></a>Streamingerfassung (Vorschauversion)
 
@@ -71,7 +71,7 @@ Es werden zwei Streamingerfassungstypen unterstützt:
 
 ## <a name="limitations"></a>Einschränkungen
 
-* [Datenbankcursor](kusto/management/databasecursor.md) werden für die Datenbank nicht unterstützt, wenn für diese selbst oder für eine Ihrer Tabellen eine [Richtlinie für die Streamingerfassung](kusto/management/streamingingestionpolicy.md) definiert und aktiviert wurde.
+* [Datenbankcursor](kusto/management/databasecursor.md) werden für eine Datenbank nicht unterstützt, wenn für diese selbst oder für eine Ihrer Tabellen eine [Richtlinie für die Streamingerfassung](kusto/management/streamingingestionpolicy.md) definiert und aktiviert wurde. In diesem Fall wird der fortlaufende Export nicht unterstützt, und die Updaterichtlinie ist auf eine Abfrage nur der Quelltabelle beschränkt.
 * Die [Datenzuordnung](kusto/management/mappings.md) muss [vorab erstellt](kusto/management/create-ingestion-mapping-command.md) werden, damit sie bei der Streamingerfassung verwendet werden kann. Individuelle Anforderungen zur Streamingerfassung bieten keine Inlinedatenzuordnungen.
 * Leistung und Kapazität der Streamingerfassung werden für größere virtuelle Computer und Cluster skaliert. Die Anzahl der gleichzeitigen Erfassungsanforderungen ist auf sechs pro Kern beschränkt. Beispielsweise besteht die maximale unterstützte Last bei SKUs mit 16 Kernen (z. B. D14 und L16) aus 96 gleichzeitigen Erfassungsanforderungen. Bei SKUs mit 2 Kernen (z. B. D11) werden als maximale Last 12 gleichzeitige Erfassungsanfragen unterstützt.
 * Die Datengröße für Anforderungen zur Streamingerfassung ist auf 4 MB beschränkt.

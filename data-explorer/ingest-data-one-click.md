@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 03/29/2020
-ms.openlocfilehash: 26b1633a13aa6ffbd98109e94113679620845160
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 98cfbf8b196d0496b4c7e86b03d6d2787ba6919f
+ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264509"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86188454"
 ---
 # <a name="what-is-one-click-ingestion"></a>Was ist die 1-Klick-Erfassung?
 
@@ -35,17 +35,6 @@ Die 1-Klick-Erfassung ist besonders nützlich, wenn Daten erstmalig erfasst werd
 * Wenn Sie über kein Azure-Abonnement verfügen, können Sie ein [kostenloses Azure-Konto](https://azure.microsoft.com/free/) erstellen, bevor Sie beginnen.
 * Erstellen Sie [einen Azure Data Explorer-Cluster und eine Datenbank](create-cluster-database-portal.md).
 * Melden Sie sich bei der [Azure Data Explorer-Webbenutzeroberfläche](https://dataexplorer.azure.com/) an, und [fügen Sie eine Verbindung mit Ihrem Cluster hinzu](web-query-data.md#add-clusters).
-
-## <a name="file-formats"></a>Dateiformate
-
-Die 1-Klick-Erfassung unterstützt das Erfassen einer neuen Tabelle aus Quelldaten in einem der folgenden Formate:
-* JSON
-* CSV
-* TSV
-* SCSV
-* SOHSV
-* TSVE
-* PSV
 
 ## <a name="ingest-new-data"></a>Erfassen neuer Daten
 
@@ -70,22 +59,34 @@ Der Assistent für die 1-Klick-Erfassung leitet Sie durch die 1-Klick-Erfassung.
 > * Erfassen in einer [neuen Tabelle aus einem Container im CSV-Format](one-click-ingestion-new-table.md)
 > * Erfassen in einer [vorhandenen Tabelle aus einer lokalen Datei im JSON-Format](one-click-ingestion-existing-table.md) 
 
-* Der Assistent führt Sie durch die folgenden Optionen:
-    * Erfassung in einer [vorhandenen Tabelle](one-click-ingestion-existing-table.md)
-    * Erfassung in einer [neuen Tabelle](one-click-ingestion-new-table.md)
-    * Erfassung von Daten aus:
+Der Assistent führt Sie durch die folgenden Optionen:
+   * Erfassung in einer [vorhandenen Tabelle](one-click-ingestion-existing-table.md)
+   * Erfassung in einer [neuen Tabelle](one-click-ingestion-new-table.md)
+   * Erfassung von Daten aus:
       * Blob Storage
       * [einer lokalen Datei](one-click-ingestion-existing-table.md)
       * [einem Container](one-click-ingestion-new-table.md)
 
+
 ### <a name="schema-mapping"></a>Schemazuordnung
 
-* Der Dienst generiert automatisch Schema- und Erfassungseigenschaften, die Sie ändern können. Abhängig davon, ob die Erfassung in einer neuen oder einer vorhandenen Tabelle erfolgt, können Sie eine vorhandene Zuordnungsstruktur verwenden oder eine neue erstellen.
+Der Dienst generiert automatisch Schema- und Erfassungseigenschaften, die Sie ändern können. Abhängig davon, ob die Erfassung in einer neuen oder einer vorhandenen Tabelle erfolgt, können Sie eine vorhandene Zuordnungsstruktur verwenden oder eine neue erstellen.
 
-* Auf der Registerkarte **Schema** können die folgenden Aktionen ausgeführt werden:
-    * Bestätigen Sie den automatisch generierten Komprimierungstyp.
-    * Wählen Sie das [Format Ihrer Daten](#file-formats) aus. Unterschiedliche Formate ermöglichen weitere Änderungen.
-      
+Führen Sie auf der Registerkarte **Schema** die folgenden Aktionen aus:
+   * Bestätigen Sie den automatisch generierten Komprimierungstyp.
+   * Wählen Sie das [Format Ihrer Daten](#file-formats) aus. Unterschiedliche Formate ermöglichen weitere Änderungen.
+
+#### <a name="file-formats"></a>Dateiformate
+
+Die 1-Klick-Erfassung unterstützt das Erfassen einer neuen Tabelle aus Quelldaten in einem der folgenden Formate:
+* JSON
+* CSV
+* TSV
+* SCSV
+* SOHSV
+* TSVE
+* PSV
+
 ### <a name="editor-window"></a>Editor-Fenster
 
 Im Fenster **Editor** können Sie Datentabellenspalten nach Bedarf anpassen. 
@@ -102,13 +103,12 @@ Im Fenster **Editor** können Sie Datentabellenspalten nach Bedarf anpassen.
 
 Wenn die Schemazuordnung und die Spaltenbearbeitung abgeschlossen sind, startet der Erfassungs-Assistent die Datenerfassung. 
 
-* Bei der Erfassung von Daten aus Quellen, die **keine Container** sind:
-    * Die Erfassung erfolgt sofort.
+* Beim Erfassen von Daten aus Quellen, die **keine Container** sind, wird die Erfassung sofort ausgeführt.
 
 * Wenn die Datenquelle ein **Container** ist:
     * Die [Richtlinie für die Batchverarbeitung](kusto/management/batchingpolicy.md) von Azure Data Explorer aggregiert Ihre Daten. 
     * Nach der Erfassung können Sie den Erfassungsbericht herunterladen und die Leistung jedes behandelten Blobs überprüfen. 
-    * Sie können eine **kontinuierliche Erfassung erstellen** und die [kontinuierliche Erfassung mit Event Grid](one-click-ingestion-new-table.md#continuous-ingestion---container-only) einrichten.
+    * Sie können eine **kontinuierliche Erfassung erstellen** und die [kontinuierliche Erfassung mit Event Grid](one-click-ingestion-new-table.md#create-continuous-ingestion-for-container) einrichten.
  
 ### <a name="initial-data-exploration"></a>Anfängliche Datenuntersuchung
    

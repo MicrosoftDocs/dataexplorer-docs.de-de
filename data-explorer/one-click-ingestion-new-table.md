@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 03/29/2020
-ms.openlocfilehash: 4a390e0501d12b6d70d924e9a5c5576e77cec435
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 2c7cd53053582c02f610f364eb36e87ecdf5b03a
+ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85265311"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86058859"
 ---
 # <a name="use-one-click-ingestion-to-ingest-csv-data-from-a-container-to-a-new-table-in-azure-data-explorer"></a>Erfassen von CSV-Daten aus einem Container in einer neuen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung
 
@@ -36,25 +36,25 @@ Informationen zum Erfassen von Daten in einer vorhandenen Tabelle in Azure Data 
     > [!NOTE]
     > Tabellennamen müssen zwischen einem und 1024 Zeichen lang sein.
 
-:::image type="content" source="media/one-click-ingestion-new-table/create-new-table.png" alt-text="Erstellen einer neuen Tabelle: 1-Klick-Erfassung":::
+    :::image type="content" source="media/one-click-ingestion-new-table/create-new-table.png" alt-text="Erstellen einer neuen Tabelle: 1-Klick-Erfassung":::
 
 ## <a name="select-an-ingestion-type"></a>Auswahl eines Erfassungstyps
 
-* Führen Sie unter **Erfassungstyp** die folgenden Schritte aus:
+Führen Sie unter **Erfassungstyp** die folgenden Schritte aus:
    
   1. Wählen Sie **from container** (aus Container) aus. 
   1. Fügen Sie im Feld **Mit Speicher verknüpfen** die [SAS-URL](/azure/vs-azure-tools-storage-explorer-blobs#get-the-sas-for-a-blob-container) des Containers hinzu, und geben Sie optional die Stichprobengröße ein.
 
       :::image type="content" source="media/one-click-ingestion-new-table/from-container.png" alt-text="1-Klick-Erfassung aus Container":::
 
- > [!TIP] 
- > Informationen zur Erfassung **aus einer Datei** finden Sie unter [Erfassen von JSON-Daten aus einer lokalen Datei in einer vorhandenen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-existing-table.md#select-an-ingestion-type).
+     > [!TIP] 
+     > Informationen zur Erfassung **aus einer Datei** finden Sie unter [Erfassen von JSON-Daten aus einer lokalen Datei in einer vorhandenen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-existing-table.md#select-an-ingestion-type).
 
-* Es wird eine Stichprobe der Daten angezeigt. Sie können diese Anzeige filtern, um nur Dateien zu erfassen, die mit bestimmten Zeichen beginnen und/oder auf bestimmte Zeichen enden. Die Vorschau wird automatisch aktualisiert, sobald Sie die Filter anpassen.
+Es wird eine Stichprobe der Daten angezeigt. Sie können diese Anzeige filtern, um nur Dateien zu erfassen, die mit bestimmten Zeichen beginnen und/oder auf bestimmte Zeichen enden. Die Vorschau wird automatisch aktualisiert, sobald Sie die Filter anpassen.
   
-  Sie können die Anzeige beispielsweise so filtern, dass alle Dateien aufgelistet werden, die mit dem Begriff *Daten* beginnen und auf die Erweiterung *.csv.gz* enden.
+ * Sie können die Anzeige beispielsweise so filtern, dass alle Dateien aufgelistet werden, die mit dem Begriff *Daten* beginnen und auf die Erweiterung *.csv.gz* enden.
 
-  :::image type="content" source="media/one-click-ingestion-new-table/from-container-with-filter.png" alt-text="Filter bei der 1-Klick-Erfassung":::
+    :::image type="content" source="media/one-click-ingestion-new-table/from-container-with-filter.png" alt-text="Filter bei der 1-Klick-Erfassung":::
   
 ## <a name="edit-the-schema"></a>Bearbeiten des Schemas
 
@@ -68,8 +68,8 @@ Wählen Sie **Schema bearbeiten** aus, um Ihre Tabellenspaltenkonfiguration anzu
 
         In diesem Fall ist das Datenformat **CSV**.
 
-    > [!TIP]
-    > Wenn Sie **JSON**-Dateien verwenden möchten, lesen Sie die Informationen unter [Erfassen von JSON-Daten aus einer lokalen Datei in einer vorhandenen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-existing-table.md#edit-the-schema).
+        > [!TIP]
+        > Wenn Sie **JSON**-Dateien verwenden möchten, lesen Sie die Informationen unter [Erfassen von JSON-Daten aus einer lokalen Datei in einer vorhandenen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-existing-table.md#edit-the-schema).
 
     * Aktivieren Sie das Kontrollkästchen **Spaltennamen einschließen**, damit die Überschriftenzeile der Datei ignoriert wird.
 
@@ -81,14 +81,14 @@ Wählen Sie **Schema bearbeiten** aus, um Ihre Tabellenspaltenkonfiguration anzu
 
 ### <a name="table"></a>Tabelle
 
-1. In der Tabelle: 
-    * Doppelklicken Sie zur Bearbeitung auf den Namen der neuen Spalte.
-    * Wählen Sie neue Spaltenüberschriften aus, und führen Sie beliebige der folgenden Aktionen aus:
+In der Tabelle: 
+ * Doppelklicken Sie zur Bearbeitung auf den Namen der neuen Spalte.
+ * Wählen Sie neue Spaltenüberschriften aus, und führen Sie beliebige der folgenden Aktionen aus:
 
-[!INCLUDE [data-explorer-one-click-column-table](includes/data-explorer-one-click-column-table.md)]
+    [!INCLUDE [data-explorer-one-click-column-table](includes/data-explorer-one-click-column-table.md)]
 
-> [!NOTE]
-> Bei Tabellenformaten kann jede Spalte in einer Spalte in Azure Data Explorer erfasst werden.
+    > [!NOTE]
+    > Bei Tabellenformaten kann jede Spalte in einer Spalte in Azure Data Explorer erfasst werden.
 
 [!INCLUDE [data-explorer-one-click-command-editor](includes/data-explorer-one-click-command-editor.md)]
 
@@ -106,7 +106,7 @@ Im Fenster **Datenerfassung abgeschlossen** werden alle drei Schritte mit grüne
 
 [!INCLUDE [data-explorer-one-click-ingestion-query-data](includes/data-explorer-one-click-ingestion-query-data.md)]
 
-## <a name="continuous-ingestion---container-only"></a>Fortlaufende Erfassung – nur Container
+## <a name="create-continuous-ingestion-for-container"></a>Erstellen von fortlaufender Erfassung für Container
 
 Mithilfe der kontinuierlichen Erfassung können Sie eine Event Grid-Instanz erstellen, die auf neue Dateien im Quellcontainer lauscht. Alle neuen Dateien, die die Kriterien der vordefinierten Parameter (Präfix, Suffix usw.) erfüllen, werden automatisch in der Zieltabelle erfasst. 
 

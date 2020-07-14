@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/31/2019
-ms.openlocfilehash: 5505eca4435521ea82c347bcd204ff3d68a14176
-ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
+ms.openlocfilehash: dcc196675b29ac1989fb0753e87ef5f1bf0477aa
+ms.sourcegitcommit: 284152eba9ee52e06d710cc13200a80e9cbd0a8b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82862121"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86291575"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>Bereitstellen von Azure Data Explorer-Clustern in Ihrem virtuellen Netzwerk
 
@@ -68,7 +68,7 @@ Wenn Sie Azure Data Explorer-Cluster in Ihrem Subnetz bereitstellen, können Sie
 
 ### <a name="network-security-groups-configuration"></a>Konfiguration von Netzwerksicherheitsgruppen
 
-[Netzwerksicherheitsgruppen (NSG)](/azure/virtual-network/security-overview) bieten die Möglichkeit, den Netzwerkzugriff innerhalb eines VNET zu steuern. Auf Azure Data Explorer kann über zwei Endpunkte zugegriffen werden: HTTPs (443) und TDS (1433). Die folgenden NSG-Regeln müssen konfiguriert werden, um den Zugriff auf diese Endpunkte für die Verwaltung, Überwachung und den ordnungsgemäßen Betrieb Ihres Clusters zuzulassen.
+[Netzwerksicherheitsgruppen (NSG)](/azure/virtual-network/security-overview) bieten die Möglichkeit, den Netzwerkzugriff innerhalb eines VNET zu steuern. Auf Azure Data Explorer kann über zwei Endpunkte zugegriffen werden: HTTPs (443) und TDS (1433). Die folgenden NSG-Regeln müssen konfiguriert werden, um den Zugriff auf diese Endpunkte für die Verwaltung, Überwachung und den ordnungsgemäßen Betrieb Ihres Clusters zuzulassen. Zusätzliche Regeln sind abhängig von Ihren Sicherheitsrichtlinien.
 
 #### <a name="inbound-nsg-configuration"></a>Konfiguration eingehender Netzwerksicherheitsgruppen
 
@@ -112,8 +112,8 @@ Wenn Sie Azure Data Explorer-Cluster in Ihrem Subnetz bereitstellen, können Sie
 | Indien, Mitte | 40.81.249.251, 104.211.98.159 |
 | USA (Mitte) | 40.67.188.68 |
 | USA, Mitte (EUAP) | 40.89.56.69 |
-| China, Osten 2 | 139.217.236.210 |
-| China, Norden 2 | 40.73.6.21 |
+| China, Osten 2 | 139.217.184.92 |
+| China, Norden 2 | 139.217.60.6 |
 | Asien, Osten | 20.189.74.103 |
 | East US | 52.224.146.56 |
 | USA (Ost 2) | 52.232.230.201 |
@@ -228,6 +228,18 @@ Wenn Sie Azure Data Explorer-Cluster in Ihrem Subnetz bereitstellen, können Sie
 | Indien, Westen | 13.71.25.187 |
 | USA, Westen | 40.78.70.148 |
 | USA, Westen 2 | 52.151.20.103 |
+
+## <a name="disable-access-to-azure-data-explorer-from-the-public-ip"></a>Deaktivieren des Zugriffs auf Azure Data Explorer über die öffentliche IP-Adresse
+
+Wenn Sie den Zugriff auf Azure Data Explorer über die öffentliche IP-Adresse vollständig deaktivieren möchten, erstellen Sie eine weitere Eingangsregel in der NSG. Diese Regel muss eine niedrigere [Priorität](/azure/virtual-network/security-overview#security-rules) haben (eine höhere Zahl). 
+
+| **Verwenden Sie**   | **Quelle** | **Quelldiensttag** | **Quellportbereiche**  | **Ziel** | **Zielportbereiche** | **Protokoll ** | **Aktion** | **Priorität ** |
+| ---   | --- | --- | ---  | --- | --- | --- | --- | --- |
+| Deaktivieren des Zugriffs über das Internet | Diensttag | Internet | *  | VirtualNetwork | * | Any | Verweigern | höhere Zahl als die oben aufgeführten Regeln |
+
+Diese Regel ermöglicht es Ihnen, nur über die folgenden DNS-Einträge (die der privaten IP-Adresse für jeden Dienst zugeordnet sind) eine Verbindung mit dem Azure Data Explorer-Cluster herzustellen:
+* `private-[clustername].[geo-region].kusto.windows.net` (Engine)
+* `private-ingest-[clustername].[geo-region].kusto.windows.net` (Datenverwaltung)
 
 ## <a name="expressroute-setup"></a>ExpressRoute-Setup
 
