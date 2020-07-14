@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6c09bea9cfe25ea7ebe86170f71593db4db7d9a2
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: a1382703c4c70263ff0d8a066860071fd07ef179
+ms.sourcegitcommit: bf2c9da0c23ebcaec19b229d2079032d54a2cc82
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264350"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86140518"
 ---
 # <a name="getting-started-with-kusto"></a>Erste Schritte mit Kusto
 
@@ -33,7 +33,7 @@ Der Dienst bietet eine ausgezeichnete Datenerfassung und Abfrageleistung:
 ## <a name="interacting-with-azure-data-explorer"></a>Interaktion mit Azure Data Explorer
 
 Für die Interaktion mit Azure Data Explorer (Kusto) verwenden Benutzer in erster Linie Folgendes:
-* Eins der vielen verfügbaren [Clienttools](../tools/index.md) 
+* Verwenden Sie eines der [Abfragetools](../../tools-integrations-overview.md#azure-data-explorer-query-tools). 
 * [SQL-Abfragen](../api/tds/t-sql.md)
 *  Für die Interaktion wird hauptsächlich die [Kusto-Abfragesprache](../query/index.md) verwendet. KQL ermöglicht das Senden von Datenabfragen und das Verwenden von [Steuerungsbefehlen](../management/index.md) zum Verwalten von Entitäten, Ermitteln von Metadaten und Ähnlichem.
 Sowohl Abfragen als auch Steuerungsbefehle sind kurze „Textprogramme“.

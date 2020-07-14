@@ -50,6 +50,8 @@
           href: security.md
         - name: Sicherheitsbaseline
           href: security-baseline.md
+    - name: Übersicht über Tools und Integrationen
+      href: tools-integrations-overview.md
 - name: Anleitungen
   items:
     - name: Erstellen eines Clusters und einer Datenbank
@@ -110,14 +112,24 @@
               href: data-connection-iot-hub-python.md
             - name: Azure Resource Manager-Vorlage
               href: data-connection-iot-hub-resource-manager.md
+            - name: Azure Data Factory
+              items: null
+            - name: Integration mit Data Factory
+              href: data-factory-integration.md
+            - name: Kopieren von Daten mit Azure Data Factory
+              href: data-factory-load-data.md
+            - name: Massenkopieren von Daten mit einer Azure Data Factory-Vorlage
+              href: data-factory-template.md
+            - name: Ausführen von Steuerungsbefehlen mithilfe von Azure Data Factory
+              href: data-factory-command-activity.md
         - name: Verwenden von SDKs
           items:
             - name: Python
               href: python-ingest-data.md
             - name: Node SDK
               href: node-ingest-data.md
-            - name: .NET Standard SDK
-              href: net-standard-ingest-data.md
+            - name: .NET SDK
+              href: net-sdk-ingest-data.md
         - name: Kafka
           href: ingest-data-kafka.md
         - name: Logstash
@@ -273,16 +285,6 @@
           href: follower.md
     - name: Integration in andere Tools
       items:
-        - name: Azure Data Factory
-          items:
-            - name: Integration mit Data Factory
-              href: data-factory-integration.md
-            - name: Kopieren von Daten mit Azure Data Factory
-              href: data-factory-load-data.md
-            - name: Massenkopieren von Daten mit einer Azure Data Factory-Vorlage
-              href: data-factory-template.md
-            - name: Ausführen von Steuerungsbefehlen mithilfe von Azure Data Factory
-              href: data-factory-command-activity.md
         - name: Power Automate
           items:
             - name: Power Automate-Flow-Connector
@@ -303,6 +305,8 @@
           href: azure-notebooks.md
         - name: Azure Pipelines
           href: devops.md
+        - name: Synchronisieren von Kusto
+          href: ./kusto/tools/synckusto.md
     - name: Problembehandlung
       items:
         - name: Erstellen eines Clusters
@@ -1189,6 +1193,28 @@
               href: ./kusto/query/re2.md
             - name: Cheat Sheet für die Übersetzung von SQL in Kusto
               href: ./kusto/query/sqlcheatsheet.md
+        - name: Abfragetools
+          items:
+            - name: Kusto.Explorer
+              items:
+                - name: Installation und Benutzeroberfläche von Kusto.Explorer
+                  href: ./kusto/tools/kusto-explorer.md
+                - name: Verwenden von Kusto.Explorer
+                  href: ./kusto/tools/kusto-explorer-using.md
+                - name: Optionen von Kusto.Explorer
+                  href: ./kusto/tools/kusto-explorer-options.md
+                - name: Tastenkombinationen
+                  href: ./kusto/tools/kusto-explorer-shortcuts.md
+                - name: Code-Refactoring
+                  href: ./kusto/tools/kusto-explorer-refactor.md
+                - name: Codenavigation
+                  href: ./kusto/tools/kusto-explorer-codenav.md
+                - name: Codeanalyse
+                  href: ./kusto/tools/kusto-explorer-code-analyzer.md
+                - name: Problembehandlung für Kusto.Explorer
+                  href: ./kusto/tools/kusto-explorer-troubleshooting.md
+            - name: Kusto.Cli
+              href: ./kusto/tools/kusto-cli.md
     - name: Konzepte
       href: ./kusto/concepts/index.md
       items:
@@ -1578,8 +1604,6 @@
                   href: ./kusto/api/netfx/kusto-ingest-best-practices.md
                 - name: Codebeispiele
                   href: ./kusto/api/netfx/kusto-ingest-client-examples.md
-                - name: 'Anleitung: Datenerfassung'
-                  href: ./kusto/api/netfx/kusto-ingest-queued-ingest-sample.md
                 - name: 'Anleitung: Datenerfassung mit der REST-API'
                   href: ./kusto/api/netfx/kusto-ingest-client-rest.md
         - name: Python SDK
@@ -1612,79 +1636,6 @@
               href: ./kusto/api/monaco/monaco-kusto.md
             - name: Einbetten der Webbenutzeroberfläche in ein iframe-Element
               href: ./kusto/api/monaco/host-web-ux-in-iframe.md
-    - name: Tools
-      href: ./kusto/tools/index.md
-      items:
-        - name: Toolübersicht
-          href: ./kusto/tools/index.md
-        - name: Ad-hoc-Abfrage
-          items:
-            - name: Kusto.Explorer
-              items:
-                - name: Installation und Benutzeroberfläche von Kusto.Explorer
-                  href: ./kusto/tools/kusto-explorer.md
-                - name: Verwenden von Kusto.Explorer
-                  href: ./kusto/tools/kusto-explorer-using.md
-                - name: Optionen von Kusto.Explorer
-                  href: ./kusto/tools/kusto-explorer-options.md
-                - name: Tastenkombinationen
-                  href: ./kusto/tools/kusto-explorer-shortcuts.md
-                - name: Code-Refactoring
-                  href: ./kusto/tools/kusto-explorer-refactor.md
-                - name: Codenavigation
-                  href: ./kusto/tools/kusto-explorer-codenav.md
-                - name: Codeanalyse
-                  href: ./kusto/tools/kusto-explorer-code-analyzer.md
-                - name: Problembehandlung für Kusto.Explorer
-                  href: ./kusto/tools/kusto-explorer-troubleshooting.md
-            - name: Web-Benutzeroberfläche
-              href: ./web-query-data.md
-            - name: Kusto.Cli
-              href: ./kusto/tools/kusto-cli.md
-        - name: 'Visualisierungen, Dashboards und Berichterstellung'
-          items:
-            - name: Azure-Notebooks
-              href: ./azure-notebooks.md
-            - name: Excel
-              items:
-                - name: Leere Excel-Abfrage
-                  href: ./excel-blank-query.md
-                - name: Excel-Connector
-                  href: ./excel-connector.md
-            - name: Grafana
-              href: ./grafana.md
-            - name: Power BI
-              items:
-                - name: Bewährte Methoden für Power BI
-                  href: ./power-bi-best-practices.md
-                - name: "Power\_BI-Connector"
-                  href: ./power-bi-connector.md
-                - name: "Importierte Power\_BI-Abfrage"
-                  href: ./power-bi-imported-query.md
-                - name: Power BI-SQL-Abfrage
-                  href: ./power-bi-sql-query.md
-        - name: Orchestrierung
-          items:
-            - name: Microsoft Flow (Vorschauversion)
-              items:
-                - name: Microsoft Flow-Connector
-                  href: ./flow.md
-                - name: Verwendungsbeispiele für den Microsoft Flow-Connector
-                  href: ./flow-usage.md
-            - name: Microsoft Logic Apps (Vorschauversion)
-              href: ./kusto/tools/logicapps.md
-        - name: Datenerfassung
-          items:
-            - name: LightIngest
-              href: ./lightingest.md
-            - name: Apache Spark-Connector
-              href: ./spark-connector.md
-        - name: Integration der Quellcodeverwaltung
-          items:
-            - name: Synchronisieren von Kusto
-              href: ./kusto/tools/synckusto.md
-            - name: Azure Pipelines/DevOps
-              href: ./devops.md
 - name: Ressourcen
   items:
     - name: Blog
