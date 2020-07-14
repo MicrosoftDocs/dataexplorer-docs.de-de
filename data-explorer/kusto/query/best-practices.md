@@ -1,5 +1,5 @@
 ---
-title: 'Bewährte Methoden für Abfragen: Azure Daten-Explorer | Microsoft-Dokumentation'
+title: 'Bewährte Methoden für Abfragen: Azure Daten-Explorer'
 description: In diesem Artikel werden bewährte Methoden für Abfragen in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -8,108 +8,38 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/03/2020
-ms.openlocfilehash: e6db181188250d28689cca64762e13973f2f33f8
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: 301917f363176fb8e3bbf2fe4286a86b7a5674ea
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128817"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280524"
 ---
-# <a name="best-practices"></a>Bewährte Methoden 
+# <a name="query-best-practices"></a>Best Practices für Abfragen
 
-## <a name="general"></a>Allgemein
+Es folgen einige bewährte Methoden, die Sie befolgen sollten, um die Abfrage schneller auszuführen.
 
-Es gibt mehrere "DOS" und "es", die Sie befolgen können, um die Abfrage schneller auszuführen.
-
-### <a name="do"></a>Sie sollten
-
-*   Verwenden Sie zunächst Zeitfilter. Kusto ist hochgradig optimiert, um Zeitfilter zu verwenden.
-*   Bei Verwendung von Zeichen folgen Operatoren:
-    *   Bevorzugen Sie den Operator, wenn Sie nach `has` `contains` vollständigen Tokens suchen. `has`ist leistungsfähiger, da es nicht in der Suche nach Teil Zeichenfolgen ist.
-    *   Bevorzugen Sie ggf. die Verwendung von Operatoren mit Berücksichtigung der Groß-/Kleinschreibung, da Sie leistungsfähiger Verwenden Sie z. b `==` `=~` `in` `in~` `contains_cs` `contains` `contains` / `contains_cs` `has` / `has_cs` . die Verwendung von "Over", "Over" und "Over"
-*   Bevorzugen Sie anstelle der Verwendung von eine bestimmte Spalte `*` (Volltextsuche in allen Spalten).
-*   Wenn Sie feststellen, dass die meisten Ihrer Abfragen mit dem Extrahieren von Feldern aus [dynamischen Objekten](./scalar-data-types/dynamic.md) über mehrere Millionen von Zeilen zu tun haben, sollten Sie diese Spalte bei der Erfassungs Zeit materialisieren. Auf diese Weise zahlen Sie nur einmal für die Spalten Extraktion.  
-*   Wenn Sie über eine- `let` Anweisung verfügen, deren Wert Sie mehrmals verwenden, sollten Sie die [Funktion "Materialize ()](./materializefunction.md) " verwenden (siehe einige [bewährte Methoden](#materialize-function) zur Verwendung von `materialize()` ).
-
-### <a name="dont"></a>Sie sollten auf keinen Fall
-
-*   Versuchen Sie nicht, neue Abfragen ohne `limit [small number]` oder `count` am Ende auszuführen.
-    Das Ausführen von ungebundenen Abfragen über ein unbekanntes DataSet kann GSB der Ergebnisse ergeben, die an den Client zurückgegeben werden, was zu einer langsamen Reaktion führt und der Cluster ausgelastet ist.
-*   Wenn Sie Konvertierungen (JSON, String usw.) über 1 Milliarde Datensätze anwenden, müssen Sie die Abfrage neu strukturieren, um die Menge der Daten zu reduzieren, die in die Konvertierung eingespeist werden.
-*   Verwenden `tolower(Col) == "lowercasestring"` Sie für Vergleiche ohne Berücksichtigung der Groß-/Kleinschreibung Verwenden Sie stattdessen `Col =~ "lowercasestring"`.
-    *   Wenn Ihre Daten bereits in Kleinbuchstaben (oder in Großbuchstaben) vorhanden sind, sollten Sie keine Vergleiche ohne Berücksichtigung der Groß-/Kleinschreibung vermeiden und `Col == "lowercasestring"` stattdessen (oder `Col == "UPPERCASESTRING"` ) verwenden.
-*   Filtern Sie nach einer berechneten Spalte nicht, wenn Sie nach einer Tabellenspalte filtern können. Anders ausgedrückt: anstelle von: `T | extend _value = <expression> | where predicate(_value)` `T | where predicate(<expression>)` .
-
-## <a name="summarize-operator"></a>summarize-Operator
-
-*   Wenn die Group by-Schlüssel des Zusammenfassungs Operators eine hohe Kardinalität aufweisen (bewährte Vorgehensweise: oberhalb von 1 Million), empfiehlt es sich, den [Hinweis. Strategy = shuffle](./shufflequery.md)zu verwenden.
-
-## <a name="join-operator"></a>join-Operator
-
-*   Wenn Sie den [Join-Operator](./joinoperator.md)verwenden, wählen Sie die Tabelle mit weniger Zeilen als die erste Tabelle aus (am weitesten links). 
-*   Wenn Sie [joinoperatordaten](./joinoperator.md) Cluster übergreifend verwenden, führen Sie die Abfrage auf der rechten Seite des Joins aus (wo sich die meisten Daten befinden).
-*   Wenn die linke Seite klein ist (bis zu 100.000 Datensätze) und die Rechte Seite groß ist, verwenden Sie [Hint. Strategy = Broadcast](./broadcastjoin.md).
-*   Wenn beide Seiten der Verknüpfung zu groß sind und die jointaste eine hohe Kardinalität hat, verwenden Sie [Hint. Strategy = shuffle](./shufflequery.md).
-    
-## <a name="parse-operator-and-extract-function"></a>Analyse Operator und Extract ()-Funktion
-
-*   der Analyse [Operator](./parseoperator.md) (einfacher Modus) ist nützlich, wenn die Werte in der Ziel Spalte Zeichen folgen enthalten, die alle das gleiche Format oder Muster aufweisen.
-Verwenden Sie z. b. für eine Spalte mit Werten wie `"Time = <time>, ResourceId = <resourceId>, Duration = <duration>, ...."` , wenn Sie die Werte jedes Felds extrahieren, `parse` anstelle mehrerer Anweisungen den-Operator `extract()` .
-*   die [extract ()-Funktion](./extractfunction.md) ist hilfreich, wenn die analysierten Zeichen folgen nicht alle das gleiche Format oder Muster aufweisen.
-Extrahieren Sie in solchen Fällen die erforderlichen Werte mithilfe eines Regex.
-
-## <a name="materialize-function"></a>Materialize ()-Funktion
-
-*   Wenn Sie die [Materialize ()-Funktion](./materializefunction.md)verwenden, versuchen Sie, alle möglichen Operatoren zu übermitteln, die das materialisierte DataSet verringern, und die Semantik der Abfrage weiterhin beibehalten. Beispielsweise Filter oder nur erforderliche Spalten.
-    
-    **Beispiel:**
-
-    ```kusto
-    let materializedData = materialize(Table
-    | where Timestamp > ago(1d));
-    union (materializedData
-    | where Text !has "somestring"
-    | summarize dcount(Resource1)), (materializedData
-    | where Text !has "somestring"
-    | summarize dcount(Resource2))
-    ```
-
-* Der Filter für Text ist gegenseitig und kann auf den materialisieren-Ausdruck geschoben werden.
-    Die Abfrage benötigt nur diese Spalten `Timestamp` , `Text` , `Resource1` und `Resource2` daher wird empfohlen, diese Spalten innerhalb des materialisierten Ausdrucks zu projizieren.
-    
-    ```kusto
-    let materializedData = materialize(Table
-    | where Timestamp > ago(1d)
-    | where Text !has "somestring"
-    | project Timestamp, Resource1, Resource2, Text);
-    union (materializedData
-    | summarize dcount(Resource1)), (materializedData
-    | summarize dcount(Resource2))
-    ```
-    
-*   Wenn die Filter in dieser Abfrage nicht identisch sind:  
-
-    ```kusto
-    let materializedData = materialize(Table
-    | where Timestamp > ago(1d));
-    union (materializedData
-    | where Text has "String1"
-    | summarize dcount(Resource1)), (materializedData
-    | where Text has "String2"
-    | summarize dcount(Resource2))
-    ```
-
-*   Dies kann sich als lohnenswert erweisen (wenn der kombinierte Filter das materialisierte Ergebnis drastisch reduziert), um beide Filter für das materialisierte Ergebnis durch einen logischen `or` Ausdruck wie in der folgenden Abfrage zu kombinieren. Behalten Sie jedoch die Filter in den einzelnen Union-Beinen bei, um die Semantik der Abfrage beizubehalten:
-     
-    ```kusto
-    let materializedData = materialize(Table
-    | where Timestamp > ago(1d)
-    | where Text has "String1" or Text has "String2"
-    | project Timestamp, Resource1, Resource2, Text);
-    union (materializedData
-    | where Text has "String1"
-    | summarize dcount(Resource1)), (materializedData
-    | where Text has "String2"
-    | summarize dcount(Resource2))
-    ```
-    
+|Aktion  |Verwendung  |Nicht verwenden  |Notizen  |
+|---------|---------|---------|---------|
+| **Zeitfilter** | Verwenden Sie zunächst Zeitfilter. ||Kusto ist für die Verwendung von Zeit Filtern stark optimiert.| 
+|**Zeichenfolgenoperatoren**      | Verwenden des `has` Operators     | Nicht verwenden`contains`     | Wenn Sie nach vollständigen Token suchen, `has` funktioniert besser, da keine Teil Zeichenfolgen gesucht werden.   |
+|**Operatoren mit Berücksichtigung der groß-**     |  Verwenden von `==`       | Nicht verwenden`=~`       |  Verwenden Sie nach Möglichkeit die Operatoren mit Berücksichtigung der groß-       |
+| | Verwenden von `in` | Nicht verwenden`in~`|
+|  | Verwenden von `contains_cs`         | Nicht verwenden`contains`        | Wenn Sie verwenden `has` / `has_cs` und nicht verwenden können `contains` / `contains_cs` , ist das noch besser. |
+| **Suchen von Text**    |    In einer bestimmten Spalte suchen     |    Nicht verwenden`*`    |   `*`führt eine Volltextsuche über alle Spalten hinweg durch.    |
+| **Felder aus [dynamischen Objekten](./scalar-data-types/dynamic.md) in Millionen von Zeilen extrahieren**    |  Materialisieren Sie die Spalte bei der Erfassungs Zeit, wenn die meisten Ihrer Abfragen Felder aus dynamischen Objekten in Millionen von Zeilen extrahieren.      |         | Auf diese Weise zahlen Sie nur einmal für die Spalten Extraktion.    |
+| **`let`Anweisung mit einem Wert, den Sie mehrmals verwenden** | Verwenden der [Materialize ()-Funktion](./materializefunction.md) |  |   Weitere Informationen zur Verwendung von finden Sie unter `materialize()` [Materialize ()](materializefunction.md).|
+| **Anwenden von Konvertierungen auf mehr als 1 Milliarde Datensätze**| Strukturieren Sie die Abfrage neu, um die Datenmenge zu reduzieren, die in die Konvertierung eingespeist wird.| Konvertieren Sie große Datenmengen nicht, wenn Sie vermieden werden können. | |
+| **Neue Abfragen** | Verwenden Sie `limit [small number]` oder `count` am Ende. | |     Das Ausführen von ungebundenen Abfragen über unbekannte Datasets kann GSB der Ergebnisse ergeben, die an den Client zurückgegeben werden. Dies führt zu einer langsamen Antwort und einem ausgelasteten Cluster.|
+| **Vergleichs Vergleiche** | Verwenden von `Col =~ "lowercasestring"` | Nicht verwenden`tolower(Col) == "lowercasestring"` |
+| **Vergleichen von Daten in Kleinbuchstaben (oder in Großbuchstaben)** | `Col == "lowercasestring"` (oder `Col == "UPPERCASESTRING"`) | Vermeiden Sie die Verwendung von vergleichen ohne Beachtung||
+| **Filtern nach Spalten** |  Filtern Sie nach einer Tabellenspalte.|Filtern Sie nicht nach einer berechneten Spalte. | |
+| | Verwenden von `T | where predicate(<expression>)` | Nicht verwenden`T | extend _value = <expression> | where predicate(_value)` ||
+| **summarize-Operator** |  Verwenden Sie [Hint. Strategy = shuffle](./shufflequery.md) , wenn der des Zusammenfassungs `group by keys` Operators eine hohe Kardinalität hat. | | Hohe Kardinalität liegt idealerweise über 1 Million.|
+|**[join-Operator](./joinoperator.md)** | Wählen Sie die Tabelle mit den weniger Zeilen aus, die die erste Tabelle sein soll (in der Abfrage ganz links). ||
+| Cluster übergreifende Einbindung |Führen Sie die Abfrage Cluster übergreifend auf der rechten Seite des Joins aus, auf der sich die meisten Daten befinden. ||
+|Join, wenn die linke Seite klein und die Rechte Seite groß ist | Use [Hint. Strategy = Broadcast](./broadcastjoin.md) || Small bezieht sich auf bis zu 100.000 Datensätze. |
+|Beitreten, wenn beide Seiten zu groß sind | Use [Hint. Strategy = shuffle](./shufflequery.md) || Verwenden Sie, wenn der joinschlüssel über eine hohe Kardinalität verfügt.|
+|**Extrahieren von Werten in einer Spalte mit Zeichen folgen, die dasselbe Format oder Muster aufweisen**|  Verwenden des Analyse [Operators](./parseoperator.md) | Verwenden Sie nicht mehrere- `extract()` Anweisungen.  | Beispielsweise werden Werte wie`"Time = <time>, ResourceId = <resourceId>, Duration = <duration>, ...."`
+|**[Extract ()-Funktion](./extractfunction.md)**| Verwenden Sie bei analysierten Zeichen folgen nicht alle das gleiche Format oder Muster.| |Extrahieren Sie die erforderlichen Werte mithilfe eines Regex.|
+| **[Materialize ()-Funktion](./materializefunction.md)** | Übermitteln Sie alle möglichen Operatoren, die das materialisierte DataSet verringern, und behalten Sie trotzdem die Semantik der Abfrage bei. | |Beispielsweise Filter oder nur erforderliche Spalten.

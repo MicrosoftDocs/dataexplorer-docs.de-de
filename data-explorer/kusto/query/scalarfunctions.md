@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: c8733a9aaa1dbdfa504961cfc3676cd813d69952
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 3b3f72bc2ea6b3b17cbdb6d4fb707b9837a2ed56
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763732"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280601"
 ---
 # <a name="scalar-function-types"></a>Skalarfunktionstypen
 
@@ -36,7 +36,7 @@ ms.locfileid: "85763732"
 |[tobool()](toboolfunction.md)|Konvertiert Eingaben in eine boolesche Darstellung (8-Bit-Darstellung mit Vorzeichen).|
 |[todatetime()](todatetimefunction.md)|Konvertiert die Eingabe in einen DateTime-skalaren Wert.|
 |["gedouble ()"/toreal ()](todoublefunction.md)|Konvertiert die Eingabe in einen Wert vom Typ "Real". ("gedouble ()" und "toreal ()" sind Synonyme.)|
-|[tostring()](tostringfunction.md)|Konvertiert Eingaben in eine Zeichen folgen Darstellung.|
+|[Zeichenfolge ()](tostringfunction.md)|Konvertiert Eingaben in eine Zeichen folgen Darstellung.|
 |[totimespan()](totimespanfunction.md)|Konvertiert Eingaben in TimeSpan Scalar.|
 
 ## <a name="datetimetimespan-functions"></a>DateTime/TimeSpan-Funktionen
@@ -44,9 +44,9 @@ ms.locfileid: "85763732"
 |Funktionsname     |BESCHREIBUNG                                          |
 |-------------------------|--------------------------------------------------------|
 |[ago()](agofunction.md)|Subtrahiert den angegebenen Zeitraum von der aktuellen UTC-Uhrzeit.|
-|[datetime_add()](datetime-addfunction.md)|Berechnet einen neuen DateTime-Wert aus einem angegebenen datepart-Wert multipliziert mit einem angegebenen Wert, der einem angegebenen DateTime-Wert hinzugefügt wird.|
+|[datetime_add ()](datetime-addfunction.md)|Berechnet einen neuen DateTime-Wert aus einem angegebenen datepart-Wert multipliziert mit einem angegebenen Wert, der einem angegebenen DateTime-Wert hinzugefügt wird.|
 |[datetime_part()](datetime-partfunction.md)|Extrahiert den angeforderten Datums Teil als ganzzahligen Wert.|
-|[datetime_diff()](datetime-difffunction.md)|Gibt das Ende des Jahres zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
+|[datetime_diff ()](datetime-difffunction.md)|Gibt das Ende des Jahres zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
 |[dayofmonth()](dayofmonthfunction.md)|Gibt die ganzzahlige Zahl zurück, die die Tagesnummer des angegebenen Monats darstellt.|
 |[dayofweek()](dayofweekfunction.md)|Gibt die ganzzahlige Anzahl von Tagen seit dem vorangegangenen Sonntag als Zeitspanne zurück.|
 |[dayofyear()](dayofyearfunction.md)|Gibt die Ganzzahl zurück, die die Tagesnummer des angegebenen Jahrs darstellt.|
@@ -76,11 +76,11 @@ ms.locfileid: "85763732"
 
 |Funktionsname     |BESCHREIBUNG                                          |
 |-------------------------|--------------------------------------------------------|
-|[array_concat()](arrayconcatfunction.md)|Verkettet eine Reihe dynamischer Arrays mit einem einzelnen Array.|
+|[array_concat ()](arrayconcatfunction.md)|Verkettet eine Reihe dynamischer Arrays mit einem einzelnen Array.|
 |[array_iif()](arrayifffunction.md)|Wendet die Element Weise IIf-Funktion auf Arrays an.|
 |[array_index_of()](arrayindexoffunction.md)|Durchsucht das Array nach dem angegebenen Element und gibt seine Position zurück.|
-|[array_length()](arraylengthfunction.md)|Berechnet die Anzahl der Elemente in einem dynamischen Array.|
-|[array_slice()](arrayslicefunction.md)|Extrahiert einen Slice eines dynamischen Arrays.|
+|[array_length ()](arraylengthfunction.md)|Berechnet die Anzahl der Elemente in einem dynamischen Array.|
+|[array_slice ()](arrayslicefunction.md)|Extrahiert einen Slice eines dynamischen Arrays.|
 |[array_split()](arraysplitfunction.md)|Erstellt ein Array von Arrays, die aus dem Eingabe Array geteilt werden.|
 |[bag_keys()](bagkeysfunction.md)|Listet alle Stamm Schlüssel in einem dynamischen Eigenschaften Behälter Objekt auf.|
 |[pack()](packfunction.md)|Erstellt ein dynamisches Objekt (Eigenschaften Behälter) aus einer Liste von Namen und Werten.|
@@ -114,16 +114,16 @@ ms.locfileid: "85763732"
 |Funktionsname     |BESCHREIBUNG                                          |
 |-------------------------|--------------------------------------------------------|
 |[Abs ()](abs-function.md)|Berechnet den absoluten Wert der Eingabe.|
-|[acos()](acosfunction.md)|Gibt den Winkel zurück, dessen Kosinus die angegebene Zahl ist (die umgekehrte Operation von cos ()).|
-|[asin()](asinfunction.md)|Gibt den Winkel zurück, dessen Sinus die angegebene Zahl ist (die umgekehrte Operation von Sin ()).|
-|[atan()](atanfunction.md)|Gibt den Winkel zurück, dessen Tangens die angegebene Zahl ist (die umgekehrte Operation von Tan ()).|
+|[acos ()](acosfunction.md)|Gibt den Winkel zurück, dessen Kosinus die angegebene Zahl ist (die umgekehrte Operation von cos ()).|
+|[ASIN ()](asinfunction.md)|Gibt den Winkel zurück, dessen Sinus die angegebene Zahl ist (die umgekehrte Operation von Sin ()).|
+|[Atan ()](atanfunction.md)|Gibt den Winkel zurück, dessen Tangens die angegebene Zahl ist (die umgekehrte Operation von Tan ()).|
 |[atan2()](atan2function.md)|Berechnet den Winkel im Bogenmaße zwischen der positiven x-Achse und dem Strahl vom Ursprung bis zum Punkt (y, x).|
 |[beta_cdf()](beta-cdffunction.md)|Gibt die standardmäßige kumulative Beta Verteilungsfunktion zurück.|
 |[beta_inv()](beta-invfunction.md)|Gibt die Umkehrung der kumulativen Beta-Wahrscheinlichkeitsfunktion der Beta-Funktion zurück.|
 |[beta_pdf()](beta-pdffunction.md)|Gibt die Beta Funktion der Wahrscheinlichkeitsdichte zurück.|
-|[cos()](cosfunction.md)|Gibt die Cosinus-Funktion zurück.|
-|[cot()](cotfunction.md)|Berechnet den trigonometrischen Kotangens des angegebenen Winkels im Bogenmaße.|
-|[degrees()](degreesfunction.md)|Konvertiert den Winkelwert in Bogenmaß mit Formel Grad = (180/PI) * Winkel-in-Bogenmaß.|
+|[cos ()](cosfunction.md)|Gibt die Cosinus-Funktion zurück.|
+|[Cot ()](cotfunction.md)|Berechnet den trigonometrischen Kotangens des angegebenen Winkels im Bogenmaße.|
+|[Grad ()](degreesfunction.md)|Konvertiert den Winkelwert in Bogenmaß mit Formel Grad = (180/PI) * Winkel-in-Bogenmaß.|
 |[Exp ()](exp-function.md)|Die exponentielle base-e-Funktion von x, die e für Power x: e ^ x ausgelöst wird.|
 |[exp10()](exp10-function.md)|Die exponentielle Base-10-Funktion von x, die 10 auf Power x: 10 ^ x fest.|
 |[exp2()](exp2-function.md)|Die exponentielle Base-2-Funktion von x, die 2 für Power x: 2 ^ x ist.|
@@ -131,21 +131,21 @@ ms.locfileid: "85763732"
 |[isfinite()](isfinitefunction.md)|Gibt zurück, ob die Eingabe ein endlicher Wert (nicht unendlich oder NaN) ist.|
 |[isinf()](isinffunction.md)|Gibt zurück, ob die Eingabe ein unendlicher (positiver oder negativer) Wert ist.|
 |[isnan()](isnanfunction.md)|Gibt zurück, ob die Eingabe ein NaN-Wert (not-a-Number) ist.|
-|[log()](log-function.md)|Gibt die natürliche Logarithmus Funktion zurück.|
-|[log10()](log10-function.md)|Gibt die allgemeine Logarithmus Funktion (Basis 10) zurück.|
+|[Log ()](log-function.md)|Gibt die natürliche Logarithmus Funktion zurück.|
+|[log10 ()](log10-function.md)|Gibt die allgemeine Logarithmus Funktion (Basis 10) zurück.|
 |[log2()](log2-function.md)|Gibt die Logarithmus Funktion der Basis 2 zurück.|
 |[loggamma()](loggammafunction.md)|Berechnet das Protokoll des absoluten Werts der Gamma Funktion.|
 |[not()](notfunction.md)|Kehrt den Wert des bool-Arguments um.|
-|[pi()](pifunction.md)|Gibt den konstanten Wert von Pi (μ) zurück.|
+|[PI ()](pifunction.md)|Gibt den konstanten Wert von Pi (μ) zurück.|
 |[pow()](powfunction.md)|Gibt das Ergebnis der Erhöhung der Stromversorgung zurück.|
-|[radians()](radiansfunction.md)|Konvertiert den Winkelwert in Grad in den Wert im Bogenmaß mit Formel Bogenmaß = (PI/180) * Winkel in Grad.|
-|[rand()](randfunction.md)|Gibt eine Zufallszahl zurück.|
-|[Bereich ()](rangefunction.md)|Generiert ein dynamisches Array, das eine Reihe von gleichmäßig getrennten Werten enthält.|
+|[radiane ()](radiansfunction.md)|Konvertiert den Winkelwert in Grad in den Wert im Bogenmaß mit Formel Bogenmaß = (PI/180) * Winkel in Grad.|
+|[Rand ()](randfunction.md)|Gibt eine Zufallszahl zurück.|
+|[range()](rangefunction.md)|Generiert ein dynamisches Array, das eine Reihe von gleichmäßig getrennten Werten enthält.|
 |[Round ()](roundfunction.md)|Gibt die abgerundete Quelle auf die angegebene Genauigkeit zurück.|
 |[Sign ()](signfunction.md)|Zeichen eines numerischen Ausdrucks.|
-|[sin()](sinfunction.md)|Gibt die Sinusfunktion zurück.|
+|[Sin ()](sinfunction.md)|Gibt die Sinusfunktion zurück.|
 |[SQRT ()](sqrtfunction.md)|Gibt die Quadratwurzel Funktion zurück.|
-|[tan()](tanfunction.md)|Gibt die Tangens Funktion zurück.|
+|[Tan ()](tanfunction.md)|Gibt die Tangens Funktion zurück.|
 |[welch_test()](welch-testfunction.md)|Berechnet den p-Wert der [Welch-Test-Funktion](https://en.wikipedia.org/wiki/Welch%27s_t-test).|
 
 ## <a name="metadata-functions"></a>Metadatenfunktionen
@@ -178,7 +178,7 @@ ms.locfileid: "85763732"
 |Funktionsname     |BESCHREIBUNG                                          |
 |-------------------------|--------------------------------------------------------|
 |[case()](casefunction.md)|Wertet eine Liste von Prädikaten aus und gibt den ersten Ergebnis Ausdruck zurück, dessen Prädikat erfüllt ist.|
-|[COALESCE ()](coalescefunction.md)|Wertet eine Liste von Ausdrücken aus und gibt den ersten Ausdruck zurück, der nicht NULL ist (oder nicht leer für eine Zeichenfolge).|
+|[coalesce()](coalescefunction.md)|Wertet eine Liste von Ausdrücken aus und gibt den ersten Ausdruck zurück, der nicht NULL ist (oder nicht leer für eine Zeichenfolge).|
 |[IIf ()/IFF ()](iiffunction.md)|Wertet das erste Argument (das Prädikat) aus und gibt den Wert des zweiten oder dritten Arguments zurück, abhängig davon, ob das Prädikat als true (Second) oder false (dritte) ausgewertet wurde.|
 |[max_of()](max-offunction.md)|Gibt den maximalen Wert von mehreren ausgewerteten numerischen Ausdrücken zurück.|
 |[min_of()](min-offunction.md)|Gibt den minimalen Wert von mehreren ausgewerteten numerischen Ausdrücken zurück.|
@@ -231,14 +231,14 @@ ms.locfileid: "85763732"
 |[base64_decode_tostring()](base64_decode_tostringfunction.md)|Decodiert eine base64-Zeichenfolge in eine UTF-8-Zeichenfolge.|
 |[base64_decode_toarray()](base64_decode_toarrayfunction.md)|Decodiert eine base64-Zeichenfolge in ein Array von Long-Werten.|
 |[count ()](cotfunction.md)|Zählt die Vorkommnisse einer Teilzeichenfolge in einer Zeichenfolge. Einfache Zeichen folgen Übereinstimmungen können sich überlappen die Regex-Übereinstimmungen sind nicht.|
-|[extrahieren ()](extractfunction.md)|Ruft eine Übereinstimmung für einen regulären Ausdruck aus einer Textzeichenfolge ab.|
+|[extract()](extractfunction.md)|Ruft eine Übereinstimmung für einen regulären Ausdruck aus einer Textzeichenfolge ab.|
 |[extract_all()](extractallfunction.md)|Alle Übereinstimmungen für einen regulären Ausdruck aus einer Text Zeichenfolge erhalten.|
 |[extractjson()](extractjsonfunction.md)|Rufen Sie ein angegebenes Element aus einem JSON-Text mit einem Pfadausdruck ab.|
-|[indexof()](indexoffunction.md)|Die Funktion meldet den NULL basierten Index des ersten Vorkommens einer angegebenen Zeichenfolge in der Eingabe Zeichenfolge.|
+|[IndexOf ()](indexoffunction.md)|Die Funktion meldet den NULL basierten Index des ersten Vorkommens einer angegebenen Zeichenfolge in der Eingabe Zeichenfolge.|
 |[isempty()](isemptyfunction.md)|Gibt "true" zurück, wenn das Argument eine leere Zeichenfolge oder NULL ist.|
 |[isnotempty()](isnotemptyfunction.md)|Gibt true zurück, wenn das Argument keine leere Zeichenfolge oder NULL ist.|
 |[isnotnull()](isnotnullfunction.md)|Gibt "true" zurück, wenn das Argument nicht NULL ist.|
-|[isnull()](isnullfunction.md)|Wertet das einzige Argument aus und gibt einen booleschen Wert zurück, der angibt, ob das Argument zu einem NULL-Wert ausgewertet wird.|
+|[IsNull ()](isnullfunction.md)|Wertet das einzige Argument aus und gibt einen booleschen Wert zurück, der angibt, ob das Argument zu einem NULL-Wert ausgewertet wird.|
 |[parse_command_line()](parse-command-line.md)|Analysiert eine Unicode-Befehlszeilen Zeichenfolge und gibt ein Array mit den Befehlszeilen Argumenten zurück.|
 |[parse_csv()](parsecsvfunction.md)|Teilt eine angegebene Zeichenfolge, die durch Trennzeichen getrennte Werte darstellt, und gibt ein Zeichen folgen Array mit diesen Werten zurück.|
 |[parse_ipv4()](parse-ipv4function.md)|Konvertiert Eingaben in eine Long-Darstellung (signed 64-Bit).|
@@ -250,7 +250,7 @@ ms.locfileid: "85763732"
 |[parse_urlquery()](parseurlqueryfunction.md)|Analysiert eine URL-Abfrage Zeichenfolge und gibt ein dynamisches Objekt zurück, das die Abfrage Parameter enthält.|
 |[parse_version()](parse-versionfunction.md)|Konvertiert die Darstellung der Eingabe Zeichenfolge in eine vergleichbare Dezimalzahl.|
 |[Replace ()](replacefunction.md)|Ersetzen Sie alle regex-Übereinstimmungen mit einer anderen Zeichenfolge.|
-|[reverse()](reversefunction.md)|Die Funktion bewirkt eine Umkehrung der Eingabe Zeichenfolge.|
+|[umkehren ()](reversefunction.md)|Die Funktion bewirkt eine Umkehrung der Eingabe Zeichenfolge.|
 |[split()](splitfunction.md)|Teilt eine angegebene Zeichenfolge gemäß einem angegebenen Trennzeichen und gibt ein Zeichen folgen Array mit den enthaltenen Teil Zeichenfolgen zurück.|
 |[strcat()](strcatfunction.md)|Verkettet zwischen 1 und 64 Argumenten.|
 |[strcat_delim()](strcat-delimfunction.md)|Verkettet zwischen zwei und 64 Argumenten mit Trennzeichen, die als erstes Argument bereitgestellt werden.|
@@ -260,7 +260,7 @@ ms.locfileid: "85763732"
 |[Teil Zeichenfolge ()](substringfunction.md)|Extrahiert eine Teil Zeichenfolge aus einer Quell Zeichenfolge beginnend mit einem Index bis zum Ende der Zeichenfolge.|
 |[toupper()](toupperfunction.md)|Konvertiert eine Zeichenfolge in Großbuchstaben.|
 |[translate()](translatefunction.md)|Ersetzt einen Zeichensatz ("SEARCHLIST") durch einen anderen Zeichensatz ("REPLACEMENTLIST") in einer angegebenen Zeichenfolge.|
-|[trim()](trimfunction.md)|Entfernt alle führenden und nachfolgenden Übereinstimmungen des angegebenen regulären Ausdrucks.|
+|[Trim ()](trimfunction.md)|Entfernt alle führenden und nachfolgenden Übereinstimmungen des angegebenen regulären Ausdrucks.|
 |[trim_end()](trimendfunction.md)|Entfernt die nachfolgende Entsprechung des angegebenen regulären Ausdrucks.|
 |[trim_start()](trimstartfunction.md)|Entfernt die führende Entsprechung des angegebenen regulären Ausdrucks.|
 |[url_decode()](urldecodefunction.md)|Die-Funktion konvertiert die codierte URL in eine reguläre URL-Darstellung.|
@@ -283,7 +283,7 @@ ms.locfileid: "85763732"
 
 |Funktionsname     |BESCHREIBUNG                                          |
 |-------------------------|--------------------------------------------------------|
-|[GetType ()](gettypefunction.md)|Gibt den Lauf Zeittyp des einzelnen Arguments zurück.|
+|[gettype()](gettypefunction.md)|Gibt den Lauf Zeittyp des einzelnen Arguments zurück.|
 
 ## <a name="scalar-aggregation-functions"></a>Skalare Aggregations Funktionen
 
@@ -301,9 +301,16 @@ ms.locfileid: "85763732"
 |Funktionsname|BESCHREIBUNG|
 |--------------------------------------------------------------------------|--------------------------------------------------------|
 |[geo_distance_2points()](geo-distance-2points-function.md)|Berechnet den kürzesten Abstand zwischen zwei geografischen Koordinaten auf der Erde.|
-|[geo_geohash_to_central_point()](geo-geohash-to-central-point-function.md)|Berechnet die räumlichen Koordinaten, die den Mittelpunkt eines GeoHash-rechteckigen Bereichs darstellen.|
+|[geo_distance_point_to_line()](geo-distance-point-to-line-function.md)|Berechnet den kürzesten Abstand zwischen einer Koordinate und einer Linie auf der Erde.|
 |[geo_point_in_circle()](geo-point-in-circle-function.md)|Berechnet, ob die georäumlichen Koordinaten sich innerhalb eines Kreises auf der Erde befinden.|
+|[geo_point_in_polygon()](geo-point-in-polygon-function.md)|Berechnet, ob sich die geografischen Koordinaten innerhalb eines Polygons oder eines multipolygons auf der Erde befinden.|
 |[geo_point_to_geohash()](geo-point-to-geohash-function.md)|Berechnet den GeoHash-Zeichen folgen Wert für einen geografischen Standort.|
+|[geo_geohash_to_central_point()](geo-geohash-to-central-point-function.md)|Berechnet die räumlichen Koordinaten, die den Mittelpunkt eines GeoHash-rechteckigen Bereichs darstellen.|
+|[geo_point_to_s2cell()](geo-point-to-s2cell-function.md)|Berechnet den S2-zelltokenzeichenfolgen-Wert für einen geografischen Standort.|
+|[geo_s2cell_to_central_point()](geo-s2cell-to-central-point-function.md)|Berechnet die räumlichen Koordinaten, die den Mittelpunkt einer S2-Zelle darstellen.|
+|[geo_polygon_to_s2cells()](geo-polygon-to-s2cells-function.md)|Berechnet S2-zelltokens, die ein Polygon oder MultiPolygon auf der Erde abdecken. Nützliches Georäumliches jointool.|
+|[geo_line_densify ()](geo-line-densify-function.md)|Konvertiert planare Zeilen Kanten durch Hinzufügen von zwischen Punkten in geodäk.|
+|[geo_polygon_densify ()](geo-polygon-densify-function.md)|Konvertiert Polygon-oder MultiPolygon-planare Ränder in geodäme durch Hinzufügen von zwischen Punkten.|
 
 ## <a name="hash-functions"></a>Hash Funktionen
 
@@ -312,5 +319,5 @@ ms.locfileid: "85763732"
 |[Hash ()](hashfunction.md)|Gibt einen Hashwert für den Eingabe Wert zurück.|
 |[hash_combine()](hash_combinefunction.md)|Kombiniert zwei oder mehr Hashwerte.|
 |[hash_many()](hash_manyfunction.md)|Gibt einen kombinierten Hashwert mit mehreren Werten zurück.|
-|[hash_md5 ()](md5hashfunction.md)|Gibt einen MD5-Hashwert für den Eingabe Wert zurück.|
+|[hash_md5()](md5hashfunction.md)|Gibt einen MD5-Hashwert für den Eingabe Wert zurück.|
 |[hash_sha256()](sha256hashfunction.md)|Gibt einen SHA256-Hashwert für den Eingabe Wert zurück.|

@@ -8,12 +8,12 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/10/2020
-ms.openlocfilehash: 25eb68a942eb0ff84ea34e47c94ea1a21cd09c90
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 96e3cfeba0002aa48a4300a994e9e12610deb9a3
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227230"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280581"
 ---
 # <a name="geo_point_in_polygon"></a>geo_point_in_polygon()
 
@@ -35,7 +35,8 @@ Gibt an, ob sich die räumlichen Koordinaten in einem Polygon befinden. Wenn die
 
 > [!NOTE]
 > * Die georäumlichen Koordinaten werden entsprechend der Darstellung durch das [WGS-84-](https://earth-info.nga.mil/GandG/update/index.php?action=home) Koordinaten Referenzsystem interpretiert.
-> * Das [geodätische Datum](https://en.wikipedia.org/wiki/Geodetic_datum) , das für Messungen auf der Erde verwendet wird, ist eine Kugel. Polygon Ränder sind geodäcs auf der Kugel.
+> * Das [geodätische Datum](https://en.wikipedia.org/wiki/Geodetic_datum) , das für Messungen auf der Erde verwendet wird, ist eine Kugel. Polygon Ränder sind [geodäcs](https://en.wikipedia.org/wiki/Geodesic) auf der Kugel.
+> * Wenn die Eingabe Polygon Ränder gerade kartesische Linien sind, sollten Sie [geo_polygon_densify ()](geo-polygon-densify-function.md) verwenden, um planare Kanten in geodesics zu konvertieren.
 
 **Polygon Definition und-Einschränkungen**
 
@@ -73,7 +74,7 @@ datatable(longitude:real, latitude:real, description:string)
 | where geo_point_in_polygon(longitude, latitude, dynamic({"type":"Polygon","coordinates":[[[-73.92597198486328,40.87821814104651],[-73.94691467285156,40.85069618625578],[-73.94691467285156,40.841865966890786],[-74.01008605957031,40.7519385984599],[-74.01866912841797,40.704586878965245],[-74.01214599609375,40.699901911003046],[-73.99772644042969,40.70875101828792],[-73.97747039794922,40.71083299030839],[-73.97026062011719,40.7290474687069],[-73.97506713867186,40.734510840309376],[-73.970947265625,40.74543623770158],[-73.94210815429688,40.77586181063573],[-73.9434814453125,40.78080140115127],[-73.92974853515625,40.79691751000055],[-73.93077850341797,40.804454347291006],[-73.93489837646484,40.80965166748853],[-73.93524169921875,40.837190668541105],[-73.92288208007812,40.85770758108904],[-73.9101791381836,40.871728144624974],[-73.92597198486328,40.87821814104651]],[[-73.95824432373047,40.80071852197889],[-73.98206233978271,40.76815921628347],[-73.97309303283691,40.76422632379533],[-73.94914627075195,40.796949998204596],[-73.95824432373047,40.80071852197889]]]}))
 ```
 
-|longitude|latitude|description|
+|longitude|latitude|Beschreibung|
 |---|---|---|
 |-73,985654|40,748487|Aufbau des Empire-Zustands|
 
@@ -95,7 +96,7 @@ coordinates
 | where geo_point_in_polygon(longitude, latitude, multipolygon)
 ```
 
-|longitude|latitude|description|
+|longitude|latitude|Beschreibung|
 |---|---|---|
 |-73,9741|40,7914|Obere westliche Seite|
 |-73,995|40,734|Greenwich Village|
@@ -143,7 +144,7 @@ Polygons
 }
 ```
 
-|longitude|latitude|description|
+|longitude|latitude|Beschreibung|
 |---|---|---|
 |-73.95|40.75|New York City-Bereich|
 |-122,3|47,6|Seattle (Bereich)|
@@ -178,7 +179,7 @@ Coordinates
 | where geo_point_in_polygon(longitude, latitude, multipolygon)
 ```
 
-|longitude|latitude|description|
+|longitude|latitude|Beschreibung|
 |---|---|---|
 |-73,9741|40,7914|Obere westliche Seite|
 |-73,995|40,734|Greenwich Village|

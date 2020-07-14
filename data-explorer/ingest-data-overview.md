@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/18/2020
-ms.openlocfilehash: 6fa60c3c82a889d1161b30529586b225cee3efbd
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
+ms.openlocfilehash: e6b329380d507e93161415f51515656628564500
+ms.sourcegitcommit: bf2c9da0c23ebcaec19b229d2079032d54a2cc82
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83863273"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86140554"
 ---
 # <a name="azure-data-explorer-data-ingestion-overview"></a>Übersicht über die Datenerfassung in Azure Data Explorer 
 
@@ -34,7 +34,6 @@ Azure Data Explorer pullt Daten aus einer externen Quelle und liest Anforderunge
 
 * **Berechtigungen**: Zum Erfassen von Daten benötigt der Prozess [Berechtigungen auf Ebene der Datenbankerfassung](kusto/management/access-control/role-based-authorization.md). Für andere Aktionen wie z. B. Abfragen sind möglicherweise die Berechtigungen „Datenbankadministrator“, „Datenbankbenutzer“ oder „Tabellenadministrator“ erforderlich.
 
-
 ## <a name="batching-vs-streaming-ingestion"></a>Batcherfassung und Streamingerfassung
 
 * Bei der Batcherfassung werden die Daten in Batches zusammengefasst und für einen hohen Erfassungsdurchsatz optimiert. Diese Methode stellt die bevorzugte und leistungsfähigste Art der Erfassung dar. Die Daten werden gemäß den Erfassungseigenschaften in Batches zusammengefasst. Anschließend werden kleine Datenbatches zusammengeführt und für schnelle Abfrageergebnisse optimiert. Die Richtlinie für die [Batcherfassung](kusto/management/batchingpolicy.md) kann für Datenbanken oder Tabellen festgelegt werden. Standardmäßig beträgt der Maximalwert für Batches 5 Minuten, 1.000 Elemente oder eine Gesamtgröße von 500 MB.
@@ -54,6 +53,12 @@ Für Organisationen, die eine Verwaltung (Drosselung, Wiederholungen, Überwachu
 * **[Event Hub:](https://azure.microsoft.com/services/event-hubs/)** Eine Pipeline, die Ereignisse von Diensten an Azure Data Explorer überträgt. Weitere Informationen finden Sie unter [Erfassen von Daten aus Event Hub in Azure Data Explorer](ingest-data-event-hub.md).
 
 * **[IoT Hub](https://azure.microsoft.com/services/iot-hub/)** : Eine Pipeline, die für die Übertragung von Daten von unterstützten IoT-Geräten an Azure Data Explorer verwendet wird. Weitere Informationen finden Sie unter [Erfassen von IoT Hub](ingest-data-iot-hub.md).
+
+* **Azure Data Factory (ADF):** Ein vollständig verwalteter Datenintegrationsdienst für analytische Workloads in Azure. Azure Data Factory stellt eine Verbindung mit über 90 unterstützten Quellen her, um eine effiziente und resiliente Datenübertragung zu ermöglichen. ADF führt die Vorbereitung, Transformation und Anreicherung der Daten durch, um Erkenntnisse zu erhalten, die auf unterschiedliche Art und Weise überwacht werden können. Dieser Dienst kann als einmalige Lösung verwendet, periodisch ausgeführt oder durch bestimmte Ereignisse ausgelöst werden. 
+  * [Integrieren von Azure Data Explorer und Azure Data Factory](data-factory-integration.md)
+  * [Kopieren von Daten aus unterstützten Quellen in Azure Data Explorer mithilfe von Azure Data Factory](/azure/data-explorer/data-factory-load-data)
+  * [Massenkopieren aus einer Datenbank in Azure Data Explorer mithilfe der Azure Data Factory-Vorlage](data-factory-template.md)
+  * [Verwenden der Azure Data Factory-Befehlsaktivität zum Ausführen von Azure Data Explorer-Steuerungsbefehlen](data-factory-command-activity.md)
 
 ### <a name="ingestion-using-connectors-and-plugins"></a>Erfassung mit Konnektoren und Plug-Ins
 
@@ -84,12 +89,6 @@ Azure-Daten-Explorer bietet SDKs, die für Abfragen und die Datenerfassung verwe
 * [GO-API](kusto/api/golang/kusto-golang-client-library.md)
 
 ### <a name="tools"></a>Tools
-
-* **Azure Data Factory (ADF):** Ein vollständig verwalteter Datenintegrationsdienst für analytische Workloads in Azure. Azure Data Factory stellt eine Verbindung mit über 90 unterstützten Quellen her, um eine effiziente und resiliente Datenübertragung zu ermöglichen. ADF führt die Vorbereitung, Transformation und Anreicherung der Daten durch, um Erkenntnisse zu erhalten, die auf unterschiedliche Art und Weise überwacht werden können. Dieser Dienst kann als einmalige Lösung verwendet, periodisch ausgeführt oder durch bestimmte Ereignisse ausgelöst werden. 
-  * [Integrieren von Azure Data Explorer und Azure Data Factory](data-factory-integration.md)
-  * [Kopieren von Daten aus unterstützten Quellen in Azure Data Explorer mithilfe von Azure Data Factory](/azure/data-explorer/data-factory-load-data)
-  * [Massenkopieren aus einer Datenbank in Azure Data Explorer mithilfe der Azure Data Factory-Vorlage](data-factory-template.md)
-  * [Verwenden der Azure Data Factory-Befehlsaktivität zum Ausführen von Azure Data Explorer-Steuerungsbefehlen](data-factory-command-activity.md)
 
 * **[1-Klick-Erfassung:](ingest-data-one-click.md)** Ermöglicht das schnelle Erfassen von Daten durch Erstellen und Anpassen von Tabellen aus einer breiten Palette von Quelltypen. Bei der 1-Klick-Erfassung werden basierend auf der Datenquelle in Azure Data Explorer automatisch Tabellen und Zuordnungsstrukturen vorschlagen. Sie können die 1-Klick-Erfassung für die einmalige Erfassung verwenden oder zum Definieren einer kontinuierlichen Erfassung über Event Grid in dem Container, in dem die Daten erfasst wurden.
 

@@ -8,12 +8,12 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/11/2020
-ms.openlocfilehash: 304b40a00fd471b7735ff11c01bdaa8b6ca3a8ec
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: b4a30aa4285b8f6e22e5d4057fe7d408d548a27b
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227451"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280563"
 ---
 # <a name="geo_distance_point_to_line"></a>geo_distance_point_to_line()
 
@@ -35,7 +35,8 @@ Die kürzeste Entfernung in Meter zwischen einer Koordinate und einer Linie auf 
 
 > [!NOTE]
 > * Die georäumlichen Koordinaten werden entsprechend der Darstellung durch das [WGS-84-](https://earth-info.nga.mil/GandG/update/index.php?action=home) Koordinaten Referenzsystem interpretiert.
-> * Das [geodätische Datum](https://en.wikipedia.org/wiki/Geodetic_datum) , das zum Messen der Entfernung auf der Erde verwendet wird, ist eine Kugel. Zeilen Kanten sind geodäcs auf der Kugel.
+> * Das [geodätische Datum](https://en.wikipedia.org/wiki/Geodetic_datum) , das zum Messen der Entfernung auf der Erde verwendet wird, ist eine Kugel. Zeilen Kanten sind [geodäcs](https://en.wikipedia.org/wiki/Geodesic) auf der Kugel.
+> * Wenn Eingangs Zeilen Ränder gerade kartesische Linien sind, empfiehlt es sich, [geo_line_densify ()](geo-line-densify-function.md) zu verwenden, um planare Kanten in geodesics zu konvertieren.
 
 **LineString-Definition und-Einschränkungen**
 

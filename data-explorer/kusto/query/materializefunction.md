@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/06/2020
-ms.openlocfilehash: f5ea896d4701aa5aec1b22c1ff20853aea18f065
-ms.sourcegitcommit: be1bbd62040ef83c08e800215443ffee21cb4219
+ms.openlocfilehash: 0580088bf04bffafd36990a3f42c32aa5c4ede53
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664941"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280464"
 ---
 # <a name="materialize"></a>materialize()
 
@@ -41,7 +41,7 @@ Ermöglicht das Zwischenspeichern eines Unterabfrage Ergebnisses während der Ab
   Diese Beschränkung erfolgt pro Cluster Knoten und ist für alle gleichzeitig ausgeführten Abfragen gegenseitig.
   Wenn eine Abfrage verwendet `materialize()` und der Cache keine weiteren Daten enthalten kann, wird die Abfrage mit einem Fehler abgebrochen.
 
-**Beispiele**
+## <a name="examples-of-query-performance-improvement"></a>Beispiele für die Verbesserung der Abfrageleistung
 
 Im folgenden Beispiel wird gezeigt `materialize()` , wie verwendet werden kann, um die Leistung der Abfrage zu verbessern.
 Der Ausdruck `_detailed_data` wird mithilfe der `materialize()` Funktion definiert und wird daher nur einmal berechnet.
@@ -57,7 +57,7 @@ _detailed_data
 | top 10 by EventPercentage
 ```
 
-|Zustand|EventType|Eventprozent|Ereignisse|
+|State|EventType|Eventprozent|Ereignisse|
 |---|---|---|---|
 |Hawaii-Wasser|Wasser Spout|100|2|
 |Lake Ontario|Seeman Gewitter Wind|100|8|
@@ -72,7 +72,7 @@ _detailed_data
 
 
 Im folgenden Beispiel wird eine Reihe von Zufallszahlen generiert und berechnet: 
-* Anzahl der unterschiedlichen Werte im Satz (DCount)
+* Anzahl der unterschiedlichen Werte im Satz ( `Dcount` )
 * die obersten drei Werte in der Gruppe. 
 * die Summe aller Werte in der Gruppe. 
  
@@ -105,6 +105,66 @@ Resultset 2:
 
 Resultset 3: 
 
-|SUM|
+|Summe|
 |---|
 |15002960543563|
+
+## <a name="examples-of-using-materialize"></a>Beispiele für die Verwendung von Materialize ()
+
+> [!TIP]
+> Materialisieren Sie die Spalte bei der Erfassungs Zeit, wenn die meisten Ihrer Abfragen Felder aus dynamischen Objekten in Millionen von Zeilen extrahieren.
+> 
+> `let`Verwenden Sie die [Materialize ()-Funktion](./materializefunction.md), um die-Anweisung mit einem Wert zu verwenden, den Sie mehrmals verwenden.
+> Weitere Informationen finden Sie unter [bewährte Methoden](best-practices.md) .
+
+Versuchen Sie, alle möglichen Operatoren zu übermitteln, die das materialisierte DataSet verringern, und behalten Sie trotzdem die Semantik der Abfrage bei. Beispielsweise Filter oder nur erforderliche Spalten.
+
+```kusto
+    let materializedData = materialize(Table
+    | where Timestamp > ago(1d));
+    union (materializedData
+    | where Text !has "somestring"
+    | summarize dcount(Resource1)), (materializedData
+    | where Text !has "somestring"
+    | summarize dcount(Resource2))
+```
+
+Der Filter für `Text` ist gegenseitig und kann auf den materialisieren-Ausdruck geschoben werden.
+Die Abfrage benötigt nur die Spalten `Timestamp` , `Text` , `Resource1` und `Resource2` . Projizieren Sie diese Spalten in den materialisierten Ausdruck.
+    
+```kusto
+    let materializedData = materialize(Table
+    | where Timestamp > ago(1d)
+    | where Text !has "somestring"
+    | project Timestamp, Resource1, Resource2, Text);
+    union (materializedData
+    | summarize dcount(Resource1)), (materializedData
+    | summarize dcount(Resource2))
+```
+    
+Wenn die Filter in dieser Abfrage nicht identisch sind:  
+
+```kusto
+    let materializedData = materialize(Table
+    | where Timestamp > ago(1d));
+    union (materializedData
+    | where Text has "String1"
+    | summarize dcount(Resource1)), (materializedData
+    | where Text has "String2"
+    | summarize dcount(Resource2))
+ ```
+
+Wenn der kombinierte Filter das materialisierte Ergebnis drastisch reduziert, kombinieren Sie beide Filter für das materialisierte Ergebnis mit einem logischen `or` Ausdruck wie in der folgenden Abfrage. Behalten Sie jedoch die Filter in den einzelnen Union-Beinen bei, um die Semantik der Abfrage beizubehalten.
+     
+```kusto
+    let materializedData = materialize(Table
+    | where Timestamp > ago(1d)
+    | where Text has "String1" or Text has "String2"
+    | project Timestamp, Resource1, Resource2, Text);
+    union (materializedData
+    | where Text has "String1"
+    | summarize dcount(Resource1)), (materializedData
+    | where Text has "String2"
+    | summarize dcount(Resource2))
+```
+    

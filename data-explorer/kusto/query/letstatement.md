@@ -8,63 +8,81 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: c2e21f0b41f34b469e409109a2586f3e5fd98fa5
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: 2994a65e8726edaba22c6905290b4b69660e0586
+ms.sourcegitcommit: 284152eba9ee52e06d710cc13200a80e9cbd0a8b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271467"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86291541"
 ---
 # <a name="let-statement"></a>let-Anweisung
 
-Let-Anweisungen binden Namen an Ausdrücke. Für den Rest des Bereichs, in dem die Let-Anweisung angezeigt wird (globaler Gültigkeitsbereich oder in einem Funktions Rumpfbereich), kann der Name verwendet werden, um auf seinen gebundenen Wert zu verweisen. Wenn dieser Name zuvor an einen anderen Wert gebunden war, wird die "innerste" Let-Anweisungs Bindung verwendet.
+Let-Anweisungen binden Namen an Ausdrücke. Für den Rest des Bereichs, in dem die Let-Anweisung angezeigt wird, kann der Name verwendet werden, um auf seinen gebundenen Wert zu verweisen. Die Let-Anweisung kann sich in einem globalen Gültigkeitsbereich oder einem Funktions Textbereich befinden.
+Wenn dieser Name zuvor an einen anderen Wert gebunden war, wird die "innerste" Let-Anweisungs Bindung verwendet.
 
-Let-Anweisungen verbessern die Modularität und die Wiederverwendung, da Sie einen potenziell komplexen Ausdruck in mehrere Teile unterteilen können, die jeweils an einen Namen durch die Let-Anweisung gebunden sind, und zusammengesetzt werden. Sie können auch verwendet werden, um benutzerdefinierte Funktionen und Sichten zu erstellen (Ausdrücke über Tabellen, deren Ergebnisse wie eine neue Tabelle aussehen).
+Let-Anweisungen verbessern die Modularität und Wiederverwendung, da Sie einen potenziell komplexen Ausdruck in mehrere Teile zerlegen können.
+Jeder Teil ist über die Let-Anweisung an einen Namen gebunden, und zusammen bilden Sie den gesamten. Sie können auch verwendet werden, um benutzerdefinierte Funktionen und Ansichten zu erstellen. Die Ansichten sind Ausdrücke über Tabellen, deren Ergebnisse wie eine neue Tabelle aussehen.
 
-Durch Let-Anweisungen gebundene Namen müssen gültige Entitäts Namen sein.
+> [!NOTE]
+> Durch Let-Anweisungen gebundene Namen müssen gültige Entitäts Namen sein.
 
 Von Let-Anweisungen gebundene Ausdrücke können folgende sein:
-* Von skalaren Typen
-* Tabellarischer Typ
+* Skalare Typen
+* Tabellarische Typen
 * Benutzerdefinierte Funktionen (Lambdas)
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `let`*Name* `=` *Scalarexpression*  |  *Tabularexpression*  |  *FunctionDefinitionExpression*
 
-* *Name*: der Name, der gebunden werden soll. Der Name muss ein gültiger Entitäts Name sein, und Entitäts Name Escapezeichen (z. b. `["Name with spaces"]` ) ist zulässig. 
-* *Scalarexpression*: ein Ausdruck mit einem skalaren Ergebnis, dessen Wert an den Namen gebunden wird. Beispiel: `let one=1;`.
-* *Tabularexpression*: ein Ausdruck mit einem Tabellen Ergebnis, dessen Wert an den Namen gebunden wird. Beispiel: `Logs | where Timestamp > ago(1h)`.
-* *FunctionDefinitionExpression*: ein Ausdruck, der ein Lambda Ergebnis (eine anonyme Funktionsdeklaration) ergibt, das an den Namen gebunden werden soll.
-  Beispiel: `let f=(a:int, b:string) { strcat(b, ":", a) }`.
+|Feld  |Definition  |Beispiel  |
+|---------|---------|---------|
+|*Name*   | Der zu bindende Name. Der Name muss ein gültiger Entitäts Name sein.    |Das Escapezeichen des Entitäts namens `["Name with spaces"]` ist zulässig.      |
+|*Scalarexpression*     |  Ein Ausdruck mit einem skalaren Ergebnis, dessen Wert an den Namen gebunden ist.  | `let one=1;`  |
+|*Tabularexpression*    | Ein Ausdruck mit einem Tabellen Ergebnis, dessen Wert an den Namen gebunden ist.   | `Logs | where Timestamp > ago(1h)`    |
+|*FunctionDefinitionExpression*   | Ein Ausdruck, der ein Lambda Ergebnis ergibt, eine anonyme Funktionsdeklaration, die an den Namen gebunden werden soll.   |  `let f=(a:int, b:string) { strcat(b, ":", a) }`  |
 
-Lambda-Ausdrücke haben die folgende Syntax:
+
+### <a name="lambda-expressions-syntax"></a>Syntax von Lambda Ausdrücken
 
 [ `view` ] `(` [*Tabulararguments*] [ `,` ] [*scalararguments*] `)` `{` *functionbody*`}`
 
 `TabularArguments`-[*Tabularargname* `:` `(` [*atrname* `:` *atrtype*] [ `,` ...] `)` ] [`,` ... ] [`,`]
 
- oder:-[*tabularargname* `:` `(` `*` `)` ]
+ oder:
+
+ [*Tabularargname* `:` `(` `*` `)`]
 
 `ScalarArguments`-[*Argname* `:` *argtype*] [ `,` ...]
 
-* `view`kann nur in einem Parameter losen Lambda-Ausdruck (einer, der keine Argumente aufweist) angezeigt werden und gibt an, dass der gebundene Name eingeschlossen wird, wenn "alle Tabellen" Abfragen sind (z. b. bei Verwendung von `union *` ).
-* *Tabulararguments* ist die Liste der formalen Tabellen Ausdrucks Argumente.
-  Jedes Argument hat Folgendes:
-  * *Tabularargname* : der Name des formalen tabellarischen Arguments. Der Name kann dann in *functionbody* angezeigt werden und wird an einen bestimmten Wert gebunden, wenn der Lambda-Ausdruck aufgerufen wird. 
-  * Tabellen Schema Definition: eine Liste von Attributen mit ihren Typen (atrname: atrtype).
-  Der tabellarische Ausdruck, der im Lambda Aufruf verwendet wird, muss über alle diese Attribute mit den übereinstimmenden Typen verfügen, ist jedoch nicht darauf beschränkt. 
-  ' (*) ' kann als tabellarischer Ausdruck verwendet werden. In diesem Fall kann jeder tabellarische Ausdruck im Lambda Aufruf verwendet werden, und auf keine seiner Spalten kann im Lambda-Ausdruck zugegriffen werden.
-  Alle tabellarischen Argumente sollten vor den skalaren Argumenten angezeigt werden.
-* *Scalararguments* ist die Liste der formalen skalaren Argumente. 
-  Jedes Argument hat Folgendes:
-  * *Argname* : der Name des formalen skalaren Arguments. Der Name kann dann in *functionbody* angezeigt werden und wird an einen bestimmten Wert gebunden, wenn der Lambda-Ausdruck aufgerufen wird.  
-  * *Argtype* : der Typ des formalen skalaren Arguments. Zurzeit werden nur die folgenden Typen als Lambda-Argumenttyp unterstützt: `bool` , `string` , `long` , `datetime` , `timespan` , `real` und `dynamic` (und Aliase zu diesen Typen).
 
-**Multiple-und netsted Let-Anweisungen**
+|Feld  |Definition  |Beispiel  |
+|---------|---------|---------|
+| **view** | Kann nur in einem Parameter losen Lambda-Ausdruck angezeigt werden, der keine Argumente aufweist. Gibt an, dass der gebundene Name eingeschlossen wird, wenn "alle Tabellen" Abfragen sind. | Beispielsweise bei Verwendung von `union *` .|
+| ***Tabulararguments*** | Die Liste der formalen Tabellen Ausdrucks Argumente. 
+| Jedes tabellarische Argument hat Folgendes:||
+|<ul><li> *Tabularargname*</li></ul> | Der Name des formalen tabellarischen Arguments. Der Name wird möglicherweise im *functionbody* -Ausdruck angezeigt und ist an einen bestimmten Wert gebunden, wenn der Lambda-Ausdruck aufgerufen wird. ||
+|<ul><li>Tabellen Schema Definition </li></ul> | Eine Liste von Attributen mit ihren Typen| Atrname: atrtype|
+| ***Scalararguments*** | Die Liste der formalen skalaren Argumente. 
+|Jedes skalare Argument hat Folgendes:||
+|<ul><li>*Argname*</li></ul> | Der Name des formalen skalaren Arguments. Der Name wird möglicherweise im *functionbody* -Ausdruck angezeigt und ist an einen bestimmten Wert gebunden, wenn der Lambda-Ausdruck aufgerufen wird.  |
+| <ul><li>*Argtype* </li></ul>| Der Typ des formalen skalaren Arguments. | Zurzeit werden nur die folgenden Typen als Lambda-Argumenttyp unterstützt: `bool` , `string` , `long` , `datetime` , `timespan` , `real` und `dynamic` (und Aliase zu diesen Typen).
 
-Mehrere Let-Anweisungen können mit Trennzeichen dazwischen verwendet werden, `;` wie im folgenden Beispiel gezeigt.
-Die letzte Anweisung muss ein gültiger Abfrage Ausdruck sein: 
+> [!NOTE]
+>Der tabellarische Ausdruck, der im Lambda Aufruf verwendet wird, muss alle Attribute mit den übereinstimmenden Typen enthalten (ist jedoch nicht darauf beschränkt).
+>
+>`(*)`kann als tabellarischer Ausdruck verwendet werden. 
+>
+> Jeder tabellarische Ausdruck kann im Lambda Aufruf verwendet werden, und auf keine seiner Spalten kann im Lambda-Ausdruck zugegriffen werden. 
+>
+> Alle tabellarischen Argumente sollten vor den skalaren Argumenten angezeigt werden.
+
+## <a name="multiple-and-nested-let-statements"></a>Multiple-und netsted Let-Anweisungen
+
+Mehrere Let-Anweisungen können mit dem Semikolon, dem Trennzeichen dazwischen verwendet werden `;` , wie im folgenden Beispiel gezeigt.
+
+> [!NOTE]
+> Die letzte Anweisung muss ein gültiger Abfrage Ausdruck sein. 
 
 ```kusto
 let start = ago(5h); 
@@ -81,25 +99,25 @@ let end_time = start_time + 2h;
 T | where Time > start_time and Time < end_time | ...
 ```
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
-### <a name="using-let-to-define-constants"></a>Verwenden von Let zum Definieren von Konstanten
+### <a name="use-let-function-to-define-constants"></a>Verwenden der Let-Funktion zum Definieren von Konstanten
 
-Im folgenden Beispiel wird der Name `x` an das skalare Literale gebunden `1` und dann in einer tabellarischen Ausdrucks Anweisung verwendet:
+Im folgenden Beispiel wird der Name `x` an das skalare Literale gebunden `1` und dann in einer tabellarischen Ausdrucks Anweisung verwendet.
 
 ```kusto
 let x = 1;
 range y from x to x step x
 ```
 
-Gleiches Beispiel, aber in diesem Fall: der Name der Let-Anweisung wird mit dem folgenden `['name']` Begriff angegeben:
+Dieses Beispiel ähnelt dem vorherigen, nur der Name der Let-Anweisung wird mithilfe des- `['name']` Begriffs angegeben.
 
 ```kusto
 let ['x'] = 1;
 range y from x to x step x
 ```
 
-Ein weiteres Beispiel, in dem Let für skalare Werte verwendet wird:
+### <a name="use-let-for-scalar-values"></a>Verwenden Sie Let für skalare Werte.
 
 ```kusto
 let n = 10;  // number
@@ -111,9 +129,9 @@ Events
 | take n
 ```
 
-### <a name="using-multiple-let-statements"></a>Verwenden von mehreren Let-Anweisungen
+### <a name="use-multiple-let-statements"></a>Verwenden mehrerer Let-Anweisungen
 
-Im folgenden Beispiel werden zwei Let-Anweisungen definiert, wobei eine-Anweisung ( `foo2` ) einen anderen verwendet ( `foo1` ).
+In diesem Beispiel werden zwei Let-Anweisungen definiert, bei denen eine Anweisung ( `foo2` ) einen anderen verwendet ( `foo1` ).
 
 ```kusto
 let foo1 = (_start:long, _end:long, _step:long) { range x from _start to _end step _step};
@@ -122,9 +140,9 @@ foo2(2) | count
 // Result: 50
 ```
 
-### <a name="using-materialize-function"></a>Verwenden der materialisieren-Funktion
+### <a name="use-materialize-function"></a>Verwenden der materialisieren-Funktion
 
-[`materialize`](materializefunction.md)die Funktion ermöglicht das Zwischenspeichern von Unterabfrage Ergebnissen während der Abfrage Ausführung. 
+Mit der- [`materialize`](materializefunction.md) Funktion können Sie Unterabfrage Ergebnisse während der Abfrage Ausführung zwischenspeichern. 
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -148,11 +166,9 @@ on Page
     totalPagesPerDay
 on $left.Day1 == $right.Day
 | project Day1, Day2, Percentage = count_*100.0/count_1
-
-
 ```
 
-|Tag1|Tag2|Prozentsatz|
+|Tag1|Tag2|Prozentwert|
 |---|---|---|
 |2016-05-01 00:00:00.0000000|2016-05-02 00:00:00.0000000|34.0645725975255|
 |2016-05-01 00:00:00.0000000|2016-05-03 00:00:00.0000000|16.618368960101|

@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 05/19/2020
-ms.openlocfilehash: 6c36ace478e9bc026c028bfb6393bcfdf4eebdfa
-ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
+ms.openlocfilehash: 1f3b273260451dc0ce36730d20f1bc357a453397
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "86013927"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280531"
 ---
 # <a name="getting-started-with-kustoexplorer"></a>Getting Started with Kusto. Explorer
 
@@ -28,7 +28,8 @@ Mit Kusto. Explorer können Sie folgende Aktionen ausführen:
 
 * Installieren Sie das [Tool Kusto. Explorer](https://aka.ms/ke).
 
-* Sie können mit Ihrem Browser unter auf Ihren Kusto-Cluster zugreifen `https://<your_cluster>.kusto.windows.net` . (Ersetzen `<your_cluster>` Sie durch den Namen Ihres Azure-Daten-Explorer Clusters.)
+* Greifen Sie stattdessen mit Ihrem Browser auf Ihren Kusto-Cluster zu:`https://<your_cluster>.kusto.windows.net.`
+   Ersetzen &lt; &gt; Sie your_cluster durch den Namen Ihres Azure Daten-Explorer Clusters.
 
 ### <a name="using-chrome-and-kustoexplorer"></a>Verwenden von Chrome und Kusto. Explorer
 
@@ -54,7 +55,7 @@ Der Menübereich von Kusto. Explorer umfasst die folgenden Registerkarten:
 * [Home](#home-tab)
 * [Datei](#file-tab)
 * [Verbindungen](#connections-tab)
-* [Ansicht](#view-tab)
+* [Anzeigen](#view-tab)
 * [Extras](#tools-tab)
 * [Überwachung](#monitoring-tab)
 * [Verwaltung](#management-tab)
@@ -69,7 +70,7 @@ Auf der Registerkarte Home werden die zuletzt verwendeten Funktionen angezeigt, 
 * [Abfrage](#query-section)
 * [Freigeben](#share-section)
 * [Visualisierungen](#visualizations-section)
-* [Ansicht](#view-section)
+* [Anzeigen](#view-section)
 * [Hilfe](#help-tab) 
 
 ### <a name="query-section"></a>Abschnitt "Abfrage"
@@ -103,16 +104,17 @@ Auf der Registerkarte Home werden die zuletzt verwendeten Funktionen angezeigt, 
 |Gestapeltes Flächendiagramm      | Zeigt ein gestapeltes Flächen Diagramm an, in dem die X-Achse die erste Spalte ist (muss numerisch sein). Alle numerischen Spalten werden verschiedenen Reihen (Y-Achse) zugeordnet. |
 |Zeitachsendiagramm   | Zeigt ein Zeitdiagramm an, in dem die X-Achse die erste Spalte ist (muss DateTime sein). Alle numerischen Spalten werden verschiedenen Reihen (Y-Achse) zugeordnet.|
 |Liniendiagramm   | Zeigt ein Liniendiagramm an, in dem die X-Achse die erste Spalte ist (muss numerisch sein). Alle numerischen Spalten werden verschiedenen Reihen (Y-Achse) zugeordnet.|
-|Anomaliediagramm|    Ähnlich wie bei timechart, findet aber Anomalien in Zeitreihendaten mithilfe des Algorithmus für die Machine Learning-Anomalien. Zur Anomalieerkennung verwendet Kusto. Explorer die [series_decompose_anomalies](../query/series-decompose-anomaliesfunction.md) -Funktion. (*) 
+|[Anomaliediagramm](#anomaly-chart)|    Ähnlich wie bei timechart, findet aber Anomalien in Zeitreihendaten mithilfe des Algorithmus für die Machine Learning-Anomalien. Zur Anomalieerkennung verwendet Kusto. Explorer die [series_decompose_anomalies](../query/series-decompose-anomaliesfunction.md) -Funktion.
 |Kreisdiagramm    |    Zeigt ein Kreis Diagramm an, in dem die farbachse die erste Spalte ist. Die zweite Spalte ist die-Achse (muss ein Measure sein, die in Prozent konvertiert wurde).|
 |Zeit Leiter |    Zeigt ein Leitungs Diagramm an, in dem die X-Achse die letzten zwei Spalten ist (muss DateTime lauten). Die Y-Achse ist ein zusammengesetzter der anderen Spalten.|
 |Punktdiagramm| Zeigt ein Punkt Diagramm an, in dem die X-Achse die erste Spalte ist (muss numerisch sein). Alle numerischen Spalten werden verschiedenen Reihen (Y-Achse) zugeordnet.|
 |PivotChart  | Zeigt eine Pivottabelle und ein PivotChart an, das die vollständige Flexibilität beim Auswählen von Daten, Spalten, Zeilen und verschiedenen Diagrammtypen ermöglicht.| 
 |Zeit Pivot   | Interaktive Navigation über die Ereignis Zeitachse (Pivotierung auf der Zeitachse)|
 
-(*) Anomaliediagramm: der Algorithmus erwartet Zeitreihe-Daten, die aus zwei Spalten bestehen:
-1. Zeit in festem Intervall
-2. Numerischer Wert für die Anomalieerkennung, um Zeitreihe-Daten in Kusto. Explorer zusammenzufassen, zusammenfassen nach dem Uhrzeitfeld und angeben des Zeit Bucket Behälters.
+> [!NOTE]
+> <a id="anomaly-chart">Anomaliediagramm</a>: der Algorithmus erwartet Zeitreihe-Daten, die aus zwei Spalten bestehen:
+>* Zeit in festem Intervall
+>* Numerischer Wert für die Anomalieerkennung, um Zeitreihe-Daten in Kusto. Explorer zusammenzufassen, zusammenfassen nach dem Uhrzeitfeld und angeben des Zeit Bucket Behälters.
 
 ### <a name="view-section"></a>Abschnitt anzeigen
 
@@ -127,7 +129,10 @@ Auf der Registerkarte Home werden die zuletzt verwendeten Funktionen angezeigt, 
 |Schriftart vergrößern  | Vergrößert die Schriftgröße der Registerkarte "Abfrage" und des Ergebnisdaten Rasters.|  
 |Schriftart verkleinern  | Verringert die Schriftgröße der Registerkarte "Abfrage" und des Ergebnisdaten Rasters.|
 
-(*) Daten Ansichts Einstellungen: Kusto. Explorer verfolgt, welche Einstellungen pro eindeutigem Satz von Spalten verwendet werden. Wenn Spalten neu angeordnet oder entfernt werden, wird die Daten Sicht gespeichert und immer dann wieder verwendet, wenn die Daten mit denselben Spalten abgerufen werden. Um die Ansicht auf die Standardwerte zurückzusetzen, wählen Sie auf der Registerkarte **Ansicht** die Option **Ansicht zurücksetzen**aus. 
+>[!NOTE]
+> Daten Ansichts Einstellungen:
+>
+> Mit "Kusto. Explorer" wird nachverfolgt, welche Einstellungen pro eindeutigem Satz von Spalten verwendet werden. Wenn Spalten neu angeordnet oder entfernt werden, wird die Datenansicht gespeichert und immer dann wieder verwendet, wenn die Daten mit denselben Spalten abgerufen werden. Um die Ansicht auf die Standardwerte zurückzusetzen, wählen Sie auf der Registerkarte **Ansicht** die Option **Ansicht zurücksetzen**aus. 
 
 ## <a name="file-tab"></a>Registerkarte „Datei“
 
@@ -195,7 +200,7 @@ Auf der Registerkarte Home werden die zuletzt verwendeten Funktionen angezeigt, 
 |Layout zurücksetzen|Setzt das Layout der Andock Steuerelemente und Fenster des Tools zurück.|
 |Registerkarte Dokument umbenennen |Ausgewählte Registerkarte umbenennen |
 ||---------*Datenansicht*---------|
-|Ansicht zurücksetzen| Setzt die Daten Ansichts Einstellungen auf die Standardwerte zurück (*).|
+|Ansicht zurücksetzen| Setzt die [Daten Ansichts Einstellungen](#dvs) auf die Standardwerte zurück. |
 |Untersuchen von Spaltenwerten|Zeigt die Verteilung von Spaltenwerten an|
 |Fokus auf Abfrage Statistik|Ändert den Fokus auf Abfrage Statistik anstelle von Abfrage Ergebnissen nach Abschluss der Abfrage.|
 |Duplikate ausblenden|Schaltet die Entfernung der doppelten Zeilen aus den Abfrage Ergebnissen um.|
@@ -206,7 +211,10 @@ Auf der Registerkarte Home werden die zuletzt verwendeten Funktionen angezeigt, 
 ||---------*Visualisierungen*---------|
 |Visualisierungen|Siehe [Visualisierungen](#visualizations-section)weiter oben. |
 
-(*) Daten Ansichts Einstellungen: in Kusto. Explorer werden die Einstellungen nachverfolgt, die pro eindeutigem Satz von Spalten verwendet werden. Wenn Spalten neu angeordnet oder entfernt werden, wird die Datenansicht gespeichert und immer dann wieder verwendet, wenn die Daten mit denselben Spalten abgerufen werden. Um die Ansicht auf die Standardwerte zurückzusetzen, wählen Sie auf der Registerkarte **Ansicht** die Option **Ansicht zurücksetzen**aus. 
+> [!NOTE]
+> <a id="dvs">Daten Ansichts Einstellungen:</a> 
+>
+> Mit Kusto. Explorer werden die Einstellungen nachverfolgt, die pro eindeutigem Satz von Spalten verwendet werden. Wenn Spalten neu angeordnet oder entfernt werden, wird die Datenansicht gespeichert und immer dann wieder verwendet, wenn die Daten mit denselben Spalten abgerufen werden. Um die Ansicht auf die Standardwerte zurückzusetzen, wählen Sie auf der Registerkarte **Ansicht** die Option **Ansicht zurücksetzen**aus. 
 
 ## <a name="tools-tab"></a>Registerkarte „Extras“
 

@@ -8,16 +8,16 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/10/2020
-ms.openlocfilehash: 39d5b35a80ff9354a5fb6987866ff024471d7305
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: c4396087018e25c57f064e8d2f99a83cc0840c3a
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83232438"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280597"
 ---
-# <a name="geo_polygon_to_s2cells"></a>geo_polygon_to_s2cells ()
+# <a name="geo_polygon_to_s2cells"></a>geo_polygon_to_s2cells()
 
-Berechnet S2-zelltokens, die ein Polygon oder MultiPolygon auf der Erde abdecken.
+Berechnet S2-zelltokens, die ein Polygon oder MultiPolygon auf der Erde abdecken. Diese Funktion ist ein nützliches Georäumliches jointool.
 
 Weitere Informationen finden Sie in der [Zellen Hierarchie S2](https://s2geometry.io/devguide/s2cell_hierarchy).
 
@@ -36,10 +36,11 @@ Array von S2-zelltokenzeichenfolgen, die ein Polygon oder MultiPolygon abdecken.
 
 > [!NOTE]
 >
-> * Das abdecken des Polygone mit S2-Zellen Token kann bei der Übereinstimmung von Koordinaten mit Polygonen nützlich sein, die diese Koordinaten enthalten könnten.
+> * Das abdecken des Polygone mit S2-Zellen Token kann bei der Übereinstimmung von Koordinaten mit Polygonen nützlich sein, die diese Koordinaten enthalten können, und die entsprechenden Polygone mit Polygonen
 > * Die Polygon-Deck enden Token sind von der gleichen S2-Zellen Ebene.
 > * Die maximale Anzahl von Token pro Polygon ist 65536.
-> * Das [geodätische Datum](https://en.wikipedia.org/wiki/Geodetic_datum) , das für Messungen auf der Erde verwendet wird, ist eine Kugel. Polygon Ränder sind geodäcs auf der Kugel.
+> * Das [geodätische Datum](https://en.wikipedia.org/wiki/Geodetic_datum) , das für Messungen auf der Erde verwendet wird, ist eine Kugel. Polygon Ränder sind [geodäcs](https://en.wikipedia.org/wiki/Geodesic) auf der Kugel.
+> * Wenn die Eingabe Polygon Ränder gerade kartesische Linien sind, empfiehlt es sich, [geo_polygon_densify ()](geo-polygon-densify-function.md) zu verwenden, um planare Kanten in geodesics zu konvertieren.
 
 **Motivation für das abdecken von Polygonen mit S2-zelltokens**
 
@@ -66,7 +67,7 @@ Polygons | extend dummy=1
 | project longitude, latitude, description
 ```
 
-|longitude|latitude|description|
+|longitude|latitude|Beschreibung|
 |---|---|---|
 |-73.95|40.75|New York City|
 |-122,3|47,6|Seattle|
@@ -91,7 +92,7 @@ Diese Übereinstimmung kann durch folgenden Prozess erreicht werden:
    - S2 Zellen Ebene 5 kann sich als gut für die Länder Abdeckung erweisen.
    - S2 Zellen Ebene 16 kann dichten und relativ kleinen Manhattan (New York) abdecken.
    - S2 Zellen Ebene 11 kann für die untergeordneten Standorten von Australien verwendet werden.
-* Die Abfrage Laufzeit und der Arbeitsspeicher Verbrauch können aufgrund unterschiedlicher Werte auf Zellen Ebene von S2 abweichen.
+* Die Abfrage Laufzeit und der Arbeitsspeicher Verbrauch können aufgrund verschiedener S2-Zellen Ebenen abweichen.
 
 > [!WARNING]
 > Das abdecken eines großen Polygons in kleinen Flächen kann zu einer großen Menge von Zellen führen. Daher kann die Abfrage NULL zurückgeben.
@@ -128,7 +129,7 @@ Polygons
 | project longitude, latitude, description
 ```
 
-|longitude|latitude|description|
+|longitude|latitude|Beschreibung|
 |---|---|---|
 |-73,9741|40,7914|Obere westliche Seite|
 |-73,995|40,734|Greenwich Village|

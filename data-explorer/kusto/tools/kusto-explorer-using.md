@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: fc8e34be3d61c690bc94795e6bd37f2559d247e0
-ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
+ms.openlocfilehash: 0b2daf955515e4c023cdb7312fbd82039ca598bc
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "86013907"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280639"
 ---
 # <a name="using-kustoexplorer"></a>Verwenden von Kusto.Explorer
 
@@ -28,11 +28,11 @@ Im Such-und +-Modus können Sie mithilfe der Such Syntax in einer oder mehreren 
 1. Geben Sie im Bearbeitungsfeld Ihren Suchbegriff ein, und wählen Sie **Los**aus.
 1. Eine Heat Map des Tabellen-/Uhrzeit-slotrasters zeigt an, welche Begriffe angezeigt werden und wo Sie angezeigt werden.
 
-:::image type="content" source="images/kusto-explorer-using/search-plus-plus.png" alt-text="Suchen + + Kusto-Explorer":::
+    :::image type="content" source="images/kusto-explorer-using/search-plus-plus.png" alt-text="Suchen + + Kusto-Explorer":::
 
 1. Wählen Sie im Raster eine Zelle aus, und wählen Sie **Details anzeigen** aus, um die relevanten Einträge im Ergebnisbereich anzuzeigen.
 
-:::image type="content" source="images/kusto-explorer-using/search-plus-plus-results.png" alt-text="Kusto-Explorer-Suche + +-Ergebnisse":::
+    :::image type="content" source="images/kusto-explorer-using/search-plus-plus-results.png" alt-text="Kusto-Explorer-Suche + +-Ergebnisse":::
 
 ## <a name="query-mode"></a>Abfrage Modus
 
@@ -117,17 +117,17 @@ In Kusto. Explorer können Sie Abfragen und Ergebnisse per e-Mail freigeben. Sie
 1. [Führen Sie die Abfrage](#basic-queries) in Kusto. Explorer aus.
 1. Wählen Sie auf der Registerkarte Startseite im Abschnitt Freigabe die Option in **Zwischenablage exportieren** aus (oder drücken Sie STRG + UMSCHALT + C).
 
-:::image type="content" source="images/kusto-explorer-using/menu-export.png" alt-text="In Zwischenablage exportieren":::
+    :::image type="content" source="images/kusto-explorer-using/menu-export.png" alt-text="In Zwischenablage exportieren":::
 
-    Kusto.Explorer pastes the following to the clipboard:
-    * Your query
-    * The query results (table or chart)
-    * The connection details for the Kusto cluster and database
-    * A link that will rerun the query automatically
+    "Kusto. Explorer" fügt Folgendes in die Zwischenablage ein:
+     * Ihre Abfrage
+     * Die Abfrageergebnisse (Tabelle oder Diagramm)
+     * Verbindungsdetails für den Kusto-Cluster und die Datenbank
+     * Ein Link, mit dem die Abfrage automatisch erneut ausgeführt wird.
 
 1. Fügen Sie den Inhalt der Zwischenablage in eine neue e-Mail-Nachricht ein.
 
-:::image type="content" source="images/kusto-explorer-using/share-results-2.png" alt-text="Ergebnisse in e-Mail freigeben":::
+    :::image type="content" source="images/kusto-explorer-using/share-results-2.png" alt-text="Ergebnisse in e-Mail freigeben":::
 
 ### <a name="deep-linking-queries"></a>Deep-Linking-Abfragen
 
@@ -164,9 +164,13 @@ https://help.kusto.windows.net/Samples?web=0&query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSs
 Paramete Abfragen können mit Deep-Linking verwendet werden.
 
 1. Erstellen Sie eine Abfrage, die als Parameterabfrage geformt werden soll (z. b. `KustoLogs | where Timestamp > ago({Period}) | count` ). 
-1. Geben Sie einen Parameter für jeden Abfrage Parameter im URI an, z. b.:
+1. Geben Sie einen Parameter für jeden Abfrage Parameter im URI an, z. b.: 
+    
+    `https://<your_cluster>.kusto.windows.net/MyDatabase?
+web=0&query=KustoLogs+%7c+where+Timestamp+>+ago({Period})+%7c+count&Period=1h`
 
-   `https://mycluster.kusto.windows.net/MyDatabase?web=0&query=KustoLogs+%7c+where+Timestamp+>+ago({Period})+%7c+count&Period=1h`
+    Ersetzen &lt; &gt; Sie your_cluster durch den Namen Ihres Azure Daten-Explorer Clusters.
+
 
 ### <a name="getting-shorter-links"></a>Erhalten kürzerer Links
 

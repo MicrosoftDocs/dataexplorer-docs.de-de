@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/09/2020
-ms.openlocfilehash: 1ac715f06945e3db99de1a00b09237ae6f6e241d
-ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
+ms.openlocfilehash: e909754a040308d752b19155e1e69a10097ab219
+ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86188556"
+ms.lasthandoff: 07/13/2020
+ms.locfileid: "86280503"
 ---
 # <a name="the-dynamic-data-type"></a>Der dynamische Datentyp.
 
@@ -52,7 +52,7 @@ print o=dynamic({"a":123, "b":"hello", "c":[1,2,3], "d":{}})
 ```
 
 Aus Gründen `dynamic` der Lesbarkeit können Literale, die im Abfragetext selbst angezeigt werden, auch andere Kusto-Literale mit Typen enthalten: `datetime` , `timespan` , `real` , `long` , `guid` , `bool` und `dynamic` .
-Diese JSON-Erweiterung ist nicht verfügbar, wenn Zeichen folgen (z. b. bei Verwendung der- `parse_json` Funktion oder beim Erfassen von Daten) verarbeitet werden, dies ermöglicht Ihnen jedoch Folgendes:
+Diese JSON-Erweiterung ist nicht verfügbar, wenn Zeichen folgen (z. b. bei Verwendung der- `parse_json` Funktion oder beim Erfassen von Daten) verwendet werden. Sie können jedoch folgende Aktionen ausführen:
 
 ```kusto
 print d=dynamic({"a": datetime(1970-05-11)})
@@ -88,7 +88,7 @@ Im folgenden Beispiel wird gezeigt, wie Sie eine Tabelle definieren können, die
   [2015-01-01,"{""EventType"":""Demo"", ""EventValue"":""Double-quote love!""}"]
 ```
 
-|Zeitstempel                   | Trace                                                 |
+|Timestamp                   | Trace                                                 |
 |----------------------------|-------------------------------------------------------|
 |2015-01-01 00:00:00.0000000 | {"EventType": "Demo", "eventvalue": "Double-Quote Love!"}|
 
@@ -120,11 +120,11 @@ Der Zugriff auf ein untergeordnetes Objekt eines `dynamic` Werts ergibt einen an
 
 > Nachdem Sie ein dynamisches Objekt abonniert haben, müssen Sie den Wert in einen einfachen Typ umwandeln.
 
-|Ausdruck | Wert | Typ|
+|Ausdruck | Wert | type|
 |---|---|---|
 | X | parse_json ("[100101102]")| array|
 |X [0]|parse_json ("100")|dynamisch|
-|"zu int" (X [1])|101| int|
+|"zu int" (X [1])|101| INT|
 | J | parse_json ("{" a1 ": 100," a b c ":" 2015-01-01 "}")| dictionary|
 |Y. a1|parse_json ("100")|dynamisch|
 |J ["a b c"]| parse_json ("2015-01-01")|dynamisch|
@@ -163,11 +163,11 @@ Außerdem gibt es mehrere Aggregatfunktionen, die `dynamic` Arrays erstellen, di
 
 ## <a name="operators-and-functions-over-dynamic-types"></a>Operatoren und Funktionen auf dynamischen Typen
 
-|||
+|Operator oder Funktion|Verwendung mit dynamischen Datentypen|
 |---|---|
 | *value* `in` *array*| TRUE, wenn ein Element von *array* vorhanden ist, das *value* entspricht<br/>`where City in ('London', 'Paris', 'Rome')`
 | *value* `!in` *array*| TRUE, wenn kein Element von *array* vorhanden ist, das *value* entspricht
-|[`array_length(`array`)`](../arraylengthfunction.md)| Null, wenn es sich nicht um ein Array handelt.
+|[`array_length(`Array`)`](../arraylengthfunction.md)| Null, wenn es sich nicht um ein Array handelt.
 |[`bag_keys(`Beut`)`](../bagkeysfunction.md)| Listet alle Stamm Schlüssel in einem dynamischen Eigenschaften Behälter Objekt auf.
 |[`bag_merge(`bag1,..., Bagn`)`](../bag-merge-function.md)| Führt dynamische Eigenschaften Behälter in einem dynamischen Eigenschaften Behälter zusammen, wobei alle Eigenschaften zusammengeführt werden.
 |[`extractjson(`Pfad, Objekt`)`](../extractjsonfunction.md)|Verwendet den Pfad zum Navigieren in das Objekt.
