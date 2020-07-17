@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: a7f34f51ee38b10c51c469c0145081f5bb702d8f
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: 98841c57c8e7c405eb113e3242df75bedf1ea3b7
+ms.sourcegitcommit: 8611ac88cc42178f2dead5385432d71fa7216c82
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780217"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86437569"
 ---
 # <a name="capacity-policy"></a>Kapazitätsrichtlinie
 
@@ -48,7 +48,7 @@ Minimal ( `ClusterMaximumConcurrentOperations` , `Number of nodes in cluster` * 
 |Eigenschaft                           |type    |BESCHREIBUNG                                                                                                |
 |-----------------------------------|--------|-----------------------------------------------------------------------------------------------------------|
 |Minimumconcurrentoperationspernode |long    |Ein Minimalwert für die Anzahl der gleichzeitigen Vorgänge zum Zusammenführen und Neuerstellen von Blöcken auf einem einzelnen Knoten. Der Standardwert ist 1 |
-|Maximumconcurrentoperationspernode |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Vorgänge zum Zusammenführen und Neuerstellen von Blöcken auf einem einzelnen Knoten. Der Standardwert ist 5 |
+|Maximumconcurrentoperationspernode |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Vorgänge zum Zusammenführen und Neuerstellen von Blöcken auf einem einzelnen Knoten. Der Standardwert ist 3 |
 
 Die Gesamt Zusammenfassungs Kapazität des Clusters, wie von angezeigt [. zeigen](../management/diagnostics.md#show-capacity)Sie die Kapazität an:
 
@@ -101,14 +101,15 @@ Der effektive Wert für `Concurrent operations` wird automatisch vom System im B
 
 Die standardmäßige Kapazitäts Richtlinie weist die folgende JSON-Darstellung auf:
 
-```kusto 
+```json
 {
   "IngestionCapacity": {
     "ClusterMaximumConcurrentOperations": 512,
     "CoreUtilizationCoefficient": 0.75
   },
   "ExtentsMergeCapacity": {
-    "MaximumConcurrentOperationsPerNode": 1
+    "MinimumConcurrentOperationsPerNode": 1,
+    "MaximumConcurrentOperationsPerNode": 3
   },
   "ExtentsPurgeRebuildCapacity": {
     "MaximumConcurrentOperationsPerNode": 1
@@ -116,6 +117,10 @@ Die standardmäßige Kapazitäts Richtlinie weist die folgende JSON-Darstellung 
   "ExportCapacity": {
     "ClusterMaximumConcurrentOperations": 100,
     "CoreUtilizationCoefficient": 0.25
+  },
+  "ExtentsPartitionCapacity": {
+    "ClusterMinimumConcurrentOperations": 1,
+    "ClusterMaximumConcurrentOperations": 16
   }
 }
 ```

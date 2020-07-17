@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 828f2450db7f6afabf33f72d813af6f0007ada6b
-ms.sourcegitcommit: c3bbb9a6bfd7c5506f05afb4968fdc2043a9fbbf
+ms.openlocfilehash: 1b857ee464b0fff973293cd03afadecc8c893af2
+ms.sourcegitcommit: 537a7eaf8c8e06a5bde57503fedd1c3706dd2b45
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85332599"
+ms.lasthandoff: 07/16/2020
+ms.locfileid: "86422982"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake
 
@@ -133,7 +133,7 @@ Weitere Informationen finden Sie unter [Speicher Verbindungs](../api/connection-
 <a name="properties"></a>
 *Optionale Eigenschaften*
 
-| Eigenschaft         | Type     | Beschreibung       |
+| Eigenschaft         | type     | BESCHREIBUNG       |
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | Tabellen Ordner                                                                     |
 | `docString`      | `string` | Zeichenfolge, die die Tabelle dokumentiert                                                       |
@@ -142,6 +142,8 @@ Weitere Informationen finden Sie unter [Speicher Verbindungs](../api/connection-
 | `namePrefix`     | `string` | Wenn festgelegt, wird das Präfix der Dateien angegeben. Bei Schreibvorgängen werden alle Dateien mit diesem Präfix geschrieben. Bei Lesevorgängen werden nur Dateien mit diesem Präfix gelesen. |
 | `fileExtension`  | `string` | Wenn festgelegt, werden Dateierweiterungen der Dateien angegeben. Beim Schreiben enden Dateinamen mit diesem Suffix. Beim Lesen werden nur Dateien mit dieser Dateierweiterung gelesen.           |
 | `encoding`       | `string` | Gibt an, wie der Text codiert wird: `UTF8NoBOM` (Standard) oder `UTF8BOM` .             |
+| `sampleUris`     | `bool`   | Wenn festgelegt, liefert das Befehls Ergebnis mehrere Beispiele für den URI externer Datendateien, da Sie von der Definition der externen Tabelle erwartet werden. |
+| `validateNotEmpty` | `bool`   | Wenn diese Einstellung festgelegt ist, werden die Verbindungs Zeichenfolgen überprüft, damit Sie Inhalte aufweisen. Der Befehl schlägt fehl, wenn der angegebene URI-Speicherort nicht vorhanden ist, oder wenn keine ausreichenden Zugriffsberechtigungen vorhanden sind. |
 
 > [!TIP]
 > Weitere Informationen zu den Rollen `namePrefix` und `fileExtension` Eigenschaften, die beim Filtern von Datendateien während der Abfrage abgespielt werden, finden Sie im Abschnitt [Dateifilter Logik](#file-filtering) .
@@ -272,7 +274,7 @@ Dabei ist " *maxResults* " ein optionaler Parameter, der so festgelegt werden ka
 
 **Ausgabe**
 
-| Output-Parameter | Type   | Beschreibung                       |
+| Output-Parameter | type   | Beschreibung                       |
 |------------------|--------|-----------------------------------|
 | URI              | Zeichenfolge | URI der externen Speicher Datendatei |
 
@@ -305,7 +307,7 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 **Beispielausgabe**
 
-| name     | Variante | Zuordnung                                                           |
+| Name     | Typ | Zuordnung                                                           |
 |----------|------|-------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -323,7 +325,7 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 **Beispielausgabe**
 
-| name     | Variante | Zuordnung                                                                |
+| Name     | Typ | Zuordnung                                                                |
 |----------|------|------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -345,7 +347,7 @@ Zeigt die Zuordnungen an (alle oder die durch den Namen angegebenen).
 
 **Beispielausgabe**
 
-| name     | Variante | Zuordnung                                                                         |
+| Name     | Typ | Zuordnung                                                                         |
 |----------|------|---------------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "Properties": {"Path": "$. ROWGUID"}}] |
 
