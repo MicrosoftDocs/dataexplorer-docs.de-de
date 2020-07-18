@@ -1,6 +1,6 @@
 ---
-title: Kusto ingestionbatching Policy Management-Azure Daten-Explorer
-description: Dieser Artikel beschreibt die Richtlinie ingestionbatching in Azure Daten-Explorer.
+title: Befehl "Kusto ingestionbatching Policy Management"-Azure Daten-Explorer
+description: Dieser Artikel beschreibt den Befehl "ingestionbatching Policy" in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: e9823fd0cd44dd2e5bd0731cc59086961ce86d8c
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 04c59b33d780db1c9731ac71d1f905315afbc302
+ms.sourcegitcommit: 4405ae34e119948778e0de5021077638d24da812
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617764"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86448043"
 ---
-# <a name="ingestionbatching-policy"></a>Ingestionbatching-Richtlinie
+# <a name="ingestionbatching-policy-command"></a>Befehl "ingestionbatching Policy"
 
 Die [ingestionbatching-Richtlinie](batchingpolicy.md) ist ein Richtlinien Objekt, das bestimmt, wann die Datenaggregation während der Datenerfassung gemäß den angegebenen Einstellungen beendet werden soll.
 
-Die Richtlinie kann auf `null`festgelegt werden. in diesem Fall werden die Standardwerte verwendet. dabei wird die maximale Batch Verarbeitungszeit Spanne festgelegt auf: 5 Minuten, 1000 Elemente und die Batch Größe insgesamt 1 g oder der von Kusto festgelegte Standard Cluster Wert.
+Die Richtlinie kann auf festgelegt werden. `null` in diesem Fall werden die Standardwerte verwendet. dabei wird die maximale Batch Verarbeitungszeit Spanne festgelegt auf: 5 Minuten, 1000 Elemente und die Batch Größe insgesamt 1 g oder der von Kusto festgelegte Standard Cluster Wert.
 
 Wenn die Richtlinie für eine bestimmte Entität nicht festgelegt ist, wird eine Richtlinie für eine höhere Hierarchieebene gesucht, wenn alle auf NULL festgelegt sind, wird der Standardwert verwendet. 
 
@@ -30,7 +30,7 @@ Die Richtlinie weist eine niedrigere Grenze von 10 Sekunden auf, und es wird nic
 Die Richtlinie kann für eine Datenbank oder Tabelle festgelegt werden und wird mit einem der folgenden Befehle angezeigt:
 
 * `.show` `database` *DatabaseName* `policy` `ingestionbatching`
-* `.show``table` *DatabaseName*`.`(*Tabellenname* `policy` )`ingestionbatching`
+* `.show``table` *DatabaseName*( `.` *Tabellenname* `policy` )`ingestionbatching`
 
 ## <a name="altering-the-ingestionbatching-policy"></a>Ändern der ingestionbatching-Richtlinie
 
