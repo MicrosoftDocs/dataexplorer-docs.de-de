@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 98841c57c8e7c405eb113e3242df75bedf1ea3b7
-ms.sourcegitcommit: 8611ac88cc42178f2dead5385432d71fa7216c82
+ms.openlocfilehash: 3835cc3e50cc589e13f7d038a7c1f8f83def9d15
+ms.sourcegitcommit: aacea5c4c397479e8254c1fe6ed0b2f333307b14
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86437569"
+ms.lasthandoff: 07/20/2020
+ms.locfileid: "86470076"
 ---
 # <a name="capacity-policy"></a>Kapazitätsrichtlinie
 
@@ -54,7 +54,7 @@ Die Gesamt Zusammenfassungs Kapazität des Clusters, wie von angezeigt [. zeigen
 
 `Number of nodes in cluster`Stuben`Concurrent operations per node`
 
-Der effektive Wert für `Concurrent operations per node` wird automatisch vom System im Bereich [ `MinimumConcurrentOperationsPerNode` , `MaximumConcurrentOperationsPerNode` ] angepasst.
+Der effektive Wert für `Concurrent operations per node` wird automatisch vom System im Bereich [ `MinimumConcurrentOperationsPerNode` , `MaximumConcurrentOperationsPerNode` ] angepasst, solange die Erfolgsrate der Mergevorgänge über 90% liegt.
 
 > [!Note]
 > * In Clustern mit drei oder mehr Knoten ist der Administrator Knoten nicht an der Ausführung von Merge-Vorgängen beteiligt. Der `Number of nodes in cluster` wird um 1 reduziert.
@@ -95,7 +95,7 @@ Minimal ( `ClusterMaximumConcurrentOperations` , `Number of nodes in cluster` * 
 
 Die Gesamtwerte für die Partitions Kapazität des Clusters (wie von angezeigt [. zeigen Sie Kapazität](../management/diagnostics.md#show-capacity)an).
 
-Der effektive Wert für `Concurrent operations` wird automatisch vom System im Bereich [ `ClusterMinimumConcurrentOperations` , `ClusterMaximumConcurrentOperations` ] angepasst.
+Der effektive Wert für `Concurrent operations` wird automatisch vom System im Bereich [ `ClusterMinimumConcurrentOperations` , `ClusterMaximumConcurrentOperations` ] angepasst, solange die Erfolgsrate der Partitionierungs Vorgänge über 90% liegt.
 
 ## <a name="defaults"></a>der Arbeitszeittabelle
 
@@ -134,7 +134,7 @@ Die standardmäßige Kapazitäts Richtlinie weist die folgende JSON-Darstellung 
 
 * Ändern Sie die Kapazitäts Richtlinie des Clusters mithilfe von [. Alter Cluster Policy Capacity](capacity-policy.md#alter-cluster-policy-capacity) .
 
-## <a name="throttling"></a>Drosselung
+## <a name="throttling"></a>Einschränkung
 
 Kusto schränkt die Anzahl gleichzeitiger Anforderungen für die folgenden vom Benutzer initiierten Befehle ein:
 

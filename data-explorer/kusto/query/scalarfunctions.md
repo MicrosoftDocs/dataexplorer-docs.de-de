@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: 3b3f72bc2ea6b3b17cbdb6d4fb707b9837a2ed56
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.openlocfilehash: 1fa12a52994e19f8710294e440de98ee47922c86
+ms.sourcegitcommit: aacea5c4c397479e8254c1fe6ed0b2f333307b14
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280601"
+ms.lasthandoff: 07/20/2020
+ms.locfileid: "86470059"
 ---
 # <a name="scalar-function-types"></a>Skalarfunktionstypen
 
@@ -36,7 +36,7 @@ ms.locfileid: "86280601"
 |[tobool()](toboolfunction.md)|Konvertiert Eingaben in eine boolesche Darstellung (8-Bit-Darstellung mit Vorzeichen).|
 |[todatetime()](todatetimefunction.md)|Konvertiert die Eingabe in einen DateTime-skalaren Wert.|
 |["gedouble ()"/toreal ()](todoublefunction.md)|Konvertiert die Eingabe in einen Wert vom Typ "Real". ("gedouble ()" und "toreal ()" sind Synonyme.)|
-|[Zeichenfolge ()](tostringfunction.md)|Konvertiert Eingaben in eine Zeichen folgen Darstellung.|
+|[tostring()](tostringfunction.md)|Konvertiert Eingaben in eine Zeichen folgen Darstellung.|
 |[totimespan()](totimespanfunction.md)|Konvertiert Eingaben in TimeSpan Scalar.|
 
 ## <a name="datetimetimespan-functions"></a>DateTime/TimeSpan-Funktionen
@@ -44,9 +44,9 @@ ms.locfileid: "86280601"
 |Funktionsname     |BESCHREIBUNG                                          |
 |-------------------------|--------------------------------------------------------|
 |[ago()](agofunction.md)|Subtrahiert den angegebenen Zeitraum von der aktuellen UTC-Uhrzeit.|
-|[datetime_add ()](datetime-addfunction.md)|Berechnet einen neuen DateTime-Wert aus einem angegebenen datepart-Wert multipliziert mit einem angegebenen Wert, der einem angegebenen DateTime-Wert hinzugefügt wird.|
+|[datetime_add()](datetime-addfunction.md)|Berechnet einen neuen DateTime-Wert aus einem angegebenen datepart-Wert multipliziert mit einem angegebenen Wert, der einem angegebenen DateTime-Wert hinzugefügt wird.|
 |[datetime_part()](datetime-partfunction.md)|Extrahiert den angeforderten Datums Teil als ganzzahligen Wert.|
-|[datetime_diff ()](datetime-difffunction.md)|Gibt das Ende des Jahres zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
+|[datetime_diff()](datetime-difffunction.md)|Gibt das Ende des Jahres zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
 |[dayofmonth()](dayofmonthfunction.md)|Gibt die ganzzahlige Zahl zurück, die die Tagesnummer des angegebenen Monats darstellt.|
 |[dayofweek()](dayofweekfunction.md)|Gibt die ganzzahlige Anzahl von Tagen seit dem vorangegangenen Sonntag als Zeitspanne zurück.|
 |[dayofyear()](dayofyearfunction.md)|Gibt die Ganzzahl zurück, die die Tagesnummer des angegebenen Jahrs darstellt.|
@@ -69,6 +69,10 @@ ms.locfileid: "86280601"
 |[startofyear()](startofyearfunction.md)|Gibt den Anfang des Jahres zurück, der das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
 |[todatetime()](todatetimefunction.md)|Konvertiert die Eingabe in einen DateTime-skalaren Wert.|
 |[totimespan()](totimespanfunction.md)|Konvertiert Eingaben in TimeSpan Scalar.|
+|[unixtime_microseconds_todatetime()](unixtime-microseconds-todatetimefunction.md)|Konvertiert Unix-Epoche-Mikrosekunden in UTC-DateTime.|
+|[unixtime_milliseconds_todatetime()](unixtime-milliseconds-todatetimefunction.md)|Konvertiert Unix-Epoch-Millisekunden in UTC-DateTime.|
+|[unixtime_nanoseconds_todatetime()](unixtime-nanoseconds-todatetimefunction.md)|Konvertiert Unix-Epoch Nanosekunden in UTC-DateTime.|
+|[unixtime_seconds_todatetime()](unixtime-seconds-todatetimefunction.md)|Konvertiert Unix-Epoch seconds in UTC-DateTime.|
 |[weekofyear()](weekofyearfunction.md)|Gibt eine ganze Zahl zurück, die die Wochen Nummer darstellt.|
 
 
@@ -76,11 +80,11 @@ ms.locfileid: "86280601"
 
 |Funktionsname     |BESCHREIBUNG                                          |
 |-------------------------|--------------------------------------------------------|
-|[array_concat ()](arrayconcatfunction.md)|Verkettet eine Reihe dynamischer Arrays mit einem einzelnen Array.|
+|[array_concat()](arrayconcatfunction.md)|Verkettet eine Reihe dynamischer Arrays mit einem einzelnen Array.|
 |[array_iif()](arrayifffunction.md)|Wendet die Element Weise IIf-Funktion auf Arrays an.|
 |[array_index_of()](arrayindexoffunction.md)|Durchsucht das Array nach dem angegebenen Element und gibt seine Position zurück.|
-|[array_length ()](arraylengthfunction.md)|Berechnet die Anzahl der Elemente in einem dynamischen Array.|
-|[array_slice ()](arrayslicefunction.md)|Extrahiert einen Slice eines dynamischen Arrays.|
+|[array_length()](arraylengthfunction.md)|Berechnet die Anzahl der Elemente in einem dynamischen Array.|
+|[array_slice()](arrayslicefunction.md)|Extrahiert einen Slice eines dynamischen Arrays.|
 |[array_split()](arraysplitfunction.md)|Erstellt ein Array von Arrays, die aus dem Eingabe Array geteilt werden.|
 |[bag_keys()](bagkeysfunction.md)|Listet alle Stamm Schlüssel in einem dynamischen Eigenschaften Behälter Objekt auf.|
 |[pack()](packfunction.md)|Erstellt ein dynamisches Objekt (Eigenschaften Behälter) aus einer Liste von Namen und Werten.|
@@ -129,18 +133,18 @@ ms.locfileid: "86280601"
 |[exp2()](exp2-function.md)|Die exponentielle Base-2-Funktion von x, die 2 für Power x: 2 ^ x ist.|
 |[gamma()](gammafunction.md)|Berechnet die Gamma Funktion.|
 |[isfinite()](isfinitefunction.md)|Gibt zurück, ob die Eingabe ein endlicher Wert (nicht unendlich oder NaN) ist.|
-|[isinf()](isinffunction.md)|Gibt zurück, ob die Eingabe ein unendlicher (positiver oder negativer) Wert ist.|
+|[isinf ()](isinffunction.md)|Gibt zurück, ob die Eingabe ein unendlicher (positiver oder negativer) Wert ist.|
 |[isnan()](isnanfunction.md)|Gibt zurück, ob die Eingabe ein NaN-Wert (not-a-Number) ist.|
 |[Log ()](log-function.md)|Gibt die natürliche Logarithmus Funktion zurück.|
 |[log10 ()](log10-function.md)|Gibt die allgemeine Logarithmus Funktion (Basis 10) zurück.|
 |[log2()](log2-function.md)|Gibt die Logarithmus Funktion der Basis 2 zurück.|
 |[loggamma()](loggammafunction.md)|Berechnet das Protokoll des absoluten Werts der Gamma Funktion.|
-|[not()](notfunction.md)|Kehrt den Wert des bool-Arguments um.|
+|[nicht ()](notfunction.md)|Kehrt den Wert des bool-Arguments um.|
 |[PI ()](pifunction.md)|Gibt den konstanten Wert von Pi (μ) zurück.|
 |[pow()](powfunction.md)|Gibt das Ergebnis der Erhöhung der Stromversorgung zurück.|
 |[radiane ()](radiansfunction.md)|Konvertiert den Winkelwert in Grad in den Wert im Bogenmaß mit Formel Bogenmaß = (PI/180) * Winkel in Grad.|
 |[Rand ()](randfunction.md)|Gibt eine Zufallszahl zurück.|
-|[range()](rangefunction.md)|Generiert ein dynamisches Array, das eine Reihe von gleichmäßig getrennten Werten enthält.|
+|[Bereich ()](rangefunction.md)|Generiert ein dynamisches Array, das eine Reihe von gleichmäßig getrennten Werten enthält.|
 |[Round ()](roundfunction.md)|Gibt die abgerundete Quelle auf die angegebene Genauigkeit zurück.|
 |[Sign ()](signfunction.md)|Zeichen eines numerischen Ausdrucks.|
 |[Sin ()](sinfunction.md)|Gibt die Sinusfunktion zurück.|
@@ -234,11 +238,11 @@ ms.locfileid: "86280601"
 |[extract()](extractfunction.md)|Ruft eine Übereinstimmung für einen regulären Ausdruck aus einer Textzeichenfolge ab.|
 |[extract_all()](extractallfunction.md)|Alle Übereinstimmungen für einen regulären Ausdruck aus einer Text Zeichenfolge erhalten.|
 |[extractjson()](extractjsonfunction.md)|Rufen Sie ein angegebenes Element aus einem JSON-Text mit einem Pfadausdruck ab.|
-|[IndexOf ()](indexoffunction.md)|Die Funktion meldet den NULL basierten Index des ersten Vorkommens einer angegebenen Zeichenfolge in der Eingabe Zeichenfolge.|
+|[indexof()](indexoffunction.md)|Die Funktion meldet den NULL basierten Index des ersten Vorkommens einer angegebenen Zeichenfolge in der Eingabe Zeichenfolge.|
 |[isempty()](isemptyfunction.md)|Gibt "true" zurück, wenn das Argument eine leere Zeichenfolge oder NULL ist.|
 |[isnotempty()](isnotemptyfunction.md)|Gibt true zurück, wenn das Argument keine leere Zeichenfolge oder NULL ist.|
 |[isnotnull()](isnotnullfunction.md)|Gibt "true" zurück, wenn das Argument nicht NULL ist.|
-|[IsNull ()](isnullfunction.md)|Wertet das einzige Argument aus und gibt einen booleschen Wert zurück, der angibt, ob das Argument zu einem NULL-Wert ausgewertet wird.|
+|[isnull()](isnullfunction.md)|Wertet das einzige Argument aus und gibt einen booleschen Wert zurück, der angibt, ob das Argument zu einem NULL-Wert ausgewertet wird.|
 |[parse_command_line()](parse-command-line.md)|Analysiert eine Unicode-Befehlszeilen Zeichenfolge und gibt ein Array mit den Befehlszeilen Argumenten zurück.|
 |[parse_csv()](parsecsvfunction.md)|Teilt eine angegebene Zeichenfolge, die durch Trennzeichen getrennte Werte darstellt, und gibt ein Zeichen folgen Array mit diesen Werten zurück.|
 |[parse_ipv4()](parse-ipv4function.md)|Konvertiert Eingaben in eine Long-Darstellung (signed 64-Bit).|
@@ -250,21 +254,21 @@ ms.locfileid: "86280601"
 |[parse_urlquery()](parseurlqueryfunction.md)|Analysiert eine URL-Abfrage Zeichenfolge und gibt ein dynamisches Objekt zurück, das die Abfrage Parameter enthält.|
 |[parse_version()](parse-versionfunction.md)|Konvertiert die Darstellung der Eingabe Zeichenfolge in eine vergleichbare Dezimalzahl.|
 |[Replace ()](replacefunction.md)|Ersetzen Sie alle regex-Übereinstimmungen mit einer anderen Zeichenfolge.|
-|[umkehren ()](reversefunction.md)|Die Funktion bewirkt eine Umkehrung der Eingabe Zeichenfolge.|
+|[reverse()](reversefunction.md)|Die Funktion bewirkt eine Umkehrung der Eingabe Zeichenfolge.|
 |[split()](splitfunction.md)|Teilt eine angegebene Zeichenfolge gemäß einem angegebenen Trennzeichen und gibt ein Zeichen folgen Array mit den enthaltenen Teil Zeichenfolgen zurück.|
 |[strcat()](strcatfunction.md)|Verkettet zwischen 1 und 64 Argumenten.|
 |[strcat_delim()](strcat-delimfunction.md)|Verkettet zwischen zwei und 64 Argumenten mit Trennzeichen, die als erstes Argument bereitgestellt werden.|
 |[strcmp()](strcmpfunction.md)|Vergleicht zwei Zeichenfolgen.|
 |[strlen()](strlenfunction.md)|Gibt die Länge der Eingabe Zeichenfolge in Zeichen zurück.|
 |[strrep()](strrepfunction.md)|Wiederholt die angegebene Zeichenfolge mehrmals (Standardwert: 1).|
-|[Teil Zeichenfolge ()](substringfunction.md)|Extrahiert eine Teil Zeichenfolge aus einer Quell Zeichenfolge beginnend mit einem Index bis zum Ende der Zeichenfolge.|
+|[substring()](substringfunction.md)|Extrahiert eine Teil Zeichenfolge aus einer Quell Zeichenfolge beginnend mit einem Index bis zum Ende der Zeichenfolge.|
 |[toupper()](toupperfunction.md)|Konvertiert eine Zeichenfolge in Großbuchstaben.|
 |[translate()](translatefunction.md)|Ersetzt einen Zeichensatz ("SEARCHLIST") durch einen anderen Zeichensatz ("REPLACEMENTLIST") in einer angegebenen Zeichenfolge.|
-|[Trim ()](trimfunction.md)|Entfernt alle führenden und nachfolgenden Übereinstimmungen des angegebenen regulären Ausdrucks.|
+|[trim()](trimfunction.md)|Entfernt alle führenden und nachfolgenden Übereinstimmungen des angegebenen regulären Ausdrucks.|
 |[trim_end()](trimendfunction.md)|Entfernt die nachfolgende Entsprechung des angegebenen regulären Ausdrucks.|
 |[trim_start()](trimstartfunction.md)|Entfernt die führende Entsprechung des angegebenen regulären Ausdrucks.|
-|[url_decode()](urldecodefunction.md)|Die-Funktion konvertiert die codierte URL in eine reguläre URL-Darstellung.|
-|[url_encode()](urlencodefunction.md)|Die-Funktion konvertiert Zeichen der Eingabe-URL in ein Format, das über das Internet übermittelt werden kann.|
+|[url_decode ()](urldecodefunction.md)|Die-Funktion konvertiert die codierte URL in eine reguläre URL-Darstellung.|
+|[url_encode ()](urlencodefunction.md)|Die-Funktion konvertiert Zeichen der Eingabe-URL in ein Format, das über das Internet übermittelt werden kann.|
 
 ## <a name="ipv4ipv6-functions"></a>IPv4/IPv6-Funktionen
 
@@ -309,8 +313,8 @@ ms.locfileid: "86280601"
 |[geo_point_to_s2cell()](geo-point-to-s2cell-function.md)|Berechnet den S2-zelltokenzeichenfolgen-Wert für einen geografischen Standort.|
 |[geo_s2cell_to_central_point()](geo-s2cell-to-central-point-function.md)|Berechnet die räumlichen Koordinaten, die den Mittelpunkt einer S2-Zelle darstellen.|
 |[geo_polygon_to_s2cells()](geo-polygon-to-s2cells-function.md)|Berechnet S2-zelltokens, die ein Polygon oder MultiPolygon auf der Erde abdecken. Nützliches Georäumliches jointool.|
-|[geo_line_densify ()](geo-line-densify-function.md)|Konvertiert planare Zeilen Kanten durch Hinzufügen von zwischen Punkten in geodäk.|
-|[geo_polygon_densify ()](geo-polygon-densify-function.md)|Konvertiert Polygon-oder MultiPolygon-planare Ränder in geodäme durch Hinzufügen von zwischen Punkten.|
+|[geo_line_densify()](geo-line-densify-function.md)|Konvertiert planare Zeilen Kanten durch Hinzufügen von zwischen Punkten in geodäk.|
+|[geo_polygon_densify()](geo-polygon-densify-function.md)|Konvertiert Polygon-oder MultiPolygon-planare Ränder in geodäme durch Hinzufügen von zwischen Punkten.|
 
 ## <a name="hash-functions"></a>Hash Funktionen
 

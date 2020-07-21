@@ -7,12 +7,12 @@ ms.reviewer: gabilehner
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 11/07/2019
-ms.openlocfilehash: 942c0577b8fb784af74cf09aec4c8a68a7be8dda
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: b1855d12872c291e1ae45f62da1ad1fe0e792617
+ms.sourcegitcommit: aacea5c4c397479e8254c1fe6ed0b2f333307b14
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84294558"
+ms.lasthandoff: 07/20/2020
+ms.locfileid: "86470110"
 ---
 # <a name="use-follower-database-to-attach-databases-in-azure-data-explorer"></a>Verwenden der Follower-Datenbank zum Anfügen von Datenbanken in Azure Data Explorer
 
@@ -182,7 +182,7 @@ In diesem Abschnitt erfahren Sie, wie Sie eine Datenbank mithilfe einer [Azure R
         {
             "name": "[concat(parameters('followerClusterName'), '/', parameters('attachedDatabaseConfigurationsName'))]",
             "type": "Microsoft.Kusto/clusters/attachedDatabaseConfigurations",
-            "apiVersion": "2019-09-07",
+            "apiVersion": "2020-02-15",
             "location": "[parameters('location')]",
             "properties": {
                 "databaseName": "[parameters('databaseName')]",
@@ -393,7 +393,6 @@ Der Administrator der Follower-Datenbank kann die [Cacherichtlinie](kusto/manage
 * Datenverschlüsselung mithilfe von [kundenseitig verwalteten Schlüsseln](security.md#customer-managed-keys-with-azure-key-vault) wird auf Leader- und Follower-Clustern nicht unterstützt. 
 * Sie können eine Datenbank, die an einen anderen Cluster angefügt ist, erst nach dem Trennen löschen.
 * Sie können einen Cluster mit einer Datenbank, die an einen anderen Cluster angefügt ist, erst nach dem Trennen löschen.
-* Sie können einen Cluster, der über angefügte Follower- oder Leader-Datenbanken verfügt, nicht beenden. 
 
 ## <a name="next-steps"></a>Nächste Schritte
 

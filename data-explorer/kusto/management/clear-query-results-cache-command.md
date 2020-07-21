@@ -8,12 +8,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/16/2020
-ms.openlocfilehash: 9ddb94e005e88855bbeddd7d3cf8ab537a42d413
-ms.sourcegitcommit: a8575e80c65eab2a2118842e59f62aee0ff0e416
+ms.openlocfilehash: 68d6493176696f0241467303f166b8c7160859b7
+ms.sourcegitcommit: cf1da667be12656a8c4727c23144421b5a4b1099
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/17/2020
-ms.locfileid: "84943082"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86565441"
 ---
 # <a name="clear-query-results-cache"></a>Abfrageergebnis Cache löschen
 
@@ -21,16 +21,16 @@ Löschen Sie alle [zwischengespeicherten Abfrageergebnisse](../query/query-resul
 
 **Syntax**
 
-`.clear` `database` `cache` `queryresults`
+`.clear` `database` `cache` `query_results`
 
 **Rückgabe**
 
 Dieser Befehl gibt eine Tabelle mit den folgenden Spalten zurück:
 
-|Spalte    |Typ    |Beschreibung
+|Spalte    |Typ    |BESCHREIBUNG
 |---|---|---
 |NodeId|`string`|Der Bezeichner des Cluster Knotens.
-|Gewinner|`long`|Die Anzahl von Einträgen, die vom Knoten gelöscht werden.
+|Anzahl|`long`|Die Anzahl von Einträgen, die vom Knoten gelöscht wurden.
 
 **Beispiel**
 

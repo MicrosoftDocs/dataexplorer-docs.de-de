@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 130526b41030ac3936236f8fd8bba81f20b4bb0e
-ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
+ms.openlocfilehash: af224c630cb835d190b8fd6655a6d42f7fd7fee9
+ms.sourcegitcommit: d79d3aa9aaa70cd23e3107ef12296159322e1eb5
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84512519"
+ms.lasthandoff: 07/20/2020
+ms.locfileid: "86475608"
 ---
-# <a name="cache-policy-hot-and-cold-cache"></a>Cache Richtlinie (Hot und Cold Cache) 
+# <a name="cache-policy-hot-and-cold-cache"></a>Cache-Richtlinie (Cache für heiße und kalte Daten) 
 
 Azure Daten-Explorer speichert die erfassten Daten in einem zuverlässigen Speicher (am häufigsten Azure BLOB Storage), von der tatsächlichen Verarbeitung (z. b. Azure Compute-Knoten). Um Abfragen für diese Daten zu beschleunigen, speichert Azure Daten-Explorer Sie oder Teile davon auf den Verarbeitungs Knoten, SSD oder sogar im RAM zwischenspeichert. Azure Daten-Explorer umfasst einen ausgereiften Cache Mechanismus, der Intelligent entscheiden soll, welche Datenobjekte zwischengespeichert werden sollen. Der Cache ermöglicht es Azure Daten-Explorer, die verwendeten Daten Artefakte zu beschreiben, damit wichtiger ist, dass wichtige Daten Vorrang haben. Beispielsweise Spalten Indizes und Spaltendaten-Shards,
 
@@ -39,7 +39,7 @@ Verwenden Sie den [Cache Policy-Befehl](cache-policy.md) , um die Cache Richtlin
 
 Wenn Daten in Azure Daten-Explorer erfasst werden, verfolgt das System das Datum und die Uhrzeit der Erfassung sowie den Umfang, der erstellt wurde. Der Erfassungs Datums-und Uhrzeitwert (oder der Höchstwert, wenn ein Block aus mehreren bereits vorhandenen Blöcken erstellt wurde) wird zum Auswerten der Cache Richtlinie verwendet.
 
-> [!Note]
+> [!NOTE]
 > Sie können einen Wert für Datum und Uhrzeit der Erfassung angeben, indem Sie die Eigenschaft Erfassung verwenden `creationTime` .
 
 Standardmäßig ist die effektive Richtlinie `null` . Dies bedeutet, dass alle Daten als **heiß**angesehen werden.
@@ -48,13 +48,16 @@ Eine Richtlinie, die keine `null` Tabellenebene ist, überschreibt eine Richtlin
 ## <a name="scoping-queries-to-hot-cache"></a>Bereichs bezogene Abfragen für den Hot-Cache
 
 Kusto unterstützt Abfragen, die auf Daten im Gültigkeitsbereich des Datenspeichers beschränkt sind.
-Es gibt mehrere Abfrage Möglichkeiten.
 
-- Fügen Sie der Abfrage eine Client Anforderungs Eigenschaft `query_datascope` mit dem Namen hinzu.
+> [!NOTE]
+> Die Datenbereichs Einschränkung gilt nur für Entitäten, die Cache Richtlinien unterstützen, z. b. Tabellen. Sie wird für andere Entitäten, z. b. externe Tabellen, ignoriert.
+
+Es gibt mehrere Abfrage Möglichkeiten:
+* Fügen Sie der Abfrage eine Client Anforderungs Eigenschaft `query_datascope` mit dem Namen hinzu.
    Mögliche Werte: `default` , `all` und `hotcache` .
-- Verwenden Sie eine- `set` Anweisung im Abfragetext: `set query_datascope='...'` .
+* Verwenden Sie eine- `set` Anweisung im Abfragetext: `set query_datascope='...'` .
    Mögliche Werte sind die gleichen wie für die Client Request-Eigenschaft.
-- Fügen Sie `datascope=...` direkt nach einem Tabellen Verweis im Abfragetext einen Text hinzu. 
+* Fügen Sie `datascope=...` direkt nach einem Tabellen Verweis im Abfragetext einen Text hinzu. 
    Mögliche Werte sind `all` und `hotcache`.
 
 Der `default` Wert gibt die Verwendung der Standardeinstellungen für den Cluster an, die bestimmen, dass die Abfrage alle Daten abdecken soll.

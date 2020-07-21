@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/13/2020
-ms.openlocfilehash: 19ffbe2f5e14a2c003c24d145b713970e6bb31b8
-ms.sourcegitcommit: 4eb64e72861d07cedb879e7b61a59eced74517ec
+ms.openlocfilehash: dd312c4a36bb095dbe4b5e475e758c141bbab6e0
+ms.sourcegitcommit: aacea5c4c397479e8254c1fe6ed0b2f333307b14
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/29/2020
-ms.locfileid: "85517765"
+ms.lasthandoff: 07/20/2020
+ms.locfileid: "86470093"
 ---
 # <a name="troubleshooting"></a>Problembehandlung
 
@@ -152,7 +152,7 @@ Dieses Symptom könnte daran liegen, dass eine andere Anwendung das Standardverh
 
 In einigen Fällen, in denen die vorherigen Schritte zur Problembehandlung beim Einstieg von Kusto. Explorer nicht helfen konnten, kann das Bereinigen von lokal gespeicherten Daten helfen.
 
-Die von der Anwendung "Kusto. Explorer" gespeicherten Daten finden Sie hier: `C:\Users\\[your alias]\AppData\Local\Kusto.Explorer` .
+Die von der Anwendung "Kusto. Explorer" gespeicherten Daten finden Sie hier: `C:\Users\[your username]\AppData\Local\Kusto.Explorer` .
 
 > [!NOTE]
 > Das Bereinigen der Daten führt zu einem Verlust der geöffneten Registerkarten (Wiederherstellungs Ordner), gespeicherter Verbindungen (Verbindungs Ordner) und Anwendungseinstellungen (Ordner "UserSettings").

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/25/2020
-ms.openlocfilehash: b5bc65b94c45e27087345cfbaf7252ccc4bcaf40
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: c07a2e624d8f2657889431df51958017228774a8
+ms.sourcegitcommit: d79d3aa9aaa70cd23e3107ef12296159322e1eb5
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264419"
+ms.lasthandoff: 07/20/2020
+ms.locfileid: "86475591"
 ---
 # <a name="row-level-security-preview"></a>Sicherheit auf Zeilenebene (Vorschau)
 
@@ -23,16 +23,22 @@ Sicherheit auf Zeilenebene (RLS) vereinfacht das Entwerfen und Programmieren der
 
 Die Zugriffs Einschränkungs Logik befindet sich auf der Datenbankebene und nicht auf der Ebene der Daten auf einer anderen Anwendungsebene. Das Datenbanksystem wendet die Zugriffsbeschränkungen bei jedem Versuch eines Datenzugriffs auf eine beliebige Ebene an. Durch diese Logik wird Ihr Sicherheitssystem zuverlässiger und robuster, indem die Oberfläche Ihres Sicherheitssystems verringert wird.
 
-Mit RLS können Sie anderen Anwendungen und Benutzern Zugriff auf einen bestimmten Teil einer Tabelle gewähren. Auf diese Weise können Sie beispielsweise folgende Vorgänge durchführen:
+Mit RLS können Sie anderen Anwendungen und Benutzern Zugriff auf einen bestimmten Teil einer Tabelle gewähren. Auf diese Weise können Sie z. B. folgende Vorgänge durchführen:
 
 * Gewähren von Zugriff nur für Zeilen, die bestimmte Kriterien erfüllen
 * Anonymisieren von Daten in einigen Spalten
-* Alle oben genannten Möglichkeiten
+* Alle oben genannten Aussagen sind zutreffend.
 
 Weitere Informationen finden Sie unter [Steuern von Befehlen zum Verwalten der Sicherheit auf Zeilenebene-Richtlinie](../management/row-level-security-policy.md).
 
 > [!NOTE]
 > Die RLS-Richtlinie, die Sie für die Produktionsdatenbank konfigurieren, wird auch in den Datenbanken der Follower wirksam. Sie können für die Produktions-und die Follower-Datenbank keine unterschiedlichen RLS-Richtlinien konfigurieren
+
+> [!TIP]
+> Diese Funktionen sind häufig für row_level_security Abfragen nützlich:
+> * [current_principal()](../query/current-principalfunction.md)
+> * [current_principal_details()](../query/current-principal-detailsfunction.md)
+> * [current_principal_is_member_of()](../query/current-principal-ismemberoffunction.md)
 
 ## <a name="limitations"></a>Einschränkungen
 

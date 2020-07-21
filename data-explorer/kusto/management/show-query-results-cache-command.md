@@ -8,32 +8,28 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/16/2020
-ms.openlocfilehash: bcbdb59355ce0461d735cbea902551c219479fd2
-ms.sourcegitcommit: a8575e80c65eab2a2118842e59f62aee0ff0e416
+ms.openlocfilehash: 84805cae07049af4ffa8a2fdb82e637261140f8f
+ms.sourcegitcommit: cf1da667be12656a8c4727c23144421b5a4b1099
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/17/2020
-ms.locfileid: "84943074"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86565424"
 ---
-# <a name="show-query-results-cache"></a>. Abfrageergebnis Cache anzeigen
+# <a name="show-database-cache-query_results"></a>. Daten Bank Cache query_results anzeigen
 
-Gibt eine Tabelle zurück, in der Statistiken zum [Abfrageergebnis Cache](../query/query-results-cache.md)angezeigt werden.
+Gibt eine Tabelle mit Statistiken zu dem [Abfrageergebnis Cache](../query/query-results-cache.md) zurück, der für die Kontext Datenbank erstellt wurde.
 
 **Syntax**
 
-`.show` `query` `results` `cache`
+`.show database query results cache`
 
 **Ausgabe**
  
-|Output-Parameter |type |Beschreibung 
+|Output-Parameter |type |BESCHREIBUNG 
 |---|---|---
-|Treffer  |long |Die Anzahl der Cache Treffer.
-|Cachefehler  |long |Die Anzahl der Cache Fehler.
-|Cachecapacityinbytes |long |Die Cache Kapazität in Byte.
-|Usedbytes  |long |Der Cache verwendete Speicherplatz.
-|Anzahl  |long | Die Anzahl der im Cache gespeicherten eindeutigen Abfrageergebnisse.
-
-**Einschränkungen**
-
-* Die Ausgabe des Befehls gibt derzeit nur die Cache Statistik wieder, die von dem Knoten erfasst wurde, auf dem die Anforderung gelandet ist.
-* Mit dem Befehl wird nur der aktuelle Verlauf angezeigt.
+|NodeId|`string`|Der Bezeichner des Cluster Knotens.
+|Treffer  |`long`|Die Anzahl der Cache Treffer.
+|Cachefehler  |`long`|Die Anzahl der Cache Fehler.
+|Cachecapacityinbytes |`long` |Die Cache Kapazität in Byte.
+|Usedbytes  |`long` |Der Cache verwendete Speicherplatz.
+|Anzahl  |`long`| Die Anzahl der im Cache gespeicherten eindeutigen Abfrageergebnisse.
