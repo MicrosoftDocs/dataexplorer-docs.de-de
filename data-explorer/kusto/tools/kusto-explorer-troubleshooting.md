@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/13/2020
-ms.openlocfilehash: dd312c4a36bb095dbe4b5e475e758c141bbab6e0
-ms.sourcegitcommit: aacea5c4c397479e8254c1fe6ed0b2f333307b14
+ms.openlocfilehash: 6dd52dbe9b69000b109f613957d1405190194b13
+ms.sourcegitcommit: 6db94135b9902ad0ea84f9cef00ded8ec0a90fc3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/20/2020
-ms.locfileid: "86470093"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86870089"
 ---
 # <a name="troubleshooting"></a>Problembehandlung
 
@@ -42,7 +42,7 @@ Jedes Mal, wenn Sie "Kusto. Explorer" öffnen, werden Sie aufgefordert, eine neu
 
 Dieses Symptom könnte auf eine Beschädigung in Ihrem lokalen ClickOnce-Speicher zurückzuführen sein. Sie können den lokalen ClickOnce-Speicher löschen, indem Sie den folgenden Befehl an einer Eingabeaufforderung mit erhöhten Rechten ausführen.
 
-> [!Important]
+> [!IMPORTANT]
 > 1. Wenn andere Instanzen von ClickOnce-Anwendungen oder von vorhanden sind `dfsvc.exe` , beenden Sie diese, bevor Sie diesen Befehl ausführen.
 > 1. Alle ClickOnce-apps werden automatisch neu installiert, wenn Sie Sie das nächste Mal ausführen, sofern Sie auf den in der APP-Verknüpfung gespeicherten ursprünglichen Installationsort zugreifen können. App-Verknüpfungen werden nicht gelöscht.
 
@@ -159,7 +159,7 @@ Die von der Anwendung "Kusto. Explorer" gespeicherten Daten finden Sie hier: `C:
 
 ## <a name="reset-kustoexplorer"></a>Zurücksetzen von Kusto. Explorer
 
-Wenn erforderlich, können Sie Kusto. Explorer vollständig zurücksetzen. Im folgenden Verfahren wird beschrieben, wie Sie "Kusto. Explorer" progressiv zurücksetzen, bis Sie vollständig vom Computer entfernt werden und von Grund auf neu installiert werden müssen.
+Wenn erforderlich, können Sie Kusto. Explorer vollständig zurücksetzen. Im folgenden Verfahren wird beschrieben, wie Sie "Kusto. Explorer" progressiv zurücksetzen, bis Sie vom Computer entfernt werden und von Grund auf neu installiert werden müssen.
 
 1. Öffnen Sie in Windows das **Programm ändern oder entfernen Sie ein Programm** (auch als **Programme und Funktionen**bezeichnet).
 1. Wählen Sie alle Elemente aus, die mit beginnen `Kusto.Explorer` .

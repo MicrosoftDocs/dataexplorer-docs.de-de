@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: 0b2daf955515e4c023cdb7312fbd82039ca598bc
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.openlocfilehash: c95ac178e82e414df41dd5a6d4456f344bb39c2f
+ms.sourcegitcommit: 6db94135b9902ad0ea84f9cef00ded8ec0a90fc3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280639"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86870123"
 ---
 # <a name="using-kustoexplorer"></a>Verwenden von Kusto.Explorer
 
@@ -75,9 +75,15 @@ StormEvents
 
 Erfahren Sie mehr über die [Kusto-Abfragesprache](https://docs.microsoft.com/azure/kusto/query/).
 
+> [!NOTE]
+> Leere Zeilen im Abfrage Ausdruck können beeinflussen, welcher Teil der Abfrage ausgeführt wird.
+>
+> Wenn kein Text ausgewählt ist, wird davon ausgegangen, dass die Abfrage oder der Befehl durch leere Zeilen getrennt ist.
+> Wenn Text ausgewählt ist, wird der ausgewählte Text ausgeführt.
+
 ## <a name="client-side-query-parameterization"></a>Client seitige Abfrage Parametrisierung
 
-> [!Note]
+> [!NOTE]
 > Es gibt zwei Typen von Abfrage parametrisierungstechniken in Kusto:
 > * Die [sprach integrierte Abfrage Parametrisierung](../query/queryparametersstatement.md) wird als Teil der Abfrage-Engine implementiert und soll von Anwendungen verwendet werden, die den Dienstprogramm gesteuert Abfragen. Diese Methode wird in diesem Dokument nicht beschrieben.
 >
@@ -139,11 +145,11 @@ Die Abfragen sind aufgrund von Browser Einschränkungen, HTTP-Proxys und Tools, 
 
 Der URI hat folgendes Format:`https://<ClusterCname>.kusto.windows.net/<DatabaseName>web=0?query=<QueryToExecute>`
 
-Beispiel:  [https://help.kusto.windows.net/Samples?web=0query=StormEvents+%7c+limit+10](https://help.kusto.windows.net/Samples?web=0query=StormEvents+%7c+limit+10)
+Beispiel: [https://help.kusto.windows.net/Samples?web=0query=StormEvents+%7c+limit+10](https://help.kusto.windows.net/Samples?web=0query=StormEvents+%7c+limit+10)
  
 Dieser URI öffnet "Kusto. Explorer", stellt eine Verbindung mit dem `Help` Kusto-Cluster her und führt die angegebene Abfrage für die `Samples` Datenbank aus. Wenn eine Instanz von "Kusto. Explorer" bereits ausgeführt wird, öffnet die laufende Instanz eine neue Registerkarte und führt die Abfrage darin aus.
 
-> [!Note] 
+> [!NOTE] 
 > Aus Sicherheitsgründen ist Deep-Linking für Steuerungsbefehle deaktiviert.
 
 ### <a name="creating-a-deep-link"></a>Erstellen eines Deep-Links
@@ -205,7 +211,7 @@ Wenn Sie z. b. "Kusto. Explorer" mit einer Skriptdatei starten möchten, `c:\tem
 Kusto.Explorer.exe c:\temp\script.kql uri=https://help.kusto.windows.net/Samples;Fed=true&name=Samples
 ```
 
-|Argument  |BESCHREIBUNG                                                               |
+|Argument  |Beschreibung                                                               |
 |----------|--------------------------------------------------------------------------|
 |**Auszuführende Abfrage**                                                                 |
 |`query`   |Die auszuführende Abfrage (base64-codiert). Wenn leer, verwenden Sie `querysrc` .          |
@@ -221,7 +227,7 @@ Kusto.Explorer.exe c:\temp\script.kql uri=https://help.kusto.windows.net/Samples
 
 ## <a name="manage-clusters-databases-tables-or-function-authorized-principals"></a>Verwalten von Clustern, Datenbanken, Tabellen oder Funktions berechtigten Prinzipale
 
-> [!Note]
+> [!NOTE]
 > Nur [Administratoren](../management/access-control/role-based-authorization.md) können autorisierte Prinzipale in Ihrem eigenen Gültigkeitsbereich hinzufügen oder löschen.
 
 Klicken Sie im Bereich [Verbindungen](kusto-explorer.md#connections-tab)mit der rechten Maustaste auf die Ziel Entität, und wählen Sie verwaltete **Cluster Prinzipale verwalten**aus. (Sie können diese Option auch im Menü "Verwaltung" auswählen.)
@@ -251,4 +257,4 @@ Erfahren Sie mehr über die Tools und Hilfsprogramme von Kusto. Explorer:
 * [Kusto. Explorer-Code Analyse](kusto-explorer-code-analyzer.md)
 * [Code Navigation in Kusto. Explorer](kusto-explorer-codenav.md)
 * [Refactoring von Kusto. Explorer-Code](kusto-explorer-refactor.md)
-* [Kusto-Abfragesprache (kql)](https://docs.microsoft.com/azure/kusto/query/)
+* [Kusto-Abfragesprache (KQL)](https://docs.microsoft.com/azure/kusto/query/)

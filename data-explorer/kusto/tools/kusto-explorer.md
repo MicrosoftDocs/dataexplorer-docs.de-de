@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 05/19/2020
-ms.openlocfilehash: 1f3b273260451dc0ce36730d20f1bc357a453397
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.openlocfilehash: d5cb54ab0171a7f7a7e6b7353f723abe2caf69ff
+ms.sourcegitcommit: 6db94135b9902ad0ea84f9cef00ded8ec0a90fc3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280531"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86870140"
 ---
 # <a name="getting-started-with-kustoexplorer"></a>Getting Started with Kusto. Explorer
 
@@ -53,10 +53,10 @@ Die Benutzeroberfläche "Kusto. Explorer" wurde mit einem Layout entworfen, das 
 Der Menübereich von Kusto. Explorer umfasst die folgenden Registerkarten:
 
 * [Home](#home-tab)
-* [Datei](#file-tab)
+* [File](#file-tab)
 * [Verbindungen](#connections-tab)
 * [Anzeigen](#view-tab)
-* [Extras](#tools-tab)
+* [Tools](#tools-tab)
 * [Überwachung](#monitoring-tab)
 * [Verwaltung](#management-tab)
 * [Hilfe](#help-tab)
@@ -68,7 +68,7 @@ Der Menübereich von Kusto. Explorer umfasst die folgenden Registerkarten:
 Auf der Registerkarte Home werden die zuletzt verwendeten Funktionen angezeigt, die in Abschnitte unterteilt sind:
 
 * [Abfrage](#query-section)
-* [Freigeben](#share-section)
+* [Teilen](#share-section)
 * [Visualisierungen](#visualizations-section)
 * [Anzeigen](#view-section)
 * [Hilfe](#help-tab) 
@@ -234,7 +234,7 @@ Auf der Registerkarte Home werden die zuletzt verwendeten Funktionen angezeigt, 
 |Abfrage an Power BI| Übersetzt eine Abfrage in ein Format, das für die Verwendung von in geeignet ist Power BI|
 ||---------*Optionen*---------|
 |Optionen zurücksetzen| Legt die Anwendungseinstellungen auf die Standardwerte fest.|
-|Optionen| Öffnet ein Tool zum Konfigurieren von Anwendungseinstellungen. Weitere Informationen zu [Kusto. Explorer-Optionen](kusto-explorer-options.md).|
+|Tastatur| Öffnet ein Tool zum Konfigurieren von Anwendungseinstellungen. Weitere Informationen zu [Kusto. Explorer-Optionen](kusto-explorer-options.md).|
 
 ## <a name="monitoring-tab"></a>Registerkarte Überwachung
 
@@ -267,7 +267,7 @@ Auf der Registerkarte Home werden die zuletzt verwendeten Funktionen angezeigt, 
 |-----------------|---------|
 ||---------*Dokumentation*---------|
 |Hilfe             | Öffnet einen Link zur Kusto-Online Dokumentation.  | 
-|Neuigkeiten       | Öffnet ein Dokument, in dem alle Änderungen an Kusto. Explorer aufgelistet sind.|
+|Neues       | Öffnet ein Dokument, in dem alle Änderungen an Kusto. Explorer aufgelistet sind.|
 |Report Issue (Problem melden)      |Öffnet ein Dialogfeld mit zwei Optionen: <ul><li>Probleme im Zusammenhang mit dem Dienst melden</li><li>Melden von Problemen in der Client Anwendung</li></ul> | 
 |Feature vorschlagen  | Öffnet einen Link zum Kusto-Feedback Forum. | 
 |Updates überprüfen     | Prüft, ob Updates für Ihre Version von Kusto. Explorer vorhanden sind. | 
@@ -306,7 +306,7 @@ Data Source=https://CLUSTER_NAME.kusto.windows.net;Initial Catalog=DATABASE_NAME
 * `AAD_TENANT_OF_CLUSTER`ist ein Domänen Name oder eine Aad-Mandanten-ID (eine GUID) des Aad-Mandanten, in dem der Cluster gehostet wird. Dabei handelt es sich normalerweise um den Domänen Namen der Organisation, die den Cluster besitzt, z `contoso.com` . b.. 
 * USER_DOMAIN ist die Identität des Benutzers, der in diesen Mandanten geladen wurde (z `user@example.com` . b.). 
 
->[!Note]
+>[!NOTE]
 > Der Domänen Name des Benutzers ist nicht notwendigerweise identisch mit dem des Mandanten, der den Cluster gehostet.
 
 :::image type="content" source="images/kusto-explorer/advanced-connection-string.png" alt-text="Erweiterte Verbindungs Zeichenfolge für Kusto-Explorer":::
@@ -336,4 +336,4 @@ Erfahren Sie mehr über die Tools und Hilfsprogramme von Kusto. Explorer:
 * [Kusto. Explorer-Code Analyse](kusto-explorer-code-analyzer.md)
 * [Code Navigation in Kusto. Explorer](kusto-explorer-codenav.md)
 * [Refactoring von Kusto. Explorer-Code](kusto-explorer-refactor.md)
-* [Kusto-Abfragesprache (kql)](https://docs.microsoft.com/azure/kusto/query/)
+* [Kusto-Abfragesprache (KQL)](https://docs.microsoft.com/azure/kusto/query/)
