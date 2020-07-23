@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/01/2020
-ms.openlocfilehash: 3a69add7e395bbb5b18c390c4089a2e8ad80f674
-ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
+ms.openlocfilehash: 88a95ea2fc8e1f417114cfcfd89c4e5003d9bef2
+ms.sourcegitcommit: fb54d71660391a63b0c107a9703adea09bfc7cb9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "86013790"
+ms.lasthandoff: 07/22/2020
+ms.locfileid: "86946103"
 ---
 # <a name="ingest-from-storage-using-event-grid-subscription"></a>Erfassung aus dem Speicher mithilfe eines Event Grid-Abonnements
 
@@ -43,7 +43,7 @@ Sie können die folgenden Eigenschaften festlegen:
 | kustoingestionmappingreferenzierung |  Name der zu verwendenden vorhandenen Erfassungszuordnung. Überschreibt die auf dem Blatt **Datenverbindung** festgelegte **Spalten Zuordnung** .|
 | kustoignorefirstrecord | Wenn der Wert auf festgelegt `true` ist, ignoriert Azure Daten-Explorer die erste Zeile des BLOBs. Verwenden Sie diese Eigenschaft in Daten in einem Tabellenformat (CSV, TSV oder ähnliche), um die Header zu ignorieren. |
 | kustoextenttags | Zeichenfolgendarstellung von [Tags](../extents-overview.md#extent-tagging), die an die resultierende Erweiterung angefügt werden. |
-| kustokreationtime |  Überschreibt [$IngestionTime](../../query/ingestiontimefunction.md?pivots=azuredataexplorer) für das BLOB, das als ISO 8601-Zeichenfolge formatiert ist. Verwenden Sie dies für einen Abgleich. |
+| kustokreationtime |  Überschreibt [$IngestionTime](../../query/ingestiontimefunction.md?pivots=azuredataexplorer) für das Blob und ist als ISO 8601-Zeichenfolge formatiert. Verwenden Sie dies für einen Abgleich. |
 
 ## <a name="events-routing"></a>Ereignis Routing
 
@@ -107,12 +107,15 @@ blob.UploadFromFile(jsonCompressedLocalFileName);
    * Wählen Sie **Betrefffilter aktivieren** aus.
    * Der **Betreff beginnt mit Feld und** ist das *literalpräfix* des Subjekts. Da das angewendete Muster *StartWith*ist, kann es sich über mehrere Container, Ordner oder blobbereiche erstrecken. Platzhalter sind nicht zulässig.
        * Zum Definieren eines Filters für den Blobcontainer *muss* das Feld wie folgt festgelegt werden: *`/blobServices/default/containers/[container prefix]`* .
-       * Zum Definieren eines Filters für ein BLOB-Präfix (oder einen Ordner in Azure Data Lake Gen2) *muss* das Feld wie folgt festgelegt werden: *`/blobServices/default/containers/[container name]/blobs/[folder/blob prefix]`* .
+       * Zum Definieren eines Filters für ein Blobpräfix (oder einen Ordner in Azure Data Lake Gen2) *muss* das Feld wie folgt festgelegt werden: *`/blobServices/default/containers/[container name]/blobs/[folder/blob prefix]`* .
    * Das Feld **Betreff endet auf** ist das *literale* Suffix des Blobs. Platzhalter sind nicht zulässig.
    * Das Feld für die Unterscheidung nach **Groß-/Kleinschreibung** gibt an, ob bei den Präfix-und suffixfiltern
    * Ausführlichere Informationen zum Filtern von Ereignissen finden Sie unter [Blob Storage-Ereignissen](/azure/storage/blobs/storage-blob-event-overview#filtering-events).
     
         :::image type="content" source="../images/eventgrid/filters-tab.png" alt-text="Filter Registerkarte (Ereignis Raster)":::
+
+> [!NOTE]
+> Wenn der Endpunkt den Empfang eines Ereignisses nicht anerkennt, aktiviert Azure Event Grid einen Wiederholungs Mechanismus. Wenn diese Wiederholungs Übermittlung fehlschlägt, werden die *nicht übermittelten*Ereignisse von Event Grid an ein Speicherkonto gesendet, wobei ein Prozess für unzustellbare Nachrichten verwendet wird. Weitere Informationen finden Sie unter [Event Grid – Nachrichtenübermittlung und -wiederholung](/azure/event-grid/delivery-and-retry#retry-schedule-and-duration).
 
 ### <a name="data-ingestion-connection-to-azure-data-explorer"></a>Verbindung mit der Datenerfassung mit Azure Daten-Explorer
 
