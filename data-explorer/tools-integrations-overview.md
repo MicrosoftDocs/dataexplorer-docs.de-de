@@ -8,12 +8,12 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: 3a2b5cfb9ca02ec255e8cca7d40c103be18a0450
-ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
+ms.openlocfilehash: 166f109f96695380c979dd4060e324187c5b5efc
+ms.sourcegitcommit: 4ae1508bbaa8fe9642dcfc8618d77f009bc8ec9f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86188539"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86405469"
 ---
 # <a name="azure-data-explorer-tools-and-integrations-overview"></a>Übersicht über Azure Data Explorer-Tools und -Integrationen
 
@@ -38,7 +38,7 @@ Die Datenerfassung ist der Prozess, mit dem Datensätze aus einer oder mehreren 
 ### <a name="ingestion-integrations"></a>Erfassungsintegrationen
 
 * Event Hub
-    * [Erfassung aus Event Hub] ([Erfassung aus Event Hub](kusto/management/data-ingestion/eventhub.md)
+    * [Erfassung aus Event Hub](kusto/management/data-ingestion/eventhub.md)
     * Erfassen aus Event Hub mit dem [Azure-Portal](ingest-data-event-hub.md), [C#](data-connection-event-hub-csharp.md), [Python](data-connection-event-hub-python.md) oder [einer Azure Resource Manager-Vorlage](data-connection-event-hub-resource-manager.md)
 * Event Grid
     * [Erfassung aus Event Grid](kusto/management/data-ingestion/eventgrid.md)
@@ -78,7 +78,7 @@ Zum Ausführen von Abfragen in Azure Data Explorer stehen verschiedene Tools zur
 * [Azure Data Lake](data-lake-query-data.md)
 * [Apache Spark](spark-connector.md)
 * Microsoft Power Apps
-* Azure Data Studio
+* [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/notebooks-kqlmagic)
 
 ## <a name="visualizations-dashboards-and-reporting"></a>Visualisierungen, Dashboards und Berichterstellung
 
@@ -88,7 +88,7 @@ Die Übersicht über die [Visualisierung](viz-overview.md) enthält Details zu D
 
 * [Azure Notebooks](azure-notebooks.md)
 * [Jupyter-Notebooks](kqlmagic.md)
-* Azure Data Studio
+* [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/notebooks-kqlmagic)
 
 ## <a name="orchestration"></a>Orchestrierung
 

@@ -1,83 +1,110 @@
 ---
-title: Erfassen von Daten in Azure Data Explorer mithilfe der Streamingerfassung
-description: Hier erfahren Sie, wie Sie Daten mithilfe der Streamingerfassung in Azure Data Explorer erfassen (laden).
+title: Konfigurieren der Streamingerfassung in Ihrem Azure Data Explorer-Cluster mithilfe des Azure-Portals
+description: Hier erfahren Sie, wie Sie Ihren Azure Data Explorer-Cluster konfigurieren und mit dem Laden von Daten mit der Streamingerfassung mithilfe des Azure-Portals beginnen.
 author: orspod
 ms.author: orspodek
-ms.reviewer: tzgitlin
+ms.reviewer: alexefro
 ms.service: data-explorer
 ms.topic: conceptual
-ms.date: 08/30/2019
-ms.openlocfilehash: bda9afdda9d922df6188a3b9170aa4d4926f8ca3
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.date: 07/13/2020
+ms.openlocfilehash: 7e5d836e25916a039a4df8e451d16e4f8a41cf18
+ms.sourcegitcommit: 537a7eaf8c8e06a5bde57503fedd1c3706dd2b45
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280414"
+ms.lasthandoff: 07/16/2020
+ms.locfileid: "86423217"
 ---
-# <a name="streaming-ingestion-preview"></a>Streamingerfassung (Vorschauversion)
+# <a name="configure-streaming-ingestion-on-your-azure-data-explorer-cluster-using-the-azure-portal"></a>Konfigurieren der Streamingerfassung in Ihrem Azure Data Explorer-Cluster mithilfe des Azure-Portals
 
-Verwenden Sie die Streamingerfassung, wenn Sie eine geringe Wartezeit mit einer Erfassungsdauer von weniger als zehn Sekunden für Daten mit unterschiedlichem Volumen benötigen. Sie dient zur Optimierung der operativen Verarbeitung vieler Tabellen in einer oder mehreren Datenbanken, bei denen der Datenstrom für die einzelnen Tabellen jeweils relativ klein (wenige Datensätze pro Sekunde), das Gesamtvolumen der Datenerfassung aber hoch ist (mehrere tausend Datensätze pro Sekunde). 
+> [!div class="op_single_selector"]
+> * [Portal](ingest-data-streaming.md)
+> * [C#](ingest-data-streaming-csharp.md)
 
-Sollte die Datenmenge mehr als 4 GB pro Stunde und Tabelle betragen, verwenden Sie anstelle der Streamingerfassung die Sammelerfassung. Weitere Informationen zu den verschiedenen Erfassungsmethoden finden Sie in der [Übersicht über die Datenerfassung](ingest-data-overview.md).
+[!INCLUDE [ingest-data-streaming-intro](includes/ingest-data-streaming-intro.md)]
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
 * Wenn Sie über kein Azure-Abonnement verfügen, können Sie ein [kostenloses Azure-Konto](https://azure.microsoft.com/free/) erstellen, bevor Sie beginnen.
-* Melden Sie sich bei der [Webbenutzeroberfläche](https://dataexplorer.azure.com/) an.
 * Erstellen Sie [einen Azure Data Explorer-Cluster und eine Datenbank](create-cluster-database-portal.md).
 
 ## <a name="enable-streaming-ingestion-on-your-cluster"></a>Aktivieren der Streamingerfassung in Ihrem Cluster
 
+### <a name="enable-streaming-ingestion-while-creating-a-new-cluster-in-the-azure-portal"></a>Aktivieren der Streamingerfassung beim Erstellen eines neuen Clusters im Azure-Portal
+
+Sie können die Streamingerfassung aktivieren, während Sie einen neuen Azure Data Explorer-Cluster erstellen. 
+
+Wählen Sie auf der Registerkarte **Konfigurationen** die Optionen **Streamingerfassung** > **Ein** aus.
+
+:::image type="content" source="media/ingest-data-streaming/cluster-creation-enable-streaming.png" alt-text="Aktivieren der Streamingerfassung beim Erstellen eines Clusters in Azure Data Explorer":::
+
+### <a name="enable-streaming-ingestion-on-an-existing-cluster-in-the-azure-portal"></a>Aktivieren der Streamingerfassung für einen vorhandenen Cluster im Azure-Portal
+
+1. Navigieren Sie im Azure-Portal zum Azure Data Explorer-Cluster. 
+1. Wählen Sie unter **Einstellungen** die Option **Konfigurationen** aus. 
+1. Wählen Sie im Bereich **Konfigurationen** die Option **Ein** aus, um die **Streamingerfassung** zu aktivieren.
+1. Wählen Sie **Speichern** aus.
+
+    :::image type="content" source="media/ingest-data-streaming/streaming-ingestion-on.png" alt-text="Aktivieren der Streamingerfassung in Azure Data Explorer":::
+
 > [!WARNING]
 > Überprüfen Sie vor dem Aktivieren der Streamingerfassung die [Einschränkungen](#limitations).
 
-1. Navigieren Sie im Azure-Portal zum Azure Data Explorer-Cluster. Wählen Sie unter **Einstellungen** die Option **Konfigurationen** aus. 
-1. Wählen Sie im Bereich **Konfigurationen** die Option **Ein** aus, um die **Streamingerfassung** zu aktivieren.
-1. Wählen Sie **Speichern** aus.
+## <a name="create-a-target-table-and-define-the-policy-in-the-azure-portal"></a>Erstellen einer Zieltabelle und Definieren der Richtlinie im Azure-Portal
+
+1. Navigieren Sie im Azure-Portal zu Ihrem Cluster.
+1. Wählen Sie **Abfrage**.
+
+    :::image type="content" source="media/ingest-data-streaming/cluster-select-query-tab.png" alt-text="Auswählen von „Abfrage“ im Azure Data Explorer-Portal zum Aktivieren der Streamingerfassung":::
+
+1. Kopieren Sie den folgenden Befehl in den **Abfragebereich**, und wählen Sie **Ausführen** aus, um die Tabelle zu erstellen, die die Daten über Streamingerfassung erhalten soll:
+
+    ```Kusto
+    .create table TestTable (TimeStamp: datetime, Name: string, Metric: int, Source:string)
+    ```
+
+    :::image type="content" source="media/ingest-data-streaming/create-table.png" alt-text="Erstellen einer Tabelle für die Streamingerfassung in Azure Data Explorer":::
+
+1. Definieren Sie die [Streamingerfassungsrichtlinie](kusto/management/streamingingestionpolicy.md) für die von Ihnen erstellte Tabelle oder für die Datenbank, die diese Tabelle enthält. 
  
-    ![Streamingerfassung aktiviert](media/ingest-data-streaming/streaming-ingestion-on.png)
- 
-1. Definieren Sie auf der [Webbenutzeroberfläche](https://dataexplorer.azure.com/) die [Streamingerfassungsrichtlinie](kusto/management/streamingingestionpolicy.md) für Tabellen oder Datenbanken, die Streamingdaten empfangen. 
+    > [!TIP]
+    > Eine Richtlinie, die auf Datenbankebene definiert ist, gilt für alle vorhandenen und zukünftigen Tabellen in der Datenbank. 
+    
+1. Kopieren Sie einen der folgenden Befehle in den **Abfragebereich**, und wählen Sie **Ausführen** aus:
 
-    > [!NOTE]
-    > * Wird die Richtlinie auf der Datenbankebene definiert, kann die Streamingerfassung für alle Tabellen in der Datenbank verwendet werden.
-    > * Die angewendete Richtlinie kann nur auf neu erfasste Daten und nicht auf andere Tabellen in der Datenbank verweisen.
+    ```kusto
+    .alter table TestTable policy streamingingestion enable
+    ```
 
-## <a name="use-streaming-ingestion-to-ingest-data-to-your-cluster"></a>Erfassen von Daten in Ihrem Cluster mithilfe der Streamingerfassung
+    oder
 
-Es werden zwei Streamingerfassungstypen unterstützt:
+    ```kusto
+    .alter database StreamingTestDb policy streamingingestion enable
+    ```
 
-* [**Event Hub**](ingest-data-event-hub.md) (wird als Datenquelle verwendet).
-* Für die **benutzerdefinierte Erfassung** muss eine Anwendung geschrieben werden, die eine der [Clientbibliotheken](kusto/api/client-libraries.md) von Azure Data Explorer verwendet. Eine Beispielanwendung finden Sie [hier](https://github.com/Azure/azure-kusto-samples-dotnet/tree/master/client/StreamingIngestionSample).
+    :::image type="content" source="media/ingest-data-streaming/define-streaming-ingestion-policy.png" alt-text="Definieren der Streamingerfassungsrichtlinie in Azure Data Explorer":::
 
-### <a name="choose-the-appropriate-streaming-ingestion-type"></a>Auswählen des geeigneten Streamingerfassungstyps
+[!INCLUDE [ingest-data-streaming-use](includes/ingest-data-streaming-types.md)]
 
-|   |Event Hub  |Benutzerdefinierte Erfassung  |
-|---------|---------|---------|
-|Datenverzögerung zwischen der Initiierung der Erfassung und der Verfügbarkeit der Daten für Abfragen   |    Längere Verzögerung     |   Kürzere Verzögerung      |
-|Zusätzlicher Entwicklungsaufwand    |   Schnelle und einfache Einrichtung, kein zusätzlicher Entwicklungsaufwand    |   Hoher zusätzlicher Entwicklungsaufwand für die Anwendung, um Fehler zu behandeln und die Datenkonsistenz sicherzustellen     |
+[!INCLUDE [ingest-data-streaming-disable](includes/ingest-data-streaming-disable.md)]
 
-## <a name="disable-streaming-ingestion-on-your-cluster"></a>Deaktivieren der Streamingerfassung in Ihrem Cluster
+## <a name="drop-the-streaming-ingestion-policy-in-the-azure-portal"></a>Löschen der Streamingerfassungsrichtlinie im Azure-Portal
 
-> [!WARNING]
-> Die Deaktivierung der Streamingerfassung kann mehrere Stunden dauern.
+1. Navigieren Sie im Azure-Portal zum Azure Data Explorer-Cluster, und wählen Sie **Abfrage** aus. 
+1. Kopieren Sie zum Löschen der Streamingerfassungsrichtlinie aus der Tabelle den folgenden Befehl in den **Abfragebereich**, und wählen Sie **Ausführen** aus:
 
-1. Entfernen Sie die [Streamingerfassungsrichtlinie](kusto/management/streamingingestionpolicy.md) aus allen relevanten Tabellen und Datenbanken. Wenn Sie die Streamingerfassungsrichtlinie entfernen, werden die Streamingerfassungsdaten aus dem anfänglichen Speicher in den permanenten Speicher im Spaltenspeicher (Erweiterungen oder Shards) verschoben. Die Datenverschiebung kann zwischen einigen Sekunden und mehreren Stunden dauern. Dies ist abhängig von der Datenmenge im anfänglichen Speicher sowie davon, wie die CPU und der Arbeitsspeicher vom Cluster genutzt werden.
-1. Navigieren Sie im Azure-Portal zum Azure Data Explorer-Cluster. Wählen Sie unter **Einstellungen** die Option **Konfigurationen** aus.
+    ```Kusto
+    .delete table TestTable policy streamingingestion 
+    ```
+
+    :::image type="content" source="media/ingest-data-streaming/delete-streaming-ingestion-policy.png" alt-text="Löschen der Streamingerfassungsrichtlinie in Azure Data Explorer":::
+
+1. Wählen Sie unter **Einstellungen** die Option **Konfigurationen** aus.
 1. Wählen Sie im Bereich **Konfigurationen** die Option **Off** aus, um die **Streamingerfassung** zu aktivieren.
 1. Wählen Sie **Speichern** aus.
 
-    ![Streamingerfassung deaktiviert](media/ingest-data-streaming/streaming-ingestion-off.png)
+    :::image type="content" source="media/ingest-data-streaming/streaming-ingestion-off.png" alt-text="Deaktivieren der Streamingerfassung in Azure Data Explorer":::
 
-## <a name="limitations"></a>Einschränkungen
-
-* [Datenbankcursor](kusto/management/databasecursor.md) werden für eine Datenbank nicht unterstützt, wenn für diese selbst oder für eine Ihrer Tabellen eine [Richtlinie für die Streamingerfassung](kusto/management/streamingingestionpolicy.md) definiert und aktiviert wurde. In diesem Fall wird der fortlaufende Export nicht unterstützt, und die Updaterichtlinie ist auf eine Abfrage nur der Quelltabelle beschränkt.
-* Die [Datenzuordnung](kusto/management/mappings.md) muss [vorab erstellt](kusto/management/create-ingestion-mapping-command.md) werden, damit sie bei der Streamingerfassung verwendet werden kann. Individuelle Anforderungen zur Streamingerfassung bieten keine Inlinedatenzuordnungen.
-* Leistung und Kapazität der Streamingerfassung werden für größere virtuelle Computer und Cluster skaliert. Die Anzahl der gleichzeitigen Erfassungsanforderungen ist auf sechs pro Kern beschränkt. Beispielsweise besteht die maximale unterstützte Last bei SKUs mit 16 Kernen (z. B. D14 und L16) aus 96 gleichzeitigen Erfassungsanforderungen. Bei SKUs mit 2 Kernen (z. B. D11) werden als maximale Last 12 gleichzeitige Erfassungsanfragen unterstützt.
-* Die Datengröße für Anforderungen zur Streamingerfassung ist auf 4 MB beschränkt.
-* Schemaaktualisierungen wie etwa die Erstellung und Änderung von Tabellen und Erfassungszuordnungen können für den Streamingerfassungsdienst bis zu fünf Minuten dauern. Weitere Informationen finden Sie unter [Streamingerfassung und Schemaänderungen](kusto/management/data-ingestion/streaming-ingestion-schema-changes.md).
-* Wenn die Streamingerfassung in einem Cluster aktiviert wird, wird ein Teil des lokalen SSD-Datenträgers der Clustercomputer für Streamingerfassungsdaten genutzt, wodurch sich der verfügbare Speicherplatz für den aktiven Cache verringert. Dies gilt auch, wenn gar keine Daten per Streaming erfasst werden.
-* [Erweiterungstags](kusto/management/extents-overview.md#extent-tagging) können für die Streamingerfassungsdaten nicht festgelegt werden.
+[!INCLUDE [ingest-data-streaming-limitations](includes/ingest-data-streaming-limitations.md)]
 
 ## <a name="next-steps"></a>Nächste Schritte
 

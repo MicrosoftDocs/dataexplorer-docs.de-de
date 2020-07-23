@@ -7,12 +7,12 @@ ms.reviewer: orspodek
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/31/2019
-ms.openlocfilehash: dcc196675b29ac1989fb0753e87ef5f1bf0477aa
-ms.sourcegitcommit: 284152eba9ee52e06d710cc13200a80e9cbd0a8b
+ms.openlocfilehash: 0b831b236c2604ef7d87c77f6955e6b5eaf2aae1
+ms.sourcegitcommit: 4ae1508bbaa8fe9642dcfc8618d77f009bc8ec9f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86291575"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86405486"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>Bereitstellen von Azure Data Explorer-Clustern in Ihrem virtuellen Netzwerk
 
@@ -223,6 +223,11 @@ Wenn Sie Azure Data Explorer-Cluster in Ihrem Subnetz bereitstellen, können Sie
 | Asien, Südosten | 52.148.86.165 |
 | UK, Süden | 52.174.4.112 |
 | UK, Westen | 52.169.237.246 |
+| USDoD, Mitte | 13.72.37.111 |
+| USDoD, Osten | 13.72.37.111 |
+| US Gov Arizona | 13.72.37.111 |
+| US Gov Texas | 13.72.37.111 |
+| US Government, Virginia | 13.72.37.111 |
 | USA, Westen-Mitte | 52.161.31.69 |
 | Europa, Westen | 52.174.4.112 |
 | Indien, Westen | 13.71.25.187 |

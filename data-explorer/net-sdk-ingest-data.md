@@ -7,12 +7,12 @@ ms.reviewer: vladikb
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/07/2020
-ms.openlocfilehash: 7b26d0585e4d6bc2ff8edfb9a906dd305278f967
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.openlocfilehash: 8a31c4a482f047f9f92edd75fe1119c1729deaf9
+ms.sourcegitcommit: 537a7eaf8c8e06a5bde57503fedd1c3706dd2b45
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280625"
+ms.lasthandoff: 07/16/2020
+ms.locfileid: "86422997"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-net-sdk"></a>Erfassen von Daten mit dem .NET SDK für Azure Data Explorer 
 
@@ -165,7 +165,7 @@ using (var kustoClient = KustoClientFactory.CreateCslAdminProvider(kustoConnecti
 
 ## <a name="define-batching-policy-for-your-table"></a>Definieren der Batchverarbeitungsrichtlinie für die Tabelle
 
-Die Azure Data Explorer-Erfassung führt die Batchverarbeitung der eingehenden Daten durch, um die Größe der Daten-Shards zu optimieren. Dieser Prozess wird von der [Richtlinie zur Erfassungsbatchverarbeitung](/kusto/management/batchingpolicy) gesteuert und kann durch einen [Steuerungsbefehl](/kusto/management/batching-policy) geändert werden. Verwenden Sie diese Richtlinie, um die Latenz von langsam eintreffenden Daten zu reduzieren.
+Die Azure Data Explorer-Erfassung führt die Batchverarbeitung der eingehenden Daten durch, um die Größe der Daten-Shards zu optimieren. Dieser Prozess wird von der [Richtlinie zur Erfassungsbatchverarbeitung](kusto/management/batchingpolicy.md) gesteuert und kann durch den [Steuerungsbefehl für die Richtlinie zur Erfassungsbatchverarbeitung](kusto/management/batching-policy.md) geändert werden. Verwenden Sie diese Richtlinie, um die Latenz von langsam eintreffenden Daten zu reduzieren.
 
 ```kusto
 using (var kustoClient = KustoClientFactory.CreateCslAdminProvider(kustoConnectionStringBuilder))
