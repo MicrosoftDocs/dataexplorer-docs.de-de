@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/27/2020
-ms.openlocfilehash: 4ea4532d8547011b2b281988ff1534cd1d49da86
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: c5f0d7e9a3fc8daedf55daf4630098af3fb4c07b
+ms.sourcegitcommit: 4507466bdcc7dd07e6e2a68c0707b6226adc25af
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84258078"
+ms.lasthandoff: 07/23/2020
+ms.locfileid: "87106480"
 ---
 # <a name="continuous-data-export"></a>Kontinuierlicher Datenexport
 
@@ -37,17 +37,23 @@ Der fortlaufende Export gewährleistet nicht, dass jeder Datensatz nur einmal in
 Die [ingestiontime-Richtlinie](../ingestiontime-policy.md) muss für alle Tabellen aktiviert werden, auf die in der Abfrage verwiesen wird, die im Export "genau einmal" verarbeitet werden sollen. Die Richtlinie ist für alle neu erstellten Tabellen standardmäßig aktiviert.
 * Das Ausgabe Schema der Export Abfrage *muss* mit dem Schema der externen Tabelle, in die Sie exportieren, identisch sein. 
 * Der fortlaufende Export unterstützt keine datenbankübergreifenden/Cluster Aufrufe.
-* Der fortlaufende Export wird gemäß dem für ihn konfigurierten Zeitraum ausgeführt. Der empfohlene Wert für dieses Intervall beträgt mindestens einige Minuten, je nachdem, welche Wartezeiten Sie akzeptieren möchten. Der fortlaufende Export *ist nicht* für das ständig Streaming von Daten aus Kusto konzipiert. Sie wird in einem verteilten Modus ausgeführt, in dem alle Knoten gleichzeitig exportiert werden. Wenn der von jeder einzelnen Testlauf abgefragte Datenbereich klein ist, ist die Ausgabe des fortlaufenden Exports viele kleine Artefakte (die Zahl hängt von der Anzahl der Knoten im Cluster ab). 
-* Die Anzahl der gleichzeitig ausgeführten Export Vorgänge wird durch die Datenexport Kapazität des Clusters eingeschränkt (siehe [Drosselung](../../management/capacitypolicy.md#throttling)). Wenn der Cluster nicht über genügend Kapazität verfügt, um alle kontinuierlichen Exporte zu verarbeiten, werden einige in den Rückstand gehen. 
- 
+* Der fortlaufende Export wird gemäß dem für ihn konfigurierten Zeitraum ausgeführt. Der empfohlene Wert für dieses Intervall beträgt mindestens einige Minuten, je nachdem, welche Wartezeiten Sie akzeptieren möchten. Der fortlaufende Export *ist nicht* für das ständig Streaming von Daten aus Kusto konzipiert. Sie wird in einem verteilten Modus ausgeführt, in dem alle Knoten gleichzeitig exportiert werden.
+Wenn der von jeder einzelnen Testlauf abgefragte Datenbereich klein ist, ist die Ausgabe des fortlaufenden Exports viele kleine Artefakte (die Zahl hängt von der Anzahl der Knoten im Cluster ab). 
+* Die Anzahl der gleichzeitig ausgeführten Export Vorgänge wird durch die Datenexport Kapazität des Clusters eingeschränkt (siehe [Drosselung](../../management/capacitypolicy.md#throttling)). Wenn der Cluster nicht über genügend Kapazität verfügt, um alle kontinuierlichen Exporte zu verarbeiten, werden einige in den Rückstand gehen.
 * Standardmäßig wird davon ausgegangen, dass alle Tabellen, auf die in der Export Abfrage verwiesen wird, [Fakten Tabellen](../../concepts/fact-and-dimension-tables.md)sind. 
 Daher sind *Sie auf den* Daten Bank Cursor beschränkt. Die Export Abfrage enthält nur die Datensätze, die seit der vorherigen Export Ausführung verknüpft sind. 
 Die Export Abfrage kann [Dimensions Tabellen](../../concepts/fact-and-dimension-tables.md) enthalten, in denen *alle* Datensätze der Dimensions Tabelle in *alle* Export Abfragen eingeschlossen werden. 
     * Wenn Sie Joins zwischen Fakten-und Dimensions Tabellen beim fortlaufenden Export verwenden, beachten Sie, dass die Datensätze in der Fakten Tabelle nur einmal verarbeitet werden. wenn der Export ausgeführt wird, während die Datensätze in den Dimensions Tabellen für einige Schlüssel fehlen, werden Datensätze für die entsprechenden Schlüssel entweder übersehen oder enthalten NULL-Werte für die Dimensions Spalten in den exportierten Dateien (abhängig davon, ob die Abfrage inneren oder äußeren Join verwendet). Die forcedlatency-Eigenschaft in der Definition des fortlaufenden Exports kann für solche Fälle nützlich sein, bei denen die Fakten-und Dimensions Tabellen gleichzeitig erfasst werden (für übereinstimmende Datensätze).
     * Der fortlaufende Export von Dimensions Tabellen wird nicht unterstützt. Die Export Abfrage muss mindestens eine einzelne Fakten Tabelle enthalten.
     * Die Syntax deklariert explizit, welche Tabellen Bereichs bezogen (Fakt) sind und welche nicht Bereichs bezogen sind (Dimension). Weitere Informationen finden Sie `over` im Parameter im [Create-Befehl](#create-or-alter-continuous-export) .
+* Wenn das exportierte Daten Volume sehr groß ist, wird dringend empfohlen, mehrere Speicher Konten für die externe Tabelle zu konfigurieren, um eine Speicher Drosselung zu vermeiden (Weitere Informationen finden Sie im Abschnitt "bekannte Probleme" im Dokument " [Exportieren von Daten in Speicher](export-data-to-storage.md#known-issues) ").
+* Um die optimale Leistung zu erzielen, sollten sich der ADX-Cluster und die Speicher Konten in derselben Azure-Region befinden.
+* Die Standardverteilung im fortlaufenden Export ist `per_node` (alle Knoten werden gleichzeitig exportiert). 
+  Diese Einstellung kann in den Eigenschaften des Befehls "Continuous Export Create" überschrieben werden. Verwenden `per_shard` Sie die Verteilung, um die Parallelität zu erhöhen (Beachten Sie, dass dadurch die Last für die Speicher Konten erhöht wird und Sie die Möglichkeit haben, einschränitäts Grenzwerte zu erreichen). Verwenden `single` Sie (oder `distributed` = `false` ), um die Verteilung vollständig zu deaktivieren (Dadurch kann der fortlaufende Export Vorgang erheblich verlangsamt werden). Diese Einstellung wirkt sich auch auf die Anzahl der Dateien aus, die in jeder fortlaufenden Export Iterationen erstellt werden (Weitere Informationen finden Sie im Abschnitt "Hinweise" unter [Exportieren in externen Tabellen Befehl](export-data-to-an-external-table.md) ).
+* Die Anzahl der in jeder fortlaufenden Export Iterationen exportierten Dateien hängt davon ab, wie die externe Tabelle partitioniert ist. Weitere Informationen finden Sie im Abschnitt "Hinweise" unter [Exportieren in einen externen Tabellen Befehl](export-data-to-an-external-table.md).
+Jede fortlaufende Export Iterationen schreibt immer in *neue* Dateien und fügt Sie niemals an vorhandene an. Folglich hängt die Anzahl der exportierten Dateien auch von der Häufigkeit ab, in der der fortlaufende Export ausgeführt wird (- `intervalBetweenRuns` Parameter).
+* Die Auswirkung des fortlaufenden Exports auf den Cluster hängt von der Abfrage ab, die der fortlaufende Export ausgeführt wird, da die meisten Ressourcen (CPU, Arbeitsspeicher) von der Abfrage Ausführung genutzt werden. Der [Befehl Befehle anzeigen-und-Queries](../commands-and-queries.md) kann verwendet werden, um den Ressourcenverbrauch zu schätzen. Filtern `| where ClientActivityId startswith "RunContinuousExports"` Sie nach, um die dem fortlaufenden Export zugeordneten Befehle und Abfragen anzuzeigen.
 
-* Die Anzahl der in jeder fortlaufenden Export Iterationen exportierten Dateien hängt davon ab, wie die externe Tabelle partitioniert ist. Weitere Informationen finden Sie im Abschnitt "Hinweise" unter [Exportieren in einen externen Tabellen Befehl](export-data-to-an-external-table.md). Jede fortlaufende Export Iterationen schreibt immer in *neue* Dateien und fügt Sie niemals an vorhandene an. Folglich hängt die Anzahl der exportierten Dateien auch von der Häufigkeit ab, in der der fortlaufende Export ausgeführt wird (- `intervalBetweenRuns` Parameter).
 
 Für alle fortlaufenden Export Befehle sind [Datenbankadministrator Berechtigungen](../access-control/role-based-authorization.md)erforderlich.
 
@@ -62,12 +68,12 @@ Für alle fortlaufenden Export Befehle sind [Datenbankadministrator Berechtigung
 
 **Eigenschaften**:
 
-| Eigenschaft             | Type     | BESCHREIBUNG   |
+| Eigenschaft             | Typ     | Beschreibung   |
 |----------------------|----------|---------------------------------------|
-| Continuousexportname | Zeichenfolge   | Name des fortlaufenden Exports. Der Name muss innerhalb der Datenbank eindeutig sein und wird verwendet, um den fortlaufenden Export regelmäßig auszuführen.      |
-| Externaltablename    | Zeichenfolge   | Name der [externen Tabelle](../externaltables.md) , in die exportiert werden soll.  |
-| Abfrage                | Zeichenfolge   | Die zu exportier Abfrage.  |
-| Over (T1, T2)        | Zeichenfolge   | Eine optionale durch Trennzeichen getrennte Liste von Fakten Tabellen in der Abfrage. Wenn nicht angegeben, wird davon ausgegangen, dass alle Tabellen, auf die in der Abfrage verwiesen wird, Fakten Tabellen sind. Wenn angegeben, werden Tabellen, die *nicht* in dieser Liste enthalten sind, als Dimensions Tabellen behandelt und werden nicht als Bereichs bezogen betrachtet (alle Datensätze werden an allen Exporten beteiligt). Weitere Informationen finden Sie im [Abschnitt "Hinweise](#notes) ". |
+| Continuousexportname | String   | Name des fortlaufenden Exports. Der Name muss innerhalb der Datenbank eindeutig sein und wird verwendet, um den fortlaufenden Export regelmäßig auszuführen.      |
+| Externaltablename    | String   | Name der [externen Tabelle](../externaltables.md) , in die exportiert werden soll.  |
+| Abfrage                | String   | Die zu exportier Abfrage.  |
+| Over (T1, T2)        | String   | Eine optionale durch Trennzeichen getrennte Liste von Fakten Tabellen in der Abfrage. Wenn nicht angegeben, wird davon ausgegangen, dass alle Tabellen, auf die in der Abfrage verwiesen wird, Fakten Tabellen sind. Wenn angegeben, werden Tabellen, die *nicht* in dieser Liste enthalten sind, als Dimensions Tabellen behandelt und werden nicht als Bereichs bezogen betrachtet (alle Datensätze werden an allen Exporten beteiligt). Weitere Informationen finden Sie im [Abschnitt "Hinweise](#notes) ". |
 | intervalbetweaufausführungen  | Timespan | Die Zeitspanne zwischen fortlaufenden Export Ausführungen. Muss größer als 1 Minute sein.   |
 | forcedlatency        | Timespan | Ein optionaler Zeitraum, um die Abfrage auf Datensätze zu beschränken, die nur vor diesem Zeitraum (relativ zur aktuellen Zeit) erfasst wurden. Diese Eigenschaft ist nützlich, wenn die Abfrage z. b. einige Aggregationen/Joins ausführt und Sie sicherstellen möchten, dass alle relevanten Datensätze bereits vor dem Ausführen des Exports erfasst wurden.
 
@@ -100,9 +106,9 @@ Gibt die Eigenschaften des kontinuierlichen Exports von *continuousexportname*zu
 
 **Eigenschaften**
 
-| Eigenschaft             | Type   | BESCHREIBUNG                |
+| Eigenschaft             | Typ   | Beschreibung                |
 |----------------------|--------|----------------------------|
-| Continuousexportname | Zeichenfolge | Name des fortlaufenden Exports. |
+| Continuousexportname | String | Name des fortlaufenden Exports. |
 
 
 `.show` `continuous-exports`
@@ -111,21 +117,21 @@ Gibt alle kontinuierlichen Exporte in der Datenbank zurück.
 
 **Ausgabe:**
 
-| Output-Parameter    | Type     | BESCHREIBUNG                                                             |
+| Output-Parameter    | Typ     | Beschreibung                                                             |
 |---------------------|----------|-------------------------------------------------------------------------|
-| Cursor scopedtables  | Zeichenfolge   | Liste der explizit Bereichs bezogenen Tabellen (Fakten Tabellen) (JSON-serialisiert)               |
-| Export Properties    | Zeichenfolge   | Export Eigenschaften (JSON-Serialisierung)                                     |
+| Cursor scopedtables  | String   | Liste der explizit Bereichs bezogenen Tabellen (Fakten Tabellen) (JSON-serialisiert)               |
+| Export Properties    | String   | Export Eigenschaften (JSON-Serialisierung)                                     |
 | Exportedto          | Datetime | Der letzte Zeitpunkt, zu dem die Daten erfolgreich exportiert wurden.       |
-| Externaltablename   | Zeichenfolge   | Name der externen Tabelle                                              |
+| Externaltablename   | String   | Name der externen Tabelle                                              |
 | Forcedlatency       | TimeSpan | Erzwungene Latenz (null, wenn nicht angegeben)                                   |
 | Intervalbetweaufausführungen | TimeSpan | Intervall zwischen Ausführungen                                                   |
-| IsDisabled          | Boolesch  | True, wenn der fortlaufende Export deaktiviert ist.                               |
-| IsRunning           | Boolesch  | True, wenn der fortlaufende Export gerade ausgeführt wird.                      |
-| Lastrauunresult       | Zeichenfolge   | Die Ergebnisse der letzten fortlaufenden Export Laufzeit ( `Completed` oder `Failed` ) |
+| IsDisabled          | Boolescher Wert  | True, wenn der fortlaufende Export deaktiviert ist.                               |
+| IsRunning           | Boolescher Wert  | True, wenn der fortlaufende Export gerade ausgeführt wird.                      |
+| Lastrauunresult       | String   | Die Ergebnisse der letzten fortlaufenden Export Laufzeit ( `Completed` oder `Failed` ) |
 | Lastrauuntime         | Datetime | Der Zeitpunkt der letzten Ausführung des fortlaufenden Exports (Startzeit)           |
-| Name                | Zeichenfolge   | Name des fortlaufenden Exports                                           |
-| Abfrage               | Zeichenfolge   | Exportieren einer Abfrage                                                            |
-| Startcursor         | Zeichenfolge   | Startpunkt der ersten Ausführung dieses fortlaufenden Exports         |
+| Name                | String   | Name des fortlaufenden Exports                                           |
+| Abfrage               | String   | Exportieren einer Abfrage                                                            |
+| Startcursor         | String   | Startpunkt der ersten Ausführung dieses fortlaufenden Exports         |
 
 ## <a name="show-continuous-export-artifacts"></a>Fortlaufende Export Artefakte anzeigen
 
@@ -137,17 +143,17 @@ Gibt alle Artefakte zurück, die vom fortlaufenden Export in allen Ausführungen
 
 **Eigenschaften**
 
-| Eigenschaft             | Type   | BESCHREIBUNG                |
+| Eigenschaft             | Typ   | Beschreibung                |
 |----------------------|--------|----------------------------|
-| Continuousexportname | Zeichenfolge | Name des fortlaufenden Exports. |
+| Continuousexportname | String | Name des fortlaufenden Exports. |
 
 **Ausgabe:**
 
-| Output-Parameter  | Type     | BESCHREIBUNG                            |
+| Output-Parameter  | Typ     | BESCHREIBUNG                            |
 |-------------------|----------|----------------------------------------|
 | Timestamp         | Datetime | Zeitstempel der fortlaufenden Export Laufzeit |
-| Externaltablename | Zeichenfolge   | Name der externen Tabelle             |
-| Pfad              | Zeichenfolge   | Ausgabepfad                            |
+| Externaltablename | String   | Name der externen Tabelle             |
+| Pfad              | String   | Ausgabepfad                            |
 | Numrecords        | long     | Anzahl der in den Pfad exportierten Datensätze     |
 
 **Beispiel:** 
@@ -170,20 +176,20 @@ Gibt alle Fehler zurück, die als Teil des fortlaufenden Exports protokolliert w
 
 **Eigenschaften**
 
-| Eigenschaft             | Type   | BESCHREIBUNG                |
+| Eigenschaft             | Typ   | Beschreibung                |
 |----------------------|--------|----------------------------|
-| Continuousexportname | Zeichenfolge | Name des fortlaufenden Exports  |
+| Continuousexportname | String | Name des fortlaufenden Exports  |
 
 **Ausgabe:**
 
-| Output-Parameter | Type      | BESCHREIBUNG                                         |
+| Output-Parameter | Typ      | BESCHREIBUNG                                         |
 |------------------|-----------|-----------------------------------------------------|
 | Timestamp        | Datetime  | Zeitstempel des Fehlers.                           |
-| OperationId      | Zeichenfolge    | Vorgangs-ID des Fehlers.                    |
-| Name             | Zeichenfolge    | Fortlaufender Export Name.                             |
+| OperationId      | String    | Vorgangs-ID des Fehlers.                    |
+| Name             | String    | Fortlaufender Export Name.                             |
 | Lastsuccess Run   | Timestamp | Die letzte erfolgreiche Ausführung des fortlaufenden Exports.   |
-| Failurekind      | Zeichenfolge    | Fehler/partialfailure. Partialfailure gibt an, dass einige Artefakte erfolgreich exportiert wurden, bevor der Fehler aufgetreten ist. |
-| Details          | Zeichenfolge    | Fehlerdetails.                              |
+| Failurekind      | String    | Fehler/partialfailure. Partialfailure gibt an, dass einige Artefakte erfolgreich exportiert wurden, bevor der Fehler aufgetreten ist. |
+| Details          | String    | Fehlerdetails.                              |
 
 **Beispiel:** 
 
@@ -203,9 +209,9 @@ Gibt alle Fehler zurück, die als Teil des fortlaufenden Exports protokolliert w
 
 **Eigenschaften**
 
-| Eigenschaft             | Type   | BESCHREIBUNG                |
+| Eigenschaft             | Typ   | Beschreibung                |
 |----------------------|--------|----------------------------|
-| Continuousexportname | Zeichenfolge | Name des fortlaufenden Exports |
+| Continuousexportname | String | Name des fortlaufenden Exports |
 
 **Ausgabe:**
 
@@ -223,9 +229,9 @@ Sie können den fortlaufenden Exportauftrag deaktivieren oder aktivieren. Ein de
 
 **Eigenschaften**
 
-| Eigenschaft             | Type   | BESCHREIBUNG                |
+| Eigenschaft             | Typ   | Beschreibung                |
 |----------------------|--------|----------------------------|
-| Continuousexportname | Zeichenfolge | Name des fortlaufenden Exports |
+| Continuousexportname | String | Name des fortlaufenden Exports |
 
 **Ausgabe:**
 

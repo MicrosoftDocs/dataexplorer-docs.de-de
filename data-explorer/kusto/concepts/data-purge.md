@@ -8,12 +8,12 @@ ms.reviewer: kedamari
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/12/2020
-ms.openlocfilehash: ad659f9208bd057719a1adc31f8370c0cb11ffd3
-ms.sourcegitcommit: fb54d71660391a63b0c107a9703adea09bfc7cb9
+ms.openlocfilehash: 86712a2e85f2785666b0b6245962aca39cd82729
+ms.sourcegitcommit: 4507466bdcc7dd07e6e2a68c0707b6226adc25af
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/22/2020
-ms.locfileid: "86946137"
+ms.lasthandoff: 07/23/2020
+ms.locfileid: "87106485"
 ---
 # <a name="data-purge"></a>Datenbereinigung
 
@@ -76,7 +76,7 @@ So reduzieren Sie die Lösch Ausführungszeit:
 
 ## <a name="trigger-the-purge-process"></a>Löschen des Löschvorgangs
 
-> [!Note]
+> [!NOTE]
 > Die Lösch Ausführung wird aufgerufen, indem der Befehl zum Löschen der [ *TableName* Records-Tabelle](#purge-table-tablename-records-command) für den Datenverwaltung Endpunkt https://ingest- [yourclustername] ausgeführt wird. [ Region]. Kusto. Windows. net.
 
 ### <a name="purge-table-tablename-records-command"></a>Befehl zum Löschen der Tabelle TableName Records
@@ -85,24 +85,24 @@ Der Löschbefehl kann für unterschiedliche Verwendungs Szenarien auf zwei Arten
 
 * Programmgesteuerter Aufruf: Ein einzelner Schritt, der von Anwendungen aufgerufen werden soll. Wenn Sie diesen Befehl direkt aufrufen, wird die Lösch Ausführungssequenz ausgelöst.
 
-    **Syntax**
+  **Syntax**
 
-     ```kusto
-     // Connect to the Data Management service
-     #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
-     
-     .purge table [TableName] records in database [DatabaseName] with (noregrets='true') <| [Predicate]
-     ```
+  ```kusto
+  // Connect to the Data Management service
+  #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
+ 
+  .purge table [TableName] records in database [DatabaseName] with (noregrets='true') <| [Predicate]
+   ```
 
-    > [!NOTE]
-    > Generieren Sie diesen Befehl mithilfe der cslcommandgenerator-API, die als Teil des nuget-Pakets der [Kusto-Client Bibliothek](../api/netfx/about-kusto-data.md) verfügbar ist.
+  > [!NOTE]
+  > Generieren Sie diesen Befehl mithilfe der cslcommandgenerator-API, die als Teil des nuget-Pakets der [Kusto-Client Bibliothek](../api/netfx/about-kusto-data.md) verfügbar ist.
 
 * Aufruf durch eine Person: Ein zweistufiger Prozess, für den als separater Schritt eine explizite Bestätigung erforderlich ist. Beim ersten Aufruf des Befehls wird ein Überprüfungs Token zurückgegeben, das bereitgestellt werden muss, um den eigentlichen Lösch Betrieb auszuführen. Diese Sequenz verringert das Risiko, dass falsche Daten versehentlich gelöscht werden. Die Ausführung dieser Option kann für umfangreiche Tabellen mit einer großen Menge an Daten im „kalten“ Cache lange dauern.
     <!-- If query times-out on DM endpoint (default timeout is 10 minutes), it is recommended to use the [engine `whatif` command](#purge-whatif-command) directly againt the engine endpoint while increasing the [server timeout limit](../concepts/querylimits.md#limit-on-request-execution-time-timeout). Only after you have verified the expected results using the engine whatif command, issue the purge command via the DM endpoint using the 'noregrets' option. -->
 
-     **Syntax**
+  **Syntax**
 
-     ```kusto
+  ```kusto
      // Connect to the Data Management service
      #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
      
@@ -111,9 +111,9 @@ Der Löschbefehl kann für unterschiedliche Verwendungs Szenarien auf zwei Arten
 
      // Step #2 - input the verification token to execute purge
      .purge table [TableName] records in database [DatabaseName] with (verificationtoken='<verification token from step #1>') <| [Predicate]
-     ```
+  ```
     
-    | Parameter  | BESCHREIBUNG  |
+    | Parameter  | Beschreibung  |
     |---------|---------|
     | `DatabaseName`   |   Name der Datenbank      |
     | `TableName`     |     Name der Tabelle    |
@@ -132,50 +132,50 @@ Der Löschbefehl kann für unterschiedliche Verwendungs Szenarien auf zwei Arten
 
 Um das Löschen in einem zweistufigen Aktivierungs Szenario zu starten, führen Sie Schritt #1 des Befehls aus:
 
-    ```kusto
+ ```kusto
     // Connect to the Data Management service
      #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
      
     .purge table MyTable records in database MyDatabase <| where CustomerId in ('X', 'Y')
-    ```
+ ```
 
-    **Output**
+**Ausgabe**
 
-    | Numrecordstopurge | Estimatedpurgeexecutiontime| Verificationtoken
-    |--|--|--
-    | 1.596 | 00:00:02 | e43c7184ed22f4f23c7a9d7b124d196be2e570096987e5baadf65057fa65736b
+ | Numrecordstopurge | Estimatedpurgeexecutiontime| Verificationtoken
+ |---|---|---
+ | 1.596 | 00:00:02 | e43c7184ed22f4f23c7a9d7b124d196be2e570096987e5baadf65057fa65736b
 
-    Then, validate the NumRecordsToPurge before running step #2. 
+Überprüfen Sie dann den numrecordstopurge vor dem Ausführen des Schritts #2. 
 
 Verwenden Sie zum Ausführen eines Löschvorgangs in einem zweistufigen Aktivierungs Szenario das von Schritt #1 zurückgegebene Überprüfungs Token, um Schritt #2 auszuführen:
 
-    ```kusto
-    .purge table MyTable records in database MyDatabase
-    with (verificationtoken='e43c7184ed22f4f23c7a9d7b124d196be2e570096987e5baadf65057fa65736b')
-    <| where CustomerId in ('X', 'Y')
-    ```
+```kusto
+.purge table MyTable records in database MyDatabase
+ with(verificationtoken='e43c7184ed22f4f23c7a9d7b124d196be2e570096987e5baadf65057fa65736b')
+<| where CustomerId in ('X', 'Y')
+```
 
-    **Output**
+**Ausgabe**
 
-    | `OperationId` | `DatabaseName` | `TableName`|`ScheduledTime` | `Duration` | `LastUpdatedOn` |`EngineOperationId` | `State` | `StateDetails` |`EngineStartTime` | `EngineDuration` | `Retries` |`ClientRequestId` | `Principal`|
-    |--|--|--|--|--|--|--|--|--|--|--|--|--|--|
-    | c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Scheduled | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...|
+| `OperationId` | `DatabaseName` | `TableName`|`ScheduledTime` | `Duration` | `LastUpdatedOn` |`EngineOperationId` | `State` | `StateDetails` |`EngineStartTime` | `EngineDuration` | `Retries` |`ClientRequestId` | `Principal`|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Scheduled | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...|
 
 #### <a name="example-single-step-purge"></a>Beispiel: Löschen mit einem Schritt
 
 Führen Sie den folgenden Befehl aus, um in einem Aktivierungs Szenario mit nur einem Schritt eine Löschung zu initiieren:
 
-    ```kusto
-    // Connect to the Data Management service
-     #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
-     
-    .purge table MyTable records in database MyDatabase with (noregrets='true') <| where CustomerId in ('X', 'Y')
-    ```
+```kusto
+// Connect to the Data Management service
+ #connect "https://ingest-[YourClusterName].[region].kusto.windows.net" 
+ 
+.purge table MyTable records in database MyDatabase with (noregrets='true') <| where CustomerId in ('X', 'Y')
+```
 
 **Ausgabe**
 
 | `OperationId` |`DatabaseName` |`TableName` |`ScheduledTime` |`Duration` |`LastUpdatedOn` |`EngineOperationId` |`State` |`StateDetails` |`EngineStartTime` |`EngineDuration` |`Retries` |`ClientRequestId` |`Principal`|
-|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Scheduled | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...|
 
 ### <a name="cancel-purge-operation-command"></a>Befehl "Löschvorgang Abbrechen"
@@ -189,28 +189,28 @@ Bei Bedarf können Sie ausstehende Lösch Anforderungen abbrechen.
 
 ```kusto
  .cancel purge <OperationId>
- ```
+```
 
 **Beispiel**
 
 ```kusto
  .cancel purge aa894210-1c60-4657-9d21-adb2887993e1
- ```
+```
 
 **Ausgabe**
 
 Die Ausgabe dieses Befehls entspricht der Befehlsausgabe "Show löscht *operationId*" und zeigt den aktualisierten Status des abgebrochenen Löschvorgangs an. Wenn der Versuch erfolgreich ist, wird der Vorgangs Status auf aktualisiert `Abandoned` . Andernfalls wird der Vorgangs Zustand nicht geändert. 
 
 |`OperationId` |`DatabaseName` |`TableName` |`ScheduledTime` |`Duration` |`LastUpdatedOn` |`EngineOperationId` |`State` |`StateDetails` |`EngineStartTime` |`EngineDuration` |`Retries` |`ClientRequestId` |`Principal`
-|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Abandoned | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...
 
 ## <a name="track-purge-operation-status"></a>Status des Löschvorgangs nachverfolgen 
 
-> [!Note]
+> [!NOTE]
 > Löschvorgänge können mit dem Befehl [Show](#show-purges-command) Löschvorgänge nachverfolgt werden, der für den Datenverwaltung Endpunkt https://ingest- [yourclustername] ausgeführt wird. [ Region]. Kusto. Windows. net.
 
-Status = ' abgeschlossen ' gibt den erfolgreichen Abschluss der ersten Phase des Löschvorgangs an, d. h. Datensätze werden vorläufig gelöscht und sind nicht mehr für Abfragen verfügbar. Kunden sollten den Abschluss der zweiten Phase (fest Löschvorgang) **nicht** verfolgen und überprüfen. Diese Phase wird intern von Azure Daten-Explorer überwacht.
+Status = ' abgeschlossen ' gibt den erfolgreichen Abschluss der ersten Phase des Löschvorgangs an, d. h. Datensätze werden vorläufig gelöscht und sind nicht mehr für Abfragen verfügbar. Kunden sollten den Abschluss der zweiten Phase (fest Löschvorgang) nicht verfolgen und überprüfen. Diese Phase wird intern von Azure Daten-Explorer überwacht.
 
 ### <a name="show-purges-command"></a>Löschbefehl anzeigen
 
@@ -246,7 +246,7 @@ Status = ' abgeschlossen ' gibt den erfolgreichen Abschluss der ersten Phase des
 **Ausgabe** 
 
 |`OperationId` |`DatabaseName` |`TableName` |`ScheduledTime` |`Duration` |`LastUpdatedOn` |`EngineOperationId` |`State` |`StateDetails` |`EngineStartTime` |`EngineDuration` |`Retries` |`ClientRequestId` |`Principal`
-|--|--|--|--|--|--|--|--|--|--|--|--|--|--|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:33.6782130 |2019-01-20 11:42:34.6169153 |a0825d4d-6b0f-47f3-a499-54ac5681ab78 |Abgeschlossen |Löschvorgang erfolgreich abgeschlossen (Speicher Artefakte ausstehend gelöscht) |2019-01-20 11:41:34.6486506 |00:00:04.4687310 |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...
 
 * `OperationId`-die DM-Vorgangs-ID, die beim Ausführen von Lösch Vorgängen 
@@ -272,7 +272,7 @@ Status = ' abgeschlossen ' gibt den erfolgreichen Abschluss der ersten Phase des
 
 Das Löschen einer Tabelle umfasst das Löschen der Tabelle und das Markieren als gelöscht, sodass der unter Lösch [Vorgang](#purge-process) beschriebene Prozess für die harte Löschung auf diesem gelöscht wird. Wenn eine Tabelle gelöscht wird, ohne Sie zu löschen, werden nicht alle zugehörigen Speicher Artefakte gelöscht. Diese Artefakte werden gemäß der Richtlinie für die feste Beibehaltung gelöscht, die anfänglich für die Tabelle festgelegt wurde. Der `purge table allrecords` Befehl ist schnell und effizient und ist dem Vorgang zum Löschen von Datensätzen vorzuziehen, wenn dies für Ihr Szenario zutrifft. 
 
-> [!Note]
+> [!NOTE]
 > Der Befehl wird aufgerufen, indem der Befehl zum Löschen der [Tabelle " *TableName* allrecords](#purge-table-tablename-allrecords-command) " für den Datenverwaltung Endpunkt https://ingest- [yourclustername] ausgeführt wird. [ Region]. Kusto. Windows. net.
 
 ### <a name="purge-table-tablename-allrecords-command"></a>Tabelle " *TableName* allrecords" löschen (Befehl)
@@ -307,7 +307,7 @@ Das Löschen einer Tabelle umfasst das Löschen der Tabelle und das Markieren al
      .purge table [TableName] in database [DatabaseName] allrecords with (verificationtoken='<verification token from step #1>')
      ```
 
-    | Parameter  |BESCHREIBUNG  |
+    | Parameter  |Beschreibung  |
     |---------|---------|
     | `DatabaseName`   |   Der Name der Datenbank.      |
     | `TableName`    |     Der Name der Tabelle.    |
@@ -328,7 +328,7 @@ Das Löschen einer Tabelle umfasst das Löschen der Tabelle und das Markieren al
     **Ausgabe**
 
     | `VerificationToken`|
-    |--|
+    |---|
     | e43c7184ed22f4f23c7a9d7b124d196be2e570096987e5baadf65057fa65736b|
 
 1.  Verwenden Sie zum Ausführen eines Löschvorgangs in einem zweistufigen Aktivierungs Szenario das von Schritt #1 zurückgegebene Überprüfungs Token, um Schritt #2 auszuführen:

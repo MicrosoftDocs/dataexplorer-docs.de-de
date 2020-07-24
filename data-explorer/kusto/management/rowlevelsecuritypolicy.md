@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/25/2020
-ms.openlocfilehash: c07a2e624d8f2657889431df51958017228774a8
-ms.sourcegitcommit: d79d3aa9aaa70cd23e3107ef12296159322e1eb5
+ms.openlocfilehash: 9952a7a7d95f03ee431b699a1833aa23b21d341b
+ms.sourcegitcommit: 4507466bdcc7dd07e6e2a68c0707b6226adc25af
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/20/2020
-ms.locfileid: "86475591"
+ms.lasthandoff: 07/23/2020
+ms.locfileid: "87106352"
 ---
 # <a name="row-level-security-preview"></a>Sicherheit auf Zeilenebene (Vorschau)
 
@@ -27,7 +27,7 @@ Mit RLS können Sie anderen Anwendungen und Benutzern Zugriff auf einen bestimmt
 
 * Gewähren von Zugriff nur für Zeilen, die bestimmte Kriterien erfüllen
 * Anonymisieren von Daten in einigen Spalten
-* Alle oben genannten Aussagen sind zutreffend.
+* Alle oben genannten Möglichkeiten
 
 Weitere Informationen finden Sie unter [Steuern von Befehlen zum Verwalten der Sicherheit auf Zeilenebene-Richtlinie](../management/row-level-security-policy.md).
 
@@ -122,6 +122,19 @@ Konfigurieren Sie anschließend RLS auf folgende Weise für mehrere Tabellen:
 .alter table Customers2 policy row_level_security enable "RLSForCustomersTables('Customers2')"
 .alter table Customers3 policy row_level_security enable "RLSForCustomersTables('Customers3')"
 ```
+
+### <a name="produce-an-error-upon-unauthorized-access"></a>Fehler bei nicht autorisiertem Zugriff
+
+Wenn Sie möchten, dass nicht autorisierte Tabellen Benutzer einen Fehler empfangen, anstatt eine leere Tabelle zurückzugeben, verwenden Sie die- `[assert()](../query/assert-function.md)` Funktion. Im folgenden Beispiel wird gezeigt, wie dieser Fehler in einer RLS-Funktion erzeugt wird:
+
+```
+.create-or-alter function RLSForCustomersTables() {
+    MyTable
+    | where assert(current_principal_is_member_of('aadgroup=mygroup@mycompany.com') == true, "You don't have access")
+}
+```
+
+Diese Vorgehensweise kann mit anderen Beispielen kombiniert werden. Beispielsweise können Sie Benutzern in verschiedenen Aad-Gruppen unterschiedliche Ergebnisse anzeigen und für jeden anderen Benutzer einen Fehler ausgeben.
 
 ## <a name="more-use-cases"></a>Weitere Anwendungsfälle
 

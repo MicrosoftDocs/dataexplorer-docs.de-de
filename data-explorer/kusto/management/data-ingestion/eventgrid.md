@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/01/2020
-ms.openlocfilehash: 88a95ea2fc8e1f417114cfcfd89c4e5003d9bef2
-ms.sourcegitcommit: fb54d71660391a63b0c107a9703adea09bfc7cb9
+ms.openlocfilehash: b8b72c2bc3b34f6d42ea71903272893ffde773fc
+ms.sourcegitcommit: 4507466bdcc7dd07e6e2a68c0707b6226adc25af
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/22/2020
-ms.locfileid: "86946103"
+ms.lasthandoff: 07/23/2020
+ms.locfileid: "87106448"
 ---
 # <a name="ingest-from-storage-using-event-grid-subscription"></a>Erfassung aus dem Speicher mithilfe eines Event Grid-Abonnements
 
@@ -35,7 +35,7 @@ Azure Daten-Explorer bietet eine kontinuierliche Erfassung von Azure Storage (BL
 Sie können Erfassungs [Eigenschaften](../../../ingestion-properties.md) der bloberfassung über die BLOB-Metadaten angeben.
 Sie können die folgenden Eigenschaften festlegen:
 
-|Eigenschaft | BESCHREIBUNG|
+|Eigenschaft | Beschreibung|
 |---|---|
 | rawsizebytes | Größe der Rohdaten (unkomprimiert). Bei Avro/Orc/Parkett ist dieser Wert die Größe, bevor die Format spezifische Komprimierung angewendet wird.|
 | kustotable |  Name der vorhandenen Zieltabelle. Überschreibt die `Table`, die auf dem Blatt `Data Connection` festgelegt ist. |
@@ -115,7 +115,7 @@ blob.UploadFromFile(jsonCompressedLocalFileName);
         :::image type="content" source="../images/eventgrid/filters-tab.png" alt-text="Filter Registerkarte (Ereignis Raster)":::
 
 > [!NOTE]
-> Wenn der Endpunkt den Empfang eines Ereignisses nicht anerkennt, aktiviert Azure Event Grid einen Wiederholungs Mechanismus. Wenn diese Wiederholungs Übermittlung fehlschlägt, werden die *nicht übermittelten*Ereignisse von Event Grid an ein Speicherkonto gesendet, wobei ein Prozess für unzustellbare Nachrichten verwendet wird. Weitere Informationen finden Sie unter [Event Grid – Nachrichtenübermittlung und -wiederholung](/azure/event-grid/delivery-and-retry#retry-schedule-and-duration).
+> Wenn der Endpunkt den Empfang eines Ereignisses nicht anerkennt, aktiviert Azure Event Grid einen Wiederholungs Mechanismus. Wenn diese Wiederholungs Übermittlung fehlschlägt, kann Event Grid die nicht übermittelten Ereignisse *mithilfe eines Prozesses*für unzustellbare Nachrichten an ein Speicherkonto übermitteln. Weitere Informationen finden Sie unter [Event Grid – Nachrichtenübermittlung und -wiederholung](/azure/event-grid/delivery-and-retry#retry-schedule-and-duration).
 
 ### <a name="data-ingestion-connection-to-azure-data-explorer"></a>Verbindung mit der Datenerfassung mit Azure Daten-Explorer
 

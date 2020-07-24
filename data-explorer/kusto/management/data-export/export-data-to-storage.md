@@ -1,6 +1,6 @@
 ---
-title: Exportieren von Daten in den Speicher - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird beschrieben, wie Daten in Azure Data Explorer gespeichert werden.
+title: 'Exportieren von Daten in den Speicher: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt das Exportieren von Daten in den Speicher in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,71 +8,71 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 12800955d1680a280aa4772db86d8b71e44e7089
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 6b76f7a3ce61a0530d885de29c1a85d170431bb9
+ms.sourcegitcommit: 4507466bdcc7dd07e6e2a68c0707b6226adc25af
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81521572"
+ms.lasthandoff: 07/23/2020
+ms.locfileid: "87106437"
 ---
-# <a name="export-data-to-storage"></a>Exportieren von Daten in die Speicherung
+# <a name="export-data-to-storage"></a>Exportieren von Daten in den Speicher
 
-Führt eine Abfrage aus und schreibt das erste Resultset in einen externen Speicher, der durch eine [Speicherverbindungszeichenfolge](../../api/connection-strings/storage.md)angegeben wird.
+Führt eine Abfrage aus und schreibt das erste Resultset in einen externen Speicher, der durch eine [Speicher Verbindungs Zeichenfolge](../../api/connection-strings/storage.md)angegeben wird.
 
 **Syntax**
 
-`.export`[`async`]`compressed` `to` [ ] *OutputDataFormat* 
- `(` *StorageConnectionString* [`,` ...] `)` `with` [ `(` *PropertyName* `=` *PropertyValue* [`,` ...] `)`] `<|` *Abfrage*
+`.export`[ `async` ] [ `compressed` ] `to` *Outputdataformat* 
+ `(` *storageconnectionstring* [ `,` ...] `)` [ `with` `(` *PropertyName* `=` *PropertyValue* [ `,` ...] `)` ] `<|` *Abfrage*
 
 **Argumente**
 
-* `async`: Wenn angegeben, gibt der Befehl an, dass er im asynchronen Modus ausgeführt wird.
-  Weitere Informationen zum Verhalten in diesem Modus finden Sie weiter unten.
+* `async`: Gibt an, dass der Befehl im asynchronen Modus ausgeführt wird, wenn angegeben.
+  Weitere Informationen zum Verhalten in diesem Modus finden Sie unten.
 
-* `compressed`: Wenn angegeben, werden die Ausgabespeicherartefakte als `.gz` Dateien komprimiert. Siehe `compressionType` zum Komprimieren von Parkettdateien als schnippisch. 
+* `compressed`: Wenn angegeben, werden die Ausgabe Speicher Artefakte als `.gz` Dateien komprimiert. Informationen `compressionType` zum Komprimieren von Parkett Dateien als Snappy finden Sie unter. 
 
-* *OutputDataFormat*: Gibt das Datenformat der Speicherartefakte an, die durch den Befehl geschrieben wurden. Unterstützte Werte `csv`sind: `json`, `parquet` `tsv`, und .
+* *Outputdataformat*: gibt das Datenformat der Speicher Artefakte an, die vom Befehl geschrieben wurden. Folgende Werte werden unterstützt: `csv` , `tsv` , `json` und `parquet` .
 
-* *StorageConnectionString*: Gibt eine oder mehrere [Speicherverbindungszeichenfolgen](../../api/connection-strings/storage.md) an, die angeben, in welchen Speicher die Daten geschrieben werden sollen. (Für skalierbare Schreibvorgänge kann mehr als eine Speicherverbindungszeichenfolge angegeben werden.) Jede solche Verbindungszeichenfolge muss die Anmeldeinformationen angeben, die beim Schreiben in den Speicher verwendet werden sollen.
-  Beim Schreiben in Azure Blob Storage können die Anmeldeinformationen beispielsweise der Speicherkontoschlüssel oder ein freigegebener Zugriffsschlüssel (SAS) mit den Berechtigungen zum Lesen, Schreiben und Auflisten von Blobs sein.
+* *Storageconnectionstring*: gibt eine oder mehrere [Speicher Verbindungs](../../api/connection-strings/storage.md) Zeichenfolgen an, die angeben, in welchen Speicher die Daten geschrieben werden sollen. (Für skalierbare Schreibvorgänge können mehr als eine Speicher Verbindungs Zeichenfolge angegeben werden.) Jede dieser Verbindungs Zeichenfolgen muss die Anmelde Informationen angeben, die beim Schreiben in den Speicher verwendet werden sollen.
+  Wenn Sie z. b. in Azure BLOB Storage schreiben, können die Anmelde Informationen der Speicherkonto Schlüssel oder ein Shared Access Key (SAS) mit den Berechtigungen zum Lesen, schreiben und Auflisten von BLOB sein.
 
 > [!NOTE]
-> Es wird dringend empfohlen, Daten in speicherweise zu exportieren, die sich in derselben Region wie der Kusto-Cluster selbst befinden. Dazu gehören Daten, die exportiert werden, damit sie an einen anderen Clouddienst in anderen Regionen übertragen werden können. Schreiben sollte lokal erfolgen, während Lesevorgänge aus der Ferne erfolgen können.
+> Es wird dringend empfohlen, Daten in den Speicher zu exportieren, der sich in derselben Region wie der Kusto-Cluster selbst befindet. Dies schließt Daten ein, die exportiert werden, damit Sie an einen anderen clouddienst in anderen Regionen übertragen werden können. Schreibvorgänge sollten lokal erfolgen, während Lesevorgänge Remote erfolgen können.
 
-* *PropertyName*/*PropertyValue*: Keine oder mehr optionale Exporteigenschaften:
+* *PropertyName* / *PropertyValue*: NULL oder mehr optionale Export Eigenschaften:
 
-|Eigenschaft        |type    |BESCHREIBUNG                                                                                                                |
+|Eigenschaft        |Typ    |Beschreibung                                                                                                                |
 |----------------|--------|---------------------------------------------------------------------------------------------------------------------------|
-|`sizeLimit`     |`long`  |Die Größenbeschränkung in Bytes eines einzelnen Speicherartefakts, das geschrieben wird (vor der Komprimierung). Der zulässige Bereich beträgt 100 MB (Standard) bis 1 GB.|
-|`includeHeaders`|`string`|Steuert `csv` / `tsv` für die Ausgabe die Generierung von Spaltenüberschriften. Kann eine `none` von sein (Standard; keine `all` Kopfzeilen emittiert), (geben `firstFile` Sie eine Kopfzeile in jedes Speicherartefakt) oder (geben Sie eine Kopfzeile nur in das erste Speicherartefakt).|
-|`fileExtension` |`string`|Gibt den "Erweiterungs"-Teil des Speicherartefakts an (z. B. `.csv` oder `.tsv`). Wenn die Komprimierung `.gz` verwendet wird, wird ebenfalls angehängt.|
-|`namePrefix`    |`string`|Gibt ein Präfix an, das jedem generierten Speicherartartartnamen hinzugefügt werden soll. Ein zufälliges Präfix wird verwendet, wenn es nicht angegeben wird.       |
-|`encoding`      |`string`|Gibt an, wie der `UTF8NoBOM` Text codiert wird: (Standard) oder `UTF8BOM`. |
-|`compressionType`|`string`|Gibt den Typ der zu verwendenden Komprimierung an. Mögliche Werte sind `gzip` oder `snappy`. Der Standardwert ist `gzip`. `snappy`(optional) für `parquet` das Format verwendet werden. |
-|`distribution`   |`string`  |Verteilungshinweis`single` `per_node`( `per_shard`, , ). Wenn der `single`Wert gleich ist, wird ein einzelner Thread in den Speicher geschrieben. Andernfalls schreibt der Export von allen Knoten, die die Abfrage parallel ausführen. Siehe [Plugin-Operator auswerten](../../query/evaluateoperator.md). Der Standardwert lautet `per_shard`.
-|`distributed`   |`bool`  |Deaktivieren/Aktivieren des verteilten Exports. Das Festlegen auf `single` false entspricht dem Verteilungshinweis. Der Standardwert ist "true".
-|`persistDetails`|`bool`  |Gibt an, dass der Befehl `async` seine Ergebnisse beibehalten soll (siehe Flag). Standardwerte `true` für async-Läufe, können jedoch deaktiviert werden, wenn der Aufrufer die Ergebnisse nicht benötigt). Standardmäßig `false` in synchronen Ausführungen, kann aber auch in diesen aktiviert werden. |
-|`parquetRowGroupSize`|`int`  |Relevant nur, wenn das Datenformat Parkett ist. Steuert die Zeilengruppengröße in den exportierten Dateien. Die Standardreihengruppengröße beträgt 100000 Datensätze.|
+|`sizeLimit`     |`long`  |Die Größenbeschränkung in Bytes eines einzelnen Speicher Artefakts, das geschrieben wird (vor der Komprimierung). Der zulässige Bereich beträgt 100 MB (Standard) 1 GB.|
+|`includeHeaders`|`string`|Für `csv` / `tsv` die Ausgabe steuert die Generierung von Spalten Headern. Kann eine der `none` (standardmäßigen, keine Header Zeilen ausgegeben), `all` (geben Sie eine Kopfzeile in jedem Speicher Element aus) oder (geben Sie `firstFile` nur eine Kopfzeile in das erste Speicher Element ein).|
+|`fileExtension` |`string`|Gibt den "Extension"-Teil des Speicher Artefakts an (z `.csv` `.tsv` . b. oder). Wenn die Komprimierung verwendet wird, `.gz` wird ebenfalls angehängt.|
+|`namePrefix`    |`string`|Gibt ein Präfix an, das den einzelnen generierten Speicher Artefaktnamen hinzugefügt wird. Wenn nicht angegeben, wird ein zufälliges Präfix verwendet.       |
+|`encoding`      |`string`|Gibt an, wie der Text codiert werden soll: `UTF8NoBOM` (Standard) oder `UTF8BOM` . |
+|`compressionType`|`string`|Gibt den zu verwendenden Komprimierungstyp an. Mögliche Werte sind `gzip` oder `snappy`. Der Standardwert ist `gzip`. `snappy`kann (optional) für das Format verwendet werden `parquet` . |
+|`distribution`   |`string`  |Verteilungs Hinweis ( `single` , `per_node` , `per_shard` ). Wenn der Wert entspricht `single` , wird ein einzelner Thread in den Speicher geschrieben. Andernfalls schreibt der Export von allen Knoten, die die Abfrage parallel ausführen. Siehe [Auswerten des Plug](../../query/evaluateoperator.md)-in-Operators Wird standardmäßig auf `per_shard` festgelegt.
+|`distributed`   |`bool`  |Deaktivieren/aktivieren Sie den verteilten Export. Das Festlegen von auf false entspricht dem `single` Verteilungs Hinweis. Der Standardwert ist "true".
+|`persistDetails`|`bool`  |Gibt an, dass der Befehl seine Ergebnisse beibehalten soll (siehe `async` Flag). Der Standardwert ist in asynchronen Ausführungen `true` , kann aber deaktiviert werden, wenn der Aufrufer die Ergebnisse nicht benötigt). Wird standardmäßig `false` in synchronen Ausführungen verwendet, kann aber auch in aktiviert werden. |
+|`parquetRowGroupSize`|`int`  |Nur relevant, wenn das Datenformat "Parkett" ist. Steuert die Zeilen Gruppengröße in den exportierten Dateien. Die Standardzeilen Gruppengröße beträgt 100000 Datensätze.|
 
 **Ergebnisse**
 
-Die Befehle geben eine Tabelle zurück, die die generierten Speicherartefakte beschreibt.
-Jeder Datensatz beschreibt ein einzelnes Artefakt und enthält den Speicherpfad zum Artefakt und die Darin enthaltene Menge an Datensätzen.
+Die Befehle gibt eine Tabelle zurück, in der die generierten Speicher Artefakte beschrieben werden.
+Jeder Datensatz beschreibt ein einzelnes Element und enthält den Speicherpfad zum Element und die Anzahl der Datensätze, die es enthält.
 
-|`Path`|NumRecords|
+|Pfad|Numrecords|
 |---|---|
 |http://storage1.blob.core.windows.net/containerName/export_1_d08afcae2f044c1092b279412dcb571b.csv|10|
 |http://storage1.blob.core.windows.net/containerName/export_2_454c0f1359e24795b6529da8a0101330.csv|15|
 
 **Asynchroner Modus**
 
-Wenn `async` das Flag angegeben ist, wird der Befehl im asynchronen Modus ausgeführt.
-In diesem Modus wird der Befehl sofort mit einer Vorgangs-ID zurückgegeben, und der Datenexport wird im Hintergrund bis zum Abschluss fortgesetzt. Die vom Befehl zurückgegebene Operation-ID kann verwendet werden, um den Fortschritt und die Ergebnisse über die folgenden Befehle zu verfolgen:
+Wenn das- `async` Flag angegeben wird, wird der Befehl im asynchronen Modus ausgeführt.
+In diesem Modus gibt der Befehl sofort eine Vorgangs-ID zurück, und der Datenexport wird im Hintergrund fortgesetzt, bis der Vorgang abgeschlossen ist. Die vom Befehl zurückgegebene Vorgangs-ID kann verwendet werden, um den Fortschritt und letztendlich seine Ergebnisse über die folgenden Befehle zu verfolgen:
 
-* [.show-Operationen](../operations.md#show-operations): Verfolgen Sie den Fortschritt.
-* [.show-Vorgangsdetails](../operations.md#show-operation-details): Erhalten Sie Abschlussergebnisse.
+* [. Show-Vorgänge](../operations.md#show-operations): Nachverfolgen des Fortschritts.
+* [. Vorgangs Details anzeigen](../operations.md#show-operation-details): Vervollständigungs Ergebnisse erhalten.
 
-Nach einem erfolgreichen Abschluss können Sie die Ergebnisse z. B. mit folgenden Informationen abrufen:
+Nach erfolgreichem Abschluss können Sie die Ergebnisse beispielsweise mithilfe von abrufen:
 
 ```kusto
 .show operation f008dc1e-2710-47d8-8d34-0d562f5f8615 details
@@ -80,8 +80,8 @@ Nach einem erfolgreichen Abschluss können Sie die Ergebnisse z. B. mit folgende
 
 **Beispiele** 
 
-In diesem Beispiel führt Kusto die Abfrage aus und exportiert dann das erste von der Abfrage erzeugte Recordset in ein oder mehrere komprimierte CSV-Blobs.
-Spaltennamenbeschriftungen werden als erste Zeile für jedes Blob hinzugefügt.
+In diesem Beispiel führt Kusto die Abfrage aus und exportiert dann das erste Recordset, das von der Abfrage erzeugt wird, in ein oder mehrere komprimierte CSV-BLOB.
+Spaltennamen Bezeichnungen werden als erste Zeile für jedes BLOB hinzugefügt.
 
 ```kusto 
 .export
@@ -98,9 +98,9 @@ Spaltennamenbeschriftungen werden als erste Zeile für jedes Blob hinzugefügt.
   <| myLogs | where id == "moshe" | limit 10000
 ```
 
-**Bekannte Probleme**
+#### <a name="known-issues"></a>Bekannte Probleme
 
-*Speicherfehler beim Exportbefehl*
+*Speicherfehler beim Export Befehl.*
 
-Standardmäßig wird der Exportbefehl so verteilt, dass alle [Ausdehnungen,](../extents-overview.md) die Daten enthalten, die zum gleichzeitigen Exportieren von Schreibzugriff in den Speicher enthalten. Bei großen Exporten kann dies bei hohen Ausdehnungen zu einer hohen Speicherbelastung führen, die zu Speicherdrosselung oder vorübergehenden Speicherfehlern führt. In solchen Fällen wird empfohlen, die Anzahl der Speicherkonten zu erhöhen, die dem Exportbefehl zur Verfügung gestellt werden (die Last `per_node` wird auf die Konten verteilt) und/oder die Parallelität zu reduzieren, indem sie den Verteilungshinweis auf (siehe Befehlseigenschaften) festlegen. Eine vollständige Deaktivierung der Verteilung ist ebenfalls möglich, dies kann sich jedoch erheblich auf die Befehlsleistung auswirken.
+Standardmäßig wird der Export Befehl so verteilt, dass alle [Blöcke](../extents-overview.md) , die Daten enthalten, die gleichzeitig in den Speicher geschrieben werden sollen, verteilt werden. Bei großen Exporten, wenn die Anzahl solcher Blöcke hoch ist, kann dies zu einer hohen Speicherauslastung führen, die zu einer Speicher Drosselung oder zu vorübergehenden Speicherfehlern führt. In solchen Fällen wird empfohlen, die Anzahl der Speicher Konten zu erhöhen, die für den Export Befehl bereitgestellt werden (die Last wird zwischen den Konten verteilt) und/oder um die Parallelität zu verringern, indem Sie den Verteilungs Hinweis auf festlegen `per_node` (siehe Befehls Eigenschaften). Die vollständige Deaktivierung der Verteilung ist ebenfalls möglich, dies kann sich jedoch erheblich auf die Befehls Leistung auswirken.
  
