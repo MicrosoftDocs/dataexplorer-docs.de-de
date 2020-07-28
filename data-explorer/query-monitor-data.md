@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/28/2020
-ms.openlocfilehash: b3f4ed8e0bb37b62c7f31c9444b373529cf24df9
-ms.sourcegitcommit: 537a7eaf8c8e06a5bde57503fedd1c3706dd2b45
+ms.openlocfilehash: d4f9fe945281eb61c1d1e685d0c2689585951926
+ms.sourcegitcommit: 6db94135b9902ad0ea84f9cef00ded8ec0a90fc3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86423038"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86870106"
 ---
 # <a name="query-data-in-azure-monitor-using-azure-data-explorer-preview"></a>Abfragen von Daten in Azure Monitor mit Azure Data Explorer (Vorschau)
 
@@ -45,7 +45,8 @@ Abfolge der Schritte für den Azure Data Explorer-Proxy:
 
     ![Hinzufügen eines Clusters](media/adx-proxy/add-cluster.png)
 
-    Wenn Sie eine Verbindung mit mehreren Proxyclustern hinzufügen, geben Sie jedem Cluster einen anderen Namen. Andernfalls haben alle Cluster im linken Bereich den gleichen Namen.
+    >[!NOTE]
+    >Wenn Sie eine Verbindung mit mehreren Proxyclustern hinzufügen, geben Sie jedem Cluster einen anderen Namen. Andernfalls haben alle Cluster im linken Bereich den gleichen Namen.
 
 1. Nachdem die Verbindung hergestellt wurde, wird der LA- oder AI-Cluster im linken Bereich mit dem nativen ADX-Cluster angezeigt. 
 
@@ -61,8 +62,8 @@ Sie können die Abfragen mithilfe von Clienttools ausführen, die Kusto-Abfragen
 > [!TIP]
 > * Datenbanknamen müssen den gleichen Namen wie die im Proxycluster angegebene Ressource haben. Bei Namen wird die Groß-/Kleinschreibung beachtet.
 > * Achten Sie bei clusterübergreifenden Abfragen auf eine korrekte Benennung der Application Insights-Apps und Log Analytics-Arbeitsbereiche.
->     * Wenn Namen Sonderzeichen enthalten, werden diese im Proxyclusternamen durch URL-Codierung ersetzt. 
->     * Wenn Namen Zeichen enthalten, die nicht den [KQL-Regeln für Bezeichnernamen](kusto/query/schema-entities/entity-names.md) entsprechen, werden sie durch einen Bindestrich ( **-** ) ersetzt.
+> * Wenn Namen Sonderzeichen enthalten, werden diese im Proxyclusternamen durch URL-Codierung ersetzt. 
+> * Wenn Namen Zeichen enthalten, die nicht den [KQL-Regeln für Bezeichnernamen](kusto/query/schema-entities/entity-names.md) entsprechen, werden sie durch einen Bindestrich ( **-** ) ersetzt.
 
 ### <a name="direct-query-from-your-la-or-ai-adx-proxy-cluster"></a>Direkte Abfragen von Ihrem LA- oder AI-ADX-Proxycluster
 
