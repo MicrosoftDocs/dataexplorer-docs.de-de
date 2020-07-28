@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 06/15/2020
-ms.openlocfilehash: 05c9a805e1391a34fe2d751c33178fcac16d15a9
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: c1202e4578f9d1d3d4520984e6dc3b6de0ef33b0
+ms.sourcegitcommit: 6db94135b9902ad0ea84f9cef00ded8ec0a90fc3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780132"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86870157"
 ---
 # <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>Schnellstart: Abfragen von Daten auf der Azure Data Explorer-Webbenutzeroberfläche
 
@@ -114,6 +114,12 @@ Sie können jetzt Abfragen für alle Cluster ausführen, mit denen Sie verbunden
     Das Ergebnis sollte dem folgenden Diagramm ähneln.
 
     ![Säulendiagramm](media/web-query-data/column-chart.png)
+
+> [!NOTE]
+> Leere Zeilen im Abfrageausdruck können beeinflussen, welcher Teil der Abfrage ausgeführt wird.
+>
+> Ist kein Text ausgewählt, wird davon ausgegangen, dass die Abfrage oder der Befehl durch leere Zeilen getrennt ist.
+> Ist Text ausgewählt, wird der ausgewählte Text ausgeführt.
 
 ## <a name="work-with-the-table-grid"></a>Arbeiten mit dem Tabellenraster
 
@@ -218,7 +224,7 @@ Um die Abfrageergebnisse in eine CSV-Datei zu exportieren, wählen Sie **Datei**
 
 ## <a name="provide-feedback"></a>Feedback geben
 
-1. Wählen Sie rechts oben in der Anwendung das Feedbacksymbol aus. ![Feedbacksymbol](media/web-query-data/icon-feedback.png)erforderlich.
+1. Wählen Sie rechts oben in der Anwendung das Feedbacksymbol aus. ![Feedbacksymbol](media/web-query-data/icon-feedback.png).
 
 1. Geben Sie Ihr Feedback ein, und wählen Sie dann **Senden** aus.
 
