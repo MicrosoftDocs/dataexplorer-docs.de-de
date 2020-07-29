@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/06/2020
-ms.openlocfilehash: 0580088bf04bffafd36990a3f42c32aa5c4ede53
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.openlocfilehash: 8858b261cb366842b475a76a1b2c3246b8a3e7b5
+ms.sourcegitcommit: de81b57b6c09b6b7442665e5c2932710231f0773
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280464"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87264697"
 ---
 # <a name="materialize"></a>materialize()
 
@@ -27,24 +27,19 @@ Ermöglicht das Zwischenspeichern eines Unterabfrage Ergebnisses während der Ab
 
 * *Ausdruck*: der tabellarische Ausdruck, der während der Abfrage Ausführung ausgewertet und zwischengespeichert werden soll.
 
-**Tipps**
+> [!NOTE]
+> "Materialize" hat eine Cache Größenbeschränkung von **5 GB**. Diese Beschränkung erfolgt pro Cluster Knoten und ist für alle gleichzeitig ausgeführten Abfragen gegenseitig. Wenn eine Abfrage verwendet `materialize()` und der Cache keine weiteren Daten enthalten kann, wird die Abfrage mit einem Fehler abgebrochen.
 
-* Verwenden Sie materialisieren mit Join oder Union, wenn ihre Operanden gegenseitige Unterabfragen verfügen, die einmal ausgeführt werden können. Weitere Informationen finden Sie in den folgenden Beispielen.
-
-* Auch hilfreich in Szenarien, in denen Verzweigungsabschnitte für „join/union“ benötigt werden.
-
-* Die Materialisierung kann nur in Let-Anweisungen verwendet werden, wenn Sie dem zwischengespeicherten Ergebnis einen Namen geben.
-
-**Hinweis**
-
-* "Materialize" hat eine Cache Größenbeschränkung von **5 GB**. 
-  Diese Beschränkung erfolgt pro Cluster Knoten und ist für alle gleichzeitig ausgeführten Abfragen gegenseitig.
-  Wenn eine Abfrage verwendet `materialize()` und der Cache keine weiteren Daten enthalten kann, wird die Abfrage mit einem Fehler abgebrochen.
+>[!TIP]
+>
+>* Pushen Sie alle möglichen Operatoren, die das materialisierte DataSet verringern, und behalten Sie die Semantik der Abfrage bei. Verwenden Sie z. b. Filter, oder projizieren Sie nur erforderliche Spalten.
+>* Verwenden Sie materialisieren mit Join oder Union, wenn ihre Operanden gegenseitige Unterabfragen verfügen, die einmal ausgeführt werden können. Z. b. Join/Union Fork Legs. Siehe [Beispiel für die Verwendung des Join-Operators](#examples-of-query-performance-improvement).
+>* Die Materialisierung kann nur in Let-Anweisungen verwendet werden, wenn Sie dem zwischengespeicherten Ergebnis einen Namen geben. Siehe [Beispiel für die Verwendung von Let-Anweisungen](#examples-of-using-materialize)).
 
 ## <a name="examples-of-query-performance-improvement"></a>Beispiele für die Verbesserung der Abfrageleistung
 
 Im folgenden Beispiel wird gezeigt `materialize()` , wie verwendet werden kann, um die Leistung der Abfrage zu verbessern.
-Der Ausdruck `_detailed_data` wird mithilfe der `materialize()` Funktion definiert und wird daher nur einmal berechnet.
+Der Ausdruck `_detailed_data` wird mithilfe der `materialize()` -Funktion definiert und wird daher nur einmal berechnet.
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -57,7 +52,7 @@ _detailed_data
 | top 10 by EventPercentage
 ```
 
-|State|EventType|Eventprozent|Ereignisse|
+|Zustand|EventType|Eventprozent|Ereignisse|
 |---|---|---|---|
 |Hawaii-Wasser|Wasser Spout|100|2|
 |Lake Ontario|Seeman Gewitter Wind|100|8|
@@ -97,7 +92,7 @@ Resultset 1:
 
 Resultset 2: 
 
-|value|
+|Wert|
 |---|
 |9999998|
 |9999998|
@@ -105,7 +100,7 @@ Resultset 2:
 
 Resultset 3: 
 
-|Summe|
+|SUM|
 |---|
 |15002960543563|
 
@@ -113,11 +108,8 @@ Resultset 3:
 
 > [!TIP]
 > Materialisieren Sie die Spalte bei der Erfassungs Zeit, wenn die meisten Ihrer Abfragen Felder aus dynamischen Objekten in Millionen von Zeilen extrahieren.
-> 
-> `let`Verwenden Sie die [Materialize ()-Funktion](./materializefunction.md), um die-Anweisung mit einem Wert zu verwenden, den Sie mehrmals verwenden.
-> Weitere Informationen finden Sie unter [bewährte Methoden](best-practices.md) .
 
-Versuchen Sie, alle möglichen Operatoren zu übermitteln, die das materialisierte DataSet verringern, und behalten Sie trotzdem die Semantik der Abfrage bei. Beispielsweise Filter oder nur erforderliche Spalten.
+`let`Verwenden Sie die [Materialize ()-Funktion](./materializefunction.md), um die-Anweisung mit einem Wert zu verwenden, den Sie mehrmals verwenden. Versuchen Sie, alle möglichen Operatoren zu übermitteln, die das materialisierte DataSet verringern, und behalten Sie trotzdem die Semantik der Abfrage bei. Verwenden Sie z. b. Filter, oder projizieren Sie nur erforderliche Spalten.
 
 ```kusto
     let materializedData = materialize(Table
@@ -142,7 +134,7 @@ Die Abfrage benötigt nur die Spalten `Timestamp` , `Text` , `Resource1` und `Re
     | summarize dcount(Resource2))
 ```
     
-Wenn die Filter in dieser Abfrage nicht identisch sind:  
+Wenn die Filter nicht identisch sind, wie in der folgenden Abfrage:  
 
 ```kusto
     let materializedData = materialize(Table
