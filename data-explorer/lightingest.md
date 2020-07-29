@@ -1,35 +1,35 @@
 ---
-title: LightIngest ist ein Befehlszeilen-Hilfsprogramm für die Erfassung in Azure Data Explorer.
+title: Verwenden von LightIngest zum Erfassen von Daten in Azure Data Explorer
 description: Hier erhalten Sie Informationen zu LightIngest, einem Befehlszeilen-Hilfsprogramm für die Ad-hoc-Datenerfassung in Azure Data Explorer.
 author: orspod
 ms.author: orspodek
 ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
-ms.date: 04/01/2020
-ms.openlocfilehash: 8d4eeb47abb8eac2b042b64e65b55dac7e91d6c9
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.date: 06/28/2020
+ms.openlocfilehash: a56f5ea3ad17e8ef7c428d927861af9eaa0e9935
+ms.sourcegitcommit: de81b57b6c09b6b7442665e5c2932710231f0773
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83374053"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87264745"
 ---
-# <a name="install-and-use-lightingest"></a>Installieren und Verwenden von LightIngest
-
-LightIngest ist ein Befehlszeilen-Hilfsprogramm für die Ad-hoc-Datenerfassung in Azure Data Explorer.
-Das Hilfsprogramm kann Quelldaten aus einem lokalen Ordner oder aus einem Azure Blob Storage-Container abrufen.
+# <a name="use-lightingest-to-ingest-data-to-azure-data-explorer"></a>Verwenden von LightIngest zum Erfassen von Daten in Azure Data Explorer
+ 
+LightIngest ist ein Befehlszeilen-Hilfsprogramm für die Ad-hoc-Datenerfassung in Azure Data Explorer. Das Hilfsprogramm kann Quelldaten aus einem lokalen Ordner oder aus einem Azure Blob Storage-Container abrufen.
+LightIngest ist besonders bei der Erfassung großer Datenmengen hilfreich, da die Erfassung zeitlich nicht beschränkt ist. LightIngest ist außerdem nützlich, wenn Sie Datensätze später anhand des Erstellungszeitpunkts und nicht anhand des Erfassungszeitpunkts abfragen möchten.
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
 * LightIngest: Herunterladen des Programms als Teil des [NuGet-Pakets „Microsoft.Azure.Kusto.Tools“](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Tools/)
 
-    ![LightIngest-Download](media/lightingest/lightingest-download-area.png)
+    :::image type="content" source="media/lightingest/lightingest-download-area.png" alt-text="LightIngest-Download":::
 
 * WinRAR: Herunterladen des Programms unter [www.win-rar.com/download.html](http://www.win-rar.com/download.html)
 
 ## <a name="install-lightingest"></a>Installieren von LightIngest
 
-1. Navigieren Sie zu dem Speicherort auf dem Computer, in dem Sie LightIngest heruntergeladen haben. 
+1. Navigieren Sie zu dem Speicherort auf dem Computer, in dem Sie LightIngest heruntergeladen haben.
 1. Extrahieren Sie mithilfe von WinRAR das Verzeichnis *tools* auf dem Computer.
 
 ## <a name="run-lightingest"></a>Ausführen von LightIngest
@@ -37,7 +37,7 @@ Das Hilfsprogramm kann Quelldaten aus einem lokalen Ordner oder aus einem Azure 
 1. Navigieren Sie zu dem extrahierten Verzeichnis *tools* auf dem Computer.
 1. Löschen Sie die vorhandenen Speicherortinformationen in der Adressleiste.
     
-      ![Löschen der Speicherortinformationen](media/lightingest/lightingest-location-bar.png)
+    :::image type="content" source="kusto/tools/images/KustoTools-Lightingest/lightingest-locationbar.png" alt-text="Löschen vorhandener Speicherortinformationen für LightIngest":::
 
 1. Geben Sie `cmd` ein, und drücken Sie die **EINGABETASTE**.
 1. Geben Sie an der Eingabeaufforderung `LightIngest.exe` ein, gefolgt vom entsprechenden Befehlszeilenargument.
@@ -45,70 +45,55 @@ Das Hilfsprogramm kann Quelldaten aus einem lokalen Ordner oder aus einem Azure 
     > [!Tip]
     > Eine Liste der unterstützten Befehlszeilenargumente erhalten Sie durch Eingeben von `LightIngest.exe /help`.
     >
-    >![Befehlszeilenhilfe](media/lightingest/lightingest-cmd-line-help.png)
+    > :::image type="content" source="media/lightingest/lightingest-cmd-line-help.png" alt-text="Befehlszeilenhilfe für LightIngest":::
 
 1. Geben Sie `ingest-` gefolgt von der Verbindungszeichenfolge für den Azure Data Explorer-Cluster ein, in dem die Datenerfassung verwaltet wird.
     Setzen Sie die Verbindungszeichenfolge in doppelte Anführungszeichen, und befolgen Sie die [Spezifikation für Kusto-Verbindungszeichenfolgen](kusto/api/connection-strings/kusto.md).
 
     Beispiel:
+
     ```
     ingest-{Cluster name and region}.kusto.windows.net;AAD Federated Security=True -db:{Database} -table:Trips -source:"https://{Account}.blob.core.windows.net/{ROOT_CONTAINER};{StorageAccountKey}" -pattern:"*.csv.gz" -format:csv -limit:2 -ignoreFirst:true -cr:10.0 -dontWait:true
     ```
 
+### <a name="recommendations"></a>Empfehlungen
+
 * Es wird empfohlen, für LightIngest den Erfassungsendpunkt unter `https://ingest-{yourClusterNameAndRegion}.kusto.windows.net` zu verwenden. Auf diese Weise kann die Erfassungslast im Azure Data Explorer-Dienst verwaltet werden, und nach vorübergehenden Fehlern kann problemlos eine Wiederherstellung durchgeführt werden. Sie können LightIngest jedoch auch so konfigurieren, dass das Programm direkt mit dem Engine-Endpunkt (`https://{yourClusterNameAndRegion}.kusto.windows.net`) verwendet wird.
 
-> [!Note]
-> Wenn Sie die Erfassung direkt mit dem Engine-Endpunkt durchführen, müssen Sie `ingest-` nicht einschließen. Es ist jedoch kein DM-Feature vorhanden, um die Engine zu schützen und die Erfolgsrate der Erfassung zu verbessern.
+   > [!NOTE]
+   > Wenn Sie die Erfassung direkt mit dem Engine-Endpunkt durchführen, müssen Sie `ingest-` nicht einfügen. Es ist jedoch kein DM-Feature vorhanden, um die Engine zu schützen und die Erfolgsrate der Erfassung zu verbessern.
 
-* Für eine optimale Erfassungsleistung ist es wichtig, dass in LightIngest die Größe der Rohdaten bekannt ist, sodass in LightIngest die nicht komprimierte Größe der lokalen Dateien geschätzt wird. Allerdings kann die Größe der Rohdaten der komprimierten Blobs in LightIngest möglicherweise erst nach dem Herunterladen der Blobs korrekt geschätzt werden. Legen Sie daher bei der Erfassung von komprimierten Blobs die `rawSizeBytes`-Eigenschaft für die Blobmetadaten auf die nicht komprimierte Datengröße in Byte fest.
+* Für eine optimale Erfassungsleistung ist die Rohdatengröße erforderlich, sodass in LightIngest die nicht komprimierte Größe der lokalen Dateien geschätzt werden kann. Allerdings kann die Größe der Rohdaten der komprimierten Blobs in LightIngest möglicherweise erst nach dem Herunterladen der Blobs korrekt geschätzt werden. Legen Sie daher bei der Erfassung von komprimierten Blobs die `rawSizeBytes`-Eigenschaft für die Blobmetadaten auf die nicht komprimierte Datengröße in Byte fest.
 
-## <a name="general-command-line-arguments"></a>Allgemeine Befehlszeilenargumente
+## <a name="command-line-arguments"></a>Befehlszeilenargumente
 
-|Argumentname         |Kurzname   |type    |Obligatorisch. |BESCHREIBUNG                                |
-|----------------------|-------------|--------|----------|-------------------------------------------|
-|                      |             |Zeichenfolge  |Obligatorisch. |[Azure Data Explorer-Verbindungszeichenfolge](kusto/api/connection-strings/kusto.md), die den Kusto-Endpunkt angibt, an dem die Erfassung verarbeitet wird. Muss in doppelte Anführungszeichen eingeschlossen werden. |
-|-database             |-db          |Zeichenfolge  |Optional  |Name der Azure Data Explorer-Zieldatenbank |
-|-table                |             |Zeichenfolge  |Obligatorisch. |Name der Azure Data Explorer-Zieltabelle |
-|-sourcePath           |-source      |Zeichenfolge  |Obligatorisch. |Pfad zu den Quelldateien oder zum Stamm-URI des Blobcontainers. Wenn sich die Daten in Blobs befinden, muss der Pfad den Speicherkontoschlüssel oder die SAS enthalten. Es empfiehlt sich, das Argument in doppelte Anführungszeichen einzuschließen. |
-|-prefix               |             |Zeichenfolge  |Optional  |Wenn sich die zu erfassenden Quelldaten in Blob Storage befinden, wird dieses URL-Präfix in allen Blobs gemeinsam genutzt, mit Ausnahme des Containernamens. <br>Wenn sich die Daten beispielsweise in `MyContainer/Dir1/Dir2` befinden, sollte das Präfix `Dir1/Dir2` lauten. Es empfiehlt sich, das Argument in doppelte Anführungszeichen einzuschließen. |
-|-pattern              |             |Zeichenfolge  |Optional  |Muster, nach dem Quelldateien oder Blobs ausgewählt werden. Unterstützt Platzhalter. Beispiel: `"*.csv"`. Es empfiehlt sich, das Argument in doppelte Anführungszeichen einzuschließen. |
-|-zipPattern           |             |Zeichenfolge  |Optional  |Regulärer Ausdruck, der zum Auswählen der zu erfassenden Dateien in einem ZIP-Archiv verwendet werden soll.<br>Alle anderen Dateien im Archiv werden ignoriert, z. B. `"*.csv"`. Es wird empfohlen, den regulären Ausdruck in doppelte Anführungszeichen einzuschließen. |
-|-format               |-f           |Zeichenfolge  |Optional  |Format der Quelldaten. Muss in einem der [unterstützten Formate](ingestion-supported-formats.md) vorliegen. |
-|-ingestionMappingPath |-mappingPath |Zeichenfolge  |Optional  |Pfad zur Spaltenzuordnungsdatei für die Erfassung (obligatorisch für JSON- und Avro-Formate). Siehe [Datenzuordnungen](kusto/management/mappings.md). |
-|-ingestionMappingRef  |-mappingRef  |Zeichenfolge  |Optional  |Name einer vorab erstellten Spaltenzuordnung für die Erfassung (obligatorisch für JSON- und Avro-Formate). Siehe [Datenzuordnungen](kusto/management/mappings.md). |
-|-creationTimePattern  |             |Zeichenfolge  |Optional  |Wenn das Argument festgelegt ist, wird es zum Extrahieren der CreationTime-Eigenschaft aus dem Datei- oder Blobpfad verwendet. Siehe [Verwenden des Arguments „CreationTimePattern“](#using-creationtimepattern-argument). |
-|-ignoreFirstRow       |-ignoreFirst |bool    |Optional  |Wenn das Argument festgelegt ist, wird der erste Datensatz jeder Datei bzw. jedes Blobs ignoriert (z. B. wenn die Quelldaten Header enthalten). |
-|-tag                  |             |Zeichenfolge  |Optional  |[Tags](kusto/management/extents-overview.md#extent-tagging), die den erfassten Daten zugeordnet werden. Mehrere Vorkommen sind zulässig. |
-|-dontWait             |             |bool    |Optional  |Wenn das Argument auf „true“ festgelegt ist, wird nicht auf den Abschluss der Erfassung gewartet. Nützlich, wenn große Mengen an Dateien oder Blobs erfasst werden. |
+|Argumentname            |type     |Beschreibung       |Obligatorisch/Optional
+|------------------------------|--------|----------|-----------------------------|
+|                               |Zeichenfolge   |[Azure Data Explorer-Verbindungszeichenfolge](kusto/api/connection-strings/kusto.md), die den Kusto-Endpunkt angibt, an dem die Erfassung verarbeitet wird. Muss in doppelte Anführungszeichen eingeschlossen werden. | Obligatorisch.
+|-database, -db          |Zeichenfolge  |Name der Azure Data Explorer-Zieldatenbank | Optional  |
+|-table                  |Zeichenfolge  |Name der Azure Data Explorer-Zieltabelle | Obligatorisch. |
+|-sourcePath, -source      |Zeichenfolge  |Pfad zu den Quelldateien oder zum Stamm-URI des Blobcontainers. Wenn sich die Daten in Blobs befinden, muss der Pfad den Speicherkontoschlüssel oder die SAS enthalten. Es empfiehlt sich, das Argument in doppelte Anführungszeichen einzuschließen. |Obligatorisch. |
+|-prefix                  |Zeichenfolge  |Wenn sich die zu erfassenden Quelldaten in Blob Storage befinden, wird dieses URL-Präfix in allen Blobs gemeinsam genutzt, mit Ausnahme des Containernamens. <br>Wenn sich die Daten beispielsweise in `MyContainer/Dir1/Dir2` befinden, sollte das Präfix `Dir1/Dir2` lauten. Es empfiehlt sich, das Argument in doppelte Anführungszeichen einzuschließen. | Optional  |
+|-pattern        |Zeichenfolge  |Muster, nach dem Quelldateien oder Blobs ausgewählt werden. Unterstützt Platzhalter. Beispiel: `"*.csv"`. Es empfiehlt sich, das Argument in doppelte Anführungszeichen einzuschließen. | Optional  |
+|-zipPattern     |Zeichenfolge  |Regulärer Ausdruck, der zum Auswählen der zu erfassenden Dateien in einem ZIP-Archiv verwendet werden soll.<br>Alle anderen Dateien im Archiv werden ignoriert. Beispiel: `"*.csv"`. Es wird empfohlen, den regulären Ausdruck in doppelte Anführungszeichen einzuschließen. | Optional  |
+|-format, -f           |Zeichenfolge  | Format der Quelldaten. Muss in einem der [unterstützten Formate](ingestion-supported-formats.md) vorliegen. | Optional  |
+|-ingestionMappingPath, -mappingPath |Zeichenfolge  |Pfad zur lokalen Datei für die Erfassungsspaltenzuordnung. Obligatorisch für JSON- und Avro-Formate. Siehe [Datenzuordnungen](kusto/management/mappings.md). | Optional  |
+|-ingestionMappingRef, -mappingRef  |Zeichenfolge  |Name einer Erfassungsspaltenzuordnung, die zuvor für die Tabelle erstellt wurde. Obligatorisch für JSON- und Avro-Formate. Siehe [Datenzuordnungen](kusto/management/mappings.md). | Optional  |
+|-creationTimePattern      |Zeichenfolge  |Wenn das Argument festgelegt ist, wird es zum Extrahieren der CreationTime-Eigenschaft aus dem Datei- oder Blobpfad verwendet. Siehe [Erfassen von Daten mithilfe von `CreationTime`](#how-to-ingest-data-using-creationtime) |Optional  |
+|-ignoreFirstRow, -ignoreFirst |bool    |Wenn das Argument festgelegt ist, wird der erste Datensatz jeder Datei bzw. jedes Blobs ignoriert (z. B. wenn die Quelldaten Header enthalten). | Optional  |
+|-tag            |Zeichenfolge   |[Tags](kusto/management/extents-overview.md#extent-tagging), die den erfassten Daten zugeordnet werden. Mehrere Vorkommen sind zulässig. | Optional  |
+|-dontWait           |bool     |Wenn das Argument auf „true“ festgelegt ist, wird nicht auf den Abschluss der Erfassung gewartet. Nützlich, wenn große Mengen an Dateien oder Blobs erfasst werden. |Optional  |
+|-compression, -cr          |double |Komprimierungsverhältnis. Nützlich, wenn komprimierte Dateien oder Blobs erfasst werden, damit in Azure Data Explorer die Größe der Rohdaten bewertet werden kann. Wird als ursprüngliche Größe geteilt durch die komprimierte Größe berechnet. |Optional  |
+|-limit , -l           |integer   |Wenn das Argument festgelegt ist, wird die Erfassung auf die ersten N Dateien beschränkt. |Optional  |
+|-listOnly, -list        |bool    |Wenn das Argument festgelegt ist, werden nur die Elemente angezeigt, die für die Erfassung ausgewählt worden wären.| Optional  |
+|-ingestTimeout   |integer  |Zeitlimit in Minuten für den Abschluss aller Erfassungsvorgänge. Der Standardwert lautet `60`.| Optional  |
+|-forceSync        |bool  |Wenn das Argument festgelegt ist, wird die synchrone Erfassung erzwungen. Der Standardwert lautet `false`. |Optional  |
+|-dataBatchSize        |integer  |Legt die Beschränkung der Gesamtgröße (MB, nicht komprimiert) für jeden Erfassungsvorgang fest. |Optional  |
+|-filesInBatch            |integer |Legt die maximal zulässige Anzahl der Dateien oder Blobs für jeden Erfassungsvorgang fest. |Optional  |
+|-devTracing, -trace       |Zeichenfolge    |Wenn das Argument festgelegt ist, werden Diagnoseprotokolle in ein lokales Verzeichnis geschrieben (standardmäßig `RollingLogs` im aktuellen Verzeichnis, kann durch Festlegen des Schalterwerts geändert werden). | Optional  |
 
-### <a name="using-creationtimepattern-argument"></a>Verwenden des Arguments „CreationTimePattern“
+## <a name="azure-blob-specific-capabilities"></a>Für Azure-Blobs spezifische Funktionen
 
-Mit dem Argument `-creationTimePattern` wird die CreationTime-Eigenschaft aus dem Datei- oder Blobpfad extrahiert. Das Muster muss nicht den gesamten Elementpfad darstellen, sondern lediglich den Abschnitt, der den zu verwendenden Zeitstempel enthält.
-
-Die Argumentwerte müssen Folgendes enthalten:
-* Konstanter Text direkt vor dem Zeitstempel, in einfache Anführungszeichen eingeschlossen
-* Zeitstempelformat in der standardmäßigen [.NET-DateTime-Notation](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings)
-* Konstanter Text direkt nach dem Zeitstempel. Wenn Blobnamen z. B. auf `historicalvalues19840101.parquet` enden (der Zeitstempel umfasst vier Ziffern für das Jahr, zwei Ziffern für den Monat und zwei Ziffern für den Tag des Monats), lautet der entsprechende Wert für das `-creationTimePattern`-Argument:
-
-```
-ingest-{Cluster name and region}.kusto.windows.net;AAD Federated Security=True -db:{Database} -table:Trips -source:"https://{Account}.blob.core.windows.net/{ROOT_CONTAINER};{StorageAccountKey}" -creationTimePattern:"'historicalvalues'yyyyMMdd'.parquet'"
- -pattern:"*.csv.gz" -format:csv -limit:2 -ignoreFirst:true -cr:10.0 -dontWait:true
-```
-
-### <a name="command-line-arguments-for-advanced-scenarios"></a>Befehlszeilenargumente für erweiterte Szenarien
-
-|Argumentname         |Kurzname   |type    |Obligatorisch. |BESCHREIBUNG                                |
-|----------------------|-------------|--------|----------|-------------------------------------------|
-|-compression          |-cr          |double  |Optional  |Komprimierungsverhältnis. Nützlich, wenn komprimierte Dateien oder Blobs erfasst werden, damit in Azure Data Explorer die Größe der Rohdaten bewertet werden kann. Wird als ursprüngliche Größe geteilt durch die komprimierte Größe berechnet. |
-|-limit                |-l           |integer |Optional  |Wenn das Argument festgelegt ist, wird die Erfassung auf die ersten N Dateien beschränkt. |
-|-listOnly             |-list        |bool    |Optional  |Wenn das Argument festgelegt ist, werden nur die Elemente angezeigt, die für die Erfassung ausgewählt worden wären.| 
-|-ingestTimeout        |             |integer |Optional  |Zeitlimit in Minuten für den Abschluss aller Erfassungsvorgänge. Der Standardwert lautet `60`.|
-|-forceSync            |             |bool    |Optional  |Wenn das Argument festgelegt ist, wird die synchrone Erfassung erzwungen. Der Standardwert lautet `false`. |
-|-dataBatchSize        |             |integer |Optional  |Legt die Beschränkung der Gesamtgröße (MB, nicht komprimiert) für jeden Erfassungsvorgang fest. |
-|-filesInBatch         |             |integer |Optional  |Legt die maximal zulässige Anzahl der Dateien oder Blobs für jeden Erfassungsvorgang fest. |
-|-devTracing           |-trace       |Zeichenfolge  |Optional  |Wenn das Argument festgelegt ist, werden Diagnoseprotokolle in ein lokales Verzeichnis geschrieben (standardmäßig `RollingLogs` im aktuellen Verzeichnis, kann durch Festlegen des Schalterwerts geändert werden). |
-
-## <a name="blob-metadata-properties"></a>Blob-Metadateneigenschaften
 Bei Verwendung mit Azure-Blobs werden in LightIngest bestimmte Blob-Metadateneigenschaften verwendet, um den Erfassungsprozess zu erweitern.
 
 |Metadateneigenschaft                            | Verwendung                                                                           |
@@ -149,8 +134,37 @@ To use the LightIngest command below:
      
 1. In Azure Data Explorer, open query count.
 
-    ![Injestion result in Azure Data Explorer](media/lightingest/lightingest-show-failure-count.png)
+    ![Ingestion result in Azure Data Explorer](media/lightingest/lightingest-show-failure-count.png)
 -->
+
+### <a name="how-to-ingest-data-using-creationtime"></a>Erfassen von Daten mithilfe von CreationTime
+
+Wenn Sie Verlaufsdaten aus einem vorhandenen System in Azure Data Explorer laden, erhalten alle Datensätze dasselbe Erfassungsdatum. Sie können das Argument `-creationTimePattern` verwenden, um die Partitionierung Ihrer Daten basierend auf der Erstellungszeit und nicht der Erfassungszeit zu ermöglichen. Mit dem Argument `-creationTimePattern` wird die `CreationTime`-Eigenschaft aus dem Datei- oder Blobpfad extrahiert. Das Muster muss nicht den gesamten Elementpfad darstellen, sondern lediglich den Abschnitt, der den zu verwendenden Zeitstempel enthält.
+
+Die Argumentwerte müssen Folgendes enthalten:
+* Konstanter Text direkt vor dem Zeitstempelformat, in einfache Anführungszeichen eingeschlossen (Präfix)
+* Zeitstempelformat in der standardmäßigen [.NET-DateTime-Notation](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings)
+* Konstanter Text direkt nach dem Zeitstempel (Suffix)
+
+**Beispiele** 
+
+* Ein Blobname, der Datum und Uhrzeit im folgenden Format enthält: `historicalvalues19840101.parquet`. (Der Zeitstempel setzt sich aus vier Ziffern für das Jahr sowie jeweils zwei Ziffern für Monat und Tag zusammen.) 
+    
+    Der Wert für das Argument `-creationTimePattern` ist Teil des Dateinamens: *'historicalvalues'yyyyMMdd'.parquet'* .
+
+    ```kusto
+    ingest-{Cluster name and region}.kusto.windows.net;AAD Federated Security=True -db:{Database} -table:Trips -source:"https://{Account}.blob.core.windows.net/{ROOT_CONTAINER};{StorageAccountKey}" -creationTimePattern:"'historicalvalues'yyyyMMdd'.parquet'"
+     -pattern:"*.csv.gz" -format:csv -limit:2 -ignoreFirst:true -cr:10.0 -dontWait:true
+    ```
+
+* Bei einem Blob-URI, der sich auf eine hierarchische Ordnerstruktur bezieht (etwa `https://storageaccount/container/folder/2002/12/01/blobname.extension`): 
+
+    Der Wert für das Argument `-creationTimePattern` ist Teil der Ordnerstruktur: *'folder/'yyyy/MM/dd'/blob'* .
+
+   ```kusto
+    ingest-{Cluster name and region}.kusto.windows.net;AAD Federated Security=True -db:{Database} -table:Trips -source:"https://{Account}.blob.core.windows.net/{ROOT_CONTAINER};{StorageAccountKey}" -creationTimePattern:"'folder/'yyyy/MM/dd'/blob'"
+     -pattern:"*.csv.gz" -format:csv -limit:2 -ignoreFirst:true -cr:10.0 -dontWait:true
+    ```
 
 ### <a name="ingesting-blobs-using-a-storage-account-key-or-a-sas-token"></a>Erfassen von Blobs mithilfe eines Speicherkontoschlüssels oder eines SAS-Tokens
 
@@ -232,7 +246,3 @@ LightIngest.exe "https://ingest-{ClusterAndRegion}.kusto.windows.net;Fed=True"
   -mappingPath:"MAPPING_FILE_PATH"
   -trace:"LOGS_PATH"
 ```
-## <a name="changelog"></a>Änderungsprotokoll
-|Version        |Änderungen                                                                             |
-|---------------|------------------------------------------------------------------------------------|
-|4.0.9.0        |<ul><li>Argument `-zipPattern` wurde hinzugefügt.</li><li>Argument `-listOnly` wurde hinzugefügt.</li><li>Die Argumentzusammenfassung wird vor Beginn der Ausführung angezeigt.</li><li>Die CreationTime wird entsprechend dem Argument `-creationTimePattern` aus den Blob-Metadateneigenschaften oder aus dem Blob- oder Dateinamen gelesen.</li></ul>|
