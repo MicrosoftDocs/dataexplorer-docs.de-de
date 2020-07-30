@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/10/2020
-ms.openlocfilehash: 3fe88a5d53faaca4512d614d3e62204ac26e6fc5
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 69e09ec9528e99e250986657bf5d7cc0756b14f8
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372444"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351249"
 ---
 # <a name="series_stats"></a>series_stats()
 
@@ -31,18 +31,18 @@ Die `series_stats()` Funktion nimmt eine Spalte mit dynamischem numerischen Arra
 > [!NOTE] 
 > Diese Funktion gibt mehrere Spalten zurück, sodass Sie nicht als Argument für eine andere Funktion verwendet werden kann.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 Project `series_stats(` *x* `[,` *ignore_nonfinite* `])` oder Erweiterung `series_stats(` *x* `)` gibt alle oben erwähnten Spalten mit den folgenden Namen zurück: series_stats_x_min, series_stats_x_min_idx und usw.
  
 Project (m, Mi) = `series_stats(` *x* `)` oder Extend (m, Mi) = `series_stats(` *x* `)` gibt die folgenden Spalten zurück: m (min) und Mi (min_idx).
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *x*: dynamische Array Zelle, bei der es sich um ein Array von numerischen Werten handelt. 
 * *ignore_nonfinite*: boolesches Flag (optional, Standard: `false` ), das angibt, ob die Statistiken beim ignorieren von nicht begrenzten Werten (*null*, *NaN*, *INF*usw.) berechnet werden sollen. Wenn der Wert auf festgelegt `false` ist, sind die zurückgegebenen Werte, `null` Wenn nicht endliche Werte im Array vorhanden sind.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

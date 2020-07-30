@@ -8,31 +8,31 @@ ms.reviewer: slneimer
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/28/2020
-ms.openlocfilehash: 0296b41dc10092f0b274491c3fab3355fc82a2d9
-ms.sourcegitcommit: 4eb64e72861d07cedb879e7b61a59eced74517ec
+ms.openlocfilehash: f330c10e95cdc36eae497811ef895ef827918b43
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/29/2020
-ms.locfileid: "85518135"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346489"
 ---
-# <a name="parse_command_line"></a>parse_command_line ()
+# <a name="parse_command_line"></a>parse_command_line()
 
 Analysiert eine Unicode-Befehlszeilen Zeichenfolge und gibt ein dynamisches Array mit den Befehlszeilen Argumenten zurück.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `parse_command_line(`*command_line**parser_type*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *command_line*: die Befehlszeile, die analysiert werden soll.
 * *parser_type*: der einzige derzeit unterstützte Wert ist `"Windows"` , der die Befehlszeile auf die gleiche Weise wie [commandlineumargvw](https://docs.microsoft.com/windows/win32/api/shellapi/nf-shellapi-commandlinetoargvw)analysiert.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Ein dynamisches Array der Befehlszeilenargumente.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

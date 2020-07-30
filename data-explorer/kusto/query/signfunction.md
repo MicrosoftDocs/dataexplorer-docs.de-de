@@ -1,6 +1,6 @@
 ---
-title: sign() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt sign() in Azure Data Explorer.
+title: Sign ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird Sign () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 86a57ed2fb7d43daf300731fe48233eca318bded
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 8d6761cc2ffa9a8c28151c00720bbd1340a56875
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81507564"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351079"
 ---
 # <a name="sign"></a>sign()
 
 Vorzeichen eines numerischen Ausdrucks
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`sign(`*X*`)`
+`sign(`*Stuben*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *x*: Eine reelle Zahl.
+* *x*: eine reelle Zahl.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-* Das positive (+1), Nullzeichen (0) oder negative (-1) Zeichen des angegebenen Ausdrucks. 
+* Das positive (+ 1), NULL (0) oder negative Vorzeichen (-1) des angegebenen Ausdrucks. 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 print s1 = sign(-42), s2 = sign(0), s3 = sign(11.2)

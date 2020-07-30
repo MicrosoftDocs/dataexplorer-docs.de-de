@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2019
-ms.openlocfilehash: 0e93383cf1c9ff11fdf4a14ebad5d83c0dfa7a74
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: 24b47981e90c15e8a0f295d845ca28a03f324a88
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717409"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351300"
 ---
 # <a name="series_periods_validate"></a>series_periods_validate()
 
@@ -27,11 +27,11 @@ Die Funktion gibt zwei Spalten aus:
 * *Zeiträume*: ein dynamisches Array, das die zu validierenden Zeiträume enthält (in der Eingabe angegeben).
 * *Bewertungen*: ein dynamisches Array, das eine Bewertung zwischen 0 und 1 enthält. Das Ergebnis zeigt die Bedeutung eines Zeitraums an der jeweiligen Position im *Zeit* Array.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_periods_validate(`*x* `,` *period1* [ `,` *period2* `,` . . . ] `)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *x*: Skalarausdruck des dynamischen Arrays, bei dem es sich um ein Array numerischer Werte handelt, in der Regel die resultierende Ausgabe der " [make-Series"-](make-seriesoperator.md) oder [make_list](makelist-aggfunction.md)
 * *period1*, *period2*usw.: Zahlen, `real` die die zu validierenden Zeiträume in Einheiten der bin-Größe angeben. Wenn sich die Reihe z. b. in 1-Stunden-Containern befindet, beträgt die wöchentliche Zeit 168 Behälter.
@@ -43,7 +43,7 @@ Die Funktion gibt zwei Spalten aus:
 > 
 > * Die-Funktion akzeptiert bis zu 16 Zeiträume für die Validierung.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Die folgende Abfrage bettet eine Momentaufnahme eines Monats für den Datenverkehr einer Anwendung ein, die zweimal pro Tag aggregiert wird (die bin-Größe beträgt 12 Stunden).
 

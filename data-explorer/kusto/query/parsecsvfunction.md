@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b61934ec2efbfb22c17fe93a4f3969a1592cefab
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: eddf893d3c0d8096f57a3f624ddedf753fe35f91
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780659"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346353"
 ---
 # <a name="parse_csv"></a>parse_csv()
 
@@ -23,23 +23,23 @@ Teilt eine angegebene Zeichenfolge, die einen einzelnen Datensatz mit durch Tren
 parse_csv("aaa,bbb,ccc") == ["aaa","bbb","ccc"]
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `parse_csv(`*Ausgangs*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Source*: die Quell Zeichenfolge, die einen einzelnen Datensatz mit durch Trennzeichen getrennten Werten darstellt.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Ein Zeichen folgen Array, das die geteilten Werte enthält.
 
-**Notizen**
+**Hinweise**
 
 Eingebettete Zeilen Feeds, Kommas und Anführungszeichen können mit einem doppelten Anführungszeichen ("" ") mit Escapezeichen versehen werden. Diese Funktion unterstützt nicht mehrere Datensätze pro Zeile (nur der erste Datensatz wird erstellt).
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

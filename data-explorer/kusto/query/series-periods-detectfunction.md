@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2019
-ms.openlocfilehash: 876966391e67ad2f8f25a900dfc4c92bf0bfd11e
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 2ee587bfa7d01ae0602cc870e6c0b776593d53c0
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763272"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351334"
 ---
 # <a name="series_periods_detect"></a>series_periods_detect()
 
@@ -29,11 +29,11 @@ Die Funktion gibt zwei Spalten aus:
 * *Zeiträume*: ein dynamisches Array, das die Zeiträume enthält, die in Einheiten der bin-Größe gefunden wurden, geordnet nach ihren Ergebnissen.
 * *Bewertungen*: ein dynamisches Array mit Werten zwischen 0 und 1. Jedes Array misst die Bedeutung eines Punkts an der jeweiligen Position im *Zeit* Array.
  
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_periods_detect(`*x* `,` *min_period* `,` *max_period* `,` *num_periods*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *x*: Skalarausdruck des dynamischen Arrays, bei dem es sich um ein Array numerischer Werte handelt, in der Regel die resultierende Ausgabe der " [make-Series"-](make-seriesoperator.md) oder [make_list](makelist-aggfunction.md)
 * *min_period*: eine `real` Zahl, die den minimalen Zeitraum angibt, nach dem gesucht werden soll.
@@ -47,7 +47,7 @@ Die Funktion gibt zwei Spalten aus:
 >
 > * Die Eingabe Zeitreihe muss regelmäßig sein. Das heißt, dass Sie in konstanten Containern aggregiert werden, was immer der Fall ist, wenn Sie mithilfe von [make-Series](make-seriesoperator.md)erstellt wurde. Andernfalls ist die Ausgabe bedeutungslos.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Die folgende Abfrage bettet eine Momentaufnahme eines Monats für den Datenverkehr einer Anwendung ein, die zweimal täglich aggregiert wird. Die bin-Größe beträgt 12 Stunden.
 

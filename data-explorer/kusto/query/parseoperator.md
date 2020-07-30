@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: dd70b2135a485303cbf52d984e0b406052c4023a
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: f9dc6e49e9e3d04aadb5aecf8507b7132d8a366a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264946"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346319"
 ---
 # <a name="parse-operator"></a>parse-Operator
 
@@ -24,11 +24,11 @@ Weitere Informationen finden Sie unter dem [Operator "Bise-WHERE](parsewhereoper
 T | parse Text with "ActivityName=" name ", ActivityType=" type
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| parse` [ `kind=regex` [ `flags=regex_flags` ] | `simple` | `relaxed` ]- *Ausdruck* `with` `*` (*StringConstant* *ColumnName* [ `:` *ColumnType*]) `*` ...
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: die Eingabe Tabelle.
 * Art
@@ -47,7 +47,7 @@ T | parse Text with "ActivityName=" name ", ActivityType=" type
   
 * *ColumnType:* Optionale. Der Skalarwert, der den Typ angibt, in den der Wert konvertiert werden soll. Der Standardwert ist der- `string` Typ.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Die Eingabe Tabelle, erweitert entsprechend der Liste der Spalten, die dem Operator bereitgestellt werden.
 
@@ -67,7 +67,7 @@ Die Eingabe Tabelle, erweitert entsprechend der Liste der Spalten, die dem Opera
 * Wenn der Regex-Modus verwendet wird, gibt es eine Option zum Hinzufügen von Regex-Flags, um den gesamten in der Analyse verwendeten Regex-Wert zu steuern.
 
 * Im Regex-Modus übersetzt die Analyse das Muster in ein Regex. Verwenden Sie die [RE2-Syntax](re2.md) , um den Abgleich durchzuführen, und verwenden Sie nummerierte, intern behandelte Gruppen.
-    Beispiel:
+    Zum Beispiel:
 
     ```kusto
     parse kind=regex Col with * <regex1> var1:string <regex2> var2:long
@@ -81,7 +81,7 @@ Die Eingabe Tabelle, erweitert entsprechend der Liste der Spalten, die dem Opera
         
     * `long`wurde in übersetzt `\-\d+` .
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Der- `parse` Operator bietet eine optimierte Methode für `extend` eine Tabelle, indem mehrere `extract` Anwendungen für denselben `string` Ausdruck verwendet werden. Dieses Ergebnis ist hilfreich, wenn die Tabelle eine `string` Spalte enthält, die mehrere Werte enthält, die Sie in einzelne Spalten unterbrechen möchten. Beispielsweise eine Spalte, die von einer Entwickler `printf` -Trace-Anweisung (""/" `Console.WriteLine` ") erstellt wurde.
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/10/2020
-ms.openlocfilehash: 87cee5244fb1276733d4cf44d0477cc3351b947c
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: d74ba88062f49e9f3274b7f38704aa7760dc7250
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372453"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351266"
 ---
 # <a name="series_stats_dynamic"></a>series_stats_dynamic()
 
@@ -28,16 +28,16 @@ Die `series_stats_dynamic()` Funktion nimmt eine Spalte mit dynamischem numerisc
 * `variance`: Stichproben Varianz des Eingabe Arrays
 * `stdev`: Stichproben Standardabweichung des Eingabe Arrays
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_stats_dynamic(`*x* - `[,` *ignore_nonfinite*`])`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *x*: dynamische Array Zelle, bei der es sich um ein Array von numerischen Werten handelt. 
 * *ignore_nonfinite*: boolesches Flag (optional, Standard: `false` ), das angibt, ob die Statistiken beim ignorieren von nicht begrenzten Werten (*null*, *NaN*, *INF*usw.) berechnet werden sollen. Wenn auf `false` das zurückgegebene Ergebnis festgelegt ist, ist dies der `null` Wert, wenn nicht endliche Werte im Array vorhanden sind.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

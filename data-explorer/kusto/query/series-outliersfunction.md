@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/20/2019
-ms.openlocfilehash: 80e20e70bc51045f68fd3ef2068f099d750b2b3f
-ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
+ms.openlocfilehash: c5ada33d74f5ed3e1c7b357321b23bd7a76be64e
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84512434"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351351"
 ---
 # <a name="series_outliers"></a>series_outliers()
 
@@ -21,11 +21,11 @@ Bewertet anomaliepunkte in einer Reihe.
 
 Die Funktion nimmt einen Ausdruck mit einem dynamischen numerischen Array als Eingabe an und generiert ein dynamisches numerisches Array mit derselben Länge. Jeder Wert des Arrays gibt mithilfe von ["Tukey es Test"](https://en.wikipedia.org/wiki/Outlier#Tukey.27s_test)eine Bewertung einer möglichen Anomalie an. Ein Wert, der größer als 1,5 im selben Element der Eingabe ist, deutet auf eine Erhöhung oder ablehnen-Anomalie hin. Ein Wert kleiner als-1,5 gibt eine Ablehnungs Anomalie an.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_outliers(`*x* `, ` *Art* `, ` *ignore_val* `, ` *min_percentile* `, ` *max_percentile*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *x*: dynamische Array Zelle, die ein Array numerischer Werte ist.
 * *Art*: Algorithmus der Ausreißererkennung. Unterstützt derzeit `"tukey"` (herkömmliches "Tukey") und `"ctukey"` (benutzerdefiniertes "Tukey"). Die Standardeinstellung ist `"ctukey"`.
@@ -43,7 +43,7 @@ In der folgenden Tabelle werden die Unterschiede zwischen `"tukey"` und beschrie
 > [!TIP]
 > Die beste Möglichkeit, diese Funktion zu verwenden, besteht darin, Sie auf die Ergebnisse des Operators " [make-Series](make-seriesoperator.md) " anzuwenden.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Eine Zeitreihe mit etwas Rauschen erstellt Ausreißer. Wenn Sie diese Ausreißer (Rauschen) durch den durchschnittlichen Wert ersetzen möchten, verwenden Sie series_outliers (), um die Ausreißer zu erkennen, und ersetzen Sie Sie dann.
 

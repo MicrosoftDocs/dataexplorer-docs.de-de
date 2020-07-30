@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: cf47fd98027859ebb5f0cf22208b790a5396dc61
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: b813ce4c0901ef66177e8e7bdaa42a1744bd5912
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763759"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351113"
 ---
 # <a name="hash_sha256"></a>hash_sha256()
 
 Gibt einen SHA256-Hashwert für den Eingabe Wert zurück.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `hash_sha256(`*Ausgangs*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Quelle*: der Wert, für den der Hashwert verwendet werden soll.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Der SHA256-Hashwert des angegebenen Skalars, der als hexadezimale Zeichenfolge (eine Zeichenfolge) codiert ist, die jeweils eine einzelne hexadezimal Zahl zwischen 0 und 255 darstellt.
 
 > [!WARNING]
 > Der Algorithmus, der von dieser Funktion (SHA256) verwendet wird, wird in Zukunft garantiert nicht geändert, ist jedoch sehr komplex zu berechnen. Für Benutzer, die für die Dauer einer einzelnen Abfrage eine "einfache" Hash Funktion benötigen, wird empfohlen, stattdessen den Funktions [Hash ()](./hashfunction.md) zu verwenden.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -56,7 +56,7 @@ StormEvents
 | top 5 by StormCount desc
 ```
 
-|Status|Status|Stormcount|
+|Zustand|Status|Stormcount|
 |---|---|---|
 |TEXAS|9087f20f23f91b5a77e8406846117049029e6798ebbd0d38aea68da73a00ca37|4701|
 |Kansas|c80e328393541a3181b258cdb4da4d00587c5045e8cf3bb6c8fdb7016b69cc2e|3166|

@@ -8,22 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 054d4be758001609fbc3100a4a6c8698ef8f69f6
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: fb1f07c4b964615342adcf4d5ae51e7c99c05d13
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717307"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351283"
 ---
 # <a name="series_seasonal"></a>series_seasonal()
 
 Berechnet die Saison Komponente einer Reihe entsprechend der erkannten oder gegebenen saisonalen Zeitspanne.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_seasonal(`*Reihe* `[,` *Zeitraum*`])`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Series*: Eingabe eines numerischen dynamischen Arrays
 * *Period* (optional): ganzzahlige Anzahl von Containern in jedem saisonalen Zeitraum, mögliche Werte:
@@ -31,7 +31,7 @@ Berechnet die Saison Komponente einer Reihe entsprechend der erkannten oder gege
     * Positive ganze Zahl: wird als Zeitraum für die Saison Komponente verwendet.
     * Beliebiger anderer Wert: ignoriert Saisonalität und gibt eine Reihe von Nullen zurück.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Dynamisches Array mit derselben Länge wie die *Reihen* Eingabe, die die berechnete Saison Komponente der Reihe enthält. Die Saison Komponente wird in den Zeiträume als *Median* aller Werte berechnet, die dem Speicherort der bin entsprechen.
 

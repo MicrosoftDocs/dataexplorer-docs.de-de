@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: e62432773d99d74a46022cad3199f3bab0cae50b
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: 34734f3975b1720c1d009f190d4fae2ebc54283f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128456"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350756"
 ---
-# <a name="todouble-toreal"></a>"gedouble ()", "toreal" ()
+# <a name="todouble-toreal"></a>todouble(), toreal()
 
 Konvertiert die Eingabe in einen Wert vom Typ `real` . ( `todouble()` und `toreal()` sind Synonyme.)
 
@@ -23,16 +23,16 @@ Konvertiert die Eingabe in einen Wert vom Typ `real` . ( `todouble()` und `torea
 toreal("123.4") == 123.4
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `toreal(`*Expr* `)` 
  Expr `todouble(` *Expr*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expr*: ein Ausdruck, dessen Wert in einen Wert vom Typ konvertiert wird `real` .
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Wenn die Konvertierung erfolgreich ist, ist das Ergebnis ein Wert vom Typ `real` .
 Wenn die Konvertierung nicht erfolgreich ist, ist das Ergebnis der Wert `real(null)` .

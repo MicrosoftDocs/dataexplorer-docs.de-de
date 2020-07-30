@@ -1,6 +1,6 @@
 ---
-title: parse_xml() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird parse_xml() in Azure Data Explorer beschrieben.
+title: parse_xml ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird parse_xml () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,49 +8,49 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9743cbcb8d3c25707d97a4a6844f947352e63b0b
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.openlocfilehash: 5e294a60545a081861597e772c39d2e7e99824e8
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744613"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346370"
 ---
 # <a name="parse_xml"></a>parse_xml()
 
-Interpretiert a `string` als XML-Wert, konvertiert den Wert in ein `dynamic`JSON und gibt den Wert als zurück.
+Interpretiert einen `string` als XML-Wert, konvertiert den Wert in einen JSON-Wert und gibt den Wert als zurück `dynamic` .
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `parse_xml(`*xml*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *xml*: Ein `string`Ausdruck vom Typ , der einen XML-formatierten Wert darstellt.
+* *XML*: ein Ausdruck vom Typ `string` , der einen XML-formatierten Wert darstellt.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Ein Objekt vom Typ [dynamic,](./scalar-data-types/dynamic.md) das durch den Wert *von xml*oder null bestimmt wird, wenn das XML-Format ungültig ist.
+Ein Objekt vom Typ " [Dynamic](./scalar-data-types/dynamic.md) ", das durch den Wert von *XML*bestimmt wird, oder NULL, wenn das XML-Format ungültig ist.
 
-Das Konvertieren der XML-Datei in JSON erfolgt mithilfe der [xml2json-Bibliothek.](https://github.com/Cheedoong/xml2json)
+Die XML-Datei wird mithilfe der [xml2json](https://github.com/Cheedoong/xml2json) -Bibliothek in JSON-Code umwandelt.
 
 Die Konvertierung erfolgt wie folgt:
 
 XML                                |JSON                                            |Zugriff
 -----------------------------------|------------------------------------------------|--------------         
-`<e/>`                             | • "e": null                                  | o.e
-`<e>text</e>`                      | " "e": "text"                                | o.e
-`<e name="value" />`               | " "e":""@name": "value"                     | o.e["@name"]
-`<e name="value">text</e>`         | " " "wert",@name"#text": "text" | o.e["@name"] o.e["#text"]
-`<e> <a>text</a> <b>text</b> </e>` | - "e": "a": "text", "b": "text"          | o.e.a o.e.b
-`<e> <a>text</a> <a>text</a> </e>` | " "e": "a": ["text", "text"]             | o.e.a[0] o.e.a[1]
-`<e> text <a>text</a> </e>`        | " "e": "#text": "text", "a": "text"      | 1'o.e["#text"] o.e.a
+`<e/>`                             | {"e": NULL}                                  | o. e
+`<e>text</e>`                      | {"e": "Text"}                                | o. e
+`<e name="value" />`               | {"e": {" @name ": "Value"}}                     | o. e [" @name "]
+`<e name="value">text</e>`         | {"e": {" @name ": "Value", "#Text": "Text"}} | o. e [" @name "] o. e ["#Text"]
+`<e> <a>text</a> <b>text</b> </e>` | {"e": {"a": "Text", "b": "Text"}}          | o. e. a o. e. b
+`<e> <a>text</a> <a>text</a> </e>` | {"e": {"a": ["Text", "Text"]}}             | o. e. a [0] o. e. a [1]
+`<e> text <a>text</a> </e>`        | {"e": {"#Text": "Text", "a": "Text"}}      | 1 ' o. e ["#Text"] o. e. a
 
 **Hinweise**
 
-* Die `string` maximale `parse_xml` Eingangslänge für 128 KB. Längere Zeichenfolgeninterpretation führt zu einem Nullobjekt 
-* Nur Elementknoten, Attribute und Textknoten werden übersetzt. Alles andere wird übersprungen
+* Die maximale Eingabe `string` Länge für `parse_xml` beträgt 128 KB. Die Interpretation längerer Zeichen folgen führt zu einem NULL-Objekt. 
+* Nur Elementknoten, Attribute und Textknoten werden übersetzt. Alles andere wird übersprungen.
  
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Für das folgende Beispiel gilt: Wenn `context_custom_metrics` ein `string`-Element ist, das wie folgt aussieht: 
 
@@ -67,7 +67,7 @@ Für das folgende Beispiel gilt: Wenn `context_custom_metrics` ein `string`-Elem
 </duration>
 ```
 
-Dann übersetzt das folgende CSL-Fragment den XML-Code in die folgende JSON:
+anschließend übersetzt das folgende CSL-Fragment den XML-Code in den folgenden JSON-Code:
 
 ```json
 {
@@ -83,7 +83,7 @@ Dann übersetzt das folgende CSL-Fragment den XML-Code in die folgende JSON:
 }
 ```
 
-und ruft den Wert `duration` des Steckplatzes im Objekt ab, `duration.value` und `duration.min` `118.0` von `110.0`diesem ruft er zwei Steckplätze bzw. ( bzw. ) ab.
+und ruft den Wert des `duration` Slots im-Objekt ab, von dem zwei Slots `duration.value` `duration.min` ( `118.0` `110.0` bzw. bzw.) abgerufen werden.
 
 ```kusto
 T

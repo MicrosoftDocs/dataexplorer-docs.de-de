@@ -1,6 +1,6 @@
 ---
-title: sqrt() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt sqrt() in Azure Data Explorer.
+title: SQRT ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird sqrt () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 660235a60893732288a551e1febd9b7b044b4f00
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 76f5c8c5f8c1a0b9f685ae88df1ab624dc446150
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81507258"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350960"
 ---
 # <a name="sqrt"></a>sqrt()
 
-Gibt die Quadratwurzelfunktion zurück.  
+Gibt die Quadratwurzel Funktion zurück.  
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`sqrt(`*X*`)`
+`sqrt(`*Stuben*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *x*: Eine reelle Zahl >= 0.
+* *x*: eine reelle Zahl >= 0.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 * Eine positive Zahl, sodass Folgendes gilt: `sqrt(x) * sqrt(x) == x`
 * `null`, wenn das Argument negativ ist oder nicht in einen `real`-Wert konvertiert werden kann. 

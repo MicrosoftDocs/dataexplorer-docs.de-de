@@ -1,6 +1,6 @@
 ---
-title: substring() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt Substring() in Azure Data Explorer.
+title: Teil Zeichenfolge ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird die Teil Zeichenfolge () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b0273b3e93c8778af9c380f164faec74349aa8cd
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b0e83e8d0baf33e5c11cb8b7ecafa607a08fe32b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506697"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350858"
 ---
 # <a name="substring"></a>substring()
 
-Extrahiert eine Teilzeichenfolge aus einer Quellzeichenfolge, beginnend mit einem Index bis zum Ende der Zeichenfolge.
+Extrahiert eine Teil Zeichenfolge aus einer Quell Zeichenfolge beginnend mit einem Index bis zum Ende der Zeichenfolge.
 
 Optional kann die Länge der angeforderten Teilzeichenfolge angegeben werden.
 
@@ -25,25 +25,25 @@ Optional kann die Länge der angeforderten Teilzeichenfolge angegeben werden.
 substring("abcdefg", 1, 2) == "bc"
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`substring(`*Quelle* `,` *startingIndex* [`,` *Länge*]`)`
+`substring(`*Quelle* `,` *startingIndex* [ `,` *Länge*]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *source*: Die Quellzeichenfolge, aus der die Teilzeichenfolge entnommen wird.
-* *startingIndex*: Die nullbasierte Startzeichenposition der angeforderten Teilzeichenfolge.
-* *length*: Ein optionaler Parameter, der verwendet werden kann, um die angeforderte Anzahl von Zeichen in der Teilzeichenfolge anzugeben. 
+* *Source*: die Quell Zeichenfolge, aus der die Teil Zeichenfolge entnommen wird.
+* *startingIndex*: die null basierte anfangs Zeichenposition der angeforderten Teil Zeichenfolge.
+* *length*: ein optionaler Parameter, der verwendet werden kann, um die angeforderte Anzahl von Zeichen in der Teil Zeichenfolge anzugeben. 
 
 **Hinweise**
 
-*startingIndex* kann eine negative Zahl sein, in diesem Fall wird die Teilzeichenfolge vom Ende der Quellzeichenfolge abgerufen.
+*startingIndex* kann eine negative Zahl sein. in diesem Fall wird die Teil Zeichenfolge vom Ende der Quell Zeichenfolge abgerufen.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Eine Teilzeichenfolge aus der angegebenen Zeichenfolge. Die Teilzeichenfolge beginnt bei der startingIndex (nullbasierten) Zeichenposition und wird bis zum Ende der Zeichenfolge oder der Längenzeichen fortgesetzt, sofern angegeben.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 substring("123456", 1)        // 23456

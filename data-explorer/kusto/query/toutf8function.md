@@ -1,6 +1,6 @@
 ---
-title: to_utf8() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird to_utf8() in Azure Data Explorer beschrieben.
+title: to_utf8 ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird to_utf8 () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,37 +8,37 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9d48ed99e517e0b1e5d498e80deaa48dc1cd3601
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 891a2bb079136d9a7c21c1992b79e3e0eab4c970
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81505830"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350671"
 ---
 # <a name="to_utf8"></a>to_utf8()
 
-Gibt ein dynamisches Array der Unicode-Zeichen einer Eingabezeichenfolge zurück (die inverse Operation von make_string).
+Gibt ein dynamisches Array von Unicode-Zeichen einer Eingabe Zeichenfolge zurück (umgekehrter Vorgang make_string).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`to_utf8(`*Quelle*`)`
+`to_utf8(`*Ausgangs*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *quelle*: Die zu konvertierende Quellzeichenfolge.
+* *Quelle*: die zu konvertierende Quell Zeichenfolge.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Gibt ein dynamisches Array der Unicodezeichen zurück, aus denen die Zeichenfolge besteht, die für diese Funktion bereitgestellt wird.
-Siehe [`make_string()`](makestringfunction.md))
+Gibt ein dynamisches Array von Unicode-Zeichen zurück, die die für diese Funktion bereitgestellte Zeichenfolge bilden.
+Siehe [`make_string()`](makestringfunction.md) )
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 print arr = to_utf8("⒦⒰⒮⒯⒪")
 ```
 
-|Arr|
+|r|
 |---|
 |[9382, 9392, 9390, 9391, 9386]|
 
@@ -46,7 +46,7 @@ print arr = to_utf8("⒦⒰⒮⒯⒪")
 print arr = to_utf8("קוסטו - Kusto")
 ```
 
-|Arr|
+|r|
 |---|
 |[1511, 1493, 1505, 1496, 1493, 32, 45, 32, 75, 117, 115, 116, 111]|
 

@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 1f88cdfc1490f8b00d8104286441e366aaf46f3f
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 112fe4135b6ed996c798e5f03a34120e4078c623
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372571"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351385"
 ---
 # <a name="series_multiply"></a>series_multiply()
 
 Berechnet die Element Weise Multiplikation von zwei numerischen Reihen Eingaben.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_multiply(`*Series1* `,` *series2*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Series1, series2*: Eingabe numerische Arrays, die Element Weise mit einem dynamischen Array Ergebnis multipliziert werden sollen. Alle Argumente müssen dynamische Arrays sein. 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Dynamisches Array der berechneten Element weisen Multiplikations Operation zwischen den beiden Eingaben. Ein nicht numerisches Element oder ein nicht vorhandenes Element (Arrays mit unterschiedlichen Größen) ergeben einen- `null` Elementwert.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

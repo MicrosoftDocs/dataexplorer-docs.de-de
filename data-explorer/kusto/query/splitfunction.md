@@ -1,6 +1,6 @@
 ---
-title: split() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt split() in Azure Data Explorer.
+title: Split ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird Split () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6e3935c524056afd27eb0d5e2d80925e072c8fa7
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: efd3812086631451b77ca1edd846ec9bd75990fe
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81507462"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351011"
 ---
 # <a name="split"></a>split()
 
-Teilt eine bestimmte Zeichenfolge nach einem bestimmten Trennzeichen und gibt ein Zeichenfolgenarray mit den enthaltenen Teilzeichenfolgen zurück.
+Teilt eine angegebene Zeichenfolge gemäß einem angegebenen Trennzeichen und gibt ein Zeichen folgen Array mit den enthaltenen Teil Zeichenfolgen zurück.
 
 Optional kann eine bestimmte Teilzeichenfolge zurückgegeben werden, sofern vorhanden.
 
@@ -25,21 +25,21 @@ Optional kann eine bestimmte Teilzeichenfolge zurückgegeben werden, sofern vorh
 split("aaa_bbb_ccc", "_") == ["aaa","bbb","ccc"]
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`split(`*source*`,` *Quelltrennzeichen* [`,` *requestedIndex*]`)`
+`split(`*Quelle* `,` *Trenn* Zeichen [ `,` *requestedindex*]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *quelle*: Die Quellzeichenfolge, die entsprechend dem angegebenen Trennzeichen aufgeteilt wird.
+* *Source*: die Quell Zeichenfolge, die entsprechend dem angegebenen Trennzeichen aufgeteilt wird.
 * *delimiter:* Das Trennzeichen, das zum Teilen der Quellzeichenfolge verwendet wird.
 * *requestedIndex*: Ein optionaler nullbasierter Index (`int`). Sofern angegeben, enthält das zurückgegebene Zeichenfolgenarray die angeforderte Teilzeichenfolge, sofern vorhanden. 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Ein Zeichenfolgenarray, das die Teilzeichenfolgen der angegebenen Quellzeichenfolge enthält, die durch das angegebene Trennzeichen getrennt sind.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 print

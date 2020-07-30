@@ -1,6 +1,6 @@
 ---
-title: row_number() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird row_number() in Azure Data Explorer beschrieben.
+title: ROW_NUMBER ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird ROW_NUMBER () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,34 +8,34 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: c8cb01ed098d24632154215ddf06dc2ab1d72695
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: ea51e6171b8a7683a0454d177dc729ed754b8896
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510165"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351589"
 ---
 # <a name="row_number"></a>row_number()
 
-Gibt den Index der aktuellen Zeile in einem [serialisierten Zeilensatz](./windowsfunctions.md#serialized-row-set)zurück.
-Der Zeilenindex beginnt `1` standardmäßig bei der ersten Zeile `1` und wird für jede weitere Zeile um erhöht.
-Optional kann der Zeilenindex mit einem `1`anderen Wert als beginnen.
-Darüber hinaus kann der Zeilenindex entsprechend einem bereitgestellten Prädikat zurückgesetzt werden.
+Gibt den Index der aktuellen Zeile in einem [serialisierten Zeilen Satz](./windowsfunctions.md#serialized-row-set)zurück.
+Der Zeilen Index beginnt standardmäßig bei `1` für die erste Zeile und wird `1` für jede weitere Zeile um inkrementiert.
+Optional kann der Zeilen Index bei einem anderen Wert als gestartet werden `1` .
+Außerdem kann der Zeilen Index gemäß dem bereitgestellten Prädikat zurückgesetzt werden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`row_number``(` [*StartingIndex* [`,` *Neustart*]]`)`
+`row_number``(`[*StartingIndex* [ `,` *Restart*]]`)`
 
-* *StartingIndex* ist ein konstanter Ausdruck des Typs, `long` der den Wert des Zeilenindex angibt, mit dem er beginnen (oder neu gestartet werden soll). Standardwert: `1`.
-* *Restart* ist ein optionales Argument vom Typ, `bool` das angibt, wann die Nummerierung auf den *StartingIndex-Wert* neu gestartet werden soll. Wenn nicht angegeben, wird `false` der Standardwert von verwendet.
+* *StartingIndex* ist ein konstanter Ausdruck vom Typ `long` , der den Wert des Zeilen Indexes angibt, bei dem begonnen wird (oder für den ein Neustart durchgestartet werden soll). Der Standardwert ist `1`.
+* *Restart* ist ein optionales Argument vom Typ `bool` , das angibt, wann die Nummerierung mit dem *startingIndex* -Wert neu gestartet werden soll. Wenn kein Wert angegeben wird, wird der Standardwert von `false` verwendet.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Die Funktion gibt den Zeilenindex der aktuellen `long`Zeile als Wert des Typs zurück.
+Die-Funktion gibt den Zeilen Index der aktuellen Zeile als Wert des Typs zurück `long` .
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
-Im folgenden Beispiel wird eine Tabelle mit`a`zwei Spalten `10` zurückgegeben, `1`die erste Spalte`rn`( ) `1` mit `10`Zahlen von unten nach und die zweite Spalte ( ) mit Zahlen von bis zu:
+Im folgenden Beispiel wird eine Tabelle mit zwei Spalten zurückgegeben: die erste Spalte ( `a` ) mit Zahlen von bis `10` zu `1` und die zweite Spalte ( `rn` ) mit Zahlen von `1` bis zu `10` :
 
 ```kusto
 range a from 1 to 10 step 1
@@ -43,7 +43,7 @@ range a from 1 to 10 step 1
 | extend rn=row_number()
 ```
 
-Das folgende Beispiel ähnelt dem obigen,`rn`nur die `7`zweite Spalte ( ) beginnt bei :
+Das folgende Beispiel ähnelt dem obigen, nur die zweite Spalte ( `rn` ) beginnt bei `7` :
 
 ```kusto
 range a from 1 to 10 step 1
@@ -51,7 +51,7 @@ range a from 1 to 10 step 1
 | extend rn=row_number(7)
 ```
 
-Das letzte Beispiel zeigt, wie man die Daten partitionieren und die Zeilen pro Partition nummerieren kann. Hier partitionieren wir `Airport`die Daten durch:
+Im letzten Beispiel wird veranschaulicht, wie die Daten partitioniert und die Zeilen pro Partition partitioniert werden können. Hier werden die Daten partitioniert nach `Airport` :
 
 ```kusto
 datatable (Airport:string, Airline:string, Departures:long)
@@ -68,10 +68,10 @@ datatable (Airport:string, Airline:string, Departures:long)
 
 Das Ausführen dieser Abfrage führt zu folgendem Ergebnis:
 
-Flughafen  | Luftfahrt  | Abfahrten  | Rank
+Airport  | Luftfahrt  | Abschiebungen  | Rank
 ---------|----------|-------------|------
 SEA      | BA       | 2           | 1
-SEA      | Lh       | 1           | 2
+SEA      | LH       | 1           | 2
 SEA      | LY       | 0           | 3
-Tlv      | LY       | 100         | 1
-Tlv      | Lh       | 1           | 2
+TLV      | LY       | 100         | 1
+TLV      | LH       | 1           | 2

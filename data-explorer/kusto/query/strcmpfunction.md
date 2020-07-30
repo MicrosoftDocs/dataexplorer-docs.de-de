@@ -1,6 +1,6 @@
 ---
-title: strcmp() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt strcmp() in Azure Data Explorer.
+title: "\"straucmp ()\": Azure Daten-Explorer | Microsoft-Dokumentation"
+description: In diesem Artikel wird "straucmp ()" in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 62ebcbfa71ebf8a29f3a8a1559feb91f96e0a2bf
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 11951195d95d956f70d4bfce32d22a9f9c73dc3d
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506901"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350926"
 ---
 # <a name="strcmp"></a>strcmp()
 
 Vergleicht zwei Zeichenfolgen.
 
-Die Funktion beginnt mit dem Vergleich des ersten Zeichens jeder Zeichenfolge. Wenn sie gleich sind, wird mit den folgenden Paaren fortgesetzt, bis sich die Zeichen unterscheiden oder bis das Ende einer kürzeren Zeichenfolge erreicht ist.
+Die Funktion beginnt mit dem Vergleich des ersten Zeichens der einzelnen Zeichen folgen. Wenn Sie gleich sind, wird die Datei mit den folgenden Paaren fortgesetzt, bis die Zeichen unterschiedlich sind oder bis das Ende der kürzeren Zeichenfolge erreicht ist.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`strcmp(`*string1* `,` *string2*`)` 
+`strcmp(`*Zeichenfolge1* `,` *Zeichenfolge2*`)` 
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *string1*: erste Eingabezeichenfolge zum Vergleich. 
-* *string2*: zweite Eingabezeichenfolge zum Vergleich.
+* *Zeichenfolge1*: erste Eingabe Zeichenfolge für den Vergleich. 
+* *Zeichenfolge2*: zweite Eingabe Zeichenfolge für den Vergleich.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Gibt einen integralen Wert zurück, der die Beziehung zwischen den Zeichenfolgen angibt:
-* *<0* - das erste Zeichen, das nicht übereinstimmt, hat in String1 einen niedrigeren Wert als in string2
-* *0* - der Inhalt beider Zeichenfolgen ist gleich
-* *>0* - das erste Zeichen, das nicht übereinstimmt, hat in String1 einen größeren Wert als in string2
+Gibt einen integralen Wert zurück, der die Beziehung zwischen den Zeichen folgen angibt:
+* *<0* -das erste Zeichen, das nicht entspricht, hat einen niedrigeren Wert in Zeichenfolge1 als in Zeichenfolge2
+* *0* -der Inhalt beider Zeichen folgen ist gleich.
+* *>0* -das erste Zeichen, das nicht entspricht, hat einen größeren Wert in Zeichenfolge1 als in Zeichenfolge2
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```
 datatable(string1:string, string2:string)
@@ -53,4 +53,4 @@ datatable(string1:string, string2:string)
 |ABC|ABC|0|
 |abc|ABC|1|
 |ABC|abc|-1|
-|Abcde|abc|1|
+|abcde|abc|1|

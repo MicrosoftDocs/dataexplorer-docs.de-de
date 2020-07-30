@@ -8,36 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/27/2019
-ms.openlocfilehash: f69261e7ac84d8ae77fd1d2fb89f31ede2536443
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: e4d97aac09138c0268bc5c466c67f64cd1da6ebe
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83370238"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350620"
 ---
 # <a name="unixtime_microseconds_todatetime"></a>unixtime_microseconds_todatetime()
 
 Konvertiert Unix-Epoche-Mikrosekunden in UTC-DateTime.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `unixtime_microseconds_todatetime(*microseconds*)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Mikrosekunden*: eine reelle Zahl stellt einen Epochen Zeitstempel in Mikrosekunden dar. `Datetime`Dies tritt auf, bevor die Epochen Zeit (1970-01-01 00:00:00) einen negativen Zeitstempelwert aufweist.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Wenn die Konvertierung erfolgreich ist, ist das Ergebnis ein [DateTime](./scalar-data-types/datetime.md) -Wert. Wenn die Konvertierung nicht erfolgreich ist, ist das Ergebnis NULL.
 
-**Siehe auch**
+**Weitere Informationen**
 
 * Konvertieren Sie UNIX-Epoch seconds in UTC-DateTime mithilfe von [unixtime_seconds_todatetime ()](unixtime-seconds-todatetimefunction.md).
 * Konvertieren Sie UNIX-Epoch-Millisekunden in UTC-DateTime mithilfe von [unixtime_milliseconds_todatetime ()](unixtime-milliseconds-todatetimefunction.md).
 * Konvertieren von UNIX-Epochen (Nanosekunden) in UTC-DateTime mithilfe von [unixtime_nanoseconds_todatetime ()](unixtime-nanoseconds-todatetimefunction.md).
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net/Samples  -->
 ```kusto

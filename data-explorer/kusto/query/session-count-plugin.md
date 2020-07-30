@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1e173dcba48e8748562bad61e0f16786e957ca83
-ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
+ms.openlocfilehash: c46430fe7acc75685b90d2322d709392c91ed6dc
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/18/2020
-ms.locfileid: "83550553"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351215"
 ---
 # <a name="session_count-plugin"></a>session_count-Plug-In
 
@@ -23,11 +23,11 @@ Berechnet die Anzahl der Sitzungen basierend auf der ID-Spalte einer Zeitachse.
 T | evaluate session_count(id, datetime_column, startofday(ago(30d)), startofday(now()), 1min, 30min, dim1, dim2, dim3)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| evaluate` `session_count(` *idColumn* `,` *timelinecolenn* `,` *Start* `,` *Ende* `,` *bin* `,` *lookbackwindow* [ `,` *dim1* `,` *dim2* `,` ...]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: der tabellarische Eingabe Ausdruck.
 * *IdColumn*: der Name der Spalte mit ID-Werten, die die Benutzeraktivität darstellen. 
@@ -38,7 +38,7 @@ T | evaluate session_count(id, datetime_column, startofday(ago(30d)), startofday
 * *Lookbackwindow*: skalare Konstante Wert, der den Sitzungs Such Zeitraum darstellt. Wenn die ID von `IdColumn` in einem Zeitfenster in angezeigt wird `LookBackWindow` , wird die Sitzung als eine vorhandene Sitzung betrachtet. Wenn die ID nicht angezeigt wird, gilt die Sitzung als neu.
 * *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, in denen die Berechnung der Sitzungs Anzahl in Slice ist.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt eine Tabelle zurück, die die Sitzungs Zählerwerte für jeden Zeitachsen Zeitraum und jede vorhandene Dimensions Kombination enthält.
 
@@ -49,7 +49,7 @@ Das Ausgabe Tabellen Schema ist:
 |Typ: ab *timelinecolumschlag*|..|..|..|long|
 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 In diesem Beispiel sind die Daten deterministisch, und wir verwenden eine Tabelle mit zwei Spalten:
 - Zeitachse: eine laufende Zahl zwischen 1 und 10.000

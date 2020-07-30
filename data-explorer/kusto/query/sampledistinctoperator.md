@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5303801b983b326310065ea2a6ce6ded7d098001
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 3cb1de08604964d4d71c5868ef7564c728b1f2c4
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372992"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351538"
 ---
 # <a name="sample-distinct-operator"></a>sample-distinct-Operator
 
@@ -25,11 +25,11 @@ der standardmäßige (und derzeit einzige) Wert des Operators versucht, eine Ant
 T | sample-distinct 5 of DeviceId
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* - `| sample-distinct` *Werte* Spalten `of` *Name*
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 * *Anzahlwerte*: die Anzahl der unterschiedlichen Werte von *T* , die zurückgegeben werden sollen. Sie können einen beliebigen numerischen Ausdruck angeben.
 
 **Tipps**
@@ -40,7 +40,7 @@ T | sample-distinct 5 of DeviceId
 
  Wenn Sie Stichproben von Daten Zeilen (anstelle von Werten einer bestimmten Spalte) durchführen möchten, lesen Sie den [Beispiel Operator](sampleoperator.md) .
 
-**Beispiele**  
+## <a name="examples"></a>Beispiele  
 
 10 unterschiedliche Werte aus einer Population
 

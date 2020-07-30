@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f5c108b670534728f34db8975f16d713848dd8f4
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 6a991f9f64decbb3985830cf2611361d6c66db31
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264607"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350841"
 ---
 # <a name="todatetime"></a>todatetime()
 
@@ -23,15 +23,15 @@ Konvertiert die Eingabe in einen [DateTime](./scalar-data-types/datetime.md) -sk
 todatetime("2015-12-24") == datetime(2015-12-24)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `todatetime(`*Expr*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expr*: Ausdruck, der in [DateTime](./scalar-data-types/datetime.md)konvertiert wird.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Wenn die Konvertierung erfolgreich ist, ist das Ergebnis ein [DateTime](./scalar-data-types/datetime.md) -Wert.
 Andernfalls ist das Ergebnis NULL.

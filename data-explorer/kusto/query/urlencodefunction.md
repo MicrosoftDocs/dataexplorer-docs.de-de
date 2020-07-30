@@ -1,6 +1,6 @@
 ---
-title: url_encode() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird url_encode() in Azure Data Explorer beschrieben.
+title: url_encode ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird url_encode () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,42 +8,42 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/17/2020
-ms.openlocfilehash: 913be2d20af413f8ba89192f4db57e60fc6d7b27
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 8ccc93286073003bdaf8324611888d32f60910fb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81505048"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350569"
 ---
 # <a name="url_encode"></a>url_encode()
 
-Die Funktion konvertiert Zeichen der Eingabe-URL in ein Format, das über das Internet übertragen werden kann. 
+Die-Funktion konvertiert Zeichen der Eingabe-URL in ein Format, das über das Internet übermittelt werden kann. 
 
-Ausführliche Informationen zur URL-Codierung und -Dekodierung finden Sie [hier](https://en.wikipedia.org/wiki/Percent-encoding).
-Unterscheidet sich von [url_encode_component](./urlencodecomponentfunction.md) durch Codierung von Leerzeichen als '+' und nicht als '20%' (siehe anwendung/x-www-form-urlencoded [hier](https://en.wikipedia.org/wiki/Percent-encoding)).
+Ausführliche Informationen zur URL-Codierung und-Decodierung finden Sie [hier](https://en.wikipedia.org/wiki/Percent-encoding).
+Unterscheidet sich von [url_encode_component](./urlencodecomponentfunction.md) , indem Leerzeichen als "+" und nicht als "20%" codiert werden (siehe "application/x-www-form-urlencoded" [hier](https://en.wikipedia.org/wiki/Percent-encoding)).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`url_encode(`*Url*`)`
+`url_encode(`*Urne*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *url*: Eingabe-URL (Zeichenfolge).  
+* *URL*: Eingabe-URL (Zeichenfolge).  
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-URL (Zeichenfolge) in ein Format konvertiert, das über das Internet übertragen werden kann.
+Die URL (Zeichenfolge) wurde in ein Format konvertiert, das über das Internet übermittelt werden kann.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 let url = @'https://www.bing.com/hello word';
 print original = url, encoded = url_encode(url)
 ```
 
-|original|Codiert|
+|original|codierte|
 |---|---|
-|https://www.bing.com/hellowort/|https%3a%2f%2fwww.bing.com%2fhello+word|
+|https://www.bing.com/helloWort|HTTPS %3 a %2 f %2 f www.... com% 2F + Word|
 
 
  

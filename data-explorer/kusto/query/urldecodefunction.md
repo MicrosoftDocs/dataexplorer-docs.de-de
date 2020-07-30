@@ -1,6 +1,6 @@
 ---
-title: url_decode() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird url_decode() in Azure Data Explorer beschrieben.
+title: url_decode ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird url_decode () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,41 +8,41 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 3ffa5052a2fc30387be118683ec1df6f34f7346f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 0019e318b90f9626d9e55a593f19526cdc7cc9c7
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81505150"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350586"
 ---
 # <a name="url_decode"></a>url_decode()
 
-Die Funktion konvertiert codierte URL in eine reguläre URL-Darstellung. 
+Die-Funktion konvertiert die codierte URL in eine reguläre URL-Darstellung. 
 
-Ausführliche Informationen zur URL-Dekodierung und -Codierung finden Sie [hier](https://en.wikipedia.org/wiki/Percent-encoding).
+Ausführliche Informationen zur URL-Decodierung und-Codierung finden Sie [hier](https://en.wikipedia.org/wiki/Percent-encoding).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `url_decode(`*codierte URL*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *codierte URL*: codierte URL (Zeichenfolge).  
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-URL (Zeichenfolge) in einer regulären Darstellung.
+URL (Zeichenfolge) in regulärer Darstellung.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 let url = @'https%3a%2f%2fwww.bing.com%2f';
 print original = url, decoded = url_decode(url)
 ```
 
-|original|Decodiert|
+|original|decodierte|
 |---|---|
-|https%3a%2f%2fwww.bing.com%2f|https://www.bing.com/|
+|HTTPS %3 a %2 f %2 f www.... com% 2F|https://www.bing.com/|
 
 
 

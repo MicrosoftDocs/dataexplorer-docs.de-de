@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1efd06b8fa2961528be65b630933aae74614e9a0
-ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
+ms.openlocfilehash: 2daea4d190ed349c41a8eecf2eef53b2c2b93716
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "86013605"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350688"
 ---
 # <a name="toint"></a>toint()
 
@@ -23,15 +23,15 @@ Konvertiert Eingaben in ganzzahlige (signierte 32-Bit-) Zahlen Darstellungen.
 toint("123") == int(123)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `toint(`*Expr*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expr*: Ausdruck, der in eine ganze Zahl konvertiert wird. 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Wenn die Konvertierung erfolgreich ist, ist das Ergebnis eine ganze Zahl.
 Wenn die Konvertierung nicht erfolgreich ist, lautet das Ergebnis `null` .

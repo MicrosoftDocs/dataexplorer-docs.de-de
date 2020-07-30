@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ac6bf9a8dbd54c3afca1c00f487e6ba564e65ce9
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: abe49795b7b997abf677fd0fafff10ae38787f44
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264979"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346336"
 ---
 # <a name="parse_json"></a>parse_json()
 
@@ -21,7 +21,7 @@ Interpretiert einen `string` als JSON-Wert und gibt den Wert als zurück `dynami
 
 Diese Funktion ist besser als die [extractjson ()-Funktion](./extractjsonfunction.md) , wenn Sie mehr als ein Element eines JSON-Verbund Objekts extrahieren müssen.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `parse_json(`*json*`)`
 
@@ -29,18 +29,18 @@ Aliase:
 - [todynamic()](./todynamicfunction.md)
 - [Objekt ()](./todynamicfunction.md)
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *JSON*: ein Ausdruck vom Typ `string` . Sie stellt einen [JSON-formatierten Wert](https://json.org/)oder einen Ausdruck vom Typ [Dynamic](./scalar-data-types/dynamic.md)dar, der den tatsächlichen `dynamic` Wert darstellt.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Ein Objekt vom Typ `dynamic` , das durch den Wert von *JSON*bestimmt wird:
 * Wenn *JSON* vom Typ ist `dynamic` , wird der zugehörige Wert unverändert verwendet.
 * Wenn *JSON* vom Typ ist `string` und eine [ordnungsgemäß formatierte JSON-Zeichenfolge](https://json.org/)ist, wird die Zeichenfolge analysiert, und der erzeugte Wert wird zurückgegeben.
 * Wenn *JSON* vom Typ ist `string` , aber keine [ordnungsgemäß formatierte JSON-Zeichenfolge](https://json.org/)ist, ist der zurückgegebene Wert ein Objekt vom Typ, das `dynamic` den ursprünglichen `string` Wert enthält.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Für das folgende Beispiel gilt: Wenn `context_custom_metrics` ein `string`-Element ist, das wie folgt aussieht:
 
@@ -56,11 +56,11 @@ T
 | extend duration_value=d.duration.value, duration_min=d["duration"]["min"]
 ```
 
-**Notizen**
+**Hinweise**
 
 Es kommt häufig vor, dass eine JSON-Zeichenfolge einen Eigenschaften Behälter beschreibt, in dem einer der "Slots" eine andere JSON-Zeichenfolge ist. 
 
-Beispiel:
+Zum Beispiel:
 
 ```kusto
 let d='{"a":123, "b":"{\\"c\\":456}"}';

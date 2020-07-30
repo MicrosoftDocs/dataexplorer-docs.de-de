@@ -1,6 +1,6 @@
 ---
-title: strlen() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt strlen() in Azure Data Explorer.
+title: strinlen ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird das Thema in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 33bb1ea56ebc03dc7357264bcdf987c191478cbb
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 2d28eae6852faedf2c6071164d8f80f9c3567602
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506867"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350892"
 ---
 # <a name="strlen"></a>strlen()
 
-Gibt die Länge der Eingabezeichenfolge in Zeichen zurück.
+Gibt die Länge der Eingabe Zeichenfolge in Zeichen zurück.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`strlen(`*Quelle*`)`
+`strlen(`*Ausgangs*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *source*: Die Quellzeichenfolge, die für die Zeichenfolgenlänge gemessen wird.
+* *Source*: die Quell Zeichenfolge, die für die Zeichen folgen Länge gemessen wird.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Gibt die Länge der Eingabezeichenfolge in Zeichen zurück.
+Gibt die Länge der Eingabe Zeichenfolge in Zeichen zurück.
 
 **Hinweise**
 
-Jedes Unicode-Zeichen in der `1`Zeichenfolge ist gleich , einschließlich Ersatzzeichen.
-(z. B.: Chinesische Zeichen werden einmal gezählt, obwohl es mehr als einen Wert in der UTF-8-Codierung erfordert).
+Jedes Unicode-Zeichen in der Zeichenfolge ist gleich `1` , einschließlich Surrogates.
+(Beispiel: chinesische Zeichen werden einmal gezählt, trotz der Tatsache, dass mehr als ein Wert in der UTF-8-Codierung erforderlich ist).
 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 print length = strlen("hello")

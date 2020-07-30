@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5e4b318743380b13a26e90a7e83549c998926bd8
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: ae5268a4a062a6f45adb715650028d952cb89e0b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85902121"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346387"
 ---
 # <a name="parse_version"></a>parse_version()
 
@@ -23,20 +23,20 @@ Konvertiert die Darstellung der Eingabe Zeichenfolge von Version in eine verglei
 parse_version("0.0.0.1")
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `parse_version``(` *Expr*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *`Expr`*: Ein Skalarausdruck vom Typ `string` , der die Version angibt, die analysiert werden soll.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Wenn die Konvertierung erfolgreich ist, ist das Ergebnis ein Dezimaltrennzeichen.
 Wenn die Konvertierung nicht erfolgreich ist, lautet das Ergebnis `null` .
 
-**Notizen**
+**Hinweise**
 
 Die Eingabe Zeichenfolge muss eine bis vier Versions Bestandteile enthalten, die als Zahlen dargestellt und durch Punkte (".") getrennt sind.
 
@@ -44,7 +44,7 @@ Jeder Teil der Version kann bis zu acht Ziffern mit dem maximalen Wert bei 99999
 
 Wenn die Anzahl der Teile kleiner als vier ist, werden alle fehlenden Teile als nachfolgende ( `1.0`  ==  `1.0.0.0` ) betrachtet.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 ```kusto
 let dt = datatable(v:string)
 ["0.0.0.5","0.0.7.0","0.0.3","0.2","0.1.2.0","1.2.3.4","1","99999999.0.0.0"];

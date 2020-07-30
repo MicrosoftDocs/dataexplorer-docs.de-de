@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: 8e96b97754600d308526a4cb059907521fda0521
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
+ms.openlocfilehash: 314244c58eca6082b9042b263e6b3e6faeb69840
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83862927"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351198"
 ---
 # <a name="set_has_element"></a>set_has_element()
 
 Bestimmt, ob die angegebene Menge das angegebene Element enthält.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `set_has_element(`*Array*,*Wert*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Array*: zu durchsuchende Eingabe Array.
 * *Wert*: Wert, nach dem gesucht werden soll. Der Wert muss vom Typ `long` , `integer` ,, `double` `datetime` , `timespan` , `decimal` , oder sein `string` `guid` .
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 True oder false, abhängig davon, ob der Wert im Array vorhanden ist.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -44,6 +44,6 @@ print arr=dynamic(["this", "is", "an", "example"])
 |---|
 |1|
 
-**Siehe auch**
+**Weitere Informationen**
 
 Verwenden [`array_index_of(arr, value)`](arrayindexoffunction.md) Sie, um die Position zu ermitteln, an der der Wert im Array vorhanden ist. Beide Funktionen sind gleichwertig.

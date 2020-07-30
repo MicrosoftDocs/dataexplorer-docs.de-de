@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 8f86d7174e73f2ffbace935f695c1220572a0e38
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: c758cc9a60e8e785031450e09e50e37b8fbf44b7
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372602"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351419"
 ---
 # <a name="series_less_equals"></a>series_less_equals()
 
 Berechnet die Element Weise weniger oder gleichmäßige `<=` Logik Operation von zwei numerischen Reihen Eingaben.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_less_equals (`*Series1* `,` *Series2*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Series1, series2*: numerische Eingabe Arrays, die Element Weise verglichen werden sollen. Alle Argumente müssen dynamische Arrays sein. 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Dynamisches Array von booleschen Werten, das die berechnete Element Weise weniger oder gleiche Logik Operation zwischen den beiden Eingaben enthält. Ein nicht numerisches Element oder ein nicht vorhandenes Element (Arrays mit unterschiedlichen Größen) ergeben einen- `null` Elementwert.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -43,7 +43,7 @@ print s1 = dynamic([1,2,4]), s2 = dynamic([4,2,1])
 |---|---|---|
 |[1, 2, 4]|[4, 2, 1]|[true, true, false]|
 
-**Siehe auch**
+**Weitere Informationen**
 
 Eine ganze Reihe von Statistik vergleichen finden Sie unter:
 * [series_stats()](series-statsfunction.md)
