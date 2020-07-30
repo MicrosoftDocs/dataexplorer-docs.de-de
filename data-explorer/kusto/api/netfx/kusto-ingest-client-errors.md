@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 97798fa62d588769636966c7155dc5f398bd001a
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: 6b94dfc0fab1150b598fad9d55beec2f3a81ad73
+ms.sourcegitcommit: f34535b0ca63cff22e65c598701cec13856c1742
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382317"
+ms.lasthandoff: 07/29/2020
+ms.locfileid: "87402337"
 ---
 # <a name="kustoingest-errors-and-exceptions"></a>Kusto. Erfassungs Fehler und Ausnahmen
 Jeder Fehler während der Erfassungs Behandlung auf der Clientseite wird durch eine c#-Ausnahme angegeben.
@@ -52,14 +52,14 @@ Wenn eine DataReader-Quelle verwendet wird, werden die Daten, die in die Wartesc
 In der `IngestFromDataReader` - `IngestFromDataReaderAsync` Methode und der-Methode bestimmt das- `retainCsvOnFailure` Flag, dessen Standardwert ist `false` ,, ob die Dateien nach einer fehlgeschlagenen Erfassung aufbewahrt werden sollen. Wenn dieses Flag auf festgelegt ist `false` , werden Daten, bei denen die Erfassung fehlschlägt, nicht persistent gespeichert, sodass es schwer zu verstehen ist, was schief gelaufen ist.
 
 ### <a name="common-failures"></a>Häufige Fehler
-|Fehler                         |`Reason`           |Minderung                                   |
+|Fehler                         |`Reason`           |Abhilfemaßnahmen                                   |
 |------------------------------|-----------------|---------------------------------------------|
 |Der Daten <database name> Bankname ist nicht vorhanden| Die Datenbank ist nicht vorhanden.|Überprüfen Sie den Datenbanknamen unter `kustoIngestionProperties` /Create the Database. |
 |Die Entität "der Tabellenname, der nicht vorhanden ist" der Art "Table" wurde nicht gefunden.|Die Tabelle ist nicht vorhanden, und es gibt keine CSV-Zuordnung.| CSV-Zuordnung hinzufügen/erforderliche Tabelle erstellen |
 |BLOB <blob path> ausgeschlossen aus Grund: das JSON-Muster muss mit dem jsonmapping-Parameter erfasst werden.| JSON-Erfassung, wenn keine JSON-Zuordnung bereitgestellt wird.|Bereitstellen einer JSON-Zuordnung |
 |Fehler beim Herunterladen des BLOBs: "der Remote Server hat einen Fehler zurückgegeben: (404) nicht gefunden."| Das Blob ist nicht vorhanden.|Überprüfen Sie, ob das BLOB vorhanden ist. Falls vorhanden, versuchen Sie es erneut, und wenden Sie sich an das Kusto-Team |
 |Die JSON-Spalten Zuordnung ist ungültig: zwei oder mehr Mapping-Elemente zeigen auf dieselbe Spalte.| Die JSON-Zuordnung verfügt über zwei Spalten mit unterschiedlichen Pfaden.|JSON-Zuordnung korrigieren |
-|EngineError-[utilsexception] `IngestionDownloader.Download` : mindestens eine Datei konnte nicht heruntergeladen werden (suchen Sie nach "kustologs" nach "ActivityID:" <GUID1> , rootactivityid: <GUID2> ).| Mindestens eine Datei konnte nicht heruntergeladen werden. |Wiederholen |
+|EngineError-[utilsexception] `IngestionDownloader.Download` : mindestens eine Datei konnte nicht heruntergeladen werden (suchen Sie nach "kustologs" nach "ActivityID:" <GUID1> , rootactivityid: <GUID2> ).| Mindestens eine Datei konnte nicht heruntergeladen werden. |Erneut versuchen |
 |Fehler beim Analysieren: der Stream mit der ID " <stream name> " weist ein falsch formatiertes CSV-Format auf, das für die Richtlinie "validationoptions" nicht |Falsch formatierte CSV-Datei (z. b., nicht über die gleiche Anzahl von Spalten in jeder Zeile). Schlägt nur fehl, wenn die Validierungs Richtlinie auf festgelegt ist `ValidationOptions` . Validatecsvinputconstantcolumns |Überprüfen Sie die CSV-Dateien. Diese Meldung gilt nur für CSV/TSV-Dateien. |
 |`IngestClientAggregateException`mit der Fehlermeldung "fehlende obligatorische Parameter für gültiges Shared Access Signature" |Die verwendete SAS ist der Dienst und nicht das Speicherkonto. |Verwenden Sie die SAS des Speicher Kontos. |
 
@@ -87,7 +87,10 @@ Um Erfassungs Fehler Programm gesteuert zu behandeln, werden Fehlerinformationen
 |UpdatePolicy_IngestionError                    | Fehler beim Aufrufen der Update Richtlinie. Erfassungs Fehler|
 |UpdatePolicy_UnknownError                      | Fehler beim Aufrufen der Update Richtlinie. Unbekannter Fehler ist aufgetreten|
 |BadRequest_MissingJsonMappingtFailure          | Das JSON-Muster konnte nicht mit dem jsonmapping-Parameter erfasst werden.|
-|BadRequest_InvalidOrEmptyBlob                  | Das BLOB ist ungültig oder ein leeres ZIP-Archiv.|
+|BadRequest_InvalidBlob                         | Engine konnte kein nicht-ZIP-BLOB öffnen und lesen|
+|BadRequest_EmptyBlob                           | Leeres BLOB|
+|BadRequest_EmptyArchive                        | Die ZIP-Datei enthält keine archivierten Elemente.|
+|BadRequest_EmptyBlobUri                        | Der angegebene BLOB-URI ist leer.|
 |BadRequest_DatabaseNotExist                    | Die Datenbank ist nicht vorhanden|
 |BadRequest_TableNotExist                       | Tabelle ist nicht vorhanden.|
 |BadRequest_InvalidKustoIdentityToken           | Ungültiges Kusto-Identitäts Token.|
@@ -107,7 +110,7 @@ Wird ausgelöst, wenn keine Warteschlangen vom Datenverwaltung Cluster zurückge
 
 Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
 
-|Feldname |Typ     |Bedeutung
+|Feldname |type     |Bedeutung
 |-----------|---------|------------------------------|
 |Fehler      | String  | Der Fehler, der beim Versuch aufgetreten ist, Warteschlangen aus der DM abzurufen.
                             
@@ -121,7 +124,7 @@ Wird ausgelöst, wenn keine BLOB-Container vom Datenverwaltung Cluster zurückge
 
 Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
 
-|Feldname   |Typ     |Bedeutung       
+|Feldname   |type     |Bedeutung       
 |-------------|---------|------------------------------|
 |Kustoendpoint| String  | Der Endpunkt der relevanten DM
                             
@@ -134,7 +137,7 @@ Wird ausgelöst, wenn eine Erfassungs Eigenschaft mehrmals konfiguriert ist.
 
 Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
 
-|Feldname   |Typ     |Bedeutung       
+|Feldname   |type     |Bedeutung       
 |-------------|---------|------------------------------------|
 |PropertyName | String  | Der Name der doppelten Eigenschaft.
                             
@@ -144,7 +147,7 @@ Wird ausgelöst, wenn eine Nachricht an die Warteschlange zurückgestellt wird.
 
 Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
 
-|Feldname   |Typ     |Bedeutung       
+|Feldname   |type     |Bedeutung       
 |-------------|---------|---------------------------------|
 |Queueuri     | String  | Der URI der Warteschlange.
 |Fehler        | String  | Die Fehlermeldung, die generiert wurde, während versucht wurde, in die Warteschlange zu schreiben.
@@ -186,9 +189,9 @@ Wird ausgelöst, wenn eine Erfassungs Quelle zu groß ist.
 
 Basisklasse: ingestcliumtexception
 
-|Feldname   |Typ     |Bedeutung       
+|Feldname   |type     |Bedeutung       
 |-------------|---------|-----------------------|
-|Größe         | long    | Die Größe der Erfassungs Quelle
+|Size         | long    | Die Größe der Erfassungs Quelle
 |MaxSize      | long    | Die maximal zulässige Größe für die Erfassung.
 
 Wenn eine Erfassungs Quelle die maximale Größe von 4 GB überschreitet, wird die Ausnahme ausgelöst. Die Größen Validierung kann durch das- `IgnoreSizeLimit` Flag in der [ingestionproperties-Klasse](kusto-ingest-client-reference.md#class-kustoingestionproperties)überschrieben werden. Es wird jedoch nicht empfohlen, [einzelne Quellen, die größer als 1 GB](about-kusto-ingest.md#ingestion-best-practices)sind, zu erfassen.
@@ -217,7 +220,7 @@ Wird ausgelöst, wenn während einer Erfassung mindestens ein Fehler auftritt.
 
 Basisklasse: [AggregateException](https://msdn.microsoft.com/library/system.aggregateexception(v=vs.110).aspx)
 
-|Feldname      |Typ                             |Bedeutung       
+|Feldname      |type                             |Bedeutung       
 |----------------|---------------------------------|-----------------------|
 |Ingestionerrors | IList<IngestClientException>    | Die Fehler, die auftreten, wenn versucht wird, zu erfassen, und die damit verbundenen Quellen
 |Isglobalerror   | bool                            | Gibt an, ob die Ausnahme für alle Quellen aufgetreten ist.

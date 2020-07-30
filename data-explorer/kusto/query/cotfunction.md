@@ -1,6 +1,6 @@
 ---
-title: Cot() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt cot() in Azure Data Explorer.
+title: Cot ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird "COT ()" in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,25 +8,25 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: cc39019b78fd4d6cf098ea4e0e2584064b5bab50
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 686f1554a4d9bd562cd223cd0b2237c147f75f74
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517016"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348801"
 ---
 # <a name="cot"></a>cot()
 
-Berechnet die trigonometrische Kotangung des angegebenen Winkels in Bogenmaß.
+Berechnet den trigonometrischen Kotangens des angegebenen Winkels im Bogenmaße.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`cot(`*X*`)`
+`cot(`*Stuben*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *x*: Eine reelle Zahl.
+* *x*: eine reelle Zahl.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-* Der Kotangentenfunktionswert für`x`
+* Der Kotangens-Funktionswert für`x`

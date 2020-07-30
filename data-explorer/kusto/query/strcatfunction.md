@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: af25bb0407c9bc0c004c2f22e326ac034c6682cd
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: 1f26b4bf267a4387748fe4c4c26636579607de51
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717103"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350994"
 ---
 # <a name="strcat"></a>strcat()
 
@@ -21,19 +21,19 @@ Verkettet zwischen 1 und 64 Argumenten.
 
 * Wenn die Argumente nicht vom Typ "String" sind, werden Sie zwangsweise in eine Zeichenfolge konvertiert.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `strcat(`*Argument1*, *Argument2*[, *argumentn*]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Argument1* ... *argumentn*: Ausdrücke, die verkettet werden sollen.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Argumente, die zu einer einzelnen Zeichenfolge verkettet werden.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
   
    ```kusto
 print str = strcat("hello", " ", "world")

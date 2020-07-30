@@ -1,6 +1,6 @@
 ---
-title: zip() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt zip() in Azure Data Explorer.
+title: zip ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird zip () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: bd407ce652d41471be5b30a15c2c09b9f608edb1
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 28fc477d4dfc5432434261e493f36985514ea28b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81504232"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350552"
 ---
 # <a name="zip"></a>zip()
 
-Die `zip` Funktion akzeptiert `dynamic` eine beliebige Anzahl von Arrays und gibt ein Array zurück, dessen Elemente jeweils ein Array sind, das die Elemente der Eingabearrays desselben Indexes enthält.
+Die `zip` Funktion nimmt eine beliebige Anzahl von `dynamic` Arrays an und gibt ein Array zurück, dessen Elemente jeweils ein Array sind, das die Elemente der Eingabe Arrays desselben Indexes enthält.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`zip(`*array1*`,` *Array1-Array2*`, ... )`
+`zip(`*array1* `,` *array2*`, ... )`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 Zwischen 2 und 16 dynamischen Arrays.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Das folgende Beispiel gibt `[[1,2],[3,4],[5,6]]`zurück:
 

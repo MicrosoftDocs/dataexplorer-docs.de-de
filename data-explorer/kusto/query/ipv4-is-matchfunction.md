@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 7b076f9878828ca8503c808b6ab94daf3375e2d4
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: 90d65f80ed8b5defe1fd2fe1e19ca4ff385cc408
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84294626"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347339"
 ---
-# <a name="ipv4_is_match"></a>ipv4_is_match ()
+# <a name="ipv4_is_match"></a>ipv4_is_match()
 
 Entspricht zwei IPv4-Zeichen folgen. Die beiden IPv4-Zeichen folgen werden analysiert und verglichen, während die kombinierte IP-Präfix Maske, die aus den Argument Präfixen berechnet wurde, und das optionale Argument berücksichtigt werden `PrefixMask` .
 
@@ -26,11 +26,11 @@ ipv4_is_match('192.168.1.1/24', '192.168.1.255/24') == true
 ipv4_is_match('192.168.1.1', '192.168.1.255', 24) == true
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `ipv4_is_match(`*Expr1* `, ` *Expr2* `[ ,` *Prefixmask*`])`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expr1*, *expr2*: ein Zeichen folgen Ausdruck, der eine IPv4-Adresse darstellt. IPv4-Zeichen folgen können mithilfe der [IP-Präfix Notation](#ip-prefix-notation)maskiert werden.
 * *Prefixmask*: eine ganze Zahl zwischen 0 und 32, die die Anzahl der signifikantesten Bits darstellt, die berücksichtigt werden.
@@ -40,7 +40,7 @@ ipv4_is_match('192.168.1.1', '192.168.1.255', 24) == true
 IP-Adressen können `IP-prefix notation` mithilfe eines Schrägstrichs ( `/` ) definiert werden. Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse. Die Zahl (1 bis 32) rechts neben dem Schrägstrich ( `/` ) ist die Anzahl von zusammenhängenden 1 Bit in der netmask. 
 **Beispiel:** 192.168.2.0/24 verfügt über eine zugeordnete net/Subnetmask mit 24 aufeinander folgenden Bits oder 255.255.255.0 im gepunkteten Dezimal Format.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 * `true`: Wenn die lange Darstellung des ersten IPv4-Zeichen folgen Arguments gleich dem zweiten IPv4-Zeichen folgen Argument ist.
 *  `false`Sonst.

@@ -1,6 +1,6 @@
 ---
-title: trim_end() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird trim_end() in Azure Data Explorer beschrieben.
+title: trim_end ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird trim_end () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a6f6ffc264cb436fc61d74f08dfded915caa05d4
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: cab78680a3b996234724bc052d75959928520289
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81505643"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87339849"
 ---
 # <a name="trim_end"></a>trim_end()
 
-Entfernt die nachfolgende Übereinstimmung des angegebenen regulären Ausdrucks.
+Entfernt die nachfolgende Entsprechung des angegebenen regulären Ausdrucks.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`trim_end(`*regex-Text* `,` *text*`)`
+`trim_end(`*Regex* `,` *Text*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *regex*: Zeichenfolge oder [regulärer Ausdruck,](re2.md) der vom Ende des *Textes*abgeschnitten werden soll.  
-* *text*: Eine Zeichenfolge.
+* *Regex*: Zeichenfolge oder [regulärer Ausdruck](re2.md) *, der am Ende des Texts*abgeschnitten werden soll.  
+* *Text*: eine Zeichenfolge.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-*Text* nach dem Zuschneiden von Übereinstimmungen von *Regex,* die am Ende des *Textes*gefunden wurden.
+*Text* nach dem *kürzen der überein*Stimmungen von *Regex* , der am Ende des Texts gefunden wurde.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
-Statement-Balg-Trimmung *ab* *Ende string_to_trim*:
+Die *Teil Zeichenfolge* der Anweisung untergeordneter Knoten vom Ende *string_to_trim*:
 
 ```kusto
 let string_to_trim = @"bing.com";
@@ -46,7 +46,7 @@ print string_to_trim = string_to_trim,trimmed_string = trim_end(substring,string
 |--------------|--------------|
 |bing.com      |bing          |
 
-Die nächste Anweisung schneidet alle Nicht-Wort-Zeichen vom Ende der Zeichenfolge:
+Die nächste Anweisung entfernt alle nicht-Wort Zeichen am Ende der Zeichenfolge:
 
 ```kusto
 print str = strcat("-  ","Te st",x,@"// $")
@@ -55,8 +55,8 @@ print str = strcat("-  ","Te st",x,@"// $")
 
 |str          |trimmed_str|
 |-------------|-----------|
-|- Te st1/|- Te st1  |
-|- Te st2/|- Te st2  |
-|- Te st3/|- Te st3  |
-|- Te st4/|- Te st4  |
-|- Te st5/|- Te st5  |
+|-Te ST1//$|-Te ST1  |
+|-Te ST2//$|-Te ST2  |
+|-Te ST3//$|-Te ST3  |
+|-Te ST4//$|-Te-ST4  |
+|-Te ST5//$|-Te ST5  |

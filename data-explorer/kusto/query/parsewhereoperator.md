@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/12/2020
-ms.openlocfilehash: 48231d24ca1e49938629dd9912804c5858d11ae1
-ms.sourcegitcommit: f9d3f54114fb8fab5c487b6aea9230260b85c41d
+ms.openlocfilehash: c2936ec7461850aaad6fdb4e9daa7624dd561c49
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/18/2020
-ms.locfileid: "85071889"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346251"
 ---
 # <a name="parse-where-operator"></a>parse-where-Operator
 
@@ -25,11 +25,11 @@ Weitere Informationen finden Sie unter Analyse [Operator](parseoperator.md), der
 T | parse-where Text with "ActivityName=" name ", ActivityType=" type
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| parse-where` [ `kind=regex` [ `flags=regex_flags` ] | `simple` ]- *Ausdruck* `with` `*` (*StringConstant* *ColumnName* [ `:` *ColumnType*]) `*` ...
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: die Eingabe Tabelle.
 
@@ -47,7 +47,7 @@ T | parse-where Text with "ActivityName=" name ", ActivityType=" type
   
 * *ColumnType:* sollte ein optionaler Skalartyp sein, der den Typ angibt, in den der Wert konvertiert werden soll. Der Standardwert ist String Type.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Die Eingabe Tabelle, die entsprechend der Liste der Spalten erweitert wird, die dem Operator bereitgestellt werden.
 

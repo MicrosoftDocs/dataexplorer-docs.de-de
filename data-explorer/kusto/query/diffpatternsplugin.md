@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b3dece66f3bafae989643afd418557aeaaa7d746
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: a02f275dc47e88c7b14b85d19040e907613d1b80
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225036"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348325"
 ---
 # <a name="diff-patterns-plugin"></a>Vergleichs Muster-Plugin
 
@@ -25,7 +25,7 @@ T | evaluate diffpatterns(splitColumn)
 ```
 
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `T | evaluate diffpatterns(SplitColumn, SplitValueA, SplitValueB [, WeightColumn, Threshold, MaxDimensions, CustomWildcard, ...])` 
 
@@ -43,7 +43,7 @@ T | evaluate diffpatterns(splitColumn)
 
     Eine Zeichenfolgendarstellung für einen der Werte in SplitColumn, der angegeben wurde. Alle Zeilen, die diesen Wert in der SplitColumn aufweisen, gelten als DataSet "B".
 
-    Ein Beispiel: `T | extend splitColumn=iff(request_responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure") `
+    Beispiel: `T | extend splitColumn=iff(request_responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure") `
 
 **Optionale Argumente**
 
@@ -54,7 +54,7 @@ Alle anderen Argumente sind optional, aber sie müssen wie unten angegeben sorti
     Berücksichtigt jede Zeile in der Eingabe gemäß dem angegebenen Gewicht (standardmäßig verfügt jede Spalte über eine Gewichtung von „1“). Das-Argument muss ein Name einer numerischen Spalte sein (z. b `int` `long` .,, `real` ).
     Eine übliche Nutzung einer Gewichtungsspalte besteht darin, die Stichprobenerstellung oder die Bucket-Zuordnung/Aggregation der Daten zu berücksichtigen, die bereits in die einzelnen Zeilen eingebettet sind.
     
-    Ein Beispiel: `T | extend splitColumn=iff(request_responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", sample_Count) `
+    Beispiel: `T | extend splitColumn=iff(request_responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", sample_Count) `
 
 * Schwellenwert-0,015 < *Double* < 1 [Standardwert: 0,05]
 
@@ -74,9 +74,9 @@ Alle anderen Argumente sind optional, aber sie müssen wie unten angegeben sorti
     Der Standard ist „null“, da der Standard eine leere Zeichenfolge ist. Wenn der Standardwert ein in den Daten funktionierender Wert ist, sollte ein anderer Platzhalter Wert verwendet werden (z `*` . b.).
     Unten finden Sie ein Beispiel hierzu.
 
-    Ein Beispiel: `T | extend splitColumn = iff(request-responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", "~", "~", "~", int(-1), double(-1), long(0), datetime(1900-1-1))`
+    Beispiel: `T | extend splitColumn = iff(request-responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", "~", "~", "~", int(-1), double(-1), long(0), datetime(1900-1-1))`
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 `Diffpatterns`Gibt einen kleinen Satz von Mustern zurück, die verschiedene Teile der Daten in den beiden Mengen erfassen (d. h. ein Muster, das einen großen Prozentsatz der Zeilen im ersten DataSet und einen niedrigen Prozentsatz der Zeilen in der zweiten Menge erfasst). Jede Zeile in den Ergebnissen steht für ein Muster.
 
@@ -109,7 +109,7 @@ Wenn Sie eine interessante Zeile finden, können Sie dafür einen Drilldown durc
 
 * Hinweis: `diffpatterns` zielt darauf ab, bedeutende Muster zu finden (die Teile des Daten Unterschieds zwischen den Sätzen erfassen) und nicht für zeilenweise Unterschiede gedacht ist.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -120,7 +120,7 @@ StormEvents
 | evaluate diffpatterns(Damage, "0", "1" )
 ```
 
-|SegmentId|CountA|CountB|PercentA|PercentB|PercentDiffAB|Bundesland/Kanton|EventType|`Source`|DamageCrops|
+|SegmentId|CountA|CountB|PercentA|PercentB|PercentDiffAB|Zustand|EventType|`Source`|DamageCrops|
 |---|---|---|---|---|---|---|---|---|---|
 |0|2278|93|49,8|7.1|42,7||Hagel||0|
 |1|779|512|17,03|39,08|22,05||Sturm|||

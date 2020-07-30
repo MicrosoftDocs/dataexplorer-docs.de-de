@@ -1,6 +1,6 @@
 ---
-title: pow() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt pow() in Azure Data Explorer.
+title: Pow ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird Pow () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 99a20feb90e2d0b25ccc50eed2cae4435ed676c5
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: cdb3a08749de3fd35914d3d50c5ed58c5534193e
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81511083"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346115"
 ---
 # <a name="pow"></a>pow()
 
-Gibt das Ergebnis der Erhöhung der Macht zurück
+Gibt das Ergebnis der Erhöhung der Stromversorgung zurück.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`pow(`*base*`,` *Basisexponenten*`)`
+`pow(`*Basis* `,` *Exponent*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *basis*: Basiswert.
-* *Exponent*: Exponentenwert.
+* *Base*: Basiswert.
+* *Exponent*: Exponent-Wert.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Gibt die Basis zurück, die auf den Leistungsexponenten angehoben wird: Base - Exponent.
+Gibt die Basis zurück, die für den Power Exponent: Base ^-Exponent ausgelöst wird.

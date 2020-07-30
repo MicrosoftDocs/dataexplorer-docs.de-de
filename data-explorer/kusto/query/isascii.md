@@ -1,6 +1,6 @@
 ---
-title: isascii() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird isascii() in Azure Data Explorer beschrieben.
+title: isascii ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird isascii () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: daba0f4015a4847155309964f8ac0909ff4bc9d0
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d8a060e4a332988fd966e0dec9ed07b3c76d0e3f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513718"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347288"
 ---
 # <a name="isascii"></a>isascii()
 
-Gibt `true` zurück, wenn das Argument eine gültige ascii-Zeichenfolge ist.
+Gibt zurück, `true` Wenn das-Argument eine gültige ASCII-Zeichenfolge ist.
     
 ```kusto
 isascii("some string") == true
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `isascii(`[*Wert*]`)`
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Gibt an, ob es sich bei dem Argument um eine gültige ascii-Zeichenfolge handelt.
+Gibt an, ob das Argument eine gültige ASCII-Zeichenfolge ist.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
 T

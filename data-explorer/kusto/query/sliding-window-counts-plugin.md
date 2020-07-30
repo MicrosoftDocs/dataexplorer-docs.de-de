@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4d90bc3b6222896d45374d771ce5f87f4bdf6786
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: af223d31f008b972bc1b61a6a9ace7e19c988ff7
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85902023"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351045"
 ---
-# <a name="sliding_window_counts-plugin"></a>Plug-in sliding_window_counts
+# <a name="sliding_window_counts-plugin"></a>sliding_window_counts-Plug-In
 
 Berechnet die Anzahl und die unterschiedliche Anzahl von Werten in einem gleitenden Fenster mithilfe des [hier](samples.md#perform-aggregations-over-a-sliding-window)beschriebenen Verfahrens in einem gleitenden Fenster.
 
@@ -25,11 +25,11 @@ Berechnen Sie beispielsweise für jeden *Tag*die Anzahl und die unterschiedliche
 T | evaluate sliding_window_counts(id, datetime_column, startofday(ago(30d)), startofday(now()), 7d, 1d, dim1, dim2, dim3)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| evaluate` `sliding_window_counts(` *idColumn* `,` *timelinecolenn* `,` *Start* `,` *Ende* `,` *lookbackwindow* `,` *bin* `,` [*dim1* `,` *dim2* `,` ...]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: der tabellarische Eingabe Ausdruck.
 * *IdColumn*: der Name der Spalte mit ID-Werten, die die Benutzeraktivität darstellen. 
@@ -40,7 +40,7 @@ T | evaluate sliding_window_counts(id, datetime_column, startofday(ago(30d)), st
 * *Bin*: skalare Konstante Wert des Analyseschritt Zeitraums. Bei diesem Wert kann es sich um einen numerischen Wert/einen DateTime-/Timestampwert handeln. Wenn der Wert eine Zeichenfolge mit dem Format ist `week` / `month` / `year` , werden alle Zeiträume [StartOf Week](startofweekfunction.md)StartOf / [Month](startofmonthfunction.md) / [StartOf Year](startofyearfunction.md). 
 * *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, in denen die Berechnung der Aktivitäts Metrik in Slice ist.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt eine Tabelle zurück, die die Anzahl-und unterschiedlichen Zählerwerte der IDs im Nachschlage Zeitraum, für jeden Zeitachse (von bin) und für jede vorhandene Dimensions Kombination enthält.
 
@@ -51,7 +51,7 @@ Das Ausgabe Tabellen Schema ist:
 |Typ: ab *timelinecolumschlag*|..|..|..|long|long|
 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Berechnen von Anzahlen und `dcounts` für Benutzer in der letzten Woche für jeden Tag im Analysezeitraum. 
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: f3fb8361cfb281ad39dee7a15a690c2b94c79bea
-ms.sourcegitcommit: be1bbd62040ef83c08e800215443ffee21cb4219
+ms.openlocfilehash: 80b54dce81799304a4297ee1192f2ee1475d2ec2
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664924"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351521"
 ---
 # <a name="series_fit_line_dynamic"></a>series_fit_line_dynamic()
 
@@ -29,18 +29,18 @@ Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe 
 
 Dieser Operator ähnelt [series_fit_line](series-fit-linefunction.md), aber im Gegensatz `series-fit-line` dazu wird ein dynamischer Behälter zurückgegeben.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_fit_line_dynamic(`*Stuben*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *x*: dynamisches Array numerischer Werte.
 
 > [!TIP]
 > Die einfachste Methode, diese Funktion zu verwenden, besteht darin, Sie auf die Ergebnisse des Operators " [make-Series](make-seriesoperator.md) " anzuwenden.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -52,7 +52,7 @@ print id=' ', x=range(bin(now(), 1h)-11h, bin(now(), 1h), 1h), y=dynamic([2,5,6,
  
 :::image type="content" source="images/series-fit-line/series-fit-line.png" alt-text="Linie für Reihen Anpassung":::
 
-| RSquare | Slope | Variance | RVariance | Interception | LineFit                                                                                     |
+| RSquare | Steigung | Variance | RVariance | Interception | LineFit                                                                                     |
 |---------|-------|----------|-----------|--------------|---------------------------------------------------------------------------------------------|
 | 0.982   | 2.730 | 98.628   | 1.686     | -1.666       | 1,064, 3,7945, 6,526, 9,256, 11,987, 14,718, 17,449, 20,180, 22,910, 25,641, 28,371, 31,102 |
  

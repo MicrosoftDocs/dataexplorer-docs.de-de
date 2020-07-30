@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: e3f874ecfc0bb1872f08efa3269c73b02971e4f3
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 1bfe42e18cfe0bb424e933b266eb9861c7676cea
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737639"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348580"
 ---
 # <a name="database-scope-function"></a>Database () (Scope-Funktion)
 
@@ -28,13 +28,13 @@ database('Sample').StormEvents
 cluster('help').database('Sample').StormEvents
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `database(`*StringConstant*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *StringConstant*: Name der Datenbank, auf die verwiesen wird. Die identifizierte Datenbank kann entweder `DatabaseName` oder `PrettyName`sein. Das Argument muss vor der Ausführung der Abfrage _konstant_ sein, d. h., es kann nicht aus der Auswertung der Unterabfrage stammen.
+* *StringConstant*: Name der Datenbank, auf die verwiesen wird. Die identifizierte Datenbank kann entweder `DatabaseName` oder sein `PrettyName` . Das Argument muss vor der Ausführung der Abfrage _konstant_ sein, d. h., es kann nicht aus der Auswertung der Unterabfrage stammen.
 
 **Hinweise**
 
@@ -55,7 +55,7 @@ database('Samples').StormEvents | count
 
 ### <a name="use-database-inside-let-statements"></a>Verwenden von Database () in Let-Anweisungen 
 
-Dieselbe Abfrage wie oben kann so umgeschrieben werden, dass Sie eine Inline Funktion (Let-Anweisung) `dbName` verwendet, die einen Parameter empfängt, der an die Database ()-Funktion übergeben wird.
+Dieselbe Abfrage wie oben kann so umgeschrieben werden, dass Sie eine Inline Funktion (Let-Anweisung) verwendet, die einen Parameter empfängt, `dbName` der an die Database ()-Funktion übergeben wird.
 
 ```kusto
 let foo = (dbName:string)
@@ -71,7 +71,7 @@ foo('help')
 
 ### <a name="use-database-inside-functions"></a>Verwenden von Database () innerhalb von Funktionen 
 
-Dieselbe Abfrage wie oben kann so umgeschrieben werden, dass Sie in einer Funktion verwendet wird, `dbName` die einen Parameter empfängt, der an die Database ()-Funktion übergeben wird.
+Dieselbe Abfrage wie oben kann so umgeschrieben werden, dass Sie in einer Funktion verwendet wird, die einen Parameter empfängt, der an `dbName` die Database ()-Funktion übergeben wird.
 
 ```kusto
 .create function foo(dbName:string)
