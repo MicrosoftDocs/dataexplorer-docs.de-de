@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7ef4bf5607979cc02976d00250e8754f3a0c4e69
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 9321f30d2643f6e398d73cf7960490708626f723
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225172"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348359"
 ---
-# <a name="diffpatterns_text-plugin"></a>Plug-in diffpatterns_text
+# <a name="diffpatterns_text-plugin"></a>Plug-In „diffpatterns_text“
 
 Vergleicht zwei Datasets von Zeichen folgen Werten und findet Textmuster, die Unterschiede zwischen den beiden Datasets charakterisieren.
 
@@ -25,7 +25,7 @@ T | evaluate diffpatterns_text(TextColumn, BooleanCondition)
 
 `diffpatterns_text`Gibt einen Satz von Textmustern zurück, die verschiedene Teile der Daten in den beiden Mengen erfassen (d. h. ein Muster, das einen großen Prozentsatz der Zeilen erfasst, wenn die Bedingung ist, `true` und einen niedrigen Prozentsatz der Zeilen, wenn die Bedingung ist `false` ). Die Muster werden aus aufeinander folgenden Token (getrennt durch Leerzeichen) erstellt, mit einem Token aus der Text Spalte oder einem, das einen Platzhalter `*` darstellt. Jede Zeile in den Ergebnissen steht für ein Muster.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `T | evaluate diffpatterns_text(`TextColumn, booleancondition [, mintokens, Threshold, maxtokens]`)` 
 
@@ -55,7 +55,7 @@ Alle anderen Argumente sind optional, aber sie müssen wie unten angegeben sorti
 
     Legt die maximale Anzahl von Token (beginnend mit dem Anfang) pro Ergebnis Muster fest. Wenn Sie eine niedrigere Grenze angeben, wird die Abfrage Laufzeit verringert.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Das Ergebnis diffpatterns_text gibt die folgenden Spalten zurück:
 
@@ -68,7 +68,7 @@ Das Ergebnis diffpatterns_text gibt die folgenden Spalten zurück:
 > [!NOTE]
 > Die Muster sind nicht notwendigerweise eindeutig und bieten möglicherweise keine vollständige Abdeckung des Datasets. Die Muster können sich überlappen, und einige Zeilen stimmen möglicherweise nicht mit einem Muster identisch.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

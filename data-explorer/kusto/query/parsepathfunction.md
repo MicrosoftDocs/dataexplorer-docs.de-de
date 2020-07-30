@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: ba74b7c1e78d568cc34845d56dc9768f2628192f
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: e2914e913402de7442d2533cf5159c2bd30fac60
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717375"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346302"
 ---
 # <a name="parse_path"></a>parse_path()
 
@@ -23,7 +23,7 @@ Analysiert einen Dateipfad `string` und gibt ein- [`dynamic`](./scalar-data-type
 * DirectoryPath
 * DirectoryName
 * FileName
-* Erweiterung
+* Durchwahl
 * Alternativen datastreamname
 
 Zusätzlich zu den einfachen Pfaden mit beiden Arten von Schrägstrichen unterstützt die-Funktion Pfade mit:
@@ -32,19 +32,19 @@ Zusätzlich zu den einfachen Pfaden mit beiden Arten von Schrägstrichen unterst
 * Lange Pfade. Beispiel: " \\ ? \c:..."
 * Alternative Datenströme Beispiel: "file1.exe:file2.exe"
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `parse_path(`*path*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *path*: eine Zeichenfolge, die einen Dateipfad darstellt.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Ein Objekt vom Typ `dynamic` , das die oben aufgeführten Pfad Komponenten enthielt.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

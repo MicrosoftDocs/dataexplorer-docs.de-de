@@ -1,6 +1,6 @@
 ---
-title: gettype() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt gettype() in Azure Data Explorer.
+title: GetType ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird GetType () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,28 +8,28 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 3a28032320948f12b2f91febc9f59c7b35ad084e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 0efa07b7a1b050fe81ce2f369e8df5af4c05e212
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81514381"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347662"
 ---
 # <a name="gettype"></a>gettype()
 
-Gibt den Laufzeittyp des einzelnen Arguments zurück.
+Gibt den Lauf Zeittyp des einzelnen Arguments zurück.
 
-Der Laufzeittyp kann sich vom nominalen (statischen) Typ `dynamic`für Ausdrücke unterscheiden, deren Nominaltyp ist ; in solchen `gettype()` Fällen kann nützlich sein, um den T-Typ des tatsächlichen Werts anzuzeigen (wie der Wert im Speicher codiert wird).
+Der Lauf Zeittyp unterscheidet sich möglicherweise vom nominalen (statischen) Typ für Ausdrücke, deren nominaler Typ ist `dynamic` . in solchen Fällen `gettype()` kann es hilfreich sein, den Typ des tatsächlichen Werts offenzulegen (wie der Wert im Arbeitsspeicher codiert ist).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `gettype(`*Expr*`)`
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Eine Zeichenfolge, die den Laufzeittyp ihres einzelnen Arguments darstellt.
+Eine Zeichenfolge, die den Lauf Zeittyp des einzelnen Arguments darstellt.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 |Ausdruck                          |Rückgabe      |
 |------------------------------------|-------------|

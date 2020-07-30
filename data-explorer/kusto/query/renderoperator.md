@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 03/29/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 90b2a08d4fdde6ab6a74b12632c9310029f8fc1b
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: cf10a18a699e1e93521b4927008858cbebd2baf8
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85902105"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345843"
 ---
 # <a name="render-operator"></a>render-Operator
 
@@ -30,17 +30,17 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 > * Der Rendering-Operator ändert keine Daten. Sie fügt eine Anmerkung ("Visualisierung") in die erweiterten Eigenschaften des Ergebnisses ein. Die-Anmerkung enthält die Informationen, die vom-Operator in der Abfrage bereitgestellt werden.
 > * Die Interpretation der Visualisierungs Informationen erfolgt über den Benutzer-Agent. Verschiedene Agents (z. b. Kusto. Explorer, Kusto. Webexplorer) unterstützen möglicherweise unterschiedliche Visualisierungen.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* - `|` `render` *Visualisierung* [ `with` `(` *propertyName* `=` *PropertyValue* [ `,` ...] `)` ]
 
-Hierbei gilt:
+Hierbei gilt Folgendes:
 
 * *Visualisierung* gibt die Art der zu verwendenden Visualisierung an. Die unterstützten Werte sind:
 
 ::: zone pivot="azuredataexplorer"
 
-|*Visualisierung*     |Beschreibung|
+|*Visualisierung*     |BESCHREIBUNG|
 |--------------------|-|
 | `anomalychart`     | Vergleichbar mit timechart, [hebt jedoch Anomalien](./samples.md#get-more-out-of-your-data-in-kusto-with-machine-learning) mithilfe [series_decompose_anomalies](./series-decompose-anomaliesfunction.md) Funktion hervor. |
 | `areachart`        | Flächen Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten sind y-Achsen. |
@@ -61,7 +61,7 @@ Hierbei gilt:
 
 ::: zone pivot="azuremonitor"
 
-|*Visualisierung*     |Beschreibung|
+|*Visualisierung*     |BESCHREIBUNG|
 |--------------------|-|
 | `areachart`        | Flächen Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten sind y-Achsen. |
 | `barchart`         | Die erste Spalte ist die x-Achse und kann "Text", "DateTime" oder "numeric" sein. Andere Spalten sind numerisch und werden als horizontale Striche angezeigt.|
@@ -112,18 +112,18 @@ Hierbei gilt:
 Einige Visualisierungen können durch Bereitstellen der-Eigenschaft weiterentwickelt werden `kind` .
 Diese lauten wie folgt:
 
-|*Visualisierung*|`kind`             |Beschreibung                        |
+|*Visualisierung*|`kind`             |BESCHREIBUNG                        |
 |---------------|-------------------|-----------------------------------|
 |`areachart`    |`default`          |Jeder "Bereich" steht eigenständig.     |
-|               |`unstacked`        |Wie in `default`.                 |
+|               |`unstacked`        |Identisch mit `default`.                 |
 |               |`stacked`          |Stapeln Sie die Bereiche auf der rechten Seite.        |
 |               |`stacked100`       |Stapeln Sie die Bereiche auf der rechten Seite, und Strecken Sie diese auf die gleiche Breite wie die anderen.|
 |`barchart`     |`default`          |Jede "Leiste" steht alleine.      |
-|               |`unstacked`        |Wie in `default`.                 |
+|               |`unstacked`        |Identisch mit `default`.                 |
 |               |`stacked`          |Stapel "leisten".                      |
 |               |`stacked100`       |Stapeln Sie "Bard", und Strecken Sie die einzelnen in dieselbe Breite wie die anderen.|
 |`columnchart`  |`default`          |Jede "Spalte" steht eigenständig.   |
-|               |`unstacked`        |Wie in `default`.                 |
+|               |`unstacked`        |Identisch mit `default`.                 |
 |               |`stacked`          |Stapeln Sie die Spalten in der anderen.|
 |               |`stacked100`       |Stapeln Sie "Columns" (Spalten), und Strecken Sie diese auf dieselbe Höhe wie die anderen.|
 |`piechart`     |`map`              |Erwartete Spalten sind [Längengrad, Breitengrad], geojson-Punkt, farbachse und numerisch. Wird in Kusto Explorer Desktop unterstützt.|
@@ -133,7 +133,7 @@ Diese lauten wie folgt:
 
 Einige Visualisierungen unterstützen das Aufteilen in mehrere y-Achsen Werte:
 
-|`ysplit`  |Beschreibung                                                       |
+|`ysplit`  |BESCHREIBUNG                                                       |
 |----------|------------------------------------------------------------------|
 |`none`    |Für alle Reihen Daten wird eine einzelne y-Achse angezeigt. (Standardwert)       |
 |`axes`    |Es wird ein einzelnes Diagramm mit mehreren y-Achsen angezeigt (eine pro Reihe).|
@@ -155,7 +155,7 @@ Einige Visualisierungen unterstützen das Aufteilen in mehrere y-Achsen Werte:
 > * Sortieren Sie die Daten, um die Reihenfolge der x-Achse zu definieren.
 > * Benutzer-Agents können den Wert von Eigenschaften "erraten", die nicht durch die Abfrage angegeben werden. Insbesondere kann es vorkommen, dass sich "uninteressante" Spalten im Schema des Ergebnisses in ein falsches Problem setzen. Versuchen Sie, solche Spalten zu projizieren, wenn dies geschieht. 
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

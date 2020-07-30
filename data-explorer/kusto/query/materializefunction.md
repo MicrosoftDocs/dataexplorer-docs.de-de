@@ -8,22 +8,22 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/06/2020
-ms.openlocfilehash: 8858b261cb366842b475a76a1b2c3246b8a3e7b5
-ms.sourcegitcommit: de81b57b6c09b6b7442665e5c2932710231f0773
+ms.openlocfilehash: 0e08857e01ffa3da1bcb23d16d1df4908336f76f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 07/28/2020
-ms.locfileid: "87264697"
+ms.locfileid: "87346863"
 ---
 # <a name="materialize"></a>materialize()
 
 Ermöglicht das Zwischenspeichern eines Unterabfrage Ergebnisses während der Abfrage Ausführung auf eine Weise, mit der andere Unterabfragen auf das Teilergebnis verweisen können.
  
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `materialize(`*expression*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Ausdruck*: der tabellarische Ausdruck, der während der Abfrage Ausführung ausgewertet und zwischengespeichert werden soll.
 
@@ -52,7 +52,7 @@ _detailed_data
 | top 10 by EventPercentage
 ```
 
-|Zustand|EventType|Eventprozent|Ereignisse|
+|Zustand|EventType|Eventprozent|Events|
 |---|---|---|---|
 |Hawaii-Wasser|Wasser Spout|100|2|
 |Lake Ontario|Seeman Gewitter Wind|100|8|
@@ -92,7 +92,7 @@ Resultset 1:
 
 Resultset 2: 
 
-|Wert|
+|value|
 |---|
 |9999998|
 |9999998|

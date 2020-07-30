@@ -8,22 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/03/2018
-ms.openlocfilehash: 612829f2cbcd8b3f495d516b254faf7a9cf6919a
-ms.sourcegitcommit: 02236d1f23f48f9dd41cc7433f46991356a869fc
+ms.openlocfilehash: e2216361022f055078be66f37f3d2b084afaa4c6
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84306570"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349532"
 ---
 # <a name="array_slice"></a>array_slice()
 
 Extrahiert einen Slice eines dynamischen Arrays.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `array_slice`(*`arr`*, *`start`*, *`end`*)
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *`arr`*: Das Eingabe Array, aus dem der Slice extrahiert werden soll, muss ein dynamisches Array sein.
 * *`start`*: NULL basierter (inklusiver) Start Index des Slice, negative Werte werden in array_length + Start konvertiert.
@@ -31,11 +31,11 @@ Extrahiert einen Slice eines dynamischen Arrays.
 
 Hinweis: Out-of-Bounds-Indizes werden ignoriert.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Dynamisches Array der Werte im Bereich [ `start..end` ] von `arr` .
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: 7aafc6ce041395a914787ed2b406d88aa9910238
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: 21a57e4c49e982fbb113917abe173f89426c74ed
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717159"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345146"
 ---
 # <a name="series_decompose_forecast"></a>series_decompose_forecast()
 
@@ -21,11 +21,11 @@ Vorhersage basierend auf der Reihen Zerlegung.
 
 Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, als Eingabe auf und prognostiziert die Werte der letzten nachfolgenden Punkte. Weitere Informationen finden Sie unter [series_decompose](series-decomposefunction.md).
  
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_decompose_forecast(`*Reihe* `,` *Punkte* `[,` *Saisonalität* `,` *Trend* `,` *Seasonality_threshold*`])`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Series*: dynamische Array Zelle numerischer Werte. In der Regel die resultierende Ausgabe von [make-Series-](make-seriesoperator.md) oder [make_list](makelist-aggfunction.md) -Operatoren.
 * *Points*: ganze Zahl, die die Anzahl der Punkte am Ende der vorher zusagenden Reihe angibt (Vorhersage). Diese Punkte werden vom Lernprozess (Regression) ausgeschlossen.
@@ -39,7 +39,7 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
     * `none`: Kein Trend, Extrahieren dieser Komponente überspringen.
 * *Seasonality_threshold*: der Schwellenwert für die saisonalitätsbewertung, wenn *Saison alität* auf Autodetect festgelegt ist. Der Standardwert für das Ergebnis ist `0.6` . Weitere Informationen finden Sie unter [series_periods_detect](series-periods-detectfunction.md).
 
-**Hre**
+**Rückgabewert**
 
  Ein dynamisches Array mit der vorhergesagten Reihe.
 
@@ -47,7 +47,7 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
 > * Das dynamische Array der ursprünglichen Eingabe Reihe sollte eine Reihe von *Punkt* Slots enthalten, die vorhergesagt werden sollen. Die Vorhersage erfolgt in der Regel mithilfe von [make-Series](make-seriesoperator.md) und durch Angabe der Endzeit im Bereich, die den Zeitrahmen für die Vorhersage umfasst.
 > * Die Saison Abhängigkeit oder der Trend sollte aktiviert werden, andernfalls ist die Funktion redundant und gibt nur eine Reihe zurück, die mit Nullen gefüllt ist.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Im folgenden Beispiel generieren wir eine Reihe von vier Wochen in stündlicher Abhängigkeit mit wöchentlicher Saisonalität und einem kleinen Aufwärtstrend. Wir verwenden dann `make-series` und fügen der Reihe eine weitere leere Woche hinzu. `series_decompose_forecast`wird mit einer Woche (24 * 7 Punkte) aufgerufen und erkennt automatisch die Saisonalität und den Trend und generiert eine Vorhersage für den gesamten fünfwöchigen Zeitraum.
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 073bf45977648bd654f72fff47b62f92ac1b3d27
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: d0a60a61e5319d9a190f6172b9c0bd8fb7fe1300
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227382"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347968"
 ---
 # <a name="format_datetime"></a>format_datetime()
 
@@ -23,22 +23,22 @@ Formatiert einen DateTime-Wert gemäß dem angegebenen Format.
 format_datetime(datetime(2015-12-14 02:03:04.12345), 'y-M-d h:m:s.fffffff') == "15-12-14 2:3:4.1234500"
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `format_datetime(`*DateTime* `,` *Format*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * `datetime`: Wert eines Typs `datetime` .
 * `format`: die Format Bezeichner-Zeichenfolge, die aus einem oder mehreren [Format Elementen](#supported-formats)besteht.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Die Zeichenfolge mit dem Format Ergebnis.
 
 ## <a name="supported-formats"></a>Unterstützte Formate
 
-|Formatbezeichner   |Beschreibung    |Beispiele
+|Formatbezeichner   |BESCHREIBUNG    |Beispiele
 |---|---|---
 |`d`    |Der Tag des Monats, von 1 bis 31. | 2009-06-01t13:45:30-> 1, 2009-06-15t13:45:30-> 15
 |`dd`   |Der Tag des Monats, von 01 bis 31.| 2009-06-01t13:45:30-> 01, 2009-06-15t13:45:30-> 15
@@ -87,7 +87,7 @@ Der Formatspezifizierer kann folgende Trennzeichen enthalten:
 |`'['`||
 |`']'`||
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

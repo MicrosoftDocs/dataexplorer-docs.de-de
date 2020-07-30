@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: bfa5286a03d06282682953a23c6b2a2705c58a9c
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: 86e3ce4f1cbb957ebd126a8493ebb6b7bc5ac66b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717069"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349413"
 ---
-# <a name="autocluster-plugin"></a>Autocluster-Plugin
+# <a name="autocluster-plugin"></a>autocluster-Plug-In
 
 ```kusto
 T | evaluate autocluster()
@@ -23,11 +23,11 @@ T | evaluate autocluster()
 
 `autocluster`findet allgemeine Muster diskreter Attribute (Dimensionen) in den Daten. Anschließend werden die Ergebnisse der ursprünglichen Abfrage, unabhängig davon, ob es sich um 100 oder 100.000 Zeilen handelt, auf eine kleine Anzahl von Mustern reduziert. Das Plug-in wurde entwickelt, um Fehler zu analysieren (z. b. Ausnahmen oder Abstürze), kann aber potenziell an jedem gefilterten Dataset arbeiten.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `T | evaluate autocluster(`*Argumente*`)`
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Das `autocluster` Plug-in gibt eine (in der Regel kleine) Gruppe von Mustern zurück. Die Muster erfassen Teile der Daten mit gemeinsamen gemeinsamen Werten über mehrere diskrete Attribute hinweg. Jedes Muster in den Ergebnissen wird durch eine Zeile dargestellt.
 

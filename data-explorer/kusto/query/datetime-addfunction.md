@@ -1,6 +1,6 @@
 ---
-title: datetime_add() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden datetime_add() in Azure Data Explorer beschrieben.
+title: datetime_add ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird datetime_add () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,45 +8,45 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ead7e0ae5c4dee94930afe1b20c4d5b99e2b4664
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 766f0617b70e21194d731ae1cf8eabf1014265bb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516455"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348546"
 ---
 # <a name="datetime_add"></a>datetime_add()
 
-Berechnet eine neue [Datumsuhr](./scalar-data-types/datetime.md) aus einem angegebenen Datumsteil multipliziert mit einem angegebenen Betrag, der zu einem angegebenen [Datumszeitpunkt](./scalar-data-types/datetime.md)hinzugefügt wird.
+Berechnet einen neuen [DateTime](./scalar-data-types/datetime.md) -Wert aus einem angegebenen datepart-Wert multipliziert mit einem angegebenen Wert, der einem angegebenen [DateTime](./scalar-data-types/datetime.md)-Wert hinzugefügt wird.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`datetime_add(`*Periodenbetrag*`,`*amount*`,`*datetime*`)`
+`datetime_add(`*Zeitraum* `,` *Betrag* `,` *DateTime*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * `period`: [Zeichenfolge](./scalar-data-types/string.md). 
-* `amount`: [ganzzahlig](./scalar-data-types/int.md).
-* `datetime`: [Datetime-Wert.](./scalar-data-types/datetime.md)
+* `amount`: [Integer](./scalar-data-types/int.md).
+* `datetime`: [DateTime](./scalar-data-types/datetime.md) -Wert.
 
-Mögliche *Periodenwerte*: 
-- Jahr
+Mögliche Werte des *Zeitraums*: 
+- Year
 - Quarter
-- Monat
+- Month
 - Week
-- Day (Tag)
+- Tag
 - Hour
 - Minute
-- Sekunde
+- Second
 - Millisekunde
 - Mikrosekunde
-- Nanosekunden
+- Nanosekunde
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Ein Datum nach dem Hinzugefügt eines bestimmten Zeit-/Datumsintervalls.
+Es wurde ein Datum nach einem bestimmten Zeit-/datesintervall hinzugefügt.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 print  year = datetime_add('year',1,make_datetime(2017,1,1)),

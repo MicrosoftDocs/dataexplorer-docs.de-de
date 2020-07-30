@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 15d9056ec21eb6f25ccbc985d659f310d670f02d
-ms.sourcegitcommit: 085e212fe9d497ee6f9f477dd0d5077f7a3e492e
+ms.openlocfilehash: 649d09fcf6d228714fdf20b40c81b2a2552374e6
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85133412"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87340257"
 ---
 # <a name="toscalar"></a>toscalar()
 
@@ -21,15 +21,15 @@ Gibt einen skalaren Konstanten Wert des ausgewerteten Ausdrucks zurück.
 
 Diese Funktion ist nützlich für Abfragen, für die gestaffelte Berechnungen erforderlich sind. Berechnen Sie z. b. die Gesamtanzahl von Ereignissen, und verwenden Sie dann das Ergebnis, um Gruppen zu filtern, die einen bestimmten Prozentsatz aller Ereignisse überschreiten.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `toscalar(`*Begriff*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expression*: Ausdruck, der für die skalare Konvertierung ausgewertet wird.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Ein skalarer konstanter Wert des ausgewerteten Ausdrucks.
 Wenn das Ergebnis eine tabellarische ist, werden die erste Spalte und die erste Zeile für die Konvertierung übernommen.
@@ -37,12 +37,12 @@ Wenn das Ergebnis eine tabellarische ist, werden die erste Spalte und die erste 
 > [!TIP]
 > Sie können eine [Let-Anweisung](letstatement.md) zur besseren Lesbarkeit der Abfrage verwenden, wenn Sie verwenden `toscalar()` .
 
-**Notizen**
+**Hinweise**
 
 `toscalar()`kann während der Abfrage Ausführung beliebig oft berechnet werden.
 Die `toscalar()` Funktion kann nicht auf Zeilenebene (für jedes Zeilen Szenario) angewendet werden.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Werten Sie `Start` , `End` und `Step` als skalare Konstanten aus, und verwenden Sie das Ergebnis für die `range` Auswertung.
 

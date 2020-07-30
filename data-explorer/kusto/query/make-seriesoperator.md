@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2020
-ms.openlocfilehash: 5c1d25c0eaa0a3f52c18cf2f1e5e4200775b7d9d
-ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
+ms.openlocfilehash: 4f303726532da7ead1c2416f3d485979d045b0b2
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/18/2020
-ms.locfileid: "83550570"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346965"
 ---
 # <a name="make-series-operator"></a>make-series-Operator
 
@@ -23,11 +23,11 @@ Erstellt eine Reihe von angegebenen aggregierten Werten auf der angegebenen Achs
 T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from datetime(2016-01-01) to datetime(2016-01-10) step 1d by fruit, supplier
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| make-series` [*makeseriesparamters*] [*Column* `=` ] *Aggregation* [ `default` `=` *DefaultValue*] [ `,` ...] `on` *axiscolumn* [ `from` *Start*] [ `to` *End*] `step` *Step* [ `by` [*Column* `=` ] *groupexpression* [ `,` ...]]
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Column:* Optionaler Name für eine Ergebnisspalte. Nimmt standardmäßig den vom Ausdruck abgeleiteten Namen an.
 * *DefaultValue:* Standardwert, der anstelle von fehlenden Werten verwendet wird. Wenn keine Zeile mit bestimmten Werten von *axiscolumn* und *groupexpression*vorhanden ist, wird dem entsprechenden Element des Arrays in den Ergebnissen ein *DefaultValue*zugewiesen. Wenn *DefaultValue* weggelassen wird, wird 0 angenommen. 
@@ -43,7 +43,7 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
   |---------------|-------------------------------------|------------------------------------------------------------------------------|
   |`kind`          |`nonempty`                               |Erzeugt ein Standard Ergebnis, wenn die Eingabe des Operators "Make-Series" leer ist.|                                
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Die Eingabezeilen werden in Gruppen angeordnet, die dieselben Werte wie die `by` Ausdrücke und den `bin_at(` *AxisColumn* `, ` *step* `, ` *Start* Ausdruck "axiscolumn" aufweisen `)` . Anschließend werden die angegebenen Aggregationsfunktionen über jede Gruppe berechnet, dabei wird eine Zeile für jede Gruppe erzeugt. Das Ergebnis enthält die `by` Spalten *axiscolumn* und auch mindestens eine Spalte für jedes berechnete Aggregat. (Aggregationen, die mehrere Spalten oder nicht numerische Ergebnisse nicht unterstützen.)
 
@@ -73,22 +73,22 @@ Es wird empfohlen, die Haupt Syntax von Make-Series und nicht die alternative Sy
 
 ## <a name="list-of-aggregation-functions"></a>Liste der Aggregations Funktionen
 
-|Funktion|Beschreibung|
+|Funktion|BESCHREIBUNG|
 |--------|-----------|
-|[any()](any-aggfunction.md)|Gibt einen zufälligen, nicht leeren Wert für die Gruppe zurück.|
+|[Any ()](any-aggfunction.md)|Gibt einen zufälligen, nicht leeren Wert für die Gruppe zurück.|
 |[AVG ()](avg-aggfunction.md)|Gibt einen durchschnittlichen Wert in der Gruppe zurück.|
 |[count ()](count-aggfunction.md)|Gibt die Anzahl der Gruppe zurück.|
 |[countif()](countif-aggfunction.md)|Gibt eine Anzahl mit dem Prädikat der Gruppe zurück.|
 |[dcount()](dcount-aggfunction.md)|Gibt eine ungefähre unterschiedliche Anzahl der Group-Elemente zurück.|
-|[Max ()](max-aggfunction.md)|Gibt den maximalen Wert in der Gruppe zurück.|
-|[min ()](min-aggfunction.md)|Gibt den Mindestwert in der Gruppe zurück.|
+|[max()](max-aggfunction.md)|Gibt den Höchstwert in der Gruppe zurück.|
+|[min()](min-aggfunction.md)|Gibt den Mindestwert in der Gruppe zurück.|
 |[StDev ()](stdev-aggfunction.md)|Gibt die Standardabweichung in der Gruppe zurück.|
 |[Sum ()](sum-aggfunction.md)|Gibt die Summe der Elemente in der Gruppe zurück.|
 |[variance()](variance-aggfunction.md)|Gibt die Varianz innerhalb der Gruppe zurück.|
 
 ## <a name="list-of-series-analysis-functions"></a>Liste der Reihen Analysefunktionen
 
-|Funktion|Beschreibung|
+|Funktion|BESCHREIBUNG|
 |--------|-----------|
 |[series_fir()](series-firfunction.md)|Wendet einen [begrenzten Impuls Antwort](https://en.wikipedia.org/wiki/Finite_impulse_response) Filter an.|
 |[series_iir()](series-iirfunction.md)|Wendet einen [unendlichen Impuls Antwort](https://en.wikipedia.org/wiki/Infinite_impulse_response) Filter an.|

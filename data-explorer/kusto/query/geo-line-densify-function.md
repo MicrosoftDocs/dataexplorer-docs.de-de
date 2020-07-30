@@ -8,27 +8,27 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/01/2020
-ms.openlocfilehash: 4aa11fd379bceb800a8d18a995a91ca188326faa
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.openlocfilehash: c5a66255f719d3bd0da962a8eb9d3cae23a8c254
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280700"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347832"
 ---
-# <a name="geo_line_densify"></a>geo_line_densify ()
+# <a name="geo_line_densify"></a>geo_line_densify()
 
 Konvertiert planare Zeilen Kanten durch Hinzufügen von zwischen Punkten in geodäk.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `geo_line_densify(`*LineString* `, ` *Toleranz*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *LineString*: Zeile im [geojson-Format](https://tools.ietf.org/html/rfc7946) und eines [dynamischen](./scalar-data-types/dynamic.md) Datentyps.
 * *Toleranz*: ein optionaler numerischer Wert, der den maximalen Abstand zwischen dem ursprünglichen planaren Edge und der konvertierten geodäschen edgekette in Meter definiert. Unterstützte Werte liegen im Bereich [0,1, 10000]. Wenn nicht angegeben, wird der Standardwert `10` verwendet.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Eine Zeile im [geojson-Format](https://tools.ietf.org/html/rfc7946) und einen [dynamischen](./scalar-data-types/dynamic.md) Datentyp. Wenn die Zeile oder die Toleranz ungültig ist, führt die Abfrage zu einem NULL-Ergebnis.
 
@@ -53,7 +53,7 @@ Dynamic ({"Type": "LineString", "Koordinaten": [[lng_1, lat_1], [lng_2, lat_2],.
 * Im [geojson-Format](https://tools.ietf.org/html/rfc7946) wird ein Rand zwischen zwei Punkten als gerade kartesische Linie definiert.
 * Die Entscheidung, geodätische-oder planare Kanten zu verwenden, hängt möglicherweise vom DataSet ab und ist besonders in langen Kanten relevant.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Im folgenden Beispiel wird eine Straße in der Manhattan-Insel bezeichnet. Der Rand ist kurz, und der Abstand zwischen dem planaren Rand und dem zugehörigen geodäc-Pendant ist kleiner als der von Tolerance angegebene Abstand. Das Ergebnis bleibt unverändert.
 

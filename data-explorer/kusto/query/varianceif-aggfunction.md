@@ -1,6 +1,6 @@
 ---
-title: varianceif() (Aggregationsfunktion) - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird varianceif() (Aggregationsfunktion) in Azure Data Explorer beschrieben.
+title: varianceif () (Aggregations Funktion)-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird varianceif () (Aggregations Funktion) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9dfebb3796f07dec6c91d36d788a018f84f70961
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: bf1009d2d269bf21ea5ae14a9c828724d8bf8c70
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81504674"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87338472"
 ---
-# <a name="varianceif-aggregation-function"></a>varianceif() (Aggregationsfunktion)
+# <a name="varianceif-aggregation-function"></a>varianceif () (Aggregations Funktion)
 
-Berechnet die [Varianz](variance-aggfunction.md) von *Expr* in der Gruppe, `true`für die *Prädikat* ausgewertet wird.
+Berechnet die [Varianz](variance-aggfunction.md) von *expr* in der Gruppe, für die das *Prädikat* ausgewertet wird `true` .
 
-* Kann nur im Kontext der Aggregation innerhalb [der Zusammenfassung](summarizeoperator.md) verwendet werden
+* Kann [nur im Kontext der Aggregation innerhalb von](summarizeoperator.md) Zusammenfassung verwendet werden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`varianceif(` *Expr*`, `*Predikat* zusammenfassen`)`
+`varianceif(` *expr*- `, ` *Prädikat* zusammenfassen`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Expr*: Ausdruck, der für die Aggregationsberechnung verwendet wird. 
-* *Prädikat*: Prädikat, dass, wenn true, der berechnete *Expr-Wert* der Varianz hinzugefügt wird.
+* *Expr*: Ausdruck, der für die Aggregations Berechnung verwendet wird. 
+* *Prädikat*: Prädikat: Wenn true, wird der berechnete *expr* -Wert der Varianz hinzugefügt.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Der Varianzwert von *Expr* in der Gruppe, `true`in der *Predikat* ausgewertet wird, ist .
+Der Varianz Wert von *expr* für die Gruppe, in der das *Prädikat* ausgewertet wird `true` .
  
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 range x from 1 to 100 step 1

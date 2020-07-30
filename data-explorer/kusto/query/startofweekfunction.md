@@ -1,6 +1,6 @@
 ---
-title: startofweek() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt startofweek() in Azure Data Explorer.
+title: starto f Week ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird starto-Week () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,40 +8,40 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9705b586a0b8c5161b7d4c27735f644b6982c707
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 24763297585a7f043847e3037103a61650f65bd1
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81507224"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87343480"
 ---
 # <a name="startofweek"></a>startofweek()
 
-Gibt den Anfang der Woche zurück, der das Datum enthält, verschoben um einen Offset, sofern angegeben.
+Gibt den Anfang der Woche zurück, der das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.
 
-Der Wochenbeginn gilt als Sonntag.
+Der Beginn der Woche gilt als Sonntag.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`startofweek(`*Datum* `,`[*Offset*]`)`
+`startofweek(`*Datum* [ `,` *Offset*]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* `date`: Das Eingabedatum.
-* `offset`: Eine optionale Anzahl von Offsetwochen ab dem Eingabedatum (ganzzahlig, default - 0).
+* `date`: Das Eingabe Datum.
+* `offset`: Eine optionale Anzahl von Offset Wochen ab dem Eingabe Datum (Integer, default-0).
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Eine Datumszeit, die den Wochenanfang für den angegebenen *Datumswert* mit dem Offset darstellt, falls angegeben.
+Ein DateTime-Wert, der den Anfang der Woche für den angegebenen *Datums* Wert mit dem Offset darstellt, falls angegeben.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
   range offset from -1 to 1 step 1
  | project weekStart = startofweek(datetime(2017-01-01 10:10:17), offset) 
 ```
 
-|weekStart|
+|weekstart|
 |---|
 |2016-12-25 00:00:00.0000000|
 |2017-01-01 00:00:00.0000000|

@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: 1d93535ff2caff096a18e2324fd3015ca91fc5b4
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 814124dc0ae9fa5f26a198fafc1bf1d7fd2b83e4
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373255"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346200"
 ---
 # <a name="percentile_tdigest"></a>percentile_tdigest()
 
 Berechnet das Perzentil-Ergebnis aus den `tdigest` Ergebnissen (das von [tdigest ()](tdigest-aggfunction.md) oder [tdigest_merge ()](tdigest-merge-aggfunction.md)generiert wurde).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `percentile_tdigest(`*`Expr`*`,`*Percentile1* [ `,` *typeliteral*]`)`
 
@@ -27,14 +27,14 @@ Berechnet das Perzentil-Ergebnis aus den `tdigest` Ergebnissen (das von [tdigest
 
 `percentiles_array_tdigest(`*`Expr`*`,`*Dynamisches Array*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expr*: Ausdruck, der von [`tdigest`](tdigest-aggfunction.md) oder [tdigest_merge ()](tdigest-merge-aggfunction.md)generiert wurde.
 * *Percentile* ist eine Double-Konstante, die das Quantil angibt.
 * *typeliteral*: ein optionales typliteralzeichen (z `typeof(long)` . b.). Wenn bereitgestellt, ist das Resultset von diesem Typ. 
 * *Dynamisches Array*: Liste der Perzentile in einem dynamischen Array von ganzzahligen oder Gleit Komma Zahlen.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Der Quantile/percentilesw-Wert jedes Werts in *`Expr`* .
 
@@ -46,7 +46,7 @@ Der Quantile/percentilesw-Wert jedes Werts in *`Expr`* .
 
 * Wenn *`Expr`* `tdigest` Funktionen verschiedener Typen enthält, geben Sie den-Typ nicht an. Das Ergebnis ist vom Typ "Dynamic". Hier einige Beispiele.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

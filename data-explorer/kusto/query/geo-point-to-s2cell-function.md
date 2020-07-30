@@ -8,12 +8,12 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: fe3af4218fcc8b714cd4d62e45e78d6f8c9c0270
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: a094644e6f8a96631e5e1bcf1d2d15cf1ba7caad
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226906"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347747"
 ---
 # <a name="geo_point_to_s2cell"></a>geo_point_to_s2cell()
 
@@ -21,17 +21,17 @@ Berechnet den S2-zelltokenzeichenfolgen-Wert für einen geografischen Standort.
 
 Weitere Informationen finden Sie in der [Zellen Hierarchie S2](https://s2geometry.io/devguide/s2cell_hierarchy).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `geo_point_to_s2cell(`*Längengrad* `, ` *Breitengrad* `, ` *Ebene*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Längengrad*: Längengrad eines geografischen Standorts. Der Längengrad " *x* " wird als gültig betrachtet, wenn " *x* " eine reelle Zahl und " *x* " im Bereich [-180, + 180] ist. 
 * *breiten*Grad: Breitengrad eines geografischen Standorts. Der Breitengrad y wird als gültig betrachtet, wenn y eine reelle Zahl und y im Bereich [-90, + 90] ist. 
 * *Level*: ein optionales `int` , das die angeforderte Zellen Ebene definiert. Unterstützte Werte liegen im Bereich [0,0]. Wenn nicht angegeben, wird der Standardwert `11` verwendet.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Der Zeichen folgen Wert des S2-zelltokens eines angegebenen geografischen Standorts. Wenn die Koordinaten oder Ebenen ungültig sind, führt die Abfrage zu einem leeren Ergebnis.
 
@@ -86,7 +86,7 @@ Die Tabellen Quelle finden Sie [in dieser Ressourcen Statistik Ressource mit S2]
 
 Siehe auch [geo_point_to_geohash ()](geo-point-to-geohash-function.md).
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 US Storm-Ereignisse, die von s2cell aggregiert werden.
 

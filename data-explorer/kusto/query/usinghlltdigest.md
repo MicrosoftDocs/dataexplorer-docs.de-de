@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 8da464bca228df5a813f50e68fab5ddb2aa926cf
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: bd3e7a77a4de46b6dcebb2f58c98009a9edddb43
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128664"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87338608"
 ---
 # <a name="using-hll-and-tdigest"></a>Verwenden von „hll()“ und „tdigest()“
 
@@ -81,7 +81,7 @@ MyTable
 |0|
 
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Es gibt eine Tabelle `PageViewsHllTDigest` mit `hll` Werten von Seiten, die in jeder Stunde angezeigt werden. Sie möchten, dass diese Werte in klassifiziert werden `12h` . Führen `hll` Sie die Werte `hll_merge()` mit der Aggregatfunktion zusammen, wobei der Zeitstempel klassifiziert ist `12h` . Verwenden Sie die-Funktion `dcount_hll` , um den endgültigen Wert zurückzugeben `dcount` :
 
@@ -127,7 +127,7 @@ PageViewsHllTDigest
 |2016-05-02 12:00:00.0000000|181315|
 |2016-05-03 00:00:00.0000000|146817|
  
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Kusto-Limits werden mit zu großen Datasets erreicht, bei denen Sie regelmäßige Abfragen für das DataSet ausführen müssen, aber die regulären Abfragen ausführen, um [`percentile()`](percentiles-aggfunction.md) große Datasets zu berechnen oder zu [`dcount()`](dcount-aggfunction.md) überschreiten.
 
@@ -178,7 +178,7 @@ PageViewsHllTDigest
 
 Diese Abfrage sollte leistungsfähiger sein, da Sie über eine kleinere Tabelle ausgeführt wird. In diesem Beispiel wird die erste Abfrage über ungefähr 215 Mio. Datensätze ausgeführt, während die zweite Abfrage über nur 32 Datensätze läuft:
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Die Beibehaltungs Abfrage.
 Angenommen, Sie verfügen über eine Tabelle, die zusammengefasst wird, wenn jede Wikipedia-Seite angezeigt wird (Stichprobengröße ist 10 m), und Sie möchten für jede date1 suchen date2 den Prozentsatz der Seiten, die in date1 und date2 in Bezug auf die auf date1 (date1 < date2) angezeigten Seiten überprüft werden.

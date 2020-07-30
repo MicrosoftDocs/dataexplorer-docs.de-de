@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9aa85bcb12cd5f8d836f58ea9d16a318d8a40506
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: cdee53ad7f46aacb71b8a8277e5b875e60438874
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225954"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349821"
 ---
 # <a name="activity_engagement-plugin"></a>activity_engagement-Plug-In
 
@@ -25,11 +25,11 @@ activity_engagement-Plug-in kann zum Berechnen von Dau/WAU/Mau (tägliche/wöche
 T | evaluate activity_engagement(id, datetime_column, 1d, 30d)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| evaluate` `activity_engagement(` *idColumn* `,` *timelinecolenn* `,` [*Start* `,` *Ende* `,` ] *inneractivitywindow* `,` *outeractivitywindow* [ `,` *dim1* `,` *dim2* `,` ...]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: der tabellarische Eingabe Ausdruck.
 * *IdColumn*: der Name der Spalte mit ID-Werten, die die Benutzeraktivität darstellen. 
@@ -40,7 +40,7 @@ T | evaluate activity_engagement(id, datetime_column, 1d, 30d)
 * *Outeractivitywindow*: Skalar mit dem Wert des Fenster Zeitraums für den äußeren Gültigkeitsbereich.
 * *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, in denen die Berechnung der Aktivitäts Metrik in Slice ist.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt eine Tabelle zurück, die (unterschiedliche Anzahl von ID-Werten im Fenster des inneren Bereichs, eine eindeutige Anzahl von ID-Werten im äußeren Gültigkeitsbereich und das aktivitätsverhältnis) für jeden Fenster Zeitraum im inneren Gültigkeitsbereich und für jede vorhandene Dimensions Kombination enthält.
 
@@ -51,7 +51,7 @@ Das Ausgabe Tabellen Schema ist:
 |Typ: ab *timelinecolumschlag*|long|long|double|..|..|..|
 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ### <a name="dauwau-calculation"></a>Berechnung von Dau/WAU
 

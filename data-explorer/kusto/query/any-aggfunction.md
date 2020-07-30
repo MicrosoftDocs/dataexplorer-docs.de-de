@@ -1,6 +1,6 @@
 ---
-title: any() (Aggregationsfunktion) - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt any() (Aggregationsfunktion) in Azure Data Explorer.
+title: 'Any () (Aggregations Funktion): Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird jede () (Aggregations Funktion) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,59 +8,59 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2a0b2aed48c9c5aa9d5b99bdb6cab68375827d2c
-ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
+ms.openlocfilehash: 73c3a660dc7a34f1f9fef840b13f47c13b4d1b2f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "82030202"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349736"
 ---
-# <a name="any-aggregation-function"></a>any() (Aggregationsfunktion)
+# <a name="any-aggregation-function"></a>Any () (Aggregations Funktion)
 
-Wählt willkürlich einen Datensatz für jede Gruppe in einem [zusammengefassten Operator](summarizeoperator.md)aus und gibt den Wert eines oder mehrerer Ausdrücke über jeden solchen Datensatz zurück.
+Wählt beliebig einen Datensatz für jede Gruppe in einem Zusammenfassungs [Operator](summarizeoperator.md)aus und gibt den Wert von einem oder mehreren Ausdrücken für jeden dieser Datensätze zurück.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`summarize``any` *Expr* `,` *Expr2* ( Expr [ Expr2 ...]) | `(` `*``)`
+`summarize``any` `(` (*Expr* [ `,` *expr2* ...]) | `*``)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Expr*: Ein Ausdruck über jeden Datensatz, der aus der Eingabe ausgewählt wurde, um zurückzukehren.
-* *Expr2* .. *ExprN*: Zusätzliche Ausdrücke.
+* *Expr*: ein Ausdruck für jeden Datensatz, der aus der Eingabe ausgewählt wurde, die zurückgegeben werden soll.
+* *Expr2* .. *ExprN*: zusätzliche Ausdrücke.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Die `any` Aggregationsfunktion gibt die Werte der ausdrücken zurück, die für jeden Datensatz berechnet wurden und nach dem Zufallsprinzip aus jeder Gruppe des Summarize-Operators ausgewählt wurden.
+Die `any` Aggregations Funktion gibt die Werte der Ausdrücke zurück, die für die einzelnen Datensätze berechnet werden, die nach dem Zufallsprinzip aus jeder Gruppe des Zusammenfassungs Operators ausgewählt werden.
 
-Wenn `*` das Argument angegeben wird, verhält sich die Funktion so, als wären die Ausdrücke alle Spalten der Eingabe für den Summarize-Operator, der die Gruppierten-nach-Spalten, falls vorhanden, ausschließt.
+Wenn das- `*` Argument bereitgestellt wird, verhält sich die-Funktion so, als ob es sich bei den Ausdrücken um alle Spalten der Eingabe des Zusammenfassungs Operators handelt, sofern vorhanden.
 
 **Anmerkungen**
 
-Diese Funktion ist nützlich, wenn Sie einen Beispielwert von einer oder mehreren Spalten pro Wert des zusammengesetzten Gruppenschlüssels abrufen möchten.
+Diese Funktion ist nützlich, wenn Sie einen Beispiel Wert von einer oder mehreren Spalten pro Wert des Verbund Gruppen Schlüssels erhalten möchten.
 
-Wenn der Funktion ein einzelner Spaltenverweis zur Verfügung gestellt wird, wird versucht, einen Wert ohne NULL/nicht leer zurückzugeben, wenn ein solcher Wert vorhanden ist.
+Wenn die Funktion mit einem einzelnen Spalten Verweis bereitgestellt wird, wird versucht, einen nicht-NULL-Wert zurückzugeben, wenn ein solcher Wert vorhanden ist.
 
-Aufgrund der zufälligen Natur dieser Funktion ist die mehrfache Verwendung `summarize` in einer einzigen Anwendung des Operators nicht gleichbedeutend mit der Verwendung eines einzigen Mals mit mehreren Ausdrücken. Erstere können jede Anwendung einen anderen Datensatz auswählen lassen, während letztere garantiert, dass alle Werte über einen einzelnen Datensatz (pro unterschiedlicher Gruppe) berechnet werden.
+Aufgrund der zufälligen Natur dieser Funktion ist die mehrfache Verwendung in einer einzelnen Anwendung des `summarize` Operators nicht gleichbedeutend mit der Verwendung einer einzelnen Zeit mit mehreren Ausdrücken. Der erste kann für jede Anwendung einen anderen Datensatz auswählen, während letztere sicherstellt, dass alle Werte über einen einzelnen Datensatz (pro eindeutiger Gruppe) berechnet werden.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
-Zufällige Kontinente anzeigen:
+Zufälligen Kontinent anzeigen:
 
 ```kusto
 Continents | summarize any(Continent)
 ```
 
-:::image type="content" source="images/aggfunction/any1.png" alt-text="Beeinen 1":::
+:::image type="content" source="images/aggfunction/any1.png" alt-text="Alle 1":::
 
-Zeigen Sie alle Details für einen zufälligen Datensatz an:
+Alle Details für einen zufälligen Datensatz anzeigen:
 
 ```kusto
 Continents | summarize any(*)
 ```
 
-:::image type="content" source="images/aggfunction/any2.png" alt-text="Alle 2":::
+:::image type="content" source="images/aggfunction/any2.png" alt-text="Beliebige 2":::
 
-Zeigen Sie alle Details für jeden zufälligen Kontinent:
+Alle Details für jeden zufälligen Kontinent anzeigen:
 
 ```kusto
 Continents | summarize any(*) by Continent

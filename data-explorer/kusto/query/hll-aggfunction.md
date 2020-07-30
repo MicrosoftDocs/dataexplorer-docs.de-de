@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/15/2020
-ms.openlocfilehash: cbe1b0639a0379fe84bc9c100a629bbadd9c3a63
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: e602a920dd07089f688f39115805a2f99d505c9c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226566"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347560"
 ---
 # <a name="hll-aggregation-function"></a>HLL () (Aggregations Funktion)
 
@@ -21,11 +21,11 @@ Berechnet die Zwischenergebnisse von [`dcount`](dcount-aggfunction.md) innerhalb
 
 Erfahren Sie mehr über den [zugrunde liegenden Algorithmus (*H*yper*L*og*l*OG) und die Schätzung der Schätzung](dcount-aggfunction.md#estimation-accuracy).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `summarize hll(`*`Expr`* `[,` *`Accuracy`*`])`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *`Expr`*: Ausdruck, der für die Aggregations Berechnung verwendet wird. 
 * *`Accuracy`* Wenn angegeben, wird das Gleichgewicht zwischen Geschwindigkeit und Genauigkeit gesteuert.
@@ -38,7 +38,7 @@ Erfahren Sie mehr über den [zugrunde liegenden Algorithmus (*H*yper*L*og*l*OG) 
   |`3` | high | langsam | 0,28% |
   |`4` | Extra hoch | langsamste | 0,2% |
     
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Die Zwischenergebnisse der unterschiedlichen Anzahl von *`Expr`* in der Gruppe.
  
@@ -48,7 +48,7 @@ Die Zwischenergebnisse der unterschiedlichen Anzahl von *`Expr`* in der Gruppe.
 
 1. Sie können die-Funktion verwenden [`dcount_hll`](dcount-hllfunction.md) , die den `dcount` aus `hll`  /  `hll_merge` Aggregations Funktionen berechnet.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

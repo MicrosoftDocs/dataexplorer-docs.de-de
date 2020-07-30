@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 5e02c7ca2874a779cc5a626fd65522392439b491
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: b376afda0874fdb70934ffc6861192ef9028e9aa
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271586"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347084"
 ---
 # <a name="new_activity_metrics-plugin"></a>new_activity_metrics-Plug-In
 
@@ -22,11 +22,11 @@ Berechnet nützliche Aktivitäts Metriken (eindeutige Anzahl Werte, unterschiedl
 T | evaluate new_activity_metrics(id, datetime_column, startofday(ago(30d)), startofday(now()), 1d, dim1, dim2, dim3)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| evaluate` `new_activity_metrics(` *idColumn* `,` *timelinecolenn* `,` *Start* `,` *End* `,` *Endfenster* [ `,` *Kohorte*] [ `,` *dim1* `,` *dim2* `,` ...] [ `,` *Lookback*]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: der tabellarische Eingabe Ausdruck.
 * *IdColumn*: der Name der Spalte mit ID-Werten, die die Benutzeraktivität darstellen. 
@@ -38,7 +38,7 @@ T | evaluate new_activity_metrics(id, datetime_column, startofday(ago(30d)), sta
 * *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, in denen die Berechnung der Aktivitäts Metrik in Slice ist.
 * *Lookback*: (optional) ein tabellarischer Ausdruck mit einem Satz von IDs, der zum Rückgabezeitraum gehört.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt eine Tabelle zurück, die die unterschiedlichen Anzahl Werte, die unterschiedliche Anzahl neuer Werte, die Beibehaltungs Dauer und die Änderungs Rate für jede Kombination aus ' from '-und ' to '-Zeitachse sowie für jede vorhandene Dimensions Kombination enthält.
 
@@ -61,7 +61,7 @@ Das Ausgabe Tabellen Schema ist:
 Definitionen von `Retention Rate` und `Churn Rate` finden Sie im Abschnitt " **Hinweise** " in [activity_metrics-Plug](./activity-metrics-plugin.md) -in-Dokumentation.
 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Das folgende Beispiel DataSet zeigt, welche Benutzer an welchen Tagen angezeigt werden. Die Tabelle wurde wie folgt auf Grundlage einer Quell `Users` Tabelle generiert: 
 
@@ -96,9 +96,9 @@ Users
 |5|2019-11-01 00:00:00.0000000|2019-11-05 00:00:00.0000000|1|4|0|1|0|
 |6|2019-11-01 00:00:00.0000000|2019-11-06 00:00:00.0000000|0|0|4|0|1|
 |7|2019-11-02 00:00:00.0000000|2019-11-02 00:00:00.0000000|2|2|0|1|0|
-|8|2019-11-02 00:00:00.0000000|2019-11-03 00:00:00.0000000|0|1|1|0.5|0.5|
-|9|2019-11-02 00:00:00.0000000|2019-11-04 00:00:00.0000000|0|1|1|0.5|0.5|
-|10|2019-11-02 00:00:00.0000000|2019-11-05 00:00:00.0000000|0|1|1|0.5|0.5|
+|8|2019-11-02 00:00:00.0000000|2019-11-03 00:00:00.0000000|0|1|1|0,5|0.5|
+|9|2019-11-02 00:00:00.0000000|2019-11-04 00:00:00.0000000|0|1|1|0,5|0.5|
+|10|2019-11-02 00:00:00.0000000|2019-11-05 00:00:00.0000000|0|1|1|0,5|0.5|
 |11|2019-11-02 00:00:00.0000000|2019-11-06 00:00:00.0000000|0|0|2|0|1|
 
 Im folgenden finden Sie eine Analyse einiger Datensätze aus der Ausgabe: 

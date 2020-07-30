@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8ebd4cb0ab8a5bffec717f83892a3ea11b35f409
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 1b94f661973d1ec89fe7f60edc9063b8c0f36d3c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227637"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349192"
 ---
 # <a name="beta_pdf"></a>beta_pdf()
 
@@ -25,17 +25,17 @@ beta_pdf(0.2, 10.0, 50.0)
 
 Die Beta-Verteilung wird häufig verwendet, um die prozentuale Abweichung eines Werts über mehrere Stichproben hinweg zu untersuchen, etwa den Anteil der Tageszeit, die Menschen mit Fernsehen verbringen.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `beta_pdf(`*x* `, ` *Alpha* `, ` *Beta Version*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *x*: ein Wert, bei dem die Funktion ausgewertet werden soll.
 * *Alpha*: ein Parameter der Verteilung.
 * *Beta*: ein Parameter der Verteilung.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 * Die [Wahrscheinlichkeits-Beta-Funktion](https://en.wikipedia.org/wiki/Beta_distribution#Probability_density_function).
 
@@ -47,7 +47,7 @@ Wenn x, 0 oder 1. x, beta_pdf () den NaN-Wert zurückgibt.
 
 Wenn Alpha-0 oder Beta-0, beta_pdf () den NaN-Wert zurückgibt.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

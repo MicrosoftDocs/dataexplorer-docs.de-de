@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/09/2019
-ms.openlocfilehash: 1281e2afdf9770975c6f6f74399f9815adaec045
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: f85c2c45ff4e69ba59f2a13313c8c2ac494c56a6
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83371061"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87340988"
 ---
 # <a name="tdigest_merge"></a>tdigest_merge()
 
@@ -21,21 +21,21 @@ ms.locfileid: "83371061"
 
 Weitere Informationen zum zugrunde liegenden Algorithmus (T-Digest) und dem geschätzten Fehler [finden Sie hier](percentiles-aggfunction.md#estimation-error-in-percentiles).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `merge_tdigests(`*Expr1* `,` *Expr2*`, ...)`
 
 `tdigest_merge(`*Expr1* `,` *Expr2* `, ...)` : Ein Alias.
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * Spalten mit den Werten, die `tdigest` zusammengeführt werden sollen.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Das Ergebnis für das Zusammenführen der Spalten `*Expr1*` , `*Expr2*` ,... `*ExprN*` zu eins `tdigest` .
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

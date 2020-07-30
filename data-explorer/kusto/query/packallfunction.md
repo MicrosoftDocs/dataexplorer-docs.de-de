@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f34f2ac316f122034fcf8ee19a8e82e51b6221df
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: 6c157c014ec3b83aa39d4bdfcadda12e97e84f3e
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780472"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346540"
 ---
 # <a name="pack_all"></a>pack_all()
 
 Erstellt ein- `dynamic` Objekt (Eigenschaften Behälter) aus allen Spalten des tabellarischen Ausdrucks.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `pack_all()`
 
-**Notizen**
+**Hinweise**
 
 Die Darstellung des zurückgegebenen Objekts ist nicht garantiert, dass es zwischen den Ausführungen mit Byte-Ebene kompatibel ist. Beispielsweise können Eigenschaften, die im Behälter angezeigt werden, in einer anderen Reihenfolge angezeigt werden.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Bei einer Tabelle mit smsmess 
 

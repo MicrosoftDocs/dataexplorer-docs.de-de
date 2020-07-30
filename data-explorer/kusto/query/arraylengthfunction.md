@@ -1,6 +1,6 @@
 ---
-title: array_length() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird array_length() in Azure Data Explorer beschrieben.
+title: array_length ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird array_length () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0bb1daeba6d24f8bd7326fcd0b8c17f06003e30b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 14203e3078b7fe30222ea26320ed1391000d5c05
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518597"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349549"
 ---
 # <a name="array_length"></a>array_length()
 
 Berechnet die Anzahl der Elemente in einem dynamischen Array.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `array_length(`*array*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Array*: `dynamic` Ein Wert.
+* *Array*: ein- `dynamic` Wert.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Die Anzahl von Elementen in *array* oder `null`, wenn *array* kein Array ist.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 print array_length(parse_json('[1, 2, 3, "four"]')) == 4

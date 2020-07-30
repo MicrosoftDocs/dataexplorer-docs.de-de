@@ -8,27 +8,27 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/01/2020
-ms.openlocfilehash: 6ef78d3078fc396d4ebfb782e54f31096a1e8777
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.openlocfilehash: bdb7bda617085ae1a7b3ead60c46c80c883943f4
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280703"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347781"
 ---
-# <a name="geo_polygon_densify"></a>geo_polygon_densify ()
+# <a name="geo_polygon_densify"></a>geo_polygon_densify()
 
 Konvertiert Polygon-oder MultiPolygon-planare Ränder in geodäme durch Hinzufügen von zwischen Punkten.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `geo_polygon_densify(`*Polygon* `, ` *Toleranz*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Polygon*: Polygon oder MultiPolygon im [geojson-Format](https://tools.ietf.org/html/rfc7946) und eines [dynamischen](./scalar-data-types/dynamic.md) Datentyps.
 * *Toleranz*: ein optionaler numerischer Wert, der den maximalen Abstand zwischen dem ursprünglichen planaren Edge und der konvertierten geodäschen edgekette in Meter definiert. Unterstützte Werte liegen im Bereich [0,1, 10000]. Wenn nicht angegeben, wird der Standardwert `10` verwendet.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Falsch [formatierte Polygon im geojson-Format](https://tools.ietf.org/html/rfc7946) und eines [dynamischen](./scalar-data-types/dynamic.md) Datentyps. Wenn das Polygon oder die Toleranz ungültig ist, führt die Abfrage zu einem NULL-Ergebnis.
 
@@ -60,7 +60,7 @@ Dynamic ({"Type": "MultiPolygon", "Koordinaten": [[linearringshell, LinearRingHo
 * Im [geojson-Format](https://tools.ietf.org/html/rfc7946) wird ein Rand zwischen zwei Punkten als gerade kartesische Linie definiert.
 * Die Entscheidung, geodätische-oder planare Kanten zu verwenden, hängt möglicherweise vom DataSet ab und ist besonders in langen Kanten relevant.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Im folgenden Beispiel wird das Polygon-Polygon im zentralen Park verweigert. Die Ränder sind kurz, und der Abstand zwischen den planaren Rändern und ihren geodäschen Entsprechungen ist kleiner als der von Tolerance angegebene Abstand. Das Ergebnis bleibt unverändert.
 

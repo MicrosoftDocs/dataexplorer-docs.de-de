@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: b70ee322d4718f78a37144b650a147c5c9965a60
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: 13cc0edad5e0e4673c34e7e5b1b517f097fa4e9a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85129021"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346183"
 ---
 # <a name="percentile-percentiles-aggregation-function"></a>Percentile (), percentiles () (Aggregations Funktion)
 
@@ -24,7 +24,7 @@ Die Genauigkeit hängt von der Bevölkerungsdichte in der Region des Perzentils 
 * `percentilesw()`ähnelt `percentilew()` , berechnet jedoch eine Reihe gewichteter Perzentil-Werte, die schneller als jedes Quantil berechnet werden.
 * `percentilew()`und `percentilesw()` können gewichtete Perzentilen berechnen. Gewichtete Perzentile berechnen die angegebenen Perzentile in einer gewichteten Weise, indem Sie jeden Wert `weight` in der Eingabe als Wiederholungszeit behandeln.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `percentile(` *expr* - `,` *Perzentil* zusammenfassen`)`
 
@@ -42,18 +42,18 @@ Die Genauigkeit hängt von der Bevölkerungsdichte in der Region des Perzentils 
 
 `percentilesw_array(`dynamisches Array von *expr* `,` *weightexpr* `,` *Dynamic array* zusammenfassen`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * `*Expr*`: Ausdruck, der für die Aggregations Berechnung verwendet wird.
 * `*WeightExpr*`: Ausdruck, der als Gewichtung von Werten für die Aggregations Berechnung verwendet wird.
 * `*Percentile*`: Eine Double-Konstante, die das Quantil angibt.
 * `*Dynamic array*`: Liste der Perzentile in einem dynamischen Array von ganzzahligen oder Gleit Komma Zahlen.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt eine Schätzung für `*Expr*` die angegebenen Perzentilen in der Gruppe zurück. 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Der Wert von `Duration` ist größer als 95% der Stichproben Menge und kleiner als 5% der Stichproben Menge.
 
@@ -83,7 +83,7 @@ Angenommen, Sie messen die Zeit (Dauer), die eine Aktion durchgeführt wird, wie
 
 Verwenden `summarize percentilesw(Duration, BucketSize, ...)` Sie, um die angegebenen Perzentilen auf eine gewichtete Weise zu berechnen. Behandeln Sie jeden Wert der Dauer so, als ob er die BucketSize-Zeiten in der Eingabe wiederholt hätte, ohne diese Datensätze tatsächlich materialisieren zu müssen.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Ein Kunde verfügt über eine Reihe von Latenz Werten in Millisekunden: `{ 1, 1, 2, 2, 2, 5, 7, 7, 12, 12, 15, 15, 15, 18, 21, 22, 26, 35 }` .
 

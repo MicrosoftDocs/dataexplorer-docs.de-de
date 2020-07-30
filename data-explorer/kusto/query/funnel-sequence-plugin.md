@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: c68cac70223b4779b4ca0acf33cd9f66d8c91765
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 67a5e05a5720c8a9290523344f793c07c47c5ed2
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227399"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347917"
 ---
 # <a name="funnel_sequence-plugin"></a>funnel_sequence-Plug-In
 
@@ -23,11 +23,11 @@ Berechnet die unterschiedliche Anzahl von Benutzern, die eine Sequenz von Zustä
 T | evaluate funnel_sequence(id, datetime_column, startofday(ago(30d)), startofday(now()), 10m, 1d, state_column, dynamic(['S1', 'S2', 'S3']))
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| evaluate` `funnel_sequence(` *idColumn* `,` *timelinecolenn* `,` *Start* `,` *Ende* `,` *maxsequencestepwindow*, *Step*, *statecolenumn*, *Sequence*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: der tabellarische Eingabe Ausdruck.
 * *Idcolum*: Spalten Verweis muss im Quell Ausdruck vorhanden sein.
@@ -39,7 +39,7 @@ T | evaluate funnel_sequence(id, datetime_column, startofday(ago(30d)), startofd
 * *Statecolbin*: der Spalten Verweis, der den Zustand darstellt, muss im Quell Ausdruck vorhanden sein.
 * *Sequence*: ein konstantes dynamisches Array mit den Sequenz Werten (Werte werden in gesucht `StateColumn` ).
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt drei Ausgabe Tabellen zurück, die zum Erstellen eines Sankey-Diagramms für die analysierte Sequenz nützlich sind:
 
@@ -57,7 +57,7 @@ Gibt drei Ausgabe Tabellen zurück, die zum Erstellen eines Sankey-Diagramms fü
     Beispiele: ein Array von IDs (von `IdColumn` ), das der Zeilen Sequenz entspricht (maximal 128 IDs werden zurückgegeben). 
 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ### <a name="exploring-storm-events"></a>Erkunden von Storm-Ereignissen 
 

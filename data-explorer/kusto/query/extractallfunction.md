@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 55168d381ab69bf0d29e8560714e13cb635fd688
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: e52f90b911331bca6374318869d3f8ebf262d81f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780523"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348070"
 ---
 # <a name="extract_all"></a>extract_all()
 
@@ -24,11 +24,11 @@ Rufen Sie optional eine Teilmenge der übereinstimmenden Gruppen ab.
 print extract_all(@"(\d+)", "a set of numbers: 123, 567 and 789") // results with the dynamic array ["123", "567", "789"]
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `extract_all(`*Regex* `,` [*capturegroups* `,` ] *Text*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 |Argument        |BESCHREIBUNG                                  |Erforderlich oder optional  |
 |----------------|---------------------------------------------|----------------------|
@@ -36,7 +36,7 @@ print extract_all(@"(\d+)", "a set of numbers: 123, 567 and 789") // results wit
 |capturegroups   |Eine dynamische Array Konstante, die die Erfassungs Gruppe angibt, die extrahiert werden soll. Gültige Werte liegen zwischen 1 und der Anzahl der Erfassungs Gruppen im regulären Ausdruck. Benannte Erfassungs Gruppen sind ebenfalls zulässig (siehe [Beispiele](#examples)).|Optional         |
 |text            |Eine `string` zu durchsuchende                         |Erforderlich              |
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 * Wenn *Regex* eine Übereinstimmung im *Text*findet: gibt ein dynamisches Array zurück, das alle Übereinstimmungen mit den angezeigten Erfassungs Gruppen *capturegroups*oder alle *Erfassungs Gruppen in Regex*enthält.
 * Wenn die Anzahl von *capturegroups* 1 ist: das zurückgegebene Array verfügt über eine einzelne Dimension von übereinstimmenden Werten.

@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/26/2019
-ms.openlocfilehash: d95bed91ab07be3feebecffbb97378866cb7c6c9
-ms.sourcegitcommit: a034b6a795ed5e62865fcf9340906f91945b3971
+ms.openlocfilehash: cf83690d61bb84d1b6b877e76a77d5776be35ad4
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85197225"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349243"
 ---
-# <a name="basket-plugin"></a>Basket-Plugin
+# <a name="basket-plugin"></a>basket-Plug-In
 
 ```kusto
 T | evaluate basket()
@@ -23,11 +23,11 @@ T | evaluate basket()
 
 Basket findet alle häufigen Muster diskreter Attribute (Dimensionen) in den Daten. Anschließend werden die häufigen Muster zurückgegeben, die den Häufigkeits Schwellenwert in der ursprünglichen Abfrage überschritten haben. Der Warenkorb findet sicher jedes häufige Muster in den Daten, aber es ist nicht garantiert, dass eine polynomale Laufzeit vorhanden ist. Die Laufzeit der Abfrage ist in der Anzahl der Zeilen linear, kann aber exponentiell in der Anzahl von Spalten (Dimensionen) sein. Basket basiert auf dem Apriori-Algorithmus, der ursprünglich für das Data Mining per Basket-Analyse entwickelt wurde.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `T | evaluate basket(`*Argumente*`)`
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Basket gibt alle häufigen Muster zurück, die oberhalb des Verhältnis Schwellenwerts der Zeilen angezeigt werden. Der Standard Schwellenwert ist 0,05. Jede Zeile in den Ergebnissen steht für ein Muster.
 
@@ -69,7 +69,7 @@ Verfügbare Argumente:
 
      `T | evaluate basket('~', '~', '~', '*', int(-1), double(-1), long(0), datetime(1900-1-1))`
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -80,7 +80,7 @@ StormEvents
 | evaluate basket(0.2)
 ```
 
-|SegmentId|Anzahl|Percent|State|EventType|Damage|DamageCrops|
+|SegmentId|Anzahl|Percent|Zustand|EventType|Damage|DamageCrops|
 |---|---|---|---|---|---|---|---|---|
 |0|4.574|77,7|||Nein|0
 |1|2278|38,7||Hagel|Nein|0
@@ -102,7 +102,7 @@ StormEvents
 | evaluate basket(0.2, '~', '~', '*', int(-1))
 ```
 
-|SegmentId|Anzahl|Percent|State|EventType|Damage|DamageCrops|
+|SegmentId|Anzahl|Percent|Zustand|EventType|Damage|DamageCrops|
 |---|---|---|---|---|---|---|---|---|
 |0|4.574|77,7|\*|\*|Nein|0
 |1|2278|38,7|\*|Hagel|Nein|0

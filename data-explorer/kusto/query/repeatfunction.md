@@ -1,6 +1,6 @@
 ---
-title: repeat() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird Repeat() in Azure Data Explorer beschrieben.
+title: REPEAT ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird REPEAT () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,29 +8,29 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0fd944112a64e7400e38c627b7b0651bb6fccd54
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 0d488ac96cd3db2161761ea837d5490d25cfc920
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510420"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345826"
 ---
 # <a name="repeat"></a>repeat()
 
-Generiert ein dynamisches Array mit einer Reihe gleicher Werte.
+Generiert ein dynamisches Array, das eine Reihe gleicher Werte enthält.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`repeat(`*Wertanzahl* `,` *count*`)` 
+`repeat(`*Wert* `,` *Anzahl*`)` 
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *value*: Der Wert des Elements im resultierenden Array. Der *Werttyp* kann boolesch, ganzzahlig, lang, real, datetime oder timespan sein.   
-* *count*: Die Anzahl der Elemente im resultierenden Array. Die *Anzahl* muss eine ganze Zahl sein.
-Wenn *die Anzahl* gleich Null ist, wird ein leeres Array zurückgegeben.
-Wenn *die Anzahl* kleiner als Null ist, wird ein NULL-Wert zurückgegeben. 
+* *value*: der Wert des Elements im resultierenden Array. Der *Wert* kann "Boolean", "Integer", "Long", "Real", "DateTime" oder "TimeSpan" lauten.   
+* *count*: die Anzahl der Elemente im resultierenden Array. Die *Anzahl* muss eine ganzzahlige Zahl sein.
+Wenn *count* gleich NULL ist, wird ein leeres Array zurückgegeben.
+Wenn *count* kleiner als 0 (null) ist, wird ein NULL-Wert zurückgegeben. 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Das folgende Beispiel gibt `[1, 1, 1]`zurück:
 

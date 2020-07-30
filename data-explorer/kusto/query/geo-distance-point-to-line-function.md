@@ -8,28 +8,28 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/11/2020
-ms.openlocfilehash: b4a30aa4285b8f6e22e5d4057fe7d408d548a27b
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.openlocfilehash: a7796c14098f773b73bd16735a3d2c9c879c8fd2
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280563"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347866"
 ---
 # <a name="geo_distance_point_to_line"></a>geo_distance_point_to_line()
 
 Berechnet den kürzesten Abstand zwischen einer Koordinate und einer Linie auf der Erde.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `geo_distance_point_to_line(`*Längengrad* `, ` *Breitengrad* `, ` *LineString*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Längengrad*: geografischer Koordinaten Längen Wert in Grad. Der gültige Wert ist eine reelle Zahl und liegt im Bereich [-180, + 180].
 * *breiten*Grad: geografischer Koordinaten Breitenwert in Grad. Der gültige Wert ist eine reelle Zahl und liegt im Bereich [-90, + 90].
 * *LineString*: Zeile im [geojson-Format](https://tools.ietf.org/html/rfc7946) und eines [dynamischen](./scalar-data-types/dynamic.md) Datentyps.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Die kürzeste Entfernung in Meter zwischen einer Koordinate und einer Linie auf der Erde. Wenn die Koordinate oder LineString ungültig sind, führt die Abfrage zu einem NULL-Ergebnis.
 
@@ -49,7 +49,7 @@ Dynamic ({"Type": "LineString", "Koordinaten": [[lng_1, lat_1], [lng_2, lat_2],.
 > [!TIP]
 > Verwenden Sie zum Verbessern der Leistung literallinien.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Im folgenden Beispiel wird die kürzeste Entfernung zwischen dem North Las Vegas-Flughafen und einem in der Nähe befindlichen Straße gefunden.
 

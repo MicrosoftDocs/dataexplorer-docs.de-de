@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 1f5584233a24c834e0ca6c28ed60aa5d7496b411
-ms.sourcegitcommit: 284152eba9ee52e06d710cc13200a80e9cbd0a8b
+ms.openlocfilehash: 22f1b36b851c6e629abd2524feb4c40c74bbb1fa
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86291524"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348138"
 ---
 # <a name="extent_id"></a>extent_id()
 
@@ -25,15 +25,15 @@ Gibt einen eindeutigen Bezeichner zurück, der den datenshard ("Block") angibt, 
 
 Wenn diese Funktion auf berechnete Daten angewendet wird, die nicht an einen datenshard angefügt sind, wird eine leere Guid (alle Nullen) zurückgegeben.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `extent_id()`
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Ein Wert vom Typ `guid` , der den datenshard des aktuellen Datensatzes angibt, oder eine leere Guid (alle Nullen).
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Im folgenden Beispiel wird gezeigt, wie Sie eine Liste aller Daten-Shards, die über Datensätze von einer Stunde verfügen, mit einem bestimmten Wert für die Spalte erhalten `ActivityId` . Es veranschaulicht, dass einige Abfrage Operatoren (hier, der- `where` Operator und und `extend` `project` ) die Informationen über den datenshard, der den Datensatz gehostet, beibehalten.
 

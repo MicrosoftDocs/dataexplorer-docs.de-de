@@ -1,6 +1,6 @@
 ---
-title: log2() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird log2() in Azure Data Explorer beschrieben.
+title: log2 ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: Dieser Artikel beschreibt log2 () in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 41e9a1457f97fa04a4daa54e1929f27d8a448ae3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a404dfba70f3a624acc08e70ee4b24935d1d7135
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513123"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347101"
 ---
 # <a name="log2"></a>log2()
 
-`log2()`gibt die Base-2-Logarithmusfunktion zurück.  
+`log2()`Gibt die Logarithmus Funktion der Basis 2 zurück.  
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`log2(`*X*`)`
+`log2(`*Stuben*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *x*: Eine reelle Zahl > 0.
+* *x*: eine reelle Zahl > 0.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-* Der Logarithmus ist der Base-2-Logarithmus: die Umkehrung der exponentiellen Funktion (exp) mit Basis 2.
-* `null`wenn das Argument negativ oder null ist oder `real` nicht in einen Wert konvertiert werden kann. 
+* Der Logarithmus ist der Logarithmus zur Basis 2: die Umkehrung der Exponentialfunktion (Exp) mit Basis 2.
+* `null`, wenn das Argument negativ oder NULL ist oder nicht in einen-Wert konvertiert werden kann `real` . 
 
-**Siehe auch**
+**Weitere Informationen**
 
-* Für natürliche (Base-e) Logarithmen siehe [log()](log-function.md).
-* Häufige (Basis-10) Logarithmen finden Sie unter [log10()](log10-function.md).
+* Einen natürlichen Logarithmus (Basis-e) finden Sie unter [Log ()](log-function.md).
+* Allgemeine (Basis 10) Logarithmus finden Sie unter [log10 ()](log10-function.md).

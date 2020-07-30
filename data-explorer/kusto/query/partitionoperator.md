@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 417d4afb74e9170301baebde6be73d97df097f0f
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: 2b082e516a1118638bc8e61b545471326dd400e5
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271535"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346234"
 ---
 # <a name="partition-operator"></a>partition-Operator
 
@@ -25,13 +25,13 @@ T | partition by Col1 ( top 10 by MaxValue )
 T | partition by Col1 { U | where Col2=toscalar(Col1) }
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `|` `partition` [*partitionparameters*] `by` *Spalte* `(` *contextualsubquery*`)`
 
 *T* `|` `partition` [*partitionparameters*] `by` *Spalten* `{` *Unterabfrage*`}`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: die tabellarische Quelle, deren Daten vom Operator verarbeitet werden sollen.
 
@@ -46,10 +46,10 @@ T | partition by Col1 { U | where Col2=toscalar(Col1) }
   |Name               |Werte         |BESCHREIBUNG|
   |-------------------|---------------|-----------|
   |`hint.materialized`|`true`,`false` |Wenn festgelegt ist, `true` wird die Quelle des Operators materialisiert `partition` (Standard: `false` ).|
-  |`hint.concurrency`|*Einigen*|Gibt an, wie viele gleichzeitige Unterabfragen des `partition` Operators parallel ausgeführt werden sollen. *Standard*Wert: CPU-Kerne auf dem einzelnen Knoten des Clusters (2 bis 16).|
-  |`hint.spread`|*Einigen*|Gibt an, wie viele Knoten von der gleichzeitigen Ausführung von `partition` Unterabfragen verwendet werden sollen. *Standard*Wert: 1.|
+  |`hint.concurrency`|*Number*|Gibt an, wie viele gleichzeitige Unterabfragen des `partition` Operators parallel ausgeführt werden sollen. *Standard*Wert: CPU-Kerne auf dem einzelnen Knoten des Clusters (2 bis 16).|
+  |`hint.spread`|*Number*|Gibt an, wie viele Knoten von der gleichzeitigen Ausführung von `partition` Unterabfragen verwendet werden sollen. *Standard*Wert: 1.|
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Der-Operator gibt eine Union der Ergebnisse der Anwendung der Unterabfrage auf jede Partition der Eingabedaten zurück.
 
@@ -76,7 +76,7 @@ StormEvents
 ) 
 
 ```
-|EventType|Bundesland/Kanton|Ereignisse|Verletzungs|
+|EventType|Zustand|Events|Verletzungs|
 |---|---|---|---|
 |Hagel|Wyoming|108|0|
 |Hoher Wind|Wyoming|81|5|

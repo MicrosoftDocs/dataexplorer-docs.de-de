@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 167ba8818709f52ccc344452e275405c42b1796e
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: df7b994350297d911a0f3be59c791b6538899d67
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227671"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349787"
 ---
 # <a name="activity_counts_metrics-plugin"></a>activity_counts_metrics-Plug-In
 
@@ -23,11 +23,11 @@ Berechnet nützliche Aktivitätsmetriken für jedes Zeitfenster, das mit *allen*
 T | evaluate activity_counts_metrics(id, datetime_column, startofday(ago(30d)), startofday(now()), 1d, dim1, dim2, dim3)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| evaluate` `activity_counts_metrics(` *idColumn* `,` *timelinecolenn* `,` *Start* `,` *End* `,` *Endfenster* [ `,` *Kohorte*] [ `,` *dim1* `,` *dim2* `,` ...] [ `,` *Lookback*]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: der tabellarische Eingabe Ausdruck.
 * *IdColumn*: der Name der Spalte mit ID-Werten, die die Benutzeraktivität darstellen. 
@@ -37,7 +37,7 @@ T | evaluate activity_counts_metrics(id, datetime_column, startofday(ago(30d)), 
 * *Fenster*: Skalar mit dem Wert des Analysefenster Zeitraums. Kann ein numerischer/DateTime-/timestamp-Wert oder eine Zeichenfolge sein, die einer von ist `week` / `month` / `year` . in diesem Fall werden alle Zeiträume [starttfweek](startofweekfunction.md) / [starttfmonth](startofmonthfunction.md) oder [starto fyear](startofyearfunction.md). 
 * *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, in denen die Berechnung der Aktivitäts Metrik in Slice ist.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt eine Tabelle zurück, die Folgendes enthält: Gesamtzahl Werte, unterschiedliche Anzahl Werte, unterschiedliche Anzahl neuer Werte und aggregierte unterschiedliche Anzahl für jedes Zeitfenster.
 
@@ -54,7 +54,7 @@ Das Ausgabe Tabellen Schema ist:
 * *`new_dcount`*: Die eindeutigen ID-Werte im Zeitfenster und *Dim (s)* im Vergleich zu allen vorherigen Zeitfenstern. 
 * *`aggregated_dcount`*: Die Gesamtzahl der aggregierten eindeutigen ID-Werte von *Dim (s)* vom ersten Zeitfenster bis zum aktuellen (einschließlich).
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ### <a name="daily-activity-counts"></a>Anzahl täglicher Aktivitäten 
 

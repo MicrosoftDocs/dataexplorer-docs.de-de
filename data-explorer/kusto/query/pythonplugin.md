@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 04/01/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: e6439912d323b7677f6febc8b23068c880a735c2
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: 984e5c37f3d29a6c56f88c6eb9b6750635e48920
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85902141"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345979"
 ---
 # <a name="python-plugin"></a>Python-Plugin
 
@@ -134,7 +134,7 @@ print "This is an example for using 'external_artifacts'"
     * Sie können auch den [Partitions Operator](partitionoperator.md) für die Partitionierung des Eingabe Datasets verwenden.
 * Verwenden Sie die Abfragesprache von Kusto, wenn dies möglich ist, um die Logik Ihres python-Skripts zu implementieren.
 
-    **Beispiel**
+    ## <a name="example"></a>Beispiel
 
     ```kusto    
     .show operations
@@ -159,7 +159,7 @@ print "This is an example for using 'external_artifacts'"
      * Doppelte Anführungszeichen ( `"` ) für python-Zeichen folgen Literale in python-Skripts
 * Verwenden Sie den- [ `externaldata` Operator](externaldata-operator.md) zum Abrufen des Inhalts eines Skripts, das Sie an einem externen Speicherort gespeichert haben, z. b. Azure BLOB Storage.
   
-    **Beispiel**
+    ## <a name="example"></a>Beispiel
 
     ```kusto
     let script = 

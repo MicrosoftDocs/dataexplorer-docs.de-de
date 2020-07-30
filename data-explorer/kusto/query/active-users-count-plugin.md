@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b40ca669df7671b1451166f6bfc1c7c680713166
-ms.sourcegitcommit: 1f50c6688a2b8d8a3976c0cd0ef40cde2ef76749
+ms.openlocfilehash: 75f1c92dfb76c56894d1f38dec24a31690f3f789
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/29/2020
-ms.locfileid: "84202958"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349838"
 ---
-# <a name="active_users_count-plugin"></a>Plug-in active_users_count
+# <a name="active_users_count-plugin"></a>active_users_count-Plug-In
 
 Berechnet die unterschiedliche Anzahl von Werten, wobei jeder Wert mindestens einer minimalen Anzahl von Zeitpunkten in einem Nachschlage Zeitraum angezeigt wird.
 
@@ -25,11 +25,11 @@ Eignet sich nur für die Berechnung der unterschiedlichen Anzahl von "Lüfter", 
 T | evaluate active_users_count(id, datetime_column, startofday(ago(30d)), startofday(now()), 7d, 1d, 2, 7d, dim1, dim2, dim3)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| evaluate` `active_users_count(` *idColumn* `,` *timelinecolenn* `,` *Start* `,` *Ende* `,` *lookbackwindow* `,` *Period* `,` *activeperiodscount* `,` *bin* `,` [*dim1* `,` *dim2* `,` ...]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: der tabellarische Eingabe Ausdruck.
 * *IdColumn*: der Name der Spalte mit ID-Werten, die die Benutzeraktivität darstellen. 
@@ -42,7 +42,7 @@ T | evaluate active_users_count(id, datetime_column, startofday(ago(30d)), start
 * *Bin*: skalare Konstante Wert des Analyseschritt Zeitraums. Kann ein numerischer/DateTime-/timestamp-Wert oder eine Zeichenfolge sein, die ist `week` / `month` / `year` . Alle Zeiträume sind die entsprechenden starstarf [Week](startofweekfunction.md)-starto- / [Month](startofmonthfunction.md)- / [startofyear](startofyearfunction.md) Funktionen.
 * *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, in denen die Berechnung der Aktivitäts Metrik in Slice ist.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt eine Tabelle zurück, die unterschiedliche Zählerwerte für IDs aufweist, die in activeperiodcounts in den folgenden Punkten aufgetreten sind: der Nachschlage Zeitraum, jeder Zeitachse und jede vorhandene Dimensions Kombination.
 
@@ -53,7 +53,7 @@ Das Ausgabe Tabellen Schema ist:
 |Typ: ab *timelinecolumschlag*|..|..|..|long|
 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Berechnen Sie die wöchentliche Anzahl der unterschiedlichen Benutzer, die in einem Zeitraum von acht Tagen in mindestens drei Tagen aufgetreten sind. Zeitraum der Analyse: Juli 2018.
 

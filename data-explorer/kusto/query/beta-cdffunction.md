@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 76b16098d9340a98fb3a456dfa947c089507da6c
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: a98fe59755e47be8f4f4e53595d25bb260004236
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227688"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349226"
 ---
 # <a name="beta_cdf"></a>beta_cdf()
 
@@ -27,17 +27,17 @@ Wenn *Wahrscheinlichkeit*  =  `beta_cdf(` *x*,... `)` , dann `beta_inv(` *Wahrsc
 
 Die Beta-Verteilung wird häufig verwendet, um die prozentuale Abweichung eines Werts über mehrere Stichproben hinweg zu untersuchen, etwa den Anteil der Tageszeit, die Menschen mit Fernsehen verbringen.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `beta_cdf(`*x* `, ` *Alpha* `, ` *Beta Version*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *x*: ein Wert, bei dem die Funktion ausgewertet werden soll.
 * *Alpha*: ein Parameter der Verteilung.
 * *Beta*: ein Parameter der Verteilung.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 * Die [kumulative Beta Verteilungsfunktion](https://en.wikipedia.org/wiki/Beta_distribution#Cumulative_distribution_function).
 
@@ -49,7 +49,7 @@ Wenn x < 0 oder x > 1, gibt beta_cdf () den NaN-Wert zurück.
 
 Wenn Alpha-0 oder Beta-0, beta_cdf () den NaN-Wert zurückgibt.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -71,7 +71,7 @@ datatable(x:double, alpha:double, beta:double, comment:string)
 |0,1|-1|20|Alpha ist < 0, ergibt Nan|NaN|
 
 
-**Siehe auch**
+**Weitere Informationen**
 
 
 * Informationen zum Berechnen der Umkehrung der kumulativen Beta Wahrscheinlichkeitsdichte-Funktion finden Sie unter [Beta-Inv ()](./beta-invfunction.md).

@@ -1,6 +1,6 @@
 ---
-title: eindeutiger Operator - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird ein eindeutiger Operator in Azure Data Explorer beschrieben.
+title: 'unterschiedlicher Operator: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt die unterschiedlichen Operatoren in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,38 +8,38 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4287ca48d3fb5006e67a9266ea05287a7d8a06f6
-ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
+ms.openlocfilehash: 233d3fdb0e25720b860a0c11515daec7c597dadd
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "82030366"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348342"
 ---
 # <a name="distinct-operator"></a>distinct-Operator
 
-Erstellt eine Tabelle mit der deutlichen Kombination der bereitgestellten Spalten der Eingabetabelle. 
+Erzeugt eine Tabelle mit der eindeutigen Kombination der angegebenen Spalten der Eingabe Tabelle. 
 
 ```kusto
 T | distinct Column1, Column2
 ```
 
-Erstellt eine Tabelle mit der eindeutigen Kombination aller Spalten in der Eingabetabelle.
+Erzeugt eine Tabelle mit der eindeutigen Kombination aller Spalten in der Eingabe Tabelle.
 
 ```kusto
 T | distinct *
 ```
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
-Zeigt die deutliche Kombination von Obst und Preis.
+Zeigt die unterschiedliche Kombination aus Obst und Preis an.
 
 ```kusto
 Table | distinct fruit, price
 ```
 
-:::image type="content" source="images/distinctoperator/distinct.PNG" alt-text="Unterschiedliche":::
+:::image type="content" source="images/distinctoperator/distinct.PNG" alt-text="Distinct":::
 
 **Hinweise**
 
-* Im `summarize by ...`Gegensatz `distinct` zu unterstützt der Operator`*`die Bereitstellung eines Sternchens ( ) als Gruppenschlüssel, wodurch die Verwendung für breite Tabellen vereinfacht wird.
-* Wenn die Gruppe nach Schlüsseln von `summarize by ...` hohen Kardinalitäten ist, könnte die Verwendung mit der [Shuffle-Strategie](shufflequery.md) nützlich sein.
+* Im Gegensatz dazu `summarize by ...` `distinct` unterstützt der-Operator die Bereitstellung eines Sternchen ( `*` ) als Gruppenschlüssel, was die Verwendung für Breite Tabellen erleichtert.
+* Wenn die Group by-Schlüssel hohe Kardinalitäten aufweisen, kann die Verwendung von `summarize by ...` mit der [shuffle-Strategie](shufflequery.md) nützlich sein.

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 444710775af405cc63193e0205e573b2ea77de3a
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 40bc5eafee803123ea1d73e763c32b5210f741ca
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373190"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346047"
 ---
 # <a name="project-away-operator"></a>project-away-Operator
 
@@ -25,16 +25,16 @@ T | project-away price, quantity, zz*
 
 Die Reihenfolge der Spalten im Ergebnis wird durch ihre ursprüngliche Reihenfolge in der Tabelle bestimmt. Nur die Spalten, die als Argumente angegeben wurden, werden gelöscht. Die anderen Spalten sind im Ergebnis enthalten.  (Siehe auch `project`.)
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| project-away` *columnnameorpattern* [ `,` ...]
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: die Eingabe Tabelle
 * *Columnnameorpattern:* Der Name des Spalten-oder Spalten Platzhalter Musters, das aus der Ausgabe entfernt werden soll.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Eine Tabelle mit Spalten, die nicht als Argumente benannt wurden. Enthält die gleiche Anzahl von Zeilen wie die Eingabe Tabelle.
 
@@ -46,7 +46,7 @@ Eine Tabelle mit Spalten, die nicht als Argumente benannt wurden. Enthält die g
 * `project-away`Alle Spalten, die in der ursprünglichen Tabelle vorhanden sind oder als Teil der Abfrage berechnet wurden, sind möglich.
 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Die Eingabetabelle `T` umfasst drei Spalten vom Typ `long`: `A`, `B` und `C`.
 
@@ -56,7 +56,7 @@ datatable(A:long, B:long, C:long) [1, 2, 3]
 | project-away C    // Removes column C from the output
 ```
 
-|Ein|B|
+|A|B|
 |---|---|
 |1|2|
 

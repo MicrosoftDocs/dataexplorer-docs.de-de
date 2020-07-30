@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: e8da8a61b285b31f63f346ec82e5ba8a4ac00d27
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 7b4b3d2b43bea2eeb96c9bbca94131cb7887db8c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372933"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345690"
 ---
-# <a name="sequence_detect-plugin"></a>Plug-in sequence_detect
+# <a name="sequence_detect-plugin"></a>Plug-In „sequence_detect“
 
 Erkennt Sequenz Vorkommen auf der Grundlage der bereitgestellten Prädikate.
 
@@ -23,11 +23,11 @@ Erkennt Sequenz Vorkommen auf der Grundlage der bereitgestellten Prädikate.
 T | evaluate sequence_detect(datetime_column, 10m, 1h, e1 = (Col1 == 'Val'), e2 = (Col2 == 'Val2'), Dim1, Dim2)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| evaluate` `sequence_detect` `(` *timelinecolenn* `,` *maxsequencestepwindow* `,` *maxsequencespan* `,` *expr1* `,` *expr2* `,` ..., *dim1* `,` *Dim2* `,` ...`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: der tabellarische Eingabe Ausdruck.
 * *Timelinecolbin*: Spalten Verweis, der die Zeitachse darstellt, muss im Quell Ausdruck vorhanden sein.
@@ -36,7 +36,7 @@ T | evaluate sequence_detect(datetime_column, 10m, 1h, e1 = (Col1 == 'Val'), e2 
 * *Expr1*, *expr2*,...: booleschen-Prädikat Ausdrücke definieren von Sequenz Schritten
 * *Dim1*, *Dim2*,...: Dimensions Ausdrücke, die zum Korrelieren von Sequenzen verwendet werden.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt eine einzelne Tabelle zurück, in der jede Zeile in der Tabelle ein einzelnes Sequenz Vorkommen darstellt:
 
@@ -44,7 +44,7 @@ Gibt eine einzelne Tabelle zurück, in der jede Zeile in der Tabelle ein einzeln
 * *Expr1*_*timelinecolenumn*, *expr2*_*timelinecolenumn*,...: Spalten mit Uhrzeitwerten, die die Zeitachse der einzelnen Sequenz Schritte darstellen.
 * *Dauer*: das Zeitfenster für die gesamtsequenz
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ### <a name="exploring-storm-events"></a>Erkunden von Storm-Ereignissen 
 
@@ -62,7 +62,7 @@ StormEvents
         State)
 ```
 
-|Bundesland/Kanton|heat_StartTime|wildfire_StartTime|Duration|
+|Zustand|heat_StartTime|wildfire_StartTime|Duration|
 |---|---|---|---|
 |Kalifornische|2007-05-08 00:00:00.0000000|2007-05-08 16:02:00.0000000|16:02:00|
 |Kalifornische|2007-05-08 00:00:00.0000000|2007-05-10 11:30:00.0000000|2.11:30:00|

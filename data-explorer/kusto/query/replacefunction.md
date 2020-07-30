@@ -1,6 +1,6 @@
 ---
-title: ersetzen() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird replace() in Azure Data Explorer beschrieben.
+title: Replace ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: Dieser Artikel beschreibt Replace () in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 84a741f10172ef418da7d92b8c1ad6ba26593d72
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 47e2724e76abde2133c075d9270783fa64ae73bb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510335"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345809"
 ---
 # <a name="replace"></a>replace()
 
 Ersetzen Sie alle regex-Übereinstimmungen mit einer anderen Zeichenfolge.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`replace(`*regex* `,` *Text neu schreiben* `,` *text*`)`
+`replace(`*Regex* `,` neu *Schreiben* `,` *Text*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *regex*: Der [reguläre Ausdruck](https://github.com/google/re2/wiki/Syntax) zum Durchsuchen von *Text*. Er kann Erfassungsgruppen in „('Klammern')“ enthalten. 
-* *rewrite*: Der Ersatzregex für jede Übereinstimmung, die durch *übereinstimmendeRegex*gemacht wird. Verwenden Sie `\0`, um auf die gesamte Übereinstimmung zu verweisen: `\1` für die erste Erfassungsgruppe, `\2` usw. für nachfolgende Erfassungsgruppen.
-* *text*: Eine Zeichenfolge.
+* *Regex*: der [reguläre Ausdruck](https://github.com/google/re2/wiki/Syntax) zum Durchsuchen von *Text*. Er kann Erfassungsgruppen in „('Klammern')“ enthalten. 
+* *Rewrite*: der Ersetzungs-Regex für jede von *matchingregex*vorgenommene Übereinstimmung. Verwenden Sie `\0`, um auf die gesamte Übereinstimmung zu verweisen: `\1` für die erste Erfassungsgruppe, `\2` usw. für nachfolgende Erfassungsgruppen.
+* *Text*: eine Zeichenfolge.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 *text* nach dem Ersetzen aller Übereinstimmungen von *regex* durch Auswertungen von *rewrite*. Übereinstimmungen überlappen sich nicht.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Diese Anweisung:
 

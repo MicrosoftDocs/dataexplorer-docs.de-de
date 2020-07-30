@@ -1,6 +1,6 @@
 ---
-title: not() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt not() in Azure Data Explorer.
+title: nicht ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird nicht () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,29 +8,29 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 539e409a9e922afc390b097c863146b7fc30d7b3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: fed2a55c8fa1c7689c087ccdeaa64ff576bea401
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81512035"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346591"
 ---
 # <a name="not"></a>not()
 
-Kehrt den Wert `bool` seines Arguments um.
+Kehrt den Wert des Arguments um `bool` .
 
 ```kusto
 not(false) == true
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`not(`*Expr*`)`
+`not(`*expr*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *expr*: `bool` Ein Ausdruck, der umgekehrt werden soll.
+* *expr*: ein `bool` Ausdruck, der umgekehrt werden soll.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Gibt den umgekehrten `bool` logischen Wert des Arguments zurück.
+Gibt den umgekehrten logischen Wert des `bool` Arguments zurück.

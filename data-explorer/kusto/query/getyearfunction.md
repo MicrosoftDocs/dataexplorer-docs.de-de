@@ -1,6 +1,6 @@
 ---
-title: getyear() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt getyear() in Azure Data Explorer.
+title: getYear ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird getYear () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a0e9d4c3e8c793f7775154261febc11e58082132
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 032cc319661218e77d5b23e6c649de7d5856d6c9
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81514330"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347645"
 ---
 # <a name="getyear"></a>getyear()
 
-Gibt den Jahresteil `datetime` des Arguments zurück.
+Gibt den Jahres Teil des `datetime` Arguments zurück.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
 T

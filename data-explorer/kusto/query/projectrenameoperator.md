@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 68581cfe4b3828823ced7d4704eb08df5d2aefa7
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 9bc000ffa57d906c3e65e54e9daac5431f8dc276
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373174"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346013"
 ---
 # <a name="project-rename-operator"></a>project-rename-Operator
 
@@ -23,22 +23,22 @@ Benennt Spalten in der Ergebnis Ausgabe um.
 T | project-rename new_column_name = column_name
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| project-rename` *newcolumnname*  =  *existingcolumnname* [ `,` ...]
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: die Eingabe Tabelle.
 * *Newcolumnname:* Der neue Name einer Spalte. 
 * *Existingcolumnname:* Der vorhandene Name einer Spalte. 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Eine Tabelle, in der die Spalten in derselben Reihenfolge wie in einer vorhandenen Tabelle mit umbenannten Spalten vorhanden sind.
 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

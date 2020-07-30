@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 67887aac4ab04e016ed63045e66ebcfab343c135
-ms.sourcegitcommit: 8953d09101f4358355df60ab09e55e71bc255ead
+ms.openlocfilehash: 247a653ead575b0fa04295d23b6b6071bd49edeb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84420865"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347356"
 ---
 # <a name="ipv4_compare"></a>ipv4_compare()
 
@@ -26,11 +26,11 @@ ipv4_compare('192.168.1.1/24', '192.168.1.255/24') == 0
 ipv4_compare('192.168.1.1', '192.168.1.255', 24) == 0
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `ipv4_compare(`*Expr1* `, ` *Expr2* `[ ,` *Prefixmask*`])`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expr1*, *expr2*: ein Zeichen folgen Ausdruck, der eine IPv4-Adresse darstellt. IPv4-Zeichen folgen können mithilfe der [IP-Präfix Notation](#ip-prefix-notation)maskiert werden.
 * *Prefixmask*: eine ganze Zahl zwischen 0 und 32, die die Anzahl der signifikantesten Bits darstellt, die berücksichtigt werden.
@@ -42,7 +42,7 @@ Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse. Die Zah
 
 **Beispiel:** 192.168.2.0/24 verfügt über eine zugeordnete net/Subnetmask mit 24 aufeinander folgenden Bits oder 255.255.255.0 im gepunkteten Dezimal Format.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 * `0`: Wenn die lange Darstellung des ersten IPv4-Zeichen folgen Arguments gleich dem zweiten IPv4-Zeichen folgen Argument ist
 * `1`: Wenn die lange Darstellung des ersten IPv4-Zeichen folgen Arguments größer als das zweite IPv4-Zeichen folgen Argument ist

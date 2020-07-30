@@ -1,6 +1,6 @@
 ---
-title: monthofyear() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt monthofyear() in Azure Data Explorer.
+title: monthosyear ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird monthosyear () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6ada34d3e6f6c905a1acfb550b02af3dab550fb8
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: af015146bb2f07d83d4333312a96d5b80c67190a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81512341"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346727"
 ---
 # <a name="monthofyear"></a>monthofyear()
 
-Gibt die ganze Zahl an, die die Monatsnummer des angegebenen Jahres darstellt.
+Gibt die Ganzzahl zurück, die die Monatsnummer des angegebenen Jahrs darstellt.
 
-Ein weiterer Alias: getmonth()
+Ein anderer Alias: getMonth ()
 
 ```kusto
 monthofyear(datetime("2015-12-14"))
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `monthofyear(`*a_date*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * `a_date`: Ein `datetime`-Wert.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-`month number`des gegebenen Jahres.
+`month number`des angegebenen Jahres.

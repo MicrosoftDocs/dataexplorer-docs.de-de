@@ -1,6 +1,6 @@
 ---
-title: minif() (Aggregationsfunktion) - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird minif() (Aggregationsfunktion) in Azure Data Explorer beschrieben.
+title: 'minif () (Aggregations Funktion): Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird minif () (Aggregations Funktion) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,35 +8,35 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0aad254ec01e83bdb07734e5b309c1450512b446
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 91764aeb8c825a272c414df7a0572d3b8310e79f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81512358"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346744"
 ---
-# <a name="minif-aggregation-function"></a>minif() (Aggregationsfunktion)
+# <a name="minif-aggregation-function"></a>minif () (Aggregations Funktion)
 
-Gibt den Mindestwert für die Gruppe zurück, `true`für die *Prädikat* ausgewertet wird.
+Gibt den minimalen Wert für die Gruppe zurück, für den das *Prädikat* ausgewertet wird `true` .
 
-* Kann nur im Kontext der Aggregation innerhalb [der Zusammenfassung](summarizeoperator.md) verwendet werden
+* Kann [nur im Kontext der Aggregation innerhalb von](summarizeoperator.md) Zusammenfassung verwendet werden.
 
-Siehe auch - [min()-Funktion,](min-aggfunction.md) die den Minimalwert in der Gruppe ohne Prädikatsausdruck zurückgibt.
+Siehe auch- [Min ()](min-aggfunction.md) -Funktion, die den minimalen Wert für die Gruppe ohne Prädikat Ausdruck zurückgibt.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`summarize``minif(``,`*Expr-Prädikat* *Expr*`)`
+`summarize``minif(` *Expr*- `,` *Prädikat*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Expr*: Ausdruck, der für die Aggregationsberechnung verwendet wird.
-* *Prädikat*: Prädikat, dass, wenn true, der berechnete *Expr-Wert* auf Minimum überprüft wird.
+* *Expr*: Ausdruck, der für die Aggregations Berechnung verwendet wird.
+* *Prädikat*: Prädikat: Wenn der Wert true ist, wird der berechnete *expr* -Wert minimal geprüft.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Der Mindestwert von *Expr* in der Gruppe, `true`für die *Predikat* ausgewertet wird, .
+Der minimale Wert von *expr* in der Gruppe, für die das *Prädikat* ausgewertet wird `true` .
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 range x from 1 to 100 step 1

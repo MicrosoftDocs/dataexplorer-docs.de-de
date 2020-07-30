@@ -1,6 +1,6 @@
 ---
-title: Suchoperator - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt den Suchoperator in Azure Data Explorer.
+title: 'Such Operator: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird der Such Operator in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,64 +8,64 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 1325a1b839b62baacade4cf7c64cd278aeeabaf5
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 5eda79977ee641d7ca7835d3d394cb943b4ebac4
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513055"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347050"
 ---
 # <a name="lookup-operator"></a>lookup-Operator
 
-Der `lookup` Operator erweitert die Spalten einer Faktentabelle mit Werten, die in einer Dimensionstabelle nachgeschlagen sind.
+Der- `lookup` Operator erweitert die Spalten einer Fakten Tabelle mit Werten, die in einer Dimensions Tabelle gesucht werden.
 
 ```kusto
 FactTable | lookup kind=leftouter (DimensionTable) on CommonColumn, $left.Col1 == $right.Col2
 ```
 
-Hier bei diesem Ergebnis handelt es `FactTable` `$left`sich um `DimensionTable` eine Tabelle, `$right`die die ( ) mit`CommonColumn``Col`Daten aus (von )`CommonColumn1`erweitert, indem ein Nachschlagen jedes Paares ( , ) aus der früheren Tabelle mit jedem Paar ( ,`Col2`) in der letztgenannten Tabelle ausgeführt wird. Die Unterschiede zwischen Fakten- und Dimensionstabellen finden Sie unter [Fakten- und Dimensionstabellen](../concepts/fact-and-dimension-tables.md). 
+Hier ist das Ergebnis eine Tabelle, die `FactTable` ( `$left` ) mit Daten aus erweitert `DimensionTable` (auf die von verwiesen wird `$right` ), indem eine Suche nach jedem Paar ( `CommonColumn` , `Col` ) aus der früheren Tabelle mit jedem Paar ( `CommonColumn1` , `Col2` ) in der letzteren Tabelle durchgeführt wird. Informationen zu den Unterschieden zwischen Fakten-und Dimensions Tabellen finden Sie unter [Fakten-und Dimensions Tabellen](../concepts/fact-and-dimension-tables.md). 
 
-Der `lookup` Operator führt einen Vorgang aus, der dem [Join-Operator](joinoperator.md) mit den folgenden Unterschieden ähnelt:
+Der- `lookup` Operator führt einen Vorgang aus, der dem [Join-Operator](joinoperator.md) ähnelt und die folgenden Unterschiede hat:
 
-* Das Ergebnis wiederholt keine `$right` Spalten aus der Tabelle, die die Grundlage für den Verknüpfungsvorgang sind.
-* Es werden nur zwei Arten `leftouter` `inner`von `leftouter` Nachschlagen unterstützt, und , wobei die Standardeinstellung ist.
-* In Bezug auf die Leistung geht `$left` das System standardmäßig davon aus, `$right` dass es sich bei der Tabelle um die größere (Fakten-)Tabelle und die Tabelle um die kleinere (Dimensionen)-Tabelle handelt. Dies steht genau im Gegensatz `join` zu der Annahme des Operators.
-* Der `lookup` Operator überträgt `$right` die `$left` Tabelle automatisch an die Tabelle `hint.broadcast` (im Wesentlichen verhält er sich so, als ob angegeben). Beachten Sie, dass dadurch `$right` die Größe der Tabelle begrenzt wird.
+* Das Ergebnis wiederholt keine Spalten aus der `$right` Tabelle, die als Grundlage für den Verknüpfungs Vorgang dienen.
+* Es werden nur zwei Arten von Suche unterstützt, `leftouter` und `inner` , wobei `leftouter` die Standardeinstellung ist.
+* Im Hinblick auf die Leistung geht das System standardmäßig davon aus, dass es sich bei der `$left` Tabelle um die größere Tabelle (Fakten Tabelle) handelt, und die `$right` Tabelle ist die kleinere Tabelle (Dimensions Tabelle). Dies entspricht genau der vom Operator verwendeten Annahme `join` .
+* Der `lookup` Operator überträgt die `$right` Tabelle automatisch an die `$left` Tabelle (verhält sich im Wesentlichen so, als ob `hint.broadcast` angegeben wurde). Beachten Sie, dass dies die Größe der `$right` Tabelle einschränkt.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-*LeftTable* `|` `lookup` `kind` `=` [`leftouter`|`inner`( `(` )] `)` `on` *RightTable-Attribute* *RightTable*
+*Linkfähig* `|` `lookup`[ `kind` `=` ( `leftouter` | `inner` )] `(` *Rightfähige* `)` `on` *Attribute*
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *LeftTable*: Die Tabelle oder der Tabellenausdruck, der die Grundlage für die Suche ist.
-  Bezeichnet als `$left`.
+* *Lefables*: der Tabellen-oder Tabellen Ausdruck, der die Grundlage für die Suche ist.
+  Wird als bezeichnet `$left` .
 
-* *RightTable*: Die Tabelle oder der Tabellarische Ausdruck, der zum "Auffüllen" neuer Spalten in der Faktentabelle verwendet wird. Bezeichnet als `$right`.
+* *Righables*: der Tabellen-oder Tabellen Ausdruck, der zum Auffüllen neuer Spalten in der Fakten Tabelle verwendet wird. Wird als bezeichnet `$right` .
 
-* *Attribute*: Eine durch Kommas getrennte Liste mit einer oder mehreren Regeln, die beschreiben, wie Zeilen aus *LeftTable* mit Zeilen aus *RightTable*abgeglichen werden. Mehrere Regeln werden `and` mit dem logischen Operator ausgewertet.
-  Eine Regel kann eine der wichtigsten sein:
+* *Attribute*: eine durch Trennzeichen getrennte Liste von einer oder mehreren Regeln, die beschreiben, wie Zeilen von *linksfähigen* Zeilen von *rightfähigen*abgeglichen werden. Mehrere Regeln werden mithilfe des `and` logischen Operators ausgewertet.
+  Eine Regel kann eine der folgenden sein:
 
   |Regelart        |Syntax                                          |Predicate                                                      |
   |-----------------|------------------------------------------------|---------------------------------------------------------------|
-  |Gleichheit nach Namen |*ColumnName*                                    |`where`*LeftTable*. *ColumnName* `==` *RightTable*. *ColumnName*|
-  |Gleichheit nach Wert|`$left.`*LeftColumn* `==` `$right.` *RightColumn*|`where``$left.` `$right.` *LeftColumn* `==` *RightColumn        |
+  |Gleichheit nach Name |*ColumnName*                                    |`where`*Linksbar*. *ColumnName* `==` *Righbar*. *ColumnName*|
+  |Gleichheit nach Wert|`$left.`*LeftColumn* `==` `$right.` *Rechte Spalte*|`where``$left.` *LeftColumn* `==` `$right.` * RightColumn        |
 
   > [!Note] 
-  > Bei "Gleichheit nach Wert" *müssen* die Spaltennamen mit der entsprechenden `$left` Besitzertabelle, die durch Notationen `$right` bezeichnet wird, qualifiziert werden.
+  > Im Fall von ' Equality by value ' *müssen* die Spaltennamen mit der anwendbaren Besitzer Tabelle qualifiziert werden, die durch die `$left` -und- `$right` Notationen gekennzeichnet ist.
 
-* `kind`: Eine optionale Anweisung zum Behandeln von Zeilen in *LeftTable,* die in *RightTable*nicht übereinstimmen. Standardmäßig wird `leftouter` verwendet, was bedeutet, dass alle diese Zeilen in der Ausgabe mit NULL-Werten angezeigt werden, die für die fehlenden Werte von *RightTable-Spalten* verwendet werden, die vom Operator hinzugefügt wurden. Wenn `inner` diese Zeilen verwendet werden, werden sie in der Ausgabe weggelassen. (Andere Arten von Verknüpfungen `looku`werden vom p-Operator nicht unterstützt.)
+* `kind`: Eine optionale Anweisung zum Behandeln von Zeilen in " *lefables* ", die keine Entsprechung in " *rightions*" aufweisen. Standardmäßig `leftouter` wird verwendet. Dies bedeutet, dass alle Zeilen in der Ausgabe mit NULL-Werten angezeigt werden, die für die fehlenden Werte der von dem-Operator hinzugefügten *righ-* Spalten verwendet werden. Wenn `inner` verwendet wird, werden solche Zeilen in der Ausgabe weggelassen. (Andere Arten von Join werden vom p-Operator nicht unterstützt `looku` .)
   
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Eine Tabelle mit:
 
 * Einer Spalte für jede Spalte in jeder der beiden Tabellen, einschließlich der übereinstimmenden Schlüssel.
   Die Spalten der rechten Seite werden automatisch umbenannt, wenn Namenskonflikte vorliegen.
 * Einer Zeile für jede Übereinstimmung zwischen den Eingabetabellen. Eine Übereinstimmung ist eine ausgewählte Zeile in einer Tabelle, die in allen `on` -Feldern denselben Wert wie eine Zeile in der anderen Tabelle aufweist. 
-* Die Attribute (Suchtasten) werden nur einmal in der Ausgabetabelle angezeigt.
+* Die Attribute (Suchschlüssel) werden nur einmal in der Ausgabe Tabelle angezeigt.
 
- * `kind`Unspecified`kind=leftouter`
+ * `kind`nicht angegeben`kind=leftouter`
 
      Zusätzlich zu den internen Übereinstimmungen ist eine Zeile für jede Zeile auf der linken (und/oder rechten) Seite vorhanden, selbst wenn es keine Übereinstimmung damit gibt. In diesem Fall enthalten die Ausgabezellen ohne Übereinstimmung NULL-Werte.
 
@@ -73,7 +73,7 @@ Eine Tabelle mit:
 
      Der Ausgabe enthält eine Zeile für jede Kombination von übereinstimmenden Zeilen der linken und rechten Seite.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 let FactTable=datatable(Row:string,Personal:string,Family:string) [
@@ -95,8 +95,8 @@ FactTable
 
 Zeile     | Persönlich  | Familie   | Alias
 --------|-----------|----------|--------
-1       | Bill      | Gates    | billg
+1       | Bill      | Schle    | billg
 2       | Bill      | Clinton  | Billc
 3       | Bill      | Clinton  | Billc
-4       | Steve     | Ballmer  | Steveb
-5       | Tim       | Kochen     | timc
+4       | Steve     | Ballmer  | SteveB
+5       | Tim       | Koch     | TimC

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/15/2019
-ms.openlocfilehash: 59c6f6a11b108cf6e74ceb59d3483ea1a95f7002
-ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
+ms.openlocfilehash: 4681f92155181f85cad5c46ed70a79cb173d437f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84512383"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347543"
 ---
 # <a name="hll_merge-aggregation-function"></a>hll_merge () (Aggregations Funktion)
 
@@ -23,15 +23,15 @@ ms.locfileid: "84512383"
 
 Weitere Informationen finden Sie unter dem [zugrunde liegenden Algorithmus (*H*yper*L*og*l*OG) und der Schätzung der Schätzung](dcount-aggfunction.md#estimation-accuracy).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `summarize``hll_merge(` *Expr*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * `*Expr*`: Ausdruck, der für die Aggregations Berechnung verwendet wird.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Die-Funktion gibt die zusammengeführten `hll` Werte von `*Expr*` in der Gruppe zurück.
  

@@ -1,6 +1,6 @@
 ---
-title: make_list_if() (Aggregationsfunktion) - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird make_list_if() (Aggregationsfunktion) in Azure Data Explorer beschrieben.
+title: make_list_if () (Aggregations Funktion)-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird make_list_if () (Aggregations Funktion) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b34c1dad7be709145c622c97b357734c25292bba
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: dda177c39959f860ad7e019371133f16e1de91e2
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81512732"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346931"
 ---
-# <a name="make_list_if-aggregation-function"></a>make_list_if() (Aggregationsfunktion)
+# <a name="make_list_if-aggregation-function"></a>make_list_if () (Aggregations Funktion)
 
-Gibt `dynamic` ein Array (JSON) aller Werte von *Expr* in der Gruppe `true`zurück, für die *Predikat* ausgewertet wird.
+Gibt ein- `dynamic` Array (JSON) aller Werte von *expr* in der Gruppe zurück, für die *Predicate* als ausgewertet wird `true` .
 
-* Kann nur im Kontext der Aggregation innerhalb [der Zusammenfassung](summarizeoperator.md) verwendet werden
+* Kann [nur im Kontext der Aggregation innerhalb von](summarizeoperator.md) Zusammenfassung verwendet werden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`summarize``make_list_if(` *Expr*, *Prädikat* [`,` *MaxSize*]`)`
+`summarize``make_list_if(` *Expr*, *Prädikat* [ `,` *MaxSize*]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Expr*: Ausdruck, der für die Aggregationsberechnung verwendet wird.
-* *Prädikat*: Prädikat, das `true`auf ausgewertet werden muss, damit *Expr* dem Ergebnis hinzugefügt werden kann.
-* *MaxSize* ist ein optionaler Ganzzahlgrenzwert für die maximale Anzahl der zurückgegebenen Elemente (Standardwert ist *1048576*). Der MaxSize-Wert darf 1048576 nicht überschreiten.
+* *Expr*: Ausdruck, der für die Aggregations Berechnung verwendet wird.
+* *Predicate*: ein Prädikat, das in ausgewertet `true` werden muss, damit *expr* dem Ergebnis hinzugefügt werden kann.
+* *MaxSize* ist eine optionale ganzzahlige Beschränkung für die maximale Anzahl von zurückgegebenen Elementen (Standardwert ist *1048576*). Der MaxSize-Wert darf 1048576 nicht überschreiten.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Gibt `dynamic` ein Array (JSON) aller Werte von *Expr* in der Gruppe `true`zurück, für die *Predikat* ausgewertet wird.
-Wenn die Eingabe `summarize` für den Operator nicht sortiert ist, ist die Reihenfolge der Elemente im resultierenden Array nicht definiert.
-Wenn die Eingabe `summarize` für den Operator sortiert ist, wird die Reihenfolge der Elemente im resultierenden Array die Reihenfolge der Eingabe nachverfolgt.
+Gibt ein- `dynamic` Array (JSON) aller Werte von *expr* in der Gruppe zurück, für die *Predicate* als ausgewertet wird `true` .
+Wenn die Eingabe für den `summarize` Operator nicht sortiert ist, ist die Reihenfolge der Elemente im resultierenden Array nicht definiert.
+Wenn die Eingabe für den `summarize` Operator sortiert ist, verfolgt die Reihenfolge der Elemente im resultierenden Array die der Eingabe.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
 let T = datatable(name:string, day_of_birth:long)
@@ -55,6 +55,6 @@ T
 |----|
 |["George", "Ringo"]|
 
-**Siehe auch**
+**Weitere Informationen**
 
-[`make_list`](./makelist-aggfunction.md)Funktion, die dasselbe tut, ohne Prädikatsausdruck.
+[`make_list`](./makelist-aggfunction.md)-Funktion, die das gleiche ohne Prädikat Ausdruck verwendet.

@@ -3,17 +3,17 @@ title: geo_polygon_to_s2cells ()-Azure Daten-Explorer
 description: In diesem Artikel wird geo_polygon_to_s2cells () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
-ms.author: orspod
+ms.author: orspodek
 ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/10/2020
-ms.openlocfilehash: c4396087018e25c57f064e8d2f99a83cc0840c3a
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.openlocfilehash: d282dc6d25947aa20da3d1f05a1f76ab887ca21c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280597"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347730"
 ---
 # <a name="geo_polygon_to_s2cells"></a>geo_polygon_to_s2cells()
 
@@ -21,16 +21,16 @@ Berechnet S2-zelltokens, die ein Polygon oder MultiPolygon auf der Erde abdecken
 
 Weitere Informationen finden Sie in der [Zellen Hierarchie S2](https://s2geometry.io/devguide/s2cell_hierarchy).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `geo_polygon_to_s2cells(`*Polygon* `, ` *Ebene*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Polygon*: Polygon oder MultiPolygon im [geojson-Format](https://tools.ietf.org/html/rfc7946) und eines [dynamischen](./scalar-data-types/dynamic.md) Datentyps. 
 * *Level*: ein optionales `int` , das die angeforderte Zellen Ebene definiert. Unterstützte Werte liegen im Bereich [0,0]. Wenn nicht angegeben, wird der Standardwert `11` verwendet.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Array von S2-zelltokenzeichenfolgen, die ein Polygon oder MultiPolygon abdecken. Wenn das Polygon oder die Ebene ungültig ist oder die Anzahl der Zellen den Grenzwert überschreitet, führt die Abfrage zu einem NULL-Ergebnis.
 
@@ -67,7 +67,7 @@ Polygons | extend dummy=1
 | project longitude, latitude, description
 ```
 
-|longitude|latitude|Beschreibung|
+|longitude|latitude|description|
 |---|---|---|
 |-73.95|40.75|New York City|
 |-122,3|47,6|Seattle|
@@ -97,7 +97,7 @@ Diese Übereinstimmung kann durch folgenden Prozess erreicht werden:
 > [!WARNING]
 > Das abdecken eines großen Polygons in kleinen Flächen kann zu einer großen Menge von Zellen führen. Daher kann die Abfrage NULL zurückgeben.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Im folgenden Beispiel werden Koordinaten in Polygone klassifiziert.
 
@@ -129,7 +129,7 @@ Polygons
 | project longitude, latitude, description
 ```
 
-|longitude|latitude|Beschreibung|
+|longitude|latitude|description|
 |---|---|---|
 |-73,9741|40,7914|Obere westliche Seite|
 |-73,995|40,734|Greenwich Village|

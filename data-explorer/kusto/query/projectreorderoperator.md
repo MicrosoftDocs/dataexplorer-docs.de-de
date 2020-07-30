@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 74acab0dc4f0fbdaf7c77e609db3e41f875f2cad
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 233f5f7f6e6064b10d1385eaef8a28302368e74b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373152"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345996"
 ---
 # <a name="project-reorder-operator"></a>project-reorder-Operator
 
@@ -23,17 +23,17 @@ Ordnet Spalten in der Ergebnis Ausgabe neu an.
 T | project-reorder Col2, Col1, Col* asc
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| project-reorder` *columnnameorpattern* [ `asc` | `desc` ] [ `,` ...]
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: die Eingabe Tabelle.
 * *Columnnameorpattern:* Der Name des Spalten-oder Spalten Platzhalter Musters, das der Ausgabe hinzugefügt wird.
 * Für Platzhalter Muster: angeben `asc` oder `desc` Sortieren von Spalten mit ihren Namen in aufsteigender oder absteigender Reihenfolge. Wenn `asc` oder `desc` nicht angegeben ist, wird die Reihenfolge durch die übereinstimmenden Spalten bestimmt, wie Sie in der Quell Tabelle angezeigt werden.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Eine Tabelle, die Spalten in der von den Operator Argumenten angegebenen Reihenfolge enthält. `project-reorder`benennt oder entfernt keine Spalten aus der Tabelle. aus diesem Grund werden alle Spalten, die in der Quell Tabelle vorhanden waren, in der Ergebnistabelle angezeigt.
 
@@ -46,7 +46,7 @@ Eine Tabelle, die Spalten in der von den Operator Argumenten angegebenen Reihenf
 * Verwenden [`project-rename`](projectrenameoperator.md) Sie zum Umbenennen von Spalten.
 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Ordnen Sie eine Tabelle mit drei Spalten (a, b, c) neu an, damit die zweite Spalte (b) zuerst angezeigt wird.
 

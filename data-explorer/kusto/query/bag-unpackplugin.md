@@ -8,24 +8,24 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/15/2020
-ms.openlocfilehash: 45dc0a02aae7cc39c7a287036055e9ca447187f3
-ms.sourcegitcommit: 085e212fe9d497ee6f9f477dd0d5077f7a3e492e
+ms.openlocfilehash: 6c91275320a5ec404b6cd5fcbe8c84b4123bd2de
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85133464"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349345"
 ---
-# <a name="bag_unpack-plugin"></a>Plug-in bag_unpack
+# <a name="bag_unpack-plugin"></a>Plug-In „bag_unpack“
 
 Das `bag_unpack` Plug-in entpackt eine einzelne Spalte vom Typ `dynamic` , indem die einzelnen Eigenschaften Behälter auf oberster Ebene als Spalte behandelt werden.
 
     T | evaluate bag_unpack(col1)
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* - `|` `evaluate` `bag_unpack(` *Spalte* [ `,` *outputcolumnprefix* ] [ `,` *columnsconflict* ] [ `,` *ignoredproperties* ]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: die tabellarische Eingabe, deren Spalten *Spalte* entpackt werden soll.
 * *Column*: die Spalte von *T* , die entpackt werden soll. Der Wert muss vom Typ `dynamic` sein.
@@ -36,14 +36,14 @@ Das `bag_unpack` Plug-in entpackt eine einzelne Spalte vom Typ `dynamic` , indem
     - `keep_source`-Die Quell Spalte wird beibehalten.
 * *ignoredproperties*: Optionaler Satz von Behälter Eigenschaften, die ignoriert werden sollen. Wenn Argument angegeben wird, wird davon ausgegangen, dass es sich um eine Konstante des `dynamic` Arrays mit mindestens einem Zeichenfolgenliteralen handelt.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Das `bag_unpack` Plug-in gibt eine Tabelle mit so vielen Datensätzen zurück wie die Tabellen Eingabe (*T*). Das Schema der Tabelle ist identisch mit dem Schema der Tabellen Eingabe mit den folgenden Änderungen:
 
 * Die angegebene Eingabe Spalte (*Spalte*) wird entfernt.
 * Das Schema wird mit so vielen Spalten erweitert, wie es unterschiedliche Slots in den Eigenschaften Behälter Werten der obersten Ebene von *T*gibt. Der Name jeder Spalte entspricht dem Namen der einzelnen Slots. optional wird das *Präfix outputcolumnprefix*vorangestellt. Der Typ ist entweder der Typ des Slots, wenn alle Werte desselben Slots denselben Typ aufweisen oder `dynamic` , wenn sich die Werte im Typ unterscheiden.
 
-**Notizen**
+**Hinweise**
 
 Das Ausgabe Schema des Plug-ins hängt von den Datenwerten ab und macht es als "unvorhersehbare" Daten selbst. Mehrere Ausführungen des Plug-ins mit unterschiedlichen Dateneingaben können ein anderes Ausgabe Schema ergeben.
 
@@ -69,7 +69,7 @@ datatable(d:dynamic)
 | evaluate bag_unpack(d)
 ```
 
-|Name  |Age|
+|Name  |Alter|
 |------|---|
 |John  |20 |
 |David  |40 |
@@ -112,7 +112,7 @@ datatable(Name:string, d:dynamic)
 | evaluate bag_unpack(d, columnsConflict='replace_source') // Use new name
 ```
 
-|Name|Age|
+|Name|Alter|
 |---|---|
 |John|20|
 |David|40|
@@ -129,7 +129,7 @@ datatable(Name:string, d:dynamic)
 | evaluate bag_unpack(d, columnsConflict='keep_source') // Keep old name
 ```
 
-|Name|Age|
+|Name|Alter|
 |---|---|
 |Old_name|20|
 |Old_name|40|

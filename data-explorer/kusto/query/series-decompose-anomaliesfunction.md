@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/28/2019
-ms.openlocfilehash: b8f9d6d27643855ba81b2c1791dfd939b53cac9a
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 2191a26a0ee0bccd708c492690e58767d3cf52e9
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264877"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345622"
 ---
 # <a name="series_decompose_anomalies"></a>series_decompose_anomalies()
 
@@ -22,11 +22,11 @@ Weitere Informationen finden Sie unter [series_decompose ()](series-decomposefun
 
 Die Funktion nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, als Eingabe an und extrahiert anormale Punkte mit Bewertungen.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_decompose_anomalies (`*Reihe* `[, ` *Schwellenwert* `,` *Saisonalität* `,` *Trend* `, ` *Test_points* `, ` *AD_method* `,` *Seasonality_threshold*`])`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Series*: dynamische Array Zelle, bei der es sich um ein Array numerischer Werte handelt, normalerweise die resultierende Ausgabe von [make-Series-](make-seriesoperator.md) oder [make_list](makelist-aggfunction.md) -Operatoren
 * *Schwellen*Wert: anomalieschwellen Wert, Standardwert 1,5 (k Wert) zum Erkennen von milden oder stärkeren Anomalien
@@ -44,7 +44,7 @@ Die Funktion nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array
     * "Tukey": [der Fence Test von Tukey mit dem](https://en.wikipedia.org/wiki/Outlier#Tukey's_fences) standardmäßigen 25.75. Perzentil-Bereich. Weitere Informationen zu verbleibenden Zeitreihen finden Sie unter [series_outliers](series-outliersfunction.md)
 * *Seasonality_threshold*: der Schwellenwert für die saisonalitätsbewertung, wenn *Saison alität* auf Autodetect festgelegt ist. Der Standardwert für das Ergebnis ist `0.6` . Weitere Informationen finden Sie unter [series_periods_detect](series-periods-detectfunction.md)
 
-**Hre**
+**Rückgabewert**
 
  Die-Funktion gibt die folgende Reihe zurück:
 

@@ -8,12 +8,12 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/27/2020
-ms.openlocfilehash: eb59eae0bc014c6ce9060d65f6c3aced80e4275c
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 40f3daa208c3c7ce18252d8c4f7276346206b250
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227127"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347849"
 ---
 # <a name="geo_geohash_to_central_point"></a>geo_geohash_to_central_point()
 
@@ -21,22 +21,22 @@ Berechnet die räumlichen Koordinaten, die den Mittelpunkt eines GeoHash-rechtec
 
 Weitere Informationen finden Sie hier [`geohash`](https://en.wikipedia.org/wiki/Geohash) .  
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `geo_geohash_to_central_point(`*GeoHash*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 *GeoHash*: GeoHash Zeichen folgen Wert, wie er von [geo_point_to_geohash ()](geo-point-to-geohash-function.md)berechnet wurde. Die GeoHash-Zeichenfolge kann zwischen 1 und 18 Zeichen enthalten.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Die georäumlichen Koordinaten Werte im [geojson-Format](https://tools.ietf.org/html/rfc7946) und eines [dynamischen](./scalar-data-types/dynamic.md) Datentyps. Wenn GeoHash ungültig ist, erzeugt die Abfrage ein NULL-Ergebnis.
 
 > [!NOTE]
 > Das geojson-Format gibt die Längen-und Breitengrad Sekunde an.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 7d5bdba030687c17c355eb72ce2fc9c358c10ebd
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 39252fb8e7233ddc3532003afc7a131505cd4282
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372845"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345078"
 ---
 # <a name="series_divide"></a>series_divide()
 
 Berechnet die Element Weise Division von zwei numerischen Reihen Eingaben.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_divide(`*Series1* `,` *series2*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Series1, series2*: numerische Eingabe Arrays, der erste, der Element Weise dividiert durch den zweiten in ein dynamisches Array Ergebnis ist. Alle Argumente müssen dynamische Arrays sein. 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Dynamisches Array des berechneten Element weisen Teilungs Vorgangs zwischen den beiden Eingaben. Ein nicht numerisches Element oder ein nicht vorhandenes Element (Arrays mit unterschiedlichen Größen) ergeben einen- `null` Elementwert.
 
 Hinweis: die Ergebnis Reihe ist vom Typ "Double", auch wenn die Eingaben ganze Zahlen sind. Division durch 0 (null) folgt der doppelten Division durch NULL (z. b. 2/0 ergibt Double (+ INF)).
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

@@ -1,6 +1,6 @@
 ---
-title: Facettenoperator - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird der Facettenoperator in Azure Data Explorer beschrieben.
+title: 'facetoperator: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt den facetoperator in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0b6c87fc044e0f00f77e28e85d89757a69835164
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 0e5bc062b99a97b8d11c11312aac2d5829d6584b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81515316"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348019"
 ---
 # <a name="facet-operator"></a>facet-Operator
 
-Gibt einen Satz von Tabellen zurück, eine für jede angegebene Spalte.
-Jede Tabelle gibt die Liste der Werte an, die von ihrer Spalte übernommen werden.
-Eine zusätzliche Tabelle kann mithilfe `with` der Klausel erstellt werden.
+Gibt eine Gruppe von Tabellen zurück, jeweils eine für jede angegebene Spalte.
+Jede Tabelle gibt die Liste der Werte an, die von der zugehörigen Spalte übernommen werden.
+Eine zusätzliche Tabelle kann mit der-Klausel erstellt werden `with` .
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-*T* `| facet by` *Spaltenname* [`, ` ...] [`with (` *filterPipe*`)`
+*T* `| facet by` *ColumnName* [ `, ` ...] [ `with (` *filterpipe*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Spaltenname:* Der Name der Spalte in der Eingabe, die als Ausgabetabelle zusammengefasst werden soll.
-* *filterPipe:* Ein Abfrageausdruck, der auf die Eingabetabelle angewendet wird, um eine der Ausgaben zu erzeugen.
+* *ColumnName:* Der Name der Spalte in der Eingabe, die als Ausgabe Tabelle zusammengefasst werden soll.
+* *filterpipe:* Ein Abfrage Ausdruck, der auf die Eingabe Tabelle angewendet wird, um eine der Ausgaben zu erhalten.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Mehrere Tabellen: eine `with` für die Klausel und eine für jede Spalte.
+Mehrere Tabellen: eine für die `with` -Klausel und eine für jede Spalte.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
 MyTable 

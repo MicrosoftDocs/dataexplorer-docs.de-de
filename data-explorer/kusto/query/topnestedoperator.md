@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 3fc4cfa307a283c4eb21ba60e3b83ba89b574757
-ms.sourcegitcommit: aaada224e2f8824b51e167ddb6ff0bab92e5485f
+ms.openlocfilehash: 68b55ec5496f1eb68f979c56412f10191b9f5a68
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84626679"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87340801"
 ---
 # <a name="top-nested-operator"></a>top-nested operator
 
@@ -28,7 +28,7 @@ Die erste Aggregations Klausel (linksbündig) unterteilt die Eingabedaten Sätze
 
 Der-Operator kann z. b. `top-nested` verwendet werden, um die folgende Frage zu beantworten: "für eine Tabelle mit Umsatzzahlen, wie z. b. Land, Vertriebsmitarbeiter und verkauftem Betrag: Was sind die fünf größten Länder nach Verkäufen? Was sind die ersten drei Vertriebsmitarbeiter in jedem dieser Länder? "
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `|` `top-nested` *TopNestedClause2* [ `,` *TopNestedClause2*...]
 
@@ -36,7 +36,7 @@ Where *topnetstedclause* weist die folgende Syntax auf:
 
 [*N*] `of` [ *`ExprName`* `=` ] *`Expr`* [] [] `with` `others` `=` *`ConstExpr`* `by` *`AggName`* `=` *`Aggregation`* [ `asc`  |  `desc` ]
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 Für jede *topnetstedclause*:
 
@@ -66,7 +66,7 @@ Für jede *topnetstedclause*:
 
 * `asc`oder `desc` (der Standardwert) wird möglicherweise angezeigt, um zu steuern, ob die Auswahl tatsächlich von der "untersten" oder "Top" des Bereichs der aggregierten Werte ist.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Dieser Operator gibt eine Tabelle mit zwei Spalten für jede Aggregations Klausel zurück:
 
@@ -87,7 +87,7 @@ Die Anzahl der Datensätze vergrößert sich möglicherweise exponentiell mit de
 
 Wenn die Verteilung der Aggregation beträchtlich nicht einheitlich ist, begrenzen Sie die Anzahl der unterschiedlichen Werte, die zurückgegeben werden (mithilfe von *N*), und verwenden Sie die `with others=` Option *constexpr* , um eine Angabe für die Gewichtung aller anderen Fälle zu erhalten.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -97,7 +97,7 @@ StormEvents
   top-nested 1 of EndLocation by sum(BeginLat)
 ```
 
-|State|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
+|Zustand|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
 |---|---|---|---|---|---|
 |Kansas|87771.2355000001|Strafverfolgungsbehörden|18744,823|FT Scott|264,858|
 |Kansas|87771.2355000001|Öffentlich|22855,6206|Bucklin|488,2457|
@@ -118,7 +118,7 @@ StormEvents
 
 ```
 
-|State|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
+|Zustand|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
 |---|---|---|---|---|---|
 |Kansas|87771.2355000001|Strafverfolgungsbehörden|18744,823|FT Scott|264,858|
 |Kansas|87771.2355000001|Öffentlich|22855,6206|Bucklin|488,2457|
@@ -159,7 +159,7 @@ StormEvents
 | project-away tmp
 ```
 
-|State|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|EventType|
+|Zustand|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|EventType|
 |---|---|---|---|---|---|---|
 |Kansas|87771.2355000001|Ausgebildeter „Spotter“|21279,7083|Sharon-Spgs|388,7404|Sturm|
 |Kansas|87771.2355000001|Ausgebildeter „Spotter“|21279,7083|Sharon-Spgs|388,7404|Hagel|
@@ -184,7 +184,7 @@ StormEvents
 | mv-expand EndLocations, endLocationSums, indicies
 ```
 
-|State|`Source`|Endpunkte|endlocationsums|Kei|
+|Zustand|`Source`|Endpunkte|endlocationsums|Kei|
 |---|---|---|---|---|
 |TEXAS|Ausgebildeter „Spotter“|Claude|421,44|0|
 |TEXAS|Ausgebildeter „Spotter“|Amarillo|316,8892|1|

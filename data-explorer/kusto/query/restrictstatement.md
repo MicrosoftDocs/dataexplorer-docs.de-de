@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 8476680ad5b8206dcd7dfe98bf116bb5b6dcefdc
-ms.sourcegitcommit: 085e212fe9d497ee6f9f477dd0d5077f7a3e492e
+ms.openlocfilehash: a81c5faadb51b99cdcd233132f9b6a4843e3ce34
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85133450"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345792"
 ---
 # <a name="restrict-statement"></a>restrict-Anweisung
 
@@ -25,7 +25,7 @@ Die Einschränkungs Anweisung schränkt den Satz von Tabellen-/ansichtentitäten
 
 Das Hauptszenario der Einschränkungs Anweisung ist für Anwendungen der mittleren Ebene, die Abfragen von Benutzern akzeptieren und einen Sicherheitsmechanismus auf Zeilenebene über diese Abfragen anwenden möchten. Die Anwendung der mittleren Ebene kann der Abfrage des Benutzers ein **Logisches Modell**, eine Reihe von Let-Anweisungen, die Ansichten definieren, die den Zugriff des Benutzers auf Daten einschränken (z `T | where UserId == "..."` . b.). Die letzte hinzugefügte Anweisung schränkt den Zugriff des Benutzers auf das logische Modell ein.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `restrict``access` `to` `(` [*Entityspecifier* [ `,` ...]]`)`
 
@@ -36,11 +36,11 @@ Where *entityspecifier* ist einer der folgenden:
 
 Alle Tabellen, Tabellen Sichten oder Muster, die nicht von der Einschränkungs Anweisung angegeben werden, werden für den Rest der Abfrage "unsichtbar". 
 
-**Notizen**
+**Hinweise**
 
 Die Einschränkungs Anweisung kann verwendet werden, um den Zugriff auf Entitäten in einer anderen Datenbank oder in einem Cluster einzuschränken (Platzhalter werden in Cluster Namen nicht unterstützt).
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 Die Einschränkungs Anweisung kann einen oder mehrere Parameter abrufen, die die Einschränkungs Einschränkung während der Namensauflösung der Entität definieren. Die Entität kann folgende sein:
 - [Let-Anweisung](./letstatement.md) wird vor der- `restrict` Anweisung angezeigt. 
@@ -80,7 +80,7 @@ restricts access to (database('DB2').*);
 ```
 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Im folgenden Beispiel wird gezeigt, wie eine Anwendung der mittleren Ebene einem Benutzer eine Abfrage mit einem logischen Modell voranstellt, das verhindert, dass der Benutzer andere Benutzerdaten abfragt.
 

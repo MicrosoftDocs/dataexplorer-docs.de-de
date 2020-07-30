@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4662b1bd9f68778cab1f799f564499e23add5812
-ms.sourcegitcommit: 6a0bd5b84f9bd739510c6a75277dec3a9e851edd
+ms.openlocfilehash: d2f9db1dbace646c41d8751272cf44cf6d04c2c3
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84788901"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346132"
 ---
-# <a name="pivot-plugin"></a>Pivot-Plugin
+# <a name="pivot-plugin"></a>pivot-Plug-In
 
 Rotiert eine Tabelle, indem die eindeutigen Werte aus einer Spalte in der Eingabe Tabelle in mehrere Spalten in der Ausgabe Tabelle umgewandelt werden, und führt Aggregationen aus, bei denen Sie für alle verbleibenden Spaltenwerte erforderlich sind, die in der endgültigen Ausgabe erwünscht sind.
 
@@ -23,17 +23,17 @@ Rotiert eine Tabelle, indem die eindeutigen Werte aus einer Spalte in der Eingab
 T | evaluate pivot(PivotColumn)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `T | evaluate pivot(`*PivotColumn* `[, ` *AggregationFunction* `] [,` *column1* `[,` *Column2* ...`]])`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *PivotColumn*: die zu rolligende Spalte. jeder eindeutige Wert aus dieser Spalte ist eine Spalte in der Ausgabe Tabelle.
 * *Aggregations Funktion*: (optional) aggregiert mehrere Zeilen in der Eingabe Tabelle in eine einzelne Zeile in der Ausgabe Tabelle. Derzeit unterstützte Funktionen: `min()` , `max()` , `any()` , `sum()` , `dcount()` , `avg()` , `stdev()` , `variance()` , `make_list()` , `make_bag()` , `make_set()` , `count()` (Standardwert ist `count()` ).
 * *column1*, *Column2*,...: (optional) Spaltennamen. Die Ausgabe Tabelle enthält eine zusätzliche Spalte für jede angegebene Spalte. Standard: alle Spalten außer der pivotierten Spalte und der Aggregations Spalte.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Pivot gibt die gedrehte Tabelle mit angegebenen Spalten (*column1*, *Column2*,...) und allen eindeutigen Werten der Pivotspalten zurück. Jede Zelle für die pivotierten Spalten enthält die Berechnung der Aggregatfunktion.
 
@@ -41,7 +41,7 @@ Pivot gibt die gedrehte Tabelle mit angegebenen Spalten (*column1*, *Column2*,..
 
 Das Ausgabe Schema des `pivot` Plug-ins basiert auf den Daten, sodass die Abfrage möglicherweise ein anderes Schema für zwei Ausführungen erzeugt. Dies bedeutet auch, dass die Abfrage, die auf entpackte Spalten verweist, jederzeit "beschädigt" werden kann. Aus diesem Grund empfiehlt es sich nicht, dieses Plug-in für Automatisierungs Aufträge zu verwenden.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ### <a name="pivot-by-a-column"></a>Pivotieren durch eine Spalte
 

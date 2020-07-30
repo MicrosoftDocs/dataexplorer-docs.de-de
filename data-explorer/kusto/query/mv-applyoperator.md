@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8fd83615de466c238a590273b228c118e2cd1b46
-ms.sourcegitcommit: 9fe6e34ef3321390ee4e366819ebc9b132b3e03f
+ms.openlocfilehash: 1f9cc982c213a9c2143b169dcf8a12103d617257
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/01/2020
-ms.locfileid: "84257839"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346710"
 ---
 # <a name="mv-apply-operator"></a>mv-apply-Operator
 
@@ -57,7 +57,7 @@ Der `mv-expand` Operator erhält die folgenden Eingaben:
 
 Der `mv-apply` Operator kann sich als Generalisierung des [`mv-expand`](./mvexpandoperator.md) Operators vorstellen (der zweite kann tatsächlich von der ersten implementiert werden, wenn die Unterabfrage nur Projektionen einschließt).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `|` `mv-apply` [*itemIndex*] *columnstoexpand* [*ROWLIMIT*] `on` `(` *Unterabfrage*`)`
 
@@ -75,7 +75,7 @@ Dabei hat *itemIndex* die Syntax:
 
 und die *Unterabfrage* haben dieselbe Syntax wie jede beliebige Abfrage Anweisung.
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *ItemIndex*: gibt bei Verwendung den Namen einer Spalte vom Typ an, die `long` als Teil der Array Erweiterungsphase an die Eingabe angehängt wird, und gibt den 0-basierten Array Index des erweiterten Werts an.
 
@@ -98,7 +98,7 @@ und die *Unterabfrage* haben dieselbe Syntax wie jede beliebige Abfrage Anweisun
 
 * Im Gegensatz zum- [`mv-expand`](./mvexpandoperator.md) Operator `mv-apply` unterstützt der-Operator nur die Array Erweiterung. Es gibt keine Unterstützung für das Erweitern von Eigenschaften Beuteln.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ## <a name="getting-the-largest-element-from-the-array"></a>Das größte Element wird aus dem Array erhalten.
 
@@ -193,6 +193,6 @@ datatable(command:string, command_time:datetime, user_id:string)
 |user2|[<br>  "RM",<br>  PWD<br>]|
 
 
-**Siehe auch**
+**Weitere Informationen**
 
 * [MV-Expand-](./mvexpandoperator.md) Operator.

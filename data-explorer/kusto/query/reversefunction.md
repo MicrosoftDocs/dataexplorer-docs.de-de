@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 22fe505eb8fd391e7a61120dbf42c214cb61c120
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: fa87dae85b158e162cea90c276057abb210ea23b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264826"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345775"
 ---
 # <a name="reverse"></a>reverse()
 
 Funktion kehrt die Reihenfolge der Eingabe Zeichenfolge um.
 Wenn der Eingabe Wert nicht vom Typ `string` ist, wandelt die Funktion den Wert in den Typ um `string` .
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `reverse(`*Ausgangs*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Quelle*: Eingabe Wert.  
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Die umgekehrte Reihenfolge eines Zeichen folgen Werts.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 print str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"

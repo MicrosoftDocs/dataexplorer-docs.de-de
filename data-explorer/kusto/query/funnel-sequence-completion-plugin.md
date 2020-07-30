@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/16/2020
-ms.openlocfilehash: 57cceb2fabb16956090430161b98c1287efdef97
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 3511d15ebf0f5e3708deeeed981a8a6808da2e48
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227321"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347934"
 ---
 # <a name="funnel_sequence_completion-plugin"></a>funnel_sequence_completion-Plug-In
 
@@ -23,11 +23,11 @@ Berechnet den Trichter der abgeschlossenen Sequenz Schritte innerhalb des Vergle
 T | evaluate funnel_sequence_completion(id, datetime_column, startofday(ago(30d)), startofday(now()), 1d, state_column, dynamic(['S1', 'S2', 'S3']), dynamic([10m, 30min, 1h]))
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| evaluate` `funnel_sequence_completion(` *idColumn* `,` *timelinecolenumn* `,` *Start* - `,` *End* - `,` *Schritt* `,` *statecolum* `,` *Sequence* `,` *maxsequencestepwindows*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: der tabellarische Eingabe Ausdruck.
 * *Idcolum*: Spalten Verweis muss im Quell Ausdruck vorhanden sein.
@@ -39,7 +39,7 @@ T | evaluate funnel_sequence_completion(id, datetime_column, startofday(ago(30d)
 * *Sequence*: ein konstantes dynamisches Array mit den Sequenz Werten (Werte werden in gesucht `StateColumn` ).
 * *Maxsequencestepwindows*: Dynamisches skalare Konstante Array mit den Werten der maximal zulässigen Zeitspanne zwischen dem ersten und letzten sequenziellen Schritt in der Sequenz. Jedes Fenster (Period) im Array generiert ein Trichter Analyseergebnis.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt eine einzelne Tabelle zurück, die zum Erstellen eines Trichter Diagramms für die analysierte Sequenz nützlich ist:
 
@@ -48,7 +48,7 @@ Gibt eine einzelne Tabelle zurück, die zum Erstellen eines Trichter Diagramms f
 * `Period`: der maximale Zeitraum (Fenster), der für das Abschließen von Schritten in der Trichter Sequenz zulässig ist, gemessen aus dem ersten Schritt in der Sequenz. Jeder Wert in *maxsequencestepwindows* generiert eine Trichter Analyse mit einem separaten Zeitraum. 
 * `dcount`: unterschiedliche Anzahl von `IdColumn` im Zeitfenster, die vom ersten Sequenz Zustand auf den Wert von umgestellt wurden `StateColumn` .
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ### <a name="exploring-storm-events"></a>Erkunden von Storm-Ereignissen 
 

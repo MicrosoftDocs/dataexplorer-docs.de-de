@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f5ae36f00e7dc54b67eea5305c65a9ed4e44c572
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 42012111c7f862672a1335e0e9165eb62179dfe7
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763417"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87344925"
 ---
 # <a name="series_fill_backward"></a>series_fill_backward()
 
@@ -21,17 +21,17 @@ Führt eine rückwärts Füll interpolung von fehlenden Werten in einer Reihe au
 
 Ein Ausdruck, der das dynamische numerische Array enthält, ist die Eingabe. Die-Funktion ersetzt alle Instanzen von missing_value_placeholder durch den nächstgelegenen Wert von der rechten Seite (außer missing_value_placeholder) und gibt das resultierende Array zurück. Die am weitesten rechts stehenden Instanzen von missing_value_placeholder werden beibehalten.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_fill_backward(`*x* `[, ` *missing_value_placeholder*`])`
 * Gibt Series *x* zurück, wobei alle Instanzen von *missing_value_placeholder* rückwärts ausgefüllt werden.
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *x*: Skalarausdruck des dynamischen Arrays, bei dem es sich um ein Array numerischer Werte handelt.
 * *missing_value_placeholder*: mit diesem optionalen Parameter wird ein Platzhalter für fehlende Werte angegeben. Der Standardwert ist `double` (*null*).
 
-**Notizen**
+**Hinweise**
 
 * Geben Sie *null* als Standardwert an, um alle Interpolations Funktionen nach der [make-Serie](make-seriesoperator.md)anzuwenden: 
 
@@ -43,7 +43,7 @@ make-series num=count() default=long(null) on TimeStamp from ago(1d) to ago(1h) 
 * Wenn *missing_value_placeholder* `double` (*null*) ist (oder weggelassen wird, das die gleiche Bedeutung hat), kann ein Ergebnis *null* -Werte enthalten. Um diese *null* -Werte auszufüllen, verwenden Sie andere Interpolations Funktionen. Derzeit unterstützen nur [series_outliers ()](series-outliersfunction.md) *null* -Werte in Eingabe Arrays.
 * Die-Funktion behält den ursprünglichen Typ von Array Elementen bei.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

@@ -1,6 +1,6 @@
 ---
-title: bin_auto() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird bin_auto() in Azure Data Explorer beschrieben.
+title: bin_auto ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird bin_auto () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,35 +8,35 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ebb214ae6a2676bf59a37e1e4e9cc3c085374bb3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 6df5d9793f2d076eb8f97156e911fb49aba4cc9c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517832"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349158"
 ---
 # <a name="bin_auto"></a>bin_auto()
 
-Rundet Werte auf einen "bin" fester Größe ab, wobei die Kontrolle über die Lagerplatzgröße und den Startpunkt durch eine Abfrageeigenschaft bereitgestellt wird.
+Rundet Werte auf einen "bin" fester Größe, wobei die Kontrolle über die bin-Größe und den von einer Abfrage Eigenschaft bereitgestellten Startpunkt festgelegt wird.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`bin_auto` `(` *Ausdruck* `)`
+`bin_auto``(` *Ausdruck*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Ausdruck*: Ein skalarer Ausdruck eines numerischen Typs, der den zu rundenden Wert angibt.
+* *Ausdruck*: ein skalarer Ausdruck eines numerischen Typs, der den zu runden Wert angibt.
 
-**Clientanforderungseigenschaften**
+**Eigenschaften von Client Anforderungen**
 
-* `query_bin_auto_size`: Ein numerisches Literal, das die Größe jedes Abschnitts angibt.
-* `query_bin_auto_at`: Ein numerisches Literal, das einen Wert von *Expression* angibt, `fixed_point` der `bin_auto(fixed_point)` == `fixed_point`ein "fester Punkt" ist (d. h. ein Wert, für den .)
+* `query_bin_auto_size`: Ein numerisches Literale, das die Größe der einzelnen bin angibt.
+* `query_bin_auto_at`: Ein numerisches Literale, das einen Wert des *Ausdrucks* angibt, der ein "fester Punkt" ist (d. h. ein Wert, `fixed_point` für den `bin_auto(fixed_point)` == `fixed_point` .)
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Das nächste Vielfache `query_bin_auto_at` von unter *Ausdruck*verschoben, so dass in `query_bin_auto_at` sich selbst übersetzt werden.
+Das nächstgelegene Vielfache des `query_bin_auto_at` folgenden *Ausdrucks*wurde verschoben, sodass es `query_bin_auto_at` in sich selbst übersetzt wird.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 set query_bin_auto_size=1h;

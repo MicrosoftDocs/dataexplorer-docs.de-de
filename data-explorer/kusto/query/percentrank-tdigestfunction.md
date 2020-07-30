@@ -8,28 +8,28 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: cafb52b7254041a18a9cae956ed338f45bc67a54
-ms.sourcegitcommit: 3848b8db4c3a16bda91c4a5b7b8b2e1088458a3a
+ms.openlocfilehash: 33eb35e51f403a3c0b7a2f030604b12c705221ea
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/16/2020
-ms.locfileid: "84818569"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346166"
 ---
 # <a name="percentrank_tdigest"></a>percentrank_tdigest()
 
 Berechnet den ungefähren Rang des Werts in einer Menge, wobei Rang als Prozentsatz der Größe des Satzes ausgedrückt wird.
 Diese Funktion kann als Umkehrung des Perzentils angezeigt werden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `percentrank_tdigest(`*Tdigest* `,` *Expr*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Tdigest*: Ausdruck, der von [tdigest ()](tdigest-aggfunction.md) oder [tdigest_merge ()](tdigest-merge-aggfunction.md)generiert wurde.
 * *Expr*: ein Ausdruck, der einen Wert darstellt, der für die Berechnung der prozentualen Bewertung verwendet wird.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Der Prozentsatz des Werts in einem DataSet.
 
@@ -39,7 +39,7 @@ Der Prozentsatz des Werts in einem DataSet.
 
 2) Der erste Parameter muss tdigest sein, der von [tdigest ()](tdigest-aggfunction.md) oder [tdigest_merge ()](tdigest-merge-aggfunction.md) generiert wurde.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Die percentrank_tdigest () der Schadens Eigenschaft mit dem Wert $4490 beträgt ~ 85%:
 

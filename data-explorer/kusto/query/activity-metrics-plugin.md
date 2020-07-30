@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8106d419f20dcacdec6386294a5b9ffb8d1bc8e2
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 69ba6a8ce3cd29d7459215184f7488b015d16558
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225903"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349804"
 ---
 # <a name="activity_metrics-plugin"></a>activity_metrics-Plug-In
 
@@ -23,11 +23,11 @@ Berechnet nützliche Aktivitäts Metriken (eindeutige Anzahl Werte, unterschiedl
 T | evaluate activity_metrics(id, datetime_column, startofday(ago(30d)), startofday(now()), 1d, dim1, dim2, dim3)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| evaluate` `activity_metrics(` *idColumn* `,` *timelinecolenn* `,` [*Start* `,` *Ende* `,` ] *Fenster* [ `,` *dim1* `,` *dim2* `,` ...]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: der tabellarische Eingabe Ausdruck.
 * *IdColumn*: der Name der Spalte mit ID-Werten, die die Benutzeraktivität darstellen. 
@@ -37,7 +37,7 @@ T | evaluate activity_metrics(id, datetime_column, startofday(ago(30d)), startof
 * *Fenster*: Skalar mit dem Wert des Analysefenster Zeitraums. Kann ein numerischer/DateTime-/timestamp-Wert oder eine Zeichenfolge sein, bei der es sich um einen handelt `week` / `month` / `year` . in diesem Fall werden alle Zeiträume entsprechend [starstarfweek](startofweekfunction.md) / [starttfmonth](startofmonthfunction.md) / [starttfyear](startofyearfunction.md) . 
 * *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, in denen die Berechnung der Aktivitäts Metrik in Slice ist.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt eine Tabelle zurück, die die unterschiedlichen Anzahl Werte, die unterschiedliche Anzahl neuer Werte, die Beibehaltungs Dauer und die Änderungs Rate für jeden Zeitachse und jede vorhandene Dimensions Kombination enthält.
 
@@ -90,7 +90,7 @@ Abgeleitet von der Definition von `Churn Rate` und `Retention Rate` ist Folgende
     [Retention rate] = 100.0% - [Churn Rate]
 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ### <a name="weekly-retention-rate-and-churn-rate"></a>Wöchentliche Aufbewahrungs Rate und Änderungs Rate
 

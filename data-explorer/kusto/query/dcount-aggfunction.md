@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7f8464ed7dca8d712900bb7a1047875b6292d243
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 2fc8ee7e8c7ab3ce372d786ec87edf55265e1249
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85265013"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348444"
 ---
 # <a name="dcount-aggregation-function"></a>DCount () (Aggregations Funktion)
 
 Gibt eine Schätzung für die Anzahl der unterschiedlichen Werte zurück, die von einem skalaren Ausdruck in der Zusammenfassungs Gruppe entnommen werden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 ... `|` `summarize` `dcount` `(`*`Expr`*[, *`Accuracy`*]`)` ...
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expr*: ein skalarer Ausdruck, dessen unterschiedliche Werte gezählt werden sollen.
 * *Genauigkeit*: ein optionales `int` Literalwert, der die angeforderte Schätzgenauigkeit definiert. Unterstützte Werte finden Sie unten. Wenn nicht angegeben, wird der Standardwert `1` verwendet.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt eine Schätzung der Anzahl der unterschiedlichen Werte von *`Expr`* in der Gruppe zurück.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
 PageViewLog | summarize countries=dcount(country) by continent
@@ -40,7 +40,7 @@ PageViewLog | summarize countries=dcount(country) by continent
 
 :::image type="content" source="images/dcount-aggfunction/dcount.png" alt-text="D-Anzahl":::
 
-**Notizen**
+**Hinweise**
 
 Die `dcount()` Aggregations Funktion ist in erster Linie für das Einschätzen der Kardinalität großer Mengen nützlich. Die Leistung wird auf Genauigkeit gewartet, und es kann ein Ergebnis zurückgegeben werden, das sich zwischen den Ausführungen ändert. Die Reihenfolge der Eingaben hat möglicherweise Auswirkungen auf die Ausgabe.
 
@@ -67,7 +67,7 @@ Die `dcount()` Aggregatfunktion verwendet eine Variante des [hyperloglog (HLL)-A
 |       0|      1.6|2<sup>12</sup>|
 |       1|      0,8|2<sup>14</sup>|
 |       2|      0,4|2<sup>16</sup>|
-|       3|     0.28|2<sup>17</sup>|
+|       3|     0,28|2<sup>17</sup>|
 |       4|      0.2|2<sup>18</sup>|
 
 > [!NOTE]

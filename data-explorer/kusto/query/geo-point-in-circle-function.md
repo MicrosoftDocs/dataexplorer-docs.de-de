@@ -8,22 +8,22 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/03/2020
-ms.openlocfilehash: 6e6ef40fcdeb4942dc0924c86862ee8f6222ac12
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 1e94e8eca72e6cb679a84e7b91ea376b9ec4b29c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227162"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347815"
 ---
 # <a name="geo_point_in_circle"></a>geo_point_in_circle()
 
 Berechnet, ob die georäumlichen Koordinaten sich innerhalb eines Kreises auf der Erde befinden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `geo_point_in_circle(`*p_longitude* `, ` *p_latitude* `, ` *pc_longitude* `, ` *pc_latitude* `, ` *c_radius*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *p_longitude*: geografischer Koordinaten Längengrad Wert in Grad. Der gültige Wert ist eine reelle Zahl und liegt im Bereich [-180, + 180].
 * *p_latitude*: geografischer Koordinaten Breitenwert in Grad. Der gültige Wert ist eine reelle Zahl und liegt im Bereich [-90, + 90].
@@ -31,7 +31,7 @@ Berechnet, ob die georäumlichen Koordinaten sich innerhalb eines Kreises auf de
 * *pc_latitude*: der Breitengrad Wert für die Kreis Center-geografischer Koordinate in Grad. Der gültige Wert ist eine reelle Zahl und liegt im Bereich [-90, + 90].
 * *c_radius*: Kreis Radius in Meter. Der gültige Wert muss positiv sein.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt an, ob die räumlichen Koordinaten innerhalb eines Kreises liegen. Wenn die Koordinaten oder der Kreis ungültig sind, führt die Abfrage zu einem NULL-Ergebnis.
 
@@ -40,7 +40,7 @@ Gibt an, ob die räumlichen Koordinaten innerhalb eines Kreises liegen. Wenn die
 >* Das [geodätische Datum](https://en.wikipedia.org/wiki/Geodetic_datum) , das zum Messen der Entfernung auf der Erde verwendet wird, ist eine Kugel.
 >* Ein Kreis ist eine kugelförmige Obergrenze in der Erde. Der Radius der Obergrenze wird entlang der Oberfläche der Kugel gemessen.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Die folgende Abfrage sucht alle Orte in dem Bereich, der durch den folgenden Kreis definiert wird: Radius von 18 km, zentriert um [-122,317404, 47,609119] Koordinaten.
 

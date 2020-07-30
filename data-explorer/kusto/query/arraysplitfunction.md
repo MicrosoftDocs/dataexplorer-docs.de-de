@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/28/2018
-ms.openlocfilehash: 102077c9c1116bd9476c6dae59d993a6379b69bd
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: be993f3b0a58b56b9b4d171378bf71a645e77f1a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225551"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349515"
 ---
 # <a name="array_split"></a>array_split()
 
 Teilt ein Array entsprechend den getrennten Indizes in mehrere Arrays und packt das generierte Array in ein dynamisches Array.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `array_split`(*`arr`*, *`indices`*)
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *`arr`*: Das Eingabe Array, das geteilt werden soll, muss ein dynamisches Array sein.
 * *`indices`*: Integer oder dynamisches Array von Ganzzahlen mit den getrennten Indizes (null basiert) werden negative Werte in array_length +-Wert konvertiert.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Dynamisches Array mit n + 1 Arrays mit den Werten im Bereich `[0..i1), [i1..i2), ... [iN..array_length)` von `arr` , wobei N die Anzahl der Eingabe Indizes und `i1...iN` die Indizes ist.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1bb995874bf6ac552350c602c6d3742a08b1273b
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: cc0cc7ca77efeae583adeaf7a983d18498e5af96
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763675"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87338268"
 ---
 # <a name="welch_test"></a>welch_test()
 
@@ -31,11 +31,11 @@ print
 // pValue = 0.021
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `welch_test(`*mean1* `, ` *variance1* `, ` *count1* `, ` *mean2* `, ` *variance2* `, ` *COUNT2*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *mean1*: Ausdruck, der den Mittelwert (Durchschnittswert) der ersten Reihe darstellt
 * *variance1*: Ausdruck, der den Varianz Wert der ersten Reihe darstellt
@@ -44,7 +44,7 @@ print
 * *variance2*: Ausdruck, der den Varianz Wert der zweiten Reihe darstellt
 * *COUNT2*: Ausdruck, der die Anzahl der Werte in der zweiten Reihe darstellt
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Von [Wikipedia](https://en.wikipedia.org/wiki/Welch%27s_t-test):
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2603aab066a7f77ff36553d8898bb713ace990b7
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 67e408653a4873dce3b5e8f21a91775573affbe2
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763803"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347016"
 ---
 # <a name="make_bag_if-aggregation-function"></a>make_bag_if () (Aggregations Funktion)
 
@@ -22,17 +22,17 @@ Gibt ein `dynamic` (JSON)-Eigenschaften Behälter (Wörterbuch) aller Werte von 
 > [!NOTE]
 > Kann nur im Kontext der [Aggregation in zusammen](summarizeoperator.md)Fassung verwendet werden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `summarize``make_bag_if(` *Expr*, *Prädikat* [ `,` *MaxSize*]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expr*: ein Ausdruck vom Typ `dynamic` , der für die Aggregations Berechnung verwendet wird.
 * *Predicate*: ein Prädikat, das für ausgewertet `true` werden muss, damit *' expr '* dem Ergebnis hinzugefügt werden kann.
 * *MaxSize*: ein optionales ganzzahliges Limit für die maximale Anzahl von zurückgegebenen Elementen (Standardwert ist *1048576*). Der MaxSize-Wert darf 1048576 nicht überschreiten.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt ein `dynamic` (JSON)-Eigenschaften Behälter (Wörterbuch) aller Werte von *"expr"* in der Gruppe zurück, die Eigenschaften Behälter (Wörterbücher) sind, für die das *Prädikat* ausgewertet wird `true` .
 Nicht-Wörterbuch Werte werden übersprungen.
@@ -41,7 +41,7 @@ Wenn ein Schlüssel in mehr als einer Zeile angezeigt wird, wird ein beliebiger 
 > [!NOTE]
 > Die- [`make_bag`](./make-bag-aggfunction.md) Funktion ähnelt make_bag_if () ohne Prädikat Ausdruck.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 let T = datatable(prop:string, value:string, predicate:bool)

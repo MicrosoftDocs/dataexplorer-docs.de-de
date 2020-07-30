@@ -1,6 +1,6 @@
 ---
-title: tolong() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt tolong() in Azure Data Explorer.
+title: Tolong ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird Tolong () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: bd354a39c048631ab98390c74cb7cd78ee5376b2
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: fb209ff3784f6e24f184b576a1e8f94c52834ba4
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506085"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87340954"
 ---
 # <a name="tolong"></a>tolong()
 
-Konvertiert Die Eingabe in eine lange (signierte 64-Bit) Zahlendarstellung.
+Konvertiert Eingaben in eine Long-Darstellung (signed 64-Bit).
 
 ```kusto
 tolong("123") == 123
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `tolong(`*Expr*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Expr*: Ausdruck, der in long konvertiert wird. 
+* *Expr*: Ausdruck, der in Long konvertiert wird. 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Wenn die Konvertierung erfolgreich ist, ist das Ergebnis eine lange Zahl.
-Wenn die Konvertierung nicht erfolgreich `null`ist, wird das Ergebnis .
+Wenn die Konvertierung erfolgreich ist, wird das Ergebnis eine lange Zahl sein.
+Wenn die Konvertierung nicht erfolgreich ist, wird das Ergebnis zurückgeben `null` .
  
-*Hinweis*: Bevorzugen Sie die Verwendung von [long()](./scalar-data-types/long.md) wenn möglich.
+*Hinweis*: Verwenden Sie nach Möglichkeit [Long ()](./scalar-data-types/long.md) .

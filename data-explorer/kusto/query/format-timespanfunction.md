@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ba4dffa50c605e9346807f28222809af7637ff09
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 923008d05ebc8c51a39955e29450e55af4100941
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227280"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347951"
 ---
 # <a name="format_timespan"></a>format_timespan()
 
@@ -23,22 +23,22 @@ Formatiert einen TimeSpan-Typ entsprechend dem angegebenen Format.
 format_timespan(time(14.02:03:04.12345), 'h:m:s.fffffff') == "2:3:4.1234500"
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `format_timespan(`*Zeitspanne* `,` *Format*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * `timespan`: Wert eines Typs `timespan` .
 * `format`: die Format Bezeichner-Zeichenfolge, die aus einem oder mehreren [Format Elementen](#supported-formats)besteht.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Die Zeichenfolge mit dem Format Ergebnis.
 
 ## <a name="supported-formats"></a>Unterstützte Formate
 
-|Formatbezeichner   |Beschreibung    |Beispiele
+|Formatbezeichner   |BESCHREIBUNG    |Beispiele
 |---|---|---
 |`d`-`dddddddd` |Die Anzahl ganzer Tage im Zeitintervall. Bei Bedarf mit Nullen aufgefüllt.|   15.13:45:30: d-> 15, DD-> 15, DDD-> 015
 |`f`    |Die Zehntelsekunden im Zeitintervall. |15.13:45:30.6170000-> 6, 15.13:45:30.05-> 0
@@ -80,7 +80,7 @@ Der Formatspezifizierer kann folgende Trennzeichen enthalten:
 |`'['`||
 |`']'`||
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

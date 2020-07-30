@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: e078919af16a9d2f7dadba0a309932b3a39b6ced
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: bb3f217b1ec0631f533a10433a7be368945667d7
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763246"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87344534"
 ---
 # <a name="series_fill_const"></a>series_fill_const()
 
@@ -21,18 +21,18 @@ Ersetzt fehlende Werte in einer Reihe durch einen angegebenen konstanten Wert.
 
 Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe, ersetzt alle Instanzen von missing_value_placeholder durch angegebene constant_value und gibt das resultierende Array zurück.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_fill_const(`*x* `[, ` *constant_value* `[,` *missing_value_placeholder*`]])`
 * Gibt Series *x* zurück, wobei alle Instanzen von *missing_value_placeholder* durch *constant_value*ersetzt werden.
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *x*: Skalarausdruck des dynamischen Arrays, bei dem es sich um ein Array numerischer Werte handelt.
 * *constant_value*: Parameter, der einen Platzhalter für einen fehlenden zu ersetzenden Wert angibt. Der Standardwert ist *0*. 
 * *missing_value_placeholder*: optionaler Parameter, der einen Platzhalter für einen fehlenden zu ersetzenden Wert angibt. Der Standardwert ist `double` (*null*).
 
-**Notizen**
+**Hinweise**
 * Sie können eine Reihe erstellen, die mit einem konstanten Wert ausgefüllt wird, indem Sie `default = ` die *DefaultValue* -Syntax verwenden (oder nur weglassen, der die Annahme 0 annimmt). Weitere Informationen finden Sie unter [make-Series](make-seriesoperator.md).
 
 ```kusto
@@ -48,7 +48,7 @@ make-series num=count() default=long(null) on TimeStamp from ago(1d) to ago(1h) 
 * Der *missing_value_placeholder* kann einen beliebigen Typ aufweisen, der in tatsächliche Elementtypen konvertiert wird. Daher `double` haben entweder (*null*), `long` (*null*) oder `int` (*null*) dieselbe Bedeutung.
 * Die-Funktion behält den ursprünglichen Typ der Array Elemente bei. 
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: 4500ec5b58c93901e011ea6dd270563d3405ee01
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: fa17d27506c4930fa9b9f7fb0a24f5ff31e1c974
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372863"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345163"
 ---
 # <a name="series_decompose"></a>series_decompose()
 
@@ -21,11 +21,11 @@ Wendet eine Zerlegungs Transformation auf eine Reihe an.
 
 Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, als Eingabe auf und zerlegt ihn in saisonale, Trend-und Rest-Komponenten.
  
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_decompose(`*Reihe* `[,` *Saisonalität* `,` *Trend* `,` *Test_points* `,` *Seasonality_threshold*`])`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Series*: dynamische Array Zelle, bei der es sich um ein Array numerischer Werte handelt, in der Regel die resultierende Ausgabe von [make-Series-](make-seriesoperator.md) oder [make_list](makelist-aggfunction.md) -Operatoren
 * *Saison*Abhängigkeit: eine ganze Zahl, die die saisonale Analyse steuert, die Folgendes enthält:
@@ -39,7 +39,7 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
 * *Test_points*: 0 (Standard) oder positive ganze Zahl, die die Anzahl der Punkte am Ende der Reihe angibt, die vom Lernprozess (Regression) ausgeschlossen werden sollen. Dieser Parameter sollte für Vorhersagezwecke festgelegt werden.
 * *Seasonality_threshold*: der Schwellenwert für die saisonalitätsbewertung, wenn *Saison alität* auf Autodetect festgelegt ist, ist der Standardwert für die Bewertung `0.6` . Weitere Informationen finden Sie unter [series_periods_detect](series-periods-detectfunction.md).
 
-**Hre**
+**Rückgabewert**
 
  Die-Funktion gibt die folgende Reihe zurück:
 
@@ -66,7 +66,7 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
 
 Diese Methode wird in der Regel auf Zeitreihen von Metriken angewendet, die das periodische und/oder Trend Verhalten manifestieren. Sie können die-Methode verwenden, um zukünftige Metrikwerte zu prognostizieren und/oder anomale Werte zu erkennen. Die implizite Annahme dieses Regressions Prozesses ist, dass die Zeitreihe außer dem saisonalen und dem Trend Verhalten stochastisch und nach dem Zufallsprinzip verteilt ist. Prognostizieren Sie zukünftige Metrikwerte aus den Saison-und Trend Komponenten, während Sie den Restteil ignorieren. Erkennen anormaler Werte auf der Grundlage der Ausreißererkennung nur für den Restteil. Weitere Informationen finden Sie im [Kapitel Zeitreihen Zerlegung](https://www.otexts.org/fpp/6).
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 **Wöchentliche Saison Abhängigkeit**
 

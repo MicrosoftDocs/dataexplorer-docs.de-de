@@ -8,14 +8,14 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: d5bd270e016f1694c28f663a7fe8bf1d9a8f0903
-ms.sourcegitcommit: 41cd88acc1fd79f320a8fe8012583d4c8522db78
+ms.openlocfilehash: b6d76f8ed834ec40c53321644e5cd9b7f5f93168
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/02/2020
-ms.locfileid: "84301281"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347305"
 ---
-# <a name="ipv6_is_match"></a>ipv6_is_match ()
+# <a name="ipv6_is_match"></a>ipv6_is_match()
 
 Entspricht zwei IPv6-oder IPv4-Netzwerk Adress Zeichenfolgen. Die beiden IPv6/IPv4-Zeichen folgen werden analysiert und verglichen, während die kombinierte IP-Präfix Maske, die aus den Argument Präfixen berechnet wurde, und das optionale Argument berücksichtigt werden `PrefixMask` .
 
@@ -27,11 +27,11 @@ ipv6_is_match('fe80::85d:e82c:9446:7994/127', 'fe80::85d:e82c:9446:7995/127') ==
 ipv6_is_match('fe80::85d:e82c:9446:7994', 'fe80::85d:e82c:9446:7995', 127) == true
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `ipv6_is_match(`*Expr1* `, ` *Expr2* `[ ,` *Prefixmask*`])`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expr1*, *expr2*: ein Zeichen folgen Ausdruck, der eine IPv6-oder IPv4-Adresse darstellt. IPv6-und IPv4-Zeichen folgen können mithilfe der [IP-Präfix Notation](#ip-prefix-notation)maskiert werden.
 * *Prefixmask*: eine ganze Zahl zwischen 0 und 128, die die Anzahl der signifikantesten Bits darstellt, die berücksichtigt werden.
@@ -41,9 +41,10 @@ ipv6_is_match('fe80::85d:e82c:9446:7994', 'fe80::85d:e82c:9446:7995', 127) == tr
 IP-Adressen können `IP-prefix notation` mithilfe eines Schrägstrichs ( `/` ) definiert werden.
 Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse. Die Zahl (1 bis 127) rechts neben dem Schrägstrich ( `/` ) ist die Anzahl von zusammenhängenden 1 Bit in der netmask. 
 
-**Beispiel**: fe80:: 85D: e82c: 9446:7994/120 verfügt über ein zugeordnetes net/Subnetmask, das 120 zusammenhängende Bits enthält.
+## <a name="example"></a>Beispiel:
+FE80:: 85D: e82c: 9446:7994/120 verfügt über eine zugeordnete net/Subnetmask mit 120 zusammenhängenden Bits.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 * `true`: Wenn die lange Darstellung des ersten IPv6/IPv4-Zeichen folgen Arguments gleich dem zweiten IPv6/IPv4-Zeichen folgen Argument ist.
 * `false`Sonst.

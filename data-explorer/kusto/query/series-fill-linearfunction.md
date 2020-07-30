@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 4bf68800cc10bf301f6a5738d47e670905c2c46d
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 0831251bd38df4475c271cc6bcec9c15668860ea
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763654"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87344168"
 ---
 # <a name="series_fill_linear"></a>series_fill_linear()
 
@@ -21,20 +21,20 @@ Linearly interpoliert fehlende Werte in einer Reihe.
 
 Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe an, führt die lineare Interpolationen für alle Instanzen missing_value_placeholder aus und gibt das resultierende Array zurück. Wenn der Anfang und das Ende des Arrays missing_value_placeholder enthalten, wird es durch den nächstgelegenen Wert ersetzt, der nicht missing_value_placeholder ist. Diese Funktion kann ausgeschaltet werden. Wenn das gesamte Array aus dem missing_value_placeholder besteht, wird das Array mit constant_value gefüllt, oder 0, wenn es nicht angegeben ist.  
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_fill_linear(`*x* `[,` *missing_value_placeholder* ` [,` *fill_edges* ` [,` *constant_value*`]]]))`
 * Gibt die Reihen lineare interpolung von *x* unter Verwendung der angegebenen Parameter zurück.
  
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *x*: Skalarausdruck des dynamischen Arrays, bei dem es sich um ein Array numerischer Werte handelt.
 * *missing_value_placeholder*: optionaler Parameter, der einen Platzhalter für die zu ersetzenden "fehlenden Werte" angibt. Der Standardwert ist `double` (*null*).
 * *fill_edges*: ein boolescher Wert, der angibt, ob *missing_value_placeholder* am Anfang und am Ende des Arrays durch den nächstgelegenen Wert ersetzt werden sollen. Standardmäßig " *true* ". Wenn *false*festgelegt ist, werden *missing_value_placeholder* am Anfang und am Ende des Arrays beibehalten.
 * *constant_value*: optionaler Parameter, der nur für Arrays relevant ist, besteht aus *null* -Werten. Dieser Parameter gibt einen konstanten Wert an, mit dem die Reihe aufgefüllt werden soll. Der Standardwert ist *0*. Wenn dieser Parameter auf `double` (*null*) festgelegt wird, werden *null* -Werte in diesem Fall nicht angezeigt.
 
-**Notizen**
+**Hinweise**
 
 * Geben Sie *null* als Standardwert an, um nach der [make-Reihe](make-seriesoperator.md)Interpolations Funktionen anzuwenden: 
 
@@ -47,7 +47,7 @@ make-series num=count() default=long(null) on TimeStamp from ago(1d) to ago(1h) 
 * Wenn *missing_value_placeholder* `double` (*null*) ist (oder weggelassen wird, das die gleiche Bedeutung hat), kann ein Ergebnis *null* -Werte enthalten. Verwenden Sie andere Interpolations Funktionen, um diese *null* -Werte auszufüllen. Derzeit unterstützen nur [series_outliers ()](series-outliersfunction.md) *null* -Werte in Eingabe Arrays.
 * Die-Funktion behält den ursprünglichen Typ von Array Elementen bei. Wenn x nur int-oder Long-Elemente enthält, gibt die lineare interpolung gerundete, nicht exakte Werte zurück.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
