@@ -8,12 +8,12 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/27/2020
-ms.openlocfilehash: 7eabcb3cb0c3fd001290848e73bb534ff8ea4218
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 30075b5a75e273061423a6f1540f44947ef93cec
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226821"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347713"
 ---
 # <a name="geo_s2cell_to_central_point"></a>geo_s2cell_to_central_point()
 
@@ -21,22 +21,22 @@ Berechnet die räumlichen Koordinaten, die den Mittelpunkt einer S2-Zelle darste
 
 Weitere Informationen finden Sie in der [Zellen Hierarchie S2](https://s2geometry.io/devguide/s2cell_hierarchy).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `geo_s2cell_to_central_point(`*s2cell*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 *s2cell*: S2-zelltokenzeichenfolgen-Wert, wie er von [geo_point_to_s2cell ()](geo-point-to-s2cell-function.md)berechnet wurde. Die maximale Zeichen folgen Länge für den S2-zelltoken beträgt 16 Zeichen.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Die georäumlichen Koordinaten Werte im [geojson-Format](https://tools.ietf.org/html/rfc7946) und eines [dynamischen](./scalar-data-types/dynamic.md) Datentyps. Wenn das S2-zelltoken ungültig ist, führt die Abfrage zu einem NULL-Ergebnis.
 
 > [!NOTE]
 > Das geojson-Format gibt die Längen-und Breitengrad Sekunde an.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

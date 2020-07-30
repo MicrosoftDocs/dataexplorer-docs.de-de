@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/06/2020
-ms.openlocfilehash: 66ca1e5ff330a4b39ab769b0e3e8d6359eed9c00
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 3d0f389264d078d2b55ac06214bb3b820fcf7f13
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226668"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347594"
 ---
 # <a name="hash_many"></a>hash_many()
 
 Gibt einen kombinierten Hashwert mit mehreren Werten zurück.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `hash_many(`*S1* `,` *S2* [ `,` *S3* ...]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *S1*, *S2*,..., *SN*: Eingabewerte, für die ein Hashwert erstellt wird.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Der kombinierte Hashwert der angegebenen skalare.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

@@ -1,6 +1,6 @@
 ---
-title: asin() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt asin() in Azure Data Explorer.
+title: ASIN ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird Asin () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 5db112daeba59dd841b02df8ba1a41185654ad6a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 360a936d136cd01760175cdf5b5da2718d0cfd91
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518546"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349498"
 ---
 # <a name="asin"></a>asin()
 
-Gibt den Winkel zurück, dessen Sinus die [`sin()`](sinfunction.md)angegebene Zahl ist (der inverse Vorgang von ) .
+Gibt den Winkel zurück, dessen Sinus die angegebene Zahl ist (die umgekehrte Operation von [`sin()`](sinfunction.md) ).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`asin(`*X*`)`
+`asin(`*Stuben*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *x*: Eine reelle Zahl im Bereich [-1, 1].
+* *x*: eine reelle Zahl im Bereich [-1, 1].
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-* Der Wert des Bogensinus von`x`
-* `null`Wenn `x` < -1 oder `x` > 1
+* Der Wert des Arkus Sinus von.`x`
+* `null`Wenn `x` <-1 oder `x` > 1

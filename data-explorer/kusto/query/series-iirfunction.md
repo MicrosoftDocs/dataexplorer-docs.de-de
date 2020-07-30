@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/20/2019
-ms.openlocfilehash: fbdf7b1a9a9f5b65e6c6ee7a78fe64afba2893af
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: e1b863b83e08fae680e1a387ca2fdd2a93d111a8
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264792"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351436"
 ---
 # <a name="series_iir"></a>series_iir()
 
@@ -26,11 +26,11 @@ Die Funktion nimmt einen Ausdruck, der das dynamische numerische Array enthält,
 
 Die-Funktion übernimmt als Eingabe die Spalte, die das dynamische Array enthält, und zwei statische dynamische Arrays der *Filter-und* - *b* -Koeffizienten und wendet den Filter auf die Spalte an. Sie gibt eine neue dynamische Array-Spalte mit der gefilterten Ausgabe aus.  
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_iir(`*x* `,` *b* `,` *a*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *x*: dynamische Array Zelle, die ein Array numerischer Werte ist, in der Regel die resultierende Ausgabe von [make-Series-](make-seriesoperator.md) oder [make_list](makelist-aggfunction.md) -Operatoren.
 * *b*: ein konstanter Ausdruck, der die Zähler Koeffizienten des Filters (gespeichert als dynamisches Array numerischer Werte) enthält.
@@ -60,12 +60,12 @@ print x=x, y = series_iir(x, dynamic([1]), dynamic([1,-1]))
 | mv-expand x, y
 ```
 
-| x | Y |
+| x | y |
 |:--|:--|
 |1.0|1.0|
 |2.0|3.0|
 |3.0|6.0|
-|4,0|10,0|
+|4,0|10.0|
 
 Im folgenden wird beschrieben, wie Sie ihn in eine Funktion einschließen:
 

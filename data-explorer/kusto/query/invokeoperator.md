@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1aca8cda34e1ee8506d5be6633cfd46fd912c6c3
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: debd0a83f4c27fa05415805404ad450bab1d3ca1
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271518"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347373"
 ---
 # <a name="invoke-operator"></a>invoke-Operator
 
@@ -23,25 +23,25 @@ Ruft Lambda auf, das die Quelle von `invoke` als tabellarisches Parameter Argume
 T | invoke foo(param1, param2)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `T | invoke`- *Funktion* `(` [*param1* `,` *Param2*]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: die tabellarische Quelle.
 * *Function*: der Name des Lambda-Ausdrucks oder Funktionsnamens, der ausgewertet werden soll.
 * *param1*, *Param2* ...: zusätzliche Lambda-Argumente.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Gibt das Ergebnis des ausgewerteten Ausdrucks zurück.
 
-**Hinweise**
+**Notizen**
 
 Weitere Informationen zum Deklarieren von Lambda-Ausdrücken, die tabellarische Argumente annehmen können, finden [Sie unter Let-Anweisungen](./letstatement.md) .
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Das folgende Beispiel zeigt, wie der-Operator verwendet wird `invoke` , um einen Lambda Ausdruck aufzurufen:
 

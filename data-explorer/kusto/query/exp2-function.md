@@ -1,6 +1,6 @@
 ---
-title: exp2() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt exp2() in Azure Data Explorer.
+title: exp2 ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: Dieser Artikel beschreibt exp2 () in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,27 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 1302a64d52962d080dcf32403362125e60eceed2
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1c2fbf2067aa83963801b6d5ec7b9f4204e99f4d
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81515605"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348172"
 ---
 # <a name="exp2"></a>exp2()
 
-Die base-2-Exponentialfunktion von x, die 2 auf die Leistung x: 2x erhöht ist.  
+Die exponentielle Base-2-Funktion von x, die 2 für Power x: 2 ^ x ist.  
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`exp2(`*X*`)`
+`exp2(`*Stuben*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *x*: Eine reelle Zahl, Wert des Exponenten.
+* *x*: eine reelle Zahl, Wert des Exponenten.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
-* Exponentialwert von x.
-* Für natürliche (Base-2) Logarithmen siehe [log2()](log2-function.md).
-* Exponentialfunktionen von Base-e- und Base-10-Logarithmen finden Sie unter [exp()](exp-function.md), [exp10()](exp10-function.md)
+* Exponentieller Wert von x.
+* Einen natürlichen Logarithmus (Basis 2) finden Sie unter [log2 ()](log2-function.md).
+* Informationen zu exponentiellen Funktionen der Logarithmus für Basis-e und Basis 10 finden Sie unter [Exp ()](exp-function.md), [exp10 ()](exp10-function.md)

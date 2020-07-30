@@ -1,6 +1,6 @@
 ---
-title: Gabeloperator - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird der Gabeloperator in Azure Data Explorer beschrieben.
+title: 'Verzweigungs Operator: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird der Fork-Operator in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,27 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 13cd837b3874a55ec758991f5609e089daba7c75
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b234a95b4a541099f3fc050501ca6b0fd9f67ccf
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81515197"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348002"
 ---
 # <a name="fork-operator"></a>fork-Operator
 
-Führt mehrere Consumeroperatoren parallel aus.
+Führt mehrere consumeroperatoren parallel aus.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-*T* `|` `=``(``)` `=``(`*name*`)` *name**subquery* *subquery* [ name ] Unterabfrage [ Name ] Unterabfrage ... `fork`
+*T* `|` `fork` [*Name* `=` ] `(` *unter* Abfrage `)` [*Name* `=` ] `(` *Unterabfrage* `)` ...
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Unterabfrage* ist eine nachgelagerte Pipeline von Abfrageoperatoren
-* *Name* ist ein temporärer Name für die Unterabfrageergebnistabelle
+* *Unterabfrage* ist eine Downstream-Pipeline von Abfrage Operatoren.
+* *Name* ist ein temporärer Name für die Ergebnistabelle der Unterabfrage.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Mehrere Ergebnistabellen, eine für jede der Unterabfragen.
 
@@ -36,18 +36,18 @@ Mehrere Ergebnistabellen, eine für jede der Unterabfragen.
 
 [`as`](asoperator.md), [`count`](countoperator.md), [`extend`](extendoperator.md), [`parse`](parseoperator.md), [`where`](whereoperator.md), [`take`](takeoperator.md), [`project`](projectoperator.md), [`project-away`](projectawayoperator.md), [`summarize`](summarizeoperator.md), [`top`](topoperator.md), [`top-nested`](topnestedoperator.md), [`sort`](sortoperator.md), [`mv-expand`](mvexpandoperator.md), [`reduce`](reduceoperator.md)
 
-**Hinweise**
+**Notizen**
 
-* [`materialize`](materializefunction.md)Funktion kann als Ersatz für [`join`](joinoperator.md) [`union`](unionoperator.md) die Verwendung oder auf Gabelbeinen verwendet werden.
-Der Eingabestream wird durch materialize zwischengespeichert, und dann kann der zwischengespeicherte Ausdruck in Join/Union-Beinen verwendet werden.
+* [`materialize`](materializefunction.md)die Funktion kann als Ersatz für die Verwendung von [`join`](joinoperator.md) oder [`union`](unionoperator.md) auf Fork-Beinen verwendet werden.
+Der Eingabestream wird von materialisieren zwischengespeichert, und anschließend kann der zwischengespeicherte Ausdruck in Join/Union-Beinen verwendet werden.
 
-* Ein Name, der `name` durch das [`as`](asoperator.md) Argument oder durch die Verwendung des [`Kusto.Explorer`](../tools/kusto-explorer.md) Operators angegeben wird, wird als der verwendet, um die Ergebnisregisterkarte im Werkzeug zu benennen.
+* Ein Name, der vom- `name` Argument oder mithilfe des- [`as`](asoperator.md) Operators angegeben wird, wird als verwendet, um die Ergebnisregister Karte im Tool zu benennen [`Kusto.Explorer`](../tools/kusto-explorer.md) .
 
-* Vermeiden `fork` Sie die Verwendung mit einer einzelnen Unterabfrage.
+* Vermeiden Sie die Verwendung `fork` von mit einer einzelnen Unterabfrage.
 
-* Bevorzugen Sie [`materialize`](materializefunction.md) die Verwendung von `fork` [Batch](batches.md) mit tabellarischen Ausdrucksanweisungen über den Operator.
+* Verwenden Sie [Batch](batches.md) mit [`materialize`](materializefunction.md) Tabellen Ausdrucks Anweisungen für den- `fork` Operator.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 KustoLogs

@@ -1,6 +1,6 @@
 ---
-title: string_size() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden string_size() in Azure Data Explorer beschrieben.
+title: string_size ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird string_size () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7886e7b8fd5039c9b197ae435bce4f40b93e5038
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 4832d00703ab9e6d1478af5b3f45ec294dfb79ce
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506884"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350909"
 ---
 # <a name="string_size"></a>string_size()
 
-Gibt die Größe der Eingabezeichenfolge in Bytes zurück.
+Gibt die Größe der Eingabe Zeichenfolge in Bytes zurück.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`string_size(`*Quelle*`)`
+`string_size(`*Ausgangs*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *quelle*: Die Quellzeichenfolge, die für die Zeichenfolgengröße gemessen wird.
+* *Source*: die Quell Zeichenfolge, die für die Zeichen folgen Größe gemessen wird.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Gibt die Länge der Eingabezeichenfolge in Bytes zurück.
+Gibt die Länge der Eingabe Zeichenfolge in Bytes zurück.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 print size = string_size("hello")

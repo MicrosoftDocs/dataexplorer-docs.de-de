@@ -1,6 +1,6 @@
 ---
-title: Top-Hitters-Operator - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird der Top-Hitter-Operator in Azure Data Explorer beschrieben.
+title: 'Top-Hitters-Operator: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird der Top-Hitters-Operator in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,42 +8,42 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7105bd4f9818deab1f0fa5dbe25dbb2d5b1b4afc
-ms.sourcegitcommit: 436cd515ea0d83d46e3ac6328670ee78b64ccb05
+ms.openlocfilehash: babb4e023d29c7894661e3acf2c0a09e753011c2
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81663108"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87340818"
 ---
 # <a name="top-hitters-operator"></a>top-hitters-Operator
 
-Gibt eine Annäherung der ersten *N-Ergebnisse* zurück (vorausgesetzt, die verzerrte Verteilung der Eingabe wird übernommen).
+Gibt einen Näherungswert für die ersten *N* Ergebnisse zurück (unter der Voraussetzung einer verzerrten Verteilung der Eingabe).
 
 ```kusto
 T | top-hitters 25 of Page by Views 
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-*T* `| top-hitters` *NumberOfRows* `of` *sort_key* `[` `by` *Ausdruck*`]`
+*T* - `| top-hitters` *numofrows* - `of` *sort_key* `[` `by` *Ausdruck*`]`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *NumberOfRows*: Die Anzahl der zurückzugebenden Zeilen von *T.* Sie können einen beliebigen numerischen Ausdruck angeben.
-* *sort_key*: Der Name der Spalte, nach der die Zeilen sortiert werden sollen.
-* *Ausdruck*: (optional) Ein Ausdruck, der für die Top-Hitter-Schätzung verwendet wird. 
-    * *ausdruck*: Top-Hitters geben *NumberOfRows-Zeilen* zurück, die ein ungefähres Maximum an Summe *(Ausdruck)* aufweisen. Ausdruck kann eine Spalte oder ein anderer Ausdruck sein, der zu einer Zahl ausgewertet wird. 
-    *  Wenn *der Ausdruck* nicht erwähnt wird, zählt der Top-Hitter-Algorithmus die Vorkommen des *Sortierschlüssels*.  
+* *Nummeriofrows*: die *Anzahl von Zeilen, die* zurückgegeben werden sollen. Sie können einen beliebigen numerischen Ausdruck angeben.
+* *sort_key*: der Name der Spalte, nach der die Zeilen sortiert werden sollen.
+* *Expression*: (optional) ein Ausdruck, der für die Top-Hitters-Schätzung verwendet wird. 
+    * *Ausdruck*: Top-Hitters geben *numofrows* -Zeilen zurück, die eine ungefähre maximale Summe von Sum (*Expression*) aufweisen. Der Ausdruck kann eine Spalte oder ein beliebiger anderer Ausdruck sein, der zu einer Zahl ausgewertet wird. 
+    *  Wenn *Expression* nicht angegeben wird, zählt der Top-Hitters-Algorithmus die Vorkommen des *Sortier Schlüssels*.  
 
-**Hinweise**
+**Notizen**
 
-`top-hitters`ist ein Annäherungsalgorithmus und sollte bei der Ausführung mit großen Daten verwendet werden. Die Annäherung der Top-Hitter basiert auf dem [Count-Min-Sketch-Algorithmus.](https://en.wikipedia.org/wiki/Count%E2%80%93min_sketch)  
+`top-hitters`ist ein Näherungs Algorithmus und sollte bei der Ausführung mit großen Daten verwendet werden. Die Näherung der Top-Hitters basiert auf dem [count-min-Sketch-](https://en.wikipedia.org/wiki/Count%E2%80%93min_sketch) Algorithmus.  
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
-## <a name="getting-top-hitters-most-frequent-items"></a>Top-Hitter (meist häufige Artikel) 
+## <a name="getting-top-hitters-most-frequent-items"></a>Erste Elemente (häufigste Elemente) 
 
-Das nächste Beispiel zeigt, wie Sie die Top-5-Sprachen mit den meisten Seiten in Wikipedia finden (abgerufen nach April 2016). 
+Im nächsten Beispiel wird gezeigt, wie Sie Top-5-Sprachen mit den meisten Seiten in Wikipedia suchen (auf die nach dem 2016-Mal zugegriffen wird). 
 
 ```kusto
 PageViews
@@ -59,9 +59,9 @@ PageViews
 |ru|227003107|
 |fr|207943448|
 
-## <a name="getting-top-hitters-based-on-column-value-"></a>Abrufen von Top-Hittern (basierend auf dem Spaltenwert) ***
+## <a name="getting-top-hitters-based-on-column-value-"></a>Erhalten von Top-hittern (basierend auf dem Spaltenwert) * * *
 
-Das nächste Beispiel zeigt, wie Sie die meistgesehenen englischen Seiten von Wikipedia des Jahres 2016 finden. Die Abfrage verwendet 'Ansichten' (ganzzahlige Zahl), um die Seitenpopularität (Anzahl der Ansichten) zu berechnen. 
+Im nächsten Beispiel wird gezeigt, wie Sie die am häufigsten angezeigten englischen Seiten von Wikipedia im Jahr 2016 suchen. Die Abfrage verwendet "Views" (ganzzahlige Zahl) zum Berechnen der Seiten Beliebtheit (Anzahl der Sichten). 
 
 ```kusto
 PageViews
@@ -75,11 +75,11 @@ PageViews
 |---|---|
 |Main_Page|1325856754|
 |Web_scraping|43979153|
-|Java_(programming_language)|16489491|
+|Java_ (programming_language)|16489491|
 |United_States|13928841|
 |Wikipedia|13584915|
 |Donald_Trump|12376448|
 |YouTube|11917252|
-|The_Revenant_(2015_film)|10714263|
-|Star_Wars:_The_Force_Awakens|9770653|
-|Portal:Current_events|9578000|
+|The_Revenant_ (2015_film)|10714263|
+|Star_Wars: _The_Force_Awakens|9770653|
+|Portal: Current_events|9578000|

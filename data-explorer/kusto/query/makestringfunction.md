@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 035be5910d173c75e585baa0b093dc6276bd4d63
-ms.sourcegitcommit: 3848b8db4c3a16bda91c4a5b7b8b2e1088458a3a
+ms.openlocfilehash: 36d31e88a89f23006dac73b92777b13db4933d06
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/16/2020
-ms.locfileid: "84818584"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346880"
 ---
 # <a name="make_string"></a>make_string()
 
 Gibt die von den Unicode-Zeichen generierte Zeichenfolge zurück.
     
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `make_string (`*Arg1*[, *argN*]...`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Arg1* ... *ArgN*: Ausdrücke, bei denen es sich um ganze Zahlen (int oder Long) handelt, oder ein dynamischer Wert, der ein Array ganzzahliger Zahlen enthält.
 
 * Diese Funktion empfängt bis zu 64 Argumente.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt die Zeichenfolge zurück, die aus den Unicode-Zeichen besteht, deren codepointwert von den Argumenten für diese Funktion bereitgestellt wird. Die Eingabe muss aus gültigen Unicode-Code Punkten bestehen.
 Wenn ein beliebiges Argument keinem Unicode-Zeichen zugeordnet ist, gibt die Funktion zurück `null` .
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 print str = make_string(75, 117, 115, 116, 111)

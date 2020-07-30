@@ -1,6 +1,6 @@
 ---
-title: dayofmonth() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt dayofmonth() in Azure Data Explorer.
+title: dayosmonth ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird dayosmonth () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,29 +8,29 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 791d85d4a8f89487e65ef68ecc605f907e63e1ea
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 3341f416642b06d899c2a3d1f6675f4d3254291f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516336"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348495"
 ---
 # <a name="dayofmonth"></a>dayofmonth()
 
-Gibt die ganze Zahl zurück, die die Tagesnummer des angegebenen Monats darstellt.
+Gibt die ganzzahlige Zahl zurück, die die Tagesnummer des angegebenen Monats darstellt.
 
 ```kusto
 dayofmonth(datetime(2015-12-14)) == 14
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `dayofmonth(`*a_date*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * `a_date`: Ein `datetime`-Wert.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 `day number`des angegebenen Monats.

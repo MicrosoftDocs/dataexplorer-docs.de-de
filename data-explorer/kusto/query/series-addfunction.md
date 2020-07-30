@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: b5847fec10eb76a6fe5a139809766d2a3ca4f089
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 7b6de7d141f02703c5f369dd831d1fbac82cb45e
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372917"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345520"
 ---
 # <a name="series_add"></a>series_add()
 
 Berechnet die Element Weise Addition von zwei numerischen Reihen Eingaben.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_add(`*Series1* `,` *series2*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Series1, series2*: numerische Eingabe Arrays, die Element Weise in ein dynamisches Array Ergebnis eingefügt werden. Alle Argumente müssen dynamische Arrays sein. 
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Dynamisches Array des berechneten Element weisen Hinzufügevorgangs zwischen den beiden Eingaben. Ein nicht numerisches Element oder ein nicht vorhandenes Element (Arrays mit unterschiedlichen Größen) ergeben einen- `null` Elementwert.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

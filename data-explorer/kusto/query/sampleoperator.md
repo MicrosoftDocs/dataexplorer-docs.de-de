@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/18/2020
-ms.openlocfilehash: 4915371127acd229845cc9eac1ea1400484c313f
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: b5d0624504744bb28dfdb68ee27c48b2119242b8
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372983"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351504"
 ---
 # <a name="sample-operator"></a>sample-Operator
 
@@ -23,15 +23,15 @@ Gibt bis zur angegebenen Anzahl zufälliger Zeilen aus der Eingabe Tabelle zurü
 T | sample 5
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 _T_ - `| sample` _numofrows_
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 - _Nummeriofrows_: die _Anzahl von Zeilen, die_ zurückgegeben werden sollen. Sie können einen beliebigen numerischen Ausdruck angeben.
 
-**Hinweise**
+**Notizen**
 
 - `sample`ist auf eine Geschwindigkeit und nicht auf eine gleichmäßige Verteilung von Werten ausgelegt. Insbesondere bedeutet dies, dass keine "Fair" Ergebnisse erzeugt werden, wenn Sie nach Operatoren verwendet werden, die Union 2-Datensätze mit unterschiedlichen Größen (z. b. ein- `union` oder- `join` Operator) verwenden. Es wird empfohlen, `sample` direkt hinter der Tabellen Referenz und den Filtern zu verwenden.
 
@@ -72,7 +72,7 @@ StormEvents | where rand() < 0.1
 
 - Wenn Sie anstelle von Zeilen Stichproben (z. b. Beispiel 10-IDs und alle Zeilen für diese IDs) verwenden möchten, können Sie [`sample-distinct`](./sampledistinctoperator.md) in Kombination mit dem- `in` Operator verwenden.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

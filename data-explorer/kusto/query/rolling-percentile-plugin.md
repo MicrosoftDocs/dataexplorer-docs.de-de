@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0ff4ad4adbae580e34c946eb9d18ca3337d3c49c
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: 8d60ad8a5e2c9a94164fb816db9e9913dcff56ea
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128885"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345758"
 ---
 # <a name="rolling_percentile-plugin"></a>rolling_percentile ()-Plug-in
 
@@ -23,11 +23,11 @@ Gibt eine Schätzung für das angegebene Perzentil der *valuecolren* -Population
 T | evaluate rolling_percentile(ValueColumn, Percentile, IndexColumn, BinSize, BinsPerWindow)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| evaluate` `rolling_percentile(` *valuecolenn* `,` *Percentile* `,` *indexcolumn* `,` *Binär Größe* `,` *binsperwindow* [ `,` *dim1* `,` *dim2* `,` ...]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: der tabellarische Eingabe Ausdruck.
 * *Valuecolenumn*: der Name der Spalte mit Werten, deren Quantil berechnet werden soll. 
@@ -37,7 +37,7 @@ T | evaluate rolling_percentile(ValueColumn, Percentile, IndexColumn, BinSize, B
 * *Binsperwindow*: Skalar mit der Anzahl der in jedem Fenster enthaltenen Behälter.
 * *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, nach denen die Segmente aufgeteilt werden sollen.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Gibt eine Tabelle mit einer Zeile für jede einzelne bin (und ggf. eine Kombination von Dimensionen) zurück, die das parallele Quantil der Werte im Fenster enthält, das auf den bin (inklusiv) endet. unterschiedliche Anzahl Werte, unterschiedliche Anzahl neuer Werte, aggregierte eindeutige Anzahl für jedes Zeitfenster.
 
@@ -48,7 +48,7 @@ Das Ausgabe Tabellen Schema ist:
 |---|---|---|---|---|
 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ### <a name="rolling-3-day-median-value-per-day"></a>Paralleler 3-Tage-Medianwert pro Tag 
 

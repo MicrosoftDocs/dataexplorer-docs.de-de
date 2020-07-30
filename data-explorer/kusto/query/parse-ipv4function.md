@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: b0377cd8af302d2680c0ee451d05f4b4b083ccec
-ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
+ms.openlocfilehash: 1f4213af91cfee667fdfc87b2d352fe42df3f915
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84512604"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346455"
 ---
 # <a name="parse_ipv4"></a>parse_ipv4()
 
@@ -24,11 +24,11 @@ parse_ipv4("127.0.0.1") == 2130706433
 parse_ipv4('192.1.168.1') < parse_ipv4('192.1.168.2') == true
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `parse_ipv4(`*`Expr`*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *`Expr`*: Zeichen folgen Ausdruck, der IPv4 darstellt, der in Long konvertiert wird. Die Zeichenfolge kann eine Netzwerk Maske mit [IP-Präfix Notation](#ip-prefix-notation)enthalten.
 
@@ -37,16 +37,16 @@ parse_ipv4('192.1.168.1') < parse_ipv4('192.1.168.2') == true
 IP-Adressen können `IP-prefix notation` mithilfe eines Schrägstrichs ( `/` ) definiert werden.
 Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse. Die Zahl (1 bis 32) rechts vom Schrägstrich (/) ist die Anzahl von zusammenhängenden 1 Bit in der netmask.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 192.168.2.0/24 verfügt über ein zugeordnetes net/Subnetmask, das 24 aufeinander folgende Bits oder 255.255.255.0 im gepunkteten Dezimal Format enthält.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Wenn die Konvertierung erfolgreich ist, wird das Ergebnis eine lange Zahl sein.
 Wenn die Konvertierung nicht erfolgreich ist, lautet das Ergebnis `null` .
  
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

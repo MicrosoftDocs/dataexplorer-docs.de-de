@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: a364361ee5e5e260436486db24f1b61e2c21cbc9
-ms.sourcegitcommit: 9fc3d8b396dddd2e1d9912845ba7bcc8e31c0267
+ms.openlocfilehash: 89e93a3c4365e0f215a797ee0b01669e6bcbdcfa
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84720909"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87343888"
 ---
 # <a name="series_fit_2lines"></a>series_fit_2lines()
 
@@ -44,7 +44,7 @@ Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe 
 > [!Note]
 > Diese Funktion gibt mehrere Spalten zurück und kann daher nicht als Argument für eine andere Funktion verwendet werden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 Projekt `series_fit_2lines(` *x*`)`
 * Gibt alle oben erwähnten Spalten mit den folgenden Namen zurück: series_fit_2lines_x_rsquare, series_fit_2lines_x_split_idx usw.
@@ -55,14 +55,14 @@ Project (RS, Si, v) = `series_fit_2lines(` *x*`)`
 Erweitern (RS, Si, v) = `series_fit_2lines(` *x*`)`
 * Gibt nur Folgendes zurück: rs (r-square), si (split index) und v (variance).
   
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *x*: dynamisches Array numerischer Werte.  
 
 > [!TIP]
 > Die einfachste Methode, diese Funktion zu verwenden, ist die Anwendung auf die Ergebnisse des Operators " [make-Series](make-seriesoperator.md) ".
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/11/2020
-ms.openlocfilehash: bee6471ef2cf2a2cd484af8ce84d70cce749d5e0
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: ede35223b9cc57fddc5318659e6902130a80c011
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225325"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349277"
 ---
 # <a name="base64_encode_fromarray"></a>base64_encode_fromarray()
 
 Codiert eine base64-Zeichenfolge aus einem Bytearray.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `base64_encode_fromarray(`*Bytesarray*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Bytesarray*: Eingabe Byte Array, das in base64-Zeichenfolge codiert werden soll.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt die base64-Zeichenfolge zurück, die aus dem Byte Array
 
@@ -35,7 +35,7 @@ Gibt die base64-Zeichenfolge zurück, die aus dem Byte Array
 * Informationen zum Codieren von Zeichen folgen in Base64-Zeichen folgen [base64_encode_tostring](base64_encode_tostringfunction.md) finden Sie unter
 * Diese Funktion ist die Umkehrung von [base64_decode_toarray ()](base64_decode_toarrayfunction.md) .
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

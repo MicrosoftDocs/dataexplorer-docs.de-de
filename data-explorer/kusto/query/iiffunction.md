@@ -1,6 +1,6 @@
 ---
-title: iif() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt iif() in Azure Data Explorer.
+title: IIf ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird IIf () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,38 +8,38 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 36ba98b9677055dffce32911d80e67a9161b673b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 0d912f94a224b073fe9214f70077067d3a24c906
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81514041"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347475"
 ---
 # <a name="iif"></a>iif()
 
-Bewertet das erste Argument (das Prädikat) und gibt den Wert des zweiten oder dritten `true` Arguments zurück, `false` je nachdem, ob das Prädikat auf (zweites) oder (drittes) ausgewertet wurde.
+Wertet das erste Argument (das Prädikat) aus und gibt den Wert des zweiten oder dritten Arguments zurück, abhängig davon, ob das Prädikat als `true` (Second) oder `false` (dritte) ausgewertet wurde.
 
 Die zweiten und dritten Argumente müssen vom gleichen Typ sein.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`iif(`*Prädikat* `,` *ifTrue* `,` *ifFalse*`)`
+`iif(`*Prädikat* `,` *ifTrue* `,` *IfFalse*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Prädikat*: Ein Ausdruck, `boolean` der zu einem Wert ausgewertet wird.
-* *ifTrue*: Ein Ausdruck, der ausgewertet wird, und sein Wert `true`wird von der Funktion zurückgegeben, wenn *prädikat* sausiert zu .
-* *ifFalse*: Ein Ausdruck, der ausgewertet wird, und sein Wert `false`wird von der Funktion zurückgegeben, wenn *prädikat* sausiert zu .
+* *Prädikat*: ein Ausdruck, der zu einem `boolean` Wert ausgewertet wird.
+* *ifTrue*: ein Ausdruck, der ausgewertet wird und dessen Wert von der Funktion zurückgegeben wird, wenn *Prädikat* als ausgewertet wird `true` .
+* *IfFalse*: ein Ausdruck, der ausgewertet wird, und der Wert, der von der Funktion zurückgegeben wird, wenn *Prädikat* als ausgewertet wird `false` .
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Diese Funktion gibt den Wert von *ifTrue* zurück, wenn *predicate* als `true` ausgewertet wird, andernfalls den Wert von *ifFalse*.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
 T 
 | extend day = iif(floor(Timestamp, 1d)==floor(now(), 1d), "today", "anotherday")
 ```
 
-Ein Alias [`iff()`](ifffunction.md)für .
+Ein Alias für [`iff()`](ifffunction.md) .

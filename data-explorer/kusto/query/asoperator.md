@@ -1,6 +1,6 @@
 ---
-title: Als Operator - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird als Operator in Azure Data Explorer beschrieben.
+title: 'as-Operator: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird als Operator in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,34 +8,34 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 05dc96fb7eec773d1e55d8b94a33cdda928622ff
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: f9d7a60b3c39fb0b7357c2bbe68533252f794347
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518427"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349481"
 ---
 # <a name="as-operator"></a>as-Operator
 
-Bindet einen Namen an den Eingabetabellenausdruck des Operators, sodass die Abfrage mehrmals auf den Wert des Tabellenausdrucks verweisen kann, ohne die Abfrage zu brechen und einen Namen durch die [let-Anweisung](letstatement.md)zu binden.
+Bindet einen Namen an den tabellarischen Eingabe Ausdruck des Operators, sodass die Abfrage mehrmals auf den Wert des tabellarischen Ausdrucks verweisen kann, ohne die Abfrage zu unterbrechen und einen Namen über die [Let-Anweisung](letstatement.md)zu binden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-*T* `|` T `as` `hint.materialized` [ `=` ] *Name* `true`
+*T* `|` `as` [ `hint.materialized` `=` `true` ] *Name*
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *T*: Ein tabellarischer Ausdruck.
-* *Name*: Ein temporärer Name für den tabellenförmigen Ausdruck.
-* `hint.materialized`: Wenn `true`auf gesetzt, wird der Wert des tabellarischen Ausdrucks so materialisiert, als ob er von einem [materialize()-Funktionsaufruf](./materializefunction.md) umschlossen wurde.
+* *T*: ein tabellarischer Ausdruck.
+* *Name*: ein temporärer Name für den tabellarischen Ausdruck.
+* `hint.materialized`: Wenn der Wert auf festgelegt `true` ist, wird der Wert des tabellarischen Ausdrucks materialisiert, als ob er von einem [Materialize ()](./materializefunction.md) -Funktions aufruten umschließt würde.
 
-**Hinweise**
+**Notizen**
 
-* Der angegebene `as` Name wird in `withsource=` der Spalte `source_` von [union](./unionoperator.md), `$table` der Spalte [find](./findoperator.md)und der Spalte [search](./searchoperator.md)verwendet.
+* Der von angegebene Name `as` wird in der- `withsource=` Spalte der [Union](./unionoperator.md), der `source_` Spalte von [Find](./findoperator.md)und der `$table` Spalte von [Search](./searchoperator.md)verwendet.
 
-* Der tabellarische Ausdruck, der mit dem Operator in`$left` [der](./joinoperator.md)äußeren tabellarischen Eingabe von ' ' benannt wird ( ) kann auch in der tabellarischen inneren Eingabe der Verknüpfung verwendet werden (`$right`).
+* Der tabellarische Ausdruck, der mit [dem-Operator in der äußeren](./joinoperator.md)Tabellen Eingabe () eines Joins benannt wird, `$left` kann auch in der tabellarischen inneren Eingabe () des Joins verwendet werden `$right` .
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 // 1. In the following 2 example the union's generated TableName column will consist of 'T1' and 'T2'

@@ -2,18 +2,18 @@
 title: 'Abfrageergebnis Cache anzeigen: Azure Daten-Explorer'
 description: In diesem Artikel wird beschrieben, wie Sie den Abfrageergebnis Cache in Azure Daten-Explorer anzeigen.
 services: data-explorer
-author: amitof
-ms.author: amitof
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: amitof
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/16/2020
-ms.openlocfilehash: 84805cae07049af4ffa8a2fdb82e637261140f8f
-ms.sourcegitcommit: cf1da667be12656a8c4727c23144421b5a4b1099
+ms.openlocfilehash: 7b7a96a01a4ec2b6c84609b2f9c518637d174390
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86565424"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349889"
 ---
 # <a name="show-database-cache-query_results"></a>. Daten Bank Cache query_results anzeigen
 

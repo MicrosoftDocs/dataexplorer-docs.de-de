@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/06/2020
-ms.openlocfilehash: bc4b0bc8a02dd3a8d2a39ffdd27db5817eb8ffdb
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: c2fab7abbcebdc97f6f1c394f840bf6e232db03a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225240"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349107"
 ---
 # <a name="binary_all_xor-aggregation-function"></a>binary_all_xor () (Aggregations Funktion)
 
@@ -21,19 +21,19 @@ Akkumuliert Werte mithilfe der binären `XOR` Operation pro Zusammenfassungs Gru
 
 * Kann [nur im Kontext der Aggregation innerhalb von](summarizeoperator.md) Zusammenfassung verwendet werden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `binary_all_xor(` *expr* zusammenfassen`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expr*: Long-Nummer.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Gibt einen Wert zurück, der mithilfe der binären Operation für Datensätze pro Zusammenfassungs Gruppe aggregiert wird `XOR` (oder insgesamt, wenn die Zusammenfassung ohne Gruppierung erfolgt).
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Erstellen von "Café-Food" mithilfe von binären `XOR` Vorgängen:
 

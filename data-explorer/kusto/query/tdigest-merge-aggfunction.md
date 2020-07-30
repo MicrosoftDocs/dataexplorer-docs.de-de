@@ -1,6 +1,6 @@
 ---
-title: tdigest_merge() (Aggregationsfunktion) - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird tdigest_merge() (Aggregationsfunktion) in Azure Data Explorer beschrieben.
+title: tdigest_merge () (Aggregations Funktion)-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird tdigest_merge () (Aggregations Funktion) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,38 +8,38 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/09/2019
-ms.openlocfilehash: 0b7de916dd53c19a49301c8048e2d8867d1b1249
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 6f15e0028bda40a2d65349a7840861c9060ff805
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506391"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87341243"
 ---
-# <a name="tdigest_merge-aggregation-function"></a>tdigest_merge() (Aggregationsfunktion)
+# <a name="tdigest_merge-aggregation-function"></a>tdigest_merge () (Aggregations Funktion)
 
-Führt tdigest-Ergebnisse in der gruppe. 
+Führt tdigest-Ergebnisse in der Gruppe zusammen. 
 
-* Kann nur im Kontext der Aggregation innerhalb [von summarize](summarizeoperator.md)verwendet werden.
+* Kann nur im Kontext der [Aggregation in zusammen](summarizeoperator.md)Fassung verwendet werden.
 
-Lesen Sie [hier](percentiles-aggfunction.md#estimation-error-in-percentiles)mehr über den zugrunde liegenden Algorithmus (T-Digest) und den geschätzten Fehler .
+Weitere Informationen zum zugrunde liegenden Algorithmus (T-Digest) und dem geschätzten Fehler [finden Sie hier](percentiles-aggfunction.md#estimation-error-in-percentiles).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`tdigest_merge(` *Expr*`)`zusammenfassen .
+Zusammenfassen von `tdigest_merge(` *expr* `)` .
 
-`tdigest_merge(` *Expr* `)` - Ein Alias zusammenfassen.
+Zusammenfassen von `tdigest_merge(` *expr* `)` : ein Alias.
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Expr*: Ausdruck, der für die Aggregationsberechnung verwendet wird. 
+* *Expr*: Ausdruck, der für die Aggregations Berechnung verwendet wird. 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Die zusammengeführten tdigest-Werte von *Expr* in der gesamten Gruppe.
+Die zusammengeführten tdigest-Werte von *expr* in der Gruppe.
  
 
 **Tipps**
 
-1) Sie können die`percentile_tdigest()`Funktion [ ] (percentile-tdigestfunction.md) verwenden.
+1) Sie können die-Funktion [ `percentile_tdigest()` ] (Percentile-tdigestfunction.MD) verwenden.
 
-2) Alle tdigests, die in derselben Gruppe enthalten sind, müssen vom gleichen Typ sein.
+2) Alle tdigests, die in derselben Gruppe enthalten sind, müssen denselben Typ aufweisen.

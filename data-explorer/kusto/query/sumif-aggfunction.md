@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7d97d31b2fb97d5541400bc0605ee40e83807b62
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: cd9900b5087ed0d6ae7e97d2f2dad809bb909331
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83371899"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350807"
 ---
 # <a name="sumif-aggregation-function"></a>SUMIF () (Aggregations Funktion)
 
@@ -23,20 +23,20 @@ Gibt eine Summe von *expr* zurück, für die das *Prädikat* ausgewertet wird `t
 
 Sie können auch die [Sum ()](sum-aggfunction.md) -Funktion verwenden, die Zeilen ohne Prädikat Ausdruck summiert.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `sumif(` *expr*- `,` *Prädikat* zusammenfassen`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expr*: Ausdruck für die Aggregations Berechnung. 
 * *Prädikat*: Prädikat: Wenn true, wird der berechnete Wert der *expr*der Summe hinzugefügt. 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Der Sum-Wert von *expr* , für den das *Prädikat* ausgewertet wird `true` .
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
 let T = datatable(name:string, day_of_birth:long)

@@ -1,6 +1,6 @@
 ---
-title: datetime_part() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird datetime_part() in Azure Data Explorer beschrieben.
+title: datetime_part ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird datetime_part () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,53 +8,53 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2020
-ms.openlocfilehash: c64208725f0d5c49a7ea7733f8eb5a208e19225b
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 2c1a73d2d7e31eb180b37fae3d392fd5792cd69b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516370"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348512"
 ---
 # <a name="datetime_part"></a>datetime_part()
 
-Extrahiert den angeforderten Datumsteil als Ganzzahlwert.
+Extrahiert den angeforderten Datums Teil als ganzzahligen Wert.
 
 ```kusto
 datetime_part("Day",datetime(2015-12-14))
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`datetime_part(`*Teilzeit*`,`*datetime*`)`
+`datetime_part(`*Teil* `,` *DateTime*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * `date`: `datetime`
 * `part`: `string`
 
-Mögliche Werte `part`von: 
-- Jahr
+Mögliche Werte `part` : 
+- Year
 - Quarter
-- Monat
+- Month
 - week_of_year
-- Day (Tag)
-- Dayofyear
+- Tag
+- DayOfYear
 - Hour
 - Minute
-- Sekunde
+- Second
 - Millisekunde
 - Mikrosekunde
-- Nanosekunden
+- Nanosekunde
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
-Eine ganze Zahl, die das extrahierte Teil darstellt.
+Eine ganze Zahl, die den extrahierten Teil darstellt.
 
 **Hinweis**
 
-`week_of_year`gibt eine ganze Zahl zurück, die die Wochennummer darstellt. Die Wochennummer wird ab der ersten Woche eines Jahres berechnet, d. h. die Nummer, die den ersten Donnerstag enthält.
+`week_of_year`gibt eine ganze Zahl zurück, die die Wochen Nummer darstellt. Die Wochen Nummer wird von der ersten Woche eines Jahres berechnet, die den ersten Donnerstag enthält.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 let dt = datetime(2017-10-30 01:02:03.7654321); 
@@ -79,5 +79,5 @@ nanosecond = datetime_part("nanosecond", dt)
 |2017|4|10|44|30|303|1|2|3|765|765432|765432100|
 
 > [!NOTE]
-> `weekofyear`ist eine veraltete Variante des Teils. `week_of_year` `weekofyear`war nicht ISO 8601-konform; die erste Woche eines Jahres wurde als die Woche mit dem ersten Mittwoch des Jahres definiert.
-`week_of_year`ISO 8601-konform ist; die erste Woche eines Jahres wird als die Woche mit dem ersten Donnerstag des Jahres definiert. [Weitere Informationen](https://en.wikipedia.org/wiki/ISO_8601#Week_dates).
+> `weekofyear`ist eine veraltete Variante von `week_of_year` Part. `weekofyear`war nicht ISO 8601-kompatibel. die erste Woche eines Jahres wurde als Woche mit dem ersten Mittwoch des Jahrs definiert.
+`week_of_year`ist ISO 8601-kompatibel; die erste Woche eines Jahres wird als Woche mit dem ersten Donnerstag des Jahrs definiert. [Weitere Informationen](https://en.wikipedia.org/wiki/ISO_8601#Week_dates).

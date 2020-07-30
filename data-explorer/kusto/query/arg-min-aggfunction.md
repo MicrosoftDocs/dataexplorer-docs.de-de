@@ -1,6 +1,6 @@
 ---
-title: arg_min() (Aggregationsfunktion) - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird arg_min() (Aggregationsfunktion) in Azure Data Explorer beschrieben.
+title: arg_min () (Aggregations Funktion)-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird arg_min () (Aggregations Funktion) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,49 +8,49 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/12/2019
-ms.openlocfilehash: 58c590e124b01166ad07aa2b00fe865546947f96
-ms.sourcegitcommit: 29018b3db4ea7d015b1afa65d49ecf918cdff3d6
+ms.openlocfilehash: 33e2657f2569957002d17d7061cfec863402027e
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "82030485"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349685"
 ---
-# <a name="arg_min-aggregation-function"></a>arg_min() (Aggregationsfunktion)
+# <a name="arg_min-aggregation-function"></a>arg_min () (Aggregations Funktion)
 
-Sucht eine Zeile in der Gruppe, die *ExprToMinimize*minimiert und den `*` Wert von *ExprToReturn* zurückgibt (oder die gesamte Zeile zurückgibt).
+Sucht eine Zeile in der Gruppe, die *exprtominimize*minimiert, und gibt den Wert von *exprtoreturn* zurück (oder `*` , um die gesamte Zeile zurückzugeben).
 
-* Kann nur im Kontext der Aggregation innerhalb [der Zusammenfassung](summarizeoperator.md) verwendet werden
+* Kann [nur im Kontext der Aggregation innerhalb von](summarizeoperator.md) Zusammenfassung verwendet werden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`summarize`[`(`*NameExprToMinimieren von* `,` *NameExprToReturn* [`,` ...] `)=` `arg_min` ] `(` *ExprToMinimieren*, `*`  |  *ExprToReturn* [`,` ...]`)`
+`summarize`[ `(` *Nameexprtominimize* `,` *nameexprtoreturn* [ `,` ...] `)=` ] `arg_min` `(` *Exprtominimize*, `*`  |  *exprtoreturn* [ `,` ...]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *ExprToMinimize*: Ausdruck, der für die Aggregationsberechnung verwendet wird. 
-* *ExprToReturn*: Ausdruck, der zum Zurückgeben des Werts verwendet wird, wenn *ExprToMinimize* minimal ist. Der zurückzugebende Ausdruck kann ein Platzhalter (*) sein, um alle Spalten der Eingabetabelle zurückzugeben.
-* *NameExprToMinimize*: Ein optionaler Name für die Ergebnisspalte, die *ExprToMinimize*darstellt.
-* *NameExprToReturn*: Zusätzliche optionale Namen für die Ergebnisspalten, die *ExprToReturn*darstellen.
+* *Exprtominimize*: der Ausdruck, der für die Aggregations Berechnung verwendet wird. 
+* *Exprtoreturn*: Ausdruck, der zum Zurückgeben des Werts verwendet wird, wenn " *exprtominimize* " minimal ist. Der zurück zugebende Ausdruck kann ein Platzhalter Zeichen (*) sein, um alle Spalten der Eingabe Tabelle zurückzugeben.
+* *Nameexprtominimize*: ein optionaler Name für die Ergebnisspalte, die *exprtominimize*darstellt.
+* *Nameexprtoreturn*: zusätzliche optionale Namen für die Ergebnis Spalten, die " *exprtoreturn*" darstellen.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
-Sucht eine Zeile in der Gruppe, die *ExprToMinimize*minimiert und den `*` Wert von *ExprToReturn* zurückgibt (oder die gesamte Zeile zurückgibt).
+Sucht eine Zeile in der Gruppe, die *exprtominimize*minimiert, und gibt den Wert von *exprtoreturn* zurück (oder `*` , um die gesamte Zeile zurückzugeben).
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
-Günstigster Lieferant für jedes Produkt:
+Günstigste Lieferanten der einzelnen Produkte anzeigen:
 
 ```kusto
 Supplies | summarize arg_min(Price, Supplier) by Product
 ```
 
-Zeigen Sie alle Details, nicht nur den Lieferantennamen:
+Alle Details anzeigen, nicht nur der Lieferanten Name:
 
 ```kusto
 Supplies | summarize arg_min(Price, *) by Product
 ```
 
-Finden Sie die südlichste Stadt auf jedem Kontinent, mit ihrem Land:
+Auffinden der südlichsten Stadt in jedem Kontinent mit dem Land:
 
 ```kusto
 PageViewLog 
@@ -58,4 +58,4 @@ PageViewLog
     by continent
 ```
 
-:::image type="content" source="images/arg-min-aggfunction/arg-min.png" alt-text="Arg min":::
+:::image type="content" source="images/arg-min-aggfunction/arg-min.png" alt-text="Arg min.":::

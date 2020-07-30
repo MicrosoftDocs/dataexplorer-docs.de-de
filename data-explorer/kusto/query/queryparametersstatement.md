@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 0373525d0f1e369af31b17595900128e0d4e0bf4
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 54c09908096f9df4ac8b568cd5e897c6e4ecc8c2
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763349"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345962"
 ---
 # <a name="query-parameters-declaration-statement"></a>Deklarations Anweisung der Abfrage Parameter
 
@@ -34,7 +34,7 @@ Insbesondere-Client Anwendungen, die eine vom Benutzer bereitgestellte Eingabe i
 
 Um auf Abfrage Parameter zu verweisen, muss der Abfragetext bzw. die darin verwendeten Funktionen zuerst den verwendeten Abfrage Parameter deklarieren. Für jeden Parameter stellt die Deklaration den Namen und den skalaren Typ bereit. Optional kann der-Parameter auch über einen Standardwert verfügen. Der Standardwert wird verwendet, wenn die Anforderung keinen konkreten Wert für den Parameter bereitstellt. Anschließend analysiert Kusto den Wert des Abfrage Parameters entsprechend der normalen Analyse Regeln für diesen Typ.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `declare``query_parameters` `(` *Name1* `:` *Typ1* [ `=` *DefaultValue1*] [ `,` ...]`);`
 
@@ -46,7 +46,7 @@ Um auf Abfrage Parameter zu verweisen, muss der Abfragetext bzw. die darin verwe
 > [!NOTE]
 > Wie [benutzerdefinierte Funktionen](functions/user-defined-functions.md)können Abfrage Parameter vom Typ `dynamic` keine Standardwerte aufweisen.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 declare query_parameters(UserName:string, Password:string);

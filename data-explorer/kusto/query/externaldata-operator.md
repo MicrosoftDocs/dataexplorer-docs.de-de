@@ -8,22 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 4534705156669447a89cb5d85c360071dfcb2b2a
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 698acc481a6313160602c939774a6029978df483
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264996"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348104"
 ---
 # <a name="externaldata-operator"></a>externaldata-Operator
 
 Der `externaldata` -Operator gibt eine Tabelle zurück, deren Schema in der Abfrage selbst definiert ist und dessen Daten aus einem externen Speicher Element, z. b. einem BLOB in Azure BLOB Storage, gelesen werden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `externaldata``(` *ColumnName* `:` *ColumnType* [ `,` ...] `)` `[` *storageconnectionstring* `]` [ `with` `(` *Eigenschaft PROP1* `=` *value1* [ `,` ...] `)` ]
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *ColumnName*, *ColumnType*: die Argumente definieren das Schema der Tabelle.
   Die Syntax ist identisch mit der Syntax, die beim Definieren einer Tabelle in der [. Create](../management/create-table-command.md)-Tabelle verwendet wird.
@@ -37,11 +37,11 @@ Der `externaldata` -Operator gibt eine Tabelle zurück, deren Schema in der Abfr
 > [!NOTE]
 > Dieser Operator hat keine Pipeline Eingabe.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Der- `externaldata` Operator gibt eine Datentabelle des angegebenen Schemas zurück, dessen Daten aus dem angegebenen Speicher Element analysiert wurden, angegeben durch die Speicher Verbindungs Zeichenfolge.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Im folgenden Beispiel wird gezeigt, wie alle Datensätze in einer Tabelle gesucht `UserID` werden, deren Spalte zu einem bekannten Satz von IDs gehört, der (eine pro Zeile) in einem externen BLOB aufbewahrt wird.
 Da auf die Gruppe indirekt von der Abfrage verwiesen wird, kann Sie sehr groß sein.

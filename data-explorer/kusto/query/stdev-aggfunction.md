@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 3a29621a18a364145585022b1f0651100cadab1c
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 18722a544ea3bbd0e19922d1d8988a3604b4d200
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618535"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87342902"
 ---
 # <a name="stdev-aggregation-function"></a>StDev () (Aggregations Funktion)
 
@@ -25,19 +25,19 @@ Berechnet die Standardabweichung von *expr* in der Gruppe, wobei die Gruppe als 
 
 * Kann [nur im Kontext der Aggregation innerhalb von](summarizeoperator.md) Zusammenfassung verwendet werden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `stdev(` *expr* zusammenfassen`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expr*: Ausdruck, der für die Aggregations Berechnung verwendet wird. 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Der Standardwert für die Abweichung von *expr* in der Gruppe.
  
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 range x from 1 to 5 step 1

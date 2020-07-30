@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 333c4d59a7ed62fd031ab52019c10abd821fd858
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 4fe19148ef8f410f04dc68f435734a2c2c425cca
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226753"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347679"
 ---
 # <a name="getschema-operator"></a>getschema-Operator 
 
@@ -23,11 +23,11 @@ Erzeugt eine Tabelle, die ein tabellarisches Schema der Eingabe darstellt.
 T | summarize MyCount=count() by Country | getschema 
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| ``getschema`
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

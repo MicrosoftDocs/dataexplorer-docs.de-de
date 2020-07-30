@@ -1,6 +1,6 @@
 ---
-title: abschlüsse() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden degrees() in Azure Data Explorer beschrieben.
+title: Grad ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel werden Grad () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1365d6c6629f4f4769d7c4b62491eaec25e4ec59
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 41d679ea1add3706de5012f4e4fbf382e1f7b3ee
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516030"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348376"
 ---
 # <a name="degrees"></a>degrees()
 
-Konvertiert den Winkelwert in Bogenmaß in Wert in Grad, mit Formel`degrees = (180 / PI ) * angle_in_radians`
+Konvertiert den Winkelwert im Bogenmaß mit der Formel.`degrees = (180 / PI ) * angle_in_radians`
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`degrees(`*Eine*`)`
+`degrees(`*ein*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *a*: Winkel in Bogenmaß (eine reelle Zahl).
+* *a*: Winkel im Bogenmaße (eine reelle Zahl).
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
-* Der entsprechende Winkel in Grad für einen in Bogenmaß angegebenen Winkel. 
+* Der entsprechende Winkel in Grad für einen im Bogenmaß angegebenen Winkel. 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 print degrees0 = degrees(pi()/4), degrees1 = degrees(pi()*1.5), degrees2 = degrees(0)
 
 ```
 
-|Grad0|Grad1|Grad2|
+|degrees0|degrees1|degrees2|
 |---|---|---|
 |45|270|0|

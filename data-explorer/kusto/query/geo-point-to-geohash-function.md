@@ -8,12 +8,12 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/04/2020
-ms.openlocfilehash: c37789ac490814288c7331f0b1ae86b8b2178d67
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 7998726637a7d19413954a509dd0ad9b34202f03
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226923"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347764"
 ---
 # <a name="geo_point_to_geohash"></a>geo_point_to_geohash()
 
@@ -21,17 +21,17 @@ Berechnet den GeoHash-Zeichen folgen Wert für einen geografischen Standort.
 
 Erfahren Sie mehr über [GeoHash](https://en.wikipedia.org/wiki/Geohash).  
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `geo_point_to_geohash(`*Längengrad* `, ` *Breitengrad* `, ` [*Genauigkeit*]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Längengrad*: Längengrad eines geografischen Standorts. Der Längengrad x wird als gültig betrachtet, wenn x eine reelle Zahl ist, und liegt im Bereich [-180, + 180]. 
 * *breiten*Grad: Breitengrad eines geografischen Standorts. Der Breitengrad y wird als gültig betrachtet, wenn y eine reelle Zahl ist, und y liegt im Bereich [-90, + 90]. 
 * *Genauigkeit*: ein optionaler `int` , der die angeforderte Genauigkeit definiert. Unterstützte Werte liegen im Bereich [1, 18]. Wenn nicht angegeben, wird der Standardwert `5` verwendet.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Der GeoHash-Zeichen folgen Wert eines angegebenen geografischen Standorts mit angeforderter Genauigkeits Länge. Wenn die Koordinate oder die Genauigkeit ungültig ist, führt die Abfrage zu einem leeren Ergebnis.
 
@@ -69,7 +69,7 @@ Der GeoHash-Zeichen folgen Wert eines angegebenen geografischen Standorts mit an
 
 Siehe auch [geo_point_to_s2cell ()](geo-point-to-s2cell-function.md).
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Von GeoHash aggregierte US Storm-Ereignisse.
 

@@ -8,29 +8,29 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/11/2020
-ms.openlocfilehash: 64c61bcde7bfe02d55bb0f4a6719e9d7b1c1a681
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 0e8d57e76b0dfa45003f541b54360cb4ac414646
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227416"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347883"
 ---
 # <a name="geo_distance_2points"></a>geo_distance_2points()
 
 Berechnet den kürzesten Abstand zwischen zwei geografischen Koordinaten auf der Erde.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `geo_distance_2points(`*p1_longitude* `, ` *p1_latitude* `, ` *p2_longitude* `, ` *p2_latitude*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *p1_longitude*: erste georäumliche Koordinate, Längengrad Wert in Grad. Der gültige Wert ist eine reelle Zahl und liegt im Bereich [-180, + 180].
 * *p1_latitude*: erste georäumliche Koordinate, Breitengrad Wert in Grad. Der gültige Wert ist eine reelle Zahl und liegt im Bereich [-90, + 90].
 * *p2_longitude*: zweite georäumliche Koordinate, Längengrad Wert in Grad. Der gültige Wert ist eine reelle Zahl und liegt im Bereich [-180, + 180].
 * *p2_latitude*: zweite georäumliche Koordinate, Breitengrad Wert in Grad. Der gültige Wert ist eine reelle Zahl und liegt im Bereich [-90, + 90].
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Die kürzeste Entfernung in Meter zwischen zwei geografischen Standorten auf der Erde. Wenn die Koordinaten ungültig sind, führt die Abfrage zu einem NULL-Ergebnis.
 
@@ -38,7 +38,7 @@ Die kürzeste Entfernung in Meter zwischen zwei geografischen Standorten auf der
 > * Die georäumlichen Koordinaten werden entsprechend der Darstellung durch das [WGS-84-](https://earth-info.nga.mil/GandG/update/index.php?action=home) Koordinaten Referenzsystem interpretiert.
 > * Das [geodätische Datum](https://en.wikipedia.org/wiki/Geodetic_datum) , das zum Messen der Entfernung auf der Erde verwendet wird, ist eine Kugel.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Im folgenden Beispiel wird die kürzeste Entfernung zwischen Seattle und Los Angeles ermittelt.
 

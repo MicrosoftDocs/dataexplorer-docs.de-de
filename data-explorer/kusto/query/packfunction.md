@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a94629ae8f4795e28cbfb0c41f06596731cdd8d9
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: 560f7ca9f423eb57fd9be0478e0e51dc2ce26755
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717324"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346506"
 ---
 # <a name="pack"></a>pack()
 
@@ -21,16 +21,16 @@ Erstellt ein `dynamic` -Objekt (Eigenschaften Behälter) aus einer Liste von Nam
 
 Alias für die `pack_dictionary()` Funktion.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `pack(`*key1* `,` *value1* `,` *key2* `,` *value2*`,... )`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * Eine abwechselnde Liste von Schlüsseln und Werten (die Gesamtlänge der Liste muss gleich sein).
 * Alle Schlüssel müssen nicht leere Konstante Zeichen folgen sein.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Das folgende Beispiel gibt `{"Level":"Information","ProcessID":1234,"Data":{"url":"www.bing.com"}}`zurück:
 

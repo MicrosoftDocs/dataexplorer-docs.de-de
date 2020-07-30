@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2019
-ms.openlocfilehash: 3f45f579ad47dbdc9bf1fca707826948a598f63d
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: ab2132908dad26f5f21cf945a1af4af1b8a049cd
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780166"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347390"
 ---
 # <a name="in-and-in-operators"></a>in- und !in-Operatoren
 
@@ -23,7 +23,7 @@ Filtert einen Daten Satz Satz basierend auf dem bereitgestellten Satz von Werten
 Table1 | where col in ('value1', 'value2')
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *Syntax der Groß-/Kleinschreibung:*
 
@@ -41,14 +41,14 @@ Table1 | where col in ('value1', 'value2')
 *T* - `|` `where` *col* `!in~` `(` *Liste der Skalarausdrücke*`)`  
 *T* - `|` `where` *col* `!in~` `(` *Tabellen Ausdruck (Tabellen* )`)`   
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T* : die tabellarische Eingabe, deren Datensätze gefiltert werden sollen.
 * *Col* : die zu filternde Spalte.
 * eine *Liste von Ausdrücken* : eine durch Trennzeichen getrennte Liste von tabellarischen, skalaren oder literalen Ausdrücken.
 * *tabellarischer Ausdruck* : ein tabellarischer Ausdruck, der über einen Satz von Werten verfügt. Wenn der Ausdruck über mehrere Spalten verfügt, wird die erste Spalte verwendet.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Zeilen in *T* , für die das Prädikat ist `true` .
 

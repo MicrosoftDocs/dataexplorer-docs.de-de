@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/20/2020
-ms.openlocfilehash: a06bd3719fba4f9f61cf7b1c9501f96b17a48d58
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: a200d0619b25fe7410a82a941a3b1bf6e35d60ac
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717222"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87342613"
 ---
 # <a name="summarize-operator"></a>summarize-Operator
 
@@ -31,11 +31,11 @@ T | summarize count() by price_range=bin(price, 10.0)
 
 Eine Tabelle, die zeigt, wie viele Elemente in jedem Intervall [0, 10,0][10,0, 20,0] usw. Preise aufweisen. In diesem Beispiel ist eine Spalte für die Anzahl und eine für den Preisbereich vorhanden. Alle anderen Eingabespalten werden ignoriert.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `| summarize` [[*Column* `=` ] *Aggregation* [ `,` ...]] [ `by` [*Column* `=` ] *groupexpression* [ `,` ...]]
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Column:* Optionaler Name für eine Ergebnisspalte. Nimmt standardmäßig den vom Ausdruck abgeleiteten Namen an.
 * *Aggregation:* Ein Aufrufe einer [Aggregations Funktion](summarizeoperator.md#list-of-aggregation-functions) , z `count()` `avg()` . b. oder, mit Spaltennamen als Argumente. Weitere Informationen finden Sie [in der Liste der Aggregations Funktionen](summarizeoperator.md#list-of-aggregation-functions).
@@ -47,7 +47,7 @@ Eine Tabelle, die zeigt, wie viele Elemente in jedem Intervall [0, 10,0][10,0, 2
 > * Wenn *groupexpression* nicht angegeben wird, ist die Ausgabe eine einzelne (leere) Zeile.
 > * Wenn *groupexpression* bereitgestellt wird, weist die Ausgabe keine Zeilen auf.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Die Eingabezeilen sind in Gruppen mit denselben Werten der `by` -Ausdrücke angeordnet. Anschließend werden die angegebenen Aggregationsfunktionen über jede Gruppe berechnet, dabei wird eine Zeile für jede Gruppe erzeugt. Das Ergebnis enthält die `by` -Spalten und auch mindestens eine Spalte für jedes berechnete Aggregat. (Einige Aggregationsfunktionen geben mehrere Spalten zurück.)
 
@@ -82,13 +82,13 @@ Um Bereiche numerischer Werte zusammenzufassen, verwenden `bin()` Sie, um Bereic
 |[make_list()](makelist-aggfunction.md)|Gibt eine Liste aller Werte in der Gruppe zurück.|
 |[make_list_if()](makelistif-aggfunction.md)|Gibt eine Liste aller Werte in der Gruppe zurück (mit Prädikat).|
 |[make_list_with_nulls()](make-list-with-nulls-aggfunction.md)|Gibt eine Liste aller Werte in der Gruppe zurück, einschließlich NULL-Werten.|
-|[MAKE_SET ()](makeset-aggfunction.md)|Gibt einen Satz unterschiedlicher Werte in der Gruppe zurück.|
+|[make_set()](makeset-aggfunction.md)|Gibt einen Satz unterschiedlicher Werte in der Gruppe zurück.|
 |[make_set_if()](makesetif-aggfunction.md)|Gibt einen Satz unterschiedlicher Werte in der Gruppe zurück (mit Prädikat).|
-|[Max ()](max-aggfunction.md)|Gibt den maximalen Wert in der Gruppe zurück.|
+|[max()](max-aggfunction.md)|Gibt den Höchstwert in der Gruppe zurück.|
 |[maxif()](maxif-aggfunction.md)|Gibt den maximalen Wert für die Gruppe (mit Prädikat) zurück.|
-|[min ()](min-aggfunction.md)|Gibt den Mindestwert in der Gruppe zurück.|
+|[min()](min-aggfunction.md)|Gibt den Mindestwert in der Gruppe zurück.|
 |[minif()](minif-aggfunction.md)|Gibt den minimalen Wert für die Gruppe (mit Prädikat) zurück.|
-|[percentiles()](percentiles-aggfunction.md)|Gibt die ungefähre Quantil der Gruppe zurück.|
+|[Perzentile ()](percentiles-aggfunction.md)|Gibt die ungefähre Quantil der Gruppe zurück.|
 |[percentiles_array ()](percentiles-aggfunction.md)|Gibt die Quantilen der Gruppe zurück.|
 |[percentilesw ()](percentiles-aggfunction.md)|Gibt das gewichtete Perzentil der Gruppe zurück.|
 |[percentilesw_array ()](percentiles-aggfunction.md)|Gibt die gewichteten Quantilen der Gruppe zurück.|
@@ -96,7 +96,7 @@ Um Bereiche numerischer Werte zusammenzufassen, verwenden `bin()` Sie, um Bereic
 |[stdevif()](stdevif-aggfunction.md)|Gibt die Standardabweichung für die Gruppe (mit Prädikat) zurück.|
 |[Sum ()](sum-aggfunction.md)|Gibt die Summe der Elemente zurück, die die Gruppe unterliegen.|
 |[sumif()](sumif-aggfunction.md)|Gibt die Summe der Elemente zurück, die mit der Gruppe (mit Prädikat) zusammengefasst werden.|
-|[Varianz ()](variance-aggfunction.md)|Gibt die Varianz innerhalb der Gruppe zurück.|
+|[variance()](variance-aggfunction.md)|Gibt die Varianz innerhalb der Gruppe zurück.|
 |[varianceif()](varianceif-aggfunction.md)|Gibt die Varianz über die Gruppe zurück (mit Prädikat).|
 
 ## <a name="aggregates-default-values"></a>Aggregiert Standardwerte
@@ -115,7 +115,7 @@ Operator       |Standardwert
 
 :::image type="content" source="images/summarizeoperator/summarize-price-by-supplier.png" alt-text="Preis nach Obst und Lieferant zusammenfassen":::
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Bestimmen Sie, welche eindeutigen Kombinationen von `ActivityType` und `CompletionStatus` in einer Tabelle vorhanden sind. Es gibt keine Aggregations Funktionen, sondern nur Gruppieren nach Schlüsseln. In der Ausgabe werden nur die Spalten für diese Ergebnisse angezeigt:
 
@@ -130,7 +130,7 @@ Activities | summarize by ActivityType, completionStatus
 |`dancing`|`abandoned`
 |`singing`|`completed`
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Sucht den minimalen und maximalen Zeitstempel aller Datensätze in der Aktivitäts Tabelle. Es gibt keine group-by-Klausel, daher gibt es nur eine Zeile in der Ausgabe:
 
@@ -142,7 +142,7 @@ Activities | summarize Min = min(Timestamp), Max = max(Timestamp)
 |---|---
 |`1975-06-09 09:21:45` | `2015-12-24 23:45:00`
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Erstellen Sie für jeden Kontinent eine Zeile, die die Anzahl der Städte anzeigt, in denen Aktivitäten auftreten. Da es nur wenige Werte für "Kontinent" gibt, ist keine Gruppierungs Funktion in der by-Klausel erforderlich:
 
@@ -155,7 +155,7 @@ Erstellen Sie für jeden Kontinent eine Zeile, die die Anzahl der Städte anzeig
 |`2673`|`North America`|
 
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Im folgenden Beispiel wird ein Histogramm für jeden Aktivitätstyp berechnet. Da `Duration` viele Werte aufweist, verwenden `bin` Sie, um die Werte in 10-Minuten-Intervallen zu gruppieren:
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 116f585fe8a09b4befddd7d1429229ad1bac886f
-ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
+ms.openlocfilehash: ed207a9db0b6440bae8f8fb4ae1c250d274565d7
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84512469"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87338217"
 ---
 # <a name="where-operator"></a>where-Operator
 
@@ -25,16 +25,16 @@ T | where fruit=="apple"
 
 **Alias**`filter`
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* - `| where` *Prädikat*
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: die tabellarische Eingabe, deren Datensätze gefiltert werden sollen.
 * *Predicate*: ein- `boolean` [Ausdruck](./scalar-data-types/bool.md) für die Spalten von *T*. Sie wird für jede Zeile in *T*ausgewertet.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Zeilen in *T*, für die *Predicate* auf `true` festgelegt ist.
 
@@ -54,7 +54,7 @@ So erzielen Sie die optimale Leistung:
 
 Weitere Informationen finden Sie in der Zusammenfassung der [verfügbaren Zeichen folgen Operatoren](./datatypes-string-operators.md) und der Zusammenfassung der [verfügbaren numerischen Operatoren](./numoperators.md).
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
 Traces
@@ -67,7 +67,7 @@ In diesem Beispiel werden Datensätze abgerufen, die nicht älter als 1 Stunde s
 
 Beachten Sie, dass der Vergleich zwischen zwei Spalten zuletzt durchgesetzt wurde, da der Index nicht verwendet werden kann und eine Überprüfung erzwungen wird.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
 Traces | where * has "Kusto"

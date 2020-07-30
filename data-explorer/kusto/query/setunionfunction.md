@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/02/2019
-ms.openlocfilehash: 19c7b47318d0748510aba146968149cd0eb246a2
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 8aec2bdebacc1bfd87b84bbfc83a6aed5cb05427
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264571"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351130"
 ---
 # <a name="set_union"></a>set_union()
 
 Gibt ein `dynamic` Array der Menge aller unterschiedlichen Werte zurück, die in einem der Arrays vorhanden sind (Arr1 ∪ arr2 ∪...).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `set_union(`*Arr1* `, ` *arr2* `[` ,` *arr3*, ...]``)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Arr1... arrn*: Eingabe Arrays zum Erstellen eines Union-Satzes (mindestens zwei Arrays). Alle Argumente müssen dynamische Arrays sein (siehe [pack_array](packarrayfunction.md)). 
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Gibt ein dynamisches Array der Menge aller unterschiedlichen Werte zurück, die in einem der Arrays vorhanden sind. Siehe [`set_intersect()`](setintersectfunction.md) und [`set_difference()`](setdifferencefunction.md) .
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

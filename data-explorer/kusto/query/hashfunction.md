@@ -8,27 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b0a8f1b2a72ceb154b7252b3218718a9c23968cb
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 16b570d996148f1dad9e285b3c2da24d136b20c4
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763868"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347577"
 ---
 # <a name="hash"></a>hash()
 
 Gibt einen Hashwert für den Eingabe Wert zurück.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `hash(`*Quelle* [ `,` *mod*]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Quelle*: der Wert, für den der Hashwert verwendet werden soll.
 * *mod*: ein optionaler Modulwert, der auf das Hash Ergebnis angewendet werden soll, sodass der Ausgabewert zwischen `0` und *mod* -1 liegt.
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Der Hashwert des angegebenen Skalars, Modulo der angegebene mod-Wert (falls angegeben).
 
@@ -37,7 +37,7 @@ Der Hashwert des angegebenen Skalars, Modulo der angegebene mod-Wert (falls ange
 > Dieser Algorithmus kann sich in Zukunft ändern, und die einzige Garantie besteht darin, dass alle Aufrufe dieser Methode innerhalb einer einzelnen Abfrage denselben Algorithmus verwenden.
 > Daher wird empfohlen, die Ergebnisse von nicht `hash()` in einer Tabelle zu speichern. Wenn persistente Hashwerte erforderlich sind, verwenden Sie stattdessen [hash_sha256 ()](./sha256hashfunction.md) oder [hash_md5 ()](./md5hashfunction.md) . Beachten Sie, dass diese Funktionen komplexer zu berechnen sind als `hash()` ).
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 hash("World")                   // 1846988464401551951

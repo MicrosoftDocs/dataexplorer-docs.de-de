@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 092915c08b4b3d1e72722a4303e911403b2defd2
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 3e1f74d6605b4916a2718a00fd252141060d748f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737197"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348886"
 ---
 # <a name="cluster-scope-function"></a>Cluster () (Scope-Funktion)
 
@@ -27,15 +27,15 @@ ms.locfileid: "82737197"
 cluster('help').database('Sample').SomeTable
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `cluster(`*StringConstant*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *StringConstant*: Name des Clusters, auf den verwiesen wird. Der Cluster Name kann entweder ein voll qualifizierter DNS-Name oder eine Zeichenfolge sein, die mit `.kusto.windows.net`versehen wird. Das Argument muss vor der Ausführung der Abfrage _konstant_ sein, d. h., es kann nicht aus der Auswertung der Unterabfrage stammen.
+* *StringConstant*: Name des Clusters, auf den verwiesen wird. Der Cluster Name kann entweder ein voll qualifizierter DNS-Name oder eine Zeichenfolge sein, die mit versehen wird `.kusto.windows.net` . Das Argument muss vor der Ausführung der Abfrage _konstant_ sein, d. h., es kann nicht aus der Auswertung der Unterabfrage stammen.
 
-**Hinweise**
+**Notizen**
 
 * Für den Zugriff auf die Datenbank innerhalb derselben Cluster-use [Database ()](databasefunction.md) -Funktion.
 * Weitere Informationen zu datenbankübergreifenden und datenbankübergreifenden Abfragen finden Sie [hier](cross-cluster-or-database-queries.md) .  
@@ -58,7 +58,7 @@ cluster('help.kusto.windows.net').database('Samples').StormEvents | count
 
 ### <a name="use-cluster-inside-let-statements"></a>Verwenden von Cluster () in Let-Anweisungen 
 
-Die gleiche Abfrage wie oben kann so umgeschrieben werden, dass Sie eine Inline Funktion (Let-Anweisung `clusterName` ) verwendet, die einen Parameter empfängt, der an die Cluster ()-Funktion übergeben wird.
+Die gleiche Abfrage wie oben kann so umgeschrieben werden, dass Sie eine Inline Funktion (Let-Anweisung) verwendet, die einen Parameter empfängt, `clusterName` der an die Cluster ()-Funktion übergeben wird.
 
 ```kusto
 let foo = (clusterName:string)
@@ -74,7 +74,7 @@ foo('help')
 
 ### <a name="use-cluster-inside-functions"></a>Verwenden von Cluster () innerhalb von Funktionen 
 
-Dieselbe Abfrage wie oben kann so umgeschrieben werden, dass Sie in einer Funktion verwendet wird, `clusterName` die einen Parameter empfängt, der an die Cluster ()-Funktion übergeben wird.
+Dieselbe Abfrage wie oben kann so umgeschrieben werden, dass Sie in einer Funktion verwendet wird, die einen Parameter empfängt, der an `clusterName` die Cluster ()-Funktion übergeben wird.
 
 ```kusto
 .create function foo(clusterName:string)

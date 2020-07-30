@@ -1,6 +1,6 @@
 ---
-title: übersetzen() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird Translate() in Azure Data Explorer beschrieben.
+title: Translation ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird übersetzt () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/11/2019
-ms.openlocfilehash: f128ce31af7fc720ee81b7471d3d74616197b8d4
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d0e99048f3f1b0e3ce5c6c59a65ea645b22d15fe
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81505711"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87340053"
 ---
 # <a name="translate"></a>translate()
 
-Ersetzt einen Satz von Zeichen ('searchList') durch einen anderen Satz von Zeichen ('replacementList') in einer bestimmten Zeichenfolge.
-Die Funktion sucht nach Zeichen in der 'searchList' und ersetzt sie durch die entsprechenden Zeichen in 'replacementList'
+Ersetzt einen Zeichensatz ("SEARCHLIST") durch einen anderen Zeichensatz ("REPLACEMENTLIST") in einer angegebenen Zeichenfolge.
+Die-Funktion sucht in "SEARCHLIST" nach Zeichen und ersetzt diese durch die entsprechenden Zeichen in "REPLACEMENTLIST".
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`translate(`*searchList* `,` *replacementListentext* `,` *text*`)`
+`translate(`*SEARCHLIST* `,` *Ersatz Liste* `,` *Text*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *searchList*: Die Liste der Zeichen, die ersetzt werden sollen
-* *replacementList*: Die Liste der Zeichen, die die Zeichen in 'searchList' ersetzen sollen
-* *Text*: Eine zu durchsuchende Zeichenfolge
+* *SEARCHLIST*: die Liste der Zeichen, die ersetzt werden sollen.
+* *REPLACEMENTLIST*: die Liste der Zeichen, die die Zeichen in "SEARCHLIST" ersetzen sollen.
+* *Text*: eine zu durchsuchende Zeichenfolge
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
-*Text* nach dem Ersetzen aller Zeichen in 'replacementList' durch die entsprechenden Zeichen in 'searchList'
+*Text* nach dem Ersetzen aller ocurrences of-Zeichen in "REPLACEMENTLIST" durch die entsprechenden Zeichen in "SEARCHLIST"
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 |Eingabe                                 |Output   |
 |--------------------------------------|---------|

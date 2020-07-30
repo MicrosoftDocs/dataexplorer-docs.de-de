@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 19329b8822a1e1d484c5f751f5fbc2f8eb6343ac
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 4485dde5eb77478e5fd75ce388ada7f4232f2ddb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226736"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347628"
 ---
 # <a name="has_any-operator"></a>has_any-Operator
 
@@ -23,23 +23,23 @@ ms.locfileid: "83226736"
 Table1 | where col has_any ('value1', 'value2')
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* - `|` `where` *col* `has_any` `(` *Liste der Skalarausdrücke*`)`   
 *T* - `|` `where` *col* `has_any` `(` *Tabellen Ausdruck (Tabellen* )`)`   
  
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T* -tabellarische Eingabe, deren Datensätze gefiltert werden sollen.
 * *col* zu filternde Spalten Spalte.
 * *Liste der Ausdrücke* : durch Trennzeichen getrennte Liste von Tabellen-, Skalar-oder Literalausdrücken  
 * *tabellarischer Ausdruck* -Tabellen Ausdruck, der einen Satz von Werten aufweist (wenn Expression über mehrere Spalten verfügt, wird die erste Spalte verwendet)
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Zeilen in *T* , für die das Prädikat`true`
 
-**Hinweise**
+**Notizen**
 
 * Die Ausdrucks Liste kann bis zu `10,000` Werte liefern.    
 * Bei tabellarischen Ausdrücken wird die erste Spalte des Resultsets ausgewählt.   
@@ -55,7 +55,7 @@ StormEvents
 | summarize count() by State
 ```
 
-|Bundesland/Kanton|count_|
+|Zustand|count_|
 |---|---|
 |NEW YORK|1750|
 |North Carolina|1721|
@@ -77,7 +77,7 @@ StormEvents
 | summarize count() by State
 ```
 
-|Bundesland/Kanton|count_|
+|Zustand|count_|
 |---|---|
 |North Carolina|1721|
 |South Dakota|1567|

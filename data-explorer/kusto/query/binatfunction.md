@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 90055f644dbf653eb65546202832f7cab834a0ac
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 8a480ad0af2d3f71dd3ae9279bb59b32d9654acb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227592"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348988"
 ---
 # <a name="bin_at"></a>bin_at()
 
 Rundet Werte auf einen "bin" mit fester Größe, wobei die Steuerung über dem Ausgangspunkt der bin gesteuert wird.
 (Siehe auch [`bin function`](./binfunction.md) .)
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `bin_at``(` *Ausdruck* `,` *binsize* `, ` *FixedPoint*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Ausdruck*: ein skalarer Ausdruck eines numerischen Typs (einschließlich `datetime` und `timespan` ), der den zu runden Wert angibt.
 * *Binsize*: eine skalare Konstante desselben Typs wie der *Ausdruck* , der die Größe der einzelnen bin angibt. 
 * *FixedPoint*: eine skalare Konstante desselben Typs wie der *Ausdruck* , der einen Wert des *Ausdrucks* angibt, der ein "fester Punkt" ist (d. h. ein Wert, `fixed_point` für den `bin_at(fixed_point, bin_size, fixed_point) == fixed_point` .)
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Das nächste Vielfache von " *binsize* " unterhalb des *Ausdrucks*, der so verschoben wird, dass *FixedPoint* in sich selbst übersetzt wird.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 |expression                                                                    |Ergebnis                           |Kommentare                   |
 |------------------------------------------------------------------------------|---------------------------------|---------------------------|

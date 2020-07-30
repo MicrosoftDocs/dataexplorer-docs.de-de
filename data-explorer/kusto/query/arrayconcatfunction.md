@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 681178cc12d145b1c574357e87ae4f7b33d736c4
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: ecaca4aea221ca2b880b798757de64787901a0cb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83225648"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349600"
 ---
 # <a name="array_concat"></a>array_concat()
 
 Verkettet eine Reihe dynamischer Arrays mit einem einzelnen Array.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `array_concat(`*Arr1* `[` , ` *arr2*, ...]` ) '
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Arr1... arrn*: Eingabe Arrays, die in ein dynamisches Array verkettet werden sollen. Alle Argumente müssen dynamische Arrays sein (siehe [pack_array](packarrayfunction.md)). 
 
-**Rückgabe**
+## <a name="returns"></a>Gibt zurück
 
 Dynamisches Array von Arrays mit Arr1, arr2,..., arrn.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
