@@ -1,6 +1,6 @@
 ---
-title: min() (Aggregationsfunktion) - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt min() (Aggregationsfunktion) in Azure Data Explorer.
+title: 'min () (Aggregations Funktion): Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird "min ()" (Aggregations Funktion) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/24/2019
-ms.openlocfilehash: ca50210c84b39f19e6717b27089313d0d116e21a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: c7b3b189a85f46cb577c37a956c35bc755321d68
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81512409"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346778"
 ---
-# <a name="min-aggregation-function"></a>min() (Aggregationsfunktion)
+# <a name="min-aggregation-function"></a>min () (Aggregations Funktion)
 
-Gibt den Mindestwert in der gruppe zurück. 
+Gibt den Mindestwert in der Gruppe zurück. 
 
-* Kann nur im Kontext der Aggregation innerhalb [der Zusammenfassung](summarizeoperator.md) verwendet werden
+* Kann [nur im Kontext der Aggregation innerhalb von](summarizeoperator.md) Zusammenfassung verwendet werden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `summarize``min(` *Expr*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Expr*: Ausdruck, der für die Aggregationsberechnung verwendet wird. 
+* *Expr*: Ausdruck, der für die Aggregations Berechnung verwendet wird. 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Der Mindestwert von *Expr* in der gesamten Gruppe.
+Der minimale Wert von *expr* in der Gruppe.
  
 > [!TIP]
-> Dies gibt Ihnen die min oder max auf eigene Faust - zum Beispiel, der höchste oder niedrigste Preis. Wenn Sie jedoch andere Spalten in der Zeile wünschen - z. B. den Namen des Lieferanten mit dem niedrigsten Preis - verwenden Sie [arg_max](arg-max-aggfunction.md) oder [arg_min](arg-min-aggfunction.md).
+> Dadurch erhalten Sie die minimale oder maximale Anzahl, z. b. den höchsten oder niedrigsten Preis. Wenn Sie jedoch andere Spalten in der Zeile verwenden möchten, z. b. der Name des Lieferanten mit dem niedrigsten Preis [ARG_MAX](arg-max-aggfunction.md) oder [arg_min](arg-min-aggfunction.md).

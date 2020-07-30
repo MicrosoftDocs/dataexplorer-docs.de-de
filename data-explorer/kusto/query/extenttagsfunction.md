@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 146ab59c1c0cbcb86bfae94fa26c09f5afa0f216
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: f745d9cb180842e86c184a24ed24c4e2f024f129
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737588"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348121"
 ---
 # <a name="extent_tags"></a>extent_tags()
 
@@ -25,17 +25,17 @@ Gibt ein dynamisches Array mit den [Tags](../management/extents-overview.md#exte
 
 Wenn diese Funktion auf berechnete Daten angewendet wird, die nicht an einen datenshard angefügt sind, wird ein leerer Wert zurückgegeben.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `extent_tags()`
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Ein Wert vom Typ `dynamic` , bei dem es sich um ein Array mit den Block Tags des aktuellen Datensatzes oder um einen leeren Wert handelt.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
-Im folgenden Beispiel wird gezeigt, wie Sie eine Liste der Tags aller datenshards, die über Datensätze von einer Stunde verfügen, mit einem bestimmten Wert für `ActivityId`die Spalte erhalten. Es veranschaulicht, dass einige Abfrage Operatoren (hier `where` der-Operator, aber dies gilt auch `extend` für `project`und) die Informationen über den datenshard, der den Datensatz gehostet, beibehalten.
+Im folgenden Beispiel wird gezeigt, wie Sie eine Liste der Tags aller datenshards, die über Datensätze von einer Stunde verfügen, mit einem bestimmten Wert für die Spalte erhalten `ActivityId` . Es veranschaulicht, dass einige Abfrage Operatoren (hier der `where` -Operator, aber dies gilt auch für `extend` und `project` ) die Informationen über den datenshard, der den Datensatz gehostet, beibehalten.
 
 ```kusto
 T
@@ -45,7 +45,7 @@ T
 | summarize by tostring(tags)
 ```
 
-Im folgenden Beispiel wird gezeigt, wie die Anzahl aller Datensätze aus der letzten Stunde abgerufen wird, die in Blöcken gespeichert sind, die mit dem- `MyTag` Tag (und potenziell anderen Tags) gekennzeichnet sind, aber nicht mit `drop-by:MyOtherTag`dem-Tag markiert sind.
+Im folgenden Beispiel wird gezeigt, wie die Anzahl aller Datensätze aus der letzten Stunde abgerufen wird, die in Blöcken gespeichert sind, die mit dem `MyTag` -Tag (und potenziell anderen Tags) gekennzeichnet sind, aber nicht mit dem-Tag markiert sind `drop-by:MyOtherTag` .
 
 ```kusto
 T

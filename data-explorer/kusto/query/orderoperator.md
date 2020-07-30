@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 35fa0c29bf00a8696d4e9d08d73c30bba6171ea1
-ms.sourcegitcommit: de81b57b6c09b6b7442665e5c2932710231f0773
+ms.openlocfilehash: 510e2de8a30a422955c0cbfcbdf3a0f50e46dbc5
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 07/28/2020
-ms.locfileid: "87264714"
+ms.locfileid: "87346557"
 ---
 # <a name="order-operator"></a>order-Operator 
 
@@ -26,11 +26,11 @@ T | order by country asc, price desc
 > [!NOTE]
 > Der Order-Operator ist ein Alias für den Sort-Operator. Weitere Informationen finden Sie unter [Sort-Operator](sortoperator.md) .
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* - `| order by` *Spalte* [ `asc`  |  `desc` ] [ `nulls first`  |  `nulls last` ] [ `,` ...]
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T*: die zu sortierende Tabellen Eingabe.
 * *Column*: Spalte von *T* , nach der sortiert werden soll. Der Typ der Werte muss „Numerisch“, „Datum“, „Uhrzeit“ oder „Zeichenfolge“ sein.

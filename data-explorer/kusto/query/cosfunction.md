@@ -1,6 +1,6 @@
 ---
-title: cos() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird cos() in Azure Data Explorer beschrieben.
+title: cos ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: Dieser Artikel beschreibt cos () in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,25 +8,25 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: fbb970e6553fed0869039b0964f54b67d04b98d4
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: e0b17ba90514cc0a5b347f0834b227bb88fcf6da
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517033"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348818"
 ---
 # <a name="cos"></a>cos()
 
-Gibt die Kosinusfunktion zurück.
+Gibt die Cosinus-Funktion zurück.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`cos(`*X*`)`
+`cos(`*Stuben*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *x*: Eine reelle Zahl.
+* *x*: eine reelle Zahl.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 * Das Ergebnis von `cos(x)`

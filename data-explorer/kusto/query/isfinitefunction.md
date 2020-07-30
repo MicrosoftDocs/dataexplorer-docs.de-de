@@ -1,6 +1,6 @@
 ---
-title: isfinite() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird isfinite() in Azure Data Explorer beschrieben.
+title: isFinite ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird isFinite () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5a17a39cce91fe039b2cf55cc5c98dba111cc334
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: f53c74fd2ac56219351c4d194c93e9fa4b627cf4
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513599"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347254"
 ---
 # <a name="isfinite"></a>isfinite()
 
 Gibt zurück, ob die Eingabe ein endlicher Wert ist (ist weder unendlich noch NaN).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`isfinite(`*X*`)`
+`isfinite(`*Stuben*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *x*: Eine reelle Zahl.
+* *x*: eine reelle Zahl.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Ein Wert ungleich Null (true), wenn x endlich ist; und Null (falsch) sonst.
+Ein Wert ungleich 0 (true), wenn x nicht begrenzt ist. und NULL (false) andernfalls.
 
-**Siehe auch**
+**Weitere Informationen**
 
-* Informationen zum Überprüfen, ob der Wert null ist, finden Sie unter [isnull()](isnullfunction.md).
-* Informationen zur Überprüfung, ob der Wert unendlich ist, finden Sie unter [isinf()](isinffunction.md).
-* Informationen finden Sie unter [isnan()](isnanfunction.md).
+* Informationen zum Überprüfen, ob der Wert NULL ist, finden Sie unter [IsNull ()](isnullfunction.md).
+* Informationen zum Überprüfen, ob der Wert unendlich ist, finden Sie unter [isinf ()](isinffunction.md).
+* Informationen zum Überprüfen, ob der Wert NaN (not-a-Number) ist, finden Sie unter [IsNaN ()](isnanfunction.md).
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
 range x from -1 to 1 step 1
@@ -46,7 +46,7 @@ range x from -1 to 1 step 1
 | extend isfinite=isfinite(div)
 ```
 
-|x|y|div|isfinit|
+|x|y|div|isFinite|
 |---|---|---|---|
 |-1|0|-∞|0|
 |0|0|NaN|0|

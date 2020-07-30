@@ -1,6 +1,6 @@
 ---
-title: bereich() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt bereich() in Azure Data Explorer.
+title: Bereich ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird der Bereich () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,28 +8,28 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 86558591e6312edd218230cda19a4afc17a13b27
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.openlocfilehash: 2606746e89d645601fa53ed7f81d67ddae203c03
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744587"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345911"
 ---
 # <a name="range"></a>range()
 
-Generiert ein dynamisches Array mit einer Reihe gleich verteilter Werte.
+Generiert ein dynamisches Array, das eine Reihe gleichmäßiger Werte enthält.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`range(`*Startstopp* `,` *stop*`,` [ *Schritt*]`)` 
+`range(`*starten* `,` Sie *stop*[ `,` *Schritt*] abbrechen`)` 
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *start*: Der Wert des ersten Elements im resultierenden Array. 
-* *stop*: Der Wert des letzten Elements im resultierenden Array oder der kleinste Wert, der größer als das letzte Element im resultierenden Array und innerhalb eines ganzzahligen Vielfachen von *step* from *start*ist.
-* *schritt*: Die Differenz zwischen zwei aufeinander folgenden Elementen des Arrays. Der Standardwert *step* für `1` Schritt `1h` ist `timespan` für numerische und für oder`datetime`
+* *Start*: der Wert des ersten Elements im resultierenden Array. 
+* *Beenden*: der Wert des letzten Elements im resultierenden Array oder der kleinste Wert, der größer als das letzte Element im resultierenden Array und innerhalb eines ganzzahligen Vielfachen von *Step* from *Start*ist.
+* *Step*: der Unterschied zwischen zwei aufeinander folgenden Elementen des Arrays. Der Standardwert für *Step* ist `1` für numeric und `1h` für `timespan` oder.`datetime`
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Das folgende Beispiel gibt `[1, 4, 7]`zurück:
 

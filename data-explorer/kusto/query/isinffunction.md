@@ -1,6 +1,6 @@
 ---
-title: isinf() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt isinf() in Azure Data Explorer.
+title: isinf ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird isinf () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: d93697890ee05cabf9ca1830ac047d90d8c9e844
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 71a37d7a1bd700b5f929c009197a382315099e08
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513582"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347237"
 ---
 # <a name="isinf"></a>isinf()
 
 Gibt zurück, ob die Eingabe ein unendlicher (positiver oder negativer) Wert ist.  
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`isinf(`*X*`)`
+`isinf(`*Stuben*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *x*: Eine reelle Zahl.
+* *x*: eine reelle Zahl.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Ein Wert ungleich Null (true), wenn x eine positive oder negative Unendlichkeit ist; und Null (falsch) sonst.
+Ein Wert ungleich 0 (true), wenn x ein positives oder negatives unendliches Ergebnis ist. und NULL (false) andernfalls.
 
-**Siehe auch**
+**Weitere Informationen**
 
-* Informationen zum Überprüfen, ob der Wert null ist, finden Sie unter [isnull()](isnullfunction.md).
-* Informationen zur Überprüfung, ob der Wert endlich ist, finden Sie unter [isfinite()](isfinitefunction.md).
-* Informationen finden Sie unter [isnan()](isnanfunction.md).
+* Informationen zum Überprüfen, ob der Wert NULL ist, finden Sie unter [IsNull ()](isnullfunction.md).
+* Informationen zum Überprüfen, ob der Wert begrenzt ist, finden Sie unter [isFinite ()](isfinitefunction.md).
+* Informationen zum Überprüfen, ob der Wert NaN (not-a-Number) ist, finden Sie unter [IsNaN ()](isnanfunction.md).
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
 range x from -1 to 1 step 1

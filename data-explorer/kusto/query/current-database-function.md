@@ -1,6 +1,6 @@
 ---
-title: current_database() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden current_database() in Azure Data Explorer beschrieben.
+title: current_database ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird current_database () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,26 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: c61717bbc8d202624b36088df5aed2ba3f3a8d2d
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d68c35547c840cc1e16224c376e90dfabec296d7
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516744"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348699"
 ---
 # <a name="current_database"></a>current_database()
 
-Gibt den Namen der Datenbank im Bereich zurück (Datenbank, für die alle Abfrageentitäten aufgelöst werden, wenn keine andere Datenbank angegeben ist).
+Gibt den Namen der Datenbank im Bereich zurück (Datenbank, für die alle Abfrage Entitäten aufgelöst werden, wenn keine andere Datenbank angegeben ist).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `current_database()`
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Der Name der Datenbank im Bereich `string`als Wert des Typs .
+Der Name der Datenbank im Gültigkeitsbereich als Wert des Typs `string` .
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
 print strcat("Database in scope: ", current_database())

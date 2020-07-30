@@ -1,6 +1,6 @@
 ---
-title: Vorschau-Plugin - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird das Vorschau-Plugin in Azure Data Explorer beschrieben.
+title: 'Vorschau-Plug-in: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt das Vorschau-Plug-in in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 18bda0a4348d0c0eb2776bf124c57397f318a989
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 3d54852577281b66ed7754e419acbabbba989e7c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510981"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346081"
 ---
-# <a name="preview-plugin"></a>Vorschau-Plugin
+# <a name="preview-plugin"></a>preview-Plug-In
 
-Gibt eine Tabelle mit bis zu der angegebenen Anzahl von Zeilen aus dem Eingabedatensatzsatz und der Gesamtzahl der Datensätze im Eingabedatensatzsatz zurück.
+Gibt eine Tabelle mit bis zu der angegebenen Anzahl von Zeilen aus der Eingabedaten Satz Gruppe und der Gesamtanzahl von Datensätzen in der Eingabedaten Satz Gruppe zurück.
 
 ```kusto
 T | evaluate preview(50)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `T` `|` `evaluate` `preview(` *NumberOfRows* `)`
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Das `preview` Plugin gibt zwei Ergebnistabellen zurück:
+Das `preview` Plug-in gibt zwei Ergebnistabellen zurück:
 * Eine Tabelle mit bis zu der angegebenen Anzahl von Zeilen.
-  Die obige Beispielabfrage entspricht beispielsweise `T | take 50`der Ausführung von .
-* Eine Tabelle mit einer einzelnen Zeile/Spalte, die die Anzahl der Datensätze im Eingabedatensatzsatz enthält.
-  Die obige Beispielabfrage entspricht beispielsweise `T | count`der Ausführung von .
+  Beispielsweise entspricht die obige Beispiel Abfrage der Ausführung von `T | take 50` .
+* Eine Tabelle mit einer einzelnen Zeile/Spalte, die die Anzahl der Datensätze in der Eingabedaten Satz Gruppe enthält.
+  Beispielsweise entspricht die obige Beispiel Abfrage der Ausführung von `T | count` .
 
 **Tipps**
 
-Wenn `evaluate` eine tabellarische Quelle vorangestellt wird, die einen komplexen Filter enthält, oder [`materialize`](materializefunction.md) ein Filter, der auf die meisten Quelltabellenspalten verweist, ziehen Sie es vor, die Funktion zu verwenden. Beispiel:
+Wenn `evaluate` eine tabellarische Quelle mit einem komplexen Filter vorangestellt ist, oder ein Filter, der auf die meisten Quell Tabellen Spalten verweist, empfiehlt es sich, die-Funktion zu verwenden [`materialize`](materializefunction.md) . Zum Beispiel:
 
 ```kusto
 let MaterializedT = materialize(T);

@@ -1,6 +1,6 @@
 ---
-title: binary_xor() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden binary_xor() in Azure Data Explorer beschrieben.
+title: binary_xor ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird binary_xor () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,29 +8,29 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: c2f487aa44f8885cbb443c31b8bb3a503e1a76fa
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 6f988fa3d14dab3188bf96825615972995291655
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517526"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349005"
 ---
 # <a name="binary_xor"></a>binary_xor()
 
-Gibt ein Ergebnis der `xor` bitweisen Operation der beiden Werte zurück.
+Gibt das Ergebnis der bitweisen- `xor` Operation der beiden-Werte zurück.
 
 ```kusto
 binary_xor(x,y)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `binary_xor(`*num1* `,` *num2*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *num1*, *num2*: lange Zahlen.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Gibt den logischen XOR-Vorgang für ein Zahlenpaar zurück: num1 num2.
+Gibt eine logische XOR-Operation für ein Zahlenpaar zurück: num1 ^ num2.

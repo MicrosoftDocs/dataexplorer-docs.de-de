@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 213b69d1458d234e987c8a378ade82441e578d5e
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: 3ae821e76c78f8beba465651ffc759bfefdfa001
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128613"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346608"
 ---
 # <a name="not-between-operator-between"></a>not-between-Operator (!between)
 
@@ -26,7 +26,7 @@ Table1 | where Time !between (datetime(2017-01-01) .. datetime(2017-01-01))
 
 `!between`kann für jeden numerischen, DateTime-oder TimeSpan-Ausdruck verwendet werden.
  
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `|` `where` *expr* `!between` `(` *leftrange* ` .. ` *rightrange*`)`   
  
@@ -34,18 +34,18 @@ Wenn der *expr* -Ausdruck "DateTime" ist, wird eine andere syntaktische Sugar-Sy
 
 *T* `|` `where` *expr* `!between` `(` *leftrangedatetime* ` .. ` *rightrangetimespan*`)`   
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T* : die tabellarische Eingabe, deren Datensätze abgeglichen werden sollen.
 * *expr* -der Ausdruck, der gefiltert werden soll.
 * *leftrange* -Ausdruck des linken Bereichs (inklusiv).
 * *rightrange* -Ausdruck des rechten Bereichs (inklusiv).
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Zeilen in *T* , für die das Prädikat von (*expr*  <  *leftrange* oder *expr*  >  *rightrange*) als ausgewertet wird `true` .
 
-**Beispiele**  
+## <a name="examples"></a>Beispiele  
 
 **Filtern numerischer Werte mithilfe des Operators '! between '**  
 

@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: ec4c398d9079cd5e01875bd1d92ae06db0bb0908
-ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
+ms.openlocfilehash: a6c17f0505927c38d26c37a5e9872747541d129a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84512570"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346438"
 ---
 # <a name="parse_ipv6_mask"></a>parse_ipv6_mask()
  
@@ -24,11 +24,11 @@ parse_ipv6_mask("127.0.0.1", 24) == '0000:0000:0000:0000:0000:ffff:7f00:0000'
 parse_ipv6_mask(":fe80::85d:e82c:9446:7994", 120) == 'fe80:0000:0000:0000:085d:e82c:9446:7900'
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `parse_ipv6_mask(`*`Expr`*`, `*`PrefixMask`*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *`Expr`*: Zeichen folgen Ausdruck, der IPv6/IPv4-Netzwerkadresse darstellt, die in eine kanonische IPv6-Darstellung konvertiert wird. Die Zeichenfolge kann eine Netzwerk Maske mit [IP-Präfix Notation](#ip-prefix-notation)enthalten.
 * *`PrefixMask`*: Eine ganze Zahl zwischen 0 und 128, die die Anzahl der signifikantesten Bits darstellt, die berücksichtigt werden.
@@ -38,12 +38,12 @@ parse_ipv6_mask(":fe80::85d:e82c:9446:7994", 120) == 'fe80:0000:0000:0000:085d:e
 IP-Adressen können `IP-prefix notation` mithilfe eines Schrägstrichs ( `/` ) definiert werden.
 Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse. Die Zahl (1 bis 127) rechts neben dem Schrägstrich ( `/` ) ist die Anzahl von zusammenhängenden 1 Bit in der netmask.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Wenn die Konvertierung erfolgreich ist, ist das Ergebnis eine Zeichenfolge, die eine kanonische IPv6-Netzwerkadresse darstellt.
 Wenn die Konvertierung nicht erfolgreich ist, lautet das Ergebnis `null` .
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

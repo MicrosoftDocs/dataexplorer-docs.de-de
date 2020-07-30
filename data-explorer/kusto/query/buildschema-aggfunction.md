@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: cf21443beffb327e2708b8990017ac37fbbc8d21
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: 2520849508c9cef829d7c8c07f22d3f8c64cfcea
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85902041"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348937"
 ---
 # <a name="buildschema-aggregation-function"></a>Buildschema () (Aggregations Funktion)
 
@@ -21,22 +21,22 @@ Gibt das minimale Schema zurück, das alle Werte von *dynamicexpr*zulässt.
 
 * Kann nur im Kontext der Aggregation verwendet werden [, in zusammen](summarizeoperator.md) Fassung
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `buildschema(` *dynamicexpr* zusammenfassen`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Dynamicexpr*: Ausdruck, der für die Aggregations Berechnung verwendet wird. Der Parameter Spaltentyp muss lauten `dynamic` . 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Der maximale Wert von *`Expr`* in der Gruppe.
 
 > [!TIP] 
 > Wenn `buildschema(json_column)` einen Syntax Fehler ergibt: *ist eine `json_column` Zeichenfolge anstelle eines dynamischen Objekts?* Verwenden Sie dann `buildschema(parsejson(json_column))` .
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 Angenommen, die Eingabe Spalte hat drei dynamische Werte.
 

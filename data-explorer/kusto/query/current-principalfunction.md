@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 12/10/2019
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 43e92edd74861acc8207a855243f9ec1e012070a
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: 7fa1ad900eb91390436e88c44ad9fd7394ad087d
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717358"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348648"
 ---
 # <a name="current_principal"></a>current_principal()
 
@@ -23,17 +23,17 @@ ms.locfileid: "84717358"
 
 Gibt den aktuellen Prinzipal Namen zurück, der die Abfrage ausführt.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `current_principal()`
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Der aktuelle voll qualifizierte Prinzipal Name (fqn) als `string` .  
 Das Zeichen folgen Format lautet wie folgt:  
 *Principlatype* `=` *Principalid* `;` *Tenantid*
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

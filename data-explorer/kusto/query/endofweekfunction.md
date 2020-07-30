@@ -1,6 +1,6 @@
 ---
-title: Endofweek() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt Endofweek() in Azure Data Explorer.
+title: EndOf Week ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird EndOf Week () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 83c080c60e34dbfdf19f7dde870621e34ded836d
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 57fa1764753e730f9ff0a2b01a70e0c221217d23
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81515826"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348274"
 ---
 # <a name="endofweek"></a>endofweek()
 
-Gibt das Ende der Woche zurück, in der das Datum enthalten ist, verschoben um einen Offset, sofern angegeben.
+Gibt das Ende der Woche zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.
 
 Der letzte Tag der Woche gilt als Samstag.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`endofweek(`*Datum* `,`[*Offset*]`)`
+`endofweek(`*Datum* [ `,` *Offset*]`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* `date`: Das Eingabedatum.
-* `offset`: Eine optionale Anzahl von Offsetwochen ab dem Eingabedatum (ganzzahlig, default - 0).
+* `date`: Das Eingabe Datum.
+* `offset`: Eine optionale Anzahl von Offset Wochen ab dem Eingabe Datum (Integer, default-0).
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Eine Datumszeit, die das Ende der Woche für den angegebenen *Datumswert* darstellt, mit dem Offset, falls angegeben.
+Ein DateTime-Wert, der das Ende der Woche für den angegebenen *Datums* Wert mit dem Offset darstellt, falls angegeben.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
   range offset from -1 to 1 step 1
@@ -42,7 +42,7 @@ Eine Datumszeit, die das Ende der Woche für den angegebenen *Datumswert* darste
 
 ```
 
-|Wochenende|
+|Wochen|
 |---|
 |2016-12-31 23:59:59.9999999|
 |2017-01-07 23:59:59.9999999|

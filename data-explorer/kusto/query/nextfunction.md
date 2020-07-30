@@ -1,6 +1,6 @@
 ---
-title: next() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird next() in Azure Data Explorer beschrieben.
+title: Next ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird die nächste ()-Daten-Explorer in Azure beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f45e88942fdf9eb23451e1391866f57ca5f0e21a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a265d536f655df3086ece1b9953eaade4717781c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81512120"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346625"
 ---
 # <a name="next"></a>next()
 
-Gibt den Wert einer Spalte in einer Zeile zurück, die nach der aktuellen Zeile in einem [serialisierten Zeilensatz](./windowsfunctions.md#serialized-row-set)bei einem Versatz versetzt wird.
+Gibt den Wert einer Spalte in einer Zeile zurück, die an einem Offset nach der aktuellen Zeile in einem [serialisierten Zeilen Satz liegt](./windowsfunctions.md#serialized-row-set).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `next(column)`
 
@@ -27,16 +27,16 @@ Gibt den Wert einer Spalte in einer Zeile zurück, die nach der aktuellen Zeile 
 
 `next(column, offset, default_value)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* `column`: die Spalte, aus der die Werte abstammen sollen.
+* `column`: die Spalte, aus der die Werte abgeleitet werden sollen.
 
-* `offset`: der Offset, um in Zeilen voranzukommen. Wenn kein Offset angegeben ist, wird ein Standardoffset 1 verwendet.
+* `offset`: der Offset, der in Zeilen fort geht. Wenn kein Offset angegeben wird, wird ein Standard Offset 1 verwendet.
 
-* `default_value`: Der Standardwert, der verwendet werden soll, wenn keine nächsten Zeilen vorhanden sind, aus denen der Wert entnommen werden kann. Wenn kein Standardwert angegeben ist, wird null verwendet.
+* `default_value`: der Standardwert, der verwendet werden soll, wenn keine nächsten Zeilen vorhanden sind, aus denen der Wert genommen werden soll. Wenn kein Standardwert angegeben ist, wird NULL verwendet.
 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 ```kusto
 Table | serialize | extend nextA = next(A,1)
 | extend diff = A - nextA

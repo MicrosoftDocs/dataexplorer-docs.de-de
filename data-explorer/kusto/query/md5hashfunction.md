@@ -8,33 +8,33 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/29/2020
-ms.openlocfilehash: c09f30a4f13f16e15cfcc826f6976f1208fdabf1
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 17b3e0d13f8048ccac90add4eee6f02f3d2e2959
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793624"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346795"
 ---
-# <a name="hash_md5"></a>hash_md5 ()
+# <a name="hash_md5"></a>hash_md5()
 
 Gibt einen MD5-Hashwert für den Eingabe Wert zurück.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `hash_md5(`*Ausgangs*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Quelle*: der Wert, für den der Hashwert verwendet werden soll.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Der MD5-Hashwert des angegebenen Skalars, der als hexadezimale Zeichenfolge (eine Zeichenfolge) codiert ist, die jeweils eine einzelne hexadezimal Zahl zwischen 0 und 255 darstellt.
 
 > [!WARNING]
 > Der Algorithmus, der von dieser Funktion (MD5) verwendet wird, wird in Zukunft garantiert nicht geändert, ist jedoch sehr komplex zu berechnen. Für Benutzer, die für die Dauer einer einzelnen Abfrage eine "einfache" Hash Funktion benötigen, wird empfohlen, stattdessen den Funktions [Hash ()](./hashfunction.md) zu verwenden.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -57,7 +57,7 @@ StormEvents
 | top 5 by StormCount
 ```
 
-|Status|Status|Stormcount|
+|Zustand|Status|Stormcount|
 |---|---|---|
 |TEXAS|3b00dbe6e07e7485a1c12d36c8e9910a|4701|
 |Kansas|e1338d0ac8be43846cf9ae967bd02e7f|3166|

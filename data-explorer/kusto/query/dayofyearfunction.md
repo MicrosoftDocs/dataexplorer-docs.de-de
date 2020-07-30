@@ -1,6 +1,6 @@
 ---
-title: dayofyear() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt dayofyear() in Azure Data Explorer.
+title: dayosyear ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird dayosyear () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,29 +8,29 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 41e7c5906da001e877dd9124124e126d729e886d
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 925b65846c6ba32163bd325fd2ee3321bc7fc802
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516217"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348461"
 ---
 # <a name="dayofyear"></a>dayofyear()
 
-Gibt die ganze Zahl an, die die Tagesnummer des angegebenen Jahres darstellt.
+Gibt die Ganzzahl zurück, die die Tagesnummer des angegebenen Jahrs darstellt.
 
 ```kusto
 dayofyear(datetime(2015-12-14))
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `dayofweek(`*a_date*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * `a_date`: Ein `datetime`-Wert.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-`day number`des gegebenen Jahres.
+`day number`des angegebenen Jahres.

@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 12/10/2019
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 5291fa664dc4736179d7f20984eacfd44efd5888
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 879fe4aac2a6714f3d7ab16a63c69cd8215bbb04
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737656"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348597"
 ---
 # <a name="cursor_current-current_cursor"></a>cursor_current(), current_cursor()
 
@@ -23,13 +23,13 @@ ms.locfileid: "82737656"
 
 Ruft den aktuellen Wert des Cursors der Datenbank im Gültigkeitsbereich ab. (Die Namen `cursor_current` und `current_cursor` sind Synonyme.)
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `cursor_current()`
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Gibt einen einzelnen Wert des Typs `string` zurück, der den aktuellen Wert des Cursors der Datenbank im Gültigkeitsbereich codiert.
+Gibt einen einzelnen Wert des Typs zurück `string` , der den aktuellen Wert des Cursors der Datenbank im Gültigkeitsbereich codiert.
 
 **Hinweise**
 

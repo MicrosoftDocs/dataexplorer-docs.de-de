@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 03/09/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: fdd062abc02ff1d98ba935fc9016d0a1505e69c3
-ms.sourcegitcommit: 974d5f2bccabe504583e387904851275567832e7
+ms.openlocfilehash: 67d589f15a414ed715a75cc1871549b06f3dba9b
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/18/2020
-ms.locfileid: "83550400"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348665"
 ---
 # <a name="current_principal_is_member_of"></a>current_principal_is_member_of()
 
@@ -31,11 +31,11 @@ print current_principal_is_member_of(
     )
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `current_principal_is_member_of`(`*list of string literals*`)
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Liste der Ausdrücke* : eine durch Trennzeichen getrennte Liste von Zeichenfolgenliteralen, wobei jedes Literale eine voll qualifizierte voll qualifizierte namens Zeichenfolge (fqn) ist:  
 *Principlatype* `=` *Principalid* `;` *Tenantid*
@@ -46,7 +46,7 @@ print current_principal_is_member_of(
 | Aad-Gruppe       | `aadgroup=` |
 | Aad-Anwendung | `aadapp=`   |
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
   
 Die Funktion gibt Folgendes zurück:
 * `true`:, wenn der aktuelle Prinzipal, der die Abfrage ausgeführt hat, mit mindestens einem Eingabe Argument erfolgreich abgeglichen wurde.
@@ -60,7 +60,7 @@ Die Funktion gibt Folgendes zurück:
 > * `where current_principal_is_member_of('non-existing-group') != false` 
 
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

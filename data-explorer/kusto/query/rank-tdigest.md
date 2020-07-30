@@ -8,27 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: 29b35e5bd7265d89e65fe0129317a9f1672c7cad
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 143257a586bb951caeb116882551e55f89c8636e
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373081"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345877"
 ---
 # <a name="rank_tdigest"></a>rank_tdigest()
 
 Berechnet den ungefähren Rang des Werts in einer Menge. Der Rang des Werts `v` in einer Menge `S` ist als Anzahl von Elementen von definiert, `S` die kleiner oder gleich sind `v` , `S` wird durch die dargestellt `tdigest` .
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `rank_tdigest(`*`TDigest`*`,` *`Expr`*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Tdigest*: Ausdruck, der von [tdigest ()](tdigest-aggfunction.md) oder [tdigest_merge ()](tdigest-merge-aggfunction.md) generiert wurde.
 * *Expr*: Ausdruck, der einen Wert darstellt, der für die Rang Folge Berechnung verwendet werden soll.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Der Rang für foreach-Werte in einem DataSet.
 
@@ -36,7 +36,7 @@ Der Rang für foreach-Werte in einem DataSet.
 
 1) Die Werte, deren Rang Sie erhalten möchten, müssen vom gleichen Typ sein wie das `tdigest` .
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 In einer sortierten Liste (1-1000) ist der Rang von 685 der zugehörige Index:
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 5fd6221e4b877d066050f932a564f71d56d8c168
-ms.sourcegitcommit: c3bbb9a6bfd7c5506f05afb4968fdc2043a9fbbf
+ms.openlocfilehash: f5ad4cdc2b74ddb62a4572249bb06fab6c656243
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85332561"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347424"
 ---
 # <a name="infer_storage_schema-plugin"></a>Plug-In „infer_storage_schema“
 
@@ -30,11 +30,11 @@ let options = dynamic({
 evaluate infer_storage_schema(options)
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `evaluate` `infer_storage_schema(` *Optionen* `)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 Ein einzelnes *options* Argument ist ein konstanter Wert des Typs `dynamic` , der einen Eigenschaften Behälter enthält, der die Eigenschaften der Anforderung angibt:
 
@@ -46,7 +46,7 @@ Ein einzelnes *options* Argument ist ein konstanter Wert des Typs `dynamic` , de
 |`FileNamePrefix`|Nein|Nur Dateien überprüfen, die mit diesem Präfix beginnen. Dies ist nicht erforderlich, aber die Angabe kann den Prozess beschleunigen.|
 |`Mode`|Nein|Strategie für die Schema Ableitung, eine der folgenden: `any` , `last` , `all` . Ableiten Sie das Datenschema aus einer beliebigen (ersten gefundenen) Datei, aus der letzten geschriebenen Datei bzw. aus allen Dateien. Der Standardwert ist `last`.|
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Das `infer_storage_schema` Plug-in gibt eine einzelne Ergebnistabelle zurück, die eine einzelne Zeile/Spalte mit der CSL-Schema Zeichenfolge enthält
 
@@ -55,7 +55,7 @@ Das `infer_storage_schema` Plug-in gibt eine einzelne Ergebnistabelle zurück, d
 > * Die Strategie "All" für die Schema Rückschluss Strategie ist ein sehr kostengünstiger Vorgang, da Sie das Lesen aus *allen* gefundenen Artefakten und das Zusammenführen Ihres Schemas impliziert.
 > * Einige zurückgegebene Typen sind möglicherweise nicht die tatsächlichen Typen, die durch einen falschen Typ (oder als Ergebnis des Schema Zusammenführung Prozesses) verursacht werden. Aus diesem Grund sollten Sie das Ergebnis sorgfältig überprüfen, bevor Sie eine externe Tabelle erstellen.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
 let options = dynamic({

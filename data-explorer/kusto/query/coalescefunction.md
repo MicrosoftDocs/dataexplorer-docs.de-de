@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ea57efe36fb86189d798e5f18fa3fe9470bfd634
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 410a0c84a1bafdfa1900ef8e21bc0a91327b64c3
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227535"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348869"
 ---
 # <a name="coalesce"></a>coalesce()
 
@@ -23,22 +23,22 @@ Wertet eine Liste von Ausdrücken aus und gibt den ersten Ausdruck zurück, der 
 coalesce(tolong("not a number"), tolong("42"), 33) == 42
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `coalesce(`*expr_1* `, ` *expr_2* `,` ...)
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *expr_i*: ein skalarer Ausdruck, der ausgewertet werden soll.
 - Alle Argumente müssen denselben Typ aufweisen.
 - Maximal 64 Argumente werden unterstützt.
 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Der Wert des ersten *expr_i* , dessen Wert nicht NULL ist (oder für Zeichen folgen Ausdrücke nicht leer ist).
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net/Samples  -->
 ```kusto

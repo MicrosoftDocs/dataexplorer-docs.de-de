@@ -1,6 +1,6 @@
 ---
-title: isnan() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird isnan() in Azure Data Explorer beschrieben.
+title: IsNaN ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird IsNaN () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 123d9cd32d645bb1225983138973a17b6bb9ecf3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 5597f21d5e426329e2793978a6b207efc3868d13
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513565"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347220"
 ---
 # <a name="isnan"></a>isnan()
 
-Gibt zurück, ob die Eingabe Not-a-Number (NaN)-Wert ist.  
+Gibt zurück, ob die Eingabe ein NaN-Wert (not-a-Number) ist.  
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`isnan(`*X*`)`
+`isnan(`*Stuben*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *x*: Eine reelle Zahl.
+* *x*: eine reelle Zahl.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Ein Wert ungleich Null (true), wenn x NaN ist; und Null (falsch) sonst.
+Ein Wert ungleich 0 (true), wenn x NaN ist. und NULL (false) andernfalls.
 
-**Siehe auch**
+**Weitere Informationen**
 
-* Informationen zum Überprüfen, ob der Wert null ist, finden Sie unter [isnull()](isnullfunction.md).
-* Informationen zur Überprüfung, ob der Wert endlich ist, finden Sie unter [isfinite()](isfinitefunction.md).
-* Informationen zur Überprüfung, ob der Wert unendlich ist, finden Sie unter [isinf()](isinffunction.md).
+* Informationen zum Überprüfen, ob der Wert NULL ist, finden Sie unter [IsNull ()](isnullfunction.md).
+* Informationen zum Überprüfen, ob der Wert begrenzt ist, finden Sie unter [isFinite ()](isfinitefunction.md).
+* Informationen zum Überprüfen, ob der Wert unendlich ist, finden Sie unter [isinf ()](isinffunction.md).
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 ```kusto
 range x from -1 to 1 step 1
@@ -46,7 +46,7 @@ range x from -1 to 1 step 1
 | extend isnan=isnan(div)
 ```
 
-|x|y|div|Isnan|
+|x|y|div|IsNaN|
 |---|---|---|---|
 |-1|1|-1|0|
 |0|0|NaN|1|

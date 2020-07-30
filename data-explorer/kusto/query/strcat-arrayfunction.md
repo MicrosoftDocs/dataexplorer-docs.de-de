@@ -1,6 +1,6 @@
 ---
-title: strcat_array() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird strcat_array() in Azure Data Explorer beschrieben.
+title: strcat_array ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird strcat_array () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2d2412762cf68243e3952a8ad12a5b919d947bd3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 5b8369d2e994477c9d01880632fac5f8a3ebaf6a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81506952"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87342596"
 ---
 # <a name="strcat_array"></a>strcat_array()
 
-Erstellt eine verkettete Zeichenfolge von Arraywerten mit einem angegebenen Trennzeichen.
+Erstellt mithilfe des angegebenen Trenn Zeichens eine verketteten Zeichenfolge von Array Werten.
     
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`strcat_array(`*Array*, *Trennzeichen*`)`
+`strcat_array(`*Array*, *Trenn* Zeichen`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *array*: `dynamic` Ein Wert, der ein Array von Zuverkettenden Werten darstellt.
-* *delimeter*: `string` Ein Wert, der zum Verketten der Werte im *Array* verwendet wird
+* *Array*: ein `dynamic` Wert, der ein Array von zu verkettenden Werten darstellt.
+* *Trennzeichen*: ein `string` Wert, der verwendet wird, um die Werte im *Array* zu verketten.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Arraywerte, verkettet auf eine einzelne Zeichenfolge.
+Array Werte, die zu einer einzelnen Zeichenfolge verkettet werden.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
   
 ```kusto
 print str = strcat_array(dynamic([1, 2, 3]), "->")

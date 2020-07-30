@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: baafca4d8d5711d55838bceae817c36ecb0edd6f
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: c5dffc8695df466dfc1ac9f0c5bcc4a40f687b2a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618569"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87342715"
 ---
 # <a name="stdevp-aggregation-function"></a>STDE VP () (Aggregations Funktion)
 
@@ -25,19 +25,19 @@ Berechnet die Standardabweichung von *expr* in der Gruppe, wobei die Gruppe als 
 
 * Kann [nur im Kontext der Aggregation innerhalb von](summarizeoperator.md) Zusammenfassung verwendet werden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `stdevp(` *expr* zusammenfassen`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expr*: Ausdruck, der für die Aggregations Berechnung verwendet wird. 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Der Standardwert für die Abweichung von *expr* in der Gruppe.
  
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 range x from 1 to 5 step 1

@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/22/2019
-ms.openlocfilehash: df10ea2bbdf4e48d32c087d35eb9361fc4d697b8
-ms.sourcegitcommit: ae72164adc1dc8d91ef326e757376a96ee1b588d
+ms.openlocfilehash: 4cfe690b5ee2d32462552fb90300c9e3168b1f1d
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/11/2020
-ms.locfileid: "84717205"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349311"
 ---
 # <a name="base64_decode_toarray"></a>base64_decode_toarray()
 
 Decodiert eine base64-Zeichenfolge in ein Array von Long-Werten.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `base64_decode_toarray(`*Schnür*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *String*: Eingabe Zeichenfolge, die von Base64 in UTF8-Zeichenfolge decodiert werden soll.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt ein Array von langen Werten zurück, die aus einer base64-Zeichenfolge decodiert wurden.
 
 * Informationen zum Decodieren von Base64-Zeichen folgen in eine UTF-8-Zeichenfolge finden Sie unter [base64_decode_tostring ()](base64_decode_tostringfunction.md)
 * Informationen zum Codieren von Zeichen folgen in eine base64-Zeichenfolge finden Sie unter [base64_encode_tostring ()](base64_encode_tostringfunction.md)
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -53,6 +53,6 @@ Wenn Sie versuchen, eine base64-Zeichenfolge zu decodieren, die aus einer ungül
 print Empty=base64_decode_toarray("U3RyaW5n0KHR0tGA0L7Rh9C60LA=")
 ```
 
-|Empty|
+|Leer|
 |-----|
 ||

@@ -1,6 +1,6 @@
 ---
-title: avg() (Aggregationsfunktion) - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt avg() (Aggregationsfunktion) in Azure Data Explorer.
+title: AVG () (Aggregations Funktion)-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird AVG () (Aggregations Funktion) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,28 +8,28 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: aadc756bdf4c6cab805f58a8a600815cf29680f7
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: f058af075a856d12a2a6a81419f32b6efbd9ea16
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518342"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349396"
 ---
-# <a name="avg-aggregation-function"></a>avg() (Aggregationsfunktion)
+# <a name="avg-aggregation-function"></a>AVG () (Aggregations Funktion)
 
-Berechnet den Durchschnitt von *Expr* in der gesamten Gruppe. 
+Berechnet den Durchschnitt von *expr* in der Gruppe. 
 
-* Kann nur im Kontext der Aggregation innerhalb [der Zusammenfassung](summarizeoperator.md) verwendet werden
+* Kann nur im Kontext der [Aggregation in zusammen](summarizeoperator.md) Fassung verwendet werden.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`avg(` *Expr* zusammenfassen`)`
+`avg(` *expr* zusammenfassen`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Expr*: Ausdruck, der für die Aggregationsberechnung verwendet wird. Datensätze `null` mit Werten werden ignoriert und nicht in die Berechnung einbezogen.
+* *Expr*: Ausdruck, der für die Aggregations Berechnung verwendet wird. Datensätze mit `null` Werten werden ignoriert und nicht in die Berechnung eingeschlossen.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Der durchschnittliche Wert von *Expr* in der gesamten Gruppe.
+Der Durchschnittswert von *expr* in der Gruppe.
  

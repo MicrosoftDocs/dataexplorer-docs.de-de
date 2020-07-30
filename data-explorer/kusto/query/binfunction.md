@@ -1,6 +1,6 @@
 ---
-title: bin() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt bin() in Azure Data Explorer.
+title: bin ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird bin () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,34 +8,34 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 3fb827c71fa63fde031a91bc9aec7f0ed108fd5c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 434d32a3b6597d71ea22c182a468d64d7971e6cb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81517424"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348971"
 ---
 # <a name="bin"></a>bin()
 
 Rundet Werte auf eine ganze Zahl ab, die ein Vielfaches der angegebenen bin-Größe ist. 
 
-Häufig in Kombination [`summarize by ...`](./summarizeoperator.md)mit verwendet.
+Wird häufig in Kombination mit verwendet [`summarize by ...`](./summarizeoperator.md) .
 Wenn Sie über einen verstreuten Satz von Werten verfügen, werden sie zu einem kleineren Satz bestimmter Werte gruppiert.
 
-Nullwerte, eine Null-Lagerplatzgröße oder eine negative Lagerplatzgröße führen zu NULL. 
+NULL-Werte, eine NULL-bin-Größe oder eine negative bin-Größe ergeben NULL. 
 
-Alias `floor()` zu funktionieren.
+Alias für die `floor()` Funktion.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`bin(`*Wert*`,`*roundTo*`)`
+`bin(`*Wert* `,` *roundTo*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Wert*: Eine Zahl, ein Datum oder eine Zeitspanne. 
-* *roundTo*: Die "bin-Größe". Eine Zahl, ein Datum oder ein Zeitraum zum Teilen des Werts ( *value*). 
+* *Wert*: eine Zahl, ein Datum oder ein TimeSpan-Wert. 
+* *roundTo*: die "bin size". Eine Zahl, ein Datum oder ein Zeitraum zum Teilen des Werts ( *value*). 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Das nächste Vielfache von *roundTo* unter dem Wert (*value*).  
  
@@ -43,9 +43,9 @@ Das nächste Vielfache von *roundTo* unter dem Wert (*value*).
 (toint((value/roundTo))) * roundTo`
 ```
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
-Ausdruck | Ergebnis
+expression | Ergebnis
 ---|---
 `bin(4.5, 1)` | `4.0`
 `bin(time(16d), 7d)` | `14d`

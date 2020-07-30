@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: f20fa8f07368052691334ab65eec666e9a3d568e
-ms.sourcegitcommit: 733bde4c6bc422c64752af338b29cd55a5af1f88
+ms.openlocfilehash: ad6403a70a8f71eee05bc56789cae2d6287a6605
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83271344"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346523"
 ---
 # <a name="pack_array"></a>pack_array()
 
 Packt alle Eingabewerte in ein dynamisches Array.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `pack_array(`*Expr1* `[` , ` *Expr2*]` ) '
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expr1... N*: Eingabe Ausdrücke, die in ein dynamisches Array gepackt werden sollen.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Dynamisches Array, das die Werte von expr1, expr2,..., exprN enthält.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

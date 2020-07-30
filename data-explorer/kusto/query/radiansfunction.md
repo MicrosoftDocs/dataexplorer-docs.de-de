@@ -1,6 +1,6 @@
 ---
-title: radians() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt Radander() in Azure Data Explorer.
+title: radiane ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel werden radiane () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,36 +8,36 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0dc04c5f9593b6bd5fc61f57d20819cf7d2a178c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 3aaa41a631498e2938acf722b75f409a1bbe5031
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81510658"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345945"
 ---
 # <a name="radians"></a>radians()
 
-Konvertiert Winkelwert in Grad in Wert in Bogenmaß, mit Formel`radians = (PI / 180 ) * angle_in_degrees`
+Konvertiert den Winkelwert in Grad in den Wert im Bogenmaß mithilfe der Formel.`radians = (PI / 180 ) * angle_in_degrees`
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`radians(`*Eine*`)`
+`radians(`*ein*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *a*: Winkel in Grad (eine reelle Zahl).
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-* Der entsprechende Winkel in Bogenmaß für einen in Grad angegebenen Winkel. 
+* Der entsprechende Winkel im Bogenmaß für einen in Grad angegebenen Winkel. 
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 print radians0 = radians(90), radians1 = radians(180), radians2 = radians(360) 
 
 ```
 
-|radians0|Radians1|radians2|
+|radians0|radians1|radians2|
 |---|---|---|
-|1.5707963267949|3.14159265358979|6.28318530717959|
+|1,5707963267949|3,14159265358979|6.28318530717959|

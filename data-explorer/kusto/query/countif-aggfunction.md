@@ -1,6 +1,6 @@
 ---
-title: countif() (Aggregationsfunktion) - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt countif() (Aggregationsfunktion) in Azure Data Explorer.
+title: 'count () (Aggregations Funktion): Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird die Funktion "count ()" (Aggregations Funktion) in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,30 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 03b6f1cb959706463a73d8aa18a11144e2123492
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: a5b69b50c0cf4c07934d7900937675bf6338eab9
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516982"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348767"
 ---
-# <a name="countif-aggregation-function"></a>countif() (Aggregationsfunktion)
+# <a name="countif-aggregation-function"></a>count () (Aggregations Funktion)
 
 Gibt die Anzahl von Zeilen zurück, für die *Predicate* als `true` ausgewertet wird.
 
-* Kann nur im Kontext der Aggregation innerhalb [der Zusammenfassung](summarizeoperator.md) verwendet werden
+* Kann [nur im Kontext der Aggregation innerhalb von](summarizeoperator.md) Zusammenfassung verwendet werden.
 
-Siehe auch - [count()-Funktion,](count-aggfunction.md) die Zeilen ohne Prädikatsausdruck zählt.
+Siehe auch- [count ()](count-aggfunction.md) -Funktion, die Zeilen ohne Prädikat Ausdruck zählt.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `countif(` *Prädikat* zusammenfassen`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Prädikat*: Ausdruck, der für die Aggregationsberechnung verwendet wird. 
+* *Predicate*: ein Ausdruck, der für die Aggregations Berechnung verwendet wird. 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Gibt die Anzahl von Zeilen zurück, für die *Predicate* als `true` ausgewertet wird.
 

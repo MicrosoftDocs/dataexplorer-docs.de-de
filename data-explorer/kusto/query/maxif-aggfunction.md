@@ -1,6 +1,6 @@
 ---
-title: maxif() (Aggregationsfunktion) - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt maxif() (Aggregationsfunktion) in Azure Data Explorer.
+title: maxif () (Aggregations Funktion)-Azure Daten-Explorer | Microsoft-Dokumentation
+description: Dieser Artikel beschreibt maxif () (Aggregations Funktion) in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,35 +8,35 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9be25615f9da61aec6b4d56543f624fa0c24c1c4
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 471ca0e3d6623b77fd2d799949bfe060643798e2
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81512443"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87346812"
 ---
-# <a name="maxif-aggregation-function"></a>maxif() (Aggregationsfunktion)
+# <a name="maxif-aggregation-function"></a>maxif () (Aggregations Funktion)
 
-Gibt den Maximalwert für die Gruppe zurück, `true`für die *Predikat* ausgewertet wird.
+Gibt den maximalen Wert für die Gruppe zurück, für den das *Prädikat* ausgewertet wird `true` .
 
-* Kann nur im Kontext der Aggregation innerhalb [der Zusammenfassung](summarizeoperator.md) verwendet werden
+* Kann [nur im Kontext der Aggregation innerhalb von](summarizeoperator.md) Zusammenfassung verwendet werden.
 
-Siehe auch - [max()-Funktion,](max-aggfunction.md) die den maximalen Wert in der Gruppe ohne Prädikatsausdruck zurückgibt.
+Siehe auch- [Max ()](max-aggfunction.md) -Funktion, die den maximalen Wert über die Gruppe ohne Prädikat Ausdruck zurückgibt.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`summarize``maxif(``,`*Expr-Prädikat* *Expr*`)`
+`summarize``maxif(` *Expr*- `,` *Prädikat*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *Expr*: Ausdruck, der für die Aggregationsberechnung verwendet wird. 
-* *Prädikat*: Prädikat, dass, wenn true, der berechnete *Expr-Wert* auf Maximum überprüft wird.
+* *Expr*: Ausdruck, der für die Aggregations Berechnung verwendet wird. 
+* *Prädikat*: Prädikat: Wenn true, wird der berechnete *expr* -Wert auf Maximum geprüft.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Der maximale Wert von *Expr* in der Gruppe, `true`für die *Predikat* ausgewertet wird, .
+Der maximale Wert von *expr* in der Gruppe, für die das *Prädikat* ausgewertet wird `true` .
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 range x from 1 to 100 step 1

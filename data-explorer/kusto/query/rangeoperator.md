@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9dc64e6d91d6832dd57345bf58200848ad5a5db4
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 5c736492745d47428b5919d9791aa6115aaf8566
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373095"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87345894"
 ---
 # <a name="range-operator"></a>range-Operator
 
@@ -21,11 +21,11 @@ Erzeugt eine einspaltige Tabelle mit Werten.
 
 Beachten Sie, dass keine Pipeline-Eingabe vorhanden ist. 
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `range`*ColumnName* `from` *starten* `to` Sie wird *beendet* `step` *Schritt*
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *ColumnName*: der Name der einzelnen Spalte in der Ausgabe Tabelle.
 * *Start*: der kleinste Wert in der Ausgabe.
@@ -34,11 +34,11 @@ Beachten Sie, dass keine Pipeline-Eingabe vorhanden ist.
 
 Die Argumente müssen numerische Werte, Datums- oder TimeSpan-Werte sein. Sie können nicht auf die Spalten einer Tabelle verweisen. (Wenn Sie den Bereich basierend auf einer Eingabe Tabelle berechnen möchten, verwenden Sie die Range-Funktion, vielleicht mit dem MV-Expand-Operator.) 
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Eine Tabelle mit einer einzelnen Spalte namens *ColumnName*, deren Werte *Start*, *Start* `+` *Schritt*,... bis zu und bis zum *Ende*.
 
-**Beispiel**  
+## <a name="example"></a>Beispiel  
 
 Eine Tabelle von Mitternacht der vergangenen sieben Tage. Die bin (floor)-Funktion reduziert jede Zeit auf den Anfang des Tages.
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: ef64818c9c5e345ffb60999c97273670026be022
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 84858a28d1676306a34b2bfa7dfe9563e46227fb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227620"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349175"
 ---
 # <a name="between-operator"></a>between-Operator
 
@@ -26,7 +26,7 @@ Table1 | where Time between (datetime(2017-01-01) .. datetime(2017-01-01))
 
 `between`kann für jeden numerischen, DateTime-oder TimeSpan-Ausdruck verwendet werden.
  
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 *T* `|` `where` *expr* `between` `(` *leftrange* ` .. ` *rightrange*`)`   
  
@@ -34,18 +34,18 @@ Wenn der *expr* -Ausdruck "DateTime" ist, wird eine andere syntaktische Sugar-Sy
 
 *T* `|` `where` *expr* `between` `(` *leftrangedatetime* ` .. ` *rightrangetimespan*`)`   
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *T* : die tabellarische Eingabe, deren Datensätze abgeglichen werden sollen.
 * *expr* -der Ausdruck, der gefiltert werden soll.
 * *leftrange* -Ausdruck des linken Bereichs (inklusiv).
 * *rightrange* -Ausdruck des rechten Bereichs (inklusiv).
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Zeilen in *T* , für die das Prädikat von (*expr*  >=  *leftrange* und *expr*  <=  *rightrange*) als ausgewertet wird `true` .
 
-**Beispiele**  
+## <a name="examples"></a>Beispiele  
 
 **Filtern numerischer Werte mithilfe eines ' between '-Operators**  
 

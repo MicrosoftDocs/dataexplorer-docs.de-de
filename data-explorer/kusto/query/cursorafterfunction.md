@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 9fab1ec936e950368667fc3afb133dcd952e44b5
-ms.sourcegitcommit: d885c0204212dd83ec73f45fad6184f580af6b7e
+ms.openlocfilehash: 0f555cd1ebec8d95a3e7d0e46c986b04154c721e
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82737690"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348631"
 ---
 # <a name="cursor_after"></a>cursor_after()
 
@@ -23,17 +23,17 @@ ms.locfileid: "82737690"
 
 Ein Prädikat für die Datensätze einer Tabelle, um Ihre Erfassungs Zeit mit einem Daten Bank Cursor zu vergleichen.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `cursor_after``(` *RHS*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *RHS*: entweder ein leeres Zeichenfolgenliteralwert oder ein gültiger Daten Bank Cursor Wert.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Ein Skalarwert des Typs `bool` , der angibt, ob der Datensatz nach dem *RHS* (`true`) des Daten Bank Cursors erfasst wurde`false`().
+Ein Skalarwert des Typs `bool` , der angibt, ob der Datensatz nach dem *RHS* () des Daten Bank Cursors erfasst wurde `true` () `false` .
 
 **Hinweise**
 

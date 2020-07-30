@@ -1,6 +1,6 @@
 ---
-title: extractjson() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird extractjson() in Azure Data Explorer beschrieben.
+title: extractjson ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: Dieser Artikel beschreibt extractjson () in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6177a1c8a6ed4390093e6f6fd24c5f5e9fd04f8a
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 21f366e8f211acf9c7c542b420006cfb23e683e7
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81515333"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348036"
 ---
 # <a name="extractjson"></a>extractjson()
 
@@ -25,22 +25,22 @@ Konvertieren Sie optional die extrahierte Zeichenfolge in einen bestimmten Typ.
 extractjson("$.hosts[1].AvailableMB", EventText, typeof(int))
 ```
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`extractjson(`*jsonPath* `,` *dataSource*`)` 
+`extractjson(`*jsonpath* `,` *Daten* Quelle`)` 
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *jsonPath*: JsonPath-Zeichenfolge, die einen Accessor im JSON-Dokument definiert.
-* *dataSource*: Ein JSON-Dokument.
+* *jsonpath*: jsonpath-Zeichenfolge, die einen Accessor im JSON-Dokument definiert.
+* *DataSource*: ein JSON-Dokument.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Diese Funktion führt eine JsonPath-Abfrage in dataSource durch, die eine gültige JSON-Zeichenfolge enthält. Optional wird dieser Wert, je nach drittem Argument, in einen anderen Typ konvertiert.
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
-Die `[``]` Klammernotatation und`.`die Punktnotation ( ) sind äquivalent:
+Die `[` Notation der Klammer `]` und die Punkt ( `.` )-Notation sind gleichwertig:
 
 ```kusto
 T 

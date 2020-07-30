@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 6f1a6e4a80bfbc02f9e6f552ceca2ba1bb54eb08
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 85a034751c6e29b2ca78f1df9de045c1ac07c7fa
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83372730"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87343905"
 ---
 # <a name="series_fit_2lines_dynamic"></a>series_fit_2lines_dynamic()
 
@@ -39,18 +39,18 @@ Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe 
 
 Dieser Operator ähnelt [series_fit_2lines](series-fit-2linesfunction.md). Im Gegensatz zu `series-fit-2lines` wird ein dynamischer Behälter zurückgegeben.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `series_fit_2lines_dynamic(`*Stuben*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *x*: dynamisches Array numerischer Werte.  
 
 > [!TIP]
 > Die einfachste Methode, diese Funktion zu verwenden, ist die Anwendung auf die Ergebnisse des Operators " [make-Series](make-seriesoperator.md) ".
 
-**Beispiel**
+## <a name="example"></a>Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

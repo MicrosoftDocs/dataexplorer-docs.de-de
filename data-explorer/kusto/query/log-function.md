@@ -1,6 +1,6 @@
 ---
-title: log() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt log() in Azure Data Explorer.
+title: Log ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird log () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,31 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 7bd3c4f5c6b262587cab2327486945f5d78aaf02
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 283cd1427dedb04b036d7cb23e650d8f0651a58c
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81513276"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347135"
 ---
 # <a name="log"></a>log()
 
-`log()`gibt die natürliche Logarithmusfunktion zurück.  
+`log()`Gibt die natürliche Logarithmus Funktion zurück.  
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`log(`*X*`)`
+`log(`*Stuben*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *x*: Eine reelle Zahl > 0.
+* *x*: eine reelle Zahl > 0.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-* Der natürliche Logarithmus ist der Basis-e-Logarithmus: die Umkehrung der natürlichen exponentiellen Funktion (exp).
-* `null`wenn das Argument negativ oder null ist oder `real` nicht in einen Wert konvertiert werden kann. 
+* Der natürliche Logarithmus ist der Basis-e-Logarithmus: die Umkehrung der natürlichen Exponentialfunktion (Exp).
+* `null`, wenn das Argument negativ oder NULL ist oder nicht in einen-Wert konvertiert werden kann `real` . 
 
-**Siehe auch**
+**Weitere Informationen**
 
-* Häufige (Basis-10) Logarithmen finden Sie unter [log10()](log10-function.md).
-* Basis-2-Logarithmen finden Sie unter [log2()](log2-function.md)
+* Allgemeine (Basis 10) Logarithmus finden Sie unter [log10 ()](log10-function.md).
+* Informationen zu Basis-2-Logarithmen finden Sie unter [log2 ()](log2-function.md)

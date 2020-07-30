@@ -1,6 +1,6 @@
 ---
-title: atan() - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt atan() in Azure Data Explorer.
+title: Atan ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: Dieser Artikel beschreibt Atan () in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,25 +8,25 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: f76f44abe2667b1d56a2161303570e17ba7da420
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 19118e65f85624c24ce9ab09b3c572491e0ce24f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81518376"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349430"
 ---
 # <a name="atan"></a>atan()
 
-Gibt den Winkel zurück, dessen Tangente die [`tan()`](tanfunction.md)angegebene Zahl ist (der inverse Vorgang von ) .
+Gibt den Winkel zurück, dessen Tangens die angegebene Zahl ist (die umgekehrte Operation von [`tan()`](tanfunction.md) ).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`atan(`*X*`)`
+`atan(`*Stuben*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
-* *x*: Eine reelle Zahl.
+* *x*: eine reelle Zahl.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-* Der Wert der Bogentangente von`x`
+* Der Wert des Arkus Tangens von.`x`

@@ -8,27 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 54431e2d088f60fa8ea2a56bffea9faa374faeda
-ms.sourcegitcommit: aaada224e2f8824b51e167ddb6ff0bab92e5485f
+ms.openlocfilehash: 23285c0747e7fecbdce810536af195f72f27236f
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84626668"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349719"
 ---
 # <a name="anyif-aggregation-function"></a>anyif () (Aggregations Funktion)
 
 Wählt beliebig einen Datensatz für jede Gruppe in einem Zusammenfassungs [Operator](summarizeoperator.md)aus, für den das Prädikat "true" ist. Die-Funktion gibt den Wert eines Ausdrucks über jeden dieser Datensätze zurück.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `summarize``anyif` `(` *Expr*, *Prädikat*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Expr*: ein Ausdruck für jeden Datensatz, der aus der Eingabe ausgewählt wurde, die zurückgegeben werden soll.
 * *Predicate*: Prädikat, um anzugeben, welche Datensätze für die Auswertung in Erwägung gezogen werden können.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Die `anyif` Aggregations Funktion gibt den Wert des Ausdrucks zurück, der für jeden der nach dem Zufallsprinzip ausgewählten Datensätze aus jeder Gruppe des Zusammenfassungs Operators berechnet wird. Es können nur Datensätze ausgewählt werden, für die das *Prädikat* "true" zurückgibt. Wenn das Prädikat "true" nicht zurückgibt, wird ein NULL-Wert erzeugt.
 
@@ -38,7 +38,7 @@ Diese Funktion ist nützlich, wenn Sie einen Beispiel Wert einer Spalte pro Wert
 
 Die Funktion versucht, einen nicht-NULL-Wert zurückzugeben, wenn ein solcher Wert vorhanden ist.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 Zeigen Sie einen zufälligen Kontinent an, der über eine Auffüllung von 300 bis 600 Millionen verfügt.
 

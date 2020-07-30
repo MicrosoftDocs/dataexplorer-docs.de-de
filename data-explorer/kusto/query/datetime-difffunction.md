@@ -1,6 +1,6 @@
 ---
-title: datetime_diff() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird datetime_diff() in Azure Data Explorer beschrieben.
+title: datetime_diff ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird datetime_diff () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,45 +8,45 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: fd62e27ac4f9ef0ec813a311ddb2b16f0a6c9a65
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 2e116661610e343c90276a43421d263bf74cd1b5
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81516438"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87348529"
 ---
 # <a name="datetime_diff"></a>datetime_diff()
 
-Berechnet die Kalenderdifferenz zwischen zwei [Datumszeitwerten.](./scalar-data-types/datetime.md)
+Berechnet die calendarian-Differenz zwischen zwei [DateTime](./scalar-data-types/datetime.md) -Werten.
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
-`datetime_diff(`*Zeitraum*`,`*datetime_1*`,`*datetime_2*`)`
+`datetime_diff(`*Zeitraum* `,` *datetime_1* `,` *datetime_2*`)`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * `period`: `string`. 
-* `datetime_1`: [Datetime-Wert.](./scalar-data-types/datetime.md)
-* `datetime_2`: [Datetime-Wert.](./scalar-data-types/datetime.md)
+* `datetime_1`: [DateTime](./scalar-data-types/datetime.md) -Wert.
+* `datetime_2`: [DateTime](./scalar-data-types/datetime.md) -Wert.
 
-Mögliche *Periodenwerte*: 
-- Jahr
+Mögliche Werte des *Zeitraums*: 
+- Year
 - Quarter
-- Monat
+- Month
 - Week
-- Day (Tag)
+- Tag
 - Hour
 - Minute
-- Sekunde
+- Second
 - Millisekunde
 - Mikrosekunde
-- Nanosekunden
+- Nanosekunde
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
-Eine ganze Zahl, die `periods` die Menge des Subtraktionsergebnisses (`datetime_1` - `datetime_2`) darstellt.
+Eine ganze Zahl, die die Anzahl von `periods` im Ergebnis der Subtraktion ( `datetime_1`  -  `datetime_2` ) darstellt.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 
 ```kusto
 print

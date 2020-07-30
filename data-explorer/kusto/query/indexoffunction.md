@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2d5accaa0e6f6c4c6e5d5261a9709ba965de6965
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 8e237441d28f12ffc6f27f8a591980a701825e39
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264961"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87347458"
 ---
 # <a name="indexof"></a>indexof()
 
@@ -23,19 +23,19 @@ Wenn die Suche oder die Eingabe Zeichenfolge nicht vom Typ " *String* " ist, wan
 
 Weitere Informationen finden Sie unter [`indexof_regex()`](indexofregexfunction.md).
 
-**Syntax**
+## <a name="syntax"></a>Syntax
 
 `indexof(`*Quelle* `,` *Suche* `[,` *start_index* `[,` *Länge* `[,` *vorkommen*`]]])`
 
-**Argumente**
+## <a name="arguments"></a>Argumente
 
 * *Quelle*: Eingabe Zeichenfolge.  
 * *Suche*: Zeichenfolge, die gesucht werden soll.
 * *start_index*: Startposition der Suche. Optional.
 * *length*: Anzahl der zu überprüfenden Zeichen Positionen. Der Wert-1 bedeutet eine unbegrenzte Länge. Optional.
-* *vorkommen*: die Anzahl der vorkommen. Standardwert „1“. Optional.
+* *vorkommen*: die Anzahl der vorkommen. Standardwert: 1. Optional.
 
-**Rückgabe**
+## <a name="returns"></a>Rückgabe
 
 Null basierte Indexposition von *Suche*.
 
@@ -43,7 +43,7 @@ Gibt-1 zurück, wenn die Zeichenfolge nicht in der Eingabe gefunden wurde.
 
 Wenn irrelevant (kleiner als 0) *start_index*, *vorkommen*oder (kleiner als-1) *length* -Parameter, wird *null*zurückgegeben.
 
-**Beispiele**
+## <a name="examples"></a>Beispiele
 ```kusto
 print
  idx1 = indexof("abcdefg","cde")    // lookup found in input string
