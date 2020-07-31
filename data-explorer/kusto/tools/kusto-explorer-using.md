@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: c95ac178e82e414df41dd5a6d4456f344bb39c2f
-ms.sourcegitcommit: 6db94135b9902ad0ea84f9cef00ded8ec0a90fc3
+ms.openlocfilehash: 601a2b90b3a9152df701f001f050ab0c48e8910d
+ms.sourcegitcommit: 6e84f50efc8c5c3fe57080341ed3effe72197886
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86870123"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87440042"
 ---
 # <a name="using-kustoexplorer"></a>Verwenden von Kusto.Explorer
 
@@ -38,7 +38,7 @@ Im Such-und +-Modus können Sie mithilfe der Such Syntax in einer oder mehreren 
 
 Kusto. Explorer enthält einen leistungsfähigen Skript Modus, mit dem Sie Ad-hoc-Abfragen schreiben, bearbeiten und ausführen können. Der Skript Modus verfügt über Syntax Hervorhebung und IntelliSense, sodass Sie Ihre Kenntnisse über die Kusto-Abfragesprache schnell übernehmen können.
 
-In diesem Dokument wird beschrieben, wie Sie grundlegende Abfragen in Kusto. Explorer ausführen und Ihren Abfragen Parameter hinzufügen.
+In diesem Abschnitt wird beschrieben, wie Sie grundlegende Abfragen in Kusto. Explorer ausführen und Ihren Abfragen Parameter hinzufügen.
 
 ## <a name="basic-queries"></a>Grundlegende Abfragen
 
@@ -76,10 +76,10 @@ StormEvents
 Erfahren Sie mehr über die [Kusto-Abfragesprache](https://docs.microsoft.com/azure/kusto/query/).
 
 > [!NOTE]
-> Leere Zeilen im Abfrage Ausdruck können beeinflussen, welcher Teil der Abfrage ausgeführt wird.
+> Leere Zeilen im Abfrageausdruck können beeinflussen, welcher Teil der Abfrage ausgeführt wird.
 >
-> Wenn kein Text ausgewählt ist, wird davon ausgegangen, dass die Abfrage oder der Befehl durch leere Zeilen getrennt ist.
-> Wenn Text ausgewählt ist, wird der ausgewählte Text ausgeführt.
+> Ist kein Text ausgewählt, wird davon ausgegangen, dass die Abfrage oder der Befehl durch leere Zeilen getrennt ist.
+> Ist Text ausgewählt, wird der ausgewählte Text ausgeführt.
 
 ## <a name="client-side-query-parameterization"></a>Client seitige Abfrage Parametrisierung
 
@@ -211,7 +211,7 @@ Wenn Sie z. b. "Kusto. Explorer" mit einer Skriptdatei starten möchten, `c:\tem
 Kusto.Explorer.exe c:\temp\script.kql uri=https://help.kusto.windows.net/Samples;Fed=true&name=Samples
 ```
 
-|Argument  |Beschreibung                                                               |
+|Argument  |BESCHREIBUNG                                                               |
 |----------|--------------------------------------------------------------------------|
 |**Auszuführende Abfrage**                                                                 |
 |`query`   |Die auszuführende Abfrage (base64-codiert). Wenn leer, verwenden Sie `querysrc` .          |
