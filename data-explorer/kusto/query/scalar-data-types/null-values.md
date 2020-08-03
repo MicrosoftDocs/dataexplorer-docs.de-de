@@ -1,6 +1,6 @@
 ---
-title: Nullwerte - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt Nullwerte in Azure Data Explorer.
+title: 'NULL-Werte: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel werden NULL-Werte in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,42 +10,42 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: c3a48fdfca855a1ff2f848d4ed97d8162e97b931
-ms.sourcegitcommit: 01eb9aaf1df2ebd5002eb7ea7367a9ef85dc4f5d
+ms.openlocfilehash: c493431fcfa22ad0419659a5b6e036205f3bf299
+ms.sourcegitcommit: 194453a8eb11c3ccb54c473e887c84cb8e91b939
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81765960"
+ms.lasthandoff: 07/31/2020
+ms.locfileid: "87473971"
 ---
 # <a name="null-values"></a>NULL-Werte
 
 Alle skalaren Datentypen in Kusto haben einen speziellen Wert, der einen fehlenden Wert darstellt.
 Dieser Wert wird als **NULL-Wert**oder einfach **null**bezeichnet.
 
-## <a name="null-literals"></a>Nullliterale
+## <a name="null-literals"></a>NULL-Literale
 
-Der NULL-Wert eines skalaren Typs `T` wird in der `T(null)`Abfragesprache durch das null-Literal dargestellt.
-Daher gibt Folgendes eine einzelne Zeile voller NULLs zurück:
+Der NULL-Wert eines skalaren Typs `T` wird in der Abfragesprache durch das NULL-Literalzeichen dargestellt `T(null)` .
+Folglich gibt Folgendes eine einzelne Zeile mit einer vollständigen Nullen zurück:
 
 ```kusto
 print bool(null), datetime(null), dynamic(null), guid(null), int(null), long(null), real(null), double(null), time(null)
 ```
 
 > [!WARNING]
-> Bitte beachten Sie, dass der `string` Typ derzeit keine NULL-Werte unterstützt.
+> Beachten Sie, dass der `string` Typ derzeit keine NULL-Werte unterstützt.
 
-## <a name="comparing-null-to-something"></a>Vergleich von NULL mit etwas
+## <a name="comparing-null-to-something"></a>Vergleichen von NULL mit etwas
 
-Der NULL-Wert ist nicht gleich mit einem anderen Wert des Datentyps, einschließlich sich selbst. (Das heißt, `null == null` ist falsch.) Um zu bestimmen, ob ein Wert der NULL-Wert ist, verwenden Sie die [isnull()-Funktion](../isnullfunction.md) und die [isnotnull()-Funktion.](../isnotnullfunction.md)
+Der NULL-Wert entspricht keinem anderen Wert des Datentyps, einschließlich selbst. (Das heißt, `null == null` ist false.) Verwenden Sie die [IsNull ()](../isnullfunction.md) -Funktion und die [IsNotNull ()](../isnotnullfunction.md) -Funktion, um zu bestimmen, ob ein Wert der NULL-Wert ist.
 
-## <a name="binary-operations-on-null"></a>Binäre Operationen auf NULL
+## <a name="binary-operations-on-null"></a>Binäre Vorgänge bei Null
 
-Im Allgemeinen verhält sich null "klebrig" um binäre Operatoren herum. Ein binärer Vorgang zwischen einem NULL-Wert und einem anderen Wert (einschließlich eines anderen NULL-Werts) erzeugt einen NULL-Wert.
+Im allgemeinen verhält sich NULL in einer "Kurzform" um binäre Operatoren. eine binäre Operation zwischen einem NULL-Wert und einem anderen Wert (einschließlich eines anderen NULL-Werts) erzeugt einen NULL-Wert.
 
-## <a name="data-ingestion-and-null-values"></a>Datenaufnahme und NULL-Werte
+## <a name="data-ingestion-and-null-values"></a>Datenerfassung und NULL-Werte
 
-Bei den meisten Datentypen erzeugt ein fehlender Wert in der Datenquelle einen NULL-Wert in der entsprechenden Tabellenzelle. Eine Ausnahme bilden Spalten `string` vom Typ und CSV-ähnliche Aufnahme, bei der ein fehlender Wert eine leere Zeichenfolge erzeugt.
-Wenn wir also z. B.: 
+Bei den meisten Datentypen erzeugt ein fehlender Wert in der Datenquelle einen NULL-Wert in der entsprechenden Tabellenzelle. Eine Ausnahme von ist eine Spalte vom Typ `string` und eine CSV-ähnliche Erfassung, bei der ein fehlender Wert eine leere Zeichenfolge erzeugt.
+Wenn beispielsweise Folgendes vorhanden ist: 
 
 ```kusto
 .create table T [a:string, b:int]
@@ -56,18 +56,18 @@ Wenn wir also z. B.:
 [a,1]
 ```
 
-Führen Sie dann folgende Schritte aus:
+Führen Sie anschließend Folgendes durch:
 
-|a     |b     |isnull(a)|isempty(a)|strlen(a)|isnull(b)|
+|a     |b     |IsNull (a)|IsEmpty (a)|Straume (a)|IsNull (b)|
 |------|------|---------|----------|---------|---------|
-|&nbsp;|&nbsp;|false    |true      |0        |true     |
-|&nbsp;|&nbsp;|false    |false     |1        |true     |
-|a     |1     |false    |false     |1        |false    |
+|&nbsp;|&nbsp;|False    |true      |0        |true     |
+|&nbsp;|&nbsp;|False    |False     |1        |true     |
+|a     |1     |False    |False     |1        |False    |
 
 ::: zone pivot="azuredataexplorer"
 
-* Wenn Sie die obige Abfrage in `true` Kusto.Explorer ausführen, `1`werden `false` alle Werte als `0`displated und alle Werte werden als angezeigt.
+* Wenn Sie die obige Abfrage in Kusto. Explorer ausführen, werden alle `true` Werte als angezeigt `1` , und alle `false` Werte werden als angezeigt `0` .
 
 ::: zone-end
 
-* Kusto bietet keine Möglichkeit, die Spalte einer Tabelle davon abzuhalten, NULL-Werte zu haben (d. h., es gibt keine Entsprechung zur `NOT NULL` SQL-Einschränkung).
+* Kusto bietet keine Möglichkeit, die Spalte einer Tabelle auf NULL-Werte zu beschränken (d. h., es gibt keine Entsprechung zur SQL- `NOT NULL` Einschränkung).
