@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 04/01/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 984e5c37f3d29a6c56f88c6eb9b6750635e48920
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 98888ddd5dd6155c9476163337e7c031e0f84a1e
+ms.sourcegitcommit: afc369ab4c4bcc74f2dce22b397a340572db8ecf
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345979"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87528145"
 ---
 # <a name="python-plugin"></a>Python-Plugin
 
@@ -36,7 +36,7 @@ Die Laufzeit des Plug-ins wird in [Sand Fächern](../concepts/sandboxes.md)gehos
 * *Skript*: ein `string` Literalzeichen, das das gültige auszuführende Python-Skript ist.
 * *script_parameters*: ein optionales `dynamic` Literalzeichen. Dabei handelt es sich um einen Eigenschaften Behälter mit Name-Wert-Paaren, die als reserviertes Wörterbuch an das Python-Skript übermittelt werden `kargs` . Weitere Informationen finden Sie unter [reservierte python-Variablen](#reserved-python-variables).
 * *Hint. Distribution*: ein optionaler Hinweis für die Ausführung des Plug-ins, das auf mehrere Cluster Knoten verteilt wird.
-  * Der Standardwert ist `single`.
+  * Standardwert: `single`.
   * `single`: Eine einzelne Instanz des Skripts wird über die gesamten Abfrage Daten ausgeführt.
   * `per_node`: Wenn die Abfrage vor der Verteilung des python-Blocks verteilt wird, wird eine Instanz des Skripts auf jedem Knoten auf den darin enthaltenen Daten ausgeführt.
 * *external_artifacts*: ein optionales `dynamic` literalobjekt, bei dem es sich um einen Eigenschaften Behälter mit Name-und URL-Paaren handelt Sie können zur Laufzeit für das Skript zur Verfügung gestellt werden.
@@ -58,7 +58,7 @@ Die folgenden Variablen sind für die Interaktion zwischen der Kusto-Abfragespra
 
 * Das Plug-in ist standardmäßig deaktiviert.
 * Informationen zum Aktivieren des Plug-Ins finden Sie in der Liste der [Voraussetzungen](../concepts/sandboxes.md#prerequisites).
-* Aktivieren oder deaktivieren Sie das Plug-in in der Azure-Portal auf der[Registerkarte Konfiguration](../../language-extensions.md)Ihres Clusters.
+* Aktivieren oder deaktivieren Sie das Plug-in in der Azure-Portal auf der [Registerkarte Konfiguration](../../language-extensions.md)Ihres Clusters.
 
 ## <a name="python-sandbox-image"></a>Python Sandbox-Image
 
