@@ -1,18 +1,18 @@
 ---
 title: Hinzufügen von Datenbankprinzipalen für Azure Data Explorer mithilfe einer Azure Resource Manager-Vorlage
 description: In diesem Artikel erfahren Sie, wie Sie Datenbankprinzipale für Azure Data Explorer mithilfe einer Azure Resource Manager-Vorlage hinzufügen können.
-author: lucygoldbergmicrosoft
-ms.author: lugoldbe
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 02/03/2020
-ms.openlocfilehash: 80fcf4b6c5d64dde7bd1c5475fb6a3dbafd7f907
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 5ed9900a33fe90dbb04be3725ddd8e19bfb63b07
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492670"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87349991"
 ---
 # <a name="add-database-principals-for-azure-data-explorer-by-using-an-azure-resource-manager-template"></a>Hinzufügen von Datenbankprinzipalen für Azure Data Explorer mithilfe einer Azure Resource Manager-Vorlage
 

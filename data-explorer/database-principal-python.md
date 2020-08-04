@@ -1,18 +1,18 @@
 ---
 title: Hinzufügen von Datenbankprinzipalen für Azure Data Explorer mithilfe von Python
 description: In diesem Artikel erfahren Sie, wie Sie Datenbankprinzipale für Azure Data Explorer mithilfe von Python hinzufügen.
-author: lucygoldbergmicrosoft
-ms.author: lugoldbe
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 02/03/2020
-ms.openlocfilehash: 3ddb34692158fdc7e6d4f7786f84b8c059bc0621
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 54b2d05c666c1ac3ed35520ad383f01eff3371cb
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493366"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350008"
 ---
 # <a name="add-database-principals-for-azure-data-explorer-by-using-python"></a>Hinzufügen von Datenbankprinzipalen für Azure Data Explorer mithilfe von Python
 

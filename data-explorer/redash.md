@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 11/04/2019
-ms.openlocfilehash: 8237eb917f5123755898d281151ce34a08eb90db
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 99d242358f5b4a54f7e1faa246a1cfc64d1414d3
+ms.sourcegitcommit: 6e84f50efc8c5c3fe57080341ed3effe72197886
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492370"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87439866"
 ---
 # <a name="visualize-data-from-azure-data-explorer-in-redash"></a>Visualisieren von Daten aus Azure Data Explorer in Redash
 
@@ -27,7 +27,7 @@ ms.locfileid: "81492370"
 
 ## <a name="create-azure-data-explorer-connector-in-redash"></a>Erstellen des Azure Data Explorer-Connectors in Redash 
 
-1. Melden Sie sich bei [Redash](https://www.redash.io/) an. Wählen Sie **Get Started** (Erste Schritte) aus, um ein Konto zu erstellen.
+1. Melden Sie sich bei [Redash](https://redash.io/) an. Wählen Sie **Get Started** (Erste Schritte) aus, um ein Konto zu erstellen.
 1. Wählen Sie unter **Let's get started** (Jetzt loslegen) die Option **Connect a Data Source** (Datenquelle verbinden) aus.
 
     ![Herstellen einer Verbindung mit einer Datenquelle](media/redash/connect-data-source.png)

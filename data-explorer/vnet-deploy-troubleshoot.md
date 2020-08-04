@@ -1,18 +1,18 @@
 ---
 title: Behandlung von Problemen im Zusammenhang mit dem Zugriff, der Erfassung und dem Betrieb Ihres Azure Data Explorer-Clusters in Ihrem virtuellen Netzwerk
 description: Behandlung von Problemen im Zusammenhang mit der Konnektivität, der Erfassung, dem Erstellen und dem Betrieb Ihres Azure Data Explorer-Clusters in Ihrem virtuellen Netzwerk
-author: basaba
-ms.author: basaba
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/24/2020
-ms.openlocfilehash: 6eab8ab3097876c74cc6aaa9116c8923ca9fc3db
-ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
+ms.openlocfilehash: b0148267f2245cd00e9bd2891b1a220908c1c16a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86188403"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351657"
 ---
 # <a name="troubleshoot-access-ingestion-and-operation-of-your-azure-data-explorer-cluster-in-your-virtual-network"></a>Behandlung von Problemen im Zusammenhang mit dem Zugriff, der Erfassung und dem Betrieb Ihres Azure Data Explorer-Clusters in Ihrem virtuellen Netzwerk
 

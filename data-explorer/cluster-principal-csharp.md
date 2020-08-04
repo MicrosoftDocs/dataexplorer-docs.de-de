@@ -1,18 +1,18 @@
 ---
 title: Hinzufügen von Clusterprinzipalen für Azure Data Explorer mithilfe von C#
 description: In diesem Artikel erfahren Sie, wie Sie Clusterprinzipale für Azure Data Explorer mithilfe von C# hinzufügen.
-author: lucygoldbergmicrosoft
-ms.author: lugoldbe
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 02/03/2020
-ms.openlocfilehash: b677768b87419833968de48eca2dd32c4fdb17cb
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 92ec0b5fcd5635bc13052bcf4141956fe8d59c55
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492794"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350416"
 ---
 # <a name="add-cluster-principals-for-azure-data-explorer-by-using-c"></a>Hinzufügen von Clusterprinzipalen für Azure Data Explorer mithilfe von C#
 

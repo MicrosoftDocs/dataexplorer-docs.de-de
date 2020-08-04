@@ -1,18 +1,18 @@
 ---
 title: Verwenden von Azure Data Share für das Freigeben von Daten mit Azure Data Explorer (Vorschauversion)
 description: Erfahren Sie, wie Sie Ihre Daten mit Azure Data Explorer und Azure Data Share freigeben.
-author: manojraheja
-ms.author: maraheja
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: maraheja
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/23/2020
-ms.openlocfilehash: c935b6f888d40cfcd2208e8857dc3d794f9a50cb
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
+ms.openlocfilehash: 325adfafcb474804d6fc03d85bc5ae2e82011fd3
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83865929"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350042"
 ---
 # <a name="use-azure-data-share-to-share-data-with-azure-data-explorer-preview"></a>Verwenden von Azure Data Share für das Freigeben von Daten mit Azure Data Explorer (Vorschauversion)
 

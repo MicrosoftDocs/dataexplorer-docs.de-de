@@ -1,18 +1,18 @@
 ---
 title: Verwalten des Hochskalierens eines Clusters zum Anpassen an den Bedarf in Azure Data Explorer
 description: Dieser Artikel beschreibt Schritte zum Hoch- und Herunterskalieren eines Azure Data Explorer-Clusters basierend auf sich änderndem Bedarf.
-author: radennis
-ms.author: radennis
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: radennis
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/14/2019
-ms.openlocfilehash: 95275598febae2b6b0355a7bc3e512490dae500d
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: fc3b4af91cd24b60f8ace110551daa47ff8cf934
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492594"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87351606"
 ---
 # <a name="manage-cluster-vertical-scaling-scale-up-in-azure-data-explorer-to-accommodate-changing-demand"></a>Verwalten des Hochskalierens eines Clusters in Azure Data Explorer, um ihn an den sich ändernden Bedarf anzupassen
 

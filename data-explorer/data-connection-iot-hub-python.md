@@ -1,18 +1,18 @@
 ---
 title: Erstellen einer IoT Hub-Datenverbindung für Azure Data Explorer mit Python
 description: In diesem Artikel erfahren Sie, wie Sie eine IoT Hub-Datenverbindung für Azure Data Explorer mit Python erstellen.
-author: lucygoldbergmicrosoft
-ms.author: lugoldbe
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: 4357e53a36274aaefdfc379c73a0f2dc1e0e2bbc
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b85ec79c962ab4e63c0831f415ee7c3f2074c970
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493054"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350093"
 ---
 # <a name="create-an-iot-hub-data-connection-for-azure-data-explorer-by-using-python-preview"></a>Erstellen einer IoT Hub-Datenverbindung für Azure Data Explorer mit Python (Vorschau)
 

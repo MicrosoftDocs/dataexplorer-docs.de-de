@@ -1,18 +1,18 @@
 ---
 title: Erfassen von Daten aus Logstash in Azure Data Explorer
 description: In diesem Artikel erfahren Sie, wie Sie Daten aus Logstash in Azure Data Explorer erfassen (laden).
-author: tamirkamara
-ms.author: takamara
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: takamara
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 06/03/2019
-ms.openlocfilehash: e7b4a8cf3dcd109de59ab12717f8fbc17b600ec9
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 0beb88cbcb2b72a79ad2d6c1ad6aac44bdcb13bc
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493138"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350518"
 ---
 # <a name="ingest-data-from-logstash-to-azure-data-explorer"></a>Erfassen von Daten aus Logstash in Azure Data Explorer
 

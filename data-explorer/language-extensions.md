@@ -7,12 +7,12 @@ ms.reviewer: orhasban
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/01/2020
-ms.openlocfilehash: 52855651daccfe3c9baf5bb059530bcf7bfb0f19
-ms.sourcegitcommit: 653bfb3edf32553c52ef36b339c8b80713a601b0
+ms.openlocfilehash: 104b3e4db18334f33c54177da7b996bc679db2de
+ms.sourcegitcommit: d9fbcd6c9787f90de62e8e832c92d43b8090cbfc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81494546"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87515888"
 ---
 # <a name="manage-language-extensions-in-your-azure-data-explorer-cluster-preview"></a>Verwalten von Spracherweiterungen in Ihrem Azure Data Explorer-Cluster (Vorschauversion)
 
@@ -64,6 +64,6 @@ Führen Sie die folgenden Schritte aus, um Spracherweiterungen für Ihren Cluste
 
 ## <a name="limitations"></a>Einschränkungen
 
-* Das Spracherweiterungsfeature unterstützt keine [Datenträgerverschlüsselung](manage-cluster-security.md). 
+* Das Spracherweiterungsfeature unterstützt keine [Datenträgerverschlüsselung](cluster-disk-encryption.md). 
 * Die Runtime-Sandbox für Spracherweiterungen weist auch dann Speicherplatz zu, wenn keine Abfrage im Bereich der jeweiligen Sprache ausgeführt wird.
 Ausführlichere Informationen finden Sie unter [Sandboxes](kusto/concepts/sandboxes.md).

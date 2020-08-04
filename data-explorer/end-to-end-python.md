@@ -1,18 +1,18 @@
 ---
 title: End-to-End-Bloberfassung in Azure Data Explorer über Python
 description: In diesem Artikel erfahren Sie anhand eines vollständigen Beispiels in Python, wie Sie Blobs in Azure Data Explorer erfassen.
-author: lucygoldbergmicrosoft
-ms.author: lugoldbe
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 02/03/2020
-ms.openlocfilehash: 0aa6cd7957dfbd6d76068c8fb4b6c92544e603c1
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: bc97ffad3ca4f6d824e10c85e570154764cc986a
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492610"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350467"
 ---
 # <a name="end-to-end-blob-ingestion-into-azure-data-explorer-through-python"></a>End-to-End-Bloberfassung in Azure Data Explorer über Python
 

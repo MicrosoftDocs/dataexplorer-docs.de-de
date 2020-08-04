@@ -1,18 +1,18 @@
 ---
 title: End-to-End-Bloberfassung in Azure Data Explorer über C#
 description: In diesem Artikel erfahren Sie anhand eines vollständigen Beispiels in C#, wie Sie Blobs in Azure Data Explorer erfassen.
-author: lucygoldbergmicrosoft
-ms.author: lugoldbe
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: 53504f51f1a5bd80967c510bd4bff1ba47cd8e58
-ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
+ms.openlocfilehash: 2a7416a2f86963ab30f84ce0a7e2fd098af52108
+ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83722166"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87350439"
 ---
 # <a name="end-to-end-blob-ingestion-into-azure-data-explorer-through-c"></a>End-to-End-Bloberfassung in Azure Data Explorer über C#
 
