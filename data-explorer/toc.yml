@@ -204,8 +204,12 @@
               href: vnet-deployment.md
             - name: 'Behandeln von Problemen mit der VNET-Clustererstellung, -konnektivität und -verwendung'
               href: vnet-deploy-troubleshoot.md
-        - name: Verwalten der Clustersicherheit
-          href: manage-cluster-security.md
+        - name: Verschlüsselung
+          items:
+            - name: 'Verschlüsselung von Clusterdatenträgern: Portal'
+              href: cluster-disk-encryption.md
+            - name: Doppelte Verschlüsselung
+              href: double-encryption.md
         - name: Konfigurieren von verwalteten Identitäten
           href: managed-identities.md
         - name: Konfigurieren von kundenseitig verwalteten Schlüsseln
