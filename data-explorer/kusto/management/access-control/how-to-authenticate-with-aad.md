@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 09/13/2019
-ms.openlocfilehash: 34a0e5cd7107827cd97eb0baf9a3d40b408b2024
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: f74848ac3b634affbafde8d0441a4340aff230da
+ms.sourcegitcommit: dc42f4a7fa617a06b5566ce40b7cdc66cfd22185
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382072"
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "87557617"
 ---
 # <a name="how-to-authenticate-with-aad-for-azure-data-explorer-access"></a>Gewusst wie: Authentifizieren mit Aad für Azure Daten-Explorer Access
 
@@ -159,7 +159,7 @@ In der Regel sind mehrere Konfigurationsschritte mit Aad erforderlich, und in ei
 // Create Auth Context for AAD (common or tenant-specific endpoint):
 AuthenticationContext authContext = new AuthenticationContext("AAD Authority URL");
 
-// Exchange your token for for Kusto token.
+// Exchange your token for a Kusto token.
 // You will need to provide your application's client ID and secret to authenticate your application
 var tokenForKusto = authContext.AcquireTokenAsync(
     "https://{serviceNameAndRegion}.kusto.windows.net",
