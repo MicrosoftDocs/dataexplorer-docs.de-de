@@ -1,18 +1,18 @@
 ---
 title: Konfigurieren verwalteter Identitäten für Azure Data Explorer-Cluster
 description: Hier erfahren Sie, wie Sie verwaltete Identitäten für Azure Data Explorer-Cluster konfigurieren.
-author: saguiitay
-ms.author: itsagui
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/12/2020
-ms.openlocfilehash: 523330f5ace4d9f2d652eccbd746b039d66df749
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 59392c8ff555df99ccb7c4a5b7503266cb095552
+ms.sourcegitcommit: d9fbcd6c9787f90de62e8e832c92d43b8090cbfc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83374298"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87515836"
 ---
 # <a name="configure-managed-identities-for-your-azure-data-explorer-cluster"></a>Konfigurieren verwalteter Identitäten für Ihren Azure Data Explorer-Cluster
 
@@ -210,6 +210,6 @@ Führen Sie Folgendes aus, um die systemseitig zugewiesene Identität zu entfern
 ## <a name="next-steps"></a>Nächste Schritte
 
 * [Schützen von Azure Data Explorer-Clustern in Azure](security.md)
-* [Sichern Ihres Clusters in Azure Data Explorer – Azure-Portal](manage-cluster-security.md) durch Aktivieren der Verschlüsselung ruhender Daten
+* [Sichern Ihres Clusters in Azure Data Explorer mithilfe von Disk Encryption (Azure-Portal)](cluster-disk-encryption.md) durch Aktivieren der Verschlüsselung ruhender Daten
  * [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#](customer-managed-keys-csharp.md)
  * [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resource Manager-Vorlage](customer-managed-keys-resource-manager.md)

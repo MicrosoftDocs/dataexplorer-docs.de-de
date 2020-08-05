@@ -7,12 +7,12 @@ ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/26/2020
-ms.openlocfilehash: f5f44f427f21cdea4b0fea382c41df23925b3549
-ms.sourcegitcommit: a7e040fc844098323aa1c00e254bcbcd41fe587f
+ms.openlocfilehash: 4477aba7c661b0bc434d2bb0cc0a635603cc8ad4
+ms.sourcegitcommit: d9fbcd6c9787f90de62e8e832c92d43b8090cbfc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84426568"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87515820"
 ---
 # <a name="configure-customer-managed-keys-using-the-azure-portal"></a>Konfigurieren von kundenseitig verwalteten Schlüsseln über das Azure-Portal
 
@@ -56,7 +56,7 @@ Wenn Sie vom Kunden verwaltete Schlüssel für Ihren Azure Data Explorer-Cluster
 ## <a name="next-steps"></a>Nächste Schritte
 
 * [Schützen von Azure Data Explorer-Clustern in Azure](security.md)
-* [Sichern Ihres Clusters in Azure Data Explorer – Azure-Portal](manage-cluster-security.md) durch Aktivieren der Verschlüsselung ruhender Daten
+* [Sichern Ihres Clusters in Azure Data Explorer mithilfe von Disk Encryption (Azure-Portal)](cluster-disk-encryption.md) durch Aktivieren der Verschlüsselung ruhender Daten
 * [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resource Manager-Vorlage](customer-managed-keys-resource-manager.md)
 * [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#](customer-managed-keys-csharp.md)
 

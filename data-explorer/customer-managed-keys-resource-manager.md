@@ -1,18 +1,18 @@
 ---
 title: Konfigurieren von kundenseitig verwalteten Schlüsseln in Azure Data Explorer mithilfe der Azure Resource Manager-Vorlage
 description: In diesem Artikel wird beschrieben, wie Sie mit der Azure Resource Manager-Vorlage die Verschlüsselung von kundenseitig verwalteten Schlüsseln für Ihre Daten in Azure Data Explorer konfigurieren.
-author: saguiitay
-ms.author: itsagui
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/06/2020
-ms.openlocfilehash: dc181e1509f720a8871fd4c41c43f940cef72728
-ms.sourcegitcommit: a7e040fc844098323aa1c00e254bcbcd41fe587f
+ms.openlocfilehash: c9594862d9dbe0eae1e8357a81e1bce5bba79da7
+ms.sourcegitcommit: d9fbcd6c9787f90de62e8e832c92d43b8090cbfc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84426507"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87515801"
 ---
 # <a name="configure-customer-managed-keys-using-the-azure-resource-manager-template"></a>Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resource Manager-Vorlage
 
@@ -85,6 +85,6 @@ Wenn Sie eine neue Version eines Schlüssels erstellen, müssen Sie den Cluster 
 
 * [Schützen von Azure Data Explorer-Clustern in Azure](security.md)
 * [Konfigurieren von verwalteten Identitäten für Ihren Azure Data Explorer-Cluster](managed-identities.md)
-* [Sichern Ihres Clusters in Azure Data Explorer – Azure-Portal](manage-cluster-security.md) durch Aktivieren der Verschlüsselung ruhender Daten
+* [Sichern Ihres Clusters in Azure Data Explorer mithilfe von Disk Encryption (Azure-Portal)](cluster-disk-encryption.md) durch Aktivieren der Verschlüsselung ruhender Daten
 * [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#](customer-managed-keys-csharp.md)
 

@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/19/2020
-ms.openlocfilehash: ffe641c6e96db1378be7a8ce845685fb2b66715f
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 2b90f029d881c1f050bce4d458f08e9f1ba20ef9
+ms.sourcegitcommit: afc369ab4c4bcc74f2dce22b397a340572db8ecf
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83374311"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87528162"
 ---
 # <a name="monitor-azure-data-explorer-performance-health-and-usage-with-metrics"></a>Überwachen der Azure Data Explorer-Leistung, -Integrität und -Nutzung mit Metriken
 
@@ -76,6 +76,10 @@ Die Erfassung von Integritäts- und Leistungsmetriken verfolgt die allgemeine In
 
 **Metrik** | **Einheit** | **Aggregation** | **Beschreibung der Metrik** | **Dimensionen** |
 |---|---|---|---|---|
+| Batchblob – Anzahl | Anzahl | Avg, Max, Min | Anzahl der Datenquellen in einem abgeschlossenen Batch für die Erfassung | Datenbank |
+| Batchdauer | Sekunden | Avg, Max, Min | Dauer der Batchverarbeitungsphase im Erfassungsflow  | Datenbank |
+| Batchgröße | Byte | Avg, Max, Min | Nicht komprimierte erwartete Datengröße in einem aggregierten Batch für die Erfassung | Datenbank |
+| Verarbeitete Batches | Anzahl | Avg, Max, Min | Anzahl der für die Erfassung abgeschlossenen Batches `BatchCompletionReason`: Gibt an, ob die Batchverarbeitungszeit oder das Limit für Datengröße/Dateianzahl in der [Batchrichtlinie](/azure/data-explorer/kusto/management/batchingpolicy) erreicht wurde | Datenbank, BatchCompletionReason |
 | Verarbeitete Ereignisse (für Event/IoT Hub) | Anzahl | Max, Min, Sum | Gesamtzahl der Ereignisse, die von Event Hubs gelesen und vom Cluster verarbeitet werden. Die Ereignisse werden danach unterteilt, ob sie vom Clustermodul abgelehnt oder akzeptiert werden. | EventStatus |
 | Latenz bei der Erfassung | Sekunden | Avg, Max, Min | Latenz der erfassten Daten ab dem Empfangszeitpunkt der Daten im Cluster bis zu dem Zeitpunkt, zu dem die Daten bereit zum Abfragen sind. Der Zeitraum der Erfassungslatenz richtet sich nach dem Erfassungsszenario. | Keine |
 | Ergebnis der Datenerfassung | Anzahl | Anzahl | Gesamtzahl von nicht erfolgreichen und erfolgreichen Erfassungsvorgängen. Verwenden Sie die Option **Teilung anwenden**, um Buckets mit Erfolgs- und Fehlerergebnissen zu erstellen und die Dimensionen zu analysieren (**Wert** > **Status**).| IngestionResultDetails |
@@ -112,4 +116,4 @@ Weitere Informationen zu unterstützten Azure Data Explorer-Clustermetriken fi
 
 * [Tutorial: Erfassen und Abfragen von Überwachungsdaten in Azure Data Explorer](ingest-data-no-code.md)
 * [Überwachen von Azure Data Explorer-Erfassungsvorgängen mithilfe von Diagnoseprotokollen](using-diagnostic-logs.md)
-* [Schnellstart: Abfragen von Daten in Azure Data Explorer](web-query-data.md)
+* [Schnellstart: Abfragen von Daten im Azure-Daten-Explorer](web-query-data.md)

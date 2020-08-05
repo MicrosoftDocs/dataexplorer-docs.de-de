@@ -1,18 +1,18 @@
 ---
 title: Schützen von Azure Data Explorer-Clustern in Azure
 description: Hier erfahren Sie, wie Sie Cluster in Azure Data Explorer schützen.
-author: saguiitay
-ms.author: itsagui
-ms.reviewer: orspodek
+author: orspod
+ms.author: orspodek
+ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/06/2020
-ms.openlocfilehash: d8220055549c3bfa2892e7267521b08c0591f817
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 0330d0bf51e3bf8844e6545c9b57543274d56ed0
+ms.sourcegitcommit: d9fbcd6c9787f90de62e8e832c92d43b8090cbfc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83370270"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87515735"
 ---
 # <a name="secure-azure-data-explorer-clusters-in-azure"></a>Schützen von Azure Data Explorer-Clustern in Azure
 
@@ -60,7 +60,7 @@ Mithilfe der [rollenbasierten Zugriffssteuerung](/azure/role-based-access-contro
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-* [Sichern von Clustern in Azure Data Explorer](manage-cluster-security.md) durch Aktivieren der Verschlüsselung ruhender Daten
+* [Sichern von Clustern in Azure Data Explorer mithilfe von Disk Encryption (Portal)](cluster-disk-encryption.md) durch Aktivieren der Verschlüsselung ruhender Daten
 * [Konfigurieren verwalteter Identitäten für Ihren Azure Data Explorer-Cluster](managed-identities.md)
 * [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resource Manager-Vorlage](customer-managed-keys-resource-manager.md)
 * [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#](customer-managed-keys-csharp.md)
