@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9321f30d2643f6e398d73cf7960490708626f723
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: b0a71f9db9062d83f55ebf9db1efabb6d86f9786
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348359"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803283"
 ---
 # <a name="diffpatterns_text-plugin"></a>Plug-In „diffpatterns_text“
 
@@ -29,7 +29,9 @@ T | evaluate diffpatterns_text(TextColumn, BooleanCondition)
 
 `T | evaluate diffpatterns_text(`TextColumn, booleancondition [, mintokens, Threshold, maxtokens]`)` 
 
-**Erforderliche Argumente**
+## <a name="arguments"></a>Argumente
+
+### <a name="required-arguments"></a>Erforderliche Argumente
 
 * TextColumn- *column_name*
 
@@ -39,7 +41,7 @@ T | evaluate diffpatterns_text(TextColumn, BooleanCondition)
 
     Definiert, wie die zwei Daten Satz Teilmengen generiert werden, die mit der Eingabe Tabelle verglichen werden sollen. Der Algorithmus teilt die Abfrage nach der Bedingung in zwei Datasets auf: "true" und "false" und analysiert dann die (Text-) Unterschiede zwischen Ihnen. 
 
-**Optionale Argumente**
+### <a name="optional-arguments"></a>Optionale Argumente
 
 Alle anderen Argumente sind optional, aber sie müssen wie unten angegeben sortiert werden. 
 
@@ -55,7 +57,7 @@ Alle anderen Argumente sind optional, aber sie müssen wie unten angegeben sorti
 
     Legt die maximale Anzahl von Token (beginnend mit dem Anfang) pro Ergebnis Muster fest. Wenn Sie eine niedrigere Grenze angeben, wird die Abfrage Laufzeit verringert.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Das Ergebnis diffpatterns_text gibt die folgenden Spalten zurück:
 
@@ -86,4 +88,3 @@ StormEvents
 |0|42|0|7,71|* * * * * * hat * * * * * * * * in Western Colorado verursacht. *|
 |0|45|0|8,26|* * niedriger als normal *|
 |0|110|0|20,18|Niedriger als normal *|
-

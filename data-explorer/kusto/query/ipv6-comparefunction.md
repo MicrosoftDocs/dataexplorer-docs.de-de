@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: 92c2c512fc81176cfa849ecdd66c0cdcfad9d8d3
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: ce14c466d927dd2431ae8e057bceec0d5fdd38b8
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347322"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803895"
 ---
 # <a name="ipv6_compare"></a>ipv6_compare()
 
@@ -27,6 +27,9 @@ ipv6_compare('fe80::85d:e82c:9446:7994/127', 'fe80::85d:e82c:9446:7995/127') == 
 ipv6_compare('fe80::85d:e82c:9446:7994', 'fe80::85d:e82c:9446:7995', 127) == 0
 ```
 
+> [!Note]
+> Die Funktion kann Argumente akzeptieren und vergleichen, die sowohl IPv6-als auch IPv4-Netzwerkadressen darstellen. Wenn der Aufrufer jedoch weiß, dass Argumente im IPv4-Format vorliegen, verwenden Sie [ipv4_is_compare ()](./ipv4-comparefunction.md) -Funktion. Diese Funktion führt zu einer besseren Laufzeitleistung.
+
 ## <a name="syntax"></a>Syntax
 
 `ipv6_compare(`*Expr1* `, ` *Expr2* `[ ,` *Prefixmask*`])`
@@ -36,24 +39,19 @@ ipv6_compare('fe80::85d:e82c:9446:7994', 'fe80::85d:e82c:9446:7995', 127) == 0
 * *Expr1*, *expr2*: ein Zeichen folgen Ausdruck, der eine IPv6-oder IPv4-Adresse darstellt. IPv6-und IPv4-Zeichen folgen können mithilfe der IP-Präfix Notation maskiert werden (siehe Hinweis).
 * *Prefixmask*: eine ganze Zahl zwischen 0 und 128, die die Anzahl der wichtigsten Bits darstellt, die berücksichtigt werden.
 
-> [!Note] 
->**IP-Präfix Notation**
-> 
->Es ist üblich, IP-Adressen mit `IP-prefix notation` einem Schrägstrich () zu definieren `/` .
->Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse, und die Zahl (1 bis 127) rechts neben dem Schrägstrich ( `/` ) ist die Anzahl von zusammenhängenden 1 Bits in der netmask. 
->
-> ## <a name="example"></a>Beispiel:
-> FE80:: 85D: e82c: 9446:7994/120 verfügt über eine zugeordnete net/Subnetmask mit 120 zusammenhängenden Bits.
+## <a name="ip-prefix-notation"></a>IP-Präfix Notation
 
-## <a name="returns"></a>Rückgabe
+Es ist üblich, IP-Adressen mit `IP-prefix notation` einem Schrägstrich () zu definieren `/` .
+Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse, und die Zahl (1 bis 127) rechts neben dem Schrägstrich ( `/` ) ist die Anzahl von zusammenhängenden 1 Bits in der netmask. 
+
+Beispielsweise wird FE80:: 85D: e82c: 9446:7994/120 eine zugeordnete net/Subnetmask mit 120 angrenzenden Bits aufweisen.
+
+## <a name="returns"></a>Gibt zurück
 
 * `0`: Wenn die lange Darstellung des ersten IPv6-Zeichen folgen Arguments gleich dem zweiten IPv6-Zeichen folgen Argument ist.
 * `1`: Wenn die lange Darstellung des ersten IPv6-Zeichen folgen Arguments größer als das zweite IPv6-Zeichen folgen Argument ist.
 * `-1`: Wenn die lange Darstellung des ersten IPv6-Zeichen folgen Arguments kleiner als das zweite IPv6-Zeichen folgen Argument ist.
 * `null`:, Wenn die Konvertierung für eine der beiden IPv6-Zeichen folgen nicht erfolgreich war.
-
-> [!Note]
-> Die Funktion kann Argumente akzeptieren und vergleichen, die sowohl IPv6-als auch IPv4-Netzwerkadressen darstellen. Wenn der Aufrufer jedoch weiß, dass Argumente im IPv4-Format vorliegen, verwenden Sie [ipv4_is_compare ()](./ipv4-comparefunction.md) -Funktion. Diese Funktion führt zu einer besseren Laufzeitleistung.
 
 ## <a name="examples-ipv6ipv4-comparison-equality-cases"></a>Beispiele: IPv6/IPv4-Vergleichs Gleichheits Fälle
 

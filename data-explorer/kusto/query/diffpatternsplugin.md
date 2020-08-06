@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a02f275dc47e88c7b14b85d19040e907613d1b80
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 0be0dc12f48723bc83376a36db04f764991f7f0d
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348325"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803096"
 ---
 # <a name="diff-patterns-plugin"></a>Vergleichs Muster-Plugin
 
@@ -23,13 +23,16 @@ Vergleicht zwei Datasets derselben Struktur und findet Muster diskreter Attribut
 ```kusto
 T | evaluate diffpatterns(splitColumn)
 ```
-
+> [!NOTE]
+> `diffpatterns`zielt darauf ab, bedeutende Muster zu finden (die Teile des Daten Unterschieds zwischen den Sätzen erfassen) und nicht für zeilenweise Unterschiede gedacht ist.
 
 ## <a name="syntax"></a>Syntax
 
 `T | evaluate diffpatterns(SplitColumn, SplitValueA, SplitValueB [, WeightColumn, Threshold, MaxDimensions, CustomWildcard, ...])` 
 
-**Erforderliche Argumente**
+## <a name="arguments"></a>Argumente 
+
+### <a name="required-arguments"></a>Erforderliche Argumente
 
 * SplitColumn - *column_name*
 
@@ -45,7 +48,7 @@ T | evaluate diffpatterns(splitColumn)
 
     Beispiel: `T | extend splitColumn=iff(request_responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure") `
 
-**Optionale Argumente**
+### <a name="optional-arguments"></a>Optionale Argumente
 
 Alle anderen Argumente sind optional, aber sie müssen wie unten angegeben sortiert werden. Um anzugeben, dass der Standardwert verwendet werden sollte, können Sie eine Tilde („~“) angeben (siehe Beispiele unten).
 
@@ -76,7 +79,7 @@ Alle anderen Argumente sind optional, aber sie müssen wie unten angegeben sorti
 
     Beispiel: `T | extend splitColumn = iff(request-responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", "~", "~", "~", int(-1), double(-1), long(0), datetime(1900-1-1))`
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 `Diffpatterns`Gibt einen kleinen Satz von Mustern zurück, die verschiedene Teile der Daten in den beiden Mengen erfassen (d. h. ein Muster, das einen großen Prozentsatz der Zeilen im ersten DataSet und einen niedrigen Prozentsatz der Zeilen in der zweiten Menge erfasst). Jede Zeile in den Ergebnissen steht für ein Muster.
 
@@ -100,14 +103,9 @@ Bei jedem Muster enthalten Spalten, die nicht im Muster (d. h. ohne Einschränku
 
 * Hinweis: die Muster sind häufig nicht verschieden. Sie können sich überlappen und in der Regel nicht alle ursprünglichen Zeilen abdecken. Einige Zeilen fallen ggf. nicht in eines der Muster.
 
-
-**Tipps**
-
-Verwenden Sie [Where](./whereoperator.md) und [Project](./projectoperator.md) in der eingabepipe, um die Daten auf die für Sie interessanten Daten zu reduzieren.
-
-Wenn Sie eine interessante Zeile finden, können Sie dafür einen Drilldown durchführen, indem Sie die jeweiligen Werte dem `where` -Filter hinzufügen.
-
-* Hinweis: `diffpatterns` zielt darauf ab, bedeutende Muster zu finden (die Teile des Daten Unterschieds zwischen den Sätzen erfassen) und nicht für zeilenweise Unterschiede gedacht ist.
+> [!TIP]
+> * Verwenden Sie [Where](./whereoperator.md) und [Project](./projectoperator.md) in der eingabepipe, um die Daten auf die für Sie interessanten Daten zu reduzieren.
+> * Wenn Sie eine interessante Zeile finden, können Sie dafür einen Drilldown durchführen, indem Sie die jeweiligen Werte dem `where` -Filter hinzufügen.
 
 ## <a name="example"></a>Beispiel
 
@@ -120,7 +118,7 @@ StormEvents
 | evaluate diffpatterns(Damage, "0", "1" )
 ```
 
-|SegmentId|CountA|CountB|PercentA|PercentB|PercentDiffAB|Zustand|EventType|`Source`|DamageCrops|
+|SegmentId|CountA|CountB|PercentA|PercentB|PercentDiffAB|State|EventType|Quelle|DamageCrops|
 |---|---|---|---|---|---|---|---|---|---|
 |0|2278|93|49,8|7.1|42,7||Hagel||0|
 |1|779|512|17,03|39,08|22,05||Sturm|||

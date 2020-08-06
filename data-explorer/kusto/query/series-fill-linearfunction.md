@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 0831251bd38df4475c271cc6bcec9c15668860ea
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 3fa07fee38ab42c61035f68773b603607d0aa858
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87344168"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803453"
 ---
 # <a name="series_fill_linear"></a>series_fill_linear()
 
@@ -34,14 +34,14 @@ Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe 
 * *fill_edges*: ein boolescher Wert, der angibt, ob *missing_value_placeholder* am Anfang und am Ende des Arrays durch den nächstgelegenen Wert ersetzt werden sollen. Standardmäßig " *true* ". Wenn *false*festgelegt ist, werden *missing_value_placeholder* am Anfang und am Ende des Arrays beibehalten.
 * *constant_value*: optionaler Parameter, der nur für Arrays relevant ist, besteht aus *null* -Werten. Dieser Parameter gibt einen konstanten Wert an, mit dem die Reihe aufgefüllt werden soll. Der Standardwert ist *0*. Wenn dieser Parameter auf `double` (*null*) festgelegt wird, werden *null* -Werte in diesem Fall nicht angezeigt.
 
-**Hinweise**
+## <a name="notes"></a>Notizen
 
 * Geben Sie *null* als Standardwert an, um nach der [make-Reihe](make-seriesoperator.md)Interpolations Funktionen anzuwenden: 
 
-<!-- csl: https://help.kusto.windows.net:443/Samples -->
-```kusto
-make-series num=count() default=long(null) on TimeStamp from ago(1d) to ago(1h) step 1h by Os, Browser
-```
+    <!-- csl: https://help.kusto.windows.net:443/Samples -->
+    ```kusto
+    make-series num=count() default=long(null) on TimeStamp from ago(1d) to ago(1h) step 1h by Os, Browser
+    ```
 
 * Der *missing_value_placeholder* kann einen beliebigen Typ aufweisen, der in tatsächliche Elementtypen konvertiert wird. Daher `double` haben entweder (*null*), `long` (*null*) oder `int` (*null*) dieselbe Bedeutung.
 * Wenn *missing_value_placeholder* `double` (*null*) ist (oder weggelassen wird, das die gleiche Bedeutung hat), kann ein Ergebnis *null* -Werte enthalten. Verwenden Sie andere Interpolations Funktionen, um diese *null* -Werte auszufüllen. Derzeit unterstützen nur [series_outliers ()](series-outliersfunction.md) *null* -Werte in Eingabe Arrays.

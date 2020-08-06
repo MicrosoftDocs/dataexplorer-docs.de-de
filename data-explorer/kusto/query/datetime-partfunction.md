@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2020
-ms.openlocfilehash: 2c1a73d2d7e31eb180b37fae3d392fd5792cd69b
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: c786f0edc94a9b92ca0f4484d0d71166ee699883
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348512"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803980"
 ---
 # <a name="datetime_part"></a>datetime_part()
 
@@ -33,26 +33,25 @@ datetime_part("Day",datetime(2015-12-14))
 * `part`: `string`
 
 Mögliche Werte `part` : 
-- Year
-- Quarter
-- Month
-- week_of_year
-- Tag
-- DayOfYear
-- Hour
-- Minute
-- Second
-- Millisekunde
-- Mikrosekunde
-- Nanosekunde
+* Year
+* Quarter
+* Month
+* week_of_year
+* Tag
+* DayOfYear
+* Hour
+* Minute
+* Second
+* Millisekunde
+* Mikrosekunde
+* Nanosekunde
 
 ## <a name="returns"></a>Gibt zurück
 
 Eine ganze Zahl, die den extrahierten Teil darstellt.
 
-**Hinweis**
-
-`week_of_year`gibt eine ganze Zahl zurück, die die Wochen Nummer darstellt. Die Wochen Nummer wird von der ersten Woche eines Jahres berechnet, die den ersten Donnerstag enthält.
+> [!NOTE]
+> `week_of_year`gibt eine ganze Zahl zurück, die die Wochen Nummer darstellt. Die Wochen Nummer wird von der ersten Woche eines Jahres berechnet, die den ersten Donnerstag enthält.
 
 ## <a name="examples"></a>Beispiele
 
@@ -80,4 +79,4 @@ nanosecond = datetime_part("nanosecond", dt)
 
 > [!NOTE]
 > `weekofyear`ist eine veraltete Variante von `week_of_year` Part. `weekofyear`war nicht ISO 8601-kompatibel. die erste Woche eines Jahres wurde als Woche mit dem ersten Mittwoch des Jahrs definiert.
-`week_of_year`ist ISO 8601-kompatibel; die erste Woche eines Jahres wird als Woche mit dem ersten Donnerstag des Jahrs definiert. [Weitere Informationen](https://en.wikipedia.org/wiki/ISO_8601#Week_dates).
+> `week_of_year`ist ISO 8601-kompatibel; die erste Woche eines Jahres wird als Woche mit dem ersten Donnerstag des Jahrs definiert. [Weitere Informationen](https://en.wikipedia.org/wiki/ISO_8601#Week_dates).

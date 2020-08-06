@@ -10,20 +10,22 @@ ms.topic: reference
 ms.date: 02/24/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: e412c1ec4f08af9820018f4c8dc172bd8c748a7f
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: e4752828b3e4b145026f7ee47a1ade3f8685262e
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350977"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803470"
 ---
 # <a name="sql_request-plugin"></a>Plug-In „sql_request“
 
 ::: zone pivot="azuredataexplorer"
 
-  `evaluate``sql_request` `(` *ConnectionString* `,` *sqlQuery* [ `,` *SQLPARAMETERS* [ `,` *Optionen*]]`)`
-
 Das `sql_request` Plug-in sendet eine SQL-Abfrage an einen SQL Server Netzwerk Endpunkt und gibt das erste Rowset in den Ergebnissen zurück.
+
+## <a name="syntax"></a>Syntax
+
+  `evaluate``sql_request` `(` *ConnectionString* `,` *sqlQuery* [ `,` *SQLPARAMETERS* [ `,` *Optionen*]]`)`
 
 ## <a name="arguments"></a>Argumente
 
@@ -121,7 +123,7 @@ Die erforderliche Syntax lautet:
 
 `Server`Voll `=` `tcp:` *qualifizierter* Name [ `,` *Port*]
 
-Hierbei gilt Folgendes:
+Hierbei gilt:
 
 * *FQDN* ist der voll qualifizierte Domänen Name des Endpunkts.
 * *Port* ist der TCP-Port des Endpunkts. Standardmäßig `1433` wird angenommen.

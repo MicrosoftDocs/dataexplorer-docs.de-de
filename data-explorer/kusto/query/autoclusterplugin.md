@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 86e3ce4f1cbb957ebd126a8493ebb6b7bc5ac66b
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 959b11eca2dc369a3f737e01175f77ff6626f773
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349413"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803844"
 ---
 # <a name="autocluster-plugin"></a>autocluster-Plug-In
 
@@ -23,11 +23,15 @@ T | evaluate autocluster()
 
 `autocluster`findet allgemeine Muster diskreter Attribute (Dimensionen) in den Daten. Anschließend werden die Ergebnisse der ursprünglichen Abfrage, unabhängig davon, ob es sich um 100 oder 100.000 Zeilen handelt, auf eine kleine Anzahl von Mustern reduziert. Das Plug-in wurde entwickelt, um Fehler zu analysieren (z. b. Ausnahmen oder Abstürze), kann aber potenziell an jedem gefilterten Dataset arbeiten.
 
+> [!NOTE]
+> `autocluster`basiert größtenteils auf dem Seed-Expand-Algorithmus aus dem folgenden Dokument: [Algorithmen für das telemetriedatenmining mit diskreten Attributen](https://www.scitepress.org/DigitalLibrary/PublicationsDetail.aspx?ID=d5kcrO+cpEU=&t=1). 
+
+
 ## <a name="syntax"></a>Syntax
 
 `T | evaluate autocluster(`*Argumente*`)`
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Das `autocluster` Plug-in gibt eine (in der Regel kleine) Gruppe von Mustern zurück. Die Muster erfassen Teile der Daten mit gemeinsamen gemeinsamen Werten über mehrere diskrete Attribute hinweg. Jedes Muster in den Ergebnissen wird durch eine Zeile dargestellt.
 
@@ -40,13 +44,16 @@ Die Muster sind nicht eindeutig, können sich überlappen und in der Regel nicht
 >
 > Wenn Sie eine interessante Zeile finden, können Sie dafür einen Drilldown durchführen, indem Sie die jeweiligen Werte dem `where` -Filter hinzufügen.
 
-**Argumente (alle optional)**
+## <a name="arguments"></a>Argumente 
+
+> [!NOTE] 
+> Alle Argumente sind optional.
 
 `T | evaluate autocluster(`[*Sizeweight*, *weightcolumn*, *numseeds*, *customwildcard*, *customwildcard*,...]`)`
 
 Alle Argumente sind optional, aber sie müssen wie oben angegeben sortiert werden. Um anzugeben, dass der Standardwert verwendet werden soll, fügen Sie die Zeichenfolge Tilde value ' ~ ' ein (siehe die Spalte ' example ' in der Tabelle).
 
-|Argument        | Typ, Bereich, Standard              |BESCHREIBUNG                | Beispiel                                        |
+|Argument        | Typ, Bereich, Standard              |Beschreibung                | Beispiel                                        |
 |----------------|-----------------------------------|---------------------------|------------------------------------------------|
 | SizeWeight     | 0 < *Double* < 1 [Standard: 0,5]   | Ermöglicht Ihnen die Kontrolle über das Gleichgewicht zwischen generischer (hoher Abdeckung) und informativen (vielen gemeinsam genutzten) Werten. Wenn Sie den Wert erhöhen, wird die Anzahl der Muster in der Regel verringert, und jedes Muster deckt tendenziell eine größere prozentuale Abdeckung ab. Wenn Sie den Wert verringern, werden normalerweise spezifischere Muster mit mehr gemeinsam genutzten Werten und eine geringere prozentuale Abdeckung erzeugt. Die Formel für die unter-der-Haube ist eine gewichtete geometrische Mittel zwischen der normalisierten generischen Bewertung und dem informativen Ergebnis mit Gewichtungen `SizeWeight` und`1-SizeWeight`                   | `T | evaluate autocluster(0.8)`                |
 |Weightcolumn    | *column_name*                     | Berücksichtigt jede Zeile in der Eingabe gemäß dem angegebenen Gewicht (standardmäßig verfügt jede Spalte über eine Gewichtung von „1“). Das Argument muss ein Name einer numerischen Spalte sein (z. b. int, Long, Real). Eine übliche Nutzung einer Gewichtungsspalte besteht darin, die Stichprobenerstellung oder die Bucket-Zuordnung/Aggregation der Daten zu berücksichtigen, die bereits in die einzelnen Zeilen eingebettet sind.                                                                                                       | `T | evaluate autocluster('~', sample_Count)` | 
@@ -55,7 +62,7 @@ Alle Argumente sind optional, aber sie müssen wie oben angegeben sortiert werde
 
 ## <a name="examples"></a>Beispiele
 
-### <a name="example"></a>Beispiel
+### <a name="using-autocluster"></a>Verwenden von Autocluster
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -66,13 +73,13 @@ StormEvents
 | evaluate autocluster(0.6)
 ```
 
-|SegmentId|Anzahl|Percent|Zustand|EventType|Damage|
+|SegmentId|Anzahl|Percent|State|EventType|Damage|
 |---|---|---|---|---|---|---|---|---|
 |0|2278|38,7||Hagel|Nein
 |1|512|8,7||Sturm|YES
 |2|898|15,3|TEXAS||
 
-### <a name="example-with-custom-wildcards"></a>Beispiel mit benutzerdefinierten Platzhaltern
+### <a name="using-custom-wildcards"></a>Verwenden von benutzerdefinierten Platzhaltern
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -83,7 +90,7 @@ StormEvents
 | evaluate autocluster(0.2, '~', '~', '*')
 ```
 
-|SegmentId|Anzahl|Percent|Zustand|EventType|Damage|
+|SegmentId|Anzahl|Percent|State|EventType|Damage|
 |---|---|---|---|---|---|---|---|---|
 |0|2278|38,7|\*|Hagel|Nein
 |1|512|8,7|\*|Sturm|YES
@@ -93,5 +100,3 @@ StormEvents
 
 * [basket](./basketplugin.md)
 * [Ver](./reduceoperator.md)
-
-* `autocluster`basiert größtenteils auf dem Seed-Expand-Algorithmus aus dem folgenden Dokument: [Algorithmen für das telemetriedatenmining mit diskreten Attributen](https://www.scitepress.org/DigitalLibrary/PublicationsDetail.aspx?ID=d5kcrO+cpEU=&t=1). 

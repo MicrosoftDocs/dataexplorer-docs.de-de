@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 90d65f80ed8b5defe1fd2fe1e19ca4ff385cc408
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 1abe99a4739d68e6acb76b800af293e77e62b2f0
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347339"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803912"
 ---
 # <a name="ipv4_is_match"></a>ipv4_is_match()
 
@@ -38,9 +38,10 @@ ipv4_is_match('192.168.1.1', '192.168.1.255', 24) == true
 ## <a name="ip-prefix-notation"></a>IP-Präfix Notation
 
 IP-Adressen können `IP-prefix notation` mithilfe eines Schrägstrichs ( `/` ) definiert werden. Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse. Die Zahl (1 bis 32) rechts neben dem Schrägstrich ( `/` ) ist die Anzahl von zusammenhängenden 1 Bit in der netmask. 
-**Beispiel:** 192.168.2.0/24 verfügt über eine zugeordnete net/Subnetmask mit 24 aufeinander folgenden Bits oder 255.255.255.0 im gepunkteten Dezimal Format.
 
-## <a name="returns"></a>Rückgabe
+Beispielsweise verfügt 192.168.2.0/24 über eine zugeordnete net/Subnetmask, die 24 aufeinander folgende Bits oder 255.255.255.0 im gepunkteten Dezimal Format enthält.
+
+## <a name="returns"></a>Gibt zurück
 
 * `true`: Wenn die lange Darstellung des ersten IPv4-Zeichen folgen Arguments gleich dem zweiten IPv4-Zeichen folgen Argument ist.
 *  `false`Sonst.
@@ -48,7 +49,7 @@ IP-Adressen können `IP-prefix notation` mithilfe eines Schrägstrichs ( `/` ) d
 
 ## <a name="examples"></a>Beispiele
 
-### <a name="ipv4-comparison-equality---ip-prefix-notation-specified-inside-the-ipv4-strings"></a>IPv4-Vergleichs Gleichheit-IP-Präfix-Notation innerhalb der IPv4-Zeichen folgen.
+### <a name="ipv4-comparison-equality---ip-prefix-notation-specified-inside-the-ipv4-strings"></a>IPv4-Vergleichs Gleichheit-IP-Präfix-Notation innerhalb der IPv4-Zeichen folgen
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

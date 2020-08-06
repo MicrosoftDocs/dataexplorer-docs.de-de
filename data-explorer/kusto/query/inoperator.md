@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2019
-ms.openlocfilehash: ab2132908dad26f5f21cf945a1af4af1b8a049cd
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: a6551ee2d4ac01d6d896cc8daff466f3c4a7852e
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347390"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803963"
 ---
 # <a name="in-and-in-operators"></a>in- und !in-Operatoren
 
@@ -23,9 +23,15 @@ Filtert einen Daten Satz Satz basierend auf dem bereitgestellten Satz von Werten
 Table1 | where col in ('value1', 'value2')
 ```
 
+> [!NOTE]
+> * Durch das Hinzufügen von ' ~ ' zum Operator wird die Groß-/Kleinschreibung nicht beachtet: `x in~ (expression)` oder `x !in~ (expression)` .
+> * In tabellarischen Ausdrücken wird die erste Spalte des Resultsets ausgewählt.
+> * Die Ausdrucks Liste kann bis zu `1,000,000` Werte liefern.
+> * In einer einzelnen Werteliste werden die in der Liste befindlichen Arrays vereinfacht. `x in (dynamic([1,[2,3]]))` wird beispielsweise zu `x in (1,2,3)`.
+ 
 ## <a name="syntax"></a>Syntax
 
-*Syntax der Groß-/Kleinschreibung:*
+### <a name="case-sensitive-syntax"></a>Syntax der Groß-/Kleinschreibung
 
 *T* - `|` `where` *col* `in` `(` *Liste der Skalarausdrücke*`)`   
 *T* - `|` `where` *col* `in` `(` *Tabellen Ausdruck (Tabellen* )`)`   
@@ -33,7 +39,7 @@ Table1 | where col in ('value1', 'value2')
 *T* - `|` `where` *col* `!in` `(` *Liste der Skalarausdrücke*`)`  
 *T* - `|` `where` *col* `!in` `(` *Tabellen Ausdruck (Tabellen* )`)`   
 
-*Syntax zur Groß-/Kleinschreibung*
+### <a name="case-insensitive-syntax"></a>Syntax ohne Beachtung
 
 *T* - `|` `where` *col* `in~` `(` *Liste der Skalarausdrücke*`)`   
 *T* - `|` `where` *col* `in~` `(` *Tabellen Ausdruck (Tabellen* )`)`   
@@ -52,16 +58,9 @@ Table1 | where col in ('value1', 'value2')
 
 Zeilen in *T* , für die das Prädikat ist `true` .
 
-**Notizen**
+## <a name="examples"></a>Beispiele  
 
-* Die Ausdrucks Liste kann bis zu `1,000,000` Werte liefern.
-* In einer einzelnen Werteliste werden die in der Liste befindlichen Arrays vereinfacht. `x in (dynamic([1,[2,3]]))` wird beispielsweise zu `x in (1,2,3)`.
-* In tabellarischen Ausdrücken wird die erste Spalte des Resultsets ausgewählt.
-* Durch das Hinzufügen von ' ~ ' zum Operator wird die Groß-/Kleinschreibung nicht beachtet: `x in~ (expression)` oder `x !in~ (expression)` .
-
-**Beispiele:**  
-
-**Einfache Verwendung des "in"-Operators:**  
+### <a name="use-in-operator"></a>Verwenden des "in"-Operators
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -74,8 +73,7 @@ StormEvents
 |---|
 |4775|  
 
-
-**Einfache Verwendung von "in ~"-Operator:**  
+### <a name="use-in-operator"></a>Use ' in ~ '-Operator  
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -88,7 +86,7 @@ StormEvents
 |---|
 |4775|  
 
-**Einfache Verwendung des Operators "! in":**  
+### <a name="use-in-operator"></a>Use '! in '-Operator
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -102,7 +100,7 @@ StormEvents
 |54291|  
 
 
-**Verwenden des dynamischen Arrays:**
+### <a name="use-dynamic-array"></a>Dynamisches Array verwenden
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -116,8 +114,7 @@ StormEvents
 |---|
 |3218|
 
-
-**Beispiel für eine Unterabfrage:**  
+### <a name="subquery"></a>Unterabfrage
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -149,7 +146,7 @@ StormEvents
 |---|
 |14242|  
 
-**Top mit anderem Beispiel:**  
+### <a name="top-with-other-example"></a>Top mit anderem Beispiel
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -160,7 +157,7 @@ Lightning_By_State
 | summarize sum(lightning_events) by State 
 ```
 
-| Zustand     | sum_lightning_events |
+| State     | sum_lightning_events |
 |-----------|----------------------|
 | ALABAMA   | 29                   |
 | Wisconsin | 31                   |
@@ -169,7 +166,7 @@ Lightning_By_State
 | Georgien   | 106                  |
 | Andere     | 415                  |
 
-**Verwenden einer statischen Liste, die von einer Funktion zurückgegeben wird:**  
+### <a name="use-a-static-list-returned-by-a-function"></a>Verwenden einer statischen Liste, die von einer Funktion zurückgegeben wird
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -188,6 +185,6 @@ Die Funktionsdefinition.
 .show function InterestingStates
 ```
 
-|Name|Parameter|Text|Ordner|DocString|
+|Name|Parameter|Body|Ordner|DocString|
 |---|---|---|---|---|
 |Interessantheits Zustände|()|{Dynamic (["Washington", "Florida", "Georgia", "New York"])}

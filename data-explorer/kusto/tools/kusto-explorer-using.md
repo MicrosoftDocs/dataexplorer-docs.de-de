@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: 601a2b90b3a9152df701f001f050ab0c48e8910d
-ms.sourcegitcommit: 6e84f50efc8c5c3fe57080341ed3effe72197886
+ms.openlocfilehash: 8688c7d6f2a5d68e0e1ae4436e099b011fd5faa0
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87440042"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803232"
 ---
 # <a name="using-kustoexplorer"></a>Verwenden von Kusto.Explorer
 
@@ -139,20 +139,10 @@ In Kusto. Explorer können Sie Abfragen und Ergebnisse per e-Mail freigeben. Sie
 
 Sie können einen URI erstellen, der, wenn er in einem Browser geöffnet wird, "Kusto. Explorer" lokal öffnet und eine bestimmte Abfrage für eine angegebene Kusto-Datenbank ausführt.
 
-### <a name="limitations"></a>Einschränkungen
-
-Die Abfragen sind aufgrund von Browser Einschränkungen, HTTP-Proxys und Tools, die Links überprüfen, wie z. b. Microsoft Outlook, auf ~ 2000 Zeichen beschränkt. Die Einschränkung ist ungefähre Werte, da Sie von der Länge des Clusters und des Daten Banknamens abhängig ist. Weitere Informationen finden Sie unter [https://support.microsoft.com/kb/208427](https://support.microsoft.com/kb/208427). Um die Wahrscheinlichkeit zu verringern, dass das Zeichenlimit erreicht wird, finden Sie weiter unten unter [Getting Kürzungs Links](#getting-shorter-links).
-
-Der URI hat folgendes Format:`https://<ClusterCname>.kusto.windows.net/<DatabaseName>web=0?query=<QueryToExecute>`
-
-Beispiel: [https://help.kusto.windows.net/Samples?web=0query=StormEvents+%7c+limit+10](https://help.kusto.windows.net/Samples?web=0query=StormEvents+%7c+limit+10)
- 
-Dieser URI öffnet "Kusto. Explorer", stellt eine Verbindung mit dem `Help` Kusto-Cluster her und führt die angegebene Abfrage für die `Samples` Datenbank aus. Wenn eine Instanz von "Kusto. Explorer" bereits ausgeführt wird, öffnet die laufende Instanz eine neue Registerkarte und führt die Abfrage darin aus.
-
 > [!NOTE] 
 > Aus Sicherheitsgründen ist Deep-Linking für Steuerungsbefehle deaktiviert.
 
-### <a name="creating-a-deep-link"></a>Erstellen eines Deep-Links
+#### <a name="creating-a-deep-link"></a>Erstellen eines Deep-Links
 
 Die einfachste Möglichkeit, einen Deep-Link zu erstellen, besteht darin, die Abfrage in Kusto. Explorer zu erstellen und dann mit `Export to Clipboard` die Abfrage (einschließlich Deep-Link und Ergebnisse) in die Zwischenablage zu kopieren. Sie können Sie dann per e-Mail freigeben.
         
@@ -165,7 +155,7 @@ Der zweite Link ( `Click to run query` ) ist der Deep-Link. Wenn Sie den Link zu
 
 https://help.kusto.windows.net/Samples?web=0&query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSspVuDlqlEoLs3NTSzKrEpVSM4vzSvR0FRIqlRIyszTCC5JLCoJycxN1VEwT9EEKS1KzUtJLVIoAYolZwAlFQCB3oo%2bTAAAAA%3d%3d
 
-### <a name="deep-links-and-parametrized-queries"></a>Deep-Links und Paramete Abfragen
+#### <a name="deep-links-and-parametrized-queries"></a>Deep-Links und Paramete Abfragen
 
 Paramete Abfragen können mit Deep-Linking verwendet werden.
 
@@ -177,6 +167,17 @@ web=0&query=KustoLogs+%7c+where+Timestamp+>+ago({Period})+%7c+count&Period=1h`
 
     Ersetzen &lt; &gt; Sie your_cluster durch den Namen Ihres Azure Daten-Explorer Clusters.
 
+#### <a name="limitations"></a>Einschränkungen
+
+Die Abfragen sind aufgrund von Browser Einschränkungen, HTTP-Proxys und Tools, die Links überprüfen, wie z. b. Microsoft Outlook, auf ~ 2000 Zeichen beschränkt. Die Einschränkung ist ungefähre Werte, da Sie von der Länge des Clusters und des Daten Banknamens abhängig ist. Weitere Informationen finden Sie unter [https://support.microsoft.com/kb/208427](https://support.microsoft.com/kb/208427). 
+
+Um die Wahrscheinlichkeit zu verringern, dass das Zeichenlimit erreicht wird, finden Sie unter [Getting kürzerer Links](#getting-shorter-links).
+
+Der URI hat folgendes Format:`https://<ClusterCname>.kusto.windows.net/<DatabaseName>web=0?query=<QueryToExecute>`
+
+Beispiel: [https://help.kusto.windows.net/Samples?web=0query=StormEvents+%7c+limit+10](https://help.kusto.windows.net/Samples?web=0query=StormEvents+%7c+limit+10)
+ 
+Dieser URI öffnet "Kusto. Explorer", stellt eine Verbindung mit dem `Help` Kusto-Cluster her und führt die angegebene Abfrage für die `Samples` Datenbank aus. Wenn eine Instanz von "Kusto. Explorer" bereits ausgeführt wird, öffnet die laufende Instanz eine neue Registerkarte und führt die Abfrage darin aus.
 
 ### <a name="getting-shorter-links"></a>Erhalten kürzerer Links
 
@@ -196,7 +197,7 @@ Befehlszeilenargumente werden verwendet, um das Tool für das Ausführen zusätz
 
 Befehlszeilenargumente werden als Teil der URL, die zum Öffnen der Anwendung verwendet wird, auf ähnliche Weise wie das Abfragen von [Deep-Linking-Abfragen](#creating-a-deep-link)übermittelt.
 
-## <a name="command-line-argument-syntax"></a>Syntax der Befehlszeilenargumente
+### <a name="command-line-argument-syntax"></a>Syntax der Befehlszeilenargumente
 
 "Kusto. Explorer" unterstützt mehrere Befehlszeilenargumente in der folgenden Syntax (die Reihenfolge spielt eine Rolle):
 

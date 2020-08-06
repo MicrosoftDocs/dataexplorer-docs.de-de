@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: debd0a83f4c27fa05415805404ad450bab1d3ca1
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 0a94b4f0e274d01a15edd06cbb725547e65d8381
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347373"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803946"
 ---
 # <a name="invoke-operator"></a>invoke-Operator
 
@@ -23,6 +23,9 @@ Ruft Lambda auf, das die Quelle von `invoke` als tabellarisches Parameter Argume
 T | invoke foo(param1, param2)
 ```
 
+> [!NOTE]
+> Weitere Informationen zum Deklarieren von Lambda-Ausdrücken, die tabellarische Argumente annehmen können, finden [Sie unter Let-Anweisungen](./letstatement.md) .
+ 
 ## <a name="syntax"></a>Syntax
 
 `T | invoke`- *Funktion* `(` [*param1* `,` *Param2*]`)`
@@ -36,10 +39,6 @@ T | invoke foo(param1, param2)
 ## <a name="returns"></a>Gibt zurück
 
 Gibt das Ergebnis des ausgewerteten Ausdrucks zurück.
-
-**Notizen**
-
-Weitere Informationen zum Deklarieren von Lambda-Ausdrücken, die tabellarische Argumente annehmen können, finden [Sie unter Let-Anweisungen](./letstatement.md) .
 
 ## <a name="example"></a>Beispiel
 

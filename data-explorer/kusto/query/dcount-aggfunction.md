@@ -8,16 +8,19 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2fc8ee7e8c7ab3ce372d786ec87edf55265e1249
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 45ab913fdc659444ac578ca725e2afb24256a38b
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348444"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803708"
 ---
 # <a name="dcount-aggregation-function"></a>DCount () (Aggregations Funktion)
 
 Gibt eine Schätzung für die Anzahl der unterschiedlichen Werte zurück, die von einem skalaren Ausdruck in der Zusammenfassungs Gruppe entnommen werden.
+
+> [!NOTE]
+> Die `dcount()` Aggregations Funktion ist in erster Linie für das Einschätzen der Kardinalität großer Mengen nützlich. Die Leistung wird auf Genauigkeit gewartet, und es kann ein Ergebnis zurückgegeben werden, das sich zwischen den Ausführungen ändert. Die Reihenfolge der Eingaben hat möglicherweise Auswirkungen auf die Ausgabe.
 
 ## <a name="syntax"></a>Syntax
 
@@ -28,7 +31,7 @@ Gibt eine Schätzung für die Anzahl der unterschiedlichen Werte zurück, die vo
 * *Expr*: ein skalarer Ausdruck, dessen unterschiedliche Werte gezählt werden sollen.
 * *Genauigkeit*: ein optionales `int` Literalwert, der die angeforderte Schätzgenauigkeit definiert. Unterstützte Werte finden Sie unten. Wenn nicht angegeben, wird der Standardwert `1` verwendet.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Gibt eine Schätzung der Anzahl der unterschiedlichen Werte von *`Expr`* in der Gruppe zurück.
 
@@ -39,10 +42,6 @@ PageViewLog | summarize countries=dcount(country) by continent
 ```
 
 :::image type="content" source="images/dcount-aggfunction/dcount.png" alt-text="D-Anzahl":::
-
-**Hinweise**
-
-Die `dcount()` Aggregations Funktion ist in erster Linie für das Einschätzen der Kardinalität großer Mengen nützlich. Die Leistung wird auf Genauigkeit gewartet, und es kann ein Ergebnis zurückgegeben werden, das sich zwischen den Ausführungen ändert. Die Reihenfolge der Eingaben hat möglicherweise Auswirkungen auf die Ausgabe.
 
 Eine genaue Anzahl von unterschiedlichen Werten von, `V` gruppiert nach `G` .
 

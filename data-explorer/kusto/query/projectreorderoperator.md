@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 233f5f7f6e6064b10d1385eaef8a28302368e74b
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 98887c8044be6ea1b429c51953c6f3f9a899d090
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345996"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87802960"
 ---
 # <a name="project-reorder-operator"></a>project-reorder-Operator
 
@@ -33,18 +33,16 @@ T | project-reorder Col2, Col1, Col* asc
 * *Columnnameorpattern:* Der Name des Spalten-oder Spalten Platzhalter Musters, das der Ausgabe hinzugefügt wird.
 * Für Platzhalter Muster: angeben `asc` oder `desc` Sortieren von Spalten mit ihren Namen in aufsteigender oder absteigender Reihenfolge. Wenn `asc` oder `desc` nicht angegeben ist, wird die Reihenfolge durch die übereinstimmenden Spalten bestimmt, wie Sie in der Quell Tabelle angezeigt werden.
 
-## <a name="returns"></a>Rückgabe
+> [!NOTE]
+> * Bei einem mehrdeutigen *columnnameorpattern* -Abgleich wird die Spalte an der ersten Position angezeigt, die mit dem Muster übereinstimmt.
+> * Das Angeben von Spalten für `project-reorder` ist optional. Spalten, die nicht explizit angegeben werden, werden als letzte Spalten der Ausgabe Tabelle angezeigt.
+> * Verwenden [`project-away`](projectawayoperator.md) Sie, um Spalten zu entfernen.
+> * Verwenden [`project-rename`](projectrenameoperator.md) Sie zum Umbenennen von Spalten.
+
+
+## <a name="returns"></a>Gibt zurück
 
 Eine Tabelle, die Spalten in der von den Operator Argumenten angegebenen Reihenfolge enthält. `project-reorder`benennt oder entfernt keine Spalten aus der Tabelle. aus diesem Grund werden alle Spalten, die in der Quell Tabelle vorhanden waren, in der Ergebnistabelle angezeigt.
-
-**Hinweise**
-
-- Bei einem mehrdeutigen *columnnameorpattern* -Abgleich wird die Spalte an der ersten Position angezeigt, die mit dem Muster übereinstimmt.
-- Das Angeben von Spalten für `project-reorder` ist optional. Spalten, die nicht explizit angegeben werden, werden als letzte Spalten der Ausgabe Tabelle angezeigt.
-
-* Verwenden [`project-away`](projectawayoperator.md) Sie, um Spalten zu entfernen.
-* Verwenden [`project-rename`](projectrenameoperator.md) Sie zum Umbenennen von Spalten.
-
 
 ## <a name="examples"></a>Beispiele
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: a477a8fd8e05bd6420f06c28f71f72431a343a31
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 050974af47b0f5cd0e041694ee5f680b8c321614
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349464"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803316"
 ---
 # <a name="assert"></a>assert()
 
@@ -28,15 +28,13 @@ ms.locfileid: "87349464"
 * *Condition*: Der auszuwertende bedingte Ausdruck. Wenn die Bedingung ist `false` , wird die angegebene Meldung verwendet, um einen Fehler zu melden. Wenn die Bedingung ist `true` , wird `true` als Auswertungs Ergebnis zurückgegeben. Während der Abfrage Analysephase muss die Bedingung als konstant ausgewertet werden.
 * *Message*: die Meldung, die verwendet wird, wenn die-Assertionen ausgewertet werden `false` Die *Nachricht* muss ein zeichenfolgenliteralsein.
 
+> [!NOTE]
+> `condition`muss in der Phase der Abfrage Analyse als konstant ausgewertet werden. Das heißt, Sie kann aus anderen Ausdrücken erstellt werden, die auf Konstanten verweisen und nicht an den Zeilen Kontext gebunden werden können.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 * `true`-Wenn die Bedingung ist`true`
 * Löst einen semantischen Fehler aus, wenn die Bedingung als ausgewertet wird `false` .
-
-**Hinweise**
-
-* `condition`muss in der Phase der Abfrage Analyse als konstant ausgewertet werden. Das heißt, Sie kann aus anderen Ausdrücken erstellt werden, die auf Konstanten verweisen und nicht an den Zeilen Kontext gebunden werden können.
 
 ## <a name="examples"></a>Beispiele
 

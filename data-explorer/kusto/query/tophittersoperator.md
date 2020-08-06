@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: babb4e023d29c7894661e3acf2c0a09e753011c2
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: be05a3a546bb6f1db003be14e4a1417841b54671
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87340818"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87804065"
 ---
 # <a name="top-hitters-operator"></a>top-hitters-Operator
 
@@ -22,6 +22,9 @@ Gibt einen Näherungswert für die ersten *N* Ergebnisse zurück (unter der Vora
 ```kusto
 T | top-hitters 25 of Page by Views 
 ```
+
+> [!NOTE]
+> `top-hitters`ist ein Näherungs Algorithmus und sollte bei der Ausführung mit großen Daten verwendet werden. Die Näherung der Top-Hitters basiert auf dem [count-min-Sketch-](https://en.wikipedia.org/wiki/Count%E2%80%93min_sketch) Algorithmus.  
 
 ## <a name="syntax"></a>Syntax
 
@@ -35,13 +38,9 @@ T | top-hitters 25 of Page by Views
     * *Ausdruck*: Top-Hitters geben *numofrows* -Zeilen zurück, die eine ungefähre maximale Summe von Sum (*Expression*) aufweisen. Der Ausdruck kann eine Spalte oder ein beliebiger anderer Ausdruck sein, der zu einer Zahl ausgewertet wird. 
     *  Wenn *Expression* nicht angegeben wird, zählt der Top-Hitters-Algorithmus die Vorkommen des *Sortier Schlüssels*.  
 
-**Notizen**
+## <a name="examples"></a>Beispiele
 
-`top-hitters`ist ein Näherungs Algorithmus und sollte bei der Ausführung mit großen Daten verwendet werden. Die Näherung der Top-Hitters basiert auf dem [count-min-Sketch-](https://en.wikipedia.org/wiki/Count%E2%80%93min_sketch) Algorithmus.  
-
-## <a name="example"></a>Beispiel
-
-## <a name="getting-top-hitters-most-frequent-items"></a>Erste Elemente (häufigste Elemente) 
+### <a name="get-most-frequent-items"></a>Die häufigsten Elemente erhalten 
 
 Im nächsten Beispiel wird gezeigt, wie Sie Top-5-Sprachen mit den meisten Seiten in Wikipedia suchen (auf die nach dem 2016-Mal zugegriffen wird). 
 
@@ -59,7 +58,7 @@ PageViews
 |ru|227003107|
 |fr|207943448|
 
-## <a name="getting-top-hitters-based-on-column-value-"></a>Erhalten von Top-hittern (basierend auf dem Spaltenwert) * * *
+### <a name="get-top-hitters-based-on-column-value"></a>Top-Hitters basierend auf dem Spaltenwert erhalten
 
 Im nächsten Beispiel wird gezeigt, wie Sie die am häufigsten angezeigten englischen Seiten von Wikipedia im Jahr 2016 suchen. Die Abfrage verwendet "Views" (ganzzahlige Zahl) zum Berechnen der Seiten Beliebtheit (Anzahl der Sichten). 
 

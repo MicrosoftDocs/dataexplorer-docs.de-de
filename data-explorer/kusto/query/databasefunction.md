@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 1bfe42e18cfe0bb424e933b266eb9861c7676cea
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6511006373cd1f6245a0dcc04537f3994183d63e
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348580"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803759"
 ---
 # <a name="database-scope-function"></a>Database () (Scope-Funktion)
 
@@ -28,6 +28,10 @@ database('Sample').StormEvents
 cluster('help').database('Sample').StormEvents
 ```
 
+> [!NOTE]
+> * Weitere Informationen finden Sie unter [datenbankübergreifende und Cluster übergreifende Abfragen](cross-cluster-or-database-queries.md).
+> * Informationen zum Zugreifen auf Remote Cluster und Remote Datenbanken finden Sie unter [Cluster ()](clusterfunction.md) Scope-Funktion.
+
 ## <a name="syntax"></a>Syntax
 
 `database(`*StringConstant*`)`
@@ -36,14 +40,9 @@ cluster('help').database('Sample').StormEvents
 
 * *StringConstant*: Name der Datenbank, auf die verwiesen wird. Die identifizierte Datenbank kann entweder `DatabaseName` oder sein `PrettyName` . Das Argument muss vor der Ausführung der Abfrage _konstant_ sein, d. h., es kann nicht aus der Auswertung der Unterabfrage stammen.
 
-**Hinweise**
-
-* Informationen zum Zugreifen auf Remote Cluster und Remote Datenbanken finden Sie unter [Cluster ()](clusterfunction.md) Scope-Funktion.
-* Weitere Informationen zu datenbankübergreifenden und datenbankübergreifenden Abfragen finden Sie [hier](cross-cluster-or-database-queries.md) .
-
 ## <a name="examples"></a>Beispiele
 
-### <a name="use-database-to-access-table-of-other-database"></a>Verwenden Sie Database (), um auf die Tabelle einer anderen Datenbank zuzugreifen. 
+### <a name="use-database-to-access-table-of-other-database"></a>Verwenden von Database () zum Zugreifen auf die Tabelle einer anderen Datenbank
 
 ```kusto
 database('Samples').StormEvents | count
@@ -80,7 +79,8 @@ Dieselbe Abfrage wie oben kann so umgeschrieben werden, dass Sie in einer Funkti
 };
 ```
 
-**Hinweis:** solche Funktionen können nur lokal und nicht in der Cluster übergreifenden Abfrage verwendet werden.
+> [!NOTE]
+> Diese Funktionen können nur lokal und nicht in der Cluster übergreifenden Abfrage verwendet werden.
 
 ::: zone-end
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ae5268a4a062a6f45adb715650028d952cb89e0b
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 57ef9eef8f4df5564adc70ed6dd965329fa1807a
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346387"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87804048"
 ---
 # <a name="parse_version"></a>parse_version()
 
@@ -31,20 +31,18 @@ parse_version("0.0.0.1")
 
 * *`Expr`*: Ein Skalarausdruck vom Typ `string` , der die Version angibt, die analysiert werden soll.
 
-## <a name="returns"></a>Rückgabe
+> [!NOTE]
+> * Die Eingabe Zeichenfolge muss eine bis vier Versions Bestandteile enthalten, die als Zahlen dargestellt und durch Punkte (".") getrennt sind.
+> * Jeder Teil der Version kann bis zu acht Ziffern mit dem maximalen Wert bei 99999999 enthalten.
+> * Wenn die Anzahl der Teile kleiner als vier ist, werden alle fehlenden Teile als nachfolgende ( `1.0`  ==  `1.0.0.0` ) betrachtet.
+
+## <a name="returns"></a>Gibt zurück
 
 Wenn die Konvertierung erfolgreich ist, ist das Ergebnis ein Dezimaltrennzeichen.
 Wenn die Konvertierung nicht erfolgreich ist, lautet das Ergebnis `null` .
 
-**Hinweise**
-
-Die Eingabe Zeichenfolge muss eine bis vier Versions Bestandteile enthalten, die als Zahlen dargestellt und durch Punkte (".") getrennt sind.
-
-Jeder Teil der Version kann bis zu acht Ziffern mit dem maximalen Wert bei 99999999 enthalten.
-
-Wenn die Anzahl der Teile kleiner als vier ist, werden alle fehlenden Teile als nachfolgende ( `1.0`  ==  `1.0.0.0` ) betrachtet.
-
 ## <a name="example"></a>Beispiel
+
 ```kusto
 let dt = datatable(v:string)
 ["0.0.0.5","0.0.7.0","0.0.3","0.2","0.1.2.0","1.2.3.4","1","99999999.0.0.0"];

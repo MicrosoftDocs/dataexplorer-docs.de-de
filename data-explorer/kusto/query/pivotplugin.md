@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: d2f9db1dbace646c41d8751272cf44cf6d04c2c3
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: ed7f6f69669cd580482beb2d3debd0e5c45bf54b
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346132"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803147"
 ---
 # <a name="pivot-plugin"></a>pivot-Plug-In
 
@@ -22,6 +22,9 @@ Rotiert eine Tabelle, indem die eindeutigen Werte aus einer Spalte in der Eingab
 ```kusto
 T | evaluate pivot(PivotColumn)
 ```
+
+> [!NOTE]
+> Das Ausgabe Schema des `pivot` Plug-ins basiert auf den Daten, sodass die Abfrage möglicherweise ein anderes Schema für zwei Ausführungen erzeugt. Dies bedeutet auch, dass die Abfrage, die auf entpackte Spalten verweist, jederzeit "beschädigt" werden kann. Aus diesem Grund empfiehlt es sich nicht, dieses Plug-in für Automatisierungs Aufträge zu verwenden.
 
 ## <a name="syntax"></a>Syntax
 
@@ -33,13 +36,9 @@ T | evaluate pivot(PivotColumn)
 * *Aggregations Funktion*: (optional) aggregiert mehrere Zeilen in der Eingabe Tabelle in eine einzelne Zeile in der Ausgabe Tabelle. Derzeit unterstützte Funktionen: `min()` , `max()` , `any()` , `sum()` , `dcount()` , `avg()` , `stdev()` , `variance()` , `make_list()` , `make_bag()` , `make_set()` , `count()` (Standardwert ist `count()` ).
 * *column1*, *Column2*,...: (optional) Spaltennamen. Die Ausgabe Tabelle enthält eine zusätzliche Spalte für jede angegebene Spalte. Standard: alle Spalten außer der pivotierten Spalte und der Aggregations Spalte.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Pivot gibt die gedrehte Tabelle mit angegebenen Spalten (*column1*, *Column2*,...) und allen eindeutigen Werten der Pivotspalten zurück. Jede Zelle für die pivotierten Spalten enthält die Berechnung der Aggregatfunktion.
-
-**Hinweis**
-
-Das Ausgabe Schema des `pivot` Plug-ins basiert auf den Daten, sodass die Abfrage möglicherweise ein anderes Schema für zwei Ausführungen erzeugt. Dies bedeutet auch, dass die Abfrage, die auf entpackte Spalten verweist, jederzeit "beschädigt" werden kann. Aus diesem Grund empfiehlt es sich nicht, dieses Plug-in für Automatisierungs Aufträge zu verwenden.
 
 ## <a name="examples"></a>Beispiele
 
@@ -64,7 +63,7 @@ StormEvents
 |Starker Wind|22|0|
 
 
-### <a name="pivot-by-a-column-with-aggregation-function"></a>Pivotieren Sie nach einer Spalte mit einer Aggregations Funktion.
+### <a name="pivot-by-a-column-with-aggregation-function"></a>Pivot durch eine Spalte mit Aggregations Funktion
 
 Zeigen Sie für jeden EventType und die Zustände, beginnend mit "ar", die Gesamtzahl der direkten Todesfälle an.
 
@@ -87,7 +86,7 @@ StormEvents
 |Hitze|3|0|
 
 
-### <a name="pivot-by-a-column-with-aggregation-function-and-a-single-additional-column"></a>Pivotieren Sie nach einer Spalte mit einer Aggregations Funktion und einer einzelnen zusätzlichen Spalte.
+### <a name="pivot-by-a-column-with-aggregation-function-and-a-single-additional-column"></a>Pivot durch eine Spalte mit Aggregations Funktion und einer einzelnen zusätzlichen Spalte
 
 Das Ergebnis ist mit dem vorherigen Beispiel identisch.
 
@@ -110,7 +109,7 @@ StormEvents
 |Hitze|3|0|
 
 
-### <a name="specify-the-pivoted-column-aggregation-function-and-multiple-additional-columns"></a>Geben Sie die pivotierte Spalte, die Aggregations Funktion und mehrere zusätzliche Spalten an.
+### <a name="specify-the-pivoted-column-aggregation-function-and-multiple-additional-columns"></a>Angeben der pivotierten Spalte, Aggregations Funktion und mehrerer zusätzlicher Spalten
 
 Addieren Sie für jeden Ereignistyp (Quelle und Zustand) die Anzahl der direkten Todesfälle.
 
@@ -122,7 +121,7 @@ StormEvents
 | evaluate pivot(State, sum(DeathsDirect), EventType, Source)
 ```
 
-|EventType|`Source`|ARKANSAS|Arizona|
+|EventType|Quelle|ARKANSAS|Arizona|
 |---|---|---|---|
 |Starker Regen|Katastrophenschutz|1|0|
 |Sturm|Katastrophenschutz|1|0|

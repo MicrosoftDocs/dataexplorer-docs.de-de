@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: e11a4d450275fb4d596bd9618c20ef6cefcb0531
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: acd1b5328150e61bc81930f94b8ea9e8025e1ebb
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350729"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87804082"
 ---
 # <a name="todynamic-toobject"></a>todynamic(), toobject()
 
@@ -22,6 +22,9 @@ Interpretiert einen `string` als [JSON-Wert](https://json.org/) und gibt den Wer
 Es ist besser, die [extractjson ()-Funktion](./extractjsonfunction.md) zu verwenden, wenn Sie mehr als ein Element eines JSON-Verbund Objekts extrahieren müssen.
 
 Aliase zu [parse_json ()](./parsejsonfunction.md) -Funktion.
+
+> [!NOTE]
+> Verwenden Sie nach Möglichkeit die Verwendung von [Dynamic ()](./scalar-data-types/dynamic.md) .
 
 ## <a name="syntax"></a>Syntax
 
@@ -32,8 +35,6 @@ Aliase zu [parse_json ()](./parsejsonfunction.md) -Funktion.
 
 * *JSON*: ein JSON-Dokument.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Ein Objekt vom Typ `dynamic` , angegeben durch *json*.
-
-*Hinweis*: Verwenden Sie nach Möglichkeit die Verwendung von [Dynamic ()](./scalar-data-types/dynamic.md) .

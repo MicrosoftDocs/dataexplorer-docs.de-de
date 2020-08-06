@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: a81c5faadb51b99cdcd233132f9b6a4843e3ce34
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 52cec808795024bd58b6a4ef6cf08e5b700c0e33
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345792"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803623"
 ---
 # <a name="restrict-statement"></a>restrict-Anweisung
 
@@ -24,6 +24,9 @@ ms.locfileid: "87345792"
 Die Einschränkungs Anweisung schränkt den Satz von Tabellen-/ansichtentitäten ein, die für die folgenden Abfrage Anweisungen sichtbar sind. In einer Datenbank, die zwei Tabellen ( `A` , `B` ) enthält, kann die Anwendung z. b. verhindern, dass der Rest der Abfrage auf eine begrenzte Form einer Tabelle zugreift, `B` `A` indem eine Sicht verwendet wird.
 
 Das Hauptszenario der Einschränkungs Anweisung ist für Anwendungen der mittleren Ebene, die Abfragen von Benutzern akzeptieren und einen Sicherheitsmechanismus auf Zeilenebene über diese Abfragen anwenden möchten. Die Anwendung der mittleren Ebene kann der Abfrage des Benutzers ein **Logisches Modell**, eine Reihe von Let-Anweisungen, die Ansichten definieren, die den Zugriff des Benutzers auf Daten einschränken (z `T | where UserId == "..."` . b.). Die letzte hinzugefügte Anweisung schränkt den Zugriff des Benutzers auf das logische Modell ein.
+
+> [!NOTE]
+> Die Einschränkungs Anweisung kann verwendet werden, um den Zugriff auf Entitäten in einer anderen Datenbank oder in einem Cluster einzuschränken (Platzhalter werden in Cluster Namen nicht unterstützt).
 
 ## <a name="syntax"></a>Syntax
 
@@ -36,49 +39,44 @@ Where *entityspecifier* ist einer der folgenden:
 
 Alle Tabellen, Tabellen Sichten oder Muster, die nicht von der Einschränkungs Anweisung angegeben werden, werden für den Rest der Abfrage "unsichtbar". 
 
-**Hinweise**
-
-Die Einschränkungs Anweisung kann verwendet werden, um den Zugriff auf Entitäten in einer anderen Datenbank oder in einem Cluster einzuschränken (Platzhalter werden in Cluster Namen nicht unterstützt).
-
 ## <a name="arguments"></a>Argumente
 
 Die Einschränkungs Anweisung kann einen oder mehrere Parameter abrufen, die die Einschränkungs Einschränkung während der Namensauflösung der Entität definieren. Die Entität kann folgende sein:
-- [Let-Anweisung](./letstatement.md) wird vor der- `restrict` Anweisung angezeigt. 
+* [Let-Anweisung](./letstatement.md) wird vor der- `restrict` Anweisung angezeigt. 
 
-```kusto
-// Limit access to 'Test' let statement only
-let Test = () { print x=1 };
-restrict access to (Test);
-```
+  ```kusto
+  // Limit access to 'Test' let statement only
+  let Test = () { print x=1 };
+  restrict access to (Test);
+  ```
 
-- [Tabellen](../management/tables.md) oder [Funktionen](../management/functions.md) , die in den Daten Bank Metadaten definiert sind.
+* [Tabellen](../management/tables.md) oder [Funktionen](../management/functions.md) , die in den Daten Bank Metadaten definiert sind.
 
-```kusto
-// Assuming the database that the query uses has table Table1 and Func1 defined in the metadata, 
-// and other database 'DB2' has Table2 defined in the metadata
- 
-restrict access to (database().Table1, database().Func1, database('DB2').Table2);
-```
+    ```kusto
+    // Assuming the database that the query uses has table Table1 and Func1 defined in the metadata, 
+    // and other database 'DB2' has Table2 defined in the metadata
+    
+    restrict access to (database().Table1, database().Func1, database('DB2').Table2);
+    ```
 
-- Platzhalter Muster, die vielfachen von [Let-Anweisungen](./letstatement.md) oder Tabellen/Funktionen entsprechen können  
+* Platzhalter Muster, die vielfachen von [Let-Anweisungen](./letstatement.md) oder Tabellen/Funktionen entsprechen können  
 
-```kusto
-let Test1 = () { print x=1 };
-let Test2 = () { print y=1 };
-restrict access to (*);
-// Now access is restricted to Test1, Test2 and no tables/functions are accessible.
+    ```kusto
+    let Test1 = () { print x=1 };
+    let Test2 = () { print y=1 };
+    restrict access to (*);
+    // Now access is restricted to Test1, Test2 and no tables/functions are accessible.
 
-// Assuming the database that the query uses has table Table1 and Func1 defined in the metadata.
-// Assuming that database 'DB2' has table Table2 and Func2 defined in the metadata
-restricts access to (database().*);
-// Now access is restricted to all tables/functions of the current database ('DB2' is not accessible).
+    // Assuming the database that the query uses has table Table1 and Func1 defined in the metadata.
+    // Assuming that database 'DB2' has table Table2 and Func2 defined in the metadata
+    restricts access to (database().*);
+    // Now access is restricted to all tables/functions of the current database ('DB2' is not accessible).
 
-// Assuming the database that the query uses has table Table1 and Func1 defined in the metadata.
-// Assuming that database 'DB2' has table Table2 and Func2 defined in the metadata
-restricts access to (database('DB2').*);
-// Now access is restricted to all tables/functions of the database 'DB2'
-```
-
+    // Assuming the database that the query uses has table Table1 and Func1 defined in the metadata.
+    // Assuming that database 'DB2' has table Table2 and Func2 defined in the metadata
+    restricts access to (database('DB2').*);
+    // Now access is restricted to all tables/functions of the database 'DB2'
+    ```
 
 ## <a name="examples"></a>Beispiele
 
