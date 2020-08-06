@@ -7,119 +7,106 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 02/19/2020
-ms.openlocfilehash: 072c908109fecb695a8961c546deb756caf830ab
-ms.sourcegitcommit: 98eabf249b3f2cc7423dade0f386417fb8e36ce7
+ms.date: 08/04/2020
+ms.openlocfilehash: 7eb5adc76c963065940365973aadc5281ff5f553
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82868702"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87803408"
 ---
-# <a name="update-policy"></a>Aktualisieren von Richtlinien
+# <a name="update-policy-overview"></a>Übersicht über Update Richtlinien
 
-Die Update Richtlinie wird für eine **Ziel Tabelle** festgelegt, die Kusto anweist, Daten automatisch an den Daten anzufügen, wenn neue Daten in die **Quell Tabelle**eingefügt werden. Die **Abfrage** der Update Richtlinie wird für die Daten ausgeführt, die in die Quell Tabelle eingefügt werden. Dies ermöglicht z. b. die Erstellung einer Tabelle als gefilterte Sicht einer anderen Tabelle, möglicherweise mit einem anderen Schema, einer Aufbewahrungs Richtlinie usw.
+Die [Update Richtlinie](update-policy.md) weist Kusto an, automatisch Daten an eine Ziel Tabelle anzufügen, wenn neue Daten in die Quell Tabelle eingefügt werden. Die Abfrage der Update Richtlinie wird für die Daten ausgeführt, die in die Quell Tabelle eingefügt werden. Die Richtlinie ermöglicht beispielsweise das Erstellen einer Tabelle als gefilterte Sicht einer anderen Tabelle. Die neue Tabelle kann über ein anderes Schema, eine andere Beibehaltungs Richtlinie usw. verfügen. 
 
-Standardmäßig wirkt sich ein Fehler beim Ausführen der Update Richtlinie nicht auf die Erfassung von Daten in die Quell Tabelle aus. Wenn die Update Richtlinie als **transaktional**definiert ist, erzwingt die Ausführung der Update Richtlinie nicht, dass die Erfassung von Daten in die Quell Tabelle ebenfalls fehlschlägt. (Vorsicht ist zu beachten, wenn dies geschieht, da einige Benutzerfehler, wie z. b. das Definieren einer falschen Abfrage in der Update Richtlinie, möglich **erweise verhindern, dass Daten** in die Quell Tabelle aufgenommen werden.) Daten, die in der Grenze von transaktionalen Update Richtlinien erfasst wurden, sind für eine Abfrage in einer einzelnen Transaktion verfügbar.
+Die Update Richtlinie unterliegt den gleichen Einschränkungen und bewährten Methoden wie die reguläre Erfassung. Die Richtlinie wird mit der Größe des Clusters horizontal hochskaliert und arbeitet effizienter, wenn Ingestionen in großen Buli durchgeführt werden.
 
-Die Abfrage der Update Richtlinie wird in einem speziellen Modus ausgeführt, in dem nur die neu erfassten Daten in der Quell Tabelle angezeigt werden. Es ist nicht möglich, die bereits erfassten Daten der Quell Tabelle als Teil dieser Abfrage abzufragen. Dies führt zu einem schnellen Auftreten von Ingestionen.
+:::image type="content" source="images/updatepolicy/update-policy-overview.png" alt-text="Übersicht über die Update Richtlinie in Azure Daten-Explorer":::
 
-Da die Aktualisierungs Richtlinie für die Ziel Tabelle definiert ist, kann das Erfassen von Daten in eine Quell Tabelle dazu führen, dass mehrere Abfragen für diese Daten ausgeführt werden. Die Ausführungsreihenfolge der Update Richtlinien ist nicht definiert.
+> [!NOTE]
+> Die Quell Tabelle und die Tabelle, für die die Update Richtlinie definiert ist, müssen sich in derselben Datenbank befinden.
+> Das Schema der Update Richtlinien Funktion und das Ziel Tabellen Schema müssen in ihren Spaltennamen, Typen und Reihenfolge entsprechen.
 
-Angenommen, die Quell Tabelle ist eine hochwertige Ablauf Verfolgungs Tabelle mit interessanten Daten, die als frei Text Spalte formatiert sind. Angenommen, die Ziel Tabelle (für die die Update Richtlinie definiert ist) akzeptiert nur bestimmte Ablauf Verfolgungs Zeilen und ein gut strukturiertes Schema, bei dem es sich um eine Transformation der ursprünglichen frei Text Daten mithilfe des Kusto-Analyse [Operators](../query/parseoperator.md)handelt.
+## <a name="update-policys-query"></a>Aktualisieren der Richtlinien Abfrage
 
-Die Aktualisierungs Richtlinie verhält sich ähnlich wie die reguläre Erfassung und unterliegt den gleichen Einschränkungen und bewährten Methoden. Beispielsweise wird die Größe des Clusters horizontal hochskaliert, und es ist effizienter, wenn Ingestionen in großen Buli durchgeführt werden.
+Die Abfrage für die Update Richtlinie wird in einem speziellen Modus ausgeführt, in dem Sie automatisch so festgelegt wird, dass nur die neu erfassten Datensätze abgedeckt werden, und Sie können die bereits erfassten Daten der Quell Tabelle nicht als Teil dieser Abfrage Abfragen. Daten, die in der Grenze von transaktionalen Update Richtlinien erfasst wurden, werden jedoch für eine Abfrage in einer einzelnen Transaktion verfügbar. Da die Aktualisierungs Richtlinie für die Ziel Tabelle definiert ist, kann das Erfassen von Daten in eine Quell Tabelle dazu führen, dass mehrere Abfragen für diese Daten ausgeführt werden. Die Ausführungsreihenfolge mehrerer Update Richtlinien ist nicht definiert. 
 
-## <a name="commands-that-trigger-the-update-policy"></a>Befehle, die die Aktualisierungs Richtlinie auslöst
+### <a name="query-limitations"></a>Abfrageeinschränkungen 
 
-Update Richtlinien treten in Kraft, wenn Daten erfasst oder verschoben werden (Blöcke werden in erstellt), indem eine der folgenden Befehle verwendet wird:
+* Die Abfrage kann gespeicherte Funktionen aufrufen, aber keine datenbankübergreifenden oder Cluster übergreifenden Abfragen einschließen. 
+* Eine Abfrage, die als Teil einer Update Richtlinie ausgeführt wird, verfügt nicht über Lesezugriff auf Tabellen, für die die [restrictedviewaccess-Richtlinie](restrictedviewaccesspolicy.md) aktiviert ist, oder wenn eine [Sicherheit auf Zeilenebene Richtlinie](rowlevelsecuritypolicy.md) aktiviert ist.
+* Beim Verweisen auf die `Source` Tabelle im `Query` Rahmen der Richtlinie oder in Funktionen, auf die vom Teil verwiesen wird `Query` :
+   * Verwenden Sie nicht den qualifizierten Namen der Tabelle. Verwenden Sie stattdessen `TableName`. 
+   * Verwenden Sie nicht `database("DatabaseName").TableName` oder `cluster("ClusterName").database("DatabaseName").TableName` .
 
-* [. Erfassung (Pull)](../management/data-ingestion/ingest-from-storage.md)
-* [. Erfassung (Inline)](../management/data-ingestion/ingest-inline.md)
-* [. Set |. Append |. Set-or-Append |. Set-or-Replace](../management/data-ingestion/ingest-from-query.md)
-* [Verschiebungs Blöcke verschieben](../management/extents-commands.md#move-extents)
-* [. Replace Blöcke](../management/extents-commands.md#replace-extents)
+> [!WARNING]
+> Wenn Sie eine falsche Abfrage in der Update Richtlinie definieren, kann dies verhindern, dass Daten in die Quell Tabelle aufgenommen werden.
 
 ## <a name="the-update-policy-object"></a>Das Update-Richtlinien Objekt
 
 Einer Tabelle können NULL, ein oder mehrere Update-Richtlinien Objekte zugeordnet sein.
-Jedes dieser Objekte wird als JSON-Eigenschaften Behälter dargestellt, wobei die folgenden Eigenschaften definiert sind:
+Jedes dieser Objekte wird als JSON-Eigenschaften Behälter dargestellt, wobei die folgenden Eigenschaften definiert sind.
 
-|Eigenschaft |Typ |BESCHREIBUNG  |
+|Eigenschaft |type |BESCHREIBUNG  |
 |---------|---------|----------------|
 |isEnabled                     |`bool`  |Gibt an, ob die Update Richtlinie aktiviert (true) oder deaktiviert (false) ist.                                                                                                                               |
 |`Source`                        |`string`|Name der Tabelle, in der die Aktualisier Ende Aktualisierungs Richtlinie ausgelöst wird                                                                                                                                 |
 |Abfrage                         |`string`|Eine Kusto-CSL-Abfrage, mit der die Daten für das Update erzeugt werden.                                                                                                                           |
-|"IsTransactional"               |`bool`  |Gibt an, ob es sich um eine transaktionale Update Richtlinie handelt (Standardwert: false). Fehler beim Ausführen einer Richtlinie für transaktionale Updates, weil die Quell Tabelle nicht ebenfalls mit neuen Daten aktualisiert wird.   |
+|"IsTransactional"               |`bool`  |Gibt an, ob es sich um eine transaktionale Update Richtlinie handelt (Standardwert: false). Fehler beim Ausführen einer Richtlinie für transaktionales Update führt dazu, dass die Quell Tabelle nicht mit neuen Daten aktualisiert wird.   |
 |Propagateingestionproperties  |`bool`  |Gibt an, ob Erfassungs Eigenschaften (Block-und Erstellungszeit), die während der Erfassung in der Quell Tabelle angegeben werden, auch auf die in der abgeleiteten Tabelle festgelegten Werte angewendet werden sollen.                 |
 
-## <a name="notes"></a>Notizen
+> [!NOTE]
+> Kaskadierende Updates sind zulässig ( `TableA` → `TableB` → `TableC` →...).
+>
+> Wenn jedoch Update Richtlinien auf zirkuläre Weise für mehrere Tabellen definiert werden, wird die Kette der Updates abgeschnitten. Dieses Problem wurde zur Laufzeit erkannt. Die Daten werden nur einmal für jede Tabelle in der Kette der betroffenen Tabellen erfasst.
 
-* Die Abfrage wird automatisch so festgelegt, dass nur die neu erfassten Datensätze abgedeckt werden.
-* Die Abfrage kann gespeicherte Funktionen aufrufen.
-* Kaskadierende Updates sind zulässig (`TableA` → `TableB` → `TableC` →...)
-* Wenn die Update Richtlinie als Teil eines `.set-or-replace` Befehls aufgerufen wird, ist das Standardverhalten, dass Daten in abgeleiteten Tabellen auch ersetzt werden, wie Sie in der Quell Tabelle enthalten sind.
+## <a name="update-policy-commands"></a>Aktualisieren von Richtlinien Befehlen
 
-## <a name="limitations"></a>Einschränkungen
+Folgende Befehle sind zum Steuern der Update Richtlinie zu berücksichtigen:
 
-* Die Quell Tabelle und die Tabelle, für die die Update Richtlinie definiert ist, **müssen sich in derselben Datenbank**befinden.
-* Die Abfrage enthält möglicherweise **keine** datenbankübergreifenden und Cluster übergreifenden Abfragen.
-* Für den Fall, dass Update Richtlinien auf zirkuläre Weise für mehrere Tabellen definiert werden, wird diese zur Laufzeit erkannt, und die Kette der Updates wird abgeschnitten (d.h., die Daten werden nur einmal für jede Tabelle in der Kette der betroffenen Tabellen erfasst).
-* Wenn Sie im `Source` `Query` Rahmen der Richtlinie auf die Tabelle verweisen (oder in Funktionen, auf die letztere verweist), sollten Sie sicherstellen, dass Sie **nicht** den qualifizierten Namen der Tabelle verwenden `TableName` (d. h. use und **Not** `database("DatabaseName").TableName` or `cluster("ClusterName").database("DatabaseName").TableName`).
-* Eine Abfrage, die als Teil einer Update Richtlinie ausgeführt wird, verfügt **nicht** über Lesezugriff auf Tabellen, für die die [restrictedviewaccess-Richtlinie](restrictedviewaccesspolicy.md) aktiviert ist.
-* Die Abfrage der Update Richtlinie kann nicht auf eine Tabelle verweisen, bei der eine [Sicherheit auf Zeilenebene Richtlinie](./rowlevelsecuritypolicy.md) aktiviert ist.
-* `PropagateIngestionProperties`tritt nur bei Erfassungs Vorgängen in Kraft. Wenn die Update Richtlinie als Teil eines- `.move extents` oder `.replace extents` -Befehls ausgelöst wird, hat diese Option **keine** Auswirkung.
+* [. Anzeigen der Tabelle *TableName* Richtlinien Aktualisierung](update-policy.md#show-update-policy) zeigt die aktuelle Aktualisierungs Richtlinie einer Tabelle an.
+* [. Alter Table *TableName* Policy Update](update-policy.md#alter-update-policy) legt die aktuelle Aktualisierungs Richtlinie einer Tabelle fest.
+* [. Alter-Merge Table *TableName* Policy Update](update-policy.md#alter-merge-table-tablename-policy-update) fügt an die aktuelle Aktualisierungs Richtlinie einer Tabelle an.
+* [. Delete Table *TableName* Policy Update](update-policy.md#delete-table-tablename-policy-update) fügt an die aktuelle Aktualisierungs Richtlinie einer Tabelle an.
 
-## <a name="retention-policy-on-the-source-table"></a>Aufbewahrungs Richtlinie für die Quell Tabelle
+## <a name="update-policy-is-initiated-following-ingestion"></a>Die Aktualisierungs Richtlinie wird nach der Erfassung initiiert.
 
-Wenn Sie die Rohdaten in der Quell Tabelle nicht beibehalten möchten, können Sie in der [Beibehaltungs Richtlinie](retentionpolicy.md)der Quell Tabelle einen Zeitraum von 0 (null) festlegen, während die Aktualisierungs Richtlinie als transaktional festgelegt wird.
+Update Richtlinien treten beim Erfassen oder Verschieben von Daten in eine definierte Quell Tabelle (Blöcke werden in erstellt) mithilfe eines der folgenden Befehle in Kraft:
 
-Dies führt zu folgenden Ergebnissen:
-* Die Quelldaten, die nicht aus der Quell Tabelle abgefragt werden sollen.
-* Die Quelldaten werden im Rahmen des Erfassungs Vorgangs nicht dauerhaft im permanenten Speicher gespeichert.
-* Verbesserung der Leistung des Vorgangs.
-* Verringerung der Ressourcen, die nach der Erfassung genutzt werden, für Hintergrund Bereinigungs Vorgänge, die für [Blöcke](../management/extents-overview.md) in der Quell Tabelle durchgeführt wurden.
+* [. Erfassung (Pull)](../management/data-ingestion/ingest-from-storage.md)
+* [. Erfassung (Inline)](../management/data-ingestion/ingest-inline.md)
+* [. Set |. Append |. Set-or-Append |. Set-or-Replace](../management/data-ingestion/ingest-from-query.md)
+  * Wenn die Update Richtlinie als Teil eines Befehls aufgerufen wird `.set-or-replace` , ist das Standardverhalten, dass Daten in abgeleiteten Tabellen wie in der Quell Tabelle ersetzt werden.
+* [.move extents](../management/extents-commands.md#move-extents)
+* [.replace extents](../management/extents-commands.md#replace-extents)
+  * Der `PropagateIngestionProperties` Befehl wird nur bei Erfassungs Vorgängen wirksam. Wenn die Update Richtlinie als Teil eines-oder- `.move extents` Befehls ausgelöst wird `.replace extents` , hat diese Option keine Auswirkung.
 
-## <a name="failures"></a>Fehler
+## <a name="regular-ingestion-using-update-policy"></a>Reguläre Erfassung mit Update Richtlinie
 
-In einigen Fällen ist die Erfassung von Daten in die Quell Tabelle erfolgreich, aber die Update Richtlinie schlägt während der Erfassung in die Ziel Tabelle fehl.
+Die Aktualisierungs Richtlinie verhält sich wie die reguläre Erfassung, wenn die folgenden Bedingungen erfüllt sind:
 
-Fehler, die auftreten, während die Richtlinien aktualisiert werden, können mithilfe des [Befehls ". Show Erfassung](../management/ingestionfailures.md)Failure" abgerufen werden. gehen Sie folgendermaßen vor:
- 
-```kusto
-.show ingestion failures 
-| where FailedOn > ago(1hr) and OriginatesFromUpdatePolicy == true
-```
+* Die Quell Tabelle ist eine stark frequtige Ablauf Verfolgungs Tabelle mit interessanten Daten, die als frei Text Spalte formatiert sind. 
+* Die Ziel Tabelle, für die die Update Richtlinie definiert ist, akzeptiert nur bestimmte Ablauf Verfolgungs Zeilen.
+* Die Tabelle verfügt über ein gut strukturiertes Schema, bei dem es sich um eine Transformation der ursprünglichen, vom Analyse [Operator](../query/parseoperator.md)erstellten frei Text Daten handelt.
 
-Fehler werden wie folgt behandelt:
+## <a name="zero-retention-on-source-table"></a>Keine Beibehaltung der Quell Tabelle
 
-* **Nicht transaktionale Richtlinie**: der Fehler wird von Kusto ignoriert. Jeder Wiederholungsversuch ist verantwortlich für den Daten Besitzer.  
-* **Transaktions Richtlinie**: der ursprüngliche Erfassungs Vorgang, der das Update ausgelöst hat, kann ebenfalls nicht ausgeführt werden. Die Quell Tabelle und die Datenbank werden nicht mit neuen Daten geändert.
-  * Für den Fall, dass die Erfassungs Methode `pull` (der Datenverwaltung Dienst von Kusto am Erfassungsprozess beteiligt ist), gibt es einen automatisierten Wiederholungsversuch für den gesamten Erfassungs Vorgang, der durch den Datenverwaltung Dienst von Kusto gemäß der folgenden Logik orchestriert ist:
-    * Wiederholungen werden ausgeführt, bis das früheste zwischen `DataImporterMaximumRetryPeriod` (Standardwert = 2 Tage) und `DataImporterMaximumRetryAttempts` (Standardwert = 10) erreicht wird.
-    * Beide Einstellungen können in der Konfiguration des Datenverwaltung Dienstanbieter von kustoops geändert werden.
-    * Der Backoff-Zeitraum beginnt bei 2 Minuten und wächst exponentiell (2-> 4-> 8-> 16... Minuten
-  * In jedem anderen Fall ist jeder Wiederholungsversuch die Verantwortung für den Daten Besitzer.
+In manchen Fällen werden Daten in einer Quell Tabelle nur als Schritt Stein für die Ziel Tabelle erfasst, und Sie möchten die Rohdaten nicht in der Quell Tabelle aufbewahren. Legen Sie in der [Beibehaltungs Richtlinie](retentionpolicy.md)der Quell Tabelle einen vorläufigen Lösch Zeitraum von 0 fest, und legen Sie die Aktualisierungs Richtlinie als transaktional fest. In dieser Situation: 
 
+* Die Quelldaten sind nicht in der Quell Tabelle abfragbar. 
+* Die Quelldaten werden im Rahmen des Erfassungs Vorgangs nicht dauerhaft im permanenten Speicher gespeichert. 
+* Die Betriebsleistung wird verbessert. 
+* Die nach Erfassung von Ressourcen für Hintergrund Bereinigungs Vorgänge werden verringert. Diese Vorgänge werden für [Blöcke](../management/extents-overview.md) in der Quell Tabelle durchgeführt.
 
+## <a name="performance-impact"></a>Auswirkungen auf die Leistung
 
-## <a name="control-commands"></a>Steuerungsbefehle
+Update Richtlinien können sich auf die Leistung eines Kusto-Clusters auswirken. Die Update Richtlinie wirkt sich auf alle Erfassungsdaten in die Quell Tabelle aus. Die Erfassung einer Reihe von Datenblöcken wird mit der Anzahl der Ziel Tabellen multipliziert. Daher ist es wichtig, dass der `Query` Teil der Aktualisierungs Richtlinie für eine gute Funktion optimiert ist. Sie können die zusätzlichen Auswirkungen einer Update Richtlinie auf einen Erfassungs Vorgang testen. Rufen Sie die Richtlinie für bestimmte und bereits vorhandene Blöcke auf, bevor Sie die Richtlinie oder Funktion, die Sie verwendet, erstellen oder ändern `Query` .
 
-* Verwenden Sie die [Richtlinien Aktualisierung der Tabellen Tabelle anzeigen](../management/update-policy.md#show-update-policy) , um die aktuelle Aktualisierungs Richtlinie einer Tabelle anzuzeigen.
-* Legen Sie die aktuelle Aktualisierungs Richtlinie einer Tabelle mithilfe von " [. ALTER TABLE table Policy Update](../management/update-policy.md#alter-update-policy) " fest.
-* Verwenden Sie das [Update ". Alter-Merge table table Policy Update](../management/update-policy.md#alter-merge-table-table-policy-update) ", um an die aktuelle Aktualisierungs Richtlinie einer Tabelle anzufügen.
-* Verwenden Sie die Update-Richtlinie der [Tabellen Tabelle löschen](../management/update-policy.md#delete-table-table-policy-update) , um an die aktuelle Update Richtlinie einer Tabelle anzufügen.
+### <a name="evaluate-resource-usage"></a>Ressourcenverwendung auswerten
 
-## <a name="testing-an-update-policys-performance-impact"></a>Testen der Auswirkungen auf die Leistung einer Update Richtlinie
-
-Das Definieren einer Update Richtlinie kann die Leistung eines Kusto-Clusters beeinträchtigen, da dies Auswirkungen auf die Erfassung in der Quell Tabelle hat. Es wird dringend empfohlen, den `Query` Teil der Aktualisierungs Richtlinie für eine gute Leistung zu optimieren.
-Sie können die zusätzlichen Leistungseinbußen einer Update Richtlinie bei einem Erfassungs Vorgang testen, indem Sie Sie für bestimmte und bereits vorhandene Blöcke aufrufen, bevor Sie die Richtlinie und/oder eine Funktion, die Sie verwendet `Query` , erstellen oder ändern.
-
-Bei diesem Beispiel wird Folgendes vorausgesetzt:
-
-* Der Name der Quell Tabelle ( `Source` die-Eigenschaft der Update Richtlinie) `MySourceTable`ist.
-* Die `Query` -Eigenschaft der Update Richtlinie Ruft eine Funktion mit `MyFunction()`dem Namen auf.
-
-Mithilfe von können Sie [Abfragen anzeigen](../management/queries.md). Sie können die Ressourcenverwendung (CPU, Arbeitsspeicher usw.) der folgenden Abfrage und/oder mehrerer Ausführungen davon auswerten.
+Verwenden Sie [. Show Queries](../management/queries.md), um die Ressourcenverwendung (CPU, Arbeitsspeicher usw.) im folgenden Szenario auszuwerten:
+* Der Name der Quell Tabelle (die- `Source` Eigenschaft der Update Richtlinie) ist `MySourceTable` .
+* Die- `Query` Eigenschaft der Update Richtlinie Ruft eine Funktion mit dem Namen auf `MyFunction()` .
 
 ```kusto
 .show table MySourceTable extents;
@@ -128,3 +115,30 @@ let extentId = $command_results | where MaxCreatedOn > ago(1hr) and MinCreatedOn
 let MySourceTable = MySourceTable | where extent_id() == toscalar(extentId);
 MyFunction()
 ```
+
+## <a name="failures"></a>Fehler
+
+Standardmäßig wirkt sich ein Fehler beim Ausführen der Update Richtlinie nicht auf die Erfassung von Daten in die Quell Tabelle aus. Wenn die Update Richtlinie jedoch als `IsTransactional` : true definiert ist, erzwingt die fehlerhafte Ausführung der Richtlinie, dass die Erfassung von Daten in die Quell Tabelle fehlschlägt. In einigen Fällen ist die Erfassung von Daten in die Quell Tabelle erfolgreich, aber die Update Richtlinie schlägt während der Erfassung in die Ziel Tabelle fehl.
+
+Fehler, die auftreten, während die Richtlinien aktualisiert werden, können mit dem [Befehl ". Show](../management/ingestionfailures.md)Failure Failure" abgerufen werden.
+ 
+```kusto
+.show ingestion failures 
+| where FailedOn > ago(1hr) and OriginatesFromUpdatePolicy == true
+```
+
+### <a name="treatment-of-failures"></a>Behandlung von Fehlern
+
+#### <a name="non-transactional-policy"></a>Nicht transaktionale Richtlinie 
+
+Der Fehler wird von Kusto ignoriert. Jeder Wiederholungsversuch liegt in der Verantwortung des Besitzers des Datenerfassungs Prozesses.  
+
+#### <a name="transactional-policy"></a>Transaktionale Richtlinie
+
+Der ursprüngliche Erfassungs Vorgang, der das Update ausgelöst hat, kann ebenfalls nicht ausgeführt werden. Die Quell Tabelle und die Datenbank werden nicht mit neuen Daten geändert.
+Wenn die Erfassungs Methode `pull` (der Datenverwaltung Dienst von Kusto am Erfassungsprozess beteiligt ist) ist, gibt es einen automatisierten Wiederholungsversuch für den gesamten Erfassungs Vorgang, der vom Datenverwaltung-Dienst von Kusto gemäß der folgenden Logik orchestriert wird:
+* Wiederholungen werden bis zum frühesten zwischen `DataImporterMaximumRetryPeriod` (Standardwert = 2 Tage) und `DataImporterMaximumRetryAttempts` (Standardwert = 10) erreicht.
+* Beide oben aufgeführten Einstellungen können in der Konfiguration des Datenverwaltung Dienstanbieter geändert werden.
+* Der Backoff-Zeitraum beginnt um 2 Minuten und wächst exponentiell (2-> 4-> 8-> 16... Minuten
+
+In jedem anderen Fall ist jeder Wiederholungsversuch die Verantwortung für den Daten Besitzer.
