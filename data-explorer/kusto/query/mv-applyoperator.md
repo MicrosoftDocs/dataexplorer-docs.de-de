@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1f9cc982c213a9c2143b169dcf8a12103d617257
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 656d1d5d9120baebced624fee476d261214eff57
+ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346710"
+ms.lasthandoff: 08/06/2020
+ms.locfileid: "87871849"
 ---
 # <a name="mv-apply-operator"></a>mv-apply-Operator
 
@@ -35,7 +35,7 @@ Der `mv-apply` Operator verfügt über die folgenden Verarbeitungsschritte:
 1. Fügt der resultierenden unter Tabelle 0 (null) oder mehr Spalten hinzu. Diese Spalten enthalten die Werte der Quell Spalten, die nicht erweitert werden und bei Bedarf wiederholt werden.
 1. Gibt die Gesamtmenge der Ergebnisse zurück.
 
-Der `mv-expand` Operator erhält die folgenden Eingaben:
+Der `mv-apply` Operator erhält die folgenden Eingaben:
 
 1. Mindestens ein Ausdruck, der in dynamische Arrays ausgewertet wird, die erweitert werden sollen.
    Die Anzahl der Datensätze in jeder erweiterten unter Tabelle ist die maximale Länge der einzelnen dynamischen Arrays. NULL-Werte werden hinzugefügt, wenn mehrere Ausdrücke angegeben werden und die entsprechenden Arrays unterschiedlich lang sind.

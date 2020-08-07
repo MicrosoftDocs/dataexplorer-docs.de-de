@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1b857ee464b0fff973293cd03afadecc8c893af2
-ms.sourcegitcommit: 537a7eaf8c8e06a5bde57503fedd1c3706dd2b45
+ms.openlocfilehash: 2616605d29f90a283f5a5d8fef367bf77df65a15
+ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86422982"
+ms.lasthandoff: 08/06/2020
+ms.locfileid: "87871934"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake
 
@@ -23,7 +23,7 @@ Mit dem folgenden Befehl wird beschrieben, wie eine externe Tabelle erstellt wir
 
 **Syntax**
 
-( `.create`  |  `.alter` ) `external` `table` *[TableName](#table-name)* - `(` *[Schema](#schema)*`)`  
+( `.create`  |  `.alter`  |  `.create-or-alter` ) `external` `table` *[TableName](#table-name)* - `(` *[Schema](#schema)*`)`  
 `kind` `=` (`blob` | `adl`)  
 [ `partition` `by` `(` *[Partitionen](#partitions)* `)` [ `pathformat` `=` `(` *[PathFormat](#path-format)* `)` ]]  
 `dataformat``=` * [Format](#format)*  
@@ -33,7 +33,7 @@ Mit dem folgenden Befehl wird beschrieben, wie eine externe Tabelle erstellt wir
 Erstellt oder ändert eine neue externe Tabelle in der Datenbank, in der der Befehl ausgeführt wird.
 
 > [!NOTE]
-> * Wenn die Tabelle vorhanden ist, `.create` schlägt der Befehl mit einem Fehler fehl. Verwenden `.alter` Sie, um vorhandene Tabellen zu ändern. 
+> * Wenn die Tabelle vorhanden ist, `.create` schlägt der Befehl mit einem Fehler fehl. Verwenden `.create-or-alter` `.alter` Sie oder, um vorhandene Tabellen zu ändern.
 > * Das Ändern des Schemas, Formats oder der Partitions Definition einer externen BLOB-Tabelle wird nicht unterstützt. 
 > * Der-Vorgang erfordert die [Datenbankbenutzer Berechtigung](../management/access-control/role-based-authorization.md) für `.create` und die [Table admin-Berechtigung](../management/access-control/role-based-authorization.md) für `.alter` . 
 
@@ -307,7 +307,7 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 **Beispielausgabe**
 
-| Name     | Typ | Zuordnung                                                           |
+| Name     | Variante | Zuordnung                                                           |
 |----------|------|-------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -325,7 +325,7 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 **Beispielausgabe**
 
-| Name     | Typ | Zuordnung                                                                |
+| Name     | Variante | Zuordnung                                                                |
 |----------|------|------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -347,7 +347,7 @@ Zeigt die Zuordnungen an (alle oder die durch den Namen angegebenen).
 
 **Beispielausgabe**
 
-| Name     | Typ | Zuordnung                                                                         |
+| Name     | Variante | Zuordnung                                                                         |
 |----------|------|---------------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "Properties": {"Path": "$. ROWGUID"}}] |
 

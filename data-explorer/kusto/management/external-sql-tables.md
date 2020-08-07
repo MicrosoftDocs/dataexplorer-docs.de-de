@@ -8,20 +8,20 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 235c68a8a04fd76dd3a9e25abac63db09e00919a
-ms.sourcegitcommit: b4d6c615252e7c7d20fafd99c5501cb0e9e2085b
+ms.openlocfilehash: ea32c7631681c12aa1262c4dbdb8debdcc22a3c7
+ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/26/2020
-ms.locfileid: "83863335"
+ms.lasthandoff: 08/06/2020
+ms.locfileid: "87871917"
 ---
-# <a name="create-and-alter-external-sql-tables"></a>Erstellen und ändern externer SQL-Tabellen
+# <a name="create-and-alter-external-sql-tables"></a>Erstellen und Ändern externer SQL-Tabellen
 
 Erstellt oder ändert eine externe SQL-Tabelle in der Datenbank, in der der Befehl ausgeführt wird.  
 
 ## <a name="syntax"></a>Syntax
 
-( `.create`  |  `.alter` ) `external` `table` *TableName* ([columnName: ColumnType],...)  
+( `.create`  |  `.alter`  |  `.create-or-alter` ) `external` `table` *TableName* ([columnName: ColumnType],...)  
 `kind` `=` `sql`  
 `table``=` *Sqltablename*  
 `(`*Sqlserverconnectionstring*`)`  
@@ -49,7 +49,7 @@ Erstellt oder ändert eine externe SQL-Tabelle in der Datenbank, in der der Befe
 | `primarykey`        | `string`        | Wenn `createifnotexists` `true` den Wert hat, wird der resultierende Spaltenname als Primärschlüssel der SQL-Tabelle verwendet, wenn er mit diesem Befehl erstellt wird.                  |
 
 > [!NOTE]
-> * Wenn die Tabelle vorhanden ist, `.create` tritt bei dem Befehl ein Fehler auf. Verwenden `.alter` Sie, um vorhandene Tabellen zu ändern. 
+> * Wenn die Tabelle vorhanden ist, `.create` tritt bei dem Befehl ein Fehler auf. Verwenden `.create-or-alter` `.alter` Sie oder, um vorhandene Tabellen zu ändern. 
 > * Das Ändern des Schemas oder Formats einer externen SQL-Tabelle wird nicht unterstützt. 
 
 Erfordert die [Datenbankbenutzer Berechtigung](../management/access-control/role-based-authorization.md) für `.create` und die [Table admin-Berechtigung](../management/access-control/role-based-authorization.md) für `.alter` . 
@@ -77,7 +77,7 @@ with
 
 | TableName   | TableType | Ordner         | DocString | Eigenschaften                            |
 |-------------|-----------|----------------|-----------|---------------------------------------|
-| Externalsql | Sql       | Externaltables | Dokumente      | {<br>  "Targetentitykind": "sqltable" ",<br>  "Targetentityname": "mysqltable",<br>  "Targetentityconnectionstring": "Server = TCP:myserver. Database. Windows. net, 1433; Authentication = Active Directory integriert; anfangs Katalog = MyDatabase; ",<br>  "FireTriggers": true,<br>  "Kreateif NotExists": true,<br>  "PrimaryKey": "x"<br>} |
+| Externalsql | Sql       | Externaltables | Docs      | {<br>  "Targetentitykind": "sqltable" ",<br>  "Targetentityname": "mysqltable",<br>  "Targetentityconnectionstring": "Server = TCP:myserver. Database. Windows. net, 1433; Authentication = Active Directory integriert; anfangs Katalog = MyDatabase; ",<br>  "FireTriggers": true,<br>  "Kreateif NotExists": true,<br>  "PrimaryKey": "x"<br>} |
 
 ## <a name="querying-an-external-table-of-type-sql"></a>Abfragen einer externen Tabelle vom Typ SQL 
 
@@ -99,4 +99,4 @@ Verwenden Sie die externe Tabelle, um die SQL-Tabelle abzufragen, wenn die Abfra
 ## <a name="next-steps"></a>Nächste Schritte
 
 * [Externe Tabelle (allgemeine Steuerungsbefehle)](externaltables.md)
-* [Erstellen und ändern externer Tabellen in Azure Storage oder Azure Data Lake](external-tables-azurestorage-azuredatalake.md)
+* [Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake](external-tables-azurestorage-azuredatalake.md)
