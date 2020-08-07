@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1d8766c1fb09ceb64cf4196a92030163eed63694
-ms.sourcegitcommit: d40fe44e7581d87f63cc0cb939f3aa9c3996fc08
+ms.openlocfilehash: 90158c066c724f7d05e9c5e91333874ad572e81b
+ms.sourcegitcommit: 53679e57e0fcb7ec46beaba7cc812bd991da6cc0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85839409"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87984469"
 ---
 # <a name="the-ingest-into-command-pull-data-from-storage"></a>Der. infassungs into-Befehl (Pull Data aus dem Speicher)
 
-`.ingest into`Mit dem Befehl werden Daten in einer Tabelle erfasst, indem die Daten aus einem oder mehreren cloudspeicherartefakten abgerufen werden.
+Der `.ingest into` Befehl erfasst Daten in eine Tabelle, indem er die Daten aus einer oder mehreren cloudspeicherdateien abzieht.
 Beispielsweise können mit dem Befehl 1000 CSV-formatierte BLOB aus Azure BLOB Storage abgerufen, analysiert und in einer einzigen Ziel Tabelle erfasst werden.
 Daten werden an die Tabelle angehängt, ohne dass sich dies auf vorhandene Datensätze auswirkt, ohne das Schema der Tabelle zu ändern.
 
@@ -32,7 +32,9 @@ Daten werden an die Tabelle angehängt, ohne dass sich dies auf vorhandene Daten
 * *TableName*: der Name der Tabelle, in der Daten erfasst werden sollen.
   Der Tabellenname ist immer relativ zur Datenbank im Kontext, und sein Schema ist das Schema, das für die Daten angenommen wird, wenn kein Schema Zuordnungsobjekt bereitgestellt wird.
 
-* *Sourcedatalocator: ein Literaltyp* `string` oder eine durch Trennzeichen getrennte Liste mit solchen Literalen, die von `(` -und- `)` Zeichen umgeben sind, und gibt die Speicher Artefakte an, die die Daten enthalten, die abgerufen werden sollen. Siehe [Speicher Verbindungs](../../api/connection-strings/storage.md)Zeichenfolgen.
+* *Sourcedatalocator: ein Literaltyp* `string` oder eine durch Trennzeichen getrennte Liste mit solchen Literalen, die von `(` -und- `)` Zeichen umgeben sind und [Speicher Verbindungs](../../api/connection-strings/storage.md)Zeichenfolgen darstellen. Kusto verwendet ein URI-Format zum Beschreiben der Speicherdateien, die die Daten enthalten, die abgerufen werden sollen. 
+  * Eine einzelne Verbindungs Zeichenfolge muss auf eine einzelne Datei verweisen, die von einem Speicherkonto gehostet wird. 
+  * Die Erfassung mehrerer Dateien kann durch Angabe mehrerer Verbindungs Zeichenfolgen erfolgen, die durch Kommas getrennt sind, oder durch die Erfassung [aus einer Abfrage](ingest-from-query.md) einer [externen Tabelle](../../query/schema-entities/externaltables.md).
 
 > [!NOTE]
 > Es wird dringend empfohlen, verborgene [Zeichen folgen Literale](../../query/scalar-data-types/string.md#obfuscated-string-literals) für den *sourcedatapointer* zu verwenden, der tatsächliche Anmelde Informationen enthält.
@@ -45,10 +47,10 @@ Daten werden an die Tabelle angehängt, ohne dass sich dies auf vorhandene Daten
 Das Ergebnis des Befehls ist eine Tabelle mit so vielen Datensätzen, wie Daten-Shards ("Extents") vom Befehl generiert werden.
 Wenn keine datenshards generiert wurden, wird ein einzelner Datensatz mit einer leeren (Nullwert-) Block-ID zurückgegeben.
 
-|Name       |Typ      |Beschreibung                                                                |
+|Name       |Typ      |BESCHREIBUNG                                                                |
 |-----------|----------|---------------------------------------------------------------------------|
 |Extentid   |`guid`    |Der eindeutige Bezeichner für den Daten-Shard, der durch den Befehl generiert wurde.|
-|Itemloaded |`string`  |Mindestens ein Speicher Artefakt, das mit diesem Datensatz verknüpft ist.             |
+|Itemloaded |`string`  |Eine oder mehrere Speicherdateien, die mit diesem Datensatz verknüpft sind.             |
 |Duration   |`timespan`|Wie lange es gedauert hat, bis die Erfassung durchgeführt wurde.                                     |
 |HasErrors  |`bool`    |Gibt an, ob dieser Datensatz einen Erfassungs Fehler darstellt oder nicht.                |
 |OperationId|`guid`    |Eine eindeutige ID, die den Vorgang darstellt. Kann mit dem Befehl verwendet werden `.show operation` .|
@@ -84,4 +86,3 @@ Er verwendet die Anmelde Informationen des Benutzers für den Zugriff auf ADLS (
 .ingest into table T ('adl://contoso.azuredatalakestore.net/Path/To/File/file1.ext;impersonate')
   with (format='csv')
 ```
-
