@@ -50,13 +50,19 @@
           href: security.md
         - name: Sicherheitsbaseline
           href: security-baseline.md
+    - name: Geschäftskontinuität
+      items:
+        - name: Übersicht
+          href: business-continuity-overview.md
+        - name: Erstellen von Lösungen
+          href: business-continuity-create-solution.md
     - name: Übersicht über Tools und Integrationen
       href: tools-integrations-overview.md
 - name: Anleitungen
   items:
     - name: Erstellen eines Clusters und einer Datenbank
       items:
-        - name: Azure CLI
+        - name: Azure-Befehlszeilenschnittstelle
           href: create-cluster-database-cli.md
         - name: PowerShell
           href: create-cluster-database-powershell.md
@@ -1291,7 +1297,7 @@
             - name: Externe Tabellen
               items:
                 - name: Allgemeine Steuerungsbefehle für externe Tabellen
-                  href: ./kusto/management/externaltables.md
+                  href: ./kusto/management/external-table-commands.md
                 - name: Erstellen und Ändern externer SQL-Tabellen
                   href: ./kusto/management/external-sql-tables.md
                 - name: Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake
@@ -1414,7 +1420,7 @@
               items:
                 - name: Aktualisieren von Richtlinien
                   href: ./kusto/management/updatepolicy.md
-                - name: Updaterichtlinienbefehl
+                - name: Aktualisieren von Richtlinienbefehlen
                   href: ./kusto/management/update-policy.md
         - name: Sicherheitsrollen
           href: ./kusto/management/security-roles.md
