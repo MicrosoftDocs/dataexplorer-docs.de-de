@@ -1,71 +1,71 @@
 ---
-title: Getting Started with Kusto. Explorer
-description: Informieren Sie sich über die Features von Kusto. Explorer und darüber, wie Sie Ihre Daten untersuchen können.
+title: Installation und Benutzeroberfläche von Kusto.Explorer
+description: Enthält eine Beschreibung der Features von Kusto.Explorer und der Nutzung für die Erkundung Ihrer Daten.
 author: orspod
 ms.author: orspodek
 ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 05/19/2020
-ms.openlocfilehash: d5cb54ab0171a7f7a7e6b7353f723abe2caf69ff
-ms.sourcegitcommit: 6db94135b9902ad0ea84f9cef00ded8ec0a90fc3
-ms.translationtype: MT
+ms.openlocfilehash: db8951c71d6f63859becab69b34597b0e0ae09a4
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86870140"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87804218"
 ---
-# <a name="getting-started-with-kustoexplorer"></a>Getting Started with Kusto. Explorer
+# <a name="kustoexplorer-installation-and-user-interface"></a>Installation und Benutzeroberfläche von Kusto.Explorer
 
-Kusto. Explorer ist eine umfangreiche Desktop Anwendung, mit der Sie Ihre Daten mithilfe der Kusto-Abfragesprache in einer benutzerfreundlichen Benutzeroberfläche untersuchen können. In dieser Übersicht werden die ersten Schritte beim Einrichten von Kusto. Explorer erläutert und die Benutzeroberfläche erläutert, die Sie verwenden werden.
+Kusto.Explorer ist eine umfassende Desktopanwendung zum Erkunden Ihrer Daten, bei der die Kusto-Abfragesprache auf einer benutzerfreundlichen Oberfläche genutzt wird. In diesem Übersichtsartikel wird beschrieben, wie Sie mit dem Einrichten Ihrer Kusto.Explorer-Anwendung beginnen und wie Sie die Benutzeroberfläche verwenden.
 
-Mit Kusto. Explorer können Sie folgende Aktionen ausführen:
-* [Fragen Sie Ihre Daten](kusto-explorer-using.md#query-mode)ab.
-* Durch [Suchen Sie Ihre Daten](kusto-explorer-using.md#search-mode) in Tabellen.
-* [Visualisieren Sie Ihre Daten](#visualizations-section) in einer Vielzahl von Diagrammen.
-* [Freigeben von Abfragen und Ergebnissen](kusto-explorer-using.md#share-queries-and-results) per e-Mail oder Verwenden von Deep-Links.
+Mit Kusto.Explorer haben Sie die folgenden Möglichkeiten:
+* [Abfragen Ihrer Daten](kusto-explorer-using.md#query-mode)
+* [Durchsuchen Ihrer Daten](kusto-explorer-using.md#search-mode) in mehreren Tabellen
+* [Visualisieren Ihrer Daten](#visualizations-section) mit vielen verschiedenen Graphen
+* [Freigeben von Abfragen und Ergebnissen](kusto-explorer-using.md#share-queries-and-results) per E-Mail oder mit Deep-Links
 
-## <a name="installing-kustoexplorer"></a>Installieren von Kusto. Explorer
+## <a name="installing-kustoexplorer"></a>Installieren von Kusto.Explorer
 
-* Installieren Sie das [Tool Kusto. Explorer](https://aka.ms/ke).
+* Installieren Sie das [Kusto.Explorer-Tool](https://aka.ms/ke).
 
-* Greifen Sie stattdessen mit Ihrem Browser auf Ihren Kusto-Cluster zu:`https://<your_cluster>.kusto.windows.net.`
-   Ersetzen &lt; &gt; Sie your_cluster durch den Namen Ihres Azure Daten-Explorer Clusters.
+* Alternativ können Sie auch mit Ihrem Browser unter der folgenden URL auf Ihren Kusto-Cluster zugreifen: `https://<your_cluster>.kusto.windows.net.`
+   Ersetzen Sie hierbei &lt;your_cluster&gt; durch den Namen Ihres Azure Data Explorer-Clusters.
 
-### <a name="using-chrome-and-kustoexplorer"></a>Verwenden von Chrome und Kusto. Explorer
+### <a name="using-chrome-and-kustoexplorer"></a>Verwenden von Chrome und Kusto.Explorer
 
-Wenn Sie Chrome als Standardbrowser verwenden, stellen Sie sicher, dass Sie die ClickOnce-Erweiterung für Chrome installieren:
+Stellen Sie bei Verwendung von Chrome als Standardbrowser sicher, dass Sie die ClickOnce-Erweiterung für Chrome installieren:
 
 [https://chrome.google.com/webstore/detail/clickonce-for-google-chro/kekahkplibinaibelipdcikofmedafmb/related?hl=en-US](https://chrome.google.com/webstore/detail/clickonce-for-google-chro/kekahkplibinaibelipdcikofmedafmb/related?hl=en-US)
 
 ## <a name="overview-of-the-user-interface"></a>Übersicht über die Benutzeroberfläche
 
-Die Benutzeroberfläche "Kusto. Explorer" wurde mit einem Layout entworfen, das auf Registerkarten und Panels basiert, ähnlich wie bei anderen Microsoft-Produkten: 
+Die Benutzeroberfläche von Kusto.Explorer verfügt über ein Layout mit Registerkarten und Bereichen, das denen der anderen Microsoft-Produkte ähnelt: 
 
-1. Navigieren Sie im [Menü](#menu-panel) Bereich durch die Registerkarten, um verschiedene Vorgänge auszuführen.
-2. Verwalten von Verbindungen im Bereich " [Verbindungen](#connections-panel) "
-3. Erstellen von Skripts, die im Skript Panel ausgeführt werden sollen
-4. Anzeigen der Ergebnisse der Skripts im Ergebnisbereich
+1. Navigieren Sie im [Menübereich](#menu-panel) durch die Registerkarten, um verschiedene Vorgänge durchzuführen.
+2. Verwalten Sie Ihre Verbindungen im [Verbindungsbereich](#connections-panel).
+3. Erstellen Sie die auszuführenden Skripts im Skriptbereich.
+4. Überprüfen Sie die Ergebnisse der Skripts im Ergebnisbereich.
 
-:::image type="content" source="images/kusto-explorer/ke-start.png" alt-text="Kusto-Explorer starten":::
+:::image type="content" source="images/kusto-explorer/ke-start.png" alt-text="Kusto.Explorer: Start":::
 
 ## <a name="menu-panel"></a>Menübereich
 
-Der Menübereich von Kusto. Explorer umfasst die folgenden Registerkarten:
+Der Menübereich von Kusto.Explorer enthält die folgenden Registerkarten:
 
 * [Home](#home-tab)
-* [File](#file-tab)
+* [Datei](#file-tab)
 * [Verbindungen](#connections-tab)
 * [Anzeigen](#view-tab)
-* [Tools](#tools-tab)
+* [Extras](#tools-tab)
 * [Überwachung](#monitoring-tab)
 * [Verwaltung](#management-tab)
 * [Hilfe](#help-tab)
 
 ### <a name="home-tab"></a>Registerkarte "Home"
 
-:::image type="content" source="images/kusto-explorer/home-tab.png" alt-text="Registerkarte "Kusto Explorer Home"":::
+:::image type="content" source="images/kusto-explorer/home-tab.png" alt-text="Registerkarte „Start“ von Kusto.Explorer":::
 
-Auf der Registerkarte Home werden die zuletzt verwendeten Funktionen angezeigt, die in Abschnitte unterteilt sind:
+Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in verschiedenen Abschnitten angezeigt:
 
 * [Abfrage](#query-section)
 * [Teilen](#share-section)
@@ -73,214 +73,214 @@ Auf der Registerkarte Home werden die zuletzt verwendeten Funktionen angezeigt, 
 * [Anzeigen](#view-section)
 * [Hilfe](#help-tab) 
 
-### <a name="query-section"></a>Abschnitt "Abfrage"
+### <a name="query-section"></a>Abschnitt „Abfrage“
 
-:::image type="content" source="images/kusto-explorer/home-query-menu.png" alt-text="Menü "Abfrage" Kusto-Explorer":::
-
-|Menü|    Verhalten|
-|----|----------|
-|Dropdown Menü für Modus | <ul><li>Abfrage Modus: schaltet das Abfragefenster in einen [Skript Modus](kusto-explorer-using.md#query-mode)um. Befehle können geladen und als Skripts gespeichert werden (Standard).</li> <li> Suchmodus: ein einzelner Abfrage Modus, in dem jeder eingegebene Befehl sofort verarbeitet wird und ein Ergebnis im Ergebnisfenster anzeigt.</li> <li>Search + +-Modus: ermöglicht die Suche nach einem Begriff mithilfe der Such Syntax in einer oder mehreren Tabellen. Weitere Informationen zum Verwenden des [Such Modus + +](kusto-explorer-using.md#search-mode)</li></ul> |
-|Neue Registerkarte| Öffnet eine neue Registerkarte zum Abfragen von Kusto. |
-
-### <a name="share-section"></a>Freigabe Abschnitt
-
-:::image type="content" source="images/kusto-explorer/home-share-menu.png" alt-text="Menü für Kusto-Explorer-Freigabe":::
+:::image type="content" source="images/kusto-explorer/home-query-menu.png" alt-text="Menü „Abfrage“ in Kusto.Explorer":::
 
 |Menü|    Verhalten|
 |----|----------|
-|Daten in Zwischenablage|    Exportiert Abfragen und Datasets in eine Zwischenablage. Wenn ein Diagramm angezeigt wird, wird das Diagramm als Bitmap exportiert.| 
-|Ergebnis in Zwischenablage| Exportiert das Dataset in eine Zwischenablage. Wenn ein Diagramm angezeigt wird, wird das Diagramm als Bitmap exportiert.| 
-|Abfrage in Zwischenablage| Exportiert die Abfrage in eine Zwischenablage.|
+|Dropdownliste „Modus“ | <ul><li>Abfragemodus: Schaltet das Abfragefenster in den [Skriptmodus](kusto-explorer-using.md#query-mode) um. Befehle können geladen und als Skripts gespeichert werden (Standardeinstellung).</li> <li> Suchmodus: Ein Modus für einzelne Abfragen, in dem jeder eingegebene Befehl sofort verarbeitet und im Ergebnisfenster das entsprechende Ergebnis dazu angezeigt wird.</li> <li>Erweiterter Suchmodus (Search++): Ermöglicht das Suchen nach einem Begriff mithilfe von Suchsyntax in einer oder mehreren Tabellen. Erfahren Sie mehr zum [erweiterten Suchmodus (Search++)](kusto-explorer-using.md#search-mode).</li></ul> |
+|Neue Registerkarte| Öffnet eine neue Registerkarte für Kusto-Abfragen. |
 
-### <a name="visualizations-section"></a>Abschnitt "Visualisierungen"
+### <a name="share-section"></a>Abschnitt „Freigabe“
 
-:::image type="content" source="images/kusto-explorer/home-visualizations-menu.png" alt-text="Menü Visualisierungen im Kusto-Explorer":::
+:::image type="content" source="images/kusto-explorer/home-share-menu.png" alt-text="Menü „Freigabe“ von Kusto.Explorer":::
+
+|Menü|    Verhalten|
+|----|----------|
+|Data To Clipboard (Daten in Zwischenablage)|    Exportiert die Abfrage und das Dataset in die Zwischenablage. Bei der Anzeige eines Diagramms werden die Diagrammdaten als Bitmap exportiert.| 
+|Result To Clipboard (Ergebnis in Zwischenablage)| Exportiert das Dataset in die Zwischenablage. Bei der Anzeige eines Diagramms werden die Diagrammdaten als Bitmap exportiert.| 
+|Query to Clipboard (Abfrage in Zwischenablage)| Exportiert die Abfrage in die Zwischenablage.|
+
+### <a name="visualizations-section"></a>Abschnitt „Visualisierungen“
+
+:::image type="content" source="images/kusto-explorer/home-visualizations-menu.png" alt-text="Menü „Visualisierungen“ in Kusto.Explorer":::
 
 |Menü         | Verhalten|
 |-------------|---------|
-|Flächendiagramm      | Zeigt ein Flächen Diagramm an, in dem die X-Achse die erste Spalte ist (muss numerisch sein). Alle numerischen Spalten werden verschiedenen Reihen (Y-Achse) zugeordnet. |
-|Säulendiagramm | Zeigt ein Säulendiagramm an, in dem alle numerischen Spalten verschiedenen Reihen (Y-Achse) zugeordnet sind. Die Text Spalte vor der numerischen ist die X-Achse (kann in der Benutzeroberfläche gesteuert werden).|
-|Balkendiagramm    | Zeigt ein Balkendiagramm an, in dem alle numerischen Spalten verschiedenen Reihen (X-Achse) zugeordnet sind. Die Text Spalte vor der numerischen ist die Y-Achse (kann in der Benutzeroberfläche gesteuert werden).|
-|Gestapeltes Flächendiagramm      | Zeigt ein gestapeltes Flächen Diagramm an, in dem die X-Achse die erste Spalte ist (muss numerisch sein). Alle numerischen Spalten werden verschiedenen Reihen (Y-Achse) zugeordnet. |
-|Zeitachsendiagramm   | Zeigt ein Zeitdiagramm an, in dem die X-Achse die erste Spalte ist (muss DateTime sein). Alle numerischen Spalten werden verschiedenen Reihen (Y-Achse) zugeordnet.|
-|Liniendiagramm   | Zeigt ein Liniendiagramm an, in dem die X-Achse die erste Spalte ist (muss numerisch sein). Alle numerischen Spalten werden verschiedenen Reihen (Y-Achse) zugeordnet.|
-|[Anomaliediagramm](#anomaly-chart)|    Ähnlich wie bei timechart, findet aber Anomalien in Zeitreihendaten mithilfe des Algorithmus für die Machine Learning-Anomalien. Zur Anomalieerkennung verwendet Kusto. Explorer die [series_decompose_anomalies](../query/series-decompose-anomaliesfunction.md) -Funktion.
-|Kreisdiagramm    |    Zeigt ein Kreis Diagramm an, in dem die farbachse die erste Spalte ist. Die zweite Spalte ist die-Achse (muss ein Measure sein, die in Prozent konvertiert wurde).|
-|Zeit Leiter |    Zeigt ein Leitungs Diagramm an, in dem die X-Achse die letzten zwei Spalten ist (muss DateTime lauten). Die Y-Achse ist ein zusammengesetzter der anderen Spalten.|
-|Punktdiagramm| Zeigt ein Punkt Diagramm an, in dem die X-Achse die erste Spalte ist (muss numerisch sein). Alle numerischen Spalten werden verschiedenen Reihen (Y-Achse) zugeordnet.|
-|PivotChart  | Zeigt eine Pivottabelle und ein PivotChart an, das die vollständige Flexibilität beim Auswählen von Daten, Spalten, Zeilen und verschiedenen Diagrammtypen ermöglicht.| 
-|Zeit Pivot   | Interaktive Navigation über die Ereignis Zeitachse (Pivotierung auf der Zeitachse)|
+|Flächendiagramm      | Zeigt ein Flächendiagramm an, in dem die X-Achse die erste Spalte ist (muss numerisch sein). Alle numerischen Spalten werden unterschiedlichen Serien (Y-Achse) zugeordnet. |
+|Säulendiagramm | Zeigt ein Säulendiagramm an, in dem alle numerischen Spalten unterschiedlichen Serien (Y-Achse) zugeordnet sind. Die Textspalte vor der numerischen Spalte ist die X-Achse (kann auf der Benutzeroberfläche gesteuert werden).|
+|Balkendiagramm    | Zeigt ein Balkendiagramm an, in dem alle numerischen Spalten unterschiedlichen Serien (X-Achse) zugeordnet sind. Die Textspalte vor der numerischen Spalte ist die Y-Achse (kann auf der Benutzeroberfläche gesteuert werden).|
+|Gestapeltes Flächendiagramm      | Zeigt ein gestapeltes Flächendiagramm an, in dem die X-Achse die erste Spalte ist (muss numerisch sein). Alle numerischen Spalten werden unterschiedlichen Serien (Y-Achse) zugeordnet. |
+|Zeitachsendiagramm   | Zeigt ein Zeitachsendiagramm an, in dem die X-Achse die erste Spalte ist (muss „datetime“ sein). Alle numerischen Spalten werden unterschiedlichen Serien (Y-Achse) zugeordnet.|
+|Liniendiagramm   | Zeigt ein Liniendiagramm an, in dem die X-Achse die erste Spalte ist (muss numerisch sein). Alle numerischen Spalten werden unterschiedlichen Serien (Y-Achse) zugeordnet.|
+|[Anomaliediagramm](#anomaly-chart)|    Ähnelt dem Zeitdiagramm, dient aber zum Ermitteln von Anomalien in Zeitreihendaten, indem der Algorithmus für Machine Learning-Anomalien verwendet wird. Für die Anomalieerkennung wird in Kusto.Explorer die Funktion [series_decompose_anomalies](../query/series-decompose-anomaliesfunction.md) verwendet.
+|Kreisdiagramm    |    Zeigt ein Kreisdiagramm an, in dem die Farbachse die erste Spalte ist. Die Theta-Achse (muss ein Measure mit Konvertierung in Prozent sein) ist die zweite Spalte.|
+|Time Ladder (Zeitleiter) |    Zeigt ein Reihenfolgediagramm (Ladder Chart) an, in dem die X-Achse den letzten beiden Spalten entspricht (muss „datetime“ sein). Die Y-Achse setzt sich aus den anderen Spalten zusammen.|
+|Punktdiagramm| Zeigt ein Punktdiagramm an, in dem die X-Achse die erste Spalte ist (muss numerisch sein). Alle numerischen Spalten werden unterschiedlichen Serien (Y-Achse) zugeordnet.|
+|PivotChart  | Zeigt eine PivotTable und ein PivotChart an, um die flexible Auswahl von Daten, Spalten, Zeilen und unterschiedlichen Diagrammtypen zu ermöglichen.| 
+|Time Pivot (PivotChart für Zeit)   | Interaktive Navigation durch die Ereignisse der Zeitachse (Pivotierung auf der Zeitachse).|
 
 > [!NOTE]
-> <a id="anomaly-chart">Anomaliediagramm</a>: der Algorithmus erwartet Zeitreihe-Daten, die aus zwei Spalten bestehen:
->* Zeit in festem Intervall
->* Numerischer Wert für die Anomalieerkennung, um Zeitreihe-Daten in Kusto. Explorer zusammenzufassen, zusammenfassen nach dem Uhrzeitfeld und angeben des Zeit Bucket Behälters.
+> <a id="anomaly-chart">Anomaliediagramm</a>: Der Algorithmus erwartet Zeitreihendaten, die aus zwei Spalten bestehen:
+>* Zeit in Buckets mit festem Intervall
+>* Numerischer Wert für Anomalieerkennung. Führen Sie zum Erzeugen von Zeitreihendaten in Kusto.Explorer die Zusammenfassung nach dem Zeitfeld durch, und geben Sie den Bucket für den Zeitabschnitt an.
 
-### <a name="view-section"></a>Abschnitt anzeigen
+### <a name="view-section"></a>Abschnitt „Ansicht“
 
-:::image type="content" source="images/kusto-explorer/home-view-menu.png" alt-text="Menü der Kusto-Explorer-Ansicht":::
+:::image type="content" source="images/kusto-explorer/home-view-menu.png" alt-text="Menü „Ansicht“ in Kusto.Explorer":::
 
 |Menü           | Verhalten|
 |---------------|---------|
-|Vollständiger Ansichtsmodus | Maximiert den Arbeitsbereich, indem das Menü Band Menü und der Verbindungs Panel ausgeblendet werden. Beenden Sie den **vollständigen**Ansichtsmodus, indem Sie den Modus für die  >  **vollständige Anzeige**auswählen oder **F11**drücken.|
-|Leere Spalten ausblenden| Entfernt leere Spalten aus dem Datenraster.|
-|Einzelne Spalten zuklappen| Reduziert Spalten mit Singular Werten.|
-|Untersuchen von Spaltenwerten| Zeigt die Verteilung von Spaltenwerten an|
-|Schriftart vergrößern  | Vergrößert die Schriftgröße der Registerkarte "Abfrage" und des Ergebnisdaten Rasters.|  
-|Schriftart verkleinern  | Verringert die Schriftgröße der Registerkarte "Abfrage" und des Ergebnisdaten Rasters.|
+|Full View Mode (Vollbildmodus) | Maximiert den Arbeitsbereich, indem das Menüband und der Verbindungsbereich ausgeblendet werden. Beenden Sie den Vollbildmodus, indem Sie **Start** > **Full View Mode** (Vollbildmodus) auswählen oder **F11** drücken.|
+|Hide Empty Columns (Leere Spalten ausblenden)| Entfernt leere Spalten aus dem Datenraster.|
+|Collapse Singular Columns (Einzelne Spalten reduzieren)| Reduziert Spalten, die einzelne Werte enthalten.|
+|Explore Column Values (Spaltenwerte untersuchen)| Zeigt die Verteilung der Spaltenwerte an.|
+|Schriftgrad vergrößern  | Vergrößert den Schriftgrad der Registerkarte „Abfrage“ und des Rasters mit den Ergebnisdaten.|  
+|Schriftgrad verkleinern  | Verkleinert den Schriftgrad der Registerkarte „Abfrage“ und des Rasters mit den Ergebnisdaten.|
 
 >[!NOTE]
-> Daten Ansichts Einstellungen:
+> Einstellungen für die Datenansicht:
 >
-> Mit "Kusto. Explorer" wird nachverfolgt, welche Einstellungen pro eindeutigem Satz von Spalten verwendet werden. Wenn Spalten neu angeordnet oder entfernt werden, wird die Datenansicht gespeichert und immer dann wieder verwendet, wenn die Daten mit denselben Spalten abgerufen werden. Um die Ansicht auf die Standardwerte zurückzusetzen, wählen Sie auf der Registerkarte **Ansicht** die Option **Ansicht zurücksetzen**aus. 
+> Mit Kusto.Explorer wird nachverfolgt, welche Einstellungen für einen eindeutigen Satz mit Spalten verwendet werden. Wenn Spalten neu sortiert oder entfernt werden, wird die Datenansicht gespeichert und jeweils wiederverwendet, wenn die Daten mit den gleichen Spalten abgerufen werden. Wählen Sie auf der Registerkarte **Ansicht** die Option **Sicht zurücksetzen** aus, um die Ansicht auf die Standardwerte zurückzusetzen. 
 
 ## <a name="file-tab"></a>Registerkarte „Datei“
 
-:::image type="content" source="images/kusto-explorer/file-tab.png" alt-text="Registerkarte "Kusto-Explorer"":::
+:::image type="content" source="images/kusto-explorer/file-tab.png" alt-text="Registerkarte „Datei“ in Kusto.Explorer":::
 
 |Menü| Verhalten|
 |---------------|---------|
-||---------*Abfrage Skript*---------|
-|Neue Registerkarte | Öffnet ein neues Registerkarten Fenster zum Abfragen von Kusto. |
-|Datei öffnen| Lädt Daten aus einer *. kql-Datei in den aktiven Skript Bereich.|
-|In Datei speichern| Speichert den Inhalt des aktiven Skript Panels in der *. kql-Datei.|
-|Registerkarte schließen| Schließt das aktuelle Registerkarten Fenster.|
+||---------*Abfrageskript*---------|
+|Neue Registerkarte | Öffnet ein neues Registerkartenfenster für Kusto-Abfragen. |
+|Datei öffnen| Lädt Daten aus einer KQL-Datei in den aktiven Skriptbereich.|
+|In Datei speichern| Speichert den Inhalt des aktiven Skriptbereichs in der KQL-Datei.|
+|Registerkarte schließen| Schließt das aktuelle Registerkartenfenster.|
 ||---------*Daten speichern*---------|
-|Daten in CSV       | Exportiert Daten in eine CSV-Datei (durch Kommas getrennte Werte).| 
-|Daten zu JSON      | Exportiert Daten in eine JSON-formatierte Datei.|
-|Daten nach Excel     | Exportiert Daten in eine XLSX-Datei (Excel).|
-|Daten in Text      | Exportiert Daten in eine txt-Datei (Text).| 
-|Skript für Daten zu kql| Exportiert eine Abfrage in eine Skriptdatei.| 
-|Daten zu Ergebnissen   | Exportiert Abfragen und Daten in eine Ergebnisdatei (qres).|
-|Abfrage in CSV ausführen |Führt eine Abfrage aus und speichert die Ergebnisse in einer lokalen CSV-Datei.|
-||---------*Laden von Daten*---------|
-|Aus Ergebnissen|    Lädt Abfragen und Daten aus einer Ergebnisdatei (qres).| 
-||---------*Clip*---------|
-|Abfragen und Ergebnisse in die Zwischenablage|    Exportiert Abfragen und Datasets in eine Zwischenablage. Wenn ein Diagramm angezeigt wird, wird das Diagramm als Bitmap exportiert.| 
-|Ergebnis in Zwischenablage| Exportiert Datasets in eine Zwischenablage. Wenn ein Diagramm angezeigt wird, wird das Diagramm als Bitmap exportiert.| 
-|Abfrage in Zwischenablage| Exportiert die Abfrage in eine Zwischenablage.|
-||---------*Folgen*---------|
-|Ergebnis Cache löschen| Löscht zwischengespeicherte Ergebnisse von zuvor ausgeführten Abfragen.| 
+|Data To CSV (Daten als CSV)       | Exportiert Daten in eine CSV-Datei (durch Trennzeichen getrennte Werte).| 
+|Data To JSON (Daten als JSON)      | Exportiert Daten in eine Datei im JSON-Format.|
+|Data To Excel (Daten nach Excel)     | Exportiert Daten in eine XLSX-Datei (Excel).|
+|Data To Text (Daten als Text)      | Exportiert Daten in eine TXT-Datei (Text).| 
+|Data To KQL Script (Daten als KQL-Skript)| Exportiert eine Abfrage in eine Skriptdatei.| 
+|Data To Results (Daten als Ergebnisse)   | Exportiert Abfragen und Daten in eine Ergebnisdatei (QRES).|
+|Run Query Into CSV (Abfrage in CSV ausführen) |Führt eine Abfrage aus und speichert die Ergebnisse in einer lokalen CSV-Datei.|
+||---------*Daten laden*---------|
+|From Results (Aus Ergebnissen)|    Lädt Abfragen und Daten aus einer Ergebnisdatei (QRES).| 
+||---------*Zwischenablage*---------|
+|Query and Results To Clipboard (Abfragen und Ergebnisse in Zwischenablage)|    Exportiert die Abfrage und das Dataset in die Zwischenablage. Bei der Anzeige eines Diagramms werden die Diagrammdaten als Bitmap exportiert.| 
+|Result To Clipboard (Ergebnis in Zwischenablage)| Exportiert das Dataset in die Zwischenablage. Bei der Anzeige eines Diagramms werden die Diagrammdaten als Bitmap exportiert.| 
+|Query to Clipboard (Abfrage in Zwischenablage)| Exportiert die Abfrage in die Zwischenablage.|
+||---------*Ergebnisse*---------|
+|Clear results cache (Ergebniscache löschen)| Löscht zwischengespeicherte Ergebnisse von zuvor ausgeführten Abfragen.| 
 
 ## <a name="connections-tab"></a>Registerkarte „Verbindungen“
 
-:::image type="content" source="images/kusto-explorer/connections-tab.png" alt-text="Registerkarte "Kusto Explorer Connections"":::
+:::image type="content" source="images/kusto-explorer/connections-tab.png" alt-text="Registerkarte „Verbindungen“ in Kusto.Explorer":::
 
 |Menü|Verhalten|
 |----|----------|
-||---------*Musik*---------|
-|Gruppe hinzufügen| Fügt eine neue Kusto-Server Gruppe hinzu.|
-|Gruppe umbenennen| Benennt die vorhandene Kusto-Server Gruppe um.|
-|Gruppe entfernen| Entfernt die vorhandene Kusto-Server Gruppe.|
-||---------*Super*---------|
-|Importieren von Verbindungen| Importiert Verbindungen aus einer Datei, die Verbindungen angibt.|
-|Verbindungen exportieren| Exportiert Verbindungen in eine Datei.|
-|Verbindung hinzufügen| Fügt eine neue Kusto-Server Verbindung hinzu.| 
-|Verbindung bearbeiten| Öffnet ein Dialogfeld für die Verbindungs Eigenschaften der Kusto-Server Verbindung.|
+||---------*Gruppen*---------|
+|Gruppe hinzufügen| Fügt eine neue Kusto-Servergruppe hinzu.|
+|Gruppe umbenennen| Benennt die vorhandene Kusto-Servergruppe um.|
+|Gruppe entfernen| Entfernt die vorhandene Kusto-Servergruppe.|
+||---------*Cluster*---------|
+|Import Connections (Verbindungen importieren)| Importiert Verbindungen aus einer Datei, die Angaben zu Verbindungen enthält.|
+|Export Connections (Verbindungen exportieren)| Exportiert Verbindungen in eine Datei.|
+|Verbindung hinzufügen| Fügt eine neue Kusto-Serververbindung hinzu.| 
+|Verbindung bearbeiten| Öffnet ein Dialogfeld, in dem die Eigenschaften einer Kusto-Serververbindung bearbeitet werden können.|
 |Verbindung entfernen| Entfernt die vorhandene Verbindung mit dem Kusto-Server.|
-|Aktualisieren| Aktualisiert die Eigenschaften einer Kusto-Server Verbindung.|
-||---------*Sicherung*---------|
-|Überprüfen des hinzufügen| Zeigt die aktiven Benutzer Details der Ströme an|
-|Abmelden von Aad| Meldet den aktuellen Benutzer von der Verbindung mit Aad ab.|
+|Aktualisieren| Aktualisiert die Eigenschaften einer Kusto-Serververbindung.|
+||---------*Sicherheit*---------|
+|Inspect Your ADD Principal (ADD-Prinzipal untersuchen)| Zeigt die Details zum derzeit aktiven Benutzer an.|
+|Sign-out From AAD (Von AAD abmelden)| Meldet den aktuellen Benutzer für die Verbindung mit AAD ab.|
 ||---------*Datenbereich*---------|
-|Cache Bereich|<ul><li>Hot dataexecute-Abfragen nur für den [Hot-Data-Cache](../management/cachepolicy.md)</li><li>Alle Daten: Ausführen von Abfragen für alle verfügbaren Daten (Standard)</li></ul> |
-|Datetime-Spalte| Der Name der Spalte, die für einen Zeit präfilter verwendet werden kann.|
-|Zeit Filter| Wert der Zeit vor dem Filtern|
+|Caching scope (Bereich für Zwischenspeicherung)|<ul><li>Hot Data (Heiße Daten): Abfragen werden nur für den [Cache für heiße Daten](../management/cachepolicy.md) durchgeführt.</li><li>Alle Daten: Abfragen werden für alle verfügbaren Daten durchgeführt (Standardeinstellung).</li></ul> |
+|DateTime Column (DateTime-Spalte)| Der Name der Spalte, die für einen Vorfilter für die Zeit verwendet werden kann.|
+|Zeitfilter| Wert des Vorfilters für die Zeit.|
 
 ## <a name="view-tab"></a>Registerkarte Ansicht
 
-:::image type="content" source="images/kusto-explorer/view-tab.png" alt-text="Registerkarte "Kusto-Explorer"":::
+:::image type="content" source="images/kusto-explorer/view-tab.png" alt-text="Registerkarte „Ansicht“ in Kusto.Explorer":::
 
 |Menü|Verhalten|
 |----|----------|
-||---------*Auftritts*---------|
-|Vollständiger Ansichtsmodus | Maximiert den Arbeitsbereich, indem das Menü Band Menü und der Verbindungs Panel ausgeblendet werden.|
-|Schriftart vergrößern  | Vergrößert die Schriftgröße der Registerkarte "Abfrage" und des Ergebnisdaten Rasters.|  
-|Schriftart verkleinern  | Verringert die Schriftgröße der Registerkarte "Abfrage" und des Ergebnisdaten Rasters.|
-|Layout zurücksetzen|Setzt das Layout der Andock Steuerelemente und Fenster des Tools zurück.|
-|Registerkarte Dokument umbenennen |Ausgewählte Registerkarte umbenennen |
+||---------*Darstellung*---------|
+|Full View Mode (Vollbildmodus) | Maximiert den Arbeitsbereich, indem das Menüband und der Verbindungsbereich ausgeblendet werden.|
+|Schriftgrad vergrößern  | Vergrößert den Schriftgrad der Registerkarte „Abfrage“ und des Rasters mit den Ergebnisdaten.|  
+|Schriftgrad verkleinern  | Verkleinert den Schriftgrad der Registerkarte „Abfrage“ und des Rasters mit den Ergebnisdaten.|
+|Layout zurücksetzen|Setzt das Layout der Andocksteuerelemente und Fenster des Tools zurück.|
+|Rename Document Tab (Dokumentregisterkarte umbenennen) |Benennt die ausgewählte Registerkarte um. |
 ||---------*Datenansicht*---------|
-|Ansicht zurücksetzen| Setzt die [Daten Ansichts Einstellungen](#dvs) auf die Standardwerte zurück. |
-|Untersuchen von Spaltenwerten|Zeigt die Verteilung von Spaltenwerten an|
-|Fokus auf Abfrage Statistik|Ändert den Fokus auf Abfrage Statistik anstelle von Abfrage Ergebnissen nach Abschluss der Abfrage.|
-|Duplikate ausblenden|Schaltet die Entfernung der doppelten Zeilen aus den Abfrage Ergebnissen um.|
-|Leere Spalten ausblenden|Schaltet das Entfernen leerer Spalten aus den Abfrage Ergebnissen um.|
-|Einzelne Spalten zuklappen|Schaltet reduzierende Spalten mit einem Singular Wert um.|
+|Ansicht zurücksetzen| Setzt die [Einstellungen der Datenansicht](#dvs) auf die Standardwerte zurück. |
+|Explore Column Values (Spaltenwerte untersuchen)|Zeigt die Verteilung der Spaltenwerte an.|
+|Focus on Query Statistics (Fokus auf Abfragestatistik)|Legt den Fokus nach Abschluss der Abfrage nicht auf die Abfrageergebnisse, sondern auf die Abfragestatistik fest.|
+|Duplikate ausblenden|Aktiviert bzw. deaktiviert die Entfernung der doppelten Zeilen aus den Abfrageergebnissen.|
+|Hide Empty Columns (Leere Spalten ausblenden)|Aktiviert bzw. deaktiviert die Entfernung leerer Spalten aus den Abfrageergebnissen.|
+|Collapse Singular Columns (Einzelne Spalten reduzieren)|Aktiviert bzw. deaktiviert die Reduzierung von Spalten mit nur einem Wert.|
 ||---------*Datenfilterung*---------|
-|Filtern von Zeilen in der Suche|Schaltet die Option zum Anzeigen von nur übereinstimmenden Zeilen in der Abfrageergebnis Suche um (**STRG + F**).|
+|Filter Rows In Search (Zeilen in Suche filtern)|Aktiviert bzw. deaktiviert die Option, bei der in den Abfrageergebnissen einer Suche nur Zeilen mit Übereinstimmungen angezeigt werden (**STRG+F**).|
 ||---------*Visualisierungen*---------|
-|Visualisierungen|Siehe [Visualisierungen](#visualizations-section)weiter oben. |
+|Visualisierungen|Weitere Informationen finden Sie oben unter [Visualisierungen](#visualizations-section). |
 
 > [!NOTE]
-> <a id="dvs">Daten Ansichts Einstellungen:</a> 
+> <a id="dvs">Einstellungen für die Datenansicht:</a> 
 >
-> Mit Kusto. Explorer werden die Einstellungen nachverfolgt, die pro eindeutigem Satz von Spalten verwendet werden. Wenn Spalten neu angeordnet oder entfernt werden, wird die Datenansicht gespeichert und immer dann wieder verwendet, wenn die Daten mit denselben Spalten abgerufen werden. Um die Ansicht auf die Standardwerte zurückzusetzen, wählen Sie auf der Registerkarte **Ansicht** die Option **Ansicht zurücksetzen**aus. 
+> Mit Kusto.Explorer werden die Einstellungen nachverfolgt, die für einen eindeutigen Satz mit Spalten verwendet werden. Wenn Spalten neu sortiert oder entfernt werden, wird die Datenansicht gespeichert und jeweils wiederverwendet, wenn die Daten mit den gleichen Spalten abgerufen werden. Wählen Sie auf der Registerkarte **Ansicht** die Option **Sicht zurücksetzen** aus, um die Ansicht auf die Standardwerte zurückzusetzen. 
 
 ## <a name="tools-tab"></a>Registerkarte „Extras“
 
-:::image type="content" source="images/kusto-explorer/tools-tab.png" alt-text="Registerkarte "Kusto Explorer Tools"":::
+:::image type="content" source="images/kusto-explorer/tools-tab.png" alt-text="Registerkarte „Extras“ in Kusto.Explorer":::
 
 |Menü|Verhalten|
 |----|----------|
 ||---------*IntelliSense*---------|
-|IntelliSense aktivieren| Aktiviert und deaktiviert IntelliSense im Skript Panel.|
-||---------*Analy*---------|
-|Query Analyzer| Hiermit wird das Abfrage Analysetool gestartet.|
-|Abfrage Prüfung | Analysiert die aktuelle Abfrage und gibt eine Reihe von anwendbaren Verbesserungsempfehlungen aus.|
-|Rechner| Starten des Rechners|
-||---------*Analytik*---------|
-|Analytische Berichte| Öffnet ein Dashboard mit mehreren vorgefertigten Berichten für die Datenanalyse.|
+|IntelliSense aktivieren| Aktiviert bzw. deaktiviert IntelliSense im Skriptbereich.|
+||---------*Analysieren*---------|
+|Query Analyzer| Startet das Tool „Query Analyzer“.|
+|Query Checker (Abfrageüberprüfung) | Analysiert die aktuelle Abfrage und gibt eine Reihe von anwendbaren Verbesserungsempfehlungen aus.|
+|Rechner| Startet den Rechner.|
+||---------*Analyse*---------|
+|Analytical Reports (Analyseberichte)| Öffnet ein Dashboard mit mehreren vordefinierten Berichten für die Datenanalyse.|
 ||---------*Übersetzen*---------|
-|Abfrage an Power BI| Übersetzt eine Abfrage in ein Format, das für die Verwendung von in geeignet ist Power BI|
+|Abfrage an Power BI| Übersetzt eine Abfrage in ein Format, das für die Verwendung in Power BI geeignet ist.|
 ||---------*Optionen*---------|
-|Optionen zurücksetzen| Legt die Anwendungseinstellungen auf die Standardwerte fest.|
-|Tastatur| Öffnet ein Tool zum Konfigurieren von Anwendungseinstellungen. Weitere Informationen zu [Kusto. Explorer-Optionen](kusto-explorer-options.md).|
+|Optionen zurücksetzen| Setzt Anwendungseinstellungen auf die Standardwerte zurück.|
+|Optionen| Öffnet ein Tool zum Konfigurieren der Anwendungseinstellungen. Erfahren Sie mehr zu den [Optionen von Kusto.Explorer](kusto-explorer-options.md).|
 
-## <a name="monitoring-tab"></a>Registerkarte Überwachung
+## <a name="monitoring-tab"></a>Registerkarte „Überwachung“
 
-:::image type="content" source="images/kusto-explorer/monitoring-tab.png" alt-text="Registerkarte "Kusto Explorer Monitoring"":::
+:::image type="content" source="images/kusto-explorer/monitoring-tab.png" alt-text="Registerkarte „Überwachung“ in Kusto.Explorer":::
 
 |Menü             | Verhalten|
 |-----------------|---------| 
-||---------*Über*---------|
-|Cluster Diagnose | Zeigt eine Integritäts Zusammenfassung für die derzeit im Verbindungs Panel ausgewählte Server Gruppe an. | 
-|Neueste Daten: alle Tabellen| Zeigt eine Zusammenfassung der neuesten Daten in allen Tabellen der aktuell ausgewählten Datenbank an.|
-|Neueste Daten: ausgewählte Tabelle|Zeigt in der Statusleiste die neuesten Daten in der ausgewählten Tabelle an.| 
+||---------*Überwachen*---------|
+|Cluster Diagnostics (Clusterdiagnose) | Zeigt eine Integritätszusammenfassung für die Servergruppe an, die im Verbindungsbereich derzeit ausgewählt ist. | 
+|Latest data: All tables (Neueste Daten: Alle Tabellen)| Zeigt eine Zusammenfassung der neuesten Daten in allen Tabellen der derzeit ausgewählten Datenbank an.|
+|Latest data: Selected table (Neueste Daten: Ausgewählte Tabelle)|Zeigt in der Statusleiste die neuesten Daten der ausgewählten Tabelle an.| 
 
-## <a name="management-tab"></a>Verwaltungs Registerkarte
+## <a name="management-tab"></a>Registerkarte „Verwaltung“
 
-:::image type="content" source="images/kusto-explorer/management-tab.png" alt-text="Kusto-Explorer-Verwaltungs Registerkarte":::
+:::image type="content" source="images/kusto-explorer/management-tab.png" alt-text="Registerkarte „Verwaltung“ in Kusto.Explorer":::
 
 |Menü             | Verhalten|
 |-----------------|---------|
 ||---------*Autorisierte Prinzipale*---------|
-|Verwalten von autorisierten clusterprinzipale |Ermöglicht das Verwalten der Prinzipale eines Clusters für autorisierte Benutzer.| 
-|Autorisierte autorisierte Daten Bank Prinzipale verwalten | Ermöglicht das Verwalten der Prinzipale einer Datenbank für autorisierte Benutzer.| 
-|Verwalten von autorisierten Tabellen Prinzipale | Ermöglicht das Verwalten der Prinzipale einer Tabelle für autorisierte Benutzer.| 
-|Verwalten von autorisierten Funktions Prinzipale | Ermöglicht das Verwalten der Prinzipale einer Funktion für autorisierte Benutzer.| 
+|Manage Cluster Authorized Principals (Autorisierte Prinzipale für Cluster verwalten) |Ermöglicht die Verwaltung der Prinzipale eines Clusters für autorisierte Benutzer.| 
+|Manage Database Authorized Principals (Autorisierte Prinzipale für Datenbank verwalten) | Ermöglicht die Verwaltung der Prinzipale einer Datenbank für autorisierte Benutzer.| 
+|Manage Table Authorized Principals (Autorisierte Prinzipale für Tabelle verwalten) | Ermöglicht die Verwaltung der Prinzipale einer Tabelle für autorisierte Benutzer.| 
+|Manage Function Authorized Principals (Autorisierte Prinzipale für Funktion verwalten) | Ermöglicht die Verwaltung der Prinzipale einer Funktion für autorisierte Benutzer.| 
 
-## <a name="help-tab"></a>Hilfe Registerkarte
+## <a name="help-tab"></a>Registerkarte „Hilfe“
 
-:::image type="content" source="images/kusto-explorer/help-tab.png" alt-text="Hilfe Registerkarte für Kusto-Explorer":::
+:::image type="content" source="images/kusto-explorer/help-tab.png" alt-text="Registerkarte „Hilfe“ in Kusto.Explorer":::
 
 |Menü             | Verhalten|
 |-----------------|---------|
 ||---------*Dokumentation*---------|
-|Hilfe             | Öffnet einen Link zur Kusto-Online Dokumentation.  | 
-|Neues       | Öffnet ein Dokument, in dem alle Änderungen an Kusto. Explorer aufgelistet sind.|
-|Report Issue (Problem melden)      |Öffnet ein Dialogfeld mit zwei Optionen: <ul><li>Probleme im Zusammenhang mit dem Dienst melden</li><li>Melden von Problemen in der Client Anwendung</li></ul> | 
-|Feature vorschlagen  | Öffnet einen Link zum Kusto-Feedback Forum. | 
-|Updates überprüfen     | Prüft, ob Updates für Ihre Version von Kusto. Explorer vorhanden sind. | 
+|Hilfe             | Öffnet einen Link zur Kusto-Onlinedokumentation.  | 
+|Neues       | Öffnet ein Dokument, in dem alle Änderungen an Kusto.Explorer aufgelistet sind.|
+|Report Issue (Problem melden)      |Öffnet ein Dialogfeld mit zwei Optionen: <ul><li>Report issues related to service (Probleme mit Dienst melden)</li><li>Report issues in the client application (Probleme in Clientanwendung melden)</li></ul> | 
+|Suggest Feature (Vorschlagfeature)  | Öffnet einen Link zum Kusto-Feedbackforum. | 
+|Updates prüfen     | Überprüft, ob Updates für Ihre Version von Kusto.Explorer vorhanden sind. | 
 
-## <a name="connections-panel"></a>Verbindungs Panel
+## <a name="connections-panel"></a>Bereich „Verbindungen“
 
-:::image type="content" source="images/kusto-explorer/connections-panel.png" alt-text="Bereich für Kusto-Explorer-Verbindungen":::
+:::image type="content" source="images/kusto-explorer/connections-panel.png" alt-text="Bereich „Verbindungen“ in Kusto.Explorer":::
 
-Im Bereich Verbindungen werden alle konfigurierten Cluster Verbindungen angezeigt. Für jeden Cluster werden die Datenbanken, Tabellen und Attribute (Spalten) angezeigt, die Sie speichern. Wählen Sie Elemente aus (wodurch ein impliziter Kontext für die Suche/Abfrage im Hauptbereich festgelegt wird), oder Doppelklicken Sie auf Elemente, um den Namen in das Such-/abfragenpanel zu kopieren.
+Im Bereich „Verbindungen“ werden alle konfigurierten Clusterverbindungen angezeigt. Für jeden Cluster werden die darin gespeicherten Datenbanken, Tabellen und Attribute (Spalten) angezeigt. Wählen Sie Einträge aus (um einen impliziten Kontext für die Suche/Abfrage im Hauptbereich festzulegen), oder doppelklicken Sie auf Einträge, um den Namen in den Bereich für die Suche/Abfrage zu kopieren.
 
-Wenn das tatsächliche Schema groß ist (z. b. eine Datenbank mit Hunderten von Tabellen), können Sie es durchsuchen, indem Sie **STRG + F** drücken und eine Teil Zeichenfolge (ohne Beachtung der Groß-/Kleinschreibung) des gesuchten Entitäts Namens eingeben.
+Bei einem umfangreichen Schema (z. B. einer Datenbank mit Hunderten von Tabellen) können Sie wie folgt vorgehen: Führen Sie einen Suchvorgang durch, indem Sie **STRG+F** drücken und einen Teil des gesuchten Entitätsnamens eingeben (ohne Berücksichtigung der Groß-/Kleinschreibung).
 
-Kusto. Explorer unterstützt das Steuern des Verbindungs Bereichs über das Abfragefenster, was für Skripts nützlich ist. Beispielsweise können Sie eine Skriptdatei mit einem Befehl starten, der Kusto. Explorer anweist, eine Verbindung mit dem Cluster bzw. der Datenbank herzustellen, deren Daten durch das Skript abgefragt werden, indem Sie die folgende Syntax verwenden:
+Kusto.Explorer unterstützt die Steuerung des Verbindungsbereichs über das Abfragefenster. Dies ist für Skripts hilfreich. Beispielsweise können Sie eine Skriptdatei mit einem Befehl starten, mit dem Kusto.Explorer angewiesen wird, eine Verbindung mit dem Cluster bzw. der Datenbank herzustellen, für den bzw. die die Daten mit dem Skript abgefragt werden. Verwenden Sie hierfür die folgende Syntax:
 
 <!-- csl -->
 ```kusto
@@ -289,51 +289,51 @@ Kusto. Explorer unterstützt das Steuern des Verbindungs Bereichs über das Abfr
 StormEvents | count
 ```
 
-Führen Sie jede Zeile mit `F5` oder ähnlich aus.
+Führen Sie die einzelnen Zeilen mit `F5` oder einer entsprechenden Option aus.
 
-### <a name="control-the-user-identity-connecting-to-kustoexplorer"></a>Steuern der Benutzeridentität, die eine Verbindung zu Kusto. Explorer herstellt
+### <a name="control-the-user-identity-connecting-to-kustoexplorer"></a>Steuern der Benutzeridentität für die Verbindungsherstellung mit Kusto.Explorer
 
-Das Standard Sicherheitsmodell für neue Verbindungen ist die Sicherheit mit Aad-Verbund. Die Authentifizierung erfolgt über die Azure Active Directory mithilfe der standardmäßigen Aad-Benutzerfunktion.
+Das Standardsicherheitsmodell für neue Verbindungen hat den Typ „AAD-Verbundsicherheit“. Die Authentifizierung erfolgt über Azure Active Directory mit der AAD-Standardbenutzeroberfläche.
 
-Wenn Sie eine präzisere Steuerung der Authentifizierungs Parameter benötigen, können Sie das Bearbeitungsfeld "Erweiterte Verbindungs Zeichenfolgen" erweitern und einen gültigen [Kusto-Verbindungs Zeichenfolgen](../api/connection-strings/kusto.md) -Wert angeben.
+Falls Sie die Authentifizierungsparameter genauer steuern müssen, können Sie das Bearbeitungsfeld „Erweitert: Verbindungszeichenfolgen“ erweitern und einen gültigen Wert für die [Kusto-Verbindungszeichenfolge](../api/connection-strings/kusto.md) angeben.
 
-Beispielsweise müssen Benutzer, die in mehreren Aad-Mandanten vorhanden sind, manchmal eine bestimmte "Projektion" ihrer Identitäten für einen bestimmten Aad-Mandanten verwenden. Geben Sie hierzu eine Verbindungs Zeichenfolge an, z. b. die folgende (ersetzen Sie Wörter in Großbuchstaben durch bestimmte Werte):
+Beispielsweise müssen Benutzer, die auf mehreren AAD-Mandanten vorhanden sind, manchmal eine bestimmte „Projektion“ ihrer Identitäten für einen spezifischen AAD-Mandanten verwenden. Geben Sie zu diesem Zweck eine Verbindungszeichenfolge an, z. B. wie im Beispiel unten (Wörter in Großbuchstaben durch Ihre Werte ersetzen):
 
 ```kusto
 Data Source=https://CLUSTER_NAME.kusto.windows.net;Initial Catalog=DATABASE_NAME;AAD Federated Security=True;Authority Id=AAD_TENANT_OF_CLUSTER;User=USER_DOMAIN
 ```
 
-* `AAD_TENANT_OF_CLUSTER`ist ein Domänen Name oder eine Aad-Mandanten-ID (eine GUID) des Aad-Mandanten, in dem der Cluster gehostet wird. Dabei handelt es sich normalerweise um den Domänen Namen der Organisation, die den Cluster besitzt, z `contoso.com` . b.. 
-* USER_DOMAIN ist die Identität des Benutzers, der in diesen Mandanten geladen wurde (z `user@example.com` . b.). 
+* `AAD_TENANT_OF_CLUSTER` ist ein Domänenname oder AAD-Mandant (eine GUID) des AAD-Mandanten, unter dem der Cluster gehostet wird. Hierbei handelt es sich normalerweise um den Domänennamen der Organisation, die den Cluster besitzt, z. B. `contoso.com`. 
+* USER_DOMAIN ist die Identität des Benutzers, der für diesen Mandanten eingeladen wurde (z. B. `user@example.com`). 
 
 >[!NOTE]
-> Der Domänen Name des Benutzers ist nicht notwendigerweise identisch mit dem des Mandanten, der den Cluster gehostet.
+> Der Domänenname des Benutzers muss nicht unbedingt dem Domänennamen des Mandanten entsprechen, von dem der Cluster gehostet wird.
 
-:::image type="content" source="images/kusto-explorer/advanced-connection-string.png" alt-text="Erweiterte Verbindungs Zeichenfolge für Kusto-Explorer":::
+:::image type="content" source="images/kusto-explorer/advanced-connection-string.png" alt-text="Erweiterte Verbindungszeichenfolge in Kusto.Explorer":::
 
 ## <a name="keyboard-shortcuts"></a>Tastenkombinationen
 
-Sie können feststellen, dass Sie mithilfe von Tastenkombinationen Vorgänge schneller ausführen können als mit der Maus. Weitere Informationen finden Sie in [der Liste der Tastenkombinationen für Kusto. Explorer](kusto-explorer-shortcuts.md) .
+Unter Umständen stellen Sie fest, dass Sie Vorgänge mit Tastenkombinationen schneller als mit der Maus durchführen können. Sehen Sie sich diese [Liste mit den Tastenkombinationen für Kusto.Explorer](kusto-explorer-shortcuts.md) an, um mehr zu erfahren.
 
-## <a name="table-row-colors"></a>Tabellenzeilen Farben
+## <a name="table-row-colors"></a>Farben von Tabellenzeilen
 
-Der Schweregrad oder der ausführlichkeits Grad der einzelnen Zeilen im Ergebnisbereich wird von Kusto. Explorer interpretiert und entsprechend farbig angezeigt. Dies geschieht, indem die unterschiedlichen Werte der einzelnen Spalten mit einem Satz bekannter Muster ("Warnung", "Fehler" usw.) abgeglichen werden.
+Kusto.Explorer versucht, den Schweregrad oder den Ausführlichkeitsgrad der einzelnen Zeilen im Ergebnisbereich zu interpretieren und diese dann entsprechend farbig zu kennzeichnen. Hierfür werden die einzelnen Werte der Spalten anhand von bekannten Mustern abgeglichen („Warnung“, „Fehler“ usw.).
 
-Um das Ausgabe Farbschema zu ändern oder dieses Verhalten zu deaktivieren, wählen Sie **im Menü Extras** die **Option Optionen**  >  **Ergebnis-Viewer**ausführlichkeits  >  **Farbschema**aus.
+Wählen Sie im Menü **Extras** die Option **Optionen** > **Results Viewer** > **Verbosity color scheme** (Ergebnisansicht > Farbschema für Ausführlichkeit) aus, um das Schema für die Ausgabefarbe zu ändern oder dieses Verhalten zu deaktivieren.
 
-:::image type="content" source="images/kusto-explorer/ke-color-scheme.png" alt-text="Änderung des Farbschemas des Kusto-Explorers":::
+:::image type="content" source="images/kusto-explorer/ke-color-scheme.png" alt-text="Änderung des Farbschemas für Kusto.Explorer":::
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-Weitere Informationen zum Arbeiten mit "Kusto. Explorer" finden Sie hier:
+Informieren Sie sich weiter über die Verwendung von Kusto.Explorer:
 
 * [Verwenden von Kusto.Explorer](kusto-explorer-using.md)
-* [Kusto. Explorer-Tastenkombinationen](kusto-explorer-shortcuts.md)
+* [Tastenkombinationen für Kusto.Explorer](kusto-explorer-shortcuts.md)
 * [Optionen von Kusto.Explorer](kusto-explorer-options.md)
 * [Problembehandlung für Kusto.Explorer](kusto-explorer-troubleshooting.md)
 
-Erfahren Sie mehr über die Tools und Hilfsprogramme von Kusto. Explorer:
-* [Kusto. Explorer-Code Analyse](kusto-explorer-code-analyzer.md)
-* [Code Navigation in Kusto. Explorer](kusto-explorer-codenav.md)
-* [Refactoring von Kusto. Explorer-Code](kusto-explorer-refactor.md)
+Informieren Sie sich über die Tools und Hilfsprogramme von Kusto.Explorer:
+* [Codeanalyse von Kusto.Explorer](kusto-explorer-code-analyzer.md)
+* [Codenavigation in Kusto.Explorer](kusto-explorer-codenav.md)
+* [Code-Refactoring in Kusto.Explorer](kusto-explorer-refactor.md)
 * [Kusto-Abfragesprache (KQL)](https://docs.microsoft.com/azure/kusto/query/)
