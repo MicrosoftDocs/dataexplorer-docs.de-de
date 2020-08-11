@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2019
-ms.openlocfilehash: 8358bf9a8eb0dab38b8f5847521e069f21fe4a2c
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6ca5b5a4e6af8ece7d6f7a6543782665062b5d80
+ms.sourcegitcommit: ed902a5a781e24e081cd85910ed15cd468a0db1e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346693"
+ms.lasthandoff: 08/11/2020
+ms.locfileid: "88072411"
 ---
 # <a name="mv-expand-operator"></a>mv-expand-Operator
 
@@ -40,7 +40,7 @@ Erweitert das Array oder den Eigenschaften Behälter mit mehreren Werten.
 
 * *Indexcolumnname:* Wenn `with_itemindex` angegeben ist, enthält die Ausgabe eine zusätzliche Spalte (mit dem Namen *indexcolumnname*), die den Index (beginnend bei 0) des Elements in der ursprünglichen erweiterten Auflistung enthält. 
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Mehrere Zeilen für jeden der Werte in einem Array, die in der benannten Spalte oder im Array Ausdruck vorhanden sind.
 Wenn mehrere Spalten oder Ausdrücke angegeben werden, werden Sie parallel erweitert. Für jede Eingabezeile gibt es so viele Ausgabezeilen, wie Elemente im längsten erweiterten Ausdruck vorhanden sind (kürzere Listen werden mit Nullen aufgefüllt). Wenn der Wert in einer Zeile ein leeres Array ist, wird die Zeile zu "Nothing" erweitert (wird im Resultset nicht angezeigt). Wenn der Wert in einer Zeile jedoch kein Array ist, wird die Zeile unverändert im Resultset gespeichert. 
@@ -88,17 +88,24 @@ datatable (a:int, b:dynamic, c:dynamic)[1,dynamic({"prop1":"a", "prop2":"b"}), d
 
 Wenn Sie ein kartesisches Produkt zum Erweitern von zwei Spalten erhalten möchten, erweitern Sie eins nach dem anderen:
 
-<!-- csl: https://help.kusto.windows.net:443/Samples -->
+<!-- csl: https://kuskusdfv3.kusto.windows.net/Kuskus -->
 ```kusto
-datatable (a:int, b:dynamic, c:dynamic)[1,dynamic({"prop1":"a", "prop2":"b"}), dynamic([5])]
-| mv-expand b 
+datatable (a:int, b:dynamic, c:dynamic)
+  [
+  1,
+  dynamic({"prop1":"a", "prop2":"b"}),
+  dynamic([5, 6])
+  ]
+| mv-expand b
 | mv-expand c
 ```
 
 |a|b|c|
 |---|---|---|
 |1|{"Eigenschaft PROP1": "a"}|5|
+|1|{"Eigenschaft PROP1": "a"}|6|
 |1|{"Prop2": "b"}|5|
+|1|{"Prop2": "b"}|6|
 
 ### <a name="convert-output"></a>Ausgabe konvertieren
 
@@ -130,14 +137,14 @@ range x from 1 to 4 step 1
 | mv-expand with_itemindex=Index x
 ```
 
-|x|Index|
+|w|Index|
 |---|---|
 |1|0|
 |2|1|
 |3|2|
 |4|3|
  
-## <a name="see-also"></a>Siehe auch
+## <a name="see-also"></a>Weitere Informationen
 
 * Weitere Beispiele finden Sie [unter Diagramm Anzahl von Live Aktivitäten im Zeit](./samples.md#chart-concurrent-sessions-over-time) Verlauf.
 * [MV-Apply-](./mv-applyoperator.md) Operator.

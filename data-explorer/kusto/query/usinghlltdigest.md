@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: bd3e7a77a4de46b6dcebb2f58c98009a9edddb43
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: f56bd1c9f87833f7c1a9d29580a71557fedb894c
+ms.sourcegitcommit: ed902a5a781e24e081cd85910ed15cd468a0db1e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87338608"
+ms.lasthandoff: 08/11/2020
+ms.locfileid: "88072394"
 ---
 # <a name="using-hll-and-tdigest"></a>Verwenden von „hll()“ und „tdigest()“
 
@@ -27,7 +27,8 @@ In den folgenden Beispielen wird gezeigt, wie Sie verwenden `hll` / `tdigest` un
 
 > [!NOTE]
 > In einigen Fällen können die dynamischen Objekte, die von `hll` oder den `tdigest` Aggregatfunktionen generiert werden, groß sein und die maxvaluesize-Standard Eigenschaft in der Codierungs Richtlinie überschreiten. Wenn dies der Fall ist, wird das Objekt als NULL erfasst.
-Wenn z. b. die Ausgabe der `hll` Funktion mit der Genauigkeits Stufe 4 persistent gespeichert wird, überschreitet die Größe des `hll` Objekts den maxvaluesize-Standardwert von 1 MB.
+> Wenn z. b. die Ausgabe der `hll` Funktion mit der Genauigkeits Stufe 4 persistent gespeichert wird, überschreitet die Größe des `hll` Objekts den maxvaluesize-Standardwert von 1 MB.
+> Um dieses Problem zu vermeiden, ändern Sie die Codierungs Richtlinie der Spalte, wie in den folgenden Beispielen gezeigt.
 
 ```kusto
 range x from 1 to 1000000 step 1

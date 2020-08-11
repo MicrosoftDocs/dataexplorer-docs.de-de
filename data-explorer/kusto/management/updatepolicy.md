@@ -8,20 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/04/2020
-ms.openlocfilehash: 7eb5adc76c963065940365973aadc5281ff5f553
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 9b2d35c796cfd1f41dc2fd8e9385a4c446000b86
+ms.sourcegitcommit: ed902a5a781e24e081cd85910ed15cd468a0db1e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803408"
+ms.lasthandoff: 08/11/2020
+ms.locfileid: "88072445"
 ---
 # <a name="update-policy-overview"></a>Übersicht über Update Richtlinien
 
-Die [Update Richtlinie](update-policy.md) weist Kusto an, automatisch Daten an eine Ziel Tabelle anzufügen, wenn neue Daten in die Quell Tabelle eingefügt werden. Die Abfrage der Update Richtlinie wird für die Daten ausgeführt, die in die Quell Tabelle eingefügt werden. Die Richtlinie ermöglicht beispielsweise das Erstellen einer Tabelle als gefilterte Sicht einer anderen Tabelle. Die neue Tabelle kann über ein anderes Schema, eine andere Beibehaltungs Richtlinie usw. verfügen. 
-
-Die Update Richtlinie unterliegt den gleichen Einschränkungen und bewährten Methoden wie die reguläre Erfassung. Die Richtlinie wird mit der Größe des Clusters horizontal hochskaliert und arbeitet effizienter, wenn Ingestionen in großen Buli durchgeführt werden.
+Die [Update Richtlinie](update-policy.md) weist Kusto an, automatisch Daten an eine Ziel Tabelle anzufügen, wenn neue Daten in die Quell Tabelle eingefügt werden, basierend auf einer Transformations Abfrage, die für die in die Quell Tabelle eingefügten Daten ausgeführt wird.
 
 :::image type="content" source="images/updatepolicy/update-policy-overview.png" alt-text="Übersicht über die Update Richtlinie in Azure Daten-Explorer":::
+
+Die Richtlinie ermöglicht beispielsweise das Erstellen einer Tabelle als gefilterte Sicht einer anderen Tabelle. Die neue Tabelle kann über ein anderes Schema, eine andere Beibehaltungs Richtlinie usw. verfügen. 
+
+Die Update Richtlinie unterliegt den gleichen Einschränkungen und bewährten Methoden wie die reguläre Erfassung. Die Richtlinie wird mit der Größe des Clusters horizontal hochskaliert und arbeitet effizienter, wenn Ingestionen in großen Buli durchgeführt werden.
 
 > [!NOTE]
 > Die Quell Tabelle und die Tabelle, für die die Update Richtlinie definiert ist, müssen sich in derselben Datenbank befinden.
@@ -47,7 +49,7 @@ Die Abfrage für die Update Richtlinie wird in einem speziellen Modus ausgeführ
 Einer Tabelle können NULL, ein oder mehrere Update-Richtlinien Objekte zugeordnet sein.
 Jedes dieser Objekte wird als JSON-Eigenschaften Behälter dargestellt, wobei die folgenden Eigenschaften definiert sind.
 
-|Eigenschaft |type |BESCHREIBUNG  |
+|Eigenschaft |Typ |BESCHREIBUNG  |
 |---------|---------|----------------|
 |isEnabled                     |`bool`  |Gibt an, ob die Update Richtlinie aktiviert (true) oder deaktiviert (false) ist.                                                                                                                               |
 |`Source`                        |`string`|Name der Tabelle, in der die Aktualisier Ende Aktualisierungs Richtlinie ausgelöst wird                                                                                                                                 |
