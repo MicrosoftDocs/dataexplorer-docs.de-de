@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/31/2019
-ms.openlocfilehash: 7025567c9495f3eeefe547dcd88b19962e1be934
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 10c2cf41ae1ab149b6eeffe35f94052069309152
+ms.sourcegitcommit: b8415e01464ca2ac9cd9939dc47e4c97b86bd07a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351640"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88028509"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>Bereitstellen von Azure Data Explorer-Clustern in Ihrem virtuellen Netzwerk
 
@@ -87,7 +87,6 @@ Wenn Sie Azure Data Explorer-Cluster in Ihrem Subnetz bereitstellen, können Sie
 | Abhängigkeit von Azure Data Lake  | ADX-Subnetz  | AzureDataLake: 443  | TCP  |
 | EventHub-Erfassung und Dienstüberwachung  | ADX-Subnetz  | EventHub: 443, 5671  | TCP  |
 | Metriken veröffentlichen  | ADX-Subnetz  | AzureMonitor: 443 | TCP  |
-| Azure Monitor-Konfigurationsdownload  | ADX-Subnetz  | [Azure Monitor-Konfigurationsendpunktadressen](#azure-monitor-configuration-endpoint-addresses): 443 | TCP  |
 | Active Directory (falls zutreffend) | ADX-Subnetz | AzureActiveDirectory: 443 | TCP |
 | Zertifizierungsstelle | ADX-Subnetz | Internet: 80 | TCP |
 | Interne Kommunikation  | ADX-Subnetz  | ADX-Subnetz: Alle Ports  | All  |
@@ -188,51 +187,7 @@ Wenn Sie Azure Data Explorer-Cluster in Ihrem Subnetz bereitstellen, können Sie
 | Europa, Westen | 23.97.212.5 |
 | Indien, Westen | 23.99.5.162 |
 | USA (Westen) | 23.99.5.162 |
-| USA, Westen 2 | 23.99.5.162, 104.210.32.14 |    
-
-#### <a name="azure-monitor-configuration-endpoint-addresses"></a>Azure Monitor-Konfigurationsendpunktadressen
-
-| Region | Adressen |
-| --- | --- |
-| Australien, Mitte | 52.148.86.165 |
-| Australien, Mitte 2 | 52.148.86.165 |
-| Australien, Osten | 52.148.86.165 |
-| Australien, Südosten | 52.148.86.165 |
-| Brasilien, Süden | 13.68.89.19 |
-| Kanada, Mitte | 13.90.43.231 |
-| Kanada, Osten | 13.90.43.231 |
-| Indien, Mitte | 13.71.25.187 |
-| USA, Mitte | 52.173.95.68 |
-| USA, Mitte (EUAP) | 13.90.43.231 |
-| Asien, Osten | 13.75.117.221 |
-| USA, Osten | 13.90.43.231 |
-| USA, Osten 2 | 13.68.89.19 |    
-| USA, Osten 2 (EUAP) | 13.68.89.19 |
-| Frankreich, Mitte | 52.174.4.112 |
-| Frankreich, Süden | 52.174.4.112 |
-| Japan, Osten | 13.75.117.221 |
-| Japan, Westen | 13.75.117.221 |
-| Korea, Mitte | 13.75.117.221 |
-| Korea, Süden | 13.75.117.221 |
-| USA, Norden-Mitte | 52.162.240.236 |
-| Europa, Norden | 52.169.237.246 |
-| Südafrika, Norden | 13.71.25.187 |
-| Südafrika, Westen | 13.71.25.187 |
-| USA, Süden-Mitte | 13.84.173.99 |
-| Indien, Süden | 13.71.25.187 |
-| Asien, Südosten | 52.148.86.165 |
-| UK, Süden | 52.174.4.112 |
-| UK, Westen | 52.169.237.246 |
-| USDoD, Mitte | 13.72.37.111 |
-| USDoD, Osten | 13.72.37.111 |
-| US Gov Arizona | 13.72.37.111 |
-| US Gov Texas | 13.72.37.111 |
-| US Government, Virginia | 13.72.37.111 |
-| USA, Westen-Mitte | 52.161.31.69 |
-| Europa, Westen | 52.174.4.112 |
-| Indien, Westen | 13.71.25.187 |
-| USA, Westen | 40.78.70.148 |
-| USA, Westen 2 | 52.151.20.103 |
+| USA, Westen 2 | 23.99.5.162, 104.210.32.14 |
 
 ## <a name="disable-access-to-azure-data-explorer-from-the-public-ip"></a>Deaktivieren des Zugriffs auf Azure Data Explorer über die öffentliche IP-Adresse
 

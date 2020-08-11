@@ -7,14 +7,20 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 06/03/2019
-ms.openlocfilehash: 19da42437cfe1d7b63dfed4bd2b30716d691a0e3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 33117a41c48a6aa3a9fc33566f201e6009b288ac
+ms.sourcegitcommit: bcd0c96b1581e43e33aa35f4d68af6dcb4979d39
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492346"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88039181"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-node-library"></a>Erfassen von Daten mit der Azure Data Explorer-Bibliothek für Node
+
+> [!div class="op_single_selector"]
+> * [.NET](net-sdk-ingest-data.md)
+> * [Python](python-ingest-data.md)
+> * [Node](node-ingest-data.md)
+> * [Go](go-ingest-data.md)
 
 Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Azure Data Explorer bietet zwei Clientbibliotheken für Node: eine [Erfassungsbibliothek](https://github.com/Azure/azure-kusto-node/tree/master/azure-kusto-ingest) und eine [Datenbibliothek](https://github.com/Azure/azure-kusto-node/tree/master/azure-kusto-data). Mit diesen Bibliotheken können Sie über Ihren Code Daten in einem Cluster erfassen (laden) und Daten abfragen. In diesem Artikel erstellen Sie zunächst eine Tabelle und eine Datenzuordnung in einem Testcluster. Anschließend stellen Sie die Erfassung im Cluster in eine Warteschlange und überprüfen die Ergebnisse.
 

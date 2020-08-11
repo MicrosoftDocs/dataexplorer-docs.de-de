@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 07/22/2019
-ms.openlocfilehash: ed0c570449a0c21e9eace1273228539db7c208da
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: cdd44f6d90e5549153cb1a1a0673a2e054839f1f
+ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81491675"
+ms.lasthandoff: 08/06/2020
+ms.locfileid: "87871957"
 ---
 # <a name="quickstart-create-an-azure-data-explorer-cluster-and-database"></a>Schnellstart: Erstellen eines Azure Data Explorer-Clusters und einer Datenbank
 
@@ -106,7 +106,10 @@ Sie können einen Cluster je nach Geschäftsanforderungen beenden und neu starte
 
 1. Um den Cluster zu beenden, wählen Sie am oberen Rand der Registerkarte **Übersicht** die Option **Beenden** aus.
 
-    Wenn der Cluster beendet wurde, sind Daten nicht für Abfragen verfügbar, und Sie können keine neuen Daten erfassen.
+    :::image type="content" source="media/create-cluster-database-portal/stop-button.png" alt-text="Die Schaltfläche zum Anhalten der Anwendung":::
+
+    > [!NOTE]
+    > Wenn der Cluster beendet wurde, sind Daten nicht für Abfragen verfügbar, und Sie können keine neuen Daten erfassen.
 
 1. Um den Cluster neu zu starten, wählen Sie am oberen Rand der Registerkarte **Übersicht** die Option **Starten** aus.
 
@@ -123,6 +126,6 @@ Falls Sie andere Schnellstartanleitungen und Tutorials durcharbeiten möchten, i
 ## <a name="next-steps"></a>Nächste Schritte
 
 > [!div class="nextstepaction"]
-> [Schnellstart: Erfassen von Daten aus Event Hub in Azure Data Explorer](ingest-data-event-hub.md)
+> [Schnellstart: Erfassen von Daten aus Event Hub in Azure-Daten-Explorer](ingest-data-event-hub.md)
 
 

@@ -7,14 +7,20 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 06/03/2019
-ms.openlocfilehash: 28151476ce96fabc92e04078396119d0eb8c2f17
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 1ebbbac5da0230ff00cbc13670b18f12fbedd2a1
+ms.sourcegitcommit: bcd0c96b1581e43e33aa35f4d68af6dcb4979d39
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81494250"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88039198"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-python-library"></a>Erfassen von Daten mit der Azure Data Explorer-Bibliothek für Python
+
+> [!div class="op_single_selector"]
+> * [.NET](net-sdk-ingest-data.md)
+> * [Python](python-ingest-data.md)
+> * [Node](node-ingest-data.md)
+> * [Go](go-ingest-data.md)
 
 In diesem Artikel erfassen Sie Daten mithilfe der Azure Data Explorer-Bibliothek für Python. Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Der Azure-Daten-Explorer bietet zwei Clientbibliotheken für Python: eine [Erfassungsbibliothek](https://github.com/Azure/azure-kusto-python/tree/master/azure-kusto-ingest) und eine [Datenbibliothek](https://github.com/Azure/azure-kusto-python/tree/master/azure-kusto-data). Mit diesen Bibliotheken können Sie über Ihren Code Daten in einem Cluster erfassen bzw. laden und Daten abfragen.
 
@@ -34,7 +40,7 @@ Dieser Artikel ist auch als [Azure-Notebook](https://notebooks.azure.com/ManojRa
 
 Installieren Sie *azure-kusto-data* und *azure-kusto-ingest*.
 
-```
+```python
 pip install azure-kusto-data
 pip install azure-kusto-ingest
 ```
@@ -51,13 +57,13 @@ from azure.kusto.data.helpers import dataframe_from_result_table
 
 Für die Authentifizierung von Anwendungen verwendet der Azure-Daten-Explorer Ihre AAD-Mandanten-ID. Um Ihre Mandanten-ID zu suchen, verwenden Sie die folgende URL, und ersetzen Sie dabei *YourDomain* durch Ihre Domäne.
 
-```
+```http
 https://login.windows.net/<YourDomain>/.well-known/openid-configuration/
 ```
 
 Wenn Ihre Domäne beispielsweise *contoso.com* ist, lautet die URL: [https://login.windows.net/contoso.com/.well-known/openid-configuration/](https://login.windows.net/contoso.com/.well-known/openid-configuration/). Klicken Sie auf diese URL, um die Ergebnisse anzuzeigen. Die erste Zeile lautet wie folgt. 
 
-```
+```console
 "authorization_endpoint":"https://login.windows.net/6babcaad-604b-40ac-a9d7-9fd97c0b779f/oauth2/authorize"
 ```
 

@@ -7,14 +7,20 @@ ms.reviewer: vladikb
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/07/2020
-ms.openlocfilehash: 8a31c4a482f047f9f92edd75fe1119c1729deaf9
-ms.sourcegitcommit: 537a7eaf8c8e06a5bde57503fedd1c3706dd2b45
+ms.openlocfilehash: 35dff1c9aa4ecb9bee96c5c7f2c54898abd45089
+ms.sourcegitcommit: bcd0c96b1581e43e33aa35f4d68af6dcb4979d39
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/16/2020
-ms.locfileid: "86422997"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88039164"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-net-sdk"></a>Erfassen von Daten mit dem .NET SDK für Azure Data Explorer 
+
+> [!div class="op_single_selector"]
+> * [.NET](net-sdk-ingest-data.md)
+> * [Python](python-ingest-data.md)
+> * [Node](node-ingest-data.md)
+> * [Go](go-ingest-data.md)
 
 Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Er bietet zwei Clientbibliotheken für .NET: eine [Erfassungsbibliothek](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Ingest/) und eine [Datenbibliothek](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Data/). Weitere Informationen zum .NET SDK finden Sie unter [Über .NET SDK](/azure/data-explorer/kusto/api/netfx/about-the-sdk).
 Mit diesen Bibliotheken können Sie über Ihren Code Daten in einem Cluster erfassen (laden) und Daten abfragen. In diesem Artikel erstellen Sie zunächst eine Tabelle und eine Datenzuordnung in einem Testcluster. Anschließend stellen Sie die Erfassung im Cluster in eine Warteschlange und überprüfen die Ergebnisse.
@@ -27,7 +33,7 @@ Mit diesen Bibliotheken können Sie über Ihren Code Daten in einem Cluster erfa
 
 ## <a name="install-the-ingest-library"></a>Installieren der Erfassungsbibliothek
 
-```
+```azurecli
 Install-Package Microsoft.Azure.Kusto.Ingest
 ```
 
@@ -37,13 +43,13 @@ Install-Package Microsoft.Azure.Kusto.Ingest
 
 Für die Authentifizierung von Anwendungen verwendet das Azure Data Explorer SDK Ihre AAD-Mandanten-ID. Um Ihre Mandanten-ID zu suchen, verwenden Sie die folgende URL, und ersetzen Sie dabei *YourDomain* durch Ihre Domäne.
 
-```
+```http
 https://login.windows.net/<YourDomain>/.well-known/openid-configuration/
 ```
 
 Wenn Ihre Domäne beispielsweise *contoso.com* ist, lautet die URL: [https://login.windows.net/contoso.com/.well-known/openid-configuration/](https://login.windows.net/contoso.com/.well-known/openid-configuration/). Klicken Sie auf diese URL, um die Ergebnisse anzuzeigen. Die erste Zeile lautet wie folgt. 
 
-```
+```console
 "authorization_endpoint":"https://login.windows.net/6babcaad-604b-40ac-a9d7-9fd97c0b779f/oauth2/authorize"
 ```
 
@@ -205,7 +211,7 @@ using (var ingestClient = KustoIngestFactory.CreateQueuedIngestClient(ingestConn
             IgnoreFirstRecord = true
         };
 
-    ingestClient.IngestFromStorageAsync(blobPath, ingestionProperties: properties);
+    ingestClient.IngestFromStorageAsync(blobPath, ingestionProperties: properties).GetAwaiter().GetResult();
 }
 ```
 

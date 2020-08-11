@@ -8,12 +8,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 09/15/2019
-ms.openlocfilehash: d59e77af1cebe9edb1c026a6dc557facec958917
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b2078ee88b6721f414d280e657d1463925f5a31f
+ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492958"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87804011"
 ---
 # <a name="use-azure-data-factory-command-activity-to-run-azure-data-explorer-control-commands"></a>Verwenden der Azure Data Factory-Befehlsaktivität zum Ausführen von Azure Data Explorer-Steuerungsbefehlen
 
@@ -43,7 +43,7 @@ Mithilfe einer [Lookup-Aktivität](/azure/data-factory/control-flow-lookup-activ
 
 1. Der Canvas enthält jetzt die von Ihnen erstellte Lookup-Aktivität. Verwenden Sie die Registerkarten unter dem Canvas, um alle relevanten Parameter zu ändern. Benennen Sie unter **Allgemein** die Aktivität um. 
 
-    ![Bearbeiten der Lookup-Aktivität](media/data-factory-command-activity/edit-lookup-activity.PNG)
+    ![Bearbeiten der Lookup-Aktivität](media/data-factory-command-activity/edit-lookup-activity.png)
 
     > [!TIP]
     > Klicken Sie auf den leeren Canvasbereich, um die Eigenschaften der Pipeline anzuzeigen. Verwenden Sie die Registerkarte **Allgemein**, um die Pipeline umzubenennen. Unsere Pipeline erhält den Namen *pipeline-4-docs*.
@@ -113,7 +113,7 @@ Diese [ForEach](/azure/data-factory/control-flow-for-each-activity)-Aktivität w
 
         ![ForEach-Aktivität](media/data-factory-command-activity/for-each-activity.png)
 
-1.    Wählen Sie die ForEach-Aktivität auf dem Canvas aus. Auf der nachfolgenden Registerkarte **Einstellungen**:
+1. Wählen Sie die ForEach-Aktivität auf dem Canvas aus. Auf der nachfolgenden Registerkarte **Einstellungen**:
     * Aktivieren Sie das Kontrollkästchen **Sequenziell** für eine sequenzielle Verarbeitung der Lookup-Ergebnisse, oder lassen Sie es deaktiviert, um eine Parallelverarbeitung zu erstellen.
     * Legen Sie **Batchanzahl** fest.
     * Stellen Sie in **Elemente** den folgenden Verweis auf den Ausgabewert bereit: *@activity('Lookup1').output.value*.
@@ -127,7 +127,7 @@ Diese [ForEach](/azure/data-factory/control-flow-for-each-activity)-Aktivität w
 
     ![Azure Data Explorer-Befehlsaktivität](media/data-factory-command-activity/adx-command-activity.png)
 
-1.    Wählen Sie auf der Registerkarte **Verbindung** denselben verknüpften Dienst aus, der zuvor erstellt wurde.
+1. Wählen Sie auf der Registerkarte **Verbindung** denselben verknüpften Dienst aus, der zuvor erstellt wurde.
 
     ![Registerkarte „Verbindung“ der Azure Data Explorer-Befehlsaktivität](media/data-factory-command-activity/adx-command-activity-connection-tab.png)
 
@@ -154,7 +154,7 @@ Diese [ForEach](/azure/data-factory/control-flow-for-each-activity)-Aktivität w
     > * Zeitlimit: 20 Minuten (Standard), 1 Stunde (maximal).
     > * Bei Bedarf können Sie mit [AdminThenQuery](kusto/management/index.md#combining-queries-and-control-commands) eine Abfrage an das Ergebnis anfügen, um die resultierende Größe/Zeit zu verringern.
 
-1.    Jetzt ist die Pipeline bereit. Sie können zur Hauptansicht der Pipeline zurückkehren, indem Sie auf den Namen der Pipeline klicken.
+1. Jetzt ist die Pipeline bereit. Sie können zur Hauptansicht der Pipeline zurückkehren, indem Sie auf den Namen der Pipeline klicken.
 
     ![Azure Data Explorer-Befehlspipeline](media/data-factory-command-activity/adx-command-pipeline.png)
 
