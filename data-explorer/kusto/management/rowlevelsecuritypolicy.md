@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/25/2020
-ms.openlocfilehash: 9952a7a7d95f03ee431b699a1833aa23b21d341b
-ms.sourcegitcommit: 4507466bdcc7dd07e6e2a68c0707b6226adc25af
+ms.openlocfilehash: a82c4b48358a90460f917f181b73b718f6c5e455
+ms.sourcegitcommit: c7b16409995087a7ad7a92817516455455ccd2c5
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/23/2020
-ms.locfileid: "87106352"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88148114"
 ---
 # <a name="row-level-security-preview"></a>Sicherheit auf Zeilenebene (Vorschau)
 
@@ -27,7 +27,7 @@ Mit RLS können Sie anderen Anwendungen und Benutzern Zugriff auf einen bestimmt
 
 * Gewähren von Zugriff nur für Zeilen, die bestimmte Kriterien erfüllen
 * Anonymisieren von Daten in einigen Spalten
-* Alle oben genannten Möglichkeiten
+* Alle oben genannten Aussagen sind zutreffend.
 
 Weitere Informationen finden Sie unter [Steuern von Befehlen zum Verwalten der Sicherheit auf Zeilenebene-Richtlinie](../management/row-level-security-policy.md).
 
@@ -125,7 +125,7 @@ Konfigurieren Sie anschließend RLS auf folgende Weise für mehrere Tabellen:
 
 ### <a name="produce-an-error-upon-unauthorized-access"></a>Fehler bei nicht autorisiertem Zugriff
 
-Wenn Sie möchten, dass nicht autorisierte Tabellen Benutzer einen Fehler empfangen, anstatt eine leere Tabelle zurückzugeben, verwenden Sie die- `[assert()](../query/assert-function.md)` Funktion. Im folgenden Beispiel wird gezeigt, wie dieser Fehler in einer RLS-Funktion erzeugt wird:
+Wenn Sie möchten, dass nicht autorisierte Tabellen Benutzer einen Fehler empfangen, anstatt eine leere Tabelle zurückzugeben, verwenden Sie die- [`assert()`](../query/assert-function.md) Funktion. Im folgenden Beispiel wird gezeigt, wie dieser Fehler in einer RLS-Funktion erzeugt wird:
 
 ```
 .create-or-alter function RLSForCustomersTables() {
