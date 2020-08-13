@@ -7,12 +7,12 @@ ms.reviewer: guregini
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/12/2020
-ms.openlocfilehash: 8a4a4e68333255c322708993b1c9429a89ae7a00
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: bf479a7248033d2aa70a8e09b039814361c78031
+ms.sourcegitcommit: bcd0c96b1581e43e33aa35f4d68af6dcb4979d39
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373767"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88039232"
 ---
 # <a name="visualize-data-from-azure-data-explorer-in-kibana-with-the-k2bridge-open-source-connector"></a>Visualisieren von Daten aus Azure Data Explorer in Kibana mit dem Open-Source-Connector K2Bridge
 
@@ -102,7 +102,7 @@ Standardmäßig verweist das Helm-Diagramm von K2Bridge auf ein öffentlich verf
 
         Unter [Configuration](https://github.com/microsoft/K2Bridge/blob/master/docs/configuration.md) (Konfiguration) finden Sie den vollständigen Satz von Konfigurationsoptionen.
 
-    1. In der Ausgabe des vorherigen Befehls wird der nächste Helm-Befehl zum Bereitstellen von Kibana vorgeschlagen. Führen Sie optional den folgenden Befehl aus:
+    1. <a name="install-kibana-service"></a> In der Ausgabe des vorherigen Befehls wird der nächste Helm-Befehl zum Bereitstellen von Kibana vorgeschlagen. Führen Sie optional den folgenden Befehl aus:
 
         ```bash
         helm install kibana elastic/kibana -n k2bridge --set image=docker.elastic.co/kibana/kibana-oss --set imageTag=6.8.5 --set elasticsearchHosts=http://k2bridge:8080
@@ -118,7 +118,7 @@ Standardmäßig verweist das Helm-Diagramm von K2Bridge auf ein öffentlich verf
 
     1. Machen Sie Kibana für Benutzer verfügbar. Dazu gibt es mehrere Möglichkeiten. Die von Ihnen verwendete Methode hängt weitgehend von Ihrem Anwendungsfall ab.
 
-        Beispielsweise können Sie den Dienst als Load Balancer-Dienst verfügbar machen. Fügen Sie dazu den Parameter **--set service.type=LoadBalancer** zu dem oben verwendeten [Installationsbefehl (**install**) von K2Bridge Helm](#install-k2bridge-chart) hinzu.
+        Beispielsweise können Sie den Dienst als Load Balancer-Dienst verfügbar machen. Fügen Sie dazu dem oben verwendeten [Installationsbefehl (**install**) von Kibana Helm](#install-kibana-service) den Parameter **--set service.type=LoadBalancer** hinzu.
 
         Führen Sie dann den folgenden Befehl aus:
 
