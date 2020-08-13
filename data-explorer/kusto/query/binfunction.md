@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 434d32a3b6597d71ea22c182a468d64d7971e6cb
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: bb6c7c51e295f9af9d6e43a5de5936dfea13f5b6
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348971"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201660"
 ---
 # <a name="bin"></a>bin()
 
@@ -33,9 +33,9 @@ Alias für die `floor()` Funktion.
 ## <a name="arguments"></a>Argumente
 
 * *Wert*: eine Zahl, ein Datum oder ein TimeSpan-Wert. 
-* *roundTo*: die "bin size". Eine Zahl, ein Datum oder ein Zeitraum zum Teilen des Werts ( *value*). 
+* *roundTo*: die "bin size". Eine Zahl oder ein TimeSpan- *Wert*, der den Wert dividiert 
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Das nächste Vielfache von *roundTo* unter dem Wert (*value*).  
  

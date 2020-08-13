@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 8a480ad0af2d3f71dd3ae9279bb59b32d9654acb
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 530f58aaf733add61b5f0aeb54ca12180f5a818e
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348988"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201684"
 ---
 # <a name="bin_at"></a>bin_at()
 
@@ -27,7 +27,7 @@ Rundet Werte auf einen "bin" mit fester Größe, wobei die Steuerung über dem A
 ## <a name="arguments"></a>Argumente
 
 * *Ausdruck*: ein skalarer Ausdruck eines numerischen Typs (einschließlich `datetime` und `timespan` ), der den zu runden Wert angibt.
-* *Binsize*: eine skalare Konstante desselben Typs wie der *Ausdruck* , der die Größe der einzelnen bin angibt. 
+* *Binsize*: eine skalare Konstante eines numerischen Typs oder `timespan` (für einen- `datetime` Ausdruck oder einen- `timespan` *Ausdruck*), die die Größe der einzelnen bin angibt.
 * *FixedPoint*: eine skalare Konstante desselben Typs wie der *Ausdruck* , der einen Wert des *Ausdrucks* angibt, der ein "fester Punkt" ist (d. h. ein Wert, `fixed_point` für den `bin_at(fixed_point, bin_size, fixed_point) == fixed_point` .)
 
 ## <a name="returns"></a>Gibt zurück

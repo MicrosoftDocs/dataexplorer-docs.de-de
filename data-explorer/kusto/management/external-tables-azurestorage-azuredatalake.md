@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 2616605d29f90a283f5a5d8fef367bf77df65a15
-ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
+ms.openlocfilehash: 866436d74e3e37319ec06b477503c11e3d7d6be7
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87871934"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201322"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake
 
@@ -97,7 +97,7 @@ Das ursprüngliche Dateipfad-Präfix kann mithilfe von Partitions Elementen erst
 
 Dabei entspricht *DateTimeFormat* der .NET-Format Spezifikation mit einer Erweiterung, die das Einschließen von Format bezeichnerwerten in geschweifte Klammern zulässt. Die folgenden beiden Formate sind z. b. äquivalent:
 
-&nbsp;&nbsp;`'year='yyyy'/month='MM`immer`year={yyyy}/month={MM}`
+&nbsp;&nbsp;`'year='yyyy'/month='MM` immer `year={yyyy}/month={MM}`
 
 Standardmäßig werden DateTime-Werte in den folgenden Formaten gerendert:
 
@@ -138,11 +138,11 @@ Weitere Informationen finden Sie unter [Speicher Verbindungs](../api/connection-
 | `folder`         | `string` | Tabellen Ordner                                                                     |
 | `docString`      | `string` | Zeichenfolge, die die Tabelle dokumentiert                                                       |
 | `compressed`     | `bool`   | Wenn festgelegt, wird angegeben, ob die Dateien als Dateien komprimiert werden `.gz` (nur im [Export Szenario](data-export/export-data-to-an-external-table.md) verwendet). |
-| `includeHeaders` | `string` | Gibt bei CSV-oder TSV-Dateien an, ob Dateien einen Header enthalten.                     |
+| `includeHeaders` | `string` | Gibt bei durch Trennzeichen getrennten Textformaten (CSV, TSV,...) an, ob Dateien einen Header enthalten. Mögliche Werte: `All` (alle Dateien enthalten einen Header), `FirstFile` (die erste Datei in einem Ordner enthält einen Header), `None` (keine Dateien enthalten einen Header). |
 | `namePrefix`     | `string` | Wenn festgelegt, wird das Präfix der Dateien angegeben. Bei Schreibvorgängen werden alle Dateien mit diesem Präfix geschrieben. Bei Lesevorgängen werden nur Dateien mit diesem Präfix gelesen. |
 | `fileExtension`  | `string` | Wenn festgelegt, werden Dateierweiterungen der Dateien angegeben. Beim Schreiben enden Dateinamen mit diesem Suffix. Beim Lesen werden nur Dateien mit dieser Dateierweiterung gelesen.           |
 | `encoding`       | `string` | Gibt an, wie der Text codiert wird: `UTF8NoBOM` (Standard) oder `UTF8BOM` .             |
-| `sampleUris`     | `bool`   | Wenn festgelegt, liefert das Befehls Ergebnis mehrere Beispiele für den URI externer Datendateien, da Sie von der Definition der externen Tabelle erwartet werden. |
+| `sampleUris`     | `bool`   | Wenn festgelegt, liefert das Befehls Ergebnis mehrere Beispiele für den URI externer Datendateien, da Sie von der Definition der externen Tabelle erwartet werden (die Beispiele werden in der zweiten Ergebnistabelle zurückgegeben). Mit dieser Option können Sie überprüfen, ob *[Partitionen](#partitions)* und *[PathFormat](#path-format)* -Parameter ordnungsgemäß definiert sind. |
 | `validateNotEmpty` | `bool`   | Wenn diese Einstellung festgelegt ist, werden die Verbindungs Zeichenfolgen überprüft, damit Sie Inhalte aufweisen. Der Befehl schlägt fehl, wenn der angegebene URI-Speicherort nicht vorhanden ist, oder wenn keine ausreichenden Zugriffsberechtigungen vorhanden sind. |
 
 > [!TIP]

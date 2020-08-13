@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/03/2020
-ms.openlocfilehash: ef8c0505c7bc26139d7a881ac0cc716395d3d497
-ms.sourcegitcommit: c7b16409995087a7ad7a92817516455455ccd2c5
+ms.openlocfilehash: fab1f41fc4b72b497900276d33beb1b89820c02c
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88148148"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201630"
 ---
 # <a name="continuous-data-export-overview"></a>Fortlaufender Datenexport (Übersicht)
 
@@ -94,4 +94,5 @@ Gefolgt von:
 * Der fortlaufende Export wird für externe Tabellen mit `impersonate` in den [Verbindungs](../../api/connection-strings/storage.md)Zeichenfolgen nicht unterstützt.
 * Der fortlaufende Export unterstützt keine datenbankübergreifenden und Cluster übergreifenden Aufrufe.
 * Der fortlaufende Export ist nicht für das ständig Streaming von Daten aus Azure Daten-Explorer konzipiert. Der fortlaufende Export wird in einem verteilten Modus ausgeführt, in dem alle Knoten gleichzeitig exportiert werden. Wenn der Datenbereich, der durch die einzelnen Testlauf abgefragt wird, gering ist, wäre die Ausgabe des fortlaufenden Exports viele kleine Artefakte. Die Anzahl der Artefakte hängt von der Anzahl der Knoten im Cluster ab.
-* Wenn die vom fortlaufenden Export verwendeten Artefakte Event Grid Benachrichtigungen auslöst, finden Sie weitere Informationen [im Abschnitt "bekannte Probleme" in der Event Grid-Dokumentation](../data-ingestion/eventgrid.md#known-issues).
+* Wenn die vom fortlaufenden Export verwendeten Artefakte Event Grid Benachrichtigungen auslöst, finden Sie weitere Informationen [im Abschnitt "bekannte Probleme" in der Event Grid-Dokumentation](../../../ingest-data-event-grid-overview.md#known-event-grid-issues).
+ 
