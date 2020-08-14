@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: e011ffa61b70c79d51941518de0624030d847c4e
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: d3625be5a3a97b456a2d6d84802b11602f959f3e
+ms.sourcegitcommit: bb7c2ba9f9dcae08710be2345ee6e63004629ea1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351096"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88218983"
 ---
 # <a name="shuffle-query"></a>Shuffleabfrage
 
@@ -22,10 +22,6 @@ Die Shuffle-Abfrage ist eine semantische Beibehaltung für eine Reihe von Operat
 Operatoren, die die Unterstützung für das herunter führen in Kusto unter [stützen, sind](summarizeoperator.md) [Join](joinoperator.md), Sum und [make-Series](make-seriesoperator.md).
 
 Legen Sie die Abfrage Strategie "shuffle" mithilfe des Abfrage Parameters `hint.strategy = shuffle` oder fest `hint.shufflekey = <key>` .
-
-Definieren Sie eine [Richtlinie für die Daten Partitionierung](../management/partitioningpolicy.md) in der Tabelle. 
-
-`shufflekey`Wird als Hash Partitions Schlüssel der Tabelle festgelegt, um die Leistung zu verbessern, da die Menge an Daten, die für die Umstellung auf Cluster Knoten erforderlich ist, reduziert wird
 
 ## <a name="syntax"></a>Syntax
 
@@ -52,7 +48,7 @@ Es ist hilfreich, die Strategie zum Mischen von Abfragen zu verwenden, wenn der 
 
 **Unterschied zwischen Hint. Strategy = shuffle und Hint. shufflekey = Key**
 
-`hint.strategy=shuffle`bedeutet, dass der Operator mit gemischtes Operator von allen Schlüsseln gemischt wird.
+`hint.strategy=shuffle` bedeutet, dass der Operator mit gemischtes Operator von allen Schlüsseln gemischt wird.
 Beispielsweise in dieser Abfrage:
 
 ```kusto
