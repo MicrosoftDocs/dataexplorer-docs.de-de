@@ -8,22 +8,23 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/20/2020
-ms.openlocfilehash: a200d0619b25fe7410a82a941a3b1bf6e35d60ac
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 19f86e4973a2822de6f25e38edb07ccd8fbda9d1
+ms.sourcegitcommit: ec191391f5ea6df8c591e6d747c67b2c46f98ac4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87342613"
+ms.lasthandoff: 08/16/2020
+ms.locfileid: "88260116"
 ---
 # <a name="summarize-operator"></a>summarize-Operator
 
 Erzeugt eine Tabelle, die den Inhalt der Eingabetabelle aggregiert.
 
 ```kusto
-T | summarize count(), avg(price) by fruit, supplier
+Sales | summarize NumTransactions=count(), Total=sum(UnitPrice * NumUnits) by Fruit, StartOfMonth=startofmonth(SellDateTime)
 ```
 
-Eine Tabelle, in der die Anzahl und der Durchschnittspreis der einzelnen Früchte der einzelnen Lieferanten angezeigt werden. Es gibt eine Zeile in der Ausgabe für jede einzelne Kombination von Obst und Lieferant. In den Ausgabespalten werden Anzahl, Durchschnittlicher Preis, Obst und Lieferant angezeigt. Alle anderen Eingabespalten werden ignoriert.
+Gibt eine Tabelle zurück, in der die Anzahl der verkauften Transaktionen und der Gesamtbetrag pro Frucht und Monat verkauft werden.
+In den Ausgabespalten wird die Anzahl von Transaktionen, der Transaktionswert, der Frucht und der DateTime-Wert für den Anfang des Monats, in dem die Transaktion aufgezeichnet wurde, angezeigt.
 
 ```kusto
 T | summarize count() by price_range=bin(price, 10.0)
@@ -39,7 +40,8 @@ Eine Tabelle, die zeigt, wie viele Elemente in jedem Intervall [0, 10,0][10,0, 2
 
 * *Column:* Optionaler Name für eine Ergebnisspalte. Nimmt standardmäßig den vom Ausdruck abgeleiteten Namen an.
 * *Aggregation:* Ein Aufrufe einer [Aggregations Funktion](summarizeoperator.md#list-of-aggregation-functions) , z `count()` `avg()` . b. oder, mit Spaltennamen als Argumente. Weitere Informationen finden Sie [in der Liste der Aggregations Funktionen](summarizeoperator.md#list-of-aggregation-functions).
-* *GroupExpression:* Ein Ausdruck für die Spalten, der einen Satz von unterschiedlichen Werten bereitstellt. Normalerweise handelt es sich entweder um einen Spaltennamen, der bereits einen eingeschränkten Satz von Werten bereitstellt, oder um `bin()` mit einer numerischen Spalte oder Zeitspalte als Argument. 
+* *Groupexpression:* Ein Skalarausdruck, der auf die Eingabedaten verweisen kann.
+  Die Ausgabe enthält so viele Datensätze, wie es unterschiedliche Werte aller Gruppierungs Ausdrücke gibt.
 
 > [!NOTE]
 > Wenn die Eingabe Tabelle leer ist, ist die Ausgabe davon abhängig, ob *groupexpression* verwendet wird:
@@ -63,17 +65,17 @@ Um Bereiche numerischer Werte zusammenzufassen, verwenden `bin()` Sie, um Bereic
 
 |Funktion|BESCHREIBUNG|
 |--------|-----------|
-|[Any ()](any-aggfunction.md)|Gibt einen zufälligen, nicht leeren Wert für die Gruppe zurück.|
+|[any()](any-aggfunction.md)|Gibt einen zufälligen, nicht leeren Wert für die Gruppe zurück.|
 |[anyif()](anyif-aggfunction.md)|Gibt einen zufälligen, nicht leeren Wert für die Gruppe zurück (mit Prädikat).|
 |[arg_max()](arg-max-aggfunction.md)|Gibt einen oder mehrere Ausdrücke zurück, wenn das Argument maximiert ist.|
 |[arg_min()](arg-min-aggfunction.md)|Gibt einen oder mehrere Ausdrücke zurück, wenn das Argument minimiert wird.|
-|[AVG ()](avg-aggfunction.md)|Gibt einen durchschnittlichen Wert in der Gruppe zurück.|
+|[avg()](avg-aggfunction.md)|Gibt einen durchschnittlichen Wert in der Gruppe zurück.|
 |[avgif()](avgif-aggfunction.md)|Gibt einen durchschnittlichen Wert über die Gruppe zurück (mit Prädikat).|
 |[binary_all_and](binary-all-and-aggfunction.md)|Gibt den aggregierten Wert mithilfe der Binärdatei der Gruppe zurück. `AND`|
 |[binary_all_or](binary-all-or-aggfunction.md)|Gibt den aggregierten Wert mithilfe der Binärdatei der Gruppe zurück. `OR`|
 |[binary_all_xor](binary-all-xor-aggfunction.md)|Gibt den aggregierten Wert mithilfe der Binärdatei der Gruppe zurück. `XOR`|
 |[buildschema()](buildschema-aggfunction.md)|Gibt das minimale Schema zurück, das alle Werte der `dynamic` Eingabe zulässt.|
-|[count ()](count-aggfunction.md)|Gibt die Anzahl der Gruppe zurück.|
+|[count()](count-aggfunction.md)|Gibt die Anzahl der Gruppe zurück.|
 |[countif()](countif-aggfunction.md)|Gibt eine Anzahl mit dem Prädikat der Gruppe zurück.|
 |[dcount()](dcount-aggfunction.md)|Gibt eine ungefähre unterschiedliche Anzahl der Group-Elemente zurück.|
 |[dcountif()](dcountif-aggfunction.md)|Gibt eine ungefähre unterschiedliche Anzahl von Gruppenelementen zurück (mit Prädikat).|
@@ -92,9 +94,9 @@ Um Bereiche numerischer Werte zusammenzufassen, verwenden `bin()` Sie, um Bereic
 |[percentiles_array ()](percentiles-aggfunction.md)|Gibt die Quantilen der Gruppe zurück.|
 |[percentilesw ()](percentiles-aggfunction.md)|Gibt das gewichtete Perzentil der Gruppe zurück.|
 |[percentilesw_array ()](percentiles-aggfunction.md)|Gibt die gewichteten Quantilen der Gruppe zurück.|
-|[StDev ()](stdev-aggfunction.md)|Gibt die Standardabweichung in der Gruppe zurück.|
+|[stdev()](stdev-aggfunction.md)|Gibt die Standardabweichung in der Gruppe zurück.|
 |[stdevif()](stdevif-aggfunction.md)|Gibt die Standardabweichung für die Gruppe (mit Prädikat) zurück.|
-|[Sum ()](sum-aggfunction.md)|Gibt die Summe der Elemente zurück, die die Gruppe unterliegen.|
+|[sum()](sum-aggfunction.md)|Gibt die Summe der Elemente zurück, die die Gruppe unterliegen.|
 |[sumif()](sumif-aggfunction.md)|Gibt die Summe der Elemente zurück, die mit der Gruppe (mit Prädikat) zusammengefasst werden.|
 |[variance()](variance-aggfunction.md)|Gibt die Varianz innerhalb der Gruppe zurück.|
 |[varianceif()](varianceif-aggfunction.md)|Gibt die Varianz über die Gruppe zurück (mit Prädikat).|

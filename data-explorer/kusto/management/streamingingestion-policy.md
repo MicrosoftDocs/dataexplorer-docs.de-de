@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 6f7efe2916bc5c5344bf4a6c4fa4a60bfaa167b7
-ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
+ms.openlocfilehash: f51a68fc90237c4213c0135ade4724446800dea9
+ms.sourcegitcommit: ec191391f5ea6df8c591e6d747c67b2c46f98ac4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "85967348"
+ms.lasthandoff: 08/16/2020
+ms.locfileid: "88259895"
 ---
 # <a name="streaming-ingestion-policy-command"></a>Befehl zum Übernehmen der streamingrichtlinie
 
@@ -33,11 +33,11 @@ Der `.show policy streamingingestion` Befehl zeigt die Richtlinie für die strea
 
 Dieser Befehl gibt eine Tabelle mit den folgenden Spalten zurück:
 
-|Spalte    |type    |BESCHREIBUNG
+|Spalte    |Typ    |BESCHREIBUNG
 |---|---|---
 |PolicyName|`string`|Der Richtlinien Name: streamingingestionpolicy
 |EntityName|`string`|Datenbank-oder Tabellenname
-|Policy    |`string`|[Richtlinien Objekt für die streamingerfassung](#streaming-ingestion-policy-object)
+|Richtlinie    |`string`|[Richtlinien Objekt für die streamingerfassung](#streaming-ingestion-policy-object)
 
 **Beispiele**
 
@@ -47,7 +47,7 @@ Dieser Befehl gibt eine Tabelle mit den folgenden Spalten zurück:
 .show table T1 policy streamingingestion
 ```
 
-|PolicyName|EntityName|Policy|Childentities|EntityType|
+|PolicyName|EntityName|Richtlinie|Childentities|EntityType|
 |---|---|---|---|---|
 |Streamingingestionpolicy|DB1|{"Isaktivierte": true, "hintallocatedrate": NULL}
 
@@ -84,7 +84,7 @@ Der Befehl ändert das Tabellen-oder Daten Bank `streamingingestion` Richtlinien
 
 .alter database DB1 policy streamingingestion '{"IsEnabled": true, "HintAllocatedRate": 2.1}'
 
-.alter table T1 streamingingestion '{"IsEnabled": true}'
+.alter table T1 policy streamingingestion '{"IsEnabled": true}'
 
 .alter-merge database DB1 policy streamingingestion '{"IsEnabled": false}'
 
@@ -115,7 +115,7 @@ Mit dem Befehl wird das Richtlinien Objekt "Table" oder "Database streaminginges
 
 In der Eingabe und Ausgabe von Verwaltungs Befehlen ist das Richtlinien Objekt für die streamingerfassung eine JSON-formatierte Zeichenfolge, die die folgenden Eigenschaften enthält.
 
-|Eigenschaft|type|BESCHREIBUNG|Erforderlich/optional
+|Eigenschaft|type|BESCHREIBUNG|Erforderlich/Optional
 |---|---|---|---
 |isEnabled|`bool`|Ist die streamingansung für die Entität aktiviert| Erforderlich
 |Hintallocatedrate|`double`|Geschätzte Datenübertragungsrate in GB/Stunde|Optional

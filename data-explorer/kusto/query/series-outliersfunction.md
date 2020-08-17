@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/20/2019
-ms.openlocfilehash: c5ada33d74f5ed3e1c7b357321b23bd7a76be64e
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: c3728b4497e09460fbc19ef2da26a72f02c2ee71
+ms.sourcegitcommit: ec191391f5ea6df8c591e6d747c67b2c46f98ac4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351351"
+ms.lasthandoff: 08/16/2020
+ms.locfileid: "88260095"
 ---
 # <a name="series_outliers"></a>series_outliers()
 
 Bewertet anomaliepunkte in einer Reihe.
 
-Die Funktion nimmt einen Ausdruck mit einem dynamischen numerischen Array als Eingabe an und generiert ein dynamisches numerisches Array mit derselben Länge. Jeder Wert des Arrays gibt mithilfe von ["Tukey es Test"](https://en.wikipedia.org/wiki/Outlier#Tukey.27s_test)eine Bewertung einer möglichen Anomalie an. Ein Wert, der größer als 1,5 im selben Element der Eingabe ist, deutet auf eine Erhöhung oder ablehnen-Anomalie hin. Ein Wert kleiner als-1,5 gibt eine Ablehnungs Anomalie an.
+Die Funktion nimmt einen Ausdruck mit einem dynamischen numerischen Array als Eingabe an und generiert ein dynamisches numerisches Array mit derselben Länge. Jeder Wert des Arrays gibt mithilfe von ["Tukey es Test"](https://en.wikipedia.org/wiki/Outlier#Tukey's_fences)eine Bewertung einer möglichen Anomalie an. Ein Wert, der größer als 1,5 im selben Element der Eingabe ist, deutet auf eine Erhöhung oder ablehnen-Anomalie hin. Ein Wert kleiner als-1,5 gibt eine Ablehnungs Anomalie an.
 
 ## <a name="syntax"></a>Syntax
 
@@ -28,8 +28,8 @@ Die Funktion nimmt einen Ausdruck mit einem dynamischen numerischen Array als Ei
 ## <a name="arguments"></a>Argumente
 
 * *x*: dynamische Array Zelle, die ein Array numerischer Werte ist.
-* *Art*: Algorithmus der Ausreißererkennung. Unterstützt derzeit `"tukey"` (herkömmliches "Tukey") und `"ctukey"` (benutzerdefiniertes "Tukey"). Die Standardeinstellung ist `"ctukey"`.
-* *ignore_val*: numerischer Wert, der fehlende Werte in der Reihe angibt. Der Standardwert ist "Double" (null). Das Ergebnis der Nullen und Werte ignorieren ist auf festgelegt.`0`
+* *Art*: Algorithmus der Ausreißererkennung. Unterstützt derzeit `"tukey"` (herkömmliches "Tukey") und  `"ctukey"` (benutzerdefiniertes "Tukey"). Die Standardeinstellung ist `"ctukey"`.
+* *ignore_val*: numerischer Wert, der fehlende Werte in der Reihe angibt. Der Standardwert ist "Double" (null). Das Ergebnis der Nullen und Werte ignorieren ist auf festgelegt. `0`
 * *min_percentile*: zum Berechnen des normalen zwischen quantifilbereichs. Der Standardwert ist 10, unterstützte benutzerdefinierte Werte liegen im Bereich `[2.0, 98.0]` ( `ctukey` nur).
 * *max_percentile*: identisch, Standardwert 90, unterstützte benutzerdefinierte Werte liegen im Bereich `[2.0, 98.0]` (nur "ctukey").
 
