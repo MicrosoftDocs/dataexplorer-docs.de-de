@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 20b1b87778451245e7a886255ce3e83493b0d9e1
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: f0b2dcc8537c7bf959d60283a63f9227b22c168b
+ms.sourcegitcommit: 31ebf208d6bfd901f825d048ea69c9bb3d8b87af
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85901934"
+ms.lasthandoff: 08/17/2020
+ms.locfileid: "88501568"
 ---
 # <a name="query-limits"></a>Abfragegrenzwerte
 
@@ -78,7 +78,9 @@ Die Kusto-Client Bibliotheken nehmen zurzeit an, dass dieser Grenzwert vorhanden
 
 Kunden, die nicht alle Daten in einem einzigen Massen Vorgang per Pull abrufen möchten, können diese Problem Umgehungen ausprobieren:
 * Wechseln einiger sdjs in den Streamingmodus (Streaming = true-Eigenschaft für kustoconnectionstringbuilder)
-* Wechseln Sie zur .NET v2-API, damit das Kusto-Team weiß, ob Sie dieses Problem beheben, sodass wir die Streaming-Client Priorität erhöhen können.
+* Wechseln zur .NET v2-API
+
+Lassen Sie das Kusto-Team wissen, wenn dieses Problem auftritt, sodass wir die streamingclientpriorität erhöhen können.
 
 Kusto bietet eine Reihe von Client Bibliotheken, die "unendlich große" Ergebnisse verarbeiten können, indem Sie an den Aufrufer gestreamt werden. Verwenden Sie eine dieser Bibliotheken, und konfigurieren Sie Sie für den Streamingmodus. Verwenden Sie z. b. den .NET Framework Client (Microsoft. Azure. Kusto. Data), und legen Sie entweder die Streaming-Eigenschaft der Verbindungs Zeichenfolge auf *true*fest, oder verwenden Sie den *ExecuteQueryV2Async ()* -Befehl, der immer Ergebnisse streamt.
 
@@ -180,7 +182,7 @@ Standardmäßig ist Timeout für Abfragen auf vier Minuten und für Steuerungsbe
 Kusto ermöglicht das Ausführen von Abfragen und das Verwenden von so viel CPU-Ressourcen wie der Cluster. Es wird versucht, einen angemessenen Roundrobin zwischen Abfragen durchzuführen, wenn mehr als eine ausgeführt wird. Diese Methode ergibt die beste Leistung bei Ad-hoc-Abfragen.
 Zu anderen Zeitpunkten können Sie die CPU-Ressourcen, die für eine bestimmte Abfrage verwendet werden, einschränken. Wenn Sie z. b. einen "Hintergrund Auftrag" ausführen, toleriert das System möglicherweise höhere Wartezeiten, um gleichzeitige Ad-hoc-Abfragen mit hoher Priorität zu versehen.
 
-Kusto unterstützt das Angeben von zwei [Client Anforderungs Eigenschaften](../api/netfx/request-properties.md) , wenn eine Abfrage ausgeführt wird. Die Eigenschaften sind *query_fanout_threads_percent* und *query_fanout_nodes_percent*.
+Kusto unterstützt das Angeben von zwei [Client Anforderungs Eigenschaften](../api/netfx/request-properties.md) , wenn eine Abfrage ausgeführt wird. Die Eigenschaften sind  *query_fanout_threads_percent* und *query_fanout_nodes_percent*.
 Beide Eigenschaften sind ganze Zahlen, die standardmäßig den maximalen Wert (100) aufweisen, jedoch für eine bestimmte Abfrage auf einen anderen Wert reduziert werden können. 
 
 Der erste, *query_fanout_threads_percent*, steuert den Verzweigungen angibt-Faktor für die Thread Verwendung. Bei 100% weist der Cluster alle CPUs auf jedem Knoten zu. Beispielsweise 16 CPUs in einem Cluster, der auf Azure D14-Knoten bereitgestellt ist. Wenn der Wert 50% beträgt, wird die Hälfte der CPUs verwendet usw. Die Zahlen werden auf eine ganze CPU aufgerundet, sodass Sie sicher auf 0 festgelegt werden kann. Mit dem zweiten *query_fanout_nodes_percent*wird gesteuert, wie viele Abfrage Knoten im Cluster pro Unterabfrage-Verteilungs Vorgang verwendet werden sollen. Es funktioniert auf ähnliche Weise.

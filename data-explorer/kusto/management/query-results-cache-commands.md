@@ -1,5 +1,5 @@
 ---
-title: 'Abfrageergebnis Cache: Azure Daten-Explorer'
+title: 'Abfrageergebnis Cache-Befehle: Azure Daten-Explorer'
 description: Dieser Artikel beschreibt den Abfrageergebnis Cache in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
@@ -8,14 +8,14 @@ ms.reviewer: amitof
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/16/2020
-ms.openlocfilehash: fa2bf2f6d24162c5bdb1c851ef7d74e4eb39489f
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 519560f0b6bb98651dc4a8b6749935ec9843eb9c
+ms.sourcegitcommit: 5e903c61e779f7bf62f745f13a6038ce2a32e934
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349906"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88512570"
 ---
-# <a name="query-results-cache"></a>Abfrageergebniscache
+# <a name="query-results-cache-commands"></a>Abfrageergebnis Cache-Befehle
 
 Der Abfrageergebnis Cache ist ein dedizierter Cache zum Speichern von Abfrage Ergebnissen. Weitere Informationen finden Sie unter [Abfrageergebnis Cache](../query/query-results-cache.md).
 

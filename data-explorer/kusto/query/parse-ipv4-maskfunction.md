@@ -1,5 +1,5 @@
 ---
-title: parse_ipv4_mask ()-Azure Daten-Explorer | Microsoft-Dokumentation
+title: parse_ipv4_mask ()-Azure Daten-Explorer
 description: In diesem Artikel wird parse_ipv4_mask ()-Funktion in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: 7399bf83369a1b1e1565dd127712faccf7e60830
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: c84a719c59f46702ba8f5d92db2a1277cef49fb4
+ms.sourcegitcommit: 5e903c61e779f7bf62f745f13a6038ce2a32e934
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346472"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88512567"
 ---
 # <a name="parse_ipv4_mask"></a>parse_ipv4_mask()
 
