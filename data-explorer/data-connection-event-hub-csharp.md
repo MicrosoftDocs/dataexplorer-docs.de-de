@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: 8d09782d29377d702b80fa9e049fa578a92ccd47
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: d71dabaa3ed597b641d0e16c2ff152779fda2d53
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350161"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201377"
 ---
 # <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-c"></a>Erstellen einer Event Hub-Datenverbindung für Azure Data Explorer mit C#
 
@@ -22,7 +22,8 @@ ms.locfileid: "87350161"
 > * [Python](data-connection-event-hub-python.md)
 > * [Azure Resource Manager-Vorlage](data-connection-event-hub-resource-manager.md)
 
-Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Azure Data Explorer bietet Erfassung (Laden von Daten) aus Event Hubs, IoT Hubs und Blobs, die in Blobcontainer geschrieben werden. In diesem Artikel erstellen Sie eine Event Hub-Datenverbindung für Azure Data Explorer mit C#.
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+In diesem Artikel erstellen Sie eine Event Hub-Datenverbindung für Azure Data Explorer mit C#.
 
 ## <a name="prerequisites"></a>Voraussetzungen
 

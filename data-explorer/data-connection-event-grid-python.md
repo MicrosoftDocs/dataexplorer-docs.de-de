@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: f86b9ed21a0d818214d2193dbfa902b3a98809ba
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 5bf7d894acc5111a43f8078874f0465f9616a166
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350195"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201480"
 ---
 # <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-python"></a>Erstellen einer Event Grid-Datenverbindung für Azure Data Explorer mit Python
 
@@ -22,21 +22,17 @@ ms.locfileid: "87350195"
 > * [Python](data-connection-event-grid-python.md)
 > * [Azure Resource Manager-Vorlage](data-connection-event-grid-resource-manager.md)
 
-In diesem Artikel erstellen Sie eine Event Grid-Datenverbindung für Azure Data Explorer mit Python. Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Azure Data Explorer bietet Erfassung (oder Laden von Daten) aus Event Hubs, IoT Hubs und in Blobcontainer geschriebenen Blobs.
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+In diesem Artikel erstellen Sie eine Event Grid-Datenverbindung für Azure Data Explorer mit Python.
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
 * Ein Azure-Konto mit einem aktiven Abonnement. [Erstellen Sie ein kostenloses Konto.](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
-
 * [Python 3.4 oder höher](https://www.python.org/downloads/)
-
 * [Ein Cluster und eine Datenbank](create-cluster-database-python.md).
-
 * [Tabellen- und Spaltenzuordnung](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
-
-* [Datenbank- und Tabellenrichtlinien](database-table-policies-csharp.md) (optional).
-
-* [Speicherkonto mit einem Event Grid-Abonnement](../data-explorer/kusto/management/data-ingestion/eventgrid.md#create-an-event-grid-subscription-in-your-storage-account)
+* [Datenbank- und Tabellenrichtlinien](database-table-policies-csharp.md) (optional)
+* [Speicherkonto mit einem Event Grid-Abonnement](ingest-data-event-grid.md)
 
 [!INCLUDE [data-explorer-data-connection-install-package-python](includes/data-explorer-data-connection-install-package-python.md)]
 

@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: a93b29d6557afa435cacbbeeb43b685c0dfbf3af
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 597eb522da9e3cb383cb3c0aad5ccc7c78de6ce3
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350212"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201395"
 ---
 # <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-c"></a>Erstellen einer Event Grid-Datenverbindung für Azure Data Explorer mit C#
 
@@ -23,7 +23,8 @@ ms.locfileid: "87350212"
 > * [Azure Resource Manager-Vorlage](data-connection-event-grid-resource-manager.md)
 
 
-Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Azure Data Explorer bietet Erfassung (Laden von Daten) aus Event Hubs, IoT Hubs und Blobs, die in Blobcontainer geschrieben werden. In diesem Artikel erstellen Sie eine Event Grid-Datenverbindung für Azure Data Explorer mit C#.
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+ In diesem Artikel erstellen Sie eine Event Grid-Datenverbindung für Azure Data Explorer mit C#.
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -32,7 +33,7 @@ Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Un
 * Erstellen eines [Clusters und einer Datenbank](create-cluster-database-csharp.md)
 * Erstellen einer [Tabelle und Spaltenzuordnung](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
 * Festlegen von [Datenbank- und Tabellenrichtlinien](database-table-policies-csharp.md) (optional)
-* Erstellen eines [Speicherkontos mit einem Event Grid-Abonnement](../data-explorer/kusto/management/data-ingestion/eventgrid.md#create-an-event-grid-subscription-in-your-storage-account)
+* Erstellen eines [Speicherkontos mit einem Event Grid-Abonnement](ingest-data-event-grid.md)
 
 [!INCLUDE [data-explorer-data-connection-install-nuget-csharp](includes/data-explorer-data-connection-install-nuget-csharp.md)]
 

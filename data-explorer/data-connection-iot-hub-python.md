@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: b85ec79c962ab4e63c0831f415ee7c3f2074c970
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 89fc499e0e74bcd521c8c2fbc7c2038536c097da
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350093"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201559"
 ---
 # <a name="create-an-iot-hub-data-connection-for-azure-data-explorer-by-using-python-preview"></a>Erstellen einer IoT Hub-Datenverbindung für Azure Data Explorer mit Python (Vorschau)
 
@@ -22,20 +22,16 @@ ms.locfileid: "87350093"
 > * [Python](data-connection-iot-hub-python.md)
 > * [Azure Resource Manager-Vorlage](data-connection-iot-hub-resource-manager.md)
 
-In diesem Artikel erstellen Sie eine IoT Hub-Datenverbindung für Azure Data Explorer mit Python. Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Azure Data Explorer bietet Erfassung (oder Laden von Daten) aus Event Hubs, IoT Hubs und in Blobcontainer geschriebenen Blobs.
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+In diesem Artikel erstellen Sie eine IoT Hub-Datenverbindung für Azure Data Explorer mit Python. 
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
 * Ein Azure-Konto mit einem aktiven Abonnement. Sie können [kostenlos ein Konto erstellen](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
-
 * [Python 3.4 oder höher](https://www.python.org/downloads/)
-
 * [Ein Cluster und eine Datenbank](create-cluster-database-python.md).
-
 * [Tabellen- und Spaltenzuordnung](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
-
 * [Datenbank- und Tabellenrichtlinien](database-table-policies-python.md) (optional).
-
 * [Erstellen einer IoT Hub-Instanz](ingest-data-iot-hub.md#create-an-iot-hub).
 
 [!INCLUDE [data-explorer-data-connection-install-package-python](includes/data-explorer-data-connection-install-package-python.md)]

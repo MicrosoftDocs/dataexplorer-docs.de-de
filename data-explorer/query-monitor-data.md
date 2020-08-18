@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/28/2020
-ms.openlocfilehash: d4f9fe945281eb61c1d1e685d0c2689585951926
-ms.sourcegitcommit: 6db94135b9902ad0ea84f9cef00ded8ec0a90fc3
+ms.openlocfilehash: 9efbceafa20b1807b5c3cfd89a288bc9b704a086
+ms.sourcegitcommit: ec191391f5ea6df8c591e6d747c67b2c46f98ac4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86870106"
+ms.lasthandoff: 08/16/2020
+ms.locfileid: "88260092"
 ---
 # <a name="query-data-in-azure-monitor-using-azure-data-explorer-preview"></a>Abfragen von Daten in Azure Monitor mit Azure Data Explorer (Vorschau)
 
@@ -107,8 +107,6 @@ Die folgende Abbildung enthält ein Beispiel für das Abfragen einer tabellarisc
 
   [ ![Abfragen einer tabellarischen Funktion über die Webbenutzeroberfläche von Azure Data Explorer](media/adx-proxy/function-query-adx-proxy.png)](media/adx-proxy/function-query-adx-proxy.png#lightbox)
 
-> [!NOTE]
-> Azure Monitor unterstützt nur tabellarische Funktionen. Tabellarische Funktionen unterstützen keine Parameter.
 
 ## <a name="additional-syntax-examples"></a>Zusätzliche Syntaxbeispiele
 

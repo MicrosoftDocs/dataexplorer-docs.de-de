@@ -7,12 +7,12 @@ ms.reviewer: ankhanol
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/05/2020
-ms.openlocfilehash: 23f25ca0d32cf241f25a9ac09081dd6c77e072f2
-ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
+ms.openlocfilehash: 39bddff724d30e19f240a25fe3a277fd2151d81e
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87877070"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201334"
 ---
 # <a name="business-continuity-and-disaster-recovery-overview"></a>Übersicht über Business Continuity & Disaster Recovery
 
@@ -121,7 +121,7 @@ Die Konfiguration mit einem aktiven und einem unmittelbar betriebsbereiten Clust
 
 ### <a name="on-demand-data-recovery-configuration"></a>Konfiguration mit bedarfsgesteuerter Datenwiederherstellung
 
-Diese Lösung bietet die geringste Resilienz (höchster RPO- und RTO-Wert) und die niedrigsten Kosten, ist aber mit dem höchsten Aufwand verbunden. In dieser Konfiguration gibt es keinen Datenwiederherstellungscluster. Konfigurieren Sie den fortlaufenden Export zusammengestellter Daten (es sei denn, es werden auch Roh- und Zwischendaten benötigt) für ein Speicherkonto mit GRS-Konfiguration (georedundanter Speicher). Ein Datenwiederherstellungscluster wird im Falle eines Notfallwiederherstellungsszenarios hochgefahren. Zu diesem Zeitpunkt werden DDLs, die Konfiguration, Richtlinien und Prozesse angewendet. Daten werden aus dem Speicher mit der Erfassungseigenschaft [kustoCreationTime](kusto/management/data-ingestion/eventgrid.md) erfasst, um die Erfassungszeit zu überschreiben, die standardmäßig auf die Systemzeit festgelegt ist. 
+Diese Lösung bietet die geringste Resilienz (höchster RPO- und RTO-Wert) und die niedrigsten Kosten, ist aber mit dem höchsten Aufwand verbunden. In dieser Konfiguration gibt es keinen Datenwiederherstellungscluster. Konfigurieren Sie den fortlaufenden Export zusammengestellter Daten (es sei denn, es werden auch Roh- und Zwischendaten benötigt) für ein Speicherkonto mit GRS-Konfiguration (georedundanter Speicher). Ein Datenwiederherstellungscluster wird im Falle eines Notfallwiederherstellungsszenarios hochgefahren. Zu diesem Zeitpunkt werden DDLs, die Konfiguration, Richtlinien und Prozesse angewendet. Daten werden aus dem Speicher mit der Erfassungseigenschaft [kustoCreationTime](ingest-data-event-grid-overview.md) erfasst, um die Erfassungszeit zu überschreiben, die standardmäßig auf die Systemzeit festgelegt ist. 
 
 :::image type="content" source="media/business-continuity-overview/on-demand-data-recovery-cluster.png" alt-text="Konfiguration mit bedarfsgesteuertem Datenwiederherstellungscluster":::
 

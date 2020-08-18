@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/18/2020
-ms.openlocfilehash: e6b329380d507e93161415f51515656628564500
-ms.sourcegitcommit: bf2c9da0c23ebcaec19b229d2079032d54a2cc82
+ms.openlocfilehash: d46455fcce2880c4f347d04125a9f6355cb4cffa
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86140554"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201542"
 ---
 # <a name="azure-data-explorer-data-ingestion-overview"></a>Übersicht über die Datenerfassung in Azure Data Explorer 
 
@@ -115,9 +115,9 @@ Es gibt eine Reihe von Methoden, mit denen Daten mithilfe von KQL-Befehlen (Kust
 | [**LogStash**](ingest-data-logstash.md) | | | | |
 | [**Azure Data Factory**](kusto/tools/azure-data-factory.md) | [Unterstützte Datenformate](/azure/data-factory/copy-activity-overview#supported-data-stores-and-formats) | unbegrenzt *(nach ADF-Einschränkungen) | Batcherfassung oder mit ADF-Trigger | Unterstützt Formate, die in der Regel nicht unterstützt werden, große Dateien, kann von über 90 Quellen kopieren, von lokal in die Cloud | Zeit der Erfassung |
 |[ **Azure Data Flow**](kusto/tools/flow.md) | | | | Erfassungsbefehle als Teil des Flows| Erfordert Antwortzeit mit hoher Leistung |
-| [**IoT Hub**](kusto/management/data-ingestion/iothub.md) | [Unterstützte Datenformate](kusto/management/data-ingestion/iothub.md#data-format)  | – | Batcherfasung, Streaming | IoT-Nachrichten, IoT-Ereignisse, IoT-Eigenschaften | |
-| [**Event Hub**](kusto/management/data-ingestion/eventhub.md) | [Unterstützte Datenformate](kusto/management/data-ingestion/eventhub.md#data-format) | – | Batcherfasung, Streaming | Nachrichten, Ereignisse | |
-| [**Event Grid**](kusto/management/data-ingestion/eventgrid.md) | [Unterstützte Datenformate](kusto/management/data-ingestion/eventgrid.md#data-format) | 1 GB unkomprimiert | Batching | Kontinuierliche Erfassung aus Azure Storage, externe Daten in Azure Storage | 100 KB als optimale Dateigröße, für Blobumbenennung und -erstellung verwendet |
+| [**IoT Hub**](ingest-data-iot-hub-overview.md) | [Unterstützte Datenformate](ingest-data-iot-hub-overview.md#data-format)  | – | Batcherfasung, Streaming | IoT-Nachrichten, IoT-Ereignisse, IoT-Eigenschaften | |
+| [**Event Hub**](ingest-data-event-hub-overview.md) | [Unterstützte Datenformate](ingest-data-event-hub-overview.md#data-format) | – | Batcherfasung, Streaming | Nachrichten, Ereignisse | |
+| [**Event Grid**](ingest-data-event-grid-overview.md) | [Unterstützte Datenformate](ingest-data-event-grid-overview.md#data-format) | 1 GB unkomprimiert | Batching | Kontinuierliche Erfassung aus Azure Storage, externe Daten in Azure Storage | 100 KB als optimale Dateigröße, für Blobumbenennung und -erstellung verwendet |
 | [**Net Std**](net-standard-ingest-data.md) | Alle Formate unterstützt | 1 GB unkomprimiert (siehe Hinweis) | Batcherfassung, Streaming, direkt | Schreiben von eigenem Code nach Anforderungen der Organisation |
 | [**Python**](python-ingest-data.md) | Alle Formate unterstützt | 1 GB unkomprimiert (siehe Hinweis) | Batcherfassung, Streaming, direkt | Schreiben von eigenem Code nach Anforderungen der Organisation |
 | [**Node.js**](node-ingest-data.md) | Alle Formate unterstützt | 1 GB unkomprimiert (siehe Hinweis) | Batcherfassung, Streaming, direkt | Schreiben von eigenem Code nach Anforderungen der Organisation |

@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 11/28/2019
-ms.openlocfilehash: f38e6ffe4cec263585c3fe6e06bbb92c9127bbba
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 7ccc256e1e3f97606659e712d3df986c160bef89
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350066"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201170"
 ---
 # <a name="create-an-iot-hub-data-connection-for-azure-data-explorer-by-using-azure-resource-manager-template"></a>Erstellen einer IoT Hub-Datenverbindung für Azure Data Explorer mit einer Azure Resource Manager-Vorlage
 
@@ -22,7 +22,8 @@ ms.locfileid: "87350066"
 > * [Python](data-connection-iot-hub-python.md)
 > * [Azure Resource Manager-Vorlage](data-connection-iot-hub-resource-manager.md)
 
-Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Azure Data Explorer bietet Erfassung (Laden von Daten) aus Event Hubs, IoT Hubs und Blobs, die in Blobcontainer geschrieben werden. In diesem Artikel erstellen Sie eine IoT Hub-Datenverbindung für Azure Data Explorer mithilfe einer Azure Resource Manager-Vorlage.
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+In diesem Artikel erstellen Sie eine IoT Hub-Datenverbindung für Azure Data Explorer mithilfe einer Azure Resource Manager-Vorlage.
 
 ## <a name="prerequisites"></a>Voraussetzungen
 

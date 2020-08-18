@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/07/2019
-ms.openlocfilehash: 7649a89208881ce323c0cbd970f3f247b0cf67da
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 7a4cc1efef506f046e17af901a87b501e0272d08
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350144"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201288"
 ---
 # <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-python"></a>Erstellen einer Event Hub-Datenverbindung für Azure Data Explorer mit Python
 
@@ -22,20 +22,16 @@ ms.locfileid: "87350144"
 > * [Python](data-connection-event-hub-python.md)
 > * [Azure Resource Manager-Vorlage](data-connection-event-hub-resource-manager.md)
 
-In diesem Artikel erstellen Sie eine Event Hub-Datenverbindung für Azure Data Explorer mit Python. Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Azure Data Explorer bietet Erfassung (oder Laden von Daten) aus Event Hubs, IoT Hubs und in Blobcontainer geschriebenen Blobs.
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+In diesem Artikel erstellen Sie eine Event Hub-Datenverbindung für Azure Data Explorer mit Python. 
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
 * Ein Azure-Konto mit einem aktiven Abonnement. Sie können [kostenlos ein Konto erstellen](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
-
 * [Python 3.4 oder höher](https://www.python.org/downloads/)
-
 * [Ein Cluster und eine Datenbank](create-cluster-database-python.md).
-
 * [Tabellen- und Spaltenzuordnung](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
-
-* [Datenbank- und Tabellenrichtlinien](database-table-policies-python.md) (optional).
-
+* [Datenbank- und Tabellenrichtlinien](database-table-policies-python.md) (optional)
 * [Event Hub mit Daten für die Erfassung](ingest-data-event-hub.md#create-an-event-hub)
 
 [!INCLUDE [data-explorer-data-connection-install-package-python](includes/data-explorer-data-connection-install-package-python.md)]

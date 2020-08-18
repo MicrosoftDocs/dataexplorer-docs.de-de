@@ -8,12 +8,12 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: 166f109f96695380c979dd4060e324187c5b5efc
-ms.sourcegitcommit: 4ae1508bbaa8fe9642dcfc8618d77f009bc8ec9f
+ms.openlocfilehash: 9522ee72e639c967f7b735c9c52d67c236498522
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86405469"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201705"
 ---
 # <a name="azure-data-explorer-tools-and-integrations-overview"></a>Übersicht über Azure Data Explorer-Tools und -Integrationen
 
@@ -38,13 +38,13 @@ Die Datenerfassung ist der Prozess, mit dem Datensätze aus einer oder mehreren 
 ### <a name="ingestion-integrations"></a>Erfassungsintegrationen
 
 * Event Hub
-    * [Erfassung aus Event Hub](kusto/management/data-ingestion/eventhub.md)
+    * [Erfassung aus Event Hub](ingest-data-event-hub-overview.md)
     * Erfassen aus Event Hub mit dem [Azure-Portal](ingest-data-event-hub.md), [C#](data-connection-event-hub-csharp.md), [Python](data-connection-event-hub-python.md) oder [einer Azure Resource Manager-Vorlage](data-connection-event-hub-resource-manager.md)
 * Event Grid
-    * [Erfassung aus Event Grid](kusto/management/data-ingestion/eventgrid.md)
+    * [Erfassung aus Event Grid](ingest-data-event-grid-overview.md)
     * Erfassen aus Event Grid mit dem [Azure-Portal](ingest-data-event-grid.md), [C#](data-connection-event-grid-csharp.md), [Python](data-connection-event-grid-python.md) oder [einer Azure Resource Manager-Vorlage](data-connection-event-grid-resource-manager.md)
 * IoT Hub
-    * [Erfassung aus IoT Hub](kusto/management/data-ingestion/iothub.md)
+    * [Erfassung aus IoT Hub](ingest-data-iot-hub-overview.md)
     * Erfassen aus IoT Hub mit dem [Azure-Portal](ingest-data-iot-hub.md), [C#](data-connection-iot-hub-csharp.md), [Python](data-connection-iot-hub-python.md) oder [einer Azure Resource Manager-Vorlage](data-connection-iot-hub-resource-manager.md)
 * [Logstash](ingest-data-logstash.md)
 * Azure Data Factory
