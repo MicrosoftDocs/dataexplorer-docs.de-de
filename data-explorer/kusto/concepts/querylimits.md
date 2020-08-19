@@ -8,17 +8,17 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: f0b2dcc8537c7bf959d60283a63f9227b22c168b
-ms.sourcegitcommit: 31ebf208d6bfd901f825d048ea69c9bb3d8b87af
+ms.openlocfilehash: a9818f2efb6b48621c59619e89b3f2c9a4315e42
+ms.sourcegitcommit: 5137a4291d70327b7bb874bbca74a4a386e57d32
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/17/2020
-ms.locfileid: "88501568"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88566414"
 ---
 # <a name="query-limits"></a>Abfragegrenzwerte
 
 Kusto ist ein Ad-hoc-Abfrage Modul, das große Datasets hostet und versucht, Abfragen zu erfüllen, indem alle relevanten Daten im Arbeitsspeicher gehalten werden.
-Es gibt ein inhärentes Risiko, dass Abfragen die Dienst Ressourcen ohne Grenzen monopolisieren. Kusto bietet eine Reihe integrierter Schutzmaßnahmen in Form von standardmäßigen Abfrage Limits.
+Es gibt ein inhärentes Risiko, dass Abfragen die Dienst Ressourcen ohne Grenzen monopolisieren. Kusto bietet eine Reihe integrierter Schutzmaßnahmen in Form von standardmäßigen Abfrage Limits. Wenn Sie erwägen, diese Grenzwerte zu entfernen, müssen Sie zunächst ermitteln, ob Sie tatsächlich einen Wert erhalten.
 
 ## <a name="limit-on-query-concurrency"></a>Limit für Abfrage Parallelität
 
@@ -74,6 +74,12 @@ set truncationmaxrecords=1105;
 MyTable | where User=="Ploni"
 ```
 
+Wenn Sie die Begrenzung für das Ergebnis abschneiden entfernen, ist es beabsichtigt, Massendaten aus Kusto zu verschieben.
+
+Sie können den Grenzwert für das Abschneiden von Ergebnissen entweder für Exportzwecke mithilfe des- `.export` Befehls oder für die spätere Aggregation entfernen. Wenn Sie eine spätere Aggregation auswählen, sollten Sie ggf. mithilfe von Kusto aggregieren.
+
+Lassen Sie das Kusto-Team wissen, ob Sie über ein Geschäftsszenario verfügen, das von keiner dieser vorgeschlagenen Lösungen erreicht werden kann.  
+
 Die Kusto-Client Bibliotheken nehmen zurzeit an, dass dieser Grenzwert vorhanden ist. Obwohl Sie den Grenzwert ohne Grenzen erhöhen können, erreichen Sie letztendlich Client Limits, die derzeit nicht konfigurierbar sind.
 
 Kunden, die nicht alle Daten in einem einzigen Massen Vorgang per Pull abrufen möchten, können diese Problem Umgehungen ausprobieren:
@@ -114,10 +120,6 @@ Standardmäßig ist dieser Wert auf 5 GB festgelegt. Sie können diesen Wert um 
 set maxmemoryconsumptionperiterator=68719476736;
 MyTable | ...
 ```
-
-Wenn Sie diese Grenzwerte entfernen, legen Sie zunächst fest, ob Sie tatsächlich einen Wert erhalten. Insbesondere bedeutet das Entfernen der Begrenzung der Ergebnis Verkürzung, dass Sie beabsichtigen, Massendaten aus Kusto zu verschieben.
-Sie können den Grenzwert für das Abschneiden von Ergebnissen entweder für Exportzwecke, mithilfe des- `.export` Befehls oder für eine spätere Aggregation entfernen. in diesem Fall sollten Sie eine Aggregation mithilfe von Kusto in Erwägung gezogen.
-Lassen Sie das Kusto-Team wissen, ob Sie über ein Geschäftsszenario verfügen, das von keiner dieser vorgeschlagenen Lösungen erreicht werden kann.  
 
 In vielen Fällen kann das Überschreiten dieses Limits vermieden werden, indem das DataSet Stichproben entnommen wird. Die folgenden beiden Abfragen zeigen, wie die Stichprobenentnahme durchzuführen ist. Der erste ist eine statistische Stichprobe, bei der ein Zufallszahlengenerator verwendet wird. Die zweite ist eine deterministische Stichprobe, durch die ein Hashwert für eine Spalte aus dem DataSet erfolgt (in der Regel eine ID).
 
