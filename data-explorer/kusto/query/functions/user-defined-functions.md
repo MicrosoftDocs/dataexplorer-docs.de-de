@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: e9e199631d57f3fd3be8d438e6b0cdbf9bdd4266
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: f1d77e91ba625b3f38c4b1fde31a841377bb88a5
+ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83227358"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88610517"
 ---
 # <a name="user-defined-functions"></a>Benutzerdefinierte Funktionen
 
@@ -45,9 +45,6 @@ Gültige Namen von benutzerdefinierten Funktionen müssen denselben [bezeichnerb
 
 Der Name muss auch innerhalb des Definitions Bereichs eindeutig sein.
 
-> [!NOTE]
-> Das Überladen von Funktionen wird nicht unterstützt. Sie können nicht mehrere Funktionen mit dem gleichen Namen definieren.
-
 ## <a name="input-arguments"></a>Eingabeargumente
 
 Gültige benutzerdefinierte Funktionen befolgen die folgenden Regeln:
@@ -69,7 +66,7 @@ Beispiel:
 |Syntax                        |Beschreibung der Eingabe Argumentliste                                 |
 |------------------------------|-----------------------------------------------------------------|
 |`()`                          |Keine Argumente|
-|`(s:string)`                  |Einzelnes skalare Argument, das `s` einen Wert vom Typ "" annimmt`string`|
+|`(s:string)`                  |Einzelnes skalare Argument, das `s` einen Wert vom Typ "" annimmt `string`|
 |`(a:long, b:bool=true)`       |Zwei skalare Argumente, wobei der zweite Wert über einen Standardwert verfügt.    |
 |`(T1:(*), T2(r:real), b:bool)`|Drei Argumente (zwei tabellarische Argumente und ein Skalar-Argument)  |
 
@@ -329,3 +326,11 @@ let Table2 = datatable(Column:long)[1235];
 let f = (hours:long) { range x from 1 to hours step 1 | summarize make_list(x) };
 Table2 | where Column != 123 | project d = f(Column)
 ```
+
+## <a name="features-that-are-currently-unsupported-by-user-defined-functions"></a>Funktionen, die derzeit nicht von benutzerdefinierten Funktionen unterstützt werden
+
+Aus Gründen der Vollständigkeit finden Sie hier einige häufig angeforderte Features für benutzerdefinierte Funktionen, die derzeit nicht unterstützt werden:
+
+1.  Funktions Überladung: derzeit gibt es keine Möglichkeit, eine Funktion zu überladen (d. h., mehrere Funktionen mit dem gleichen Namen und einem anderen Eingabe Schema zu erstellen).
+
+2.  Standardwerte: der Standardwert für einen skalarparameter für eine Funktion muss ein skalares Literale (konstant) sein. Außerdem können gespeicherte Funktionen keinen Standardwert vom Typ aufweisen `dynamic` .

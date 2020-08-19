@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/20/2019
-ms.openlocfilehash: 7684ea11b03113051580e3e19aef0d9ac3f13585
-ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
+ms.openlocfilehash: a7a2dcaea2ef982edc8286b83a042d2f21460986
+ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "84011481"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88610439"
 ---
-# <a name="ingestion-failures"></a>Erfassungs Fehler
+# <a name="ingestion-failures"></a>Erfassungsfehler
 
 ## <a name="show-ingestion-failures"></a>. einerfassungs Fehler anzeigen
 
@@ -30,7 +30,7 @@ Dieser Befehl gibt ein Resultset mit allen Erfassungs Fehlern zurück, die auftr
 
 **Syntax**
 
-|||
+|Syntax Option|Beschreibung|
 |---|---| 
 |`.show` `ingestion` `failures`                                       |Gibt alle aufgezeichneten Erfassungs Fehler zurück.  
 |`.show` `ingestion` `failures` <code>&#124;</code> `where` ...       |Gibt einen gefilterten Satz von Erfassungs Fehlern zurück.
@@ -38,7 +38,7 @@ Dieser Befehl gibt ein Resultset mit allen Erfassungs Fehlern zurück, die auftr
 
 **Ergebnisse**
  
-|Output-Parameter           |Type     |BESCHREIBUNG                                                                              |
+|Output-Parameter           |type     |Beschreibung                                                                              |
 |---------------------------|---------|-----------------------------------------------------------------------------------------|
 |OperationId                |String   |Vorgangs Bezeichner, der zum Anzeigen zusätzlicher Vorgangs Details verwendet werden kann. <br> Befehl zum [Anzeigen von Vorgängen](operations.md) </br> 
 |Datenbank                   |String   |Datenbank, auf der der Fehler aufgetreten ist
@@ -49,7 +49,7 @@ Dieser Befehl gibt ein Resultset mit allen Erfassungs Fehlern zurück, die auftr
 |Failurekind                |String   |Typ des Fehlers (permanent/vorübergehend)
 |RootActivityId             |String   |Stamm Aktivitäts-ID.
 |Operationkind              |String   |Der Typ der Erfassungs Operation (Phase), in dem der Fehler registriert wurde
-|Originatesfromupdatepolicy |Boolescher Wert | Gibt an, ob der Fehler beim Ausführen einer [Update Richtlinie](update-policy.md) registriert wurde.
+|Originatesfromupdatepolicy |Boolean | Gibt an, ob der Fehler beim Ausführen einer [Update Richtlinie](update-policy.md) registriert wurde.
  
 **Beispiel**
  

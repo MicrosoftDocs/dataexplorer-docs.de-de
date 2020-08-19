@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1d34b0611db134a6fc99daa49d04bfc19575a1c1
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: d4d4ac00ad05d62f95901c24ea91af8cace0322e
+ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348750"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88610534"
 ---
 # <a name="countof"></a>countof()
 
@@ -40,7 +40,7 @@ Angabe, wie oft die Suchzeichenfolge im Container abgeglichen werden kann. Einfa
 
 ## <a name="examples"></a>Beispiele
 
-|||
+|Funktionsaufruf|Ergebnis|
 |---|---
 |`countof("aaa", "a")`| 3 
 |`countof("aaaa", "aa")`| 3 (nicht 2!)

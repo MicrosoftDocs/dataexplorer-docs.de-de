@@ -7,12 +7,12 @@ ms.reviewer: docohe
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/14/2020
-ms.openlocfilehash: 8765635e0eea8c1d41640bc0393d39a0afa5f971
-ms.sourcegitcommit: e66c5f4b833b4f6269bb7bfa5695519fcb11d9fa
+ms.openlocfilehash: 9ac8011f8bc126c4fc6ea13fdb174bb7af0ba0af
+ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83630191"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88610609"
 ---
 # <a name="microsoft-logic-app-and-azure-data-explorer"></a>Microsoft Logic APP und Azure Daten-Explorer
 
@@ -23,9 +23,9 @@ Logik-APP und Flow werden auf demselben Connector erstellt. Daher gelten die fü
 ## <a name="how-to-create-a-logic-app-with-azure-data-explorer"></a>Erstellen einer Logik-App mit Azure Daten-Explorer
 
 1. Öffnen Sie die [Microsoft Azure-Portal](https://ms.portal.azure.com/). 
-1. Suchen Sie nach, `logic app` und wählen Sie es aus.
+1. Suchen Sie nach `logic app`, und wählen Sie diese Option aus.
 
-    [![](./Images/logicapps/logicapp-search.png "Search for logic app")](./Images/logicapps/logicapp-search.png#lightbox)
+    :::image type="content" source="./images/logicapps/logicapp-search.png" alt-text="Suchen nach "Logik-app" in der Azure-Portal, Azure Daten-Explorer" lightbox="./images/logicapps/logicapp-search.png#lightbox":::
 
 1. Wählen Sie **+ Hinzufügen** aus.
 

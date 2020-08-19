@@ -1,6 +1,6 @@
 ---
-title: Der Datentyp der Zeitspanne - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt den Datentyp der Zeitspanne in Azure Data Explorer.
+title: 'Der TimeSpan-Datentyp: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird der TimeSpan-Datentyp in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,22 +8,22 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 31a0bfafed817ffaf531cffdcb844da8a357531f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 204076e8ed079dec69cae7080e7d2c50df52a9a6
+ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81509604"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88610320"
 ---
-# <a name="the-timespan-data-type"></a>Der Zeitspandatentyp
+# <a name="the-timespan-data-type"></a>Der TimeSpan-Datentyp
 
-Der `timespan` `time`Datentyp ( ) stellt ein Zeitintervall dar.
+Der `timespan` ( `time` )-Datentyp stellt ein Zeitintervall dar.
 
-## <a name="timespan-literals"></a>Zeitspanliterale
+## <a name="timespan-literals"></a>TimeSpan-Literale
 
-Literale vom `timespan` Typ `timespan(`haben den *Syntaxwert*`)`, wobei eine Reihe von Formaten für *den Wert*unterstützt werden, wie in der folgenden Tabelle angegeben:
+Literale vom Typ `timespan` verfügen über den Syntax `timespan(` *Wert* `)` , bei dem eine Reihe von Formaten für den *Wert*unterstützt werden, wie in der folgenden Tabelle angegeben:
 
-|||
+|Wert|Zeitspanne|
 ---|---
 `2d`|2 Tage
 `1.5h`|1,5 Stunden
@@ -37,16 +37,16 @@ Literale vom `timespan` Typ `timespan(`haben den *Syntaxwert*`)`, wobei eine Rei
 `time(2)`| 2 Tage
 `time(0.12:34:56.7)`|`0d+12h+34m+56.7s`
 
-Die sonderform `time(null)` ist der [Nullwert](null-values.md).
+Das besondere Formular `time(null)` ist der [NULL-Wert](null-values.md).
 
-## <a name="timespan-operators"></a>Zeitspanoperatoren
+## <a name="timespan-operators"></a>TimeSpan-Operatoren
 
-Zwei Werte `timespan` des Typs können hinzugefügt, subtrahiert und geteilt werden.
-Der letzte Vorgang gibt `real` einen Wert des Typs zurück, der die Bruchzahl der Anzahl der Werte darstellt, die dem anderen wert entsprechen können.
+Es können zwei Werte vom Typ `timespan` hinzugefügt, subtrahiert und geteilt werden.
+Der letzte Vorgang gibt einen Wert vom Typ zurück, `real` der die Sekundenbruchteile angibt, mit denen ein Wert in den anderen eingefügt werden kann.
 
 ## <a name="examples"></a>Beispiele
 
-Im folgenden Beispiel wird auf verschiedene Weise berechnet, wie viele Sekunden an einem Tag sind:
+Im folgenden Beispiel wird die Anzahl der Sekunden an einem Tag auf verschiedene Weise berechnet:
 
 ```kusto
 print

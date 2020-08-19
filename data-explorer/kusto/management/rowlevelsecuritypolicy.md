@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/25/2020
-ms.openlocfilehash: a82c4b48358a90460f917f181b73b718f6c5e455
-ms.sourcegitcommit: c7b16409995087a7ad7a92817516455455ccd2c5
+ms.openlocfilehash: f3d42835733ffe9303806687891c69df4dcc2178
+ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88148114"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88610456"
 ---
 # <a name="row-level-security-preview"></a>Sicherheit auf Zeilenebene (Vorschau)
 
@@ -30,9 +30,6 @@ Mit RLS können Sie anderen Anwendungen und Benutzern Zugriff auf einen bestimmt
 * Alle oben genannten Aussagen sind zutreffend.
 
 Weitere Informationen finden Sie unter [Steuern von Befehlen zum Verwalten der Sicherheit auf Zeilenebene-Richtlinie](../management/row-level-security-policy.md).
-
-> [!NOTE]
-> Die RLS-Richtlinie, die Sie für die Produktionsdatenbank konfigurieren, wird auch in den Datenbanken der Follower wirksam. Sie können für die Produktions-und die Follower-Datenbank keine unterschiedlichen RLS-Richtlinien konfigurieren
 
 > [!TIP]
 > Diese Funktionen sind häufig für row_level_security Abfragen nützlich:
@@ -107,7 +104,7 @@ Definieren Sie zunächst eine Funktion, die den Tabellennamen als Zeichen folgen
 
 Beispiel:
 
-```
+```kusto
 .create-or-alter function RLSForCustomersTables(TableName: string) {
     table(TableName)
     | ...
@@ -117,7 +114,7 @@ Beispiel:
 Konfigurieren Sie anschließend RLS auf folgende Weise für mehrere Tabellen:
 
 
-```
+```kusto
 .alter table Customers1 policy row_level_security enable "RLSForCustomersTables('Customers1')"
 .alter table Customers2 policy row_level_security enable "RLSForCustomersTables('Customers2')"
 .alter table Customers3 policy row_level_security enable "RLSForCustomersTables('Customers3')"
@@ -127,7 +124,7 @@ Konfigurieren Sie anschließend RLS auf folgende Weise für mehrere Tabellen:
 
 Wenn Sie möchten, dass nicht autorisierte Tabellen Benutzer einen Fehler empfangen, anstatt eine leere Tabelle zurückzugeben, verwenden Sie die- [`assert()`](../query/assert-function.md) Funktion. Im folgenden Beispiel wird gezeigt, wie dieser Fehler in einer RLS-Funktion erzeugt wird:
 
-```
+```kusto
 .create-or-alter function RLSForCustomersTables() {
     MyTable
     | where assert(current_principal_is_member_of('aadgroup=mygroup@mycompany.com') == true, "You don't have access")
@@ -135,6 +132,21 @@ Wenn Sie möchten, dass nicht autorisierte Tabellen Benutzer einen Fehler empfan
 ```
 
 Diese Vorgehensweise kann mit anderen Beispielen kombiniert werden. Beispielsweise können Sie Benutzern in verschiedenen Aad-Gruppen unterschiedliche Ergebnisse anzeigen und für jeden anderen Benutzer einen Fehler ausgeben.
+
+### <a name="control-permissions-on-follower-databases"></a>Control-Berechtigungen für Follower-Datenbanken
+
+Die RLS-Richtlinie, die Sie für die Produktionsdatenbank konfigurieren, wird auch in den Datenbanken der Follower wirksam. Sie können für die Produktions-und die Follower-Datenbank keine unterschiedlichen RLS-Richtlinien konfigurieren Sie können jedoch die- [`current_cluster_endpoint()`](../query/current-cluster-endpoint-function.md) Funktion in der RLS-Abfrage verwenden, um die gleiche Wirkung zu erzielen, wie z. b. unterschiedliche RLS-Abfragen in Follower-Tabellen.
+
+Beispiel:
+
+```kusto
+.create-or-alter function RLSForCustomersTables() {
+    let IsProductionCluster = current_cluster_endpoint() == "mycluster.eastus.kusto.windows.net";
+    let DataForProductionCluster = TempTable | where IsProductionCluster;
+    let DataForFollowerClusters = TempTable | where not(IsProductionCluster) | extend CreditCardNumber = "****";
+    union DataForProductionCluster, DataForFollowerClusters
+}
+```
 
 ## <a name="more-use-cases"></a>Weitere Anwendungsfälle
 
