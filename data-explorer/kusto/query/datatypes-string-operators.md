@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0c8e9b3397026c572d27c250fc4e817bd5f7f265
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 8ad104b7802bde2355b46bc31e74e63a6708d4f4
+ms.sourcegitcommit: d2edf654f71f8686d1f03d8ec16200f84e671b12
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803674"
+ms.lasthandoff: 08/20/2020
+ms.locfileid: "88659262"
 ---
 # <a name="string-operators"></a>Zeichenfolgenoperatoren
 
-Kusto bietet eine Vielzahl von Abfrage Operatoren zum Durchsuchen von Zeichen folgen Datentypen. Im folgenden Artikel wird beschrieben, wie Zeichen folgen Begriffe indiziert werden, die Zeichen folgen Abfrage Operatoren aufgelistet werden und Tipps zur Leistungsoptimierung angezeigt werden.
+Kusto bietet eine Vielzahl von Abfrage Operatoren zum Durchsuchen von Zeichen folgen Datentypen. Im folgenden Artikel wird beschrieben, wie Zeichen folgen Begriffe indiziert werden, die Zeichen folgen Abfrage Operatoren aufgelistet werden und Tipps zur Leistungsoptimierung erhalten.
 
 ## <a name="understanding-string-terms"></a>Verstehen von Zeichen folgen Begriffen
 
@@ -91,7 +91,7 @@ Beispiel:
 * Verwenden Sie anstelle von `contains``contains_cs`
 
 Wenn Sie das vorhanden sein eines Symbols oder eines alphanumerischen Worts, das durch nicht-alphanumerische Zeichen gebunden ist, oder durch den Anfang oder das Ende eines Felds testen möchten, verwenden Sie `has` oder `in` . 
-`has`funktioniert schneller als `contains` , `startswith` oder `endswith` .
+`has` funktioniert schneller als `contains` , `startswith` oder `endswith` .
 
 Beispielsweise wird die erste dieser Abfragen schneller ausgeführt:
 
