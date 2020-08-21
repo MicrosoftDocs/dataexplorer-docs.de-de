@@ -1,20 +1,20 @@
 ---
-title: Verwenden von Azure Data Share für das Freigeben von Daten mit Azure Data Explorer (Vorschauversion)
+title: Verwenden von Azure Data Share zum Freigeben von Daten für Azure Data Explorer
 description: Erfahren Sie, wie Sie Ihre Daten mit Azure Data Explorer und Azure Data Share freigeben.
 author: orspod
 ms.author: orspodek
 ms.reviewer: maraheja
 ms.service: data-explorer
 ms.topic: conceptual
-ms.date: 04/23/2020
-ms.openlocfilehash: 325adfafcb474804d6fc03d85bc5ae2e82011fd3
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.date: 08/14/2020
+ms.openlocfilehash: 29d3c10dc08d0506f43af7127cbf705a8b1881c1
+ms.sourcegitcommit: ec191391f5ea6df8c591e6d747c67b2c46f98ac4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350042"
+ms.lasthandoff: 08/16/2020
+ms.locfileid: "88259927"
 ---
-# <a name="use-azure-data-share-to-share-data-with-azure-data-explorer-preview"></a>Verwenden von Azure Data Share für das Freigeben von Daten mit Azure Data Explorer (Vorschauversion)
+# <a name="use-azure-data-share-to-share-data-with-azure-data-explorer"></a>Verwenden von Azure Data Share zum Freigeben von Daten für Azure Data Explorer
 
 Es gibt viele herkömmliche Möglichkeiten zum Freigeben von Daten, z. B. über Dateifreigaben, FTP, E-Mail und APIs. Diese Methoden erfordern, dass beide Parteien eine Datenpipeline erstellen und verwalten, über die die Daten zwischen Teams und Organisationen ausgetauscht werden. Mit Azure Data Explorer können Sie Ihre Daten problemlos und sicher für Personen in Ihrem Unternehmen oder externe Partner freigeben. Die Freigabe erfolgt nahezu in Echtzeit, ohne dass eine Datenpipeline erstellt oder gewartet werden muss. Alle Datenbankänderungen, einschließlich Schema und Daten, auf Anbieterseite sind auf Consumerseite sofort verfügbar.
 

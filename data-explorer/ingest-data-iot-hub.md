@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/08/2020
-ms.openlocfilehash: 1e04b3c2796f8d8814e21763d9a62189b4dc06cb
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 36c724a001bb4438757316a456fbf85b55691c09
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493886"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201602"
 ---
 # <a name="ingest-data-from-iot-hub-into-azure-data-explorer"></a>Erfassen von Daten aus IoT Hub in Azure Data Explorer 
 
@@ -22,7 +22,9 @@ ms.locfileid: "81493886"
 > * [Python](data-connection-iot-hub-python.md)
 > * [Azure Resource Manager-Vorlage](data-connection-iot-hub-resource-manager.md)
 
-Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Azure Data Explorer ermöglicht das Erfassen (Laden) von Daten aus IoT Hub (Big Data-Streamingplattform und IoT-Erfassungsdienst).
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
+
+In diesem Artikel wird erläutert, wie Sie in Azure Data Explorer Daten aus IoT Hub (Big Data-Streamingplattform und IoT-Erfassungsdienst) erfassen.
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -96,7 +98,7 @@ Als Nächstes stellen Sie über Azure Data Explorer eine Verbindung mit der IoT�
      **Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**
     |---|---|---|
     | Tabelle | *TestTable* | Die Tabelle, die Sie in **testdb** erstellt haben. |
-    | Datenformat | *JSON* | Folgende Formate werden unterstützt: Avro, CSV, JSON, MULTILINE JSON, PSV, SOHSV, SCSV, TSV, TSVE und TXT. |
+    | Datenformat | *JSON* | Die unterstützten Formate sind Avro, CSV, JSON, MULTILINE JSON, ORC, PARQUET, PSV, SCSV, SOHSV, TSV, TXT, TSVE, APACHEAVRO und W3CLOG.|
     | Spaltenzuordnung | *TestMapping* | Die [Zuordnung](kusto/management/mappings.md), die Sie in **testdb** erstellt haben, um eingehende JSON-Daten den Spaltennamen und Datentypen von **testdb** zuzuordnen. Für „JSON“, „MULTILINE JSON“ und „AVRO“ erforderlich, für andere Formate optional.|
     | | |
 
@@ -165,17 +167,17 @@ Nachdem die App nun Daten generiert, sehen Sie den Datenfluss vom IoT-Hub zur Ta
 
 ## <a name="clean-up-resources"></a>Bereinigen von Ressourcen
 
-Wenn Sie Ihre IoT Hub-Instanz nicht mehr benötigen, bereinigen Sie **test-hub-rg**, um Kosten zu vermeiden.
+Wenn Sie nicht vorhaben, Ihren IoT Hub nochmals zu verwenden, sollten Sie die Ressourcengruppe bereinigen, damit Ihnen keine Kosten entstehen.
 
 1. Klicken Sie ganz links im Azure-Portal auf **Ressourcengruppen** und anschließend auf die erstellte Ressourcengruppe.  
 
     Wenn das linke Menü reduziert ist, wählen Sie ![Schaltfläche „Erweitern“](media/ingest-data-event-hub/expand.png) , um es zu erweitern.
 
-   ![Auswählen einer zu löschenden Ressourcengruppe](media/ingest-data-event-hub/delete-resources-select.png)
+   ![Auswählen einer zu löschenden Ressourcengruppe](media/ingest-data-iot-hub/delete-resources-select.png)
 
 1. Wählen Sie unter **test-resource-group** die Option **Ressourcengruppe löschen** aus.
 
-1. Geben Sie im neuen Fenster den Namen der zu löschenden Ressourcengruppe (*test-hub-rg*) ein, und wählen Sie dann **Löschen** aus.
+2. Geben Sie im neuen Fenster den Namen der Ressourcengruppe ein, die Sie löschen möchten, und wählen Sie dann **Löschen** aus.
 
 ## <a name="next-steps"></a>Nächste Schritte
 

@@ -6,12 +6,13 @@ ms.author: orspodek
 ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
-ms.date: 06/03/2019
-ms.openlocfilehash: cad16cf68b5b923c4ffef36370adb6506255dafd
-ms.sourcegitcommit: 0d15903613ad6466d49888ea4dff7bab32dc5b23
+ms.date: 08/13/2020
+ms.openlocfilehash: 2785ec685041c47943ce618b9223eadd46ad9b2a
+ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "86014115"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88201730"
 ---
 # <a name="ingest-blobs-into-azure-data-explorer-by-subscribing-to-event-grid-notifications"></a>Erfassen von Blobs in Azure Data Explorer durch das Abonnieren von Event Grid-Benachrichtigungen
 
@@ -21,7 +22,7 @@ ms.locfileid: "86014115"
 > * [Python](data-connection-event-grid-python.md)
 > * [Azure Resource Manager-Vorlage](data-connection-event-grid-resource-manager.md)
 
-Azure Data Explorer ist ein schneller und skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Er bietet eine kontinuierliche Erfassung (Laden von Daten) aus Blobs, die in Blobcontainer geschrieben werden.
+[!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
 
 In diesem Artikel erfahren Sie, wie Blobs aus Ihrem Speicherkonto unter Verwendung einer Event Grid-Datenverbindung in Azure Data Explorer erfasst werden. Sie erstellen eine Event Grid Datenverbindung und legen ein [Azure Event Grid](/azure/event-grid/overview)-Abonnement fest. Das Event Grid-Abonnement leitet Ereignisse aus Ihrem Speicherkonto über einen Azure Event Hub an Azure Data Explorer weiter. Anschließend wird ein Beispiel für den Datenfluss im gesamten System gezeigt.
 
@@ -78,7 +79,7 @@ Verbinden Sie nun das Speicherkonto mit Azure Data Explorer, so dass die in den 
     | Name der Datenverbindung | *test-grid-connection* | Der Name der Verbindung, die Sie im Azure Data Explorer erstellen möchten.|
     | Speicherkontoabonnement | Ihre Abonnement-ID | Die Abonnement-ID, unter der sich Ihr Speicherkonto befindet.|
     | Speicherkonto | *gridteststorage1* | Der Name des zuvor erstellten Speicherkontos.|
-    | Ressourcenerstellung | *Automatisch* | Legen Sie fest, ob Azure Data Explorer ein Event Grid Abonnement, einen Event Hub-Namespace und einen Event Hub für Sie erstellen soll. Eine ausführliche Erläuterung der manuellen Erstellung Event Grid-Abonnements finden Sie unter den Verweisen im Abschnitt [Erstellen eines Event Grid-Abonnements in Ihrem Speicherkonto](../data-explorer/kusto/management/data-ingestion/eventgrid.md#create-an-event-grid-subscription-in-your-storage-account).|
+    | Ressourcenerstellung | *Automatisch* | Legen Sie fest, ob Azure Data Explorer ein Event Grid Abonnement, einen Event Hub-Namespace und einen Event Hub für Sie erstellen soll. Eine ausführliche Erläuterung der manuellen Erstellung Event Grid-Abonnements finden Sie unter den Verweisen im Abschnitt [Erstellen eines Event Grid-Abonnements in Ihrem Speicherkonto](ingest-data-event-grid.md).|
 
 1. Wählen Sie **Filtereinstellungen** aus, wenn Sie bestimmte Themen nachverfolgen möchten. Legen Sie die Filter für die Benachrichtigungen wie folgt fest:
     * Das Feld **Präfix** ist das *Literalpräfix* des Themas. Da das angewendete Muster *startswith* ist, kann es mehrere Container, Ordner oder Blobs umfassen. Platzhalter sind nicht zulässig.
@@ -101,14 +102,14 @@ Verbinden Sie nun das Speicherkonto mit Azure Data Explorer, so dass die in den 
      **Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**
     |---|---|---|
     | Tabelle | *TestTable* | Die Tabelle, die Sie unter **TestDatabase** erstellt haben. |
-    | Datenformat | *JSON* | Folgende Formate werden unterstützt: Avro, CSV, JSON, MULTILINE JSON, ORC, PARQUET, PSV, SCSV, SOHSV, TSV, TXT und TSVE. Unterstützte Komprimierungsoptionen: Zip und gzip |
+    | Datenformat | *JSON* | Die unterstützten Formate sind Avro, CSV, JSON, MULTILINE JSON, ORC, PARQUET, PSV, SCSV, SOHSV, TSV, TXT, TSVE, APACHEAVRO, RAW und W3CLOG. Die unterstützten Komprimierungsoptionen sind Zip und GZip. |
     | Zuordnung | *TestMapping* | Die Zuordnung, die Sie in **TestDatabase** erstellt haben, um eingehende JSON-Daten den Spaltennamen und Datentypen von **TestTable** zuzuordnen.|
 
 1. Überprüfen Sie die Ressourcen, die automatisch für Sie erstellt wurden, und wählen Sie **Erstellen** aus.
 
     :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-review-create.png" alt-text="Überprüfen und Erstellen einer Datenverbindung für Event Grid":::
 
-1. Warten Sie, bis die Bereitstellung abgeschlossen wurde. Wenn die Bereitstellung fehlschlägt, können Sie **Vorgangsdetails** neben der fehlerhaften Phase auswählen, um weitere Informationen zur Fehlerursache zu erhalten. Sie können auch **Erneut bereitstellen** auswählen, um erneut zu versuchen, die Ressourcen bereitzustellen.
+1. Warten Sie, bis die Bereitstellung abgeschlossen wurde. Wenn bei Ihrer Bereitstellung ein Fehler aufgetreten ist, können Sie neben der fehlerhaften Phase auf **Vorgangsdetails** klicken, um weitere Informationen zur Fehlerursache anzuzeigen. Sie können auch **Erneut bereitstellen** auswählen, um die Bereitstellung der Ressourcen zu wiederholen.
 
     :::image type="content" source="media/ingest-data-event-grid/deploy-event-grid-resources.png" alt-text="Bereitstellen von Event Grid-Ressourcen":::
 
@@ -162,15 +163,7 @@ Sie können die [Datenerfassungseigenschaften](ingestion-properties.md) für die
 
 Die folgenden Eigenschaften können festgelegt werden:
 
-|**Eigenschaft** | **Beschreibung der Eigenschaft**|
-|---|---|
-| `rawSizeBytes` | Größe der Rohdaten (unkomprimiert). Bei Avro/ORC/Parquet ist dies die Größe vor dem Anwenden der formatspezifischen Komprimierung.|
-| `kustoTable` |  Name der vorhandenen Zieltabelle. Überschreibt die `Table`, die auf dem Blatt `Data Connection` festgelegt ist. |
-| `kustoDataFormat` |  Datenformat. Überschreibt das `Data format`, das auf dem Blatt `Data Connection` festgelegt ist. |
-| `kustoIngestionMappingReference` |  Name der zu verwendenden vorhandenen Erfassungszuordnung. Überschreibt das `Column mapping`, das auf dem Blatt `Data Connection` festgelegt ist.|
-| `kustoIgnoreFirstRecord` | Wenn `true` festgelegt wird, ignoriert Kusto die erste Zeile im Blob. Verwenden Sie diese Eigenschaft in Daten in einem Tabellenformat (CSV, TSV oder ähnliche), um die Header zu ignorieren. |
-| `kustoExtentTags` | Zeichenfolgendarstellung von [Tags](kusto/management/extents-overview.md#extent-tagging), die an die resultierende Erweiterung angefügt werden. |
-| `kustoCreationTime` |  Überschreibt [$IngestionTime](kusto/query/ingestiontimefunction.md?pivots=azuredataexplorer) für das Blob und ist als ISO 8601-Zeichenfolge formatiert. Verwenden Sie dies für einen Abgleich. |
+[!INCLUDE [ingestion-properties-event-grid](includes/ingestion-properties-event-grid.md)]
 
 > [!NOTE]
 > Azure Data Explorer löscht die Blobs nach der Erfassung nicht.
