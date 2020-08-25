@@ -7,12 +7,12 @@ ms.reviewer: dorcohen
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/15/2020
-ms.openlocfilehash: 0ecf0124051b6c003e056263afb6a3c5aa9ddb81
-ms.sourcegitcommit: 98eabf249b3f2cc7423dade0f386417fb8e36ce7
+ms.openlocfilehash: 56851a159f6d8d2cee5f3991dab290070fb8c482
+ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82868714"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88610490"
 ---
 # <a name="usage-examples-for-azure-data-explorer-connector-to-power-automate-preview"></a>Anwendungsbeispiele für den Azure Data Explorer-Connector für Power Automate (Vorschauversion)
 
@@ -66,12 +66,12 @@ Gehen Sie wie folgt vor, um einen ähnlichen Flow zu erstellen:
 1. Wählen Sie im Fenster für dynamische Inhalte den Parameter aus, den Sie als Bedingung für die nächsten Aktionen verwenden möchten.
 1. Wählen Sie den Typ für *Beziehung* und *Wert* aus, um eine bestimmte Bedingung für den jeweiligen Parameter festzulegen.
 
-    [![](./media/flow-usage/flow-condition.png "Screenshot of flow conditions")](./media/flow-usage/flow-condition.png#lightbox)
+    :::image type="content" source="./media/flow-usage/flow-condition.png" alt-text="Verwenden von Flowbedingungen basierend auf Kusto-Abfrageergebnissen, um die nächste Flowaktion zu bestimmen, Azure Data Explorer" lightbox="./media/flow-usage/flow-condition.png#lightbox":::
 
     Der Flow wendet diese Bedingung auf jede Zeile der Abfrageergebnistabelle an.
 1. Fügen Sie Aktionen hinzu, wenn die Bedingung wahr (true) und falsch (false) ist.
 
-    [![](./media/flow-usage/flow-conditionactions.png "Screenshot of flow condition actions")](./media/flow-usage/flow-conditionactions.png#lightbox)
+    :::image type="content" source="./media/flow-usage/flow-conditionactions.png" alt-text="Hinzufügen von Aktionen für den Fall, dass eine Bedingung wahr oder falsch ist, Flowbedingungen basierend auf Kusto-Abfrageergebnissen, Azure Data Explorer" lightbox="./media/flow-usage/flow-conditionactions.png#lightbox":::
 
 Sie können die Ergebniswerte aus der Kusto-Abfrage als Eingabe für die nächsten Aktionen verwenden. Wählen Sie die Ergebniswerte aus dem Fenster für dynamische Inhalte aus.
 Im folgenden Beispiel fügen Sie die Aktionen **Slack – Nachricht veröffentlichen** und **Visual Studio – Neues Arbeitselement erstellen** mit Daten aus der Kusto-Abfrage hinzu.
@@ -116,9 +116,9 @@ Visualisieren Sie diese Informationen als Kreisdiagramm, und senden Sie sie per 
 
 Ergebnisse:
 
-[![](./media/flow-usage/flow-resultsmultipleattachments.png "Screenshot of results of multiple attachments, visualized as a pie chart and bar chart")](./media/flow-usage/flow-resultsmultipleattachments.png#lightbox)
+:::image type="content" source="./media/flow-usage/flow-resultsmultipleattachments.png" alt-text="Ergebnisse mehrerer E-Mail-Anlagen, visualisiert als Kreis- und Balkendiagramm, Azure Data Explorer" lightbox="./media/flow-usage/flow-resultsmultipleattachments.png#lightbox":::
 
-[![](./media/flow-usage/flow-resultsmultipleattachments2.png "Screenshot of results of multiple attachments, visualized as a time chart")](./media/flow-usage/flow-resultsmultipleattachments2.png#lightbox)
+:::image type="content" source="./media/flow-usage/flow-resultsmultipleattachments2.png" alt-text="Ergebnisse mehrerer E-Mail-Anlagen, visualisiert als Zeitdiagramm, Azure Data Explorer" lightbox="./media/flow-usage/flow-resultsmultipleattachments2.png#lightbox":::
 
 ## <a name="next-steps"></a>Nächste Schritte
 
