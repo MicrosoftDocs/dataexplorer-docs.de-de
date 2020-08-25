@@ -7,16 +7,16 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 06/15/2020
-ms.openlocfilehash: c1202e4578f9d1d3d4520984e6dc3b6de0ef33b0
-ms.sourcegitcommit: 6db94135b9902ad0ea84f9cef00ded8ec0a90fc3
+ms.openlocfilehash: 061c3ea6c2a493cbda8ac428837720efe42f2082
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86870157"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793958"
 ---
 # <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>Schnellstart: Abfragen von Daten auf der Azure Data Explorer-Webbenutzeroberfläche
 
-Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Der Azure-Daten-Explorer bietet eine Webanwendung, mit der Sie Abfragen ausführen und freigeben können. Die Anwendung steht im Azure-Portal sowie als eigenständige Webanwendung zur Verfügung. In diesem Artikel arbeiten Sie in der eigenständigen Version, mit der Sie Verbindungen mit mehreren Clustern herstellen und Deep-Links zu Ihren Abfragen freigeben können.
+Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Azure Data Explorer stellt eine Webanwendung bereit, mit der Sie Abfragen ausführen und freigeben können. Die Anwendung steht im Azure-Portal sowie als eigenständige Webanwendung zur Verfügung. In diesem Artikel arbeiten Sie in der eigenständigen Version, mit der Sie Verbindungen mit mehreren Clustern herstellen und Deep-Links zu Ihren Abfragen freigeben können.
 
 Wenn Sie über kein Azure-Abonnement verfügen, können Sie ein [kostenloses Azure-Konto](https://azure.microsoft.com/free/) erstellen, bevor Sie beginnen.
 
