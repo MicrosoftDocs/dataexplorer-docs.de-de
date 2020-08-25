@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: fa17d27506c4930fa9b9f7fb0a24f5ff31e1c974
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 9ff0df578f174bc6964e39e799b91068f89a28e4
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345163"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793948"
 ---
 # <a name="series_decompose"></a>series_decompose()
 
@@ -39,7 +39,7 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
 * *Test_points*: 0 (Standard) oder positive ganze Zahl, die die Anzahl der Punkte am Ende der Reihe angibt, die vom Lernprozess (Regression) ausgeschlossen werden sollen. Dieser Parameter sollte für Vorhersagezwecke festgelegt werden.
 * *Seasonality_threshold*: der Schwellenwert für die saisonalitätsbewertung, wenn *Saison alität* auf Autodetect festgelegt ist, ist der Standardwert für die Bewertung `0.6` . Weitere Informationen finden Sie unter [series_periods_detect](series-periods-detectfunction.md).
 
-**Rückgabewert**
+**Return**
 
  Die-Funktion gibt die folgende Reihe zurück:
 
@@ -51,7 +51,7 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
 * `residual`: die Reihe der Rest-Komponente (d. h. x-Baseline).
   
 
-**Hinweise**
+**Notizen**
 
 * Ausführungsreihenfolge der Komponente:
     1. Extrahieren der Saison Serie
@@ -64,13 +64,13 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
 
 **Weitere Informationen zur Reihen Zerlegung**
 
-Diese Methode wird in der Regel auf Zeitreihen von Metriken angewendet, die das periodische und/oder Trend Verhalten manifestieren. Sie können die-Methode verwenden, um zukünftige Metrikwerte zu prognostizieren und/oder anomale Werte zu erkennen. Die implizite Annahme dieses Regressions Prozesses ist, dass die Zeitreihe außer dem saisonalen und dem Trend Verhalten stochastisch und nach dem Zufallsprinzip verteilt ist. Prognostizieren Sie zukünftige Metrikwerte aus den Saison-und Trend Komponenten, während Sie den Restteil ignorieren. Erkennen anormaler Werte auf der Grundlage der Ausreißererkennung nur für den Restteil. Weitere Informationen finden Sie im [Kapitel Zeitreihen Zerlegung](https://www.otexts.org/fpp/6).
+Diese Methode wird in der Regel auf Zeitreihen von Metriken angewendet, die das periodische und/oder Trend Verhalten manifestieren. Sie können die-Methode verwenden, um zukünftige Metrikwerte zu prognostizieren und/oder anomale Werte zu erkennen. Die implizite Annahme dieses Regressions Prozesses ist, dass die Zeitreihe außer dem saisonalen und dem Trend Verhalten stochastisch und nach dem Zufallsprinzip verteilt ist. Prognostizieren Sie zukünftige Metrikwerte aus den Saison-und Trend Komponenten, während Sie den Restteil ignorieren. Erkennen anormaler Werte auf der Grundlage der Ausreißererkennung nur für den Restteil. Weitere Informationen finden Sie im [Kapitel Zeitreihen Zerlegung](https://otexts.com/fpp2/decomposition.html).
 
 ## <a name="examples"></a>Beispiele
 
 **Wöchentliche Saison Abhängigkeit**
 
-Im folgenden Beispiel wird eine Reihe mit wöchentlicher Saison Abhängigkeit und ohne Trend generiert. Anschließend werden einige Ausreißer hinzugefügt. `series_decompose`findet und erkennt automatisch die Saisonalität und generiert eine Baseline, die fast identisch mit der Saison Komponente ist. Die Ausreißer, die wir hinzugefügt haben, können eindeutig in der Komponente Restwerte angezeigt werden.
+Im folgenden Beispiel wird eine Reihe mit wöchentlicher Saison Abhängigkeit und ohne Trend generiert. Anschließend werden einige Ausreißer hinzugefügt. `series_decompose` findet und erkennt automatisch die Saisonalität und generiert eine Baseline, die fast identisch mit der Saison Komponente ist. Die Ausreißer, die wir hinzugefügt haben, können eindeutig in der Komponente Restwerte angezeigt werden.
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

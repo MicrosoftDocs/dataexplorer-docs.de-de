@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 2520849508c9cef829d7c8c07f22d3f8c64cfcea
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 3fb6ae643bb4350cea1ffef4493625bc9c7d191d
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348937"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793562"
 ---
 # <a name="buildschema-aggregation-function"></a>Buildschema () (Aggregations Funktion)
 
@@ -29,12 +29,16 @@ Gibt das minimale Schema zurück, das alle Werte von *dynamicexpr*zulässt.
 
 * *Dynamicexpr*: Ausdruck, der für die Aggregations Berechnung verwendet wird. Der Parameter Spaltentyp muss lauten `dynamic` . 
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Der maximale Wert von *`Expr`* in der Gruppe.
 
 > [!TIP] 
-> Wenn `buildschema(json_column)` einen Syntax Fehler ergibt: *ist eine `json_column` Zeichenfolge anstelle eines dynamischen Objekts?* Verwenden Sie dann `buildschema(parsejson(json_column))` .
+> Wenn `buildschema(json_column)` einen Syntax Fehler ergibt:
+>
+> > *Handelt es sich um `json_column` eine Zeichenfolge anstatt um ein dynamisches Objekt?*
+>
+> Verwenden Sie dann `buildschema(parsejson(json_column))` .
 
 ## <a name="example"></a>Beispiel
 
@@ -49,12 +53,14 @@ Angenommen, die Eingabe Spalte hat drei dynamische Werte.
 
 Lautet das resultierende Schema folgendermaßen:
 
-    { 
-      "x":["int", "string"], 
-      "y":["double", {"w": "string"}], 
-      "z":{"`indexer`": ["int", "string"]}, 
-      "t":{"`indexer`": "string"} 
-    }
+```kusto
+{ 
+    "x":["int", "string"],
+    "y":["double", {"w": "string"}],
+    "z":{"`indexer`": ["int", "string"]},
+    "t":{"`indexer`": "string"}
+}
+```
 
 Das Schema weist auf Folgendes hin:
 
@@ -70,19 +76,22 @@ Das Schema weist auf Folgendes hin:
 
 Die Syntax des zurückgegebenen Schemas lautet folgendermaßen:
 
-    Container ::= '{' Named-type* '}';
-    Named-type ::= (name | '"`indexer`"') ':' Type;
-    Type ::= Primitive-type | Union-type | Container;
-    Union-type ::= '[' Type* ']';
-    Primitive-type ::= "int" | "string" | ...;
+```output
+Container ::= '{' Named-type* '}';
+Named-type ::= (name | '"`indexer`"') ':' Type;
+Type ::= Primitive-type | Union-type | Container;
+Union-type ::= '[' Type* ']';
+Primitive-type ::= "int" | "string" | ...;
+```
 
 Die Werte entsprechen einer Teilmenge der typescript-Typanmerkungen, die als dynamischer Kusto-Wert codiert sind. In TypeScript würde das Beispielschema folgendermaßen lauten:
 
-    var someobject: 
-    { 
-      x?: (number | string), 
-      y?: (number | { w?: string}), 
-      z?: { [n:number] : (int | string)},
-      t?: { [n:number]: string } 
-    }
-    
+```typescript
+var someobject: 
+{
+    x?: (number | string),
+    y?: (number | { w?: string}),
+    z?: { [n:number] : (int | string)},
+    t?: { [n:number]: string }
+}
+```

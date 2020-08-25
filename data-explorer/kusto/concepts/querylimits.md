@@ -4,16 +4,16 @@ description: In diesem Artikel werden die Abfrage Limits in Azure Daten-Explorer
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: a9818f2efb6b48621c59619e89b3f2c9a4315e42
-ms.sourcegitcommit: 5137a4291d70327b7bb874bbca74a4a386e57d32
+ms.openlocfilehash: 5bb05de1ad5a3a055201f42541927619777cafcd
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88566414"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793729"
 ---
 # <a name="query-limits"></a>Abfragegrenzwerte
 
@@ -30,7 +30,7 @@ Die **Abfrage** Parallelität ist ein Limit, das ein Cluster für eine Reihe von
 
 ## <a name="limit-on-result-set-size-result-truncation"></a>Grenzwert für die Größe des Resultsets (Ergebnis abschneiden)
 
-Das **Abschneiden** von Ergebnissen ist ein Standardmäßiges Limit für das Resultset, das von der Abfrage zurückgegeben wird. Kusto schränkt die Anzahl der an den Client zurückgegebenen Datensätze auf **500.000**und den gesamten Arbeitsspeicher für diese Datensätze auf **64 MB**ein. Wenn eine dieser Grenzwerte überschritten wird, tritt bei der Abfrage ein Fehler mit dem Fehler "partielle Abfrage Fehler" auf. Das Überschreiten des Gesamt Speichers generiert eine Ausnahme mit der folgenden Meldung:
+Das **Abschneiden** von Ergebnissen ist ein Standardmäßiges Limit für das Resultset, das von der Abfrage zurückgegeben wird. Kusto schränkt die Anzahl der an den Client zurückgegebenen Datensätze auf **500.000**und die Gesamtgröße der Datensätze für diese Datensätze auf **64 MB**ein. Wenn eine dieser Grenzwerte überschritten wird, tritt bei der Abfrage ein Fehler mit dem Fehler "partielle Abfrage Fehler" auf. Wenn die Gesamtdaten Größe überschritten wird, wird eine Ausnahme mit der folgenden Meldung generiert:
 
 ```
 The Kusto DataEngine has failed to execute a query: 'Query result set has exceeded the internal data size limit 67108864 (E_QUERY_RESULT_SET_TOO_LARGE).'
@@ -47,7 +47,7 @@ Es gibt eine Reihe von Strategien für den Umgang mit diesem Fehler.
 * Reduzieren Sie die resultsetgröße, indem Sie die Abfrage so ändern, dass nur interessante Daten zurückgegeben werden Diese Strategie ist nützlich, wenn die anfängliche fehlerhafte Abfrage zu "breit" ist. Beispielsweise werden die Datenspalten, die nicht benötigt werden, von der Abfrage nicht entfernt.
 * Verringern Sie die Größe des Resultsets, indem Sie die Verarbeitung nach Abfrage, z. b. Aggregationen, in die Abfrage selbst verschieben. Die Strategie ist in Szenarios nützlich, in denen die Ausgabe der Abfrage an ein anderes Verarbeitungssystem weitergeleitet wird und dann zusätzliche Aggregationen durchführt.
 * Wechseln Sie von Abfragen zu mithilfe des [Datenexports](../management/data-export/index.md) , wenn Sie große Datenmengen aus dem Dienst exportieren möchten.
-* Weisen Sie den Dienst an, dieses Abfragelimit zu unterdrücken.
+* Weisen Sie den Dienst an, dieses Abfragelimit mithilfe `set` der unten aufgeführten Anweisungen oder der Flags in den [Eigenschaften der Client Anforderung](../api/netfx/request-properties.md)zu unterdrücken.
 
 Zu den Methoden zum Verringern der von der Abfrage erzeugten resultsetgröße gehören:
 
@@ -59,7 +59,7 @@ Zu den Methoden zum Verringern der von der Abfrage erzeugten resultsetgröße ge
 Sie können die Ergebnis Verkürzung mithilfe der `notruncation` Option Request deaktivieren.
 Es wird empfohlen, dass eine bestimmte Art von Einschränkung immer noch vorhanden ist.
 
-Beispiel:
+Zum Beispiel:
 
 ```kusto
 set notruncation;
@@ -71,22 +71,12 @@ Es ist auch möglich, eine präzisetere Kontrolle über das Abschneiden von Erge
 ```kusto
 set truncationmaxsize=1048576;
 set truncationmaxrecords=1105;
-MyTable | where User=="Ploni"
+MyTable | where User=="UserId1"
 ```
 
 Wenn Sie die Begrenzung für das Ergebnis abschneiden entfernen, ist es beabsichtigt, Massendaten aus Kusto zu verschieben.
 
 Sie können den Grenzwert für das Abschneiden von Ergebnissen entweder für Exportzwecke mithilfe des- `.export` Befehls oder für die spätere Aggregation entfernen. Wenn Sie eine spätere Aggregation auswählen, sollten Sie ggf. mithilfe von Kusto aggregieren.
-
-Lassen Sie das Kusto-Team wissen, ob Sie über ein Geschäftsszenario verfügen, das von keiner dieser vorgeschlagenen Lösungen erreicht werden kann.  
-
-Die Kusto-Client Bibliotheken nehmen zurzeit an, dass dieser Grenzwert vorhanden ist. Obwohl Sie den Grenzwert ohne Grenzen erhöhen können, erreichen Sie letztendlich Client Limits, die derzeit nicht konfigurierbar sind.
-
-Kunden, die nicht alle Daten in einem einzigen Massen Vorgang per Pull abrufen möchten, können diese Problem Umgehungen ausprobieren:
-* Wechseln einiger sdjs in den Streamingmodus (Streaming = true-Eigenschaft für kustoconnectionstringbuilder)
-* Wechseln zur .NET v2-API
-
-Lassen Sie das Kusto-Team wissen, wenn dieses Problem auftritt, sodass wir die streamingclientpriorität erhöhen können.
 
 Kusto bietet eine Reihe von Client Bibliotheken, die "unendlich große" Ergebnisse verarbeiten können, indem Sie an den Aufrufer gestreamt werden. Verwenden Sie eine dieser Bibliotheken, und konfigurieren Sie Sie für den Streamingmodus. Verwenden Sie z. b. den .NET Framework Client (Microsoft. Azure. Kusto. Data), und legen Sie entweder die Streaming-Eigenschaft der Verbindungs Zeichenfolge auf *true*fest, oder verwenden Sie den *ExecuteQueryV2Async ()* -Befehl, der immer Ergebnisse streamt.
 
@@ -146,9 +136,7 @@ Wenn Sie eine dieser Grenzwerte überschreiten, führt dies zu einem der folgend
 ```
 Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too large and exceeds the limit of ...GB (see https://aka.ms/kustoquerylimits)')
 
-Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too large and exceeds the maximum count of 2G items (see http://aka.ms/kustoquerylimits)')
-
-Runaway query (E_RUNAWAY_QUERY). (message: 'Single string size shouldn't exceed the limit of 2GB (see http://aka.ms/kustoquerylimits)')
+Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too large and exceeds the maximum count of ..GB items (see http://aka.ms/kustoquerylimits)')
 ```
 
 Zurzeit gibt es keinen Switch, um die maximale Größe der Zeichen folgen Menge zu erhöhen.
@@ -193,7 +181,7 @@ Der erste, *query_fanout_threads_percent*, steuert den Verzweigungen angibt-Fakt
 
 Während der Abfrage Ausführung wird der Abfragetext in eine Struktur von relationalen Operatoren transformiert, die die Abfrage darstellen.
 Wenn die Baum Tiefe einen internen Schwellenwert von mehreren tausend Ebenen überschreitet, wird die Abfrage als zu komplex für die Verarbeitung betrachtet und schlägt mit einem Fehlercode fehl. Der Fehler zeigt an, dass die Struktur der relationalen Operatoren die Grenzen überschreitet.
-Limits werden aufgrund von Abfragen mit langen Listen binärer Operatoren, die miteinander verkettet sind, überschritten. Beispiel:
+Limits werden aufgrund von Abfragen mit langen Listen binärer Operatoren, die miteinander verkettet sind, überschritten. Zum Beispiel:
 
 ```kusto
 T 

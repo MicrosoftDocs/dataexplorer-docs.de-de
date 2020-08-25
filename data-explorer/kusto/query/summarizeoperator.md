@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/20/2020
-ms.openlocfilehash: 19f86e4973a2822de6f25e38edb07ccd8fbda9d1
-ms.sourcegitcommit: ec191391f5ea6df8c591e6d747c67b2c46f98ac4
+ms.openlocfilehash: 00d205a710b7b3bf41dc181e79e5e6d0baa95fc6
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/16/2020
-ms.locfileid: "88260116"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793924"
 ---
 # <a name="summarize-operator"></a>summarize-Operator
 
@@ -63,19 +63,19 @@ Um Bereiche numerischer Werte zusammenzufassen, verwenden `bin()` Sie, um Bereic
 
 ## <a name="list-of-aggregation-functions"></a>Liste der Aggregations Funktionen
 
-|Funktion|BESCHREIBUNG|
+|Funktion|Beschreibung|
 |--------|-----------|
-|[any()](any-aggfunction.md)|Gibt einen zufälligen, nicht leeren Wert für die Gruppe zurück.|
+|[Any ()](any-aggfunction.md)|Gibt einen zufälligen, nicht leeren Wert für die Gruppe zurück.|
 |[anyif()](anyif-aggfunction.md)|Gibt einen zufälligen, nicht leeren Wert für die Gruppe zurück (mit Prädikat).|
 |[arg_max()](arg-max-aggfunction.md)|Gibt einen oder mehrere Ausdrücke zurück, wenn das Argument maximiert ist.|
 |[arg_min()](arg-min-aggfunction.md)|Gibt einen oder mehrere Ausdrücke zurück, wenn das Argument minimiert wird.|
-|[avg()](avg-aggfunction.md)|Gibt einen durchschnittlichen Wert in der Gruppe zurück.|
+|[AVG ()](avg-aggfunction.md)|Gibt einen durchschnittlichen Wert in der Gruppe zurück.|
 |[avgif()](avgif-aggfunction.md)|Gibt einen durchschnittlichen Wert über die Gruppe zurück (mit Prädikat).|
 |[binary_all_and](binary-all-and-aggfunction.md)|Gibt den aggregierten Wert mithilfe der Binärdatei der Gruppe zurück. `AND`|
 |[binary_all_or](binary-all-or-aggfunction.md)|Gibt den aggregierten Wert mithilfe der Binärdatei der Gruppe zurück. `OR`|
 |[binary_all_xor](binary-all-xor-aggfunction.md)|Gibt den aggregierten Wert mithilfe der Binärdatei der Gruppe zurück. `XOR`|
 |[buildschema()](buildschema-aggfunction.md)|Gibt das minimale Schema zurück, das alle Werte der `dynamic` Eingabe zulässt.|
-|[count()](count-aggfunction.md)|Gibt die Anzahl der Gruppe zurück.|
+|[count ()](count-aggfunction.md)|Gibt die Anzahl der Gruppe zurück.|
 |[countif()](countif-aggfunction.md)|Gibt eine Anzahl mit dem Prädikat der Gruppe zurück.|
 |[dcount()](dcount-aggfunction.md)|Gibt eine ungefähre unterschiedliche Anzahl der Group-Elemente zurück.|
 |[dcountif()](dcountif-aggfunction.md)|Gibt eine ungefähre unterschiedliche Anzahl von Gruppenelementen zurück (mit Prädikat).|
@@ -94,11 +94,11 @@ Um Bereiche numerischer Werte zusammenzufassen, verwenden `bin()` Sie, um Bereic
 |[percentiles_array ()](percentiles-aggfunction.md)|Gibt die Quantilen der Gruppe zurück.|
 |[percentilesw ()](percentiles-aggfunction.md)|Gibt das gewichtete Perzentil der Gruppe zurück.|
 |[percentilesw_array ()](percentiles-aggfunction.md)|Gibt die gewichteten Quantilen der Gruppe zurück.|
-|[stdev()](stdev-aggfunction.md)|Gibt die Standardabweichung in der Gruppe zurück.|
+|[StDev ()](stdev-aggfunction.md)|Gibt die Standardabweichung in der Gruppe zurück.|
 |[stdevif()](stdevif-aggfunction.md)|Gibt die Standardabweichung für die Gruppe (mit Prädikat) zurück.|
-|[sum()](sum-aggfunction.md)|Gibt die Summe der Elemente zurück, die die Gruppe unterliegen.|
-|[sumif()](sumif-aggfunction.md)|Gibt die Summe der Elemente zurück, die mit der Gruppe (mit Prädikat) zusammengefasst werden.|
-|[variance()](variance-aggfunction.md)|Gibt die Varianz innerhalb der Gruppe zurück.|
+|[Sum ()](sum-aggfunction.md)|Gibt die Summe der Elemente in der Gruppe zurück.|
+|[sumif()](sumif-aggfunction.md)|Gibt die Summe der Elemente in der Gruppe zurück (mit Prädikat).|
+|[Varianz ()](variance-aggfunction.md)|Gibt die Varianz innerhalb der Gruppe zurück.|
 |[varianceif()](varianceif-aggfunction.md)|Gibt die Varianz über die Gruppe zurück (mit Prädikat).|
 
 ## <a name="aggregates-default-values"></a>Aggregiert Standardwerte
@@ -148,7 +148,9 @@ Activities | summarize Min = min(Timestamp), Max = max(Timestamp)
 
 Erstellen Sie für jeden Kontinent eine Zeile, die die Anzahl der Städte anzeigt, in denen Aktivitäten auftreten. Da es nur wenige Werte für "Kontinent" gibt, ist keine Gruppierungs Funktion in der by-Klausel erforderlich:
 
-    Activities | summarize cities=dcount(city) by continent
+```kusto
+Activities | summarize cities=dcount(city) by continent
+```
 
 |`cities`|`continent`
 |---:|---

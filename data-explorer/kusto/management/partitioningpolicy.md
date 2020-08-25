@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 0bf2960d1bf585efc6b356a1b7075a27ca6616da
-ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
+ms.openlocfilehash: 944ada323a1a928d4b63c2d8f4e168c442e78ffa
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86188369"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793684"
 ---
 # <a name="data-partitioning-policy"></a>Daten Partitionierungs Richtlinie
 
@@ -48,17 +48,17 @@ Die folgenden Arten von Partitions Schlüsseln werden unterstützt.
 
 #### <a name="partition-properties"></a>Partitionseigenschaften
 
-* `Function`der Name einer Hash Modulo-Funktion, die verwendet werden soll.
+* `Function` der Name einer Hash Modulo-Funktion, die verwendet werden soll.
   * Unterstützter Wert: `XxHash64` .
-* `MaxPartitionCount`die maximale Anzahl der zu erstellenden Partitionen (das Modulo-Argument für die Hash Modulo-Funktion) pro Zeitraum.
+* `MaxPartitionCount` die maximale Anzahl der zu erstellenden Partitionen (das Modulo-Argument für die Hash Modulo-Funktion) pro Zeitraum.
   * Unterstützte Werte liegen im Bereich `(1,1024]` .
     * Der Wert muss wie folgt lauten:
-      * Größer als die Anzahl der Knoten im Cluster
+      * Größer als die Anzahl der Knoten im Cluster.
       * Kleiner als die Kardinalität der Spalte.
     * Je höher der Wert ist, desto größer ist der Aufwand für den Daten Partitionierungs Prozess auf den Knoten des Clusters, und je höher die Anzahl der Blöcke für jeden Zeitraum.
-    * Es wird empfohlen, mit einem Wert von zu beginnen `256` .
+    * Bei Clustern mit weniger als 30 Knoten empfiehlt es sich, mit einem Wert von zu beginnen `256` .
       * Passen Sie den Wert nach Bedarf basierend auf den oben genannten Überlegungen oder basierend auf dem Vorteil der Abfrageleistung und dem Aufwand für die Partitionierung der Daten nach der Erfassung an.
-* `Seed`der Wert, der zum randomialisieren des Hashwerts verwendet werden soll.
+* `Seed` der Wert, der zum randomialisieren des Hashwerts verwendet werden soll.
   * Der Wert muss eine positive ganze Zahl sein.
   * Der empfohlene Wert ist `1` . Dies ist die Standardeinstellung, sofern nicht angegeben.
 
@@ -90,11 +90,11 @@ Die verwendete Partitions Funktion ist [bin_at ()](../query/binatfunction.md) un
 
 #### <a name="partition-properties"></a>Partitionseigenschaften
 
-* `RangeSize`eine `timespan` skalare Konstante, die die Größe der einzelnen DateTime-Partitionen angibt.
+* `RangeSize` eine `timespan` skalare Konstante, die die Größe der einzelnen DateTime-Partitionen angibt.
   Es wird empfohlen, Folgendes zu tun:
   * Beginnen Sie mit dem Wert `1.00:00:00` (ein Tag).
   * Legen Sie einen Wert kürzer als den Wert fest, da dies dazu führen kann, dass die Tabelle eine große Anzahl kleiner Blöcke aufweist, die nicht zusammengeführt werden können.
-* `Reference`eine `datetime` skalare Konstante, die einen festgelegten Zeitpunkt angibt, gemäß dem DateTime-Partitionen ausgerichtet werden.
+* `Reference` eine `datetime` skalare Konstante, die einen festgelegten Zeitpunkt angibt, gemäß dem DateTime-Partitionen ausgerichtet werden.
   * Wir empfehlen Ihnen, mit zu beginnen `1970-01-01 00:00:00` .
   * Wenn Datensätze vorhanden sind, in denen der DateTime-Partitions Schlüssel `null` Werte aufweist, wird der Partitions Wert auf den Wert von festgelegt `Reference` .
 
@@ -181,7 +181,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
   * Diese Eigenschaft ist optional. Der Standardwert ist `0` mit einem Standardziel von 5 Millionen Datensätzen.
     * Sie können einen Wert kleiner als 5 Mio. festlegen, wenn Sie festzustellen, dass die Partitionierungs Vorgänge eine sehr große Menge an Arbeitsspeicher oder CPU pro Vorgang belegen. Weitere Informationen finden Sie unter [Überwachung](#monitoring).
 
-## <a name="notes"></a>Hinweise
+## <a name="notes"></a>Notizen
 
 ### <a name="the-data-partitioning-process"></a>Der Daten Partitionierungs Prozess
 
@@ -205,7 +205,7 @@ Die Ausgabe umfasst Folgendes:
     * Wenn dieser Prozentsatz konstant weiterhin unter 90% liegt, sollten Sie die Partitions [Kapazität](partitioningpolicy.md#capacity)des Clusters auswerten.
   * `TableWithMinPartitioningPercentage`: Der voll qualifizierte Name der Tabelle, deren Partitionierungs Prozentsatz oben angezeigt wird.
 
-Verwenden Sie [. Show-Befehle](commands.md) , um die Partitionierungs Befehle und deren Ressourcenverwendung zu überwachen. Beispiel:
+Verwenden Sie [. Show-Befehle](commands.md) , um die Partitionierungs Befehle und deren Ressourcenverwendung zu überwachen. Zum Beispiel:
 
 ```kusto
 .show commands 

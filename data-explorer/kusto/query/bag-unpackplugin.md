@@ -8,22 +8,24 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/15/2020
-ms.openlocfilehash: 6c91275320a5ec404b6cd5fcbe8c84b4123bd2de
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 48670f1c0bb38599451bc73afa58d6f1dba344a2
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349345"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793643"
 ---
 # <a name="bag_unpack-plugin"></a>Plug-In „bag_unpack“
 
 Das `bag_unpack` Plug-in entpackt eine einzelne Spalte vom Typ `dynamic` , indem die einzelnen Eigenschaften Behälter auf oberster Ebene als Spalte behandelt werden.
 
-    T | evaluate bag_unpack(col1)
+```kusto
+T | evaluate bag_unpack(col1)
+```
 
 ## <a name="syntax"></a>Syntax
 
-*T* - `|` `evaluate` `bag_unpack(` *Spalte* [ `,` *outputcolumnprefix* ] [ `,` *columnsconflict* ] [ `,` *ignoredproperties* ]`)`
+*T* - `|` `evaluate` `bag_unpack(` *Spalte* [ `,` *outputcolumnprefix* ] [ `,` *columnsconflict* ] [ `,` *ignoredproperties* ] `)`
 
 ## <a name="arguments"></a>Argumente
 
@@ -31,19 +33,19 @@ Das `bag_unpack` Plug-in entpackt eine einzelne Spalte vom Typ `dynamic` , indem
 * *Column*: die Spalte von *T* , die entpackt werden soll. Der Wert muss vom Typ `dynamic` sein.
 * *Outputcolumnprefix*: ein gängiges Präfix, das allen Spalten hinzugefügt wird, die vom Plug-in erzeugt werden. Dieses Argument ist optional.
 * *columnsconflict*: eine Richtung für die Auflösung von Spalten Konflikten. Dieses Argument ist optional. Wenn Argument angegeben wird, wird erwartet, dass es sich um ein Zeichenfolgenliteral handelt, das einem der folgenden Werte entspricht:
-    - `error`-Die Abfrage erzeugt einen Fehler (Standard).
-    - `replace_source`-Quell Spalte wird ersetzt
-    - `keep_source`-Die Quell Spalte wird beibehalten.
+    - `error` -Die Abfrage erzeugt einen Fehler (Standard).
+    - `replace_source` -Quell Spalte wird ersetzt
+    - `keep_source` -Die Quell Spalte wird beibehalten.
 * *ignoredproperties*: Optionaler Satz von Behälter Eigenschaften, die ignoriert werden sollen. Wenn Argument angegeben wird, wird davon ausgegangen, dass es sich um eine Konstante des `dynamic` Arrays mit mindestens einem Zeichenfolgenliteralen handelt.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Das `bag_unpack` Plug-in gibt eine Tabelle mit so vielen Datensätzen zurück wie die Tabellen Eingabe (*T*). Das Schema der Tabelle ist identisch mit dem Schema der Tabellen Eingabe mit den folgenden Änderungen:
 
 * Die angegebene Eingabe Spalte (*Spalte*) wird entfernt.
 * Das Schema wird mit so vielen Spalten erweitert, wie es unterschiedliche Slots in den Eigenschaften Behälter Werten der obersten Ebene von *T*gibt. Der Name jeder Spalte entspricht dem Namen der einzelnen Slots. optional wird das *Präfix outputcolumnprefix*vorangestellt. Der Typ ist entweder der Typ des Slots, wenn alle Werte desselben Slots denselben Typ aufweisen oder `dynamic` , wenn sich die Werte im Typ unterscheiden.
 
-**Hinweise**
+**Notizen**
 
 Das Ausgabe Schema des Plug-ins hängt von den Datenwerten ab und macht es als "unvorhersehbare" Daten selbst. Mehrere Ausführungen des Plug-ins mit unterschiedlichen Dateneingaben können ein anderes Ausgabe Schema ergeben.
 
@@ -69,7 +71,7 @@ datatable(d:dynamic)
 | evaluate bag_unpack(d)
 ```
 
-|Name  |Alter|
+|Name  |Age|
 |------|---|
 |John  |20 |
 |David  |40 |
@@ -112,7 +114,7 @@ datatable(Name:string, d:dynamic)
 | evaluate bag_unpack(d, columnsConflict='replace_source') // Use new name
 ```
 
-|Name|Alter|
+|Name|Age|
 |---|---|
 |John|20|
 |David|40|
@@ -129,7 +131,7 @@ datatable(Name:string, d:dynamic)
 | evaluate bag_unpack(d, columnsConflict='keep_source') // Keep old name
 ```
 
-|Name|Alter|
+|Name|Age|
 |---|---|
 |Old_name|20|
 |Old_name|40|

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 69ba6a8ce3cd29d7459215184f7488b015d16558
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 2ab8a9b8a687b695859c52e75ab4e9f88aac408b
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349804"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793709"
 ---
 # <a name="activity_metrics-plugin"></a>activity_metrics-Plug-In
 
@@ -37,7 +37,7 @@ T | evaluate activity_metrics(id, datetime_column, startofday(ago(30d)), startof
 * *Fenster*: Skalar mit dem Wert des Analysefenster Zeitraums. Kann ein numerischer/DateTime-/timestamp-Wert oder eine Zeichenfolge sein, bei der es sich um einen handelt `week` / `month` / `year` . in diesem Fall werden alle Zeiträume entsprechend [starstarfweek](startofweekfunction.md) / [starttfmonth](startofmonthfunction.md) / [starttfyear](startofyearfunction.md) . 
 * *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, in denen die Berechnung der Aktivitäts Metrik in Slice ist.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Gibt eine Tabelle zurück, die die unterschiedlichen Anzahl Werte, die unterschiedliche Anzahl neuer Werte, die Beibehaltungs Dauer und die Änderungs Rate für jeden Zeitachse und jede vorhandene Dimensions Kombination enthält.
 
@@ -47,47 +47,47 @@ Das Ausgabe Tabellen Schema ist:
 |---|---|---|---|---|--|--|--|--|--|--|
 |Typ: ab *timelinecolumschlag*|long|long|double|double|..|..|..|
 
-**Hinweise**
+**Notizen**
 
 ***Definition der Beibehaltungs Rate***
 
-`Retention Rate`über einen Zeitraum wird berechnet als:
+`Retention Rate` über einen Zeitraum wird berechnet als:
 
-    # of customers returned during the period
-    / (divided by)
-    # customers at the beginning of the period
+> *Anzahl der Kunden, die während des Zeitraums zurückgegeben wurden*  
+> /(dividiert durch)  
+> *Anzahl der Kunden am Anfang des Zeitraums*  
 
 der `# of customers returned during the period` ist definiert als:
 
-    # of customers at end of period
-    - (minus)
-    # of new customers acquired during the period
+> *Anzahl der Kunden am Ende des Zeitraums*  
+> \- Kurs  
+> *Anzahl der während des Zeitraums erworbenen neuen Kunden*  
 
-`Retention Rate`kann zwischen 0,0 und 1,0 variieren.  
+`Retention Rate` kann zwischen 0,0 und 1,0 variieren.  
 Das höhere Ergebnis bedeutet die größere Anzahl von Benutzern, die zurückgegeben werden.
 
 
 ***Änderungs Raten Definition***
 
-`Churn Rate`über einen Zeitraum wird berechnet als:
+`Churn Rate` über einen Zeitraum wird berechnet als:
     
-    # of customers lost in the period
-    / (divided by)
-    # of customers at the beginning of the period
+> *Anzahl der Kunden, die in dem Zeitraum verloren gegangen sind*  
+> /(dividiert durch)  
+> *Anzahl der Kunden zu Beginn des Zeitraums*  
 
 der `# of customer lost in the period` ist definiert als:
 
-    # of customers at the beginning of the period
-    - (minus)
-    # of customers at the end of the period
+> *Anzahl der Kunden zu Beginn des Zeitraums*  
+> \- Kurs  
+> *Anzahl der Kunden am Ende des Zeitraums*  
 
-`Churn Rate`kann zwischen 0,0 und 1,0 variieren. das höhere Ergebnis bedeutet, dass die größere Anzahl von Benutzern nicht an den Dienst zurückgegeben wird.
+`Churn Rate` kann zwischen 0,0 und 1,0 variieren. das höhere Ergebnis bedeutet, dass die größere Anzahl von Benutzern nicht an den Dienst zurückgegeben wird.
 
 ***Änderungs Rate im Vergleich zu Aufbewahrungs Rate***
 
 Abgeleitet von der Definition von `Churn Rate` und `Retention Rate` ist Folgendes immer true:
 
-    [Retention rate] = 100.0% - [Churn Rate]
+> [ `Retention Rate` ] = 100,0%-[ `Churn Rate` ]
 
 
 ## <a name="examples"></a>Beispiele

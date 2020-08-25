@@ -4,22 +4,22 @@ description: Dieser Artikel beschreibt den MV-Expand-Operator in Azure Daten-Exp
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2019
-ms.openlocfilehash: 6ca5b5a4e6af8ece7d6f7a6543782665062b5d80
-ms.sourcegitcommit: ed902a5a781e24e081cd85910ed15cd468a0db1e
+ms.openlocfilehash: a9f5517baf0963b4857759fc18158cfa0eee0bb1
+ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/11/2020
-ms.locfileid: "88072411"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88793894"
 ---
 # <a name="mv-expand-operator"></a>mv-expand-Operator
 
 Erweitert das Array oder den Eigenschaften Behälter mit mehreren Werten.
 
-`mv-expand`wird auf ein [dynamisch](./scalar-data-types/dynamic.md)typisiertes Array oder eine Eigenschaften Behälter Spalte angewendet, sodass jeder Wert in der Auflistung eine separate Zeile erhält. Alle anderen Spalten in einer erweiterten Zeile werden dupliziert. 
+`mv-expand` wird auf ein [dynamisch](./scalar-data-types/dynamic.md)typisiertes Array oder eine Eigenschaften Behälter Spalte angewendet, sodass jeder Wert in der Auflistung eine separate Zeile erhält. Alle anderen Spalten in einer erweiterten Zeile werden dupliziert. 
 
 ## <a name="syntax"></a>Syntax
 
@@ -32,7 +32,7 @@ Erweitert das Array oder den Eigenschaften Behälter mit mehreren Werten.
 * *ColumnName:* Im Ergebnis werden Arrays in der benannten Spalte auf mehrere Zeilen erweitert. 
 * *ArrayExpression:* Ein Ausdruck, der ein Array zurückgibt. Bei Verwendung dieses Formulars wird eine neue Spalte hinzugefügt, und die vorhandene wird beibehalten.
 * *Name:* Ein Name für die neue Spalte.
-* *Typname:* Gibt den zugrunde liegenden Typ der Elemente des Arrays an, der zum Typ der vom Operator erzeugten Spalte wird. Nicht konforme Werte im Array werden nicht konvertiert. Stattdessen nehmen diese Werte einen `null` Wert an.
+* *Typname:* Gibt den zugrunde liegenden Typ der Elemente des Arrays an, der zum Typ der vom Operator erzeugten Spalte wird `mv-apply` . Der Vorgang zum Anwenden des Typs ist nur Umwandlungs Vorgänge und umfasst weder die-noch die-Typkonvertierung. Array Elemente, die nicht mit dem deklarierten Typ übereinstimmen, werden zu `null` Werten.
 * *RowLimit:* Die maximale Anzahl von Zeilen, die aus jeder ursprünglichen Zeile generiert werden. Der Standardwert ist 2147483647. 
 
   > [!Note]
@@ -122,7 +122,7 @@ ColumnName|ColumnOrdinal|DateType|ColumnType
 -|-|-|-
 a|0|System.String|Zeichenfolge
 b|1|System.Object|dynamisch
-c|2|System. Int32|INT
+c|2|System.Int32|INT
 
 Beachten Sie, dass die Spalte als angezeigt wird `b` , `dynamic` während `c` als herauskommt `int` .
 
@@ -137,7 +137,7 @@ range x from 1 to 4 step 1
 | mv-expand with_itemindex=Index x
 ```
 
-|w|Index|
+|x|Index|
 |---|---|
 |1|0|
 |2|1|
