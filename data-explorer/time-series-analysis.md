@@ -7,12 +7,12 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/07/2019
-ms.openlocfilehash: 3019cfd85fa2e62a18536fe22353d81b93e64c26
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: c7a54943ba6090a1bccddce90d0be2d2a0778cfe
+ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83374343"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88610626"
 ---
 # <a name="time-series-analysis-in-azure-data-explorer"></a>Zeitreihenanalysen in Azure Data Explorer
 
@@ -34,19 +34,18 @@ demo_make_series1 | take 10
 
 Die resultierende Tabelle enthält eine Zeitstempelspalte, drei kontextbezogene Dimensionsspalten und keine Metriken:
 
-|   |   |   |   |   |
-| --- | --- | --- | --- | --- |
-|   | TimeStamp | BrowserVer | OsVer | Land/Region |
-|   | 2016-08-25 09:12:35.4020000 | Chrome 51.0 | Windows 7 | United Kingdom |
-|   | 2016-08-25 09:12:41.1120000 | Chrome 52.0 | Windows 10 |   |
-|   | 2016-08-25 09:12:46.2300000 | Chrome 52.0 | Windows 7 | United Kingdom |
-|   | 2016-08-25 09:12:46.5100000 | Chrome 52.0 | Windows 10 | United Kingdom |
-|   | 2016-08-25 09:12:46.5570000 | Chrome 52.0 | Windows 10 | Republik Litauen |
-|   | 2016-08-25 09:12:47.0470000 | Chrome 52.0 | Windows 8.1 | Indien |
-|   | 2016-08-25 09:12:51.3600000 | Chrome 52.0 | Windows 10 | United Kingdom |
-|   | 2016-08-25 09:12:51.6930000 | Chrome 52.0 | Windows 7 | Niederlande |
-|   | 2016-08-25 09:12:56.4240000 | Chrome 52.0 | Windows 10 | United Kingdom |
-|   | 2016-08-25 09:13:08.7230000 | Chrome 52.0 | Windows 10 | Indien |
+| TimeStamp | BrowserVer | OsVer | Land/Region |
+| --- | --- | --- | --- |
+| 2016-08-25 09:12:35.4020000 | Chrome 51.0 | Windows 7 | United Kingdom |
+| 2016-08-25 09:12:41.1120000 | Chrome 52.0 | Windows 10 |   |
+| 2016-08-25 09:12:46.2300000 | Chrome 52.0 | Windows 7 | United Kingdom |
+| 2016-08-25 09:12:46.5100000 | Chrome 52.0 | Windows 10 | United Kingdom |
+| 2016-08-25 09:12:46.5570000 | Chrome 52.0 | Windows 10 | Republik Litauen |
+| 2016-08-25 09:12:47.0470000 | Chrome 52.0 | Windows 8.1 | Indien |
+| 2016-08-25 09:12:51.3600000 | Chrome 52.0 | Windows 10 | United Kingdom |
+| 2016-08-25 09:12:51.6930000 | Chrome 52.0 | Windows 7 | Niederlande |
+| 2016-08-25 09:12:56.4240000 | Chrome 52.0 | Windows 10 | United Kingdom |
+| 2016-08-25 09:13:08.7230000 | Chrome 52.0 | Windows 10 | Indien |
 
 Da keine Metriken vorhanden sind, können wir nur einen Satz Zeitreihen erstellen, die die Anzahl von Datenverkehrsbewegungen selbst darstellen, partitioniert nach Betriebssystem. Dazu erstellen wir folgende Abfrage:
 
@@ -152,11 +151,10 @@ demo_series3
 | extend days=2h*todouble(periods)/1d
 ```
 
-|   |   |   |   |
-| --- | --- | --- | --- |
-|   | Zeiträume | Treffer | days |
-|   | 84 | 0.820622786055595 | 7 |
-|   | 12 | 0.764601405803502 | 1 |
+| Zeiträume | Treffer | days |
+| --- | --- | --- |
+| 84 | 0.820622786055595 | 7 |
+| 12 | 0.764601405803502 | 1 |
 
 Die Funktion erkennt tägliche und wöchentliche Saisonalität. Der Trefferwert bei der täglichen Messung ist geringer, weil sich Wochenendtage von Wochentagen unterscheiden.
 
@@ -194,13 +192,12 @@ demo_many_series1
 | take 4 
 ```
 
-|   |   |   |   |   |   |
-| --- | --- | --- | --- | --- | --- |
-|   | timestamp | Loc | anonOp | DB | DataRead |
-|   | 2016-09-11 21:00:00.0000000 | Loc 9 | 5117853934049630089 | 262 | 0 |
-|   | 2016-09-11 21:00:00.0000000 | Loc 9 | 5117853934049630089 | 241 | 0 |
-|   | 2016-09-11 21:00:00.0000000 | Loc 9 | -865998331941149874 | 262 | 279862 |
-|   | 2016-09-11 21:00:00.0000000 | Loc 9 | 371921734563783410 | 255 | 0 |
+| timestamp | Loc | anonOp | DB | DataRead |
+| --- | --- | --- | --- | --- |
+| 2016-09-11 21:00:00.0000000 | Loc 9 | 5117853934049630089 | 262 | 0 |
+| 2016-09-11 21:00:00.0000000 | Loc 9 | 5117853934049630089 | 241 | 0 |
+| 2016-09-11 21:00:00.0000000 | Loc 9 | -865998331941149874 | 262 | 279862 |
+| 2016-09-11 21:00:00.0000000 | Loc 9 | 371921734563783410 | 255 | 0 |
 
 Und eine einfache Statistik:
 
@@ -211,10 +208,9 @@ demo_many_series1
 | summarize num=count(), min_t=min(TIMESTAMP), max_t=max(TIMESTAMP) 
 ```
 
-|   |   |   |   |
-| --- | --- | --- | --- |
-|   | num | min\_t | max\_t |
-|   | 2177472 | 2016-09-08 00:00:00.0000000 | 2016-09-11 23:00:00.0000000 |
+| num | min\_t | max\_t |
+| --- | --- | --- |
+| 2177472 | 2016-09-08 00:00:00.0000000 | 2016-09-11 23:00:00.0000000 |
 
 Eine Zeitreihe in 1-Stunden-Abschnitten der Metrik für die Anzahl von Lesevorgängen (4 Tage × 24 Stunden = 96 Punkte) führt zu einer normalen Musterfluktuation:
 
@@ -242,10 +238,9 @@ demo_many_series1
 | count
 ```
 
-|   |   |
-| --- | --- |
-|   | Anzahl |
-|   | 18339 |
+| Anzahl |
+| --- |
+| 18339 |
 
 Jetzt erstellen wir einen Satz aus 18.339 Zeitreihen der Metrik für die Anzahl von Lesevorgängen. Wir fügen die `by`-Klausel zur make-series-Anweisung hinzu, wenden lineare Regression an und wählen die beiden Zeitreihen aus, bei denen der signifikanteste Abwärtstrend zu beobachten war:
 
@@ -277,11 +272,10 @@ demo_many_series1
 | project Loc, Op, DB, slope 
 ```
 
-|   |   |   |   |   |
-| --- | --- | --- | --- | --- |
-|   | Loc | Op | DB | slope |
-|   | Loc 15 | 37 | 1151 | -102743.910227889 |
-|   | Loc 13 | 37 | 1249 | -86303.2334644601 |
+| Loc | Op | DB | slope |
+| --- | --- | --- | --- |
+| Loc 15 | 37 | 1151 | -102743.910227889 |
+| Loc 13 | 37 | 1249 | -86303.2334644601 |
 
 In weniger als zwei Minuten hat Azure Data Explorer fast 20.000 Zeitreihen analysiert und zwei anomale Zeitreihen erkannt, in denen die Anzahl von Lesevorgängen plötzlich sehr stark gesunken ist.
 
