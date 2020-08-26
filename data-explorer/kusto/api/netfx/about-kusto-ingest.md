@@ -9,16 +9,16 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 03/18/2020
-ms.openlocfilehash: a5655ac982ab65d06cdee7c93a166dce51377eed
-ms.sourcegitcommit: e66c5f4b833b4f6269bb7bfa5695519fcb11d9fa
+ms.openlocfilehash: c5a0bd91df6e12d90436e3b27a2b55021668117a
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/19/2020
-ms.locfileid: "83630053"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874340"
 ---
 # <a name="kusto-ingest-client-library"></a>Kusto-Erfassungs Client Bibliothek 
 
-`Kusto.Ingest`Library ist eine .NET 4.6.2-Bibliothek zum Senden von Daten an den Kusto-Dienst.
+`Kusto.Ingest` Library ist eine .NET 4.6.2-Bibliothek zum Senden von Daten an den Kusto-Dienst.
 Es werden Abhängigkeiten von folgenden Bibliotheken und sDas benötigt:
 
 * Adal für Azure AD Authentifizierung
@@ -97,3 +97,4 @@ Um die unnötige Auslastung Ihres Kusto-Dienstanbieter zu minimieren, empfiehlt 
 * [Kusto.](kusto-ingest-client-examples.md) Erfassungs Beispiele zeigt Code Ausschnitte, die verschiedene Techniken zum Erfassen von Daten in Kusto veranschaulichen.
 
 * [Datenerfassung ohne Kusto.](kusto-ingest-client-rest.md) Erfassungs Bibliothek erläutert das Implementieren der Kusto-Erfassung in der Warteschlange, mithilfe von Kusto-Rest-APIs und ohne Abhängigkeit von der `Kusto.Ingest` Bibliothek.
+

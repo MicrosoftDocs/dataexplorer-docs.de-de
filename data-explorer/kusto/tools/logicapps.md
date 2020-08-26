@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: docohe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 04/14/2020
-ms.openlocfilehash: 9ac8011f8bc126c4fc6ea13fdb174bb7af0ba0af
-ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
+ms.openlocfilehash: ae79fd334b3ac2a59a99c5ad8d63fccf0ed6784c
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88610609"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88875224"
 ---
 # <a name="microsoft-logic-app-and-azure-data-explorer"></a>Microsoft Logic APP und Azure Daten-Explorer
 
@@ -36,7 +36,7 @@ Logik-APP und Flow werden auf demselben Connector erstellt. Daher gelten die fü
     * Resource group
     * Name der Logik-App
     * Region oder Integrationsdienstumgebung
-    * Standort
+    * Position
     * Protokollanalyse ein-oder ausschalten
 1. Klicken Sie auf **Überprüfen + erstellen**.
 
