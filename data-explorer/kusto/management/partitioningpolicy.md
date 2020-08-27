@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 944ada323a1a928d4b63c2d8f4e168c442e78ffa
-ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
+ms.openlocfilehash: cbafde1b87807c449923b8b010c57e3394c4a74f
+ms.sourcegitcommit: d08b3344d7e9a6201cf01afc8455c7aea90335aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88793684"
+ms.lasthandoff: 08/27/2020
+ms.locfileid: "88964743"
 ---
 # <a name="data-partitioning-policy"></a>Daten Partitionierungs Richtlinie
 
@@ -53,11 +53,11 @@ Die folgenden Arten von Partitions Schlüsseln werden unterstützt.
 * `MaxPartitionCount` die maximale Anzahl der zu erstellenden Partitionen (das Modulo-Argument für die Hash Modulo-Funktion) pro Zeitraum.
   * Unterstützte Werte liegen im Bereich `(1,1024]` .
     * Der Wert muss wie folgt lauten:
-      * Größer als die Anzahl der Knoten im Cluster.
+      * Größer als das 5-fache der Anzahl der Knoten im Cluster.
       * Kleiner als die Kardinalität der Spalte.
     * Je höher der Wert ist, desto größer ist der Aufwand für den Daten Partitionierungs Prozess auf den Knoten des Clusters, und je höher die Anzahl der Blöcke für jeden Zeitraum.
-    * Bei Clustern mit weniger als 30 Knoten empfiehlt es sich, mit einem Wert von zu beginnen `256` .
-      * Passen Sie den Wert nach Bedarf basierend auf den oben genannten Überlegungen oder basierend auf dem Vorteil der Abfrageleistung und dem Aufwand für die Partitionierung der Daten nach der Erfassung an.
+    * Für Cluster mit weniger als 50 Knoten empfiehlt es sich, mit einem Wert von zu beginnen `256` .
+      * Passen Sie den Wert nach Bedarf basierend auf den oben genannten Überlegungen (z. b. die Anzahl der Knoten im Cluster) oder basierend auf dem Vorteil der Abfrageleistung im Vergleich zum Aufwand bei der Partitionierung der Daten nach der Erfassung an.
 * `Seed` der Wert, der zum randomialisieren des Hashwerts verwendet werden soll.
   * Der Wert muss eine positive ganze Zahl sein.
   * Der empfohlene Wert ist `1` . Dies ist die Standardeinstellung, sofern nicht angegeben.
@@ -205,7 +205,7 @@ Die Ausgabe umfasst Folgendes:
     * Wenn dieser Prozentsatz konstant weiterhin unter 90% liegt, sollten Sie die Partitions [Kapazität](partitioningpolicy.md#capacity)des Clusters auswerten.
   * `TableWithMinPartitioningPercentage`: Der voll qualifizierte Name der Tabelle, deren Partitionierungs Prozentsatz oben angezeigt wird.
 
-Verwenden Sie [. Show-Befehle](commands.md) , um die Partitionierungs Befehle und deren Ressourcenverwendung zu überwachen. Zum Beispiel:
+Verwenden Sie [. Show-Befehle](commands.md) , um die Partitionierungs Befehle und deren Ressourcenverwendung zu überwachen. Beispiel:
 
 ```kusto
 .show commands 

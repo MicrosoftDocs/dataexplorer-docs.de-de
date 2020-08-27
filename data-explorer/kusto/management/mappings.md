@@ -8,14 +8,14 @@ ms.reviewer: ohbitton
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/19/2020
-ms.openlocfilehash: c4a64db6d1103aa2a004b816969ab73c7ba19943
-ms.sourcegitcommit: ee90472a4f9d751d4049744d30e5082029c1b8fa
+ms.openlocfilehash: cd498d43d98250bad0a7ce00c4a8fec7b4f3ad4f
+ms.sourcegitcommit: d08b3344d7e9a6201cf01afc8455c7aea90335aa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/21/2020
-ms.locfileid: "83722064"
+ms.lasthandoff: 08/27/2020
+ms.locfileid: "88964726"
 ---
-# <a name="data-mappings"></a>Daten Zuordnungen
+# <a name="data-mappings"></a>Datenzuordnungen
 
 Daten Zuordnungen werden während der Erfassung verwendet, um eingehende Datenspalten in Kusto-Tabellen zuzuordnen.
 
@@ -46,7 +46,7 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 |`constantValue`|Optionale Der Konstante Wert, der für eine Spalte anstelle eines Werts im CSV verwendet werden soll.|
 
 > [!NOTE]
-> `Ordinal`und `ConstantValue` schließen sich gegenseitig aus.
+> `Ordinal` und `ConstantValue` schließen sich gegenseitig aus.
 
 ### <a name="example-of-the-csv-mapping"></a>Beispiel für die CSV-Zuordnung
 
@@ -176,10 +176,10 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 |`Path`|Eine Alternative zur Verwendung `field` von, die die Verwendung des inneren Teils eines Avro-Daten Satz Felds ermöglicht, falls erforderlich. Der Wert bezeichnet einen JSON-Pfad vom Stamm des Datensatzes. Weitere Informationen finden Sie in den Hinweisen unten. |
 |`transform`|Optionale Transformation, die auf den Inhalt mit [unterstützten Transformationen](#mapping-transformations)angewendet werden soll.|
 
-**Hinweise**
+**Notizen**
 >[!NOTE]
-> * `field`und `path` können nicht gleichzeitig verwendet werden, es ist nur eine zulässig. 
-> * `path`kann nicht nur auf root verweisen `$` , sondern muss mindestens eine Pfad Ebene aufweisen.
+> * `field` und `path` können nicht gleichzeitig verwendet werden, es ist nur eine zulässig. 
+> * `path` kann nicht nur auf root verweisen `$` , sondern muss mindestens eine Pfad Ebene aufweisen.
 
 Die folgenden beiden Alternativen sind gleich:
 
@@ -344,7 +344,6 @@ Einige der Datenformat Zuordnungen (Parkett, JSON und Avro) unterstützen einfac
 |Pfad abhängige Transformation|BESCHREIBUNG|Bedingungen|
 |--|--|--|
 |`PropertyBagArrayToDictionary`|Wandelt das JSON-Array von Eigenschaften (z. b. {Events: [{"N1": "V1"}, {"N2": "V2"}]}) in das Wörterbuch um und serialisiert es in ein gültiges JSON-Dokument (z. b. {"N1": "V1", "N2": "V2"}).|Kann nur angewendet werden, wenn `path` verwendet wird.|
-|`GetPathElement(index)`|Extrahiert ein Element aus dem angegebenen Pfad gemäß dem angegebenen Index (z. b. Path: $. a. b. c, getpathelement (0) = = "c", getpathelement (-1) = = "b", Type String|Kann nur angewendet werden, wenn `path` verwendet wird.|
 |`SourceLocation`|Der Name des Speicher Artefakts, von dem die Daten bereitgestellt wurden, geben Sie Zeichenfolge ein (z. b. das Feld "baseUri" des BLOBs).|
 |`SourceLineNumber`|Offset relativ zu diesem Speicher Element, Typ Long (beginnend mit "1" und Inkrementieren pro neuem Datensatz).|
 |`DateTimeFromUnixSeconds`|Konvertiert eine Zahl, die UNIX-Zeit (Sekunden seit 1970-01-01) darstellt, in die UTC-DateTime|
