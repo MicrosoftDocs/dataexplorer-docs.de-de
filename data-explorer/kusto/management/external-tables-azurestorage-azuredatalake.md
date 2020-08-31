@@ -8,16 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 866436d74e3e37319ec06b477503c11e3d7d6be7
-ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
+ms.openlocfilehash: 1db42577a0d4d10da732b54b0a5032ab2be11b69
+ms.sourcegitcommit: 91e7d49a1046575bbc63a4f25724656ebfc070db
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88201322"
+ms.lasthandoff: 08/30/2020
+ms.locfileid: "89151160"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake
 
 Mit dem folgenden Befehl wird beschrieben, wie eine externe Tabelle erstellt wird, die sich in Azure BLOB Storage, Azure Data Lake Store Gen1 oder Azure Data Lake Store Gen2 befindet. 
+
+Eine Einführung in die Funktion "externe Azure Storage Tabellen" finden [Sie Unterabfragen von Daten in Azure Data Lake mithilfe von Azure-Daten-Explorer](../../data-lake-query-data.md).
 
 ## <a name="create-or-alter-external-table"></a>. Create oder. Alter externe Tabelle
 
@@ -81,6 +83,7 @@ Die Partitionsliste ist eine beliebige Kombination von Partitions Spalten, die i
   *PartitionName* `:` `datetime` `=` ( `startofyear` \| `startofmonth` \| `startofweek` \| `startofday` ) `(` *ColumnName*`)`  
   *PartitionName* `:` `datetime` `=` `bin` `(` *ColumnName* `,` *TimeSpan*`)`
 
+Um die Richtigkeit der Partitionierungs Definitionen zu überprüfen, verwenden Sie die-Eigenschaft `sampleUris` beim Erstellen einer externen Tabelle.
 
 <a name="path-format"></a>
 *PathFormat*
@@ -113,6 +116,8 @@ Standardmäßig werden DateTime-Werte in den folgenden Formaten gerendert:
 
 Wenn *PathFormat* in der Definition der externen Tabelle weggelassen wird, wird davon ausgegangen, dass alle Partitionen in genau derselben Reihenfolge, in der Sie definiert sind, durch Trennzeichen getrennt werden `/` . Partitionen werden mithilfe Ihrer standardmäßigen Zeichen folgen Darstellung gerendert.
 
+Um die Richtigkeit der Pfad Format Definitionen zu überprüfen, verwenden Sie die-Eigenschaft `sampleUris` beim Erstellen einer externen Tabelle.
+
 <a name="format"></a>
 *Ges*
 
@@ -133,7 +138,7 @@ Weitere Informationen finden Sie unter [Speicher Verbindungs](../api/connection-
 <a name="properties"></a>
 *Optionale Eigenschaften*
 
-| Eigenschaft         | type     | BESCHREIBUNG       |
+| Eigenschaft         | Typ     | Beschreibung       |
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | Tabellen Ordner                                                                     |
 | `docString`      | `string` | Zeichenfolge, die die Tabelle dokumentiert                                                       |
@@ -238,9 +243,6 @@ dataformat=parquet
 )
 ```
 
-> [!NOTE]
-> Derzeit werden virtuelle Spalten für die folgenden Datenformate nicht unterstützt: `CSV` , `TSV` , `TSVE` , `SCsv` , `SOHsv` , `PSV` `RAW` und `TXT` .
-
 <a name="file-filtering"></a>
 **Logik zum Filtern von Dateien**
 
@@ -257,7 +259,7 @@ Beim Abfragen einer externen Tabelle verbessert die Abfrage-Engine die Leistung,
 Sobald alle Bedingungen erfüllt sind, wird die Datei von der Abfrage-Engine abgerufen und verarbeitet.
 
 > [!NOTE]
-> Das anfängliche URI-Muster wird mithilfe von Abfrage Prädikat Werten erstellt. Dies funktioniert am besten für einen begrenzten Satz von Zeichen folgen Werten sowie für geschlossene Zeiträume. 
+> Das anfängliche URI-Muster wird mithilfe von Abfrage Prädikat Werten erstellt. Dies funktioniert am besten für einen begrenzten Satz von Zeichen folgen Werten sowie für geschlossene Zeiträume.
 
 ## <a name="show-external-table-artifacts"></a>. anzeigen externer Tabellen Artefakte
 
@@ -274,7 +276,7 @@ Dabei ist " *maxResults* " ein optionaler Parameter, der so festgelegt werden ka
 
 **Ausgabe**
 
-| Output-Parameter | type   | Beschreibung                       |
+| Output-Parameter | Typ   | Beschreibung                       |
 |------------------|--------|-----------------------------------|
 | URI              | Zeichenfolge | URI der externen Speicher Datendatei |
 

@@ -62,7 +62,7 @@
   items:
     - name: Erstellen eines Clusters und einer Datenbank
       items:
-        - name: Azure-Befehlszeilenschnittstelle
+        - name: Azure CLI
           href: create-cluster-database-cli.md
         - name: PowerShell
           href: create-cluster-database-powershell.md
@@ -1316,10 +1316,10 @@
               items:
                 - name: Allgemeine Steuerungsbefehle für externe Tabellen
                   href: ./kusto/management/external-table-commands.md
-                - name: Erstellen und Ändern externer SQL-Tabellen
-                  href: ./kusto/management/external-sql-tables.md
                 - name: Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake
                   href: ./kusto/management/external-tables-azurestorage-azuredatalake.md
+                - name: Erstellen und Ändern externer SQL-Tabellen
+                  href: ./kusto/management/external-sql-tables.md
             - name: Spalten
               items:
                 - name: Spaltenverwaltung
