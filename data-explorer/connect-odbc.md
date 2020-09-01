@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: gabil
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 06/30/2019
-ms.openlocfilehash: 156257613195cb53730273ac3a654908feac9601
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: ee5b898b5e4bbb72ad1cd32fcfb40ba0d144c02d
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492726"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88872997"
 ---
 # <a name="connect-to-azure-data-explorer-with-odbc"></a>Herstellen einer Verbindung mit Azure Data Explorer mithilfe der ODBC
 
@@ -48,7 +48,7 @@ Gehen Sie wie folgt vor, um eine ODBC-Datenquelle mithilfe des ODBC-Treibers fü
 
     ![Treiber auswählen](media/connect-odbc/select-driver.png)
 
-1. Geben Sie einen Namen ein sowie eine Beschreibung für die Verbindung und den Cluster, mit dem Sie eine Verbindung herstellen möchten, und klicken Sie dann auf **Weiter**. Die Form der Cluster-URL sollte wie folgt aussehen: *\<ClusterName\>.\<Region\>.kusto.windows.net*.
+1. Geben Sie einen Namen ein sowie eine Beschreibung für die Verbindung und den Cluster, mit dem Sie eine Verbindung herstellen möchten, und klicken Sie dann auf **Weiter**. Die Cluster-URL muss folgendes Format haben: *\<ClusterName\>.\<Region\>.kusto.windows.net*.
 
     ![Server auswählen](media/connect-odbc/select-server.png)
 

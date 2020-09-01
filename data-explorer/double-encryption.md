@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: toleibov
 ms.service: data-explorer
-ms.topic: conceptual
-ms.date: 08/02/2020
-ms.openlocfilehash: 4a550d7596a74c3ae0bfca1718f10a69a183cc58
-ms.sourcegitcommit: d9fbcd6c9787f90de62e8e832c92d43b8090cbfc
+ms.topic: how-to
+ms.date: 08/11/2020
+ms.openlocfilehash: e89ce6f77545b4f0b42cbb3d792edd5ceeb0ed34
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87515902"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874669"
 ---
 # <a name="enable-infrastructure-encryption-double-encryption-during-cluster-creation-in-azure-data-explorer"></a>Aktivieren der Infrastrukturverschlüsselung (doppelte Verschlüsselung) während der Clustererstellung in Azure Data Explorer
   
@@ -22,6 +22,15 @@ Wenn Sie einen Cluster erstellen, wird der zugehörige Speicher [automatisch auf
 > * Das Aktivieren der doppelten Verschlüsselung ist nur während der Clustererstellung möglich.
 > * Sobald die Infrastrukturverschlüsselung für Ihren Cluster aktiviert ist, können Sie sie **nicht** mehr deaktivieren.
 > * Die doppelte Verschlüsselung ist nur in Regionen verfügbar, in denen die Infrastrukturverschlüsselung unterstützt wird. Weitere Informationen finden Sie unter [Erstellen eines Speicherkontos mit aktivierter Infrastrukturverschlüsselung für die doppelte Datenverschlüsselung](/azure/storage/common/infrastructure-encryption-enable).
+
+# <a name="azure-portal"></a>[Azure-Portal](#tab/portal)
+
+1. [Erstellen eines Azure Data Explorer-Clusters](create-cluster-database-portal.md#create-a-cluster) 
+1. Wählen Sie auf der Registerkarte **Sicherheit** unter **Enable Double Encryption** (Doppelte Verschlüsselung aktivieren) die Option **Ein** aus. Wählen Sie zum Entfernen der doppelten Verschlüsselung **Aus** aus.
+1. Wählen Sie **Weiter:Netzwerk>** oder **Überprüfen + erstellen** aus, um den Cluster zu erstellen.
+
+    :::image type="content" source="media/double-encryption/double-encryption-portal.png" alt-text="Doppelte Verschlüsselung, neuer Cluster":::
+
 
 # <a name="c"></a>[C#](#tab/c-sharp)
 
@@ -67,7 +76,7 @@ Richten Sie eine verwaltete Identität mithilfe des C#-Clients für Azure Data�
     await kustoManagementClient.Clusters.CreateOrUpdateAsync(resourceGroupName, clusterName, cluster);
     ```
     
-2. Führen Sie den folgenden Befehl aus, um zu überprüfen, ob Ihr Cluster erfolgreich erstellt wurde:
+1. Führen Sie den folgenden Befehl aus, um zu überprüfen, ob Ihr Cluster erfolgreich erstellt wurde:
 
     ```csharp
     kustoManagementClient.Clusters.Get(resourceGroupName, clusterName);
@@ -84,33 +93,33 @@ Mithilfe einer Azure Resource Manager-Vorlage kann die Bereitstellung Ihrer Azur
 ## <a name="add-a-system-assigned-identity-using-an-azure-resource-manager-template"></a>Hinzufügen einer systemseitig zugewiesenen Identität unter Verwendung einer Azure Resource Manager-Vorlage
 
 1. Fügen Sie den Typ „EnableDoubleEncryption“ hinzu, um Azure anzuweisen, die Infrastrukturverschlüsselung (doppelte Verschlüsselung) für Ihren Cluster zu aktivieren.
-
-```json
-{
-    "apiVersion": "2020-06-14",
-    "type": "Microsoft.Kusto/clusters",
-    "name": "[variables('clusterName')]",
-    "location": "[resourceGroup().location]",
-    "properties": {
-        "trustedExternalTenants": [],
-        "virtualNetworkConfiguration": null,
-        "optimizedAutoscale": null,
-        "enableDiskEncryption": false,
-        "enableStreamingIngest": false,
-        "enableDoubleEncryption": true,
+    
+    ```json
+    {
+        "apiVersion": "2020-06-14",
+        "type": "Microsoft.Kusto/clusters",
+        "name": "[variables('clusterName')]",
+        "location": "[resourceGroup().location]",
+        "properties": {
+            "trustedExternalTenants": [],
+            "virtualNetworkConfiguration": null,
+            "optimizedAutoscale": null,
+            "enableDiskEncryption": false,
+            "enableStreamingIngest": false,
+            "enableDoubleEncryption": true,
+        }
     }
-}
-```
+    ```
 
-2. Wenn der Cluster erstellt wird, verfügt er über folgende zusätzliche Eigenschaften:
+1. Wenn der Cluster erstellt wird, verfügt er über folgende zusätzliche Eigenschaften:
 
-```json
-"identity": {
-    "type": "SystemAssigned",
-    "tenantId": "<TENANTID>",
-    "principalId": "<PRINCIPALID>"
-}
-```
+    ```json
+    "identity": {
+        "type": "SystemAssigned",
+        "tenantId": "<TENANTID>",
+        "principalId": "<PRINCIPALID>"
+    }
+    ```
 ---
 
 ## <a name="next-steps"></a>Nächste Schritte

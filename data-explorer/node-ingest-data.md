@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: 33117a41c48a6aa3a9fc33566f201e6009b288ac
-ms.sourcegitcommit: bcd0c96b1581e43e33aa35f4d68af6dcb4979d39
+ms.openlocfilehash: c7c85440c1b2e3830805efdabc3c95ec7ed5797c
+ms.sourcegitcommit: 4b6488a40c35c541a16c65a237c201b7f7dc02e2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88039181"
+ms.lasthandoff: 08/31/2020
+ms.locfileid: "89176289"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-node-library"></a>Erfassen von Daten mit der Azure Data Explorer-Bibliothek für Node
 
@@ -56,7 +56,7 @@ const { DataFormat } = require("azure-kusto-ingest").IngestionPropertiesEnums;
 const { BlobDescriptor } = require("azure-kusto-ingest").IngestionDescriptors;
 
 ```
-Für die Authentifizierung von Anwendungen verwendet Azure Data Explorer Ihre Azure Active Directory-Mandanten-ID. Informationen zum Ermitteln Ihrer Mandanten-ID finden Sie unter [Find your Office 365 tenant ID](https://docs.microsoft.com/onedrive/find-your-office-365-tenant-id) (Ermitteln Ihrer Office 365-Mandanten-ID).
+Für die Authentifizierung von Anwendungen verwendet Azure Data Explorer Ihre Azure Active Directory-Mandanten-ID. Informationen zum Ermitteln Ihrer Mandanten-ID finden Sie unter [Ermitteln Ihrer Microsoft 365-Mandanten-ID](https://docs.microsoft.com/onedrive/find-your-office-365-tenant-id).
 
 Legen Sie vor dem Ausführen dieses Codes die Werte für `authorityId`, `kustoUri`, `kustoIngestUri` und `kustoDatabase` fest.
 

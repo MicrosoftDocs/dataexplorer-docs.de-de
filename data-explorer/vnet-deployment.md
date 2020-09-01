@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: basaba
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/31/2019
-ms.openlocfilehash: 10c2cf41ae1ab149b6eeffe35f94052069309152
-ms.sourcegitcommit: b8415e01464ca2ac9cd9939dc47e4c97b86bd07a
+ms.openlocfilehash: 93860688f798c3b9ac2552052f22cc1ca1ca565e
+ms.sourcegitcommit: 91e7d49a1046575bbc63a4f25724656ebfc070db
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88028509"
+ms.lasthandoff: 08/30/2020
+ms.locfileid: "89151194"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>Bereitstellen von Azure Data Explorer-Clustern in Ihrem virtuellen Netzwerk
 
@@ -63,6 +63,14 @@ Wenn Sie Azure Data Explorer-Cluster in Ihrem Subnetz bereitstellen, können Sie
 
 > [!NOTE]
 > Wenn Sie die EventGrid-Einrichtung mit [Storage](/azure/storage/common/storage-introduction) und [Event Hub] verwenden, kann das im Abonnement verwendete Speicherkonto mit Dienstendpunkten im Subnetz von Azure Data Explorer gesperrt werden, während vertrauenswürdige Azure-Plattformdienste in der [Firewallkonfiguration](/azure/storage/common/storage-network-security) zugelassen werden. Der Event Hub kann jedoch Dienstendpunkte nicht aktivieren, da er keine vertrauenswürdigen [Azure-Plattformdienste](/azure/event-hubs/event-hubs-service-endpoints) unterstützt.
+
+## <a name="private-endpoints"></a>Private Endpunkte
+
+[Private Endpunkte](/azure/private-link/private-endpoint-overview) ermöglichen den privaten Zugriff auf Azure-Ressourcen (etwa Storage/Event Hub/Data Lake Gen 2) und nutzen die private IP-Adresse Ihres virtuellen Netzwerks, um die Ressource effektiv in Ihr VNET einzubinden.
+Erstellen Sie einen [privaten Endpunkt](/azure/private-link/private-endpoint-overview) für Ressourcen, der von Datenverbindungen (beispielsweise Event Hub und Storage) und von externen Tabellen (beispielsweise Storage, Data Lake Gen 2 und SQL-Datenbank) in Ihrem VNET verwendet wird, um privat auf die zugrunde liegenden Ressourcen zuzugreifen.
+
+ [!NOTE]
+ > Die Einrichtung eines privaten Endpunkts erfordert die [Konfiguration von DNS](/azure/private-link/private-endpoint-dns). Wir unterstützen nur die Einrichtung einer [privaten Azure DNS-Zone](/azure/dns/private-dns-privatednszone). Ein benutzerdefinierter DNS-Server wird nicht unterstützt. 
 
 ## <a name="dependencies-for-vnet-deployment"></a>Abhängigkeiten für die VNET-Bereitstellung
 
@@ -221,7 +229,7 @@ wdcp.microsoft.com:443
 login.microsoftonline.com:443
 azureprofilerfrontdoor.cloudapp.net:443
 *.core.windows.net:443
-*.servicebus.windows.net:443
+*.servicebus.windows.net:443,5671
 shoebox2.metrics.nsatc.net:443
 prod-dsts.dsts.core.windows.net:443
 ocsp.msocsp.com:80
@@ -235,6 +243,9 @@ www.microsoft.com:80
 adl.windows.com:80
 crl3.digicert.com:80
 ```
+
+> [!NOTE]
+> Wenn Sie [Azure Firewall](/azure/firewall/overview) verwenden, müssen Sie „Netzwerkregel“ hinzufügen, um *AzureMonitor* (Diensttag) für Port 443 zuzulassen.
 
 Sie müssen außerdem die [Routingtabelle](/azure/virtual-network/virtual-networks-udr-overview) für das Subnetz mit den [Verwaltungsadressen](#azure-data-explorer-management-ip-addresses) und [Systemüberwachungsadressen](#health-monitoring-addresses) mit *Internet* als nächstem Hop definieren, um Probleme mit asymmetrischen Routen zu vermeiden.
 
