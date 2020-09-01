@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/30/2019
-ms.openlocfilehash: 42f52581d8f2f80deb5d6250ed54ab64fc1ba4d3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d74409b8ec24e02458e2fed4a135b248ba970388
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493670"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874595"
 ---
 # <a name="visualize-data-using-the-azure-data-explorer-connector-for-excel"></a>Visualisieren von Daten mithilfe des Azure Data Explorer-Connectors für Excel
 

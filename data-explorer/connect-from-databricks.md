@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: maraheja
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 05/21/2020
-ms.openlocfilehash: 08ac06b5f0a1a65afec6a71106943f3b58c1b9f5
-ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
+ms.openlocfilehash: adbf974852f071dde54cc668b213e7b7d6d7cfea
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88610303"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88871943"
 ---
 # <a name="connect-to-azure-data-explorer-from-azure-databricks"></a>Herstellen einer Verbindung mit Azure Data Explorer von Azure Databricks
 
@@ -45,7 +45,7 @@ So installieren Sie den [spark-kusto-connector](https://mvnrepository.com/artifa
     .set database <DB Name> users ('aadapp=<AAD App ID>;<AAD Tenant ID>') 'AAD App to connect Spark to ADX
     ```
 
-    | Parameter | Beschreibung |
+    | Parameter | BESCHREIBUNG |
     | - | - |
     | `DB Name` | Ihr Datenbankname |
     | `AAD App ID` | Ihre Azure AD-App-ID |

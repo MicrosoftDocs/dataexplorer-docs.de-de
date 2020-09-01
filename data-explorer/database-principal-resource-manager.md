@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: lugoldbe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/03/2020
-ms.openlocfilehash: 5ed9900a33fe90dbb04be3725ddd8e19bfb63b07
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: b48bae5301f7a9a0387b110f1f69888834448ad2
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349991"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88873048"
 ---
 # <a name="add-database-principals-for-azure-data-explorer-by-using-an-azure-resource-manager-template"></a>Hinzufügen von Datenbankprinzipalen für Azure Data Explorer mithilfe einer Azure Resource Manager-Vorlage
 

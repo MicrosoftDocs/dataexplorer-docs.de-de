@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: lugoldbe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 09/24/2019
-ms.openlocfilehash: 892605953fae65e8cc5404ace215c5699e3971d6
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 9ebce32338bcf82ccea9df5cb23770839c0ee278
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349974"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88873031"
 ---
 # <a name="create-database-and-table-policies-for-azure-data-explorer-by-using-c"></a>Erstellen von Datenbank- und Tabellenrichtlinien für Azure Data Explorer mithilfe von C#
 

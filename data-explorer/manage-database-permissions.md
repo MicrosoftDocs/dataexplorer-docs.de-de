@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 09/24/2018
-ms.openlocfilehash: da56848dda4f129732408d062836586b1da4a0d3
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 25bdd9c36c63d521cd662ab5c69f3dfec974b1e6
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492586"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874765"
 ---
 # <a name="manage-azure-data-explorer-database-permissions"></a>Verwalten der Berechtigungen für Datenbanken in Azure-Daten-Explorer
 

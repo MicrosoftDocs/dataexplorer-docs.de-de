@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: gabil
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 08/02/2020
-ms.openlocfilehash: 4f0ed42727759dae54f75fcb33ba1f024c218a4a
-ms.sourcegitcommit: d9fbcd6c9787f90de62e8e832c92d43b8090cbfc
+ms.openlocfilehash: 2a925e87f1fbc57b0b65f66abb6085e1083b864a
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87515901"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88872334"
 ---
 # <a name="secure-your-cluster-using-disk-encryption-in-azure-data-explorer---azure-portal"></a>Sichern Ihres Clusters in Azure Data Explorer mithilfe von Disk Encryption Azure-Portal
 

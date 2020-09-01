@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: lugoldbe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: tutorial
 ms.date: 02/03/2020
-ms.openlocfilehash: bc97ffad3ca4f6d824e10c85e570154764cc986a
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 520b0821eaa9955916bd8212970f73e1d5cce95e
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350467"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874612"
 ---
 # <a name="end-to-end-blob-ingestion-into-azure-data-explorer-through-python"></a>End-to-End-Bloberfassung in Azure Data Explorer über Python
 

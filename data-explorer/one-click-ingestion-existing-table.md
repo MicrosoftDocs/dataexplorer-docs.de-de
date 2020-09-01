@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: tzgitlin
 ms.service: data-explorer
-ms.topic: overview
+ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: 4e87ab389179f308642de3b9469544fde6139507
-ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.openlocfilehash: 293425b54514b4ee1628fd6b96d892459a929d77
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86058914"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88875088"
 ---
 # <a name="use-one-click-ingestion-to-ingest-json-data-from-a-local-file-to-an-existing-table-in-azure-data-explorer"></a>Erfassen von JSON-Daten aus einer lokalen Datei in einer vorhandenen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung
 

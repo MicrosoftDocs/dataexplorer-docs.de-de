@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: lugoldbe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 10/07/2019
-ms.openlocfilehash: 597eb522da9e3cb383cb3c0aad5ccc7c78de6ce3
-ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
+ms.openlocfilehash: 5ba4f61d051a89d0fd3851f3e5be4f344ea79e0b
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88201395"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88874136"
 ---
 # <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-c"></a>Erstellen einer Event Grid-Datenverbindung für Azure Data Explorer mit C#
 

@@ -5,14 +5,14 @@ author: orspod
 ms.author: orspodek
 ms.reviewer: lugoldbe
 ms.service: data-explorer
-ms.topic: conceptual
+ms.topic: how-to
 ms.date: 02/03/2020
-ms.openlocfilehash: 9577e6d583f7e2c936116d9802839b24481e5f8e
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: a70928649ff5aa6dd8ac9e214d844e1387bcd0d1
+ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350382"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88872079"
 ---
 # <a name="add-cluster-principals-for-azure-data-explorer-by-using-an-azure-resource-manager-template"></a>Hinzufügen von Clusterprinzipalen für Azure Data Explorer mithilfe einer Azure Resource Manager-Vorlage
 
