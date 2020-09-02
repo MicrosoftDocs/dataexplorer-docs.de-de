@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: c75924ed450b2995f2d35d206951adf05aecec0e
-ms.sourcegitcommit: fb54d71660391a63b0c107a9703adea09bfc7cb9
+ms.openlocfilehash: 7f17302475221bb259e6717987f7d31e96d7c118
+ms.sourcegitcommit: a4779e31a52d058b07b472870ecd2b8b8ae16e95
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/22/2020
-ms.locfileid: "86946120"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89366026"
 ---
 # <a name="make_list-aggregation-function"></a>make_list () (Aggregations Funktion)
 
@@ -40,7 +40,7 @@ Wenn die Eingabe für den `summarize` Operator nicht sortiert ist, ist die Reihe
 Wenn die Eingabe für den `summarize` Operator sortiert ist, verfolgt die Reihenfolge der Elemente im resultierenden Array die der Eingabe.
 
 > [!TIP]
-> Verwenden Sie den- [`mv-apply`](./mv-applyoperator.md) Operator, um eine geordnete Liste nach einem Schlüssel zu erstellen. Beispiele finden Sie [hier](./mv-applyoperator.md#using-the-mv-apply-operator-to-sort-the-output-of-makelist-aggregate-by-some-key).
+> Verwenden Sie den- [`mv-apply`](./mv-applyoperator.md) Operator, um eine geordnete Liste nach einem Schlüssel zu erstellen. Beispiele finden Sie [hier](./mv-applyoperator.md#using-the-mv-apply-operator-to-sort-the-output-of-make_list-aggregate-by-some-key).
 
 ## <a name="examples"></a>Beispiele
 
@@ -122,6 +122,6 @@ shapes
 |false|[{"Name": "Dreieck", "sidecount": 3}, {"Name": "Pentagon", "sidecount": 5}, {"Name": "heptagon", "sidecount": 7}, {"Name": "Nonagon", "sidecount": 9}]|
 |true|[{"Name": "Square", "sidecount": 4}, {"Name": "Rechteck", "sidecount": 4}, {"Name": "hexseck", "sidecount": 6}, {"Name": "Octogon", "sidecount": 8}, {"Name": "decseck", "sidecount": 10}]|
 
-## <a name="see-also"></a>Weitere Informationen
+## <a name="see-also"></a>Siehe auch
 
-[`make_list_if`](./makelistif-aggfunction.md)der-Operator ähnelt `make_list` , mit dem Unterschied, dass er auch ein Prädikat akzeptiert.
+[`make_list_if`](./makelistif-aggfunction.md) der-Operator ähnelt `make_list` , mit dem Unterschied, dass er auch ein Prädikat akzeptiert.

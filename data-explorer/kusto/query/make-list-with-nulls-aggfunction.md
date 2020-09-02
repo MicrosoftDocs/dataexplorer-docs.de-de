@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/09/2020
-ms.openlocfilehash: b78bed51da8422dced4d57406c10721639b68ccc
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 1d4dafdab4c727b89838f18e13b016d771262f08
+ms.sourcegitcommit: a4779e31a52d058b07b472870ecd2b8b8ae16e95
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346982"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89366009"
 ---
 # <a name="make_list_with_nulls-aggregation-function"></a>make_list_with_nulls () (Aggregations Funktion)
 
@@ -29,11 +29,11 @@ Gibt ein- `dynamic` Array (JSON) aller Werte von *expr* in der Gruppe zurück, e
 
 * *Expr*: Ausdruck, der für die Aggregations Berechnung verwendet wird.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Gibt ein- `dynamic` Array (JSON) aller Werte von *expr* in der Gruppe zurück, einschließlich NULL-Werten.
 Wenn die Eingabe für den `summarize` Operator nicht sortiert ist, ist die Reihenfolge der Elemente im resultierenden Array nicht definiert.
 Wenn die Eingabe für den `summarize` Operator sortiert ist, verfolgt die Reihenfolge der Elemente im resultierenden Array die der Eingabe.
 
 > [!TIP]
-> Verwenden Sie den- [`mv-apply`](./mv-applyoperator.md) Operator, um eine geordnete Liste nach einem Schlüssel zu erstellen. Beispiele finden Sie [hier](./mv-applyoperator.md#using-the-mv-apply-operator-to-sort-the-output-of-makelist-aggregate-by-some-key).
+> Verwenden Sie den- [`mv-apply`](./mv-applyoperator.md) Operator, um eine geordnete Liste nach einem Schlüssel zu erstellen. Beispiele finden Sie [hier](./mv-applyoperator.md#using-the-mv-apply-operator-to-sort-the-output-of-make_list-aggregate-by-some-key).
