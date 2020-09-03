@@ -9,22 +9,22 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 01/02/2019
-ms.openlocfilehash: 5511155eaa131c85a49a2082322ad95fcd022418
-ms.sourcegitcommit: f6cf88be736aa1e23ca046304a02dee204546b6e
+ms.openlocfilehash: 6766a817a1568eeb3cbcf2eb5bc0440cdd10eec6
+ms.sourcegitcommit: 9e0289945270db517e173aa10024e0027b173b52
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82862009"
+ms.lasthandoff: 09/03/2020
+ms.locfileid: "89428428"
 ---
 # <a name="ms-tds-with-azure-active-directory"></a>MS-TDS mit Azure Active Directory
 
-## <a name="aad-user-authentication"></a>Aad-Benutzerauthentifizierung
+## <a name="azure-ad-user-authentication"></a>Azure AD Benutzerauthentifizierung
 
-SQL-Clients, die die Aad-Benutzerauthentifizierung unterstützen, können mit Kusto verwendet werden.
+SQL-Clients, die Azure AD Benutzerauthentifizierung unterstützen, können mit Azure Daten-Explorer verwendet werden.
 
 ### <a name="net-sql-client-user"></a>.NET SQL-Client (Benutzer)
 
-Beispielsweise für die integrierte Aad-Integration:
+Beispielsweise für integrierte Azure AD:
 ```csharp
     var csb = new SqlConnectionStringBuilder()
     {
@@ -80,13 +80,13 @@ public class Sample {
 }
 ```
 
-## <a name="aad-application-authentication"></a>Aad-Anwendungs Authentifizierung
+## <a name="azure-ad-application-authentication"></a>Azure AD Anwendungs Authentifizierung
 
-Die für Kusto bereitgestellte Aad-Anwendung kann SQL-Client Bibliotheken verwenden, die Aad zum Herstellen einer Verbindung mit Kusto unterstützen. Weitere Informationen zu Aad-Anwendungen finden Sie unter [Erstellen einer Aad-Anwendung](../../management/access-control/how-to-provision-aad-app.md) .
+Azure AD bereitgestellte Anwendung für Kusto kann SQL-Client Bibliotheken verwenden, die Azure AD für das Herstellen einer Verbindung mit Kusto unterstützen. Weitere Informationen zu Azure AD Anwendungen finden Sie unter [Erstellen einer Azure AD Anwendung](../../management/access-control/how-to-provision-aad-app.md).
 
 ### <a name="net-sql-client-application"></a>.NET SQL-Client (Anwendung)
 
-Angenommen, Sie haben eine Aad-Anwendung mit " *applicationclientid* " und " *applicationkey* " bereitgestellt und Ihnen Berechtigungen für den Zugriff auf die Datenbank " *DatabaseName* " auf dem Cluster " *clusterdnsname*" erteilt. im folgenden Beispiel wird veranschaulicht, wie der .NET SQL-Client für Abfragen dieser Aad-Anwendung
+Angenommen, Sie haben Azure AD Anwendung mit *applicationclientid* und *applicationkey* bereitgestellt und ihm Berechtigungen zum Zugreifen auf die Datenbank *DatabaseName* auf dem Cluster *clusterdnsname*erteilt. im folgenden Beispiel wird veranschaulicht, wie der .NET SQL-Client für Abfragen dieser Azure AD Anwendung verwendet wird.
 
 ```csharp
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
