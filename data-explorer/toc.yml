@@ -180,6 +180,8 @@
               href: azure-data-explorer-dashboards.md
             - name: Verwenden von Dashboardparametern
               href: dashboard-parameters.md
+            - name: Anpassen der visuellen Dashboardelemente
+              href: dashboard-customize-visuals.md
         - name: Power BI
           items:
             - name: Bewährte Methoden
