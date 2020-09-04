@@ -220,6 +220,8 @@
               href: vnet-deployment.md
             - name: 'Behandeln von Problemen mit der VNET-Clustererstellung, -konnektivität und -verwendung'
               href: vnet-deploy-troubleshoot.md
+            - name: 'Erstellen eines privaten Endpunkts für Ihren VNET-Cluster: Portal'
+              href: vnet-create-private-endpoint.md
         - name: Verschlüsselung
           items:
             - name: 'Verschlüsselung von Clusterdatenträgern: Portal'

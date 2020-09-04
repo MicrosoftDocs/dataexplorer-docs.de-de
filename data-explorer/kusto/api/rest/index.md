@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/29/2019
-ms.openlocfilehash: 6abfe15490e5c633e1cb7912f4794ee90bec1947
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: e7598ccc2c04ab54a27830ba16e2b307e84bba2c
+ms.sourcegitcommit: 9e0289945270db517e173aa10024e0027b173b52
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373603"
+ms.lasthandoff: 09/03/2020
+ms.locfileid: "89428276"
 ---
 # <a name="azure-data-explorer-rest-api"></a>Azure Data Explorer-REST-API
 
-In diesem Artikel erfahren Sie, wie Sie mit Kusto über HTTPS interagieren.
+In diesem Artikel erfahren Sie, wie Sie mit Azure Data Explorer über HTTPS interagieren.
 
 ## <a name="supported-actions"></a>Unterstützte Aktionen
 
