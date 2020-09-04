@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: cbafde1b87807c449923b8b010c57e3394c4a74f
-ms.sourcegitcommit: d08b3344d7e9a6201cf01afc8455c7aea90335aa
+ms.openlocfilehash: 0b85d0c4bd0604f46375e314cb1fe029647b8d32
+ms.sourcegitcommit: 9b96a0c1ba0d07fec81f29bdf8f71b9549e79b3a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88964743"
+ms.lasthandoff: 09/04/2020
+ms.locfileid: "89472239"
 ---
 # <a name="data-partitioning-policy"></a>Daten Partitionierungs Richtlinie
 
@@ -51,7 +51,7 @@ Die folgenden Arten von Partitions Schlüsseln werden unterstützt.
 * `Function` der Name einer Hash Modulo-Funktion, die verwendet werden soll.
   * Unterstützter Wert: `XxHash64` .
 * `MaxPartitionCount` die maximale Anzahl der zu erstellenden Partitionen (das Modulo-Argument für die Hash Modulo-Funktion) pro Zeitraum.
-  * Unterstützte Werte liegen im Bereich `(1,1024]` .
+  * Unterstützte Werte liegen im Bereich `(1,2048]` .
     * Der Wert muss wie folgt lauten:
       * Größer als das 5-fache der Anzahl der Knoten im Cluster.
       * Kleiner als die Kardinalität der Spalte.
@@ -181,7 +181,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
   * Diese Eigenschaft ist optional. Der Standardwert ist `0` mit einem Standardziel von 5 Millionen Datensätzen.
     * Sie können einen Wert kleiner als 5 Mio. festlegen, wenn Sie festzustellen, dass die Partitionierungs Vorgänge eine sehr große Menge an Arbeitsspeicher oder CPU pro Vorgang belegen. Weitere Informationen finden Sie unter [Überwachung](#monitoring).
 
-## <a name="notes"></a>Notizen
+## <a name="notes"></a>Hinweise
 
 ### <a name="the-data-partitioning-process"></a>Der Daten Partitionierungs Prozess
 
