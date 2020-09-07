@@ -92,7 +92,7 @@
           href: lightingest.md
         - name: Event Hub
           items:
-            - name: Herstellen einer Event Hub-Verbindung
+            - name: Herstellen einer Verbindung mit Event Hub
               href: ingest-data-event-hub-overview.md
             - name: Azure-Portal
               href: ingest-data-event-hub.md
@@ -297,7 +297,8 @@
       items:
         - name: Verwenden von Diagnoseprotokollen zum Überwachen der Erfassung
           href: using-diagnostic-logs.md
-        - name: Verwenden von Metriken zum Überwachen der Clusterintegrität
+        - name: Überwachen von Azure Data Explorer mit Metriken
+          displayName: 'health, performance'
           href: using-metrics.md
         - name: Überwachen der Clusterintegrität mithilfe von Resource Health
           href: monitor-with-resource-health.md
