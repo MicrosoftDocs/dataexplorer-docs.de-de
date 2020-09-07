@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: ea32c7631681c12aa1262c4dbdb8debdcc22a3c7
-ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
+ms.openlocfilehash: 79816960b75735e226395f70286ea9d81829a173
+ms.sourcegitcommit: 08c54dabc1efe3d4e2d2581c4b668a6b73daf855
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87871917"
+ms.lasthandoff: 09/07/2020
+ms.locfileid: "89510694"
 ---
 # <a name="create-and-alter-external-sql-tables"></a>Erstellen und Ändern externer SQL-Tabellen
 
@@ -40,7 +40,7 @@ Erstellt oder ändert eine externe SQL-Tabelle in der Datenbank, in der der Befe
 
 ## <a name="optional-properties"></a>Optionale Eigenschaften
 
-| Eigenschaft            | type            | BESCHREIBUNG                          |
+| Eigenschaft            | Typ            | BESCHREIBUNG                          |
 |---------------------|-----------------|---------------------------------------------------------------------------------------------------|
 | `folder`            | `string`        | Der Ordner der Tabelle.                  |
 | `docString`         | `string`        | Eine Zeichenfolge, die die Tabelle dokumentiert.      |
@@ -57,7 +57,7 @@ Erfordert die [Datenbankbenutzer Berechtigung](../management/access-control/role
 **Beispiel** 
 
 ```kusto
-.create external table ExternalSql (x:long, s:string) 
+.create external table MySqlExternalTable (x:long, s:string) 
 kind=sql
 table=MySqlTable
 ( 
@@ -77,14 +77,14 @@ with
 
 | TableName   | TableType | Ordner         | DocString | Eigenschaften                            |
 |-------------|-----------|----------------|-----------|---------------------------------------|
-| Externalsql | Sql       | Externaltables | Docs      | {<br>  "Targetentitykind": "sqltable" ",<br>  "Targetentityname": "mysqltable",<br>  "Targetentityconnectionstring": "Server = TCP:myserver. Database. Windows. net, 1433; Authentication = Active Directory integriert; anfangs Katalog = MyDatabase; ",<br>  "FireTriggers": true,<br>  "Kreateif NotExists": true,<br>  "PrimaryKey": "x"<br>} |
+| Mysqlexternaltable | Sql       | Externaltables | Docs      | {<br>  "Targetentitykind": "sqltable" ",<br>  "Targetentityname": "mysqltable",<br>  "Targetentityconnectionstring": "Server = TCP:myserver. Database. Windows. net, 1433; Authentication = Active Directory integriert; anfangs Katalog = MyDatabase; ",<br>  "FireTriggers": true,<br>  "Kreateif NotExists": true,<br>  "PrimaryKey": "x"<br>} |
 
-## <a name="querying-an-external-table-of-type-sql"></a>Abfragen einer externen Tabelle vom Typ SQL 
+## <a name="querying-an-external-table-of-type-sql"></a>Abfragen einer externen Tabelle vom Typ SQL
 
 Das Abfragen einer externen SQL-Tabelle wird unterstützt. Weitere Informationen finden Sie unter [Abfragen externer Tabellen](../../data-lake-query-data.md). 
 
 > [!Note]
-> Die Implementierung der externen SQL-Tabellen Abfrage führt eine vollständige SELECT *-Abfrage (oder ausgewählte Spalten) aus der SQL-Tabelle aus. Der Rest der Abfrage wird auf der Kusto-Seite ausgeführt. 
+> Die Abfrage Implementierung der externen SQL-Tabelle führt `SELECT x, s FROM MySqlTable` die-Anweisung aus, wobei `x` und `s` externe Tabellen Spaltennamen sind. Der Rest der Abfrage wird auf der Kusto-Seite ausgeführt.
 
 Sehen Sie sich die folgende externe Tabellen Abfrage an: 
 
@@ -92,7 +92,7 @@ Sehen Sie sich die folgende externe Tabellen Abfrage an:
 external_table('MySqlExternalTable') | count
 ```
 
-Kusto führt eine Abfrage vom Typ "Select * from table" für die SQL-Datenbank aus, gefolgt von einer Anzahl auf Kusto-Seite. In solchen Fällen wird erwartet, dass die Leistung besser ist, wenn Sie in T-SQL direkt geschrieben wird ("SELECT count (1) from table") und mit dem [sql_request-Plug](../query/sqlrequestplugin.md)-in ausgeführt wird, anstatt die externe Tabellen Funktion zu verwenden. Ebenso werden Filter nicht an die SQL-Abfrage übermittelt.  
+Kusto führt eine `SELECT x, s FROM MySqlTable` Abfrage für die SQL-Datenbank aus, gefolgt von einer Anzahl auf Kusto-Seite. In solchen Fällen wird erwartet, dass die Leistung besser ist, wenn Sie in T-SQL direkt ( `SELECT COUNT(1) FROM MySqlTable` ) geschrieben und mit dem [sql_request-Plug](../query/sqlrequestplugin.md)-in ausgeführt wird, anstatt die externe Tabellen Funktion zu verwenden. Ebenso werden Filter nicht an die SQL-Abfrage übermittelt.  
 
 Verwenden Sie die externe Tabelle, um die SQL-Tabelle abzufragen, wenn die Abfrage das Lesen der gesamten Tabelle (oder relevanter Spalten) für die weitere Ausführung auf Kusto-Seite erfordert. Wenn eine SQL-Abfrage in T-SQL optimiert werden kann, verwenden Sie das [sql_request-Plug](../query/sqlrequestplugin.md)-in.
 
