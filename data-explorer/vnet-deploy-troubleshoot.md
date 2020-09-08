@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/24/2020
-ms.openlocfilehash: 498912016c595646e1ef4b4df9bec427c262b6e9
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 6f3831580c998814d956b57a58acc8acd7269abb
+ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873881"
+ms.lasthandoff: 09/07/2020
+ms.locfileid: "89502431"
 ---
 # <a name="troubleshoot-access-ingestion-and-operation-of-your-azure-data-explorer-cluster-in-your-virtual-network"></a>Behandlung von Problemen im Zusammenhang mit dem Zugriff, der Erfassung und dem Betrieb Ihres Azure Data Explorer-Clusters in Ihrem virtuellen Netzwerk
 
@@ -69,7 +69,7 @@ Wenn bei der Erfassung Probleme auftreten und Sie vermuten, dass sie im Zusammen
 
 ### <a name="check-ingestion-health"></a>Überprüfen der Erfassungsintegrität
 
-Überprüfen Sie, ob die [Clustererfassungsmetriken](using-metrics.md#ingestion-health-and-performance-metrics) einen fehlerfreien Status aufweisen.
+Überprüfen Sie, ob die [Clustererfassungsmetriken](using-metrics.md#ingestion-metrics) einen fehlerfreien Status aufweisen.
 
 ### <a name="check-security-rules-on-data-source-resources"></a>Überprüfen von Sicherheitsregeln für Datenquellenressourcen
 
