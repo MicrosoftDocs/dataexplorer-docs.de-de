@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 02/19/2020
-ms.openlocfilehash: eb13b53ba5f6785c79aaa586de50478074901c8d
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: 10f59a167de12e4b688f6d9b5f15d3f0f15d8291
+ms.sourcegitcommit: f689547c0f77b1b8bfa50a19a4518cbbc6d408e5
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85901924"
+ms.lasthandoff: 09/08/2020
+ms.locfileid: "89557393"
 ---
 # <a name="ingestion-without-kustoingest-library"></a>Erfassung ohne Kusto. Erfassungs Bibliothek
 
@@ -283,7 +283,7 @@ internal static string PrepareIngestionMessage(string db, string table, string d
 Veröffentlichen Sie schließlich die erstellte Nachricht in der ausgewählten Erfassungs Warteschlange, die Sie aus Azure Daten-Explorer abgerufen haben.
 
 > [!NOTE]
-> Der .NET-Speicher Client codiert bei Verwendung die Nachricht standardmäßig in base64. Weitere Informationen finden Sie unter [Storage docs](https://docs.microsoft.com/dotnet/api/microsoft.azure.storage.queue.cloudqueue.encodemessage?view=azure-dotnet-legacy#Microsoft_WindowsAzure_Storage_Queue_CloudQueue_EncodeMessage). Wenn Sie diesen Client nicht verwenden, stellen Sie sicher, dass Sie den Nachrichten Inhalt ordnungsgemäß codieren.
+> .NET-Speicher Client Versionen unter V12 Codieren die Nachricht standardmäßig in Base64, um weitere Informationen zu erhalten. Weitere Informationen finden Sie unter [Storage docs](https://docs.microsoft.com/dotnet/api/microsoft.azure.storage.queue.cloudqueue.encodemessage?view=azure-dotnet-legacy#Microsoft_WindowsAzure_Storage_Queue_CloudQueue_EncodeMessage). Wenn Sie .NET-Speicher Client Versionen oberhalb von V12 verwenden, müssen Sie den Nachrichten Inhalt ordnungsgemäß codieren.
 
 ```csharp
 internal static void PostMessageToQueue(string queueUriWithSas, string message)
@@ -353,7 +353,7 @@ Die Meldung, dass der Kusto-Datenverwaltung-Dienst aus der Azure-Eingabe Wartesc
 
 Die Meldung, die der Datenverwaltung erwartet, aus der Azure-Eingabe Warteschlange zu lesen, ist ein JSON-Dokument im folgenden Format.
 
-|Eigenschaft | Beschreibung |
+|Eigenschaft | BESCHREIBUNG |
 |---------|-------------
 |OperationId |Vorgangs-ID (GUID), die zum Nachverfolgen des Vorgangs auf der Dienst Seite verwendet werden kann. |
 |Datenbank |Name der Zieldatenbank |
