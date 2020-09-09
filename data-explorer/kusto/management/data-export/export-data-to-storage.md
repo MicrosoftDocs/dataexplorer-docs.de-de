@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 6b76f7a3ce61a0530d885de29c1a85d170431bb9
-ms.sourcegitcommit: 4507466bdcc7dd07e6e2a68c0707b6226adc25af
+ms.openlocfilehash: b470d017937ed6f2687016ab8a7cf53fed7b51ab
+ms.sourcegitcommit: 993bc7b69096ab5516d3c650b9df97a1f419457b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/23/2020
-ms.locfileid: "87106437"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89614478"
 ---
 # <a name="export-data-to-storage"></a>Exportieren von Daten in den Speicher
 
@@ -41,16 +41,16 @@ Führt eine Abfrage aus und schreibt das erste Resultset in einen externen Speic
 
 * *PropertyName* / *PropertyValue*: NULL oder mehr optionale Export Eigenschaften:
 
-|Eigenschaft        |Typ    |Beschreibung                                                                                                                |
+|Eigenschaft        |type    |BESCHREIBUNG                                                                                                                |
 |----------------|--------|---------------------------------------------------------------------------------------------------------------------------|
 |`sizeLimit`     |`long`  |Die Größenbeschränkung in Bytes eines einzelnen Speicher Artefakts, das geschrieben wird (vor der Komprimierung). Der zulässige Bereich beträgt 100 MB (Standard) 1 GB.|
 |`includeHeaders`|`string`|Für `csv` / `tsv` die Ausgabe steuert die Generierung von Spalten Headern. Kann eine der `none` (standardmäßigen, keine Header Zeilen ausgegeben), `all` (geben Sie eine Kopfzeile in jedem Speicher Element aus) oder (geben Sie `firstFile` nur eine Kopfzeile in das erste Speicher Element ein).|
 |`fileExtension` |`string`|Gibt den "Extension"-Teil des Speicher Artefakts an (z `.csv` `.tsv` . b. oder). Wenn die Komprimierung verwendet wird, `.gz` wird ebenfalls angehängt.|
 |`namePrefix`    |`string`|Gibt ein Präfix an, das den einzelnen generierten Speicher Artefaktnamen hinzugefügt wird. Wenn nicht angegeben, wird ein zufälliges Präfix verwendet.       |
 |`encoding`      |`string`|Gibt an, wie der Text codiert werden soll: `UTF8NoBOM` (Standard) oder `UTF8BOM` . |
-|`compressionType`|`string`|Gibt den zu verwendenden Komprimierungstyp an. Mögliche Werte sind `gzip` oder `snappy`. Der Standardwert ist `gzip`. `snappy`kann (optional) für das Format verwendet werden `parquet` . |
+|`compressionType`|`string`|Gibt den zu verwendenden Komprimierungstyp an. Mögliche Werte sind `gzip` oder `snappy`. Der Standardwert ist `gzip`. `snappy` kann (optional) für das Format verwendet werden `parquet` . |
 |`distribution`   |`string`  |Verteilungs Hinweis ( `single` , `per_node` , `per_shard` ). Wenn der Wert entspricht `single` , wird ein einzelner Thread in den Speicher geschrieben. Andernfalls schreibt der Export von allen Knoten, die die Abfrage parallel ausführen. Siehe [Auswerten des Plug](../../query/evaluateoperator.md)-in-Operators Wird standardmäßig auf `per_shard` festgelegt.
-|`distributed`   |`bool`  |Deaktivieren/aktivieren Sie den verteilten Export. Das Festlegen von auf false entspricht dem `single` Verteilungs Hinweis. Der Standardwert ist "true".
+|`distributed`   |`bool`  |Deaktivieren/aktivieren Sie den verteilten Export. Das Festlegen von auf false entspricht dem `single` Verteilungs Hinweis. Der Standardwert ist "True".
 |`persistDetails`|`bool`  |Gibt an, dass der Befehl seine Ergebnisse beibehalten soll (siehe `async` Flag). Der Standardwert ist in asynchronen Ausführungen `true` , kann aber deaktiviert werden, wenn der Aufrufer die Ergebnisse nicht benötigt). Wird standardmäßig `false` in synchronen Ausführungen verwendet, kann aber auch in aktiviert werden. |
 |`parquetRowGroupSize`|`int`  |Nur relevant, wenn das Datenformat "Parkett" ist. Steuert die Zeilen Gruppengröße in den exportierten Dateien. Die Standardzeilen Gruppengröße beträgt 100000 Datensätze.|
 
@@ -100,7 +100,8 @@ Spaltennamen Bezeichnungen werden als erste Zeile für jedes BLOB hinzugefügt.
 
 #### <a name="known-issues"></a>Bekannte Probleme
 
-*Speicherfehler beim Export Befehl.*
+**Fehler beim Export Befehl.**
 
-Standardmäßig wird der Export Befehl so verteilt, dass alle [Blöcke](../extents-overview.md) , die Daten enthalten, die gleichzeitig in den Speicher geschrieben werden sollen, verteilt werden. Bei großen Exporten, wenn die Anzahl solcher Blöcke hoch ist, kann dies zu einer hohen Speicherauslastung führen, die zu einer Speicher Drosselung oder zu vorübergehenden Speicherfehlern führt. In solchen Fällen wird empfohlen, die Anzahl der Speicher Konten zu erhöhen, die für den Export Befehl bereitgestellt werden (die Last wird zwischen den Konten verteilt) und/oder um die Parallelität zu verringern, indem Sie den Verteilungs Hinweis auf festlegen `per_node` (siehe Befehls Eigenschaften). Die vollständige Deaktivierung der Verteilung ist ebenfalls möglich, dies kann sich jedoch erheblich auf die Befehls Leistung auswirken.
- 
+* Der Export Befehl kann während der Ausführung transitiv fehlschlagen. Wenn der Export Befehl fehlschlägt, werden Artefakte, die bereits in den Speicher geschrieben wurden, nicht gelöscht. Diese Artefakte verbleiben im Speicher. Wenn der Befehl fehlschlägt, gehen Sie davon aus, dass der Export unvollständig ist, auch wenn einige Artefakte geschrieben wurden. Die beste Möglichkeit zum Nachverfolgen der Ausführung des Befehls und der Elemente, die nach erfolgreichem Abschluss exportiert werden, ist die Verwendung der Befehle [. Show Operations](../operations.md#show-operations) und [. Show Operation Details](../operations.md#show-operation-details) .
+
+* Standardmäßig wird der Export Befehl so verteilt, dass alle [Blöcke](../extents-overview.md) , die Daten enthalten, die gleichzeitig in den Speicher geschrieben werden sollen, verteilt werden. Bei großen Exporten, wenn die Anzahl solcher Blöcke hoch ist, kann dies zu einer hohen Speicherauslastung führen, die zu einer Speicher Drosselung oder zu vorübergehenden Speicherfehlern führt. In solchen Fällen wird empfohlen, die Anzahl der Speicher Konten zu erhöhen, die für den Export Befehl bereitgestellt werden (die Last wird zwischen den Konten verteilt) und/oder um die Parallelität zu verringern, indem Sie den Verteilungs Hinweis auf festlegen `per_node` (siehe Befehls Eigenschaften). Die vollständige Deaktivierung der Verteilung ist ebenfalls möglich, dies kann sich jedoch erheblich auf die Befehls Leistung auswirken.
