@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 0b85d0c4bd0604f46375e314cb1fe029647b8d32
-ms.sourcegitcommit: 9b96a0c1ba0d07fec81f29bdf8f71b9549e79b3a
+ms.openlocfilehash: c3f7212b062adaae1bd56399753270653204ad22
+ms.sourcegitcommit: 53a727fceaa89e6022bc593a4aae70f1e0232f49
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/04/2020
-ms.locfileid: "89472239"
+ms.lasthandoff: 09/10/2020
+ms.locfileid: "89652108"
 ---
 # <a name="data-partitioning-policy"></a>Daten Partitionierungs Richtlinie
 
 Die Partitionierungs Richtlinie definiert, ob und wie Blöcke [(datenshards)](../management/extents-overview.md) für eine bestimmte Tabelle partitioniert werden sollen.
 
-Der Hauptzweck der Richtlinie besteht darin, die Leistung von Abfragen zu verbessern, die bekanntermaßen den Datensatz von Werten in den partitionierten Spalten eingrenzen, oder Aggregat/Join für eine Spalte mit hoher kardinalitätszeichenfolge. Die Richtlinie kann auch zu einer besseren Komprimierung der Daten führen.
+Der Hauptzweck der Richtlinie besteht darin, die Leistung von Abfragen zu verbessern, die bekanntermaßen den Datensatz eingrenzen, indem Sie die partitionierten Spalten filtern oder eine Aggregat-oder Join-Anweisung für eine Spalte mit hoher kardinalitätszeichenfolge durchlaufen. Die Richtlinie kann auch zu einer besseren Komprimierung der Daten führen.
 
 > [!CAUTION]
 > Es sind keine hart codierten Grenzwerte für die Anzahl der Tabellen festgelegt, für die die Richtlinie definiert werden kann. Allerdings erhöht jede zusätzliche Tabelle den Aufwand für den Hintergrunddaten Partitionierungs Prozess, der auf den Knoten des Clusters ausgeführt wird. Dies kann dazu führen, dass mehr Cluster Ressourcen verwendet werden. Weitere Informationen finden Sie unter [Überwachung](#monitoring) und [Kapazität](#capacity).
@@ -41,7 +41,6 @@ Die folgenden Arten von Partitions Schlüsseln werden unterstützt.
 > * Der Großteil der Abfragen aggregiert/verknüpft eine bestimmte `string` typisierte Spalte der *großen Dimension* (Kardinalität von 10 m oder höher), wie z. b `application_ID` ., `tenant_ID` oder `user_ID` .
 
 * Eine Hash-Modulo-Funktion wird verwendet, um die Daten zu partitionieren.
-* Alle homogenen (partitionierten) Blöcke, die derselben Partition angehören, werden demselben Datenknoten zugewiesen.
 * Daten in homogenen (partitionierten) Blöcken werden nach dem Hash Partitions Schlüssel geordnet.
   * Sie müssen den Hash Partitions Schlüssel nicht in die [Richtlinie für die Zeilen Reihenfolge](roworderpolicy.md)einschließen, wenn eine für die Tabelle definiert ist.
 * Abfragen, die die [shuffle-Strategie](../query/shufflequery.md)verwenden, und in denen der `shuffle key` , der in verwendet wird `join` , `summarize` oder `make-series` der Hash Partitions Schlüssel der Tabelle ist, erwarten eine bessere Leistung, da die Menge der Daten, die für die Umstellung auf Cluster Knoten erforderlich sind, erheblich reduziert wird.
@@ -61,6 +60,11 @@ Die folgenden Arten von Partitions Schlüsseln werden unterstützt.
 * `Seed` der Wert, der zum randomialisieren des Hashwerts verwendet werden soll.
   * Der Wert muss eine positive ganze Zahl sein.
   * Der empfohlene Wert ist `1` . Dies ist die Standardeinstellung, sofern nicht angegeben.
+* `PartitionAssignmentMode` der Modus, der zum Zuweisen von Partitionen zu Knoten im Cluster verwendet wird.
+  * Unterstützte Modi:
+    * `Default`: Alle homogenen (partitionierten) Blöcke, die derselben Partition angehören, werden demselben Knoten zugewiesen.
+    * `Uniform`: Die Partitionswerte eines Blöcke werden ignoriert, und Blöcke werden den Knoten des Clusters einheitlich zugewiesen.
+  * , Wenn Abfragen nicht mit dem Schlüssel use der Hash Partition verknüpft oder aggregiert werden `Uniform` . Verwenden Sie andernfalls `Default`.
 
 #### <a name="example"></a>Beispiel
 
@@ -74,7 +78,8 @@ Sie verwendet die `XxHash64` Hash-Funktion mit dem `MaxPartitionCount` `256` und
   "Properties": {
     "Function": "XxHash64",
     "MaxPartitionCount": 256,
-    "Seed": 1
+    "Seed": 1,
+    "PartitionAssignmentMode": "Default"
   }
 }
 ```
@@ -153,7 +158,8 @@ Richtlinien Objekt für die Daten Partitionierung mit zwei Partitions Schlüssel
       "Properties": {
         "Function": "XxHash64",
         "MaxPartitionCount": 256,
-        "Seed": 1
+        "Seed": 1,
+        "PartitionAssignmentMode": "Default"
       }
     },
     {
@@ -181,7 +187,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
   * Diese Eigenschaft ist optional. Der Standardwert ist `0` mit einem Standardziel von 5 Millionen Datensätzen.
     * Sie können einen Wert kleiner als 5 Mio. festlegen, wenn Sie festzustellen, dass die Partitionierungs Vorgänge eine sehr große Menge an Arbeitsspeicher oder CPU pro Vorgang belegen. Weitere Informationen finden Sie unter [Überwachung](#monitoring).
 
-## <a name="notes"></a>Hinweise
+## <a name="notes"></a>Notizen
 
 ### <a name="the-data-partitioning-process"></a>Der Daten Partitionierungs Prozess
 
