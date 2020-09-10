@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/08/2020
-ms.openlocfilehash: 578141c63daeecd285d397b356260a4f22720621
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 4433126f67187d1bb2a190821dc6a59d96be3f5b
+ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874935"
+ms.lasthandoff: 09/07/2020
+ms.locfileid: "89502788"
 ---
 # <a name="ingest-data-from-iot-hub-into-azure-data-explorer"></a>Erfassen von Daten aus IoT Hub in Azure Data Explorer 
 
@@ -25,6 +25,8 @@ ms.locfileid: "88874935"
 [!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
 
 In diesem Artikel wird erläutert, wie Sie in Azure Data Explorer Daten aus IoT Hub (Big Data-Streamingplattform und IoT-Erfassungsdienst) erfassen.
+
+Allgemeine Informationen zur Erfassung in Azure Data Explorer aus IoT Hub finden Sie unter [Herstellen einer Verbindung mit IoT Hub](ingest-data-iot-hub-overview.md).
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -98,7 +100,7 @@ Als Nächstes stellen Sie über Azure Data Explorer eine Verbindung mit der IoT�
      **Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**
     |---|---|---|
     | Tabelle | *TestTable* | Die Tabelle, die Sie in **testdb** erstellt haben. |
-    | Datenformat | *JSON* | Die unterstützten Formate sind Avro, CSV, JSON, MULTILINE JSON, ORC, PARQUET, PSV, SCSV, SOHSV, TSV, TXT, TSVE, APACHEAVRO und W3CLOG.|
+    | Datenformat | *JSON* | Die unterstützen Formate sind Avro, CSV, JSON, MULTILINE JSON, ORC, PARQUET, PSV, SCSV, SOHSV, TSV, TXT, TSVE, APACHEAVRO und W3CLOG.|
     | Spaltenzuordnung | *TestMapping* | Die [Zuordnung](kusto/management/mappings.md), die Sie in **testdb** erstellt haben, um eingehende JSON-Daten den Spaltennamen und Datentypen von **testdb** zuzuordnen. Für „JSON“, „MULTILINE JSON“ und „AVRO“ erforderlich, für andere Formate optional.|
     | | |
 
@@ -106,7 +108,13 @@ Als Nächstes stellen Sie über Azure Data Explorer eine Verbindung mit der IoT�
     > * Wählen Sie **My data includes routing info** (Meine Daten enthalten Routinginformationen) aus, um dynamisches Routing zu verwenden. Dabei enthalten Ihre Daten die erforderlichen Routinginformationen, wie in den Kommentaren der [Beispiel-App](https://github.com/Azure-Samples/event-hubs-dotnet-ingest) zu sehen. Werden sowohl statische als auch dynamische Eigenschaften festgelegt, setzen die dynamischen Eigenschaften die statischen außer Kraft. 
     > * Nur Ereignisse, die nach dem Erstellen der Datenverbindung in die Warteschlange eingereiht werden, werden erfasst.
 
-[!INCLUDE [data-explorer-container-system-properties](includes/data-explorer-container-system-properties.md)]
+### <a name="event-system-properties-mapping"></a>Zuordnung von Ereignissystemeigenschaften
+
+> [!Note]
+> * Systemeigenschaften werden für Ereignisse mit einem Datensatz unterstützt.
+> * Für die `csv`-Zuordnung werden am Anfang des Datensatzes Eigenschaften hinzugefügt. Bei einer `json`-Zuordnung werden Eigenschaften entsprechend dem in der Dropdownliste angezeigten Namen hinzugefügt.
+
+Wenn Sie **Ereignissystemeigenschaften** im Abschnitt **Datenquelle** der Tabelle ausgewählt haben, müssen Sie die [Systemeigenschaften](ingest-data-iot-hub-overview.md#system-properties) in das Tabellenschema und die Zuordnung einschließen.
 
 ## <a name="generate-sample-data-for-testing"></a>Generieren von Beispieldaten zu Testzwecken
 
@@ -177,7 +185,7 @@ Wenn Sie nicht vorhaben, Ihren IoT Hub nochmals zu verwenden, sollten Sie die R
 
 1. Wählen Sie unter **test-resource-group** die Option **Ressourcengruppe löschen** aus.
 
-2. Geben Sie im neuen Fenster den Namen der Ressourcengruppe ein, die Sie löschen möchten, und wählen Sie dann **Löschen** aus.
+1. Geben Sie im neuen Fenster den Namen der Ressourcengruppe ein, die Sie löschen möchten, und wählen Sie dann **Löschen** aus.
 
 ## <a name="next-steps"></a>Nächste Schritte
 

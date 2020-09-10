@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 25c82c8890342e00279d137eb749f3acc7df986f
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: c96203ccfa0c4dc70fff83454dac217cccfc0a6c
+ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874986"
+ms.lasthandoff: 09/07/2020
+ms.locfileid: "89502771"
 ---
 # <a name="ingest-blobs-into-azure-data-explorer-by-subscribing-to-event-grid-notifications"></a>Erfassen von Blobs in Azure Data Explorer durch das Abonnieren von Event Grid-Benachrichtigungen
 
@@ -26,6 +26,8 @@ ms.locfileid: "88874986"
 
 In diesem Artikel erfahren Sie, wie Blobs aus Ihrem Speicherkonto unter Verwendung einer Event Grid-Datenverbindung in Azure Data Explorer erfasst werden. Sie erstellen eine Event Grid Datenverbindung und legen ein [Azure Event Grid](/azure/event-grid/overview)-Abonnement fest. Das Event Grid-Abonnement leitet Ereignisse aus Ihrem Speicherkonto über einen Azure Event Hub an Azure Data Explorer weiter. Anschließend wird ein Beispiel für den Datenfluss im gesamten System gezeigt.
 
+Allgemeine Informationen zur Erfassung in Azure Data Explorer aus Event Grid finden Sie unter [Herstellen einer Verbindung mit Event Grid](ingest-data-event-grid-overview.md).
+
 ## <a name="prerequisites"></a>Voraussetzungen
 
 * Ein Azure-Abonnement. Erstellen Sie ein [kostenloses Azure-Konto](https://azure.microsoft.com/free/).
@@ -38,7 +40,7 @@ Erstellen Sie in Azure Data Explorer eine Tabelle, an die Event Hubs Daten sende
 
 1. Wählen Sie im Azure-Portal unter Ihrem Cluster die Option **Abfrage** aus.
 
-    :::image type="content" source="media/ingest-data-event-grid/query-explorer-link.png" alt-text="Link zum Abfrage-Explorer":::    
+    :::image type="content" source="media/ingest-data-event-grid/query-explorer-link.png" alt-text="Link zum Abfrage-Explorer"::: 
 
 1. Kopieren Sie den folgenden Befehl in das Fenster, und wählen Sie **Ausführen**, um die Tabelle (TestTable) zu erstellen, die die erfassten Daten erhalten soll.
 
@@ -159,11 +161,7 @@ Speichern Sie die Daten in einer Datei, und laden Sie sie mit diesem Skript hoch
 
 ### <a name="ingestion-properties"></a>Erfassungseigenschaften
 
-Sie können die [Datenerfassungseigenschaften](ingestion-properties.md) für die Bloberfassung über die Blobmetadaten angeben.
-
-Die folgenden Eigenschaften können festgelegt werden:
-
-[!INCLUDE [ingestion-properties-event-grid](includes/ingestion-properties-event-grid.md)]
+Sie können die [Datenerfassungseigenschaften](ingest-data-event-grid-overview.md#set-ingestion-properties) für die Bloberfassung über die Blobmetadaten angeben. 
 
 > [!NOTE]
 > Azure Data Explorer löscht die Blobs nach der Erfassung nicht.

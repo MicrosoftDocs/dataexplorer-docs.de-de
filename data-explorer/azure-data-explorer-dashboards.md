@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 05/26/2020
-ms.openlocfilehash: 0b5633dc7ed54f9b4a763400ae8de84ba32f09e6
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 47ca1ebdd4136b3add6b4476757f34a24b08eeea
+ms.sourcegitcommit: a4779e31a52d058b07b472870ecd2b8b8ae16e95
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872589"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89366101"
 ---
 # <a name="visualize-data-with-azure-data-explorer-dashboards"></a>Visualisieren von Daten mit Azure Data Explorer-Dashboards
 
@@ -100,7 +100,63 @@ Bei **Abfrage hinzufügen** werden Ausschnitte in der Kusto-Abfragesprache zum A
 
     :::image type="content" source="media/adx-dashboards/save-dashboard.png" alt-text="Speichern des Dashboards":::
 
+## <a name="share-dashboards"></a>Freigeben von Dashboards
+
+Verwenden Sie das Freigabemenü zum [Erteilen von Berechtigungen](#grant-permissions) für das Dashboard, zum [Ändern der Berechtigungsstufe eines Benutzers](#change-a-user-permission-level) und zum [Freigeben des Dashboardlinks](#share-the-dashboard-link).
+
+> [!IMPORTANT]
+> Für den Zugriff auf das Dashboard benötigt eine Person, die das Dashboard anzeigt, Folgendes:
+> * Dashboardlink für den Zugriff
+> * Dashboardberechtigungen
+> * Zugriff auf die zugrunde liegende Datenbank im Azure Data Explorer-Cluster  
+
+1. Wählen Sie auf der oberen Leiste des Dashboards das Menüelement **Freigeben** aus.
+1. Wählen Sie im Dropdownmenü **Berechtigungen verwalten** aus. 
+
+    :::image type="content" source="media/adx-dashboards/share-dashboard.png" alt-text="Dropdownmenü „Freigeben“ des Dashboards":::
+
+### <a name="grant-permissions"></a>Erteilen von Berechtigungen
+
+So erteilen Sie einem Benutzer Berechtigungen im Bereich **Dashboard permissions** (Dashboardberechtigungen):
+1. Geben Sie den Namen oder die E-Mail-Adresse des Benutzers in das Feld **Add new members** (Neue Mitglieder hinzufügen) ein.
+1. Wählen Sie unter **Berechtigung** die Stufe **Kann anzeigen** oder **Kann bearbeiten** aus, und klicken Sie dann auf **Hinzufügen**.
+
+:::image type="content" source="media/adx-dashboards/dashboard-permissions.png" alt-text="Verwalten der Dashboardberechtigungen":::
+
+### <a name="change-a-user-permission-level"></a>Ändern der Benutzerberechtigungsstufe
+
+So ändern Sie eine Benutzerberechtigungsstufe im Bereich **Dashboard permissions** (Dashboardberechtigungen):
+1. Verwenden Sie das Suchfeld, oder scrollen Sie durch die Benutzerliste, um den Benutzer zu suchen.
+1. Ändern Sie ggf. die Stufe unter **Berechtigung**.
+
+### <a name="share-the-dashboard-link"></a>Freigeben des Dashboardlinks
+
+So geben Sie den Dashboardlink frei:
+* Wählen Sie im Dropdownmenü **Freigeben** und dann **Link kopieren** aus.
+* Wählen Sie alternativ im Fenster **Dashboard permissions** (Dashboardberechtigungen) die Option **Link kopieren** aus. 
+
+## <a name="enable-auto-refresh"></a>Aktivieren der automatischen Aktualisierung 
+
+1. Wählen Sie im Dashboardmenü **Bearbeiten** aus, um in den Bearbeitungsmodus zu wechseln.
+1. Wählen Sie **Automatische Aktualisierung** aus. 
+ 
+    :::image type="content" source="media/adx-dashboards/auto-refresh.png" alt-text="Auswählen der automatischen Aktualisierung":::
+
+1. Schalten Sie die Option um, sodass die automatische Aktualisierung **aktiviert** ist. 
+1. Wählen Sie Werte für **Minimum time interval** (Minimales Zeitintervall) und **Default refresh rate** (Standardaktualisierungsrate) aus. 
+
+    :::image type="content" source="media/adx-dashboards/auto-refresh-toggle.png" alt-text="Aktivieren der automatischen Aktualisierung":::
+
+1. Wählen Sie **Anwenden** aus, und klicken Sie auf **Speichern**, um das Dashboard zu speichern.
+
+> [!NOTE]
+> * Wählen Sie den kleinsten Wert für das minimale Zeitintervall aus, um eine unnötige Auslastung des Clusters zu vermeiden. 
+> * Eine Person, die das Dashboard anzeigt: 
+>    * Kann die minimalen Zeitintervalle nur für die persönliche Verwendung ändern. 
+>    * Kann keinen Wert auswählen, der kleiner ist als der vom Editor angegebene Wert für **Minimum time interval** (Minimales Zeitintervall).
+
 ## <a name="next-steps"></a>Nächste Schritte
 
 * [Verwenden von Parametern in Azure Data Explorer-Dashboards](dashboard-parameters.md)
+* [Anpassen der visuellen Dashboardelemente](dashboard-customize-visuals.md)
 * [Abfragen von Daten in Azure Data Explorer](web-query-data.md)

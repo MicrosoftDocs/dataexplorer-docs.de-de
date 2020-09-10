@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: d77c02ee3da7c33fc77416fa712a9108411c2276
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: fa18a89e44a09a877cedb41c6d6e77384c965801
+ms.sourcegitcommit: 811cf98edefd919b412d80201400919eedcab5cd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874799"
+ms.lasthandoff: 09/01/2020
+ms.locfileid: "89274597"
 ---
 # <a name="what-is-one-click-ingestion"></a>Was ist die 1-Klick-Erfassung?
 
@@ -36,7 +36,7 @@ Die 1-Klick-Erfassung ist besonders nützlich, wenn Daten erstmalig erfasst werd
 * Erstellen Sie [einen Azure Data Explorer-Cluster und eine Datenbank](create-cluster-database-portal.md).
 * Melden Sie sich bei der [Azure Data Explorer-Webbenutzeroberfläche](https://dataexplorer.azure.com/) an, und [fügen Sie eine Verbindung mit Ihrem Cluster hinzu](web-query-data.md#add-clusters).
 
-## <a name="ingest-new-data"></a>Erfassen neuer Daten
+## <a name="access-the-one-click-wizard"></a>Zugreifen auf den 1-Klick-Assistenten
 
 Der Assistent für die 1-Klick-Erfassung leitet Sie durch die 1-Klick-Erfassung.
 
@@ -48,7 +48,9 @@ Der Assistent für die 1-Klick-Erfassung leitet Sie durch die 1-Klick-Erfassung.
 
     :::image type="content" source="media/ingest-data-one-click/one-click-ingestion-in-webui.png" alt-text="Auswählen der 1-Klick-Erfassung auf der Webbenutzeroberfläche":::
 
-<!-- TODO either change the local file tutorial to blob storage or create another one to show users how to do this-->
+* Um über das Azure-Portal auf den Assistenten zuzugreifen, wählen Sie im linken Menü **Abfrage** aus, klicken Sie mit der rechten Maustaste auf die **Datenbank** oder **Tabelle**, und wählen Sie **Neue Daten erfassen (Vorschau)** aus.
+
+    :::image type="content" source="media/ingest-data-one-click/access-from-portal.png" alt-text="Zugreifen auf den Assistenten für die 1-Klick-Erfassung über das Azure-Portal":::
 
 ## <a name="one-click-ingestion-wizard"></a>Assistent für die 1-Klick-Erfassung
 
@@ -112,7 +114,7 @@ Wenn die Schemazuordnung und die Spaltenbearbeitung abgeschlossen sind, startet 
  
 ### <a name="initial-data-exploration"></a>Anfängliche Datenuntersuchung
    
-Nach der Erfassung bietet der Assistent Optionen zur Verwendung von **[Schnellbefehlen](one-click-ingestion-existing-table.md#quick-queries-and-tools)** für die erste Untersuchung Ihrer Daten.
+Nach der Erfassung bietet der Assistent Optionen zur Verwendung von **[Schnellbefehlen](one-click-ingestion-existing-table.md#explore-quick-queries-and-tools)** für die erste Untersuchung Ihrer Daten.
 
 ## <a name="next-steps"></a>Nächste Schritte
 

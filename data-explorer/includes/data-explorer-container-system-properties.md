@@ -4,22 +4,16 @@ ms.service: data-explorer
 ms.topic: include
 ms.date: 02/27/2020
 ms.author: orspodek
-ms.openlocfilehash: a2297301a0b9c0540c73c0f50483cccfc3181a0f
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 40334f81e39317839c05ce09a2e4923be4e0747c
+ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493406"
+ms.lasthandoff: 09/07/2020
+ms.locfileid: "89502658"
 ---
-### <a name="event-system-properties-mapping"></a>Zuordnung von Ereignissystemeigenschaften
+### <a name="schema-mapping-examples"></a>Beispiele für die Schemazuordnung
 
-> [!Note]
-> * Systemeigenschaften werden für Ereignisse mit einem Datensatz unterstützt.
-> * Für die `csv`-Zuordnung werden am Anfang des Datensatzes Eigenschaften hinzugefügt. Bei einer `json`-Zuordnung werden Eigenschaften entsprechend dem in der Dropdownliste angezeigten Namen hinzugefügt.
-
-Wenn Sie **Ereignissystemeigenschaften** im Abschnitt **Datenquelle** der Tabelle ausgewählt haben, müssen Sie die folgenden Eigenschaften in das Tabellenschema und die Zuordnung einfügen.
-
-**Beispiel für ein Tabellenschema**
+**Beispiel für die Tabellenschemazuordnung**
 
 Wenn Ihre Daten drei Spalten (`Timespan`, `Metric` und `Value`) enthalten und die Eigenschaften, die Sie einschließen, `x-opt-enqueued-time` und `x-opt-offset` lauten, erstellen oder ändern Sie das Tabellenschema mit dem folgenden Befehl:
 
@@ -27,7 +21,7 @@ Wenn Ihre Daten drei Spalten (`Timespan`, `Metric` und `Value`) enthalten und di
     .create-merge table TestTable (TimeStamp: datetime, Metric: string, Value: int, EventHubEnqueuedTime:datetime, EventHubOffset:string)
 ```
 
-**Beispiel einer CSV-Zuordnung**
+**Beispiel für eine CSV-Zuordnung**
 
 Führen Sie die folgenden Befehle aus, um am Anfang des Datensatzes Daten hinzuzufügen. Beachten Sie die Ordinalwerte.
 
@@ -42,9 +36,9 @@ Führen Sie die folgenden Befehle aus, um am Anfang des Datensatzes Daten hinzuz
     ']'
 ```
  
-**Beispiel einer JSON-Zuordnung**
+**Beispiel für eine JSON-Zuordnung**
 
-Daten werden mithilfe der Namen der Systemeigenschaften hinzugefügt, mit denen sie auf dem Blatt **Datenverbindung** in der Liste **Ereignissystemeigenschaften** angezeigt werden. Führen Sie diese Befehle aus.
+Daten werden mithilfe der Systemeigenschaftenzuordnung hinzugefügt. Führen Sie diese Befehle aus:
 
 ```kusto
     .create table TestTable ingestion json mapping "JsonMapping1"

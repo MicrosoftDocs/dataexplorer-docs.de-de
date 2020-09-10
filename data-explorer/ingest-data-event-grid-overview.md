@@ -8,25 +8,27 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 5369f3166e3700740be2a30927da793a8d21e05c
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 4ef0365336c1c4e04d19acbb14e2b6d1ec4cdd82
+ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874901"
+ms.lasthandoff: 09/07/2020
+ms.locfileid: "89502686"
 ---
-# <a name="connect-to-event-grid"></a>Herstellen einer Verbindung mit Event Grid
+# <a name="create-a-connection-to-event-grid"></a>Herstellen einer Verbindung mit Event Grid
 
 Event Grid ist eine Pipeline, die auf Azure Storage lauscht und Azure Data Explorer aktualisiert, um Informationen zu pullen, wenn abonnierte Ereignisse auftreten. Azure Data Explorer ermöglicht eine kontinuierliche Erfassung aus Azure Storage (Blobspeicher und ADLSv2) mit einem [Azure Event Grid](/azure/event-grid/overview)-Abonnement für Benachrichtigungen zur Erstellung von Blobs und das Streaming dieser Benachrichtigungen an Azure Data Explorer über einen Event Hub.
 
-Die Event Grid-Erfassungspipeline umfasst mehrere Schritte. Sie erstellen eine Zieltabelle in Azure Data Explorer, in der die [Daten in einem bestimmten Format](#data-format) erfasst werden. Anschließend erstellen Sie eine Event Grid-Datenverbindung in Azure Data Explorer. Die Event Grid-Datenverbindung muss über Informationen zum [Ereignisrouting](#set-events-routing) verfügen, z. B. die Tabelle, an die Daten gesendet werden sollen, und die Tabellenzuordnung. Außerdem geben Sie [Erfassungseigenschaften](#set-ingestion-properties) an, die die zu erfassenden Daten, die Zieltabelle und die Zuordnung beschreiben. Dieser Prozess kann über das [Azure-Portal](ingest-data-event-grid.md), programmgesteuert mit [C#](data-connection-event-grid-csharp.md) oder [Python](data-connection-event-grid-python.md) oder mit der [Azure Resource Manager-Vorlage](data-connection-event-grid-resource-manager.md) verwaltet werden.
+Die Event Grid-Erfassungspipeline umfasst mehrere Schritte. Sie erstellen eine Zieltabelle in Azure Data Explorer, in der die [Daten in einem bestimmten Format](#data-format) erfasst werden. Anschließend erstellen Sie eine Event Grid-Datenverbindung in Azure Data Explorer. Die Event Grid-Datenverbindung muss über Informationen zum [Ereignisrouting](#set-events-routing) verfügen, z. B. die Tabelle, an die Daten gesendet werden sollen, und die Tabellenzuordnung. Außerdem geben Sie [Erfassungseigenschaften](#set-ingestion-properties) an, die die zu erfassenden Daten, die Zieltabelle und die Zuordnung beschreiben. Sie können Beispieldaten generieren und [Blobs hochladen](#upload-blobs), um Ihre Verbindung zu testen. [Löschen Sie Blobs](#delete-blobs-using-storage-lifecycle) nach der Erfassung. Dieser Prozess kann über das [Azure-Portal](ingest-data-event-grid.md), programmgesteuert mit [C#](data-connection-event-grid-csharp.md) oder [Python](data-connection-event-grid-python.md) oder mit der [Azure Resource Manager-Vorlage](data-connection-event-grid-resource-manager.md) verwaltet werden.
+
+Allgemeine Informationen zur Datenerfassung in Azure Data Explorer finden Sie unter [Übersicht über die Datenerfassung in Azure Data Explorer](ingest-data-overview.md).
 
 ## <a name="data-format"></a>Datenformat
 
 * Siehe [Unterstützte Formate](ingestion-supported-formats.md).
 * Siehe [Unterstützte Komprimierungen](ingestion-supported-formats.md#supported-data-compression-formats).
-  * Die ursprüngliche Größe der nicht komprimierten Daten sollte Teil der Blobmetadaten sein. Andernfalls wird sie von Azure Data Explorer geschätzt.  Das Größenlimit für die Erfassung von nicht komprimierten Daten pro Datei ist 4 GB.
- 
+    * Die ursprüngliche Größe der nicht komprimierten Daten sollte Teil der Blobmetadaten sein. Andernfalls wird sie von Azure Data Explorer geschätzt. Das Größenlimit für die Erfassung von nicht komprimierten Daten pro Datei ist 4 GB.
+
 ## <a name="set-ingestion-properties"></a>Festlegen von Erfassungseigenschaften
 
 Sie können [Erfassungseigenschaften](ingestion-properties.md) für die Bloberfassung über die Blobmetadaten angeben.
@@ -46,7 +48,7 @@ Sie können mithilfe von Blobmetadaten auch Zieltabelleneigenschaften für jeden
 
 Das folgende Beispiel zeigt, wie Sie vor dem Hochladen Erfassungseigenschaften für die Blobmetadaten festlegen. Blobs werden an verschiedene Tabellen weitergeleitet.
 
-Weitere Informationen finden Sie unter [Generieren von Daten](#generate-data).
+Weitere Informationen finden Sie unter [Hochladen von Blobs](#upload-blobs).
 
 ```csharp
 // Blob is dynamically routed to table `Events`, ingested using `EventsMapping` data mapping
@@ -58,32 +60,12 @@ blob.Metadata.Add("kustoIngestionMappingReference", "EventsMapping");
 blob.UploadFromFile(jsonCompressedLocalFileName);
 ```
 
-### <a name="generate-data"></a>Generieren von Daten
+## <a name="upload-blobs"></a>Hochladen von Blobs
+
+Sie können ein Blob aus einer lokalen Datei erstellen, Erfassungseigenschaften für die Blobmetadaten festlegen und das Blob hochladen. Beispiele finden Sie unter [Erfassen von Blobs in Azure Data Explorer durch das Abonnieren von Event Grid-Benachrichtigungen](ingest-data-event-grid.md#generate-sample-data).
 
 > [!NOTE]
 > Verwenden Sie `BlockBlob`, um Daten zu generieren. `AppendBlob` wird nicht unterstützt.
-
-Sie können wie folgt einen Blob aus einer lokalen Datei erstellen, Erfassungseigenschaften für die Blobmetadaten festlegen und den Blob hochladen:
-
- ```csharp
- var azureStorageAccountConnectionString=<storage_account_connection_string>;
-
-var containerName=<container_name>;
-var blobName=<blob_name>;
-var localFileName=<file_to_upload>;
-
-// Create the container
-var azureStorageAccount = CloudStorageAccount.Parse(azureStorageAccountConnectionString);
-var blobClient = azureStorageAccount.CreateCloudBlobClient();
-var container = blobClient.GetContainerReference(containerName);
-container.CreateIfNotExists();
-
-// Set ingestion properties in blob metadata and upload the blob
-var blob = container.GetBlockBlobReference(blobName);
-blob.Metadata.Add("rawSizeBytes", "4096‬"); // the uncompressed size is 4096 bytes
-blob.Metadata.Add("kustoIgnoreFirstRecord", "true"); // First line of this csv file are headers
-blob.UploadFromFile(csvCompressedLocalFileName);
-```
 
 > [!NOTE]
 > Die Verwendung des Azure Data Lake Gen2 Storage SDK erfordert, dass Sie `CreateFile` zum Hochladen von Dateien verwenden sowie am Ende `Flush` ausführen und dabei den Parameter „close“ auf „true“ festlegen.
@@ -96,7 +78,7 @@ Azure Data Explorer löscht Blobs nach der Erfassung nicht. Informationen zum L�
 ## <a name="known-event-grid-issues"></a>Bekannte Probleme mit Event Grid
 
 * Beachten Sie Folgendes, wenn Sie Azure Data Explorer zum [Exportieren](kusto/management/data-export/export-data-to-storage.md) der Dateien für die Event Grid-Erfassung verwenden: 
-    * Event Grid-Benachrichtigungen werden nicht ausgelöst, wenn die für den Exportbefehl oder für eine [externe Tabelle](kusto/management/data-export/export-data-to-an-external-table.md) angegebene Verbindungszeichenfolge eine Verbindungszeichenfolge im [ADLS Gen2-Format](kusto/api/connection-strings/storage.md#azure-data-lake-store) ist (z. B. `abfss://filesystem@accountname.dfs.core.windows.net`), das Speicherkonto aber nicht für den hierarchischen Namespace aktiviert ist. 
+    * Event Grid-Benachrichtigungen werden nicht ausgelöst, wenn die für den Exportbefehl oder für eine [externe Tabelle](kusto/management/data-export/export-data-to-an-external-table.md) angegebene Verbindungszeichenfolge eine Verbindungszeichenfolge im [ADLS Gen2-Format](kusto/api/connection-strings/storage.md#azure-data-lake-store) ist (z. B. `abfss://filesystem@accountname.dfs.core.windows.net`), das Speicherkonto aber nicht für den hierarchischen Namespace aktiviert ist.
     * Wenn das Konto nicht für den hierarchischen Namespace aktiviert ist, muss die Verbindungszeichenfolge dem [Blob Storage](kusto/api/connection-strings/storage.md#azure-storage-blob)-Format entsprechen (z. B. `https://accountname.blob.core.windows.net`). Der Export funktioniert auch bei Verwendung der ADLS Gen2-Verbindungszeichenfolge wie erwartet, es werden jedoch keine Benachrichtigungen ausgelöst, und die Event Grid-Erfassung erfolgt nicht.
 
 ## <a name="next-steps"></a>Nächste Schritte

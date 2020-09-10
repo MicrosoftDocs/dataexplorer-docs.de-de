@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: b9a55915ebef61bef534e42ca0aef6a7c19868ac
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 84f4348f1d172238bd71de55e989ed8520f78b93
+ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874952"
+ms.lasthandoff: 09/07/2020
+ms.locfileid: "89502754"
 ---
 # <a name="ingest-data-from-event-hub-into-azure-data-explorer"></a>Erfassen von Daten aus Event Hub in Azure Data Explorer
 
@@ -25,6 +25,8 @@ ms.locfileid: "88874952"
 [!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
 
 Azure-Daten-Explorer ermöglicht die Datenerfassung (das Laden von Daten) aus Event Hubs. Dabei handelt es sich um eine Big Data-Streamingplattform und einen Ereigniserfassungsdienst. [Event Hubs](/azure/event-hubs/event-hubs-about) kann Millionen von Ereignissen pro Sekunde nahezu in Echtzeit verarbeiten. In diesem Artikel erstellen Sie einen Event Hub, stellen damit eine Verbindung über Azure Data Explorer her und zeigen den Datenfluss durch das System an.
+
+Allgemeine Informationen zur Erfassung in Azure Data Explorer aus Event Hub finden Sie unter [Herstellen einer Event Hub-Verbindung](ingest-data-event-hub-overview.md).
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -43,11 +45,11 @@ In diesem Artikel generieren Sie Beispieldaten und senden sie an einen Event Hub
 
 1. Verwenden Sie für die Event Hub-Erstellung die folgende Schaltfläche, um die Bereitstellung zu starten. Klicken Sie mit der rechten Maustaste, und wählen Sie **In neuem Fenster öffnen**, damit Sie die restlichen Schritte in diesem Artikel ausführen können.
 
-    [![In Azure bereitstellen](media/ingest-data-event-hub/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-event-hubs-create-event-hub-and-consumer-group%2Fazuredeploy.json)
+    [![Schaltfläche zum Bereitstellen in Azure](media/ingest-data-event-hub/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-event-hubs-create-event-hub-and-consumer-group%2Fazuredeploy.json)
 
     Über die Schaltfläche **In Azure bereitstellen** gelangen Sie zum Azure-Portal, um ein Bereitstellungsformular auszufüllen.
 
-    ![Bereitstellen in Azure](media/ingest-data-event-hub/deploy-to-azure.png)
+    ![Erstellen eines Event Hub-Formulars](media/ingest-data-event-hub/deploy-to-azure.png)
 
 1. Wählen Sie das Abonnement aus, in dem Sie den Event Hub erstellen möchten, und erstellen Sie eine Ressourcengruppe mit dem Namen *test-hub-rg*.
 
@@ -73,7 +75,7 @@ In diesem Artikel generieren Sie Beispieldaten und senden sie an einen Event Hub
 
 1. Wählen Sie auf der Symbolleiste die Option **Benachrichtigungen** aus, um den Bereitstellungsvorgang zu überwachen. Es kann einige Minuten dauern, bis die Bereitstellung erfolgreich abgeschlossen ist, aber Sie können jetzt mit dem nächsten Schritt fortfahren.
 
-    ![Benachrichtigungen](media/ingest-data-event-hub/notifications.png)
+    ![Symbol „Benachrichtigungen“](media/ingest-data-event-hub/notifications.png)
 
 ## <a name="create-a-target-table-in-azure-data-explorer"></a>Erstellen einer Zieltabelle im Azure-Daten-Explorer
 
@@ -141,7 +143,15 @@ Als Nächstes stellen Sie über Azure Data Explorer eine Verbindung mit dem Even
     > * Sie können den Komprimierungstyp auch über dynamische Eigenschaften festlegen, wie in der [Beispiel-App](https://github.com/Azure-Samples/event-hubs-dotnet-ingest) gezeigt wird.
     > * Die Formate Avro, ORC und PARQUET sowie Ereignissystemeigenschaften werden bei der GZip-Komprimierungsnutzlast nicht unterstützt.
 
-[!INCLUDE [data-explorer-container-system-properties](includes/data-explorer-container-system-properties.md)]
+
+### <a name="event-system-properties-mapping"></a>Zuordnung von Ereignissystemeigenschaften
+
+> [!Note]
+> * Systemeigenschaften werden für Ereignisse mit einem Datensatz unterstützt.
+> * Für die `csv`-Zuordnung werden am Anfang des Datensatzes Eigenschaften hinzugefügt. Bei einer `json`-Zuordnung werden Eigenschaften entsprechend dem in der Dropdownliste angezeigten Namen hinzugefügt.
+
+Wenn Sie **Ereignissystemeigenschaften** im Abschnitt **Datenquelle** der Tabelle ausgewählt haben, müssen Sie die [Systemeigenschaften](ingest-data-event-hub-overview.md#system-properties) in das Tabellenschema und die Zuordnung einschließen.
+
 
 ## <a name="copy-the-connection-string"></a>Verbindungszeichenfolge kopieren
 

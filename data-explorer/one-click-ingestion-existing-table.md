@@ -7,18 +7,23 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: 293425b54514b4ee1628fd6b96d892459a929d77
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 49195d39ed2c81a6f7dca685781cbe265e8843d3
+ms.sourcegitcommit: 811cf98edefd919b412d80201400919eedcab5cd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88875088"
+ms.lasthandoff: 09/01/2020
+ms.locfileid: "89274662"
 ---
 # <a name="use-one-click-ingestion-to-ingest-json-data-from-a-local-file-to-an-existing-table-in-azure-data-explorer"></a>Erfassen von JSON-Daten aus einer lokalen Datei in einer vorhandenen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung
 
+
+> [!div class="op_single_selector"]
+> * [Erfassen von CSV-Daten aus einem Container in einer neuen Tabelle](one-click-ingestion-new-table.md)
+> * [Erfassen von JSON-Daten aus einer lokaler Datei in einer vorhandene Tabelle](one-click-ingestion-existing-table.md)
+
 Mit der [1-Klick-Erfassung](ingest-data-one-click.md) können Sie Daten im JSON- und CSV-Format sowie in anderen Formaten schnell in einer Tabelle erfassen und auf einfache Weise Zuordnungsstrukturen erstellen. Die Daten können entweder aus dem Speicher, aus einer lokalen Datei oder aus einem Container als einmaliger oder kontinuierlicher Erfassungsprozess erfasst werden.  
 
-In diesem Dokument erfahren Sie, wie Sie mithilfe des intuitiven 1-Klick-Assistenten in einem bestimmten Anwendungsfall **JSON**-Daten aus einer **lokalen Datei** in einer **vorhandenen Tabelle** erfassen. Sie können den gleichen Prozess mit geringfügigen Anpassungen verwenden, um eine Vielzahl verschiedener Anwendungsfälle abzudecken.
+In diesem Dokument erfahren Sie, wie Sie mithilfe des intuitiven 1-Klick-Assistenten in einem bestimmten Anwendungsfall **JSON**-Daten aus einer **lokalen Datei** in einer **vorhandenen Tabelle** erfassen. Verwenden Sie den gleichen Prozess mit geringfügigen Anpassungen, um eine Vielzahl verschiedener Anwendungsfälle abzudecken.
 
 Eine Übersicht über die 1-Klick-Erfassung sowie eine Liste der Voraussetzungen finden Sie unter [Was ist die 1-Klick-Erfassung?](ingest-data-one-click.md)
 Informationen zu verschiedenen Datentypen oder-quellen finden Sie unter [Erfassen von CSV-Daten aus einem Container in einer neuen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-new-table.md).
@@ -45,12 +50,11 @@ Klicken Sie im linken Menü der Webbenutzeroberfläche mit der rechten Maustaste
     
       :::image type="content" source="media/one-click-ingestion-existing-table/from-file.png" alt-text="1-Klick-Erfassung aus Datei":::
 
- 1. Es wird eine Stichprobe der Daten angezeigt. Sie können diese Anzeige filtern, um nur Dateien zu erfassen, die mit bestimmten Zeichen beginnen und/oder auf bestimmte Zeichen enden. 
+ 1. Es wird eine Stichprobe der Daten angezeigt. Filtern Sie die Daten, um nur Dateien zu erfassen, die mit bestimmten Zeichen beginnen oder auf bestimmte Zeichen enden. 
    
     >[!NOTE] 
     >Die Vorschau wird automatisch aktualisiert, sobald Sie die Filter anpassen.
   
-
 > [!TIP]
 > Informationen zur Erfassung **aus einem Container** finden Sie unter [Erfassen von CSV-Daten aus einem Container in einer neuen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-new-table.md#select-an-ingestion-type).
 
@@ -60,8 +64,8 @@ Wählen Sie **Schema bearbeiten** aus, um Ihre Tabellenspaltenkonfiguration anzu
 
 ### <a name="map-columns"></a>Zuordnen von Spalten 
 
-1. Das Dialogfeld **Spalten zuordnen** wird geöffnet. Hier können Sie Quellspalten oder -attribute an Ihre Azure Data Explorer-Spalten anfügen.
-    * Neue Zuordnungen werden automatisch festgelegt. Sie können auch eine vorhandene Zuordnung verwenden. 
+1. Das Dialogfeld **Spalten zuordnen** wird geöffnet. Fügen Sie Quellspalten oder -attribute an Ihre Azure Data Explorer-Spalten an.
+    * Neue Zuordnungen werden automatisch festgelegt. Verwenden Sie alternativ eine vorhandene Zuordnung. 
     * Geben Sie in den Feldern **Quellspalten** die Spaltennamen ein, die den **Zielspalten** zugeordnet werden sollen.
     * Um eine Spalte aus der Zuordnung zu löschen, wählen Sie das Papierkorbsymbol aus.
 
@@ -78,11 +82,13 @@ Wählen Sie **Schema bearbeiten** aus, um Ihre Tabellenspaltenkonfiguration anzu
        > [!TIP]
        > Informationen zur Verwendung von **CSV**-Dateien finden Sie unter [Erfassen von CSV-Daten aus einem Container in einer neuen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-new-table.md#edit-the-schema).
 
-### <a name="table"></a>Tabelle 
+### <a name="edit-the-table"></a>Bearbeiten der Tabelle 
+
+Beim Erfassen von Daten in einer vorhandenen Tabelle sind Sie hinsichtlich der Änderungen, die Sie an der Tabelle vornehmen können, stärker eingeschränkt.
 
 In der Tabelle: 
-  * Wählen Sie neue Spaltenüberschriften aus, um eine der folgenden Aufgaben auszuführen: **Neue Spalte** hinzufügen, **Spalte löschen**, **Aufsteigend sortieren** oder **Absteigend sortieren**. 
- * Für vorhandene Spalten steht nur eine Datensortierung zur Verfügung.
+* Wählen Sie neue Spaltenüberschriften aus, um eine der folgenden Aufgaben auszuführen: **Neue Spalte** hinzufügen, **Spalte löschen**, **Aufsteigend sortieren** oder **Absteigend sortieren**. 
+* Für vorhandene Spalten steht nur eine Datensortierung zur Verfügung.
 
 [!INCLUDE [data-explorer-one-click-column-table](includes/data-explorer-one-click-column-table.md)]
 
@@ -94,7 +100,7 @@ Wählen Sie **Erfassung starten** aus, um Tabelle und Zuordnung zu erstellen und
 
 :::image type="content" source="media/one-click-ingestion-existing-table/start-ingestion.png" alt-text="Starten der Erfassung":::
 
-## <a name="data-ingestion-completed"></a>Datenerfassung abgeschlossen
+## <a name="complete-data-ingestion"></a>Abschließen der Datenerfassung
 
 Im Fenster **Datenerfassung abgeschlossen** werden alle drei Schritte mit grünen Häkchen markiert, wenn die Datenerfassung erfolgreich abgeschlossen wurde.
 

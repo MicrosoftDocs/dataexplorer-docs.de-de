@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/31/2019
-ms.openlocfilehash: 93860688f798c3b9ac2552052f22cc1ca1ca565e
-ms.sourcegitcommit: 91e7d49a1046575bbc63a4f25724656ebfc070db
+ms.openlocfilehash: 9fa58d36815ede98a4f0239f1ce68a6542f24c4b
+ms.sourcegitcommit: cb55064b7cdd57c792ad259b09069525bf799fa0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/30/2020
-ms.locfileid: "89151194"
+ms.lasthandoff: 09/03/2020
+ms.locfileid: "89410807"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>Bereitstellen von Azure Data Explorer-Clustern in Ihrem virtuellen Netzwerk
 
@@ -69,7 +69,7 @@ Wenn Sie Azure Data Explorer-Cluster in Ihrem Subnetz bereitstellen, können Sie
 [Private Endpunkte](/azure/private-link/private-endpoint-overview) ermöglichen den privaten Zugriff auf Azure-Ressourcen (etwa Storage/Event Hub/Data Lake Gen 2) und nutzen die private IP-Adresse Ihres virtuellen Netzwerks, um die Ressource effektiv in Ihr VNET einzubinden.
 Erstellen Sie einen [privaten Endpunkt](/azure/private-link/private-endpoint-overview) für Ressourcen, der von Datenverbindungen (beispielsweise Event Hub und Storage) und von externen Tabellen (beispielsweise Storage, Data Lake Gen 2 und SQL-Datenbank) in Ihrem VNET verwendet wird, um privat auf die zugrunde liegenden Ressourcen zuzugreifen.
 
- [!NOTE]
+ > [!NOTE]
  > Die Einrichtung eines privaten Endpunkts erfordert die [Konfiguration von DNS](/azure/private-link/private-endpoint-dns). Wir unterstützen nur die Einrichtung einer [privaten Azure DNS-Zone](/azure/dns/private-dns-privatednszone). Ein benutzerdefinierter DNS-Server wird nicht unterstützt. 
 
 ## <a name="dependencies-for-vnet-deployment"></a>Abhängigkeiten für die VNET-Bereitstellung
@@ -163,14 +163,14 @@ Erstellen Sie einen [privaten Endpunkt](/azure/private-link/private-endpoint-ove
 | Kanada, Mitte | 168.61.212.201 |
 | Kanada, Osten | 168.61.212.201 |
 | Indien, Mitte | 23.99.5.162 |
-| USA (Mitte) | 168.61.212.201 |
-| USA, Mitte (EUAP) | 168.61.212.201 |
+| USA (Mitte) | 168.61.212.201, 23.101.115.123 |
+| USA, Mitte (EUAP) | 168.61.212.201, 23.101.115.123 |
 | China, Osten 2 | 40.73.96.39 |
 | China, Norden 2 | 40.73.33.105 |
 | Asien, Osten | 168.63.212.33 |
-| East US | 137.116.81.189 |
-| USA (Ost) 2 | 137.116.81.189 |
-| USA, Osten 2 (EUAP) | 137.116.81.189 |
+| East US | 137.116.81.189, 52.249.253.174 |
+| USA (Ost) 2 | 137.116.81.189, 104.46.110.170 |
+| USA, Osten 2 (EUAP) | 137.116.81.189, 104.46.110.170 |
 | Frankreich, Mitte | 23.97.212.5 |
 | Frankreich, Süden | 23.97.212.5 |
 | Japan, Osten | 138.91.19.129 |
@@ -178,10 +178,10 @@ Erstellen Sie einen [privaten Endpunkt](/azure/private-link/private-endpoint-ove
 | Korea, Mitte | 138.91.19.129 |
 | Korea, Süden | 138.91.19.129 |
 | USA Nord Mitte | 23.96.212.108 |
-| Nordeuropa | 191.235.212.69 
+| Nordeuropa | 191.235.212.69, 40.127.194.147 |
 | Südafrika, Norden | 104.211.224.189 |
 | Südafrika, Westen | 104.211.224.189 |
-| USA Süd Mitte | 23.98.145.105 |
+| USA Süd Mitte | 23.98.145.105, 104.215.116.88 |
 | Indien (Süden) | 23.99.5.162 |
 | Asien, Südosten | 168.63.173.234 |
 | UK, Süden | 23.97.212.5 |
@@ -192,10 +192,10 @@ Erstellen Sie einen [privaten Endpunkt](/azure/private-link/private-endpoint-ove
 | US Gov Texas | 52.238.116.34 |
 | US Government, Virginia | 23.97.0.26 |
 | USA, Westen-Mitte | 168.61.212.201 |
-| Europa, Westen | 23.97.212.5 |
+| Europa, Westen | 23.97.212.5, 213.199.136.176 |
 | Indien, Westen | 23.99.5.162 |
-| USA (Westen) | 23.99.5.162 |
-| USA, Westen 2 | 23.99.5.162, 104.210.32.14 |
+| USA (Westen) | 23.99.5.162, 13.88.13.50 |
+| USA, Westen 2 | 23.99.5.162, 104.210.32.14, 52.183.35.124 |
 
 ## <a name="disable-access-to-azure-data-explorer-from-the-public-ip"></a>Deaktivieren des Zugriffs auf Azure Data Explorer über die öffentliche IP-Adresse
 
@@ -245,7 +245,10 @@ crl3.digicert.com:80
 ```
 
 > [!NOTE]
-> Wenn Sie [Azure Firewall](/azure/firewall/overview) verwenden, müssen Sie „Netzwerkregel“ hinzufügen, um *AzureMonitor* (Diensttag) für Port 443 zuzulassen.
+> Wenn Sie [Azure Firewall](/azure/firewall/overview) verwenden, fügen Sie eine **Netzwerkregel** mit den folgenden Eigenschaften hinzu:
+> | **Protokoll**   | **Quellentyp** | **Quelle** | **Diensttags**  | **Zielports** |
+> | ---   | --- | --- | ---  | --- |
+> | TCP | IP-Adresse | * | AzureMonitor | 443 |
 
 Sie müssen außerdem die [Routingtabelle](/azure/virtual-network/virtual-networks-udr-overview) für das Subnetz mit den [Verwaltungsadressen](#azure-data-explorer-management-ip-addresses) und [Systemüberwachungsadressen](#health-monitoring-addresses) mit *Internet* als nächstem Hop definieren, um Probleme mit asymmetrischen Routen zu vermeiden.
 

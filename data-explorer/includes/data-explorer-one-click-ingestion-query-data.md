@@ -4,18 +4,18 @@ ms.service: data-explorer
 ms.topic: include
 ms.date: 30/03/2020
 ms.author: orspodek
-ms.openlocfilehash: 0d4b0a5f6c466ac629a3ea35045f2c7146aafcbc
-ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.openlocfilehash: 3e916c26b95a77be5c35748c6a50e05fe0ef916d
+ms.sourcegitcommit: 811cf98edefd919b412d80201400919eedcab5cd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86058858"
+ms.lasthandoff: 09/01/2020
+ms.locfileid: "89274661"
 ---
-## <a name="quick-queries-and-tools"></a>Schnellabfragen und Tools
+## <a name="explore-quick-queries-and-tools"></a>Erkunden von Schnellabfragen und Tools
 
-Wählen Sie im Menü auf der rechten Seite **Schnellabfragen** oder **Tools** aus: 
+Sehen Sie sich auf den Kacheln unter dem Erfassungsstatus **Schnellabfragen** oder **Tools** an: 
  * **Schnellabfragen** enthält Links zur Webbenutzeroberfläche mit Beispielabfragen.
- * **Tools** enthält einen Link zur Webbenutzeroberfläche mit **Drop-Befehlen**, die Ihnen die Problembehandlung durch Ausführen der entsprechenden `.drop`-Befehle ermöglichen.
+ * **Tools** enthält Links zur Webbenutzeroberfläche mit den Optionen **Rückgängig machen** oder **Neue Daten löschen**, die Ihnen die Problembehandlung durch Ausführen der entsprechenden `.drop`-Befehle ermöglichen.
 
      > [!NOTE]
      > Wenn Sie `.drop`-Befehle verwenden, gehen möglicherweise Daten verloren. Verwenden Sie sie daher mit Vorsicht.

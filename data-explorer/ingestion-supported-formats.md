@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/19/2020
-ms.openlocfilehash: c591c4f774f3af99004d398898b288256861bb75
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: 89ee29e70c71c29afb65ee81fc4ce8e498faee33
+ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373722"
+ms.lasthandoff: 09/07/2020
+ms.locfileid: "89502635"
 ---
 # <a name="data-formats-supported-by-azure-data-explorer-for-ingestion"></a>Von Azure Data Explorer für die Erfassung unterstützte Datenformate.
 
@@ -49,7 +49,7 @@ Geben Sie die Komprimierung an, indem Sie die Erweiterung dem Namen des Blobs od
 
 Beispiel:
 * `MyData.csv.zip` gibt an, dass ein Blob oder eine Datei als CSV formatiert und mit ZIP (Archiv oder einzelne Datei) komprimiert ist.
-* `MyData.csv.gz` gibt an, dass ein Blob oder eine Datei als CSV formatiert und mit GZIP (Archiv oder einzelne Datei) komprimiert ist.
+* `MyData.json.gz` gibt an, dass ein Blob oder eine Datei als JSON formatiert und mit gzip komprimiert ist.
 
 Blob- oder Dateinamen, die nicht die Formaterweiterungen, sondern nur die Komprimierung (z. B. `MyData.zip`) enthalten, werden ebenfalls unterstützt. In diesem Fall muss das Dateiformat als Erfassungseigenschaft angegeben werden, da es nicht abgeleitet werden kann.
 
