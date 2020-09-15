@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a98fe59755e47be8f4f4e53595d25bb260004236
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 8a3711594ec5d1cbcaf36c7286f1484a708c29a0
+ms.sourcegitcommit: 50c799c60a3937b4c9e81a86a794bdb189df02a3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349226"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90067520"
 ---
 # <a name="beta_cdf"></a>beta_cdf()
 
@@ -37,7 +37,7 @@ Die Beta-Verteilung wird häufig verwendet, um die prozentuale Abweichung eines 
 * *Alpha*: ein Parameter der Verteilung.
 * *Beta*: ein Parameter der Verteilung.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 * Die [kumulative Beta Verteilungsfunktion](https://en.wikipedia.org/wiki/Beta_distribution#Cumulative_distribution_function).
 
@@ -47,7 +47,9 @@ Wenn ein Argument nicht numerisch ist, gibt beta_cdf () einen NULL-Wert zurück.
 
 Wenn x < 0 oder x > 1, gibt beta_cdf () den NaN-Wert zurück.
 
-Wenn Alpha-0 oder Beta-0, beta_cdf () den NaN-Wert zurückgibt.
+Wenn Alpha, 0 oder Alpha > 10000, gibt beta_cdf () den NaN-Wert zurück.
+
+Wenn Beta, 0 oder Beta > 10000, gibt beta_cdf () den NaN-Wert zurück.
 
 ## <a name="examples"></a>Beispiele
 
@@ -63,12 +65,12 @@ datatable(x:double, alpha:double, beta:double, comment:string)
 | extend b = beta_cdf(x, alpha, beta)
 ```
 
-|x|alpha|Beta|comment|b|
+|x|alpha|Beta|comment|k|
 |---|---|---|---|---|
-|0.9|10|20|Gültige Eingabe|0.999999999999959|
+|0,9|10|20|Gültige Eingabe|0.999999999999959|
 |1.5|10|20|x > 1, ergibt Nan|NaN|
 |-10|10|20|x < 0, ergibt Nan|NaN|
-|0,1|-1|20|Alpha ist < 0, ergibt Nan|NaN|
+|0.1|-1|20|Alpha ist < 0, ergibt Nan|NaN|
 
 
 **Weitere Informationen**
