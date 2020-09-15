@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 42254e00e629a19dfceeef2d4a6c2d1877400c05
-ms.sourcegitcommit: 283cce0e7635a2d8ca77543f297a3345a5201395
+ms.openlocfilehash: ad2a4180be714e5220121dfeaff5b34f801c4745
+ms.sourcegitcommit: 95527c793eb873f0135c4f0e9a2f661ca55305e3
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/27/2020
-ms.locfileid: "84011549"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90533982"
 ---
 # <a name="callout-policy"></a>Aufrufrichtlinie
 
@@ -21,10 +21,10 @@ Azure Daten-Explorer-Cluster können in vielen verschiedenen Szenarien mit exter
 Cluster Administratoren können die autorisierten Domänen für externe Aufrufe verwalten, indem Sie die Legenden Richtlinien des Clusters aktualisieren.
 
 Callout-Richtlinien werden auf Cluster Ebene verwaltet und in die folgenden Typen eingeteilt.
-* `kusto`-Steuert Azure Daten-Explorer-Cluster übergreifende Abfragen.
-* `sql`-Steuert das [SQL-Plug](../query/sqlrequestplugin.md)-in.
-
-* `webapi`-Steuert andere externe Webaufrufe.
+* `kusto` -Steuert Azure Daten-Explorer-Cluster übergreifende Abfragen.
+* `sql` -Steuert das [SQL-Plug](../query/sqlrequestplugin.md)-in.
+* `cosmosdb` -Steuert das [cosmosdb-Plug](../query/cosmosdb-plugin.md)-in.
+* `webapi` -Steuert andere externe Webaufrufe.
 * `sandbox_artifacts`-Steuert Sandbox-Plug-ins ([python](../query/pythonplugin.md)  |  [R](../query/rplugin.md)).
 
 Die Legenden Richtlinie besteht aus folgendem:
