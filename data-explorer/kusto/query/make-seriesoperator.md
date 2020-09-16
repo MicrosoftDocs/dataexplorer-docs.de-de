@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2020
-ms.openlocfilehash: 4f303726532da7ead1c2416f3d485979d045b0b2
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6ed841a6f47eb9a0a1e73182a3b9acd1c0209bd9
+ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346965"
+ms.lasthandoff: 09/16/2020
+ms.locfileid: "90680763"
 ---
 # <a name="make-series-operator"></a>make-series-Operator
 
@@ -43,7 +43,7 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
   |---------------|-------------------------------------|------------------------------------------------------------------------------|
   |`kind`          |`nonempty`                               |Erzeugt ein Standard Ergebnis, wenn die Eingabe des Operators "Make-Series" leer ist.|                                
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Die Eingabezeilen werden in Gruppen angeordnet, die dieselben Werte wie die `by` Ausdrücke und den `bin_at(` *AxisColumn* `, ` *step* `, ` *Start* Ausdruck "axiscolumn" aufweisen `)` . Anschließend werden die angegebenen Aggregationsfunktionen über jede Gruppe berechnet, dabei wird eine Zeile für jede Gruppe erzeugt. Das Ergebnis enthält die `by` Spalten *axiscolumn* und auch mindestens eine Spalte für jedes berechnete Aggregat. (Aggregationen, die mehrere Spalten oder nicht numerische Ergebnisse nicht unterstützen.)
 
@@ -69,7 +69,7 @@ Es wird empfohlen, die Haupt Syntax von Make-Series und nicht die alternative Sy
 
 **Verteilung und Shuffle**
 
-`make-series`unterstützt `summarize` [shufflekey-Hinweise](shufflequery.md) mithilfe der Syntax Hint. shufflekey.
+`make-series` unterstützt `summarize` [shufflekey-Hinweise](shufflequery.md) mithilfe der Syntax Hint. shufflekey.
 
 ## <a name="list-of-aggregation-functions"></a>Liste der Aggregations Funktionen
 
@@ -77,13 +77,18 @@ Es wird empfohlen, die Haupt Syntax von Make-Series und nicht die alternative Sy
 |--------|-----------|
 |[Any ()](any-aggfunction.md)|Gibt einen zufälligen, nicht leeren Wert für die Gruppe zurück.|
 |[AVG ()](avg-aggfunction.md)|Gibt einen durchschnittlichen Wert in der Gruppe zurück.|
+|[avgif()](avgif-aggfunction.md)|Gibt einen Durchschnitt mit dem Prädikat der Gruppe zurück.|
 |[count ()](count-aggfunction.md)|Gibt die Anzahl der Gruppe zurück.|
 |[countif()](countif-aggfunction.md)|Gibt eine Anzahl mit dem Prädikat der Gruppe zurück.|
 |[dcount()](dcount-aggfunction.md)|Gibt eine ungefähre unterschiedliche Anzahl der Group-Elemente zurück.|
+|[dcountif()](dcountif-aggfunction.md)|Gibt eine ungefähre unterschiedliche Anzahl mit dem Prädikat der Gruppe zurück.|
 |[max()](max-aggfunction.md)|Gibt den Höchstwert in der Gruppe zurück.|
+|[maxif()](maxif-aggfunction.md)|Gibt den maximalen Wert mit dem Prädikat der Gruppe zurück.|
 |[min()](min-aggfunction.md)|Gibt den Mindestwert in der Gruppe zurück.|
-|[StDev ()](stdev-aggfunction.md)|Gibt die Standardabweichung in der Gruppe zurück.|
+|[minif()](minif-aggfunction.md)|Gibt den Minimalwert mit dem Prädikat der Gruppe zurück.|
+|[stdev()](stdev-aggfunction.md)|Gibt die Standardabweichung in der Gruppe zurück.|
 |[Sum ()](sum-aggfunction.md)|Gibt die Summe der Elemente in der Gruppe zurück.|
+|[sumif()](sumif-aggfunction.md)|Gibt die Summe der Elemente mit dem Prädikat der Gruppe zurück.|
 |[variance()](variance-aggfunction.md)|Gibt die Varianz innerhalb der Gruppe zurück.|
 
 ## <a name="list-of-series-analysis-functions"></a>Liste der Reihen Analysefunktionen

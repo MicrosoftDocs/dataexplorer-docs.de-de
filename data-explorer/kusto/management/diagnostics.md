@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6c9bfed37ea54e541e55106a505471f04fe94e99
-ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
+ms.openlocfilehash: 60d25403b230be9ef625a6d52d1fdb159f9fc4e3
+ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88610558"
+ms.lasthandoff: 09/16/2020
+ms.locfileid: "90680659"
 ---
 # <a name="diagnostic-information"></a>Diagnoseinformationen
 
@@ -34,7 +34,7 @@ Gibt eine Menge zurück, die einen Datensatz für jeden Knoten enthält, der der
 
 **Ergebnisse** 
 
-|Ausgabe Spalte |type |Beschreibung
+|Ausgabe Spalte |Typ |Beschreibung
 |---|---|---|
 |NodeId|String|Identifiziert den Knoten. Bei der Knoten-ID handelt es sich um die Azure-RoleID des Knotens, wenn der Cluster in Azure bereitgestellt wird.
 |Adresse|String |Der interne Endpunkt, der vom Cluster für die Kommunikation zwischen Knoten verwendet wird.
@@ -52,7 +52,7 @@ Gibt eine Menge zurück, die einen Datensatz für jeden Knoten enthält, der der
 .show cluster
 ```
 
-NodeId|Adresse|Name|StartTime|IsAdmin|Machinetotalmemory|Machineavailablememory|ProcessorCount|Umgebungs Beschreibung
+NodeId|Adresse|name|StartTime|IsAdmin|Machinetotalmemory|Machineavailablememory|ProcessorCount|Umgebungs Beschreibung
 ---|---|---|---|---|---|---|---|---
 Kusto. Azure. Svc_IN_1|NET. TCP://100.112.150.30:23107/|Kusto. Azure. Svc_IN_4/rd000d3ab1e9bd/waworkerhost/3820|2016-01-15 02:00:22.6522152|True|274877435904|247797796864|16|{"Updatedomain": 0, "Fehler Domäne": 0}
 Kusto. Azure. Svc_IN_3|NET. TCP://100.112.154.34:23107/|Kusto. Azure. Svc_IN_3/rd000d3ab1e062/waworkerhost/2760|2016-01-15 05:52:52.1434683|False|274877435904|258740346880|16|{"Updatedomain": 1, "Fehler Domäne": 1}
@@ -70,7 +70,7 @@ Gibt Informationen zum Kusto-Cluster Integritäts Status zurück.
  
 **Rückgabe**
 
-|Output-Parameter |type |Beschreibung|
+|Output-Parameter |Typ |Beschreibung|
 |-----------------|-----|-----------| 
 |Ishealthy|Boolean|Wenn der Cluster fehlerfrei ist oder nicht
 |Isscaleumquired|Boolean|Wenn die Größe des Clusters durch Hinzufügen von weiteren Computer Knoten erhöht werden soll
@@ -83,8 +83,8 @@ Gibt Informationen zum Kusto-Cluster Integritäts Status zurück.
 |Reserviert|Int64|
 |Reserviert|Int64|
 |Instancestargetbasedondatacapacity|Int64|Die Anzahl der Instanzen, die erforderlich sind, um den clusterdatacapacityfactor unter 80 zu verschieben. Dieser Wert ist nur gültig, wenn alle Computer gleich groß sind.
-|Totaloriginaldatasize|Int64|Gesamtgröße der ursprünglich erfassten Daten
-|Totalextentsize|Int64|Gesamtgröße der gespeicherten Daten nach der Komprimierung und Indizierung
+|Totaloriginaldatasize|Int64|Gesamtgröße der ursprünglich erfassten Daten in Bytes
+|Totalextentsize|Int64|Gesamtgröße der gespeicherten Daten nach der Komprimierung und Indizierung in Bytes
 |IngestionsLoadFactor|Double|Der Prozentsatz der verwendeten Cluster Erfassungs Kapazität. Die maximale Kapazität kann mit dem Befehl eingesehen werden. `.show capacity`
 |Ingestionsinprogress|Int64|Die Anzahl der Erfassungs Vorgänge, die zurzeit ausgeführt werden.
 |Ingestionserfolgreiches Rate|Double|Der Prozentsatz der Erfassungs Vorgänge, die in den letzten 10 Minuten erfolgreich abgeschlossen wurden.
@@ -103,7 +103,7 @@ Gibt Informationen zum Kusto-Cluster Integritäts Status zurück.
 |Failedmergeoperations|Int64|Anzahl fehlgeschlagener Zusammenarbeits Vorgänge in der letzten 1 Stunde
 |Maxextentsinsingletable|Int64|Maximale Anzahl von Blöcken in der Tabelle (tablewithmaxextents)
 |Tablewithmaxextents|String|Tabelle mit der maximalen Anzahl von Blöcken (maxextentsinsingletable)
-|Warmextentsize|Double|Gesamtgröße der Blöcke im aktiven Cache
+|Warmextentsize|Double|Gesamtgröße der Blöcke im aktiven Cache in Bytes
 |Anzahl von Datenbanken|Int32|Anzahl der Datenbanken im Cluster
 
 ## <a name="show-capacity"></a>. Anzeigen der Kapazität
@@ -116,7 +116,7 @@ Gibt die Ergebnisse einer Berechnung für eine geschätzte Cluster Kapazität f�
  
 **Ergebnisse**
 
-|Output-Parameter |type |BESCHREIBUNG 
+|Output-Parameter |Typ |BESCHREIBUNG 
 |---|---|---
 |Resource |String |Der Name der Ressource 
 |Gesamt |Int64 |Die Gesamtmenge der Ressourcen vom Typ "Resource", die verfügbar sind. Beispielsweise die Anzahl der gleichzeitigen Ingestionen.
@@ -125,7 +125,7 @@ Gibt die Ergebnisse einer Berechnung für eine geschätzte Cluster Kapazität f�
  
 **Beispiel**
 
-|Resource |Gesamt |Consumed |Verbleibend
+|Ressource |Gesamt |Consumed |Verbleibend
 |---|---|---|---
 |Ingestionen |576 |1 |575
 
@@ -141,7 +141,7 @@ Dieser Befehl gibt eine Tabelle zurück, die alle administrativen Vorgänge enth
 
 **Ergebnisse**
  
-|Output-Parameter |type |BESCHREIBUNG
+|Output-Parameter |Typ |BESCHREIBUNG
 |---|---|---
 |id |String |Vorgangs Bezeichner
 |Vorgang |String |Administrator befehlsalias

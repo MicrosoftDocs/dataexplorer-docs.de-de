@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5e294a60545a081861597e772c39d2e7e99824e8
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 41e3f58ba857e23d31062484f11f30e80fb37317
+ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346370"
+ms.lasthandoff: 09/16/2020
+ms.locfileid: "90680723"
 ---
 # <a name="parse_xml"></a>parse_xml()
 
@@ -27,15 +27,13 @@ Interpretiert einen `string` als XML-Wert, konvertiert den Wert in einen JSON-We
 
 * *XML*: ein Ausdruck vom Typ `string` , der einen XML-formatierten Wert darstellt.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Ein Objekt vom Typ " [Dynamic](./scalar-data-types/dynamic.md) ", das durch den Wert von *XML*bestimmt wird, oder NULL, wenn das XML-Format ungültig ist.
 
-Die XML-Datei wird mithilfe der [xml2json](https://github.com/Cheedoong/xml2json) -Bibliothek in JSON-Code umwandelt.
-
 Die Konvertierung erfolgt wie folgt:
 
-XML                                |JSON                                            |Zugriff
+XML                                |JSON                                            |Access
 -----------------------------------|------------------------------------------------|--------------         
 `<e/>`                             | {"e": NULL}                                  | o. e
 `<e>text</e>`                      | {"e": "Text"}                                | o. e
@@ -47,7 +45,7 @@ XML                                |JSON                                        
 
 **Hinweise**
 
-* Die maximale Eingabe `string` Länge für `parse_xml` beträgt 128 KB. Die Interpretation längerer Zeichen folgen führt zu einem NULL-Objekt. 
+* Die maximale Eingabe `string` Länge für `parse_xml` beträgt 1 MB (1.048.576 Byte). Die Interpretation längerer Zeichen folgen führt zu einem NULL-Objekt.
 * Nur Elementknoten, Attribute und Textknoten werden übersetzt. Alles andere wird übersprungen.
  
 ## <a name="example"></a>Beispiel
