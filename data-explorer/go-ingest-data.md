@@ -7,12 +7,12 @@ ms.reviewer: abhishgu
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/10/2020
-ms.openlocfilehash: b733e70c78d9792e53dfe9cf133efe759e8ea91e
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 82302fc2071eca8bf2fb1e4c89b96de50b1a8806
+ms.sourcegitcommit: f689547c0f77b1b8bfa50a19a4518cbbc6d408e5
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873983"
+ms.lasthandoff: 09/08/2020
+ms.locfileid: "89557342"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-go-sdk"></a>Erfassen von Daten mit dem Go SDK für Azure Data Explorer 
 
@@ -32,6 +32,7 @@ In diesem Artikel erstellen Sie zunächst eine Tabelle und eine Datenzuordnung i
 * Installieren Sie [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git).
 * Installieren Sie [Go](https://golang.org/) mit den folgenden [Mindestanforderungen für das Go SDK](kusto/api/golang/kusto-golang-client-library.md#minimum-requirements). 
 * Erstellen Sie [einen Azure Data Explorer-Cluster und eine Datenbank](create-cluster-database-portal.md).
+* Erstellen Sie eine [App-Registrierung, und gewähren Sie ihr Berechtigungen für die Datenbank](provision-azure-ad-app.md). Speichern Sie die Client-ID und den geheimen Clientschlüssel zur späteren Verwendung.
 
 ## <a name="install-the-go-sdk"></a>Installieren des Go SDK
 

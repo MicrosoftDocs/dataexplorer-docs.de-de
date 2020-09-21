@@ -7,12 +7,12 @@ ms.reviewer: elbirnbo
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/09/2020
-ms.openlocfilehash: 55de6b9560b2b47496c122e6454e1a128dc26428
-ms.sourcegitcommit: 9e0289945270db517e173aa10024e0027b173b52
+ms.openlocfilehash: 7c2dfe62852b05239215f0c88c711cea4093808e
+ms.sourcegitcommit: 50c799c60a3937b4c9e81a86a794bdb189df02a3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/03/2020
-ms.locfileid: "89428918"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90067571"
 ---
 # <a name="create-a-private-endpoint-in-your-azure-data-explorer-cluster-in-your-virtual-network"></a>Erstellen eines privaten Endpunkts in Ihrem Azure Data Explorer-Cluster in Ihrem virtuellen Netzwerk
 
@@ -23,7 +23,9 @@ Verwenden Sie zum Einrichten Ihres [Private Link-Diensts](https://docs.microsof
 ## <a name="prerequisites"></a>Voraussetzungen
 
 * Erstellen Sie einen [Azure Data Explorer-Cluster in Ihrem virtuellen Netzwerk](https://docs.microsoft.com/azure/data-explorer/vnet-create-cluster-portal).
-* [Deaktivieren Sie Netzwerkrichtlinien](https://docs.microsoft.com/azure/private-link/disable-private-endpoint-network-policy) wie Netzwerksicherheitsgruppen (NSGs). Diese Gruppen werden für private Endpunkte nicht unterstützt.
+* Deaktivieren von Netzwerkrichtlinien:
+  * Deaktivieren Sie im virtuellen Netzwerk des Azure Data Explorer-Clusters die [Richtlinie für den Private Link-Dienst](https://docs.microsoft.com/azure/private-link/disable-private-link-service-network-policy).
+  * Deaktivieren Sie im virtuellen Netzwerk des privaten Endpunkts, das mit dem virtuellen Netzwerk des Azure Data Explorer-Clusters identisch sein kann, die [Richtlinie für private Endpunkte](https://docs.microsoft.com/azure/private-link/disable-private-endpoint-network-policy).
 
 ## <a name="create-private-link-service"></a>Erstellen eines Private Link-Diensts
 

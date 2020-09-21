@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/28/2020
-ms.openlocfilehash: 39865b049512252e08dac9c182a6b1e20a388abe
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 078737ff7e5cd74d15792cc2f0f058cb3ea12a19
+ms.sourcegitcommit: e0cf581d433bbbb2eda5a4209a8eabcdae80c21b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88875003"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90059494"
 ---
 # <a name="query-data-in-azure-monitor-using-azure-data-explorer-preview"></a>Abfragen von Daten in Azure Monitor mit Azure Data Explorer (Vorschau)
 
@@ -59,6 +59,9 @@ Abfolge der Schritte für den Azure Data Explorer-Proxy:
 
 Sie können die Abfragen mithilfe von Clienttools ausführen, die Kusto-Abfragen unterstützen, z. B.: Kusto Explorer, ADX-Webbenutzeroberfläche, Jupyter Kqlmagic, Flow, PowerQuery, PowerShell, Jarvis, Lens, REST-API.
 
+> [!NOTE]
+> Die ADX-Proxyfunktion wird nur für den Datenabruf verwendet. Weitere Informationen finden Sie unter [Funktionsunterstützbarkeit](#function-supportability).
+
 > [!TIP]
 > * Datenbanknamen müssen den gleichen Namen wie die im Proxycluster angegebene Ressource haben. Bei Namen wird die Groß-/Kleinschreibung beachtet.
 > * Achten Sie bei clusterübergreifenden Abfragen auf eine korrekte Benennung der Application Insights-Apps und Log Analytics-Arbeitsbereiche.
@@ -75,13 +78,13 @@ Perf | take 10 // Demonstrate query through the proxy on the LA workspace
 
 ![Abfragen des LA-Arbeitsbereichs](media/adx-proxy/query-la.png)
 
-### <a name="cross-query-of-your-la-or-ai-adx-proxy-cluster-and-the-adx-native-cluster"></a>Clusterübergreifende Abfragen des LA- oder AI-ADX-Clusters und des nativen ADX-Proxys 
+### <a name="cross-query-of-your-la-or-ai-adx-proxy-cluster-and-the-adx-native-cluster"></a>Clusterübergreifende Abfragen des LA- oder AI-ADX-Clusters und des nativen ADX-Proxys
 
 Wenn Sie über den Proxy clusterübergreifende Abfragen ausführen, überprüfen Sie, ob der native ADX-Cluster im linken Bereich ausgewählt ist. Die folgenden Beispiele veranschaulichen das Kombinieren von ADX-Clustertabellen (mithilfe von `union`) mit dem LA-Arbeitsbereich.
 
 ```kusto
 union StormEvents, cluster('https://ade.loganalytics.io/subscriptions/<subscription-id>/resourcegroups/<resource-group-name>/providers/microsoft.operationalinsights/workspaces/<workspace-name>').database('<workspace-name>').Perf
-| take 10 
+| take 10
 ```
 
 ```kusto
@@ -103,7 +106,8 @@ Der Proxy unterstützt die folgenden Befehle:
 * `.show function {FunctionName}`
 * `.show database {DatabaseName} schema as json`
 
-Die folgende Abbildung enthält ein Beispiel für das Abfragen einer tabellarischen Funktion über die Webbenutzeroberfläche von Azure Data Explorer. Führen Sie zur Verwendung der Funktion den Namen im Abfragefenster aus.
+Die folgende Abbildung enthält ein Beispiel für das Abfragen einer tabellarischen Funktion über die Webbenutzeroberfläche von Azure Data Explorer.
+Führen Sie zur Verwendung der Funktion den Namen im Abfragefenster aus.
 
   [ ![Abfragen einer tabellarischen Funktion über die Webbenutzeroberfläche von Azure Data Explorer](media/adx-proxy/function-query-adx-proxy.png)](media/adx-proxy/function-query-adx-proxy.png#lightbox)
 
