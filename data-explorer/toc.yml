@@ -72,6 +72,8 @@
           href: create-cluster-database-python.md
         - name: Azure Resource Manager-Vorlage
           href: create-cluster-database-resource-manager.md
+    - name: Erstellen einer Tabelle
+      href: one-click-table.md
     - name: Erfassen von Daten
       items:
         - name: 1-Klick-Erfassung
@@ -212,6 +214,8 @@
           href: k2bridge.md
     - name: Sicher
       items:
+        - name: Isolierte Computeressource
+          href: isolated-compute.md
         - name: Netzwerkisolation (VNET)
           items:
             - name: 'Erstellen eines Clusters in Ihrem VNET: Portal'
@@ -297,7 +301,7 @@
               href: dealing-with-duplicates.md
     - name: Überwachen
       items:
-        - name: Verwenden von Diagnoseprotokollen zum Überwachen der Erfassung
+        - name: 'Verwenden von Diagnoseprotokollen zum Überwachen der Erfassung, von Befehlen und Abfragen'
           href: using-diagnostic-logs.md
         - name: Überwachen von Azure Data Explorer mit Metriken
           displayName: 'health, performance'
@@ -314,10 +318,12 @@
       items:
         - name: Power Automate
           items:
-            - name: Power Automate-Flow-Connector
+            - name: Power Automate-Connector
               href: flow.md
+              displayName: 'Microsoft Flow, flow, flow connector'
             - name: Verwendungsbeispiele für den Power Automate-Connector
               href: flow-usage.md
+              displayName: 'Microsoft Flow, flow, flow connector'
         - name: Logic Apps
           href: kusto/tools/logicapps.md
         - name: Apache Spark-Connector
