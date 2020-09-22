@@ -7,12 +7,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/17/2020
-ms.openlocfilehash: 7762ec885a52df7ba47c90d5ac91c1019150cf17
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 058a42cc21c6af9642d91231e6b1620315f94f55
+ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873253"
+ms.lasthandoff: 09/16/2020
+ms.locfileid: "90680695"
 ---
 # <a name="query-data-in-azure-data-lake-using-azure-data-explorer"></a>Abfragen von Daten in Azure Data Lake mit Azure Data Explorer
 
@@ -125,7 +125,7 @@ dataformat=multijson
 Definieren Sie eine JSON-Zuordnung, die Datenfelder zu den Definitionsfeldern der externen Tabelle zuordnet:
 
 ```kusto
-.create external table ApiCalls json mapping 'MyMapping' '[{"Column":"Timestamp","Properties":{"Path":"$.time"}},{"Column":"TenantId","Properties":{"Path":"$.data.tenant"}},{"Column":"MethodName","Properties":{"Path":"$.data.method"}}]'
+.create external table ApiCalls json mapping 'MyMapping' '[{"Column":"Timestamp","Properties":{"Path":"$.timestamp"}},{"Column":"TenantId","Properties":{"Path":"$.data.tenant"}},{"Column":"MethodName","Properties":{"Path":"$.data.method"}}]'
 ```
 
 Wenn Sie die externe Tabelle abfragen, wird die Zuordnung aufgerufen, und relevante Daten werden den externen Tabellenspalten zugeordnet:

@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: c2986fd436c5a6257efb9a537753d993a0a57169
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 8dfb0fb6637214d77df5bed436649bb10f808a47
+ms.sourcegitcommit: 95527c793eb873f0135c4f0e9a2f661ca55305e3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872011"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90533965"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-python"></a>Erstellen eines Azure Data Explorer-Clusters und einer Datenbank mit Python
 
@@ -75,11 +75,12 @@ Zum Ausführen der Beispiele in diesem Artikel benötigen wir eine Azure AD-Anwe
     cluster_name = 'mykustocluster'
     cluster = Cluster(location=location, sku=AzureSku(name=sku_name, capacity=capacity, tier=tier))
     
-    kustoManagementClient = KustoManagementClient(credentials, subscription_id)
-    
-    cluster_operations = kustoManagementClient.clusters
+    kusto_management_client = KustoManagementClient(credentials, subscription_id)
+
+    cluster_operations = kusto_management_client.clusters
     
     poller = cluster_operations.create_or_update(resource_group_name, cluster_name, cluster)
+    poller.wait()
     ```
 
    |**Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**|
@@ -96,7 +97,7 @@ Zum Ausführen der Beispiele in diesem Artikel benötigen wir eine Azure AD-Anwe
 1. Führen Sie den folgenden Befehl aus, um zu überprüfen, ob Ihr Cluster erfolgreich erstellt wurde:
 
     ```Python
-    cluster_operations.get(resource_group_name = resource_group_name, cluster_name= clusterName, custom_headers=None, raw=False)
+    cluster_operations.get(resource_group_name = resource_group_name, cluster_name= cluster_name, custom_headers=None, raw=False)
     ```
 
 Wenn das Ergebnis `provisioningState` mit dem Wert `Succeeded` enthält, wurde der Cluster erfolgreich erstellt.
@@ -106,20 +107,40 @@ Wenn das Ergebnis `provisioningState` mit dem Wert `Succeeded` enthält, wurde d
 1. Erstellen Sie Ihre Datenbank mit dem folgenden Befehl:
 
     ```Python
-    from azure.mgmt.kusto.models import Database
+    from azure.mgmt.kusto import KustoManagementClient
+    from azure.common.credentials import ServicePrincipalCredentials
+    from azure.mgmt.kusto.models import ReadWriteDatabase
     from datetime import timedelta
+
+    #Directory (tenant) ID
+    tenant_id = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx"
+    #Application ID
+    client_id = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx"
+    #Client Secret
+    client_secret = "xxxxxxxxxxxxxx"
+    subscription_id = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx"
+    credentials = ServicePrincipalCredentials(
+        client_id=client_id,
+        secret=client_secret,
+        tenant=tenant_id
+    )
     
-    softDeletePeriod = timedelta(days=3650)
-    hotCachePeriod = timedelta(days=3650)
-    databaseName="mykustodatabase"
+    location = 'Central US'
+    resource_group_name = 'testrg'
+    cluster_name = 'mykustocluster'
+    soft_delete_period = timedelta(days=3650)
+    hot_cache_period = timedelta(days=3650)
+    database_name = "mykustodatabase"
+
+    kusto_management_client = KustoManagementClient(credentials, subscription_id)
     
-    database_operations = kusto_management_client.databases 
-    _database = ReadWriteDatabase(location=location,
-                        soft_delete_period=softDeletePeriod,
-                        hot_cache_period=hotCachePeriod)
+    database_operations = kusto_management_client.databases
+    database = ReadWriteDatabase(location=location,
+                        soft_delete_period=soft_delete_period,
+                        hot_cache_period=hot_cache_period)
     
-    #Returns an instance of LROPoller, see https://docs.microsoft.com/python/api/msrest/msrest.polling.lropoller?view=azure-python
-    poller =database_operations.create_or_update(resource_group_name = resource_group_name, cluster_name = clusterName, database_name = databaseName, parameters = _database)
+    poller = database_operations.create_or_update(resource_group_name = resource_group_name, cluster_name = cluster_name, database_name = database_name, parameters = database)
+    poller.wait()
     ```
 
     > [!NOTE]
@@ -136,7 +157,7 @@ Wenn das Ergebnis `provisioningState` mit dem Wert `Succeeded` enthält, wurde d
 1. Führen Sie den folgenden Befehl aus, um die erstellte Datenbank anzuzeigen:
 
     ```Python
-    database_operations.get(resource_group_name = resource_group_name, cluster_name = clusterName, database_name = databaseName)
+    database_operations.get(resource_group_name = resource_group_name, cluster_name = cluster_name, database_name = database_name)
     ```
 
 Jetzt verfügen Sie über einen Cluster und eine Datenbank.
@@ -147,7 +168,7 @@ Jetzt verfügen Sie über einen Cluster und eine Datenbank.
 * Löschen Sie den Cluster, um Ressourcen zu bereinigen. Wenn Sie einen Cluster löschen, werden auch alle darin enthaltenen Datenbanken gelöscht. Verwenden Sie den folgenden Befehl, um Ihren Cluster zu löschen:
 
     ```Python
-    cluster_operations.delete(resource_group_name = resource_group_name, cluster_name = clusterName)
+    cluster_operations.delete(resource_group_name = resource_group_name, cluster_name = cluster_name)
     ```
 
 ## <a name="next-steps"></a>Nächste Schritte

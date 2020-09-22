@@ -8,12 +8,12 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: 9522ee72e639c967f7b735c9c52d67c236498522
-ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
+ms.openlocfilehash: e341b70dfc2a7c0d3038d6d60d9c8ae2b40b6218
+ms.sourcegitcommit: c2ab3176db4dd55ac9ca8eee52bbd24096d1277f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88201705"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90740251"
 ---
 # <a name="azure-data-explorer-tools-and-integrations-overview"></a>Übersicht über Azure Data Explorer-Tools und -Integrationen
 
@@ -93,7 +93,7 @@ Die Übersicht über die [Visualisierung](viz-overview.md) enthält Details zu D
 ## <a name="orchestration"></a>Orchestrierung
 
 * Power Automate
-    * [Power Automate-Flow-Connector](flow.md)
+    * [Power Automate-Connector](flow.md)
     * [Verwendungsbeispiele für den Power Automate-Connector](flow-usage.md)
 * [Microsoft-Logik-App](kusto/tools/logicapps.md) 
 * [Azure Data Factory](data-factory-integration.md)
