@@ -7,20 +7,21 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/08/2020
-ms.openlocfilehash: 38c3933eb7e09709594892d0d73082c1171a6355
-ms.sourcegitcommit: 50c799c60a3937b4c9e81a86a794bdb189df02a3
+ms.openlocfilehash: 218ef000869e4cea0f237137a0481a9b4d72d65e
+ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90075136"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90998992"
 ---
-# <a name="series_rolling_fl"></a>series_rolling_fl ()
+# <a name="series_rolling_fl"></a>series_rolling_fl()
 
 
 Die-Funktion `series_rolling_fl()` wendet eine parallele Aggregation auf eine Reihe an. Sie nimmt eine Tabelle mit mehreren Reihen (dynamisches numerisches Array) und gilt für jede Reihe für eine parallele Aggregations Funktion.
 
 > [!NOTE]
-> `series_rolling_fl()` ist eine [UDF (benutzerdefinierte Funktion)](../query/functions/user-defined-functions.md).  Diese Funktion bezieht Inline-python ein und erfordert [das Aktivieren des python ()-Plug](../query/pythonplugin.md#enable-the-plugin) -ins auf dem Cluster. Weitere Informationen finden Sie unter [Verwendung](#usage).
+> * `series_rolling_fl()` ist eine [UDF (benutzerdefinierte Funktion)](../query/functions/user-defined-functions.md).
+> * Diese Funktion enthält Inline-python und erfordert [die Aktivierung des python ()-Plug](../query/pythonplugin.md#enable-the-plugin) -ins auf dem Cluster. Weitere Informationen finden Sie unter [Verwendung](#usage).
 
 ## <a name="syntax"></a>Syntax
 

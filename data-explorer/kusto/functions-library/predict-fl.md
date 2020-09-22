@@ -7,19 +7,20 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/09/2020
-ms.openlocfilehash: 31f35f02951c057de4776ec83c8cd42fdbcbc9f5
-ms.sourcegitcommit: 50c799c60a3937b4c9e81a86a794bdb189df02a3
+ms.openlocfilehash: 29db6fd462311ab30b5c477d27b04606ecfd2915
+ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90075143"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90998958"
 ---
-# <a name="predict_fl"></a>predict_fl ()
+# <a name="predict_fl"></a>predict_fl()
 
 Die Funktion `predict_fl()` prognostiziert mithilfe eines vorhandenen trainierten Machine Learning-Modells. Dieses Modell wurde mit [scikit-Learn](https://scikit-learn.org/stable/)erstellt, in eine Zeichenfolge serialisiert und in einer standardmäßigen Azure-Daten-Explorer Tabelle gespeichert.
 
 > [!NOTE]
-> `predict_fl()` ist eine [UDF (benutzerdefinierte Funktion)](../query/functions/user-defined-functions.md). Diese Funktion enthält Inline-python und erfordert [die Aktivierung des python ()-Plug](../query/pythonplugin.md#enable-the-plugin) -ins auf dem Cluster. Weitere Informationen finden Sie unter [Verwendung](#usage).
+> * `predict_fl()` ist eine [UDF (benutzerdefinierte Funktion)](../query/functions/user-defined-functions.md).
+> * Diese Funktion enthält Inline-python und erfordert [die Aktivierung des python ()-Plug](../query/pythonplugin.md#enable-the-plugin) -ins auf dem Cluster. Weitere Informationen finden Sie unter [Verwendung](#usage).
 
 ## <a name="syntax"></a>Syntax
 

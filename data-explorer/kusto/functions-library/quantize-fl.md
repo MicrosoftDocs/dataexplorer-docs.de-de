@@ -7,20 +7,21 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/08/2020
-ms.openlocfilehash: f5cff6a5ef8490a90126a8cd90297067bdd709ad
-ms.sourcegitcommit: 50c799c60a3937b4c9e81a86a794bdb189df02a3
+ms.openlocfilehash: 38d353caf1e0352688ee91edfe7f1d2cef94d18a
+ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90075144"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90998941"
 ---
-# <a name="quantize_fl"></a>quantize_fl ()
+# <a name="quantize_fl"></a>quantize_fl()
 
 
 Die `quantize_fl()` metrikspalten der Funktions Behälter. Metrikspalten werden basierend auf dem K-Means-Algorithmus in kategorische Bezeichnungen quantifizierert.
 
 > [!NOTE]
-> `quantize_fl()` ist eine [UDF (benutzerdefinierte Funktion)](../query/functions/user-defined-functions.md). Diese Funktion enthält Inline-python und erfordert [die Aktivierung des python ()-Plug](../query/pythonplugin.md#enable-the-plugin) -ins auf dem Cluster. Weitere Informationen finden Sie unter [Verwendung](#usage).
+> * `quantize_fl()` ist eine [UDF (benutzerdefinierte Funktion)](../query/functions/user-defined-functions.md).
+> * Diese Funktion enthält Inline-python und erfordert [die Aktivierung des python ()-Plug](../query/pythonplugin.md#enable-the-plugin) -ins auf dem Cluster. Weitere Informationen finden Sie unter [Verwendung](#usage).
 
 ## <a name="syntax"></a>Syntax
 

@@ -7,19 +7,20 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/09/2020
-ms.openlocfilehash: 068dd159da048d28849f61ea04d935979f13eac5
-ms.sourcegitcommit: 50c799c60a3937b4c9e81a86a794bdb189df02a3
+ms.openlocfilehash: 9cc70418b39ece5c33d6059c7fc90c47f3039ece
+ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90075151"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90998975"
 ---
-# <a name="predict_onnx_fl"></a>predict_onnx_fl ()
+# <a name="predict_onnx_fl"></a>predict_onnx_fl()
 
 Die Funktion `predict_onnx_fl()` prognostiziert mithilfe eines vorhandenen trainierten Machine Learning-Modells. Dieses Modell wurde in das [onnx](https://onnx.ai/) -Format konvertiert, in eine Zeichenfolge serialisiert und in einer standardmäßigen Azure-Daten-Explorer Tabelle gespeichert.
 
 > [!NOTE]
-> `predict_onnx_fl()` ist eine [UDF (benutzerdefinierte Funktion)](../query/functions/user-defined-functions.md). Diese Funktion enthält Inline-python und erfordert [die Aktivierung des python ()-Plug](../query/pythonplugin.md#enable-the-plugin) -ins auf dem Cluster. Weitere Informationen finden Sie unter [Verwendung](#usage).
+> * `predict_onnx_fl()` ist eine [UDF (benutzerdefinierte Funktion)](../query/functions/user-defined-functions.md).
+> * Diese Funktion enthält Inline-python und erfordert [die Aktivierung des python ()-Plug](../query/pythonplugin.md#enable-the-plugin) -ins auf dem Cluster. Weitere Informationen finden Sie unter [Verwendung](#usage).
 
 ## <a name="syntax"></a>Syntax
 
