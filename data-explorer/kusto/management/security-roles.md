@@ -1,6 +1,6 @@
 ---
-title: Verwaltung von Sicherheitsrollen - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die Verwaltung von Sicherheitsrollen in Azure Data Explorer beschrieben.
+title: 'Verwaltung von Sicherheitsrollen: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird die Verwaltung von Sicherheitsrollen in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,132 +8,133 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ea56911ff2ad320d1070da2a4b92d94f060273cf
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 4bda122b589e3ba297b3e7c350d15687da6ee123
+ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81520093"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91057001"
 ---
 # <a name="security-roles-management"></a>Verwaltung von Sicherheitsrollen
 
 > [!IMPORTANT]
-> Bevor Sie die Autorisierungsregeln für Ihre Kusto-Cluster ändern, lesen Sie Folgendes: [Kusto-Zugriffssteuerungsübersichtssteuerungsautorisierung](../management/access-control/index.md) 
-> [role based authorization](../management/access-control/role-based-authorization.md) 
+> Lesen Sie vor dem Ändern der Autorisierungs Regeln für Ihren Kusto-Cluster die folgenden Informationen: [Übersicht über](../management/access-control/index.md)die  
+>  [rollenbasierte Autorisierung](../management/access-control/role-based-authorization.md) mit der Kusto-Zugriffs Steuerung. 
 
 In diesem Artikel werden die Steuerungsbefehle beschrieben, die zum Verwalten von Sicherheitsrollen verwendet werden.
-Sicherheitsrollen definieren, welche Sicherheitsprinzipale (Benutzer und Anwendungen) über Berechtigungen zum Betrieb einer gesicherten Ressource wie einer Datenbank oder einer Tabelle verfügen und welche Vorgänge zulässig sind. Prinzipale mit der `database viewer` Sicherheitsrolle für eine bestimmte Datenbank können z. B. alle Entitäten dieser Datenbank abfragen und anzeigen (mit Ausnahme eingeschränkter Tabellen).
+Sicherheitsrollen definieren, welche Sicherheits Prinzipale (Benutzer und Anwendungen) über Berechtigungen für eine gesicherte Ressource verfügen, wie z. b. eine Datenbank oder eine Tabelle, und welche Vorgänge zulässig sind. Prinzipale, die über die `database viewer` Sicherheitsrolle für eine bestimmte Datenbank verfügen, können z. b. alle Entitäten der Datenbank Abfragen und anzeigen (mit Ausnahme von eingeschränkten Tabellen).
 
-Die Sicherheitsrolle kann Sicherheitsprinzipalen oder Sicherheitsgruppen zugeordnet werden (die andere Sicherheitsprinzipale oder andere Sicherheitsgruppen haben können). Wenn ein Sicherheitsprinzipal versucht, einen Vorgang für eine gesicherte Ressource auszuführen, überprüft das System, ob dem Prinzipal mindestens eine Sicherheitsrolle zugeordnet ist, die Berechtigungen zum Ausführen dieses Vorgangs für die Ressource erteilt. Dies wird als **Autorisierungsprüfung**bezeichnet. Wenn die Autorisierungsprüfung fehlschlägt, wird der Vorgang abgebrochen.
+Die Sicherheitsrolle kann Sicherheits Prinzipale oder Sicherheitsgruppen zugeordnet werden (die andere Sicherheits Prinzipale oder andere Sicherheitsgruppen haben können). Wenn ein Sicherheits Prinzipal versucht, einen Vorgang für eine gesicherte Ressource auszuführen, prüft das System, ob der Prinzipal mindestens einer Sicherheitsrolle zugeordnet ist, die Berechtigungen zum Ausführen dieses Vorgangs für die Ressource erteilt. Dies wird als **Autorisierungs Überprüfung**bezeichnet. Wenn die Autorisierungs Überprüfung fehlschlägt, wird der Vorgang abgebrochen.
 
 **Syntax**
 
-Syntax von Sicherheitsrollenverwaltungsbefehlen:
+Syntax der Befehle für die Verwaltung von Sicherheitsrollen:
 
-*Verb* *SecurableObjectType* *SecurableObjectName-Rolle* *Role* `(` [ *ListOfPrincipals* `)` [*Beschreibung*]]
+*Verb* *Sichersecurableobjecttype* *securableobjectname* *Role* [ `(` *listOf Principals* `)` [*Description*]]
 
-* *Verb* gibt die Art der `.show` `.add`auszuführenden Aktion an: , , `.drop`, und `.set`.
+* *Verb* gibt die Art der auszuführenden Aktion an: `.show` , `.add` , `.drop` und `.set` .
 
-    |*Verb* |Beschreibung                                  |
+    |*Verb* |BESCHREIBUNG                                  |
     |-------|---------------------------------------------|
-    |`.show`|Gibt den aktuellen Wert oder die aktuellen Werte zurück.         |
+    |`.show`|Gibt den aktuellen Wert oder die Werte zurück.         |
     |`.add` |Fügt der Rolle einen oder mehrere Prinzipale hinzu.     |
     |`.drop`|Entfernt einen oder mehrere Prinzipale aus der Rolle.|
-    |`.set` |Legt die Rolle auf die spezifische Liste der Prinzipale fest, wodurch alle vorherigen (falls vorhanden) entfernt werden.|
+    |`.set` |Legt die Rolle auf die spezifische Liste von Prinzipale fest, wobei alle vorherigen entfernt werden (sofern vorhanden).|
 
-* *SecurableObjectType* ist die Art des Objekts, dessen Rolle angegeben ist.
+* *Securableobjecttype* ist die Art des Objekts, dessen Rolle angegeben wird.
 
-    |*SecurableObjectType*|Beschreibung|
+    |*Securableobjecttype*|BESCHREIBUNG|
     |---------------------|-----------|
-    |`database`|Die angegebene Datenbank|
+    |`database`|Die angegebene Datenbank.|
     |`table`|Die angegebene Tabelle|
+    |`materialized-view`| Die angegebene [materialisierte Sicht](materialized-views/materialized-view-overview.md) .| 
 
-* *SecurableObjectName* ist der Name des Objekts.
+* *Securableobjectname* ist der Name des Objekts.
 
-* *Rolle* ist der Name der entsprechenden Rolle.
+* *Role* ist der Name der relevanten Rolle.
 
-    |*Rolle*      |Beschreibung|
+    |*Rolle*      |BESCHREIBUNG|
     |------------|-----------|
-    |`principals`|Kann nur als Teil `.show` eines Verbs erscheinen; gibt die Liste der Prinzipale zurück, die sich auf das sicherungsfähige Objekt auswirken können.|
-    |`admins`    |Behalten Sie die Kontrolle über das sicherungsfähige Objekt, einschließlich der Möglichkeit, es anzuzeigen, zu ändern und das Objekt und alle Unterobjekte zu entfernen.|
-    |`users`     |Kann das sicherungsfähige Objekt anzeigen und darunter neue Objekte erstellen.|
-    |`viewers`   |Kann das sicherungsfähige Objekt anzeigen.|
-    |`unrestrictedviewers`|Nur auf Datenbankebene können eingeschränkte Tabellen angezeigt werden (die `viewers` `users`nicht "normal" und "normal" verfügbar gemacht werden).|
-    |`ingestors` |Nur auf Datenbankebene erlauben Sie die Datenerfassung in alle Tabellen.|
+    |`principals`|Kann nur als Teil eines Verbs angezeigt werden `.show` . gibt die Liste der Prinzipale zurück, die das Sicherungs fähige Objekt beeinflussen können.|
+    |`admins`    |Sie haben die Kontrolle über das Sicherungs fähige Objekt, einschließlich der Fähigkeit, es anzuzeigen, zu ändern und das-Objekt und alle untergeordneten Objekte zu entfernen.|
+    |`users`     |Kann das Sicherungs fähige Objekt anzeigen und darunter neue Objekte erstellen.|
+    |`viewers`   |Kann das Sicherungs fähige Objekt anzeigen.|
+    |`unrestrictedviewers`|Nur auf Datenbankebene ermöglicht die Anzeige von eingeschränkten Tabellen (die nicht für "Normal" und nicht verfügbar sind `viewers` `users` ).|
+    |`ingestors` |Nur auf Datenbankebene lassen Sie die Datenerfassung in alle Tabellen zu.|
     |`monitors`  ||
 
-* *ListOfPrincipals* ist eine optionale, durch Kommas getrennte Liste von `string`Sicherheitsprinzipal-IDs (Werte vom Typ ).
+* *Listoberprincipals* ist eine optionale, durch Kommas getrennte Liste von Sicherheits Prinzipal bezeichnerwerten (Werte vom Typ `string` ).
 
-* *Beschreibung* ist ein optionaler Wert des Typs, `string` der zusammen mit der Zuordnung für zukünftige Überwachungszwecke gespeichert wird.
+* *Description* ist ein optionaler Wert des Typs, der `string` für zukünftige Überwachungszwecke zusammen mit der Zuordnung gespeichert wird.
 
 ## <a name="example"></a>Beispiel
 
-Der folgende Befehl "Steuerelement" listet alle Sicherheitsprinzipale auf, die Zugriff auf die Tabelle `StormEvents` in der Datenbank haben:
+Der folgende Steuerelement Befehl listet alle Sicherheits Prinzipale auf, die Zugriff auf die-Tabelle `StormEvents` in der-Datenbank haben:
 
 ```kusto
 .show table StormEvents principals
 ```
 
-Hier sind mögliche Ergebnisse aus diesem Befehl:
+Im folgenden finden Sie mögliche Ergebnisse dieses Befehls:
 
-|Role |PrincipalType |PrincipalDisplayName |PrincipalObjectId |PrincipalFQN 
+|Rolle |Principaltype |Principaldisplayname |Principalobjectid |Principalfqn 
 |---|---|---|---|---
-|Datenbank Apsty Admin |AAD-Benutzer |Mark Smith |cd709aed-a26c-e3953dec735e |aaduser=msmith@fabrikam.com|
+|Daten Bank apsty-Administrator |Azure AD Benutzer |Mark Smith |cd709aed-a26c-e3953dec735e |aaduser =msmith@fabrikam.com|
 
 
 
 
 
-## <a name="managing-database-security-roles"></a>Verwalten von Datenbanksicherheitsrollen
+## <a name="managing-database-security-roles"></a>Verwalten von Daten Bank Sicherheitsrollen
 
-`.set``database` *DatabaseName-Rolle* *Role* `none` [`skip-results`]
+`.set``database` *DatabaseName* - *Rolle* `none` [ `skip-results` ]
 
-`.set``database` *DatabaseName* *Rollenprinzipal* `,` *Role* `(` [ *Principal*...] `)` [`skip-results`] [*Beschreibung*]
+`.set``database` *DatabaseName* - *Rollen* `(` *Prinzipal* [ `,` *Principal*...] `)` [ `skip-results` ] [*Beschreibung*]
 
-`.add``database` *DatabaseName* *Rollenprinzipal* `,` *Role* `(` [ *Principal*...] `)` [`skip-results`] [*Beschreibung*]
+`.add``database` *DatabaseName* - *Rollen* `(` *Prinzipal* [ `,` *Principal*...] `)` [ `skip-results` ] [*Beschreibung*]
 
-`.drop``database` *DatabaseName* *Rollenprinzipal* `,` *Role* `(` [ *Principal*...] `)` [`skip-results`] [*Beschreibung*]
+`.drop``database` *DatabaseName* - *Rollen* `(` *Prinzipal* [ `,` *Principal*...] `)` [ `skip-results` ] [*Beschreibung*]
 
-Der erste Befehl entfernt alle Prinzipale aus der Rolle. Die zweite entfernt alle Prinzipale aus der Rolle und legt einen neuen Satz von Prinzipalen fest. Der dritte fügt der Rolle neue Prinzipale hinzu, ohne vorhandene Prinzipale zu entfernen. Die letzte entfernt die angegebenen Prinzipale aus den Rollen und behält die anderen.
+Mit dem ersten Befehl werden alle Prinzipale aus der Rolle entfernt. Die zweite entfernt alle Prinzipale aus der Rolle und legt einen neuen Satz von Prinzipale fest. Das dritte fügt der Rolle neue Prinzipale hinzu, ohne vorhandene Prinzipale zu entfernen. Der letzte entfernt die aufgeführten Prinzipale aus den Rollen und behält die anderen bei.
 
 Hierbei gilt:
 
 * *DatabaseName* ist der Name der Datenbank, deren Sicherheitsrolle geändert wird.
 
-* *Rolle* `admins`ist: `ingestors` `monitors`, `unrestrictedviewers` `users`, `viewers`, , , oder .
+* *Rolle* : `admins` , `ingestors` , `monitors` , `unrestrictedviewers` , `users` oder `viewers` .
 
-* *Principal* ist ein oder mehrere Prinzipale. Informationen zum Angeben dieser Prinzipale finden Sie unter [Prinzipale und Identitätsanbieter.](./access-control/principals-and-identity-providers.md)
+* *Prinzipal* ist ein oder mehrere Prinzipale. Informationen zur Angabe dieser Prinzipale finden Sie unter [Prinzipale und Identitäts Anbieter](./access-control/principals-and-identity-providers.md) .
 
-* `skip-results`, falls angegeben, fordert an, dass der Befehl die aktualisierte Liste der Datenbankprinzipale nicht zurückgibt.
+* `skip-results`Wenn angegeben, wird von angefordert, dass der Befehl die aktualisierte Liste der Daten Bank Prinzipale nicht zurückgibt.
 
-* *Beschreibung*, falls angegeben, ist Text, der der Änderung `.show` zugeordnet und mit dem entsprechenden Befehl abgerufen wird.
+* Die *Beschreibung*ist, falls vorhanden, Text, der der Änderung zugeordnet und durch den entsprechenden Befehl abgerufen wird `.show` .
 
 <!-- TODO: Need more examples for the public syntax. Until then we're keeping this internal -->
 
 
-## <a name="managing-table-security-roles"></a>Verwalten von Tabellensicherheitsrollen
+## <a name="managing-table-security-roles"></a>Verwalten von Tabellen Sicherheitsrollen
 
-`.set``table` *TableName-Rolle* *Role* `none` [`skip-results`]
+`.set``table` *TableName* - *Rolle* `none` [ `skip-results` ]
 
-`.set``table` *TableName* *Rollenprinzipal* `,` *Role* `(` [ *Principal*...] `)` [`skip-results`] [*Beschreibung*]
+`.set``table` *TableName* - *Rollen* `(` *Prinzipal* [ `,` *Principal*...] `)` [ `skip-results` ] [*Beschreibung*]
 
-`.add``table` *TableName* *Rollenprinzipal* `,` *Role* `(` [ *Principal*...] `)` [`skip-results`] [*Beschreibung*]
+`.add``table` *TableName* - *Rollen* `(` *Prinzipal* [ `,` *Principal*...] `)` [ `skip-results` ] [*Beschreibung*]
 
-`.drop``table` *TableName* *Rollenprinzipal* `,` *Role* `(` [ *Principal*...] `)` [`skip-results`] [*Beschreibung*]
+`.drop``table` *TableName* - *Rollen* `(` *Prinzipal* [ `,` *Principal*...] `)` [ `skip-results` ] [*Beschreibung*]
 
-Der erste Befehl entfernt alle Prinzipale aus der Rolle. Die zweite entfernt alle Prinzipale aus der Rolle und legt einen neuen Satz von Prinzipalen fest. Der dritte fügt der Rolle neue Prinzipale hinzu, ohne vorhandene Prinzipale zu entfernen. Die letzte entfernt die angegebenen Prinzipale aus den Rollen und behält die anderen.
+Mit dem ersten Befehl werden alle Prinzipale aus der Rolle entfernt. Die zweite entfernt alle Prinzipale aus der Rolle und legt einen neuen Satz von Prinzipale fest. Das dritte fügt der Rolle neue Prinzipale hinzu, ohne vorhandene Prinzipale zu entfernen. Der letzte entfernt die aufgeführten Prinzipale aus den Rollen und behält die anderen bei.
 
 Hierbei gilt:
 
 * *TableName* ist der Name der Tabelle, deren Sicherheitsrolle geändert wird.
 
-* *Die* Rolle `admins` `ingestors`ist: oder .
+* Die *Rolle* ist: `admins` oder `ingestors` .
 
-* *Principal* ist ein oder mehrere Prinzipale. Informationen zum Angeben dieser Prinzipale finden Sie unter [Prinzipale und Identitätsanbieter.](./access-control/principals-and-identity-providers.md)
+* *Prinzipal* ist ein oder mehrere Prinzipale. Informationen zur Angabe dieser Prinzipale finden Sie unter [Prinzipale und Identitäts Anbieter](./access-control/principals-and-identity-providers.md) .
 
-* `skip-results`, falls angegeben, fordert an, dass der Befehl die aktualisierte Liste der Tabellenprinzipale nicht zurückgibt.
+* `skip-results`Wenn angegeben, wird von angefordert, dass der Befehl die aktualisierte Liste der Tabellen Prinzipale nicht zurückgibt.
 
-* *Beschreibung*, falls angegeben, ist Text, der der Änderung `.show` zugeordnet und mit dem entsprechenden Befehl abgerufen wird.
+* Die *Beschreibung*ist, falls vorhanden, Text, der der Änderung zugeordnet und durch den entsprechenden Befehl abgerufen wird `.show` .
 
 **Beispiel**
 
@@ -141,29 +142,44 @@ Hierbei gilt:
 .add table Test admins ('aaduser=imike@fabrikam.com ')
 ```
 
-## <a name="managing-function-security-roles"></a>Verwalten von Funktionssicherheitsrollen
+## <a name="managing-materialized-view-security-roles"></a>Verwalten von Sicherheitsrollen für materialisierte Sichten
 
-`.set``function` *FunctionName-Rolle* *Role* `none` [`skip-results`]
+`.show``materialized-view` *Materializedviewname*`principals`
 
-`.set``function` *FunktionName* *Rollenprinzipal* `,` *Role* `(` [ *Principal*...] `)` [`skip-results`] [*Beschreibung*]
+`.set``materialized-view` *Materializedviewname* `admins` `(` *Prinzipal* `,[` *Prinzipal...*`])`
 
-`.add``function` *FunktionName* *Rollenprinzipal* `,` *Role* `(` [ *Principal*...] `)` [`skip-results`] [*Beschreibung*]
+`.add``materialized-view` *Materializedviewname* `admins` `(` *Prinzipal* `,[` *Prinzipal...*`])`
 
-`.drop``function` *FunktionName* *Rollenprinzipal* `,` *Role* `(` [ *Principal*...] `)` [`skip-results`] [*Beschreibung*]
+`.drop``materialized-view` *Materializedviewname* `admins` `(` *Prinzipal* `,[` *Prinzipal...*`])`
 
-Der erste Befehl entfernt alle Prinzipale aus der Rolle. Die zweite entfernt alle Prinzipale aus der Rolle und legt einen neuen Satz von Prinzipalen fest. Der dritte fügt der Rolle neue Prinzipale hinzu, ohne vorhandene Prinzipale zu entfernen. Die letzte entfernt die angegebenen Prinzipale aus den Rollen und behält die anderen.
+Hierbei gilt:
+
+* *Materializedviewname* ist der Name der materialisierten Sicht, deren Sicherheitsrolle geändert wird.
+* *Prinzipal* ist ein oder mehrere Prinzipale. Weitere Informationen finden Sie unter [Prinzipale und Identitäts Anbieter](./access-control/principals-and-identity-providers.md)
+
+## <a name="managing-function-security-roles"></a>Verwalten von Funktions Sicherheitsrollen
+
+`.set``function` *FunctionName* - *Rolle* `none` [ `skip-results` ]
+
+`.set``function` *FunctionName* - *Rollen* `(` *Prinzipal* [ `,` *Principal*...] `)` [ `skip-results` ] [*Beschreibung*]
+
+`.add``function` *FunctionName* - *Rollen* `(` *Prinzipal* [ `,` *Principal*...] `)` [ `skip-results` ] [*Beschreibung*]
+
+`.drop``function` *FunctionName* - *Rollen* `(` *Prinzipal* [ `,` *Principal*...] `)` [ `skip-results` ] [*Beschreibung*]
+
+Mit dem ersten Befehl werden alle Prinzipale aus der Rolle entfernt. Die zweite entfernt alle Prinzipale aus der Rolle und legt einen neuen Satz von Prinzipale fest. Das dritte fügt der Rolle neue Prinzipale hinzu, ohne vorhandene Prinzipale zu entfernen. Der letzte entfernt die aufgeführten Prinzipale aus den Rollen und behält die anderen bei.
 
 Hierbei gilt:
 
 * *FunctionName* ist der Name der Funktion, deren Sicherheitsrolle geändert wird.
 
-* *Rolle* ist `admin`immer .
+* Die *Rolle* ist immer `admin` .
 
-* *Principal* ist ein oder mehrere Prinzipale. Informationen zum Angeben dieser Prinzipale finden Sie unter [Prinzipale und Identitätsanbieter.](./access-control/principals-and-identity-providers.md)
+* *Prinzipal* ist ein oder mehrere Prinzipale. Informationen zur Angabe dieser Prinzipale finden Sie unter [Prinzipale und Identitäts Anbieter](./access-control/principals-and-identity-providers.md) .
 
-* `skip-results`, falls angegeben, fordert an, dass der Befehl die aktualisierte Liste der Funktionsprinzipale nicht zurückgibt.
+* `skip-results`Wenn bereitgestellt, wird angefordert, dass der Befehl die aktualisierte Liste der Funktions Prinzipale nicht zurückgibt.
 
-* *Beschreibung*, falls angegeben, ist Text, der der Änderung `.show` zugeordnet und mit dem entsprechenden Befehl abgerufen wird.
+* Die *Beschreibung*ist, falls vorhanden, Text, der der Änderung zugeordnet und durch den entsprechenden Befehl abgerufen wird `.show` .
 
 **Beispiel**
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 830db0da43da241ffb77ff05f15c0a5f62eb1725
-ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
+ms.openlocfilehash: 87980046e6f0ebbbdd17a9037aa1206779d2a61e
+ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "85967569"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91057035"
 ---
 # <a name="merge-policy"></a>Zusammenführungsrichtlinie
 
@@ -60,6 +60,7 @@ Die Merge-Richtlinie enthält die folgenden Eigenschaften:
     * Definiert `Merge` , ob Vorgänge aktiviert werden. in diesem Fall werden Sie weniger bevorzugt als `Rebuild` Vorgänge.
 * **Maxrangeingehours**:
     * Der Standardwert ist 8.
+        * Der Standardwert ist 14 Tage in [materialisierten Sichten](materialized-views/materialized-view-overview.md), es sei denn, die Wiederherstellbarkeit ist in der effektiven [Beibehaltungs Richtlinie](retentionpolicy.md)der materialisierten Sichten deaktiviert.
     * Maximal zulässige Differenz (in Stunden) zwischen den Erstellungs Zeiten zweier verschiedener Blöcke, sodass Sie weiterhin gemergt werden können.
     * Timestamps sind von der Block Erstellung und stehen nicht in Beziehung zu den tatsächlichen Daten, die in den Blöcken enthalten sind.
     * Gilt für Merge-und Rebuild-Vorgänge.

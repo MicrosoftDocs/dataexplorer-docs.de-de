@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 3835cc3e50cc589e13f7d038a7c1f8f83def9d15
-ms.sourcegitcommit: aacea5c4c397479e8254c1fe6ed0b2f333307b14
+ms.openlocfilehash: 6b0c1247c0d161caae3301dc674a701bd1019ad3
+ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/20/2020
-ms.locfileid: "86470076"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91056933"
 ---
-# <a name="capacity-policy"></a>Kapazitätsrichtlinie
+# <a name="capacity-policy"></a>Kapazitätsrichtlinie 
 
 Eine Kapazitäts Richtlinie wird zum Steuern der computeressourcen von Daten Verwaltungs Vorgängen auf dem Cluster verwendet.
 
@@ -31,14 +31,10 @@ Die Kapazitäts Richtlinie besteht aus:
 
 ## <a name="ingestion-capacity"></a>Erfassungs Kapazität
 
-|Eigenschaft                           |type    |BESCHREIBUNG                                                                                                                                                                               |
-|-----------------------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|Clustermaximumconcurrentoperations |long    |Ein maximaler Wert für die Anzahl von gleichzeitigen Erfassungs Vorgängen in einem Cluster.                                          |
-|Coreutilizationkoeffizienten         |double  |Ein Koeffizienten für den Prozentsatz der Kerne, die beim Berechnen der Erfassungs Kapazität verwendet werden sollen. Das Ergebnis der Berechnung wird immer von normalisiert.`ClusterMaximumConcurrentOperations`                          |
-
-Die Gesamt Erfassungs Kapazität des Clusters, wie von angezeigt [. zeigen](../management/diagnostics.md#show-capacity)Sie die Kapazität an:
-
-Minimal ( `ClusterMaximumConcurrentOperations` , `Number of nodes in cluster` * Maximum (1, `Core count per node`  *  `CoreUtilizationCoefficient` ))
+|Eigenschaft       |type    |BESCHREIBUNG    |
+|-----------------------------------|--------|-----------------------------------------------------------------------------------------|
+|Clustermaximumconcurrentoperations |long    |Ein maximaler Wert für die Anzahl von gleichzeitigen Erfassungs Vorgängen in einem Cluster.               |
+|Coreutilizationkoeffizienten         |double  |Ein Koeffizienten für den Prozentsatz der Kerne, die beim Berechnen der Erfassungs Kapazität verwendet werden sollen. Das Ergebnis der Berechnung wird immer von normalisiert. `ClusterMaximumConcurrentOperations` <br> Die Gesamt Erfassungs Kapazität des Clusters, wie von angezeigt [. zeigen](../management/diagnostics.md#show-capacity)Sie die Kapazität an: <br> Minimal ( `ClusterMaximumConcurrentOperations` , `Number of nodes in cluster` * Maximum (1, `Core count per node`  *  `CoreUtilizationCoefficient` ))
 
 > [!Note]
 > In Clustern mit drei oder mehr Knoten ist der Administrator Knoten nicht Teil der Erfassungs Vorgänge. Der `Number of nodes in cluster` wird um 1 reduziert.
@@ -52,12 +48,12 @@ Minimal ( `ClusterMaximumConcurrentOperations` , `Number of nodes in cluster` * 
 
 Die Gesamt Zusammenfassungs Kapazität des Clusters, wie von angezeigt [. zeigen](../management/diagnostics.md#show-capacity)Sie die Kapazität an:
 
-`Number of nodes in cluster`Stuben`Concurrent operations per node`
+`Number of nodes in cluster` Stuben `Concurrent operations per node`
 
 Der effektive Wert für `Concurrent operations per node` wird automatisch vom System im Bereich [ `MinimumConcurrentOperationsPerNode` , `MaximumConcurrentOperationsPerNode` ] angepasst, solange die Erfolgsrate der Mergevorgänge über 90% liegt.
 
 > [!Note]
-> * In Clustern mit drei oder mehr Knoten ist der Administrator Knoten nicht an der Ausführung von Merge-Vorgängen beteiligt. Der `Number of nodes in cluster` wird um 1 reduziert.
+> In Clustern mit drei oder mehr Knoten ist der Administrator Knoten nicht an der Ausführung von Merge-Vorgängen beteiligt. Der `Number of nodes in cluster` wird um 1 reduziert.
 
 ## <a name="extents-purge-rebuild-capacity"></a>Erweiterbare Lösch Kapazität für Lösch Blöcke
 
@@ -67,7 +63,7 @@ Der effektive Wert für `Concurrent operations per node` wird automatisch vom Sy
 
 Die Gesamtanzahl der Blöcke zum Löschen von Blöcken im Cluster Gesamt (wie von angezeigt [. Anzeige Kapazität](../management/diagnostics.md#show-capacity)) wird berechnet durch:
 
-`Number of nodes in cluster`Stuben`MaximumConcurrentOperationsPerNode`
+`Number of nodes in cluster` Stuben `MaximumConcurrentOperationsPerNode`
 
 > [!Note]
 > In Clustern mit drei oder mehr Knoten ist der Administrator Knoten nicht an der Ausführung von Merge-Vorgängen beteiligt. Der `Number of nodes in cluster` wird um 1 reduziert.
@@ -97,7 +93,49 @@ Die Gesamtwerte für die Partitions Kapazität des Clusters (wie von angezeigt [
 
 Der effektive Wert für `Concurrent operations` wird automatisch vom System im Bereich [ `ClusterMinimumConcurrentOperations` , `ClusterMaximumConcurrentOperations` ] angepasst, solange die Erfolgsrate der Partitionierungs Vorgänge über 90% liegt.
 
-## <a name="defaults"></a>der Arbeitszeittabelle
+## <a name="materialized-views-capacity-policy"></a>Kapazitäts Richtlinie für materialisierte Sichten
+
+Ändern Sie die Kapazitäts Richtlinie mithilfe der [Alter Cluster Policy-Kapazität](capacity-policy.md#alter-cluster-policy-capacity). Diese Änderung erfordert `AllDatabasesAdmin` Berechtigungen.
+Die Richtlinie kann verwendet werden, um Parallelitäts Einstellungen für materialisierte Sichten zu ändern. Diese Änderung ist möglicherweise erforderlich, wenn mehr als eine einzelne materialisierte Sicht in einem Cluster definiert ist und der Cluster nicht mit der Materialisierung aller Sichten Schritt halten kann. Standardmäßig sind Parallelitäts Einstellungen relativ niedrig, um sicherzustellen, dass die Materialisierung die Leistung des Clusters nicht beeinträchtigt.
+
+> [!WARNING]
+> Die materialisierte Ansichts Kapazität sollte nur gesteigert werden, wenn die Ressourcen des Clusters gut sind (geringe CPU, verfügbarer Arbeitsspeicher). Wenn Sie diese Werte erhöhen, wenn Ressourcen eingeschränkt sind, kann dies zu einer Erschöpfung der Ressourcen führen, was die Leistung des Clusters beeinträchtigt.
+
+Die Kapazitäts Richtlinie materialisierte Sichten ist Teil der [Kapazitäts Richtlinie](#capacity-policy)des Clusters und verfügt über die folgende JSON-Darstellung:
+
+<!-- csl -->
+``` 
+{
+   "MaterializedViewsCapacity": {
+    "ClusterMaximumConcurrentOperations": 1,
+    "ExtentsRebuildCapacity": {
+      "ClusterMaximumConcurrentOperations": 50,
+      "MaximumConcurrentOperationsPerNode": 5
+    }
+  }
+}
+```
+
+### <a name="properties"></a>Eigenschaften
+
+Eigenschaft | BESCHREIBUNG
+|---|---|
+|`ClusterMaximumConcurrentOperations` | Die maximale Anzahl von materialisierten Sichten, die der Cluster gleichzeitig materialisieren kann. Dieser Wert ist standardmäßig 1, während Materialisierung selbst (einer einzelnen Ansicht) viele gleichzeitige Vorgänge ausführen kann. Wenn im Cluster mehr als eine einzelne materialisierte Sicht definiert ist und sich die Ressourcen des Clusters in einem guten Zustand befinden, wird empfohlen, diesen Wert zu erhöhen. |
+| `ExtentsRebuildCapacity`|  Bestimmt die Anzahl von gleichzeitigen Blöcken zum erneuten Erstellen, die für alle materialisierten Sichten während des Materialisierungs Vorgangs ausgeführt werden. Wenn mehrere Sichten gleichzeitig ausgeführt werden, da `ClusterMaximumConcurrentOperation` größer als 1 ist, wird das von dieser Eigenschaft definierte Kontingent gemeinsam genutzt. Der Wert für die maximale Anzahl von gleichzeitigen Blöcke wird nicht überschritten. |
+
+### <a name="extents-rebuild"></a>Extents Rebuild
+
+Weitere Informationen zu Blöcken zum Erstellen von Blöcken finden Sie unter [Funktionsweise von materialisierten Sichten](materialized-views/materialized-view-overview.md#how-materialized-views-work). Die maximale Anzahl von Blöcke, die erweitert werden, wird berechnet durch:
+    
+```kusto
+Maximum(`ClusterMaximumConcurrentOperations`, `Number of nodes in cluster` * `MaximumConcurrentOperationsPerNode`)
+```
+
+* Die Standardwerte sind 50 Gesamtzahl der Parallelitäts neubuilds und maximal 5 pro Knoten.
+* Die `ExtentsRebuildCapacity` Richtlinie dient nur als Obergrenze. Der tatsächlich verwendete Wert wird vom System dynamisch festgelegt, basierend auf den Bedingungen des aktuellen Clusters (Arbeitsspeicher, CPU) und einer Schätzung der Menge an Ressourcen, die für den Rebuild-Vorgang erforderlich sind. In der Praxis kann die Parallelität wesentlich niedriger sein als der in Capacity Policy angegebene Wert.
+    * Die `MaterializedViewExtentsRebuild` Metrik enthält Informationen darüber, wie viele Blöcke in jedem Materialisierungs Intervall neu erstellt wurden. Weitere Informationen finden Sie unter [materialisierte Ansichten Überwachung](materialized-views/materialized-view-overview.md#materialized-views-monitoring).
+
+## <a name="defaults"></a>Standardeinstellungen
 
 Die standardmäßige Kapazitäts Richtlinie weist die folgende JSON-Darstellung auf:
 
@@ -134,7 +172,7 @@ Die standardmäßige Kapazitäts Richtlinie weist die folgende JSON-Darstellung 
 
 * Ändern Sie die Kapazitäts Richtlinie des Clusters mithilfe von [. Alter Cluster Policy Capacity](capacity-policy.md#alter-cluster-policy-capacity) .
 
-## <a name="throttling"></a>Einschränkung
+## <a name="throttling"></a>Drosselung
 
 Kusto schränkt die Anzahl gleichzeitiger Anforderungen für die folgenden vom Benutzer initiierten Befehle ein:
 
