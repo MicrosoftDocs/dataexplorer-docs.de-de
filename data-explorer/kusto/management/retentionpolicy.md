@@ -1,6 +1,6 @@
 ---
 title: 'Kusto-Beibehaltungs Richtlinie steuert, wie Daten entfernt werden: Azure Daten-Explorer'
-description: Dieser Artikel beschreibt die Aufbewahrungs Richtlinie in Azure Daten-Explorer.
+description: In diesem Artikel werden die Aufbewahrungs Richtlinien in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,26 +8,24 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 7c9bc193e739011a5f91d9bd5d4d8746a7ce2591
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: 871ad751105ba6a3f6ce5dcba55b3a0fd1c17789
+ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780557"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91056984"
 ---
 # <a name="retention-policy"></a>Aufbewahrungsrichtlinie
 
-Die Beibehaltungs Richtlinie steuert den Mechanismus, mit dem Daten automatisch aus Tabellen entfernt werden. Es ist hilfreich, Daten zu entfernen, die kontinuierlich in eine Tabelle fließen und deren Relevanz Alters basiert ist. Die Richtlinie kann z. b. für eine Tabelle verwendet werden, die Diagnose Ereignisse enthält, die nach zwei Wochen möglicherweise uninteressant werden.
+Die Beibehaltungs Richtlinie steuert den Mechanismus, mit dem Daten automatisch aus Tabellen oder [materialisierten Sichten](materialized-views/materialized-view-overview.md)entfernt werden. Es ist hilfreich, Daten zu entfernen, die kontinuierlich in eine Tabelle fließen und deren Relevanz Alters basiert ist. Die Richtlinie kann z. b. für eine Tabelle verwendet werden, die Diagnose Ereignisse enthält, die nach zwei Wochen möglicherweise uninteressant werden.
 
-Die Aufbewahrungs Richtlinie kann für eine bestimmte Tabelle oder für eine gesamte Datenbank konfiguriert werden.
-Die Richtlinie gilt dann für alle Tabellen in der Datenbank, die Sie nicht außer Kraft setzen.
+Die Aufbewahrungs Richtlinie kann für eine bestimmte Tabelle oder materialisierte Sicht oder für eine gesamte Datenbank konfiguriert werden. Die Richtlinie gilt dann für alle Tabellen in der Datenbank, die Sie nicht außer Kraft setzen.
 
 Das Einrichten einer Aufbewahrungs Richtlinie ist wichtig für Cluster, die kontinuierlich Daten erfassen, wodurch die Kosten eingeschränkt werden.
 
-Daten, die sich außerhalb der Aufbewahrungs Richtlinie befinden, sind zum Entfernen berechtigt. Kusto garantiert nicht, wann eine Entfernung stattfindet. Daten können auch dann "Linger" sein, wenn die Aufbewahrungs Richtlinie ausgelöst wird.
+Daten, die sich außerhalb der Aufbewahrungs Richtlinie befinden, sind zum Entfernen berechtigt. Es gibt keine besondere Garantie, wenn das Entfernen erfolgt. Daten können auch dann "Linger" sein, wenn die Aufbewahrungs Richtlinie ausgelöst wird.
 
-Die Aufbewahrungs Richtlinie wird am häufigsten festgelegt, um das Alter der Daten seit der Erfassung einzuschränken.
-Weitere Informationen finden Sie unter [Software Update Period](#the-policy-object).
+Die Aufbewahrungs Richtlinie wird am häufigsten festgelegt, um das Alter der Daten seit der Erfassung einzuschränken. Weitere Informationen finden Sie unter [Software Update Period](#the-policy-object).
 
 > [!NOTE]
 > * Der Lösch Zeitpunkt ist unpräzise. Das System stellt sicher, dass die Daten nicht gelöscht werden, bevor der Grenzwert überschritten wird. das Löschen erfolgt jedoch nicht unmittelbar nach diesem Punkt.
@@ -51,8 +49,8 @@ Eine Beibehaltungs Richtlinie umfasst die folgenden Eigenschaften:
 
 ## <a name="control-commands"></a>Steuerungsbefehle
 
-* Verwenden Sie [. zeigen Sie die Richtlinien Beibehaltung](../management/retention-policy.md) an, um die aktuelle Aufbewahrungs Richtlinie für eine Datenbank oder eine Tabelle anzuzeigen.
-* Ändern Sie die aktuelle Aufbewahrungs Richtlinie einer Datenbank oder Tabelle mithilfe von [. Alter Policy Retention](../management/retention-policy.md) .
+* Verwenden Sie [. zeigen Sie die Richtlinien Beibehaltung](../management/retention-policy.md) an, um die aktuelle Aufbewahrungs Richtlinie für eine Datenbank, eine Tabelle oder eine [materialisierte Sicht](materialized-views/materialized-view-overview.md)anzuzeigen.
+* Verwenden Sie zum Ändern der aktuellen Beibehaltungs Richtlinie einer Datenbank, Tabelle oder [materialisierten Sicht](materialized-views/materialized-view-overview.md)die " [. Alter"-Richtlinien Beibehaltung](../management/retention-policy.md) .
 
 ## <a name="defaults"></a>der Arbeitszeittabelle
 
@@ -64,6 +62,7 @@ Die standardmäßige Aufbewahrungs Richtlinie mit den oben erwähnten Standardwe
 ```kusto
 .alter database DatabaseName policy retention "{}"
 .alter table TableName policy retention "{}"
+.alter materialized-view ViewName policy retention "{}"
 ```
 
 Der Befehl führt dazu, dass das folgende Richtlinien Objekt auf die Datenbank oder Tabelle angewendet wird.
@@ -96,6 +95,7 @@ Legen Sie für alle Tabellen in der Datenbank einen vorläufig Lösch Zeitraum v
 .delete table MyTable2 policy retention        // optional, only if the table previously had its policy set
 .delete table MySpecialTable policy retention  // optional, only if the table previously had its policy set
 .alter-merge database MyDatabase policy retention softdelete = 7d recoverability = disabled
+.alter-merge materialized-view ViewName policy retention softdelete = 7d 
 ```
 
 * *Option 2*: Legen Sie für jede Tabelle eine Beibehaltungs Richtlinie auf Tabellenebene fest, wobei ein vorläufiger Lösch Zeitraum von sieben Tagen und die Wiederherstellbarkeit deaktiviert ist.
