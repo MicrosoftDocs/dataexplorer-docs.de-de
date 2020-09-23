@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b69fed2b3d7028fdc29d8098e8358c0088fcd8bb
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: deb91e6131d5662017ebdf714a79d0ee391c8ba1
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349209"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91103303"
 ---
 # <a name="beta_inv"></a>beta_inv()
 
@@ -37,11 +37,11 @@ Die Beta-Verteilung kann bei der Projektplanung verwendet werden, um wahrscheinl
 * *Alpha*: ein Parameter der Verteilung.
 * *Beta*: ein Parameter der Verteilung.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 * Die Umkehrung der kumulativen Beta-Wahrscheinlichkeitsdichte-Funktion [beta_cdf ()](./beta-cdffunction.md) .
 
-**Hinweise**
+**Notizen**
 
 Wenn ein Argument nicht numerisch ist, gibt beta_inv () einen NULL-Wert zurück.
 
@@ -64,13 +64,13 @@ datatable(p:double, alpha:double, beta:double, comment:string)
 | extend b = beta_inv(p, alpha, beta)
 ```
 
-|p|alpha|Beta|comment|b|
+|p|alpha|Beta|comment|k|
 |---|---|---|---|---|
-|0,1|10|20|Gültige Eingabe|0.226415022388749|
+|0.1|10|20|Gültige Eingabe|0.226415022388749|
 |1.5|10|20|p > 1, ergibt NULL||
-|0,1|-1|20|Alpha ist < 0, ergibt Nan|NaN|
+|0.1|-1|20|Alpha ist < 0, ergibt Nan|NaN|
 
-**Weitere Informationen**
+## <a name="see-also"></a>Weitere Informationen
 
 * Informationen zum Berechnen der kumulativen Beta Verteilungsfunktion finden Sie unter [Beta-CDF ()](./beta-cdffunction.md).
 * Informationen zum Berechnen der Wahrscheinlichkeits-Beta Dichtefunktion finden Sie unter [Beta-PDF ()](./beta-pdffunction.md).

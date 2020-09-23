@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f53c74fd2ac56219351c4d194c93e9fa4b627cf4
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: d1f70675a1f455c6cd0c392483eb574867088394
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347254"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91103292"
 ---
 # <a name="isfinite"></a>isfinite()
 
@@ -27,11 +27,11 @@ Gibt zurück, ob die Eingabe ein endlicher Wert ist (ist weder unendlich noch Na
 
 * *x*: eine reelle Zahl.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Ein Wert ungleich 0 (true), wenn x nicht begrenzt ist. und NULL (false) andernfalls.
 
-**Weitere Informationen**
+## <a name="see-also"></a>Weitere Informationen
 
 * Informationen zum Überprüfen, ob der Wert NULL ist, finden Sie unter [IsNull ()](isnullfunction.md).
 * Informationen zum Überprüfen, ob der Wert unendlich ist, finden Sie unter [isinf ()](isinffunction.md).

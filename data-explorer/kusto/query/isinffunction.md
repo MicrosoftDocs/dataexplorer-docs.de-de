@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 71a37d7a1bd700b5f929c009197a382315099e08
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: e9fa24aeec2cc70b41e1fcd4f9d1185ef80b714b
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347237"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91103240"
 ---
 # <a name="isinf"></a>isinf()
 
@@ -27,11 +27,11 @@ Gibt zurück, ob die Eingabe ein unendlicher (positiver oder negativer) Wert ist
 
 * *x*: eine reelle Zahl.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Ein Wert ungleich 0 (true), wenn x ein positives oder negatives unendliches Ergebnis ist. und NULL (false) andernfalls.
 
-**Weitere Informationen**
+## <a name="see-also"></a>Weitere Informationen
 
 * Informationen zum Überprüfen, ob der Wert NULL ist, finden Sie unter [IsNull ()](isnullfunction.md).
 * Informationen zum Überprüfen, ob der Wert begrenzt ist, finden Sie unter [isFinite ()](isfinitefunction.md).

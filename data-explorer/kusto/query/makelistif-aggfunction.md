@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: dda177c39959f860ad7e019371133f16e1de91e2
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 9090e752f018c4abcce759c37a8ecb3571e2fbd6
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346931"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91102909"
 ---
 # <a name="make_list_if-aggregation-function"></a>make_list_if () (Aggregations Funktion)
 
@@ -31,7 +31,7 @@ Gibt ein- `dynamic` Array (JSON) aller Werte von *expr* in der Gruppe zurück, f
 * *Predicate*: ein Prädikat, das in ausgewertet `true` werden muss, damit *expr* dem Ergebnis hinzugefügt werden kann.
 * *MaxSize* ist eine optionale ganzzahlige Beschränkung für die maximale Anzahl von zurückgegebenen Elementen (Standardwert ist *1048576*). Der MaxSize-Wert darf 1048576 nicht überschreiten.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Gibt ein- `dynamic` Array (JSON) aller Werte von *expr* in der Gruppe zurück, für die *Predicate* als ausgewertet wird `true` .
 Wenn die Eingabe für den `summarize` Operator nicht sortiert ist, ist die Reihenfolge der Elemente im resultierenden Array nicht definiert.
@@ -55,6 +55,6 @@ T
 |----|
 |["George", "Ringo"]|
 
-**Weitere Informationen**
+## <a name="see-also"></a>Weitere Informationen
 
-[`make_list`](./makelist-aggfunction.md)-Funktion, die das gleiche ohne Prädikat Ausdruck verwendet.
+[`make_list`](./makelist-aggfunction.md) -Funktion, die das gleiche ohne Prädikat Ausdruck verwendet.

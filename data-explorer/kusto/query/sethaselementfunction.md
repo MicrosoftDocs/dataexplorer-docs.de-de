@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: 314244c58eca6082b9042b263e6b3e6faeb69840
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: b62e5032d6f2ccedc2883b6cbccaf7be69e1cebf
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351198"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91103505"
 ---
 # <a name="set_has_element"></a>set_has_element()
 
@@ -28,7 +28,7 @@ Bestimmt, ob die angegebene Menge das angegebene Element enthält.
 * *Array*: zu durchsuchende Eingabe Array.
 * *Wert*: Wert, nach dem gesucht werden soll. Der Wert muss vom Typ `long` , `integer` ,, `double` `datetime` , `timespan` , `decimal` , oder sein `string` `guid` .
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 True oder false, abhängig davon, ob der Wert im Array vorhanden ist.
 
@@ -44,6 +44,6 @@ print arr=dynamic(["this", "is", "an", "example"])
 |---|
 |1|
 
-**Weitere Informationen**
+## <a name="see-also"></a>Weitere Informationen
 
 Verwenden [`array_index_of(arr, value)`](arrayindexoffunction.md) Sie, um die Position zu ermitteln, an der der Wert im Array vorhanden ist. Beide Funktionen sind gleichwertig.

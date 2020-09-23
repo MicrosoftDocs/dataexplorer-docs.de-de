@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ee6239b7e8ad4cbdd3d36e6b7b3c20f0cc0cdaeb
-ms.sourcegitcommit: a4779e31a52d058b07b472870ecd2b8b8ae16e95
+ms.openlocfilehash: 8380e26b01f74585b2c3e99bb3eb4cd8c51df01c
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/02/2020
-ms.locfileid: "89366043"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91103059"
 ---
 # <a name="mv-apply-operator"></a>mv-apply-Operator
 
@@ -139,7 +139,6 @@ _data
 |1    |[1, 3, 5, 7]|12       |
 |0    |[2, 4, 6, 8]|14       |
 
-
 ## <a name="using-with_itemindex-for-working-with-a-subset-of-the-array"></a>Verwenden `with_itemindex` von zum Arbeiten mit einer Teilmenge des Arrays
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
@@ -192,7 +191,6 @@ datatable(command:string, command_time:datetime, user_id:string)
 |user1|[<br>  "ls",<br>  "mkdir",<br>  "chmod",<br>  "dir",<br>  "pwd",<br>  RMS<br>]|
 |user2|[<br>  "RM",<br>  PWD<br>]|
 
-
-**Weitere Informationen**
+## <a name="see-also"></a>Weitere Informationen
 
 * [MV-Expand-](./mvexpandoperator.md) Operator.

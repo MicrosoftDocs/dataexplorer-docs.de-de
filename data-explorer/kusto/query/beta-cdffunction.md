@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8a3711594ec5d1cbcaf36c7286f1484a708c29a0
-ms.sourcegitcommit: 50c799c60a3937b4c9e81a86a794bdb189df02a3
+ms.openlocfilehash: b500f5f0e727fde315bea8d77ab60f600f127271
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90067520"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91103410"
 ---
 # <a name="beta_cdf"></a>beta_cdf()
 
@@ -41,7 +41,7 @@ Die Beta-Verteilung wird häufig verwendet, um die prozentuale Abweichung eines 
 
 * Die [kumulative Beta Verteilungsfunktion](https://en.wikipedia.org/wiki/Beta_distribution#Cumulative_distribution_function).
 
-**Hinweise**
+**Notizen**
 
 Wenn ein Argument nicht numerisch ist, gibt beta_cdf () einen NULL-Wert zurück.
 
@@ -67,13 +67,13 @@ datatable(x:double, alpha:double, beta:double, comment:string)
 
 |x|alpha|Beta|comment|k|
 |---|---|---|---|---|
-|0,9|10|20|Gültige Eingabe|0.999999999999959|
+|0.9|10|20|Gültige Eingabe|0.999999999999959|
 |1.5|10|20|x > 1, ergibt Nan|NaN|
-|-10|10|20|x < 0, ergibt Nan|NaN|
+|–10|10|20|x < 0, ergibt Nan|NaN|
 |0.1|-1|20|Alpha ist < 0, ergibt Nan|NaN|
 
 
-**Weitere Informationen**
+## <a name="see-also"></a>Weitere Informationen
 
 
 * Informationen zum Berechnen der Umkehrung der kumulativen Beta Wahrscheinlichkeitsdichte-Funktion finden Sie unter [Beta-Inv ()](./beta-invfunction.md).

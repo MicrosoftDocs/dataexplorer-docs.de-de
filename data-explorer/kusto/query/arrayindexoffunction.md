@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/22/2020
-ms.openlocfilehash: a366120428d14c713b18aee6652460817c75433a
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 4b3cd0996b4c60362c7377c06621b140c29203a9
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349566"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91103040"
 ---
 # <a name="array_index_of"></a>array_index_of()
 
@@ -28,7 +28,7 @@ Durchsucht das Array nach dem angegebenen Element und gibt seine Position zurüc
 * *Array*: zu durchsuchende Eingabe Array.
 * *Wert*: Wert, nach dem gesucht werden soll. Der Wert muss vom Typ Long, Integer, Double, DateTime, TimeSpan, Decimal, String oder GUID sein.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Null basierte Indexposition von Lookup.
 Gibt-1 zurück, wenn der Wert nicht im Array gefunden wird.
@@ -45,6 +45,6 @@ print arr=dynamic(["this", "is", "an", "example"])
 |---|
 |3|
 
-**Weitere Informationen**
+## <a name="see-also"></a>Weitere Informationen
 
 Wenn Sie nur überprüfen möchten, ob ein Wert in einem Array vorhanden ist, Sie jedoch nicht an seiner Position interessiert sind, können Sie [set_has_element ( `arr` , `value` )](sethaselementfunction.md)verwenden. Diese Funktion verbessert die Lesbarkeit der Abfrage. Beide Funktionen haben dieselbe Leistung.

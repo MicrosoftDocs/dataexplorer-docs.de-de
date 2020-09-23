@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 18d0bf2eaa0f5215e38b8b787178ea5934fb3737
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 3258a847a526e0e3b6ac8f0186b0a1aaabc3ffe5
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347033"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91103195"
 ---
 # <a name="make_bag-aggregation-function"></a>make_bag () (Aggregations Funktion)
 
@@ -34,13 +34,13 @@ Gibt ein `dynamic` (JSON)-Eigenschaften Behälter (Wörterbuch) aller Werte von 
 
 Eine Legacy-und veraltete Variante der Funktion `make_dictionary()` hat ein Standard Limit von *MaxSize* = 128.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Gibt ein `dynamic` (JSON)-Eigenschaften Behälter (Wörterbuch) aller Werte von *`Expr`* in der Gruppe zurück, bei denen es sich um Eigenschaften Behälter handelt.
 Nicht-Wörterbuch Werte werden übersprungen.
 Wenn ein Schlüssel in mehr als einer Zeile angezeigt wird, wird ein beliebiger Wert aus den möglichen Werten für diesen Schlüssel ausgewählt.
 
-**Weitere Informationen**
+## <a name="see-also"></a>Weitere Informationen
 
 Verwenden Sie das [bag_unpack ()](bag-unpackplugin.md) -Plug-in zum Erweitern dynamischer JSON-Objekte in Spalten, die Eigenschaften Behälter Schlüssel verwenden. 
 

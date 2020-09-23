@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 1c362dd57cc804e0705023f4744602d93ad47c0b
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 579cc4a7b86340b7e2df3e47482406ce7d31e388
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351368"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91103562"
 ---
 # <a name="series_not_equals"></a>series_not_equals()
 
@@ -27,7 +27,7 @@ Berechnet die Element Weise not Gleichheits ( `!=` )-Logik Operation von zwei nu
 
 * *Series1, series2*: numerische Eingabe Arrays, die Element Weise verglichen werden sollen. Alle Argumente müssen dynamische Arrays sein. 
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Dynamisches Array von booleschen Werten, das die berechnete Element Weise Not Equal Logic-Operation zwischen den beiden Eingaben enthält. Ein nicht numerisches Element oder ein nicht vorhandenes Element (Arrays mit unterschiedlichen Größen) ergeben einen- `null` Elementwert.
 
@@ -43,7 +43,7 @@ print s1 = dynamic([1,2,4]), s2 = dynamic([4,2,1])
 |---|---|---|
 |[1, 2, 4]|[4, 2, 1]|[true, false, true]|
 
-**Weitere Informationen**
+## <a name="see-also"></a>Weitere Informationen
 
 Eine ganze Reihe von Statistik vergleichen finden Sie unter:
 * [series_stats()](series-statsfunction.md)

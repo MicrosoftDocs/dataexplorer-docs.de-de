@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: c85738928aa65bf2a4476f10afa065c2a8ca1faf
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 0ae1a01af019e18e8e9f05454a1c52ef6a1f856c
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346914"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91103090"
 ---
 # <a name="make_set-aggregation-function"></a>MAKE_SET () (Aggregations Funktion)
 
@@ -33,7 +33,7 @@ Gibt ein `dynamic` -Array (JSON) des Satzes eindeutiger Werte zurück, die *Expr
 > [!NOTE]
 > Eine Legacy-und veraltete Variante dieser Funktion: `makeset()` hat ein Standard Limit von *MaxSize* = 128.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Gibt ein `dynamic` -Array (JSON) des Satzes eindeutiger Werte zurück, die *Expr* in der Gruppe annimmt.
 Die Sortierreihenfolge des Arrays ist nicht definiert.
@@ -48,9 +48,9 @@ PageViewLog
 | summarize countries=make_set(country) by continent
 ```
 
-:::image type="content" source="images/makeset-aggfunction/makeset.png" alt-text="Makeset":::
+:::image type="content" source="images/makeset-aggfunction/makeset.png" alt-text="Tabelle mit Kusto-Abfrage zusammenfassen von Ländern nach Kontinent in Azure Daten-Explorer":::
 
-**Weitere Informationen**
+## <a name="see-also"></a>Weitere Informationen
 
 * Verwenden Sie [`mv-expand`](./mvexpandoperator.md) den-Operator für die umgekehrte Funktion.
-* [`make_set_if`](./makesetif-aggfunction.md)der-Operator ähnelt `make_set` , mit dem Unterschied, dass er auch ein Prädikat akzeptiert.
+* [`make_set_if`](./makesetif-aggfunction.md) der-Operator ähnelt `make_set` , mit dem Unterschied, dass er auch ein Prädikat akzeptiert.

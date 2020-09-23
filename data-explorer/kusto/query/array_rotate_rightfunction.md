@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 9282e31d4422172f71da33ba1eddc0322b0345fb
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 7d6e9cfac03e0169bd0bfae12a01ac685d265736
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349651"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91102779"
 ---
 # <a name="array_rotate_right"></a>array_rotate_right()
 
-`array_rotate_right()`rotiert Werte in einem Array nach rechts.
+`array_rotate_right()` rotiert Werte in einem Array nach rechts.
 
 ## <a name="syntax"></a>Syntax
 
@@ -28,11 +28,11 @@ ms.locfileid: "87349651"
 * *arr*: das zu teilende Eingabe Array muss ein dynamisches Array sein.
 * *rotate_count*: ganze Zahl, die die Anzahl der Positionen angibt, die Array Elemente nach rechts gedreht werden. Wenn der Wert negativ ist, werden die Elemente nach links gedreht.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Dynamisches Array, das die gleiche Menge an Elementen wie im ursprünglichen Array enthält, wobei jedes Element gemäß *rotate_count*gedreht wurde.
 
-**Weitere Informationen**
+## <a name="see-also"></a>Weitere Informationen
 
 * Informationen zum Drehen des Arrays nach Links finden Sie unter [array_rotate_left ()](array_rotate_leftfunction.md).
 * Informationen zum Verschieben des Arrays nach Links finden Sie unter [array_shift_left ()](array_shift_leftfunction.md).

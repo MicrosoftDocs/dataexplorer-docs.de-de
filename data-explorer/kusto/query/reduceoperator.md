@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 42eb17b6aca5fc722597bcbf656f18c6d92ba545
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: d844f693b1509a823702b12bd28b85a9f19a07bd
+ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345860"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91102892"
 ---
 # <a name="reduce-operator"></a>reduce-Operator
 
@@ -38,7 +38,7 @@ Für jede solche Gruppe gibt Sie ein **Muster** aus, das die Gruppe am besten be
 
 ## <a name="returns"></a>Gibt zurück
 
-Dieser Operator gibt eine Tabelle mit drei Spalten ( `Pattern` , `Count` und `Representative` ) sowie so viele Zeilen zurück, wie es Gruppen gibt. `Pattern`der Pattern-Wert für die Gruppe, der `*` als Platzhalter verwendet wird (die beliebige Einfügezeichenfolgen darstellt), `Count` zählt, wie viele Zeilen in der Eingabe für den Operator durch dieses Muster dargestellt werden, und `Representative` ist ein Wert aus der Eingabe, der in diese Gruppe fällt.
+Dieser Operator gibt eine Tabelle mit drei Spalten ( `Pattern` , `Count` und `Representative` ) sowie so viele Zeilen zurück, wie es Gruppen gibt. `Pattern` der Pattern-Wert für die Gruppe, der `*` als Platzhalter verwendet wird (die beliebige Einfügezeichenfolgen darstellt), `Count` zählt, wie viele Zeilen in der Eingabe für den Operator durch dieses Muster dargestellt werden, und `Representative` ist ein Wert aus der Eingabe, der in diese Gruppe fällt.
 
 Wenn `[kind=source]` angegeben wird, fügt der Operator die `Pattern` Spalte an die vorhandene Tabellenstruktur an.
 Beachten Sie, dass die Syntax für ein Schema dieser Art möglicherweise zukünftigen Änderungen unterliegt.
@@ -82,7 +82,7 @@ Trace | take 10000
 | reduce by Text with characters="-_"
 ```
 
-**Weitere Informationen**
+## <a name="see-also"></a>Weitere Informationen
 
 [autocluster](./autoclusterplugin.md)
 
