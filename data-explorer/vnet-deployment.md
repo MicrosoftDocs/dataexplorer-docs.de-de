@@ -7,18 +7,18 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/31/2019
-ms.openlocfilehash: 9fa58d36815ede98a4f0239f1ce68a6542f24c4b
-ms.sourcegitcommit: cb55064b7cdd57c792ad259b09069525bf799fa0
+ms.openlocfilehash: 74d72ced89b1953b2f7e327656517f1febe4166f
+ms.sourcegitcommit: 803a572ab6f04494f65dbc60a4c5df7fcebe1600
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/03/2020
-ms.locfileid: "89410807"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90714022"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>Bereitstellen von Azure Data Explorer-Clustern in Ihrem virtuellen Netzwerk
 
 In diesem Artikel werden die Ressourcen erläutert, die beim Bereitstellen eines Azure Data Explorer-Clusters in einem benutzerdefinierten virtuellen Azure-Netzwerk vorhanden sind. Diese Informationen helfen Ihnen bei der Bereitstellung eines Clusters in einem Subnetz in Ihrem virtuellen Netzwerk (VNET). Weitere Informationen zu virtuellen Azure-Netzwerken finden Sie unter [Was ist Azure Virtual Network?](/azure/virtual-network/virtual-networks-overview)
 
-   ![VNET-Diagramm](media/vnet-deployment/vnet-diagram.png)
+:::image type="content" source="media/vnet-deployment/vnet-diagram.png" alt-text="Diagramm: Schematische Architektur des virtuellen Netzwerks"::: 
 
 Azure Data Explorer unterstützt die Bereitstellung eines Clusters in einem Subnetz in Ihrem virtuellen Netzwerk (VNET). Diese Funktion ermöglicht Ihnen Folgendes:
 
@@ -62,7 +62,7 @@ Mit [Azure-Dienstendpunkten](/azure/virtual-network/virtual-network-service-endp
 Wenn Sie Azure Data Explorer-Cluster in Ihrem Subnetz bereitstellen, können Sie Datenverbindungen mit [Event Hub](/azure/event-hubs/event-hubs-about) oder [Event Grid](/azure/event-grid/overview) einrichten, während Sie die zugrunde liegenden Ressourcen für das Azure Data Explorer-Subnetz einschränken.
 
 > [!NOTE]
-> Wenn Sie die EventGrid-Einrichtung mit [Storage](/azure/storage/common/storage-introduction) und [Event Hub] verwenden, kann das im Abonnement verwendete Speicherkonto mit Dienstendpunkten im Subnetz von Azure Data Explorer gesperrt werden, während vertrauenswürdige Azure-Plattformdienste in der [Firewallkonfiguration](/azure/storage/common/storage-network-security) zugelassen werden. Der Event Hub kann jedoch Dienstendpunkte nicht aktivieren, da er keine vertrauenswürdigen [Azure-Plattformdienste](/azure/event-hubs/event-hubs-service-endpoints) unterstützt.
+> Wenn Sie die EventGrid-Einrichtung mit [Storage](/azure/storage/common/storage-introduction) und [Event Hub](/azure/event-hubs/event-hubs-about) verwenden, kann das im Abonnement verwendete Speicherkonto mit Dienstendpunkten im Subnetz von Azure Data Explorer gesperrt werden, während vertrauenswürdige Azure-Plattformdienste in der [Firewallkonfiguration](/azure/storage/common/storage-network-security) zugelassen werden. Der Event Hub kann jedoch Dienstendpunkte nicht aktivieren, da er keine vertrauenswürdigen [Azure-Plattformdienste](/azure/event-hubs/event-hubs-service-endpoints) unterstützt.
 
 ## <a name="private-endpoints"></a>Private Endpunkte
 
@@ -201,7 +201,7 @@ Erstellen Sie einen [privaten Endpunkt](/azure/private-link/private-endpoint-ove
 
 Wenn Sie den Zugriff auf Azure Data Explorer über die öffentliche IP-Adresse vollständig deaktivieren möchten, erstellen Sie eine weitere Eingangsregel in der NSG. Diese Regel muss eine niedrigere [Priorität](/azure/virtual-network/security-overview#security-rules) haben (eine höhere Zahl). 
 
-| **Verwenden Sie**   | **Quelle** | **Quelldiensttag** | **Quellportbereiche**  | **Ziel** | **Zielportbereiche** | **Protokoll ** | **Aktion** | **Priorität ** |
+| **Verwenden Sie**   | **Quelle** | **Quelldiensttag** | **Quellportbereiche**  | **Ziel** | **Zielportbereiche** | **Protokoll** | **Aktion** | **Priority** |
 | ---   | --- | --- | ---  | --- | --- | --- | --- | --- |
 | Deaktivieren des Zugriffs über das Internet | Diensttag | Internet | *  | VirtualNetwork | * | Any | Verweigern | höhere Zahl als die oben aufgeführten Regeln |
 
@@ -245,10 +245,8 @@ crl3.digicert.com:80
 ```
 
 > [!NOTE]
-> Wenn Sie [Azure Firewall](/azure/firewall/overview) verwenden, fügen Sie eine **Netzwerkregel** mit den folgenden Eigenschaften hinzu:
-> | **Protokoll**   | **Quellentyp** | **Quelle** | **Diensttags**  | **Zielports** |
-> | ---   | --- | --- | ---  | --- |
-> | TCP | IP-Adresse | * | AzureMonitor | 443 |
+> Wenn Sie [Azure Firewall](/azure/firewall/overview) verwenden, fügen Sie eine **Netzwerkregel** mit den folgenden Eigenschaften hinzu: <br>
+> **Protokoll:** TCP <br> **Quelltyp:** IP-Adresse <br> **Quelle:** * <br> **Diensttags:** AzureMonitor <br> **Zielports:** 443
 
 Sie müssen außerdem die [Routingtabelle](/azure/virtual-network/virtual-networks-udr-overview) für das Subnetz mit den [Verwaltungsadressen](#azure-data-explorer-management-ip-addresses) und [Systemüberwachungsadressen](#health-monitoring-addresses) mit *Internet* als nächstem Hop definieren, um Probleme mit asymmetrischen Routen zu vermeiden.
 

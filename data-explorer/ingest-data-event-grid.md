@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: c96203ccfa0c4dc70fff83454dac217cccfc0a6c
-ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
+ms.openlocfilehash: 5cab29b20ad726c1482fa892ad4dadece464f01d
+ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89502771"
+ms.lasthandoff: 09/21/2020
+ms.locfileid: "90832716"
 ---
 # <a name="ingest-blobs-into-azure-data-explorer-by-subscribing-to-event-grid-notifications"></a>Erfassen von Blobs in Azure Data Explorer durch das Abonnieren von Event Grid-Benachrichtigungen
 
@@ -68,19 +68,20 @@ Verbinden Sie nun das Speicherkonto mit Azure Data Explorer, so dass die in den 
 
     :::image type="content" source="media/ingest-data-event-grid/data-ingestion-create.png" alt-text="Hinzufügen der Datenverbindung für die Datenerfassung":::
 
+### <a name="data-connection---basics-tab"></a>Datenverbindung: Registerkarte „Grundlagen“
+
 1. Wählen Sie den Verbindungstyp aus: **Blobspeicher**.
 
 1. Füllen Sie das Formular mit den folgenden Informationen aus:
 
-    :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-basics.png" alt-text="Ausfüllen des Event Grid-Formulars mit grundlegenden Verbindungsinformationen":::
-
-     Datenquelle:
+    :::image type="content" source="media/ingest-data-event-grid/data-connection-basics.png" alt-text="Ausfüllen des Event Grid-Formulars mit grundlegenden Verbindungsinformationen":::
 
     |**Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**|
     |---|---|---|
     | Name der Datenverbindung | *test-grid-connection* | Der Name der Verbindung, die Sie im Azure Data Explorer erstellen möchten.|
     | Speicherkontoabonnement | Ihre Abonnement-ID | Die Abonnement-ID, unter der sich Ihr Speicherkonto befindet.|
     | Speicherkonto | *gridteststorage1* | Der Name des zuvor erstellten Speicherkontos.|
+    | Ereignistyp | *Blob erstellt* oder *Blob umbenannt* | Der Typ des Ereignisses, das die Erfassung auslöst |
     | Ressourcenerstellung | *Automatisch* | Legen Sie fest, ob Azure Data Explorer ein Event Grid Abonnement, einen Event Hub-Namespace und einen Event Hub für Sie erstellen soll. Eine ausführliche Erläuterung der manuellen Erstellung Event Grid-Abonnements finden Sie unter den Verweisen im Abschnitt [Erstellen eines Event Grid-Abonnements in Ihrem Speicherkonto](ingest-data-event-grid.md).|
 
 1. Wählen Sie **Filtereinstellungen** aus, wenn Sie bestimmte Themen nachverfolgen möchten. Legen Sie die Filter für die Benachrichtigungen wie folgt fest:
@@ -95,25 +96,36 @@ Verbinden Sie nun das Speicherkonto mit Azure Data Explorer, so dass die in den 
 
 1. Klicken Sie auf **Weiter: Erfassungseigenschaften**.
 
-1. Füllen Sie das Formular mit den folgenden Informationen aus, und wählen Sie **Weiter: Überprüfen + erstellen**. Für Tabellen- und Zuordnungsnamen wird die Groß-/Kleinschreibung beachtet:
+### <a name="data-connection---ingest-properties-tab"></a>Datenverbindung: Registerkarte „Erfassungseigenschaften“
 
-   :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-ingest-properties.png" alt-text="Überprüfen und Erstellen von Erfassungseigenschaften für Tabellen und Zuordnungen":::
+1. Füllen Sie das Formular mit den folgenden Informationen aus. Für Tabellen- und Zuordnungsnamen wird die Groß-/Kleinschreibung beachtet:
+
+   :::image type="content" source="media/ingest-data-event-grid/data-connection-ingest-properties.png" alt-text="Überprüfen und Erstellen von Erfassungseigenschaften für Tabellen und Zuordnungen":::
 
     Erfassungseigenschaften:
 
      **Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**
     |---|---|---|
-    | Tabelle | *TestTable* | Die Tabelle, die Sie unter **TestDatabase** erstellt haben. |
+    | Tabellenname | *TestTable* | Die Tabelle, die Sie unter **TestDatabase** erstellt haben. |
     | Datenformat | *JSON* | Die unterstützten Formate sind Avro, CSV, JSON, MULTILINE JSON, ORC, PARQUET, PSV, SCSV, SOHSV, TSV, TXT, TSVE, APACHEAVRO, RAW und W3CLOG. Die unterstützten Komprimierungsoptionen sind Zip und GZip. |
     | Zuordnung | *TestMapping* | Die Zuordnung, die Sie in **TestDatabase** erstellt haben, um eingehende JSON-Daten den Spaltennamen und Datentypen von **TestTable** zuzuordnen.|
+    | Erweiterte Einstellungen | *Die Daten haben Überschriften.* | Ignoriert Überschriften. Unterstützt für Dateien vom Typ „*SV“.|
+
+   > [!NOTE]
+   > Sie müssen nicht alle **Standardroutingeinstellungen** angeben. Es ist auch zulässig, nur einen Teil der Einstellungen anzugeben.
+1. Klicken Sie auf **Weiter: Überprüfen und erstellen**.
+
+### <a name="data-connection---review--create-tab"></a>Datenverbindung: Registerkarte „Überprüfen und erstellen“
 
 1. Überprüfen Sie die Ressourcen, die automatisch für Sie erstellt wurden, und wählen Sie **Erstellen** aus.
 
     :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-review-create.png" alt-text="Überprüfen und Erstellen einer Datenverbindung für Event Grid":::
 
-1. Warten Sie, bis die Bereitstellung abgeschlossen wurde. Wenn bei Ihrer Bereitstellung ein Fehler aufgetreten ist, können Sie neben der fehlerhaften Phase auf **Vorgangsdetails** klicken, um weitere Informationen zur Fehlerursache anzuzeigen. Sie können auch **Erneut bereitstellen** auswählen, um die Bereitstellung der Ressourcen zu wiederholen.
+### <a name="deployment"></a>Bereitstellung
 
-    :::image type="content" source="media/ingest-data-event-grid/deploy-event-grid-resources.png" alt-text="Bereitstellen von Event Grid-Ressourcen":::
+Warten Sie, bis die Bereitstellung abgeschlossen wurde. Wenn bei Ihrer Bereitstellung ein Fehler aufgetreten ist, können Sie neben der fehlerhaften Phase auf **Vorgangsdetails** klicken, um weitere Informationen zur Fehlerursache anzuzeigen. Sie können auch **Erneut bereitstellen** auswählen, um die Bereitstellung der Ressourcen zu wiederholen. Sie können die Parameter vor der Bereitstellung ändern.
+
+:::image type="content" source="media/ingest-data-event-grid/deploy-event-grid-resources.png" alt-text="Bereitstellen von Event Grid-Ressourcen":::
 
 ## <a name="generate-sample-data"></a>Generieren von Beispieldaten
 

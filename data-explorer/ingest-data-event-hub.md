@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 84f4348f1d172238bd71de55e989ed8520f78b93
-ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
+ms.openlocfilehash: 69438457dfcbfc4e29805d5d193c227538910e45
+ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89502754"
+ms.lasthandoff: 09/21/2020
+ms.locfileid: "90832645"
 ---
 # <a name="ingest-data-from-event-hub-into-azure-data-explorer"></a>Erfassen von Daten aus Event Hub in Azure Data Explorer
 
@@ -109,40 +109,45 @@ Als Nächstes stellen Sie über Azure Data Explorer eine Verbindung mit dem Even
 
     ![Testdatenbank auswählen](media/ingest-data-event-hub/select-test-database.png)
 
-1. Wählen Sie **Datenerfassung** und dann **Datenverbindung hinzufügen** aus. Füllen Sie dann das Formular mit den folgenden Informationen aus. Wählen Sie **Erstellen**, wenn Sie fertig sind.
+1. Wählen Sie **Datenerfassung** und dann **Datenverbindung hinzufügen** aus. 
 
-    ![Event Hub-Verbindung](media/ingest-data-event-hub/event-hub-connection.png)
+    :::image type="content" source="media/ingest-data-event-hub/event-hub-connection.png" alt-text="Auswählen von „Datenerfassung“ und „Datenverbindung hinzufügen“ in Event Hub: Azure Data Explorer":::
 
-    **Datenquelle:**
+### <a name="create-a-data-connection"></a>Erstellen einer Datenverbindung
+
+1. Füllen Sie das Formular mit den folgenden Informationen aus:
+
+    :::image type="content" source="media/ingest-data-event-hub/data-connection-pane.png" alt-text="Bereich „Datenverbindung“ in Event Hub: Azure Data Explorer":::
 
     **Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**
     |---|---|---|
     | Name der Datenverbindung | *test-hub-connection* | Der Name der Verbindung, die Sie im Azure-Daten-Explorer erstellen möchten.|
+    | Subscription |      | Die Abonnement-ID, unter der sich die Event Hub-Ressource befindet  |
     | Event Hub-Namespace | Ein eindeutiger Namespacename | Der von Ihnen zuvor ausgewählte Name, der Ihren Namespace identifiziert. |
-    | Event Hub | *test-hub* | Der von Ihnen erstellte Event Hub. |
-    | Consumergruppe | *test-group* | Die Consumergruppe, die in dem von Ihnen erstellten Event Hub definiert ist. |
+    | Event Hub | *test-hub* | Der von Ihnen erstellte Event Hub |
+    | Consumergruppe | *test-group* | Die Consumergruppe, die in dem von Ihnen erstellten Event Hub definiert ist |
     | Ereignissystemeigenschaften | Auswählen relevanter Eigenschaften | Die [Event Hub-Systemeigenschaften](/azure/service-bus-messaging/service-bus-amqp-protocol-guide#message-annotations). Wenn pro Ereignisnachricht mehrere Datensätze vorhanden sind, werden die Systemeigenschaften dem ersten Datensatz hinzugefügt. Beim Hinzufügen von Systemeigenschaften [erstellen](kusto/management/create-table-command.md) oder [aktualisieren](kusto/management/alter-table-command.md) Sie das Tabellenschema und die [Zuordnung](kusto/management/mappings.md), um die ausgewählten Eigenschaften einzubeziehen. |
     | Komprimierung | *None* | Der Komprimierungstyp der Event Hub-Nachrichtennutzlast. Unterstützte Komprimierungstypen: *None, GZip*.|
-    | | |
+    
+#### <a name="target-table"></a>Zieltabelle
 
-    **Zieltabelle:**
+Es stehen zwei Routingoptionen für erfasste Daten zur Verfügung: *statisch* und *dynamisch*. In diesem Artikel verwenden Sie statisches Routing, für das der Tabellenname, das Datenformat und die Zuordnung als Standardwerte angegeben werden müssen. Enthält die Event Hub-Nachricht Datenroutinginformationen, überschreiben diese Routinginformationen die Standardeinstellungen.
 
-    Es stehen zwei Routingoptionen für erfasste Daten zur Verfügung: *statisch* und *dynamisch*. 
-    In diesem Artikel verwenden Sie statisches Routing, für das der Tabellenname, das Datenformat und die Zuordnung angegeben werden müssen. Lassen Sie das Kontrollkästchen **My data includes routing info** (Meine Daten enthalten Routinginformationen) daher deaktiviert.
+1. Füllen Sie die folgenden Routingeinstellungen aus:
+  
+   :::image type="content" source="media/ingest-data-event-hub/default-routing-settings.png" alt-text="Standardroutingeinstellungen für das Erfassen von Daten in Event Hub: Azure Data Explorer":::
+        
+   |**Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**
+   |---|---|---|
+   | Tabellenname | *TestTable* | Die Tabelle, die Sie unter **TestDatabase** erstellt haben. |
+   | Datenformat | *JSON* | Die unterstützen Formate sind Avro, CSV, JSON, MULTILINE JSON, ORC, PARQUET, PSV, SCSV, SOHSV, TSV, TXT, TSVE, APACHEAVRO und W3CLOG. |
+   | Zuordnung | *TestMapping* | Die [Zuordnung](kusto/management/mappings.md), die Sie in **TestDatabase** erstellt haben, um eingehende Daten den Spaltennamen und Datentypen von **TestTable** zuzuordnen. Für „JSON“, „MULTILINE JSON“ und „AVRO“ erforderlich, für andere Formate optional.|
+    
+   > [!NOTE]
+   > * Sie müssen nicht alle **Standardroutingeinstellungen** angeben. Es ist auch zulässig, nur einen Teil der Einstellungen anzugeben.
+   > * Nur Ereignisse, die nach dem Erstellen der Datenverbindung in die Warteschlange eingereiht werden, werden erfasst.
 
-     **Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**
-    |---|---|---|
-    | Tabelle | *TestTable* | Die Tabelle, die Sie unter **TestDatabase** erstellt haben. |
-    | Datenformat | *JSON* | Die unterstützen Formate sind Avro, CSV, JSON, MULTILINE JSON, ORC, PARQUET, PSV, SCSV, SOHSV, TSV, TXT, TSVE, APACHEAVRO und W3CLOG. |
-    | Spaltenzuordnung | *TestMapping* | Die [Zuordnung](kusto/management/mappings.md), die Sie in **TestDatabase** erstellt haben, um eingehende JSON-Daten den Spaltennamen und Datentypen von **TestTable** zuzuordnen. Erforderlich für JSON oder MULTILINE JSON; für andere Formate optional.|
-    | | |
-
-    > [!NOTE]
-    > * Wählen Sie **My data includes routing info** (Meine Daten enthalten Routinginformationen) aus, um dynamisches Routing zu verwenden. Dabei enthalten Ihre Daten die erforderlichen Routinginformationen, wie in den Kommentaren der [Beispiel-App](https://github.com/Azure-Samples/event-hubs-dotnet-ingest) zu sehen. Werden sowohl statische als auch dynamische Eigenschaften festgelegt, setzen die dynamischen Eigenschaften die statischen außer Kraft. 
-    > * Nur Ereignisse, die nach dem Erstellen der Datenverbindung in die Warteschlange eingereiht werden, werden erfasst.
-    > * Sie können den Komprimierungstyp auch über dynamische Eigenschaften festlegen, wie in der [Beispiel-App](https://github.com/Azure-Samples/event-hubs-dotnet-ingest) gezeigt wird.
-    > * Die Formate Avro, ORC und PARQUET sowie Ereignissystemeigenschaften werden bei der GZip-Komprimierungsnutzlast nicht unterstützt.
-
+1. Klicken Sie auf **Erstellen**. 
 
 ### <a name="event-system-properties-mapping"></a>Zuordnung von Ereignissystemeigenschaften
 

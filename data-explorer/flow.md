@@ -7,16 +7,16 @@ ms.reviewer: dorcohen
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/25/2020
-ms.openlocfilehash: 58b384b502683b69020c1f211345bfcec8c095b5
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 7c40d6b1f62014e8ede6ed3328dd3a3974d41a88
+ms.sourcegitcommit: c2ab3176db4dd55ac9ca8eee52bbd24096d1277f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874272"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90740302"
 ---
 # <a name="azure-data-explorer-connector-to-power-automate-preview"></a>Azure Data Explorer-Connector für Power Automate (Vorschauversion)
 
-Der Azure Data Explorer-Flow-Connector ermöglicht es Azure Data Explorer, die Flow-Funktionen von [Microsoft Power Automate](https://flow.microsoft.com/) zu nutzen. Sie können Kusto-Abfragen und -Befehle automatisch als Teil einer geplanten oder ausgelösten Aufgabe ausführen.
+Der Azure Data Explorer-Connector für Power Automate (vormals Microsoft Flow) ermöglicht es Azure Data Explorer, die Flowfunktionen von [Microsoft Power Automate](https://flow.microsoft.com/) zu nutzen. Sie können Kusto-Abfragen und -Befehle automatisch als Teil einer geplanten oder ausgelösten Aufgabe ausführen.
 
 Ihre Möglichkeiten:
 
@@ -66,7 +66,7 @@ Ab jetzt wird dieser Flow unter Verwendung dieser Anwendungsanmeldeinformationen
 
 ## <a name="find-the-azure-kusto-connector"></a>Suchen des Azure Kusto-Connectors
 
-Um den Flow-Connector zu verwenden, müssen Sie zunächst einen Trigger hinzufügen. Sie können einen Trigger auf der Grundlage eines wiederkehrenden Zeitraums oder als Reaktion auf eine vorherige Flow-Aktion festlegen.
+Um den Power Automate-Connector zu verwenden, müssen Sie zunächst einen Trigger hinzufügen. Sie können einen Trigger auf der Grundlage eines wiederkehrenden Zeitraums oder als Reaktion auf eine vorherige Flow-Aktion festlegen.
 
 1. [Erstellen Sie einen neuen Flow](https://flow.microsoft.com/manage/flows/new), oder wählen Sie auf der Startseite von Microsoft Power Automate die Optionen **Meine Flows** >  **+ Neu** aus.
 
@@ -98,15 +98,15 @@ Verwenden Sie diese Aktion, um einen [Steuerungsbefehl](kusto/management/index.m
 1. Geben Sie die Cluster-URL an. Beispiel: `https://clusterName.eastus.kusto.windows.net`.
 1. Geben Sie den Namen der Datenbank ein.
 1. Geben Sie den Steuerungsbefehl an:
-   - Wählen Sie dynamischen Inhalt aus den im Flow verwendeten Apps und Connectors aus.
-   - Fügen Sie einen Ausdruck hinzu, um auf Werte zuzugreifen, sie zu konvertieren und zu vergleichen.
+   * Wählen Sie dynamischen Inhalt aus den im Flow verwendeten Apps und Connectors aus.
+   * Fügen Sie einen Ausdruck hinzu, um auf Werte zuzugreifen, sie zu konvertieren und zu vergleichen.
 1. Geben Sie zum Senden der Ergebnisse dieser Aktion per E-Mail in Form einer Tabelle oder eines Diagramms den Diagrammtyp an. Infrage kommt:
-   - Eine HTML-Tabelle
-   - Ein Kreisdiagramm
-   - Ein Zeitdiagramm
-   - Ein Balkendiagramm.
+   * Eine HTML-Tabelle
+   * Ein Kreisdiagramm
+   * Ein Zeitdiagramm
+   * Ein Balkendiagramm.
 
-![Screenshot: Steuerungsbefehl ausführen und Ergebnisse visualisieren](./media/flow/flow-runcontrolcommand.png)
+![Screenshot: Ausführen des Steuerungsbefehls und Visualisieren von Ergebnissen im Bereich „Serie“](./media/flow/flow-runcontrolcommand.png)
 
 > [!IMPORTANT]
 > Geben Sie in das Feld **Clustername** die Cluster-URL ein.

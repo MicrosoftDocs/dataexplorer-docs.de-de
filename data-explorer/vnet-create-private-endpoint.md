@@ -7,14 +7,14 @@ ms.reviewer: elbirnbo
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/09/2020
-ms.openlocfilehash: 7c2dfe62852b05239215f0c88c711cea4093808e
-ms.sourcegitcommit: 50c799c60a3937b4c9e81a86a794bdb189df02a3
+ms.openlocfilehash: aeb807db9b69c6c5b806a7f4b152330ea2dabc72
+ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90067571"
+ms.lasthandoff: 09/16/2020
+ms.locfileid: "90680754"
 ---
-# <a name="create-a-private-endpoint-in-your-azure-data-explorer-cluster-in-your-virtual-network"></a>Erstellen eines privaten Endpunkts in Ihrem Azure Data Explorer-Cluster in Ihrem virtuellen Netzwerk
+# <a name="create-a-private-endpoint-in-your-azure-data-explorer-cluster-in-your-virtual-network-preview"></a>Erstellen eines privaten Endpunkts in Ihrem Azure Data Explorer-Cluster in Ihrem virtuellen Netzwerk (Vorschau)
 
 Verwenden Sie einen Private Link-Dienst mit einem privaten Endpunkt, um sicher auf Ihren Azure Data Explorer-Cluster in Ihrem virtuellen Netzwerk (VNET) zuzugreifen. 
 

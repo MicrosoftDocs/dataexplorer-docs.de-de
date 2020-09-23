@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 11/25/2019
-ms.openlocfilehash: 7031ecf15ea3f7a472fbfbe1791d166e2e35b065
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: 7b97d62e007b5294bf776fb5d5adcbac435056ef
+ms.sourcegitcommit: 3fc8e9b6a313a863916031d4beba84123edcf123
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763889"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90847852"
 ---
 # <a name="kusto-access-control-overview"></a>Übersicht über die Kusto-Zugriffssteuerung
 
@@ -61,7 +61,7 @@ Verwenden Sie den Azure AD-Anwendungsauthentifizierungsablauf, wenn Anforderunge
 ### <a name="microsoft-accounts-msas"></a>Microsoft-Konten (MSAs)
 
 Microsoft-Konto (Microsoft Account, MSA) ist der Begriff für alle von Microsoft verwalteten, nicht organisationsbezogenen Benutzerkonten wie etwa `hotmail.com`, `live.com` oder `outlook.com`.
-Kusto unterstützt die Benutzerauthentifizierung für MSAs (es gibt kein Sicherheitsgruppenkonzept), die anhand ihres universellen Prinzipalnamens (UPN) identifiziert werden.
+Kusto unterstützt die Benutzerauthentifizierung für MSAs (es gibt kein Sicherheitsgruppenkonzept), die anhand ihres Benutzerprinzipalnamens (User Principal Name, UPN) identifiziert werden.
 
 Wenn ein MSA-Prinzipal für eine Azure Data Explorer-Ressource konfiguriert ist, versucht Azure Data Explorer **nicht**, den bereitgestellten UPN aufzulösen.
 

@@ -7,34 +7,34 @@ ms.reviewer: dorcohen
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/15/2020
-ms.openlocfilehash: a9f2be17e02103a64fa31a10bc6195076addb1fc
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 03422de8987e125b5565b0625434ef660426b40a
+ms.sourcegitcommit: c2ab3176db4dd55ac9ca8eee52bbd24096d1277f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874527"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90740268"
 ---
 # <a name="usage-examples-for-azure-data-explorer-connector-to-power-automate-preview"></a>Anwendungsbeispiele für den Azure Data Explorer-Connector für Power Automate (Vorschauversion)
 
-Der Azure Data Explorer-Flow-Connector ermöglicht es Azure Data Explorer, die Flow-Funktionen von [Microsoft Power Automate](https://flow.microsoft.com/) zu nutzen. Sie können Kusto-Abfragen und -Befehle automatisch als Teil einer geplanten oder ausgelösten Aufgabe ausführen. Dieser Artikel enthält einige allgemeine Beispiele für die Verwendung des Flow-Connectors.
+Der Azure Data Explorer-Connector für Power Automate (vormals Microsoft Flow) ermöglicht es Azure Data Explorer, die Flowfunktionen von [Microsoft Power Automate](https://flow.microsoft.com/) zu nutzen. Sie können Kusto-Abfragen und -Befehle automatisch als Teil einer geplanten oder ausgelösten Aufgabe ausführen. Dieser Artikel enthält einige allgemeine Beispiele für die Verwendung des Power Automate-Connectors.
 
-Weitere Informationen finden Sie unter [Azure Data Explorer-Flow-Connector (Vorschauversion)](flow.md).
+Weitere Informationen finden Sie unter [Azure Data Explorer-Connector für Power Automate (Vorschauversion)](flow.md).
 
-## <a name="flow-connector-and-your-sql-database"></a>Flow-Connector und SQL-Datenbank
+## <a name="power-automate-connector-and-your-sql-database"></a>Power Automate-Connector und SQL-Datenbank
 
-Verwenden Sie den Flow-Connector, um Ihre Daten abzufragen und in einer SQL-Datenbank zu aggregieren.
+Verwenden Sie den Power Automate-Connector, um Ihre Daten abzufragen und in einer SQL-Datenbank zu aggregieren.
 
 > [!Note]
-> Verwenden Sie den Flow-Connector nur für geringe Mengen von Ausgabedaten. Der SQL-Einfügevorgang wird für jede Zeile separat durchgeführt. 
+> Verwenden Sie den Power Automate-Connector nur für geringe Mengen von Ausgabedaten. Der SQL-Einfügevorgang wird für jede Zeile separat durchgeführt. 
 
-![Screenshot: Abfragen von Daten mit dem Flow-Connector](./media/flow-usage/flow-sqlexample.png)
+![Screenshot: Abfragen von Daten mit dem Power Automate-Connector](./media/flow-usage/flow-sqlexample.png)
 
 > [!IMPORTANT]
 > Geben Sie in das Feld **Clustername** die Cluster-URL ein.
 
 ## <a name="push-data-to-a-microsoft-power-bi-dataset"></a>Übertragen von Daten an ein Microsoft Power BI-Dataset per Pushvorgang
 
-Der Flow-Connector kann zusammen mit dem Power BI-Connector verwendet werden, um Daten von Kusto-Abfragen an Power BI-Streamingdatasets zu pushen.
+Der Power Automate-Connector kann zusammen mit dem Power BI-Connector verwendet werden, um Daten von Kusto-Abfragen an Power BI-Streamingdatasets zu pushen.
 
 1. Erstellen Sie eine neue Aktion für **Abfrage ausführen und Ergebnisse auflisten**.
 1. Wählen Sie **Neuer Schritt** aus.
@@ -54,7 +54,7 @@ Der Flow wendet automatisch die Power BI-Aktion für jede Zeile der Kusto-Abfra
 
 ## <a name="conditional-queries"></a>Bedingte Abfragen
 
-Sie können die Ergebnisse von Kusto-Abfragen als Eingabe oder Bedingungen für die nächsten Flow-Aktionen verwenden.
+Sie können die Ergebnisse von Kusto-Abfragen als Eingabe oder Bedingungen für die nächsten Power Automate-Aktionen verwenden.
 
 Im folgenden Beispiel wird Kusto nach Vorfällen abgefragt, die sich am letzten Tag ereignet haben. Für jeden behandelten Vorfall wird eine Slack-Nachricht gepostet und eine Pushbenachrichtigung erstellt.
 Für jeden noch aktiven Vorfall wird Kusto nach weiteren Informationen zu ähnlichen Vorfällen abgefragt. Diese Informationen werden als E-Mail gesendet, und eine zugehörige Aufgabe wird in Azure DevOps Server geöffnet.

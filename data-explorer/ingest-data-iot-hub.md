@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/08/2020
-ms.openlocfilehash: 4433126f67187d1bb2a190821dc6a59d96be3f5b
-ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
+ms.openlocfilehash: 47fce36f598c334c5e372ccb7bc44d21bd9ff94f
+ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89502788"
+ms.lasthandoff: 09/21/2020
+ms.locfileid: "90832779"
 ---
 # <a name="ingest-data-from-iot-hub-into-azure-data-explorer"></a>Erfassen von Daten aus IoT Hub in Azure Data Explorer 
 
@@ -75,38 +75,48 @@ Als Nächstes stellen Sie über Azure Data Explorer eine Verbindung mit der IoT�
     
     ![Testdatenbank auswählen](media/ingest-data-iot-hub/select-database.png)
 
-1. Wählen Sie **Datenerfassung** und dann **Datenverbindung hinzufügen** aus. Füllen Sie dann das Formular mit den folgenden Informationen aus. Wählen Sie anschließend **Erstellen** aus.
+1. Wählen Sie **Datenerfassung** und dann **Datenverbindung hinzufügen** aus.
 
-    ![IoT Hub-Verbindung](media/ingest-data-iot-hub/iot-hub-connection.png)
+    :::image type="content" source="media/ingest-data-iot-hub/iot-hub-connection.png" alt-text="Erstellen einer Datenverbindung mit IoT Hub: Azure Data Explorer":::
 
-    **Datenquelle:**
+### <a name="create-a-data-connection"></a>Erstellen einer Datenverbindung
+
+1. Füllen Sie das Formular mit den folgenden Informationen aus. 
+    
+    :::image type="content" source="media/ingest-data-iot-hub/data-connection-pane.png" alt-text="Bereich „Datenverbindung“ in IoT Hub: Azure Data Explorer":::
 
     **Einstellung** | **Feldbeschreibung**
     |---|---|
     | Name der Datenverbindung | Der Name der Verbindung, die Sie in Azure Data Explorer erstellen möchten.
+    | Subscription |  Die Abonnement-ID, unter der sich die Event Hub-Ressource befindet  |
     | IoT Hub | IoT Hub-Name |
     | SAS-Richtlinie | Der Name der SAS-Richtlinie. Leseberechtigungen erforderlich |
     | Consumergruppe |  Die Consumergruppe, die im integrierten IoT Hub-Endpunkt definiert ist. |
     | Ereignissystemeigenschaften | Die [IoT Hub-Ereignissystemeigenschaften](/azure/iot-hub/iot-hub-devguide-messages-construct#system-properties-of-d2c-iot-hub-messages). Beim Hinzufügen von Systemeigenschaften [erstellen](kusto/management/create-table-command.md) oder [aktualisieren](kusto/management/alter-table-command.md) Sie das Tabellenschema und die [Zuordnung](kusto/management/mappings.md), um die ausgewählten Eigenschaften einzubeziehen. | | | 
 
-    > [!NOTE]
-    > Im Falle eines [manuellen Failovers](/azure/iot-hub/iot-hub-ha-dr#manual-failover) muss die Datenverbindung neu erstellt werden.
+#### <a name="target-table"></a>Zieltabelle
 
-    **Zieltabelle:**
+Es stehen zwei Routingoptionen für erfasste Daten zur Verfügung: *statisch* und *dynamisch*. In diesem Artikel verwenden Sie statisches Routing, für das der Tabellenname, das Datenformat und die Zuordnung angegeben werden müssen. Enthält die Event Hub-Nachricht Datenroutinginformationen, überschreiben diese Routinginformationen die Standardeinstellungen.
 
-    Es stehen zwei Routingoptionen für erfasste Daten zur Verfügung: *statisch* und *dynamisch*. 
-    In diesem Artikel verwenden Sie statisches Routing, für das der Tabellenname, das Datenformat und die Zuordnung angegeben werden müssen. Lassen Sie das Kontrollkästchen **My data includes routing info** (Meine Daten enthalten Routinginformationen) daher deaktiviert.
+1. Füllen Sie die folgenden Routingeinstellungen aus:
+    
+    :::image type="content" source="media/ingest-data-iot-hub/default-routing-settings.png" alt-text="Standardroutingeigenschaften – IoT Hub: Azure Data Explorer":::
 
      **Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**
     |---|---|---|
-    | Tabelle | *TestTable* | Die Tabelle, die Sie in **testdb** erstellt haben. |
+    | Tabellenname | *TestTable* | Die Tabelle, die Sie in **testdb** erstellt haben. |
     | Datenformat | *JSON* | Die unterstützen Formate sind Avro, CSV, JSON, MULTILINE JSON, ORC, PARQUET, PSV, SCSV, SOHSV, TSV, TXT, TSVE, APACHEAVRO und W3CLOG.|
-    | Spaltenzuordnung | *TestMapping* | Die [Zuordnung](kusto/management/mappings.md), die Sie in **testdb** erstellt haben, um eingehende JSON-Daten den Spaltennamen und Datentypen von **testdb** zuzuordnen. Für „JSON“, „MULTILINE JSON“ und „AVRO“ erforderlich, für andere Formate optional.|
+    | Zuordnung | *TestMapping* | Die [Zuordnung](kusto/management/mappings.md), die Sie in **testdb** erstellt haben, um eingehende Daten den Spaltennamen und Datentypen von **testdb** zuzuordnen. Für „JSON“, „MULTILINE JSON“ und „AVRO“ erforderlich, für andere Formate optional.|
     | | |
 
+    > [!WARNING]
+    > Im Falle eines [manuellen Failovers](/azure/iot-hub/iot-hub-ha-dr#manual-failover) muss die Datenverbindung neu erstellt werden.
+    
     > [!NOTE]
-    > * Wählen Sie **My data includes routing info** (Meine Daten enthalten Routinginformationen) aus, um dynamisches Routing zu verwenden. Dabei enthalten Ihre Daten die erforderlichen Routinginformationen, wie in den Kommentaren der [Beispiel-App](https://github.com/Azure-Samples/event-hubs-dotnet-ingest) zu sehen. Werden sowohl statische als auch dynamische Eigenschaften festgelegt, setzen die dynamischen Eigenschaften die statischen außer Kraft. 
+    > * Sie müssen nicht alle **Standardroutingeinstellungen** angeben. Es ist auch zulässig, nur einen Teil der Einstellungen anzugeben.
     > * Nur Ereignisse, die nach dem Erstellen der Datenverbindung in die Warteschlange eingereiht werden, werden erfasst.
+
+1. Klicken Sie auf **Erstellen**.
 
 ### <a name="event-system-properties-mapping"></a>Zuordnung von Ereignissystemeigenschaften
 

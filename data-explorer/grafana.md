@@ -6,13 +6,13 @@ ms.author: orspodek
 ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
-ms.date: 11/13/2019
-ms.openlocfilehash: 30a78efa9cc9a54ac12eeaa6bfbdf8f5a7541eeb
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.date: 09/09/2020
+ms.openlocfilehash: 08093fd06fed1facc1d8e55d98785abb952632c8
+ms.sourcegitcommit: 95527c793eb873f0135c4f0e9a2f661ca55305e3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874442"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90534059"
 ---
 # <a name="visualize-data-from-azure-data-explorer-in-grafana"></a>Visualisieren von Daten über Azure Data Explorer in Grafana
 
@@ -22,7 +22,7 @@ Anhand des folgenden Videos lernen Sie, wie Sie Azure Data Explorer mithilfe des
 
 > [!VIDEO https://www.youtube.com/embed/fSR_qCIFZSA]
 
-Alternativ können Sie die [Datenquelle auch konfigurieren](#configure-the-data-source) und die [Daten visualisieren,](#visualize-data), wie es im folgenden Artikel beschrieben ist.
+Stattdessen können Sie zum [Konfigurieren der Datenquelle](#configure-the-data-source) und zum [Visualisieren der Daten](#visualize-data) auch wie in diesem Artikel beschrieben vorgehen.
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -30,9 +30,9 @@ Sie benötigen Folgendes, um diesen Artikel durchzuarbeiten:
 
 * [Grafana, Version 5.3.0 oder höher,](https://docs.grafana.org/installation/) für Ihr Betriebssystem
 
-* [Azure Data Explorer-Plug-In](https://grafana.com/plugins/grafana-azure-data-explorer-datasource/installation) für Grafana
+* [Azure Data Explorer-Plug-In](https://grafana.com/plugins/grafana-azure-data-explorer-datasource/installation) für Grafana. Für die Verwendung des Grafana-Abfrage-Generators ist mindestens die Plug-In-Version 3.0.5 erforderlich.
 
-* Ein Cluster, der die StormEvents-Beispieldaten enthält Weitere Informationen finden Sie unter [Schnellstart: Erstellen eines Azure-Daten-Explorer-Clusters und einer Datenbank](create-cluster-database-portal.md) und [Erfassen von Beispieldaten in Azure-Daten-Explorer](ingest-sample-data.md).
+* Ein Cluster, der die StormEvents-Beispieldaten enthält Weitere Informationen finden Sie unter [Schnellstart: Erstellen eines Azure Data Explorer-Clusters und einer Datenbank](create-cluster-database-portal.md) und [Erfassen von Beispieldaten in Azure Data Explorer](ingest-sample-data.md).
 
     [!INCLUDE [data-explorer-storm-events](includes/data-explorer-storm-events.md)]
 
@@ -56,7 +56,7 @@ Wenn der Dienstprinzipal der Rolle *Betrachter* zugeordnet ist, geben Sie jetzt 
 
     ![Verbindungseigenschaften](media/grafana/connection-properties.png)
 
-    | Grafana-Benutzeroberfläche | Azure-Portal | Azure-Befehlszeilenschnittstelle |
+    | Grafana-Benutzeroberfläche | Azure-Portal | Azure CLI |
     | --- | --- | --- |
     | Subscription Id (Abonnement-ID) | ABONNEMENT-ID | SubscriptionId |
     | Mandanten-ID | Verzeichnis-ID | tenant |
@@ -70,7 +70,7 @@ Wenn der Dienstprinzipal der Rolle *Betrachter* zugeordnet ist, geben Sie jetzt 
 
 ## <a name="visualize-data"></a>Visualisieren von Daten
 
-Nachdem Sie den Azure Data Explorer als Datenquelle für Grafana konfiguriert haben, ist es an der Zeit, Daten zu visualisieren. Hier wird ein einfaches Beispiel gezeigt, aber es sind noch viele weitere Schritte verfügbar. Es wird empfohlen, sich [Schreiben von Abfragen für den Azure Data Explorer](write-queries.md) anzusehen, um Beispiele für andere Abfragen zu erhalten, die für das Beispieldataset ausgeführt werden.
+Nachdem Sie den Azure Data Explorer als Datenquelle für Grafana konfiguriert haben, ist es an der Zeit, Daten zu visualisieren. Hier finden Sie ein einfaches Beispiel, in dem sowohl der Abfrage-Generator-Modus als auch der RAW-Modus des Abfrage-Editors verwendet wird. Es wird empfohlen, sich [Schreiben von Abfragen für den Azure Data Explorer](write-queries.md) anzusehen, um Beispiele für andere Abfragen zu erhalten, die für das Beispieldataset ausgeführt werden.
 
 1. Wählen Sie in Grafana im linken Menü das Plussymbol und dann **Dashboard** aus.
 
@@ -88,7 +88,46 @@ Nachdem Sie den Azure Data Explorer als Datenquelle für Grafana konfiguriert ha
 
     ![Auswählen einer Datenquelle](media/grafana/select-data-source.png)
 
-1. Kopieren Sie im Abfragepanel die folgende Abfrage, und wählen Sie dann **Ausführen** aus. Die Abfrage berücksichtigt die Anzahl der Ereignisse pro Tag für das Beispieldataset.
+### <a name="query-builder-mode"></a>Abfrage-Generator-Modus
+
+Der Abfrage-Editor verfügt über zwei Modi: den Abfrage-Generator-Modus und den RAW-Modus. Verwenden Sie den Abfrage-Generator-Modus, um Ihre Abfrage zu definieren.
+
+1. Wählen Sie unterhalb der Datenquelle die Option **Datenbank** und anschließend in der Dropdownliste Ihre Datenbank aus. 
+1. Wählen Sie **Aus** und anschließend in der Dropdownliste Ihre Tabelle aus.
+
+    :::image type="content" source="media/grafana/query-builder-from-table.png" alt-text="Auswählen der Tabelle im Abfrage-Generator":::    
+
+1. Filtern Sie nach dem Definieren der Tabelle die Daten, wählen Sie die darzustellenden Werte aus, und definieren Sie die Gruppierung dieser Werte.
+
+    **Filter**
+    1. Klicken Sie rechts neben **Where (filter)** (Where (Filtern)) auf **+** , und wählen Sie in der Dropdownliste mindestens eine Spalte Ihrer Tabelle aus. 
+    1. Definieren Sie die Werte für jeden Filter mithilfe des passenden Operators. 
+    Diese Auswahl ähnelt der Verwendung des [Where-Operators](kusto/query/whereoperator.md) in der Kusto-Abfragesprache.
+
+    **Auswählen von Werten**
+    1. Klicken Sie rechts neben **Spaltenwerte** auf **+** , und wählen Sie in der Dropdownliste die Wertspalten aus, die im Bereich angezeigt werden sollen.
+    1. Legen Sie für die einzelnen Wertspalten jeweils den Aggregationstyp fest. 
+    Sie können eine einzelne Wertspalte oder auch mehrere Wertspalten festlegen. Diese Auswahl entspricht der Verwendung des [summarize-Operators](kusto/query/summarizeoperator.md).
+
+    **Gruppieren von Werten** <br> 
+    Klicken Sie rechts neben **Group by (summarize)** (Gruppieren nach (Zusammenfassen)) auf **+** , und wählen Sie in der Dropdownliste mindestens eine Spalte aus, die zum Gruppieren der Werte verwendet werden soll. Dies entspricht dem Gruppierungsausdruck im summarize-Operator.
+
+1. Wählen Sie zum Ausführen der Abfrage die Option **Abfrage ausführen** aus.
+
+    :::image type="content" source="media/grafana/query-builder-all-values.png" alt-text="Abfrage-Generator mit allen Werten":::
+
+    > [!TIP]
+    > Wenn Sie die Einstellungen im Abfrage-Generator abschließen, wird eine Abfrage in der Kusto-Abfragesprache erstellt. Diese Abfrage spiegelt die Logik wider, die Sie mithilfe des grafischen Abfrage-Editors erstellt haben. 
+
+1. Wählen Sie **KQL bearbeiten** aus, um in den RAW-Modus zu wechseln, und bearbeiten Sie Ihre Abfrage mit der Flexibilität und Leistungsfähigkeit der Kusto-Abfragesprache.
+
+:::image type="content" source="media/grafana/query-builder-with-raw-query.png" alt-text="Abfrage-Generator mit unformatierter Abfrage":::
+
+### <a name="raw-mode"></a>RAW-Modus
+
+Bearbeiten Sie die Abfrage im RAW-Modus. 
+
+1. Fügen Sie im Abfragebereich die folgende Abfrage ein, und wählen Sie anschließend **Abfrage ausführen** aus. Die Abfrage berücksichtigt die Anzahl der Ereignisse pro Tag für das Beispieldataset.
 
     ```kusto
     StormEvents
@@ -109,7 +148,12 @@ Nachdem Sie den Azure Data Explorer als Datenquelle für Grafana konfiguriert ha
 
     ![Fertiges Diagramm](media/grafana/finished-graph.png)
 
-1. Wählen Sie im oberen Menü das Speichersymbol aus: ![Symbol „Speichern“](media/grafana/save-icon.png)erforderlich.
+1. Wählen Sie im oberen Menü das Speichersymbol aus: ![Symbol „Speichern“](media/grafana/save-icon.png).
+
+> [!IMPORTANT]
+> Wählen Sie **Switch to builder** (Zum Generator wechseln) aus, um in den Abfrage-Generator-Modus zu wechseln. Daraufhin wird die Abfrage von Grafana in die im Abfrage-Generator verfügbare Logik konvertiert. Die Logik des Abfrage-Generators ist beschränkt, sodass manuelle Änderungen für die Abfrage ggf. verloren gehen.
+
+:::image type="content" source="media/grafana/raw-mode.png" alt-text="Wechseln vom RAW-Modus in den Generator-Modus":::
 
 ## <a name="create-alerts"></a>Erstellen von Warnungen
 

@@ -6,14 +6,14 @@ ms.author: orspodek
 ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
-ms.date: 01/19/2020
+ms.date: 09/19/2020
 ms.custom: contperfq1
-ms.openlocfilehash: f1a7a0d9be744e4014732689e76220adab3bcd93
-ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
+ms.openlocfilehash: d12e1d2382c3d7fe9a980b2b777a02205d28e5de
+ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89502726"
+ms.lasthandoff: 09/21/2020
+ms.locfileid: "90832551"
 ---
 # <a name="monitor-azure-data-explorer-performance-health-and-usage-with-metrics"></a>Überwachen der Azure Data Explorer-Leistung, -Integrität und -Nutzung mit Metriken
 
@@ -81,7 +81,7 @@ Exportmetriken dienen zum Nachverfolgen der allgemeinen Integrität und Leistung
 
 |**Metrik** | **Einheit** | **Aggregation** | **Beschreibung der Metrik** | **Dimensionen** |
 |---|---|---|---|---|
-Fortlaufender Export – Anzahl der exportierten Datensätze    | Anzahl | SUM | Die Anzahl exportierter Datensätze in allen Aufträgen mit fortlaufendem Export. | Keine |
+Fortlaufender Export – Anzahl der exportierten Datensätze    | Anzahl | SUM | Die Anzahl exportierter Datensätze in allen Aufträgen mit fortlaufendem Export. | ContinuousExportName |
 Fortlaufender Export – maximale Verzögerung |    Anzahl   | Max   | Die Verzögerung (in Minuten), die von Aufträgen mit fortlaufendem Export im Cluster gemeldet wurde. | Keine |
 Fortlaufender Export – ausstehende Anzahl | Anzahl | Max   | Die Anzahl ausstehender Aufträge mit fortlaufendem Export. Diese Aufträge sind ausführungsbereit, befinden sich aber in einer Warteschlange (möglicherweise aufgrund von unzureichender Kapazität). 
 Fortlaufender Export – Ergebnis    | Anzahl |   Anzahl   | Das Ergebnis (Fehler/Erfolg) der einzelnen Ausführungen des fortlaufenden Exports. | ContinuousExportName |
@@ -96,7 +96,7 @@ Erfassungsmetriken dienen zum Nachverfolgen der allgemeinen Integrität und Leis
 | Batchblob – Anzahl | Anzahl | Avg, Max, Min | Anzahl der Datenquellen in einem abgeschlossenen Batch für die Erfassung | Datenbank |
 | Batchdauer | Sekunden | Avg, Max, Min | Dauer der Batchverarbeitungsphase im Erfassungsflow  | Datenbank |
 | Batchgröße | Byte | Avg, Max, Min | Nicht komprimierte erwartete Datengröße in einem aggregierten Batch für die Erfassung | Datenbank |
-| Verarbeitete Batches | Anzahl | Avg, Max, Min | Anzahl der für die Erfassung abgeschlossenen Batches `BatchCompletionReason`: Gibt an, ob die Batchverarbeitungszeit oder das Limit für Datengröße/Dateianzahl in der [Batchrichtlinie](/azure/data-explorer/kusto/management/batchingpolicy) erreicht wurde | Datenbank, BatchCompletionReason |
+| Verarbeitete Batches | Anzahl | Avg, Max, Min | Anzahl der für die Erfassung abgeschlossenen Batches `Batching Type`: Gibt an, ob die Batchverarbeitungszeit oder der Grenzwert für Datengröße/Dateianzahl in der [Batchrichtlinie](/azure/data-explorer/kusto/management/batchingpolicy) erreicht wurde. | Datenbank, Batchverarbeitungstyp |
 | Wartezeit bei der Ermittlung | Sekunden | Avg, Max, Min | Die Zeit zwischen dem Hinzufügen von Daten zur Warteschlange und der Erkennung durch die Datenverbindung. Diese Zeit ist nicht in der **Gesamterfassungsdauer für Kusto** oder in **KustoEventAge (Wartezeit bei der Erfassung)** enthalten. | Datenbank, Tabelle, Art der Datenverbindung, Name der Datenverbindung |
 | Verarbeitete Ereignisse (für Event/IoT Hub) | Anzahl | Max, Min, Sum | Gesamtzahl der Ereignisse, die von Event Hubs gelesen und vom Cluster verarbeitet werden. Die Ereignisse werden danach unterteilt, ob sie vom Clustermodul abgelehnt oder akzeptiert werden. | EventStatus |
 | Latenz bei der Erfassung | Sekunden | Avg, Max, Min | Latenz der erfassten Daten ab dem Empfangszeitpunkt der Daten im Cluster bis zu dem Zeitpunkt, zu dem die Daten bereit zum Abfragen sind. Der Zeitraum der Erfassungslatenz richtet sich nach dem Erfassungsszenario. | Keine |
