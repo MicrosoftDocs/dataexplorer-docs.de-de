@@ -8,32 +8,32 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: bb3f217b1ec0631f533a10433a7be368945667d7
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 8433773111f65e0271692bc3d1ba68cf0bc7c544
+ms.sourcegitcommit: 44a4f7ea5c5d75301d7a09b7dc1254a1e5f08eaa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87344534"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210510"
 ---
 # <a name="series_fill_const"></a>series_fill_const()
 
 Ersetzt fehlende Werte in einer Reihe durch einen angegebenen konstanten Wert.
 
-Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe, ersetzt alle Instanzen von missing_value_placeholder durch angegebene constant_value und gibt das resultierende Array zurück.
+Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe, ersetzt alle Instanzen missing_value_placeholder durch den angegebenen constant_value und gibt das resultierende Array zurück.
 
 ## <a name="syntax"></a>Syntax
 
-`series_fill_const(`*x* `[, ` *constant_value* `[,` *missing_value_placeholder*`]])`
+`series_fill_const(`*x* `, ` *constant_value* `[,` *missing_value_placeholder*`])`
 * Gibt Series *x* zurück, wobei alle Instanzen von *missing_value_placeholder* durch *constant_value*ersetzt werden.
 
 ## <a name="arguments"></a>Argumente
 
 * *x*: Skalarausdruck des dynamischen Arrays, bei dem es sich um ein Array numerischer Werte handelt.
-* *constant_value*: Parameter, der einen Platzhalter für einen fehlenden zu ersetzenden Wert angibt. Der Standardwert ist *0*. 
+* *constant_value*: der-Wert, der fehlende Werte ersetzt. 
 * *missing_value_placeholder*: optionaler Parameter, der einen Platzhalter für einen fehlenden zu ersetzenden Wert angibt. Der Standardwert ist `double` (*null*).
 
 **Hinweise**
-* Sie können eine Reihe erstellen, die mit einem konstanten Wert ausgefüllt wird, indem Sie `default = ` die *DefaultValue* -Syntax verwenden (oder nur weglassen, der die Annahme 0 annimmt). Weitere Informationen finden Sie unter [make-Series](make-seriesoperator.md).
+* Wenn Sie die Reihe mithilfe des Operators " [make-Series](make-seriesoperator.md) " erstellen, füllt Sie fehlende Werte standardmäßig 0 aus, oder Sie können einen konstanten Wert angeben, der ausgefüllt werden soll, indem Sie `default = ` *DefaultValue* in der Anweisung "Make-Series" angeben.
 
 ```kusto
 make-series num=count() default=-1 on TimeStamp from ago(1d) to ago(1h) step 1h by Os, Browser
