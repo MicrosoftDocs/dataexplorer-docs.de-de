@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8433773111f65e0271692bc3d1ba68cf0bc7c544
-ms.sourcegitcommit: 44a4f7ea5c5d75301d7a09b7dc1254a1e5f08eaa
+ms.openlocfilehash: 7e587ab08c009516788e3a44b0b8e4a321741d94
+ms.sourcegitcommit: 8853e50a798ee7c78b69bf9822bbf1ced3abe73c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210510"
+ms.lasthandoff: 09/25/2020
+ms.locfileid: "91227023"
 ---
 # <a name="series_fill_const"></a>series_fill_const()
 
@@ -33,7 +33,7 @@ Nimmt einen Ausdruck, der das dynamische numerische Array enthält, als Eingabe,
 * *missing_value_placeholder*: optionaler Parameter, der einen Platzhalter für einen fehlenden zu ersetzenden Wert angibt. Der Standardwert ist `double` (*null*).
 
 **Hinweise**
-* Wenn Sie die Reihe mithilfe des Operators " [make-Series](make-seriesoperator.md) " erstellen, füllt Sie fehlende Werte standardmäßig 0 aus, oder Sie können einen konstanten Wert angeben, der ausgefüllt werden soll, indem Sie `default = ` *DefaultValue* in der Anweisung "Make-Series" angeben.
+* Wenn Sie die Reihe mithilfe des Operators " [make-Series](make-seriesoperator.md) " erstellen, werden die fehlenden Werte mit dem Standardwert 0 ausgefüllt. Sie können auch einen konstanten Wert angeben, der ausgefüllt werden soll, indem Sie `default = ` *DefaultValue* in der Make-Series-Anweisung angeben.
 
 ```kusto
 make-series num=count() default=-1 on TimeStamp from ago(1d) to ago(1h) step 1h by Os, Browser
