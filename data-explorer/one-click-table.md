@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/06/2020
-ms.openlocfilehash: 8732edf3b2cb9600fcce1ed03097d893c6615528
-ms.sourcegitcommit: c2ab3176db4dd55ac9ca8eee52bbd24096d1277f
+ms.openlocfilehash: 3302e7cb94a2184be64664f3c3d8698b8bea7643
+ms.sourcegitcommit: 92b8057a36bd7daa16226f1526b29253bceb3602
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90740899"
+ms.lasthandoff: 09/28/2020
+ms.locfileid: "91402740"
 ---
 # <a name="create-a-table-in-azure-data-explorer-preview"></a>Erstellen einer Tabelle in Azure Data Explorer (Vorschauversion)
 
@@ -41,19 +41,19 @@ Das Fenster **Tabelle erstellen** wird geöffnet, und die Registerkarte **Quelle
 1. Wählen Sie unter **Quelltyp** die Datenquelle aus, die Sie zum Erstellen der Tabellenzuordnung verwenden möchten. Sie können zwischen folgenden Optionen wählen: **Aus Blob**, **Aus Datei** und **Aus Container**.
    
     
-    * Gehen Sie bei Verwendung eines **Blobs** wie folgt vor:
+    * Gehen Sie bei Verwendung eines **Containers** wie folgt vor:
         * Geben Sie die Speicher-URL des Blobs und optional die Stichprobengröße ein. 
         * Filtern Sie Ihre Dateien mithilfe der **Dateifilter**. 
         * Wählen Sie eine Datei aus, die im nächsten Schritt zum Definieren des Schemas verwendet wird.
 
-        :::image type="content" source="media/one-click-table/blob.png" alt-text="Erstellen einer Tabelle unter Verwendung eines Blobs zum Erstellen einer Schemazuordnung":::
+        :::image type="content" source="media/one-click-table/storage.png" alt-text="Erstellen einer Tabelle unter Verwendung eines Blobs zum Erstellen einer Schemazuordnung":::
     
     * Gehen Sie bei Verwendung einer **lokalen Datei** wie folgt vor:
         * Wählen Sie **Durchsuchen** aus, um nach der Datei zu suchen, oder ziehen Sie die Datei in das Feld.
 
         :::image type="content" source="./media/one-click-table/data-from-file.png" alt-text="Erstellen einer Tabelle auf der Grundlage von Daten aus einer lokalen Datei":::
 
-    * Gehen Sie bei Verwendung eines **Containers** wie folgt vor:
+    * Gehen Sie bei Verwendung eines **Blobs** wie folgt vor:
         * Fügen Sie im Feld **Mit Speicher verknüpfen** die [SAS-URL](/azure/vs-azure-tools-storage-explorer-blobs#get-the-sas-for-a-blob-container) des Containers hinzu, und geben Sie optional die Stichprobengröße ein. 
 
 1. Wählen Sie **Schema bearbeiten** aus, um zur Registerkarte **Schema** zu gelangen.
