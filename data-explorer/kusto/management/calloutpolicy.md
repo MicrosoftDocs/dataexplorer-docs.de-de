@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 809088f35567f85444755d89ab30e02fad46abaf
-ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
+ms.openlocfilehash: 6e3bb943347e4ea794733451fcf65674e5e23ca7
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/16/2020
-ms.locfileid: "90680676"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452662"
 ---
 # <a name="callout-policy"></a>Aufrufrichtlinie
 
@@ -24,13 +24,12 @@ Callout-Richtlinien werden auf Cluster Ebene verwaltet und in die folgenden Type
 * `kusto` -Steuert Azure Daten-Explorer-Cluster übergreifende Abfragen.
 * `sql` -Steuert das [SQL-Plug](../query/sqlrequestplugin.md)-in.
 * `cosmosdb` -Steuert das [cosmosdb-Plug](../query/cosmosdb-plugin.md)-in.
-* `webapi` -Steuert andere externe Webaufrufe.
 * `sandbox_artifacts`-Steuert Sandbox-Plug-ins ([python](../query/pythonplugin.md)  |  [R](../query/rplugin.md)).
 * `external_data` -Steuert den Zugriff auf externe Daten über [externe Tabellen](../query/schema-entities/externaltables.md) oder den [externaldata](../query/externaldata-operator.md) -Operator.
 
 Die Legenden Richtlinie besteht aus folgendem:
 
-* **Callouttype** : definiert den Typ der Legende und kann `kusto` , oder sein. `sql``webapi`
+* **Callouttype** : definiert den Typ der Legende und kann `kusto` oder sein `sql` .
 * **Callouturiregex** : gibt den zulässigen regulären Ausdruck der Legenden Domäne an.
 * **Cancall:** gibt an, ob die Legende zulässige externe Aufrufe ist.
 
@@ -63,13 +62,13 @@ Die Befehle erfordern [alldatabasesadmin](access-control/role-based-authorizatio
 **Ändern von Legenden Richtlinien**
 
 ```kusto
-.alter cluster policy callout @'[{"CalloutType": "webapi","CalloutUriRegex": "en\\.wikipedia\\.org","CanCall": true}]'
+.alter cluster policy callout @'[{"CalloutType": "sql","CalloutUriRegex": "sqlname.database.azure.com","CanCall": true}]'
 ```
 
 **Hinzufügen eines Satzes zulässiger Legenden Aufrufe**
 
 ```kusto
-.alter-merge cluster policy callout @'[{"CalloutType": "webapi","CalloutUriRegex": "en\\.wikipedia\\.org","CanCall": true}, {"CalloutType": "webapi","CalloutUriRegex": "bing\\.com","CanCall": true}]'
+.alter-merge cluster policy callout @'[{"CalloutType": "sql","CalloutUriRegex": "sqlname.database.azure.com","CanCall": true}]'
 ```
 
 **Alle nicht unveränderlichen Legenden Richtlinien löschen**

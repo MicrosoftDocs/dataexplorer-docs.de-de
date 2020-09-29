@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 03/29/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: cf10a18a699e1e93521b4927008858cbebd2baf8
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 5485088ba8dd4e348733c9d8e14e2dc54dd2c858
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345843"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452832"
 ---
 # <a name="render-operator"></a>render-Operator
 
@@ -34,7 +34,7 @@ range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 
 *T* - `|` `render` *Visualisierung* [ `with` `(` *propertyName* `=` *PropertyValue* [ `,` ...] `)` ]
 
-Hierbei gilt Folgendes:
+Hierbei gilt:
 
 * *Visualisierung* gibt die Art der zu verwendenden Visualisierung an. Die unterstützten Werte sind:
 
@@ -43,19 +43,19 @@ Hierbei gilt Folgendes:
 |*Visualisierung*     |BESCHREIBUNG|
 |--------------------|-|
 | `anomalychart`     | Vergleichbar mit timechart, [hebt jedoch Anomalien](./samples.md#get-more-out-of-your-data-in-kusto-with-machine-learning) mithilfe [series_decompose_anomalies](./series-decompose-anomaliesfunction.md) Funktion hervor. |
-| `areachart`        | Flächen Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten sind y-Achsen. |
+| `areachart`        | Flächen Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
 | `barchart`         | Die erste Spalte ist die x-Achse und kann "Text", "DateTime" oder "numeric" sein. Andere Spalten sind numerisch und werden als horizontale Striche angezeigt.|
 | `card`             | Der erste Ergebnisdaten Satz wird als Satz von skalaren Werten behandelt und als Karte angezeigt. |
 | `columnchart`      | Wie `barchart` bei vertikalen Streifen anstelle von horizontalen Bändern.|
 | `ladderchart`      | Die letzten zwei Spalten sind die x-Achse, andere Spalten sind y-Achse.|
-| `linechart`        | ein Liniendiagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten sind y-Achsen. |
+| `linechart`        | ein Liniendiagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
 | `piechart`         | Die erste Spalte ist eine Farbachse, die zweite Spalte enthält Zahlen. |
 | `pivotchart`       | Zeigt eine Pivottabelle und ein Diagramm an. Der Benutzer kann Daten, Spalten, Zeilen und verschiedene Diagrammtypen interaktiv auswählen. |
-| `scatterchart`     | Punkt Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten sind y-Achsen. |
-| `stackedareachart` | Gestapeltes Flächen Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten sind y-Achsen. |
+| `scatterchart`     | Punkt Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
+| `stackedareachart` | Gestapeltes Flächen Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
 | `table`            | Standard-Ergebnisse werden als Tabelle angezeigt.|
 | `timechart`        | ein Liniendiagramm. Die erste Spalte ist die X-Achse und muss einen datetime-Wert enthalten. Andere (numerische) Spalten sind y-Achsen. Es gibt eine Zeichen folgen Spalte, deren Werte verwendet werden, um die numerischen Spalten zu gruppieren und verschiedene Zeilen im Diagramm zu erstellen (weitere Zeichen folgen Spalten werden ignoriert). |
-| `timepivot`        | Interaktive Navigation über die Ereignis Zeitachse (Pivotierung auf der Zeitachse)|
+| `timepivot`        | Interaktive Navigation durch die Ereignisse der Zeitachse (Pivotierung auf der Zeitachse).|
 
 ::: zone-end
 
@@ -63,11 +63,11 @@ Hierbei gilt Folgendes:
 
 |*Visualisierung*     |BESCHREIBUNG|
 |--------------------|-|
-| `areachart`        | Flächen Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten sind y-Achsen. |
+| `areachart`        | Flächen Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
 | `barchart`         | Die erste Spalte ist die x-Achse und kann "Text", "DateTime" oder "numeric" sein. Andere Spalten sind numerisch und werden als horizontale Striche angezeigt.|
 | `columnchart`      | Wie `barchart` bei vertikalen Streifen anstelle von horizontalen Bändern.|
 | `piechart`         | Die erste Spalte ist eine Farbachse, die zweite Spalte enthält Zahlen. |
-| `scatterchart`     | Punkt Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten sind y-Achsen. |
+| `scatterchart`     | Punkt Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
 | `table`            | Standard-Ergebnisse werden als Tabelle angezeigt.|
 | `timechart`        | ein Liniendiagramm. Die erste Spalte ist die X-Achse und muss einen datetime-Wert enthalten. Andere (numerische) Spalten sind y-Achsen. Es gibt eine Zeichen folgen Spalte, deren Werte verwendet werden, um die numerischen Spalten zu gruppieren und verschiedene Zeilen im Diagramm zu erstellen (weitere Zeichen folgen Spalten werden ignoriert).|
 
@@ -110,24 +110,24 @@ Hierbei gilt Folgendes:
 ::: zone-end
 
 Einige Visualisierungen können durch Bereitstellen der-Eigenschaft weiterentwickelt werden `kind` .
-Diese lauten wie folgt:
+Dies sind:
 
 |*Visualisierung*|`kind`             |BESCHREIBUNG                        |
 |---------------|-------------------|-----------------------------------|
 |`areachart`    |`default`          |Jeder "Bereich" steht eigenständig.     |
-|               |`unstacked`        |Identisch mit `default`.                 |
+|               |`unstacked`        |Wie in `default`.                 |
 |               |`stacked`          |Stapeln Sie die Bereiche auf der rechten Seite.        |
 |               |`stacked100`       |Stapeln Sie die Bereiche auf der rechten Seite, und Strecken Sie diese auf die gleiche Breite wie die anderen.|
 |`barchart`     |`default`          |Jede "Leiste" steht alleine.      |
-|               |`unstacked`        |Identisch mit `default`.                 |
+|               |`unstacked`        |Wie in `default`.                 |
 |               |`stacked`          |Stapel "leisten".                      |
 |               |`stacked100`       |Stapeln Sie "Bard", und Strecken Sie die einzelnen in dieselbe Breite wie die anderen.|
 |`columnchart`  |`default`          |Jede "Spalte" steht eigenständig.   |
-|               |`unstacked`        |Identisch mit `default`.                 |
+|               |`unstacked`        |Wie in `default`.                 |
 |               |`stacked`          |Stapeln Sie die Spalten in der anderen.|
 |               |`stacked100`       |Stapeln Sie "Columns" (Spalten), und Strecken Sie diese auf dieselbe Höhe wie die anderen.|
+|`scatterchart` |`map`              |Erwartete Spalten sind [Längengrad, Breitengrad] oder geojson-Punkt. Die Reihen Spalte ist optional.|
 |`piechart`     |`map`              |Erwartete Spalten sind [Längengrad, Breitengrad], geojson-Punkt, farbachse und numerisch. Wird in Kusto Explorer Desktop unterstützt.|
-|`scatterchart` |`map`              |Erwartete Spalten sind [Längengrad, Breitengrad] oder geojson-Punkt. Die Reihen Spalte ist optional. Wird in Kusto Explorer Desktop unterstützt.|
 
 ::: zone pivot="azuredataexplorer"
 

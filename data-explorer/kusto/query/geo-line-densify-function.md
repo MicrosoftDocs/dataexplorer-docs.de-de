@@ -8,16 +8,16 @@ ms.reviewer: mbrichko
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/01/2020
-ms.openlocfilehash: c5a66255f719d3bd0da962a8eb9d3cae23a8c254
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: f86ec0349b4e84215e9b2fdff33b2d705967bcac
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347832"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452815"
 ---
 # <a name="geo_line_densify"></a>geo_line_densify()
 
-Konvertiert planare Zeilen Kanten durch Hinzufügen von zwischen Punkten in geodäk.
+Konvertiert planare oder mehrzeilige Kanten durch Hinzufügen von zwischen Punkten in geodesics.
 
 ## <a name="syntax"></a>Syntax
 
@@ -25,10 +25,10 @@ Konvertiert planare Zeilen Kanten durch Hinzufügen von zwischen Punkten in geod
 
 ## <a name="arguments"></a>Argumente
 
-* *LineString*: Zeile im [geojson-Format](https://tools.ietf.org/html/rfc7946) und eines [dynamischen](./scalar-data-types/dynamic.md) Datentyps.
+* *LineString*: Zeile oder mehrzeilige im [geojson-Format](https://tools.ietf.org/html/rfc7946) und eines [dynamischen](./scalar-data-types/dynamic.md) Datentyps.
 * *Toleranz*: ein optionaler numerischer Wert, der den maximalen Abstand zwischen dem ursprünglichen planaren Edge und der konvertierten geodäschen edgekette in Meter definiert. Unterstützte Werte liegen im Bereich [0,1, 10000]. Wenn nicht angegeben, wird der Standardwert `10` verwendet.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Eine Zeile im [geojson-Format](https://tools.ietf.org/html/rfc7946) und einen [dynamischen](./scalar-data-types/dynamic.md) Datentyp. Wenn die Zeile oder die Toleranz ungültig ist, führt die Abfrage zu einem NULL-Ergebnis.
 
@@ -38,6 +38,8 @@ Eine Zeile im [geojson-Format](https://tools.ietf.org/html/rfc7946) und einen [d
 **LineString-Definition**
 
 Dynamic ({"Type": "LineString", "Koordinaten": [[lng_1, lat_1], [lng_2, lat_2],..., [lng_N, lat_N]]})
+
+Dynamic ({"Type": "MultiLineString", "Koordinaten": [[line_1, line_2,..., line_N]]})
 
 * Das LineString-Koordinaten Array muss mindestens zwei Einträge enthalten.
 * Die Koordinaten [Längengrad, Breitengrad] müssen gültig sein. Der Längengrad muss eine reelle Zahl im Bereich [-180, + 180] sein, und der Breitengrad muss eine reelle Zahl im Bereich [-90, + 90] sein.

@@ -8,18 +8,18 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: ac9fb575f46bb60e313da4fa2b3c023ac826daec
-ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
+ms.openlocfilehash: eaa4e759f0987940a86c509788f5e8a58b2f9e75
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91057171"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452730"
 ---
-# <a name="alter-materialized-view"></a>. ALTER MATERIALIZED-VIEW
+# <a name="alter-materialized-view"></a>.alter materialized-view
 
 Das Ändern der [materialisierten Sicht](materialized-view-overview.md) kann verwendet werden, um die Abfrage einer materialisierten Sicht zu ändern, während die vorhandenen Daten in der Ansicht beibehalten werden.
 
-Um die materialisierte Sicht zu ändern, sind [Datenbankadministrator](../access-control/role-based-authorization.md) Berechtigungen oder ein Administrator der materialisierten Sicht erforderlich. Weitere Informationen finden Sie unter [Verwaltung von Sicherheitsrollen](../security-roles.md).
+Erfordert [Datenbankadministrator](../access-control/role-based-authorization.md) Berechtigungen oder einen Administrator der materialisierten Sicht.
 
 > [!WARNING]
 > Seien Sie beim Ändern einer materialisierten Sicht besonders vorsichtig. Eine falsche Verwendung kann zu Datenverlusten führen.
@@ -37,9 +37,9 @@ Um die materialisierte Sicht zu ändern, sind [Datenbankadministrator](../access
 
 |Argument|type|BESCHREIBUNG
 |----------------|-------|---|
-|Ansichtsname|Zeichenfolge|Der materialisierte Sichtname.|
-|SourceTableName|Zeichenfolge|Der Name der Quell Tabelle, in der die Sicht definiert ist.|
-|Abfrage|Zeichenfolge|Die materialisierte Ansichts Abfrage.|
+|Ansichtsname|String|Der materialisierte Sichtname.|
+|SourceTableName|String|Der Name der Quell Tabelle, in der die Sicht definiert ist.|
+|Abfrage|String|Die materialisierte Ansichts Abfrage.|
 
 ## <a name="properties"></a>Eigenschaften
 

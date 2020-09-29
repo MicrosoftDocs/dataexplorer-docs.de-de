@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 319a71e5db7019ed28001f44a1d4a4bcb21984e9
-ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
+ms.openlocfilehash: 9b080badd2dc1015319e9b6d44c4c477061f92f9
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "85967246"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452713"
 ---
 # <a name="cache-policy-command"></a>Cacherichtlinienbefehl
 
@@ -21,15 +21,16 @@ In diesem Artikel werden Befehle zum Erstellen und Ändern von [Cache Richtlinie
 
 ## <a name="displaying-the-cache-policy"></a>Anzeigen der Cache Richtlinie
 
-Die Richtlinie kann für Daten oder Tabellen festgelegt werden und wird mit einem der folgenden Befehle angezeigt:
+Die Richtlinie kann für eine Datenbank, eine Tabelle oder eine [materialisierte Sicht](materialized-views/materialized-view-overview.md)festgelegt werden. Sie wird mit einem der folgenden Befehle angezeigt:
 
-* `.show` `database` *DatabaseName* `policy` `caching`
-* `.show``table` *DatabaseName*( `.` *Tabellenname* `policy` )`caching`
+* `.show``database` *DatabaseName* `policy``caching`
+* `.show``table` *TableName* `policy``caching`
+* `.show``materialized-view` *Materializedviewname* `policy``caching`
 
 ## <a name="altering-the-cache-policy"></a>Ändern der Cache Richtlinie
 
 ```kusto
-.alter <entity_type> <database_or_table_name> policy caching hot = <timespan>
+.alter <entity_type> <database_or_table_or_materialized-view_name> policy caching hot = <timespan>
 ```
 
 Ändern der Cache Richtlinie für mehrere Tabellen (im selben Daten Bank Kontext):
@@ -51,11 +52,11 @@ Cache Richtlinie:
 }
 ```
 
-* `entity_type`: Tabelle, Datenbank oder Cluster
-* `database_or_table`: Wenn die Entität eine Tabelle oder Datenbank ist, sollte Ihr Name wie folgt im Befehl angegeben werden: 
+* `entity_type` : Tabelle, Datenbank oder Cluster
+* `database_or_table_or_materialized-view`: Wenn die Entität eine Tabelle oder Datenbank ist, sollte Ihr Name wie folgt im Befehl angegeben werden: 
   - `database_name` oder 
   - `database_name.table_name` oder 
-  - `table_name`(bei Ausführung im Kontext einer bestimmten Datenbank)
+  - `table_name` (bei Ausführung im Kontext einer bestimmten Datenbank)
 
 ## <a name="deleting-the-cache-policy"></a>Löschen der Cache Richtlinie
 
@@ -75,6 +76,7 @@ Cache Richtlinie der Tabelle `MyTable` (im Daten Bank Kontext) wird auf 3 Tage f
 
 ```kusto
 .alter table MyTable policy caching hot = 3d
+.alter materialized-view MyMaterializedView policy caching hot = 3d
 ```
 
 Festlegen der Richtlinie für mehrere Tabellen (im Daten Bank Kontext) auf 3 Tage:
@@ -87,6 +89,12 @@ Löschen einer für eine Tabelle festgelegten Richtlinie:
 
 ```kusto
 .delete table MyTable policy caching
+```
+
+Löschen einer Richtlinie, die für eine materialisierte Sicht festgelegt wurde:
+
+```kusto
+.delete materialized-view MyMaterializedView policy caching
 ```
 
 Löschen einer für eine Datenbank festgelegten Richtlinie:

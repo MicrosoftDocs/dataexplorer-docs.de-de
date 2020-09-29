@@ -8,25 +8,25 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: c1f96fa2fcfd8989936f31ac0c3b608dabdd6830
-ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
+ms.openlocfilehash: 77c86708a20349f5864bd10fa298719dce0fbab9
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91057139"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452798"
 ---
 # <a name="materialized-views-preview"></a>Materialisierte Sichten (Vorschau)
 
-[Materialisierte Sichten](../../query/materialized-view-function.md) machen eine *Aggregations* Abfrage über eine Quell Tabelle verfügbar. Materialisierte Sichten geben immer ein Aktuelles Ergebnis der Aggregations Abfrage zurück (immer aktuell). Das [Abfragen einer materialisierten Sicht](#materialized-views-queries), bei der es sich um einen einmaligen Daten Bereinigungs Prozess handelt, ist leistungsfähiger als die direkte Ausführung der Aggregation über die Quell Tabelle, die jede Abfrage durchführt.
+[Materialisierte Sichten](../../query/materialized-view-function.md) machen eine *Aggregations* Abfrage über eine Quell Tabelle verfügbar. Materialisierte Sichten geben immer ein Aktuelles Ergebnis der Aggregations Abfrage zurück (immer aktuell). Das [Abfragen einer materialisierten Sicht](#materialized-views-queries) ist leistungsfähiger als die direkte Ausführung der Aggregation über die Quell Tabelle, die jede Abfrage durchführt.
 
 > [!NOTE]
-> Materialisierte Sichten weisen einige [Einschränkungen](#limitations-on-creating-materialized-views)auf und funktionieren nicht garantiert für alle Szenarien. Überprüfen Sie die [Leistungs Überlegungen](#performance-considerations) , bevor Sie mit dem Feature arbeiten.
+> Materialisierte Sichten weisen einige [Einschränkungen](materialized-view-create.md#limitations-on-creating-materialized-views)auf und funktionieren nicht garantiert für alle Szenarien. Überprüfen Sie die [Leistungs Überlegungen](#performance-considerations) , bevor Sie mit dem Feature arbeiten.
 
 Verwenden Sie die folgenden Befehle, um materialisierte Sichten zu verwalten:
-* [. CREATE MATERIALIZED-VIEW](materialized-view-create.md)
-* [. ALTER MATERIALIZED-VIEW](materialized-view-alter.md)
-* [. Drop MATERIALIZED-VIEW](materialized-view-drop.md)
-* [. deaktivieren |. enable MATERIALIZED-VIEW](materialized-view-enable-disable.md)
+* [.create materialized-view](materialized-view-create.md)
+* [.alter materialized-view](materialized-view-alter.md)
+* [.drop materialized-view](materialized-view-drop.md)
+* [.disable | .enable materialized-view](materialized-view-enable-disable.md)
 * [. Anzeigen von Befehlen für materialisierte Sichten](materialized-view-show-commands.md)
 
 ## <a name="why-use-materialized-views"></a>Gründe für die Verwendung materialisierter Sichten
@@ -37,7 +37,16 @@ Durch die Investition von Ressourcen (Datenspeicherung, CPU-Hintergrund Zyklen) 
 
 * Aktualität **:** Eine materialisierte Sicht Abfrage gibt immer die aktuellen Ergebnisse zurück, unabhängig davon, wann die Materialisierung zuletzt stattfindet. Die Abfrage kombiniert den materialisierten Teil der Sicht mit den Datensätzen in der Quell Tabelle, die noch nicht materialisiert wurden (der `delta` Teil), wobei immer die aktuellsten Ergebnisse bereitgestellt werden.
 
-* **Kostenreduzierung:** beim [Abfragen einer materialisierten Sicht](#materialized-views-queries) werden weniger Ressourcen aus dem Cluster beansprucht, als die Aggregation für die gesamte Quell Tabelle durchgeführt wird. Die Beibehaltungs Richtlinie der Quell Tabelle kann reduziert werden, wenn nur eine Aggregation erforderlich ist. Durch diese Einrichtung werden die Kosten für den Hot Cache für die Quell Tabelle reduziert.
+* **Kostenreduzierung:** beim [Abfragen einer materialisierten Sicht](#materialized-views-queries) werden weniger Ressourcen aus dem Cluster beansprucht als durch die Aggregation der Quell Tabelle. Die Beibehaltungs Richtlinie der Quell Tabelle kann reduziert werden, wenn nur eine Aggregation erforderlich ist. Durch diese Einrichtung werden die Kosten für den Hot Cache für die Quell Tabelle reduziert.
+
+## <a name="materialized-views-use-cases"></a>Anwendungsfälle für materialisierte Sichten
+
+Im folgenden werden gängige Szenarien beschrieben, die mithilfe einer materialisierten Sicht adressiert werden können:
+
+* Abfragen des letzten Datensatzes pro Entität mithilfe von [ARG_MAX () (Aggregations Funktion)](../../query/arg-max-aggfunction.md).
+* Duplizieren von Datensätzen in einer Tabelle mithilfe [von Any () (Aggregations Funktion)](../../query/any-aggfunction.md).
+* Reduzieren Sie die Datenauflösung, indem Sie regelmäßige Statistiken über die Rohdaten berechnen. Verwenden Sie verschiedene [Aggregations Funktionen](materialized-view-create.md#supported-aggregation-functions) nach Zeit.
+    * Verwenden `T | summarize dcount(User) by bin(Timestamp, 1d)` Sie z. b., um eine aktuelle Momentaufnahme von unterschiedlichen Benutzern pro Tag beizubehalten.
 
 ## <a name="how-materialized-views-work"></a>Funktionsweise materialisierter Sichten
 
@@ -46,46 +55,8 @@ Eine materialisierte Sicht besteht aus zwei Komponenten:
 * Ein *materialisierter* Teil: eine Azure Daten-Explorer Tabelle, die aggregierte Datensätze aus der Quell Tabelle enthält, die bereits verarbeitet wurden.  Diese Tabelle enthält immer einen einzelnen Datensatz gemäß der Group-by-Kombination der Aggregation.
 * Ein *Delta* : die neu erfassten Datensätze in der Quell Tabelle, die noch nicht verarbeitet wurden.
 
-Beim Abfragen der materialisierten Sicht wird der materialisierte Teil mit dem Delta Teil kombiniert, und es wird ein Aktuelles Ergebnis der Aggregations Abfrage bereitgestellt. Der Offline-Materialisierungs Prozess erfasst neue Datensätze aus der *Delta* -in die materialisierte Tabelle und ersetzt vorhandene Datensätze. Der Austausch erfolgt durch das Neuerstellen von Blöcken, die zu ersetzende Datensätze enthalten. Wenn sich Datensätze im *Delta* ständig mit allen Daten-Shards im *materialisierten* Teil schneiden, erfordert jeder Materialisierungs Vorgang das Neuerstellen des gesamten *materialisierten* Teils und wird möglicherweise nicht mehr mit der Geschwindigkeit Schritt halten. Die Erfassungs Rate ist höher als die materialisierungsrate. In diesem Fall wird die Ansicht fehlerhaft, und das *Delta* wird ständig vergrößert.
-
-## <a name="create-a-materialized-view"></a>Erstellen einer materialisierten Sicht
-
-Es gibt zwei Möglichkeiten, eine materialisierte Sicht zu erstellen, die im [Create-Befehl](materialized-view-create.md)durch die Option " *Abgleich* " angegeben wird:
- * **Basierend auf den vorhandenen Datensätzen in der Quell Tabelle erstellen:** 
-      * Die Erstellung kann in Abhängigkeit von der Anzahl der Datensätze in der Quell Tabelle einige Zeit in Anspruch nehmen. Die Ansicht ist bis zum Abschluss nicht für Abfragen verfügbar.
-      * Wenn Sie diese Option verwenden, muss der CREATE-Befehl sein, `async` und die Ausführung kann mit dem Befehl [. Show Operations](../operations.md#show-operations) überwacht werden.
-    
-      > [!IMPORTANT]
-      > * Die Verwendung der Option "Abgleich" wird für Daten im kaltcache nicht unterstützt. Erhöhen Sie ggf. den Zeitraum für den aktiven Cache für die Erstellung der Sicht. Hierfür ist möglicherweise eine horizontale Skalierung erforderlich.    
-      > * Die Verwendung der Abgleich-Option kann für große Quell Tabellen eine lange Zeit in Anspruch nehmen. Wenn dieser Prozess während der Ausführung vorübergehend fehlschlägt, wird er nicht automatisch wiederholt, und eine erneute Ausführung des create-Befehls ist erforderlich.
-    
-* **Erstellen Sie ab jetzt die materialisierte Ansicht:** 
-    * Die materialisierte Sicht wird leer erstellt und enthält nur Datensätze, die nach der Erstellung der Sicht erfasst werden. Die Erstellung dieser Art wird sofort zurückgegeben, erfordert nicht `async` , und die Ansicht ist sofort für Abfragen verfügbar.
-
-### <a name="limitations-on-creating-materialized-views"></a>Einschränkungen beim Erstellen materialisierter Sichten
-
-* Eine materialisierte Sicht kann nicht erstellt werden:
-    * Zusätzlich zu einer anderen materialisierten Sicht.
-    * Auf [Follower-Datenbanken](../../../follower.md). Follower-Datenbanken sind schreibgeschützt, und materialisierte Sichten erfordern Schreibvorgänge.  Materialisierte Sichten, die auf Daten Bank Datenbanken definiert sind, können wie jede andere Tabelle in der Führungskraft von ihren Followern abgefragt werden. 
-* Die Quell Tabelle einer materialisierten Sicht:
-    * Muss eine Tabelle sein, die direkt erfasst wird, entweder mithilfe einer der Erfassungs [Methoden](../../../ingest-data-overview.md#ingestion-methods-and-tools), mithilfe einer [Update Richtlinie](../updatepolicy.md)oder [durch Erfassung von Abfrage Befehlen](../data-ingestion/ingest-from-query.md).
-        * Insbesondere wird die Verwendung von [Move-Blöcken](../move-extents.md) aus anderen Tabellen in die Quell Tabelle der materialisierten Sicht nicht unterstützt. Das Verschieben von Blöcken kann mit folgendem Fehler fehlschlagen: `Cannot drop/move extents from/to table 'TableName' since Materialized View 'ViewName' is currently processing some of these extents` . 
-    * Die [ingestiontime-Richtlinie](../ingestiontimepolicy.md) muss aktiviert sein (der Standardwert ist aktiviert).
-    * Kann nicht für die streamingansung aktiviert werden.
-    * Kann keine eingeschränkte Tabelle oder Tabelle mit aktivierter Sicherheit auf Zeilenebene sein.
-* [Cursor Funktionen](../databasecursor.md#cursor-functions) können nicht über materialisierte Sichten verwendet werden.
-* Der fortlaufende Export aus einer materialisierten Sicht wird nicht unterstützt.
-
-### <a name="materialized-view-retention-policy"></a>Beibehaltungs Richtlinie für materialisierte Ansicht
-
-Die materialisierte Sicht leitet die Richtlinie für die Daten Bank Beibehaltung standardmäßig ab. Die Richtlinie kann mithilfe von [Steuerungs Befehlen](../retentionpolicy.md)geändert werden.
-   
-   * Die Beibehaltungs Richtlinie der materialisierten Sicht steht nicht im Zusammenhang mit der Beibehaltungs Richtlinie der Quell Tabelle.
-   * Wenn die Datensätze der Quell Tabelle nicht anderweitig verwendet werden, kann die Beibehaltungs Richtlinie der Quell Tabelle auf ein Mindestmaß gelöscht werden. Die materialisierte Sicht speichert die Daten weiterhin gemäß der für die Sicht festgelegten Beibehaltungs Richtlinie. 
-   * Während sich materialisierte Sichten im Vorschaumodus befinden, empfiehlt es sich, mindestens sieben Tage und die Wiederherstellbarkeit auf true festzulegen. Diese Einstellung ermöglicht eine schnelle Wiederherstellung von Fehlern und zu Diagnose Zwecken.
-    
-> [!NOTE]
-> Keine Aufbewahrungs Richtlinie für die Quell Tabelle wird derzeit nicht unterstützt.
+Beim Abfragen der materialisierten Sicht wird der materialisierte Teil mit dem Delta Teil kombiniert, und es wird ein Aktuelles Ergebnis der Aggregations Abfrage bereitgestellt. Der Offline-Materialisierungs Prozess erfasst neue Datensätze aus der *Delta* -in die materialisierte Tabelle und ersetzt vorhandene Datensätze. Der Austausch erfolgt durch das Neuerstellen von Blöcken, die zu ersetzende Datensätze enthalten. Wenn sich die Datensätze im *Delta* ständig mit allen Daten-Shards im *materialisierten* Teil schneiden, erfordert jeder Materialisierungs Vorgang das Neuerstellen des gesamten *materialisierten* Teils und wird möglicherweise nicht mit der Erfassungs Rate aufrechterhalten. In diesem Fall wird die Ansicht fehlerhaft, und das *Delta* wird ständig vergrößert.
+Im Abschnitt " [Überwachung](#materialized-views-monitoring) " wird erläutert, wie Sie Probleme beheben können.
 
 ## <a name="materialized-views-queries"></a>Abfragen für materialisierte Sichten
 
@@ -95,16 +66,7 @@ Eine weitere Möglichkeit zum Abfragen der Sicht ist die Verwendung der [materia
 
 Die Sicht kann an datenbankübergreifenden oder datenbankübergreifenden Abfragen teilnehmen, aber nicht in Platzhalter-Unions oder-suchen enthalten sein.
 
-### <a name="query-use-cases"></a>Anwendungsfälle für Abfragen
-
-Im folgenden werden gängige Szenarien beschrieben, die mithilfe einer materialisierten Sicht adressiert werden können:
-
-* Abfragen des letzten Datensatzes pro Entität mithilfe von [ARG_MAX () (Aggregations Funktion)](../../query/arg-max-aggfunction.md).
-* Duplizieren von Datensätzen in einer Tabelle mithilfe [von Any () (Aggregations Funktion)](../../query/any-aggfunction.md).
-* Reduzieren Sie die Datenauflösung, indem Sie regelmäßige Statistiken über die Rohdaten berechnen. Verwenden Sie verschiedene [Aggregations Funktionen](materialized-view-create.md#supported-aggregation-functions) nach Zeit.
-    * Verwenden `T | summarize dcount(User) by bin(Timestamp, 1d)` Sie z. b., um eine aktuelle Momentaufnahme von unterschiedlichen Benutzern pro Tag beizubehalten.
-
-### <a name="query-examples"></a>Beispiele für Abfragen
+### <a name="examples"></a>Beispiele
 
 1. Fragen Sie die gesamte Ansicht ab. Die neuesten Datensätze in der Quell Tabelle sind enthalten:
     
@@ -119,7 +81,7 @@ Im folgenden werden gängige Szenarien beschrieben, die mithilfe einer materiali
     ```kusto
     materialized_view("ViewName")
     ```
-    
+  
 ## <a name="performance-considerations"></a>Überlegungen zur Leistung
 
 Die wichtigsten Mitwirkenden, die sich auf die materialisierte Ansicht auswirken können, sind:
@@ -133,6 +95,19 @@ Die wichtigsten Mitwirkenden, die sich auf die materialisierte Ansicht auswirken
 * **Anzahl der materialisierten Sichten im Cluster:** Die obigen Überlegungen gelten für jede einzelne materialisierte Sicht, die im Cluster definiert ist. Jede Ansicht beansprucht ihre eigenen Ressourcen, und viele Ansichten konkurrieren miteinander in den verfügbaren Ressourcen. Es gibt keine hart codierten Grenzwerte für die Anzahl der materialisierten Sichten in einem Cluster. Die allgemeine Empfehlung besteht jedoch darin, höchstens 10 materialisierte Sichten in einem Cluster zu haben. Die [Kapazitäts Richtlinie](../capacitypolicy.md#materialized-views-capacity-policy) kann angepasst werden, wenn im Cluster mehr als eine einzelne materialisierte Sicht definiert ist.
 
 * **Materialisierte Sicht Definition**: die materialisierte Sicht Definition muss gemäß den bewährten Methoden für Abfragen für eine optimale Abfrageleistung definiert werden. Weitere Informationen finden Sie unter [Erstellen von Tipps zur Leistungssteigerung](materialized-view-create.md#performance-tips).
+
+## <a name="materialized-views-policies"></a>Materialisierte Sichten-Richtlinien
+
+Sie können die [Beibehaltungs Richtlinie](../retentionpolicy.md) und die [Cachingrichtlinie](../cachepolicy.md) einer materialisierten Sicht wie jede beliebige Azure Daten-Explorer Tabelle definieren.
+
+Die materialisierte Sicht leitet die Daten Bank Beibehaltungs-und Cache Richtlinien standardmäßig ab. Die Richtlinien können mithilfe von [Beibehaltungs Richtlinien-Steuerungs Befehlen](../retention-policy.md) oder zwischen [Speichern von Richtlinien Steuerungs Befehlen](../cache-policy.md)geändert werden.
+   
+   * Die Beibehaltungs Richtlinie der materialisierten Sicht steht nicht im Zusammenhang mit der Beibehaltungs Richtlinie der Quell Tabelle.
+   * Wenn die Datensätze der Quell Tabelle nicht anderweitig verwendet werden, kann die Beibehaltungs Richtlinie der Quell Tabelle auf ein Mindestmaß gelöscht werden. Die materialisierte Sicht speichert die Daten weiterhin gemäß der für die Sicht festgelegten Beibehaltungs Richtlinie. 
+   * Während sich materialisierte Sichten im Vorschaumodus befinden, empfiehlt es sich, mindestens sieben Tage und die Wiederherstellbarkeit auf true festzulegen. Diese Einstellung ermöglicht eine schnelle Wiederherstellung von Fehlern und zu Diagnose Zwecken.
+    
+> [!NOTE]
+> Keine Aufbewahrungs Richtlinie für die Quell Tabelle wird derzeit nicht unterstützt.
 
 ## <a name="materialized-views-monitoring"></a>Überwachung von materialisierten Sichten
 
@@ -184,5 +159,5 @@ Wenn keine Materialisierungs Fehler auftreten, `MaterializedViewResult` wird die
 ## <a name="next-steps"></a>Nächste Schritte
 
 * [. Create materialisierte View](materialized-view-create.md)
-* [. ALTER MATERIALIZED-VIEW](materialized-view-alter.md)
+* [.alter materialized-view](materialized-view-alter.md)
 * [Materialisierte Sichten zeigen Befehle an](materialized-view-show-commands.md)

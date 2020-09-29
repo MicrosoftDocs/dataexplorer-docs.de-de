@@ -8,21 +8,20 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: 1be8f66300b2d605c4004661c68e64f741437dc1
-ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
+ms.openlocfilehash: bb1fab3f211de4b33ca0dd2cee6a8cfa0cc796a9
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91057131"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452679"
 ---
-# <a name="disable--enable-materialized-view"></a>. deaktivieren |. enable MATERIALIZED-VIEW
+# <a name="disable--enable-materialized-view"></a>.disable | .enable materialized-view
 
 Eine materialisierte Sicht kann auf eine der folgenden Arten deaktiviert werden:
 
 * **Automatisches deaktivieren durch das System:**  Die materialisierte Sicht wird automatisch deaktiviert, wenn die Materialisierung mit einem permanenten Fehler fehlschlägt. Dieser Vorgang kann in den folgenden Instanzen erfolgen: 
     * Schema Änderungen, die mit der Sicht Definition inkonsistent sind.  
-    * Änderungen an der Quell Tabelle, die dazu führen, dass die materialisierte Sicht Abfrage semantisch ungültig ist. <br>
-    Weitere Informationen finden Sie unter [CREATE MATERIALIZED-VIEW](materialized-view-create.md).
+    * Änderungen an der Quell Tabelle, die dazu führen, dass die materialisierte Sicht Abfrage semantisch ungültig ist. 
 * **Explizites Deaktivieren der materialisierten Ansicht:**  Wenn sich die materialisierte Ansicht negativ auf die Integrität des Clusters auswirkt (z. b., wenn zu viel CPU beansprucht wird), deaktivieren Sie die Sicht mithilfe des folgenden [Befehls](#syntax) .
 
 > [!NOTE]
@@ -39,7 +38,7 @@ Die Deaktivierung einer Ansicht wird nur empfohlen, wenn Sie vermuten, dass die 
 
 |Eigenschaft|type|BESCHREIBUNG
 |----------------|-------|---|
-|Materializedviewname|Zeichenfolge|Der Name der materialisierten Sicht.|
+|Materializedviewname|String|Der Name der materialisierten Sicht.|
 
 ## <a name="example"></a>Beispiel
 
