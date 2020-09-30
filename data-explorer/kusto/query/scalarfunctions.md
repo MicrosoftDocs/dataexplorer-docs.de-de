@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: 652b08afc15d1405d6b7f17523088ed0ec5bef61
-ms.sourcegitcommit: 31ebf208d6bfd901f825d048ea69c9bb3d8b87af
+ms.openlocfilehash: eb974793875fd5f797fe1a1b801598abdc60e354
+ms.sourcegitcommit: 454b9bf6449449fc3382ff5794894502f920795a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/17/2020
-ms.locfileid: "88501619"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91517615"
 ---
 # <a name="scalar-function-types"></a>Skalarfunktionstypen
 
@@ -47,14 +47,14 @@ ms.locfileid: "88501619"
 |[datetime_add ()](datetime-addfunction.md)|Berechnet einen neuen DateTime-Wert aus einem angegebenen datepart-Wert multipliziert mit einem angegebenen Wert, der einem angegebenen DateTime-Wert hinzugefügt wird.|
 |[datetime_part ()](datetime-partfunction.md)|Extrahiert den angeforderten Datums Teil als ganzzahligen Wert.|
 |[datetime_diff ()](datetime-difffunction.md)|Gibt das Ende des Jahres zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
-|[dayofmonth()](dayofmonthfunction.md)|Gibt die ganzzahlige Zahl zurück, die die Tagesnummer des angegebenen Monats darstellt.|
-|[dayofweek()](dayofweekfunction.md)|Gibt die ganzzahlige Anzahl von Tagen seit dem vorangegangenen Sonntag als Zeitspanne zurück.|
-|[dayofyear()](dayofyearfunction.md)|Gibt die Ganzzahl zurück, die die Tagesnummer des angegebenen Jahrs darstellt.|
+|[dayosmonth ()](dayofmonthfunction.md)|Gibt die ganzzahlige Zahl zurück, die die Tagesnummer des angegebenen Monats darstellt.|
+|[dayof Week ()](dayofweekfunction.md)|Gibt die ganzzahlige Anzahl von Tagen seit dem vorangegangenen Sonntag als Zeitspanne zurück.|
+|[dayosyear ()](dayofyearfunction.md)|Gibt die Ganzzahl zurück, die die Tagesnummer des angegebenen Jahrs darstellt.|
 |[endofday()](endofdayfunction.md)|Gibt das Ende des Tages zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
 |[endofmonth()](endofmonthfunction.md)|Gibt das Ende des Monats zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
 |[endofweek()](endofweekfunction.md)|Gibt das Ende der Woche zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
 |[endofyear()](endofyearfunction.md)|Gibt das Ende des Jahres zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
-|[format_datetime()](format-datetimefunction.md)|Formatiert einen DateTime-Parameter basierend auf dem Format Muster Parameter.|
+|[format_datetime ()](format-datetimefunction.md)|Formatiert einen DateTime-Parameter basierend auf dem Format Muster Parameter.|
 |[format_timespan()](format-timespanfunction.md)|Formatiert einen Format-TimeSpan-Parameter basierend auf dem Format Muster Parameter.|
 |[getmonth()](getmonthfunction.md)|Rufen Sie die Monatsnummer (1-12) aus einem datetime-Wert ab.|
 |[getyear()](getyearfunction.md)|Gibt den Jahres Teil des datetime-Arguments zurück.|
@@ -63,8 +63,8 @@ ms.locfileid: "88501619"
 |[make_timespan()](make-timespanfunction.md)|Erstellt einen TimeSpan-Skalarwert aus dem angegebenen Zeitraum.|
 |[monthofyear()](monthofyearfunction.md)|Gibt die Ganzzahl zurück, die die Monatsnummer des angegebenen Jahrs darstellt.|
 |[now()](nowfunction.md)|Gibt die aktuelle UTC-Uhrzeit (optional) um einen bestimmten TimeSpan-Wert zurück.|
-|[startofday()](startofdayfunction.md)|Gibt den Anfang des Tages zurück, der das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
-|[startofmonth()](startofmonthfunction.md)|Gibt den Anfang des Monats zurück, der das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
+|[starstarsday ()](startofdayfunction.md)|Gibt den Anfang des Tages zurück, der das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
+|[starto-month ()](startofmonthfunction.md)|Gibt den Anfang des Monats zurück, der das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
 |[startofweek()](startofweekfunction.md)|Gibt den Anfang der Woche zurück, der das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
 |[startofyear()](startofyearfunction.md)|Gibt den Anfang des Jahres zurück, der das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
 |[todatetime()](todatetimefunction.md)|Konvertiert die Eingabe in einen DateTime-skalaren Wert.|
@@ -96,7 +96,7 @@ ms.locfileid: "88501619"
 |[set_intersect()](setintersectfunction.md)|Gibt ein Array der Menge aller unterschiedlichen Werte zurück, die in allen Arrays vorliegen.|
 |[set_union()](setunionfunction.md)|Gibt ein Array der Menge aller unterschiedlichen Werte zurück, die in einem der angegebenen Arrays enthalten sind.|
 |[treepath()](treepathfunction.md)|Listet alle Path-Ausdrücke auf, die Verzweigungen in einem dynamischen Objekt identifizieren.|
-|[zip ()](zipfunction.md)|Die ZIP-Funktion akzeptiert eine beliebige Anzahl dynamischer Arrays. Gibt ein Array zurück, dessen Elemente jeweils ein Array mit den Elementen der Eingabe Arrays desselben Indexes sind.|
+|[zip()](zipfunction.md)|Die ZIP-Funktion akzeptiert eine beliebige Anzahl dynamischer Arrays. Gibt ein Array zurück, dessen Elemente jeweils ein Array mit den Elementen der Eingabe Arrays desselben Indexes sind.|
 
 ## <a name="window-scalar-functions"></a>Skalare Fenster Funktionen
 
@@ -105,7 +105,7 @@ ms.locfileid: "88501619"
 |[Next ()](nextfunction.md)|Für den serialisierten Zeilen Satz wird der Wert einer angegebenen Spalte aus der nachfolgenden Zeile entsprechend dem Offset zurückgegeben.|
 |[prev()](prevfunction.md)|Für das serialisierte Zeilen Satz gibt den Wert einer angegebenen Spalte aus der früheren Zeile entsprechend dem Offset zurück.|
 |[row_cumsum()](rowcumsumfunction.md)|Berechnet die kumulierte Summe einer Spalte.|
-|[row_number()](rownumberfunction.md)|Gibt die Nummer einer Zeile in den serialisierten Zeilen Satz-aufeinander folgenden Zahlen zurück, beginnend mit einem angegebenen Index oder standardmäßig von 1.|
+|[ROW_NUMBER ()](rownumberfunction.md)|Gibt die Nummer einer Zeile in den serialisierten Zeilen Satz-aufeinander folgenden Zahlen zurück, beginnend mit einem angegebenen Index oder standardmäßig von 1.|
 
 ## <a name="flow-control-functions"></a>Fluss Steuerungsfunktionen
 
@@ -139,12 +139,12 @@ ms.locfileid: "88501619"
 |[log10 ()](log10-function.md)|Gibt die allgemeine Logarithmus Funktion (Basis 10) zurück.|
 |[log2()](log2-function.md)|Gibt die Logarithmus Funktion der Basis 2 zurück.|
 |[loggamma()](loggammafunction.md)|Berechnet das Protokoll des absoluten Werts der Gamma Funktion.|
-|[not()](notfunction.md)|Kehrt den Wert des bool-Arguments um.|
+|[nicht ()](notfunction.md)|Kehrt den Wert des bool-Arguments um.|
 |[PI ()](pifunction.md)|Gibt den konstanten Wert von Pi (μ) zurück.|
 |[pow()](powfunction.md)|Gibt das Ergebnis der Erhöhung der Stromversorgung zurück.|
 |[radiane ()](radiansfunction.md)|Konvertiert den Winkelwert in Grad in den Wert im Bogenmaß mit Formel Bogenmaß = (PI/180) * Winkel in Grad.|
 |[Rand ()](randfunction.md)|Gibt eine Zufallszahl zurück.|
-|[range()](rangefunction.md)|Generiert ein dynamisches Array, das eine Reihe von gleichmäßig getrennten Werten enthält.|
+|[Bereich ()](rangefunction.md)|Generiert ein dynamisches Array, das eine Reihe von gleichmäßig getrennten Werten enthält.|
 |[Round ()](roundfunction.md)|Gibt die abgerundete Quelle auf die angegebene Genauigkeit zurück.|
 |[Sign ()](signfunction.md)|Zeichen eines numerischen Ausdrucks.|
 |[Sin ()](sinfunction.md)|Gibt die Sinusfunktion zurück.|
@@ -182,7 +182,7 @@ ms.locfileid: "88501619"
 |Funktionsname     |Beschreibung                                          |
 |-------------------------|--------------------------------------------------------|
 |[case()](casefunction.md)|Wertet eine Liste von Prädikaten aus und gibt den ersten Ergebnis Ausdruck zurück, dessen Prädikat erfüllt ist.|
-|[coalesce()](coalescefunction.md)|Wertet eine Liste von Ausdrücken aus und gibt den ersten Ausdruck zurück, der nicht NULL ist (oder nicht leer für eine Zeichenfolge).|
+|[COALESCE ()](coalescefunction.md)|Wertet eine Liste von Ausdrücken aus und gibt den ersten Ausdruck zurück, der nicht NULL ist (oder nicht leer für eine Zeichenfolge).|
 |[IIf ()/IFF ()](iiffunction.md)|Wertet das erste Argument (das Prädikat) aus und gibt den Wert des zweiten oder dritten Arguments zurück, abhängig davon, ob das Prädikat als true (Second) oder false (dritte) ausgewertet wurde.|
 |[max_of()](max-offunction.md)|Gibt den maximalen Wert von mehreren ausgewerteten numerischen Ausdrücken zurück.|
 |[min_of()](min-offunction.md)|Gibt den minimalen Wert von mehreren ausgewerteten numerischen Ausdrücken zurück.|
@@ -213,13 +213,13 @@ ms.locfileid: "88501619"
 |[series_fill_const()](series-fill-constfunction.md)|Ersetzt fehlende Werte in einer Reihe durch einen angegebenen konstanten Wert.|
 |[series_fill_forward()](series-fill-forwardfunction.md)|Führt vorwärts Füll Interpolationen von fehlenden Werten in einer Reihe aus.|
 |[series_fill_linear()](series-fill-linearfunction.md)|Führt eine lineare interpolung von fehlenden Werten in einer Reihe aus.|
-|[series_fft ()](series-fft-function.md)|Wendet die schnelle Fourier-Transformation (FFT) auf eine Reihe an.|
+|[series_fft()](series-fft-function.md)|Wendet die schnelle Fourier-Transformation (FFT) auf eine Reihe an.|
 |[series_fir()](series-firfunction.md)|Wendet einen endlichen Impuls Antwort Filter auf eine Reihe an.|
 |[series_fit_2lines()](series-fit-2linesfunction.md)|Wendet die lineare Regression zweier Segmente auf eine Reihe an und gibt mehrere Spalten zurück.|
 |[series_fit_2lines_dynamic()](series-fit-2lines-dynamicfunction.md)|Wendet die lineare Regression zweier Segmente auf eine Reihe an und gibt ein dynamisches Objekt zurück.|
 |[series_fit_line()](series-fit-linefunction.md)|Wendet die lineare Regression für eine Reihe an und gibt mehrere Spalten zurück.|
 |[series_fit_line_dynamic()](series-fit-line-dynamicfunction.md)|Wendet die lineare Regression für eine Reihe an und gibt ein dynamisches Objekt zurück.|
-|[series_ifft ()](series-ifft-function.md)|Wendet die umgekehrte schnelle Fourier-Transformation (IFFT) für eine Reihe an.|
+|[series_ifft()](series-ifft-function.md)|Wendet die umgekehrte schnelle Fourier-Transformation (IFFT) für eine Reihe an.|
 |[series_iir()](series-iirfunction.md)|Wendet einen unendlichen Impuls Antwort Filter auf eine Reihe an.|
 |[series_outliers()](series-outliersfunction.md)|Bewertet anomaliepunkte in einer Reihe.|
 |[series_pearson_correlation()](series-pearson-correlationfunction.md)|Berechnet den Pearson-Korrelationskoeffizienten Zweierreihen.|
@@ -236,8 +236,8 @@ ms.locfileid: "88501619"
 |[base64_encode_tostring()](base64_encode_tostringfunction.md)|Codiert eine Zeichenfolge als base64-Zeichenfolge.|
 |[base64_decode_tostring()](base64_decode_tostringfunction.md)|Decodiert eine base64-Zeichenfolge in eine UTF-8-Zeichenfolge.|
 |[base64_decode_toarray()](base64_decode_toarrayfunction.md)|Decodiert eine base64-Zeichenfolge in ein Array von Long-Werten.|
-|[count ()](cotfunction.md)|Zählt die Vorkommnisse einer Teilzeichenfolge in einer Zeichenfolge. Einfache Zeichen folgen Übereinstimmungen können sich überlappen die Regex-Übereinstimmungen sind nicht.|
-|[extract()](extractfunction.md)|Ruft eine Übereinstimmung für einen regulären Ausdruck aus einer Textzeichenfolge ab.|
+|[count ()](countoffunction.md)|Zählt die Vorkommnisse einer Teilzeichenfolge in einer Zeichenfolge. Einfache Zeichen folgen Übereinstimmungen können sich überlappen die Regex-Übereinstimmungen sind nicht.|
+|[extrahieren ()](extractfunction.md)|Ruft eine Übereinstimmung für einen regulären Ausdruck aus einer Textzeichenfolge ab.|
 |[extract_all()](extractallfunction.md)|Alle Übereinstimmungen für einen regulären Ausdruck aus einer Text Zeichenfolge erhalten.|
 |[extractjson()](extractjsonfunction.md)|Rufen Sie ein angegebenes Element aus einem JSON-Text mit einem Pfadausdruck ab.|
 |[IndexOf ()](indexoffunction.md)|Die Funktion meldet den NULL basierten Index des ersten Vorkommens einer angegebenen Zeichenfolge in der Eingabe Zeichenfolge.|
@@ -257,15 +257,15 @@ ms.locfileid: "88501619"
 |[parse_version()](parse-versionfunction.md)|Konvertiert die Darstellung der Eingabe Zeichenfolge in eine vergleichbare Dezimalzahl.|
 |[Replace ()](replacefunction.md)|Ersetzen Sie alle regex-Übereinstimmungen mit einer anderen Zeichenfolge.|
 |[umkehren ()](reversefunction.md)|Die Funktion bewirkt eine Umkehrung der Eingabe Zeichenfolge.|
-|[split()](splitfunction.md)|Teilt eine angegebene Zeichenfolge gemäß einem angegebenen Trennzeichen und gibt ein Zeichen folgen Array mit den enthaltenen Teil Zeichenfolgen zurück.|
+|[Split ()](splitfunction.md)|Teilt eine angegebene Zeichenfolge gemäß einem angegebenen Trennzeichen und gibt ein Zeichen folgen Array mit den enthaltenen Teil Zeichenfolgen zurück.|
 |[strcat()](strcatfunction.md)|Verkettet zwischen 1 und 64 Argumenten.|
 |[strcat_delim()](strcat-delimfunction.md)|Verkettet zwischen zwei und 64 Argumenten mit Trennzeichen, die als erstes Argument bereitgestellt werden.|
 |[strcmp()](strcmpfunction.md)|Vergleicht zwei Zeichenfolgen.|
 |[strlen()](strlenfunction.md)|Gibt die Länge der Eingabe Zeichenfolge in Zeichen zurück.|
 |[strrep()](strrepfunction.md)|Wiederholt die angegebene Zeichenfolge mehrmals (Standardwert: 1).|
 |[Teil Zeichenfolge ()](substringfunction.md)|Extrahiert eine Teil Zeichenfolge aus einer Quell Zeichenfolge beginnend mit einem Index bis zum Ende der Zeichenfolge.|
-|[toupper()](toupperfunction.md)|Konvertiert eine Zeichenfolge in Großbuchstaben.|
-|[translate()](translatefunction.md)|Ersetzt einen Zeichensatz ("SEARCHLIST") durch einen anderen Zeichensatz ("REPLACEMENTLIST") in einer angegebenen Zeichenfolge.|
+|[ToUpper()](toupperfunction.md)|Konvertiert eine Zeichenfolge in Großbuchstaben.|
+|[übersetzen ()](translatefunction.md)|Ersetzt einen Zeichensatz ("SEARCHLIST") durch einen anderen Zeichensatz ("REPLACEMENTLIST") in einer angegebenen Zeichenfolge.|
 |[Trim ()](trimfunction.md)|Entfernt alle führenden und nachfolgenden Übereinstimmungen des angegebenen regulären Ausdrucks.|
 |[trim_end()](trimendfunction.md)|Entfernt die nachfolgende Entsprechung des angegebenen regulären Ausdrucks.|
 |[trim_start()](trimstartfunction.md)|Entfernt die führende Entsprechung des angegebenen regulären Ausdrucks.|
