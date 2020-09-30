@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: 354908df7ab0e65c8d4110dbff3a45a876b748a0
-ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
+ms.openlocfilehash: f67b2d61cfed297886447a97dd178dfb578a2c68
+ms.sourcegitcommit: 463ee13337ed6d6b4f21eaf93cf58885d04bccaa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91452747"
+ms.lasthandoff: 09/30/2020
+ms.locfileid: "91572142"
 ---
 # <a name="create-materialized-view"></a>.create materialized-view
 
@@ -45,7 +45,7 @@ Für den Create-Vorgang sind [Datenbankadministrator](../access-control/role-bas
 
 ## <a name="arguments"></a>Argumente
 
-|Argument|type|BESCHREIBUNG
+|Argument|Type|Beschreibung
 |----------------|-------|---|
 |Ansichtsname|String|Der materialisierte Sichtname. Der Sichtname kann nicht mit Tabellen-oder Funktionsnamen in derselben Datenbank in Konflikt stehen und muss den [bezeichnerbenennungs Regeln](../../query/schema-entities/entity-names.md#identifier-naming-rules)entsprechen. |
 |SourceTableName|String|Der Name der Quell Tabelle, in der die Sicht definiert ist.|
@@ -80,7 +80,7 @@ Die im materialisierte View-Argument verwendete Abfrage ist durch die folgenden 
 
 Die folgenden Elemente werden in der-Klausel unterstützt `with(propertyName=propertyValue)` . Alle Eigenschaften sind optional.
 
-|Eigenschaft|type|BESCHREIBUNG |
+|Eigenschaft|Type|Beschreibung |
 |----------------|-------|---|
 |Abgleich|bool|Gibt an, ob die Ansicht auf der Grundlage aller Datensätze erstellt werden soll, die sich derzeit in *SourceTable* ( `true` ) befinden, oder ob Sie "From-Now-on" () erstellt wird `false` Der Standardwert ist `false`.| 
 |effectivedatetime|datetime| Wenn die Angabe zusammen mit festgelegt `backfill=true` ist, wird die Erstellung nur mit Datensätzen Rück gefüllt, die nach DateTime erfasst wurden. "Backfill" muss ebenfalls auf "true" festgelegt werden. Erwartet ein DateTime-Literalzeichen, z. b. `effectiveDateTime=datetime(2019-05-01)`|
@@ -99,7 +99,7 @@ Die folgenden Elemente werden in der-Klausel unterstützt `with(propertyName=pro
 
 ## <a name="examples"></a>Beispiele
 
-1. Erstellen Sie eine leere Ansicht, die nur Datensätze materialisiert, die von nun an erfasst wurden: 
+1. Erstellen Sie eine leere ARG_MAX Sicht, die nur Datensätze materialisiert, die von nun an erfasst wurden:
 
     <!-- csl -->
     ```
@@ -109,7 +109,7 @@ Die folgenden Elemente werden in der-Klausel unterstützt `with(propertyName=pro
     }
     ```
     
-1. Erstellen Sie eine materialisierte Sicht mit der Option Abgleich, indem Sie Folgendes verwenden `async` :
+1. Erstellen Sie eine materialisierte Sicht für tägliche Aggregate mit Abgleich-Option mit `async` :
 
     <!-- csl -->
     ```
@@ -132,7 +132,17 @@ Die folgenden Elemente werden in der-Klausel unterstützt `with(propertyName=pro
         | summarize count(), dcount(User), max(Duration) by Customer, Day
     } 
     ```
-    
+1. Eine materialisierte Sicht, die die Quell Tabelle basierend auf der EventId-Spalte dedupliziert:
+
+    <!-- csl -->
+    ```
+    .create materialized-view DedupedT on table T
+    {
+        T
+        | summarize any(*) by EventId
+    }
+    ```
+
 1. Die Definition kann zusätzliche Operatoren vor der- `summarize` Anweisung enthalten, solange die-Anweisung `summarize` die letzte ist:
 
     <!-- csl -->
@@ -146,7 +156,7 @@ Die folgenden Elemente werden in der-Klausel unterstützt `with(propertyName=pro
         | summarize count(), dcount(User), max(Duration) by Customer, Api, Month
     }
     ```
-    
+
 1. Materialisierte Sichten, die mit einer Dimensions Tabelle verknüpft sind:
 
     <!-- csl -->
@@ -279,13 +289,13 @@ Der Erstellungs Prozess kann nicht sofort abgebrochen werden. Der Cancel-Befehl 
 
 ### <a name="properties"></a>Eigenschaften
 
-|Eigenschaft|type|BESCHREIBUNG
+|Eigenschaft|Type|Beschreibung
 |----------------|-------|---|
 |operationId|Guid|Die Vorgangs-ID, die vom CREATE MATERIALIZED-VIEW-Befehl zurückgegeben wird.|
 
 ### <a name="output"></a>Ausgabe
 
-|Ausgabeparameter |type |BESCHREIBUNG
+|Ausgabeparameter |Type |Beschreibung
 |---|---|---
 |OperationId|Guid|Die Vorgangs-ID des Befehls Create materialisierte View.
 |Vorgang|String|Art des Vorgangs.

@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: 77c86708a20349f5864bd10fa298719dce0fbab9
-ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
+ms.openlocfilehash: f19104111d8db615c82eff2e399fb4857f27c841
+ms.sourcegitcommit: 463ee13337ed6d6b4f21eaf93cf58885d04bccaa
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91452798"
+ms.lasthandoff: 09/30/2020
+ms.locfileid: "91572158"
 ---
 # <a name="materialized-views-preview"></a>Materialisierte Sichten (Vorschau)
 
@@ -47,6 +47,8 @@ Im folgenden werden gängige Szenarien beschrieben, die mithilfe einer materiali
 * Duplizieren von Datensätzen in einer Tabelle mithilfe [von Any () (Aggregations Funktion)](../../query/any-aggfunction.md).
 * Reduzieren Sie die Datenauflösung, indem Sie regelmäßige Statistiken über die Rohdaten berechnen. Verwenden Sie verschiedene [Aggregations Funktionen](materialized-view-create.md#supported-aggregation-functions) nach Zeit.
     * Verwenden `T | summarize dcount(User) by bin(Timestamp, 1d)` Sie z. b., um eine aktuelle Momentaufnahme von unterschiedlichen Benutzern pro Tag beizubehalten.
+
+Beispiele für alle Anwendungsfälle finden Sie unter [materialisierte View Create Command](materialized-view-create.md#examples).
 
 ## <a name="how-materialized-views-work"></a>Funktionsweise materialisierter Sichten
 
