@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/28/2020
-ms.openlocfilehash: 078737ff7e5cd74d15792cc2f0f058cb3ea12a19
-ms.sourcegitcommit: e0cf581d433bbbb2eda5a4209a8eabcdae80c21b
+ms.openlocfilehash: b8de71ffcda28a7baa0f8452e501c7485e861122
+ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90059494"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90999009"
 ---
 # <a name="query-data-in-azure-monitor-using-azure-data-explorer-preview"></a>Abfragen von Daten in Azure Monitor mit Azure Data Explorer (Vorschau)
 
@@ -95,6 +95,20 @@ union <ADX table>, cluster(CL1).database(<workspace-name>).<table name>
    [ ![Clusterübergreifende Abfragen über den Azure Data Explorer-Proxy](media/adx-proxy/cross-query-adx-proxy.png)](media/adx-proxy/cross-query-adx-proxy.png#lightbox)
 
 Wenn Sie anstelle von „union“ den [`join`-Operator](kusto/query/joinoperator.md) verwenden, ist möglicherweise ein [`hint`](kusto/query/joinoperator.md#join-hints) erforderlich, um die Abfrage für den nativen Azure Data Explorer-Cluster (und nicht für den Proxy) auszuführen. 
+
+### <a name="join-data-from-an-adx-cluster-in-one-tenant-with-an-azure-monitor-resource-in-another"></a>Verknüpfen von Daten eines ADX-Clusters auf einem Mandanten mit einer Azure Monitor-Ressource auf einem anderen
+
+Mandantenübergreifende Abfragen werden vom ADX-Proxy nicht unterstützt. Sie sind nur bei einem Mandanten angemeldet, um die Abfrage für beide Ressourcen auszuführen.
+
+Wenn sich die Azure Data Explorer-Ressource auf Mandant „A“ und der LA-Arbeitsbereich auf Mandant „B“ befindet, sollten Sie eine der beiden folgenden Methoden verwenden:
+
+1. Mit Azure Data Explorer können Sie Rollen für Prinzipale auf unterschiedlichen Mandanten hinzufügen. Fügen Sie Ihre Benutzer-ID auf Mandant „B“ als autorisierten Benutzer im Azure Data Explorer-Cluster hinzu. Vergewissern Sie sich, dass die Eigenschaft *ExternalTrustedTenant* im Azure Data Explorer-Cluster den Mandanten „B“ enthält. Führen Sie die übergreifende Abfrage vollständig auf Mandant „B“ aus. 
+
+2. Verwenden Sie [Lighthouse](https://docs.microsoft.com/azure/lighthouse/), um die Azure Monitor-Ressource auf Mandant „A“ zu projizieren.
+
+### <a name="connect-to-azure-data-explorer-clusters-from-different-tenants"></a>Herstellen einer Verbindung mit Azure Data Explorer-Clustern von unterschiedlichen Mandanten
+
+Bei Kusto-Explorer werden Sie automatisch bei dem Mandanten angemeldet, zu dem das Benutzerkonto ursprünglich gehört. Für den Zugriff auf Ressourcen auf anderen Mandanten mit demselben Benutzerkonto muss die `tenantId` explizit in der Verbindungszeichenfolge angegeben werden: `Data Source=https://ade.applicationinsights.io/subscriptions/SubscriptionId/resourcegroups/ResourceGroupName;Initial Catalog=NetDefaultDB;AAD Federated Security=True;Authority ID=\*\*TenantId**`
 
 ## <a name="function-supportability"></a>Funktionsunterstützbarkeit
 

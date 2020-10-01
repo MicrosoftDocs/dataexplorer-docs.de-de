@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/19/2020
 ms.custom: contperfq1
-ms.openlocfilehash: d12e1d2382c3d7fe9a980b2b777a02205d28e5de
-ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
+ms.openlocfilehash: e2adf84e869638d6019b149af7623e12a64930d8
+ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/21/2020
-ms.locfileid: "90832551"
+ms.lasthandoff: 09/23/2020
+ms.locfileid: "91056967"
 ---
 # <a name="monitor-azure-data-explorer-performance-health-and-usage-with-metrics"></a>Überwachen der Azure Data Explorer-Leistung, -Integrität und -Nutzung mit Metriken
 
@@ -59,6 +59,7 @@ Die Metriktypen umfassen Folgendes:
 * [Erfassungsmetriken](#ingestion-metrics) 
 * [Streamingerfassungsmetriken](#streaming-ingest-metrics)
 * [Abfragemetriken](#query-metrics) 
+* [Metriken der materialisierten Sicht](#materialized-view-metrics)
 
 Eine alphabetische Liste der Azure Monitor-Metriken für Azure Data Explorer finden Sie in den [unterstützten Metriken für Azure Data Explorer-Cluster](/azure/azure-monitor/platform/metrics-supported#microsoftkustoclusters).
 
@@ -124,6 +125,17 @@ Abfrageleistungsmetriken verfolgen die Abfragedauer und Gesamtanzahl gleichzeiti
 | Abfragedauer | Millisekunden | Avg, Min, Max, Sum | Gesamtzeit bis zum Empfangen der Abfrageergebnisse (ohne Netzwerklatenz). | QueryStatus |
 | Gesamtanzahl gleichzeitiger Abfragen | Anzahl | Avg, Max, Min, Sum | Die Anzahl der Abfragen, die im Cluster parallel ausgeführt werden. Diese Metrik ist eine gute Möglichkeit, um die Auslastung des Clusters einzuschätzen. | Keine |
 | Gesamtanzahl gedrosselter Abfragen | Anzahl | Avg, Max, Min, Sum | Die Anzahl der gedrosselten (abgelehnten) Abfragen im Cluster. Die maximal zulässige Anzahl gleichzeitiger (paralleler) Abfragen wird in der Richtlinie für gleichzeitige Abfragen definiert. | Keine |
+
+## <a name="materialized-view-metrics"></a>Metriken der materialisierten Sicht
+
+|**Metrik** | **Einheit** | **Aggregation** | **Beschreibung der Metrik** | **Dimensionen** |
+|---|---|---|---|---|
+|MaterializedViewHealth                    | 1, 0    | Avg     |  Der Wert ist „1“, wenn die Sicht als fehlerfrei angesehen wird, und andernfalls „0“. | Database, MaterializedViewName |
+|MaterializedViewAgeMinutes                | Minuten | Avg     | Das Alter (`age`) der Sicht ist definiert durch den aktuellen Zeitpunkt abzüglich des letzten Erfassungszeitpunkts, der von der Sicht verarbeitet wurde. Der Metrikwert ist die Zeit in Minuten (je niedriger der Wert, desto „fehlerfreier“ ist die Sicht). | Database, MaterializedViewName |
+|MaterializedViewResult                    | 1       | Avg     | Die Metrik enthält die Dimension `Result`, mit der das Ergebnis des letzten Materialisierungszyklus angegeben wird (siehe mögliche Werte unten). Der Metrikwert ist immer „1“. | Database, MaterializedViewName, Result |
+|MaterializedViewRecordsInDelta            | Anzahl von Datensätzen | Avg | Die Anzahl von Datensätzen, die sich derzeit im nicht verarbeiteten Teil der Quelltabelle befinden. Weitere Informationen finden Sie im Abschnitt zur [Funktionsweise von materialisierten Sichten](./kusto/management/materialized-views/materialized-view-overview.md#how-materialized-views-work).| Database, MaterializedViewName |
+|MaterializedViewExtentsRebuild            | Anzahl von Erweiterungen | Avg | Die Anzahl von Erweiterungen („Extents“), die während des Materialisierungszyklus neu erstellt wurden. | Database, MaterializedViewName|
+|MaterializedViewDataLoss                  | 1       | Max    | Die Metrik wird ausgelöst, wenn für nicht verarbeitete Quelldaten demnächst der Aufbewahrungszeitraum beginnt. | Database, MaterializedViewName, Kind |
 
 ## <a name="next-steps"></a>Nächste Schritte
 
