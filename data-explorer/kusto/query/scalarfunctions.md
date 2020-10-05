@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/27/2020
-ms.openlocfilehash: eb974793875fd5f797fe1a1b801598abdc60e354
-ms.sourcegitcommit: 454b9bf6449449fc3382ff5794894502f920795a
+ms.openlocfilehash: 3a6897bc7acce8cf216c0f21cd46251c2f033d6c
+ms.sourcegitcommit: 2764e739b4ad51398f4f0d3a9742d7168c4f5fd7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91517615"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91712135"
 ---
 # <a name="scalar-function-types"></a>Skalarfunktionstypen
 
@@ -36,7 +36,7 @@ ms.locfileid: "91517615"
 |[tobool()](toboolfunction.md)|Konvertiert Eingaben in eine boolesche Darstellung (8-Bit-Darstellung mit Vorzeichen).|
 |[todatetime()](todatetimefunction.md)|Konvertiert die Eingabe in einen DateTime-skalaren Wert.|
 |["gedouble ()"/toreal ()](todoublefunction.md)|Konvertiert die Eingabe in einen Wert vom Typ "Real". ("gedouble ()" und "toreal ()" sind Synonyme.)|
-|[Zeichenfolge ()](tostringfunction.md)|Konvertiert Eingaben in eine Zeichen folgen Darstellung.|
+|[tostring()](tostringfunction.md)|Konvertiert Eingaben in eine Zeichen folgen Darstellung.|
 |[totimespan()](totimespanfunction.md)|Konvertiert Eingaben in TimeSpan Scalar.|
 
 ## <a name="datetimetimespan-functions"></a>DateTime/TimeSpan-Funktionen
@@ -44,17 +44,17 @@ ms.locfileid: "91517615"
 |Funktionsname     |Beschreibung                                          |
 |-------------------------|--------------------------------------------------------|
 |[ago()](agofunction.md)|Subtrahiert den angegebenen Zeitraum von der aktuellen UTC-Uhrzeit.|
-|[datetime_add ()](datetime-addfunction.md)|Berechnet einen neuen DateTime-Wert aus einem angegebenen datepart-Wert multipliziert mit einem angegebenen Wert, der einem angegebenen DateTime-Wert hinzugefügt wird.|
-|[datetime_part ()](datetime-partfunction.md)|Extrahiert den angeforderten Datums Teil als ganzzahligen Wert.|
-|[datetime_diff ()](datetime-difffunction.md)|Gibt das Ende des Jahres zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
-|[dayosmonth ()](dayofmonthfunction.md)|Gibt die ganzzahlige Zahl zurück, die die Tagesnummer des angegebenen Monats darstellt.|
-|[dayof Week ()](dayofweekfunction.md)|Gibt die ganzzahlige Anzahl von Tagen seit dem vorangegangenen Sonntag als Zeitspanne zurück.|
-|[dayosyear ()](dayofyearfunction.md)|Gibt die Ganzzahl zurück, die die Tagesnummer des angegebenen Jahrs darstellt.|
+|[datetime_add()](datetime-addfunction.md)|Berechnet einen neuen DateTime-Wert aus einem angegebenen datepart-Wert multipliziert mit einem angegebenen Wert, der einem angegebenen DateTime-Wert hinzugefügt wird.|
+|[datetime_part()](datetime-partfunction.md)|Extrahiert den angeforderten Datums Teil als ganzzahligen Wert.|
+|[datetime_diff()](datetime-difffunction.md)|Gibt das Ende des Jahres zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
+|[dayofmonth()](dayofmonthfunction.md)|Gibt die ganzzahlige Zahl zurück, die die Tagesnummer des angegebenen Monats darstellt.|
+|[dayofweek()](dayofweekfunction.md)|Gibt die ganzzahlige Anzahl von Tagen seit dem vorangegangenen Sonntag als Zeitspanne zurück.|
+|[dayofyear()](dayofyearfunction.md)|Gibt die Ganzzahl zurück, die die Tagesnummer des angegebenen Jahrs darstellt.|
 |[endofday()](endofdayfunction.md)|Gibt das Ende des Tages zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
 |[endofmonth()](endofmonthfunction.md)|Gibt das Ende des Monats zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
 |[endofweek()](endofweekfunction.md)|Gibt das Ende der Woche zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
 |[endofyear()](endofyearfunction.md)|Gibt das Ende des Jahres zurück, das das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
-|[format_datetime ()](format-datetimefunction.md)|Formatiert einen DateTime-Parameter basierend auf dem Format Muster Parameter.|
+|[format_datetime()](format-datetimefunction.md)|Formatiert einen DateTime-Parameter basierend auf dem Format Muster Parameter.|
 |[format_timespan()](format-timespanfunction.md)|Formatiert einen Format-TimeSpan-Parameter basierend auf dem Format Muster Parameter.|
 |[getmonth()](getmonthfunction.md)|Rufen Sie die Monatsnummer (1-12) aus einem datetime-Wert ab.|
 |[getyear()](getyearfunction.md)|Gibt den Jahres Teil des datetime-Arguments zurück.|
@@ -63,8 +63,8 @@ ms.locfileid: "91517615"
 |[make_timespan()](make-timespanfunction.md)|Erstellt einen TimeSpan-Skalarwert aus dem angegebenen Zeitraum.|
 |[monthofyear()](monthofyearfunction.md)|Gibt die Ganzzahl zurück, die die Monatsnummer des angegebenen Jahrs darstellt.|
 |[now()](nowfunction.md)|Gibt die aktuelle UTC-Uhrzeit (optional) um einen bestimmten TimeSpan-Wert zurück.|
-|[starstarsday ()](startofdayfunction.md)|Gibt den Anfang des Tages zurück, der das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
-|[starto-month ()](startofmonthfunction.md)|Gibt den Anfang des Monats zurück, der das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
+|[startofday()](startofdayfunction.md)|Gibt den Anfang des Tages zurück, der das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
+|[startofmonth()](startofmonthfunction.md)|Gibt den Anfang des Monats zurück, der das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
 |[startofweek()](startofweekfunction.md)|Gibt den Anfang der Woche zurück, der das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
 |[startofyear()](startofyearfunction.md)|Gibt den Anfang des Jahres zurück, der das Datum enthält, das durch einen Offset verschoben wird, falls angegeben.|
 |[todatetime()](todatetimefunction.md)|Konvertiert die Eingabe in einen DateTime-skalaren Wert.|
@@ -80,13 +80,19 @@ ms.locfileid: "91517615"
 
 |Funktionsname     |Beschreibung                                          |
 |-------------------------|--------------------------------------------------------|
-|[array_concat ()](arrayconcatfunction.md)|Verkettet eine Reihe dynamischer Arrays mit einem einzelnen Array.|
+|[array_concat()](arrayconcatfunction.md)|Verkettet eine Reihe dynamischer Arrays mit einem einzelnen Array.|
 |[array_iif()](arrayifffunction.md)|Wendet die Element Weise IIf-Funktion auf Arrays an.|
 |[array_index_of()](arrayindexoffunction.md)|Durchsucht das Array nach dem angegebenen Element und gibt seine Position zurück.|
 |[array_length ()](arraylengthfunction.md)|Berechnet die Anzahl der Elemente in einem dynamischen Array.|
-|[array_slice ()](arrayslicefunction.md)|Extrahiert einen Slice eines dynamischen Arrays.|
+|[array_rotate_left()](array_rotate_leftfunction.md)|Rotiert Werte innerhalb eines dynamischen Arrays nach links.|
+|[array_rotate_right()](array_rotate_rightfunction.md)|Rotiert Werte innerhalb eines dynamischen Arrays nach rechts.|
+|[array_shift_left()](array_shift_leftfunction.md)|Verschiebt Werte innerhalb eines dynamischen Arrays nach links.|
+|[array_shift_right()](array_shift_rightfunction.md)|Verschiebt Werte innerhalb eines dynamischen Arrays nach rechts.|
+|[array_slice()](arrayslicefunction.md)|Extrahiert einen Slice eines dynamischen Arrays.|
 |[array_split()](arraysplitfunction.md)|Erstellt ein Array von Arrays, die aus dem Eingabe Array geteilt werden.|
 |[bag_keys()](bagkeysfunction.md)|Listet alle Stamm Schlüssel in einem dynamischen Eigenschaften Behälter Objekt auf.|
+|[bag_merge()](bag-merge-function.md)|Führt dynamische Eigenschaften Behälter in einem dynamischen Eigenschaften Behälter zusammen, wobei alle Eigenschaften zusammengeführt werden.|
+|[bag_remove_keys ()](bag-remove-keys-function.md)|Entfernt Schlüssel und zugehörige Werte aus einem dynamischen Eigenschaften Behälter.|
 |[pack()](packfunction.md)|Erstellt ein dynamisches Objekt (Eigenschaften Behälter) aus einer Liste von Namen und Werten.|
 |[pack_all()](packallfunction.md)|Erstellt ein dynamisches Objekt (Eigenschaften Behälter) aus allen Spalten des tabellarischen Ausdrucks.|
 |[pack_array()](packarrayfunction.md)|Packt alle Eingabewerte in ein dynamisches Array.|
@@ -102,10 +108,10 @@ ms.locfileid: "91517615"
 
 |Funktionsname     |Beschreibung                                          |
 |-------------------------|--------------------------------------------------------|
-|[Next ()](nextfunction.md)|Für den serialisierten Zeilen Satz wird der Wert einer angegebenen Spalte aus der nachfolgenden Zeile entsprechend dem Offset zurückgegeben.|
+|[next()](nextfunction.md)|Für den serialisierten Zeilen Satz wird der Wert einer angegebenen Spalte aus der nachfolgenden Zeile entsprechend dem Offset zurückgegeben.|
 |[prev()](prevfunction.md)|Für das serialisierte Zeilen Satz gibt den Wert einer angegebenen Spalte aus der früheren Zeile entsprechend dem Offset zurück.|
 |[row_cumsum()](rowcumsumfunction.md)|Berechnet die kumulierte Summe einer Spalte.|
-|[ROW_NUMBER ()](rownumberfunction.md)|Gibt die Nummer einer Zeile in den serialisierten Zeilen Satz-aufeinander folgenden Zahlen zurück, beginnend mit einem angegebenen Index oder standardmäßig von 1.|
+|[row_number()](rownumberfunction.md)|Gibt die Nummer einer Zeile in den serialisierten Zeilen Satz-aufeinander folgenden Zahlen zurück, beginnend mit einem angegebenen Index oder standardmäßig von 1.|
 
 ## <a name="flow-control-functions"></a>Fluss Steuerungsfunktionen
 
@@ -118,38 +124,38 @@ ms.locfileid: "91517615"
 |Funktionsname     |Beschreibung                                          |
 |-------------------------|--------------------------------------------------------|
 |[Abs ()](abs-function.md)|Berechnet den absoluten Wert der Eingabe.|
-|[acos ()](acosfunction.md)|Gibt den Winkel zurück, dessen Kosinus die angegebene Zahl ist (die umgekehrte Operation von cos ()).|
-|[ASIN ()](asinfunction.md)|Gibt den Winkel zurück, dessen Sinus die angegebene Zahl ist (die umgekehrte Operation von Sin ()).|
-|[Atan ()](atanfunction.md)|Gibt den Winkel zurück, dessen Tangens die angegebene Zahl ist (die umgekehrte Operation von Tan ()).|
+|[acos()](acosfunction.md)|Gibt den Winkel zurück, dessen Kosinus die angegebene Zahl ist (die umgekehrte Operation von cos ()).|
+|[asin()](asinfunction.md)|Gibt den Winkel zurück, dessen Sinus die angegebene Zahl ist (die umgekehrte Operation von Sin ()).|
+|[atan()](atanfunction.md)|Gibt den Winkel zurück, dessen Tangens die angegebene Zahl ist (die umgekehrte Operation von Tan ()).|
 |[atan2()](atan2function.md)|Berechnet den Winkel im Bogenmaße zwischen der positiven x-Achse und dem Strahl vom Ursprung bis zum Punkt (y, x).|
 |[beta_cdf()](beta-cdffunction.md)|Gibt die standardmäßige kumulative Beta Verteilungsfunktion zurück.|
 |[beta_inv()](beta-invfunction.md)|Gibt die Umkehrung der kumulativen Beta-Wahrscheinlichkeitsfunktion der Beta-Funktion zurück.|
 |[beta_pdf()](beta-pdffunction.md)|Gibt die Beta Funktion der Wahrscheinlichkeitsdichte zurück.|
-|[cos ()](cosfunction.md)|Gibt die Cosinus-Funktion zurück.|
-|[Cot ()](cotfunction.md)|Berechnet den trigonometrischen Kotangens des angegebenen Winkels im Bogenmaße.|
-|[Grad ()](degreesfunction.md)|Konvertiert den Winkelwert in Bogenmaß mit Formel Grad = (180/PI) * Winkel-in-Bogenmaß.|
-|[Exp ()](exp-function.md)|Die exponentielle base-e-Funktion von x, die e für Power x: e ^ x ausgelöst wird.|
+|[cos()](cosfunction.md)|Gibt die Cosinus-Funktion zurück.|
+|[cot()](cotfunction.md)|Berechnet den trigonometrischen Kotangens des angegebenen Winkels im Bogenmaße.|
+|[degrees()](degreesfunction.md)|Konvertiert den Winkelwert in Bogenmaß mit Formel Grad = (180/PI) * Winkel-in-Bogenmaß.|
+|[exp()](exp-function.md)|Die exponentielle base-e-Funktion von x, die e für Power x: e ^ x ausgelöst wird.|
 |[exp10()](exp10-function.md)|Die exponentielle Base-10-Funktion von x, die 10 auf Power x: 10 ^ x fest.|
 |[exp2()](exp2-function.md)|Die exponentielle Base-2-Funktion von x, die 2 für Power x: 2 ^ x ist.|
 |[gamma()](gammafunction.md)|Berechnet die Gamma Funktion.|
 |[isfinite()](isfinitefunction.md)|Gibt zurück, ob die Eingabe ein endlicher Wert (nicht unendlich oder NaN) ist.|
 |[isinf()](isinffunction.md)|Gibt zurück, ob die Eingabe ein unendlicher (positiver oder negativer) Wert ist.|
 |[isnan()](isnanfunction.md)|Gibt zurück, ob die Eingabe ein NaN-Wert (not-a-Number) ist.|
-|[Log ()](log-function.md)|Gibt die natürliche Logarithmus Funktion zurück.|
-|[log10 ()](log10-function.md)|Gibt die allgemeine Logarithmus Funktion (Basis 10) zurück.|
+|[log()](log-function.md)|Gibt die natürliche Logarithmus Funktion zurück.|
+|[log10()](log10-function.md)|Gibt die allgemeine Logarithmus Funktion (Basis 10) zurück.|
 |[log2()](log2-function.md)|Gibt die Logarithmus Funktion der Basis 2 zurück.|
 |[loggamma()](loggammafunction.md)|Berechnet das Protokoll des absoluten Werts der Gamma Funktion.|
-|[nicht ()](notfunction.md)|Kehrt den Wert des bool-Arguments um.|
-|[PI ()](pifunction.md)|Gibt den konstanten Wert von Pi (μ) zurück.|
+|[not()](notfunction.md)|Kehrt den Wert des bool-Arguments um.|
+|[pi()](pifunction.md)|Gibt den konstanten Wert von Pi (μ) zurück.|
 |[pow()](powfunction.md)|Gibt das Ergebnis der Erhöhung der Stromversorgung zurück.|
-|[radiane ()](radiansfunction.md)|Konvertiert den Winkelwert in Grad in den Wert im Bogenmaß mit Formel Bogenmaß = (PI/180) * Winkel in Grad.|
-|[Rand ()](randfunction.md)|Gibt eine Zufallszahl zurück.|
+|[radians()](radiansfunction.md)|Konvertiert den Winkelwert in Grad in den Wert im Bogenmaß mit Formel Bogenmaß = (PI/180) * Winkel in Grad.|
+|[rand()](randfunction.md)|Gibt eine Zufallszahl zurück.|
 |[Bereich ()](rangefunction.md)|Generiert ein dynamisches Array, das eine Reihe von gleichmäßig getrennten Werten enthält.|
-|[Round ()](roundfunction.md)|Gibt die abgerundete Quelle auf die angegebene Genauigkeit zurück.|
+|[round()](roundfunction.md)|Gibt die abgerundete Quelle auf die angegebene Genauigkeit zurück.|
 |[Sign ()](signfunction.md)|Zeichen eines numerischen Ausdrucks.|
-|[Sin ()](sinfunction.md)|Gibt die Sinusfunktion zurück.|
-|[SQRT ()](sqrtfunction.md)|Gibt die Quadratwurzel Funktion zurück.|
-|[Tan ()](tanfunction.md)|Gibt die Tangens Funktion zurück.|
+|[sin()](sinfunction.md)|Gibt die Sinusfunktion zurück.|
+|[sqrt()](sqrtfunction.md)|Gibt die Quadratwurzel Funktion zurück.|
+|[tan()](tanfunction.md)|Gibt die Tangens Funktion zurück.|
 |[welch_test()](welch-testfunction.md)|Berechnet den p-Wert der [Welch-Test-Funktion](https://en.wikipedia.org/wiki/Welch%27s_t-test).|
 
 ## <a name="metadata-functions"></a>Metadatenfunktionen
@@ -174,15 +180,15 @@ ms.locfileid: "91517615"
 |-------------------------|--------------------------------------------------------|
 |[bin()](binfunction.md)|Rundet Werte auf eine ganze Zahl ab, die ein Vielfaches der angegebenen bin-Größe ist.|
 |[bin_at()](binatfunction.md)|Rundet Werte auf einen "bin" mit fester Größe, wobei die Steuerung über dem Ausgangspunkt der bin gesteuert wird. (Siehe auch bin-Funktion.)|
-|[Ceiling ()](ceilingfunction.md)|Berechnet die kleinste Ganzzahl, die größer oder gleich dem angegebenen numerischen Ausdruck ist.|
-|[Floor ()](floorfunction.md)|Rundet Werte auf eine ganze Zahl ab, die ein Vielfaches der angegebenen bin-Größe ist.|
+|[ceiling()](ceilingfunction.md)|Berechnet die kleinste Ganzzahl, die größer oder gleich dem angegebenen numerischen Ausdruck ist.|
+|[floor()](floorfunction.md)|Rundet Werte auf eine ganze Zahl ab, die ein Vielfaches der angegebenen bin-Größe ist.|
 
 ## <a name="conditional-functions"></a>Bedingte Funktionen
 
 |Funktionsname     |Beschreibung                                          |
 |-------------------------|--------------------------------------------------------|
 |[case()](casefunction.md)|Wertet eine Liste von Prädikaten aus und gibt den ersten Ergebnis Ausdruck zurück, dessen Prädikat erfüllt ist.|
-|[COALESCE ()](coalescefunction.md)|Wertet eine Liste von Ausdrücken aus und gibt den ersten Ausdruck zurück, der nicht NULL ist (oder nicht leer für eine Zeichenfolge).|
+|[coalesce()](coalescefunction.md)|Wertet eine Liste von Ausdrücken aus und gibt den ersten Ausdruck zurück, der nicht NULL ist (oder nicht leer für eine Zeichenfolge).|
 |[IIf ()/IFF ()](iiffunction.md)|Wertet das erste Argument (das Prädikat) aus und gibt den Wert des zweiten oder dritten Arguments zurück, abhängig davon, ob das Prädikat als true (Second) oder false (dritte) ausgewertet wurde.|
 |[max_of()](max-offunction.md)|Gibt den maximalen Wert von mehreren ausgewerteten numerischen Ausdrücken zurück.|
 |[min_of()](min-offunction.md)|Gibt den minimalen Wert von mehreren ausgewerteten numerischen Ausdrücken zurück.|
@@ -237,35 +243,35 @@ ms.locfileid: "91517615"
 |[base64_decode_tostring()](base64_decode_tostringfunction.md)|Decodiert eine base64-Zeichenfolge in eine UTF-8-Zeichenfolge.|
 |[base64_decode_toarray()](base64_decode_toarrayfunction.md)|Decodiert eine base64-Zeichenfolge in ein Array von Long-Werten.|
 |[count ()](countoffunction.md)|Zählt die Vorkommnisse einer Teilzeichenfolge in einer Zeichenfolge. Einfache Zeichen folgen Übereinstimmungen können sich überlappen die Regex-Übereinstimmungen sind nicht.|
-|[extrahieren ()](extractfunction.md)|Ruft eine Übereinstimmung für einen regulären Ausdruck aus einer Textzeichenfolge ab.|
+|[extract()](extractfunction.md)|Ruft eine Übereinstimmung für einen regulären Ausdruck aus einer Textzeichenfolge ab.|
 |[extract_all()](extractallfunction.md)|Alle Übereinstimmungen für einen regulären Ausdruck aus einer Text Zeichenfolge erhalten.|
 |[extractjson()](extractjsonfunction.md)|Rufen Sie ein angegebenes Element aus einem JSON-Text mit einem Pfadausdruck ab.|
-|[IndexOf ()](indexoffunction.md)|Die Funktion meldet den NULL basierten Index des ersten Vorkommens einer angegebenen Zeichenfolge in der Eingabe Zeichenfolge.|
+|[indexof()](indexoffunction.md)|Die Funktion meldet den NULL basierten Index des ersten Vorkommens einer angegebenen Zeichenfolge in der Eingabe Zeichenfolge.|
 |[isempty()](isemptyfunction.md)|Gibt "true" zurück, wenn das Argument eine leere Zeichenfolge oder NULL ist.|
 |[isnotempty()](isnotemptyfunction.md)|Gibt true zurück, wenn das Argument keine leere Zeichenfolge oder NULL ist.|
 |[isnotnull()](isnotnullfunction.md)|Gibt "true" zurück, wenn das Argument nicht NULL ist.|
-|[IsNull ()](isnullfunction.md)|Wertet das einzige Argument aus und gibt einen booleschen Wert zurück, der angibt, ob das Argument zu einem NULL-Wert ausgewertet wird.|
+|[isnull()](isnullfunction.md)|Wertet das einzige Argument aus und gibt einen booleschen Wert zurück, der angibt, ob das Argument zu einem NULL-Wert ausgewertet wird.|
 |[parse_command_line()](parse-command-line.md)|Analysiert eine Unicode-Befehlszeilen Zeichenfolge und gibt ein Array mit den Befehlszeilen Argumenten zurück.|
 |[parse_csv()](parsecsvfunction.md)|Teilt eine angegebene Zeichenfolge, die durch Trennzeichen getrennte Werte darstellt, und gibt ein Zeichen folgen Array mit diesen Werten zurück.|
 |[parse_ipv4()](parse-ipv4function.md)|Konvertiert Eingaben in eine Long-Darstellung (signed 64-Bit).|
 |[parse_ipv4_mask()](parse-ipv4-maskfunction.md)|Konvertiert die Eingabe Zeichenfolge und die IP-Präfix Maske in eine Long-Darstellung (signed 64-Bit).|
 |[parse_ipv6()](parse-ipv6function.md)|Konvertiert IPv6-oder IPv4-Zeichen folgen in eine kanonische IPv6-Zeichen folgen Darstellung.|
 |[parse_ipv6_mask()](parse-ipv6-maskfunction.md)|Konvertiert IPv6-oder IPv4-Zeichen folgen und Netzmaske in eine kanonische IPv6-Zeichen folgen Darstellung.|
-|[parse_json()](parsejsonfunction.md)|Interpretiert eine Zeichenfolge als JSON-Wert und gibt den Wert als Dynamic zurück.|
+|[parse_json ()](parsejsonfunction.md)|Interpretiert eine Zeichenfolge als JSON-Wert und gibt den Wert als Dynamic zurück.|
 |[parse_url()](parseurlfunction.md)|Analysiert eine absolute URL Zeichenfolge und gibt ein dynamisches Objekt zurück, das alle Teile der URL enthält.|
 |[parse_urlquery()](parseurlqueryfunction.md)|Analysiert eine URL-Abfrage Zeichenfolge und gibt ein dynamisches Objekt zurück, das die Abfrage Parameter enthält.|
 |[parse_version()](parse-versionfunction.md)|Konvertiert die Darstellung der Eingabe Zeichenfolge in eine vergleichbare Dezimalzahl.|
 |[Replace ()](replacefunction.md)|Ersetzen Sie alle regex-Übereinstimmungen mit einer anderen Zeichenfolge.|
-|[umkehren ()](reversefunction.md)|Die Funktion bewirkt eine Umkehrung der Eingabe Zeichenfolge.|
-|[Split ()](splitfunction.md)|Teilt eine angegebene Zeichenfolge gemäß einem angegebenen Trennzeichen und gibt ein Zeichen folgen Array mit den enthaltenen Teil Zeichenfolgen zurück.|
+|[reverse()](reversefunction.md)|Die Funktion bewirkt eine Umkehrung der Eingabe Zeichenfolge.|
+|[split()](splitfunction.md)|Teilt eine angegebene Zeichenfolge gemäß einem angegebenen Trennzeichen und gibt ein Zeichen folgen Array mit den enthaltenen Teil Zeichenfolgen zurück.|
 |[strcat()](strcatfunction.md)|Verkettet zwischen 1 und 64 Argumenten.|
 |[strcat_delim()](strcat-delimfunction.md)|Verkettet zwischen zwei und 64 Argumenten mit Trennzeichen, die als erstes Argument bereitgestellt werden.|
 |[strcmp()](strcmpfunction.md)|Vergleicht zwei Zeichenfolgen.|
 |[strlen()](strlenfunction.md)|Gibt die Länge der Eingabe Zeichenfolge in Zeichen zurück.|
 |[strrep()](strrepfunction.md)|Wiederholt die angegebene Zeichenfolge mehrmals (Standardwert: 1).|
-|[Teil Zeichenfolge ()](substringfunction.md)|Extrahiert eine Teil Zeichenfolge aus einer Quell Zeichenfolge beginnend mit einem Index bis zum Ende der Zeichenfolge.|
-|[ToUpper()](toupperfunction.md)|Konvertiert eine Zeichenfolge in Großbuchstaben.|
-|[übersetzen ()](translatefunction.md)|Ersetzt einen Zeichensatz ("SEARCHLIST") durch einen anderen Zeichensatz ("REPLACEMENTLIST") in einer angegebenen Zeichenfolge.|
+|[substring()](substringfunction.md)|Extrahiert eine Teil Zeichenfolge aus einer Quell Zeichenfolge beginnend mit einem Index bis zum Ende der Zeichenfolge.|
+|[toupper()](toupperfunction.md)|Konvertiert eine Zeichenfolge in Großbuchstaben.|
+|[translate()](translatefunction.md)|Ersetzt einen Zeichensatz ("SEARCHLIST") durch einen anderen Zeichensatz ("REPLACEMENTLIST") in einer angegebenen Zeichenfolge.|
 |[Trim ()](trimfunction.md)|Entfernt alle führenden und nachfolgenden Übereinstimmungen des angegebenen regulären Ausdrucks.|
 |[trim_end()](trimendfunction.md)|Entfernt die nachfolgende Entsprechung des angegebenen regulären Ausdrucks.|
 |[trim_start()](trimstartfunction.md)|Entfernt die führende Entsprechung des angegebenen regulären Ausdrucks.|
