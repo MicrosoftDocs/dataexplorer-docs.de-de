@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 7d6e9cfac03e0169bd0bfae12a01ac685d265736
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: 267e2b4d5769efee87dd90b9a3265310998fcbd9
+ms.sourcegitcommit: 2764e739b4ad51398f4f0d3a9742d7168c4f5fd7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91102779"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91712101"
 ---
 # <a name="array_rotate_right"></a>array_rotate_right()
 
-`array_rotate_right()` rotiert Werte in einem Array nach rechts.
+Rotiert Werte innerhalb eines `dynamic` Arrays nach rechts.
 
 ## <a name="syntax"></a>Syntax
 
@@ -28,7 +28,7 @@ ms.locfileid: "91102779"
 * *arr*: das zu teilende Eingabe Array muss ein dynamisches Array sein.
 * *rotate_count*: ganze Zahl, die die Anzahl der Positionen angibt, die Array Elemente nach rechts gedreht werden. Wenn der Wert negativ ist, werden die Elemente nach links gedreht.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Dynamisches Array, das die gleiche Menge an Elementen wie im ursprünglichen Array enthält, wobei jedes Element gemäß *rotate_count*gedreht wurde.
 
