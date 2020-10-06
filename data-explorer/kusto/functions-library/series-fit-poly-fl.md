@@ -7,19 +7,25 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/08/2020
-ms.openlocfilehash: 7be785a7a3a0abe0c1f6483e016484ee0124f29b
-ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
+ms.openlocfilehash: eff9a5cd8ed2d9ed7e518be9aade9ecf2aded7bf
+ms.sourcegitcommit: d0f8d71261f8f01e7676abc77283f87fc450c7b1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/21/2020
-ms.locfileid: "90832602"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91765471"
 ---
 # <a name="series_fit_poly_fl"></a>series_fit_poly_fl()
 
-Die-Funktion `series_fit_poly_fl()` wendet eine polynomale Regression auf eine Reihe an. Es wird eine Tabelle mit mehreren Reihen (dynamisches numerisches Array) verwendet, und für jede Reihe wird das hochwertige polynomal generiert, das am besten mit [Polynomregression](https://en.wikipedia.org/wiki/Polynomial_regression)übereinstimmt. Diese Funktion gibt sowohl die Polynomen als auch das interpolierte Polynoms über den Bereich der Reihe zurück.
+Die-Funktion `series_fit_poly_fl()` wendet eine polynomale Regression auf eine Reihe an. Diese Funktion verwendet eine Tabelle, die mehrere Reihen (dynamische numerische Arrays) enthält, und generiert die beste Anpassung mit hoher Reihenfolge für jede Reihe mithilfe der [polynomialen Regression](https://en.wikipedia.org/wiki/Polynomial_regression). Diese Funktion gibt sowohl die Polynomen als auch das interpolierte Polynoms über den Bereich der Reihe zurück.
 
 > [!NOTE]
-> `series_fit_poly_fl()` ist eine [UDF (benutzerdefinierte Funktion)](../query/functions/user-defined-functions.md). Diese Funktion enthält Inline-python und erfordert [die Aktivierung des python ()-Plug](../query/pythonplugin.md#enable-the-plugin) -ins auf dem Cluster. Weitere Informationen finden Sie unter [Verwendung](#usage). Verwenden Sie die systemeigene Funktion [series_fit_line ()](../query/series-fit-linefunction.md)für die lineare Regression einer Reihe mit gleichmäßiger Distanz, die durch den [Operator der Make-Reihe](../query/make-seriesoperator.md)erstellt wurde.
+> Verwenden Sie die native Funktion [series_fit_poly ()](../query/series-fit-poly-function.md). Die folgende Funktion dient nur zu Referenzzwecken.
+
+
+> [!NOTE]
+> * `series_fit_poly_fl()` ist eine [UDF (benutzerdefinierte Funktion)](../query/functions/user-defined-functions.md).
+> * Diese Funktion enthält Inline-python und erfordert [die Aktivierung des python ()-Plug](../query/pythonplugin.md#enable-the-plugin) -ins auf dem Cluster. Weitere Informationen finden Sie unter [Verwendung](#usage).
+> * Verwenden Sie die systemeigene Funktion [series_fit_line ()](../query/series-fit-linefunction.md)für die lineare Regression einer Reihe mit gleichmäßiger Distanz, die durch den [Operator der Make-Reihe](../query/make-seriesoperator.md)erstellt wurde.
 
 ## <a name="syntax"></a>Syntax
 
@@ -31,7 +37,7 @@ Die-Funktion `series_fit_poly_fl()` wendet eine polynomale Regression auf eine R
 * *y_fit_series*: der Name der Spalte, in der die am besten geeignete Reihenfolge gespeichert werden soll.
 * *fit_coeff*: der Name der Spalte zum Speichern der am besten geeigneten polynomialen Koeffizienten.
 * *Grad*: die erforderliche Reihenfolge der Polynomen, die angepasst werden soll. Beispiel: 1 für lineare Regression, 2 für quadratische Regression usw.
-* *x_series*: der Name der Spalte, die die [unabhängige Variable](https://en.wikipedia.org/wiki/Dependent_and_independent_variables)enthält, d. h. die x-oder Time-Achse. Dieser Parameter ist optional und wird nur für eine [Reihe ungleichmäßiger Abstände](https://en.wikipedia.org/wiki/Unevenly_spaced_time_series)benötigt. Der Standardwert ist eine leere Zeichenfolge, da x für die Regression einer gleichmäßig im Bereich befindlichen Reihe redundant ist.
+* *x_series*: der Name der Spalte, die die [unabhängige Variable](https://en.wikipedia.org/wiki/Dependent_and_independent_variables)enthält, d. h. die x-oder Time-Achse. Dieser Parameter ist optional und wird nur für eine [Reihe ungleichmäßiger Abstände](https://en.wikipedia.org/wiki/Unevenly_spaced_time_series)benötigt. Der Standardwert ist eine leere Zeichenfolge, da x für die Regression einer gleichmäßig abgehaltenen Reihe redundant ist.
 * *x_istime*: Dieser boolesche Parameter ist optional. Dieser Parameter ist nur erforderlich, wenn *x_series* angegeben wird und es sich um einen Vektor von DateTime handelt.
 
 ## <a name="usage"></a>Verwendung
@@ -81,7 +87,7 @@ let series_fit_poly_fl=(tbl:(*), y_series:string, y_fit_series:string, fit_coeff
      | evaluate python(typeof(*), code, kwargs)
 };
 //
-// Fit 5th order polynomial to a regular (evenly spaced) time series, created with make-series
+// Fit fifth order polynomial to a regular (evenly spaced) time series, created with make-series
 //
 let max_t = datetime(2016-09-03);
 demo_make_series1
@@ -143,7 +149,7 @@ series_fit_poly_fl(tbl:(*), y_series:string, y_fit_series:string, fit_coeff:stri
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 //
-// Fit 5th order polynomial to a regular (evenly spaced) time series, created with make-series
+// Fit fifth order polynomial to a regular (evenly spaced) time series, created with make-series
 //
 let max_t = datetime(2016-09-03);
 demo_make_series1
@@ -155,7 +161,7 @@ demo_make_series1
 
 ---
 
-:::image type="content" source="images/series-fit-poly-fl/usage-example.png" alt-text="Diagramm mit der 5.-Reihenfolge Polynoms an reguläre Zeitreihen anpassen" border="false":::
+:::image type="content" source="images/series-fit-poly-fl/usage-example.png" alt-text="Diagramm mit der fünften Reihenfolge Polynoms, die an eine reguläre Zeitreihe angepasst ist" border="false":::
 
 ## <a name="additional-examples"></a>Weitere Beispiele
 
@@ -165,9 +171,6 @@ In den folgenden Beispielen wird davon ausgegangen, dass die Funktion bereits in
     
     <!-- csl: https://help.kusto.windows.net:443/Samples -->
     ```kusto
-    //
-    //  Test irregular (unevenly spaced) time series
-    //
     let max_t = datetime(2016-09-03);
     demo_make_series1
     | where TimeStamp between ((max_t-2d)..max_t)
@@ -180,20 +183,16 @@ In den folgenden Beispielen wird davon ausgegangen, dass die Funktion bereits in
     | render timechart with(ycolumns=num, fnum)
     ```
     
-    :::image type="content" source="images/series-fit-poly-fl/irregular-time-series.png" alt-text="Diagramm mit der 8. Reihenfolge Polynoms, die an eine unregelmäßige Zeit Reihe angepasst ist" border="false":::
+    :::image type="content" source="images/series-fit-poly-fl/irregular-time-series.png" alt-text="Diagramm mit der fünften Reihenfolge Polynoms, die an eine reguläre Zeitreihe angepasst ist" border="false":::
 
-1. 5.-Reihenfolge Polynoms mit Rauschen für x & y-Achsen
+1. Fünfte Reihenfolge Polynoms mit Rauschen für x & y-Achsen
 
     <!-- csl: https://help.kusto.windows.net:443/Samples -->
     ```kusto
-    //
-    // 5th order polynomial with noise on x & y axes
-    //
     range x from 1 to 200 step 1
     | project x = rand()*5 - 2.3
     | extend y = pow(x, 5)-8*pow(x, 3)+10*x+6
     | extend y = y + (rand() - 0.5)*0.5*y
-    | order by x asc 
     | summarize x=make_list(x), y=make_list(y)
     | extend y_fit = dynamic(null), coeff=dynamic(null)
     | invoke series_fit_poly_fl('y', 'y_fit', 'coeff', 5, 'x')
@@ -201,6 +200,6 @@ In den folgenden Beispielen wird davon ausgegangen, dass die Funktion bereits in
     | render linechart
     ```
         
-    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise.png" alt-text="Diagramm der Anpassung der 5.-Reihenfolge Polynoms mit Rauschen für x & y-Achsen":::
+    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise.png" alt-text="Diagramm mit der fünften Reihenfolge Polynoms, die an eine reguläre Zeitreihe angepasst ist":::
        
-    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise-table.png" alt-text="Koeffizienten der Eignung der 5.-Reihenfolge Polynoms mit Rauschen" border="false":::
+    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise-table.png" alt-text="Diagramm mit der fünften Reihenfolge Polynoms, die an eine reguläre Zeitreihe angepasst ist" border="false":::
