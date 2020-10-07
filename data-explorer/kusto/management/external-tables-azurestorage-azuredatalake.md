@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1db42577a0d4d10da732b54b0a5032ab2be11b69
-ms.sourcegitcommit: 91e7d49a1046575bbc63a4f25724656ebfc070db
+ms.openlocfilehash: c10e6502c4e18a5c30d971c4814c2270a0b27ff1
+ms.sourcegitcommit: 830837607f344f1ce1f146f946a41e45bfebcb22
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/30/2020
-ms.locfileid: "89151160"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91806681"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake
 
@@ -138,7 +138,7 @@ Weitere Informationen finden Sie unter [Speicher Verbindungs](../api/connection-
 <a name="properties"></a>
 *Optionale Eigenschaften*
 
-| Eigenschaft         | Typ     | Beschreibung       |
+| Eigenschaft         | type     | BESCHREIBUNG       |
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | Tabellen Ordner                                                                     |
 | `docString`      | `string` | Zeichenfolge, die die Tabelle dokumentiert                                                       |
@@ -276,9 +276,11 @@ Dabei ist " *maxResults* " ein optionaler Parameter, der so festgelegt werden ka
 
 **Ausgabe**
 
-| Output-Parameter | Typ   | Beschreibung                       |
+| Ausgabeparameter | type   | Beschreibung                       |
 |------------------|--------|-----------------------------------|
 | URI              | Zeichenfolge | URI der externen Speicher Datendatei |
+| Size             | long   | Dateilänge in Byte              |
+| Partition        | dynamisch | Dynamisches Objekt, das Datei Partitionen für eine partitionierte externe Tabelle beschreibt |
 
 > [!TIP]
 > Das Durchlaufen aller Dateien, auf die von einer externen Tabelle verwiesen wird, kann in Abhängigkeit von der Anzahl der Dateien recht kostspielig sein. Stellen Sie sicher, dass Sie den Parameter verwenden, `limit` Wenn Sie nur einige URI-Beispiele sehen möchten.
@@ -291,9 +293,19 @@ Dabei ist " *maxResults* " ein optionaler Parameter, der so festgelegt werden ka
 
 **Ausgabe:**
 
-| Uri                                                                     |
-|-------------------------------------------------------------------------|
-| `https://storageaccount.blob.core.windows.net/container1/folder/file.csv` |
+| Uri                                                                     | Size | Partition |
+|-------------------------------------------------------------------------| ---- | --------- |
+| `https://storageaccount.blob.core.windows.net/container1/folder/file.csv` | 10743 | `{}`   |
+
+
+Für eine partitionierte Tabelle `Partition` enthält die Spalte extrahierte Partitionswerte:
+
+**Ausgabe:**
+
+| Uri                                                                     | Size | Partition |
+|-------------------------------------------------------------------------| ---- | --------- |
+| `https://storageaccount.blob.core.windows.net/container1/customer=john.doe/dt=20200101/file.csv` | 10743 | `{"Customer": "john.doe", "Date": "2020-01-01T00:00:00.0000000Z"}` |
+
 
 ## <a name="create-external-table-mapping"></a>. Erstellen einer externen Tabellen Zuordnung
 
