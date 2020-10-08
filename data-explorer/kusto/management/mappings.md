@@ -4,16 +4,16 @@ description: In diesem Artikel werden Daten Zuordnungen in Azure Daten-Explorer 
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: ohbitton
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/19/2020
-ms.openlocfilehash: cd498d43d98250bad0a7ce00c4a8fec7b4f3ad4f
-ms.sourcegitcommit: d08b3344d7e9a6201cf01afc8455c7aea90335aa
+ms.openlocfilehash: 9695bd1a1330b4dc7cd44131d566c538c0264de4
+ms.sourcegitcommit: eff06eb34f78630fd78470d918ebc04ff5dc863e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88964726"
+ms.lasthandoff: 10/08/2020
+ms.locfileid: "91847195"
 ---
 # <a name="data-mappings"></a>Datenzuordnungen
 
@@ -67,19 +67,6 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 > [!NOTE]
 > Wenn die oben genannte Zuordnung als Teil des Control-Befehls bereitgestellt wird, `.ingest` wird Sie als JSON-Zeichenfolge serialisiert.
 
-* Wenn die zuvor erstellte Zuordnung [vorab erstellt wurde](create-ingestion-mapping-command.md) , kann im Befehl Control auf Sie verwiesen werden `.ingest` :
-
-```kusto
-.ingest into Table123 (@"source1", @"source2")
-    with 
-    (
-        format="csv", 
-        ingestionMappingReference = "Mapping1"
-    )
-```
-
-* Wenn die oben genannte Zuordnung als Teil des Control-Befehls bereitgestellt wird, `.ingest` wird Sie als JSON-Zeichenfolge serialisiert:
-
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
     with 
@@ -93,7 +80,20 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
     )
 ```
 
-**Hinweis:** Das folgende Mapping-Format, ohne den `Properties` Eigenschaften Behälter, ist veraltet.
+> [!NOTE]
+> Wenn die zuvor erstellte Zuordnung [vorab erstellt wurde](create-ingestion-mapping-command.md) , kann im Befehl Control auf Sie verwiesen werden `.ingest` :
+
+```kusto
+.ingest into Table123 (@"source1", @"source2")
+    with 
+    (
+        format="csv", 
+        ingestionMappingReference = "Mapping1"
+    )
+```
+
+> [!NOTE]
+> Das folgende Mapping-Format, ohne den `Properties` Eigenschaften Behälter, ist veraltet.
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -116,7 +116,7 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 
 |Eigenschaft|BESCHREIBUNG|
 |----|--|
-|`path`|Wenn mit `$` : JSON-Pfad zu dem Feld beginnt, das zum Inhalt der Spalte im JSON-Dokument wird (JSON-Pfad, der das gesamte Dokument bezeichnet `$` ). Wenn der Wert nicht mit beginnt `$` : ein konstanter Wert wird verwendet.|
+|`path`|Wenn mit `$` : JSON-Pfad zu dem Feld beginnt, das zum Inhalt der Spalte im JSON-Dokument wird (JSON-Pfad, der das gesamte Dokument bezeichnet `$` ). Wenn der Wert nicht mit beginnt `$` : ein konstanter Wert wird verwendet. JSON-Pfade, die Leerzeichen enthalten, müssen mit Escapezeichen als [ \' Eigenschafts Name] versehen werden \' .|
 |`transform`|Optionale Transformation, die auf den Inhalt mit Mapping- [Transformationen](#mapping-transformations)angewendet werden soll.|
 
 ### <a name="example-of-json-mapping"></a>Beispiel für JSON-Zuordnung
@@ -141,6 +141,23 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 > Wenn die oben genannte Zuordnung als Teil des Control-Befehls bereitgestellt wird, `.ingest` wird Sie als JSON-Zeichenfolge serialisiert.
 
 ```kusto
+.ingest into Table123 (@"source1", @"source2") 
+  with 
+  (
+      format = "json", 
+      ingestionMapping = 
+      "["
+        "{\"column\":\"rownumber\",\"Properties\":{\"Path\":\"$.rownumber\"}},"
+        "{\"column\":\"rowguid\",  \"Properties\":{\"Path\":\"$.rowguid\"}}",
+        "{\"column\":\"custom_column\",  \"Properties\":{\"Path\":\"$.[\'property name with space\']\"}}"
+      "]"
+  )
+```
+
+> [!NOTE]
+> Wenn die zuvor erstellte Zuordnung [vorab erstellt wurde](create-ingestion-mapping-command.md) , kann im Befehl Control auf Sie verwiesen werden `.ingest` :
+
+```kusto
 .ingest into Table123 (@"source1", @"source2")
     with 
     (
@@ -149,7 +166,8 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
     )
 ```
 
-**Hinweis:** Das folgende Mapping-Format, ohne den `Properties` Eigenschaften Behälter, ist veraltet.
+> [!NOTE]
+> Das folgende Mapping-Format, ohne den `Properties` Eigenschaften Behälter, ist veraltet.
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2") 
@@ -173,10 +191,10 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 |Eigenschaft|BESCHREIBUNG|
 |----|--|
 |`Field`|Der Name des Felds im Avro-Datensatz.|
-|`Path`|Eine Alternative zur Verwendung `field` von, die die Verwendung des inneren Teils eines Avro-Daten Satz Felds ermöglicht, falls erforderlich. Der Wert bezeichnet einen JSON-Pfad vom Stamm des Datensatzes. Weitere Informationen finden Sie in den Hinweisen unten. |
+|`Path`|Eine Alternative zur Verwendung `field` von, die die Verwendung des inneren Teils eines Avro-Daten Satz Felds ermöglicht, falls erforderlich. Der Wert bezeichnet einen JSON-Pfad vom Stamm des Datensatzes. Weitere Informationen finden Sie in den Hinweisen unten. JSON-Pfade, die Leerzeichen enthalten, müssen mit Escapezeichen als [ \' Eigenschafts Name] versehen werden \' .|
 |`transform`|Optionale Transformation, die auf den Inhalt mit [unterstützten Transformationen](#mapping-transformations)angewendet werden soll.|
 
-**Notizen**
+**Hinweise**
 >[!NOTE]
 > * `field` und `path` können nicht gleichzeitig verwendet werden, es ist nur eine zulässig. 
 > * `path` kann nicht nur auf root verweisen `$` , sondern muss mindestens eine Pfad Ebene aufweisen.
@@ -214,6 +232,22 @@ Die folgenden beiden Alternativen sind gleich:
 > Wenn die oben genannte Zuordnung als Teil des Control-Befehls bereitgestellt wird, `.ingest` wird Sie als JSON-Zeichenfolge serialisiert.
 
 ```kusto
+.ingest into Table123 (@"source1", @"source2") 
+  with 
+  (
+      format = "avro", 
+      ingestionMapping = 
+      "["
+        "{\"column\":\"rownumber\",\"Properties\":{\"Path\":\"$.rownumber\"}},"
+        "{\"column\":\"rowguid\",  \"Properties\":{\"Path\":\"$.rowguid\"}}"
+      "]"
+  )
+```
+
+> [!NOTE]
+> Wenn die zuvor erstellte Zuordnung [vorab erstellt wurde](create-ingestion-mapping-command.md) , kann im Befehl Control auf Sie verwiesen werden `.ingest` :
+
+```kusto
 .ingest into Table123 (@"source1", @"source2")
     with 
     (
@@ -222,7 +256,8 @@ Die folgenden beiden Alternativen sind gleich:
     )
 ```
 
-**Hinweis:** Das folgende Mapping-Format, ohne den `Properties` Eigenschaften Behälter, ist veraltet.
+> [!NOTE]
+> Das folgende Mapping-Format, ohne den `Properties` Eigenschaften Behälter, ist veraltet.
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2") 
@@ -245,7 +280,7 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 
 |Eigenschaft|BESCHREIBUNG|
 |----|--|
-|`path`|Wenn beginnt mit `$` : JSON-Pfad zum Feld, das zum Inhalt der Spalte im Parkett Dokument wird (JSON-Pfad, der das gesamte Dokument bezeichnet `$` ). Wenn der Wert nicht mit beginnt `$` : ein konstanter Wert wird verwendet.|
+|`path`|Wenn beginnt mit `$` : JSON-Pfad zum Feld, das zum Inhalt der Spalte im Parkett Dokument wird (JSON-Pfad, der das gesamte Dokument bezeichnet `$` ). Wenn der Wert nicht mit beginnt `$` : ein konstanter Wert wird verwendet. JSON-Pfade, die Leerzeichen enthalten, müssen mit Escapezeichen als [ \' Eigenschafts Name] versehen werden \' . |
 |`transform`|Optionale [Mapping von Transformationen](#mapping-transformations) , die auf den Inhalt angewendet werden sollen.
 
 
@@ -268,7 +303,22 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 > [!NOTE]
 > Wenn die oben genannte Zuordnung als Teil des Control-Befehls bereitgestellt wird, `.ingest` wird Sie als JSON-Zeichenfolge serialisiert.
 
-* Wenn die zuvor erstellte Zuordnung [vorab erstellt wurde](create-ingestion-mapping-command.md) , kann im Befehl Control auf Sie verwiesen werden `.ingest` :
+```kusto
+.ingest into Table123 (@"source1", @"source2") 
+  with 
+  (
+      format = "parquet", 
+      ingestionMapping = 
+      "["
+        "{\"column\":\"rownumber\",\"Properties\":{\"Path\":\"$.rownumber\"}},"
+        "{\"column\":\"rowguid\",  \"Properties\":{\"Path\":\"$.rowguid\"}}",
+        "{\"column\":\"custom_column\",  \"Properties\":{\"Path\":\"$.[\'property name with space\']\"}}"
+      "]"
+  )
+```
+
+> [!NOTE]
+> Wenn die zuvor erstellte Zuordnung [vorab erstellt wurde](create-ingestion-mapping-command.md) , kann im Befehl Control auf Sie verwiesen werden `.ingest` :
 
 ```kusto
 .ingest into Table123 (@"source1", @"source2")
@@ -279,21 +329,6 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
     )
 ```
 
-* Wenn die oben genannte Zuordnung als Teil des Control-Befehls bereitgestellt wird, `.ingest` wird Sie als JSON-Zeichenfolge serialisiert:
-
-```kusto
-.ingest into Table123 (@"source1", @"source2") 
-  with 
-  (
-      format = "parquet", 
-      ingestionMapping = 
-      "["
-        "{\"column\":\"rownumber\",\"Properties\":{\"Path\":\"$.rownumber\"}},"
-        "{\"column\":\"rowguid\",  \"Properties\":{\"Path\":\"$.rowguid\"}}"
-      "]"
-  )
-```
-
 ## <a name="orc-mapping"></a>Orc-Zuordnung
 
 Wenn die Quelldatei im Orc-Format vorliegt, wird der Dateiinhalt der Kusto-Tabelle zugeordnet. Die Tabelle muss in der Kusto-Datenbank vorhanden sein, es sei denn, für alle zugeordneten Spalten ist ein gültiger Datentyp angegeben. Die Spalten, die in der Orc-Zuordnung zugeordnet sind, müssen in der Kusto-Tabelle vorhanden sein, es sei denn, für alle nicht vorhandenen Spalten ist ein Datentyp angegeben.
@@ -302,7 +337,7 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
 
 |Eigenschaft|BESCHREIBUNG|
 |----|--|
-|`path`|Wenn beginnt mit `$` : JSON-Pfad zum Feld, das zum Inhalt der Spalte im Orc-Dokument wird (JSON-Pfad, der das gesamte Dokument bezeichnet `$` ). Wenn der Wert nicht mit beginnt `$` : ein konstanter Wert wird verwendet.|
+|`path`|Wenn beginnt mit `$` : JSON-Pfad zum Feld, das zum Inhalt der Spalte im Orc-Dokument wird (JSON-Pfad, der das gesamte Dokument bezeichnet `$` ). Wenn der Wert nicht mit beginnt `$` : ein konstanter Wert wird verwendet. JSON-Pfade, die Leerzeichen enthalten, müssen mit Escapezeichen als [ \' Eigenschafts Name] versehen werden \' .|
 |`transform`|Optionale [Mapping von Transformationen](#mapping-transformations) , die auf den Inhalt angewendet werden sollen.
 
 ### <a name="example-of-orc-mapping"></a>Beispiel für Orc-Zuordnung
@@ -332,9 +367,22 @@ Jedes Element in der Liste beschreibt eine Zuordnung für eine bestimmte Spalte 
       ingestionMapping = 
       "["
         "{\"column\":\"rownumber\",\"Properties\":{\"Path\":\"$.rownumber\"}},"
-        "{\"column\":\"rowguid\",  \"Properties\":{\"Path\":\"$.rowguid\"}}"
+        "{\"column\":\"rowguid\",  \"Properties\":{\"Path\":\"$.rowguid\"}}",
+        "{\"column\":\"custom_column\",  \"Properties\":{\"Path\":\"$.[\'property name with space\']\"}}"
       "]"
   )
+```
+
+> [!NOTE]
+> Wenn die zuvor erstellte Zuordnung [vorab erstellt wurde](create-ingestion-mapping-command.md) , kann im Befehl Control auf Sie verwiesen werden `.ingest` :
+
+```kusto
+.ingest into Table123 (@"source1", @"source2")
+    with 
+    (
+        format="orc", 
+        ingestionMappingReference = "Mapping1"
+    )
 ```
 
 ## <a name="mapping-transformations"></a>Mapping von Transformationen
