@@ -1431,6 +1431,12 @@
                   href: ./kusto/management/partitioningpolicy.md
                 - name: Partitionierungsrichtlinienbefehl
                   href: ./kusto/management/partitioning-policy.md
+            - name: Abfragedrosselung
+              items:
+                - name: Abfragedrosselungsrichtlinie
+                  href: ./kusto/management/query-throttling-policy.md
+                - name: Befehle der Abfragedrosselungsrichtlinie
+                  href: ./kusto/management/query-throttling-policy-commands.md
             - name: Aufbewahrung
               items:
                 - name: Aufbewahrungsrichtlinie

@@ -8,20 +8,20 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/28/2020
-ms.openlocfilehash: b8de71ffcda28a7baa0f8452e501c7485e861122
-ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
+ms.openlocfilehash: 334d2bc27709c78c53bd57c92c8c3b3364bbe3bb
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90999009"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452906"
 ---
 # <a name="query-data-in-azure-monitor-using-azure-data-explorer-preview"></a>Abfragen von Daten in Azure Monitor mit Azure Data Explorer (Vorschau)
 
 Der Azure Data Explorer-Proxycluster (ADX Proxy) ermöglicht Ihnen das Ausführen von produktübergreifenden Abfragen zwischen Azure Data Explorer, [Application Insights (AI)](/azure/azure-monitor/app/app-insights-overview) und [Log Analytics (LA)](/azure/azure-monitor/platform/data-platform-logs) im Dienst [Azure Monitor](/azure/azure-monitor/). Sie können Azure Monitor den Log Analytics-Arbeitsbereichen oder Application Insights-Apps als Proxycluster zuordnen. Anschließend können Sie den Proxycluster mit Azure Data Explorer-Tools abfragen und in einer clusterübergreifenden Abfrage auf ihn verweisen. In dem Artikel wird gezeigt, wie eine Verbindung mit einem Proxycluster hergestellt wird, der Azure Data Explorer-Webbenutzeroberfläche ein Proxycluster hinzugefügt wird und über Azure Data Explorer Abfragen der AI-Apps oder LA-Arbeitsbereiche durchgeführt werden.
 
-Abfolge der Schritte für den Azure Data Explorer-Proxy: 
+Abfolge der Schritte für den Azure Data Explorer-Proxy:
 
-![Abfolge der Schritte für den ADX-Proxy](media/adx-proxy/adx-proxy-flow.png)
+![Abfolge der Schritte für den ADX-Proxy](media/adx-proxy/adx-proxy-workflow.png)
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -102,13 +102,13 @@ Mandantenübergreifende Abfragen werden vom ADX-Proxy nicht unterstützt. Sie si
 
 Wenn sich die Azure Data Explorer-Ressource auf Mandant „A“ und der LA-Arbeitsbereich auf Mandant „B“ befindet, sollten Sie eine der beiden folgenden Methoden verwenden:
 
-1. Mit Azure Data Explorer können Sie Rollen für Prinzipale auf unterschiedlichen Mandanten hinzufügen. Fügen Sie Ihre Benutzer-ID auf Mandant „B“ als autorisierten Benutzer im Azure Data Explorer-Cluster hinzu. Vergewissern Sie sich, dass die Eigenschaft *ExternalTrustedTenant* im Azure Data Explorer-Cluster den Mandanten „B“ enthält. Führen Sie die übergreifende Abfrage vollständig auf Mandant „B“ aus. 
+1. Mit Azure Data Explorer können Sie Rollen für Prinzipale auf unterschiedlichen Mandanten hinzufügen. Fügen Sie Ihre Benutzer-ID auf Mandant „B“ als autorisierten Benutzer im Azure Data Explorer-Cluster hinzu. Vergewissern Sie sich, dass die Eigenschaft *[ExternalTrustedTenant](https://docs.microsoft.com/powershell/module/az.kusto/update-azkustocluster)* im Azure Data Explorer-Cluster den Mandanten „B“ enthält. Führen Sie die übergreifende Abfrage vollständig auf Mandant „B“ aus.
 
 2. Verwenden Sie [Lighthouse](https://docs.microsoft.com/azure/lighthouse/), um die Azure Monitor-Ressource auf Mandant „A“ zu projizieren.
 
 ### <a name="connect-to-azure-data-explorer-clusters-from-different-tenants"></a>Herstellen einer Verbindung mit Azure Data Explorer-Clustern von unterschiedlichen Mandanten
 
-Bei Kusto-Explorer werden Sie automatisch bei dem Mandanten angemeldet, zu dem das Benutzerkonto ursprünglich gehört. Für den Zugriff auf Ressourcen auf anderen Mandanten mit demselben Benutzerkonto muss die `tenantId` explizit in der Verbindungszeichenfolge angegeben werden: `Data Source=https://ade.applicationinsights.io/subscriptions/SubscriptionId/resourcegroups/ResourceGroupName;Initial Catalog=NetDefaultDB;AAD Federated Security=True;Authority ID=\*\*TenantId**`
+Bei Kusto-Explorer werden Sie automatisch bei dem Mandanten angemeldet, zu dem das Benutzerkonto ursprünglich gehört. Für den Zugriff auf Ressourcen in anderen Mandanten mit demselben Benutzerkonto muss `tenantId` explizit in der Verbindungszeichenfolge angegeben werden: `Data Source=https://ade.applicationinsights.io/subscriptions/SubscriptionId/resourcegroups/ResourceGroupName;Initial Catalog=NetDefaultDB;AAD Federated Security=True;Authority ID=`**TenantId**
 
 ## <a name="function-supportability"></a>Funktionsunterstützbarkeit
 

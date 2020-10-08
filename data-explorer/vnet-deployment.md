@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/31/2019
-ms.openlocfilehash: 74d72ced89b1953b2f7e327656517f1febe4166f
-ms.sourcegitcommit: 803a572ab6f04494f65dbc60a4c5df7fcebe1600
+ms.openlocfilehash: 5a7f680dc2ab76a9f952efa52d60b59c7b1d1c93
+ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90714022"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91452849"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>Bereitstellen von Azure Data Explorer-Clustern in Ihrem virtuellen Netzwerk
 
@@ -37,7 +37,7 @@ Die folgenden DNS-Einträge werden für den Zugriff auf den Dienst erstellt:
 
 * `[clustername].[geo-region].kusto.windows.net` (Engine) und `ingest-[clustername].[geo-region].kusto.windows.net` (Datenverwaltung) werden der öffentlichen IP-Adresse für jeden Dienst zugeordnet. 
 
-* `private-[clustername].[geo-region].kusto.windows.net` (Engine) und `private-ingest-[clustername].[geo-region].kusto.windows.net` (Datenverwaltung) werden der privaten IP-Adresse für jeden Dienst zugeordnet.
+* `private-[clustername].[geo-region].kusto.windows.net` (Engine) und `ingest-private-[clustername].[geo-region].kusto.windows.net`\\`private-ingest-[clustername].[geo-region].kusto.windows.net` (Datenverwaltung) werden der privaten IP-Adresse für jeden Dienst zugeordnet.
 
 ## <a name="plan-subnet-size-in-your-vnet"></a>Planen der Subnetzgröße in Ihrem VNET
 

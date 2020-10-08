@@ -7,18 +7,18 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: f277ff9caaaf29b39b7e1fac4175ce2fa862c269
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 404d8f2d6b7eacc61571575613fd8017baadb54d
+ms.sourcegitcommit: 1618cbad18f92cf0cda85cb79a5cc1aa789a2db7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872980"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91614848"
 ---
 # <a name="best-practices-for-using-power-bi-to-query-and-visualize-azure-data-explorer-data"></a>Bewährte Methoden für die Verwendung von Power BI zum Abfragen und Visualisieren von Azure Data Explorer-Daten
 
-Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). [Power BI](https://docs.microsoft.com/power-bi/) ist eine Business Analytics-Lösung, mit der Sie Ihre Daten visualisieren und die Ergebnisse unternehmensweit teilen können. Azure Data Explorer bietet drei Möglichkeiten, um eine Verbindung mit Daten in Power BI herzustellen. Verwenden Sie den [integrierten Connector](power-bi-connector.md), [importieren Sie eine Abfrage aus Azure Data Explorer in Power BI](power-bi-imported-query.md), oder verwenden Sie eine [SQL-Abfrage](power-bi-sql-query.md). In den in diesem Artikel enthaltenen Tipps wird erläutert, wie Sie Azure Data Explorer-Daten mit Power BI abfragen und visualisieren. 
+Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). [Power BI](https://docs.microsoft.com/power-bi/) ist eine Business Analytics-Lösung, mit der Sie Ihre Daten visualisieren und die Ergebnisse unternehmensweit teilen können. Azure Data Explorer bietet drei Möglichkeiten, um eine Verbindung mit Daten in Power BI herzustellen. Verwenden Sie den [integrierten Connector](power-bi-connector.md), [importieren Sie eine Abfrage aus Azure Data Explorer in Power BI](power-bi-imported-query.md), oder verwenden Sie eine [SQL-Abfrage](power-bi-sql-query.md). In den in diesem Artikel enthaltenen Tipps wird erläutert, wie Sie Azure Data Explorer-Daten mit Power BI abfragen und visualisieren. 
 
-## <a name="best-practices-for-using-power-bi"></a>Bewährte Methoden für die Verwendung von Power BI 
+## <a name="best-practices-for-using-power-bi"></a>Bewährte Methoden für die Verwendung von Power BI
 
 Wenn Sie mit neuen Rohdaten im Terabytebereich arbeiten, befolgen Sie diese Anweisungen, damit Ihre Power BI-Dashboards und -Berichte immer gut organisiert und auf dem neuesten Stand sind:
 
@@ -30,15 +30,16 @@ Wenn Sie mit neuen Rohdaten im Terabytebereich arbeiten, befolgen Sie diese Anwe
 
 * **Parallelität**: Der Azure Data Explorer ist eine linear skalierbare Datenplattform. Daher können Sie die Leistung beim Dashboardrendering verbessern, indem Sie die Parallelität des End-to-End-Flows wie folgt erhöhen:
 
-   * Erhöhen Sie die Anzahl [gleichzeitiger Verbindungen in DirectQuery in Power BI](https://docs.microsoft.com/power-bi/desktop-directquery-about#maximum-number-of-connections-option-for-directquery).
+  * Erhöhen Sie die Anzahl [gleichzeitiger Verbindungen in DirectQuery in Power BI](https://docs.microsoft.com/power-bi/desktop-directquery-about#maximum-number-of-connections-option-for-directquery).
 
-   * Verwenden Sie eine [schwache Konsistenz, um die Parallelität zu verbessern](kusto/concepts/queryconsistency.md). Dies kann sich auf die Aktualität der Daten auswirken.
+  * Verwenden Sie eine [schwache Konsistenz, um die Parallelität zu verbessern](kusto/concepts/queryconsistency.md). Dies kann sich auf die Aktualität der Daten auswirken.
 
 * **Effektive Slicer**: Verwenden Sie [Synchronisierungsslicer](https://docs.microsoft.com/power-bi/visuals/power-bi-visualization-slicers#sync-and-use-slicers-on-other-pages), um zu verhindern, dass Daten in Berichte geladen werden, bevor Sie bereit sind. Nachdem Sie das Dataset strukturiert, alle visuellen Elemente platziert und alle Slicer gekennzeichnet haben, können Sie den Synchronisierungsslicer auswählen, um nur die benötigten Daten zu laden.
 
 * **Verwendung von Filtern** – Verwenden Sie so viele Power BI-Filter wie möglich, um die Azure Data Explorer-Suche auf die relevanten Datenshards zu beschränken.
 
 * **Effiziente visuelle Elemente** – Wählen Sie die leistungsfähigsten visuellen Elemente für Ihre Daten.
+
 
 ## <a name="tips-for-using-the-azure-data-explorer-connector-for-power-bi-to-query-data"></a>Tipps zur Datenabfrage mit dem Azure Data Explorer-Connector für Power BI
 
@@ -62,15 +63,39 @@ Verwenden Sie anstelle dieser Abfrage, die den `ago()`-Operator enthält:
 
 Die folgende äquivalente Abfrage:
 
-```powerquery-m
+```m
 let
-    Source = Kusto.Contents("help", "Samples", "StormEvents", []),
+    Source = AzureDataExplorer.Contents("help", "Samples", "StormEvents", []),
     #"Filtered Rows" = Table.SelectRows(Source, each [StartTime] > (DateTime.FixedLocalNow()-#duration(5,0,0,0)))
 in
     #"Filtered Rows"
 ```
 
-### <a name="reaching-kusto-query-limits"></a>Erreichen der Kusto-Abfragegrenzwerte 
+### <a name="configuring-azure-data-explorer-connector-options-in-m-query"></a>Konfigurieren von Optionen für den Azure Data Explorer-Connector in M-Abfragen
+
+Sie können die Optionen des Azure Data Explorer-Connectors über den erweiterten Editor von PBI in der Abfragesprache M konfigurieren. Mithilfe dieser Optionen können Sie die generierte Abfrage steuern, die an Ihren Azure Data Explorer-Cluster gesendet wird.
+
+```m
+let
+    Source = AzureDataExplorer.Contents("help", "Samples", "StormEvents", [<options>])
+in
+    Source
+```
+
+Sie können eine der folgenden Optionen in der M-Abfrage verwenden:
+
+| Option | Beispiel | BESCHREIBUNG
+|---|---|---
+| MaxRows | `[MaxRows=300000]` | Fügt die Set-Anweisung `truncationmaxrecords` zur Abfrage hinzu. Überschreibt die standardmäßige maximale Anzahl von Datensätzen, die eine Abfrage an den Aufrufer zurückgeben kann (Kürzung).
+| MaxSize | `[MaxSize=4194304]` | Fügt die Set-Anweisung `truncationmaxsize` zur Abfrage hinzu. Überschreibt die standardmäßige maximale Datengröße, die eine Abfrage an den Aufrufer zurückgeben darf (Kürzung).
+| NoTruncate | `[NoTruncate=true]` | Fügt die Set-Anweisung `notruncation` zur Abfrage hinzu. Dadurch kann die Kürzung der an den Aufrufer zurückgegebenen Abfrageergebnisse unterdrückt werden.
+| AdditionalSetStatements | `[AdditionalSetStatements="set query_datascope=hotcache"]` | Fügt der Abfrage die bereitgestellten Set-Anweisungen hinzu. Diese Anweisungen werden zum Festlegen von Abfrageoptionen für die Dauer der Abfrage verwendet. Mit Abfrageoptionen wird gesteuert, wie eine Abfrage ausgeführt wird und wie Ergebnisse zurückgegeben werden.
+| CaseInsensitive | `[CaseInsensitive=true]` | Diese Option bewirkt, dass der Connector Abfragen generiert, bei denen die Groß-/Kleinschreibung nicht beachtet wird. Abfragen verwenden beim Vergleichen von Werten den Operator `=~` anstelle des Operators `==`.
+
+    > [!NOTE]
+    > You can combine multiple options together to reach the desired behavior: `[NoTruncate=true, CaseInsensitive=true]`
+
+### <a name="reaching-kusto-query-limits"></a>Erreichen der Kusto-Abfragegrenzwerte
 
 Kusto-Abfragen geben standardmäßig bis zu 500.000 Zeilen oder 64 MB zurück, wie unter [Abfragegrenzwerte](kusto/concepts/querylimits.md) beschrieben. Sie können diese Standardwerte außer Kraft setzen, indem Sie im Verbindungsfenster von **Azure Data Explorer (Kusto)** die Option **Erweiterte Optionen** verwenden:
 
@@ -78,9 +103,21 @@ Kusto-Abfragen geben standardmäßig bis zu 500.000 Zeilen oder 64 MB zurück, 
 
 Durch diese Optionen werden mit Ihrer Abfrage [SET-Anweisungen](kusto/query/setstatement.md) ausgegeben, um die standardmäßigen Abfragegrenzwerte zu ändern:
 
-  * **Datensatzanzahl für Abfrageergebnisse einschränken** generiert `set truncationmaxrecords`.
-  * **Datengröße in Bytes für Abfrageergebnisse einschränken** generiert `set truncationmaxsize`.
-  * **Abschneiden von Resultsets deaktivieren** generiert `set notruncation`.
+* **Datensatzanzahl für Abfrageergebnisse einschränken** generiert `set truncationmaxrecords`.
+* **Datengröße in Bytes für Abfrageergebnisse einschränken** generiert `set truncationmaxsize`.
+* **Abschneiden von Resultsets deaktivieren** generiert `set notruncation`.
+
+### <a name="case-sensitivity"></a>Groß- und Kleinschreibung
+
+Der Connector generiert standardmäßig Abfragen, die beim Vergleichen von Zeichenfolgenwerten den Operator `==` verwenden, bei dem die Groß-/Kleinschreibung beachtet werden muss. Wird bei den Daten die Groß-/Kleinschreibung nicht beachtet, ist dies nicht das gewünschte Verhalten. Verwenden Sie die Connectoroption `CaseInsensitive`, um die generierte Abfrage zu ändern:
+
+```m
+let
+    Source = AzureDataExplorer.Contents("help", "Samples", "StormEvents", [CaseInsensitive=true]),
+    #"Filtered Rows" = Table.SelectRows(Source, each [State] == "aLaBama")
+in
+    #"Filtered Rows"
+```
 
 ### <a name="using-query-parameters"></a>Verwenden von Abfrageparametern
 
@@ -94,28 +131,28 @@ Verwenden Sie einen Abfrageparameter, um Informationen in der Abfrage zu filtern
 
 1. Suchen Sie den folgenden Abschnitt in der Abfrage:
 
-    ```powerquery-m
-    Source = Kusto.Contents("<Cluster>", "<Database>", "<Query>", [])
+    ```m
+    Source = AzureDataExplorer.Contents("<Cluster>", "<Database>", "<Query>", [])
     ```
-   
+
    Beispiel:
 
-    ```powerquery-m
-    Source = Kusto.Contents("Help", "Samples", "StormEvents | where State == 'ALABAMA' | take 100", [])
+    ```m
+    Source = AzureDataExplorer.Contents("Help", "Samples", "StormEvents | where State == 'ALABAMA' | take 100", [])
     ```
 
 1. Ersetzen Sie den relevanten Teil der Abfrage durch Ihren Parameter. Unterteilen Sie die Abfrage in mehrere Teile, und verketten Sie diese wieder mit dem kaufmännischen Und-Zeichen (&) und dem Parameter.
 
    In der Abfrage oben verwenden wir beispielsweise den Teil `State == 'ALABAMA'`, unterteilen ihn in `State == '` und `'` und fügen den `State`-Parameter dazwischen ein:
-   
+
     ```kusto
     "StormEvents | where State == '" & State & "' | take 100"
     ```
 
-1. Wenn die Abfrage Anführungszeichen enthält, codieren Sie sie ordnungsgemäß. Beispielsweise wird die folgende Abfrage: 
+1. Wenn die Abfrage Anführungszeichen enthält, codieren Sie sie ordnungsgemäß. Beispielsweise wird die folgende Abfrage:
 
    ```kusto
-   "StormEvents | where State == "ALABAMA" | take 100" 
+   "StormEvents | where State == "ALABAMA" | take 100"
    ```
 
    im **Erweiterten Editor** mit zwei Anführungszeichen wie folgt angezeigt:
@@ -142,12 +179,8 @@ Power BI enthält einen Datenaktualisierungsplaner, der regelmäßig Abfragen f�
 
 ### <a name="power-bi-can-send-only-short-lt2000-characters-queries-to-kusto"></a>Von Power BI können nur kurze Abfragen (&lt;2.000 Zeichen) an Kusto gesendet werden.
 
-Wenn die Ausführung einer Abfrage in Power BI folgenden Fehler verursacht: _„DataSource. Fehler: Fehler beim Abrufen von Inhalten von ... durch „Web.Contents“_ , ist die Abfrage möglicherweise länger als 2.000 Zeichen. Power BI verwendet **PowerQuery** zum Abfragen von Kusto. Dabei wird eine HTTP GET-Anforderung ausgegeben, durch die die Abfrage als Teil des abgerufenen URIs codiert wird. Daher sind von Power BI ausgegebene Kusto-Abfragen auf die maximale Länge eines Anforderungs-URI beschränkt (2.000 Zeichen abzüglich eines kleinen Puffers). Um dieses Problem zu umgehen, können Sie eine [gespeicherte Funktion](kusto/query/schema-entities/stored-functions.md) in Kusto definieren und Power BI diese Funktion in der Abfrage verwenden lassen.
+Wenn die Ausführung einer Abfrage in Power BI folgenden Fehler verursacht: _„DataSource. Fehler: Fehler beim Abrufen von Inhalten von ... durch „Web.Contents“_ , ist die Abfrage möglicherweise länger als 2000 Zeichen. Power BI verwendet **PowerQuery** zum Abfragen von Kusto. Dabei wird eine HTTP GET-Anforderung ausgegeben, durch die die Abfrage als Teil des abgerufenen URIs codiert wird. Daher sind von Power BI ausgegebene Kusto-Abfragen auf die maximale Länge eines Anforderungs-URI beschränkt (2.000 Zeichen abzüglich eines kleinen Puffers). Um dieses Problem zu umgehen, können Sie eine [gespeicherte Funktion](kusto/query/schema-entities/stored-functions.md) in Kusto definieren und Power BI diese Funktion in der Abfrage verwenden lassen.
 
 ## <a name="next-steps"></a>Nächste Schritte
 
 [Visualisieren von Daten mithilfe des Azure Data Explorer-Connectors für Power BI](power-bi-connector.md)
-
-
-
-

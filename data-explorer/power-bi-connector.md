@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 07/10/2019
-ms.openlocfilehash: 591f8add363f0d1b09d8314c21a209fdc4cbedac
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: d6c3e49aa2141e2428251f806b29b47a9c65c164
+ms.sourcegitcommit: 1618cbad18f92cf0cda85cb79a5cc1aa789a2db7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88875173"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91615052"
 ---
 # <a name="visualize-data-using-the-azure-data-explorer-connector-for-power-bi"></a>Visualisieren von Daten mithilfe des Azure Data Explorer-Connectors für Power BI
 
@@ -42,26 +42,35 @@ Sie stellen zunächst eine Verbindung mit dem Azure Data Explorer-Hilfecluster h
 
     ![Optionen für Cluster, Datenbank und Tabelle](media/power-bi-connector/cluster-database-table.png)
 
-    **Einstellung** | **Wert** | **Feldbeschreibung**
-    |---|---|---|
+    | Einstellung | Wert | Feldbeschreibung
+    |---|---|---
     | Cluster | *https://help.kusto.windows.net* | Die URL für den Hilfecluster. Für andere Cluster hat die URL das Format *https://\<ClusterName\>.\<Region\>.kusto.windows.net*. |
     | Datenbank | Nicht ausfüllen | Eine Datenbank, die in dem Cluster gehostet wird, mit dem Sie eine Verbindung herstellen. Wird in einem späteren Schritt ausgewählt. |
     | Tabellenname | Nicht ausfüllen | Eine der Tabellen in der Datenbank oder eine Abfrage wie <code>StormEvents \| take 1000</code> Wird in einem späteren Schritt ausgewählt. |
-    | Erweiterte Optionen | Nicht ausfüllen | Optionen für Ihre Abfragen (etwa die Größe des Resultsets). |
+    | Erweiterte Optionen | Nicht ausfüllen | Optionen für Ihre Abfragen (etwa die Größe des Resultsets).
     | Datenkonnektivitätsmodus | *DirectQuery* | Bestimmt, ob Power BI die Daten importiert oder direkt eine Verbindung mit der Datenquelle herstellt. Für diesen Connector sind beide Optionen geeignet. |
-    | | | |
-    
+
     > [!NOTE]
     > Im **Import**-Modus werden Daten nach Power BI verschoben. Im **DirectQuery**-Modus werden Daten direkt aus dem Azure Data Explorer-Cluster abgefragt.
     >
     > Verwenden Sie den **Import**-Modus in folgenden Fällen:
+    >
     > * Ihr Dataset ist klein.
-    > * Sie benötigen keine Fast-Echtzeitdaten. 
-    > * Ihre Daten sind bereits aggregiert, oder Sie führen die [Aggregation in Kusto](kusto/query/summarizeoperator.md#list-of-aggregation-functions) aus.    
+    > * Sie benötigen keine Fast-Echtzeitdaten.
+    > * Ihre Daten sind bereits aggregiert, oder Sie führen die [Aggregation in Kusto](kusto/query/summarizeoperator.md#list-of-aggregation-functions) aus.
     >
     > Verwenden Sie den **DirectQuery**-Modus in folgenden Fällen:
-    > * Ihr Dataset ist sehr umfangreich. 
-    > * Sie benötigen Fast-Echtzeitdaten.   
+    > * Ihr Dataset ist sehr umfangreich.
+    > * Sie benötigen Fast-Echtzeitdaten.
+
+    ### <a name="advanced-options"></a>Erweiterte Optionen
+
+    | Einstellung | Beispielwert | Feldbeschreibung
+    |---|---|---
+    | Datensatzanzahl für Abfrageergebnisse einschränken| `300000` | Maximale Anzahl der im Ergebnis zurückzugebender Datensätze |
+    | Datengröße für Abfrageergebnisse einschränken | `4194304` | Maximale Datengröße in Bytes, die im Ergebnis zurückgegeben werden soll |
+    | Abschneiden von Resultsets deaktivieren | `true` | Aktivieren/Deaktivieren der Ergebniskürzung mithilfe der Anforderungsoption „noTruncation“ |
+    | Zusätzliche SET-Anweisungen | `set query_datascope=hotcache` | Legt Abfrageoptionen für die Dauer der Abfrage fest. Mit Abfrageoptionen wird gesteuert, wie eine Abfrage ausgeführt wird und wie Ergebnisse zurückgegeben werden. |
 
 1. Falls Sie noch keine Verbindung mit dem Hilfecluster hergestellt haben, melden Sie sich an. Melden Sie sich mit einem Organisationskonto an, und wählen Sie dann **Verbinden** aus.
 

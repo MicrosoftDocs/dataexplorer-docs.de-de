@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 03/19/2020
-ms.openlocfilehash: 89ee29e70c71c29afb65ee81fc4ce8e498faee33
-ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
+ms.openlocfilehash: 4f7e61755b12c84fc49373a12edc0b507aee9bf4
+ms.sourcegitcommit: 2764e739b4ad51398f4f0d3a9742d7168c4f5fd7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89502635"
+ms.lasthandoff: 10/05/2020
+ms.locfileid: "91712050"
 ---
 # <a name="data-formats-supported-by-azure-data-explorer-for-ingestion"></a>Von Azure Data Explorer für die Erfassung unterstützte Datenformate.
 
@@ -20,8 +20,8 @@ Bei der Datenerfassung werden Daten einer Tabelle hinzugefügt und für Abfragen
 
 |Format   |Durchwahl   |BESCHREIBUNG|
 |---------|------------|-----------|
-|Avro     |`.avro`     |Eine [Avro-Containerdatei](https://avro.apache.org/docs/current/). Die folgenden Codes werden unterstützt: `null` und `deflate`. (`snappy` wird derzeit nicht unterstützt.)|
-|ApacheAvro|`.avro`    |Experimentelle native Implementierung für das [Avro](https://avro.apache.org/docs/current/)-Format mit Unterstützung für [logische Typen](https://avro.apache.org/docs/current/spec.html#Logical+Types) und für den Komprimierungscodec `snappy`.|
+|ApacheAvro|`.avro`    |Ein [Avro](https://avro.apache.org/docs/current/)-Format mit Unterstützung für [logische Typen](https://avro.apache.org/docs/current/spec.html#Logical+Types) und für den Komprimierungscodec `snappy`|
+|Avro     |`.avro`     |Eine Legacyimplementierung für die [Avro-Containerdatei](https://avro.apache.org/docs/current/). Die folgenden Codes werden unterstützt: `null`, `deflate`. (Verwenden Sie für `snappy` das Dateiformat `apacheavro`.)|
 |CSV      |`.csv`      |Eine Textdatei mit kommagetrennten Werten (`,`). Weitere Informationen finden Sie unter [RFC 4180: _Common Format and MIME Type for Comma-Separated Values (CSV) Files_](https://www.ietf.org/rfc/rfc4180.txt) (RFC 4180: Allgemeines Format und MIME-Typ für CSV-Dateien).|
 |JSON     |`.json`     |Eine Textdatei mit JSON-Objekten getrennt durch `\n` oder `\r\n`. Weitere Informationen finden Sie unter [JSON Lines (JSONL)](http://jsonlines.org/).|
 |MultiJSON|`.multijson`|Eine Textdatei mit einem JSON-Array mit Eigenschaftenbehältern (die jeweils einen Datensatz darstellen) oder einer beliebigen Anzahl von durch Leerzeichen getrennten Eigenschaftenbehältern, `\n` oder `\r\n`. Jeder Eigenschaftenbehälter kann auf mehrere Zeilen verteilt sein. Dieses Format ist `JSON` vorzuziehen, es sei denn, bei den Daten handelt es sich nicht um Eigenschaftenbehälter.|

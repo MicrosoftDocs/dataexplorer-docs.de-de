@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/18/2020
-ms.openlocfilehash: d46455fcce2880c4f347d04125a9f6355cb4cffa
-ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
+ms.openlocfilehash: e6630067cb02f3bf4685e274d2d5d2a6d00a97c5
+ms.sourcegitcommit: 1618cbad18f92cf0cda85cb79a5cc1aa789a2db7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88201542"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91615035"
 ---
 # <a name="azure-data-explorer-data-ingestion-overview"></a>Übersicht über die Datenerfassung in Azure Data Explorer 
 
@@ -36,7 +36,7 @@ Azure Data Explorer pullt Daten aus einer externen Quelle und liest Anforderunge
 
 ## <a name="batching-vs-streaming-ingestion"></a>Batcherfassung und Streamingerfassung
 
-* Bei der Batcherfassung werden die Daten in Batches zusammengefasst und für einen hohen Erfassungsdurchsatz optimiert. Diese Methode stellt die bevorzugte und leistungsfähigste Art der Erfassung dar. Die Daten werden gemäß den Erfassungseigenschaften in Batches zusammengefasst. Anschließend werden kleine Datenbatches zusammengeführt und für schnelle Abfrageergebnisse optimiert. Die Richtlinie für die [Batcherfassung](kusto/management/batchingpolicy.md) kann für Datenbanken oder Tabellen festgelegt werden. Standardmäßig beträgt der Maximalwert für Batches 5 Minuten, 1.000 Elemente oder eine Gesamtgröße von 500 MB.
+* Bei der Batcherfassung werden die Daten in Batches zusammengefasst und für einen hohen Erfassungsdurchsatz optimiert. Diese Methode stellt die bevorzugte und leistungsfähigste Art der Erfassung dar. Die Daten werden gemäß den Erfassungseigenschaften in Batches zusammengefasst. Anschließend werden kleine Datenbatches zusammengeführt und für schnelle Abfrageergebnisse optimiert. Die Richtlinie für die [Batcherfassung](kusto/management/batchingpolicy.md) kann für Datenbanken oder Tabellen festgelegt werden. Standardmäßig beträgt der Maximalwert für Batches 5 Minuten, 1.000 Elemente oder eine Gesamtgröße von 1 GB.
 
 * Die [Streamingerfassung](ingest-data-streaming.md) erfolgt durch eine fortlaufende Datenerfassung aus einer Streamingquelle. Durch die Streamingerfassung sinkt die Latenz bei kleinen Datensätzen pro Tabelle auf nahezu Echtzeit. Die Daten werden anfänglich im Zeilenspeicher erfasst und dann in Spaltenspeichererweiterungen verschoben. Die Streamingerfassung kann mithilfe einer Azure Data Explorer-Clientbibliothek oder einer der unterstützten Datenpipelines erfolgen. 
 
