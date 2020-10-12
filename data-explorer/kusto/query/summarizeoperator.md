@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/20/2020
-ms.openlocfilehash: 00d205a710b7b3bf41dc181e79e5e6d0baa95fc6
-ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
+ms.openlocfilehash: 9514f7c94568e73a704e6ba6f4bcc5bf61590d2f
+ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88793924"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91954772"
 ---
 # <a name="summarize-operator"></a>summarize-Operator
 
@@ -63,7 +63,7 @@ Um Bereiche numerischer Werte zusammenzufassen, verwenden `bin()` Sie, um Bereic
 
 ## <a name="list-of-aggregation-functions"></a>Liste der Aggregations Funktionen
 
-|Funktion|Beschreibung|
+|Funktion|BESCHREIBUNG|
 |--------|-----------|
 |[Any ()](any-aggfunction.md)|Gibt einen zufälligen, nicht leeren Wert für die Gruppe zurück.|
 |[anyif()](anyif-aggfunction.md)|Gibt einen zufälligen, nicht leeren Wert für die Gruppe zurück (mit Prädikat).|
@@ -117,7 +117,7 @@ Operator       |Standardwert
 
 :::image type="content" source="images/summarizeoperator/summarize-price-by-supplier.png" alt-text="Preis nach Obst und Lieferant zusammenfassen":::
 
-## <a name="example"></a>Beispiel
+## <a name="example-unique-combination"></a>Beispiel: eindeutige Kombination
 
 Bestimmen Sie, welche eindeutigen Kombinationen von `ActivityType` und `CompletionStatus` in einer Tabelle vorhanden sind. Es gibt keine Aggregations Funktionen, sondern nur Gruppieren nach Schlüsseln. In der Ausgabe werden nur die Spalten für diese Ergebnisse angezeigt:
 
@@ -132,7 +132,7 @@ Activities | summarize by ActivityType, completionStatus
 |`dancing`|`abandoned`
 |`singing`|`completed`
 
-## <a name="example"></a>Beispiel
+## <a name="example-minimum-and-maximum-timestamp"></a>Beispiel: minimaler und maximaler Zeitstempel
 
 Sucht den minimalen und maximalen Zeitstempel aller Datensätze in der Aktivitäts Tabelle. Es gibt keine group-by-Klausel, daher gibt es nur eine Zeile in der Ausgabe:
 
@@ -144,7 +144,7 @@ Activities | summarize Min = min(Timestamp), Max = max(Timestamp)
 |---|---
 |`1975-06-09 09:21:45` | `2015-12-24 23:45:00`
 
-## <a name="example"></a>Beispiel
+## <a name="example-distinct-count"></a>Beispiel: unterschiedliche Anzahl
 
 Erstellen Sie für jeden Kontinent eine Zeile, die die Anzahl der Städte anzeigt, in denen Aktivitäten auftreten. Da es nur wenige Werte für "Kontinent" gibt, ist keine Gruppierungs Funktion in der by-Klausel erforderlich:
 
@@ -159,7 +159,7 @@ Activities | summarize cities=dcount(city) by continent
 |`2673`|`North America`|
 
 
-## <a name="example"></a>Beispiel
+## <a name="example-histogram"></a>Beispiel: Histogramm
 
 Im folgenden Beispiel wird ein Histogramm für jeden Aktivitätstyp berechnet. Da `Duration` viele Werte aufweist, verwenden `bin` Sie, um die Werte in 10-Minuten-Intervallen zu gruppieren:
 

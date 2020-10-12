@@ -1,6 +1,6 @@
 ---
-title: .drop-Funktion - Azure Data Explorer | Microsoft Docs
-description: Dieser Artikel beschreibt die .drop-Funktion in Azure Data Explorer.
+title: '. Drop-Funktion: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt die Drop-Funktion in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,31 +8,30 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8930f7333ff18fad0d5b3dbbebe9328f8bf7a0b9
-ms.sourcegitcommit: e94be7045d71a0435b4171ca3a7c30455e6dfa57
+ms.openlocfilehash: 279af228d15f511b35c26eebd0d21521450be786
+ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81744791"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91954738"
 ---
 # <a name="drop-function"></a>.drop function
 
 Löscht eine Funktion aus der Datenbank.
-Informationen zum Löschen mehrerer Funktionen aus der Datenbank finden Sie unter [.drop-Funktionen](#drop-functions).
+Informationen zum Löschen mehrerer Funktionen aus der Datenbank finden Sie unter [. Drop Functions](#drop-functions).
 
 **Syntax**
 
-`.drop``function` *Funktionsname* `ifexists`[ ]
+`.drop``function` *FunctionName* [ `ifexists` ]
 
-* `ifexists`: Wenn angegeben, ändert sich das Verhalten des Befehls, um für eine nicht vorhandene Funktion nicht fehlschlagen zu können.
+* `ifexists`: Wenn dies angegeben ist, wird das Verhalten des Befehls so geändert, dass es für eine nicht vorhandene Funktion nicht fehlschlägt.
 
 > [!NOTE]
-> * Erfordert [Datenbankadministratorberechtigung](../management/access-control/role-based-authorization.md).
-> * Der [Datenbankbenutzer,](../management/access-control/role-based-authorization.md) der die Funktion ursprünglich erstellt hat, darf die Funktion ändern.  
+> * Erfordert die [Administrator Berechtigung](../management/access-control/role-based-authorization.md)für die Funktion.
     
 |Ausgabeparameter |type |BESCHREIBUNG
 |---|---|--- 
-|Name  |String |Der Name der Funktion, die entfernt wurde
+|Name  |String |Der Name der Funktion, die entfernt wurde.
  
 **Beispiel** 
 
@@ -40,27 +39,27 @@ Informationen zum Löschen mehrerer Funktionen aus der Datenbank finden Sie unte
 .drop function MyFunction1
 ```
 
-## <a name="drop-functions"></a>.drop-Funktionen
+## <a name="drop-functions"></a>. Drop-Funktionen
 
 Löscht mehrere Funktionen aus der Datenbank.
 
 **Syntax**
 
-`.drop``functions` (*FunctionName1*, *FunctionName2*,..) [ifexists]
+`.drop``functions`(*FunctionName1*, *FunctionName2*,..) [ifist vorhanden]
 
 **Rückgabe**
 
-Dieser Befehl gibt eine Liste der verbleibenden Funktionen in der Datenbank zurück.
+Mit diesem Befehl wird eine Liste der verbleibenden Funktionen in der Datenbank zurückgegeben.
 
 |Ausgabeparameter |type |BESCHREIBUNG
 |---|---|--- 
 |Name  |String |Der Name der Funktion. 
-|Parameter  |String |Die für die Funktion erforderlichen Parameter.
-|Body  |String |(Null oder mehr) `let` gefolgt von einem gültigen CSL-Ausdruck, der beim Funktionsaufruf ausgewertet wird.
-|Ordner|String|Ein Ordner, der für die Kategorisierung von UI-Funktionen verwendet wird. Dieser Parameter ändert nicht die Art und Weise, wie die Funktion aufgerufen wird.
-|DocString|String|Eine Beschreibung der Funktion für UI-Zwecke.
+|Parameter  |String |Die Parameter, die für die Funktion erforderlich sind.
+|Body  |String |(0 (null) oder mehr) `let` Anweisungen gefolgt von einem gültigen CSL-Ausdruck, der beim Funktionsaufruf ausgewertet wird.
+|Ordner|String|Ein für die Kategorisierung von Benutzeroberflächen Funktionen verwendeter Ordner. Dieser Parameter ändert nicht die Art und Weise, in der die Funktion aufgerufen wird.
+|DocString|String|Eine Beschreibung der Funktion zu UI-Zwecken.
 
-Erfordert [Funktionsadministratorberechtigung](../management/access-control/role-based-authorization.md).
+Erfordert die [Administrator Berechtigung](../management/access-control/role-based-authorization.md)für die Funktion.
 
 **Beispiel** 
  

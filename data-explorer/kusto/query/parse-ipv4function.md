@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 1f4213af91cfee667fdfc87b2d352fe42df3f915
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 48bfab2549da572efba117c21d783b35ac0202af
+ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346455"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91954721"
 ---
 # <a name="parse_ipv4"></a>parse_ipv4()
 
@@ -37,9 +37,7 @@ parse_ipv4('192.1.168.1') < parse_ipv4('192.1.168.2') == true
 IP-Adressen können `IP-prefix notation` mithilfe eines Schrägstrichs ( `/` ) definiert werden.
 Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse. Die Zahl (1 bis 32) rechts vom Schrägstrich (/) ist die Anzahl von zusammenhängenden 1 Bit in der netmask.
 
-## <a name="example"></a>Beispiel
-
-192.168.2.0/24 verfügt über ein zugeordnetes net/Subnetmask, das 24 aufeinander folgende Bits oder 255.255.255.0 im gepunkteten Dezimal Format enthält.
+Beispielsweise verfügt 192.168.2.0/24 über eine zugeordnete net/Subnetmask, die 24 aufeinander folgende Bits oder 255.255.255.0 im gepunkteten Dezimal Format enthält.
 
 ## <a name="returns"></a>Gibt zurück
 

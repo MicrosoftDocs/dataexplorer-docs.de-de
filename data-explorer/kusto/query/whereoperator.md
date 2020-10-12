@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ed207a9db0b6440bae8f8fb4ae1c250d274565d7
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 79eb1314fad1c3d3bdbbda242b3bd6a86c19e158
+ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87338217"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91954466"
 ---
 # <a name="where-operator"></a>where-Operator
 
@@ -54,7 +54,7 @@ So erzielen Sie die optimale Leistung:
 
 Weitere Informationen finden Sie in der Zusammenfassung der [verfügbaren Zeichen folgen Operatoren](./datatypes-string-operators.md) und der Zusammenfassung der [verfügbaren numerischen Operatoren](./numoperators.md).
 
-## <a name="example"></a>Beispiel
+## <a name="example-simple-comparisons-first"></a>Beispiel: einfache Vergleiche zuerst
 
 ```kusto
 Traces
@@ -67,7 +67,7 @@ In diesem Beispiel werden Datensätze abgerufen, die nicht älter als 1 Stunde s
 
 Beachten Sie, dass der Vergleich zwischen zwei Spalten zuletzt durchgesetzt wurde, da der Index nicht verwendet werden kann und eine Überprüfung erzwungen wird.
 
-## <a name="example"></a>Beispiel
+## <a name="example-columns-contain-string"></a>Beispiel: Spalten enthalten Zeichenfolge
 
 ```kusto
 Traces | where * has "Kusto"

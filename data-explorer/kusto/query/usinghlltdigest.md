@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: f56bd1c9f87833f7c1a9d29580a71557fedb894c
-ms.sourcegitcommit: ed902a5a781e24e081cd85910ed15cd468a0db1e
+ms.openlocfilehash: 30d4f6bd315b5a32c67570ab16b9abc3160f0177
+ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/11/2020
-ms.locfileid: "88072394"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91954483"
 ---
 # <a name="using-hll-and-tdigest"></a>Verwenden von „hll()“ und „tdigest()“
 
@@ -82,7 +82,7 @@ MyTable
 |0|
 
 
-## <a name="example"></a>Beispiel
+## <a name="example-count-with-binned-timestamp"></a>Beispiel: count with klassierte Zeitstempel
 
 Es gibt eine Tabelle `PageViewsHllTDigest` mit `hll` Werten von Seiten, die in jeder Stunde angezeigt werden. Sie möchten, dass diese Werte in klassifiziert werden `12h` . Führen `hll` Sie die Werte `hll_merge()` mit der Aggregatfunktion zusammen, wobei der Zeitstempel klassifiziert ist `12h` . Verwenden Sie die-Funktion `dcount_hll` , um den endgültigen Wert zurückzugeben `dcount` :
 
@@ -128,7 +128,7 @@ PageViewsHllTDigest
 |2016-05-02 12:00:00.0000000|181315|
 |2016-05-03 00:00:00.0000000|146817|
  
-## <a name="example"></a>Beispiel
+## <a name="example-temporary-table"></a>Beispiel: temporäre Tabelle
 
 Kusto-Limits werden mit zu großen Datasets erreicht, bei denen Sie regelmäßige Abfragen für das DataSet ausführen müssen, aber die regulären Abfragen ausführen, um [`percentile()`](percentiles-aggfunction.md) große Datasets zu berechnen oder zu [`dcount()`](dcount-aggfunction.md) überschreiten.
 
@@ -179,7 +179,7 @@ PageViewsHllTDigest
 
 Diese Abfrage sollte leistungsfähiger sein, da Sie über eine kleinere Tabelle ausgeführt wird. In diesem Beispiel wird die erste Abfrage über ungefähr 215 Mio. Datensätze ausgeführt, während die zweite Abfrage über nur 32 Datensätze läuft:
 
-## <a name="example"></a>Beispiel
+## <a name="example-intermediate-results"></a>Beispiel: Zwischenergebnisse
 
 Die Beibehaltungs Abfrage.
 Angenommen, Sie verfügen über eine Tabelle, die zusammengefasst wird, wenn jede Wikipedia-Seite angezeigt wird (Stichprobengröße ist 10 m), und Sie möchten für jede date1 suchen date2 den Prozentsatz der Seiten, die in date1 und date2 in Bezug auf die auf date1 (date1 < date2) angezeigten Seiten überprüft werden.
