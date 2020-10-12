@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/13/2020
-ms.openlocfilehash: 6c7910a222227dbb6b22e1fc4f0f4136897a0ef9
-ms.sourcegitcommit: be1bbd62040ef83c08e800215443ffee21cb4219
+ms.openlocfilehash: 2ad77b1763c8f4d85d676b34039a9300fca5912d
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84665111"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91941841"
 ---
 # <a name="extents-data-shards"></a>Blöcke (Daten-Shards)
 
@@ -54,7 +54,7 @@ Eine der wichtigsten Informationen zu den einzelnen Blöcken ist die Erstellungs
 
 1. **Beibehaltungs** Dauer: Blöcke, die zuvor erstellt wurden, werden zuvor gelöscht.
 1. **Caching** : Blöcke, die vor kurzem erstellt wurden, werden im [Hot Cache](cachepolicy.md)aufbewahrt.)
-1. **Sampling** : letzte Blöcke werden bevorzugt, wenn Abfrage Vorgänge verwendet werden, z. b.`take`
+1. **Sampling** : letzte Blöcke werden bevorzugt, wenn Abfrage Vorgänge verwendet werden, z. b. `take`
 
 Tatsächlich verfolgt Kusto zwei `datetime` Werte pro Block nach: `MinCreatedOn` und `MaxCreatedOn` .
 Anfänglich sind die beiden Werte identisch. Wenn der Block mit anderen Blöcken zusammengeführt wird, entsprechen die neuen Werte den ursprünglichen minimalen und maximalen Werten der zusammengeführten Blöcke.
@@ -112,5 +112,5 @@ Im folgenden Beispiel werden Daten nur einmal erfasst. Der 2. und der dritte Bef
 
 * Das Überschreiben von `ingest-by` Tags wird nicht empfohlen.
 Wenn die Pipeline, die Kusto nährt, Daten Duplizierungen hat, empfiehlt es sich, diese Duplikate so weit wie möglich zu beheben, bevor die Daten in Kusto erfasst werden. Verwenden Sie auch `ingest-by` Tags in Kusto nur dann, wenn der Teil, der zu Kusto gehört, möglicherweise Duplikate einführt (z. b. gibt es einen Wiederholungs Mechanismus, der sich mit bereits in Bearbeitung befindlichen Erfassungs aufrufen überlappen kann). Wenn Sie versuchen, ein eindeutiges Tag für jeden Erfassungs Befehl festzulegen, `ingest-by` kann dies schwerwiegende Auswirkungen auf die Leistung haben.
-* Wenn solche Tags für einige Zeit nach dem Erfassen der Daten nicht erforderlich sind, wird empfohlen, dass Sie [die Tags löschen](extents-commands.md#drop-extent-tags).
+* Wenn solche Tags für einige Zeit nach dem Erfassen der Daten nicht erforderlich sind, wird empfohlen, Block Tags zu [Löschen](drop-extent-tags.md).
  

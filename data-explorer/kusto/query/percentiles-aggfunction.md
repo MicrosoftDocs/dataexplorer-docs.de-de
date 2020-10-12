@@ -8,21 +8,21 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 13cc0edad5e0e4673c34e7e5b1b517f097fa4e9a
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 0322dd6a8ba900fa4d55bea6b3568a5c42f61b52
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346183"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942368"
 ---
 # <a name="percentile-percentiles-aggregation-function"></a>Percentile (), percentiles () (Aggregations Funktion)
 
 Gibt eine Schätzung für das angegebene [Perzentil](#nearest-rank-percentile) mit dem nächstliegenden Rang der durch definierten Population zurück `*Expr*` .
 Die Genauigkeit hängt von der Bevölkerungsdichte in der Region des Perzentils ab. Diese Funktion kann [nur im Kontext der Aggregation innerhalb von](summarizeoperator.md) "Zusammenfassung" verwendet werden.
 
-* `percentiles()`ist wie `percentile()` , berechnet jedoch eine Reihe von perzentilwerten, die schneller als jedes Quantil berechnet werden.
-* `percentilesw()`ähnelt `percentilew()` , berechnet jedoch eine Reihe gewichteter Perzentil-Werte, die schneller als jedes Quantil berechnet werden.
-* `percentilew()`und `percentilesw()` können gewichtete Perzentilen berechnen. Gewichtete Perzentile berechnen die angegebenen Perzentile in einer gewichteten Weise, indem Sie jeden Wert `weight` in der Eingabe als Wiederholungszeit behandeln.
+* `percentiles()` ist wie `percentile()` , berechnet jedoch eine Reihe von perzentilwerten, die schneller als jedes Quantil berechnet werden.
+* `percentilesw()` ähnelt `percentilew()` , berechnet jedoch eine Reihe gewichteter Perzentil-Werte, die schneller als jedes Quantil berechnet werden.
+* `percentilew()` und `percentilesw()` können gewichtete Perzentilen berechnen. Gewichtete Perzentile berechnen die angegebenen Perzentile in einer gewichteten Weise, indem Sie jeden Wert `weight` in der Eingabe als Wiederholungszeit behandeln.
 
 ## <a name="syntax"></a>Syntax
 
@@ -49,7 +49,7 @@ Die Genauigkeit hängt von der Bevölkerungsdichte in der Region des Perzentils 
 * `*Percentile*`: Eine Double-Konstante, die das Quantil angibt.
 * `*Dynamic array*`: Liste der Perzentile in einem dynamischen Array von ganzzahligen oder Gleit Komma Zahlen.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Gibt eine Schätzung für `*Expr*` die angegebenen Perzentilen in der Gruppe zurück. 
 
@@ -68,7 +68,7 @@ CallDetailRecords
 | summarize percentiles(Duration, 5, 50, 95) by continent
 ```
 
-:::image type="content" source="images/percentiles-aggfunction/percentiles.png" alt-text="Perzentile":::
+:::image type="content" source="images/percentiles-aggfunction/percentiles.png" alt-text="Eine Tabelle mit den Ergebnissen, mit Spalten für den Kontinent und für Duration-Werte in den fünften, fifßigund neun fünften Quantilen.":::
 
 Die Ergebnisse zeigen, dass in Europa 5% der Anrufe kürzer als 11.55 s sind, 50% der Anrufe kürzer als 3 Minuten, 18,46 Sekunden und 95% der Anrufe kürzer als 40 Minuten 48 Sekunden.
 
@@ -89,12 +89,7 @@ Ein Kunde verfügt über eine Reihe von Latenz Werten in Millisekunden: `{ 1, 1,
 
 Um die Bandbreite und den Speicherplatz zu reduzieren, führen Sie eine vorab Aggregation der folgenden Bucket durch: `{ 10, 20, 30, 40, 50, 100 }` . Zählen Sie die Anzahl der Ereignisse in jedem Bucket, um die folgende Tabelle zu bilden:
 
-:::image type="content" source="images/percentiles-aggfunction/percentilesw-table.png" alt-text="Percentilesw-Tabelle":::
-
-In der Tabelle wird Folgendes angezeigt:
- * Acht Ereignisse im Bucket "10 MS" (entsprechend der Teilmenge `{ 1, 1, 2, 2, 2, 5, 7, 7 }` )
- * Sechs Ereignisse im Bucket mit 20 ms (entsprechend der Teilmenge `{ 12, 12, 15, 15, 15, 18 }` )
- * Drei Ereignisse im Bucket "30 ms" (entsprechend der Teilmenge `{ 21, 22, 26 }` )
+:::image type="content" source="images/percentiles-aggfunction/percentilesw-table.png" alt-text="Eine Tabelle mit den Ergebnissen, mit Spalten für den Kontinent und für Duration-Werte in den fünften, fifßigund neun fünften Quantilen." (entsprechend der Teilmenge `{ 21, 22, 26 }` )
  * Ein Ereignis im Bucket 40-ms (entsprechend der Teilmenge `{ 35 }` )
 
 An diesem Punkt sind die ursprünglichen Daten nicht mehr verfügbar. Nur die Anzahl der Ereignisse in jedem Bucket. Verwenden Sie die-Funktion, um Perzentilen aus diesen Daten zu berechnen `percentilesw()` .
@@ -113,12 +108,12 @@ datatable (ReqCount:long, LatencyBucket:long)
 
 Das Ergebnis der obigen Abfrage lautet:
 
-:::image type="content" source="images/percentiles-aggfunction/percentilesw-result.png" alt-text="Perzentilesw-Ergebnis" border="false":::
+:::image type="content" source="images/percentiles-aggfunction/percentilesw-result.png" alt-text="Eine Tabelle mit den Ergebnissen, mit Spalten für den Kontinent und für Duration-Werte in den fünften, fifßigund neun fünften Quantilen." border="false":::
 
 
 Die obige Abfrage entspricht der-Funktion `percentiles(LatencyBucket, 50, 75, 99.9)` , wenn die Daten in die folgende Form erweitert wurden:
 
-:::image type="content" source="images/percentiles-aggfunction/percentilesw-rawtable.png" alt-text="Percentilesw-Rohtabelle":::
+:::image type="content" source="images/percentiles-aggfunction/percentilesw-rawtable.png" alt-text="Eine Tabelle mit den Ergebnissen, mit Spalten für den Kontinent und für Duration-Werte in den fünften, fifßigund neun fünften Quantilen.":::
 
 ## <a name="getting-multiple-percentiles-in-an-array"></a>Erhalten von mehreren Perzentilen in einem Array
 
@@ -129,7 +124,7 @@ CallDetailRecords
 | summarize percentiles_array(Duration, 5, 25, 50, 75, 95), avg(Duration)
 ```
 
-:::image type="content" source="images/percentiles-aggfunction/percentiles-array-result.png" alt-text="Perzentiles Array Ergebnis":::
+:::image type="content" source="images/percentiles-aggfunction/percentiles-array-result.png" alt-text="Eine Tabelle mit den Ergebnissen, mit Spalten für den Kontinent und für Duration-Werte in den fünften, fifßigund neun fünften Quantilen.":::
 
 Entsprechend können gewichtete Perzentile mithilfe von als dynamisches Array zurückgegeben werden `percentilesw_array` .
 

@@ -1,6 +1,6 @@
 ---
-title: Kusto Explorer-Codeumgestaltung - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird die Kusto Explorer-Codeumgestaltung in Azure Data Explorer beschrieben.
+title: 'Refactoring von Kusto-Explorer-Code: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird das Refactoring von Code im Kusto-Explorer in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,33 +8,33 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/05/2019
-ms.openlocfilehash: 0a89cf9c648fc4811d56c22012cdb25d5505eb4c
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 959cf8d25b20d459b48a0c8f1968541b50917a9d
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81523986"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942232"
 ---
-# <a name="kusto-explorer-code-refactoring"></a>Kusto Explorer Code-Umgestaltung
+# <a name="kusto-explorer-code-refactoring"></a>Refactoring von Kusto-Explorer-Code
 
-Ähnlich wie andere IDEs bietet Kusto.Explorer mehrere Funktionen für die Bearbeitung und Umgestaltung von KQL-Abfragen.
+Ähnlich wie bei anderen IDEs bietet Kusto. Explorer mehrere Features für das Bearbeiten und Refactoring von kql-Abfragen.
 
-## <a name="rename-variable-or-column-name"></a>Variablen oder Spaltennamen umbenennen
+## <a name="rename-variable-or-column-name"></a>Variablen-oder Spaltennamen umbenennen
 
-+ `R` `Ctrl` + `R` Wenn Sie im Fenster Abfrage-Editor auf klicken, können Sie das aktuell ausgewählte Symbol umbenennen. `Ctrl`
+`Ctrl` + `R` `Ctrl` + `R` Wenn Sie im Abfrage-Editor-Fenster auf klicken, können Sie das derzeit ausgewählte Symbol umbenennen.
 
-Siehe unten Snapshot, der die Erfahrung demonstriert:
+Sehen Sie sich die folgende Momentaufnahme an, die die-
 
-![alt text](./Images/KustoTools-KustoExplorer/ke-refactor-rename.gif "Umbenennung")
+![Animiertes GIF, das eine Variable anzeigt, die im Abfrage-Editor-Fenster umbenannt wird. Drei vorkommen werden gleichzeitig durch den neuen Namen ersetzt.](./Images/KustoTools-KustoExplorer/ke-refactor-rename.gif "umbenennen-umbenennen")
 
-## <a name="extract-scalars-as-let-expressions"></a>Extrahieren von Skalarn als `let` Ausdrücke
+## <a name="extract-scalars-as-let-expressions"></a>Extrahieren von skalaren als `let` Ausdrücke
 
-Sie können das aktuell `let` ausgewählte Literal `Alt` + `Ctrl` + `M`als Ausdruck heraufstufen, indem Sie auf klicken. 
+Sie können das aktuell ausgewählte Literale als Ausdruck herauf Stufen, `let` indem Sie auf klicken `Alt` + `Ctrl` + `M` 
 
-![alt text](./Images/KustoTools-KustoExplorer/ke-extract-as-let-literal.gif "extract-as-let-literal")
+![Animiertes GIF. Der Abfrage-Editor-Zeiger beginnt bei einem literalen Ausdruck. Daraufhin wird eine Let-Anweisung angezeigt, die diesen Literalwert auf eine neue Variable festlegt.](./Images/KustoTools-KustoExplorer/ke-extract-as-let-literal.gif "Extract-as-Let-Literale")
 
 ## <a name="extract-tabular-statements-as-let-expressions"></a>Extrahieren von tabellarischen Anweisungen als `let` Ausdrücke
 
-Sie können tabellentabellarische `let` Ausdrücke auch als Anweisungen `Alt` + `Ctrl` +heraufstufen, indem Sie den Text auswählen und dann auf `M`klicken. 
+Sie können auch tabellarische Ausdrücke als Anweisungen herauf Stufen, `let` indem Sie den zugehörigen Text auswählen und dann auf klicken `Alt` + `Ctrl` + `M` . 
 
-![alt text](./Images/KustoTools-KustoExplorer/ke-extract-as-let-tabular.gif "extract-as-let-tabellarisch")
+![Animiertes GIF. Im Abfrage-Editor ist ein tabellarischer Ausdruck ausgewählt. Daraufhin wird eine Let-Anweisung angezeigt, in der der tabellarische Ausdruck auf eine neue Variable festgelegt wird.](./Images/KustoTools-KustoExplorer/ke-extract-as-let-tabular.gif "Extract-as-Let-tabellarisch")

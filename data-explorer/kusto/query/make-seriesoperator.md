@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2020
-ms.openlocfilehash: 6ed841a6f47eb9a0a1e73182a3b9acd1c0209bd9
-ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
+ms.openlocfilehash: 56742b04386bfda9e2cdbaa40a85d2220f2373d5
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/16/2020
-ms.locfileid: "90680763"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942351"
 ---
 # <a name="make-series-operator"></a>make-series-Operator
 
@@ -86,10 +86,10 @@ Es wird empfohlen, die Haupt Syntax von Make-Series und nicht die alternative Sy
 |[maxif()](maxif-aggfunction.md)|Gibt den maximalen Wert mit dem Prädikat der Gruppe zurück.|
 |[min()](min-aggfunction.md)|Gibt den Mindestwert in der Gruppe zurück.|
 |[minif()](minif-aggfunction.md)|Gibt den Minimalwert mit dem Prädikat der Gruppe zurück.|
-|[stdev()](stdev-aggfunction.md)|Gibt die Standardabweichung in der Gruppe zurück.|
+|[StDev ()](stdev-aggfunction.md)|Gibt die Standardabweichung in der Gruppe zurück.|
 |[Sum ()](sum-aggfunction.md)|Gibt die Summe der Elemente in der Gruppe zurück.|
 |[sumif()](sumif-aggfunction.md)|Gibt die Summe der Elemente mit dem Prädikat der Gruppe zurück.|
-|[variance()](variance-aggfunction.md)|Gibt die Varianz innerhalb der Gruppe zurück.|
+|[Varianz ()](variance-aggfunction.md)|Gibt die Varianz innerhalb der Gruppe zurück.|
 
 ## <a name="list-of-series-analysis-functions"></a>Liste der Reihen Analysefunktionen
 
@@ -127,7 +127,7 @@ T | make-series PriceAvg=avg(Price) default=0
 on Purchase from datetime(2016-09-10) to datetime(2016-09-13) step 1d by Supplier, Fruit
 ```
 
-:::image type="content" source="images/make-seriesoperator/makeseries.png" alt-text="Makeseries":::  
+:::image type="content" source="images/make-seriesoperator/makeseries.png" alt-text="Drei Tabellen. Der erste listet Rohdaten auf, die zweite enthält nur unterschiedliche Kombinationen aus &quot;Supplier-Fruit-Date&quot; und das dritte die Ergebnisse der Ergebnisse.":::  
 
 <!-- csl: https://help.kusto.windows.net:443/Samples --> 
 ```kusto

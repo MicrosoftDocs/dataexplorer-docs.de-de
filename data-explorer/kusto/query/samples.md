@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1408bfa0af8c07166bde94c2738b53cd0065ec97
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: bc28fcb860dc067d55dd2e5ce9de3f3a17b402f2
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85902163"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942317"
 ---
 # <a name="samples"></a>Beispiele
 
@@ -36,13 +36,13 @@ StormEvents
 * Verwenden `where` `summarize` Sie, und, `top` um die Datenmenge einzuschränken, die Sie anzeigen.
 * Sortieren Sie die Ergebnisse, um die Reihenfolge der x-Achse zu definieren.
 
-:::image type="content" source="images/samples/060.png" alt-text="060":::
+:::image type="content" source="images/samples/060.png" alt-text="Screenshot eines Säulen Diagramms. Die y-Achse liegt zwischen 0 und ungefähr 50. Zehn farbige Spalten stellen die entsprechenden Werte von 10 Standorten dar.":::
 
 ## <a name="get-sessions-from-start-and-stop-events"></a>Abrufen von Sitzungen aus Start- und Stop-Ereignissen
 
 Angenommen, Sie haben ein Ereignisprotokoll. Einige Ereignisse markieren den Anfang oder das Ende einer erweiterten Aktivität oder Sitzung. 
 
-|name|City|SessionID|Timestamp|
+|Name|City|SessionID|Timestamp|
 |---|---|---|---|
 |Start|London|2817330|2015-12-09T10:12:02.32|
 |Game|London|2817330|2015-12-09T10:12:52.45|
@@ -103,9 +103,9 @@ Das Join ordnet jede Startzeit mit allen Endzeiten von der gleichen Client-IP-Ad
 1. Gruppieren Sie nach Startzeit und IP, um eine Gruppe für jede Sitzung zu erhalten. 
 1. Stellen Sie eine `bin` Funktion für den startTime-Parameter bereit. Wenn Sie dies nicht tun, verwendet Kusto automatisch 1-Stunden-Behälter, die einigen Startzeiten mit den falschen Endzeit Punkten entsprechen.
 
-`arg_min`wählt die Zeile mit der kleinsten Dauer in jeder Gruppe aus, und der `*` Parameter übergibt alle anderen Spalten. Das Argument Präfix "min_" für die einzelnen Spaltennamen. 
+`arg_min` wählt die Zeile mit der kleinsten Dauer in jeder Gruppe aus, und der `*` Parameter übergibt alle anderen Spalten. Das Argument Präfix "min_" für die einzelnen Spaltennamen. 
 
-:::image type="content" source="images/samples/040.png" alt-text="040"::: 
+:::image type="content" source="images/samples/040.png" alt-text="Screenshot eines Säulen Diagramms. Die y-Achse liegt zwischen 0 und ungefähr 50. Zehn farbige Spalten stellen die entsprechenden Werte von 10 Standorten dar."::: 
 
 Fügen Sie Code hinzu, um die Dauer in Containern mit einfacher Größenordnung zu zählen. Wenn in diesem Beispiel ein Balkendiagramm bevorzugt wird, teilen Sie durch, `1s` um die Zeiträume in Zahlen zu konvertieren. 
 
@@ -118,7 +118,7 @@ Fügen Sie Code hinzu, um die Dauer in Containern mit einfacher Größenordnung 
     | sort by duration asc | render barchart 
 ```
 
-:::image type="content" source="images/samples/050.png" alt-text="050":::
+:::image type="content" source="images/samples/050.png" alt-text="Screenshot eines Säulen Diagramms. Die y-Achse liegt zwischen 0 und ungefähr 50. Zehn farbige Spalten stellen die entsprechenden Werte von 10 Standorten dar.":::
 
 ### <a name="real-example"></a>Beispiel aus der Praxis
 
@@ -197,7 +197,7 @@ Im folgenden finden Sie eine Beispiel Eingabe mit dem Namen `X` .
 
 |SessionID | StartTime | StopTime |
 |---|---|---|
-| eine | 10:01:03 | 10:10:08 |
+| a | 10:01:03 | 10:10:08 |
 | k | 10:01:29 | 10:03:10 |
 | c | 10:03:02 | 10:05:20 |
 
@@ -209,11 +209,11 @@ Hier ist ein Zwischenergebnis.
 X | extend samples = range(bin(StartTime, 1m), StopTime, 1m)
 ```
 
-`range`generiert ein Array von Werten in den angegebenen Intervallen.
+`range` generiert ein Array von Werten in den angegebenen Intervallen.
 
 |SessionID | StartTime | StopTime  | Beispiele|
 |---|---|---|---|
-| eine | 10:01:33 | 10:06:31 | [10:01:00,10:02:00,...10:06:00]|
+| a | 10:01:33 | 10:06:31 | [10:01:00,10:02:00,...10:06:00]|
 | k | 10:02:29 | 10:03:45 | [10:02:00,10:03:00]|
 | c | 10:03:12 | 10:04:30 | [10:03:00,10:04:00]|
 
@@ -225,12 +225,12 @@ X | mv-expand samples = range(bin(StartTime, 1m), StopTime , 1m)
 
 |SessionID | StartTime | StopTime  | Beispiele|
 |---|---|---|---|
-| eine | 10:01:33 | 10:06:31 | 10:01:00|
-| eine | 10:01:33 | 10:06:31 | 10:02:00|
-| eine | 10:01:33 | 10:06:31 | 10:03:00|
-| eine | 10:01:33 | 10:06:31 | 10:04:00|
-| eine | 10:01:33 | 10:06:31 | 10:05:00|
-| eine | 10:01:33 | 10:06:31 | 10:06:00|
+| a | 10:01:33 | 10:06:31 | 10:01:00|
+| a | 10:01:33 | 10:06:31 | 10:02:00|
+| a | 10:01:33 | 10:06:31 | 10:03:00|
+| a | 10:01:33 | 10:06:31 | 10:04:00|
+| a | 10:01:33 | 10:06:31 | 10:05:00|
+| a | 10:01:33 | 10:06:31 | 10:06:00|
 | k | 10:02:29 | 10:03:45 | 10:02:00|
 | k | 10:02:29 | 10:03:45 | 10:03:00|
 | c | 10:03:12 | 10:04:30 | 10:03:00|
@@ -329,7 +329,7 @@ Logs
 | project count_, Message 
 ```
 
-|count_|`Message`
+|count_|Nachricht
 |---|---
 |7125|Fehler bei "executealgorithmmethod" für die Methode "runcyclefrominteridata"...
 |7125|Inferencehostservice-Rückruf failed..System. NullReferenceException: der Objekt Verweis ist nicht auf eine Instanz eines Objekts festgelegt...
@@ -378,7 +378,7 @@ Logs
 | evaluate autocluster()
 ```
 
-|Anzahl |Prozent (%)|Komponente|Cluster|`Message`
+|Anzahl |Prozent (%)|Komponente|Cluster|Nachricht
 |---|---|---|---|---
 |7125|26,64|Inferencehostservice|Db4|Executealgorithmmethod für die-Methode...
 |7125|26,64|Unbekannte Komponente|Db4|Fehler beim inferencehostservice-Befehl....
@@ -389,7 +389,7 @@ Logs
 
 Ein häufiger Anwendungsfall ist die statische Zuordnung von Werten, die dazu beitragen können, Ergebnisse besser darstellbar zu machen.
 Sehen Sie sich beispielsweise die nächste Tabelle an. 
-`DeviceModel`Gibt ein Modell des Geräts an, das keine sehr bequeme Form der Referenzierung des Geräte namens ist.  
+`DeviceModel` Gibt ein Modell des Geräts an, das keine sehr bequeme Form der Referenzierung des Geräte namens ist.  
 
 
 |DeviceModel |Anzahl 
@@ -707,8 +707,8 @@ A; B
 |2019-01-01 00:00:00.0000000|x|Ax1|
 |2019-01-01 00:00:00.0000000|z|Az1|
 |2019-01-01 00:00:01.0000000|x|Ax2|
-|2019-01-01 00:00:02.0000000|y|Ay1|
-|2019-01-01 00:00:05.0000000|y|Ay2|
+|2019-01-01 00:00:02.0000000|j|Ay1|
+|2019-01-01 00:00:05.0000000|j|Ay2|
 
 </br>
 
@@ -716,7 +716,7 @@ A; B
 |---|---|---|
 |2019-01-01 00:00:03.0000000|x|B|
 |2019-01-01 00:00:04.0000000|x|B|
-|2019-01-01 00:00:04.0000000|y|B|
+|2019-01-01 00:00:04.0000000|j|B|
 |2019-01-01 00:02:00.0000000|z|B|
 
 Erwartete Ausgabe: 
@@ -725,7 +725,7 @@ Erwartete Ausgabe:
 |---|---|---|---|---|
 |x|2019-01-01 00:00:03.0000000|B|2019-01-01 00:00:01.0000000|Ax2|
 |x|2019-01-01 00:00:04.0000000|B|2019-01-01 00:00:01.0000000|Ax2|
-|y|2019-01-01 00:00:04.0000000|B|2019-01-01 00:00:02.0000000|Ay1|
+|j|2019-01-01 00:00:04.0000000|B|2019-01-01 00:00:02.0000000|Ay1|
 |z|2019-01-01 00:02:00.0000000|B|2019-01-01 00:00:00.0000000|Az1|
 
 Es gibt zwei verschiedene Ansätze, die für dieses Problem vorgeschlagen werden. Sie sollten beide in Ihrem speziellen DataSet testen, um das für Sie am besten geeignete DataSet zu finden.
@@ -784,5 +784,5 @@ B_events
 |---|---|---|---|---|
 |x|2019-01-01 00:00:03.0000000|2019-01-01 00:00:01.0000000|B|Ax2|
 |x|2019-01-01 00:00:04.0000000|2019-01-01 00:00:01.0000000|B|Ax2|
-|y|2019-01-01 00:00:04.0000000|2019-01-01 00:00:02.0000000|B|Ay1|
+|j|2019-01-01 00:00:04.0000000|2019-01-01 00:00:02.0000000|B|Ay1|
 |z|2019-01-01 00:02:00.0000000||B||

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 41e3f58ba857e23d31062484f11f30e80fb37317
-ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
+ms.openlocfilehash: 3f003c5e9c6733391d61a2130528c9babc4aae67
+ms.sourcegitcommit: d157e661de293aa4c2b5ad334a554eda0295bd2c
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/16/2020
-ms.locfileid: "90680723"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91886297"
 ---
 # <a name="parse_xml"></a>parse_xml()
 
@@ -33,7 +33,7 @@ Ein Objekt vom Typ " [Dynamic](./scalar-data-types/dynamic.md) ", das durch den 
 
 Die Konvertierung erfolgt wie folgt:
 
-XML                                |JSON                                            |Access
+XML                                |JSON                                            |Zugriff
 -----------------------------------|------------------------------------------------|--------------         
 `<e/>`                             | {"e": NULL}                                  | o. e
 `<e>text</e>`                      | {"e": "Text"}                                | o. e
@@ -81,7 +81,7 @@ anschließend übersetzt das folgende CSL-Fragment den XML-Code in den folgenden
 }
 ```
 
-und ruft den Wert des `duration` Slots im-Objekt ab, von dem zwei Slots `duration.value` `duration.min` ( `118.0` `110.0` bzw. bzw.) abgerufen werden.
+und ruft den Wert des `duration` Slots im-Objekt ab, von dem zwei Slots `duration.value` `duration.min` ( `118.0` `100.0` bzw. bzw.) abgerufen werden.
 
 ```kusto
 T

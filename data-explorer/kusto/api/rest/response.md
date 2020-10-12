@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/05/2018
-ms.openlocfilehash: f926daa248a74b7b61ea4867d3a54f857444823e
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 2642ffc6b87afab785dc5f7ba962e1f659232cc2
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226022"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942266"
 ---
 # <a name="querymanagement-http-response"></a>HTTP-Antwort (Abfrage/Verwaltung)
 
@@ -24,9 +24,9 @@ Code 200 gibt z. b. Erfolg an.
 
 Die folgenden Statuscodes werden derzeit verwendet, es kann jedoch ein beliebiger gültiger HTTP-Code zurückgegeben werden.
 
-|Code|Subcode        |Beschreibung                                    |
+|Code|Subcode        |BESCHREIBUNG                                    |
 |----|---------------|-----------------------------------------------|
-|100 |Continue       |Der Client kann die Anforderung weiterhin senden.       |
+|100 |Weiter       |Der Client kann die Anforderung weiterhin senden.       |
 |200 |OK             |Die Anforderung wurde erfolgreich verarbeitet.       |
 |400 |BadRequest     |Die Anforderung ist falsch formatiert und ist fehlgeschlagen (permanent).|
 |401 |Nicht autorisiert   |Der Client muss sich zuerst authentifizieren.            |
@@ -45,7 +45,7 @@ Die folgenden Statuscodes werden derzeit verwendet, es kann jedoch ein beliebige
 
 Die folgenden benutzerdefinierten Header werden zurückgegeben.
 
-|Benutzerdefinierter Header           |Beschreibung                                                                                               |
+|Benutzerdefinierter Header           |BESCHREIBUNG                                                                                               |
 |------------------------|----------------------------------------------------------------------------------------------------------|
 |`x-ms-client-request-id`|Der eindeutige Anforderungs Bezeichner, der im Anforderungs Header desselben Namens gesendet wird, oder ein eindeutiger Bezeichner.     |
 |`x-ms-activity-id`      |Eine global eindeutige Korrelations-ID für die Anforderung. Sie wird vom-Dienst erstellt.                    |
@@ -68,13 +68,13 @@ Weitere Informationen finden Sie unter [Microsoft-Rest-API-Richtlinien](https://
 
 Die JSON-Codierung einer Sequenz von Tabellen ist ein einzelner JSON-Eigenschaften Behälter mit den folgenden Name/Wert-Paaren.
 
-|name  |Wert                              |
+|Name  |Wert                              |
 |------|-----------------------------------|
 |Tabellen|Ein Array des Tabellen Eigenschaften Behälters.|
 
 Der Tabellen Eigenschaften Behälter weist die folgenden Name/Wert-Paare auf.
 
-|name     |Wert                               |
+|Name     |Wert                               |
 |---------|------------------------------------|
 |TableName|Eine Zeichenfolge, die die Tabelle bezeichnet. |
 |Spalten  |Ein Array des Spalten Eigenschaften Behälters.|
@@ -82,7 +82,7 @@ Der Tabellen Eigenschaften Behälter weist die folgenden Name/Wert-Paare auf.
 
 Der Spalten Eigenschaften Behälter weist die folgenden Name/Wert-Paare auf.
 
-|name      |Wert                                                          |
+|Name      |Wert                                                          |
 |----------|---------------------------------------------------------------|
 |ColumnName|Eine Zeichenfolge, die die Spalte identifiziert.                           |
 |DataType  |Eine Zeichenfolge, die den ungefähren .NET-Typ der Spalte bereitstellt.|
@@ -109,7 +109,7 @@ Das folgende Beispiel zeigt ein mögliches solches Objekt, wenn es eine einzelne
 
 Ein weiteres Beispiel: 
 
-:::image type="content" source="../images/rest-json-representation.png" alt-text="Rest-JSON-Darstellung":::
+:::image type="content" source="../images/rest-json-representation.png" alt-text="Screenshot der Strukturansicht einer JSON-Datei, die ein Array von Tabellen Objekten enthält.":::
 
 ## <a name="the-meaning-of-tables-in-the-response"></a>Die Bedeutung von Tabellen in der Antwort.
 
@@ -145,7 +145,7 @@ Es werden häufig drei Tabellen erstellt:
 
   Ein Beispiel für diese Tabelle ist:
 
-  |Ordinal|Variante            |name               |Id                                  |Prettyname|
+  |Ordinal|Typ            |Name               |Id                                  |Prettyname|
   |-------|----------------|-------------------|------------------------------------|----------|
   |0      | QueryResult    |Primaryresult      |db9520f9-0455-4cb5-b257-53068497605a||
   |1      | QueryProperties|@ExtendedProperties|908901l6-5319-4809-ae9e-009068c267c7||

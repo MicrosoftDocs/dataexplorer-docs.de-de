@@ -1,21 +1,21 @@
 ---
-title: 'Rowlevelsecurity-Richtlinie (Vorschau): Azure Daten-Explorer | Microsoft-Dokumentation'
-description: In diesem Artikel wird die rowlevelsecurity-Richtlinie (Vorschauversion) in Azure Daten-Explorer beschrieben.
+title: 'Rowlevelsecurity-Richtlinie: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird die rowlevelsecurity-Richtlinie in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 03/25/2020
-ms.openlocfilehash: 2df8178bbc75b9338699c00cdd8a16e7ab3b057f
-ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
+ms.date: 10/11/2020
+ms.openlocfilehash: f73cf5718a80528415c9aed201917c1bd52bb660
+ms.sourcegitcommit: 86636f80a12f47ea434f128fa04fe9fc09629730
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "85967518"
+ms.lasthandoff: 10/12/2020
+ms.locfileid: "91942632"
 ---
-# <a name="row_level_security-policy-command-preview"></a>Befehl "row_level_security Richtlinie" (Vorschau)
+# <a name="row_level_security-policy-command"></a>Richtlinienbefehl für „row_level_security“
 
 In diesem Artikel werden Befehle beschrieben, die zum Konfigurieren einer [row_level_security Richtlinie](rowlevelsecuritypolicy.md) für Datenbanktabellen verwendet werden.
 
