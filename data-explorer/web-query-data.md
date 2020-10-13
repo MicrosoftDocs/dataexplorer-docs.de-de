@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 06/15/2020
-ms.openlocfilehash: 061c3ea6c2a493cbda8ac428837720efe42f2082
-ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
+ms.openlocfilehash: 78666938417ce02d5320c56b247e1b854b842234
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88793958"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942334"
 ---
 # <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>Schnellstart: Abfragen von Daten auf der Azure Data Explorer-Webbenutzeroberfläche
 
@@ -75,7 +75,7 @@ Sie können jetzt Abfragen für alle Cluster ausführen, mit denen Sie verbunden
     ```
     Diese Abfrage gibt die zehn neuesten Datensätze in der Tabelle **StormEvents** zurück. Die linke Seite des Ergebnisses sollte der folgenden Tabelle ähneln.
 
-    ![Abfrageergebnisse](media/web-query-data/result-set-01.png)
+    :::image type="content" source="media/web-query-data/result-set-01.png" alt-text="Screenshot: Tabelle mit Startzeit, Endzeit, Episode, Ereignis-ID, Zustand und Ereignistyp für zehn Sturmereignisse" border="false":::
 
     Die folgende Abbildung zeigt den Zustand, den die Anwendung nun aufweisen sollte, zusammen mit hinzugefügten Clustern und einer Abfrage mit Ergebnissen.
 
@@ -95,7 +95,7 @@ Sie können jetzt Abfragen für alle Cluster ausführen, mit denen Sie verbunden
 
    Diese Abfrage gibt dieselben Datensätze wie die erste zurück, schließt aber nur die in der `project`-Anweisung angegebenen Spalten ein. Das Ergebnis sollte der folgenden Tabelle ähneln.
 
-    ![Abfrageergebnisse](media/web-query-data/result-set-02.png)
+    :::image type="content" source="media/web-query-data/result-set-02.png" alt-text="Screenshot: Tabelle mit Startzeit, Endzeit, Episode, Ereignis-ID, Zustand und Ereignistyp für zehn Sturmereignisse" border="false":::
 
 1. Wählen Sie oben im Abfragefenster **Abruf** aus.
 
@@ -131,7 +131,7 @@ Nun, da Sie wissen, wie grundlegende Abfragen funktionieren, sehen wir uns an, w
 
 1. Erweitern Sie im Raster **California** (Kalifornien), um Datensätze für diesen Bundesstaat anzuzeigen.
 
-    ![Abfrageergebnisse](media/web-query-data/result-set-03.png)
+    :::image type="content" source="media/web-query-data/result-set-03.png" alt-text="Screenshot: Tabelle mit Startzeit, Endzeit, Episode, Ereignis-ID, Zustand und Ereignistyp für zehn Sturmereignisse" border="false":::
 
     Diese Art der Gruppierung kann hilfreich sein, wenn Sie explorative Analysen durchführen.
 
@@ -175,7 +175,7 @@ Häufig möchten Sie die erstellten Abfragen freigeben.
 
 1. Wählen Sie oben im Abfragefenster **Freigeben** aus. 
 
-:::image type="content" source="media/web-query-data/share-menu.png" alt-text="Menü „Freigeben“":::
+:::image type="content" source="media/web-query-data/share-menu.png" alt-text="Screenshot: Tabelle mit Startzeit, Endzeit, Episode, Ereignis-ID, Zustand und Ereignistyp für zehn Sturmereignisse":::
 
 Die folgenden Optionen sind im Dropdown verfügbar:
 * Link in Zwischenablage
@@ -194,7 +194,7 @@ Sie können einen Deep-Link angeben, damit andere Benutzer mit Zugriff auf den C
 
 1. Fügen Sie den Link in einem neuen Browserfenster ein. Das Ergebnis sollte nach dem Ausführen der Abfrage dem folgenden ähneln.
 
-    :::image type="content" source="media/web-query-data/shared-query.png" alt-text="Freigegebener Deep-Link der Abfrage":::
+    :::image type="content" source="media/web-query-data/shared-query.png" alt-text="Screenshot: Tabelle mit Startzeit, Endzeit, Episode, Ereignis-ID, Zustand und Ereignistyp für zehn Sturmereignisse":::
 
 ### <a name="pin-to-dashboard"></a>An Dashboard anheften
 
@@ -211,7 +211,7 @@ So heften Sie eine Abfrage an
     1. Aktivieren Sie das Kontrollkästchen **Dashboard nach Erstellung anzeigen** (wenn es sich um ein neues Dashboard handelt).
     1. Wählen Sie **Anheften**aus
 
-    :::image type="content" source="media/web-query-data/pin-to-dashboard.png" alt-text="Bereich „An Dashboard anheften“":::
+    :::image type="content" source="media/web-query-data/pin-to-dashboard.png" alt-text="Screenshot: Tabelle mit Startzeit, Endzeit, Episode, Ereignis-ID, Zustand und Ereignistyp für zehn Sturmereignisse":::
     
 > [!NOTE]
 > Mit **An Dashboard anheften** wird nur die ausgewählte Abfrage angeheftet. Um die Dashboarddatenquelle zu erstellen und Renderbefehle in ein visuelles Element im Dashboard zu übersetzen, muss die relevante Datenbank in der Datenbankliste ausgewählt werden.
@@ -220,7 +220,7 @@ So heften Sie eine Abfrage an
 
 Um die Abfrageergebnisse in eine CSV-Datei zu exportieren, wählen Sie **Datei** > **Nach CSV exportieren** aus.
 
-:::image type="content" source="media/web-query-data/export-results.png" alt-text="Exportieren von Ergebnissen in eine CSV-Datei":::
+:::image type="content" source="media/web-query-data/export-results.png" alt-text="Screenshot: Tabelle mit Startzeit, Endzeit, Episode, Ereignis-ID, Zustand und Ereignistyp für zehn Sturmereignisse":::
 
 ## <a name="provide-feedback"></a>Feedback geben
 

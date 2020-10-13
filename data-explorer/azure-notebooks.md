@@ -7,12 +7,12 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 04/01/2020
-ms.openlocfilehash: d41c9e2719ef5139d89986ff5333c03e6e34d26c
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 4cb0e319cafbd1c59680c7bccc35e2d865d29d40
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872470"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942198"
 ---
 # <a name="use-azure-notebooks-to-analyze-data-in-azure-data-explorer"></a>Verwenden von Azure Notebooks zum Analysieren von Daten in Azure Data Explorer
 
@@ -48,13 +48,13 @@ ms.locfileid: "88872470"
 1. Erstellen Sie in Ihrem neuen Projekt ein Notebook. Für das Notebook sollte eine [unterstützte Sprache](https://github.com/Azure/azure-kusto-python#minimum-requirements) verwendet werden.
 Wählen Sie **+ Neu** und dann **Notebook** aus, um ein Notebook zu erstellen.
 
-    ![Erstellen eines neuen Notebooks](media/azurenotebooks/an-create-new-notebook-menu.png) 
+    :::image type="content" source="media/azurenotebooks/an-create-new-notebook-menu.png" alt-text="Seite „Projekte“, Registerkarte „Meine Projekte“, Microsoft Azure Notebooks, Azure Data Explorer" border="false":::
 
 1. Geben Sie im Dialogfeld **Neues Notizbuch erstellen** einen Namen für das Notebook ein.
 
 1. Wählen Sie **Python 3.6** und dann **Neu** aus.
     
-    ![Erstellen eines neuen Notebooks](media/azurenotebooks/an-create-new-notebook.png) 
+    :::image type="content" source="media/azurenotebooks/an-create-new-notebook.png" alt-text="Seite „Projekte“, Registerkarte „Meine Projekte“, Microsoft Azure Notebooks, Azure Data Explorer" border="false"::: 
     
 1. Wählen Sie in Ihrem Projekt Ihr neues Notebook aus.
 
@@ -90,7 +90,7 @@ Wählen Sie **+ Neu** und dann **Notebook** aus, um ein Notebook zu erstellen.
 
 1. Wechseln Sie zu Ihrem Notebook zurück, um das Ergebnis der Authentifizierung anzuzeigen. 
 
-:::image type="content" source="media/azurenotebooks/an-python-commands.png" alt-text="Ausgabe des Authentifizierungsergebnisses, Notebook-Fenster, Microsoft Azure Notebooks, Azure Data Explorer" lightbox="media/azurenotebooks/an-python-commands.png#lightbox":::
+:::image type="content" source="media/azurenotebooks/an-python-commands.png" alt-text="Seite „Projekte“, Registerkarte „Meine Projekte“, Microsoft Azure Notebooks, Azure Data Explorer" lightbox="media/azurenotebooks/an-python-commands.png#lightbox":::
 
 ## <a name="execute-a-kusto-query"></a>Ausführen einer Kusto-Abfrage
 
@@ -103,7 +103,7 @@ Wählen Sie **+ Neu** und dann **Notebook** aus, um ein Notebook zu erstellen.
         print(", ".join(row))
     ```    
 
-:::image type="content" source="media/azurenotebooks/an-commands.png" alt-text="Schaltfläche „Ausführen“, Notebook-Fenster, Microsoft Azure Notebooks, Azure Data Explorer" lightbox="media/azurenotebooks/an-commands.png#lightbox":::
+:::image type="content" source="media/azurenotebooks/an-commands.png" alt-text="Seite „Projekte“, Registerkarte „Meine Projekte“, Microsoft Azure Notebooks, Azure Data Explorer" lightbox="media/azurenotebooks/an-commands.png#lightbox":::
 
 ## <a name="next-steps"></a>Nächste Schritte
 

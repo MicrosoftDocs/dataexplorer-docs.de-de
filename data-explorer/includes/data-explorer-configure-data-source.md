@@ -4,12 +4,12 @@ ms.service: data-explorer
 ms.topic: include
 ms.date: 11/03/2019
 ms.author: orspodek
-ms.openlocfilehash: 3cd9d017429b629acad39f5b902e842886c3c818
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: b6c50e466df1028f11021e75fe572ea1ecb32225
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492374"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942647"
 ---
 ## <a name="configure-the-data-source"></a>Konfigurieren der Datenquelle
 
@@ -93,17 +93,17 @@ Nachdem Sie jetzt über einen Dienstprinzipal verfügen, fügen Sie ihn der Roll
 
 1. Suchen Sie den zuvor erstellten Dienstprinzipal. Wählen Sie den Prinzipal und dann **Auswählen** aus.
 
-    ![Verwalten von Berechtigungen im Azure-Portal](media/data-explorer-configure-data-source/new-principals.png)
+    :::image type="content" source="media/data-explorer-configure-data-source/new-principals.png" alt-text="Screenshot: Bereich „Neue Prinzipale“ im Azure-Portal. Die Schaltfläche „Auswählen“ und zwei Felder mit nicht lesbaren Dienstprinzipaleigenschaften sind hervorgehoben." border="false":::
 
 1. Wählen Sie **Speichern** aus.
 
-    ![Verwalten von Berechtigungen im Azure-Portal](media/data-explorer-configure-data-source/save-permission.png)
+    :::image type="content" source="media/data-explorer-configure-data-source/save-permission.png" alt-text="Screenshot: Bereich „Neue Prinzipale“ im Azure-Portal. Die Schaltfläche „Auswählen“ und zwei Felder mit nicht lesbaren Dienstprinzipaleigenschaften sind hervorgehoben." border="false":::
 
 #### <a name="management-command---query"></a>Verwaltungsbefehl – Abfrage
 
 1. Navigieren Sie im Azure-Portal zum Azure Data Explorer-Cluster, und wählen Sie **Abfrage** aus.
 
-    ![Abfrage](media/data-explorer-configure-data-source/query.png)
+    :::image type="content" source="media/data-explorer-configure-data-source/query.png" alt-text="Screenshot: Bereich „Neue Prinzipale“ im Azure-Portal. Die Schaltfläche „Auswählen“ und zwei Felder mit nicht lesbaren Dienstprinzipaleigenschaften sind hervorgehoben." border="false":::
 
 1. Führen Sie den folgenden Befehl im Abfragefenster aus. Verwenden Sie die Anwendungs-ID und die Mandanten-ID aus dem Azure-Portal oder der Befehlszeilenschnittstelle.
 

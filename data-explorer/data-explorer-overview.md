@@ -7,16 +7,19 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: overview
 ms.date: 09/24/2018
-ms.openlocfilehash: aae60156ec6035f354378e4f56f993efa33e0a7c
-ms.sourcegitcommit: fb54d71660391a63b0c107a9703adea09bfc7cb9
+ms.openlocfilehash: 323e8ba2d7f49a2d44ac4000d207316d75e9bd6e
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/22/2020
-ms.locfileid: "86946154"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942079"
 ---
 # <a name="what-is-azure-data-explorer"></a>Was ist der Azure-Daten-Explorer?
 
 Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Hiermit können Sie die vielen Datenströme moderner Software verarbeiten, um die Daten zu sammeln, zu speichern und zu analysieren. Azure-Daten-Explorer ist ideal zum Analysieren von großen Mengen unterschiedlicher Daten aus beliebigen Datenquellen geeignet, z.B. Websites, Anwendungen, IoT-Geräte und mehr. Diese Daten werden für die Diagnose, Überwachung, Berichterstellung, Machine Learning und weitere Analysefunktionen verwendet. Azure Data Explorer ermöglicht das einfache Erfassen dieser Daten, und Sie können komplexe Ad-hoc-Abfragen der Daten innerhalb von Sekunden ausführen.
+
+Erfahren Sie mehr über Azure Data Explorer: Neuigkeiten, Ankündigungen und Kundenstimmen. 
+[Registrieren Sie sich für die Onlineveranstaltung am 14. Oktober 2020.](https://aka.ms/adxevent)
 
 ## <a name="what-makes-azure-data-explorer-unique"></a>Weshalb ist der Azure-Daten-Explorer so einzigartig?
 
@@ -58,7 +61,7 @@ Azure-Daten-Explorer eignet sich gleichermaßen gut für die Verarbeitung große
 
 Die Funktionen von Azure Data Explorer werden durch andere Dienste erweitert, die auf seiner leistungsfähigen Abfragesprache aufbauen, u. a. durch [Azure Monitor-Protokolle](/azure/log-analytics/), [Application Insights](/azure/application-insights/), [Time Series Insights](/azure/time-series-insights/) und [Windows Defender Advanced Threat Protection](/windows/security/threat-protection/windows-defender-atp/windows-defender-advanced-threat-protection/).
 
-## <a name="feedback"></a>Feedback
+## <a name="how-to-provide-feedback"></a>Senden von Feedback
 
 Wir würden uns sehr über Ihr Feedback zu Azure Data Explorer und seiner Abfragesprache freuen:
 

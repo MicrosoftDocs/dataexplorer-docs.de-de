@@ -7,12 +7,12 @@ ms.reviewer: prvavill
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/31/2020
-ms.openlocfilehash: 5de30b4e6eb2ac9d01314482b693f6643075ca4a
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 630b03fc0e89005f1031aba4cbd1a86d803ff275
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872742"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942028"
 ---
 # <a name="monitor-azure-data-explorer-using-resource-health-preview"></a>Überwachen von Azure Data Explorer mithilfe von Resource Health (Vorschau)
 
@@ -40,13 +40,13 @@ Die Integrität einer Ressource wird mit einem der folgenden Status angezeigt: �
 
 Der Integritätsstatus **Verfügbar** gibt an, dass Ihre Azure Data Explorer-Ressource fehlerfrei ist und keine Probleme aufweist.
 
-![Verfügbar](media/monitor-with-resource-health/available.png)
+:::image type="content" source="media/monitor-with-resource-health/available.png" alt-text="Screenshot: Ressourcenintegritätsseite für eine Azure Data Explorer-Ressource. Der Status ist als „Verfügbar“ angegeben und hervorgehoben." border="false":::
 
 ### <a name="unavailable"></a>Nicht verfügbar
 
 Der Integritätsstatus **Nicht verfügbar** gibt an, dass ein Problem mit Ihrer Azure Data Explorer-Ressource vorliegt, das dazu geführt hat, dass sie für Abfragen und Erfassung nicht verfügbar ist. Beispielsweise kann es sein, dass Knoten in Ihrer Azure Data Explorer-Ressource unerwartet neu gestartet wurden. Falls sich Ihre Azure Data Explorer-Ressource länger in diesem Zustand befindet, wenden Sie sich an den [Support]().
 
-![Nicht verfügbar](media/monitor-with-resource-health/unavailable.png)
+:::image type="content" source="media/monitor-with-resource-health/unavailable.png" alt-text="Screenshot: Ressourcenintegritätsseite für eine Azure Data Explorer-Ressource. Der Status ist als „Verfügbar“ angegeben und hervorgehoben." border="false":::
 
 > [!TIP]
 > Die Problemursache kann mithilfe der [Systeminformationsbefehle](kusto/management/systeminfo.md) ermittelt werden.
@@ -58,7 +58,7 @@ Der Integritätsstatus **Unbekannt** gibt an, dass **Resource Health** seit mehr
 > [!TIP]
 > Die Integrität der Azure Data Explorer-Clusterressource ist **Unbekannt**, wenn sie sich im Zustand „Beendet“ befindet.
 
-![Unknown](media/monitor-with-resource-health/unknown.png)
+:::image type="content" source="media/monitor-with-resource-health/unknown.png" alt-text="Screenshot: Ressourcenintegritätsseite für eine Azure Data Explorer-Ressource. Der Status ist als „Verfügbar“ angegeben und hervorgehoben." border="false":::
 
 ## <a name="historical-information"></a>Verlaufsinformationen
 

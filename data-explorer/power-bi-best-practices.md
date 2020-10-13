@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: 404d8f2d6b7eacc61571575613fd8017baadb54d
-ms.sourcegitcommit: 1618cbad18f92cf0cda85cb79a5cc1aa789a2db7
+ms.openlocfilehash: 3d1e8b4df2507a9b2eb7126973dea891edc1d6ac
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91614848"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91941977"
 ---
 # <a name="best-practices-for-using-power-bi-to-query-and-visualize-azure-data-explorer-data"></a>Bewährte Methoden für die Verwendung von Power BI zum Abfragen und Visualisieren von Azure Data Explorer-Daten
 
@@ -92,8 +92,8 @@ Sie können eine der folgenden Optionen in der M-Abfrage verwenden:
 | AdditionalSetStatements | `[AdditionalSetStatements="set query_datascope=hotcache"]` | Fügt der Abfrage die bereitgestellten Set-Anweisungen hinzu. Diese Anweisungen werden zum Festlegen von Abfrageoptionen für die Dauer der Abfrage verwendet. Mit Abfrageoptionen wird gesteuert, wie eine Abfrage ausgeführt wird und wie Ergebnisse zurückgegeben werden.
 | CaseInsensitive | `[CaseInsensitive=true]` | Diese Option bewirkt, dass der Connector Abfragen generiert, bei denen die Groß-/Kleinschreibung nicht beachtet wird. Abfragen verwenden beim Vergleichen von Werten den Operator `=~` anstelle des Operators `==`.
 
-    > [!NOTE]
-    > You can combine multiple options together to reach the desired behavior: `[NoTruncate=true, CaseInsensitive=true]`
+> [!NOTE]
+> Sie können mehrere Optionen miteinander kombinieren, um das gewünschte Verhalten zu erzielen: `[NoTruncate=true, CaseInsensitive=true]`
 
 ### <a name="reaching-kusto-query-limits"></a>Erreichen der Kusto-Abfragegrenzwerte
 

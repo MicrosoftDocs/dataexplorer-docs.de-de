@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/24/2018
-ms.openlocfilehash: 25bdd9c36c63d521cd662ab5c69f3dfec974b1e6
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 0ff2b0892231f52390f103fe299f219a7a3f3860
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874765"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91942045"
 ---
 # <a name="manage-azure-data-explorer-database-permissions"></a>Verwalten der Berechtigungen für Datenbanken in Azure-Daten-Explorer
 
@@ -54,11 +54,11 @@ Der Azure-Daten-Explorer verfügt über die folgenden Rollen:
 
 1. Suchen Sie nach dem Prinzipal, und wählen Sie ihn und dann **Auswählen** aus.
 
-    ![Verwalten von Berechtigungen im Azure-Portal](media/manage-database-permissions/new-principals.png)
+    :::image type="content" source="media/manage-database-permissions/new-principals.png" alt-text="Screenshot: Seite „Neue Prinzipale“ im Azure-Portal. Ein Prinzipalname und ein Bild sind ausgewählt und hervorgehoben. Außerdem ist die Schaltfläche „Auswählen“ hervorgehoben." border="false":::
 
 1. Wählen Sie **Speichern** aus.
 
-    ![Verwalten von Berechtigungen im Azure-Portal](media/manage-database-permissions/save-permission.png)
+    :::image type="content" source="media/manage-database-permissions/save-permission.png" alt-text="Screenshot: Seite „Neue Prinzipale“ im Azure-Portal. Ein Prinzipalname und ein Bild sind ausgewählt und hervorgehoben. Außerdem ist die Schaltfläche „Auswählen“ hervorgehoben." border="false":::
 
 ## <a name="manage-permissions-with-management-commands"></a>Verwalten von Berechtigungen mit Verwaltungsbefehlen
 
