@@ -7,12 +7,12 @@ ms.topic: conceptual
 ms.date: 03/25/2020
 ms.author: mbaldwin
 ms.custom: security-benchmark
-ms.openlocfilehash: e67621e92af12c45ac7e66bd6055f90245f705d2
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: d56681eaee708fa66c2fc0ceedb08b003e259955
+ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81494174"
+ms.lasthandoff: 10/11/2020
+ms.locfileid: "91941960"
 ---
 # <a name="azure-security-baseline-for-data-explorer"></a>Azure-Sicherheitsbaseline für Data Explorer
 
@@ -657,9 +657,9 @@ Erstellen von Abfragen mit Azure Resource Graph: https://docs.microsoft.com/azur
 
 **Leitfaden**: Sie können Azure-Richtlinien verwenden, um Einschränkungen für den Typ der Ressourcen anzugeben, die in Kundenabonnements erstellt werden können. Nutzen Sie dazu die folgenden integrierten Richtliniendefinitionen:
 
-    - Not allowed resource types (Unzulässige Ressourcentypen)
+- Not allowed resource types (Unzulässige Ressourcentypen)
 
-    - Zulässige Ressourcentypen
+- Zulässige Ressourcentypen
 
 Sie werden in der Lage sein, die von der Richtlinie generierten Ereignisse mithilfe der 
 
@@ -707,9 +707,9 @@ Erstellen, Anzeigen und Verwalten von Aktivitätsprotokollwarnungen mit Azure Mo
 
 **Leitfaden**: Sie können Azure-Richtlinien verwenden, um Einschränkungen für den Typ der Ressourcen anzugeben, die in Kundenabonnements erstellt werden können. Nutzen Sie dazu die folgenden integrierten Richtliniendefinitionen:
 
-    - Not allowed resource types (Unzulässige Ressourcentypen)
+- Not allowed resource types (Unzulässige Ressourcentypen)
 
-    - Zulässige Ressourcentypen
+- Zulässige Ressourcentypen
 
 Tutorial: Erstellen und Verwalten von Richtlinien zur Konformitätserzwingung: https://docs.microsoft.com/azure/governance/policy/tutorials/create-and-manage
 
@@ -723,7 +723,7 @@ Azure Policy-Beispiele: https://docs.microsoft.com/azure/governance/policy/sampl
 
 ### <a name="610-implement-approved-application-list"></a>6.10: Implementieren einer Liste genehmigter Anwendungen
 
-**Anleitung:** Nicht zutreffend. Diese Empfehlung ist für Computeressourcen vorgesehen.
+**Leitfaden**: Nicht zutreffend. Diese Empfehlung ist für Computeressourcen vorgesehen.
 
 **Azure Security Center-Überwachung**: Nicht zutreffend
 
@@ -1022,21 +1022,12 @@ Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resou
 ### <a name="101-create-incident-response-guide"></a>10.1: Erstellen eines Leitfadens für die Reaktion auf Vorfälle
 
 **Leitfaden**: Erarbeiten Sie einen Leitfaden für die Reaktion auf Vorfälle für Ihre Organisation. Stellen Sie sicher, dass es schriftliche Pläne für die Reaktion auf Vorfälle gibt, in denen alle Rollen der Mitarbeiter sowie die Phasen der Bearbeitung und Verwaltung von Vorfällen von der Ermittlung bis zur abschließenden Überprüfung definiert sind.
-    
 
-    Guidance on building your own security incident response process: https://msrc-blog.microsoft.com/2019/07/01/inside-the-msrc-building-your-own-security-incident-response-process/
+Anleitung zum Entwickeln eines Prozesses für die Reaktion auf Sicherheitsvorfälle: https://msrc-blog.microsoft.com/2019/07/01/inside-the-msrc-building-your-own-security-incident-response-process/
 
-    
+Struktur eines Vorfalls laut Microsoft Security Response Center: https://msrc-blog.microsoft.com/2019/06/27/inside-the-msrc-anatomy-of-a-ssirp-incident/
 
-    Microsoft Security Response Center's Anatomy of an Incident: https://msrc-blog.microsoft.com/2019/06/27/inside-the-msrc-anatomy-of-a-ssirp-incident/
-
-    
-
-    Customer may also leverage NIST's Computer Security Incident Handling Guide to aid in the creation of their own incident response plan: https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final
-
-    
-
-
+Kunden können außerdem den Computer Security Incident Handling Guide des US-amerikanischen National Institute of Standards and Technology (NIST) nutzen, um einen Plan zur Reaktion auf Vorfälle zu entwickeln: https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final
 
 **Azure Security Center-Überwachung**: Nicht zutreffend
 
@@ -1045,19 +1036,12 @@ Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resou
 ### <a name="102-create-incident-scoring-and-prioritization-procedure"></a>10.2: Erstellen eines Verfahrens zur Bewertung und Priorisierung von Vorfällen
 
 **Leitfaden**: Security Center weist jeder Warnung einen Schweregrad zu, damit Sie priorisieren können, welche Warnungen zuerst untersucht werden sollen. Der Schweregrad basiert darauf, wie zuversichtlich Security Center in Bezug auf den Befund oder die Analyse ist, die zum Auslösen der Warnung verwendet wird, sowie auf dem Zuverlässigkeitsgrad, dass hinter der Aktivität, die zu der Warnung führte, eine böswillige Absicht stand. 
-    
 
-    Additionally, clearly mark subscriptions (for ex. production, non-prod) using tags and create a naming system to clearly identify and categorize Azure resources, especially those processing sensitive data.  It is your responsibility to prioritize the remediation of alerts based on the criticality of the Azure resources and environment where the incident occurred.
+Kennzeichnen Sie außerdem die Abonnements (z. B. Produktion, Nicht-Produktion) mithilfe von Tags, und erstellen Sie ein Namenssystem, um Azure-Ressourcen eindeutig zu identifizieren und zu kategorisieren, insbesondere solche, die vertrauliche Daten verarbeiten.  Die Priorisierung der Behebung von Warnungen basierend auf der Wichtigkeit der Azure-Ressourcen und der Umgebung, in der der Vorfall aufgetreten ist, liegt in Ihrer Verantwortung.
 
-    
+Sicherheitswarnungen in Azure Security Center: https://docs.microsoft.com/azure/security-center/security-center-alerts-overview
 
-    Security alerts in Azure Security Center: https://docs.microsoft.com/azure/security-center/security-center-alerts-overview
-
-    
-
-    Use tags to organize your Azure resources: https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags
-
-
+Verwenden von Tags zum Organisieren von Azure-Ressourcen: https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags
 
 **Azure Security Center-Überwachung**: Ja
 
@@ -1066,11 +1050,8 @@ Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resou
 ### <a name="103-test-security-response-procedures"></a>10.3: Verfahren zum Testen der Reaktion auf Sicherheitsvorfälle
 
 **Leitfaden**: Führen Sie in regelmäßigen Abständen Übungen durch, um die Reaktionsfähigkeit Ihrer Systeme zu testen und so Ihre Azure-Ressourcen zu schützen. Identifizieren Sie Schwachstellen und Lücken, und überarbeiten Sie den Plan bei Bedarf.
-    
 
-    Refer to NIST's publication: Guide to Test, Training, and Exercise Programs for IT Plans and Capabilities: https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-84.pdf
-
-
+Informationen finden Sie in der folgenden Veröffentlichung des NIST: Leitfaden zum Testen, Trainieren und Ausführen von Programmen für IT-Pläne und -Funktionen: https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-84.pdf
 
 **Azure Security Center-Überwachung**: Nicht zutreffend
 
@@ -1090,15 +1071,10 @@ Festlegen der Kontaktinformationen in Azure Security Center: https://docs.micros
 ### <a name="105-incorporate-security-alerts-into-your-incident-response-system"></a>10.5: Integrieren von Sicherheitswarnungen in das System zur Reaktion auf Vorfälle
 
 **Leitfaden**: Exportieren Sie die Azure Security Center-Warnungen und -Empfehlungen über die Funktion „Fortlaufender Export“, um Risiken für Azure-Ressourcen zu ermitteln. Über „Fortlaufender Export“ können Sie Warnungen und Empfehlungen entweder manuell oder kontinuierlich exportieren. Sie können den Azure Security Center-Datenconnector verwenden, um die Warnungen an Azure Sentinel zu streamen.
-    
 
-    How to configure continuous export: https://docs.microsoft.com/azure/security-center/continuous-export
+Konfigurieren des fortlaufenden Exports: https://docs.microsoft.com/azure/security-center/continuous-export
 
-    
-
-    How to stream alerts into Azure Sentinel: https://docs.microsoft.com/azure/sentinel/connect-azure-security-center
-
-
+Streamen von Warnungen in Azure Sentinel: https://docs.microsoft.com/azure/sentinel/connect-azure-security-center
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -1107,11 +1083,8 @@ Festlegen der Kontaktinformationen in Azure Security Center: https://docs.micros
 ### <a name="106-automate-the-response-to-security-alerts"></a>10.6: Automatisieren der Reaktion auf Sicherheitswarnungen
 
 **Leitfaden**: Verwenden Sie die Funktion „Workflowautomatisierung“ in Azure Security Center, um über Logic Apps automatisch Reaktionen auf Sicherheitswarnungen und -empfehlungen auszulösen und dadurch Ihre Azure-Ressourcen noch besser zu schützen.
-    
 
-    How to configure Workflow Automation and Logic Apps: https://docs.microsoft.com/azure/security-center/workflow-automation
-
-
+Konfigurieren von „Workflowautomatisierung“ und Logic Apps: https://docs.microsoft.com/azure/security-center/workflow-automation
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
