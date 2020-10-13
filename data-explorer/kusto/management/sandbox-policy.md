@@ -1,6 +1,6 @@
 ---
 title: 'Sandbox-Richtlinie: Azure Daten-Explorer | Microsoft-Dokumentation'
-description: Dieser Artikel beschreibt die Sandbox Richtlinie in Azure Daten-Explorer.
+description: Erfahren Sie mehr über Sandbox-Richtlinien Befehle in Azure Daten-Explorer. Weitere Informationen finden Sie unter Vorgehensweise beim Anzeigen, anpassen und Ablegen von Sandbox Richtlinien.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 7d56d602f53db29f5ea558acb0e9e4288e5ac6e3
-ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
+ms.openlocfilehash: ba37147db87c436aff7d77790641b17576e86392
+ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "85967484"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "92002963"
 ---
 # <a name="sandbox-policy-command"></a>Befehl "Sandbox Richtlinie"
 
@@ -61,4 +61,3 @@ Verwenden Sie den folgenden Befehl, um **alle** Sandbox-Richtlinien zu löschen:
 ```kusto
 .delete cluster policy sandbox
 ```
-

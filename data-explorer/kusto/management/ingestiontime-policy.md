@@ -1,6 +1,6 @@
 ---
 title: Kusto ingestiontime-Richtlinien Verwaltung-Azure Daten-Explorer
-description: Dieser Artikel beschreibt die ingestiontime-Richtlinie in Azure Daten-Explorer.
+description: Machen Sie sich mit den Befehlen der ingestiontime-Richtlinie in Azure Daten-Explorer vertraut. Erfahren Sie, wie Sie auf Erfassungszeiten zugreifen, und wie Sie diese Richtlinie aktivieren und deaktivieren.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f5ffc7ae648a9254564af0705cda84f3c79da99b
-ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
+ms.openlocfilehash: 2e1671373547a4ed069d67bc9153248f23bc3b5e
+ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "85966940"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "92003104"
 ---
 # <a name="ingestiontime-policy-command"></a>IngestionTime-Richtlinienbefehl
 

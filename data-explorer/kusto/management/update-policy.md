@@ -1,6 +1,6 @@
 ---
 title: 'Kusto-Update Richtlinien Verwaltung: Azure Daten-Explorer'
-description: Dieser Artikel beschreibt die Aktualisierungs Richtlinie in Azure Daten-Explorer.
+description: Erfahren Sie mehr über Befehle zum Aktualisieren von Richtlinien in Azure Daten-Explorer. Weitere Informationen finden Sie unter Vorgehensweise beim Anzeigen, festlegen, ändern und Löschen von Tabellen Update Richtlinien.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/04/2020
-ms.openlocfilehash: 111110ac69e726c8367af4a2741a79061df7531a
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: c9ef5b2a205665c692c383654f3d050c4658c0f1
+ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803861"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "92002979"
 ---
-# <a name="update-policy-commands"></a>Aktualisieren von Richtlinien Befehlen
+# <a name="update-policy-commands"></a>Aktualisieren von Richtlinienbefehlen
 
 Die [Aktualisierungs Richtlinie](updatepolicy.md) ist ein Richtlinien Objekt auf Tabellenebene, das automatisch eine Abfrage ausführt und dann die Ergebnisse erfasst, wenn Daten in einer anderen Tabelle erfasst werden.
 
@@ -63,7 +63,7 @@ Mit diesem Befehl wird die Aktualisierungs Richtlinie der angegebenen Tabelle fe
 > * Verwenden Sie eine gespeicherte Funktion für die- `Query` Eigenschaft des Update Policy-Objekts.
    Anstelle des gesamten Richtlinien Objekts müssen Sie nur die Funktionsdefinition ändern.
 > * Wenn `IsEnabled` auf festgelegt ist `true` , werden die folgenden Überprüfungen für die Update Richtlinie ausgeführt, während Sie festgelegt wird:
->    * `Source`-Überprüft, ob die Tabelle in der Zieldatenbank vorhanden ist.
+>    * `Source` -Überprüft, ob die Tabelle in der Zieldatenbank vorhanden ist.
 >    * `Query` 
 >        * Überprüft, ob das durch das Schema definierte Schema mit der einer Ziel Tabelle übereinstimmt.
 >        * Überprüft, ob die Abfrage `source` auf die Tabelle der Update Richtlinie verweist. 

@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/13/2020
-ms.openlocfilehash: 6dd52dbe9b69000b109f613957d1405190194b13
-ms.sourcegitcommit: 6db94135b9902ad0ea84f9cef00ded8ec0a90fc3
+ms.openlocfilehash: 9a697cfd37590f0368d5a8f0bacf91d02e1c8725
+ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86870089"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "92003159"
 ---
 # <a name="troubleshooting"></a>Problembehandlung
 
@@ -22,11 +22,11 @@ Dieses Dokument stellt häufige Probleme beim Ausführen und Verwenden von Kusto
 
 ### <a name="kustoexplorer-shows-error-dialog-during-or-after-start-up"></a>"Kusto. Explorer" zeigt ein Fehler Dialogfeld während oder nach dem Start an.
 
-**Symptom**
+#### <a name="symptom"></a>Symptom
 
 Beim Start zeigt Kusto. Explorer einen `InvalidOperationException` Fehler an.
 
-**Mögliche Lösung**
+#### <a name="possible-solution"></a>Mögliche Lösung
 
 Dieser Fehler kann darauf hindeuten, dass das Betriebssystem beschädigt wurde oder einige der grundlegenden Module fehlt.
 Um fehlende oder beschädigte Systemdateien zu überprüfen, führen Sie die folgenden Schritte aus:   
@@ -34,11 +34,11 @@ Um fehlende oder beschädigte Systemdateien zu überprüfen, führen Sie die fol
 
 ## <a name="kustoexplorer-always-downloads-even-when-there-are-no-updates"></a>"Kusto. Explorer" wird immer heruntergeladen, auch wenn keine Updates vorhanden sind.
 
-**Symptom**
+#### <a name="symptom"></a>Symptom
 
 Jedes Mal, wenn Sie "Kusto. Explorer" öffnen, werden Sie aufgefordert, eine neue Version zu installieren. "Kusto. Explorer" lädt das gesamte Paket herunter, ohne die bereits installierte Version zu aktualisieren.
 
-**Mögliche Lösung**
+#### <a name="possible-solution"></a>Mögliche Lösung
 
 Dieses Symptom könnte auf eine Beschädigung in Ihrem lokalen ClickOnce-Speicher zurückzuführen sein. Sie können den lokalen ClickOnce-Speicher löschen, indem Sie den folgenden Befehl an einer Eingabeaufforderung mit erhöhten Rechten ausführen.
 
@@ -54,7 +54,7 @@ Versuchen Sie, Kusto. Explorer erneut von einem der [Installations Spiegelungen]
 
 ### <a name="clickonce-error-cannot-start-application"></a>ClickOnce-Fehler: die Anwendung kann nicht gestartet werden.
 
-**Symptome**  
+#### <a name="symptoms"></a>Symptome
 
 Das Programm kann nicht gestartet werden und zeigt einen der folgenden Fehler an: 
 * `External component has thrown an exception`
@@ -82,7 +82,7 @@ Following errors were detected during this operation.
             at System.Deployment.Application.ApplicationActivator.ActivateDeploymentWorker(Object state)
 ```
 
-**Vorgeschlagene Lösungsschritte**
+#### <a name="proposed-solution-steps"></a>Vorgeschlagene Lösungsschritte
 
 1. Deinstallieren Sie Kusto. Explorer mithilfe von `Programs and Features` ( `appwiz.cpl` ).
 
@@ -124,8 +124,10 @@ Following errors were detected during this operation.
         copy %LOCALAPPDATA%\Kusto.Explorer.bak\User*.xml %LOCALAPPDATA%\Kusto.Explorer
         ```
 
+#### <a name="enabling-clickonce-verbose-logging"></a>Aktivieren der ausführlichen ClickOnce-Protokollierung
+
 1. Wenn die Anwendung immer noch nicht gestartet wird:
-    1. Aktivieren Sie die ausführliche ClickOnce-Protokollierung, indem Sie den LogVerbosityLevel-Zeichen folgen Wert 1 unter:
+    1. Aktivieren Sie die ausführliche [ClickOnce-Protokollierung](https://docs.microsoft.com/visualstudio/deployment/how-to-specify-verbose-log-files-for-clickonce-deployments) , indem Sie den LogVerbosityLevel-Zeichen folgen Wert 1 unter:
 
         ```kusto
         HKEY_CURRENT_USER\Software\Classes\Software\Microsoft\Windows\CurrentVersion\Deployment
@@ -136,12 +138,12 @@ Following errors were detected during this operation.
 
 ### <a name="clickonce-error-your-administrator-has-blocked-this-application-because-it-potentially-poses-a-security-risk-to-your-computer"></a>ClickOnce-Fehler: Ihr Administrator hat diese Anwendung blockiert, da Sie potenziell ein Sicherheitsrisiko für Ihren Computer darstellt.
 
-**Symptom**  
+#### <a name="symptom"></a>Symptom 
 Die Anwendung kann mit einem der folgenden Fehler nicht installiert werden:
 * `Your administrator has blocked this application because it potentially poses a security risk to your computer`.
 * `Your security settings do not allow this application to be installed on your computer.`
 
-**Lösung**
+#### <a name="solution"></a>Lösung
 
 Dieses Symptom könnte daran liegen, dass eine andere Anwendung das Standardverhalten der ClickOnce-Vertrauens Aufforderung überschreibt. 
 1. Anzeigen der Standard Konfigurationseinstellungen.

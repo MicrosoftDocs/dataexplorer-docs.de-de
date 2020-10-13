@@ -8,12 +8,12 @@ ms.reviewer: amitof
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/16/2020
-ms.openlocfilehash: 4bfc7b591683940e10d2737ec776421f65d1427a
-ms.sourcegitcommit: 93510ef1e5570ce4da2cbf76eb77946c93a7dec8
+ms.openlocfilehash: d0942a949454bf12840626ff25d3703a23aed2cc
+ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85372467"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "92002949"
 ---
 # <a name="query-results-cache"></a>Abfrageergebniscache
 
@@ -55,7 +55,6 @@ Die Abfrageergebnisse werden nicht zwischengespeichert, wenn eine der folgenden 
     * [current_principal](current-principalfunction.md)
     * [current_principal_details](current-principal-detailsfunction.md)
     * [current_principal_is_member_of](current-principal-ismemberoffunction.md)
-* Bei der Abfrage handelt es sich um eine [Cluster übergreifende Abfrage](cross-cluster-or-database-queries.md).
 * Die Abfrage greift auf eine [externe Tabelle](schema-entities/externaltables.md) oder auf [externe Daten](externaldata-operator.md)zu.
 * Die Abfrage verwendet den Operator zum [Auswerten von Plug](evaluateoperator.md) -ins.
 
@@ -71,12 +70,12 @@ Wenn ein zwischengespeichertes Ergebnis, das die Zeiteinschränkungen erfüllt, 
 Wie zeigt der Dienst an, dass die Abfrageergebnisse aus dem Cache bedient werden?
 Bei der Reaktion auf eine Abfrage sendet Kusto eine zusätzliche " [ExtendedProperties](../api/rest/response.md) "-Antwort Tabelle, die eine `Key` Spalte und eine `Value` Spalte enthält.
 Für zwischengespeicherte Abfrageergebnisse wird eine zusätzliche Zeile an die Tabelle angehängt:
-* Die Spalte der Zeile `Key` enthält die Zeichenfolge.`ServerCache`
+* Die Spalte der Zeile `Key` enthält die Zeichenfolge. `ServerCache`
 * Die Spalte der Zeile `Value` enthält einen Eigenschaften Behälter mit zwei Feldern:
-   * `OriginalClientRequestId`: Gibt die [clientrequestid](../api/netfx/request-properties.md#the-clientrequestid-x-ms-client-request-id-named-property)der ursprünglichen Anforderung an.
-   * `OriginalStartedOn`: Gibt die Startzeit der ursprünglichen Anforderung an.
+   * `OriginalClientRequestId` : Gibt die [clientrequestid](../api/netfx/request-properties.md#the-clientrequestid-x-ms-client-request-id-named-property)der ursprünglichen Anforderung an.
+   * `OriginalStartedOn` : Gibt die Startzeit der ursprünglichen Anforderung an.
 
-## <a name="distribution"></a>Verteilung
+## <a name="distribution"></a>Distribution
 
 Der Cache wird nicht von Cluster Knoten gemeinsam genutzt. Jeder Knoten verfügt über einen dedizierten Cache in seinem eigenen privaten Speicher. Wenn zwei identische Abfragen auf verschiedenen Knoten ausgeführt werden, wird die Abfrage ausgeführt und auf beiden Knoten zwischengespeichert. Dieser Prozess kann auftreten, wenn eine [schwache Konsistenz](../concepts/queryconsistency.md) verwendet wird.
 
