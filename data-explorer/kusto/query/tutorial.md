@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 03/23/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 2060d2996338cf1eee33b5905e9929c46040afa9
-ms.sourcegitcommit: b286703209f1b657ac3d81b01686940f58e5e145
+ms.openlocfilehash: 64736d944c71d84c4950dea0341089732b258f27
+ms.sourcegitcommit: a10e7c6ba96bdb94d95ef23f5d1506eb8fda0041
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86188590"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92058681"
 ---
 # <a name="tutorial"></a>Lernprogramm
 
@@ -44,7 +44,7 @@ Um herauszufinden, wie groß es ist, übergeben wir den Inhalt an einen Operator
 StormEvents | count
 ```
 
-So sieht das Ergebnis aus:
+Das Ergebnis lautet wie folgt:
 
 |Anzahl|
 |-----|
@@ -68,7 +68,7 @@ StormEvents
 | project StartTime, EndTime , State , EventType , EpisodeNarrative
 ```
 
-|StartTime|EndTime|Zustand|EventType|Episodenarrative|
+|StartTime|EndTime|State|EventType|Episodenarrative|
 |---|---|---|---|---|
 |2007-02-19 00:00:00.0000000|2007-02-19 08:00:00.0000000|Kalifornische|Hochwasser|Ein frontaler System, das sich über den südlichen San-Joaquin Valley bewegt, hat in den frühen Morgenstunden des 19 Über Bundesland-Autobahn 166 in der Nähe von Taft wurde eine neben Überflutung|
 
@@ -83,7 +83,7 @@ StormEvents
 | project  StartTime, EndTime, EventType, State, EventNarrative  
 ```
 
-|StartTime|EndTime|EventType|Zustand|EventNarrative|
+|StartTime|EndTime|EventType|State|EventNarrative|
 |---|---|---|---|---|
 |2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|Starker Regen|Flori|Bis zu 9 Zoll in einem Zeitraum von 24 Stunden in Teilen des Küsten bauweiten Kreises.|
 |2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|Hüterin|Flori|Ein Tornado, der in der Stadt von Eustis am Nord Ende des West-kruklake liegt. Der Tornado hat sich schnell auf die EF1 Stärke verstärkt, als er Nord Nordwest durch Eustis verlagert hat. Die Nachverfolgung war direkt unter zwei km lang und hatte eine maximale Breite von 300 Meter.  Der Tornado hat 7 Häuser zerstört. 20 sieben Häuser erhielten größere Schäden, und 81 Häuser haben geringfügige Schäden gemeldet. Es sind keine schwerwiegenden Verletzungen aufgetreten, und der Eigenschafts Schaden wurde bei $6,2 Millionen festgelegt.|
@@ -108,7 +108,7 @@ StormEvents
 | project  StartTime, EndTime, EventType, State, EventNarrative  
 ```
 
-|StartTime|EndTime|EventType|Zustand|EventNarrative|
+|StartTime|EndTime|EventType|State|EventNarrative|
 |---|---|---|---|---|
 |2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Winter Storm|MICHIGAN|Dieses schwere Schnee Ereignis wurde in den frühen Morgenstunden am Tag des neuen Jahrs fortgesetzt.|
 |2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Winter Storm|MICHIGAN|Dieses schwere Schnee Ereignis wurde in den frühen Morgenstunden am Tag des neuen Jahrs fortgesetzt.|
@@ -123,7 +123,7 @@ Dies kann mithilfe des [Sortier](./sortoperator.md) -und anschließenden [Operat
 StormEvents
 | sort by StartTime desc
 | take 5
-| project  StartTime, EndLat, EventType, EventNarrative
+| project  StartTime, EndTime, EventType, EventNarrative
 ```
 
 ## <a name="extend-compute-derived-columns"></a>erweitern: abgeleitete Spalten berechnen
@@ -138,7 +138,7 @@ StormEvents
 | project StartTime, EndTime, Duration, EventType, State
 ```
 
-|StartTime|EndTime|Dauer|EventType|Zustand|
+|StartTime|EndTime|Duration|EventType|State|
 |---|---|---|---|---|
 |2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|22:00:00|Starker Regen|Flori|
 |2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|00:08:00|Hüterin|Flori|
@@ -184,7 +184,7 @@ StormEvents
 | top 5 by StormCount desc
 ```
 
-|Zustand|Stormcount|Typeofstorms|
+|State|Stormcount|Typeofstorms|
 |---|---|---|
 |TEXAS|4701|27|
 |Kansas|3166|21|
@@ -238,11 +238,11 @@ StormEvents
 | render columnchart
 ```
 
-:::image type="content" source="images/tutorial/event-counts-state.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status":::
+:::image type="content" source="images/tutorial/event-counts-state.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status&quot;:::
 
 Obwohl wir den `mid` Projekt Vorgang entfernt haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
 
-Streng genommen handelt es sich bei "Rendering" nicht um einen Teil der Abfragesprache, sondern um eine Funktion des-Clients. Dennoch ist es in die Sprache integriert und ist sehr nützlich, um Ihre Ergebnisse zu entwerfen.
+Streng genommen handelt es sich bei &quot;Rendering" nicht um einen Teil der Abfragesprache, sondern um eine Funktion des-Clients. Dennoch ist es in die Sprache integriert und ist sehr nützlich, um Ihre Ergebnisse zu entwerfen.
 
 
 ## <a name="timecharts"></a>Zeitdiagramme
@@ -256,7 +256,11 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tutorial/time-series-start-bin.png" alt-text="Zeilendiagramm Ereignisse, klassifiziert nach Zeit":::
+:::image type="content" source="images/tutorial/time-series-start-bin.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status&quot;:::
+
+Obwohl wir den `mid` Projekt Vorgang entfernt haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
+
+Streng genommen handelt es sich bei &quot;Rendering":::
 
 ## <a name="multiple-series"></a>Mehrere Reihen
 
@@ -270,11 +274,19 @@ StormEvents
 | summarize count() by bin(StartTime, 10h), Source
 ```
 
-:::image type="content" source="images/tutorial/table-count-source.png" alt-text="Tabellen Anzahl nach Quelle":::
+:::image type="content" source="images/tutorial/table-count-source.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status&quot;:::
+
+Obwohl wir den `mid` Projekt Vorgang entfernt haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
+
+Streng genommen handelt es sich bei &quot;Rendering":::
 
 Fügen Sie einfach den "Rendering"-Begriff zum obigen hinzu: `| render timechart` .
 
-:::image type="content" source="images/tutorial/line-count-source.png" alt-text="Liniendiagramm Anzahl nach Quelle":::
+:::image type="content" source="images/tutorial/line-count-source.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status&quot;:::
+
+Obwohl wir den `mid` Projekt Vorgang entfernt haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
+
+Streng genommen handelt es sich bei &quot;Rendering":::
 
 Beachten Sie, dass `render timechart` die erste Spalte als x-Achse verwendet und die anderen Spalten dann als separate Zeilen anzeigt.
 
@@ -293,11 +305,19 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tutorial/time-count-hour.png" alt-text="Zeitdiagramm Anzahl nach Stunde":::
+:::image type="content" source="images/tutorial/time-count-hour.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status&quot;:::
+
+Obwohl wir den `mid` Projekt Vorgang entfernt haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
+
+Streng genommen handelt es sich bei &quot;Rendering":::
 
 Derzeit wird die `render` Dauer nicht ordnungsgemäß beschriftet, aber wir könnten `| render columnchart` stattdessen verwenden:
 
-:::image type="content" source="images/tutorial/column-count-hour.png" alt-text="Säulendiagramm Anzahl nach Stunde":::
+:::image type="content" source="images/tutorial/column-count-hour.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status&quot;:::
+
+Obwohl wir den `mid` Projekt Vorgang entfernt haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
+
+Streng genommen handelt es sich bei &quot;Rendering":::
 
 ## <a name="compare-multiple-daily-series"></a>Vergleichen mehrerer täglicher Reihen
 
@@ -312,7 +332,11 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tutorial/time-hour-state.png" alt-text="Zeitdiagramm nach Stunde und Zustand":::
+:::image type="content" source="images/tutorial/time-hour-state.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status&quot;:::
+
+Obwohl wir den `mid` Projekt Vorgang entfernt haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
+
+Streng genommen handelt es sich bei &quot;Rendering":::
 
 Dividieren `1h` Sie durch, um die x-Achse in Stundenzahl anstelle einer Dauer zu verwandeln:
 
@@ -325,7 +349,11 @@ StormEvents
 | render columnchart
 ```
 
-:::image type="content" source="images/tutorial/column-hour-state.png" alt-text="Säulendiagramm nach Stunde und Zustand":::
+:::image type="content" source="images/tutorial/column-hour-state.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status&quot;:::
+
+Obwohl wir den `mid` Projekt Vorgang entfernt haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
+
+Streng genommen handelt es sich bei &quot;Rendering":::
 
 ## <a name="join"></a>Join
 
@@ -344,7 +372,11 @@ StormEvents
 | distinct State
 ```
 
-:::image type="content" source="images/tutorial/join-events-la.png" alt-text="Ereignisse Blitz und Lawinen in Verbindung treten":::
+:::image type="content" source="images/tutorial/join-events-la.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status&quot;:::
+
+Obwohl wir den `mid` Projekt Vorgang entfernt haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
+
+Streng genommen handelt es sich bei &quot;Rendering":::
 
 ## <a name="user-session-example-of-join"></a>Benutzer Sitzungs Beispiel für Join
 
@@ -370,7 +402,11 @@ Events
 | take 10
 ```
 
-:::image type="content" source="images/tutorial/user-session-extend.png" alt-text="Erweiterung für Benutzersitzung":::
+:::image type="content" source="images/tutorial/user-session-extend.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status&quot;:::
+
+Obwohl wir den `mid` Projekt Vorgang entfernt haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
+
+Streng genommen handelt es sich bei &quot;Rendering":::
 
 Es ist üblich, `project` zu verwenden, um vor dem Verknüpfen nur die Spalten auszuwählen, die wir benötigen.
 In den gleichen Klauseln benennen wir die Zeitstempelspalte um.
@@ -391,11 +427,19 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tutorial/event-count-duration.png" alt-text="Ereignis Anzahl Zeitdiagramm nach Dauer":::
+:::image type="content" source="images/tutorial/event-count-duration.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status&quot;:::
+
+Obwohl wir den `mid` Projekt Vorgang entfernt haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
+
+Streng genommen handelt es sich bei &quot;Rendering":::
 
 Oder verwenden Sie Folgendes `| render columnchart` :
 
-:::image type="content" source="images/tutorial/column-event-count-duration.png" alt-text="Säulendiagramm Ereignis Anzahl Zeitdiagramm nach Dauer":::
+:::image type="content" source="images/tutorial/column-event-count-duration.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status&quot;:::
+
+Obwohl wir den `mid` Projekt Vorgang entfernt haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
+
+Streng genommen handelt es sich bei &quot;Rendering":::
 
 ## <a name="percentiles"></a>Perzentile
 
@@ -409,7 +453,11 @@ Verwenden Sie die obige Abfrage, aber ersetzen Sie `render` durch:
 
 In diesem Fall haben wir keine- `by` Klausel bereitgestellt, sodass das Ergebnis eine einzelne Zeile ist:
 
-:::image type="content" source="images/tutorial/summarize-percentiles-duration.png" alt-text="Tabelle fasst Perzentilen nach Dauer zusammen":::
+:::image type="content" source="images/tutorial/summarize-percentiles-duration.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status&quot;:::
+
+Obwohl wir den `mid` Projekt Vorgang entfernt haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
+
+Streng genommen handelt es sich bei &quot;Rendering":::
 
 Daraus lässt sich Folgendes ablesen:
 
@@ -431,7 +479,11 @@ StormEvents
 | summarize percentiles(duration, 5, 20, 50, 80, 95) by State
 ```
 
-:::image type="content" source="images/tutorial/summarize-percentiles-state.png" alt-text="Tabelle fasst die Dauer des Perzentils nach Status zusammen.":::
+:::image type="content" source="images/tutorial/summarize-percentiles-state.png" alt-text="Säulendiagramm der Anzahl von Storm-Ereignissen nach Status&quot;:::
+
+Obwohl wir den `mid` Projekt Vorgang entfernt haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
+
+Streng genommen handelt es sich bei &quot;Rendering":::
 
 ## <a name="let-assign-a-result-to-a-variable"></a>let: Zuweisen eines Ergebnisses zu einer Variablen
 

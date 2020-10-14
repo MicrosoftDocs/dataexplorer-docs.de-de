@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 8f079fd7deb6e2b1ef81565aaf591ef4a5d0f020
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 27c92b9081844df0e8f8d4dc207ba5d2a8a2e2f3
+ms.sourcegitcommit: a10e7c6ba96bdb94d95ef23f5d1506eb8fda0041
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617747"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92058664"
 ---
 # <a name="ingestionbatching-policy"></a>Ingestionbatching-Richtlinie
 
@@ -33,12 +33,12 @@ Wie oben erläutert, gibt es eine optimale Größe von Daten, die in einem Masse
 Derzeit beträgt die Größe etwa 1 GB an nicht komprimierten Daten. Die Erfassung in BLOB-Daten, die wesentlich weniger Daten als die optimale Größe enthalten, ist nicht optimal. Daher werden bei der Erfassung in der Warteschlange solche kleinen BLOB in Batches zusammengefasst. Die Batch Verarbeitung erfolgt, bis die erste Bedingung erfüllt wird:
 
 1. Die Gesamtgröße der Batch Daten erreicht die optimale Größe, oder
-2. Die maximale Verzögerungszeit, Gesamtgröße oder Anzahl der von der `IngestionBatching` Richtlinie zulässigen blobwerte wurde erreicht.
+2. Die maximale Verzögerungszeit, Gesamtgröße oder Anzahl der von der Richtlinie zulässigen blobwerte wurde `IngestionBatching` erreicht.
 
 Die `IngestionBatching` Richtlinie kann für Datenbanken oder Tabellen festgelegt werden. Wenn keine Richtlinie definiert ist, verwendet Kusto standardmäßig einen Standardwert von **5 Minuten** als maximale Verzögerungszeit, **1000** Elemente, Gesamtgröße von **1 g** für die Batch Verarbeitung.
 
 > [!WARNING]
-> Es wird empfohlen, dass Kunden, die diese Richtlinie festlegen möchten, zuerst das Kusto OPS-Team kontaktieren. Wenn diese Richtlinie auf einen sehr kleinen Wert festgelegt wird, ist dies eine Erhöhung der COGS des Clusters und die geringere Leistung. Darüber hinaus kann das verringern dieses Werts zu einer **höheren** effektiven End-to-End-Erfassungs Latenz führen, weil mehrere Erfassungs Prozesse parallel verwaltet werden.
+> Wenn diese Richtlinie auf einen sehr kleinen Wert festgelegt wird, ist dies eine Erhöhung der COGS des Clusters und die geringere Leistung. Darüber hinaus kann das verringern dieses Werts zu einer **höheren** effektiven End-to-End-Erfassungs Latenz führen, weil mehrere Erfassungs Prozesse parallel verwaltet werden.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
