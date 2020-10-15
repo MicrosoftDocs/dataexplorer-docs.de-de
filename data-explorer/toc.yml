@@ -29,6 +29,8 @@
       href: visualize-power-bi.md
 - name: Konzepte
   items:
+    - name: EngineV3
+      href: engine-v3.md
     - name: Datenerfassung
       items:
         - name: Übersicht über die Datenerfassung
@@ -62,7 +64,7 @@
   items:
     - name: Erstellen eines Clusters und einer Datenbank
       items:
-        - name: Azure CLI
+        - name: Azure-Befehlszeilenschnittstelle
           href: create-cluster-database-cli.md
         - name: PowerShell
           href: create-cluster-database-powershell.md
@@ -316,26 +318,43 @@
           href: follower.md
     - name: Integration in andere Tools
       items:
-        - name: Power Automate
+        - name: Orchestrieren
           items:
-            - name: Power Automate-Connector
-              href: flow.md
-              displayName: 'Microsoft Flow, flow, flow connector'
-            - name: Verwendungsbeispiele für den Power Automate-Connector
-              href: flow-usage.md
-              displayName: 'Microsoft Flow, flow, flow connector'
-        - name: Logic Apps
-          href: kusto/tools/logicapps.md
-        - name: Apache Spark-Connector
-          href: spark-connector.md
+            - name: Power Automate
+              items:
+                - name: Power Automate-Connector
+                  href: flow.md
+                  displayName: 'Microsoft Flow, flow, flow connector'
+                - name: Verwendungsbeispiele für den Power Automate-Connector
+                  href: flow-usage.md
+                  displayName: 'Microsoft Flow, flow, flow connector'
+            - name: Logic Apps
+              href: kusto/tools/logicapps.md
         - name: Cosmos DB
           href: 'https://github.com/Azure/azure-kusto-labs/tree/master/cosmosdb-adx-integration'
+        - name: Apache Spark-Connector
+          href: spark-connector.md
+        - name: Herstellen einer Verbindung über Azure Synapse Apache Spark
+          href: 'https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer?toc=/azure/data-explorer/toc.json&bc=/azure/data-explorer/breadcrumb/toc.json'
         - name: Herstellen einer Verbindung über Azure Databricks
           href: connect-from-databricks.md
-        - name: Analysieren von Daten in Jupyter Notebooks und Kqlmagic
-          href: kqlmagic.md
-        - name: Analysieren von Daten in Azure Notebooks
-          href: azure-notebooks.md
+        - name: Notebooks
+          items:
+            - name: Analysieren von Daten in Jupyter Notebooks und Kqlmagic
+              href: kqlmagic.md
+            - name: Analysieren von Daten in Azure Notebooks
+              href: azure-notebooks.md
+            - name: Azure Data Studio
+              items:
+                - name: Übersicht über die Kusto-Erweiterung
+                  displayName: Azure Data Studio
+                  href: 'https://docs.microsoft.com/sql/azure-data-studio/extensions/kusto-extension?toc=/azure/data-explorer/toc.json&bc=/azure/data-explorer/breadcrumb/toc.json'
+                - name: Verwenden der Kusto-Erweiterung
+                  displayName: Azure Data Studio
+                  href: 'https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?toc=/azure/data-explorer/toc.json&bc=/azure/data-explorer/breadcrumb/toc.json'
+                - name: Verwenden von Kqlmagic
+                  displayName: Azure Data Studio
+                  href: 'https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kqlmagic?context=/azure/data-explorer/context/context'
         - name: Azure Pipelines
           href: devops.md
         - name: Synchronisieren von Kusto
