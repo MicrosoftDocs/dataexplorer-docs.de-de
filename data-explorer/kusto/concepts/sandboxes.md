@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 7dbbd4b94169e6b1e23547c7a6b9ed94cf5e70ca
-ms.sourcegitcommit: be1bbd62040ef83c08e800215443ffee21cb4219
+ms.openlocfilehash: cb8e9d5afea956ee42fe3b444c564059e34b9a24
+ms.sourcegitcommit: d9569989283f4e98846725e2bc4c96149bd01281
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664959"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92155413"
 ---
 # <a name="sandboxes"></a>Sandboxes
 
@@ -63,9 +63,10 @@ Einige Einschränkungen können mithilfe einer [Sandbox-Richtlinie](../managemen
 > Die mit Sandbox verwendeten Ressourcen hängen nicht nur von der Größe der Daten ab, die als Teil der Anforderung verarbeitet werden, sondern auch von der Logik, die in der Sandbox ausgeführt wird, und von der Implementierung von Bibliotheken, die von ihr verwendet werden.
 > Bei den `python` -und-Plug `r` -ins bedeutet das letztere beispielsweise, dass das vom Benutzer bereitgestellte Skript und die python-oder R-Bibliotheken zur Laufzeit verwendet werden.
 
-## <a name="errors"></a>Fehler
+## <a name="errors"></a>Errors
 
-|Code                      |`Message`                                                                                        |Möglicher Grund                                                                                                    |
-|--------------------------|-----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
-|E_SB_QUERY_THROTTLED_ERROR|Die Sandbox-Abfrage wurde aufgrund einer Drosselung abgebrochen. Erneuter Versuch, nachdem einige Backoff erfolgreich ausgeführt werden konnten   |Auf dem Zielknoten sind keine Sandkästen verfügbar. Neue Sand Fächer sollten in wenigen Sekunden verfügbar werden.     |
-|E_SB_QUERY_THROTTLED_ERROR|Sandboxes der Art "{Kind}" wurden noch nicht initialisiert.                       |Die Sandbox Richtlinie wurde vor kurzem geändert. Neue Sand Fächer, die die neue Richtlinie einhalten, werden in wenigen Sekunden verfügbar sein.           |
+|ErrorCode                 |Status                     |Nachricht                                                                                            |Möglicher Grund                                                                                                    |
+|--------------------------|---------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
+|E_SB_QUERY_THROTTLED_ERROR|Toomanyrequests (429)      |Die Sandbox-Abfrage wurde aufgrund einer Drosselung abgebrochen. Erneuter Versuch, nachdem einige Backoff erfolgreich ausgeführt werden konnten   |Auf dem Zielknoten sind keine Sandkästen verfügbar. Neue Sand Fächer sollten in wenigen Sekunden verfügbar werden.         |
+|E_SB_QUERY_THROTTLED_ERROR|Toomanyrequests (429)      |Sandboxes der Art "{Kind}" wurden noch nicht initialisiert.                                            |Die Sandbox Richtlinie wurde vor kurzem geändert. Neue Sand Fächer, die die neue Richtlinie einhalten, werden in wenigen Sekunden verfügbar sein.|
+|                          |Internalserviceerror (520) |Die Sandbox-Abfrage wurde aufgrund eines Fehlers bei der Initialisierung von Sandkästen abgebrochen.                         |Unerwarteter Infrastruktur Fehler. Wenn das Problem weiterhin besteht, öffnen Sie eine Supportanfrage.                         |

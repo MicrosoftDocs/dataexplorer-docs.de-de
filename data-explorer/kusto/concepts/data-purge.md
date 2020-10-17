@@ -8,12 +8,12 @@ ms.reviewer: kedamari
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/12/2020
-ms.openlocfilehash: 86712a2e85f2785666b0b6245962aca39cd82729
-ms.sourcegitcommit: 4507466bdcc7dd07e6e2a68c0707b6226adc25af
+ms.openlocfilehash: 053581b5109d0eeacd7b69fd0eda2b53f43ac701
+ms.sourcegitcommit: 468b4ad125657c5131e4c3c839f702ebb6e455a0
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/23/2020
-ms.locfileid: "87106485"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92134743"
 ---
 # <a name="data-purge"></a>Datenbereinigung
 
@@ -55,7 +55,7 @@ Durch das Ausgeben eines `.purge` Befehls wird dieser Prozess ausgelöst, der ei
 
 * Der `.purge` Befehl wird für den Datenverwaltung Endpunkt ausgeführt: `https://ingest-[YourClusterName].[region].kusto.windows.net` .
    Der Befehl erfordert Berechtigungen vom Typ [Datenbankadministrator](../management/access-control/role-based-authorization.md) für die relevanten Datenbanken. 
-* Aufgrund der Auswirkungen auf den Löschvorgang auf die Leistung und um sicherzustellen, dass die Lösch [Richtlinien](#purge-guidelines) befolgt wurden, sollte der Aufrufer das Datenschema so ändern, dass die minimalen Tabellen relevante Daten und Batch Befehle pro Tabelle enthalten, um die erheblichen Auswirkungen des Löschvorgangs auf COGS zu verringern.
+* Aufgrund der Auswirkungen auf den Löschvorgang auf die Leistung und um sicherzustellen, dass die Lösch  [Richtlinien](#purge-guidelines) befolgt wurden, sollte der Aufrufer das Datenschema so ändern, dass die minimalen Tabellen relevante Daten und Batch Befehle pro Tabelle enthalten, um die erheblichen Auswirkungen des Löschvorgangs auf COGS zu verringern.
 * Der- `predicate` Parameter des [. Purge](#purge-table-tablename-records-command) -Befehls wird verwendet, um anzugeben, welche Datensätze gelöscht werden sollen.
 Die Größe von `Predicate` ist auf 63 KB beschränkt. Beim Erstellen von `predicate` :
     * Verwenden Sie den [Operator "in"](../query/inoperator.md), z `where [ColumnName] in ('Id1', 'Id2', .. , 'Id1000')` . b.. 
@@ -94,11 +94,11 @@ Der Löschbefehl kann für unterschiedliche Verwendungs Szenarien auf zwei Arten
   .purge table [TableName] records in database [DatabaseName] with (noregrets='true') <| [Predicate]
    ```
 
-  > [!NOTE]
-  > Generieren Sie diesen Befehl mithilfe der cslcommandgenerator-API, die als Teil des nuget-Pakets der [Kusto-Client Bibliothek](../api/netfx/about-kusto-data.md) verfügbar ist.
+* Aufruf durch eine Person: Ein zweistufiger Prozess, für den als separater Schritt eine explizite Bestätigung erforderlich ist. Beim ersten Aufruf des Befehls wird ein Überprüfungs Token zurückgegeben, das bereitgestellt werden muss, um den eigentlichen Lösch Betrieb auszuführen. Diese Sequenz verringert das Risiko, dass falsche Daten versehentlich gelöscht werden.
 
-* Aufruf durch eine Person: Ein zweistufiger Prozess, für den als separater Schritt eine explizite Bestätigung erforderlich ist. Beim ersten Aufruf des Befehls wird ein Überprüfungs Token zurückgegeben, das bereitgestellt werden muss, um den eigentlichen Lösch Betrieb auszuführen. Diese Sequenz verringert das Risiko, dass falsche Daten versehentlich gelöscht werden. Die Ausführung dieser Option kann für umfangreiche Tabellen mit einer großen Menge an Daten im „kalten“ Cache lange dauern.
-    <!-- If query times-out on DM endpoint (default timeout is 10 minutes), it is recommended to use the [engine `whatif` command](#purge-whatif-command) directly againt the engine endpoint while increasing the [server timeout limit](../concepts/querylimits.md#limit-on-request-execution-time-timeout). Only after you have verified the expected results using the engine whatif command, issue the purge command via the DM endpoint using the 'noregrets' option. -->
+ > [!NOTE]
+ > Der erste Schritt im zweistufigen Aufruf erfordert, dass eine Abfrage für das gesamte Dataset ausgeführt wird, um Datensätze zu identifizieren, die gelöscht werden sollen.
+ > Diese Abfrage kann für große Tabellen ein Timeout oder einen Fehler verursachen, insbesondere bei einer beträchtlichen Menge an kaltcache-Daten. Wenn Fehler auftreten, überprüfen Sie das Prädikat selbst. Nachdem Sie die Richtigkeit überprüft haben, verwenden Sie das Löschen mit einem einzelnen Schritt mit der `noregrets` Option.
 
   **Syntax**
 
@@ -113,7 +113,7 @@ Der Löschbefehl kann für unterschiedliche Verwendungs Szenarien auf zwei Arten
      .purge table [TableName] records in database [DatabaseName] with (verificationtoken='<verification token from step #1>') <| [Predicate]
   ```
     
-    | Parameter  | Beschreibung  |
+    | Parameter  | BESCHREIBUNG  |
     |---------|---------|
     | `DatabaseName`   |   Name der Datenbank      |
     | `TableName`     |     Name der Tabelle    |
@@ -159,7 +159,7 @@ Verwenden Sie zum Ausführen eines Löschvorgangs in einem zweistufigen Aktivier
 
 | `OperationId` | `DatabaseName` | `TableName`|`ScheduledTime` | `Duration` | `LastUpdatedOn` |`EngineOperationId` | `State` | `StateDetails` |`EngineStartTime` | `EngineDuration` | `Retries` |`ClientRequestId` | `Principal`|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Scheduled | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...|
+| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Geplant | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...|
 
 #### <a name="example-single-step-purge"></a>Beispiel: Löschen mit einem Schritt
 
@@ -176,7 +176,7 @@ Führen Sie den folgenden Befehl aus, um in einem Aktivierungs Szenario mit nur 
 
 | `OperationId` |`DatabaseName` |`TableName` |`ScheduledTime` |`Duration` |`LastUpdatedOn` |`EngineOperationId` |`State` |`StateDetails` |`EngineStartTime` |`EngineDuration` |`Retries` |`ClientRequestId` |`Principal`|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Scheduled | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...|
+| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Geplant | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...|
 
 ### <a name="cancel-purge-operation-command"></a>Befehl "Löschvorgang Abbrechen"
 
@@ -214,7 +214,7 @@ Status = ' abgeschlossen ' gibt den erfolgreichen Abschluss der ersten Phase des
 
 ### <a name="show-purges-command"></a>Löschbefehl anzeigen
 
-`Show purges`Befehl zeigt den Status des Löschvorgangs an, indem die Vorgangs-ID innerhalb des angeforderten Zeitraums angegeben wird. 
+`Show purges` Befehl zeigt den Status des Löschvorgangs an, indem die Vorgangs-ID innerhalb des angeforderten Zeitraums angegeben wird. 
 
 ```kusto
 .show purges <OperationId>
@@ -223,7 +223,7 @@ Status = ' abgeschlossen ' gibt den erfolgreichen Abschluss der ersten Phase des
 .show purges from '<StartDate>' to '<EndDate>' [in database <DatabaseName>]
 ```
 
-| Eigenschaften  |BESCHREIBUNG  |Obligatorisch/optional|
+| Eigenschaften  |BESCHREIBUNG  |Obligatorisch/Optional|
 |---------|------------|-------|
 |`OperationId `   |      Die Datenverwaltung Vorgangs-ID, die nach der Ausführung einer Phase oder einer zweiten Phase ausgegeben wird.   |Obligatorisch.
 |`StartDate`    |   Unteres Zeit Limit für Filter Vorgänge. Wenn der Wert weggelassen wird, wird standardmäßig 24 Stunden vor der aktuellen Uhrzeit verwendet      |Optional
@@ -249,24 +249,24 @@ Status = ' abgeschlossen ' gibt den erfolgreichen Abschluss der ersten Phase des
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:33.6782130 |2019-01-20 11:42:34.6169153 |a0825d4d-6b0f-47f3-a499-54ac5681ab78 |Abgeschlossen |Löschvorgang erfolgreich abgeschlossen (Speicher Artefakte ausstehend gelöscht) |2019-01-20 11:41:34.6486506 |00:00:04.4687310 |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...
 
-* `OperationId`-die DM-Vorgangs-ID, die beim Ausführen von Lösch Vorgängen 
+* `OperationId` -die DM-Vorgangs-ID, die beim Ausführen von Lösch Vorgängen 
 * `DatabaseName`* *-Datenbankname (Groß-/Kleinschreibung wird beachtet) 
-* `TableName`-Tabellenname (Groß-/Kleinschreibung beachten). 
-* `ScheduledTime`-Zeitpunkt des Ausführens des Lösch Befehls für den DM-Dienst. 
-* `Duration`-Gesamtdauer des Löschvorgangs, einschließlich der Ausführungs Wartezeit der DM-Warteschlange. 
-* `EngineOperationId`: die Vorgangs-ID des eigentlichen Löschvorgangs, der in der Engine ausgeführt wird. 
-* `State`-Zustand löschen: kann einen der folgenden Werte aufweisen: 
-    * `Scheduled`-der Löschvorgang ist für die Ausführung geplant. Wenn der Auftrag geplant bleibt, gibt es wahrscheinlich einen Rückstand an Lösch Vorgängen. Weitere Informationen zu diesem Rückstand finden Sie unter Löschen der [Leistung](#purge-performance) . Wenn bei einem Löschvorgang bei einem vorübergehenden Fehler ein Fehler auftritt, wird er von der DM wiederholt, und der Vorgang wird erneut geplant (daher wird möglicherweise ein Vorgangs Übergang von "geplant" zu "InProgress" und zurück zu "geplant" angezeigt).
-    * `InProgress`-der Löschvorgang wird in der-Engine ausgeführt. 
-    * `Completed`-Löschvorgang wurde erfolgreich abgeschlossen.
-    * `BadInput`-Fehler beim Löschen bei fehlerhafter Eingabe, und es wird kein erneuter Versuch unternommen. Dieser Fehler kann auf verschiedene Probleme zurückzuführen sein, wie z. b. ein Syntax Fehler im Prädikat, ein ungültiges Prädikat für Lösch Befehle, eine Abfrage, die Grenzwerte überschreitet (z. b. über 1 Mio. Entitäten in einem `externaldata` Operator oder mehr als 64 MB Gesamtzahl der erweiterten Abfrage Größe) und 404-oder 403-Fehler für `externaldata` BLOB.
-    * `Failed`-Fehler beim Löschen und wird nicht wiederholt. Dieser Fehler kann auftreten, wenn der Vorgang zu lange in der Warteschlange gewartet hat (über 14 Tage), aufgrund eines Backlogs anderer Löschvorgänge oder einer Anzahl von Fehlern, die das Wiederholungs Limit überschreiten. Letztere generiert eine interne Überwachungs Warnung und wird vom Azure Daten-Explorer-Team untersucht. 
-* `StateDetails`-eine Beschreibung des Zustands.
-* `EngineStartTime`-die Zeit, zu der der Befehl für die Engine ausgegeben wurde. Wenn es zwischen dieser Zeit und scheduledtime einen großen Unterschied gibt, gibt es in der Regel einen erheblichen Rückstand an Lösch Vorgängen, und der Cluster ist nicht in der Geschwindigkeit. 
-* `EngineDuration`-Zeitpunkt der eigentlichen Lösch Ausführung in der Engine. Wenn das Löschen mehrmals wiederholt wurde, ist dies die Summe aller Ausführungs dauern. 
-* `Retries`Gibt an, wie oft der DM-Dienst aufgrund eines vorübergehenden Fehlers wiederholt wurde.
-* `ClientRequestId`-Client Aktivitäts-ID der DM-Bereinigungs Anforderung. 
-* `Principal`: Identität des Ausstellers für den Löschbefehl.
+* `TableName` -Tabellenname (Groß-/Kleinschreibung beachten). 
+* `ScheduledTime` -Zeitpunkt des Ausführens des Lösch Befehls für den DM-Dienst. 
+* `Duration` -Gesamtdauer des Löschvorgangs, einschließlich der Ausführungs Wartezeit der DM-Warteschlange. 
+* `EngineOperationId` : die Vorgangs-ID des eigentlichen Löschvorgangs, der in der Engine ausgeführt wird. 
+* `State` -Zustand löschen: kann einen der folgenden Werte aufweisen: 
+    * `Scheduled` -der Löschvorgang ist für die Ausführung geplant. Wenn der Auftrag geplant bleibt, gibt es wahrscheinlich einen Rückstand an Lösch Vorgängen. Weitere Informationen zu diesem Rückstand finden Sie unter Löschen der [Leistung](#purge-performance) . Wenn bei einem Löschvorgang bei einem vorübergehenden Fehler ein Fehler auftritt, wird er von der DM wiederholt, und der Vorgang wird erneut geplant (daher wird möglicherweise ein Vorgangs Übergang von "geplant" zu "InProgress" und zurück zu "geplant" angezeigt).
+    * `InProgress` -der Löschvorgang wird in der-Engine ausgeführt. 
+    * `Completed` -Löschvorgang wurde erfolgreich abgeschlossen.
+    * `BadInput` -Fehler beim Löschen bei fehlerhafter Eingabe, und es wird kein erneuter Versuch unternommen. Dieser Fehler kann auf verschiedene Probleme zurückzuführen sein, wie z. b. ein Syntax Fehler im Prädikat, ein ungültiges Prädikat für Lösch Befehle, eine Abfrage, die Grenzwerte überschreitet (z. b. über 1 Mio. Entitäten in einem `externaldata` Operator oder mehr als 64 MB Gesamtzahl der erweiterten Abfrage Größe) und 404-oder 403-Fehler für `externaldata` BLOB.
+    * `Failed` -Fehler beim Löschen und wird nicht wiederholt. Dieser Fehler kann auftreten, wenn der Vorgang zu lange in der Warteschlange gewartet hat (über 14 Tage), aufgrund eines Backlogs anderer Löschvorgänge oder einer Anzahl von Fehlern, die das Wiederholungs Limit überschreiten. Letztere generiert eine interne Überwachungs Warnung und wird vom Azure Daten-Explorer-Team untersucht. 
+* `StateDetails` -eine Beschreibung des Zustands.
+* `EngineStartTime` -die Zeit, zu der der Befehl für die Engine ausgegeben wurde. Wenn es zwischen dieser Zeit und scheduledtime einen großen Unterschied gibt, gibt es in der Regel einen erheblichen Rückstand an Lösch Vorgängen, und der Cluster ist nicht in der Geschwindigkeit. 
+* `EngineDuration` -Zeitpunkt der eigentlichen Lösch Ausführung in der Engine. Wenn das Löschen mehrmals wiederholt wurde, ist dies die Summe aller Ausführungs dauern. 
+* `Retries` Gibt an, wie oft der DM-Dienst aufgrund eines vorübergehenden Fehlers wiederholt wurde.
+* `ClientRequestId` -Client Aktivitäts-ID der DM-Bereinigungs Anforderung. 
+* `Principal` : Identität des Ausstellers für den Löschbefehl.
 
 ## <a name="purging-an-entire-table"></a>Löschen einer gesamten Tabelle
 
@@ -307,7 +307,7 @@ Das Löschen einer Tabelle umfasst das Löschen der Tabelle und das Markieren al
      .purge table [TableName] in database [DatabaseName] allrecords with (verificationtoken='<verification token from step #1>')
      ```
 
-    | Parameter  |Beschreibung  |
+    | Parameter  |BESCHREIBUNG  |
     |---------|---------|
     | `DatabaseName`   |   Der Name der Datenbank.      |
     | `TableName`    |     Der Name der Tabelle.    |

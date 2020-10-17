@@ -118,6 +118,9 @@
               href: data-connection-event-grid-python.md
             - name: Azure Resource Manager-Vorlage
               href: data-connection-event-grid-resource-manager.md
+            - name: Manuelles Erstellen von Ressourcen im Azure-Portal
+              displayName: Manually create resources for Event Grid ingestion
+              href: ingest-data-event-grid-manual.md
         - name: IoT Hub
           items:
             - name: Herstellen einer Verbindung mit IoT Hub

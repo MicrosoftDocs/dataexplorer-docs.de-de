@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: c3f7212b062adaae1bd56399753270653204ad22
-ms.sourcegitcommit: 53a727fceaa89e6022bc593a4aae70f1e0232f49
+ms.openlocfilehash: d1e1af6e7fef39295dde61034f63701a466abb51
+ms.sourcegitcommit: 58588ba8d1fc5a6adebdce2b556db5bc542e38d8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/10/2020
-ms.locfileid: "89652108"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92098386"
 ---
 # <a name="data-partitioning-policy"></a>Daten Partitionierungs Richtlinie
 
@@ -28,7 +28,7 @@ Der Hauptzweck der Richtlinie besteht darin, die Leistung von Abfragen zu verbes
 
 Die folgenden Arten von Partitions Schlüsseln werden unterstützt.
 
-|Variante                                                   |Spaltentyp |Partitionseigenschaften                    |Partitions Wert                                        |
+|Typ                                                   |Spaltentyp |Partitionseigenschaften                    |Partitions Wert                                        |
 |-------------------------------------------------------|------------|----------------------------------------|----------------------|
 |[Hash](#hash-partition-key)                            |`string`    |`Function`, `MaxPartitionCount`, `Seed` | `Function`(`ColumnName`, `MaxPartitionCount`, `Seed`) |
 |[Einheitlicher Bereich](#uniform-range-datetime-partition-key) |`datetime`  |`RangeSize`, `Reference`                | `bin_at`(`ColumnName`, `RangeSize`, `Reference`)      |
@@ -140,6 +140,8 @@ Die Richtlinie für die Daten Partitionierung verfügt über die folgenden Haupt
   * Der UTC-DateTime-Wert, aus dem die Richtlinie gültig ist.
   * Diese Eigenschaft ist optional. Wenn Sie nicht angegeben ist, wird die Richtlinie für die Daten übernommen, die nach dem Anwenden der Richtlinie erfasst wurden.
   * Alle nicht homogenen (nicht partitionierten) Blöcke, die aufgrund von Beibehaltungs Dauer gelöscht werden können, werden vom Partitionierungs Prozess ignoriert, da deren Erstellungszeit 90% der effektiven vorläufigen Lösch Dauer der Tabelle vorausgeht.
+  * **Hinweis:** Es ist möglich, in der Vergangenheit einen DateTime-Wert festzulegen und das Ergebnis mit bereits erfassten Daten zu erhalten, die partitioniert werden.
+    Dies kann jedoch zu einer erheblichen Steigerung der Ressourcennutzung des Partitionierungs Prozesses und der entsprechenden Gewichtung der entsprechenden Vorteile werden.
 
 ### <a name="example"></a>Beispiel
 
@@ -187,7 +189,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden, si
   * Diese Eigenschaft ist optional. Der Standardwert ist `0` mit einem Standardziel von 5 Millionen Datensätzen.
     * Sie können einen Wert kleiner als 5 Mio. festlegen, wenn Sie festzustellen, dass die Partitionierungs Vorgänge eine sehr große Menge an Arbeitsspeicher oder CPU pro Vorgang belegen. Weitere Informationen finden Sie unter [Überwachung](#monitoring).
 
-## <a name="notes"></a>Notizen
+## <a name="notes"></a>Hinweise
 
 ### <a name="the-data-partitioning-process"></a>Der Daten Partitionierungs Prozess
 
