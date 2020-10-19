@@ -7,13 +7,13 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 02/13/2020
-ms.openlocfilehash: 8ad104b7802bde2355b46bc31e74e63a6708d4f4
-ms.sourcegitcommit: d2edf654f71f8686d1f03d8ec16200f84e671b12
+ms.date: 10/19/2020
+ms.openlocfilehash: c2a841bc78c8f17ac3a929b2541b08d5db682da1
+ms.sourcegitcommit: 88923cfb2495dbf10b62774ab2370b59681578b9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/20/2020
-ms.locfileid: "88659262"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92175520"
 ---
 # <a name="string-operators"></a>Zeichenfolgenoperatoren
 
@@ -69,8 +69,8 @@ Operator        |BESCHREIBUNG                                                   
 `!startswith_cs`|Rechte Seite ist keine öffnende Teilsequenz von linker Seite                          |Ja           |`"Fabrikam" !startswith_cs "fab"`
 `endswith`      |Rechte Seite ist eine schließende Teilsequenz von linker Seite                               |Nein            |`"Fabrikam" endswith "Kam"`
 `!endswith`     |Rechte Seite ist keine schließende Teilsequenz von linker Seite                           |Nein            |`"Fabrikam" !endswith "brik"`
-`endswith_cs`   |Rechte Seite ist eine schließende Teilsequenz von linker Seite                               |Ja           |`"Fabrikam" endswith "Kam"`
-`!endswith_cs`  |Rechte Seite ist keine schließende Teilsequenz von linker Seite                           |Ja           |`"Fabrikam" !endswith "brik"`
+`endswith_cs`   |Rechte Seite ist eine schließende Teilsequenz von linker Seite                               |Ja           |`"Fabrikam" endswith_cs "kam"`
+`!endswith_cs`  |Rechte Seite ist keine schließende Teilsequenz von linker Seite                           |Ja           |`"Fabrikam" !endswith_cs "brik"`
 `matches regex` |Linke Seite enthält eine Übereinstimmung für rechte Seite                                      |Ja           |`"Fabrikam" matches regex "b.*k"`
 `in`            |Entspricht einem der Elemente                                     |Ja           |`"abc" in ("123", "345", "abc")`
 `!in`           |Entspricht keinem der Elemente                                 |Ja           |`"bca" !in ("123", "345", "abc")`
