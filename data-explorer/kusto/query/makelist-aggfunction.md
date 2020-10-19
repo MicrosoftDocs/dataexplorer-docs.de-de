@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: 7f17302475221bb259e6717987f7d31e96d7c118
-ms.sourcegitcommit: a4779e31a52d058b07b472870ecd2b8b8ae16e95
+ms.openlocfilehash: ecfcaa39195caec06184b966403bd6655a00b714
+ms.sourcegitcommit: 62476f682b7812cd9cff7e6958ace5636ee46755
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/02/2020
-ms.locfileid: "89366026"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92169539"
 ---
 # <a name="make_list-aggregation-function"></a>make_list () (Aggregations Funktion)
 
@@ -40,7 +40,7 @@ Wenn die Eingabe für den `summarize` Operator nicht sortiert ist, ist die Reihe
 Wenn die Eingabe für den `summarize` Operator sortiert ist, verfolgt die Reihenfolge der Elemente im resultierenden Array die der Eingabe.
 
 > [!TIP]
-> Verwenden Sie den- [`mv-apply`](./mv-applyoperator.md) Operator, um eine geordnete Liste nach einem Schlüssel zu erstellen. Beispiele finden Sie [hier](./mv-applyoperator.md#using-the-mv-apply-operator-to-sort-the-output-of-make_list-aggregate-by-some-key).
+> Verwenden Sie die- [`array_sort_asc()`](./arraysortascfunction.md) oder- [`array_sort_desc()`](./arraysortdescfunction.md) Funktion, um eine geordnete Liste anhand eines Schlüssels zu erstellen.
 
 ## <a name="examples"></a>Beispiele
 

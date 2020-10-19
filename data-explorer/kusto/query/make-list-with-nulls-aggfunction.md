@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/09/2020
-ms.openlocfilehash: 1d4dafdab4c727b89838f18e13b016d771262f08
-ms.sourcegitcommit: a4779e31a52d058b07b472870ecd2b8b8ae16e95
+ms.openlocfilehash: c53faca94e273bf816abcfa34ed400708a7433a3
+ms.sourcegitcommit: 62476f682b7812cd9cff7e6958ace5636ee46755
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/02/2020
-ms.locfileid: "89366009"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92169556"
 ---
 # <a name="make_list_with_nulls-aggregation-function"></a>make_list_with_nulls () (Aggregations Funktion)
 
@@ -36,4 +36,4 @@ Wenn die Eingabe für den `summarize` Operator nicht sortiert ist, ist die Reihe
 Wenn die Eingabe für den `summarize` Operator sortiert ist, verfolgt die Reihenfolge der Elemente im resultierenden Array die der Eingabe.
 
 > [!TIP]
-> Verwenden Sie den- [`mv-apply`](./mv-applyoperator.md) Operator, um eine geordnete Liste nach einem Schlüssel zu erstellen. Beispiele finden Sie [hier](./mv-applyoperator.md#using-the-mv-apply-operator-to-sort-the-output-of-make_list-aggregate-by-some-key).
+> Verwenden Sie die- [`array_sort_asc()`](./arraysortascfunction.md) oder- [`array_sort_desc()`](./arraysortdescfunction.md) Funktion, um eine geordnete Liste anhand eines Schlüssels zu erstellen.
