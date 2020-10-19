@@ -64,7 +64,7 @@
   items:
     - name: Erstellen eines Clusters und einer Datenbank
       items:
-        - name: Azure-Befehlszeilenschnittstelle
+        - name: Azure CLI
           href: create-cluster-database-cli.md
         - name: PowerShell
           href: create-cluster-database-powershell.md
@@ -664,6 +664,10 @@
               href: ./kusto/query/array_shift_rightfunction.md
             - name: array_slice()
               href: ./kusto/query/arrayslicefunction.md
+            - name: array_sort_asc()
+              href: ./kusto/query/arraysortascfunction.md
+            - name: array_sort_desc()
+              href: ./kusto/query/arraysortdescfunction.md
             - name: array_split()
               href: ./kusto/query/arraysplitfunction.md
             - name: asin()
