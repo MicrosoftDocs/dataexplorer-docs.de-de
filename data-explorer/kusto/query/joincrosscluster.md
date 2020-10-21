@@ -4,18 +4,18 @@ description: In diesem Artikel wird der Cluster übergreifende Join in Azure Dat
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: dc22d44bd861a02d0db7fd0d8f7cc80ddcb5c8d4
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: a7c8f89886a8c12941dbc218ad69b35eebd7f1c7
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128455"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246592"
 ---
 # <a name="cross-cluster-join"></a>Clusterübergreifender Join
 
@@ -23,7 +23,7 @@ ms.locfileid: "85128455"
 
 Allgemeine Erörterung von Cluster übergreifenden Abfragen finden Sie unter [Cluster übergreifende oder datenbankübergreifende Abfragen](cross-cluster-or-database-queries.md) .
 
-Es ist möglich, einen Join-Vorgang für Datasets in verschiedenen Clustern durchzuführen. Zum Beispiel:
+Es ist möglich, einen Join-Vorgang für Datasets in verschiedenen Clustern durchzuführen. Beispiel:
 
 ```kusto
 T | ... | join (cluster("SomeCluster").database("SomeDB").T2 | ...) on Col1 // (1)
@@ -33,7 +33,7 @@ cluster("SomeCluster").database("SomeDB").T | ... | join (cluster("SomeCluster2"
 
 Im obigen Beispiel handelt es sich bei dem Verknüpfungs Vorgang um einen Cluster übergreifenden Join, bei dem angenommen wird, dass der aktuelle Cluster nicht "somecluester" oder "SomeCluster2" ist.
 
-Im folgenden Beispiel:
+Siehe folgendes Beispiel:
 
 ```kusto
 cluster("SomeCluster").database("SomeDB").T | ... | join (cluster("SomeCluster").database("SomeDB2").T2 | ...) on Col1 
@@ -59,11 +59,11 @@ Dieser Vorgang kann erfolgen, indem Sie den Kusto-joinremotinghinweis bereitstel
 T | ... | join hint.remote=<strategy> (cluster("SomeCluster").database("SomeDB").T2 | ...) on Col1
 ```
 
-Folgende zulässige Werte sind zulässig:`strategy`
-* `left`-Join im Cluster des linken Operanden ausführen 
-* `right`-Join im Cluster des rechten Operanden ausführen
-* `local`-Join im Cluster des aktuellen Clusters ausführen
-* `auto`-(Standard) lassen Sie die automatische Remoting-Entscheidung durch Kusto treffen
+Folgende zulässige Werte sind zulässig: `strategy`
+* `left` -Join im Cluster des linken Operanden ausführen 
+* `right` -Join im Cluster des rechten Operanden ausführen
+* `local` -Join im Cluster des aktuellen Clusters ausführen
+* `auto` -(Standard) lassen Sie die automatische Remoting-Entscheidung durch Kusto treffen
 
 > [!Note]
 > Der Join-Remoting-Hinweis wird von Kusto ignoriert, wenn die angedeutete Strategie nicht auf den Joinvorgang anwendbar ist.

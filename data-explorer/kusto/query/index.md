@@ -4,16 +4,16 @@ description: Dieser Artikel enthält eine Übersicht über Azure Data Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/07/2019
-ms.openlocfilehash: 7f36e5239ba183b87ab04349b873a0182363def7
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: f6e91beaf52e19a0571efa3f29aa4e67a5ef4353
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226481"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92241538"
 ---
 # <a name="overview"></a>Übersicht
 

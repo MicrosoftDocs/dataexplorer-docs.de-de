@@ -4,16 +4,16 @@ description: In diesem Artikel wird external_table () in Azure Daten-Explorer be
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/21/2019
-ms.openlocfilehash: 30de02ba0ae18fbfd7944a97ad95d78dbe51066b
-ms.sourcegitcommit: 08c54dabc1efe3d4e2d2581c4b668a6b73daf855
+ms.openlocfilehash: 5ec069979d41a7c750c140ad84ef0db4ba5638a4
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89510677"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245054"
 ---
 # <a name="external_table"></a>external_table()
 

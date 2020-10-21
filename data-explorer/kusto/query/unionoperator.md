@@ -4,18 +4,18 @@ description: Dieser Artikel beschreibt den Union-Operator in Azure Daten-Explore
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 4995c989b04df5dd66e20e3405b5fb7da7c739ce
-ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
+ms.openlocfilehash: b3b7d571662d8a9ed0fd592547f32a131d26e277
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/12/2020
-ms.locfileid: "91954704"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245749"
 ---
 # <a name="union-operator"></a>union-Operator
 
@@ -48,7 +48,7 @@ Alternatives Formular ohne weitergeleitete Eingabe:
 Wenn die Abfrage (nach Platzhalter Übereinstimmung) auf Tabellen aus mehreren Datenbanken verweist (Standarddatenbank immer zählt), wird für den Wert dieser Spalte ein Tabellenname mit der Datenbank qualifiziert.
 Entsprechend werden __Cluster-und Daten Bank__ Qualifizierungen im Wert vorhanden sein, wenn auf mehr als ein Cluster verwiesen wird. 
 * `isfuzzy=``true`  |  `false` : Wenn `isfuzzy` auf festgelegt ist, `true` lässt die fuzzyauflösung von Union-Beinen zu. `Fuzzy` gilt für den Satz von `union` Quellen. Dies bedeutet, dass bei der Analyse der Abfrage und der Vorbereitung auf die Ausführung der Satz von Union-Quellen auf den Satz von Tabellen verweisen reduziert wird, der vorhanden und jederzeit zugänglich ist. Wenn mindestens eine solche Tabelle gefunden wurde, ergibt jeder Auflösungs Fehler eine Warnung in den Ergebnissen des Abfrage Status (eine für jeden fehlenden Verweis), verhindert jedoch die Abfrage Ausführung. Wenn keine Auflösungen erfolgreich waren, gibt die Abfrage einen Fehler zurück.
-Der Standardwert lautet `isfuzzy=` `false`.
+Der Standardwert ist `isfuzzy=` `false`.
 * *Unionparameters*: NULL oder mehr (durch Leerzeichen getrennte) Parameter in der Form des *namens* `=` *Werts* , die das Verhalten der Zeilen Übereinstimmungs Operation und des Ausführungs Plans steuern. Die folgenden Parameter werden unterstützt: 
 
   |Name           |Werte                                        |BESCHREIBUNG                                  |
@@ -71,15 +71,15 @@ Der Standardwert lautet `isfuzzy=` `false`.
 Wenn die Abfrage (nach Platzhalter Übereinstimmung) auf Tabellen aus mehreren Datenbanken verweist (Standarddatenbank immer zählt), wird für den Wert dieser Spalte ein Tabellenname mit der Datenbank qualifiziert.
 Entsprechend sind die __Cluster-und Daten Bank__ Qualifizierungen im Wert vorhanden, wenn auf mehr als ein Cluster verwiesen wird. 
 * `isfuzzy=``true`  |  `false` : Wenn `isfuzzy` auf festgelegt ist, `true` lässt die fuzzyauflösung von Union-Beinen zu. `Fuzzy` gilt für den Satz von `union` Quellen. Dies bedeutet, dass bei der Analyse der Abfrage und der Vorbereitung auf die Ausführung der Satz von Union-Quellen auf den Satz von Tabellen verweisen reduziert wird, der vorhanden und jederzeit zugänglich ist. Wenn mindestens eine solche Tabelle gefunden wurde, ergibt jeder Auflösungs Fehler eine Warnung in den Ergebnissen des Abfrage Status (eine für jeden fehlenden Verweis), verhindert jedoch die Abfrage Ausführung. Wenn keine Auflösungen erfolgreich waren, gibt die Abfrage einen Fehler zurück.
-Der Standardwert lautet `isfuzzy=false`.
+Der Standardwert ist `isfuzzy=false`.
 
 ::: zone-end
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Eine Tabelle mit derselben Anzahl von Zeilen, wie in allen Eingabetabellen vorhanden sind.
 
-**Hinweise**
+**Notizen**
 
 ::: zone pivot="azuredataexplorer"
 

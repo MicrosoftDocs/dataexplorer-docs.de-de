@@ -4,16 +4,16 @@ description: In diesem Artikel wird der Broadcast Beitritt in Azure Daten-Explor
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7987f44437d673b90954b674e63b70ac35e2432c
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: 0cbcd71cc4582a4f5dd966001ae32fd4cedf0c1e
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128681"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245288"
 ---
 # <a name="broadcast-join"></a>Broadcastjoin
 

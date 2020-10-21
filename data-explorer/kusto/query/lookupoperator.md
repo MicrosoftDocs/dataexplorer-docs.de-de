@@ -4,16 +4,16 @@ description: In diesem Artikel wird der Such Operator in Azure Daten-Explorer be
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 5eda79977ee641d7ca7835d3d394cb943b4ebac4
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 3305d78dd903160491ac3cdabd274ce8ace8ba2f
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347050"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246424"
 ---
 # <a name="lookup-operator"></a>lookup-Operator
 
@@ -65,7 +65,7 @@ Eine Tabelle mit:
 * Einer Zeile für jede Übereinstimmung zwischen den Eingabetabellen. Eine Übereinstimmung ist eine ausgewählte Zeile in einer Tabelle, die in allen `on` -Feldern denselben Wert wie eine Zeile in der anderen Tabelle aufweist. 
 * Die Attribute (Suchschlüssel) werden nur einmal in der Ausgabe Tabelle angezeigt.
 
- * `kind`nicht angegeben`kind=leftouter`
+ * `kind` nicht angegeben `kind=leftouter`
 
      Zusätzlich zu den internen Übereinstimmungen ist eine Zeile für jede Zeile auf der linken (und/oder rechten) Seite vorhanden, selbst wenn es keine Übereinstimmung damit gibt. In diesem Fall enthalten die Ausgabezellen ohne Übereinstimmung NULL-Werte.
 

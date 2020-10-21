@@ -4,16 +4,16 @@ description: In diesem Artikel wird parse_json () in Azure Daten-Explorer beschr
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: abe49795b7b997abf677fd0fafff10ae38787f44
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 0f49ee6763d4afadf12e9e008bd7ea8e61c49acc
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346336"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246105"
 ---
 # <a name="parse_json"></a>parse_json()
 
@@ -56,11 +56,11 @@ T
 | extend duration_value=d.duration.value, duration_min=d["duration"]["min"]
 ```
 
-**Hinweise**
+**Notizen**
 
 Es kommt häufig vor, dass eine JSON-Zeichenfolge einen Eigenschaften Behälter beschreibt, in dem einer der "Slots" eine andere JSON-Zeichenfolge ist. 
 
-Zum Beispiel:
+Beispiel:
 
 ```kusto
 let d='{"a":123, "b":"{\\"c\\":456}"}';

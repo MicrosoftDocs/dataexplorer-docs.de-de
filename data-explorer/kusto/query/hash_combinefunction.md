@@ -4,16 +4,16 @@ description: In diesem Artikel wird hash_combine () in Azure Daten-Explorer besc
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/19/2019
-ms.openlocfilehash: f71a0d0cdfa4fe0ca8cdb84e65a271ee42bc7dc7
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 91a178ded007ff75d96ed73f864276aa7d193d8c
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347611"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92244768"
 ---
 # <a name="hash_combine"></a>hash_combine()
 
@@ -29,7 +29,7 @@ Kombiniert Hashwerte von zwei oder mehr Hashes.
 * *H2*: Long-Wert, der den zweiten Hashwert darstellt.
 * *HN*: Long-Wert, der den Nth-Hashwert darstellt.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Der kombinierte Hashwert der angegebenen skalare.
 

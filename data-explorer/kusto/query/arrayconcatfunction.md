@@ -4,16 +4,16 @@ description: In diesem Artikel wird array_concat () in Azure Daten-Explorer besc
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: ecaca4aea221ca2b880b798757de64787901a0cb
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 4c8e2da4d2ba4ed205987b5a1d063ac2e75ed289
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349600"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246917"
 ---
 # <a name="array_concat"></a>array_concat()
 
@@ -27,7 +27,7 @@ Verkettet eine Reihe dynamischer Arrays mit einem einzelnen Array.
 
 * *Arr1... arrn*: Eingabe Arrays, die in ein dynamisches Array verkettet werden sollen. Alle Argumente müssen dynamische Arrays sein (siehe [pack_array](packarrayfunction.md)). 
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Dynamisches Array von Arrays mit Arr1, arr2,..., arrn.
 

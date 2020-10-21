@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt den Sortier Operator in Azure Daten-Explo
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4f9878b77ad2288395a54d5315864e460ca37875
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 8823b0a6bb15898a9bb15ed00919fa57d75f8e25
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351028"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245816"
 ---
 # <a name="sort-operator"></a>sort-Operator 
 
@@ -36,7 +36,7 @@ T | sort by strlen(country) asc, price desc
 * *T*: die zu sortierende Tabellen Eingabe.
 * *Ausdruck*: ein skalarer Ausdruck, nach dem sortiert werden soll. Der Typ der Werte muss „Numerisch“, „Datum“, „Uhrzeit“ oder „Zeichenfolge“ sein.
 * `asc` : Sortierung in aufsteigender Reihenfolge. Die Standardeinstellung ist `desc`, also absteigend.
-* `nulls first`(der Standard `asc` Wert für Order) platziert die NULL-Werte am Anfang und `nulls last` (der Standard `desc` Wert für Order) platziert die NULL-Werte am Ende.
+* `nulls first` (der Standard `asc` Wert für Order) platziert die NULL-Werte am Anfang und `nulls last` (der Standard `desc` Wert für Order) platziert die NULL-Werte am Ende.
 
 ## <a name="example"></a>Beispiel
 

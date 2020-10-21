@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt endosmonth () in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 772cf42bfb4bd96a9cff94b7723b234139da462a
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 1911546f95b86a04fe59d22137b1eaeff22e2c2a
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348291"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245145"
 ---
 # <a name="endofmonth"></a>endofmonth()
 
@@ -28,7 +28,7 @@ Gibt das Ende des Monats zurück, das das Datum enthält, das durch einen Offset
 * `date`: Das Eingabe Datum.
 * `offset`: Eine optionale Anzahl von Offset Monaten ab dem Eingabe Datum (Integer, default-0).
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Ein DateTime-Wert, der das Ende des Monats für den angegebenen *Datums* Wert mit dem Offset darstellt, falls angegeben.
 

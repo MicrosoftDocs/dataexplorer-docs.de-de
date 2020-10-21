@@ -4,16 +4,16 @@ description: In diesem Artikel wird make_list () (Aggregations Funktion) in Azur
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: ecfcaa39195caec06184b966403bd6655a00b714
-ms.sourcegitcommit: 62476f682b7812cd9cff7e6958ace5636ee46755
+ms.openlocfilehash: f5a4c16f1f259de457ef963f2a400d6c9fd79727
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/19/2020
-ms.locfileid: "92169539"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246385"
 ---
 # <a name="make_list-aggregation-function"></a>make_list () (Aggregations Funktion)
 
@@ -33,7 +33,7 @@ Gibt ein `dynamic` -Array (JSON) aller Werte von *Expr* in der Gruppe zurück.
 > [!NOTE]
 > Eine Legacy-und veraltete Variante dieser Funktion: `makelist()` hat ein Standard Limit von *MaxSize* = 128.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Gibt ein `dynamic` -Array (JSON) aller Werte von *Expr* in der Gruppe zurück.
 Wenn die Eingabe für den `summarize` Operator nicht sortiert ist, ist die Reihenfolge der Elemente im resultierenden Array nicht definiert.
@@ -122,6 +122,6 @@ shapes
 |false|[{"Name": "Dreieck", "sidecount": 3}, {"Name": "Pentagon", "sidecount": 5}, {"Name": "heptagon", "sidecount": 7}, {"Name": "Nonagon", "sidecount": 9}]|
 |true|[{"Name": "Square", "sidecount": 4}, {"Name": "Rechteck", "sidecount": 4}, {"Name": "hexseck", "sidecount": 6}, {"Name": "Octogon", "sidecount": 8}, {"Name": "decseck", "sidecount": 10}]|
 
-## <a name="see-also"></a>Siehe auch
+## <a name="see-also"></a>Weitere Informationen
 
 [`make_list_if`](./makelistif-aggfunction.md) der-Operator ähnelt `make_list` , mit dem Unterschied, dass er auch ein Prädikat akzeptiert.

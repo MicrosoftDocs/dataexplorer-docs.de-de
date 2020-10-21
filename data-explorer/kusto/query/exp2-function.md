@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt exp2 () in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 1c2fbf2067aa83963801b6d5ec7b9f4204e99f4d
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: c1a59a4f0c809deb3f09126eb281dad0ddfc1342
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348172"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246686"
 ---
 # <a name="exp2"></a>exp2()
 
@@ -27,7 +27,7 @@ Die exponentielle Base-2-Funktion von x, die 2 für Power x: 2 ^ x ist.
 
 * *x*: eine reelle Zahl, Wert des Exponenten.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 * Exponentieller Wert von x.
 * Einen natürlichen Logarithmus (Basis 2) finden Sie unter [log2 ()](log2-function.md).

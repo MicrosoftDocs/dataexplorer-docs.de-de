@@ -4,16 +4,16 @@ description: In diesem Artikel wird unixtime_microseconds_todatetime () in Azure
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/27/2019
-ms.openlocfilehash: 377fea9906c6078bc4c4ff685e2d06c670f2cafb
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: 713cf936878d0fa311d4637f61881f0481229617
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103481"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245702"
 ---
 # <a name="unixtime_microseconds_todatetime"></a>unixtime_microseconds_todatetime()
 
@@ -27,7 +27,7 @@ Konvertiert Unix-Epoche-Mikrosekunden in UTC-DateTime.
 
 * *Mikrosekunden*: eine reelle Zahl stellt einen Epochen Zeitstempel in Mikrosekunden dar. `Datetime` Dies tritt auf, bevor die Epochen Zeit (1970-01-01 00:00:00) einen negativen Zeitstempelwert aufweist.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Wenn die Konvertierung erfolgreich ist, ist das Ergebnis ein [DateTime](./scalar-data-types/datetime.md) -Wert. Wenn die Konvertierung nicht erfolgreich ist, ist das Ergebnis NULL.
 

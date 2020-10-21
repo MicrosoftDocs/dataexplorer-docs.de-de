@@ -4,16 +4,16 @@ description: In diesem Artikel wird MAKE_SET () (Aggregations Funktion) in Azure
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: 0ae1a01af019e18e8e9f05454a1c52ef6a1f856c
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: 8f5494c9d54d2950ba82da8de0b0094b2d17f798
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103090"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246400"
 ---
 # <a name="make_set-aggregation-function"></a>MAKE_SET () (Aggregations Funktion)
 
@@ -33,7 +33,7 @@ Gibt ein `dynamic` -Array (JSON) des Satzes eindeutiger Werte zurück, die *Expr
 > [!NOTE]
 > Eine Legacy-und veraltete Variante dieser Funktion: `makeset()` hat ein Standard Limit von *MaxSize* = 128.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Gibt ein `dynamic` -Array (JSON) des Satzes eindeutiger Werte zurück, die *Expr* in der Gruppe annimmt.
 Die Sortierreihenfolge des Arrays ist nicht definiert.

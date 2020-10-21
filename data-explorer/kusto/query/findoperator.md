@@ -4,18 +4,18 @@ description: In diesem Artikel wird der Such Operator in Azure Daten-Explorer be
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 4be61920fe22c7b77eb54f849e86ba06a8bf533b
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: d1e01f366c1bae677111c67b0e60fde59683706e
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763822"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245053"
 ---
 # <a name="find-operator"></a>find-Operator
 
@@ -55,9 +55,9 @@ find in (Table1, Table2, Table3) where Fruit=="apple"
 
 * `withsource=`*ColumnName*: optional. Standardmäßig enthält die Ausgabe eine Spalte mit dem Namen *source_* , deren Werte angeben, welche Quell Tabelle die einzelnen Zeilen beigetragen hat. Wenn angegeben, wird *ColumnName* anstelle von *source_* verwendet.
 Wenn die Abfrage nach Platzhalter Übereinstimmung auf Tabellen aus mehr als einer Datenbank (einschließlich der Standarddatenbank) verweist, wird für den Wert dieser Spalte ein Tabellenname mit der Datenbank qualifiziert. Entsprechend werden *Cluster* -und *Daten Bank* Qualifizierungen im Wert vorhanden sein, wenn auf mehr als ein Cluster verwiesen wird.
-* *Predicate*: ein `boolean` [Ausdruck](./scalar-data-types/bool.md) für die Spalten der *Tabelle* "Eingabe Tabellen" [ `,` *Tabelle*,...]. Sie wird für jede Zeile in jeder Eingabe Tabelle ausgewertet. Weitere Informationen finden Sie unter [Prädikat Syntax Details](./findoperator.md#predicate-syntax).
+* *Predicate*: ein `boolean` [Ausdruck](./scalar-data-types/bool.md) für die Spalten der *Tabelle* "Eingabe Tabellen" [ `,` *Tabelle*,...]. Sie wird für jede Zeile in jeder Eingabe Tabelle ausgewertet. Weitere Informationen finden Sie unter  [Prädikat Syntax Details](./findoperator.md#predicate-syntax).
 * `Table`: Optional. Standardmäßig sucht die *Suche* in allen Tabellen in der aktuellen Datenbank nach:
-    *  Der Name einer Tabelle, z. b.`Events`
+    *  Der Name einer Tabelle, z. b. `Events`
     *  Ein Abfrageausdruck, z.B. `(Events | where id==42)`.
     *  Ein Satz von Tabellen, die mit einem Platzhalterzeichen angegeben sind. Beispielsweise `E*` würde die Vereinigung aller Tabellen in der Datenbank bilden, deren Namen mit beginnen `E` .
 * `project-smart` | `project`: Wenn nicht angegeben, `project-smart` wird standardmäßig verwendet. Weitere Informationen finden Sie unter [Details zum Ausgabe Schema](./findoperator.md#output-schema).
@@ -67,16 +67,16 @@ Wenn die Abfrage nach Platzhalter Übereinstimmung auf Tabellen aus mehr als ein
 ::: zone pivot="azuremonitor"
 
 * `withsource=`*ColumnName*: optional. Standardmäßig enthält die Ausgabe eine Spalte mit dem Namen *source_* , deren Werte angeben, welche Quell Tabelle die einzelnen Zeilen beigetragen hat. Wenn angegeben, wird *ColumnName* anstelle von *source_* verwendet.
-* *Predicate*: ein `boolean` [Ausdruck](./scalar-data-types/bool.md) für die Spalten der *Tabelle* "Eingabe Tabellen" [ `,` *Tabelle*,...]. Sie wird für jede Zeile in jeder Eingabe Tabelle ausgewertet. Weitere Informationen finden Sie unter [Prädikat Syntax Details](./findoperator.md#predicate-syntax).
+* *Predicate*: ein `boolean` [Ausdruck](./scalar-data-types/bool.md) für die Spalten der *Tabelle* "Eingabe Tabellen" [ `,` *Tabelle*,...]. Sie wird für jede Zeile in jeder Eingabe Tabelle ausgewertet. Weitere Informationen finden Sie unter  [Prädikat Syntax Details](./findoperator.md#predicate-syntax).
 * `Table`: Optional. Standardmäßig *durchsucht die Suche alle* Tabellen nach:
-    *  Der Name einer Tabelle, z. b.`Events` 
+    *  Der Name einer Tabelle, z. b. `Events` 
     *  Ein Abfrageausdruck, z.B. `(Events | where id==42)`.
     *  Ein Satz von Tabellen, die mit einem Platzhalterzeichen angegeben sind. Beispielsweise `E*` würde die Vereinigung aller Tabellen bilden, deren Namen mit beginnen `E` .
 * `project-smart` | `project`: Wenn nicht angegeben, `project-smart` wird standardmäßig verwendet. Weitere Informationen finden Sie unter [Details zum Ausgabe Schema](./findoperator.md#output-schema).
 
 ::: zone-end
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Transformation von Zeilen in *Tabelle* [ `,` *Tabelle*,...], für die das *Prädikat* ist `true` . Die Zeilen werden entsprechend dem [Ausgabe Schema](#output-schema)transformiert.
 
@@ -112,12 +112,12 @@ Der *Find* -Operator unterstützt eine alternative Syntax für den `* has` Begri
 
 Eine Zusammenfassung einiger Filterfunktionen finden Sie unter [Where-Operator](./whereoperator.md).
 
-## <a name="notes"></a>Hinweise
+## <a name="notes"></a>Notizen
 
 * Wenn die `project` -Klausel auf eine Spalte verweist, die in mehreren Tabellen angezeigt wird und mehrere Typen aufweist, muss ein Typ diesem Spalten Verweis in der Project-Klausel folgen.
 * Wenn eine Spalte in mehreren Tabellen angezeigt wird und mehrere Typen aufweist und `project-smart` verwendet wird, gibt es eine entsprechende Spalte für jeden Typ im `find` Ergebnis, wie in [Union](./unionoperator.md)
 * Bei der Verwendung von *Project-Intelligent*kann das Ausgabe Schema durch Änderungen im Prädikat im Quell Tabellen Satz oder im Tabellen Schema geändert werden. Wenn ein konstantes Ergebnis Schema erforderlich ist, verwenden Sie stattdessen *Project* .
-* `find`der Bereich kann keine [Funktionen](../management/functions.md)enthalten. Wenn Sie eine Funktion in den Suchbereich einschließen möchten, definieren [Sie eine Let-Anweisung](./letstatement.md) mit dem View- [Schlüsselwort](./letstatement.md).
+* `find` der Bereich kann keine [Funktionen](../management/functions.md)enthalten. Wenn Sie eine Funktion in den Suchbereich einschließen möchten, definieren [Sie eine Let-Anweisung](./letstatement.md) mit dem View- [Schlüsselwort](./letstatement.md).
 
 ## <a name="performance-tips"></a>Leistungstipps
 
@@ -204,10 +204,10 @@ Angenommen, wir haben den nächsten Inhalt dieser beiden Tabellen:
 
 |Session_Id|Ebene|EventText|Version
 |---|---|---|---|
-|acbd207d-51aa-4df7-bfa7-be70eb68f04e|Information|Einige text1|v 1.0.0
-|acbd207d-51aa-4df7-bfa7-be70eb68f04e|Fehler|Einige Text2|v 1.0.0
-|28b8e46e-3c31-43cf-83cb-48921c3986fc|Fehler|Einige Text3|v 1.0.1
-|8f057b11-3281-45C3-A856-05ebb18a3c59|Information|Einige text4|v 1.1.0
+|acbd207d-51aa-4df7-bfa7-be70eb68f04e|Information|Einige text1|v1.0.0
+|acbd207d-51aa-4df7-bfa7-be70eb68f04e|Fehler|Einige Text2|v1.0.0
+|28b8e46e-3c31-43cf-83cb-48921c3986fc|Fehler|Einige Text3|v1.0.1
+|8f057b11-3281-45C3-A856-05ebb18a3c59|Information|Einige text4|1\.1.0
 
 ### <a name="eventstable2"></a>EventsTable2
 
@@ -228,7 +228,7 @@ find in (EventsTable1, EventsTable2)
 
 |source_|EventText|Version|EventName|pack_
 |---|---|---|---|---|
-|EventsTable1|Einige Text2|v 1.0.0||{"Session_Id": "acbd207d-51aa-4df7-BFA7-be70eb68f04e", "Level": "Error"}
+|EventsTable1|Einige Text2|v1.0.0||{"Session_Id": "acbd207d-51aa-4df7-BFA7-be70eb68f04e", "Level": "Error"}
 |EventsTable2|Andere Text3||Event3|{"Session_Id": "acbd207d-51aa-4df7-BFA7-be70eb68f04e", "Level": "Error"}
 
 
@@ -240,8 +240,8 @@ find Version == 'v1.0.0' or EventName == 'Event1' project Session_Id, EventText,
 
 |source_|Session_Id|EventText|Version|EventName|
 |---|---|---|---|---|
-|EventsTable1|acbd207d-51aa-4df7-bfa7-be70eb68f04e|Einige text1|v 1.0.0
-|EventsTable1|acbd207d-51aa-4df7-bfa7-be70eb68f04e|Einige Text2|v 1.0.0
+|EventsTable1|acbd207d-51aa-4df7-bfa7-be70eb68f04e|Einige text1|v1.0.0
+|EventsTable1|acbd207d-51aa-4df7-bfa7-be70eb68f04e|Einige Text2|v1.0.0
 |EventsTable2|f7d5f95f-f580-4ea6-830b-5776c8d64fdd|Andere text1||Event1
 
 Hinweis: in der Praxis werden *EventsTable1* -Zeilen mit ```Version == 'v1.0.0'``` Prädikat gefiltert, und *EventsTable2* -Zeilen werden mit ```EventName == 'Event1'``` Prädikat gefiltert.
@@ -274,7 +274,7 @@ find Session_Id == 'acbd207d-51aa-4df7-bfa7-be70eb68f04e' project pack(*)
 |EventsTable2|{"Session_Id": "acbd207d-51aa-4df7-BFA7-be70eb68f04e", "Level": "Error", "eventText": "Some other Text3", "EventName": "Event3"}
 
 
-## <a name="examples-of-cases-where-find-will-act-as-union"></a>Beispiele für Fälle, in denen `find` fungieren soll`union`
+## <a name="examples-of-cases-where-find-will-act-as-union"></a>Beispiele für Fälle, in denen `find` fungieren soll `union`
 
 ### <a name="using-a-non-tabular-expression-as-find-operand"></a>Verwenden eines nicht tabellarischen Ausdrucks als Such Operand
 

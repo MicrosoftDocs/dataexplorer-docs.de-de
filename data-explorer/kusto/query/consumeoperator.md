@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt den nutzungsoperator in Azure Daten-Explo
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 85fd891590e359e31224ed5d707a837b1cc0eb41
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 1e4b2ff4ee45fd92e7e16f9468c18e1d0a70ca82
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348835"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245166"
 ---
 # <a name="consume-operator"></a>consume-Operator
 
@@ -27,7 +27,7 @@ T | consume
 
 ## <a name="syntax"></a>Syntax
 
-`consume`[ `decodeblocks` `=` *Decodeblocks*]
+`consume` [ `decodeblocks` `=` *Decodeblocks*]
 
 ## <a name="arguments"></a>Argumente
 

@@ -4,16 +4,16 @@ description: In diesem Artikel wird binary_all_xor () (Aggregations Funktion) in
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/06/2020
-ms.openlocfilehash: c2fab7abbcebdc97f6f1c394f840bf6e232db03a
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 7aa83f7c214c7bc45892ff1064a09dd84240b5f4
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349107"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246732"
 ---
 # <a name="binary_all_xor-aggregation-function"></a>binary_all_xor () (Aggregations Funktion)
 
@@ -29,7 +29,7 @@ Akkumuliert Werte mithilfe der binären `XOR` Operation pro Zusammenfassungs Gru
 
 * *Expr*: Long-Nummer.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Gibt einen Wert zurück, der mithilfe der binären Operation für Datensätze pro Zusammenfassungs Gruppe aggregiert wird `XOR` (oder insgesamt, wenn die Zusammenfassung ohne Gruppierung erfolgt).
 

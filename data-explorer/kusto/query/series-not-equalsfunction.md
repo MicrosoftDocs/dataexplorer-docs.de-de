@@ -4,16 +4,16 @@ description: In diesem Artikel wird series_not_equals () in Azure Daten-Explorer
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 579cc4a7b86340b7e2df3e47482406ce7d31e388
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: c55cd4c4846f568dccc7f17e11e024f97c87f14b
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103562"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246044"
 ---
 # <a name="series_not_equals"></a>series_not_equals()
 
@@ -27,7 +27,7 @@ Berechnet die Element Weise not Gleichheits ( `!=` )-Logik Operation von zwei nu
 
 * *Series1, series2*: numerische Eingabe Arrays, die Element Weise verglichen werden sollen. Alle Argumente müssen dynamische Arrays sein. 
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Dynamisches Array von booleschen Werten, das die berechnete Element Weise Not Equal Logic-Operation zwischen den beiden Eingaben enthält. Ein nicht numerisches Element oder ein nicht vorhandenes Element (Arrays mit unterschiedlichen Größen) ergeben einen- `null` Elementwert.
 

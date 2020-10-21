@@ -4,16 +4,16 @@ description: In diesem Artikel wird parse_xml () in Azure Daten-Explorer beschri
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 3f003c5e9c6733391d61a2130528c9babc4aae67
-ms.sourcegitcommit: d157e661de293aa4c2b5ad334a554eda0295bd2c
+ms.openlocfilehash: 95741bb407baec3298bb84695ed98b4adcbbd5a6
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91886297"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246168"
 ---
 # <a name="parse_xml"></a>parse_xml()
 
@@ -27,13 +27,13 @@ Interpretiert einen `string` als XML-Wert, konvertiert den Wert in einen JSON-We
 
 * *XML*: ein Ausdruck vom Typ `string` , der einen XML-formatierten Wert darstellt.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Ein Objekt vom Typ " [Dynamic](./scalar-data-types/dynamic.md) ", das durch den Wert von *XML*bestimmt wird, oder NULL, wenn das XML-Format ungültig ist.
 
 Die Konvertierung erfolgt wie folgt:
 
-XML                                |JSON                                            |Zugriff
+XML                                |JSON                                            |Access
 -----------------------------------|------------------------------------------------|--------------         
 `<e/>`                             | {"e": NULL}                                  | o. e
 `<e>text</e>`                      | {"e": "Text"}                                | o. e
@@ -43,7 +43,7 @@ XML                                |JSON                                        
 `<e> <a>text</a> <a>text</a> </e>` | {"e": {"a": ["Text", "Text"]}}             | o. e. a [0] o. e. a [1]
 `<e> text <a>text</a> </e>`        | {"e": {"#Text": "Text", "a": "Text"}}      | 1 ' o. e ["#Text"] o. e. a
 
-**Hinweise**
+**Notizen**
 
 * Die maximale Eingabe `string` Länge für `parse_xml` beträgt 1 MB (1.048.576 Byte). Die Interpretation längerer Zeichen folgen führt zu einem NULL-Objekt.
 * Nur Elementknoten, Attribute und Textknoten werden übersetzt. Alles andere wird übersprungen.

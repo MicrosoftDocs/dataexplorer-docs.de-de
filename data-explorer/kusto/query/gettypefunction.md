@@ -4,16 +4,16 @@ description: In diesem Artikel wird GetType () in Azure Daten-Explorer beschrieb
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 0efa07b7a1b050fe81ce2f369e8df5af4c05e212
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 8fc1c3949ef13e504de6ba76be1bd5e600926288
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347662"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92244799"
 ---
 # <a name="gettype"></a>gettype()
 

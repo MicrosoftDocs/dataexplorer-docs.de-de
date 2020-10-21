@@ -4,16 +4,16 @@ description: In diesem Artikel wird der Top-Hitters-Operator in Azure Daten-Expl
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: be05a3a546bb6f1db003be14e4a1417841b54671
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: d95c981f999d0842a266702ad5fc733281d45a7d
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87804065"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245791"
 ---
 # <a name="top-hitters-operator"></a>top-hitters-Operator
 
@@ -24,7 +24,7 @@ T | top-hitters 25 of Page by Views
 ```
 
 > [!NOTE]
-> `top-hitters`ist ein Näherungs Algorithmus und sollte bei der Ausführung mit großen Daten verwendet werden. Die Näherung der Top-Hitters basiert auf dem [count-min-Sketch-](https://en.wikipedia.org/wiki/Count%E2%80%93min_sketch) Algorithmus.  
+> `top-hitters` ist ein Näherungs Algorithmus und sollte bei der Ausführung mit großen Daten verwendet werden. Die Näherung der Top-Hitters basiert auf dem [count-min-Sketch-](https://en.wikipedia.org/wiki/Count%E2%80%93min_sketch) Algorithmus.  
 
 ## <a name="syntax"></a>Syntax
 

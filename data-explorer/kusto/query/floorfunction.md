@@ -1,20 +1,20 @@
 ---
-title: floor() - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel wird floor() in Azure Data Explorer beschrieben.
+title: Floor ()-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel wird Floor () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: b0df5485cb575a805a8f806b5062d7b3fb1e7139
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: ab1e38edfac7730d3c1c1df652abcfd10a490198
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81515231"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245019"
 ---
 # <a name="floor"></a>floor()
 
-Ein Alias [`bin()`](binfunction.md)für .
+Ein Alias für [`bin()`](binfunction.md) .
