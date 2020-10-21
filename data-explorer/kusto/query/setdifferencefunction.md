@@ -4,16 +4,16 @@ description: In diesem Artikel wird set_difference () in Azure Daten-Explorer be
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/02/2019
-ms.openlocfilehash: bd442f70b3411b61f213098fefec918622f8d916
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 1657e6e9b82e433d7712dfb21930c4ae4d20a315
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351181"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242673"
 ---
 # <a name="set_difference"></a>set_difference()
 

@@ -4,16 +4,16 @@ description: In diesem Artikel wird rolling_percentile-Plug-in in Azure Daten-Ex
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8d60ad8a5e2c9a94164fb816db9e9913dcff56ea
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: f64a7e5c183e34e81781986d5c28f189a04291e7
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345758"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242879"
 ---
 # <a name="rolling_percentile-plugin"></a>rolling_percentile ()-Plug-in
 
@@ -37,7 +37,7 @@ T | evaluate rolling_percentile(ValueColumn, Percentile, IndexColumn, BinSize, B
 * *Binsperwindow*: Skalar mit der Anzahl der in jedem Fenster enthaltenen Behälter.
 * *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, nach denen die Segmente aufgeteilt werden sollen.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Gibt eine Tabelle mit einer Zeile für jede einzelne bin (und ggf. eine Kombination von Dimensionen) zurück, die das parallele Quantil der Werte im Fenster enthält, das auf den bin (inklusiv) endet. unterschiedliche Anzahl Werte, unterschiedliche Anzahl neuer Werte, aggregierte eindeutige Anzahl für jedes Zeitfenster.
 

@@ -4,16 +4,16 @@ description: In diesem Artikel wird EndOf Year () in Azure Daten-Explorer beschr
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a76a402725eaefe9f12cbb67228381e3b0c25351
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: a93b24af949beedc02ddd3dbbc479074f0aa891c
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348257"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92249148"
 ---
 # <a name="endofyear"></a>endofyear()
 

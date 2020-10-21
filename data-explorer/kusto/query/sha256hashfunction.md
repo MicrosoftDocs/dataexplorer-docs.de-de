@@ -4,16 +4,16 @@ description: In diesem Artikel wird hash_sha256 () in Azure Daten-Explorer besch
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b813ce4c0901ef66177e8e7bdaa42a1744bd5912
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 3d6cd8b71ac5abed2d56e567c992a15512141063
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351113"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242591"
 ---
 # <a name="hash_sha256"></a>hash_sha256()
 

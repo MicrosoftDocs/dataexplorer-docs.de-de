@@ -4,16 +4,16 @@ description: In diesem Artikel wird Case () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 087ff2fc38f3b72e4abdbb86ce4b7ac98a5569e6
-ms.sourcegitcommit: d0f8d71261f8f01e7676abc77283f87fc450c7b1
+ms.openlocfilehash: 809c11f337db86e9b9bdfbd93439e5f743008c38
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91765372"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92249313"
 ---
 # <a name="case"></a>case()
 
@@ -33,7 +33,7 @@ Alle geraden Argumente (die `then` s) und das letzte Argument (der `else` ) müs
 * *then_i*: ein Ausdruck, der ausgewertet wird und dessen Wert von der Funktion zurückgegeben wird, wenn *predicate_i* das erste Prädikat ist, das ergibt `true` .
 * *else*: ein Ausdruck, der ausgewertet wird und dessen Wert von der Funktion zurückgegeben wird, wenn keine der *predicate_i* ausgewertet wird `true` .
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Der Wert des ersten *then_i* , dessen *predicate_i* als ausgewertet `true` wird, oder der Wert von *else* , wenn keine der Prädikate erfüllt ist.
 
@@ -49,11 +49,11 @@ range Size from 1 to 15 step 2
 
 |Size|bucket|
 |---|---|
-|1|Small|
-|3|Small|
+|1|Klein|
+|3|Klein|
 |5|Medium|
 |7|Medium|
 |9|Medium|
-|11|Large|
-|13|Large|
-|15|Large|
+|11|Groß|
+|13|Groß|
+|15|Groß|

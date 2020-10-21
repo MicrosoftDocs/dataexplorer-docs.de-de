@@ -4,16 +4,16 @@ description: In diesem Artikel wird url_encode_component () in Azure Daten-Explo
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/17/2020
-ms.openlocfilehash: 44e77e2a0e34b66506852bd82d65e4a108b520fd
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6740effd6a6117a2e63b5d03f09b38a723055f30
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87338455"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92241133"
 ---
 # <a name="url_encode_component"></a>url_encode_component()
 
@@ -30,7 +30,7 @@ Unterscheidet sich von [url_encode](./urlencodefunction.md) , indem Leerzeichen 
 
 * *URL*: Eingabe-URL (Zeichenfolge).  
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Die URL (Zeichenfolge) wurde in ein Format konvertiert, das über das Internet übermittelt werden kann.
 
@@ -43,7 +43,7 @@ print original = url, encoded = url_encode_component(url)
 
 |original|codierte|
 |---|---|
-|https://www.bing.com/helloWort|HTTPS %3 a %2 f %2 f www. b. com% 2F %20 Word|
+|https://www.bing.com/hello Wort|HTTPS %3 a %2 f %2 f www. b. com% 2F %20 Word|
 
 
  

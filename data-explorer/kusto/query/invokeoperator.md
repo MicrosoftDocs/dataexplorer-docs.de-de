@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt den Aufruf Operator in Azure Daten-Explor
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0a94b4f0e274d01a15edd06cbb725547e65d8381
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 1114952cdafe04284e93815d11c160455416b87c
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803946"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248964"
 ---
 # <a name="invoke-operator"></a>invoke-Operator
 
@@ -36,7 +36,7 @@ T | invoke foo(param1, param2)
 * *Function*: der Name des Lambda-Ausdrucks oder Funktionsnamens, der ausgewertet werden soll.
 * *param1*, *Param2* ...: zusätzliche Lambda-Argumente.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Gibt das Ergebnis des ausgewerteten Ausdrucks zurück.
 

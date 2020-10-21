@@ -4,16 +4,16 @@ description: In diesem Artikel wird funnel_sequence_completion-Plug-in in Azure 
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/16/2020
-ms.openlocfilehash: 3511d15ebf0f5e3708deeeed981a8a6808da2e48
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: cd4d0d07c191d70951c4cfafb549a2bc31f5d153
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347934"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92249047"
 ---
 # <a name="funnel_sequence_completion-plugin"></a>funnel_sequence_completion-Plug-In
 

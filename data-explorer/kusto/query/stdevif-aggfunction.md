@@ -4,16 +4,16 @@ description: In diesem Artikel wird stdevif () (Aggregations Funktion) in Azure 
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a158a623768a7beb6ec497ca8d8467aecd7c3b61
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 831011bcd72c2fc9b06c3c68c6ebda7929d49e4b
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87342817"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242529"
 ---
 # <a name="stdevif-aggregation-function"></a>stdevif () (Aggregations Funktion)
 

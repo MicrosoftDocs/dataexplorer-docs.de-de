@@ -4,18 +4,18 @@ description: In diesem Artikel wird das R-Plug-in (Vorschau) in Azure Daten-Expl
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 429140a1ae74dc0d7189e4b8dec1a32428fe3bb3
-ms.sourcegitcommit: 7dd20592bf0e08f8b05bd32dc9de8461d89cff14
+ms.openlocfilehash: ae8a82253dfd17b7d3667cd4c72648df0c42658a
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/02/2020
-ms.locfileid: "85902157"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242779"
 ---
 # <a name="r-plugin-preview"></a>R-Plug-in (Vorschau)
 

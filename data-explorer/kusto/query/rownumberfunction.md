@@ -4,16 +4,16 @@ description: In diesem Artikel wird ROW_NUMBER () in Azure Daten-Explorer beschr
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ea51e6171b8a7683a0454d177dc729ed754b8896
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 457e9445aa113e76052b9c4d96019352215d08f9
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351589"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242801"
 ---
 # <a name="row_number"></a>row_number()
 
@@ -68,7 +68,7 @@ datatable (Airport:string, Airline:string, Departures:long)
 
 Das Ausführen dieser Abfrage führt zu folgendem Ergebnis:
 
-Airport  | Luftfahrt  | Abschiebungen  | Rank
+Airport  | Luftfahrt  | Abschiebungen  | Rang
 ---------|----------|-------------|------
 SEA      | BA       | 2           | 1
 SEA      | LH       | 1           | 2

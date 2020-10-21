@@ -4,16 +4,16 @@ description: In diesem Artikel wird row_cumsum () in Azure Daten-Explorer beschr
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 83dc48589fce7332c8e24d1e5a47c75a6cfca608
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6ad1df20972238bee17217f5d9de19a020b4cbce
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345724"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242858"
 ---
 # <a name="row_cumsum"></a>row_cumsum()
 
@@ -72,6 +72,6 @@ name   | month  | End  | total
 Alina  | 1      | 1000    | 1000
 Alina  | 2      | 2000    | 3000
 Alina  | 3      | 1400    | 4400
-Bob    | 1      | 1000    | 1000
-Bob    | 2      | 1950    | 2950
+Bernd    | 1      | 1000    | 1000
+Bernd    | 2      | 1950    | 2950
 Bob    | 3      | 1450    | 4400

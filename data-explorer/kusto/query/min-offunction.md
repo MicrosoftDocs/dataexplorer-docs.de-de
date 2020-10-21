@@ -4,16 +4,16 @@ description: In diesem Artikel wird min_of () in Azure Daten-Explorer beschriebe
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ed8d14a4e793f253342c1b52269678874c96660f
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: c08ef6f147640330cd5ea33c55dcc6acafd77a31
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346761"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248814"
 ---
 # <a name="min_of"></a>min_of()
 
@@ -34,7 +34,7 @@ min_of(10, 1, -3, 17) == -3
 - Alle Argumente müssen denselben Typ aufweisen.
 - Maximal 64 Argumente werden unterstützt.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Der minimale Wert aller Argument Ausdrücke.
 

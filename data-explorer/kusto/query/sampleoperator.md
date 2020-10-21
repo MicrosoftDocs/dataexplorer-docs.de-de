@@ -4,16 +4,16 @@ description: In diesem Artikel wird der Beispiel Operator in Azure Daten-Explore
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/18/2020
-ms.openlocfilehash: 89e9eea4e8a6a5922e9141818fc5832156ac8e72
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 35495b9541f7dac35bb1aa45cbc435e7f3fedfad
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803555"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242714"
 ---
 # <a name="sample-operator"></a>sample-Operator
 
@@ -24,8 +24,8 @@ T | sample 5
 ```
 
 > [!NOTE]
-> * `sample`ist auf eine Geschwindigkeit und nicht auf eine gleichmäßige Verteilung von Werten ausgelegt. Insbesondere bedeutet dies, dass keine "Fair" Ergebnisse erzeugt werden, wenn Sie nach Operatoren verwendet werden, die Union 2-Datensätze mit unterschiedlichen Größen (z. b. ein- `union` oder- `join` Operator) verwenden. Es wird empfohlen, `sample` direkt hinter der Tabellen Referenz und den Filtern zu verwenden.
-> * `sample`bei handelt es sich um einen nicht deterministischen Operator, der jedes Mal ein anderes Resultset zurückgibt, wenn er während der Abfrage ausgewertet wird. Beispielsweise ergibt die folgende Abfrage zwei verschiedene Zeilen (auch wenn davon ausgegangen wird, dass die gleiche Zeile zweimal zurückgegeben wird).
+> * `sample` ist auf eine Geschwindigkeit und nicht auf eine gleichmäßige Verteilung von Werten ausgelegt. Insbesondere bedeutet dies, dass keine "Fair" Ergebnisse erzeugt werden, wenn Sie nach Operatoren verwendet werden, die Union 2-Datensätze mit unterschiedlichen Größen (z. b. ein- `union` oder- `join` Operator) verwenden. Es wird empfohlen, `sample` direkt hinter der Tabellen Referenz und den Filtern zu verwenden.
+> * `sample` bei handelt es sich um einen nicht deterministischen Operator, der jedes Mal ein anderes Resultset zurückgibt, wenn er während der Abfrage ausgewertet wird. Beispielsweise ergibt die folgende Abfrage zwei verschiedene Zeilen (auch wenn davon ausgegangen wird, dass die gleiche Zeile zweimal zurückgegeben wird).
 
 ## <a name="syntax"></a>Syntax
 

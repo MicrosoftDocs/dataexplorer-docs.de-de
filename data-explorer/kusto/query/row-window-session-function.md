@@ -4,20 +4,20 @@ description: In diesem Artikel wird row_window_session () in Azure Daten-Explore
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ce8da96733dd483b8600c7cfb3618ed986e9d2b0
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: f872004a8291adc95f594c6301075faa02c8ec6c
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351555"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242873"
 ---
 # <a name="row_window_session"></a>row_window_session()
 
-`row_window_session()`berechnet die Sitzungsstart Werte einer Spalte in einem [serialisierten Zeilen Satz](./windowsfunctions.md#serialized-row-set).
+`row_window_session()` berechnet die Sitzungsstart Werte einer Spalte in einem [serialisierten Zeilen Satz](./windowsfunctions.md#serialized-row-set).
 
 ## <a name="syntax"></a>Syntax
 
@@ -39,7 +39,7 @@ ms.locfileid: "87351555"
 
 Die-Funktion gibt die Werte am Anfang jeder Sitzung zurück.
 
-**Hinweise**
+**Notizen**
 
 Die Funktion verfügt über das folgende konzeptionelle Berechnungsmodell:
 

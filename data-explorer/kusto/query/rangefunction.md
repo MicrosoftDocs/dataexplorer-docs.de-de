@@ -4,16 +4,16 @@ description: In diesem Artikel wird der Bereich () in Azure Daten-Explorer besch
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2606746e89d645601fa53ed7f81d67ddae203c03
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 9a37d375ca83252b063821659f0b5490337c6667
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345911"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92241045"
 ---
 # <a name="range"></a>range()
 
@@ -27,7 +27,7 @@ Generiert ein dynamisches Array, das eine Reihe gleichmäßiger Werte enthält.
 
 * *Start*: der Wert des ersten Elements im resultierenden Array. 
 * *Beenden*: der Wert des letzten Elements im resultierenden Array oder der kleinste Wert, der größer als das letzte Element im resultierenden Array und innerhalb eines ganzzahligen Vielfachen von *Step* from *Start*ist.
-* *Step*: der Unterschied zwischen zwei aufeinander folgenden Elementen des Arrays. Der Standardwert für *Step* ist `1` für numeric und `1h` für `timespan` oder.`datetime`
+* *Step*: der Unterschied zwischen zwei aufeinander folgenden Elementen des Arrays. Der Standardwert für *Step* ist `1` für numeric und `1h` für `timespan` oder. `datetime`
 
 ## <a name="examples"></a>Beispiele
 

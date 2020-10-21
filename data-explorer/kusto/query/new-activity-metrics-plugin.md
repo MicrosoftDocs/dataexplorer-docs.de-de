@@ -4,16 +4,16 @@ description: In diesem Artikel wird new_activity_metrics-Plug-in in Azure Daten-
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: b376afda0874fdb70934ffc6861192ef9028e9aa
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 447191158ce3de69c4429b5af4a33d24150af77c
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347084"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248846"
 ---
 # <a name="new_activity_metrics-plugin"></a>new_activity_metrics-Plug-In
 
@@ -48,15 +48,15 @@ Das Ausgabe Tabellen Schema ist:
 |---|---|---|---|---|---|---|---|---|---|
 |Typ: ab *timelinecolumschlag*|identisch|long|long|double|double|double|..|..|..|
 
-* `from_TimelineColumn`-die Kohorte neuer Benutzer. Metriken in diesem Datensatz beziehen sich auf alle Benutzer, die in diesem Zeitraum zuerst gesehen wurden. Bei der Entscheidung für das *erste Mal* werden alle vorangegangenen Zeiträume im Analysezeitraum berücksichtigt. 
-* `to_TimelineColumn`-der Zeitraum, mit dem verglichen wird. 
-* `dcount_new_values`: die Anzahl der unterschiedlichen Benutzer `to_TimelineColumn` , in denen nicht in *allen* Perioden vor und einschließlich angezeigt wurde `from_TimelineColumn` . 
-* `dcount_retained_values`-von allen neuen Benutzern, zuerst in `from_TimelineColumn` , die Anzahl der unterschiedlichen Benutzer, die in gesehen wurden `to_TimelineCoumn` .
-* `dcount_churn_values`-von allen neuen Benutzern, zuerst in `from_TimelineColumn` , die Anzahl der unterschiedlichen Benutzer, die in *nicht* angezeigt wurden `to_TimelineCoumn` .
-* `retention_rate`: der Prozentsatz von `dcount_retained_values` aus der Kohorte (in den ersten Benutzern `from_TimelineColumn` ).
-* `churn_rate`: der Prozentsatz von `dcount_churn_values` aus der Kohorte (in den ersten Benutzern `from_TimelineColumn` ).
+* `from_TimelineColumn` -die Kohorte neuer Benutzer. Metriken in diesem Datensatz beziehen sich auf alle Benutzer, die in diesem Zeitraum zuerst gesehen wurden. Bei der Entscheidung für das *erste Mal* werden alle vorangegangenen Zeiträume im Analysezeitraum berücksichtigt. 
+* `to_TimelineColumn` -der Zeitraum, mit dem verglichen wird. 
+* `dcount_new_values` : die Anzahl der unterschiedlichen Benutzer `to_TimelineColumn` , in denen nicht in *allen* Perioden vor und einschließlich angezeigt wurde `from_TimelineColumn` . 
+* `dcount_retained_values` -von allen neuen Benutzern, zuerst in `from_TimelineColumn` , die Anzahl der unterschiedlichen Benutzer, die in gesehen wurden `to_TimelineCoumn` .
+* `dcount_churn_values` -von allen neuen Benutzern, zuerst in `from_TimelineColumn` , die Anzahl der unterschiedlichen Benutzer, die in *nicht* angezeigt wurden `to_TimelineCoumn` .
+* `retention_rate` : der Prozentsatz von `dcount_retained_values` aus der Kohorte (in den ersten Benutzern `from_TimelineColumn` ).
+* `churn_rate` : der Prozentsatz von `dcount_churn_values` aus der Kohorte (in den ersten Benutzern `from_TimelineColumn` ).
 
-**Hinweise**
+**Notizen**
 
 Definitionen von `Retention Rate` und `Churn Rate` finden Sie im Abschnitt " **Hinweise** " in [activity_metrics-Plug](./activity-metrics-plugin.md) -in-Dokumentation.
 
@@ -96,23 +96,23 @@ Users
 |5|2019-11-01 00:00:00.0000000|2019-11-05 00:00:00.0000000|1|4|0|1|0|
 |6|2019-11-01 00:00:00.0000000|2019-11-06 00:00:00.0000000|0|0|4|0|1|
 |7|2019-11-02 00:00:00.0000000|2019-11-02 00:00:00.0000000|2|2|0|1|0|
-|8|2019-11-02 00:00:00.0000000|2019-11-03 00:00:00.0000000|0|1|1|0,5|0.5|
-|9|2019-11-02 00:00:00.0000000|2019-11-04 00:00:00.0000000|0|1|1|0,5|0.5|
-|10|2019-11-02 00:00:00.0000000|2019-11-05 00:00:00.0000000|0|1|1|0,5|0.5|
+|8|2019-11-02 00:00:00.0000000|2019-11-03 00:00:00.0000000|0|1|1|0.5|0.5|
+|9|2019-11-02 00:00:00.0000000|2019-11-04 00:00:00.0000000|0|1|1|0.5|0.5|
+|10|2019-11-02 00:00:00.0000000|2019-11-05 00:00:00.0000000|0|1|1|0.5|0.5|
 |11|2019-11-02 00:00:00.0000000|2019-11-06 00:00:00.0000000|0|0|2|0|1|
 
 Im folgenden finden Sie eine Analyse einiger Datensätze aus der Ausgabe: 
 * Datensatz `R=3` , `from_TimelineColumn`  =  `2019-11-01` , `to_TimelineColumn`  =  `2019-11-03` :
     * Die für diesen Datensatz berücksichtigten Benutzer sind alle neuen Benutzer, die auf 11/1 angezeigt werden. Da dies der erste Zeitraum ist, sind dies alle Benutzer in dieser bin – [0, 2, 3, 4]
-    * `dcount_new_values`– die Anzahl der Benutzer auf 11/3, die auf 11/1 nicht angezeigt wurden. Dies schließt eine einzelne Benutzer – ein `5` . 
-    * `dcount_retained_values`– von allen neuen Benutzern auf 11/1, wie viele wurden bis 11/3 aufbewahrt? Es gibt drei ( `[0,2,4]` ), während gleich `count_churn_values` 1 ist (User = `3` ). 
-    * `retention_rate`= 0,75 – die drei Benutzer, die von den vier neuen Benutzern, die zuerst in 11/1 waren, aufbewahrt wurden. 
+    * `dcount_new_values` – die Anzahl der Benutzer auf 11/3, die auf 11/1 nicht angezeigt wurden. Dies schließt eine einzelne Benutzer – ein `5` . 
+    * `dcount_retained_values` – von allen neuen Benutzern auf 11/1, wie viele wurden bis 11/3 aufbewahrt? Es gibt drei ( `[0,2,4]` ), während gleich `count_churn_values` 1 ist (User = `3` ). 
+    * `retention_rate` = 0,75 – die drei Benutzer, die von den vier neuen Benutzern, die zuerst in 11/1 waren, aufbewahrt wurden. 
 
 * Datensatz `R=9` , `from_TimelineColumn`  =  `2019-11-02` , `to_TimelineColumn`  =  `2019-11-04` :
     * Dieser Datensatz konzentriert sich auf die neuen Benutzer, die zuerst auf 11/2 –-Benutzern und angezeigt wurden `1` `5` . 
-    * `dcount_new_values`– die Anzahl der Benutzer auf 11/4, die nicht durch alle Zeiträume gesehen wurden `T0 .. from_Timestamp` . Dies bedeutet, dass Benutzer, die auf 11/4 angezeigt werden, aber weder in 11/1 noch 11/2 angezeigt wurden – es gibt keine solchen Benutzer. 
-    * `dcount_retained_values`– von allen neuen Benutzern auf 11/2 ( `[1,5]` ), wie viele wurden bis 11/4 aufbewahrt? Es gibt einen solchen Benutzer ( `[1]` ), während count_churn_values einer (Benutzer `5` ) ist. 
-    * `retention_rate`ist 0,5 – der einzelne Benutzer, der auf 11/4 aus den beiden neuen auf 11/2 beibehalten wurde. 
+    * `dcount_new_values` – die Anzahl der Benutzer auf 11/4, die nicht durch alle Zeiträume gesehen wurden `T0 .. from_Timestamp` . Dies bedeutet, dass Benutzer, die auf 11/4 angezeigt werden, aber weder in 11/1 noch 11/2 angezeigt wurden – es gibt keine solchen Benutzer. 
+    * `dcount_retained_values` – von allen neuen Benutzern auf 11/2 ( `[1,5]` ), wie viele wurden bis 11/4 aufbewahrt? Es gibt einen solchen Benutzer ( `[1]` ), während count_churn_values einer (Benutzer `5` ) ist. 
+    * `retention_rate` ist 0,5 – der einzelne Benutzer, der auf 11/4 aus den beiden neuen auf 11/2 beibehalten wurde. 
 
 
 ### <a name="weekly-retention-rate-and-churn-rate-single-week"></a>Wöchentliche Aufbewahrungs Rate und Änderungs Rate (einzelne Woche)

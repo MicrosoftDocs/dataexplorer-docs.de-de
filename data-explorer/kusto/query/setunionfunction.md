@@ -4,16 +4,16 @@ description: In diesem Artikel wird set_union () in Azure Daten-Explorer beschri
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/02/2019
-ms.openlocfilehash: 8aec2bdebacc1bfd87b84bbfc83a6aed5cb05427
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 2fff5763f7eba13e48d0cbdb0e85af666c385308
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351130"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242638"
 ---
 # <a name="set_union"></a>set_union()
 
@@ -27,9 +27,9 @@ Gibt ein `dynamic` Array der Menge aller unterschiedlichen Werte zurück, die in
 
 * *Arr1... arrn*: Eingabe Arrays zum Erstellen eines Union-Satzes (mindestens zwei Arrays). Alle Argumente müssen dynamische Arrays sein (siehe [pack_array](packarrayfunction.md)). 
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
-Gibt ein dynamisches Array der Menge aller unterschiedlichen Werte zurück, die in einem der Arrays vorhanden sind. Siehe [`set_intersect()`](setintersectfunction.md) und [`set_difference()`](setdifferencefunction.md) .
+Gibt ein dynamisches Array der Menge aller unterschiedlichen Werte zurück, die in einem der Arrays vorhanden sind. Siehe [`set_intersect()`](setintersectfunction.md)  und [`set_difference()`](setdifferencefunction.md) .
 
 ## <a name="example"></a>Beispiel
 
