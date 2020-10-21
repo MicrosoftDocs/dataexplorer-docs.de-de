@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/27/2020
-ms.openlocfilehash: 2c6efc03ea252eba5ed63e99d9214e59113856e9
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: cf9f9e5f6a9c5afca58e2637ed4e639882e3749d
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83373583"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92337413"
 ---
 # <a name="querymanagement-http-request"></a>HTTP-Anforderung (Abfrage/Verwaltung)
 
@@ -39,22 +39,22 @@ Nachstehend finden Sie die einzuschließenden Anforderungs Header und Text.
 
 Die folgende Tabelle enthält die allgemeinen Header, die für Abfrage-und Verwaltungsvorgänge verwendet werden.
 
-|Standard Header  |Beschreibung                                                                                 |Erforderlich/Optional |
+|Standard Header  |BESCHREIBUNG                                                                                 |Erforderlich/Optional |
 |-----------------|--------------------------------------------------------------------------------------------|------------------|
 |`Accept`         |Legen Sie den Wert `application/json`                                                                   |Erforderlich          |
-|`Accept-Encoding`|Unterstützte Codierungen sind `gzip` und.`deflate`                                                |Optional          |
+|`Accept-Encoding`|Unterstützte Codierungen sind `gzip` und. `deflate`                                                |Optional          |
 |`Authorization`  |Siehe [Authentifizierung](./authentication.md)                                                   |Erforderlich          |
-|`Connection`     |Es wird empfohlen, Folgendes zu aktivieren:`Keep-Alive`                                                   |Optional          |
+|`Connection`     |Es wird empfohlen, Folgendes zu aktivieren: `Keep-Alive`                                                   |Optional          |
 |`Content-Length` |Es wird empfohlen, die Länge des Anforderungs Texts anzugeben, wenn bekannt                            |Optional          |
 |`Content-Type`   |Legen Sie auf fest. `application/json``charset=utf-8`                                              |Erforderlich          |
-|`Expect`         |Kann auf festgelegt werden.`100-Continue`                                                                |Optional          |
+|`Expect`         |Kann auf festgelegt werden. `100-Continue`                                                                |Optional          |
 |`Host`           |Legen Sie auf den qualifizierten Domänen Namen fest, an den die Anforderung gesendet wurde (z. b. `help.kusto.windows.net` ). |Erforderlich|
 
 Die folgende Tabelle enthält die allgemeinen benutzerdefinierten Header, die für Abfrage-und Verwaltungsvorgänge verwendet werden. Sofern nicht anders angegeben, werden diese Header nur für Telemetriezwecke verwendet und haben keine Auswirkungen auf die Funktionalität.
 
 Alle Header sind optional. Es wird empfohlen, dass Sie den `x-ms-client-request-id` benutzerdefinierten Header angeben. In einigen Szenarien, z. b. beim Abbrechen einer laufenden Abfrage, ist dieser Header erforderlich, da er zur Identifizierung der Anforderung verwendet wird.
 
-|Benutzerdefinierter Header           |Beschreibung                                                                                               |
+|Benutzerdefinierter Header           |BESCHREIBUNG                                                                                               |
 |------------------------|----------------------------------------------------------------------------------------------------------|
 |`x-ms-app`              |Der (freundliche) Name der Anwendung, die die Anforderung sendet.                                                 |
 |`x-ms-user`             |Der (benutzerfreundliche) Name des Benutzers, der die Anforderung sendet.                                                        |
@@ -67,7 +67,7 @@ Alle Header sind optional. Es wird empfohlen, dass Sie den `x-ms-client-request-
 
 Die folgenden Parameter können in der Anforderung übermittelt werden. Sie werden in der Anforderung als Abfrage Parameter oder als Teil des Texts codiert, je nachdem, ob Get oder Post verwendet wird.
 
-|Parameter   |Beschreibung                                                                                 |Erforderlich/Optional |
+|Parameter   |BESCHREIBUNG                                                                                 |Erforderlich/Optional |
 |------------|--------------------------------------------------------------------------------------------|------------------|
 |`csl`       |Text des auszuführenden Abfrage-oder Steuerelement Befehls                                             |Erforderlich          |
 |`db`        |Der Name der Datenbank im Bereich, der das Ziel des Abfrage-oder Steuerungs Befehls ist.            |Optional für einige Steuerbefehle. <br>Erforderlich für andere Befehle und alle Abfragen. </br>                                                                   |
@@ -77,7 +77,7 @@ Die folgenden Parameter können in der Anforderung übermittelt werden. Sie werd
 
 Wenn Get verwendet wird, geben die Abfrage Parameter der Anforderung die Anforderungs Parameter an.
 
-## <a name="body"></a>Body
+## <a name="body"></a>Text
 
 Wenn Post verwendet wird, ist der Anforderungs Text ein einzelnes JSON-Dokument, das in UTF-8 codiert ist, mit den Werten der Anforderungs Parameter.
 
@@ -116,7 +116,7 @@ In diesem Beispiel wird gezeigt, wie eine Anforderung erstellt wird, die die obi
 
 1. Rufen Sie ein Token für die Authentifizierung ab.
 
-    Ersetzen `AAD_TENANT_NAME_OR_ID` `AAD_APPLICATION_ID` Sie, und `AAD_APPLICATION_KEY` durch die relevanten Werte nach dem Einrichten der [Aad-Anwendungs Authentifizierung](../../management/access-control/how-to-provision-aad-app.md) .
+    Ersetzen `AAD_TENANT_NAME_OR_ID` `AAD_APPLICATION_ID` Sie, und `AAD_APPLICATION_KEY` durch die relevanten Werte nach dem Einrichten der [Aad-Anwendungs Authentifizierung](../../../provision-azure-ad-app.md) .
 
     ```
     curl "https://login.microsoftonline.com/AAD_TENANT_NAME_OR_ID/oauth2/token" \

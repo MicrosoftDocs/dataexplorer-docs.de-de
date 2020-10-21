@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 79816960b75735e226395f70286ea9d81829a173
-ms.sourcegitcommit: 08c54dabc1efe3d4e2d2581c4b668a6b73daf855
+ms.openlocfilehash: d6473fd0efd588bfc7a6990dd2f57d70960b40e2
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89510694"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342755"
 ---
 # <a name="create-and-alter-external-sql-tables"></a>Erstellen und Ändern externer SQL-Tabellen
 
@@ -40,12 +40,12 @@ Erstellt oder ändert eine externe SQL-Tabelle in der Datenbank, in der der Befe
 
 ## <a name="optional-properties"></a>Optionale Eigenschaften
 
-| Eigenschaft            | Typ            | BESCHREIBUNG                          |
+| Eigenschaft            | type            | BESCHREIBUNG                          |
 |---------------------|-----------------|---------------------------------------------------------------------------------------------------|
 | `folder`            | `string`        | Der Ordner der Tabelle.                  |
 | `docString`         | `string`        | Eine Zeichenfolge, die die Tabelle dokumentiert.      |
-| `firetriggers`      | `true`/`false`  | Wenn `true` , wird das Zielsystem angewiesen, INSERT-Trigger auszulösen, die für die SQL-Tabelle definiert sind. Der Standardwert lautet `false`. (Weitere Informationen finden Sie unter [Bulk Insert](https://msdn.microsoft.com/library/ms188365.aspx) und [System. Data. SqlClient. SqlBulkCopy](https://msdn.microsoft.com/library/system.data.sqlclient.sqlbulkcopy(v=vs.110).aspx)). |
-| `createifnotexists` | `true`/ `false` | Wenn `true` , wird die SQL-Ziel Tabelle erstellt, wenn Sie nicht bereits vorhanden `primarykey` ist. die-Eigenschaft muss in diesem Fall angegeben werden, um die Ergebnisspalte anzugeben, die der Primärschlüssel ist. Der Standardwert lautet `false`.  |
+| `firetriggers`      | `true`/`false`  | Wenn `true` , wird das Zielsystem angewiesen, INSERT-Trigger auszulösen, die für die SQL-Tabelle definiert sind. Der Standardwert ist `false`. (Weitere Informationen finden Sie unter [Bulk Insert](/sql/t-sql/statements/bulk-insert-transact-sql) und [System. Data. SqlClient. SqlBulkCopy](/dotnet/api/system.data.sqlclient.sqlbulkcopy)). |
+| `createifnotexists` | `true`/ `false` | Wenn `true` , wird die SQL-Ziel Tabelle erstellt, wenn Sie nicht bereits vorhanden `primarykey` ist. die-Eigenschaft muss in diesem Fall angegeben werden, um die Ergebnisspalte anzugeben, die der Primärschlüssel ist. Der Standardwert ist `false`.  |
 | `primarykey`        | `string`        | Wenn `createifnotexists` `true` den Wert hat, wird der resultierende Spaltenname als Primärschlüssel der SQL-Tabelle verwendet, wenn er mit diesem Befehl erstellt wird.                  |
 
 > [!NOTE]
@@ -98,5 +98,5 @@ Verwenden Sie die externe Tabelle, um die SQL-Tabelle abzufragen, wenn die Abfra
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-* [Externe Tabelle (allgemeine Steuerungsbefehle)](externaltables.md)
+* [Externe Tabelle (allgemeine Steuerungsbefehle)](./external-table-commands.md)
 * [Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake](external-tables-azurestorage-azuredatalake.md)

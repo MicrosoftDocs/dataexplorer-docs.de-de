@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: c10e6502c4e18a5c30d971c4814c2270a0b27ff1
-ms.sourcegitcommit: 830837607f344f1ce1f146f946a41e45bfebcb22
+ms.openlocfilehash: 0532219b8efc1cab7508d1838882b6fa48f5048f
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/07/2020
-ms.locfileid: "91806681"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343265"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake
 
@@ -279,7 +279,7 @@ Dabei ist " *maxResults* " ein optionaler Parameter, der so festgelegt werden ka
 | Ausgabeparameter | type   | Beschreibung                       |
 |------------------|--------|-----------------------------------|
 | URI              | Zeichenfolge | URI der externen Speicher Datendatei |
-| Size             | long   | Dateilänge in Byte              |
+| Größe             | long   | Dateilänge in Byte              |
 | Partition        | dynamisch | Dynamisches Objekt, das Datei Partitionen für eine partitionierte externe Tabelle beschreibt |
 
 > [!TIP]
@@ -293,7 +293,7 @@ Dabei ist " *maxResults* " ein optionaler Parameter, der so festgelegt werden ka
 
 **Ausgabe:**
 
-| Uri                                                                     | Size | Partition |
+| Uri                                                                     | Größe | Partition |
 |-------------------------------------------------------------------------| ---- | --------- |
 | `https://storageaccount.blob.core.windows.net/container1/folder/file.csv` | 10743 | `{}`   |
 
@@ -302,7 +302,7 @@ Für eine partitionierte Tabelle `Partition` enthält die Spalte extrahierte Par
 
 **Ausgabe:**
 
-| Uri                                                                     | Size | Partition |
+| Uri                                                                     | Größe | Partition |
 |-------------------------------------------------------------------------| ---- | --------- |
 | `https://storageaccount.blob.core.windows.net/container1/customer=john.doe/dt=20200101/file.csv` | 10743 | `{"Customer": "john.doe", "Date": "2020-01-01T00:00:00.0000000Z"}` |
 
@@ -321,7 +321,7 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 **Beispielausgabe**
 
-| Name     | Variante | Zuordnung                                                           |
+| Name     | Typ | Zuordnung                                                           |
 |----------|------|-------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -339,7 +339,7 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 **Beispielausgabe**
 
-| Name     | Variante | Zuordnung                                                                |
+| Name     | Typ | Zuordnung                                                                |
 |----------|------|------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -361,7 +361,7 @@ Zeigt die Zuordnungen an (alle oder die durch den Namen angegebenen).
 
 **Beispielausgabe**
 
-| Name     | Variante | Zuordnung                                                                         |
+| Name     | Typ | Zuordnung                                                                         |
 |----------|------|---------------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -378,5 +378,5 @@ Löscht die Zuordnung aus der Datenbank.
 ```
 ## <a name="next-steps"></a>Nächste Schritte
 
-* [Externe Tabelle (allgemeine Steuerungsbefehle)](externaltables.md)
+* [Externe Tabelle (allgemeine Steuerungsbefehle)](./external-table-commands.md)
 * [Erstellen und Ändern externer SQL-Tabellen](external-sql-tables.md)

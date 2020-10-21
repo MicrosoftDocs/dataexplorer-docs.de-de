@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/04/2020
-ms.openlocfilehash: 9b2d35c796cfd1f41dc2fd8e9385a4c446000b86
-ms.sourcegitcommit: ed902a5a781e24e081cd85910ed15cd468a0db1e
+ms.openlocfilehash: 28e88b71b5d7a2f8729e2f9eef416ee5804a2880
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/11/2020
-ms.locfileid: "88072445"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92337634"
 ---
 # <a name="update-policy-overview"></a>Übersicht über Update Richtlinien
 
@@ -49,9 +49,9 @@ Die Abfrage für die Update Richtlinie wird in einem speziellen Modus ausgeführ
 Einer Tabelle können NULL, ein oder mehrere Update-Richtlinien Objekte zugeordnet sein.
 Jedes dieser Objekte wird als JSON-Eigenschaften Behälter dargestellt, wobei die folgenden Eigenschaften definiert sind.
 
-|Eigenschaft |Typ |BESCHREIBUNG  |
+|Eigenschaft |type |BESCHREIBUNG  |
 |---------|---------|----------------|
-|isEnabled                     |`bool`  |Gibt an, ob die Update Richtlinie aktiviert (true) oder deaktiviert (false) ist.                                                                                                                               |
+|IsEnabled                     |`bool`  |Gibt an, ob die Update Richtlinie aktiviert (true) oder deaktiviert (false) ist.                                                                                                                               |
 |`Source`                        |`string`|Name der Tabelle, in der die Aktualisier Ende Aktualisierungs Richtlinie ausgelöst wird                                                                                                                                 |
 |Abfrage                         |`string`|Eine Kusto-CSL-Abfrage, mit der die Daten für das Update erzeugt werden.                                                                                                                           |
 |"IsTransactional"               |`bool`  |Gibt an, ob es sich um eine transaktionale Update Richtlinie handelt (Standardwert: false). Fehler beim Ausführen einer Richtlinie für transaktionales Update führt dazu, dass die Quell Tabelle nicht mit neuen Daten aktualisiert wird.   |
@@ -78,9 +78,9 @@ Update Richtlinien treten beim Erfassen oder Verschieben von Daten in eine defin
 * [. Erfassung (Pull)](../management/data-ingestion/ingest-from-storage.md)
 * [. Erfassung (Inline)](../management/data-ingestion/ingest-inline.md)
 * [. Set |. Append |. Set-or-Append |. Set-or-Replace](../management/data-ingestion/ingest-from-query.md)
-  * Wenn die Update Richtlinie als Teil eines Befehls aufgerufen wird `.set-or-replace` , ist das Standardverhalten, dass Daten in abgeleiteten Tabellen wie in der Quell Tabelle ersetzt werden.
-* [.move extents](../management/extents-commands.md#move-extents)
-* [.replace extents](../management/extents-commands.md#replace-extents)
+  * Wenn die Update Richtlinie als Teil eines Befehls aufgerufen wird  `.set-or-replace` , ist das Standardverhalten, dass Daten in abgeleiteten Tabellen wie in der Quell Tabelle ersetzt werden.
+* [.move extents](./move-extents.md)
+* [.replace extents](./replace-extents.md)
   * Der `PropagateIngestionProperties` Befehl wird nur bei Erfassungs Vorgängen wirksam. Wenn die Update Richtlinie als Teil eines-oder- `.move extents` Befehls ausgelöst wird `.replace extents` , hat diese Option keine Auswirkung.
 
 ## <a name="regular-ingestion-using-update-policy"></a>Reguläre Erfassung mit Update Richtlinie

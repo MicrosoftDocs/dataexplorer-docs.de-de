@@ -8,19 +8,19 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 74871c2c1a10c199c5eb5415fcdf21590e4cf648
-ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
+ms.openlocfilehash: 70d4013c8524fa88249de14a0a67cc8a85e73b3f
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "85967450"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92337566"
 ---
 # <a name="data-sharding-policy"></a>Daten Sharding-Richtlinie
 
 Die Sharding-Richtlinie definiert, ob und wie [Blöcke (Data Shards)](../management/extents-overview.md) im Azure-Daten-Explorer Cluster versiegelt sein sollten.
 
 > [!NOTE]
-> Die Richtlinie gilt für alle Vorgänge, mit denen neue Blöcke erstellt werden, z. b. Befehle für die [Daten](../../ingest-data-overview.md#kusto-query-language-ingest-control-commands)Erfassung und [Merge-und Rebuild-Befehle](../management/extents-commands.md#merge-extents) .
+> Die Richtlinie gilt für alle Vorgänge, mit denen neue Blöcke erstellt werden, z. b. Befehle für die [Daten](../../ingest-data-overview.md#kusto-query-language-ingest-control-commands)Erfassung und [Merge-und Rebuild-Befehle](./merge-extents.md) .
 
 Die Daten Sharding-Richtlinie enthält die folgenden Eigenschaften:
 
@@ -45,4 +45,3 @@ Die Daten Sharding-Richtlinie enthält die folgenden Eigenschaften:
 Wenn eine Datenbank erstellt wird, enthält Sie die standardmäßige Daten Sharding-Richtlinie. Diese Richtlinie wird von allen Tabellen geerbt, die in der Datenbank erstellt wurden (es sei denn, die Richtlinie wird explizit auf Tabellenebene überschrieben).
 
 Verwenden Sie die [Befehle der Sharding-Richtlinien Steuerung](../management/sharding-policy.md)), um Daten Sharding-Richtlinien für Datenbanken und Tabellen zu verwalten.
- 

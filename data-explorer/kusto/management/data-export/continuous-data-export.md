@@ -8,16 +8,16 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/03/2020
-ms.openlocfilehash: fab1f41fc4b72b497900276d33beb1b89820c02c
-ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
+ms.openlocfilehash: 7f9465df4847a24a4877c8b1cb637ba1d7542db3
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88201630"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342534"
 ---
 # <a name="continuous-data-export-overview"></a>Fortlaufender Datenexport (Übersicht)
 
-In diesem Artikel wird der fortlaufende Export von Daten aus Kusto in eine [externe Tabelle](../externaltables.md) mit einer regelmäßig laufenden Abfrage beschrieben. Die Ergebnisse werden in der externen Tabelle gespeichert, die das Ziel definiert, z. b. Azure BLOB Storage, und das Schema der exportierten Daten. Durch diesen Vorgang wird sichergestellt, dass alle Datensätze mit einigen [Ausnahmen](#exactly-once-export)"genau einmal" exportiert werden. 
+In diesem Artikel wird der fortlaufende Export von Daten aus Kusto in eine [externe Tabelle](../external-table-commands.md) mit einer regelmäßig laufenden Abfrage beschrieben. Die Ergebnisse werden in der externen Tabelle gespeichert, die das Ziel definiert, z. b. Azure BLOB Storage, und das Schema der exportierten Daten. Durch diesen Vorgang wird sichergestellt, dass alle Datensätze mit einigen [Ausnahmen](#exactly-once-export)"genau einmal" exportiert werden. 
 
 Erstellen Sie zum Aktivieren des fortlaufenden Datenexports [eine externe Tabelle](../external-tables-azurestorage-azuredatalake.md#create-or-alter-external-table) , und erstellen Sie dann [eine Definition für fortlaufenden Export](create-alter-continuous.md) , die auf die externe Tabelle zeigt. 
 
@@ -95,4 +95,3 @@ Gefolgt von:
 * Der fortlaufende Export unterstützt keine datenbankübergreifenden und Cluster übergreifenden Aufrufe.
 * Der fortlaufende Export ist nicht für das ständig Streaming von Daten aus Azure Daten-Explorer konzipiert. Der fortlaufende Export wird in einem verteilten Modus ausgeführt, in dem alle Knoten gleichzeitig exportiert werden. Wenn der Datenbereich, der durch die einzelnen Testlauf abgefragt wird, gering ist, wäre die Ausgabe des fortlaufenden Exports viele kleine Artefakte. Die Anzahl der Artefakte hängt von der Anzahl der Knoten im Cluster ab.
 * Wenn die vom fortlaufenden Export verwendeten Artefakte Event Grid Benachrichtigungen auslöst, finden Sie weitere Informationen [im Abschnitt "bekannte Probleme" in der Event Grid-Dokumentation](../../../ingest-data-event-grid-overview.md#known-event-grid-issues).
- 

@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: 8f56568f87c391122b468d7f3ae8027eabe4641e
-ms.sourcegitcommit: 9dbbdf0c339f9af78d754e3fb44b9a4f2469003a
+ms.openlocfilehash: a424e34561792287d6e761f8d5b0747fbf8c7100
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
 ms.lasthandoff: 10/21/2020
-ms.locfileid: "92292854"
+ms.locfileid: "92342789"
 ---
 # <a name="kustoexplorer-installation-and-user-interface"></a>Installation und Benutzeroberfläche von Kusto.Explorer
 
@@ -338,4 +338,4 @@ Informieren Sie sich über die Tools und Hilfsprogramme von Kusto.Explorer:
 * [Codeanalyse von Kusto.Explorer](kusto-explorer-code-analyzer.md)
 * [Codenavigation in Kusto.Explorer](kusto-explorer-codenav.md)
 * [Code-Refactoring in Kusto.Explorer](kusto-explorer-refactor.md)
-* [Kusto-Abfragesprache (KQL)](https://docs.microsoft.com/azure/kusto/query/)
+* [Kusto-Abfragesprache (KQL)](/azure/kusto/query/)

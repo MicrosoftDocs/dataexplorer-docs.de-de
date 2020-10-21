@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 01/02/2019
-ms.openlocfilehash: 6766a817a1568eeb3cbcf2eb5bc0440cdd10eec6
-ms.sourcegitcommit: 9e0289945270db517e173aa10024e0027b173b52
+ms.openlocfilehash: 262842c7117dd5d7a9737f1038197ae93321985f
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/03/2020
-ms.locfileid: "89428428"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343316"
 ---
 # <a name="ms-tds-with-azure-active-directory"></a>MS-TDS mit Azure Active Directory
 
@@ -82,7 +82,7 @@ public class Sample {
 
 ## <a name="azure-ad-application-authentication"></a>Azure AD Anwendungs Authentifizierung
 
-Azure AD bereitgestellte Anwendung für Kusto kann SQL-Client Bibliotheken verwenden, die Azure AD für das Herstellen einer Verbindung mit Kusto unterstützen. Weitere Informationen zu Azure AD Anwendungen finden Sie unter [Erstellen einer Azure AD Anwendung](../../management/access-control/how-to-provision-aad-app.md).
+Azure AD bereitgestellte Anwendung für Kusto kann SQL-Client Bibliotheken verwenden, die Azure AD für das Herstellen einer Verbindung mit Kusto unterstützen. Weitere Informationen zu Azure AD Anwendungen finden Sie unter [Erstellen einer Azure AD Anwendung](../../../provision-azure-ad-app.md).
 
 ### <a name="net-sql-client-application"></a>.NET SQL-Client (Anwendung)
 

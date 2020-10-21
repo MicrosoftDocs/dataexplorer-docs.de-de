@@ -8,20 +8,20 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/23/2020
-ms.openlocfilehash: 6db37366ddd3d70aaa89c0d6eebd1ec8affbb76d
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.openlocfilehash: 608d177d555419f8e2340ddacffd32382118eb7f
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264441"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343299"
 ---
 # <a name="fact-and-dimension-tables"></a>Fakten- und Dimensionstabellen
 
 Wenn Sie das Schema für eine Azure Daten-Explorer-Datenbank entwerfen, stellen Sie sich die Tabellen als eine der beiden Kategorien im großen und ganzen vor.
-* [Fakten Tabellen](https://en.wikipedia.org/wiki/Fact_table)
-* [Dimensions Tabellen](https://en.wikipedia.org/wiki/Dimension_(data_warehouse)#Dimension_table)
+* [Faktentabellen](https://en.wikipedia.org/wiki/Fact_table)
+* [Dimensionstabellen](https://en.wikipedia.org/wiki/Dimension_(data_warehouse)#Dimension_table)
 
-## <a name="fact-tables"></a>Fakten Tabellen
+## <a name="fact-tables"></a>Faktentabellen
 Fakten Tabellen sind Tabellen, deren Datensätze unveränderlich "Fakten" sind, wie z. b. Dienst Protokolle und Mess Informationen. Datensätze werden in einem Streamingmodus oder in großen Blöcken progressiv an die Tabelle angehängt. Die Datensätze bleiben bestehen, bis Sie aufgrund von Kosten entfernt werden oder weil Sie Ihren Wert verloren haben. Datensätze werden andernfalls nie aktualisiert.
 
 Entitäts Daten werden manchmal in Fakten Tabellen gespeichert, bei denen sich die Entitäts Daten langsam ändern. Beispielsweise Daten zu einer physischen Entität, z. b. eine Office-Ausrüstung, bei der sich selten der Standort ändert.
@@ -31,12 +31,12 @@ Da die Daten in Kusto unveränderlich sind, besteht die übliche Vorgehensweise 
 
 Dann wird nur der letzte Datensatz für jede Entitäts Identität abgerufen.
 
-## <a name="dimension-tables"></a>Dimensions Tabellen
+## <a name="dimension-tables"></a>Dimensionstabellen
 Dimensions Tabellen:
 * Halten Sie Verweis Daten, z. b. Nachschlage Tabellen, von einem Entitäts Bezeichner zu ihren Eigenschaften.
 * Speichern von Momentaufnahme ähnlichen Daten in Tabellen, deren ganzer Inhalt in einer einzelnen Transaktion geändert wird
 
-Dimensions Tabellen werden nicht regelmäßig mit neuen Daten erfasst. Stattdessen wird der gesamte Dateninhalt mithilfe von Vorgängen wie z [. b.. Set-or-Replace](../management/data-ingestion/ingest-from-query.md), [. Move-Blöcke](../management/extents-commands.md#move-extents)oder [Umbenennungs Tabellen](../management/rename-table-command.md)gleichzeitig aktualisiert.
+Dimensions Tabellen werden nicht regelmäßig mit neuen Daten erfasst. Stattdessen wird der gesamte Dateninhalt mithilfe von Vorgängen wie z [. b.. Set-or-Replace](../management/data-ingestion/ingest-from-query.md), [. Move-Blöcke](../management/move-extents.md)oder [Umbenennungs Tabellen](../management/rename-table-command.md)gleichzeitig aktualisiert.
 
 Manchmal können Dimensions Tabellen aus Fakten Tabellen abgeleitet werden. Dieser Vorgang kann über eine [Aktualisierungs Richtlinie](../management/updatepolicy.md) für die Fakten Tabelle durchgeführt werden, wobei eine Abfrage für die Tabelle durchgeführt wird, die den letzten Datensatz für jede Entität annimmt.
 

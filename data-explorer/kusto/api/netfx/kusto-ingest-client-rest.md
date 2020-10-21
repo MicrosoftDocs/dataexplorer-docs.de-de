@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 02/19/2020
-ms.openlocfilehash: 10f59a167de12e4b688f6d9b5f15d3f0f15d8291
-ms.sourcegitcommit: f689547c0f77b1b8bfa50a19a4518cbbc6d408e5
+ms.openlocfilehash: 694b229c36a8bbbe6c15531b555dc8467198cd65
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/08/2020
-ms.locfileid: "89557393"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92337600"
 ---
 # <a name="ingestion-without-kustoingest-library"></a>Erfassung ohne Kusto. Erfassungs Bibliothek
 
@@ -22,7 +22,7 @@ Die Kusto. Erfassungs Bibliothek ist für das Erfassen von Daten in Azure Daten-
 In diesem Artikel erfahren Sie, wie Sie mithilfe der in der *Warteschlange* befindlichen Erfassung in Azure Daten-Explorer für Pipelines auf Produktionsqualität anwenden.
 
 > [!NOTE]
-> Der folgende Code ist in c# geschrieben und nutzt das Azure Storage SDK, die Adal-Authentifizierungs Bibliothek und die NewtonSoft.JSfür das Paket, um den Beispielcode zu vereinfachen. Bei Bedarf kann der entsprechende Code durch entsprechende [Azure Storage Rest-API](https://docs.microsoft.com/rest/api/storageservices/blob-service-rest-api) -Aufrufe, [Non-.net Adal-Paket](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-libraries)und beliebiges verfügbares JSON-Verarbeitungs Paket ersetzt werden.
+> Der folgende Code ist in c# geschrieben und nutzt das Azure Storage SDK, die Adal-Authentifizierungs Bibliothek und die NewtonSoft.JSfür das Paket, um den Beispielcode zu vereinfachen. Bei Bedarf kann der entsprechende Code durch entsprechende [Azure Storage Rest-API](/rest/api/storageservices/blob-service-rest-api) -Aufrufe, [Non-.net Adal-Paket](/azure/active-directory/develop/active-directory-authentication-libraries)und beliebiges verfügbares JSON-Verarbeitungs Paket ersetzt werden.
 
 In diesem Artikel wird der empfohlene Modus für die Erfassung behandelt. Die zugehörige Entität für die Kusto. Erfassungs Bibliothek ist die [ikustoqueuedingestclient](kusto-ingest-client-reference.md#interface-ikustoqueuedingestclient) -Schnittstelle. Hier interagiert der Client Code mit dem Azure Daten-Explorer Service, indem er Erfassungs Benachrichtigungs Meldungen an eine Azure-Warteschlange übermitteln. Verweise auf die Nachrichten werden vom Kusto-Datenverwaltung abgerufen (auch als Erfassungs Dienst bezeichnet). Die Interaktion mit dem Dienst muss mit Azure Active Directory (Azure AD) authentifiziert werden.
 
@@ -104,7 +104,7 @@ public static void IngestSingleFile(string file, string db, string table, string
 ### <a name="obtain-authentication-evidence-from-azure-ad"></a>Abrufen von Authentifizierungs beweisen aus Azure AD
 
 Hier wird Adal verwendet, um ein Azure AD Token für den Zugriff auf den Kusto-Datenverwaltung Dienst abzurufen und Eingabe Warteschlangen anzufordern.
-Adal ist bei Bedarf auf [nicht-Windows-Plattformen](https://docs.microsoft.com/azure/active-directory/develop/active-directory-authentication-libraries) verfügbar.
+Adal ist bei Bedarf auf [nicht-Windows-Plattformen](/azure/active-directory/develop/active-directory-authentication-libraries) verfügbar.
 
 ```csharp
 // Authenticates the interactive user and retrieves Azure AD Access token for specified resource
@@ -218,7 +218,7 @@ internal static string RetrieveKustoIdentityToken(string ingestClusterBaseUri, s
 
 ### <a name="upload-data-to-the-azure-blob-container"></a>Hochladen von Daten in den Azure-BLOB-Container
 
-In diesem Schritt wird eine lokale Datei in ein Azure-BLOB hochgeladen, das für die Erfassung übergeben wird. In diesem Code wird das Azure Storage SDK verwendet. Wenn keine Abhängigkeit möglich ist, kann dies mit der [Rest-API des Azure-BLOB-Dienstanbieter](https://docs.microsoft.com/rest/api/storageservices/fileservices/blob-service-rest-api)erreicht werden
+In diesem Schritt wird eine lokale Datei in ein Azure-BLOB hochgeladen, das für die Erfassung übergeben wird. In diesem Code wird das Azure Storage SDK verwendet. Wenn keine Abhängigkeit möglich ist, kann dies mit der [Rest-API des Azure-BLOB-Dienstanbieter](/rest/api/storageservices/fileservices/blob-service-rest-api)erreicht werden
 
 ```csharp
 // Uploads a single local file to an Azure Blob container, returns blob URI and original data size
@@ -283,7 +283,7 @@ internal static string PrepareIngestionMessage(string db, string table, string d
 Veröffentlichen Sie schließlich die erstellte Nachricht in der ausgewählten Erfassungs Warteschlange, die Sie aus Azure Daten-Explorer abgerufen haben.
 
 > [!NOTE]
-> .NET-Speicher Client Versionen unter V12 Codieren die Nachricht standardmäßig in Base64, um weitere Informationen zu erhalten. Weitere Informationen finden Sie unter [Storage docs](https://docs.microsoft.com/dotnet/api/microsoft.azure.storage.queue.cloudqueue.encodemessage?view=azure-dotnet-legacy#Microsoft_WindowsAzure_Storage_Queue_CloudQueue_EncodeMessage). Wenn Sie .NET-Speicher Client Versionen oberhalb von V12 verwenden, müssen Sie den Nachrichten Inhalt ordnungsgemäß codieren.
+> .NET-Speicher Client Versionen unter V12 Codieren die Nachricht standardmäßig in Base64, um weitere Informationen zu erhalten. Weitere Informationen finden Sie unter [Storage docs](/dotnet/api/microsoft.azure.storage.queue.cloudqueue.encodemessage?view=azure-dotnet-legacy#Microsoft_WindowsAzure_Storage_Queue_CloudQueue_EncodeMessage). Wenn Sie .NET-Speicher Client Versionen oberhalb von V12 verwenden, müssen Sie den Nachrichten Inhalt ordnungsgemäß codieren.
 
 ```csharp
 internal static void PostMessageToQueue(string queueUriWithSas, string message)

@@ -8,14 +8,14 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/03/2020
-ms.openlocfilehash: b75ac4fe4b03c85eec74ccc69c5c03ff59a4bcfe
-ms.sourcegitcommit: c7b16409995087a7ad7a92817516455455ccd2c5
+ms.openlocfilehash: 11822a58b2ced0b257ad649997bc154ab4be19d5
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88149515"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92337583"
 ---
-# <a name="create-or-alter-continuous-export"></a>Erstellen oder Ändern von fortlaufendem Export
+# <a name="create-or-alter-continuous-export"></a>Erstellen oder Ändern eines fortlaufenden Exports
 
 Erstellt oder ändert einen fortlaufenden Exportauftrag.
 
@@ -31,7 +31,7 @@ Erstellt oder ändert einen fortlaufenden Exportauftrag.
 | Eigenschaft             | type     | BESCHREIBUNG   |
 |----------------------|----------|---------------------------------------|
 | ContinuousExportName | String   | Name des fortlaufenden Exports. Der Name muss innerhalb der Datenbank eindeutig sein und wird verwendet, um den fortlaufenden Export regelmäßig auszuführen.      |
-| Externaltablename    | String   | Name der [externen Tabelle](../externaltables.md) , in die exportiert werden soll.  |
+| Externaltablename    | String   | Name der [externen Tabelle](../external-table-commands.md) , in die exportiert werden soll.  |
 | Abfrage                | String   | Die zu exportier Abfrage.  |
 | Over (T1, T2)        | String   | Eine optionale durch Trennzeichen getrennte Liste von Fakten Tabellen in der Abfrage. Wenn nicht angegeben, wird davon ausgegangen, dass alle Tabellen, auf die in der Abfrage verwiesen wird, Fakten Tabellen sind. Wenn angegeben, werden Tabellen, die *nicht* in dieser Liste enthalten sind, als Dimensions Tabellen behandelt und werden nicht als Bereichs bezogen betrachtet (alle Datensätze werden an allen Exporten beteiligt). Ausführliche Informationen finden Sie unter [Übersicht über fortlaufenden Datenexport](continuous-data-export.md) . |
 | intervalbetweaufausführungen  | Timespan | Die Zeitspanne zwischen fortlaufenden Export Ausführungen. Muss größer als 1 Minute sein.   |

@@ -8,12 +8,12 @@ ms.reviewer: slneimer
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/28/2020
-ms.openlocfilehash: f330c10e95cdc36eae497811ef895ef827918b43
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: a13e3def33ea7098a48db7ffefa4406097863c2a
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346489"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342721"
 ---
 # <a name="parse_command_line"></a>parse_command_line()
 
@@ -26,7 +26,7 @@ Analysiert eine Unicode-Befehlszeilen Zeichenfolge und gibt ein dynamisches Arra
 ## <a name="arguments"></a>Argumente
 
 * *command_line*: die Befehlszeile, die analysiert werden soll.
-* *parser_type*: der einzige derzeit unterstützte Wert ist `"Windows"` , der die Befehlszeile auf die gleiche Weise wie [commandlineumargvw](https://docs.microsoft.com/windows/win32/api/shellapi/nf-shellapi-commandlinetoargvw)analysiert.
+* *parser_type*: der einzige derzeit unterstützte Wert ist `"Windows"` , der die Befehlszeile auf die gleiche Weise wie [commandlineumargvw](/windows/win32/api/shellapi/nf-shellapi-commandlinetoargvw)analysiert.
 
 ## <a name="returns"></a>Rückgabe
 

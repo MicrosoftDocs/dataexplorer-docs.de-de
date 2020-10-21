@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/13/2020
-ms.openlocfilehash: 2ad77b1763c8f4d85d676b34039a9300fca5912d
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: c1ed0de6f638828abe120caffcb5e14517f09a02
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91941841"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342738"
 ---
 # <a name="extents-data-shards"></a>Blöcke (Daten-Shards)
 
@@ -64,7 +64,7 @@ Das Überschreiben ist z. b. für Aufbewahrungs Zwecke hilfreich, wenn der Clien
 
 ## <a name="extent-tagging"></a>Blockmarkierung
 
-Kusto unterstützt das Anfügen mehrerer Optionaler Block *Markierungen* als Teil der Metadaten. Ein Block-Tag (oder einfach ein *Tag*) ist eine Zeichenfolge, die dem Block zugeordnet ist. Sie können die [. Showblöcke](extents-commands.md#show-extents) -Befehle verwenden, um die einem Block zugeordneten Tags anzuzeigen, und die Funktion "Block [-Tags ()](../query/extenttagsfunction.md) ", um die den Datensätzen zugeordneten Tags in einem Block anzuzeigen.
+Kusto unterstützt das Anfügen mehrerer Optionaler Block *Markierungen* als Teil der Metadaten. Ein Block-Tag (oder einfach ein *Tag*) ist eine Zeichenfolge, die dem Block zugeordnet ist. Sie können die [. Showblöcke](./show-extents.md) -Befehle verwenden, um die einem Block zugeordneten Tags anzuzeigen, und die Funktion "Block [-Tags ()](../query/extenttagsfunction.md) ", um die den Datensätzen zugeordneten Tags in einem Block anzuzeigen.
 Block Tags können verwendet werden, um Eigenschaften effizient zu beschreiben, die von allen Daten im Block gemeinsam verwendet werden.
 Beispielsweise können Sie während der Erfassung ein Block-Tag hinzufügen, das die Quelle der erfassten Daten angibt, und dieses Tag später verwenden. Da die Blöcke Datenblöcke beschreiben, werden die zugehörigen Tags ebenfalls zusammengeführt, wenn Sie zwei oder mehr zusammenführen. Das resultierende Block-Tag ist die Vereinigung aller Tags dieser zusammengeführten Blöcke.
 
@@ -88,7 +88,7 @@ Beispiel:
 #### <a name="performance-notes"></a>Leistungs Hinweise
 
 * Überschreiben Sie keine `drop-by` Tags. Das Löschen von Daten in der oben erwähnten Weise ist für selten auftretende Ereignisse gedacht. Es dient nicht zum Ersetzen von Daten auf Datensatzebene, und es basiert darauf, dass die auf diese Weise markierten Daten sperrig sind. Der Versuch, ein anderes Tag für jeden Datensatz oder eine kleine Anzahl von Datensätzen anzugeben, kann zu schwerwiegenden Auswirkungen auf die Leistung führen.
-* Wenn `drop-by` Tags nach dem Erfassen der Daten nicht länger benötigt werden, empfiehlt es sich, [die Tags zu löschen](extents-commands.md#drop-extent-tags).
+* Wenn `drop-by` Tags nach dem Erfassen der Daten nicht länger benötigt werden, empfiehlt es sich, [die Tags zu löschen](#drop-by-extent-tags).
 
 ### <a name="ingest-by-extent-tags"></a>"Erfassungs-nach:"-Block Tags
 
@@ -113,4 +113,3 @@ Im folgenden Beispiel werden Daten nur einmal erfasst. Der 2. und der dritte Bef
 * Das Überschreiben von `ingest-by` Tags wird nicht empfohlen.
 Wenn die Pipeline, die Kusto nährt, Daten Duplizierungen hat, empfiehlt es sich, diese Duplikate so weit wie möglich zu beheben, bevor die Daten in Kusto erfasst werden. Verwenden Sie auch `ingest-by` Tags in Kusto nur dann, wenn der Teil, der zu Kusto gehört, möglicherweise Duplikate einführt (z. b. gibt es einen Wiederholungs Mechanismus, der sich mit bereits in Bearbeitung befindlichen Erfassungs aufrufen überlappen kann). Wenn Sie versuchen, ein eindeutiges Tag für jeden Erfassungs Befehl festzulegen, `ingest-by` kann dies schwerwiegende Auswirkungen auf die Leistung haben.
 * Wenn solche Tags für einige Zeit nach dem Erfassen der Daten nicht erforderlich sind, wird empfohlen, Block Tags zu [Löschen](drop-extent-tags.md).
- 

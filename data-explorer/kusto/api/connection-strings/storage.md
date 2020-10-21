@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/23/2020
-ms.openlocfilehash: 0456ad7115c51bcdc51b0db82bc9f9b88953be32
-ms.sourcegitcommit: 39b04c97e9ff43052cdeb7be7422072d2b21725e
+ms.openlocfilehash: 4b212435eb506ce71b52e19d3304461e9be35b5e
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83226209"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342500"
 ---
 # <a name="storage-connection-strings"></a>Storage-Verbindungszeichenfolgen
 
@@ -68,7 +68,7 @@ Hierbei gilt:
 Beim Zugriff auf Azure Data Lake Store Gen 2 muss der Aufrufer gültige Anmelde Informationen für den Zugriff auf den Dienst angeben. Die folgenden Methoden zum Bereitstellen von Anmelde Informationen werden unterstützt:
 
 * Fügen Sie `;sharedkey=` *accountkey* an den URI an, wobei _accountkey_ der Speicherkonto Schlüssel ist.
-* Fügen `;impersonate` Sie an den URI an. Kusto verwendet die Prinzipal Identität des Anforderers und nimmt die Identität für den Zugriff auf die Ressource an. Prinzipal muss über die entsprechenden RBAC-Rollenzuweisungen verfügen, um die Lese-/Schreibvorgänge ausführen zu können, wie [hier](https://docs.microsoft.com/azure/storage/blobs/data-lake-storage-access-control)dokumentiert. (Die minimale Rolle für Lesevorgänge ist beispielsweise die- `Storage Blob Data Reader` Rolle.)
+* Fügen `;impersonate` Sie an den URI an. Kusto verwendet die Prinzipal Identität des Anforderers und nimmt die Identität für den Zugriff auf die Ressource an. Prinzipal muss über die entsprechenden RBAC-Rollenzuweisungen verfügen, um die Lese-/Schreibvorgänge ausführen zu können, wie [hier](/azure/storage/blobs/data-lake-storage-access-control)dokumentiert. (Die minimale Rolle für Lesevorgänge ist beispielsweise die- `Storage Blob Data Reader` Rolle.)
 * Fügen Sie `;token=` *aadtoken* an den URI an, wobei _aadtoken_ ein Base-64-codiertes Aad-Zugriffs Token ist (stellen Sie sicher, dass das Token für die Ressource bestimmt ist `https://storage.azure.com/` ).
 * Fügen `;prompt` Sie an den URI an. Kusto fordert Benutzer Anmelde Informationen an, wenn er auf die Ressource zugreifen muss. (Die Aufforderung, dass der Benutzer bei cloudbereitstellungen deaktiviert ist und nur in Testumgebungen aktiviert ist.)
 * Stellen Sie einen SAS-Schlüssel (Shared Access) mithilfe der Standard Abfrage von Azure Data Lake Storage Gen 2 ( `?sig=...` ) bereit. Verwenden Sie diese Methode, wenn Kusto für einen begrenzten Zeitraum auf die Ressource zugreifen muss.
@@ -83,6 +83,3 @@ Er muss mit Anmelde Informationen bereitgestellt werden (Kusto verwendet nicht s
 * Fügen `;impersonate` Sie an den URI an. Kusto verwendet die Prinzipal Identität des Anforderers und nimmt die Identität des Anforderers für den Zugriff auf die Ressource an.
 * Fügen Sie `;token=` *aadtoken* an den URI an, wobei *aadtoken* ein Base-64-codiertes Aad-Zugriffs Token ist (stellen Sie sicher, dass das Token für die Ressource bestimmt ist `https://management.azure.com/` ).
 * Fügen `;prompt` Sie an den URI an. Kusto fordert Benutzer Anmelde Informationen an, wenn er auf die Ressource zugreifen muss. (Die Aufforderung, dass der Benutzer bei cloudbereitstellungen deaktiviert ist und nur in Testumgebungen aktiviert ist.)
-
-
-

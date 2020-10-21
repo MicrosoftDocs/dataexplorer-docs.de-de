@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/13/2020
-ms.openlocfilehash: 9a697cfd37590f0368d5a8f0bacf91d02e1c8725
-ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
+ms.openlocfilehash: 365ce1e4c8e5dd2157a7975095b9e30dfd1e3722
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/13/2020
-ms.locfileid: "92003159"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342704"
 ---
 # <a name="troubleshooting"></a>Problembehandlung
 
@@ -148,7 +148,7 @@ Die Anwendung kann mit einem der folgenden Fehler nicht installiert werden:
 Dieses Symptom könnte daran liegen, dass eine andere Anwendung das Standardverhalten der ClickOnce-Vertrauens Aufforderung überschreibt. 
 1. Anzeigen der Standard Konfigurationseinstellungen.
 1. Vergleichen Sie Ihre Konfigurationseinstellungen mit den tatsächlichen Einstellungen auf Ihrem Computer.
-1. Setzen Sie die Konfigurationseinstellungen nach Bedarf zurück, wie [in diesem Artikel](https://docs.microsoft.com/visualstudio/deployment/how-to-configure-the-clickonce-trust-prompt-behavior)erläutert.
+1. Setzen Sie die Konfigurationseinstellungen nach Bedarf zurück, wie [in diesem Artikel](/visualstudio/deployment/how-to-configure-the-clickonce-trust-prompt-behavior)erläutert.
 
 ### <a name="cleanup-application-data"></a>Bereinigen von Anwendungsdaten
 
@@ -183,4 +183,4 @@ Es ist auch möglich, zu einer bestimmten Version von Kusto. Explorer zurückzuk
 
 * Weitere Informationen zur [Benutzeroberfläche von "Kusto. Explorer](kusto-explorer.md#overview-of-the-user-interface) "
 * Erfahren Sie mehr über [die Ausführung von Kusto. Explorer über die Befehlszeile.](kusto-explorer-using.md#kustoexplorer-command-line-arguments)
-* Weitere Informationen zu [Kusto Query Language (kql)](https://docs.microsoft.com/azure/kusto/query/)
+* Weitere Informationen zu [Kusto Query Language (kql)](../query/index.md)

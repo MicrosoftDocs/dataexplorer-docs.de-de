@@ -7,18 +7,18 @@ ms.reviewer: docohe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 04/14/2020
-ms.openlocfilehash: ae79fd334b3ac2a59a99c5ad8d63fccf0ed6784c
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 4c918c43f748f97b3bb3f6d0342c660775c1e5c8
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88875224"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342653"
 ---
 # <a name="microsoft-logic-app-and-azure-data-explorer"></a>Microsoft Logic APP und Azure Daten-Explorer
 
-Der Azure Kusto Logic App-Connector ermöglicht das automatische Ausführen von Kusto-Abfragen und-Befehlen im Rahmen einer geplanten oder ausgelösten Aufgabe mithilfe des [Microsoft Logic App](https://docs.microsoft.com/azure/logic-apps/logic-apps-what-are-logic-apps) -Connector.
+Der Azure Kusto Logic App-Connector ermöglicht das automatische Ausführen von Kusto-Abfragen und-Befehlen im Rahmen einer geplanten oder ausgelösten Aufgabe mithilfe des [Microsoft Logic App](/azure/logic-apps/logic-apps-what-are-logic-apps) -Connector.
 
-Logik-APP und Flow werden auf demselben Connector erstellt. Daher gelten die für Flow geltenden [Einschränkungen](flow.md#limitations), [Aktionen](flow.md#azure-kusto-flow-actions), [Authentifizierungs](flow.md#authentication) -und [Verwendungs Beispiele](flow.md#azure-kusto-flow-actions) auch für Logic apps, wie auf der [Seite zur Fluss Dokumentation](flow.md)erwähnt.
+Logik-APP und Energie Automatisierung werden auf demselben Connector erstellt. Daher gelten die [Einschränkungen](../../flow.md#limitations), [Aktionen](../../flow.md#flow-actions), [Authentifizierungs](../../flow.md#authentication) -und [Verwendungs Beispiele](../../flow-usage.md) , die für die Energie Automatisierung gelten, auch für Logic apps, wie auf der [Dokumentationsseite zur Energie Automatisierung](../../flow.md)erwähnt.
 
 ## <a name="how-to-create-a-logic-app-with-azure-data-explorer"></a>Erstellen einer Logik-App mit Azure Daten-Explorer
 
@@ -32,11 +32,11 @@ Logik-APP und Flow werden auf demselben Connector erstellt. Daher gelten die fü
     ![Logik-app hinzufügen](./Images/logicapps/logicapp-add.png)
 
 1. Geben Sie die erforderlichen Details zum Formular ein:
-    * Subscription
-    * Resource group
+    * Abonnement
+    * Ressourcengruppe
     * Name der Logik-App
     * Region oder Integrationsdienstumgebung
-    * Position
+    * Standort
     * Protokollanalyse ein-oder ausschalten
 1. Klicken Sie auf **Überprüfen + erstellen**.
 
@@ -56,5 +56,5 @@ Logik-APP und Flow werden auf demselben Connector erstellt. Daher gelten die fü
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-* Weitere Informationen zum Konfigurieren einer Wiederholungs Aktion finden Sie auf der Daten [Fluss-Dokumentationsseite](flow.md) .
-* Werfen Sie einen Blick auf einige [Verwendungs Beispiele](flow.md#azure-kusto-flow-actions) für Ideen zum Konfigurieren ihrer Logik-App-Aktionen.
+* Weitere Informationen zum Konfigurieren einer Wiederholungs Aktion finden Sie auf der [Dokumentationsseite zur Energie Automatisierung](../../flow.md) .
+* Werfen Sie einen Blick auf einige [Verwendungs Beispiele](../../flow-usage.md) für Ideen zum Konfigurieren ihrer Logik-App-Aktionen.

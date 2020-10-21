@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/21/2019
-ms.openlocfilehash: 5ec069979d41a7c750c140ad84ef0db4ba5638a4
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: b966dbd43d1f40842240eaebf7d4008450e1f746
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92245054"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343197"
 ---
 # <a name="external_table"></a>external_table()
 
@@ -40,6 +40,6 @@ external_table('StormEvent')
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-* [Externe Tabelle (allgemeine Steuerungsbefehle)](../management/externaltables.md)
+* [Externe Tabelle (allgemeine Steuerungsbefehle)](../management/external-table-commands.md)
 * [Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake](../management/external-tables-azurestorage-azuredatalake.md)
 * [Erstellen und Ändern externer SQL-Tabellen](../management/external-sql-tables.md)

@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: d0f815cd523e0e53111e791d8faaaf6c37c7bb7b
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: ee36823bb3f730a12f7ad2d1febe91439d4a2aad
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92252846"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343282"
 ---
 # <a name="query-limits"></a>Abfragegrenzwerte
 
@@ -27,7 +27,7 @@ Die **Abfrage** Parallelität ist ein Limit, das ein Cluster für eine Reihe von
 * Der Standardwert des Abfrage Parallelitäts Limits hängt von dem SKU-Cluster ab, auf dem er ausgeführt wird, und wird wie folgt berechnet: `Cores-Per-Node x 10` .
   * Beispielsweise ist für einen Cluster, der auf der D14v2-SKU eingerichtet ist, wobei jeder Computer über 16 virtuelle Kerne verfügt, das Standard Limit für die Abfrage Parallelität `16 cores x10 = 160` .
 * Der Standardwert kann durch Konfigurieren der [Richtlinie für die Abfrage Drosselung](../management/query-throttling-policy.md)geändert werden. 
-  * Die tatsächliche Anzahl von Abfragen, die gleichzeitig in einem Cluster ausgeführt werden können, hängt von verschiedenen Faktoren ab. Die wichtigsten Faktoren sind Cluster-SKU, verfügbare Cluster Ressourcen und Abfrage Muster. Die Richtlinie für die Abfrage Drosselung kann basierend auf Auslastungs Tests konfiguriert werden, die für Produktions ähnliche Abfrage Muster ausgeführt werden.
+  * Die tatsächliche Anzahl von Abfragen, die gleichzeitig in einem Cluster ausgeführt werden können, hängt von verschiedenen Faktoren ab. Die wichtigsten Faktoren sind Cluster-SKU, verfügbare Ressourcen des Clusters und Abfrage Muster. Die Richtlinie für die Abfrage Drosselung kann basierend auf Auslastungs Tests konfiguriert werden, die für Produktions ähnliche Abfrage Muster ausgeführt werden.
 
 ## <a name="limit-on-result-set-size-result-truncation"></a>Grenzwert für die Größe des Resultsets (Ergebnis abschneiden)
 
@@ -154,7 +154,7 @@ Timeout bei Ausführung von Anforderungen (Abfragen und Steuerungsbefehle) wird 
 
 Standardmäßig ist Timeout für Abfragen auf vier Minuten und für Steuerungsbefehle 10 Minuten festgelegt. Dieser Wert kann bei Bedarf (begrenzt auf eine Stunde) erweitert werden.
 
-* Wenn Sie die Abfrage mithilfe von "Kusto. Explorer" durchführen **, verwenden Sie** Extras &gt; **Optionen** *  &gt; **Verbindungen** &gt; **Abfrage Server Timeout**.
+* Wenn Sie die Abfrage mithilfe von "Kusto. Explorer" durchführen **, verwenden Sie** Extras &gt; **Optionen**_ &gt; _*Verbindungen* *  &gt; **Abfrage Server Timeout**.
 * Legen `servertimeout` Sie die Client Anforderungs Eigenschaft (einen Wert vom Typ) Programm gesteuert `System.TimeSpan` auf eine Stunde fest.
 
 **Hinweise zu Timeouts**

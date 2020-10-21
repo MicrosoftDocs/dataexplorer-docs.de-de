@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 6b94dfc0fab1150b598fad9d55beec2f3a81ad73
-ms.sourcegitcommit: f34535b0ca63cff22e65c598701cec13856c1742
+ms.openlocfilehash: 61c183f11aa7658faba00c5dd3c4795f235e5467
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/29/2020
-ms.locfileid: "87402337"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92337481"
 ---
 # <a name="kustoingest-errors-and-exceptions"></a>Kusto. Erfassungs Fehler und Ausnahmen
 Jeder Fehler während der Erfassungs Behandlung auf der Clientseite wird durch eine c#-Ausnahme angegeben.
@@ -24,7 +24,7 @@ Jeder Fehler während der Erfassungs Behandlung auf der Clientseite wird durch e
 
 Beim Versuch, aus mehreren Quellen zu erfassen, können während des Erfassungs Vorgangs Fehler auftreten. Wenn eine Erfassung für eine der Quellen fehlschlägt, wird Sie protokolliert, und der Client nimmt weiterhin die verbleibenden Quellen an. Nachdem Sie alle Quellen für die Erfassung überlaufen haben, wird eine ausgelöst `IngestClientAggregateException` , die den `IList<IngestClientException> IngestionErrors` Member enthält.
 
-`IngestClientException`und die abgeleiteten Klassen enthalten ein Feld `IngestionSource` und ein `Error` Feld. Die beiden Felder erstellen eine Zuordnung von der Quelle, bei der ein Fehler aufgetreten ist, zu dem Fehler, der während der Erfassung aufgetreten ist. Die Informationen können in der Liste verwendet werden `IngestionErrors` , um zu ermitteln, bei welchen Quellen die Erfassung fehlgeschlagen ist und warum. Die `IngestClientAggregateException` Ausnahme enthält auch eine boolesche Eigenschaft `GlobalError` , die angibt, ob für alle Quellen ein Fehler aufgetreten ist.
+`IngestClientException` und die abgeleiteten Klassen enthalten ein Feld `IngestionSource` und ein `Error` Feld. Die beiden Felder erstellen eine Zuordnung von der Quelle, bei der ein Fehler aufgetreten ist, zu dem Fehler, der während der Erfassung aufgetreten ist. Die Informationen können in der Liste verwendet werden `IngestionErrors` , um zu ermitteln, bei welchen Quellen die Erfassung fehlgeschlagen ist und warum. Die `IngestClientAggregateException` Ausnahme enthält auch eine boolesche Eigenschaft `GlobalError` , die angibt, ob für alle Quellen ein Fehler aufgetreten ist.
 
 ### <a name="failures-ingesting-from-files-or-blobs"></a>Fehler beim Erfassen von Dateien oder blobdateien
 
@@ -38,7 +38,7 @@ In der `IngestFromDataReader` - `IngestFromDataReaderAsync` Methode und der-Meth
 
 ## <a name="kustoqueuedingestclient-exceptions"></a>Kustoqueuedingestclient-Ausnahmen
 
-`KustoQueuedIngestClient`erfasst Daten, indem Nachrichten in eine Azure-Warteschlange hochgeladen werden. Wenn ein Fehler vor oder während des Warteschlangen Prozesses auftritt, `IngestClientAggregateException` wird am Ende des Prozesses eine ausgelöst. Die ausgelöste Ausnahme enthält eine Auflistung von `IngestClientException` , die die Quelle der einzelnen Fehler enthält und die nicht an die Warteschlange gesendet wurde. Der Fehler, der beim Versuch aufgetreten ist, die Nachricht zu veröffentlichen, wird ebenfalls ausgelöst.
+`KustoQueuedIngestClient` erfasst Daten, indem Nachrichten in eine Azure-Warteschlange hochgeladen werden. Wenn ein Fehler vor oder während des Warteschlangen Prozesses auftritt, `IngestClientAggregateException` wird am Ende des Prozesses eine ausgelöst. Die ausgelöste Ausnahme enthält eine Auflistung von `IngestClientException` , die die Quelle der einzelnen Fehler enthält und die nicht an die Warteschlange gesendet wurde. Der Fehler, der beim Versuch aufgetreten ist, die Nachricht zu veröffentlichen, wird ebenfalls ausgelöst.
 
 ### <a name="posting-to-queue-failures-with-a-file-or-blob-as-a-source"></a>Veröffentlichen in Warteschlangen Fehlern mit einer Datei oder einem BLOB als Quelle
 
@@ -52,16 +52,16 @@ Wenn eine DataReader-Quelle verwendet wird, werden die Daten, die in die Wartesc
 In der `IngestFromDataReader` - `IngestFromDataReaderAsync` Methode und der-Methode bestimmt das- `retainCsvOnFailure` Flag, dessen Standardwert ist `false` ,, ob die Dateien nach einer fehlgeschlagenen Erfassung aufbewahrt werden sollen. Wenn dieses Flag auf festgelegt ist `false` , werden Daten, bei denen die Erfassung fehlschlägt, nicht persistent gespeichert, sodass es schwer zu verstehen ist, was schief gelaufen ist.
 
 ### <a name="common-failures"></a>Häufige Fehler
-|Fehler                         |`Reason`           |Abhilfemaßnahmen                                   |
+|Fehler                         |`Reason`           |Minderung                                   |
 |------------------------------|-----------------|---------------------------------------------|
 |Der Daten <database name> Bankname ist nicht vorhanden| Die Datenbank ist nicht vorhanden.|Überprüfen Sie den Datenbanknamen unter `kustoIngestionProperties` /Create the Database. |
 |Die Entität "der Tabellenname, der nicht vorhanden ist" der Art "Table" wurde nicht gefunden.|Die Tabelle ist nicht vorhanden, und es gibt keine CSV-Zuordnung.| CSV-Zuordnung hinzufügen/erforderliche Tabelle erstellen |
 |BLOB <blob path> ausgeschlossen aus Grund: das JSON-Muster muss mit dem jsonmapping-Parameter erfasst werden.| JSON-Erfassung, wenn keine JSON-Zuordnung bereitgestellt wird.|Bereitstellen einer JSON-Zuordnung |
 |Fehler beim Herunterladen des BLOBs: "der Remote Server hat einen Fehler zurückgegeben: (404) nicht gefunden."| Das Blob ist nicht vorhanden.|Überprüfen Sie, ob das BLOB vorhanden ist. Falls vorhanden, versuchen Sie es erneut, und wenden Sie sich an das Kusto-Team |
 |Die JSON-Spalten Zuordnung ist ungültig: zwei oder mehr Mapping-Elemente zeigen auf dieselbe Spalte.| Die JSON-Zuordnung verfügt über zwei Spalten mit unterschiedlichen Pfaden.|JSON-Zuordnung korrigieren |
-|EngineError-[utilsexception] `IngestionDownloader.Download` : mindestens eine Datei konnte nicht heruntergeladen werden (suchen Sie nach "kustologs" nach "ActivityID:" <GUID1> , rootactivityid: <GUID2> ).| Mindestens eine Datei konnte nicht heruntergeladen werden. |Erneut versuchen |
+|EngineError-[utilsexception] `IngestionDownloader.Download` : mindestens eine Datei konnte nicht heruntergeladen werden (suchen Sie nach "kustologs" nach "ActivityID:" <GUID1> , rootactivityid: <GUID2> ).| Mindestens eine Datei konnte nicht heruntergeladen werden. |Wiederholen |
 |Fehler beim Analysieren: der Stream mit der ID " <stream name> " weist ein falsch formatiertes CSV-Format auf, das für die Richtlinie "validationoptions" nicht |Falsch formatierte CSV-Datei (z. b., nicht über die gleiche Anzahl von Spalten in jeder Zeile). Schlägt nur fehl, wenn die Validierungs Richtlinie auf festgelegt ist `ValidationOptions` . Validatecsvinputconstantcolumns |Überprüfen Sie die CSV-Dateien. Diese Meldung gilt nur für CSV/TSV-Dateien. |
-|`IngestClientAggregateException`mit der Fehlermeldung "fehlende obligatorische Parameter für gültiges Shared Access Signature" |Die verwendete SAS ist der Dienst und nicht das Speicherkonto. |Verwenden Sie die SAS des Speicher Kontos. |
+|`IngestClientAggregateException` mit der Fehlermeldung "fehlende obligatorische Parameter für gültiges Shared Access Signature" |Die verwendete SAS ist der Dienst und nicht das Speicherkonto. |Verwenden Sie die SAS des Speicher Kontos. |
 
 ### <a name="ingestion-error-codes"></a>Erfassungs Fehlercodes
 
@@ -108,7 +108,7 @@ Um Erfassungs Fehler Programm gesteuert zu behandeln, werden Fehlerinformationen
 
 Wird ausgelöst, wenn keine Warteschlangen vom Datenverwaltung Cluster zurückgegeben wurden.
 
-Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
+Basisklasse: [Exception](/dotnet/api/system.exception)
 
 |Feldname |type     |Bedeutung
 |-----------|---------|------------------------------|
@@ -122,7 +122,7 @@ Während des Erfassungs Vorgangs werden mehrere Versuche unternommen, die mit de
 
 Wird ausgelöst, wenn keine BLOB-Container vom Datenverwaltung Cluster zurückgegeben wurden.
 
-Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
+Basisklasse: [Exception](/dotnet/api/system.exception)
 
 |Feldname   |type     |Bedeutung       
 |-------------|---------|------------------------------|
@@ -135,7 +135,7 @@ Beim Erfassen von Quellen, die sich noch nicht in einem Azure-Container befinden
 
 Wird ausgelöst, wenn eine Erfassungs Eigenschaft mehrmals konfiguriert ist.
 
-Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
+Basisklasse: [Exception](/dotnet/api/system.exception)
 
 |Feldname   |type     |Bedeutung       
 |-------------|---------|------------------------------------|
@@ -145,7 +145,7 @@ Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=v
 
 Wird ausgelöst, wenn eine Nachricht an die Warteschlange zurückgestellt wird.
 
-Basisklasse: [Exception](https://msdn.microsoft.com/library/system.exception(v=vs.110).aspx)
+Basisklasse: [Exception](/dotnet/api/system.exception)
 
 |Feldname   |type     |Bedeutung       
 |-------------|---------|---------------------------------|
@@ -157,7 +157,7 @@ Der in die Warteschlange eingereihte Erfassungs Client erfasst Daten, indem er e
 
 ### <a name="dataformatnotspecifiedexception"></a>Dataformatnotspecifiedexception
 
-Wird ausgelöst, wenn ein Datenformat erforderlich ist, aber nicht in`IngestionProperties`
+Wird ausgelöst, wenn ein Datenformat erforderlich ist, aber nicht in `IngestionProperties`
 
 Basisklasse: ingestcliumtexception
 
@@ -191,7 +191,7 @@ Basisklasse: ingestcliumtexception
 
 |Feldname   |type     |Bedeutung       
 |-------------|---------|-----------------------|
-|Size         | long    | Die Größe der Erfassungs Quelle
+|Größe         | long    | Die Größe der Erfassungs Quelle
 |MaxSize      | long    | Die maximal zulässige Größe für die Erfassung.
 
 Wenn eine Erfassungs Quelle die maximale Größe von 4 GB überschreitet, wird die Ausnahme ausgelöst. Die Größen Validierung kann durch das- `IgnoreSizeLimit` Flag in der [ingestionproperties-Klasse](kusto-ingest-client-reference.md#class-kustoingestionproperties)überschrieben werden. Es wird jedoch nicht empfohlen, [einzelne Quellen, die größer als 1 GB](about-kusto-ingest.md#ingestion-best-practices)sind, zu erfassen.
@@ -218,7 +218,7 @@ Basisklasse: ingestcliumtexception
 
 Wird ausgelöst, wenn während einer Erfassung mindestens ein Fehler auftritt.
 
-Basisklasse: [AggregateException](https://msdn.microsoft.com/library/system.aggregateexception(v=vs.110).aspx)
+Basisklasse: [AggregateException](/dotnet/api/system.aggregateexception)
 
 |Feldname      |type                             |Bedeutung       
 |----------------|---------------------------------|-----------------------|
