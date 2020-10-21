@@ -4,16 +4,16 @@ description: In diesem Artikel wird unixtime_nanoseconds_todatetime () in Azure 
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/25/2019
-ms.openlocfilehash: 869a89510e96c1c3fbc99feb9a01bd70d2728149
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: ca933f8d7ae61cbb0f49cf1e2226ffe51ba7bff7
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103455"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92241157"
 ---
 # <a name="unixtime_nanoseconds_todatetime"></a>unixtime_nanoseconds_todatetime()
 
@@ -27,7 +27,7 @@ Konvertiert Unix-Epoch Nanosekunden in UTC-DateTime.
 
 * *Nanosekunden*: eine reelle Zahl stellt einen Epochen Zeitstempel in Nanosekunden dar. `Datetime` Dies tritt auf, bevor die Epochen Zeit (1970-01-01 00:00:00) einen negativen Zeitstempelwert aufweist.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Wenn die Konvertierung erfolgreich ist, ist das Ergebnis ein [DateTime](./scalar-data-types/datetime.md) -Wert. Wenn die Konvertierung nicht erfolgreich ist, ist das Ergebnis NULL.
 

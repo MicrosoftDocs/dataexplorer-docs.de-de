@@ -4,16 +4,16 @@ description: In diesem Artikel wird jede () (Aggregations Funktion) in Azure Dat
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 73c3a660dc7a34f1f9fef840b13f47c13b4d1b2f
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: c4d718cfb46e3a404c943d579feaf4733499ab3e
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349736"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248230"
 ---
 # <a name="any-aggregation-function"></a>Any () (Aggregations Funktion)
 
@@ -58,7 +58,7 @@ Alle Details für einen zufälligen Datensatz anzeigen:
 Continents | summarize any(*)
 ```
 
-:::image type="content" source="images/aggfunction/any2.png" alt-text="Beliebige 2":::
+:::image type="content" source="images/aggfunction/any2.png" alt-text="Alle 1":::
 
 Alle Details für jeden zufälligen Kontinent anzeigen:
 
@@ -66,4 +66,4 @@ Alle Details für jeden zufälligen Kontinent anzeigen:
 Continents | summarize any(*) by Continent
 ```
 
-:::image type="content" source="images/aggfunction/any3.png" alt-text="Alle 3":::
+:::image type="content" source="images/aggfunction/any3.png" alt-text="Alle 1":::

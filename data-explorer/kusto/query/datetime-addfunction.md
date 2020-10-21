@@ -4,16 +4,16 @@ description: In diesem Artikel wird datetime_add () in Azure Daten-Explorer besc
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 766f0617b70e21194d731ae1cf8eabf1014265bb
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: ab395dadf178b296929300fe4cfd42742fba5f27
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348546"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247732"
 ---
 # <a name="datetime_add"></a>datetime_add()
 
@@ -32,8 +32,8 @@ Berechnet einen neuen [DateTime](./scalar-data-types/datetime.md) -Wert aus eine
 Mögliche Werte des *Zeitraums*: 
 - Year
 - Quarter
-- Month
-- Week
+- Month (Monat)
+- Woche
 - Tag
 - Hour
 - Minute
@@ -60,7 +60,7 @@ second = datetime_add('second',1,make_datetime(2017,1,1))
 
 ```
 
-|year|quarter|month|week|day|hour|minute|second|
+|Jahr|quarter|month|week|day|hour|minute|second|
 |---|---|---|---|---|---|---|---|
 |2018-01-01 00:00:00.0000000|2017-04-01 00:00:00.0000000|2017-02-01 00:00:00.0000000|2017-01-08 00:00:00.0000000|2017-01-02 00:00:00.0000000|2017-01-01 01:00:00.0000000|2017-01-01 00:01:00.0000000|2017-01-01 00:00:01.0000000|
 

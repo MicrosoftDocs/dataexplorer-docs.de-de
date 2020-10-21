@@ -4,16 +4,16 @@ description: In diesem Artikel wird activity_metrics-Plug-in in Azure Daten-Expl
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2ab8a9b8a687b695859c52e75ab4e9f88aac408b
-ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
+ms.openlocfilehash: 041f5c3517eae5090fa2d68ea10acce7c9286bb5
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88793709"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248320"
 ---
 # <a name="activity_metrics-plugin"></a>activity_metrics-Plug-In
 
@@ -37,7 +37,7 @@ T | evaluate activity_metrics(id, datetime_column, startofday(ago(30d)), startof
 * *Fenster*: Skalar mit dem Wert des Analysefenster Zeitraums. Kann ein numerischer/DateTime-/timestamp-Wert oder eine Zeichenfolge sein, bei der es sich um einen handelt `week` / `month` / `year` . in diesem Fall werden alle Zeiträume entsprechend [starstarfweek](startofweekfunction.md) / [starttfmonth](startofmonthfunction.md) / [starttfyear](startofyearfunction.md) . 
 * *dim1*, *dim2*,...: (optional) Liste der Dimensions Spalten, in denen die Berechnung der Aktivitäts Metrik in Slice ist.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Gibt eine Tabelle zurück, die die unterschiedlichen Anzahl Werte, die unterschiedliche Anzahl neuer Werte, die Beibehaltungs Dauer und die Änderungs Rate für jeden Zeitachse und jede vorhandene Dimensions Kombination enthält.
 
@@ -184,4 +184,4 @@ range _day from _start to _end  step 1d
 |2017-05-22 00:00:00.0000000|1740|1017|
 |2017-05-29 00:00:00.0000000|960|756|
 
-:::image type="content" source="images/activity-metrics-plugin/activity-metrics-dcount-and-dcount-newvalues.png" border="false" alt-text="Neue Werte der Aktivitätsmetriken DCount und DCount":::
+:::image type="content" source="images/activity-metrics-plugin/activity-metrics-dcount-and-dcount-newvalues.png" border="false" alt-text="Änderung und Aufbewahrung von Aktivitäts Metriken":::

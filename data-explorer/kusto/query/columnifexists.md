@@ -4,16 +4,16 @@ description: In diesem Artikel wird column_ifexists () in Azure Daten-Explorer b
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5eeecf9e4756ac18cdeb5c6297aea1bcca5bac14
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 570a832673d94d57d69dfa9c8442d56802ecd7ac
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348852"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247861"
 ---
 # <a name="column_ifexists"></a>column_ifexists()
 

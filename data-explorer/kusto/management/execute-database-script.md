@@ -8,14 +8,14 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/14/2020
-ms.openlocfilehash: 4eaa7e8cc6f3c0f321abb9744bfe1608521e7b0e
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: c8fa3a000de67559c83745c598da40797e31f9b9
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84784530"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248351"
 ---
-# <a name="execute-database-script"></a>. Datenbankskript ausführen
+# <a name="execute-database-script"></a>.execute database script
 
 Führt Befehle für den Batch von Steuerelementen im Bereich einer einzelnen Datenbank aus.
 
@@ -35,13 +35,13 @@ Führt Befehle für den Batch von Steuerelementen im Bereich einer einzelnen Dat
 
 | Eigenschaft            | type            | BESCHREIBUNG                          |
 |---------------------|-----------------|---------------------------------------------------------------------------------------------------|
-| `ContinueOnErrors`            | `bool`        | Wenn diese Einstellung auf festgelegt ist, `false` wird das Skript beim ersten Fehler beendet. Wenn Sie auf festgelegt ist, `true` wird die Skriptausführung fortgesetzt. Standard: `false` |
+| `ContinueOnErrors`            | `bool`        | Wenn diese Einstellung auf festgelegt ist, `false` wird das Skript beim ersten Fehler beendet. Wenn Sie auf festgelegt ist, `true` wird die Skriptausführung fortgesetzt. Standardwert: `false`. |
 
 ## <a name="output"></a>Output
 
 Jeder Befehl, der im Skript angezeigt wird, wird als separater Datensatz in der Ausgabe Tabelle gemeldet. Jeder Datensatz enthält die folgenden Felder:
 
-|Output-Parameter |type |BESCHREIBUNG
+|Ausgabeparameter |type |BESCHREIBUNG
 |---|---|--- 
 |OperationId  |Guid |Der Bezeichner des Befehls.
 |CommandType  |String |Der Typ des Befehls.
@@ -60,13 +60,13 @@ Jeder Befehl, der im Skript angezeigt wird, wird als separater Datensatz in der 
 
 ```kusto
 .execute database script <|
-
+//
 // Create tables
 .create-merge table T(a:string, b:string)
-
+//
 // Apply policies
 .alter-merge table T policy retention softdelete = 10d 
-
+//
 // Create functions
 .create-or-alter function
   with (skipvalidation = "true") 

@@ -4,16 +4,16 @@ description: In diesem Artikel wird binary_or () in Azure Daten-Explorer beschri
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6903ee36e29551e7af6d08e686c1189e0c0125f3
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 97144b244fb6fea5ac218f6160d8aa9e95f50aa4
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349056"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247889"
 ---
 # <a name="binary_or"></a>binary_or()
 

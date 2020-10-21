@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt den Partitions Operator in Azure Daten-Ex
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2b082e516a1118638bc8e61b545471326dd400e5
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 8587995a6836a1f8a180eada19d450277709a6e7
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346234"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248593"
 ---
 # <a name="partition-operator"></a>partition-Operator
 
@@ -46,14 +46,14 @@ T | partition by Col1 { U | where Col2=toscalar(Col1) }
   |Name               |Werte         |BESCHREIBUNG|
   |-------------------|---------------|-----------|
   |`hint.materialized`|`true`,`false` |Wenn festgelegt ist, `true` wird die Quelle des Operators materialisiert `partition` (Standard: `false` ).|
-  |`hint.concurrency`|*Number*|Gibt an, wie viele gleichzeitige Unterabfragen des `partition` Operators parallel ausgeführt werden sollen. *Standard*Wert: CPU-Kerne auf dem einzelnen Knoten des Clusters (2 bis 16).|
-  |`hint.spread`|*Number*|Gibt an, wie viele Knoten von der gleichzeitigen Ausführung von `partition` Unterabfragen verwendet werden sollen. *Standard*Wert: 1.|
+  |`hint.concurrency`|*Zahl*|Gibt an, wie viele gleichzeitige Unterabfragen des `partition` Operators parallel ausgeführt werden sollen. *Standard*Wert: CPU-Kerne auf dem einzelnen Knoten des Clusters (2 bis 16).|
+  |`hint.spread`|*Zahl*|Gibt an, wie viele Knoten von der gleichzeitigen Ausführung von `partition` Unterabfragen verwendet werden sollen. *Standard*Wert: 1.|
 
 ## <a name="returns"></a>Rückgabe
 
 Der-Operator gibt eine Union der Ergebnisse der Anwendung der Unterabfrage auf jede Partition der Eingabedaten zurück.
 
-**Hinweise**
+**Notizen**
 
 * Der Partitions Operator ist zurzeit durch die Anzahl der Partitionen beschränkt.
   Es können bis zu 64 unterschiedliche Partitionen erstellt werden.
@@ -76,7 +76,7 @@ StormEvents
 ) 
 
 ```
-|EventType|Zustand|Events|Verletzungs|
+|EventType|Zustand|Ereignisse|Verletzungs|
 |---|---|---|---|
 |Hagel|Wyoming|108|0|
 |Hoher Wind|Wyoming|81|5|

@@ -4,16 +4,16 @@ description: In diesem Artikel wird der Analyse Operator in Azure Daten-Explorer
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: f9dc6e49e9e3d04aadb5aecf8507b7132d8a366a
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: a942015908c9608a76d3c49c411de9d17d6e70f5
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346319"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248614"
 ---
 # <a name="parse-operator"></a>parse-Operator
 
@@ -67,7 +67,7 @@ Die Eingabe Tabelle, erweitert entsprechend der Liste der Spalten, die dem Opera
 * Wenn der Regex-Modus verwendet wird, gibt es eine Option zum Hinzufügen von Regex-Flags, um den gesamten in der Analyse verwendeten Regex-Wert zu steuern.
 
 * Im Regex-Modus übersetzt die Analyse das Muster in ein Regex. Verwenden Sie die [RE2-Syntax](re2.md) , um den Abgleich durchzuführen, und verwenden Sie nummerierte, intern behandelte Gruppen.
-    Zum Beispiel:
+    Beispiel:
 
     ```kusto
     parse kind=regex Col with * <regex1> var1:string <regex2> var2:long
@@ -75,11 +75,11 @@ Die Eingabe Tabelle, erweitert entsprechend der Liste der Spalten, die dem Opera
 
     In der Analyse Anweisung ist der Regex, der intern von der Analyse generiert wird, `.*?<regex1>(.*?)<regex2>(\-\d+)` .
         
-    * `*`wurde in übersetzt `.*?` .
+    * `*` wurde in übersetzt `.*?` .
         
-    * `string`wurde in übersetzt `.*?` .
+    * `string` wurde in übersetzt `.*?` .
         
-    * `long`wurde in übersetzt `\-\d+` .
+    * `long` wurde in übersetzt `\-\d+` .
 
 ## <a name="examples"></a>Beispiele
 
@@ -164,7 +164,7 @@ Traces
 |Pipelinescheduler, totalslices = 27, slicengber = 16, Locktime = 02/17/2016 08:41:00, releasetime = 02/17/2016 08:41:00|
 
 Die erwarteten Ergebnisse werden nicht angezeigt, da der Standardmodus gieriger ist.
-Wenn Sie über einige Datensätze verfügen, bei denen *resourceName* manchmal als Kleinbuchstaben und manchmal auch als Großbuchstaben angezeigt wird, erhalten Sie möglicherweise NULL-Werte für einige Werte.
+Wenn Sie über einige Datensätze verfügen, bei denen *resourceName*  manchmal als Kleinbuchstaben und manchmal auch als Großbuchstaben angezeigt wird, erhalten Sie möglicherweise NULL-Werte für einige Werte.
 
 Um das gewünschte Ergebnis zu erhalten, führen Sie die Abfrage mit dem nicht gierigen aus, und deaktivieren Sie die Unterscheidung nach `U` Groß-/Kleinschreibung `i` .
 

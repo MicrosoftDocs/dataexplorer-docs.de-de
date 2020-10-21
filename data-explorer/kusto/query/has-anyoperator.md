@@ -4,20 +4,20 @@ description: In diesem Artikel wird has_any Operator in Azure Daten-Explorer bes
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: 4485dde5eb77478e5fd75ce388ada7f4232f2ddb
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 012a6b0555778a30055ac9d7f4619c7b74d13988
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347628"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92241635"
 ---
 # <a name="has_any-operator"></a>has_any-Operator
 
-`has_any`Operator Filter basierend auf dem bereitgestellten Satz von Werten.
+`has_any` Operator Filter basierend auf dem bereitgestellten Satz von Werten.
 
 ```kusto
 Table1 | where col has_any ('value1', 'value2')
@@ -35,9 +35,9 @@ Table1 | where col has_any ('value1', 'value2')
 * *Liste der Ausdrücke* : durch Trennzeichen getrennte Liste von Tabellen-, Skalar-oder Literalausdrücken  
 * *tabellarischer Ausdruck* -Tabellen Ausdruck, der einen Satz von Werten aufweist (wenn Expression über mehrere Spalten verfügt, wird die erste Spalte verwendet)
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
-Zeilen in *T* , für die das Prädikat`true`
+Zeilen in *T* , für die das Prädikat `true`
 
 **Notizen**
 

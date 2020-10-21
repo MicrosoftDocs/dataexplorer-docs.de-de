@@ -4,18 +4,18 @@ description: Dieser Artikel beschreibt den Join-Operator in Azure Daten-Explorer
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 4952e315a974e72135c722b255a96f57bf89cc12
-ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.openlocfilehash: 8324d0c6537d6d22a2814a7aa80625278dc36aec
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86058778"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92241513"
 ---
 # <a name="join-operator"></a>join-Operator
 
@@ -27,7 +27,7 @@ Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2
 
 ## <a name="syntax"></a>Syntax
 
-*Linkfähig* `|` `join`[*Joinparameters*] `(` *rightfähige* `)` `on` *Attribute*
+*Linkfähig* `|` `join` [*Joinparameters*] `(` *rightfähige* `)` `on` *Attribute*
 
 ## <a name="arguments"></a>Argumente
 
@@ -72,7 +72,7 @@ Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2
 > [!WARNING]
 > Wenn `kind` nicht angegeben wird, ist die standardmäßige joinkonfiguration `innerunique` . Dies unterscheidet sich von anderen Analyseprodukten, die über `inner` die Standardkonfiguration verfügen.  Informationen zu den Unterschieden finden Sie unter [Join-Varianten](#join-flavors) , um sicherzustellen, dass die Abfrage die gewünschten Ergebnisse liefert.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 **Das Ausgabe Schema hängt von der joinkonfiguration ab:**
 
@@ -92,7 +92,7 @@ Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2
 |---|---|
 |`kind=leftanti`, `kind=leftantisemi`| Gibt alle Datensätze von der linken Seite zurück, für die keine Übereinstimmungen von rechts vorhanden sind.|
 | `kind=rightanti`, `kind=rightantisemi`| Gibt alle Datensätze von der rechten Seite zurück, für die keine Übereinstimmungen von Links vorhanden sind.|
-| `kind`nicht angegeben`kind=innerunique`| Nur eine Zeile der linken Seite wird für jeden Wert des `on` -Schlüssels abgeglichen. Die Ausgabe enthält eine Zeile für jede Übereinstimmung dieser Zeile mit Zeilen der rechten Seite.|
+| `kind` nicht angegeben `kind=innerunique`| Nur eine Zeile der linken Seite wird für jeden Wert des `on` -Schlüssels abgeglichen. Die Ausgabe enthält eine Zeile für jede Übereinstimmung dieser Zeile mit Zeilen der rechten Seite.|
 | `kind=leftsemi`| Gibt alle Datensätze von der linken Seite zurück, die Übereinstimmungen von rechts aufweisen. |
 | `kind=rightsemi`| Gibt alle Datensätze von der rechten Seite zurück, die Übereinstimmungen von Links aufweisen. |
 |`kind=inner`| Enthält eine Zeile in der Ausgabe für jede Kombination aus übereinstimmenden Zeilen von links nach rechts. |
@@ -135,12 +135,12 @@ Der genaue Typ des Join-Operators wird mit dem *Kind* -Schlüsselwort angegeben.
 
 |Joinart/-Konfiguration|BESCHREIBUNG|
 |--|--|
-|[`innerunique`](#default-join-flavor)(oder leer als Standard)|Innerer Join mit linker seitiger Deduplizierung|
+|[`innerunique`](#default-join-flavor) (oder leer als Standard)|Innerer Join mit linker seitiger Deduplizierung|
 |[`inner`](#inner-join-flavor)|Innerer Standard Beitritt|
 |[`leftouter`](#left-outer-join-flavor)|Left Outer Join|
 |[`rightouter`](#right-outer-join-flavor)|Rechte äußere Verknüpfung|
 |[`fullouter`](#full-outer-join-flavor)|Vollständiger äußerer Join|
-|[`leftanti`](#left-anti-join-flavor), [`anti`](#left-anti-join-flavor) oder[`leftantisemi`](#left-anti-join-flavor)|Linker Anti-Join|
+|[`leftanti`](#left-anti-join-flavor), [`anti`](#left-anti-join-flavor) oder [`leftantisemi`](#left-anti-join-flavor)|Linker Anti-Join|
 |[`rightanti`](#right-anti-join-flavor) oder [`rightantisemi`](#right-anti-join-flavor)|Rechter Anti-Join|
 |[`leftsemi`](#left-semi-join-flavor)|Linker Semijoin|
 |[`rightsemi`](#right-semi-join-flavor)|Rechter Semijoin|
@@ -161,7 +161,7 @@ Die folgenden beiden Beispiel Tabellen werden verwendet, um den Vorgang des Join
 
 |Schlüssel |Wert1
 |---|---
-|eine |1
+|a |1
 |k |2
 |b |3
 |c |4
@@ -173,17 +173,17 @@ Die folgenden beiden Beispiel Tabellen werden verwendet, um den Vorgang des Join
 |k |10
 |c |20
 |c |30
-|d |40
+|T |40
 
 Der Standard Join führt einen inneren Join aus, nachdem die Deduplizierung der linken Seite auf dem joinschlüssel durchführt (bei der Deduplizierung wird der erste Datensatz beibehalten).
 
-Bei dieser Anweisung:`X | join Y on Key`
+Bei dieser Anweisung: `X | join Y on Key`
 
 die effektive linke Seite des Joins, Tabelle X nach der Deduplizierung, wäre:
 
 |Schlüssel |Wert1
 |---|---
-|eine |1
+|a |1
 |k |2
 |c |4
 
@@ -359,7 +359,7 @@ X | join kind=leftouter Y on Key
 |k|2|k|10|
 |c|4|c|20|
 |c|4|c|30|
-|eine|1|||
+|a|1|||
 
 ### <a name="right-outer-join-flavor"></a>Rechter äußerer Join-Typ
 
@@ -389,7 +389,7 @@ X | join kind=rightouter Y on Key
 |k|2|k|10|
 |c|4|c|20|
 |c|4|c|30|
-|||d|40|
+|||T|40|
 
 ### <a name="full-outer-join-flavor"></a>Vollständiger äußerer Join-Vorgang
 
@@ -419,8 +419,8 @@ X | join kind=fullouter Y on Key
 |k|2|k|10|
 |c|4|c|20|
 |c|4|c|30|
-|||d|40|
-|eine|1|||
+|||T|40|
+|a|1|||
 
 ### <a name="left-anti-join-flavor"></a>Linke Anti-Join-Konfiguration
 
@@ -446,7 +446,7 @@ X | join kind=leftanti Y on Key
 
 |Schlüssel|Wert1|
 |---|---|
-|eine|1|
+|a|1|
 
 > [!NOTE]
 > Anti-Join formt die Abfrage „NOT IN“.
@@ -475,7 +475,7 @@ X | join kind=rightanti Y on Key
 
 |Schlüssel|Wert2|
 |---|---|
-|d|40|
+|T|40|
 
 > [!NOTE]
 > Anti-Join formt die Abfrage „NOT IN“.

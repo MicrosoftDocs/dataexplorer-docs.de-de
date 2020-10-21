@@ -4,18 +4,18 @@ description: Dieser Artikel beschreibt die Muster Anweisung in Azure Daten-Explo
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 03d183bd042bb75d8bb44f530575bd3b91cb2102
-ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
+ms.openlocfilehash: 1fa4c303624c62b7c43d2ddd0de58977ed6e42aa
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88793804"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92241342"
 ---
 # <a name="pattern-statement"></a>Pattern-Anweisung
 
@@ -35,7 +35,7 @@ Beispielsweise eine Muster Anweisung, die deklariert, dass `app` ein Muster ist.
 declare pattern app;
 ```
 
-Diese Anweisung teilt Kusto `app` mit, dass es sich um ein Muster handelt, aber nicht, wie das Muster aufgelöst werden kann. Daher führt jeder Versuch, dieses Muster in der Abfrage aufzurufen, zu einem bestimmten Fehler und listet alle derartigen Aufrufe auf. Zum Beispiel:
+Diese Anweisung teilt Kusto `app` mit, dass es sich um ein Muster handelt, aber nicht, wie das Muster aufgelöst werden kann. Daher führt jeder Versuch, dieses Muster in der Abfrage aufzurufen, zu einem bestimmten Fehler und listet alle derartigen Aufrufe auf. Beispiel:
 
 ```kusto
 declare pattern app;
@@ -52,7 +52,7 @@ Diese Abfrage generiert einen Fehler von Kusto und zeigt an, dass die nächsten 
 
 ## <a name="pattern-definition"></a>Muster Definition
 
-Die Pattern-Anweisung kann auch verwendet werden, um ein Muster zu definieren. In einer Muster Definition werden alle möglichen Aufrufe des Musters explizit angelegt und der entsprechende tabellarische Ausdruck angegeben. Wenn Kusto dann die Abfrage ausführt, wird jeder Muster Aufruf durch den entsprechenden Muster Text ersetzt. Zum Beispiel:
+Die Pattern-Anweisung kann auch verwendet werden, um ein Muster zu definieren. In einer Muster Definition werden alle möglichen Aufrufe des Musters explizit angelegt und der entsprechende tabellarische Ausdruck angegeben. Wenn Kusto dann die Abfrage ausführt, wird jeder Muster Aufruf durch den entsprechenden Muster Text ersetzt. Beispiel:
 
 ```kusto
 declare pattern app = (applicationId:string)[eventType:string]

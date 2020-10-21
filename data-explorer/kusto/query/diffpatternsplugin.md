@@ -4,27 +4,27 @@ description: Dieser Artikel beschreibt das diffpatterns-Plug-in in Azure Daten-E
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0be0dc12f48723bc83376a36db04f764991f7f0d
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: f269bb12c4e4f73f7a7e6c4e9818d47dfc8002ef
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803096"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92249485"
 ---
 # <a name="diff-patterns-plugin"></a>Vergleichs Muster-Plugin
 
 Vergleicht zwei Datasets derselben Struktur und findet Muster diskreter Attribute (Dimensionen), die Unterschiede zwischen den beiden Datasets charakterisieren.
- `Diffpatterns`wurde entwickelt, um Fehler zu analysieren (z. b. durch Vergleichen von Fehlern mit nicht-Fehlern in einem bestimmten Zeitrahmen), kann jedoch möglicherweise Unterschiede zwischen zwei Datensätzen derselben Struktur finden. 
+ `Diffpatterns` wurde entwickelt, um Fehler zu analysieren (z. b. durch Vergleichen von Fehlern mit nicht-Fehlern in einem bestimmten Zeitrahmen), kann jedoch möglicherweise Unterschiede zwischen zwei Datensätzen derselben Struktur finden. 
 
 ```kusto
 T | evaluate diffpatterns(splitColumn)
 ```
 > [!NOTE]
-> `diffpatterns`zielt darauf ab, bedeutende Muster zu finden (die Teile des Daten Unterschieds zwischen den Sätzen erfassen) und nicht für zeilenweise Unterschiede gedacht ist.
+> `diffpatterns` zielt darauf ab, bedeutende Muster zu finden (die Teile des Daten Unterschieds zwischen den Sätzen erfassen) und nicht für zeilenweise Unterschiede gedacht ist.
 
 ## <a name="syntax"></a>Syntax
 
@@ -79,9 +79,9 @@ Alle anderen Argumente sind optional, aber sie müssen wie unten angegeben sorti
 
     Beispiel: `T | extend splitColumn = iff(request-responseCode == 200, "Success" , "Failure") | evaluate diffpatterns(splitColumn, "Success","Failure", "~", "~", "~", int(-1), double(-1), long(0), datetime(1900-1-1))`
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
-`Diffpatterns`Gibt einen kleinen Satz von Mustern zurück, die verschiedene Teile der Daten in den beiden Mengen erfassen (d. h. ein Muster, das einen großen Prozentsatz der Zeilen im ersten DataSet und einen niedrigen Prozentsatz der Zeilen in der zweiten Menge erfasst). Jede Zeile in den Ergebnissen steht für ein Muster.
+`Diffpatterns` Gibt einen kleinen Satz von Mustern zurück, die verschiedene Teile der Daten in den beiden Mengen erfassen (d. h. ein Muster, das einen großen Prozentsatz der Zeilen im ersten DataSet und einen niedrigen Prozentsatz der Zeilen in der zweiten Menge erfasst). Jede Zeile in den Ergebnissen steht für ein Muster.
 
 Das Ergebnis von `diffpatterns` gibt die folgenden Spalten zurück:
 
@@ -118,12 +118,12 @@ StormEvents
 | evaluate diffpatterns(Damage, "0", "1" )
 ```
 
-|SegmentId|CountA|CountB|PercentA|PercentB|PercentDiffAB|State|EventType|Quelle|DamageCrops|
+|SegmentId|CountA|CountB|PercentA|PercentB|PercentDiffAB|Zustand|EventType|`Source`|DamageCrops|
 |---|---|---|---|---|---|---|---|---|---|
 |0|2278|93|49,8|7.1|42,7||Hagel||0|
 |1|779|512|17,03|39,08|22,05||Sturm|||
 |2|1.098|118|24,01|9,01|15|||Ausgebildeter „Spotter“|0|
-|3|136|158|2,97|12,06|9,09|||Zeitung||
+|3|136|158|2.97|12,06|9,09|||Zeitung||
 |4|359|214|7,85|16,34|8,49||Überschwemmung|||
 |5|50|122|1,09|9,31|8,22|IOWA||||
 |6|655|279|14,32|21,3|6,98|||Strafverfolgungsbehörden||

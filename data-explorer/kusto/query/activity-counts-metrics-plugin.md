@@ -4,16 +4,16 @@ description: In diesem Artikel wird activity_counts_metrics-Plug-in in Azure Dat
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: df7b994350297d911a0f3be59c791b6538899d67
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: f44af0b7c1623bfd8393ddeefee57f7f8ca27d2b
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349787"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92241732"
 ---
 # <a name="activity_counts_metrics-plugin"></a>activity_counts_metrics-Plug-In
 
@@ -45,7 +45,7 @@ Das Ausgabe Tabellen Schema ist:
 
 |`TimelineColumn`|`dim1`|...|`dim_n`|`count`|`dcount`|`new_dcount`|`aggregated_dcount`
 |---|---|---|---|---|---|---|---|---|
-|Typ: ab*`TimelineColumn`*|..|..|..|long|long|long|long|long
+|Typ: ab *`TimelineColumn`*|..|..|..|long|long|long|long|long
 
 
 * *`TimelineColumn`*: Die Startzeit des Zeitfensters.

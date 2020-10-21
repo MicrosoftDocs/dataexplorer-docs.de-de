@@ -4,16 +4,16 @@ description: In diesem Artikel wird series_subtract () in Azure Daten-Explorer b
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 9276b3d920259b4a73d3fb45c056837439b43fba
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 09d208b25096afa58bd9f673d0103b30f7e8bb47
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351232"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92241956"
 ---
 # <a name="series_subtract"></a>series_subtract()
 
@@ -27,7 +27,7 @@ Berechnet die Element Weise Subtraktion von zwei numerischen Reihen Eingaben.
 
 * *Series1, series2*: numerische Eingabe Arrays, die zweite Element Weise, die vom ersten in ein dynamisches Array Ergebnis subtrahiert wird. Alle Argumente müssen dynamische Arrays sein. 
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Dynamisches Array des berechneten Element weisen subtrahieren-Vorgangs zwischen den beiden Eingaben. Ein nicht numerisches Element oder ein nicht vorhandenes Element (Arrays mit unterschiedlichen Größen) ergeben einen- `null` Elementwert.
 

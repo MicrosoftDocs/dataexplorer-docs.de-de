@@ -4,16 +4,16 @@ description: In diesem Artikel wird array_rotate_left () in Azure Daten-Explorer
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: fa5ae1266b97c7ee01a65bc36c7508cac0779ab2
-ms.sourcegitcommit: 2764e739b4ad51398f4f0d3a9742d7168c4f5fd7
+ms.openlocfilehash: 7c9e6a318ebcd0a0911b3a86c1bf0ad99aeb2f51
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/05/2020
-ms.locfileid: "91712084"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248128"
 ---
 # <a name="array_rotate_left"></a>array_rotate_left()
 

@@ -4,16 +4,16 @@ description: In diesem Artikel wird beta_inv () in Azure Daten-Explorer beschrie
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: deb91e6131d5662017ebdf714a79d0ee391c8ba1
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: 4e302f997addbdc4f2f9da4bd906844dbd1d07a4
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103303"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248004"
 ---
 # <a name="beta_inv"></a>beta_inv()
 
@@ -37,7 +37,7 @@ Die Beta-Verteilung kann bei der Projektplanung verwendet werden, um wahrscheinl
 * *Alpha*: ein Parameter der Verteilung.
 * *Beta*: ein Parameter der Verteilung.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 * Die Umkehrung der kumulativen Beta-Wahrscheinlichkeitsdichte-Funktion [beta_cdf ()](./beta-cdffunction.md) .
 

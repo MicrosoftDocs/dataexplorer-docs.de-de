@@ -4,16 +4,16 @@ description: In diesem Artikel wird AVG () (Aggregations Funktion) in Azure Date
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: f058af075a856d12a2a6a81419f32b6efbd9ea16
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 949bd463f57b9eb0b674fe780aa50e78e30926a2
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349396"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248029"
 ---
 # <a name="avg-aggregation-function"></a>AVG () (Aggregations Funktion)
 

@@ -4,16 +4,16 @@ description: In diesem Artikel wird HLL () (Aggregations Funktion) in Azure Date
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/15/2020
-ms.openlocfilehash: e602a920dd07089f688f39115805a2f99d505c9c
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 4474299c804e1b54d3060d639d171652e770d989
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347560"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92241604"
 ---
 # <a name="hll-aggregation-function"></a>HLL () (Aggregations Funktion)
 

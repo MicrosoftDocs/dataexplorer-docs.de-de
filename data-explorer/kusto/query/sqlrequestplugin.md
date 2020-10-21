@@ -4,18 +4,18 @@ description: In diesem Artikel wird sql_request-Plug-in in Azure Daten-Explorer 
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: e4752828b3e4b145026f7ee47a1ade3f8685262e
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 1a6349547d5cf1eb3af5a21f6e8c504573f15e52
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803470"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92241760"
 ---
 # <a name="sql_request-plugin"></a>Plug-In „sql_request“
 
@@ -33,9 +33,9 @@ Das `sql_request` Plug-in sendet eine SQL-Abfrage an einen SQL Server Netzwerk E
 
 * *SqlQuery*: ein `string` Literalwert, der die Abfrage angibt, die für den SQL-Endpunkt ausgeführt werden soll. Muss mindestens ein Rowset zurückgeben, aber nur das erste Rowset wird für den Rest der Kusto-Abfrage zur Verfügung gestellt.
 
-* *SQLPARAMETERS*: ein konstanter Wert des Typs `dynamic` , der Schlüssel-Wert-Paare enthält, die als Parameter zusammen mit der Abfrage übergeben werden. Optional.
+* *SQLPARAMETERS*: ein konstanter Wert des Typs `dynamic` , der Schlüssel-Wert-Paare enthält, die als Parameter zusammen mit der Abfrage übergeben werden. Dies ist optional.
   
-* *Optionen*: ein konstanter Wert des Typs `dynamic` , der Erweiterte Einstellungen als Schlüssel-Wert-Paare enthält. Zurzeit `token` kann nur festgelegt werden, um einen vom Aufrufer bereitgestellten Azure AD Zugriffs Token zu übergeben, der zur Authentifizierung an den SQL-Endpunkt weitergeleitet wird. Optional.
+* *Optionen*: ein konstanter Wert des Typs `dynamic` , der Erweiterte Einstellungen als Schlüssel-Wert-Paare enthält. Zurzeit `token` kann nur festgelegt werden, um einen vom Aufrufer bereitgestellten Azure AD Zugriffs Token zu übergeben, der zur Authentifizierung an den SQL-Endpunkt weitergeleitet wird. Dies ist optional.
 
 ## <a name="examples"></a>Beispiele
 
@@ -111,8 +111,8 @@ Das sql_request-Plug-in unterstützt drei Authentifizierungsmethoden für den SQ
 
 Die folgenden Verbindungs Eigenschaften werden aus Sicherheitsgründen beim Herstellen einer Verbindung mit einem SQL Server Netzwerk Endpunkt erzwungen.
 
-* `Encrypt`wird auf bedingungslos festgelegt `true` .
-* `TrustServerCertificate`wird auf bedingungslos festgelegt `false` .
+* `Encrypt` wird auf bedingungslos festgelegt `true` .
+* `TrustServerCertificate` wird auf bedingungslos festgelegt `false` .
 
 Folglich muss der SQL Server mit einem gültigen SSL/TLS-Server Zertifikat konfiguriert werden.
 

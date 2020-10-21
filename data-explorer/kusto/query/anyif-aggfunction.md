@@ -4,16 +4,16 @@ description: In diesem Artikel wird anyif () (Aggregations Funktion) in Azure Da
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6d40b0a95b71999382f5fc4e83f108717ac5d683
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 032541f34af7d8cbc07e0c02a854ba6b66657f8c
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803385"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92248265"
 ---
 # <a name="anyif-aggregation-function"></a>anyif () (Aggregations Funktion)
 
@@ -32,7 +32,7 @@ Wählt beliebig einen Datensatz für jede Gruppe in einem Zusammenfassungs [Oper
 * *Expr*: ein Ausdruck für jeden Datensatz, der aus der Eingabe ausgewählt wurde, die zurückgegeben werden soll.
 * *Predicate*: Prädikat, um anzugeben, welche Datensätze für die Auswertung in Erwägung gezogen werden können.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Die `anyif` Aggregations Funktion gibt den Wert des Ausdrucks zurück, der für jeden der nach dem Zufallsprinzip ausgewählten Datensätze aus jeder Gruppe des Zusammenfassungs Operators berechnet wird. Es können nur Datensätze ausgewählt werden, für die das *Prädikat* "true" zurückgibt. Wenn das Prädikat "true" nicht zurückgibt, wird ein NULL-Wert erzeugt.
 

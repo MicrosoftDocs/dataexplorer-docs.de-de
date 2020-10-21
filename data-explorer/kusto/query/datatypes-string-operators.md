@@ -4,16 +4,16 @@ description: In diesem Artikel werden Zeichen folgen Operatoren in Azure Daten-E
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/19/2020
-ms.openlocfilehash: c2a841bc78c8f17ac3a929b2541b08d5db682da1
-ms.sourcegitcommit: 88923cfb2495dbf10b62774ab2370b59681578b9
+ms.openlocfilehash: 61ed36d5d1657957b38ea78f0d2e09faa3a3f4e9
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/19/2020
-ms.locfileid: "92175520"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247774"
 ---
 # <a name="string-operators"></a>Zeichenfolgenoperatoren
 
