@@ -4,16 +4,16 @@ description: In diesem Artikel wird base64_encode_tostring () in Azure Daten-Exp
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/22/2019
-ms.openlocfilehash: 218f87a3c11695c4aa8135f98b0c445580de9ad0
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6fca71cbc7cf33f49a9f4698553391a84ddbb728
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349260"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252662"
 ---
 # <a name="base64_encode_tostring"></a>base64_encode_tostring()
 

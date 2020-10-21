@@ -4,16 +4,16 @@ description: In diesem Artikel wird EndOf Week () in Azure Daten-Explorer beschr
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 57fa1764753e730f9ff0a2b01a70e0c221217d23
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 47a5c9dd11af7282c38aabdd08b8b3bec571e57a
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348274"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92253041"
 ---
 # <a name="endofweek"></a>endofweek()
 

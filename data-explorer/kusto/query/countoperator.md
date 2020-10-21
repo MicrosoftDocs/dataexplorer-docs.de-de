@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt den count-Operator in Azure Daten-Explore
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/16/2020
-ms.openlocfilehash: 969efc142f1cd823b319a5c98494542fb2603f24
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: bf595e27d7b4881dca7b5e2a370c90a8407a8c78
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348733"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252600"
 ---
 # <a name="count-operator"></a>count-Operator
 

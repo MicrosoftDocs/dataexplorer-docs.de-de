@@ -4,18 +4,18 @@ description: Dieser Artikel beschreibt Cluster () (Scope-Funktion) in Azure Date
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 3e1f74d6605b4916a2718a00fd252141060d748f
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: b2f9dd3fd3eede1f6d527c97b905353f9a331620
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348886"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92253072"
 ---
 # <a name="cluster-scope-function"></a>Cluster () (Scope-Funktion)
 

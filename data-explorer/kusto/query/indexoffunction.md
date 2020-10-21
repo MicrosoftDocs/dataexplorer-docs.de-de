@@ -4,16 +4,16 @@ description: In diesem Artikel wird IndexOf () in Azure Daten-Explorer beschrieb
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8e237441d28f12ffc6f27f8a591980a701825e39
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 1558e2463c2958965fcb501aff99c7ec14fe8688
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347458"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252953"
 ---
 # <a name="indexof"></a>indexof()
 
@@ -31,8 +31,8 @@ Weitere Informationen finden Sie unter [`indexof_regex()`](indexofregexfunction.
 
 * *Quelle*: Eingabe Zeichenfolge.  
 * *Suche*: Zeichenfolge, die gesucht werden soll.
-* *start_index*: Startposition der Suche. Optional.
-* *length*: Anzahl der zu überprüfenden Zeichen Positionen. Der Wert-1 bedeutet eine unbegrenzte Länge. Optional.
+* *start_index*: Startposition der Suche. Dies ist optional.
+* *length*: Anzahl der zu überprüfenden Zeichen Positionen. Der Wert-1 bedeutet eine unbegrenzte Länge. Dies ist optional.
 * *vorkommen*: die Anzahl der vorkommen. Standardwert: 1. Optional.
 
 ## <a name="returns"></a>Rückgabe

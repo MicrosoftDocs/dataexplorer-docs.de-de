@@ -4,16 +4,16 @@ description: In diesem Artikel wird hll_merge () in Azure Daten-Explorer beschri
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/15/2019
-ms.openlocfilehash: ecf16a714b0466a7ffc2da7b69f117383c90970e
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6bf364106bef8fbe626f96c22502dae748884180
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347526"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252975"
 ---
 # <a name="hll_merge"></a>hll_merge()
 
@@ -29,7 +29,7 @@ Erfahren Sie mehr über den [zugrunde liegenden Algorithmus (*H*yper*L*og*l*OG) 
 
 * Spalten `hll` mit Werten, die zusammengeführt werden sollen.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Das Ergebnis für das Zusammenführen der Spalten `*Exrp1*` , `*Expr2*` ,... `*ExprN*` zu einem `hll` Wert.
 

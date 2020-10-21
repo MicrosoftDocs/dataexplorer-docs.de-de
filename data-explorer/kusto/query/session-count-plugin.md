@@ -4,16 +4,16 @@ description: In diesem Artikel wird session_count-Plug-in in Azure Daten-Explore
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: c46430fe7acc75685b90d2322d709392c91ed6dc
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 0790a3ab173bc653cbd3c4c15b3f28e5a0c70cd5
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351215"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252897"
 ---
 # <a name="session_count-plugin"></a>session_count-Plug-In
 
@@ -55,7 +55,7 @@ In diesem Beispiel sind die Daten deterministisch, und wir verwenden eine Tabell
 - Zeitachse: eine laufende Zahl zwischen 1 und 10.000
 - ID: ID des Benutzers von 1 bis 50
 
-`Id`wird an einem bestimmten `Timeline` Slot angezeigt, wenn es sich um einen unter Teiler von handelt `Timeline` (Timeline% ID = = 0).
+`Id` wird an einem bestimmten `Timeline` Slot angezeigt, wenn es sich um einen unter Teiler von handelt `Timeline` (Timeline% ID = = 0).
 
 Ein Ereignis mit `Id==1` wird an jedem `Timeline` Slot, einem Ereignis mit `Id==2` jedem zweiten `Timeline` Slot usw. angezeigt.
 

@@ -4,16 +4,16 @@ description: In diesem Artikel wird active_users_count-Plug-in in Azure Daten-Ex
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 75f1c92dfb76c56894d1f38dec24a31690f3f789
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: a35cbb4c9078d58f2c9de3c681453c578baf1476
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349838"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252871"
 ---
 # <a name="active_users_count-plugin"></a>active_users_count-Plug-In
 
@@ -92,6 +92,6 @@ Ein Benutzer gilt als aktiv, wenn er beide der folgenden Kriterien erfüllt:
 * Der Benutzer wurde in mindestens drei verschiedenen Tagen angezeigt (Period = 1D, activezeiträume = 3).
 * Der Benutzer wurde in einem Nachschlage Fenster von 8D vor und einschließlich der aktuellen Darstellung angezeigt.
 
-In der Abbildung unten sind die folgenden Instanzen, die von diesem Kriterium aktiv sind, die folgenden Instanzen: Benutzer A auf 7/20 und Benutzer B auf 7/4 (siehe Plug-in-Ergebnisse weiter oben). Der Anschein von Benutzer B ist für das Nachschlage Fenster auf 7/4, jedoch nicht für den Start-End-Zeitbereich von 6/29-30 enthalten. 
+In der Abbildung unten sind die folgenden Instanzen, die von diesem Kriterium aktiv sind, die folgenden Instanzen: Benutzer A auf 7/20 und Benutzer B auf 7/4 (siehe Plug-in-Ergebnisse weiter oben). Der Anschein von Benutzer B ist für das Nachschlage Fenster in 7/4 enthalten, jedoch nicht für den Start-End Zeitbereich von 6/29-30. 
 
 :::image type="content" source="images/queries/active-users-count.png" alt-text="Beispiel für aktive Benutzer Anzahl":::

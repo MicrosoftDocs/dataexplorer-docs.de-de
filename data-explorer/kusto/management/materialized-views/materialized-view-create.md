@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: f67b2d61cfed297886447a97dd178dfb578a2c68
-ms.sourcegitcommit: 463ee13337ed6d6b4f21eaf93cf58885d04bccaa
+ms.openlocfilehash: 95f8ce19c6edb419de4fb5053a79c243e3e332c4
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/30/2020
-ms.locfileid: "91572142"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252847"
 ---
 # <a name="create-materialized-view"></a>.create materialized-view
 
@@ -45,7 +45,7 @@ Für den Create-Vorgang sind [Datenbankadministrator](../access-control/role-bas
 
 ## <a name="arguments"></a>Argumente
 
-|Argument|Type|Beschreibung
+|Argument|type|BESCHREIBUNG
 |----------------|-------|---|
 |Ansichtsname|String|Der materialisierte Sichtname. Der Sichtname kann nicht mit Tabellen-oder Funktionsnamen in derselben Datenbank in Konflikt stehen und muss den [bezeichnerbenennungs Regeln](../../query/schema-entities/entity-names.md#identifier-naming-rules)entsprechen. |
 |SourceTableName|String|Der Name der Quell Tabelle, in der die Sicht definiert ist.|
@@ -80,7 +80,7 @@ Die im materialisierte View-Argument verwendete Abfrage ist durch die folgenden 
 
 Die folgenden Elemente werden in der-Klausel unterstützt `with(propertyName=propertyValue)` . Alle Eigenschaften sind optional.
 
-|Eigenschaft|Type|Beschreibung |
+|Eigenschaft|type|BESCHREIBUNG |
 |----------------|-------|---|
 |Abgleich|bool|Gibt an, ob die Ansicht auf der Grundlage aller Datensätze erstellt werden soll, die sich derzeit in *SourceTable* ( `true` ) befinden, oder ob Sie "From-Now-on" () erstellt wird `false` Der Standardwert ist `false`.| 
 |effectivedatetime|datetime| Wenn die Angabe zusammen mit festgelegt `backfill=true` ist, wird die Erstellung nur mit Datensätzen Rück gefüllt, die nach DateTime erfasst wurden. "Backfill" muss ebenfalls auf "true" festgelegt werden. Erwartet ein DateTime-Literalzeichen, z. b. `effectiveDateTime=datetime(2019-05-01)`|
@@ -161,14 +161,14 @@ Die folgenden Elemente werden in der-Klausel unterstützt `with(propertyName=pro
 
     <!-- csl -->
     ```
-    .create materialized-view EnrichedArgMax on table T with (dimensionTable = ['DimUsers'])
+    .create materialized-view EnrichedArgMax on table T with (dimensionTables = ['DimUsers'])
     {
         T
         | lookup DimUsers on User  
         | summarize arg_max(Timestamp, *) by User 
     }
     
-    .create materialized-view EnrichedArgMax on table T with (dimensionTable = ['DimUsers'])
+    .create materialized-view EnrichedArgMax on table T with (dimensionTables = ['DimUsers'])
     {
         DimUsers | project User, Age, Address
         | join kind=rightouter hint.strategy=broadcast T on User
@@ -289,13 +289,13 @@ Der Erstellungs Prozess kann nicht sofort abgebrochen werden. Der Cancel-Befehl 
 
 ### <a name="properties"></a>Eigenschaften
 
-|Eigenschaft|Type|Beschreibung
+|Eigenschaft|type|BESCHREIBUNG
 |----------------|-------|---|
 |operationId|Guid|Die Vorgangs-ID, die vom CREATE MATERIALIZED-VIEW-Befehl zurückgegeben wird.|
 
-### <a name="output"></a>Ausgabe
+### <a name="output"></a>Output
 
-|Ausgabeparameter |Type |Beschreibung
+|Ausgabeparameter |type |BESCHREIBUNG
 |---|---|---
 |OperationId|Guid|Die Vorgangs-ID des Befehls Create materialisierte View.
 |Vorgang|String|Art des Vorgangs.

@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt das Warenkorb-Plug-in in Azure Daten-Expl
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/26/2019
-ms.openlocfilehash: cf83690d61bb84d1b6b877e76a77d5776be35ad4
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 9436254d72f364edc1f6a758ce2325e272367293
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349243"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252676"
 ---
 # <a name="basket-plugin"></a>basket-Plug-In
 
@@ -88,7 +88,7 @@ StormEvents
 |3|2371|40,3||Hagel||0
 |4|1.279|21,7||Sturm||0
 |5|2.468|41,9||Hagel||
-|6|1.310|22,3|||YES|
+|6|1.310|22.3|||YES|
 |7|1.291|21,9||Sturm||
 
 **Beispiel mit benutzerdefinierten Platzhaltern**
@@ -110,5 +110,5 @@ StormEvents
 |3|2371|40,3|\*|Hagel|\*|0
 |4|1.279|21,7|\*|Sturm|\*|0
 |5|2.468|41,9|\*|Hagel|\*|-1
-|6|1.310|22,3|\*|\*|YES|-1
+|6|1.310|22.3|\*|\*|YES|-1
 |7|1.291|21,9|\*|Sturm|\*|-1

@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt Assert () in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: 050974af47b0f5cd0e041694ee5f680b8c321614
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 442fbec2742a4d1edc7a9ad03a81db27e6d18574
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803316"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252780"
 ---
 # <a name="assert"></a>assert()
 
@@ -29,11 +29,11 @@ ms.locfileid: "87803316"
 * *Message*: die Meldung, die verwendet wird, wenn die-Assertionen ausgewertet werden `false` Die *Nachricht* muss ein zeichenfolgenliteralsein.
 
 > [!NOTE]
-> `condition`muss in der Phase der Abfrage Analyse als konstant ausgewertet werden. Das heißt, Sie kann aus anderen Ausdrücken erstellt werden, die auf Konstanten verweisen und nicht an den Zeilen Kontext gebunden werden können.
+> `condition` muss in der Phase der Abfrage Analyse als konstant ausgewertet werden. Das heißt, Sie kann aus anderen Ausdrücken erstellt werden, die auf Konstanten verweisen und nicht an den Zeilen Kontext gebunden werden können.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
-* `true`-Wenn die Bedingung ist`true`
+* `true` -Wenn die Bedingung ist `true`
 * Löst einen semantischen Fehler aus, wenn die Bedingung als ausgewertet wird `false` .
 
 ## <a name="examples"></a>Beispiele

@@ -4,16 +4,16 @@ description: In diesem Artikel wird base64_decode_tostring () in Azure Daten-Exp
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/22/2019
-ms.openlocfilehash: 17d88c8be518b6d31b67a327a7a5d42818132cb9
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: eab1065713bcbc73913a2ab17a99894d9af9f8a4
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349294"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252717"
 ---
 # <a name="base64_decode_tostring"></a>base64_decode_tostring()
 
@@ -27,7 +27,7 @@ Decodiert eine base64-Zeichenfolge in eine UTF-8-Zeichenfolge.
 
 * *String*: die Eingabe Zeichenfolge, die von Base64 in UTF8-8-Zeichenfolge decodiert werden soll.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Gibt die aus base64-Zeichenfolge decodierte UTF-8-Zeichenfolge zurück
 

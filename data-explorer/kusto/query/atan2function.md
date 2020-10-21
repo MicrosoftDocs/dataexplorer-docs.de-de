@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt atan2 () in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 60b500109f140290427a6d1ad3baba8e25849b57
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 1229ff1476afe2863f07cfc0ff7aecffadd5867f
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349447"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252763"
 ---
 # <a name="atan2"></a>atan2()
 

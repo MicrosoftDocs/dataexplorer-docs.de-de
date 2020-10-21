@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 5bb05de1ad5a3a055201f42541927619777cafcd
-ms.sourcegitcommit: 05489ce5257c0052aee214a31562578b0ff403e7
+ms.openlocfilehash: d0f815cd523e0e53111e791d8faaaf6c37c7bb7b
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88793729"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252846"
 ---
 # <a name="query-limits"></a>Abfragegrenzwerte
 
@@ -26,7 +26,8 @@ Die **Abfrage** Parallelität ist ein Limit, das ein Cluster für eine Reihe von
 
 * Der Standardwert des Abfrage Parallelitäts Limits hängt von dem SKU-Cluster ab, auf dem er ausgeführt wird, und wird wie folgt berechnet: `Cores-Per-Node x 10` .
   * Beispielsweise ist für einen Cluster, der auf der D14v2-SKU eingerichtet ist, wobei jeder Computer über 16 virtuelle Kerne verfügt, das Standard Limit für die Abfrage Parallelität `16 cores x10 = 160` .
-* Der Standardwert kann geändert werden, indem Sie ein Support Ticket erstellen. In Zukunft wird dieses Steuerelement auch über einen Steuerelement Befehl verfügbar gemacht.
+* Der Standardwert kann durch Konfigurieren der [Richtlinie für die Abfrage Drosselung](../management/query-throttling-policy.md)geändert werden. 
+  * Die tatsächliche Anzahl von Abfragen, die gleichzeitig in einem Cluster ausgeführt werden können, hängt von verschiedenen Faktoren ab. Die wichtigsten Faktoren sind Cluster-SKU, verfügbare Cluster Ressourcen und Abfrage Muster. Die Richtlinie für die Abfrage Drosselung kann basierend auf Auslastungs Tests konfiguriert werden, die für Produktions ähnliche Abfrage Muster ausgeführt werden.
 
 ## <a name="limit-on-result-set-size-result-truncation"></a>Grenzwert für die Größe des Resultsets (Ergebnis abschneiden)
 
@@ -59,7 +60,7 @@ Zu den Methoden zum Verringern der von der Abfrage erzeugten resultsetgröße ge
 Sie können die Ergebnis Verkürzung mithilfe der `notruncation` Option Request deaktivieren.
 Es wird empfohlen, dass eine bestimmte Art von Einschränkung immer noch vorhanden ist.
 
-Zum Beispiel:
+Beispiel:
 
 ```kusto
 set notruncation;
@@ -181,7 +182,7 @@ Der erste, *query_fanout_threads_percent*, steuert den Verzweigungen angibt-Fakt
 
 Während der Abfrage Ausführung wird der Abfragetext in eine Struktur von relationalen Operatoren transformiert, die die Abfrage darstellen.
 Wenn die Baum Tiefe einen internen Schwellenwert von mehreren tausend Ebenen überschreitet, wird die Abfrage als zu komplex für die Verarbeitung betrachtet und schlägt mit einem Fehlercode fehl. Der Fehler zeigt an, dass die Struktur der relationalen Operatoren die Grenzen überschreitet.
-Limits werden aufgrund von Abfragen mit langen Listen binärer Operatoren, die miteinander verkettet sind, überschritten. Zum Beispiel:
+Limits werden aufgrund von Abfragen mit langen Listen binärer Operatoren, die miteinander verkettet sind, überschritten. Beispiel:
 
 ```kusto
 T 

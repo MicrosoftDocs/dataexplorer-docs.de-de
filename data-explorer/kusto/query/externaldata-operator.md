@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt den externen Daten Operator in Azure Date
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 8bb30180a7506b594e5747e3591f0d1aff80f8c3
-ms.sourcegitcommit: f689547c0f77b1b8bfa50a19a4518cbbc6d408e5
+ms.openlocfilehash: 5b17b69fd49e937b672da07dd0b5c8abae9100fb
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/08/2020
-ms.locfileid: "89557359"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92253045"
 ---
 # <a name="externaldata-operator"></a>externaldata-Operator
 
@@ -47,7 +47,7 @@ Derzeit werden die folgenden Eigenschaften unterstützt:
 > * Dieser Operator akzeptiert keine Pipeline Eingaben.
 > * Standard mäßige [Abfrage Limits](../concepts/querylimits.md) gelten auch für externe Daten Abfragen.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Der- `externaldata` Operator gibt eine Datentabelle des angegebenen Schemas zurück, dessen Daten aus dem angegebenen Speicher Element analysiert wurden, angegeben durch die Speicher Verbindungs Zeichenfolge.
 

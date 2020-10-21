@@ -25,7 +25,7 @@ Logik-APP und Flow werden auf demselben Connector erstellt. Daher gelten die fü
 1. Öffnen Sie die [Microsoft Azure-Portal](https://ms.portal.azure.com/). 
 1. Suchen Sie nach `logic app`, und wählen Sie diese Option aus.
 
-    :::image type="content" source="./images/logicapps/logicapp-search.png" alt-text="Suchen nach "Logik-app" in der Azure-Portal, Azure Daten-Explorer" lightbox="./images/logicapps/logicapp-search.png#lightbox":::
+    :::image type="content" source="./images/logicapps/logicapp-search.png" alt-text="Suchen nach &quot;Logik-app&quot; in der Azure-Portal, Azure Daten-Explorer" lightbox="./images/logicapps/logicapp-search.png#lightbox":::
 
 1. Wählen Sie **+ Hinzufügen** aus.
 

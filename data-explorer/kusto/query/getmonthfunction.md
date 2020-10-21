@@ -4,16 +4,16 @@ description: In diesem Artikel wird getMonth () in Azure Daten-Explorer beschrie
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/22/2020
-ms.openlocfilehash: 13254314bdbab7ddbdb74341e384867c26b6259d
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 1b3f87c7be8f4b2e12fc0136c163c4df0766eed8
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347696"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252979"
 ---
 # <a name="getmonth"></a>getmonth()
 

@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: a96e47eeb8c0a27ffb1f1446b68d6adc8e564e4b
-ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
+ms.openlocfilehash: 8f56568f87c391122b468d7f3ae8027eabe4641e
+ms.sourcegitcommit: 9dbbdf0c339f9af78d754e3fb44b9a4f2469003a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88610643"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92292854"
 ---
 # <a name="kustoexplorer-installation-and-user-interface"></a>Installation und Benutzeroberfläche von Kusto.Explorer
 
@@ -26,10 +26,12 @@ Mit Kusto.Explorer haben Sie die folgenden Möglichkeiten:
 
 ## <a name="installing-kustoexplorer"></a>Installieren von Kusto.Explorer
 
-* Laden Sie das Kusto.Explorer-Tool von [https://aka.ms/ke](https://aka.ms/ke) herunter, und installieren Sie es.
+* Laden Sie das Kusto.Explorer-Tool über die folgenden Links herunter, und installieren Sie es:
+     * [https://aka.ms/ke](https://aka.ms/ke) (CDN-Adresse)
+     * [https://aka.ms/ke-mirror](https://aka.ms/ke-mirror) (keine CDN-Adresse)
 
-* Alternativ können Sie auch mit Ihrem Browser unter der folgenden URL auf Ihren Kusto-Cluster zugreifen: `https://<your_cluster>.kusto.windows.net.`
-   Ersetzen Sie hierbei &lt;your_cluster&gt; durch den Namen Ihres Azure Data Explorer-Clusters.
+* Alternativ können Sie auch mit Ihrem Browser unter der folgenden URL auf Ihren Kusto-Cluster zugreifen: `https://<your_cluster>.<region>.kusto.windows.net.`
+   Ersetzen Sie hierbei &lt;your_cluster&gt; und &lt;region&gt; durch den Namen und die Bereitstellungsregion Ihres Azure Data Explorer-Clusters.
 
 ### <a name="using-chrome-and-kustoexplorer"></a>Verwenden von Chrome und Kusto.Explorer
 
@@ -63,7 +65,7 @@ Der Menübereich von Kusto.Explorer enthält die folgenden Registerkarten:
 
 ### <a name="home-tab"></a>Registerkarte "Home"
 
-:::image type="content" source="images/kusto-explorer/home-tab.png" alt-text="Registerkarte „Start“ von Kusto.Explorer":::
+:::image type="content" source="images/kusto-explorer/home-tab.png" alt-text="Kusto.Explorer: Start":::
 
 Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in verschiedenen Abschnitten angezeigt:
 
@@ -75,7 +77,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ### <a name="query-section"></a>Abschnitt „Abfrage“
 
-:::image type="content" source="images/kusto-explorer/home-query-menu.png" alt-text="Menü „Abfrage“ in Kusto.Explorer":::
+:::image type="content" source="images/kusto-explorer/home-query-menu.png" alt-text="Kusto.Explorer: Start":::
 
 |Menü|    Verhalten|
 |----|----------|
@@ -84,7 +86,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ### <a name="share-section"></a>Abschnitt „Freigabe“
 
-:::image type="content" source="images/kusto-explorer/home-share-menu.png" alt-text="Menü „Freigabe“ von Kusto.Explorer":::
+:::image type="content" source="images/kusto-explorer/home-share-menu.png" alt-text="Kusto.Explorer: Start":::
 
 |Menü|    Verhalten|
 |----|----------|
@@ -94,7 +96,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ### <a name="visualizations-section"></a>Abschnitt „Visualisierungen“
 
-:::image type="content" source="images/kusto-explorer/home-visualizations-menu.png" alt-text="Menü „Visualisierungen“ in Kusto.Explorer":::
+:::image type="content" source="images/kusto-explorer/home-visualizations-menu.png" alt-text="Kusto.Explorer: Start":::
 
 |Menü         | Verhalten|
 |-------------|---------|
@@ -118,7 +120,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ### <a name="view-section"></a>Abschnitt „Ansicht“
 
-:::image type="content" source="images/kusto-explorer/home-view-menu.png" alt-text="Menü „Ansicht“ in Kusto.Explorer":::
+:::image type="content" source="images/kusto-explorer/home-view-menu.png" alt-text="Kusto.Explorer: Start":::
 
 |Menü           | Verhalten|
 |---------------|---------|
@@ -136,7 +138,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="file-tab"></a>Registerkarte „Datei“
 
-:::image type="content" source="images/kusto-explorer/file-tab.png" alt-text="Registerkarte „Datei“ in Kusto.Explorer":::
+:::image type="content" source="images/kusto-explorer/file-tab.png" alt-text="Kusto.Explorer: Start":::
 
 |Menü| Verhalten|
 |---------------|---------|
@@ -164,7 +166,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="connections-tab"></a>Registerkarte „Verbindungen“
 
-:::image type="content" source="images/kusto-explorer/connections-tab.png" alt-text="Registerkarte „Verbindungen“ in Kusto.Explorer":::
+:::image type="content" source="images/kusto-explorer/connections-tab.png" alt-text="Kusto.Explorer: Start":::
 
 |Menü|Verhalten|
 |----|----------|
@@ -189,7 +191,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="view-tab"></a>Registerkarte Ansicht
 
-:::image type="content" source="images/kusto-explorer/view-tab.png" alt-text="Registerkarte „Ansicht“ in Kusto.Explorer":::
+:::image type="content" source="images/kusto-explorer/view-tab.png" alt-text="Kusto.Explorer: Start":::
 
 |Menü|Verhalten|
 |----|----------|
@@ -218,7 +220,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="tools-tab"></a>Registerkarte „Extras“
 
-:::image type="content" source="images/kusto-explorer/tools-tab.png" alt-text="Registerkarte „Extras“ in Kusto.Explorer":::
+:::image type="content" source="images/kusto-explorer/tools-tab.png" alt-text="Kusto.Explorer: Start":::
 
 |Menü|Verhalten|
 |----|----------|
@@ -238,7 +240,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="monitoring-tab"></a>Registerkarte „Überwachung“
 
-:::image type="content" source="images/kusto-explorer/monitoring-tab.png" alt-text="Registerkarte „Überwachung“ in Kusto.Explorer":::
+:::image type="content" source="images/kusto-explorer/monitoring-tab.png" alt-text="Kusto.Explorer: Start":::
 
 |Menü             | Verhalten|
 |-----------------|---------| 
@@ -249,7 +251,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="management-tab"></a>Registerkarte „Verwaltung“
 
-:::image type="content" source="images/kusto-explorer/management-tab.png" alt-text="Registerkarte „Verwaltung“ in Kusto.Explorer":::
+:::image type="content" source="images/kusto-explorer/management-tab.png" alt-text="Kusto.Explorer: Start":::
 
 |Menü             | Verhalten|
 |-----------------|---------|
@@ -261,7 +263,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="help-tab"></a>Registerkarte „Hilfe“
 
-:::image type="content" source="images/kusto-explorer/help-tab.png" alt-text="Registerkarte „Hilfe“ in Kusto.Explorer":::
+:::image type="content" source="images/kusto-explorer/help-tab.png" alt-text="Kusto.Explorer: Start":::
 
 |Menü             | Verhalten|
 |-----------------|---------|
@@ -274,7 +276,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="connections-panel"></a>Bereich „Verbindungen“
 
-:::image type="content" source="images/kusto-explorer/connections-panel.png" alt-text="Bereich „Verbindungen“ in Kusto.Explorer":::
+:::image type="content" source="images/kusto-explorer/connections-panel.png" alt-text="Kusto.Explorer: Start":::
 
 Im Bereich „Verbindungen“ werden alle konfigurierten Clusterverbindungen angezeigt. Für jeden Cluster werden die darin gespeicherten Datenbanken, Tabellen und Attribute (Spalten) angezeigt. Wählen Sie Einträge aus (um einen impliziten Kontext für die Suche/Abfrage im Hauptbereich festzulegen), oder doppelklicken Sie auf Einträge, um den Namen in den Bereich für die Suche/Abfrage zu kopieren.
 
@@ -309,7 +311,7 @@ Data Source=https://CLUSTER_NAME.kusto.windows.net;Initial Catalog=DATABASE_NAME
 >[!NOTE]
 > Der Domänenname des Benutzers muss nicht unbedingt dem Domänennamen des Mandanten entsprechen, von dem der Cluster gehostet wird.
 
-:::image type="content" source="images/kusto-explorer/advanced-connection-string.png" alt-text="Erweiterte Verbindungszeichenfolge in Kusto.Explorer":::
+:::image type="content" source="images/kusto-explorer/advanced-connection-string.png" alt-text="Kusto.Explorer: Start":::
 
 ## <a name="keyboard-shortcuts"></a>Tastenkombinationen
 
@@ -321,7 +323,7 @@ Kusto.Explorer versucht, den Schweregrad oder den Ausführlichkeitsgrad der einz
 
 Wählen Sie im Menü **Extras** die Option **Optionen** > **Results Viewer** > **Verbosity color scheme** (Ergebnisansicht > Farbschema für Ausführlichkeit) aus, um das Schema für die Ausgabefarbe zu ändern oder dieses Verhalten zu deaktivieren.
 
-:::image type="content" source="images/kusto-explorer/ke-color-scheme.png" alt-text="Änderung des Farbschemas für Kusto.Explorer":::
+:::image type="content" source="images/kusto-explorer/ke-color-scheme.png" alt-text="Kusto.Explorer: Start":::
 
 ## <a name="next-steps"></a>Nächste Schritte
 

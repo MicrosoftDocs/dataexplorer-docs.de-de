@@ -4,18 +4,18 @@ description: In diesem Artikel werden die Abfrage Anweisungen in Azure Daten-Exp
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 778b8c276d6264b890c0b0be7b127f578663a64d
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: e546f71c3eb4eda09ff7061dd1a3be9eb6ad6c88
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85129055"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252884"
 ---
 # <a name="query-statement-types"></a>Abfrageanweisungstypen
 

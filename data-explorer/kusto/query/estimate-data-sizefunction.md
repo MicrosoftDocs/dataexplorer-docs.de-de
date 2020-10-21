@@ -4,16 +4,16 @@ description: In diesem Artikel wird estimate_data_size () in Azure Daten-Explore
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 00438528f00c91a95fde9a77a7aa18a75002fce9
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 09d722b07b3ff49a294d4d8ce19a89563fc8f66e
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348240"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92253024"
 ---
 # <a name="estimate_data_size"></a>estimate_data_size()
 
