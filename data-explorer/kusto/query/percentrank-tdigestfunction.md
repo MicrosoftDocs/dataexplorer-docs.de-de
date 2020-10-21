@@ -4,16 +4,16 @@ description: In diesem Artikel wird percentrank_tdigest () in Azure Daten-Explor
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: 33eb35e51f403a3c0b7a2f030604b12c705221ea
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: dd784d8968b45a735bd2df840a09c349e2fdcbd2
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346166"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92249693"
 ---
 # <a name="percentrank_tdigest"></a>percentrank_tdigest()
 

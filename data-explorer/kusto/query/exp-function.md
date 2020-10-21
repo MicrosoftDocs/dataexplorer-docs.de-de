@@ -4,16 +4,16 @@ description: In diesem Artikel wird Exp () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: d990fee2ba9a93781a702bd76739e9f7085ce92c
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: c1a324e2438031184126fa3fc7d223a070a9b40b
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348206"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92243371"
 ---
 # <a name="exp"></a>exp()
 
@@ -27,7 +27,7 @@ Die exponentielle base-e-Funktion von x, die e für Power x: e ^ x ausgelöst wi
 
 * *x*: eine reelle Zahl, Wert des Exponenten.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 * Exponentieller Wert von x.
 * Einen natürlichen Logarithmus (Basis-e) finden Sie unter [Log ()](log-function.md).

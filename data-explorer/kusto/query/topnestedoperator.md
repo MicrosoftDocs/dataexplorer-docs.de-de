@@ -4,16 +4,16 @@ description: In diesem Artikel wird der Top-netsted-Operator in Azure Daten-Expl
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 85a59adc355c3d8855c34bcf97d29d3bd6eea4a1
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: ce56040e2135a455e29a8ff0ce83d832cbf5c5f7
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803130"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92243722"
 ---
 # <a name="top-nested-operator"></a>top-nested operator
 
@@ -64,9 +64,9 @@ Für jede *topnetstedclause*:
    * [Perzentil ()](percentiles-aggfunction.md), und
    * [percentilew ()](percentiles-aggfunction.md). Jede algebraische Kombination der Aggregationen wird ebenfalls unterstützt.
 
-* `asc`oder `desc` (der Standardwert) wird möglicherweise angezeigt, um zu steuern, ob die Auswahl tatsächlich von der "untersten" oder "Top" des Bereichs der aggregierten Werte ist.
+* `asc` oder `desc` (der Standardwert) wird möglicherweise angezeigt, um zu steuern, ob die Auswahl tatsächlich von der "untersten" oder "Top" des Bereichs der aggregierten Werte ist.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Dieser Operator gibt eine Tabelle mit zwei Spalten für jede Aggregations Klausel zurück:
 
@@ -80,7 +80,7 @@ Eingabe Spalten, die nicht als Werte angegeben werden, werden *`Expr`* nicht aus
 Um alle Werte auf einer bestimmten Ebene zu erhalten, fügen Sie eine Anzahl von Aggregationen hinzu:
 
 * Lässt den Wert von *N* aus.
-* Verwendet den Spaltennamen als Wert von.*`Expr`*
+* Verwendet den Spaltennamen als Wert von. *`Expr`*
 * Verwendet `Ignore=max(1)` als Aggregation und ignoriert die Spalte anschließend (oder entfernt Sie) `Ignore` .
 
 Die Anzahl der Datensätze vergrößert sich möglicherweise exponentiell mit der Anzahl von Aggregations Klauseln ((N1 + 1) \* (N2 + 1) \* ...). Die Daten Satz Vergrößerung ist noch schneller, wenn kein *N* -Limit angegeben wird. Berücksichtigen Sie, dass dieser Operator möglicherweise eine beträchtliche Menge an Ressourcen beansprucht.
@@ -97,7 +97,7 @@ StormEvents
   top-nested 1 of EndLocation by sum(BeginLat)
 ```
 
-|State|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
+|Zustand|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
 |---|---|---|---|---|---|
 |Kansas|87771.2355000001|Strafverfolgungsbehörden|18744,823|FT Scott|264,858|
 |Kansas|87771.2355000001|Öffentlich|22855,6206|Bucklin|488,2457|
@@ -118,7 +118,7 @@ StormEvents
 
 ```
 
-|State|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
+|Zustand|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|
 |---|---|---|---|---|---|
 |Kansas|87771.2355000001|Strafverfolgungsbehörden|18744,823|FT Scott|264,858|
 |Kansas|87771.2355000001|Öffentlich|22855,6206|Bucklin|488,2457|
@@ -159,7 +159,7 @@ StormEvents
 | project-away tmp
 ```
 
-|State|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|EventType|
+|Zustand|aggregated_State|`Source`|aggregated_Source|EndLocation|aggregated_EndLocation|EventType|
 |---|---|---|---|---|---|---|
 |Kansas|87771.2355000001|Ausgebildeter „Spotter“|21279,7083|Sharon-Spgs|388,7404|Sturm|
 |Kansas|87771.2355000001|Ausgebildeter „Spotter“|21279,7083|Sharon-Spgs|388,7404|Hagel|
@@ -184,7 +184,7 @@ StormEvents
 | mv-expand EndLocations, endLocationSums, indicies
 ```
 
-|State|`Source`|Endpunkte|endlocationsums|Kei|
+|Zustand|`Source`|Endpunkte|endlocationsums|Kei|
 |---|---|---|---|---|
 |TEXAS|Ausgebildeter „Spotter“|Claude|421,44|0|
 |TEXAS|Ausgebildeter „Spotter“|Amarillo|316,8892|1|

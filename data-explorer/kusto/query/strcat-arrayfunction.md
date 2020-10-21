@@ -4,16 +4,16 @@ description: In diesem Artikel wird strcat_array () in Azure Daten-Explorer besc
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5b8369d2e994477c9d01880632fac5f8a3ebaf6a
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 06bdf7eb55b61cb974e803c9cdeb7b37b34ad87e
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87342596"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92243790"
 ---
 # <a name="strcat_array"></a>strcat_array()
 

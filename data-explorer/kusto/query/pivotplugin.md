@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt das Pivot-Plug-in in Azure Daten-Explorer
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ed7f6f69669cd580482beb2d3debd0e5c45bf54b
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 430370404a7111f808a5d343b7fcd58c4eef0b41
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803147"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92249661"
 ---
 # <a name="pivot-plugin"></a>pivot-Plug-In
 
@@ -36,7 +36,7 @@ T | evaluate pivot(PivotColumn)
 * *Aggregations Funktion*: (optional) aggregiert mehrere Zeilen in der Eingabe Tabelle in eine einzelne Zeile in der Ausgabe Tabelle. Derzeit unterstützte Funktionen: `min()` , `max()` , `any()` , `sum()` , `dcount()` , `avg()` , `stdev()` , `variance()` , `make_list()` , `make_bag()` , `make_set()` , `count()` (Standardwert ist `count()` ).
 * *column1*, *Column2*,...: (optional) Spaltennamen. Die Ausgabe Tabelle enthält eine zusätzliche Spalte für jede angegebene Spalte. Standard: alle Spalten außer der pivotierten Spalte und der Aggregations Spalte.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Pivot gibt die gedrehte Tabelle mit angegebenen Spalten (*column1*, *Column2*,...) und allen eindeutigen Werten der Pivotspalten zurück. Jede Zelle für die pivotierten Spalten enthält die Berechnung der Aggregatfunktion.
 
@@ -121,7 +121,7 @@ StormEvents
 | evaluate pivot(State, sum(DeathsDirect), EventType, Source)
 ```
 
-|EventType|Quelle|ARKANSAS|Arizona|
+|EventType|`Source`|ARKANSAS|Arizona|
 |---|---|---|---|
 |Starker Regen|Katastrophenschutz|1|0|
 |Sturm|Katastrophenschutz|1|0|

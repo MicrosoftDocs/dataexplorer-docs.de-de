@@ -4,16 +4,16 @@ description: In diesem Artikel werden Percentile (), perzentiles () in Azure Dat
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 0322dd6a8ba900fa4d55bea6b3568a5c42f61b52
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: 6b48a962e1016b681525c9ee493a7a8a6e436395
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91942368"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92249712"
 ---
 # <a name="percentile-percentiles-aggregation-function"></a>Percentile (), percentiles () (Aggregations Funktion)
 
@@ -49,7 +49,7 @@ Die Genauigkeit hängt von der Bevölkerungsdichte in der Region des Perzentils 
 * `*Percentile*`: Eine Double-Konstante, die das Quantil angibt.
 * `*Dynamic array*`: Liste der Perzentile in einem dynamischen Array von ganzzahligen oder Gleit Komma Zahlen.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Gibt eine Schätzung für `*Expr*` die angegebenen Perzentilen in der Gruppe zurück. 
 

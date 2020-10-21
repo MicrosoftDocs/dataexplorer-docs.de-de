@@ -4,16 +4,16 @@ description: In diesem Artikel wird die Zeichenfolge () in Azure Daten-Explorer 
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 2093ff1117cf7744af550cf93c3fe630fa40a6e6
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 43797dcaa5e1a18b6a84f15fc0af89d88d814ff6
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87340173"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92243804"
 ---
 # <a name="tostring"></a>tostring()
 

@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt den MV-APPLY-Operator in Azure Daten-Expl
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4fb1ca893f80c045432715cd99e2dc4ea3d18c2a
-ms.sourcegitcommit: 62476f682b7812cd9cff7e6958ace5636ee46755
+ms.openlocfilehash: c15b3aaf14c9f859c3d93c48406ec642897e59d4
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/19/2020
-ms.locfileid: "92169522"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92243205"
 ---
 # <a name="mv-apply-operator"></a>mv-apply-Operator
 
@@ -162,6 +162,6 @@ _data
 |3|8|
 |4|10|
 
-## <a name="see-also"></a>Siehe auch
+## <a name="see-also"></a>Weitere Informationen
 
 * [MV-Expand-](./mvexpandoperator.md) Operator.

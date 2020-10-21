@@ -4,16 +4,16 @@ description: In diesem Artikel werden bitweise (binäre) Operatoren in Azure Dat
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 6038ee8214ef06a7feb88e95d68f4688fc8a88f4
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: e4ebdfb8fda91bb4abd613de84f7c6384b20c47c
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128919"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92243394"
 ---
 # <a name="bitwise-binary-operators"></a>Bitweise (binäre) Operatoren
 

@@ -4,16 +4,16 @@ description: In diesem Artikel wird series_fit_line_dynamic () in Azure Daten-Ex
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 80b54dce81799304a4297ee1192f2ee1475d2ec2
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 157a9d88327cc4f35566c9e0b3890e2124098048
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351521"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242045"
 ---
 # <a name="series_fit_line_dynamic"></a>series_fit_line_dynamic()
 

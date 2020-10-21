@@ -4,16 +4,16 @@ description: In diesem Artikel wird Sign () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 8d6761cc2ffa9a8c28151c00720bbd1340a56875
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: db6757e8c3ca871036cba1c21c1a20c3486b9249
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351079"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250002"
 ---
 # <a name="sign"></a>sign()
 

@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt log2 () in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: e04d71ad0e88d42f93f9f34576c4f5f6e752ddb6
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: c5bab8e2f4106ddafc085fa35da424db60616a46
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103251"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92243244"
 ---
 # <a name="log2"></a>log2()
 
@@ -27,7 +27,7 @@ ms.locfileid: "91103251"
 
 * *x*: eine reelle Zahl > 0.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 * Der Logarithmus ist der Logarithmus zur Basis 2: die Umkehrung der Exponentialfunktion (Exp) mit Basis 2.
 * `null` , wenn das Argument negativ oder NULL ist oder nicht in einen-Wert konvertiert werden kann `real` . 

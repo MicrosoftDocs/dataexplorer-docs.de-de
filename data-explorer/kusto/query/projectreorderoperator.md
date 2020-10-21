@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt den Projekttyp-Operator in Azure Daten-Ex
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 98887c8044be6ea1b429c51953c6f3f9a899d090
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 7bcb33d30bdfdbd22b28dbb7364427cfa3a81a5b
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87802960"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92242142"
 ---
 # <a name="project-reorder-operator"></a>project-reorder-Operator
 
@@ -40,9 +40,9 @@ T | project-reorder Col2, Col1, Col* asc
 > * Verwenden [`project-rename`](projectrenameoperator.md) Sie zum Umbenennen von Spalten.
 
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
-Eine Tabelle, die Spalten in der von den Operator Argumenten angegebenen Reihenfolge enthält. `project-reorder`benennt oder entfernt keine Spalten aus der Tabelle. aus diesem Grund werden alle Spalten, die in der Quell Tabelle vorhanden waren, in der Ergebnistabelle angezeigt.
+Eine Tabelle, die Spalten in der von den Operator Argumenten angegebenen Reihenfolge enthält. `project-reorder` benennt oder entfernt keine Spalten aus der Tabelle. aus diesem Grund werden alle Spalten, die in der Quell Tabelle vorhanden waren, in der Ergebnistabelle angezeigt.
 
 ## <a name="examples"></a>Beispiele
 
@@ -54,9 +54,9 @@ print a='a', b='b', c='c'
 |  project-reorder b
 ```
 
-|b|a|c|
+|k|a|c|
 |---|---|---|
-|b|a|c|
+|k|a|c|
 
 Ordnen Sie Spalten einer Tabelle so an, dass Spalten, die mit beginnen, `a` vor anderen Spalten angezeigt werden.
 
@@ -66,6 +66,6 @@ print b = 'b', a2='a2', a3='a3', a1='a1'
 |  project-reorder a* asc
 ```
 
-|a1|a2|a3|b|
+|a1|a2|a3|k|
 |---|---|---|---|
-|a1|a2|a3|b|
+|a1|a2|a3|k|

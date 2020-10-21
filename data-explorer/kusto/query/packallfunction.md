@@ -4,16 +4,16 @@ description: In diesem Artikel wird pack_all () in Azure Daten-Explorer beschrie
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0c4ce80c00df4c9c6e257fbe1f8a93802f54438e
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 547c9960d9a9f04e57f1b5ff0cdebada449b1b4b
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87802943"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92249698"
 ---
 # <a name="pack_all"></a>pack_all()
 

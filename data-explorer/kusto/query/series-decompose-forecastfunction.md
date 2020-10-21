@@ -4,16 +4,16 @@ description: In diesem Artikel wird series_decompose_forecast () in Azure Daten-
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/26/2019
-ms.openlocfilehash: 21a57e4c49e982fbb113917abe173f89426c74ed
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 4cf02f01504f3111050f28430de9907fb4aad18b
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345146"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250114"
 ---
 # <a name="series_decompose_forecast"></a>series_decompose_forecast()
 
@@ -39,7 +39,7 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
     * `none`: Kein Trend, Extrahieren dieser Komponente überspringen.
 * *Seasonality_threshold*: der Schwellenwert für die saisonalitätsbewertung, wenn *Saison alität* auf Autodetect festgelegt ist. Der Standardwert für das Ergebnis ist `0.6` . Weitere Informationen finden Sie unter [series_periods_detect](series-periods-detectfunction.md).
 
-**Rückgabewert**
+**Return**
 
  Ein dynamisches Array mit der vorhergesagten Reihe.
 
@@ -49,7 +49,7 @@ Nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array) enthält, a
 
 ## <a name="example"></a>Beispiel
 
-Im folgenden Beispiel generieren wir eine Reihe von vier Wochen in stündlicher Abhängigkeit mit wöchentlicher Saisonalität und einem kleinen Aufwärtstrend. Wir verwenden dann `make-series` und fügen der Reihe eine weitere leere Woche hinzu. `series_decompose_forecast`wird mit einer Woche (24 * 7 Punkte) aufgerufen und erkennt automatisch die Saisonalität und den Trend und generiert eine Vorhersage für den gesamten fünfwöchigen Zeitraum.
+Im folgenden Beispiel generieren wir eine Reihe von vier Wochen in stündlicher Abhängigkeit mit wöchentlicher Saisonalität und einem kleinen Aufwärtstrend. Wir verwenden dann `make-series` und fügen der Reihe eine weitere leere Woche hinzu. `series_decompose_forecast` wird mit einer Woche (24 * 7 Punkte) aufgerufen und erkennt automatisch die Saisonalität und den Trend und generiert eine Vorhersage für den gesamten fünfwöchigen Zeitraum.
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
