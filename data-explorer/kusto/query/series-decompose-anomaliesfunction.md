@@ -4,16 +4,16 @@ description: In diesem Artikel wird series_decompose_anomalies () in Azure Daten
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/28/2019
-ms.openlocfilehash: 770eded43fff091c8c500fcda59efcc2d4f95d9e
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: ded1f7ed499d0a8379fdf5b8e9949fa06351fc07
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803572"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250192"
 ---
 # <a name="series_decompose_anomalies"></a>series_decompose_anomalies()
 
@@ -44,7 +44,7 @@ Die Funktion nimmt einen Ausdruck, der eine Reihe (dynamisches numerisches Array
     * "Tukey": [der Fence Test von Tukey mit dem](https://en.wikipedia.org/wiki/Outlier#Tukey's_fences) standardmäßigen 25.75. Perzentil-Bereich. Weitere Informationen zu verbleibenden Zeitreihen finden Sie unter [series_outliers](series-outliersfunction.md)
 * *Seasonality_threshold*: der Schwellenwert für die saisonalitätsbewertung, wenn *Saison alität* auf Autodetect festgelegt ist. Der Standardwert für das Ergebnis ist `0.6` . Weitere Informationen finden Sie unter [series_periods_detect](series-periods-detectfunction.md)
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
  Die-Funktion gibt die folgende Reihe zurück:
 
@@ -63,7 +63,7 @@ Diese Funktion folgt den folgenden Schritten:
 
 ### <a name="detect-anomalies-in-weekly-seasonality"></a>Erkennen von Anomalien in wöchentlicher Saisonalität
 
-Generieren Sie im folgenden Beispiel eine Reihe mit wöchentlicher Saisonalität, und fügen Sie Ihr dann einige Ausreißer hinzu. `series_decompose_anomalies`erkennt die Saisonalität automatisch und generiert eine Baseline, die das sich wiederholende Muster erfasst. Die Ausreißer, die Sie hinzugefügt haben, können in der ad_score Komponente eindeutig erkannt werden.
+Generieren Sie im folgenden Beispiel eine Reihe mit wöchentlicher Saisonalität, und fügen Sie Ihr dann einige Ausreißer hinzu. `series_decompose_anomalies` erkennt die Saisonalität automatisch und generiert eine Baseline, die das sich wiederholende Muster erfasst. Die Ausreißer, die Sie hinzugefügt haben, können in der ad_score Komponente eindeutig erkannt werden.
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -99,7 +99,7 @@ series_multiply(10, series_decompose_anomalies_y_ad_flag) // multiply by 10 for 
 | render timechart
 ```
 
-:::image type="content" source="images/series-decompose-anomaliesfunction/weekly-seasonality-outliers-with-trend.png" alt-text="Wöchentliche saisonalitätsausreißer mit Trend" border="false":::
+:::image type="content" source="images/series-decompose-anomaliesfunction/weekly-seasonality-outliers-with-trend.png" alt-text="Wöchentliche Saison Abhängigkeit, die Baseline und Ausreißer anzeigt" border="false":::
 
 Führen Sie als nächstes das gleiche Beispiel aus, aber da Sie einen Trend in der Reihe erwarten, geben Sie `linefit` im Trend Parameter an. Sie können sehen, dass sich die Baseline wesentlich näher an der Eingabe Reihe befindet. Alle eingefügten Ausreißer werden erkannt, und es werden auch einige falsch positive Ergebnisse erkannt. Weitere Informationen zum Optimieren des Schwellenwerts finden Sie im nächsten Beispiel.
 
@@ -118,7 +118,7 @@ series_multiply(10, series_decompose_anomalies_y_ad_flag) // multiply by 10 for 
 | render timechart  
 ```
 
-:::image type="content" source="images/series-decompose-anomaliesfunction/weekly-seasonality-linefit-trend.png" alt-text="Wöchentliche saisonitäts Anomalien mit Linefit-Trend" border="false":::
+:::image type="content" source="images/series-decompose-anomaliesfunction/weekly-seasonality-linefit-trend.png" alt-text="Wöchentliche Saison Abhängigkeit, die Baseline und Ausreißer anzeigt" border="false":::
 
 ### <a name="tweak-the-anomaly-detection-threshold"></a>Optimieren des Schwellenwerts für die Anomalieerkennung
 
@@ -139,4 +139,4 @@ series_multiply(10, series_decompose_anomalies_y_ad_flag) // multiply by 10 for 
 | render timechart  
 ```
 
-:::image type="content" source="images/series-decompose-anomaliesfunction/weekly-seasonality-higher-threshold.png" alt-text="Abweichungen bei wöchentlichen Reihen mit höherem anomalieschwellen Wert" border="false":::
+:::image type="content" source="images/series-decompose-anomaliesfunction/weekly-seasonality-higher-threshold.png" alt-text="Wöchentliche Saison Abhängigkeit, die Baseline und Ausreißer anzeigt" border="false":::

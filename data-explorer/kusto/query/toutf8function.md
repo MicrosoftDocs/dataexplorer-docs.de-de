@@ -4,16 +4,16 @@ description: In diesem Artikel wird to_utf8 () in Azure Daten-Explorer beschrieb
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 891a2bb079136d9a7c21c1992b79e3e0eab4c970
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: c47c37dbbde7bd2276f1b5788dc6eb7b062f39a3
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350671"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251260"
 ---
 # <a name="to_utf8"></a>to_utf8()
 

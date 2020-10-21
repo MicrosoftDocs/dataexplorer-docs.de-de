@@ -4,16 +4,16 @@ description: In diesem Artikel wird tdigest () (Aggregations Funktion) in Azure 
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
-ms.openlocfilehash: 47b6ab3db5f0ea252fa86ef925026613654afeea
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 9e8f61038856096d4ca6676c5304bb9fc6112070
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87341636"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250708"
 ---
 # <a name="tdigest-aggregation-function"></a>tdigest () (Aggregations Funktion)
 

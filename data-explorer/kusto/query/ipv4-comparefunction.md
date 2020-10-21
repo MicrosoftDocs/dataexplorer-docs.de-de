@@ -4,16 +4,16 @@ description: In diesem Artikel wird ipv4_compare () in Azure Daten-Explorer besc
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 68082b68a1c7772135f711248ddfcd4079bc753e
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 06cb9078464d782d6034ec11e3e0cdc4c249b541
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87803929"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250354"
 ---
 # <a name="ipv4_compare"></a>ipv4_compare()
 
@@ -42,7 +42,7 @@ Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse. Die Zah
 
 Beispielsweise verfügt 192.168.2.0/24 über eine zugeordnete net/Subnetmask, die 24 aufeinander folgende Bits oder 255.255.255.0 im gepunkteten Dezimal Format enthält.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 * `0`: Wenn die lange Darstellung des ersten IPv4-Zeichen folgen Arguments gleich dem zweiten IPv4-Zeichen folgen Argument ist
 * `1`: Wenn die lange Darstellung des ersten IPv4-Zeichen folgen Arguments größer als das zweite IPv4-Zeichen folgen Argument ist

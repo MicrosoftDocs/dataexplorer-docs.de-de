@@ -4,16 +4,16 @@ description: In diesem Artikel wird sequence_detect-Plug-in in Azure Daten-Explo
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7b4b3d2b43bea2eeb96c9bbca94131cb7887db8c
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: c284a1044e3e5a48cddeec352a945b48b665ce36
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345690"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250229"
 ---
 # <a name="sequence_detect-plugin"></a>Plug-In „sequence_detect“
 

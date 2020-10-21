@@ -4,16 +4,16 @@ description: In diesem Artikel wird WEEK_OF_YEAR () in Azure Daten-Explorer besc
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2020
-ms.openlocfilehash: 82678a68166061fc7b8a30c7cb2e019c8d3d9e0c
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 18cad42dfd0f652daa4c8da80524ba40ace9b153
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87338557"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251233"
 ---
 # <a name="week_of_year"></a>WEEK_OF_YEAR ()
 
@@ -33,7 +33,7 @@ week_of_year(datetime("2015-12-14"))
 
 ## <a name="returns"></a>Rückgabe
 
-`week number`-Die Wochen Nummer, die das angegebene Datum enthält.
+`week number` -Die Wochen Nummer, die das angegebene Datum enthält.
 
 ## <a name="examples"></a>Beispiele
 
@@ -45,5 +45,5 @@ week_of_year(datetime("2015-12-14"))
 |`week_of_year(datetime(2000-01-01))`     |`52`  |
 
 > [!NOTE]
-> `weekofyear()`ist eine veraltete Variante dieser Funktion. `weekofyear()`war nicht ISO 8601-kompatibel. die erste Woche eines Jahres wurde als Woche mit dem ersten Mittwoch des Jahrs definiert.
+> `weekofyear()` ist eine veraltete Variante dieser Funktion. `weekofyear()` war nicht ISO 8601-kompatibel. die erste Woche eines Jahres wurde als Woche mit dem ersten Mittwoch des Jahrs definiert.
 Die aktuelle Version dieser Funktion `week_of_year()` ist ISO 8601-kompatibel. die erste Woche eines Jahres wird als Woche mit dem ersten Donnerstag des Jahrs definiert.

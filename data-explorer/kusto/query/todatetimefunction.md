@@ -4,16 +4,16 @@ description: In diesem Artikel wird "DateTime ()" in Azure Daten-Explorer beschr
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 6a991f9f64decbb3985830cf2611361d6c66db31
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 5b9248ddc76a4893cf1edd353c0fbd036c9a1e7d
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350841"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250537"
 ---
 # <a name="todatetime"></a>todatetime()
 

@@ -4,16 +4,16 @@ description: In diesem Artikel wird schema_merge-Plug-in in Azure Daten-Explorer
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2020
-ms.openlocfilehash: 2873f3d010464b82ef8cb6a9a3e09f7b0a56b8d9
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 9a6f25a7ea1c75211d043fdbca7f99c16ff98e1b
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87345707"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250328"
 ---
 # <a name="schema_merge-plugin"></a>Plug-In „schema_merge“
 
@@ -35,7 +35,7 @@ union Schema1, Schema2 | evaluate schema_merge()
 
 ## <a name="arguments"></a>Argumente
 
-* *Preserveorder*: (optional) Wenn Sie auf festgelegt `true` ist, weist das Plug-in an, die Spaltenreihenfolge zu validieren, wie vom ersten tabellarischen Schema definiert. Wenn dieselbe Spalte in mehreren Schemas enthalten ist, muss die Spalten Ordnungszahl wie die Spalten Ordnungszahl des ersten Schemas lauten, in dem Sie enthalten war. Der Standardwert ist `true`sein.
+* *Preserveorder*: (optional) Wenn Sie auf festgelegt `true` ist, weist das Plug-in an, die Spaltenreihenfolge zu validieren, wie vom ersten tabellarischen Schema definiert. Wenn dieselbe Spalte in mehreren Schemas enthalten ist, muss die Spalten Ordnungszahl wie die Spalten Ordnungszahl des ersten Schemas lauten, in dem Sie enthalten war. Der Standardwert ist `true`.
 
 ## <a name="returns"></a>Rückgabe
 
@@ -56,7 +56,7 @@ union schema1, schema2 | evaluate schema_merge()
 |ColumnName | ColumnOrdinal | DataType | ColumnType|
 |---|---|---|---|
 |Uri|0|System.String|Zeichenfolge|
-|HttpStatus|1|System. Int32|INT|
+|HttpStatus|1|System.Int32|INT|
 |Referrer|2|System.String|Zeichenfolge|
 
 Führen Sie eine Zusammenführung mit einem Schema aus, das eine andere Spalten Sortierung aufweist ( `HttpStatus` ordinaländerungen von in `1` `2` in der neuen Variante).
@@ -89,4 +89,4 @@ union schema1, schema2 | evaluate schema_merge(PreserveOrder = false)
 |---|---|---|---|
 |Uri|0|System.String|Zeichenfolge
 |Referrer|1|System.String|Zeichenfolge
-|HttpStatus|2|System. Int32|INT|
+|HttpStatus|2|System.Int32|INT|

@@ -4,16 +4,16 @@ description: In diesem Artikel wird der Such Operator in Azure Daten-Explorer be
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: edd35e5e259666e8ce4360c072aaac6717e6f8c3
-ms.sourcegitcommit: f9d3f54114fb8fab5c487b6aea9230260b85c41d
+ms.openlocfilehash: 24e79b7feeb51a0626ed270a90c3d323fa94cbf3
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/18/2020
-ms.locfileid: "85071877"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250279"
 ---
 # <a name="search-operator"></a>search-Operator
 
@@ -37,7 +37,7 @@ Der Such Operator bietet eine mehrspaltige und mehrspaltige Suchfunktion.
 
   **Erweiterungen für Zeichen**folgen Übereinstimmungen: Zeichen folgen Literale, die als Begriffe in *searchpredicate* angezeigt werden, geben an, dass eine Übereinstimmung zwischen allen Spalten und dem Literalzeichen verwendet `has` wird `hasprefix` `hassuffix` `!` `sc` Die Entscheidung `has` , ob, oder anzuwenden ist, `hasprefix` `hassuffix` hängt davon ab, ob das Literale durch ein Sternchen () beginnt oder endet (oder beides) `*` . Sternchen innerhalb des Literals sind nicht zulässig.
 
-    |Literal   |Betreiber   |
+    |Literal   |Operator   |
     |----------|-----------|
     |`billg`   |`has`      |
     |`*billg`  |`hassuffix`|
@@ -74,7 +74,7 @@ Beachten Sie Folgendes: Wenn sowohl *tabularsource* als auch *tablesources* ausg
   |12|`search "abc" and ("def" or "hij")`    |`where * has "abc" and (* has "def" or * has hij")`||
   |13|`search "err" or (A>a and A<b)`        |`where * has "err" or (A>a and A<b)`   ||
 
-## <a name="remarks"></a>Hinweise
+## <a name="remarks"></a>Bemerkungen
 
 **Im Gegensatz** zum [Find](findoperator.md)-Operator `search` unterstützt der-Operator Folgendes nicht:
 

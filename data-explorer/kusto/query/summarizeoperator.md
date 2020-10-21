@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt den Zusammenfassungs Operator in Azure Da
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/20/2020
-ms.openlocfilehash: 9514f7c94568e73a704e6ba6f4bcc5bf61590d2f
-ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
+ms.openlocfilehash: 1317f9767182ad76f226fae6995763ea832cd36a
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/12/2020
-ms.locfileid: "91954772"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250857"
 ---
 # <a name="summarize-operator"></a>summarize-Operator
 
@@ -49,7 +49,7 @@ Eine Tabelle, die zeigt, wie viele Elemente in jedem Intervall [0, 10,0][10,0, 2
 > * Wenn *groupexpression* nicht angegeben wird, ist die Ausgabe eine einzelne (leere) Zeile.
 > * Wenn *groupexpression* bereitgestellt wird, weist die Ausgabe keine Zeilen auf.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Die Eingabezeilen sind in Gruppen mit denselben Werten der `by` -Ausdrücke angeordnet. Anschließend werden die angegebenen Aggregationsfunktionen über jede Gruppe berechnet, dabei wird eine Zeile für jede Gruppe erzeugt. Das Ergebnis enthält die `by` -Spalten und auch mindestens eine Spalte für jedes berechnete Aggregat. (Einige Aggregationsfunktionen geben mehrere Spalten zurück.)
 
@@ -98,7 +98,7 @@ Um Bereiche numerischer Werte zusammenzufassen, verwenden `bin()` Sie, um Bereic
 |[stdevif()](stdevif-aggfunction.md)|Gibt die Standardabweichung für die Gruppe (mit Prädikat) zurück.|
 |[Sum ()](sum-aggfunction.md)|Gibt die Summe der Elemente in der Gruppe zurück.|
 |[sumif()](sumif-aggfunction.md)|Gibt die Summe der Elemente in der Gruppe zurück (mit Prädikat).|
-|[Varianz ()](variance-aggfunction.md)|Gibt die Varianz innerhalb der Gruppe zurück.|
+|[variance()](variance-aggfunction.md)|Gibt die Varianz innerhalb der Gruppe zurück.|
 |[varianceif()](varianceif-aggfunction.md)|Gibt die Varianz über die Gruppe zurück (mit Prädikat).|
 
 ## <a name="aggregates-default-values"></a>Aggregiert Standardwerte

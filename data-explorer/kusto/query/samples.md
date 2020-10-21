@@ -4,18 +4,18 @@ description: In diesem Artikel werden die Beispiele in Azure Daten-Explorer besc
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: bc28fcb860dc067d55dd2e5ce9de3f3a17b402f2
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: 0db8c472ed3b23a1bf46f8fce9cbd38b0ca960b3
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91942317"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251024"
 ---
-# <a name="samples"></a>Beispiele
+# <a name="samples"></a>Proben
 
 Im folgenden finden Sie einige häufige Abfrage Anforderungen und wie die Kusto-Abfragesprache verwendet werden kann, um Sie zu erfüllen.
 
@@ -329,7 +329,7 @@ Logs
 | project count_, Message 
 ```
 
-|count_|Nachricht
+|count_|`Message`
 |---|---
 |7125|Fehler bei "executealgorithmmethod" für die Methode "runcyclefrominteridata"...
 |7125|Inferencehostservice-Rückruf failed..System. NullReferenceException: der Objekt Verweis ist nicht auf eine Instanz eines Objekts festgelegt...
@@ -378,7 +378,7 @@ Logs
 | evaluate autocluster()
 ```
 
-|Anzahl |Prozent (%)|Komponente|Cluster|Nachricht
+|Anzahl |Prozent (%)|Komponente|Cluster|`Message`
 |---|---|---|---|---
 |7125|26,64|Inferencehostservice|Db4|Executealgorithmmethod für die-Methode...
 |7125|26,64|Unbekannte Komponente|Db4|Fehler beim inferencehostservice-Befehl....

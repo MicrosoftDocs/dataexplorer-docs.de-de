@@ -4,16 +4,16 @@ description: In diesem Artikel wird format_datetime () in Azure Daten-Explorer b
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: d0a60a61e5319d9a190f6172b9c0bd8fb7fe1300
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: b9523bf62232c09bdb7fd45298c9430095e39363
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347968"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92244667"
 ---
 # <a name="format_datetime"></a>format_datetime()
 

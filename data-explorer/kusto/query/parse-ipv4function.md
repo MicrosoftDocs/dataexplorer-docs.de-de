@@ -4,16 +4,16 @@ description: In diesem Artikel wird parse_ipv4 () in Azure Daten-Explorer beschr
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: 48bfab2549da572efba117c21d783b35ac0202af
-ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
+ms.openlocfilehash: f5d65fa75a4f53bea7d27202c5aed2228c167bbd
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/12/2020
-ms.locfileid: "91954721"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250907"
 ---
 # <a name="parse_ipv4"></a>parse_ipv4()
 
@@ -39,7 +39,7 @@ Die IP-Adresse links vom Schrägstrich ( `/` ) ist die Basis-IP-Adresse. Die Zah
 
 Beispielsweise verfügt 192.168.2.0/24 über eine zugeordnete net/Subnetmask, die 24 aufeinander folgende Bits oder 255.255.255.0 im gepunkteten Dezimal Format enthält.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Wenn die Konvertierung erfolgreich ist, wird das Ergebnis eine lange Zahl sein.
 Wenn die Konvertierung nicht erfolgreich ist, lautet das Ergebnis `null` .

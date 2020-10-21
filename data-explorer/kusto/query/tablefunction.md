@@ -4,18 +4,18 @@ description: In diesem Artikel wird die Tabelle () (Scope-Funktion) in Azure Dat
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: ba61537de8925b3eeaaffc8b5337e2ecfa343d88
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 80035e20110b8a1f2fb705ef73f75275f60fcdda
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87342392"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251307"
 ---
 # <a name="table-scope-function"></a>Table () (Scope-Funktion)
 

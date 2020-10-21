@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt die Übernahme des Operators in Azure Dat
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a57dd8cde9ea00b0b68ae95ff557bd3b530357cc
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: 5192bb2d752a5754ae36840611b9f7b0e84da256
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87804150"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250718"
 ---
 # <a name="take-operator"></a>take-Operator
 
@@ -26,7 +26,7 @@ T | take 5
 Es gibt keine Garantie, welche Datensätze zurückgegeben werden, es sei denn, die Quelldaten sind sortiert.
 
 > [!NOTE]
-> `take`ist eine einfache, schnelle und effiziente Möglichkeit, eine kleine Stichprobe von Datensätzen anzuzeigen, wenn Daten interaktiv durchsucht werden, aber beachten Sie, dass es keine Konsistenz der Ergebnisse gewährleistet, wenn es mehrmals ausgeführt wird, selbst wenn das DataSet nicht geändert wurde.
+> `take` ist eine einfache, schnelle und effiziente Möglichkeit, eine kleine Stichprobe von Datensätzen anzuzeigen, wenn Daten interaktiv durchsucht werden, aber beachten Sie, dass es keine Konsistenz der Ergebnisse gewährleistet, wenn es mehrmals ausgeführt wird, selbst wenn das DataSet nicht geändert wurde.
 > Auch wenn die Anzahl der Zeilen, die von der Abfrage zurückgegeben werden, nicht explizit durch die Abfrage begrenzt ist (kein `take` Operator verwendet), schränkt Kusto diese Anzahl standardmäßig ein. Weitere Informationen finden Sie unter [Kusto-Abfrage Limits](../concepts/querylimits.md).
 
 ## <a name="syntax"></a>Syntax
@@ -48,7 +48,7 @@ Implementieren Sie für Paging-Unterstützung eine der folgenden Funktionen:
 
 * Schreiben einer Anwendung der mittleren Ebene, die eine Zustands behaftete Paging-API bereitstellt, indem die Ergebnisse einer Kusto-Abfrage zwischengespeichert werden.
 
-## <a name="see-also"></a>Siehe auch
+## <a name="see-also"></a>Weitere Informationen
 
 * [sort-Operator](sortoperator.md)
 * [top-Operator](topoperator.md)

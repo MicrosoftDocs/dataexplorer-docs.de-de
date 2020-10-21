@@ -4,16 +4,16 @@ description: In diesem Artikel wird ToGuid () in Azure Daten-Explorer beschriebe
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 689ee6bf7b3fcb27dced20b06a9002659622902e
-ms.sourcegitcommit: 3dfaaa5567f8a5598702d52e4aa787d4249824d4
+ms.openlocfilehash: d122833f4797c8503dd41cc8ba861554d6924338
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87804133"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92250390"
 ---
 # <a name="toguid"></a>toguid()
 
@@ -34,7 +34,7 @@ toguid("70fc66f7-8279-44fc-9092-d364d70fce44") == guid("70fc66f7-8279-44fc-9092-
 
 * *Expr*: Ausdruck, der in einen skalaren Wert konvertiert wird [`guid`](./scalar-data-types/guid.md) . 
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Wenn die Konvertierung erfolgreich ist, ist das Ergebnis ein [`guid`](./scalar-data-types/guid.md) Skalar.
 Wenn die Konvertierung nicht erfolgreich ist, wird das Ergebnis zurückgeben `null` .

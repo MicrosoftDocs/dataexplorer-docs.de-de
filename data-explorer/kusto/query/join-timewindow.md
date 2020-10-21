@@ -4,16 +4,16 @@ description: In diesem Artikel wird das beitreten innerhalb des Zeitfensters in 
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1ca7f38fa377be40cd290b04af65cc6fd59075cd
-ms.sourcegitcommit: e093e4fdc7dafff6997ee5541e79fa9db446ecaa
+ms.openlocfilehash: b1f951f23587451d62deefa5feb24e2d1fc6b612
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85763716"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251112"
 ---
 # <a name="time-window-join"></a>Zeitfenster-Join
 
