@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt extractjson () in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 9668b173c6b3769113972be2c74382464e7d9819
-ms.sourcegitcommit: bc09599c282b20b5be8f056c85188c35b66a52e5
+ms.openlocfilehash: 4891e3b906de540fb2b4939e65359829fd442f7f
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88610575"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247515"
 ---
 # <a name="extractjson"></a>extractjson()
 
@@ -34,7 +34,7 @@ extractjson("$.hosts[1].AvailableMB", EventText, typeof(int))
 * *jsonpath*: jsonpath-Zeichenfolge, die einen Accessor im JSON-Dokument definiert.
 * *DataSource*: ein JSON-Dokument.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Diese Funktion führt eine JsonPath-Abfrage in dataSource durch, die eine gültige JSON-Zeichenfolge enthält. Optional wird dieser Wert, je nach drittem Argument, in einen anderen Typ konvertiert.
 
@@ -52,7 +52,7 @@ T
 
 ### <a name="json-path-expressions"></a>JSON Path-Ausdrücke
 
-|Pfadausdruck|Beschreibung|
+|Pfadausdruck|BESCHREIBUNG|
 |---|---|
 |`$`|Stammobjekt|
 |`@`|Aktuelles Objekt|

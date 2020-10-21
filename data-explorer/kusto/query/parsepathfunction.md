@@ -4,16 +4,16 @@ description: In diesem Artikel wird parse_path () in Azure Daten-Explorer beschr
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: e2914e913402de7442d2533cf5159c2bd30fac60
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 07224c01e1bd226575aff6555ca7cd0a82c049b2
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346302"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251678"
 ---
 # <a name="parse_path"></a>parse_path()
 

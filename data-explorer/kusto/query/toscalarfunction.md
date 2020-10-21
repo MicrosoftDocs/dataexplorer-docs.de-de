@@ -4,16 +4,16 @@ description: In diesem Artikel wird der Wert von "" in Azure Daten-Explorer besc
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 649d09fcf6d228714fdf20b40c81b2a2552374e6
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 1210a820b4b3c8790d218ba53992da0255028de2
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87340257"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252009"
 ---
 # <a name="toscalar"></a>toscalar()
 
@@ -37,9 +37,9 @@ Wenn das Ergebnis eine tabellarische ist, werden die erste Spalte und die erste 
 > [!TIP]
 > Sie können eine [Let-Anweisung](letstatement.md) zur besseren Lesbarkeit der Abfrage verwenden, wenn Sie verwenden `toscalar()` .
 
-**Hinweise**
+**Notizen**
 
-`toscalar()`kann während der Abfrage Ausführung beliebig oft berechnet werden.
+`toscalar()` kann während der Abfrage Ausführung beliebig oft berechnet werden.
 Die `toscalar()` Funktion kann nicht auf Zeilenebene (für jedes Zeilen Szenario) angewendet werden.
 
 ## <a name="examples"></a>Beispiele

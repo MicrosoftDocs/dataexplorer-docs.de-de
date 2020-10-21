@@ -4,16 +4,16 @@ description: In diesem Artikel wird dcount_hll () in Azure Daten-Explorer beschr
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/15/2019
-ms.openlocfilehash: 2e3847f0ad6c120f076461c5b4774f60349d6125
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 743f35b6bf6d461c1d08c3082bb235b88b57ada2
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348427"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252364"
 ---
 # <a name="dcount_hll"></a>dcount_hll()
 

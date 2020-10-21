@@ -4,18 +4,18 @@ description: In diesem Artikel wird cursor_current (), current_cursor () in Azur
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/10/2019
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 879fe4aac2a6714f3d7ab16a63c69cd8215bbb04
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 1b2e6f868d5117cbdd3db6ba88c6b77e5f0e8ccf
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348597"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252445"
 ---
 # <a name="cursor_current-current_cursor"></a>cursor_current(), current_cursor()
 
@@ -31,7 +31,7 @@ Ruft den aktuellen Wert des Cursors der Datenbank im Gültigkeitsbereich ab. (Di
 
 Gibt einen einzelnen Wert des Typs zurück `string` , der den aktuellen Wert des Cursors der Datenbank im Gültigkeitsbereich codiert.
 
-**Hinweise**
+**Notizen**
 
 Weitere Informationen zu Datenbankcursorn finden Sie unter [Daten Bank Cursor](../management/databasecursor.md) .
 

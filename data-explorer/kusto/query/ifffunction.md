@@ -4,16 +4,16 @@ description: In diesem Artikel wird IFF () in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7eeab87f3c3ef42d1e00bf0d6b8853fe3a2f3125
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 5cc6a41c8b74e4fd08eebbe968b7384dce39039e
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347492"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252279"
 ---
 # <a name="iff"></a>iff()
 
@@ -31,7 +31,7 @@ Die zweiten und dritten Argumente müssen vom gleichen Typ sein.
 * *ifTrue*: ein Ausdruck, der ausgewertet wird und dessen Wert von der Funktion zurückgegeben wird, wenn *Prädikat* als ausgewertet wird `true` .
 * *IfFalse*: ein Ausdruck, der ausgewertet wird, und der Wert, der von der Funktion zurückgegeben wird, wenn *Prädikat* als ausgewertet wird `false` .
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Diese Funktion gibt den Wert von *ifTrue* zurück, wenn *predicate* als `true` ausgewertet wird, andernfalls den Wert von *ifFalse*.
 

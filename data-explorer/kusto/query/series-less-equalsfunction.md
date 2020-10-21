@@ -4,16 +4,16 @@ description: In diesem Artikel wird series_less_equals () in Azure Daten-Explore
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: 0373fdf7c687dd7af63895ce3a542ae9b6b4f150
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: e7172d9840562b26b3f9c532c8a83413131e0c21
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103547"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251569"
 ---
 # <a name="series_less_equals"></a>series_less_equals()
 
@@ -27,7 +27,7 @@ Berechnet die Element Weise weniger oder gleichmäßige `<=` Logik Operation von
 
 * *Series1, series2*: numerische Eingabe Arrays, die Element Weise verglichen werden sollen. Alle Argumente müssen dynamische Arrays sein. 
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Dynamisches Array von booleschen Werten, das die berechnete Element Weise weniger oder gleiche Logik Operation zwischen den beiden Eingaben enthält. Ein nicht numerisches Element oder ein nicht vorhandenes Element (Arrays mit unterschiedlichen Größen) ergeben einen- `null` Elementwert.
 

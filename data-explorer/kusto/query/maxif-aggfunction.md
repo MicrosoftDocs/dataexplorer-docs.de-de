@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt maxif () (Aggregations Funktion) in Azure
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 471ca0e3d6623b77fd2d799949bfe060643798e2
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 4df30f50d82e0ad5af87acaaa88b55f151a2a77a
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87346812"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251701"
 ---
 # <a name="maxif-aggregation-function"></a>maxif () (Aggregations Funktion)
 

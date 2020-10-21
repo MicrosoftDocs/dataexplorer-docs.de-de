@@ -4,16 +4,16 @@ description: In diesem Artikel wird der Fork-Operator in Azure Daten-Explorer be
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b234a95b4a541099f3fc050501ca6b0fd9f67ccf
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: dfa4d2218c3f54a9c85644fb0ee1edf4b7c012dd
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348002"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247400"
 ---
 # <a name="fork-operator"></a>fork-Operator
 
@@ -28,7 +28,7 @@ Führt mehrere consumeroperatoren parallel aus.
 * *Unterabfrage* ist eine Downstream-Pipeline von Abfrage Operatoren.
 * *Name* ist ein temporärer Name für die Ergebnistabelle der Unterabfrage.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Mehrere Ergebnistabellen, eine für jede der Unterabfragen.
 
@@ -38,7 +38,7 @@ Mehrere Ergebnistabellen, eine für jede der Unterabfragen.
 
 **Notizen**
 
-* [`materialize`](materializefunction.md)die Funktion kann als Ersatz für die Verwendung von [`join`](joinoperator.md) oder [`union`](unionoperator.md) auf Fork-Beinen verwendet werden.
+* [`materialize`](materializefunction.md) die Funktion kann als Ersatz für die Verwendung von [`join`](joinoperator.md) oder [`union`](unionoperator.md) auf Fork-Beinen verwendet werden.
 Der Eingabestream wird von materialisieren zwischengespeichert, und anschließend kann der zwischengespeicherte Ausdruck in Join/Union-Beinen verwendet werden.
 
 * Ein Name, der vom- `name` Argument oder mithilfe des- [`as`](asoperator.md) Operators angegeben wird, wird als verwendet, um die Ergebnisregister Karte im Tool zu benennen [`Kusto.Explorer`](../tools/kusto-explorer.md) .

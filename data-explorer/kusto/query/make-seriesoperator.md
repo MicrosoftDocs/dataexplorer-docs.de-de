@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt den Operator "Make-Series" in Azure Daten
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2020
-ms.openlocfilehash: 56742b04386bfda9e2cdbaa40a85d2220f2373d5
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: 1e39e71aa9406815338974b2da03d05315054b65
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91942351"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247351"
 ---
 # <a name="make-series-operator"></a>make-series-Operator
 
@@ -43,7 +43,7 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
   |---------------|-------------------------------------|------------------------------------------------------------------------------|
   |`kind`          |`nonempty`                               |Erzeugt ein Standard Ergebnis, wenn die Eingabe des Operators "Make-Series" leer ist.|                                
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Die Eingabezeilen werden in Gruppen angeordnet, die dieselben Werte wie die `by` Ausdrücke und den `bin_at(` *AxisColumn* `, ` *step* `, ` *Start* Ausdruck "axiscolumn" aufweisen `)` . Anschließend werden die angegebenen Aggregationsfunktionen über jede Gruppe berechnet, dabei wird eine Zeile für jede Gruppe erzeugt. Das Ergebnis enthält die `by` Spalten *axiscolumn* und auch mindestens eine Spalte für jedes berechnete Aggregat. (Aggregationen, die mehrere Spalten oder nicht numerische Ergebnisse nicht unterstützen.)
 
@@ -89,7 +89,7 @@ Es wird empfohlen, die Haupt Syntax von Make-Series und nicht die alternative Sy
 |[StDev ()](stdev-aggfunction.md)|Gibt die Standardabweichung in der Gruppe zurück.|
 |[Sum ()](sum-aggfunction.md)|Gibt die Summe der Elemente in der Gruppe zurück.|
 |[sumif()](sumif-aggfunction.md)|Gibt die Summe der Elemente mit dem Prädikat der Gruppe zurück.|
-|[Varianz ()](variance-aggfunction.md)|Gibt die Varianz innerhalb der Gruppe zurück.|
+|[variance()](variance-aggfunction.md)|Gibt die Varianz innerhalb der Gruppe zurück.|
 
 ## <a name="list-of-series-analysis-functions"></a>Liste der Reihen Analysefunktionen
 

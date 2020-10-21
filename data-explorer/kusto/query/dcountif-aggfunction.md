@@ -4,16 +4,16 @@ description: In diesem Artikel wird DCount () (Aggregations Funktion) in Azure D
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: ac07b51135c202f611ba28931eebf79ef5e996f1
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: c14c4d9e0512d4bb054bb3df39acb4828be5a5bd
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348393"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247539"
 ---
 # <a name="dcountif-aggregation-function"></a>dzähltif () (Aggregations Funktion)
 
@@ -33,14 +33,14 @@ Informieren Sie sich über die [Genauigkeit der Schätzung](dcount-aggfunction.m
 * *Predicate*: Ausdruck, der zum Filtern von Zeilen verwendet wird.
 * Mit *Accuracy* wird, sofern angegeben, der Ausgleich zwischen Geschwindigkeit und Genauigkeit gesteuert.
     * `0` ist die am wenigsten präzise und schnellste Berechnung. 1,6%-Fehler
-    * `1`= der Standardwert, mit dem Genauigkeit und Berechnungszeit ausgeglichen werden. etwa 0,8% Fehler.
-    * `2`= exakte und langsame Berechnung; etwa 0,4% Fehler.
-    * `3`= Extra genaue und langsame Berechnung; etwa 0,28% Fehler.
-    * `4`= sehr präzise und langsamste Berechnung; etwa 0,2% Fehler.
+    * `1` = der Standardwert, mit dem Genauigkeit und Berechnungszeit ausgeglichen werden. etwa 0,8% Fehler.
+    * `2` = exakte und langsame Berechnung; etwa 0,4% Fehler.
+    * `3` = Extra genaue und langsame Berechnung; etwa 0,28% Fehler.
+    * `4` = sehr präzise und langsamste Berechnung; etwa 0,2% Fehler.
     
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
-Gibt eine Schätzung der Anzahl von unterschiedlichen *Werten von Zeilen aus,* für die das *Prädikat* `true` in der Gruppe ausgewertet wird. 
+Gibt eine Schätzung der Anzahl von unterschiedlichen *Werten von Zeilen aus,*  für die das *Prädikat* `true` in der Gruppe ausgewertet wird. 
 
 ## <a name="example"></a>Beispiel
 

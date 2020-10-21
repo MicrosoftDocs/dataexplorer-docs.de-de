@@ -4,18 +4,18 @@ description: In diesem Artikel wird die SQL-zu-Kusto-Abfrage Übersetzung in Azu
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/22/2020
-ms.openlocfilehash: cc00da54cad69c36041e36fd60524c7e4ef0ba35
-ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
+ms.openlocfilehash: 216d8c0eeacf6733eb1f7d4b4880bbad1d408e02
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "85967144"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247086"
 ---
-# <a name="sql-to-kusto-cheat-sheet"></a>Spickzettel zu SQL-zu-Kusto
+# <a name="sql-to-kusto-cheat-sheet"></a>Cheat Sheet für die Übersetzung von SQL in Kusto
 
 Kusto unterstützt eine Teilmenge der SQL-Sprache. Eine vollständige Liste der nicht unterstützten Funktionen finden Sie in der Liste der [bekannten SQL-Probleme](../api/tds/sqlknownissues.md) .
 
@@ -33,7 +33,7 @@ SELECT COUNT_BIG(*) as C FROM StormEvents
 |---|
 |StormEvents<br>| C = count () zusammenfassen<br>| Projekt C|
 
-## <a name="sql-to-kusto-cheat-sheet"></a>Spickzettel zu SQL-zu-Kusto
+## <a name="sql-to-kusto-cheat-sheet"></a>Cheat Sheet für die Übersetzung von SQL in Kusto
 
 Die folgende Tabelle zeigt Beispielabfragen in SQL und ihre kql-Entsprechungen.
 

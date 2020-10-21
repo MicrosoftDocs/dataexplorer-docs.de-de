@@ -4,16 +4,16 @@ description: In diesem Artikel wird übersetzt () in Azure Daten-Explorer beschr
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/11/2019
-ms.openlocfilehash: d0e99048f3f1b0e3ce5c6c59a65ea645b22d15fe
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 5d186172a0be1780347dbf89600c200c00687291
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87340053"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252038"
 ---
 # <a name="translate"></a>translate()
 
@@ -30,7 +30,7 @@ Die-Funktion sucht in "SEARCHLIST" nach Zeichen und ersetzt diese durch die ents
 * *REPLACEMENTLIST*: die Liste der Zeichen, die die Zeichen in "SEARCHLIST" ersetzen sollen.
 * *Text*: eine zu durchsuchende Zeichenfolge
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 *Text* nach dem Ersetzen aller ocurrences of-Zeichen in "REPLACEMENTLIST" durch die entsprechenden Zeichen in "SEARCHLIST"
 

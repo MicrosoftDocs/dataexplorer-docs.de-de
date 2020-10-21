@@ -4,16 +4,16 @@ description: In diesem Artikel wird funnel_sequence-Plug-in in Azure Daten-Explo
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 67a5e05a5720c8a9290523344f793c07c47c5ed2
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 34159fb6d02cd30907924109c861d5e9fd963568
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347917"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252338"
 ---
 # <a name="funnel_sequence-plugin"></a>funnel_sequence-Plug-In
 
@@ -74,7 +74,7 @@ StormEvents
 
 Das Ergebnis umfasst drei Tabellen:
 
-* Table #1: alle möglichen Varianten der Vorgänge vor und nach der Sequenz. Die zweite Zeile bedeutet beispielsweise, dass 87 verschiedene Ereignisse mit folgender Sequenz vorhanden waren:`Hail` -> `Tornado` -> `Hail`
+* Table #1: alle möglichen Varianten der Vorgänge vor und nach der Sequenz. Die zweite Zeile bedeutet beispielsweise, dass 87 verschiedene Ereignisse mit folgender Sequenz vorhanden waren: `Hail` -> `Tornado` -> `Hail`
 
 
 |`StartTime`|`prev`|`next`|`dcount`|

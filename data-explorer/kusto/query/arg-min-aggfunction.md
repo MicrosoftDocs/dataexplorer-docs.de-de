@@ -4,16 +4,16 @@ description: In diesem Artikel wird arg_min () (Aggregations Funktion) in Azure 
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/12/2019
-ms.openlocfilehash: 33e2657f2569957002d17d7061cfec863402027e
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 5c3e7912839dd3258c4a3f96530fbf438bf4ef4f
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349685"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245617"
 ---
 # <a name="arg_min-aggregation-function"></a>arg_min () (Aggregations Funktion)
 
@@ -32,7 +32,7 @@ Sucht eine Zeile in der Gruppe, die *exprtominimize*minimiert, und gibt den Wert
 * *Nameexprtominimize*: ein optionaler Name für die Ergebnisspalte, die *exprtominimize*darstellt.
 * *Nameexprtoreturn*: zusätzliche optionale Namen für die Ergebnis Spalten, die " *exprtoreturn*" darstellen.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Sucht eine Zeile in der Gruppe, die *exprtominimize*minimiert, und gibt den Wert von *exprtoreturn* zurück (oder `*` , um die gesamte Zeile zurückzugeben).
 

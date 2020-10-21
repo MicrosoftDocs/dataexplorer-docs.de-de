@@ -4,16 +4,16 @@ description: In diesem Artikel wird series_fill_backward () in Azure Daten-Explo
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 42012111c7f862672a1335e0e9165eb62179dfe7
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 572a80cc6e11a94f1597478f8395fe477f0cb64c
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87344925"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247215"
 ---
 # <a name="series_fill_backward"></a>series_fill_backward()
 
@@ -31,7 +31,7 @@ Ein Ausdruck, der das dynamische numerische Array enthält, ist die Eingabe. Die
 * *x*: Skalarausdruck des dynamischen Arrays, bei dem es sich um ein Array numerischer Werte handelt.
 * *missing_value_placeholder*: mit diesem optionalen Parameter wird ein Platzhalter für fehlende Werte angegeben. Der Standardwert ist `double` (*null*).
 
-**Hinweise**
+**Notizen**
 
 * Geben Sie *null* als Standardwert an, um alle Interpolations Funktionen nach der [make-Serie](make-seriesoperator.md)anzuwenden: 
 

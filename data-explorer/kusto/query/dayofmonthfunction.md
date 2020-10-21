@@ -4,16 +4,16 @@ description: In diesem Artikel wird dayosmonth () in Azure Daten-Explorer beschr
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 3341f416642b06d899c2a3d1f6675f4d3254291f
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: e98e1405a6521ef9cdaf40a24b2c173bdf72c376
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348495"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252408"
 ---
 # <a name="dayofmonth"></a>dayofmonth()
 
@@ -31,6 +31,6 @@ dayofmonth(datetime(2015-12-14)) == 14
 
 * `a_date`: Ein `datetime`-Wert.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
-`day number`des angegebenen Monats.
+`day number` des angegebenen Monats.

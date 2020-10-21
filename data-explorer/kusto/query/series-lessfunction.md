@@ -4,16 +4,16 @@ description: In diesem Artikel wird series_less () in Azure Daten-Explorer besch
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/01/2020
-ms.openlocfilehash: d6ed6f073b1b1aa93b5767c46459a7c8a7b4bf55
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: ccf5638c2393ca4fbd63474d93c60d96972580fd
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91103522"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251543"
 ---
 # <a name="series_less"></a>series_less()
 
@@ -27,7 +27,7 @@ Berechnet die Element Weise Less ( `<` )-Logik Operation von zwei numerischen Re
 
 * *Series1, series2*: numerische Eingabe Arrays, die Element Weise verglichen werden sollen. Alle Argumente müssen dynamische Arrays sein. 
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Dynamisches Array von booleschen Werten, das die berechnete Element Weise weniger Logik Operation zwischen den beiden Eingaben enthält. Ein nicht numerisches Element oder ein nicht vorhandenes Element (Arrays mit unterschiedlichen Größen) ergeben einen- `null` Elementwert.
 

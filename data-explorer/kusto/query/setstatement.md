@@ -4,18 +4,18 @@ description: Dieser Artikel beschreibt die Set-Anweisung in Azure Daten-Explorer
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: fbb5d3765b4be20b55cd7e3fa155a26e429c61e8
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: b8b30aafd8fafc2a900fe0596243a0d4ed89f276
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87351147"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252068"
 ---
 # <a name="set-statement"></a>set-Anweisung
 

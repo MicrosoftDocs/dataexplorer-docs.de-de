@@ -4,16 +4,16 @@ description: In diesem Artikel wird der reduzierungsoperator in Azure Daten-Expl
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: d844f693b1509a823702b12bd28b85a9f19a07bd
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: 6ef5e42dc9c41426cd66dbf4d857ec0d2c32e2ae
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91102892"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92252109"
 ---
 # <a name="reduce-operator"></a>reduce-Operator
 
@@ -36,7 +36,7 @@ Für jede solche Gruppe gibt Sie ein **Muster** aus, das die Gruppe am besten be
 * *Zeichen*: ein `string` Literalwert, der eine Liste von Zeichen enthält, die der Liste der Zeichen hinzugefügt werden sollen, die keinen Begriff unterbrechen. (Wenn Sie z. b. `aaa=bbbb` und `aaa:bbb` zu jedem ein ganzer Begriff sein möchten, anstatt an und zu unterbrechen `=` `:` , verwenden Sie `":="` als Zeichenfolgenliterale.)
 * *Reducekind*: gibt den reduzierungstyp an. Der einzige gültige Wert für die Zeit, die ist `source` .
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Dieser Operator gibt eine Tabelle mit drei Spalten ( `Pattern` , `Count` und `Representative` ) sowie so viele Zeilen zurück, wie es Gruppen gibt. `Pattern` der Pattern-Wert für die Gruppe, der `*` als Platzhalter verwendet wird (die beliebige Einfügezeichenfolgen darstellt), `Count` zählt, wie viele Zeilen in der Eingabe für den Operator durch dieses Muster dargestellt werden, und `Representative` ist ein Wert aus der Eingabe, der in diese Gruppe fällt.
 

@@ -4,16 +4,16 @@ description: In diesem Artikel wird beta_pdf () in Azure Daten-Explorer beschrie
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 1b94f661973d1ec89fe7f60edc9063b8c0f36d3c
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6ef26e3a24d7bc6f1d4cd50f74ca83d0a1d21dab
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87349192"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92245490"
 ---
 # <a name="beta_pdf"></a>beta_pdf()
 
@@ -39,7 +39,7 @@ Die Beta-Verteilung wird häufig verwendet, um die prozentuale Abweichung eines 
 
 * Die [Wahrscheinlichkeits-Beta-Funktion](https://en.wikipedia.org/wiki/Beta_distribution#Probability_density_function).
 
-**Hinweise**
+**Notizen**
 
 Wenn ein Argument nicht numerisch ist, gibt beta_pdf () einen NULL-Wert zurück.
 
@@ -65,8 +65,8 @@ datatable(x:double, alpha:double, beta:double, comment:string)
 |---|---|---|---|---|
 |0.5|10|20|Gültige Eingabe|0.746176019310951|
 |1.5|10|20|x > 1, ergibt Nan|NaN|
-|-10|10|20|x < 0, ergibt Nan|NaN|
-|0,1|-1|20|Alpha ist < 0, ergibt Nan|NaN|
+|–10|10|20|x < 0, ergibt Nan|NaN|
+|0.1|-1|20|Alpha ist < 0, ergibt Nan|NaN|
 
 **Referenzen**
 

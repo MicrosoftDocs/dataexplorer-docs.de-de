@@ -4,16 +4,16 @@ description: In diesem Artikel wird format_timespan () in Azure Daten-Explorer b
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 923008d05ebc8c51a39955e29450e55af4100941
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: ca0f0e00e54f31c5dcc29c06150b824c0988d30f
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87347951"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247399"
 ---
 # <a name="format_timespan"></a>format_timespan()
 

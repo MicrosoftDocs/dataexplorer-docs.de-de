@@ -4,16 +4,16 @@ description: In diesem Artikel wird array_shift_right () in Azure Daten-Explorer
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2019
-ms.openlocfilehash: a38eda3fb595256527c277b12a16f359ef9eb910
-ms.sourcegitcommit: 4e95f5beb060b5d29c1d7bb8683695fe73c9f7ea
+ms.openlocfilehash: af983f63046280d4ddd237107d1d2cf35d6cce2d
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91102708"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92246997"
 ---
 # <a name="array_shift_right"></a>array_shift_right()
 
@@ -29,7 +29,7 @@ ms.locfileid: "91102708"
 * *`shift_count`*: Ganze Zahl, die die Anzahl der Positionen angibt, die Array Elemente nach rechts verschoben werden. Wenn der Wert negativ ist, werden die Elemente nach links verschoben.
 * *`fill_value`*: Skalarwert, der zum Einfügen von Elementen anstelle der verschobenen und entfernten Elemente verwendet wird. Standard: NULL-Wert oder eine leere Zeichenfolge (abhängig vom *arr* -Typ).
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Dynamisches Array, das die gleiche Menge an Elementen wie im ursprünglichen Array enthält. Jedes Element wurde nach verschoben *`shift_count`* . Neue Elemente, die anstelle der entfernten Elemente hinzugefügt werden, haben den Wert *`fill_value`* .
 

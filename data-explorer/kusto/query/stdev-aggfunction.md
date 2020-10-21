@@ -4,16 +4,16 @@ description: In diesem Artikel wird StDev () (Aggregations Funktion) in Azure Da
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 18722a544ea3bbd0e19922d1d8988a3604b4d200
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: 6d2ed328930f01d3f9c52a675eab61805fd87593
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87342902"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92247062"
 ---
 # <a name="stdev-aggregation-function"></a>StDev () (Aggregations Funktion)
 

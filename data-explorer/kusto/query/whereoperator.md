@@ -4,16 +4,16 @@ description: Dieser Artikel beschreibt den Where-Operator in Azure Daten-Explore
 services: data-explorer
 author: orspod
 ms.author: orspodek
-ms.reviewer: rkarlin
+ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 79eb1314fad1c3d3bdbbda242b3bd6a86c19e158
-ms.sourcegitcommit: 6f610cd9c56dbfaff4eb0470ac0d1441211ae52d
+ms.openlocfilehash: 738683b3042295678f7d507425443b47c9dec79e
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/12/2020
-ms.locfileid: "91954466"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92251792"
 ---
 # <a name="where-operator"></a>where-Operator
 
@@ -34,7 +34,7 @@ T | where fruit=="apple"
 * *T*: die tabellarische Eingabe, deren Datensätze gefiltert werden sollen.
 * *Predicate*: ein- `boolean` [Ausdruck](./scalar-data-types/bool.md) für die Spalten von *T*. Sie wird für jede Zeile in *T*ausgewertet.
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Zeilen in *T*, für die *Predicate* auf `true` festgelegt ist.
 
