@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7bcb33d30bdfdbd22b28dbb7364427cfa3a81a5b
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: de8ff4b9256c8f964350bafd64eac15b028f53d4
+ms.sourcegitcommit: ee904f45e3eb3feab046263aa9956cb7780a056d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92242142"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92356485"
 ---
 # <a name="project-reorder-operator"></a>project-reorder-Operator
 
@@ -36,9 +36,9 @@ T | project-reorder Col2, Col1, Col* asc
 > [!NOTE]
 > * Bei einem mehrdeutigen *columnnameorpattern* -Abgleich wird die Spalte an der ersten Position angezeigt, die mit dem Muster übereinstimmt.
 > * Das Angeben von Spalten für `project-reorder` ist optional. Spalten, die nicht explizit angegeben werden, werden als letzte Spalten der Ausgabe Tabelle angezeigt.
-> * Verwenden [`project-away`](projectawayoperator.md) Sie, um Spalten zu entfernen.
-> * Verwenden [`project-rename`](projectrenameoperator.md) Sie zum Umbenennen von Spalten.
-
+> * Verwenden Sie zum Entfernen von Spalten [`project-away`](projectawayoperator.md) .
+> * Um auszuwählen, welche Spalten aufbewahrt werden sollen, verwenden Sie [`project-keep`](project-keep-operator.md) .
+> * Verwenden Sie zum Umbenennen von Spalten [`project-rename`](projectrenameoperator.md) .
 
 ## <a name="returns"></a>Rückgabe
 

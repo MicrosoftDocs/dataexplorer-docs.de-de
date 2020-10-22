@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 9706cce08a99989441aa657c5d85465294be837e
-ms.sourcegitcommit: 188f89553b9d0230a8e7152fa1fce56c09ebb6d6
+ms.openlocfilehash: 448da9db3e515385ca44cec94d9dd8604a8c1125
+ms.sourcegitcommit: ee904f45e3eb3feab046263aa9956cb7780a056d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84512417"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92356570"
 ---
 # <a name="query-result-set-has-exceeded-the-internal--limit"></a>Das Resultset der Abfrage hat den internen Wert überschritten... ans
 
@@ -24,9 +24,9 @@ Ein *Abfrageresultset hat den internen... "Limit* " ist ein [Teil eines Abfrage 
 Es gibt mehrere mögliche Aktions Kurse:
 
 * Ändern Sie die Abfrage so, dass weniger Ressourcen beansprucht werden. 
-  Beispielsweise können Sie folgende Aktionen ausführen:
+  Sie haben beispielsweise folgende Möglichkeiten:
   * Begrenzen der Anzahl der von der Abfrage zurückgegebenen Datensätze mit dem [Take-Operator](../query/takeoperator.md) oder Hinzufügen zusätzlicher [WHERE-Klauseln](../query/whereoperator.md)
-  * Versuchen Sie, die Anzahl der von der Abfrage zurückgegebenen Spalten zu verringern. Verwenden des [Project-Operators](../query/projectoperator.md)oder des [Projekt entfernten Operators](../query/projectawayoperator.md))
+  * Versuchen Sie, die Anzahl der von der Abfrage zurückgegebenen Spalten zu verringern. Verwenden Sie den [Project-Operator](../query/projectoperator.md), den [Projekt entfernten Operator](../query/projectawayoperator.md)oder den [Project-Keep-Operator](../query/project-keep-operator.md) .
   * Verwenden Sie den Zusammenfassungs [Operator](../query/summarizeoperator.md) , um aggregierte Daten zu erhalten.
 * Erhöhen Sie das relevante Abfragelimit für diese Abfrage vorübergehend. Weitere Informationen finden Sie unter **Abschneiden** von Ergebnissen unter [Abfrage Limits](querylimits.md)).
 
