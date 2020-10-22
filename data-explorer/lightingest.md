@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/28/2020
-ms.openlocfilehash: 1825ef642e5427df58800c8d6a71f75ff484bcf5
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: f3925ed2b3012dffbd7e96ca6dd6a795b0499071
+ms.sourcegitcommit: 88923cfb2495dbf10b62774ab2370b59681578b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872640"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92175707"
 ---
 # <a name="use-lightingest-to-ingest-data-to-azure-data-explorer"></a>Verwenden von LightIngest zum Erfassen von Daten in Azure Data Explorer
  
@@ -36,8 +36,9 @@ LightIngest ist besonders bei der Erfassung großer Datenmengen hilfreich, da di
 
 1. Navigieren Sie zu dem extrahierten Verzeichnis *tools* auf dem Computer.
 1. Löschen Sie die vorhandenen Speicherortinformationen in der Adressleiste.
-    
-    :::image type="content" source="kusto/tools/images/KustoTools-Lightingest/lightingest-locationbar.png" alt-text="Löschen vorhandener Speicherortinformationen für LightIngest":::
+
+    :::image type="content" source="media/lightingest/lightingest-locationbar.png" alt-text="LightIngest-Download":::
+
 
 1. Geben Sie `cmd` ein, und drücken Sie die **EINGABETASTE**.
 1. Geben Sie an der Eingabeaufforderung `LightIngest.exe` ein, gefolgt vom entsprechenden Befehlszeilenargument.
@@ -45,7 +46,7 @@ LightIngest ist besonders bei der Erfassung großer Datenmengen hilfreich, da di
     > [!Tip]
     > Eine Liste der unterstützten Befehlszeilenargumente erhalten Sie durch Eingeben von `LightIngest.exe /help`.
     >
-    > :::image type="content" source="media/lightingest/lightingest-cmd-line-help.png" alt-text="Befehlszeilenhilfe für LightIngest":::
+    > :::image type="content" source="media/lightingest/lightingest-cmd-line-help.png" alt-text="LightIngest-Download":::
 
 1. Geben Sie `ingest-` gefolgt von der Verbindungszeichenfolge für den Azure Data Explorer-Cluster ein, in dem die Datenerfassung verwaltet wird.
     Setzen Sie die Verbindungszeichenfolge in doppelte Anführungszeichen, und befolgen Sie die [Spezifikation für Kusto-Verbindungszeichenfolgen](kusto/api/connection-strings/kusto.md).

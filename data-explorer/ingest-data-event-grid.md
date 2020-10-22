@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 5cab29b20ad726c1482fa892ad4dadece464f01d
-ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
+ms.openlocfilehash: 3452ca547778869ae08e7aef92c1a3a7a4754446
+ms.sourcegitcommit: 58588ba8d1fc5a6adebdce2b556db5bc542e38d8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/21/2020
-ms.locfileid: "90832716"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92098437"
 ---
 # <a name="ingest-blobs-into-azure-data-explorer-by-subscribing-to-event-grid-notifications"></a>Erfassen von Blobs in Azure Data Explorer durch das Abonnieren von Event Grid-Benachrichtigungen
 
@@ -24,9 +24,9 @@ ms.locfileid: "90832716"
 
 [!INCLUDE [data-connector-intro](includes/data-connector-intro.md)]
 
-In diesem Artikel erfahren Sie, wie Blobs aus Ihrem Speicherkonto unter Verwendung einer Event Grid-Datenverbindung in Azure Data Explorer erfasst werden. Sie erstellen eine Event Grid Datenverbindung und legen ein [Azure Event Grid](/azure/event-grid/overview)-Abonnement fest. Das Event Grid-Abonnement leitet Ereignisse aus Ihrem Speicherkonto über einen Azure Event Hub an Azure Data Explorer weiter. Anschließend wird ein Beispiel für den Datenfluss im gesamten System gezeigt.
+In diesem Artikel erfahren Sie, wie Blobs aus Ihrem Speicherkonto unter Verwendung einer Event Grid-Datenverbindung in Azure Data Explorer erfasst werden. Sie erstellen eine Event Grid-Datenverbindung, über die ein [Azure Event Grid](/azure/event-grid/overview)-Abonnement festgelegt wird. Das Event Grid-Abonnement leitet Ereignisse aus Ihrem Speicherkonto über einen Azure Event Hub an Azure Data Explorer weiter. Anschließend wird ein Beispiel für den Datenfluss im gesamten System gezeigt. 
 
-Allgemeine Informationen zur Erfassung in Azure Data Explorer aus Event Grid finden Sie unter [Herstellen einer Verbindung mit Event Grid](ingest-data-event-grid-overview.md).
+Allgemeine Informationen zur Erfassung in Azure Data Explorer aus Event Grid finden Sie unter [Herstellen einer Verbindung mit Event Grid](ingest-data-event-grid-overview.md). Informationen zur manuellen Erstellung von Ressourcen im Azure-Portal finden Sie unter [Manuelles Erstellen von Ressourcen für die Event Grid-Erfassung](ingest-data-event-grid-manual.md).
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -48,7 +48,7 @@ Erstellen Sie in Azure Data Explorer eine Tabelle, an die Event Hubs Daten sende
     .create table TestTable (TimeStamp: datetime, Value: string, Source:string)
     ```
 
-    :::image type="content" source="media/ingest-data-event-grid/run-create-table.png" alt-text="Ausführen des Befehls „create table“":::
+    :::image type="content" source="media/ingest-data-event-grid/run-create-table.png" alt-text="Link zum Abfrage-Explorer":::
 
 1. Kopieren Sie den folgenden Befehl in das Fenster, und wählen Sie **Ausführen**, um die eingehenden JSON-Daten den Spaltennamen und Datentypen der Tabelle (TestTable) zuzuordnen.
 
@@ -62,11 +62,11 @@ Verbinden Sie nun das Speicherkonto mit Azure Data Explorer, so dass die in den 
 
 1. Wählen Sie unter dem von Ihnen erstellten Cluster **Datenbanken** > **TestDatabase**.
 
-    :::image type="content" source="media/ingest-data-event-grid/select-test-database.png" alt-text="Auswählen der Testdatenbank":::
+    :::image type="content" source="media/ingest-data-event-grid/select-test-database.png" alt-text="Link zum Abfrage-Explorer":::
 
 1. Wählen Sie **Datenerfassung** > **Datenverbindung hinzufügen**.
 
-    :::image type="content" source="media/ingest-data-event-grid/data-ingestion-create.png" alt-text="Hinzufügen der Datenverbindung für die Datenerfassung":::
+    :::image type="content" source="media/ingest-data-event-grid/data-ingestion-create.png" alt-text="Link zum Abfrage-Explorer":::
 
 ### <a name="data-connection---basics-tab"></a>Datenverbindung: Registerkarte „Grundlagen“
 
@@ -74,7 +74,7 @@ Verbinden Sie nun das Speicherkonto mit Azure Data Explorer, so dass die in den 
 
 1. Füllen Sie das Formular mit den folgenden Informationen aus:
 
-    :::image type="content" source="media/ingest-data-event-grid/data-connection-basics.png" alt-text="Ausfüllen des Event Grid-Formulars mit grundlegenden Verbindungsinformationen":::
+    :::image type="content" source="media/ingest-data-event-grid/data-connection-basics.png" alt-text="Link zum Abfrage-Explorer":::
 
     |**Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**|
     |---|---|---|
@@ -82,17 +82,17 @@ Verbinden Sie nun das Speicherkonto mit Azure Data Explorer, so dass die in den 
     | Speicherkontoabonnement | Ihre Abonnement-ID | Die Abonnement-ID, unter der sich Ihr Speicherkonto befindet.|
     | Speicherkonto | *gridteststorage1* | Der Name des zuvor erstellten Speicherkontos.|
     | Ereignistyp | *Blob erstellt* oder *Blob umbenannt* | Der Typ des Ereignisses, das die Erfassung auslöst |
-    | Ressourcenerstellung | *Automatisch* | Legen Sie fest, ob Azure Data Explorer ein Event Grid Abonnement, einen Event Hub-Namespace und einen Event Hub für Sie erstellen soll. Eine ausführliche Erläuterung der manuellen Erstellung Event Grid-Abonnements finden Sie unter den Verweisen im Abschnitt [Erstellen eines Event Grid-Abonnements in Ihrem Speicherkonto](ingest-data-event-grid.md).|
+    | Ressourcenerstellung | *Automatisch* | Legen Sie fest, ob mit Azure Data Explorer ein Event Grid-Abonnement, Event Hub-Namespace und Event Hub für Sie erstellt werden soll. Informationen zur manuellen Erstellung von Ressourcen finden Sie unter [Manuelles Erstellen von Ressourcen für die Event Grid-Erfassung](ingest-data-event-grid-manual.md).|
 
 1. Wählen Sie **Filtereinstellungen** aus, wenn Sie bestimmte Themen nachverfolgen möchten. Legen Sie die Filter für die Benachrichtigungen wie folgt fest:
-    * Das Feld **Präfix** ist das *Literalpräfix* des Themas. Da das angewendete Muster *startswith* ist, kann es mehrere Container, Ordner oder Blobs umfassen. Platzhalter sind nicht zulässig.
+    * Das Feld **Präfix** ist das *Literalpräfix* des Themas. Da das angewendete Muster *startswith* ist, kann es für mehrere Container, Ordner oder Blobs gelten. Platzhalter sind nicht zulässig.
         * Zum Definieren eines Filters für den Blobcontainer *muss* das Feld wie folgt festgelegt werden: *`/blobServices/default/containers/[container prefix]`* .
         * Zum Definieren eines Filters für ein Blobpräfix (oder einen Ordner in Azure Data Lake Gen2) *muss* das Feld wie folgt festgelegt werden: *`/blobServices/default/containers/[container name]/blobs/[folder/blob prefix]`* .
     * Das Feld **Suffix** ist das *Literalsuffix* des Blobs. Platzhalter sind nicht zulässig.
-    * Das Feld **Groß-/Kleinschreibung beachten** Feld gibt an, ob bei den Präfix- und Suffixfilter nach Groß-/Kleinschreibung unterschieden wird.
+    * Mit dem Feld **Groß-/Kleinschreibung beachten** wird angegeben, ob bei den Präfix- und Suffixfiltern nach Groß-/Kleinschreibung unterschieden wird.
     * Weitere Informationen zum Filtern von Ereignissen finden Sie unter [Blob Storage-Ereignisse](/azure/storage/blobs/storage-blob-event-overview#filtering-events).
     
-    :::image type="content" source="media/ingest-data-event-grid/filter-settings.png" alt-text="Event Grid-Filtereinstellungen":::    
+    :::image type="content" source="media/ingest-data-event-grid/filter-settings.png" alt-text="Link zum Abfrage-Explorer":::    
 
 1. Klicken Sie auf **Weiter: Erfassungseigenschaften**.
 
@@ -100,7 +100,7 @@ Verbinden Sie nun das Speicherkonto mit Azure Data Explorer, so dass die in den 
 
 1. Füllen Sie das Formular mit den folgenden Informationen aus. Für Tabellen- und Zuordnungsnamen wird die Groß-/Kleinschreibung beachtet:
 
-   :::image type="content" source="media/ingest-data-event-grid/data-connection-ingest-properties.png" alt-text="Überprüfen und Erstellen von Erfassungseigenschaften für Tabellen und Zuordnungen":::
+   :::image type="content" source="media/ingest-data-event-grid/data-connection-ingest-properties.png" alt-text="Link zum Abfrage-Explorer":::
 
     Erfassungseigenschaften:
 
@@ -119,13 +119,13 @@ Verbinden Sie nun das Speicherkonto mit Azure Data Explorer, so dass die in den 
 
 1. Überprüfen Sie die Ressourcen, die automatisch für Sie erstellt wurden, und wählen Sie **Erstellen** aus.
 
-    :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-review-create.png" alt-text="Überprüfen und Erstellen einer Datenverbindung für Event Grid":::
+    :::image type="content" source="media/ingest-data-event-grid/create-event-grid-data-connection-review-create.png" alt-text="Link zum Abfrage-Explorer":::
 
 ### <a name="deployment"></a>Bereitstellung
 
 Warten Sie, bis die Bereitstellung abgeschlossen wurde. Wenn bei Ihrer Bereitstellung ein Fehler aufgetreten ist, können Sie neben der fehlerhaften Phase auf **Vorgangsdetails** klicken, um weitere Informationen zur Fehlerursache anzuzeigen. Sie können auch **Erneut bereitstellen** auswählen, um die Bereitstellung der Ressourcen zu wiederholen. Sie können die Parameter vor der Bereitstellung ändern.
 
-:::image type="content" source="media/ingest-data-event-grid/deploy-event-grid-resources.png" alt-text="Bereitstellen von Event Grid-Ressourcen":::
+:::image type="content" source="media/ingest-data-event-grid/deploy-event-grid-resources.png" alt-text="Link zum Abfrage-Explorer":::
 
 ## <a name="generate-sample-data"></a>Generieren von Beispieldaten
 
@@ -189,7 +189,7 @@ Sie kann bei Bedarf zu einem späteren Zeitpunkt geändert werden. In diesem Art
 
 1. Im Azure-Portal sehen Sie unter Ihrer Event Grid-Instanz den Anstieg der Aktivität während der App-Ausführung.
 
-    :::image type="content" source="media/ingest-data-event-grid/event-grid-graph.png" alt-text="Aktivitätsgraph für Event Grid":::
+    :::image type="content" source="media/ingest-data-event-grid/event-grid-graph.png" alt-text="Link zum Abfrage-Explorer":::
 
 1. Führen Sie in Ihrer Testdatenbank die folgende Abfrage aus, um zu überprüfen, wie viele Nachrichten bisher an die Datenbank gesendet wurden:
 
@@ -206,39 +206,39 @@ Sie kann bei Bedarf zu einem späteren Zeitpunkt geändert werden. In diesem Art
 
     Das Resultset sollte wie auf der folgenden Abbildung aussehen:
 
-    :::image type="content" source="media/ingest-data-event-grid/table-result.png" alt-text="Nachrichten-Resultset für Event Grid":::
+    :::image type="content" source="media/ingest-data-event-grid/table-result.png" alt-text="Link zum Abfrage-Explorer":::
 
 ## <a name="clean-up-resources"></a>Bereinigen von Ressourcen
 
-Wenn Sie Ihre Event Grid-Instanz nicht erneut verwenden möchten, bereinigen Sie das Event Grid-Abonnement, den Event Hub-Namespace und den Event Hub, die automatisch für Sie erstellt wurden, um Kosten zu vermeiden.
+Wenn Sie Ihre Event Grid-Instanz nicht erneut verwenden möchten, sollten Sie die automatisch erstellten Komponenten „Event Grid-Abonnement“, „Event Hub-Namespace“ und „Event Hub“ bereinigen, um das Anfallen von Kosten zu vermeiden.
 
 1. Wählen Sie im Azure-Portal im Menü auf der linken Seite die Option **Alle Ressourcen** aus.
 
-    :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-all-resource.png" alt-text="Auswählen aller Ressourcen für die Event Grid-Bereinigung":::    
+    :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-all-resource.png" alt-text="Link zum Abfrage-Explorer":::    
 
 1. Suchen Sie nach Ihrem Event Hub-Namespace, und wählen Sie **Löschen** aus, um ihn zu löschen:
 
-    :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-find-eventhub-namespace-delete.png" alt-text="Bereinigen des Event Hub-Namespace":::
+    :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-find-eventhub-namespace-delete.png" alt-text="Link zum Abfrage-Explorer":::
 
 1. Bestätigen Sie im Formular „Ressourcen löschen“ den Löschvorgang, um den Event Hub-Namespace und die Event Hub-Ressourcen zu löschen.
 
 1. Wechseln Sie zum Speicherkonto. Wählen Sie im linken Menü die Option **Ereignisse** aus:
 
-    :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-events.png" alt-text="Auswählen von Ereignissen zur Bereinigung für Event Grid":::
+    :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-events.png" alt-text="Link zum Abfrage-Explorer":::
 
 1. Wählen Sie unterhalb des Graphs Ihr Event Grid-Abonnement aus, und wählen Sie dann **Löschen** aus, um es zu löschen:
 
-    :::image type="content" source="media/ingest-data-event-grid/delete-event-grid-subscription.png" alt-text="Löschen des Event Grid-Abonnements":::
+    :::image type="content" source="media/ingest-data-event-grid/delete-event-grid-subscription.png" alt-text="Link zum Abfrage-Explorer":::
 
 1. Wenn Sie Ihre Event Grid Datenverbindung löschen möchten, wechseln Sie zu Ihrem Azure Data Explorer-Cluster. Wählen Sie im Menü auf der linken Seite **Datenbanken** aus.
 
 1. Wählen Sie Ihre Datenbank **TestDatabase** aus:
 
-    :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-database.png" alt-text="Auswählen einer Datenbank zum Bereinigen von Ressourcen":::
+    :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-database.png" alt-text="Link zum Abfrage-Explorer":::
 
 1. Wählen Sie im Menü auf der linken Seite die Option **Datenerfassung** aus.
 
-    :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-data-ingestion.png" alt-text="Auswählen von „Datenerfassung“ zum Bereinigen von Ressourcen":::
+    :::image type="content" source="media/ingest-data-event-grid/clean-up-resources-select-data-ingestion.png" alt-text="Link zum Abfrage-Explorer":::
 
 1. Wählen Sie Ihre Datenverbindung *test-grid-connection* aus, und wählen Sie dann **Löschen** aus, um sie zu löschen.
 

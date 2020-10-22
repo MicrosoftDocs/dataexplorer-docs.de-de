@@ -1,18 +1,18 @@
 ---
 title: Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#
-description: In diesem Artikel wird beschrieben, wie Sie die Verschlüsselung von kundenseitig verwalteten Schlüsseln für Ihre Daten in Azure Data Explorer konfigurieren.
+description: In diesem Artikel wird beschrieben, wie Sie kundenseitig verwaltete Schlüssel für die Verschlüsselung von Azure Data Explorer-Daten mit C# konfigurieren.
 author: orspod
 ms.author: orspodek
 ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/06/2020
-ms.openlocfilehash: ade06e6fffb31a5c76fa12fe02d5192e4126091e
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: db20566a9aa9b5c720ea9f72ec9c980042db0625
+ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872096"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "92003005"
 ---
 # <a name="configure-customer-managed-keys-using-c"></a>Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#
 

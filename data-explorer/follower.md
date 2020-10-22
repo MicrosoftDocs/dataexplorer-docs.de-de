@@ -6,13 +6,13 @@ ms.author: orspodek
 ms.reviewer: gabilehner
 ms.service: data-explorer
 ms.topic: how-to
-ms.date: 11/07/2019
-ms.openlocfilehash: 36c5201f7b9d9f1cad2b82d569733c9d9f2abb90
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.date: 10/06/2020
+ms.openlocfilehash: d07dc282ba3996113903bd1b7c5ab08672d46543
+ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874000"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "92003054"
 ---
 # <a name="use-follower-database-to-attach-databases-in-azure-data-explorer"></a>Verwenden der Follower-Datenbank zum Anfügen von Datenbanken in Azure Data Explorer
 
@@ -34,7 +34,10 @@ Das Anfügen einer Datenbank an einen anderen Cluster mithilfe der Follower-Funk
 
 ## <a name="attach-a-database"></a>Anfügen einer Datenbank
 
-Es gibt verschiedene Methoden zum Anfügen einer Datenbank. In diesem Artikel wird das Anfügen einer Datenbank mithilfe von C#, Python oder einer Azure Resource Manager-Vorlage erläutert. Zum Anfügen einer Datenbank benötigen Sie einen Benutzer, eine Gruppe, einen Dienstprinzipal oder eine verwaltete Identität mit mindestens der Rolle „Mitwirkender“ für den Leader-Cluster und den Follower-Cluster. Sie können Rollenzuweisungen mit dem [Azure-Portal](/azure/role-based-access-control/role-assignments-portal), [PowerShell](/azure/role-based-access-control/role-assignments-powershell), der [Azure CLI](/azure/role-based-access-control/role-assignments-cli) und einer [ARM-Vorlage](/azure/role-based-access-control/role-assignments-template) hinzufügen oder entfernen. Weitere Informationen zur rollenbasierten Zugriffssteuerung in Azure (Role-Based Access Control, RBAC) und zu den verschiedenen Rollen finden Sie [hier](/azure/role-based-access-control/overview) und [hier](/azure/role-based-access-control/rbac-and-directory-admin-roles). 
+Es gibt verschiedene Methoden zum Anfügen einer Datenbank. In diesem Artikel wird das Anfügen einer Datenbank mithilfe von C#, Python, PowerShell oder einer Azure Resource Manager-Vorlage beschrieben. Zum Anfügen einer Datenbank benötigen Sie einen Benutzer, eine Gruppe, einen Dienstprinzipal oder eine verwaltete Identität mit mindestens der Rolle „Mitwirkender“ für den Leader-Cluster und den Follower-Cluster. Sie können Rollenzuweisungen mit dem [Azure-Portal](/azure/role-based-access-control/role-assignments-portal), [PowerShell](/azure/role-based-access-control/role-assignments-powershell), der [Azure CLI](/azure/role-based-access-control/role-assignments-cli) und einer [ARM-Vorlage](/azure/role-based-access-control/role-assignments-template) hinzufügen oder entfernen. Weitere Informationen zur rollenbasierten Zugriffssteuerung in Azure (Role-Based Access Control, RBAC) und zu den verschiedenen Rollen finden Sie [hier](/azure/role-based-access-control/overview) und [hier](/azure/role-based-access-control/rbac-and-directory-admin-roles). 
+
+
+# <a name="c"></a>[C#](#tab/csharp)
 
 ### <a name="attach-a-database-using-c"></a>Anfügen einer Datenbank mithilfe von C#
 
@@ -43,9 +46,9 @@ Es gibt verschiedene Methoden zum Anfügen einer Datenbank. In diesem Artikel wi
 * Installieren Sie [Microsoft.Azure.Management.kusto](https://www.nuget.org/packages/Microsoft.Azure.Management.Kusto/).
 * Installieren Sie [Microsoft.Rest.ClientRuntime.Azure.Authentication](https://www.nuget.org/packages/Microsoft.Rest.ClientRuntime.Azure.Authentication) für die Authentifizierung.
 
-#### <a name="code-example"></a>Codebeispiel
+#### <a name="example"></a>Beispiel
 
-```Csharp
+```csharp
 var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID
 var clientId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Application ID
 var clientSecret = "xxxxxxxxxxxxxx";//Client secret
@@ -77,6 +80,8 @@ AttachedDatabaseConfiguration attachedDatabaseConfigurationProperties = new Atta
 var attachedDatabaseConfigurations = resourceManagementClient.AttachedDatabaseConfigurations.CreateOrUpdate(followerResourceGroupName, followerClusterName, attachedDatabaseConfigurationName, attachedDatabaseConfigurationProperties);
 ```
 
+# <a name="python"></a>[Python](#tab/python)
+
 ### <a name="attach-a-database-using-python"></a>Anfügen einer Datenbank mithilfe von Python
 
 #### <a name="needed-modules"></a>Erforderliche Module
@@ -86,7 +91,7 @@ pip install azure-common
 pip install azure-mgmt-kusto
 ```
 
-#### <a name="code-example"></a>Codebeispiel
+#### <a name="example"></a>Beispiel
 
 ```python
 from azure.mgmt.kusto import KustoManagementClient
@@ -124,6 +129,51 @@ attached_database_configuration_properties = AttachedDatabaseConfiguration(clust
 #Returns an instance of LROPoller, see https://docs.microsoft.com/python/api/msrest/msrest.polling.lropoller?view=azure-python
 poller = kusto_management_client.attached_database_configurations.create_or_update(follower_resource_group_name, follower_cluster_name, attached_database_Configuration_name, attached_database_configuration_properties)
 ```
+
+# <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
+
+### <a name="attach-a-database-using-powershell"></a>Anfügen einer Datenbank mit PowerShell
+
+#### <a name="needed-modules"></a>Erforderliche Module
+
+```
+Install : Az.Kusto
+```
+
+#### <a name="example"></a>Beispiel
+
+```Powershell
+$FollowerClustername = 'follower'
+$FollowerClusterSubscriptionID = 'xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx'
+$FollowerResourceGroupName = 'followerResouceGroup'
+$DatabaseName = "db"  ## Can be specific database name or * for all databases
+$LeaderClustername = 'leader'
+$LeaderClusterSubscriptionID = 'xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx'
+$LeaderClusterResourceGroup = 'leaderResouceGroup'
+$DefaultPrincipalsModificationKind = 'Union'
+##Construct the LeaderClusterResourceId and Location
+$getleadercluster = Get-AzKustoCluster -Name $LeaderClustername -ResourceGroupName $LeaderClusterResourceGroup -SubscriptionId $LeaderClusterSubscriptionID -ErrorAction Stop
+$LeaderClusterResourceid = $getleadercluster.Id
+$Location = $getleadercluster.Location
+##Handle the config name if all databases needs to be followed
+if($DatabaseName -eq '*')  {
+        $configname = $FollowerClustername + 'config'
+       } 
+else {
+        $configname = $DatabaseName   
+     }
+New-AzKustoAttachedDatabaseConfiguration -ClusterName $FollowerClustername `
+    -Name $configname `
+    -ResourceGroupName $FollowerResourceGroupName `
+    -SubscriptionId $FollowerClusterSubscriptionID `
+    -DatabaseName $DatabaseName `
+    -ClusterResourceId $LeaderClusterResourceid `
+    -DefaultPrincipalsModificationKind $DefaultPrincipalsModificationKind `
+    -Location $Location `
+    -ErrorAction Stop 
+```
+
+# <a name="resource-manager-template"></a>[Resource Manager-Vorlage](#tab/azure-resource-manager)
 
 ### <a name="attach-a-database-using-an-azure-resource-manager-template"></a>Anhängen einer Datenbank mithilfe einer Azure Resource Manager-Vorlage
 
@@ -200,7 +250,6 @@ Sie können die Azure Resource Manager-Vorlage über das [Azure-Portal](https://
 
    ![Vorlagenbereitstellung](media/follower/template-deployment.png)
 
-
 |**Einstellung**  |**Beschreibung**  |
 |---------|---------|
 |Name des Follower-Clusters     |  Der Name des Followerclusters, auf dem die Vorlage bereitgestellt wird.  |
@@ -209,28 +258,38 @@ Sie können die Azure Resource Manager-Vorlage über das [Azure-Portal](https://
 |Leader-Clusterressourcen-ID    |   Die Ressourcen-ID des Leader-Clusters.      |
 |Standardänderungsart für Prinzipale    |   Die Standardänderungsart für Prinzipale. Dies kann `Union`, `Replace` oder `None` sein. Weitere Informationen zur Standardänderungsart für Prinzipale finden Sie unter [Steuerungsbefehl für Prinzipaländerungsart](kusto/management/cluster-follower.md#alter-follower-database-principals-modification-kind).      |
 |Standort   |   Der Speicherort aller Ressourcen. Der Leader und der Follower müssen sich am gleichen Speicherort befinden.       |
- 
-### <a name="verify-that-the-database-was-successfully-attached"></a>Überprüfen, ob die Datenbank erfolgreich angehängt wurde
 
-Um zu überprüfen, ob die Datenbank erfolgreich angefügt wurde, suchen Sie im [Azure-Portal](https://portal.azure.com) nach angefügten Datenbanken. 
+---
+
+## <a name="verify-that-the-database-was-successfully-attached"></a>Überprüfen, ob die Datenbank erfolgreich angehängt wurde
+
+Um zu überprüfen, ob die Datenbank erfolgreich angefügt wurde, suchen Sie im [Azure-Portal](https://portal.azure.com) nach angefügten Datenbanken. Sie können das erfolgreiche Anfügen der Datenbanken im [Follower](#check-your-follower-cluster)- oder [Leader](#check-your-leader-cluster)-Cluster überprüfen.
+
+### <a name="check-your-follower-cluster"></a>Überprüfen des Follower-Clusters  
 
 1. Navigieren Sie zum Follower-Cluster, und wählen Sie **Datenbanken** aus.
 1. Suchen Sie in der Datenbankliste nach neuen schreibgeschützten Datenbanken.
 
     ![Schreibgeschützte Follower-Datenbank](media/follower/read-only-follower-database.png)
 
-Alternativ:
+### <a name="check-your-leader-cluster"></a>Überprüfen des Leader-Clusters
 
 1. Navigieren Sie zum Leader-Cluster, und wählen Sie **Datenbanken** aus.
 2. Überprüfen Sie, ob die relevanten Datenbanken unter **FREIGEGEBEN FÜR WEITERE PERSONEN** >  mit **Ja** gekennzeichnet sind.
 
     ![Lesen und Schreiben für angefügte Datenbanken](media/follower/read-write-databases-shared.png)
 
-## <a name="detach-the-follower-database-using-c"></a>Trennen der Follower-Datenbank mithilfe vonC# 
+## <a name="detach-the-follower-database"></a>Trennen der Follower-Datenbank  
 
-### <a name="detach-the-attached-follower-database-from-the-follower-cluster"></a>Trennen der angefügten Follower-Datenbank vom Follower-Cluster
+> [!NOTE]
+> Zum Trennen einer Datenbank auf Follower- oder Leader-Seite benötigen Sie einen Benutzer, eine Gruppe, einen Dienstprinzipal oder eine verwaltete Identität mit mindestens der Rolle „Mitwirkender“ für den Cluster, von dem Sie die Datenbank trennen. Im Beispiel unten wird ein Dienstprinzipal verwendet.
 
-Vom Follower-Cluster kann jede angefügte Datenbank wie folgt getrennt werden:
+# <a name="c"></a>[C#](#tab/csharp)
+
+### <a name="detach-the-attached-follower-database-from-the-follower-cluster-using-c"></a>Trennen der angefügten Follower-Datenbank vom Follower-Cluster mit C#
+
+
+Vom Follower-Cluster kann jede angefügte Follower-Datenbank wie folgt getrennt werden:
 
 ```csharp
 var tenantId = "xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx";//Directory (tenant) ID
@@ -252,10 +311,7 @@ var attachedDatabaseConfigurationsName = "uniqueName";
 resourceManagementClient.AttachedDatabaseConfigurations.Delete(followerResourceGroupName, followerClusterName, attachedDatabaseConfigurationsName);
 ```
 
-Zum Trennen einer Datenbank aufseiten des Followers benötigen Sie einen Benutzer, eine Gruppe, einen Dienstprinzipal oder eine verwaltete Identität mit mindestens der Rolle „Mitwirkender“ für den Follower-Cluster.
-Im obigen Beispiel wird ein Dienstprinzipal verwendet.
-
-### <a name="detach-the-attached-follower-database-from-the-leader-cluster"></a>Trennen der angefügten Follower-Datenbank vom Leader-Cluster
+### <a name="detach-the-attached-follower-database-from-the-leader-cluster-using-c"></a>Trennen der angefügten Follower-Datenbank vom Leader-Cluster mit C#
 
 Vom Leader-Cluster kann jede angefügte Datenbank wie folgt getrennt werden:
 
@@ -285,11 +341,9 @@ var followerDatabaseDefinition = new FollowerDatabaseDefinition()
 resourceManagementClient.Clusters.DetachFollowerDatabases(leaderResourceGroupName, leaderClusterName, followerDatabaseDefinition);
 ```
 
-Zum Trennen einer Datenbank aufseiten des Leaders benötigen Sie einen Benutzer, eine Gruppe, einen Dienstprinzipal oder eine verwaltete Identität mit mindestens der Rolle „Mitwirkender“ für den Leader-Cluster. Im obigen Beispiel wird ein Dienstprinzipal verwendet.
+# <a name="python"></a>[Python](#tab/python)
 
-## <a name="detach-the-follower-database-using-python"></a>Trennen der Follower-Datenbank mithilfe von Python
-
-### <a name="detach-the-attached-follower-database-from-the-follower-cluster"></a>Trennen der angefügten Follower-Datenbank vom Follower-Cluster
+### <a name="detach-the-attached-follower-database-from-the-follower-cluster-using-python"></a>Trennen der angefügten Follower-Datenbank vom Follower-Cluster mit Python
 
 Vom Follower-Cluster kann jede angefügte Datenbank wie folgt getrennt werden:
 
@@ -319,10 +373,8 @@ attached_database_configurationName = "uniqueName"
 #Returns an instance of LROPoller, see https://docs.microsoft.com/python/api/msrest/msrest.polling.lropoller?view=azure-python
 poller = kusto_management_client.attached_database_configurations.delete(follower_resource_group_name, follower_cluster_name, attached_database_configurationName)
 ```
-Zum Trennen einer Datenbank aufseiten des Followers benötigen Sie einen Benutzer, eine Gruppe, einen Dienstprinzipal oder eine verwaltete Identität mit mindestens der Rolle „Mitwirkender“ für den Follower-Cluster.
-Im obigen Beispiel wird ein Dienstprinzipal verwendet.
 
-### <a name="detach-the-attached-follower-database-from-the-leader-cluster"></a>Trennen der angefügten Follower-Datenbank vom Leader-Cluster
+### <a name="detach-the-attached-follower-database-from-the-leader-cluster-using-python"></a>Trennen der angefügten Follower-Datenbank vom Leader-Cluster mit Python
 
 Vom Leader-Cluster kann jede angefügte Datenbank wie folgt getrennt werden:
 
@@ -356,13 +408,40 @@ attached_database_configuration_name = "uniqueName"
 location = "North Central US"
 cluster_resource_id = "/subscriptions/" + follower_subscription_id + "/resourceGroups/" + follower_resource_group_name + "/providers/Microsoft.Kusto/Clusters/" + follower_cluster_name
 
-
 #Returns an instance of LROPoller, see https://docs.microsoft.com/python/api/msrest/msrest.polling.lropoller?view=azure-python
 poller = kusto_management_client.clusters.detach_follower_databases(resource_group_name = leader_resource_group_name, cluster_name = leader_cluster_name, cluster_resource_id = cluster_resource_id, attached_database_configuration_name = attached_database_configuration_name)
 ```
 
-Zum Trennen einer Datenbank aufseiten des Leaders benötigen Sie einen Benutzer, eine Gruppe, einen Dienstprinzipal oder eine verwaltete Identität mit mindestens der Rolle „Mitwirkender“ für den Leader-Cluster.
-Im obigen Beispiel wird ein Dienstprinzipal verwendet.
+# <a name="powershell"></a>[PowerShell](#tab/azure-powershell)
+
+### <a name="detach-a-database-using-powershell"></a>Trennen einer Datenbank mit PowerShell
+
+#### <a name="needed-modules"></a>Erforderliche Module
+
+```
+Install : Az.Kusto
+```
+
+#### <a name="example"></a>Beispiel
+
+```Powershell
+$FollowerClustername = 'follower'
+$FollowerClusterSubscriptionID = 'xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx'
+$FollowerResourceGroupName = 'followerResouceGroup'
+$DatabaseName = "sanjn"  ## Can be specific database name or * for all databases
+
+##Construct the Configuration name 
+$confignameraw = (Get-AzKustoAttachedDatabaseConfiguration -ClusterName $FollowerClustername -ResourceGroupName $FollowerResourceGroupName -SubscriptionId $FollowerClusterSubscriptionID) | Where-Object {$_.DatabaseName -eq $DatabaseName }
+$configname =$confignameraw.Name.Split("/")[1]
+
+Remove-AzKustoAttachedDatabaseConfiguration -ClusterName $FollowerClustername -Name $configname -ResourceGroupName $FollowerResourceGroupName
+```
+
+# <a name="resource-manager-template"></a>[Resource Manager-Vorlage](#tab/azure-resource-manager)
+
+[Trennen Sie die Follower-Datenbank](#detach-the-follower-database) mit C#, Python oder PowerShell.
+
+---
 
 ## <a name="manage-principals-permissions-and-caching-policy"></a>Verwalten von Prinzipalen, Berechtigungen und Cacherichtlinie
 
@@ -397,3 +476,4 @@ Der Administrator der Follower-Datenbank kann die [Cacherichtlinie](kusto/manage
 ## <a name="next-steps"></a>Nächste Schritte
 
 * Informationen zur Konfiguration von Follower-Clustern finden Sie unter [Steuerungsbefehle zum Verwalten eines Follower-Clusters](kusto/management/cluster-follower.md).
+

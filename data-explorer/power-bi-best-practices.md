@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: 3d1e8b4df2507a9b2eb7126973dea891edc1d6ac
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: 4cb2c64e2a66d8412277717e505626965bca1052
+ms.sourcegitcommit: 7024f73c76bf5b506557fd0ef7a0f4f40ec7d313
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91941977"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92021218"
 ---
 # <a name="best-practices-for-using-power-bi-to-query-and-visualize-azure-data-explorer-data"></a>Bewährte Methoden für die Verwendung von Power BI zum Abfragen und Visualisieren von Azure Data Explorer-Daten
 
@@ -91,6 +91,7 @@ Sie können eine der folgenden Optionen in der M-Abfrage verwenden:
 | NoTruncate | `[NoTruncate=true]` | Fügt die Set-Anweisung `notruncation` zur Abfrage hinzu. Dadurch kann die Kürzung der an den Aufrufer zurückgegebenen Abfrageergebnisse unterdrückt werden.
 | AdditionalSetStatements | `[AdditionalSetStatements="set query_datascope=hotcache"]` | Fügt der Abfrage die bereitgestellten Set-Anweisungen hinzu. Diese Anweisungen werden zum Festlegen von Abfrageoptionen für die Dauer der Abfrage verwendet. Mit Abfrageoptionen wird gesteuert, wie eine Abfrage ausgeführt wird und wie Ergebnisse zurückgegeben werden.
 | CaseInsensitive | `[CaseInsensitive=true]` | Diese Option bewirkt, dass der Connector Abfragen generiert, bei denen die Groß-/Kleinschreibung nicht beachtet wird. Abfragen verwenden beim Vergleichen von Werten den Operator `=~` anstelle des Operators `==`.
+| Timeout | `[Timeout=#duration(0,10,0,0)]` | Dient zum Festlegen des Client- und Servertimeouts der Abfrage auf die angegebene Dauer.
 
 > [!NOTE]
 > Sie können mehrere Optionen miteinander kombinieren, um das gewünschte Verhalten zu erzielen: `[NoTruncate=true, CaseInsensitive=true]`

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: b3a8c379ad010a9787fdb8b7d4e2961fb58ead9e
-ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
+ms.openlocfilehash: c20e18a31105dca584ebe35198462e8755cf8dc4
+ms.sourcegitcommit: 88923cfb2495dbf10b62774ab2370b59681578b9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89502659"
+ms.lasthandoff: 10/19/2020
+ms.locfileid: "92175715"
 ---
 # <a name="create-a-connection-to-event-hub"></a>Herstellen einer Verbindung mit Event Hub
 
@@ -30,7 +30,7 @@ Allgemeine Informationen zur Datenerfassung in Azure Data Explorer finden Sie un
     > [!NOTE]
     > Das RAW-Format wird von Event Hub nicht unterstützt.
 
-* Siehe [Unterstützte Komprimierungen](ingestion-supported-formats.md#supported-data-compression-formats).
+* Daten können mit dem `GZip`-Komprimierungsalgorithmus komprimiert werden. Geben Sie `Compression` in den [Erfassungseigenschaften](#set-ingestion-properties) an.
    * Für komprimierte Formate (Avro, Parquet, ORC) wird die Datenkomprimierung nicht unterstützt.
    * Eine benutzerdefinierte Codierung und eingebettete [Systemeigenschaften](#set-event-system-properties-mapping) werden für komprimierte Daten nicht unterstützt.
   

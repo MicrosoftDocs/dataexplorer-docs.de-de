@@ -1,18 +1,18 @@
 ---
 title: Konfigurieren von kundenseitig verwalteten Schlüsseln über das Azure-Portal
-description: In diesem Artikel wird beschrieben, wie Sie die Verschlüsselung von kundenseitig verwalteten Schlüsseln für Ihre Daten in Azure Data Explorer konfigurieren.
+description: Es wird beschrieben, wie Sie kundenseitig verwaltete Schlüssel für die Verschlüsselung von Azure Data Explorer-Daten mit dem Azure-Portal konfigurieren.
 author: orspod
 ms.author: orspodek
 ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/26/2020
-ms.openlocfilehash: 4d828905ce673c3b1c6453d31974334312bd3b5e
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 3c8aaf6f4a6a876707a362ac163de146630a86cb
+ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872147"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "92003026"
 ---
 # <a name="configure-customer-managed-keys-using-the-azure-portal"></a>Konfigurieren von kundenseitig verwalteten Schlüsseln über das Azure-Portal
 
@@ -59,6 +59,5 @@ Wenn Sie vom Kunden verwaltete Schlüssel für Ihren Azure Data Explorer-Cluster
 * [Sichern Ihres Clusters in Azure Data Explorer mithilfe von Disk Encryption (Azure-Portal)](cluster-disk-encryption.md) durch Aktivieren der Verschlüsselung ruhender Daten
 * [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resource Manager-Vorlage](customer-managed-keys-resource-manager.md)
 * [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#](customer-managed-keys-csharp.md)
-
 
 

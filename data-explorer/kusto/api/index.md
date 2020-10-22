@@ -8,12 +8,12 @@ ms.reviewer: vladikb
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/11/2020
-ms.openlocfilehash: b9fd03bfd08a31d872ca3c0ef48bd96514e9eb18
-ms.sourcegitcommit: 9e0289945270db517e173aa10024e0027b173b52
+ms.openlocfilehash: b352ed44e7beb487588cf94f37d280eb6b51cdf9
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/03/2020
-ms.locfileid: "89428395"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92337464"
 ---
 # <a name="azure-data-explorer-api-overview"></a>Übersicht über die Azure Data Explorer-API
 
@@ -23,7 +23,7 @@ Der Azure Data Explorer-Dienst unterstützt folgende Kommunikationsendpunkte:
    Dieser Endpunkt unterstützt die [Kusto-Abfragesprache](../query/index.md) für Abfragen sowie [Steuerungsbefehle](../management/index.md).
 1. Einen [MS-TDS](#ms-tds)-Endpunkt, der einen Teil des TDS-Protokolls (Tabular Data Stream) von Microsoft implementiert, das von den Microsoft SQL Server-Produkten verwendet wird.
    Dieser Endpunkt ist nützlich für Tools, die mit einem SQL Server-Endpunkt für Abfragen kommunizieren können.
-1. Einen [Azure Resource Manager](https://docs.microsoft.com/azure/role-based-access-control/resource-provider-operations#microsoftkusto)-Endpunkt (ARM), der von Azure-Diensten standardmäßig verwendet wird. Der Endpunkt wird zum Verwalten von Ressourcen wie Azure Data Explorer-Clustern verwendet.
+1. Einen [Azure Resource Manager](/azure/role-based-access-control/resource-provider-operations#microsoftkusto)-Endpunkt (ARM), der von Azure-Diensten standardmäßig verwendet wird. Der Endpunkt wird zum Verwalten von Ressourcen wie Azure Data Explorer-Clustern verwendet.
 
 ## <a name="rest-api"></a>REST-API
 

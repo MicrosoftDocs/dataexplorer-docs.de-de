@@ -8,12 +8,12 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: e341b70dfc2a7c0d3038d6d60d9c8ae2b40b6218
-ms.sourcegitcommit: c2ab3176db4dd55ac9ca8eee52bbd24096d1277f
+ms.openlocfilehash: c1be494fd290b051455010d6e6e082d01650107c
+ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90740251"
+ms.lasthandoff: 10/13/2020
+ms.locfileid: "92003137"
 ---
 # <a name="azure-data-explorer-tools-and-integrations-overview"></a>Übersicht über Azure Data Explorer-Tools und -Integrationen
 
@@ -30,31 +30,18 @@ Die Datenerfassung ist der Prozess, mit dem Datensätze aus einer oder mehreren 
 ### <a name="azure-data-explorer-ingestion-tools"></a>Datenerfassungstools von Azure Data Explorer
 
 * [LightIngest](lightingest.md): Hilfsprogramm für die Ad-hoc-Datenerfassung in Azure Data Explorer
-* 1-Klick-Erfassung
-    * [Übersicht über die 1-Klick-Erfassung](ingest-data-one-click.md) 
-    * [Erfassen von Daten aus einem Container in einer neuen Tabelle](one-click-ingestion-new-table.md)
-    * [Erfassen von Daten aus einer lokaler Datei in einer vorhandene Tabelle](one-click-ingestion-existing-table.md)
+* 1-Klick-Erfassung: [Übersicht](ingest-data-one-click.md) Erfassen von Daten [aus einem Container in einer neuen Tabelle](one-click-ingestion-new-table.md) oder [aus einer lokalen Datei in einer vorhandenen Tabelle](one-click-ingestion-existing-table.md)
 
 ### <a name="ingestion-integrations"></a>Erfassungsintegrationen
 
-* Event Hub
-    * [Erfassung aus Event Hub](ingest-data-event-hub-overview.md)
-    * Erfassen aus Event Hub mit dem [Azure-Portal](ingest-data-event-hub.md), [C#](data-connection-event-hub-csharp.md), [Python](data-connection-event-hub-python.md) oder [einer Azure Resource Manager-Vorlage](data-connection-event-hub-resource-manager.md)
-* Event Grid
-    * [Erfassung aus Event Grid](ingest-data-event-grid-overview.md)
-    * Erfassen aus Event Grid mit dem [Azure-Portal](ingest-data-event-grid.md), [C#](data-connection-event-grid-csharp.md), [Python](data-connection-event-grid-python.md) oder [einer Azure Resource Manager-Vorlage](data-connection-event-grid-resource-manager.md)
-* IoT Hub
-    * [Erfassung aus IoT Hub](ingest-data-iot-hub-overview.md)
-    * Erfassen aus IoT Hub mit dem [Azure-Portal](ingest-data-iot-hub.md), [C#](data-connection-iot-hub-csharp.md), [Python](data-connection-iot-hub-python.md) oder [einer Azure Resource Manager-Vorlage](data-connection-iot-hub-resource-manager.md)
+* Event Hub: [Übersicht über die Erfassung aus Event Hub](ingest-data-event-hub-overview.md) und Verwendung von [Azure-Portal](ingest-data-event-hub.md), [C#](data-connection-event-hub-csharp.md), [Python](data-connection-event-hub-python.md) oder einer [Azure Resource Manager-Vorlage](data-connection-event-hub-resource-manager.md)
+* Event Grid: [Übersicht über die Erfassung aus Event Grid](ingest-data-event-grid-overview.md) und Verwendung von [Azure-Portal](ingest-data-event-grid.md), [C#](data-connection-event-grid-csharp.md), [Python](data-connection-event-grid-python.md) oder einer [Azure Resource Manager-Vorlage](data-connection-event-grid-resource-manager.md)
+* IoT Hub: [Übersicht über die Erfassung aus IoT Hub](ingest-data-iot-hub-overview.md) und Verwendung von [Azure-Portal](ingest-data-iot-hub.md), [C#](data-connection-iot-hub-csharp.md), [Python](data-connection-iot-hub-python.md) oder einer [Azure Resource Manager-Vorlage](data-connection-iot-hub-resource-manager.md)
 * [Logstash](ingest-data-logstash.md)
-* Azure Data Factory
-    * [Azure Data Factory-Integration](data-factory-integration.md)
-    * [Kopieren von Daten](data-factory-load-data.md)
-    * [Massenkopieren aus einer Datenbank mithilfe der Azure Data Factory-Vorlage](data-factory-template.md)
-    * [Verwenden der Azure Data Factory-Befehlsaktivität zum Ausführen von Azure Data Explorer-Steuerungsbefehlen](data-factory-command-activity.md)
-* Apache 
-    * [Spark](spark-connector.md)
-    * [Kafka](ingest-data-kafka.md)
+* Azure Data Factory: [Übersicht über die Integration](data-factory-integration.md), [Kopieren von Daten](data-factory-load-data.md), [Massenkopieren mit der Azure Data Factory-Vorlage](data-factory-template.md) und [Ausführen von Azure Data Explorer-Steuerungsbefehlen per Azure Data Factory-Befehlsaktivität](data-factory-command-activity.md)
+* [Verbinden mit Azure Data Explorer per Synapse Apache Spark](https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer?context=/azure/data-explorer/context/context)
+* [Apache Spark](spark-connector.md)
+* [Apache Kafka](ingest-data-kafka.md)
 * [Cosmos DB](https://github.com/Azure/azure-kusto-labs/tree/master/cosmosdb-adx-integration)
 * [Power Automate](flow.md)
 
@@ -65,10 +52,8 @@ Die Datenerfassung ist der Prozess, mit dem Datensätze aus einer oder mehreren 
 Zum Ausführen von Abfragen in Azure Data Explorer stehen verschiedene Tools zur Verfügung.
 
 * Kusto.Explorer
-    * [Installation und Benutzeroberfläche](kusto/tools/kusto-explorer.md)
-    * [Verwenden von Kusto.Explorer](kusto/tools/kusto-explorer-using.md)
-    * [options](kusto/tools/kusto-explorer-options.md)
-    * Zu den zusätzlichen Themen zählen [Problembehandlung](kusto/tools/kusto-explorer-troubleshooting.md), [Tastenkombinationen](kusto/tools/kusto-explorer-shortcuts.md), [Code-Refactoring](kusto/tools/kusto-explorer-refactor.md), [Codenavigation](kusto/tools/kusto-explorer-codenav.md)und [Codeanalyse.](kusto/tools/kusto-explorer-code-analyzer.md)
+    * [Installation und Benutzeroberfläche](kusto/tools/kusto-explorer.md), [Verwenden von Kusto.Explorer](kusto/tools/kusto-explorer-using.md)
+    * Zu den zusätzlichen Themen zählen [Optionen](kusto/tools/kusto-explorer-options.md), [Problembehandlung](kusto/tools/kusto-explorer-troubleshooting.md), [Tastenkombinationen](kusto/tools/kusto-explorer-shortcuts.md), [Code-Refactoring](kusto/tools/kusto-explorer-refactor.md), [Codenavigation](kusto/tools/kusto-explorer-codenav.md) und [Codeanalyse](kusto/tools/kusto-explorer-code-analyzer.md).
 * [Web-Benutzeroberfläche](web-query-data.md)
 * [Kusto.Cli](kusto/tools/kusto-cli.md)
 
@@ -76,9 +61,10 @@ Zum Ausführen von Abfragen in Azure Data Explorer stehen verschiedene Tools zur
 
 * [Azure Monitor](query-monitor-data.md)
 * [Azure Data Lake](data-lake-query-data.md)
+* [Verbinden mit Azure Data Explorer per Synapse Apache Spark](https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer?context=/azure/data-explorer/context/context)
 * [Apache Spark](spark-connector.md)
 * Microsoft Power Apps
-* [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/notebooks-kqlmagic)
+* Azure Data Studio: [Übersicht über Kusto-Erweiterung](https://docs.microsoft.com/sql/azure-data-studio/extensions/kusto-extension?context=/azure/data-explorer/context/context), [Verwenden von Kusto](https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=/azure/data-explorer/context/context) und [Verwenden von Kqlmagic](https://docs.microsoft.com/sql/azure-data-studio/notebooks-kqlmagic?context=/azure/data-explorer/context/context)
 
 ## <a name="visualizations-dashboards-and-reporting"></a>Visualisierungen, Dashboards und Berichterstellung
 
@@ -88,7 +74,7 @@ Die Übersicht über die [Visualisierung](viz-overview.md) enthält Details zu D
 
 * [Azure Notebooks](azure-notebooks.md)
 * [Jupyter-Notebooks](kqlmagic.md)
-* [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/notebooks-kqlmagic)
+* Azure Data Studio: [Übersicht über Kusto-Erweiterung](https://docs.microsoft.com/sql/azure-data-studio/extensions/kusto-extension?context=/azure/data-explorer/context/context), [Verwenden von Kusto](https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=/azure/data-explorer/context/context) und [Verwenden von Kqlmagic](https://docs.microsoft.com/sql/azure-data-studio/notebooks-kqlmagic?context=/azure/data-explorer/context/context)
 
 ## <a name="orchestration"></a>Orchestrierung
 

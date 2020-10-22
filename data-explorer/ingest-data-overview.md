@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/18/2020
-ms.openlocfilehash: e6630067cb02f3bf4685e274d2d5d2a6d00a97c5
-ms.sourcegitcommit: 1618cbad18f92cf0cda85cb79a5cc1aa789a2db7
+ms.openlocfilehash: 04b1f53ad16d8658d3a12d36370261afac02fe86
+ms.sourcegitcommit: 58588ba8d1fc5a6adebdce2b556db5bc542e38d8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91615035"
+ms.lasthandoff: 10/15/2020
+ms.locfileid: "92098420"
 ---
 # <a name="azure-data-explorer-data-ingestion-overview"></a>Übersicht über die Datenerfassung in Azure Data Explorer 
 
@@ -126,7 +126,7 @@ Es gibt eine Reihe von Methoden, mit denen Daten mithilfe von KQL-Befehlen (Kust
 | [**Go**](kusto/api/golang/kusto-golang-client-library.md) | Alle Formate unterstützt | 1 GB unkomprimiert (siehe Hinweis) | Batcherfassung, Streaming, direkt | Schreiben von eigenem Code nach Anforderungen der Organisation |
 
 > [!Note] 
-> Wenn in der obigen Tabelle darauf verwiesen wird, unterstützt die Erfassung eine maximale Dateigröße von 5 GB. Es wird empfohlen, Dateien zwischen 100 MB und 1 GB zu erfassen.
+> Wenn in der obigen Tabelle darauf verwiesen wird, unterstützt die Erfassung eine maximale Dateigröße von 4 GB. Es wird empfohlen, Dateien zwischen 100 MB und 1 GB zu erfassen.
 
 ## <a name="ingestion-process"></a>Erfassungsprozess
 
