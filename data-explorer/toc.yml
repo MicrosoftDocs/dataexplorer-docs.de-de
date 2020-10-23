@@ -338,26 +338,24 @@
         - name: Apache Spark-Connector
           href: spark-connector.md
         - name: Herstellen einer Verbindung über Azure Synapse Apache Spark
-          href: 'https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer?toc=/azure/data-explorer/toc.json&bc=/azure/data-explorer/breadcrumb/toc.json'
+          href: /azure/synapse-analytics/quickstart-connect-azure-data-explorer?toc=/azure/data-explorer/toc.json&bc=/azure/data-explorer/breadcrumb/toc.json
         - name: Herstellen einer Verbindung über Azure Databricks
           href: connect-from-databricks.md
         - name: Notebooks
           items:
             - name: Analysieren von Daten in Jupyter Notebooks und Kqlmagic
               href: kqlmagic.md
-            - name: Analysieren von Daten in Azure Notebooks
-              href: azure-notebooks.md
             - name: Azure Data Studio
               items:
                 - name: Übersicht über die Kusto-Erweiterung
                   displayName: Azure Data Studio
-                  href: 'https://docs.microsoft.com/sql/azure-data-studio/extensions/kusto-extension?toc=/azure/data-explorer/toc.json&bc=/azure/data-explorer/breadcrumb/toc.json'
+                  href: /sql/azure-data-studio/extensions/kusto-extension?context=/azure/data-explorer/context/context
                 - name: Verwenden der Kusto-Erweiterung
                   displayName: Azure Data Studio
-                  href: 'https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?toc=/azure/data-explorer/toc.json&bc=/azure/data-explorer/breadcrumb/toc.json'
+                  href: /sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=/azure/data-explorer/context/context
                 - name: Verwenden von Kqlmagic
                   displayName: Azure Data Studio
-                  href: 'https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kqlmagic?context=/azure/data-explorer/context/context'
+                  href: /sql/azure-data-studio/notebooks/notebooks-kqlmagic?context=%252fazure%252fdata-explorer%252fcontext%252fcontext
         - name: Azure Pipelines
           href: devops.md
         - name: Synchronisieren von Kusto
@@ -552,6 +550,8 @@
               href: ./kusto/query/projectoperator.md
             - name: project-away-Operator
               href: ./kusto/query/projectawayoperator.md
+            - name: project-keep-Operator
+              href: ./kusto/query/project-keep-operator.md
             - name: project-rename-Operator
               href: ./kusto/query/projectrenameoperator.md
             - name: project-reorder-Operator
