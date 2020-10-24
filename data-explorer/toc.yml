@@ -313,6 +313,8 @@
           href: using-metrics.md
         - name: Überwachen der Clusterintegrität mithilfe von Resource Health
           href: monitor-with-resource-health.md
+        - name: Erstellen von Power Apps-Anwendungen zum Abfragen von Daten in Azure Data Explorer
+          href: power-apps-connector.md
     - name: Freigeben von Daten
       items:
         - name: Verwenden von Azure Data Share
@@ -1779,8 +1781,8 @@
           href: 'https://stackoverflow.com/questions/tagged/azure-data-explorer'
         - name: Technische Microsoft-Community
           href: 'https://techcommunity.microsoft.com/t5/Azure-Data-Explorer/bd-p/Kusto'
-        - name: MSDN-Forum
-          href: 'https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureKusto'
+        - name: Microsoft Q&A (Fragen und Antworten)
+          href: /answers/topics/azure-data-explorer.html
     - name: Produktfeedback
       href: 'https://aka.ms/adefeedback'
     - name: Preise und Abrechnung
