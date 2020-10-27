@@ -8,12 +8,12 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: c1be494fd290b051455010d6e6e082d01650107c
-ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
+ms.openlocfilehash: fd596d840dcbaab1843833b4164901423a2ebef8
+ms.sourcegitcommit: 88291fd9cebc26e5210463cb95be5540bf84eef8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/13/2020
-ms.locfileid: "92003137"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92437383"
 ---
 # <a name="azure-data-explorer-tools-and-integrations-overview"></a>Übersicht über Azure Data Explorer-Tools und -Integrationen
 
@@ -63,8 +63,8 @@ Zum Ausführen von Abfragen in Azure Data Explorer stehen verschiedene Tools zur
 * [Azure Data Lake](data-lake-query-data.md)
 * [Verbinden mit Azure Data Explorer per Synapse Apache Spark](https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer?context=/azure/data-explorer/context/context)
 * [Apache Spark](spark-connector.md)
-* Microsoft Power Apps
-* Azure Data Studio: [Übersicht über Kusto-Erweiterung](https://docs.microsoft.com/sql/azure-data-studio/extensions/kusto-extension?context=/azure/data-explorer/context/context), [Verwenden von Kusto](https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=/azure/data-explorer/context/context) und [Verwenden von Kqlmagic](https://docs.microsoft.com/sql/azure-data-studio/notebooks-kqlmagic?context=/azure/data-explorer/context/context)
+* [Microsoft Power Apps](power-apps-connector.md)
+* Azure Data Studio: [Übersicht über Kusto-Erweiterung](/sql/azure-data-studio/extensions/kusto-extension?context=%252fazure%252fdata-explorer%252fcontext%252fcontext), [Verwenden von Kusto](/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=%252fazure%252fdata-explorer%252fcontext%252fcontext) und [Verwenden von Kqlmagic](/sql/azure-data-studio/notebooks-kqlmagic?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)
 
 ## <a name="visualizations-dashboards-and-reporting"></a>Visualisierungen, Dashboards und Berichterstellung
 
@@ -74,7 +74,7 @@ Die Übersicht über die [Visualisierung](viz-overview.md) enthält Details zu D
 
 * [Azure Notebooks](azure-notebooks.md)
 * [Jupyter-Notebooks](kqlmagic.md)
-* Azure Data Studio: [Übersicht über Kusto-Erweiterung](https://docs.microsoft.com/sql/azure-data-studio/extensions/kusto-extension?context=/azure/data-explorer/context/context), [Verwenden von Kusto](https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=/azure/data-explorer/context/context) und [Verwenden von Kqlmagic](https://docs.microsoft.com/sql/azure-data-studio/notebooks-kqlmagic?context=/azure/data-explorer/context/context)
+* Azure Data Studio: [Übersicht über Kusto-Erweiterung](/sql/azure-data-studio/extensions/kusto-extension?context=%252fazure%252fdata-explorer%252fcontext%252fcontext), [Verwenden von Kusto](/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=%252fazure%252fdata-explorer%252fcontext%252fcontext) und [Verwenden von Kqlmagic](/sql/azure-data-studio/notebooks-kqlmagic?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)
 
 ## <a name="orchestration"></a>Orchestrierung
 

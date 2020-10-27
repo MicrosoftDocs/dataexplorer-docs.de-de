@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/28/2020
-ms.openlocfilehash: f3925ed2b3012dffbd7e96ca6dd6a795b0499071
-ms.sourcegitcommit: 88923cfb2495dbf10b62774ab2370b59681578b9
+ms.openlocfilehash: 5e15983039209e2e0c62ebd761e416ebb3bd1076
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/19/2020
-ms.locfileid: "92175707"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342619"
 ---
 # <a name="use-lightingest-to-ingest-data-to-azure-data-explorer"></a>Verwenden von LightIngest zum Erfassen von Daten in Azure Data Explorer
  
@@ -40,7 +40,7 @@ LightIngest ist besonders bei der Erfassung großer Datenmengen hilfreich, da di
     :::image type="content" source="media/lightingest/lightingest-locationbar.png" alt-text="LightIngest-Download":::
 
 
-1. Geben Sie `cmd` ein, und drücken Sie die **EINGABETASTE**.
+1. Geben Sie `cmd` ein, und drücken Sie die **EINGABETASTE** .
 1. Geben Sie an der Eingabeaufforderung `LightIngest.exe` ein, gefolgt vom entsprechenden Befehlszeilenargument.
 
     > [!Tip]
@@ -144,7 +144,7 @@ Wenn Sie Verlaufsdaten aus einem vorhandenen System in Azure Data Explorer laden
 
 Die Argumentwerte müssen Folgendes enthalten:
 * Konstanter Text direkt vor dem Zeitstempelformat, in einfache Anführungszeichen eingeschlossen (Präfix)
-* Zeitstempelformat in der standardmäßigen [.NET-DateTime-Notation](https://docs.microsoft.com/dotnet/standard/base-types/custom-date-and-time-format-strings)
+* Zeitstempelformat in der standardmäßigen [.NET-DateTime-Notation](/dotnet/standard/base-types/custom-date-and-time-format-strings)
 * Konstanter Text direkt nach dem Zeitstempel (Suffix)
 
 **Beispiele** 

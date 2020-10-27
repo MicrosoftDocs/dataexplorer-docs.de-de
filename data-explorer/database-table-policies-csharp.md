@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/24/2019
-ms.openlocfilehash: 9ebce32338bcf82ccea9df5cb23770839c0ee278
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: f5778f4e242361be6c0af7827611ac812137e9c4
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873031"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342874"
 ---
 # <a name="create-database-and-table-policies-for-azure-data-explorer-by-using-c"></a>Erstellen von Datenbank- und Tabellenrichtlinien für Azure Data Explorer mithilfe von C#
 
@@ -25,10 +25,10 @@ Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Un
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
-* Visual Studio 2019: Falls Sie Visual Studio 2019 nicht besitzen, können Sie die *kostenlose* Edition [Visual Studio Community 2019](https://www.visualstudio.com/downloads/) herunterladen und verwenden. Aktivieren Sie beim Setup von Visual Studio die Option **Azure-Entwicklung**.
+* Visual Studio 2019: Falls Sie Visual Studio 2019 nicht besitzen, können Sie die *kostenlose* Edition [Visual Studio Community 2019](https://www.visualstudio.com/downloads/) herunterladen und verwenden. Aktivieren Sie beim Setup von Visual Studio die Option **Azure-Entwicklung** .
 * Ein Azure-Abonnement. Wenn erforderlich, können Sie ein [kostenloses Azure-Konto](https://azure.microsoft.com/free/) erstellen, bevor Sie beginnen.
 * [Ein Testcluster und eine Testdatenbank](create-cluster-database-csharp.md)
-* [Eine Testtabelle](net-standard-ingest-data.md#create-a-table-on-your-test-cluster).
+* [Eine Testtabelle](./net-sdk-ingest-data.md#create-a-table-on-your-test-cluster).
 
 ## <a name="install-c-nuget"></a>Installieren eines C#-NuGet-Pakets
 
@@ -37,7 +37,7 @@ Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Un
 * Installieren Sie das [NuGet-Paket Microsoft.IdentityModel.Clients.ActiveDirectory](https://www.nuget.org/packages/Microsoft.IdentityModel.Clients.ActiveDirectory/) für die Authentifizierung.
 
 ## <a name="authentication"></a>Authentifizierung
-Um die Beispiele in diesem Artikel ausführen zu können, benötigen Sie eine Azure Active Directory-Anwendung (Azure AD) und einen Dienstprinzipal, der auf Ressourcen zugreifen kann. Sie können dieselbe Azure AD-Anwendung für die Authentifizierung aus einem [Testcluster und einer Datenbank](create-cluster-database-csharp.md#authentication) verwenden. Wenn Sie eine andere Azure AD Anwendung verwenden möchten, finden Sie weitere Informationen unter [Erstellen einer Azure AD-Anwendung](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal), um eine kostenlose Azure AD-Anwendung zu erstellen und die Rollenzuweisung im Abonnementbereich hinzuzufügen. Dieser Artikel zeigt außerdem, wie Sie die Angaben `Directory (tenant) ID`, `Application ID` und `Client secret` abrufen. Möglicherweise müssen Sie die neue Azure AD-Anwendung als Prinzipal in der Datenbank hinzufügen. Weitere Informationen finden Sie unter [Verwalten der Berechtigungen für Datenbanken in Azure Data Explorer](manage-database-permissions.md).
+Um die Beispiele in diesem Artikel ausführen zu können, benötigen Sie eine Azure Active Directory-Anwendung (Azure AD) und einen Dienstprinzipal, der auf Ressourcen zugreifen kann. Sie können dieselbe Azure AD-Anwendung für die Authentifizierung aus einem [Testcluster und einer Datenbank](create-cluster-database-csharp.md#authentication) verwenden. Wenn Sie eine andere Azure AD Anwendung verwenden möchten, finden Sie weitere Informationen unter [Erstellen einer Azure AD-Anwendung](/azure/active-directory/develop/howto-create-service-principal-portal), um eine kostenlose Azure AD-Anwendung zu erstellen und die Rollenzuweisung im Abonnementbereich hinzuzufügen. Dieser Artikel zeigt außerdem, wie Sie die Angaben `Directory (tenant) ID`, `Application ID` und `Client secret` abrufen. Möglicherweise müssen Sie die neue Azure AD-Anwendung als Prinzipal in der Datenbank hinzufügen. Weitere Informationen finden Sie unter [Verwalten der Berechtigungen für Datenbanken in Azure Data Explorer](manage-database-permissions.md).
 
 ## <a name="alter-database-retention-policy"></a>Ändern der Aufbewahrungsrichtlinie für die Datenbank
 Legt eine Aufbewahrungsrichtlinie mit einem vorläufigen Löschzeitraum von 10 Tagen fest.

@@ -7,12 +7,12 @@ ms.reviewer: abhishgu
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/10/2020
-ms.openlocfilehash: 82302fc2071eca8bf2fb1e4c89b96de50b1a8806
-ms.sourcegitcommit: f689547c0f77b1b8bfa50a19a4518cbbc6d408e5
+ms.openlocfilehash: c133c3cf1185e7ffdb959ed6ea127af7502820c4
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/08/2020
-ms.locfileid: "89557342"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342568"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-go-sdk"></a>Erfassen von Daten mit dem Go SDK für Azure Data Explorer 
 
@@ -151,7 +151,7 @@ Der Client für die [Erfassung](https://godoc.org/github.com/Azure/azure-kusto-g
     1. **Zuordnungserstellung:** Die Zuordnung `StormEvents_CSV_Mapping` wird erstellt.
     1. **Dateierfassung:** Eine CSV-Datei (in Azure Blob Storage) wird zur Erfassung in eine Warteschlange eingereiht.
 
-1. Erstellen Sie über die Azure-Befehlszeilenschnittstelle mithilfe des Befehls [az ad sp create-for-rbac](https://docs.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) einen Dienstprinzipal für die Authentifizierung. Legen Sie die Dienstprinzipalinformationen mit dem Clusterendpunkt und dem Datenbanknamen in Form von Umgebungsvariablen fest, die vom Programm verwendet werden:
+1. Erstellen Sie über die Azure-Befehlszeilenschnittstelle mithilfe des Befehls [az ad sp create-for-rbac](/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) einen Dienstprinzipal für die Authentifizierung. Legen Sie die Dienstprinzipalinformationen mit dem Clusterendpunkt und dem Datenbanknamen in Form von Umgebungsvariablen fest, die vom Programm verwendet werden:
 
     ```console
     export AZURE_SP_CLIENT_ID="<replace with appID>"

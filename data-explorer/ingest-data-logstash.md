@@ -7,12 +7,12 @@ ms.reviewer: takamara
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: b062b2da81662e89dc61720ebf6bb555f896a8ca
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 228722bab25dc19532860f92b8194c4fd2d79a38
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874782"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343095"
 ---
 # <a name="ingest-data-from-logstash-to-azure-data-explorer"></a>Erfassen von Daten aus Logstash in Azure Data Explorer
 
@@ -85,11 +85,11 @@ Falls Sie Logstash bereits verwenden und Zugriff auf Ihren eigenen Ereignisdaten
     }
     ```
 
-Diese Konfiguration enthält auch das Eingabe-Plug-In `stdin`, das es Ihnen ermöglicht, weitere Nachrichten zu schreiben. (Drücken Sie die*EINGABETASTE*, um die Nachrichten an die Pipeline zu übermitteln.)
+Diese Konfiguration enthält auch das Eingabe-Plug-In `stdin`, das es Ihnen ermöglicht, weitere Nachrichten zu schreiben. (Drücken Sie die *EINGABETASTE* , um die Nachrichten an die Pipeline zu übermitteln.)
 
 ## <a name="configure-logstash-to-send-data-to-azure-data-explorer"></a>Konfigurieren von Logstash, um Daten an Azure Data Explorer zu senden
 
-Fügen Sie die folgenden Einstellungen in die Konfigurationsdatei aus dem vorherigen Schritt ein. Ersetzen Sie die Platzhalter jeweils durch die entsprechenden Werte für Ihr Setup. Weitere Informationen finden Sie unter [HowTo: Creating an AAD Application](kusto/management/access-control/how-to-provision-aad-app.md) (Erstellen einer AAD-Anwendung). 
+Fügen Sie die folgenden Einstellungen in die Konfigurationsdatei aus dem vorherigen Schritt ein. Ersetzen Sie die Platzhalter jeweils durch die entsprechenden Werte für Ihr Setup. Weitere Informationen finden Sie unter [HowTo: Creating an AAD Application](./provision-azure-ad-app.md) (Erstellen einer AAD-Anwendung). 
 
 ```ruby
 output {
@@ -110,7 +110,7 @@ output {
 | --- | --- |
 | **path** | Das Logstash-Plug-In schreibt Ereignisse vor dem Senden an Azure Data Explorer in temporäre Dateien. Dieser Parameter enthält einen Pfad, an dem die Dateien geschrieben werden sollen, sowie einen Zeitausdruck für die Dateirotation, um einen Uploadvorgang an den Azure Data Explorer-Dienst auszulösen.|
 | **ingest_url** | Der Kusto-Endpunkt für die erfassungsbezogene Kommunikation.|
-| **app_id**, **app_key** und **app_tenant**| Anmeldeinformationen für die Verbindungsherstellung mit Azure Data Explorer. Wichtig: Verwenden Sie eine Anwendung mit Erfassungsberechtigungen. |
+| **app_id** , **app_key** und **app_tenant**| Anmeldeinformationen für die Verbindungsherstellung mit Azure Data Explorer. Wichtig: Verwenden Sie eine Anwendung mit Erfassungsberechtigungen. |
 | **database**| Name der Zieldatenbank für Ereignisse. |
 | **Tabelle** | Name der Zieltabelle für Ereignisse. |
 | **mapping** | Mit dem mapping-Parameter wird die JSON-Zeichenfolge eines eingehenden Ereignisses dem korrekten Zeilenformat zugeordnet (also definiert, welche Eigenschaft in welche Spalte eingefügt wird). |

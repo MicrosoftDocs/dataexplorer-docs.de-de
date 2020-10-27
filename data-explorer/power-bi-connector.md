@@ -7,16 +7,16 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 07/10/2019
-ms.openlocfilehash: d6c3e49aa2141e2428251f806b29b47a9c65c164
-ms.sourcegitcommit: 1618cbad18f92cf0cda85cb79a5cc1aa789a2db7
+ms.openlocfilehash: 47bb390e6211a0448e16b3fca16560176dcc8702
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91615052"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343537"
 ---
 # <a name="visualize-data-using-the-azure-data-explorer-connector-for-power-bi"></a>Visualisieren von Daten mithilfe des Azure Data Explorer-Connectors für Power BI
 
-Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Power BI ist eine Business Analytics-Lösung, mit der Sie Ihre Daten visualisieren und die Ergebnisse in Ihrer Organisation teilen können. Azure Data Explorer bietet drei Optionen für die Verbindungsherstellung mit Daten in Power BI: Verwenden des integrierten Connectors, Importieren einer Abfrage aus Azure Data Explorer oder Verwenden einer SQL-Abfrage. In diesem Artikel wird der integrierte Connector verwendet, um Daten abzurufen und in einem Power BI-Bericht zu visualisieren. Die Erstellung von Power BI-Dashboards mit dem nativen Azure Data Explorer-Connector ist ganz einfach. Der Power BI-Connector unterstützt [Import- und Direktabfrage-Konnektivitätsmodi](https://docs.microsoft.com/power-bi/desktop-directquery-about). Je nach Szenario, Skalierung und Leistungsanforderungen können Sie Dashboards mit dem Modus **Import** oder **DirectQuery** erstellen. 
+Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Power BI ist eine Business Analytics-Lösung, mit der Sie Ihre Daten visualisieren und die Ergebnisse in Ihrer Organisation teilen können. Azure Data Explorer bietet drei Optionen für die Verbindungsherstellung mit Daten in Power BI: Verwenden des integrierten Connectors, Importieren einer Abfrage aus Azure Data Explorer oder Verwenden einer SQL-Abfrage. In diesem Artikel wird der integrierte Connector verwendet, um Daten abzurufen und in einem Power BI-Bericht zu visualisieren. Die Erstellung von Power BI-Dashboards mit dem nativen Azure Data Explorer-Connector ist ganz einfach. Der Power BI-Connector unterstützt [Import- und Direktabfrage-Konnektivitätsmodi](/power-bi/desktop-directquery-about). Je nach Szenario, Skalierung und Leistungsanforderungen können Sie Dashboards mit dem Modus **Import** oder **DirectQuery** erstellen. 
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -34,7 +34,7 @@ Sie stellen zunächst eine Verbindung mit dem Azure Data Explorer-Hilfecluster h
 
     ![Datensammlung](media/power-bi-connector/get-data-more.png)
 
-1. Suchen Sie nach *Azure Data Explorer*, wählen Sie **Azure Data Explorer** und dann **Verbinden** aus.
+1. Suchen Sie nach *Azure Data Explorer* , wählen Sie **Azure Data Explorer** und dann **Verbinden** aus.
 
     ![Suchen und Abrufen von Daten](media/power-bi-connector/search-get-data.png)
 
@@ -44,22 +44,22 @@ Sie stellen zunächst eine Verbindung mit dem Azure Data Explorer-Hilfecluster h
 
     | Einstellung | Wert | Feldbeschreibung
     |---|---|---
-    | Cluster | *https://help.kusto.windows.net* | Die URL für den Hilfecluster. Für andere Cluster hat die URL das Format *https://\<ClusterName\>.\<Region\>.kusto.windows.net*. |
+    | Cluster | *https://help.kusto.windows.net* | Die URL für den Hilfecluster. Für andere Cluster hat die URL das Format *https://\<ClusterName\>.\<Region\>.kusto.windows.net* . |
     | Datenbank | Nicht ausfüllen | Eine Datenbank, die in dem Cluster gehostet wird, mit dem Sie eine Verbindung herstellen. Wird in einem späteren Schritt ausgewählt. |
     | Tabellenname | Nicht ausfüllen | Eine der Tabellen in der Datenbank oder eine Abfrage wie <code>StormEvents \| take 1000</code> Wird in einem späteren Schritt ausgewählt. |
     | Erweiterte Optionen | Nicht ausfüllen | Optionen für Ihre Abfragen (etwa die Größe des Resultsets).
     | Datenkonnektivitätsmodus | *DirectQuery* | Bestimmt, ob Power BI die Daten importiert oder direkt eine Verbindung mit der Datenquelle herstellt. Für diesen Connector sind beide Optionen geeignet. |
 
     > [!NOTE]
-    > Im **Import**-Modus werden Daten nach Power BI verschoben. Im **DirectQuery**-Modus werden Daten direkt aus dem Azure Data Explorer-Cluster abgefragt.
+    > Im **Import** -Modus werden Daten nach Power BI verschoben. Im **DirectQuery** -Modus werden Daten direkt aus dem Azure Data Explorer-Cluster abgefragt.
     >
-    > Verwenden Sie den **Import**-Modus in folgenden Fällen:
+    > Verwenden Sie den **Import** -Modus in folgenden Fällen:
     >
     > * Ihr Dataset ist klein.
     > * Sie benötigen keine Fast-Echtzeitdaten.
     > * Ihre Daten sind bereits aggregiert, oder Sie führen die [Aggregation in Kusto](kusto/query/summarizeoperator.md#list-of-aggregation-functions) aus.
     >
-    > Verwenden Sie den **DirectQuery**-Modus in folgenden Fällen:
+    > Verwenden Sie den **DirectQuery** -Modus in folgenden Fällen:
     > * Ihr Dataset ist sehr umfangreich.
     > * Sie benötigen Fast-Echtzeitdaten.
 
@@ -76,7 +76,7 @@ Sie stellen zunächst eine Verbindung mit dem Azure Data Explorer-Hilfecluster h
 
     ![Anmelden](media/power-bi-connector/sign-in.png)
 
-1. Erweitern Sie im Bildschirm **Navigator** die Datenbank **Samples**, und wählen Sie **StormEvents** > **Bearbeiten** aus.
+1. Erweitern Sie im Bildschirm **Navigator** die Datenbank **Samples** , und wählen Sie **StormEvents** > **Bearbeiten** aus.
 
     ![Tabelle auswählen](media/power-bi-connector/select-table.png)
 
@@ -90,7 +90,7 @@ Sie stellen zunächst eine Verbindung mit dem Azure Data Explorer-Hilfecluster h
 
     ![Beibehalten der ersten Zeilen](media/power-bi-connector/keep-top-rows.png)
 
-1. Klicken Sie auf der Registerkarte **Start** auf **Schließen und übernehmen**.
+1. Klicken Sie auf der Registerkarte **Start** auf **Schließen und übernehmen** .
 
     ![Schließen und übernehmen](media/power-bi-connector/close-apply.png)
 

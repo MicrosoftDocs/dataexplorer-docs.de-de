@@ -8,12 +8,12 @@ ms.reviewer: jasonh
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 05/05/2019
-ms.openlocfilehash: b45e6d0be5a61e4eff8f1c70d3df2fe7ee6901ea
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: a92e657bfc2f440deb20fd4b812169b1c2e32112
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874714"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342908"
 ---
 # <a name="azure-devops-task-for-azure-data-explorer"></a>Azure DevOps-Aufgabe für Azure Data Explorer
 
@@ -27,7 +27,7 @@ Dieses Dokument beschreibt ein einfaches Beispiel für die Verwendung der Aufgab
 * Wenn Sie über kein Azure-Abonnement verfügen, können Sie ein [kostenloses Azure-Konto](https://azure.microsoft.com/free/) erstellen, bevor Sie beginnen.
 * Setup eines Azure Data Explorer-Clusters:
     * Ein [Azure Data Explorer-Cluster und eine Datenbank](create-cluster-database-portal.md)
-    * Erstellen Sie eine Azure Active Directory (Azure AD)-App mit [Bereitstellung einer Azure AD-Anwendung](kusto/management/access-control/how-to-provision-aad-app.md).
+    * Erstellen Sie eine Azure Active Directory (Azure AD)-App mit [Bereitstellung einer Azure AD-Anwendung](./provision-azure-ad-app.md).
     * Gewährleisten Sie den Zugriff auf Ihre Azure AD-App in Ihrer Azure Data Explorer-Datenbank, indem Sie [die Berechtigungen der Azure Data Explorer-Datenbank verwalten](manage-database-permissions.md).
 * Azure DevOps-Setup:
     * [Für eine kostenlose Organisation registrieren](/azure/devops/user-guide/sign-up-invite-teammates?view=azure-devops)
@@ -37,7 +37,7 @@ Dieses Dokument beschreibt ein einfaches Beispiel für die Verwendung der Aufgab
 
 ## <a name="create-folders"></a>Erstellen Sie die Ordner.
 
-Erstellen Sie die folgenden Beispielordner (*Funktionen*, *Richtlinien*, *Tabellen*) in Ihrem Git-Repository. Kopieren Sie die Dateien von [hier](https://github.com/Azure/azure-kusto-docs-samples/tree/master/DevOps_release_pipeline) in die entsprechenden Ordner wie unten gezeigt, und übertragen Sie die Änderungen. Die Beispieldateien werden zur Verfügung gestellt, um den folgenden Workflow auszuführen.
+Erstellen Sie die folgenden Beispielordner ( *Funktionen* , *Richtlinien* , *Tabellen* ) in Ihrem Git-Repository. Kopieren Sie die Dateien von [hier](https://github.com/Azure/azure-kusto-docs-samples/tree/master/DevOps_release_pipeline) in die entsprechenden Ordner wie unten gezeigt, und übertragen Sie die Änderungen. Die Beispieldateien werden zur Verfügung gestellt, um den folgenden Workflow auszuführen.
 
 ![Erstellen Sie die Ordner.](media/devops/create-folders.png)
 
@@ -47,7 +47,7 @@ Erstellen Sie die folgenden Beispielordner (*Funktionen*, *Richtlinien*, *Tabell
 ## <a name="create-a-release-pipeline"></a>Erstellen einer Releasepipeline
 
 1. Melden Sie sich bei Ihrer [Azure DevOps-Organisation](https://dev.azure.com/) an.
-1. Wählen Sie **Pipelines** > **Releases** aus, und wählen im linken Menü **Neue Pipeline**.
+1. Wählen Sie **Pipelines** > **Releases** aus, und wählen im linken Menü **Neue Pipeline** .
 
     ![Neue Pipeline](media/devops/new-pipeline.png)
 
@@ -55,15 +55,15 @@ Erstellen Sie die folgenden Beispielordner (*Funktionen*, *Richtlinien*, *Tabell
 
      ![Vorlage auswählen](media/devops/select-template.png)
 
-1. Klicken Sie auf die Schaltfläche **Stufe**. Fügen Sie im Bereich **Stufe** den **Namen der Stufe** hinzu. Klicken Sie auf **Speichern**, um Ihre Pipeline zu speichern.
+1. Klicken Sie auf die Schaltfläche **Stufe** . Fügen Sie im Bereich **Stufe** den **Namen der Stufe** hinzu. Klicken Sie auf **Speichern** , um Ihre Pipeline zu speichern.
 
     ![Stufe benennen](media/devops/stage-name.png)
 
-1. Klicken Sie auf die Schaltfläche **Artefakt hinzufügen**. Wählen Sie im Bereich **Artefakt hinzufügen** das Repository aus, in dem sich Ihr Code befindet, geben Sie die relevanten Informationen ein, und klicken Sie auf **Hinzufügen**. Klicken Sie auf **Speichern**, um Ihre Pipeline zu speichern.
+1. Klicken Sie auf die Schaltfläche **Artefakt hinzufügen** . Wählen Sie im Bereich **Artefakt hinzufügen** das Repository aus, in dem sich Ihr Code befindet, geben Sie die relevanten Informationen ein, und klicken Sie auf **Hinzufügen** . Klicken Sie auf **Speichern** , um Ihre Pipeline zu speichern.
 
     ![Hinzufügen eines Artefakts](media/devops/add-artifact.png)
 
-1. Wählen Sie auf der Registerkarte **Variablen** **+ Hinzufügen**, um eine Variable für **Endpunkt-URL** zu erstellen, die in der Aufgabe verwendet wird. Geben Sie den **Namen** und den **Wert** des Endpunkts ein. Klicken Sie auf **Speichern**, um Ihre Pipeline zu speichern. 
+1. Wählen Sie auf der Registerkarte **Variablen** **+ Hinzufügen** , um eine Variable für **Endpunkt-URL** zu erstellen, die in der Aufgabe verwendet wird. Geben Sie den **Namen** und den **Wert** des Endpunkts ein. Klicken Sie auf **Speichern** , um Ihre Pipeline zu speichern. 
 
     ![Variable erstellen](media/devops/create-variable.png)
 
@@ -73,21 +73,21 @@ Erstellen Sie die folgenden Beispielordner (*Funktionen*, *Richtlinien*, *Tabell
 
 ## <a name="create-tasks-to-deploy"></a>Erstellen von Aufgaben zum Bereitstellen
 
-1. Klicken Sie auf der Registerkarte **Pipeline** auf **1 Auftrag, 0 Aufgabe**, um Aufgaben hinzuzufügen. 
+1. Klicken Sie auf der Registerkarte **Pipeline** auf **1 Auftrag, 0 Aufgabe** , um Aufgaben hinzuzufügen. 
 
     ![Hinzufügen von Aufgaben](media/devops/add-task.png)
 
-1. Erstellen Sie drei Aufgaben, um **Tabellen**, **Funktionen** und **Richtlinien** (in dieser Reihenfolge) bereitzustellen. 
+1. Erstellen Sie drei Aufgaben, um **Tabellen** , **Funktionen** und **Richtlinien** (in dieser Reihenfolge) bereitzustellen. 
 
-1. Wählen Sie auf der Registerkarte **Aufgaben** **+** neben **Agent-Auftrag**. Suchen Sie nach **Azure Data Explorer**. Installieren Sie unter **Marktplatz** die Erweiterung **Azure Data Explorer – Admin Commands**. Wählen Sie dann **Hinzufügen** unter **Azure Data Explorer-Befehl ausführen**.
+1. Wählen Sie auf der Registerkarte **Aufgaben** **+** neben **Agent-Auftrag** . Suchen Sie nach **Azure Data Explorer** . Installieren Sie unter **Marktplatz** die Erweiterung **Azure Data Explorer – Admin Commands** . Wählen Sie dann **Hinzufügen** unter **Azure Data Explorer-Befehl ausführen** .
 
      ![Administratorbefehle hinzufügen](media/devops/add-admin-commands.png)
 
-1. Klicken Sie links auf **Kusto-Befehl**, und aktualisieren Sie die Aufgabe mit den folgenden Informationen:
-    * **Anzeigename**: Der Name der Aufgabe.
-    * **Dateipfad**: Geben Sie in der Aufgabe **Tabellen** */Tables/* .csl an, da sich die Dateien zur Tabellenerstellung im Ordner *Tabelle* befinden.
-    * **Endpunkt-URL**: geben Sie die im vorherigen Schritt erstellte `EndPoint URL`-Variable ein.
-    * Wählen Sie **Dienstendpunkt verwenden**, und wählen Sie **+ Neu**.
+1. Klicken Sie links auf **Kusto-Befehl** , und aktualisieren Sie die Aufgabe mit den folgenden Informationen:
+    * **Anzeigename** : Der Name der Aufgabe.
+    * **Dateipfad** : Geben Sie in der Aufgabe **Tabellen** */Tables/* .csl an, da sich die Dateien zur Tabellenerstellung im Ordner *Tabelle* befinden.
+    * **Endpunkt-URL** : geben Sie die im vorherigen Schritt erstellte `EndPoint URL`-Variable ein.
+    * Wählen Sie **Dienstendpunkt verwenden** , und wählen Sie **+ Neu** .
 
     ![Kusto-Befehlsaufgabe aktualisieren](media/devops/kusto-command-task.png)
 
@@ -101,19 +101,19 @@ Erstellen Sie die folgenden Beispielordner (*Funktionen*, *Richtlinien*, *Tabell
     |**Dienstprinzipal-App-Schlüssel**     |    Geben Sie den AAD-App-Schlüssel (als Voraussetzung erstellt) ein.    |
     |**ID des AAD-Mandanten**    |      Geben Sie Ihren AAD-Mandanten ein (z.B. „microsoft.com“, „contoso.com“...)    |
 
-    Aktivieren Sie das Kontrollkästchen **Nutzung dieser Verbindung für alle Pipelines erlauben**. Klicken Sie auf **OK**.
+    Aktivieren Sie das Kontrollkästchen **Nutzung dieser Verbindung für alle Pipelines erlauben** . Klicken Sie auf **OK** .
 
     ![Dienstverbindung hinzufügen](media/devops/add-service-connection.png)
 
-1. Wiederholen Sie die Schritte 1-5 zweimal, um Dateien aus den Ordnern *Funktionen* und *Richtlinien* bereitzustellen. Wählen Sie **Speichern** aus. Auf der Registerkarte **Aufgaben** finden Sie die drei erstellten Aufgaben: **Bereitstellen von Tabellen**, **Bereitstellen von Funktionen** und **Bereitstellen von Richtlinien**.
+1. Wiederholen Sie die Schritte 1-5 zweimal, um Dateien aus den Ordnern *Funktionen* und *Richtlinien* bereitzustellen. Wählen Sie **Speichern** aus. Auf der Registerkarte **Aufgaben** finden Sie die drei erstellten Aufgaben: **Bereitstellen von Tabellen** , **Bereitstellen von Funktionen** und **Bereitstellen von Richtlinien** .
 
     ![Alle Ordner bereitstellen](media/devops/deploy-all-folders.png)
 
-1. Wählen Sie **+ Release** > **Release erstellen**, um ein Release zu erstellen.
+1. Wählen Sie **+ Release** > **Release erstellen** , um ein Release zu erstellen.
 
     ![Erstellen eines Release](media/devops/create-release.png)
 
-1. Überprüfen Sie auf der Registerkarte **Protokolle**, ob die Bereitstellung erfolgreich war.
+1. Überprüfen Sie auf der Registerkarte **Protokolle** , ob die Bereitstellung erfolgreich war.
 
     ![Bereitstellung erfolgreich](media/devops/deployment-successful.png)
 

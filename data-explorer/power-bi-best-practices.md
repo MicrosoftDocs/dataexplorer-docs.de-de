@@ -7,16 +7,16 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: 4cb2c64e2a66d8412277717e505626965bca1052
-ms.sourcegitcommit: 7024f73c76bf5b506557fd0ef7a0f4f40ec7d313
+ms.openlocfilehash: a508d40d4e48205288dcb6133e267578a54198f9
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92021218"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343520"
 ---
 # <a name="best-practices-for-using-power-bi-to-query-and-visualize-azure-data-explorer-data"></a>Bewährte Methoden für die Verwendung von Power BI zum Abfragen und Visualisieren von Azure Data Explorer-Daten
 
-Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). [Power BI](https://docs.microsoft.com/power-bi/) ist eine Business Analytics-Lösung, mit der Sie Ihre Daten visualisieren und die Ergebnisse unternehmensweit teilen können. Azure Data Explorer bietet drei Möglichkeiten, um eine Verbindung mit Daten in Power BI herzustellen. Verwenden Sie den [integrierten Connector](power-bi-connector.md), [importieren Sie eine Abfrage aus Azure Data Explorer in Power BI](power-bi-imported-query.md), oder verwenden Sie eine [SQL-Abfrage](power-bi-sql-query.md). In den in diesem Artikel enthaltenen Tipps wird erläutert, wie Sie Azure Data Explorer-Daten mit Power BI abfragen und visualisieren. 
+Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). [Power BI](/power-bi/) ist eine Business Analytics-Lösung, mit der Sie Ihre Daten visualisieren und die Ergebnisse unternehmensweit teilen können. Azure Data Explorer bietet drei Möglichkeiten, um eine Verbindung mit Daten in Power BI herzustellen. Verwenden Sie den [integrierten Connector](power-bi-connector.md), [importieren Sie eine Abfrage aus Azure Data Explorer in Power BI](power-bi-imported-query.md), oder verwenden Sie eine [SQL-Abfrage](power-bi-sql-query.md). In den in diesem Artikel enthaltenen Tipps wird erläutert, wie Sie Azure Data Explorer-Daten mit Power BI abfragen und visualisieren. 
 
 ## <a name="best-practices-for-using-power-bi"></a>Bewährte Methoden für die Verwendung von Power BI
 
@@ -24,17 +24,17 @@ Wenn Sie mit neuen Rohdaten im Terabytebereich arbeiten, befolgen Sie diese Anwe
 
 * **Nur das Nötigste** – Laden Sie nur die Daten in Power BI, die Sie für Ihre Berichte benötigen. Verwenden Sie für umfassende interaktive Analysen die [Azure Data Explorer-Webbenutzeroberfläche](web-query-data.md), die für die Ad-hoc-Exploration mit der Kusto-Abfragesprache optimiert ist.
 
-* **Zusammengesetztes Modell** – Verwenden Sie ein [zusammengesetztes Modell](https://docs.microsoft.com/power-bi/desktop-composite-models), um aggregierte Daten für Dashboards der obersten Ebene mit gefilterten, operativen Rohdaten zu kombinieren. Sie können klar definieren, wann Rohdaten und wann eine aggregierte Ansicht verwendet werden sollen. 
+* **Zusammengesetztes Modell** – Verwenden Sie ein [zusammengesetztes Modell](/power-bi/desktop-composite-models), um aggregierte Daten für Dashboards der obersten Ebene mit gefilterten, operativen Rohdaten zu kombinieren. Sie können klar definieren, wann Rohdaten und wann eine aggregierte Ansicht verwendet werden sollen. 
 
-* **Importmodus oder DirectQuery-Modus** – Verwenden Sie den **Importmodus** für Interaktionen mit kleineren Datasets. Verwenden Sie den **DirectQuery-Modus** für große, häufig aktualisierte Datasets. Erstellen Sie beispielsweise Dimensionstabellen mit dem **Importmodus**, da sie klein sind und sich nicht häufig ändern. Legen Sie das Aktualisierungsintervall entsprechend der erwarteten Datenaktualisierungsrate fest. Erstellen Sie mit dem **DirectQuery-Modus** Faktentabellen, da diese Tabellen groß sind und Rohdaten enthalten. Verwenden Sie diese Tabellen, um gefilterte Daten mithilfe von Power BI-[Drillthroughs](https://docs.microsoft.com/power-bi/desktop-drillthrough) darzustellen.
+* **Importmodus oder DirectQuery-Modus** – Verwenden Sie den **Importmodus** für Interaktionen mit kleineren Datasets. Verwenden Sie den **DirectQuery-Modus** für große, häufig aktualisierte Datasets. Erstellen Sie beispielsweise Dimensionstabellen mit dem **Importmodus** , da sie klein sind und sich nicht häufig ändern. Legen Sie das Aktualisierungsintervall entsprechend der erwarteten Datenaktualisierungsrate fest. Erstellen Sie mit dem **DirectQuery-Modus** Faktentabellen, da diese Tabellen groß sind und Rohdaten enthalten. Verwenden Sie diese Tabellen, um gefilterte Daten mithilfe von Power BI-[Drillthroughs](/power-bi/desktop-drillthrough) darzustellen.
 
-* **Parallelität**: Der Azure Data Explorer ist eine linear skalierbare Datenplattform. Daher können Sie die Leistung beim Dashboardrendering verbessern, indem Sie die Parallelität des End-to-End-Flows wie folgt erhöhen:
+* **Parallelität** : Der Azure Data Explorer ist eine linear skalierbare Datenplattform. Daher können Sie die Leistung beim Dashboardrendering verbessern, indem Sie die Parallelität des End-to-End-Flows wie folgt erhöhen:
 
-  * Erhöhen Sie die Anzahl [gleichzeitiger Verbindungen in DirectQuery in Power BI](https://docs.microsoft.com/power-bi/desktop-directquery-about#maximum-number-of-connections-option-for-directquery).
+  * Erhöhen Sie die Anzahl [gleichzeitiger Verbindungen in DirectQuery in Power BI](/power-bi/desktop-directquery-about#maximum-number-of-connections-option-for-directquery).
 
   * Verwenden Sie eine [schwache Konsistenz, um die Parallelität zu verbessern](kusto/concepts/queryconsistency.md). Dies kann sich auf die Aktualität der Daten auswirken.
 
-* **Effektive Slicer**: Verwenden Sie [Synchronisierungsslicer](https://docs.microsoft.com/power-bi/visuals/power-bi-visualization-slicers#sync-and-use-slicers-on-other-pages), um zu verhindern, dass Daten in Berichte geladen werden, bevor Sie bereit sind. Nachdem Sie das Dataset strukturiert, alle visuellen Elemente platziert und alle Slicer gekennzeichnet haben, können Sie den Synchronisierungsslicer auswählen, um nur die benötigten Daten zu laden.
+* **Effektive Slicer** : Verwenden Sie [Synchronisierungsslicer](/power-bi/visuals/power-bi-visualization-slicers#sync-and-use-slicers-on-other-pages), um zu verhindern, dass Daten in Berichte geladen werden, bevor Sie bereit sind. Nachdem Sie das Dataset strukturiert, alle visuellen Elemente platziert und alle Slicer gekennzeichnet haben, können Sie den Synchronisierungsslicer auswählen, um nur die benötigten Daten zu laden.
 
 * **Verwendung von Filtern** – Verwenden Sie so viele Power BI-Filter wie möglich, um die Azure Data Explorer-Suche auf die relevanten Datenshards zu beschränken.
 
@@ -128,7 +128,7 @@ Mit [Abfrageparametern](kusto/query/queryparametersstatement.md) können Sie die
 
 Verwenden Sie einen Abfrageparameter, um Informationen in der Abfrage zu filtern und die Abfrageleistung zu optimieren.
  
-Öffnen Sie im Fenster **Abfragen bearbeiten** -> **Home** > **Erweiterter Editor**.
+Öffnen Sie im Fenster **Abfragen bearbeiten** -> **Home** > **Erweiterter Editor** .
 
 1. Suchen Sie den folgenden Abschnitt in der Abfrage:
 

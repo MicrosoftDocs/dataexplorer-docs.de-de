@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 9b080badd2dc1015319e9b6d44c4c477061f92f9
-ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
+ms.openlocfilehash: 31d051bf104778ecc4c2a743db6bda5ccf8ed89f
+ms.sourcegitcommit: ef3d919dee27c030842abf7c45c9e82e6e8350ee
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91452713"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92630125"
 ---
 # <a name="cache-policy-command"></a>Cacherichtlinienbefehl
 
@@ -52,7 +52,7 @@ Cache Richtlinie:
 }
 ```
 
-* `entity_type` : Tabelle, Datenbank oder Cluster
+* `entity_type` : Tabelle, materialisierte Sicht, Datenbank oder Cluster
 * `database_or_table_or_materialized-view`: Wenn die Entität eine Tabelle oder Datenbank ist, sollte Ihr Name wie folgt im Befehl angegeben werden: 
   - `database_name` oder 
   - `database_name.table_name` oder 

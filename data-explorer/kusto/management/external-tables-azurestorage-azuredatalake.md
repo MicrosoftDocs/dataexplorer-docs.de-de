@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 0532219b8efc1cab7508d1838882b6fa48f5048f
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 1d0625c949fe563084caeec936e3433c9ee70f5e
+ms.sourcegitcommit: ef3d919dee27c030842abf7c45c9e82e6e8350ee
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343265"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92630108"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake
 
@@ -28,7 +28,7 @@ Eine Einführung in die Funktion "externe Azure Storage Tabellen" finden [Sie Un
 ( `.create`  |  `.alter`  |  `.create-or-alter` ) `external` `table` *[TableName](#table-name)* - `(` *[Schema](#schema)*`)`  
 `kind` `=` (`blob` | `adl`)  
 [ `partition` `by` `(` *[Partitionen](#partitions)* `)` [ `pathformat` `=` `(` *[PathFormat](#path-format)* `)` ]]  
-`dataformat``=` * [Format](#format)*  
+`dataformat``=` *[Format](#format)*  
 `(`*[Storageconnectionstring](#connection-string)* [ `,` ...]`)`   
 [ `with` `(` *[PropertyName](#properties)* - `=` *[Wert](#properties)* `,` ... `)` ]  
 
@@ -74,7 +74,7 @@ Die Partitionsliste ist eine beliebige Kombination von Partitions Spalten, die i
 
   *PartitionName* `:` `string` `=` *ColumnName*
 
-* Partition, basierend auf einem [Hash](../query/hashfunction.md)Wert der Zeichen folgen Spalte, Modulo *Number*.
+* Partition, basierend auf einem [Hash](../query/hashfunction.md)Wert der Zeichen folgen Spalte, Modulo *Number* .
 
   *PartitionName* `:` `long` `=` `hash` `(` *ColumnName* - `,` *Nummer*`)`
 
@@ -90,9 +90,9 @@ Um die Richtigkeit der Partitionierungs Definitionen zu überprüfen, verwenden 
 
 Dateipfad-Format für externe Daten, das zusätzlich zu Partitionen angegeben werden kann. Das Pfad Format ist eine Sequenz von Partitions Elementen und Text Trennzeichen:
 
-&nbsp;&nbsp;[*Stringseparator*] *Partition* [*stringseparator*] [*Partition* [*stringseparator*]...]  
+&nbsp;&nbsp;[ *Stringseparator* ] *Partition* [ *stringseparator* ] [ *Partition* [ *stringseparator* ]...]  
 
-Dabei verweist *Partition* auf eine in-Klausel deklarierte Partition `partition` `by` , und *stringseparator* ist ein beliebiger Text, der in Anführungszeichen eingeschlossen ist. Aufeinander folgende Partitions Elemente müssen mithilfe von *stringseparator*getrennt festgelegt werden.
+Dabei verweist *Partition* auf eine in-Klausel deklarierte Partition `partition` `by` , und *stringseparator* ist ein beliebiger Text, der in Anführungszeichen eingeschlossen ist. Aufeinander folgende Partitions Elemente müssen mithilfe von *stringseparator* getrennt festgelegt werden.
 
 Das ursprüngliche Dateipfad-Präfix kann mithilfe von Partitions Elementen erstellt werden, die als Zeichen folgen gerendert und mit entsprechenden Text Trennzeichen Zum Angeben des Formats, das zum Rendern eines DateTime-Partitions Werts verwendet wird, kann das folgende Makro verwendet werden:
 
@@ -270,7 +270,7 @@ Gibt eine Liste aller Dateien zurück, die verarbeitet werden, wenn eine bestimm
 
 **Syntax:** 
 
-`.show``external` `table` *TableName* `artifacts` [ `limit` *maxResults*]
+`.show``external` `table` *TableName* `artifacts` [ `limit` *maxResults* ]
 
 Dabei ist " *maxResults* " ein optionaler Parameter, der so festgelegt werden kann, dass die Anzahl der Ergebnisse beschränkt wird.
 
@@ -279,7 +279,7 @@ Dabei ist " *maxResults* " ein optionaler Parameter, der so festgelegt werden ka
 | Ausgabeparameter | type   | Beschreibung                       |
 |------------------|--------|-----------------------------------|
 | URI              | Zeichenfolge | URI der externen Speicher Datendatei |
-| Größe             | long   | Dateilänge in Byte              |
+| Size             | long   | Dateilänge in Byte              |
 | Partition        | dynamisch | Dynamisches Objekt, das Datei Partitionen für eine partitionierte externe Tabelle beschreibt |
 
 > [!TIP]
@@ -293,7 +293,7 @@ Dabei ist " *maxResults* " ein optionaler Parameter, der so festgelegt werden ka
 
 **Ausgabe:**
 
-| Uri                                                                     | Größe | Partition |
+| Uri                                                                     | Size | Partition |
 |-------------------------------------------------------------------------| ---- | --------- |
 | `https://storageaccount.blob.core.windows.net/container1/folder/file.csv` | 10743 | `{}`   |
 
@@ -302,7 +302,7 @@ Für eine partitionierte Tabelle `Partition` enthält die Spalte extrahierte Par
 
 **Ausgabe:**
 
-| Uri                                                                     | Größe | Partition |
+| Uri                                                                     | Size | Partition |
 |-------------------------------------------------------------------------| ---- | --------- |
 | `https://storageaccount.blob.core.windows.net/container1/customer=john.doe/dt=20200101/file.csv` | 10743 | `{"Customer": "john.doe", "Date": "2020-01-01T00:00:00.0000000Z"}` |
 
@@ -321,7 +321,7 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 **Beispielausgabe**
 
-| Name     | Typ | Zuordnung                                                           |
+| Name     | Art | Zuordnung                                                           |
 |----------|------|-------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -339,7 +339,7 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 **Beispielausgabe**
 
-| Name     | Typ | Zuordnung                                                                |
+| Name     | Art | Zuordnung                                                                |
 |----------|------|------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -361,7 +361,7 @@ Zeigt die Zuordnungen an (alle oder die durch den Namen angegebenen).
 
 **Beispielausgabe**
 
-| Name     | Typ | Zuordnung                                                                         |
+| Name     | Art | Zuordnung                                                                         |
 |----------|------|---------------------------------------------------------------------------------|
 | mapping1 | JSON | [{"ColumnName": "RowNumber", "Properties": {"Path": "$. RowNumber"}}, {"ColumnName": "ROWGUID", "Properties": {"Path": "$. ROWGUID"}}] |
 
@@ -378,5 +378,6 @@ Löscht die Zuordnung aus der Datenbank.
 ```
 ## <a name="next-steps"></a>Nächste Schritte
 
-* [Externe Tabelle (allgemeine Steuerungsbefehle)](./external-table-commands.md)
-* [Erstellen und Ändern externer SQL-Tabellen](external-sql-tables.md)
+* [Externe Tabellen Abfragen](../../data-lake-query-data.md).
+* [Exportieren von Daten in eine externe Tabelle](data-export/export-data-to-an-external-table.md).
+* [Fortlaufender Datenexport in eine externe Tabelle](data-export/continuous-data-export.md).

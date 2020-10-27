@@ -7,12 +7,12 @@ ms.reviewer: gabilehner
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/06/2020
-ms.openlocfilehash: d07dc282ba3996113903bd1b7c5ab08672d46543
-ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
+ms.openlocfilehash: 4d8574e0b68c234f1cef0ba49b37eb869e61c142
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/13/2020
-ms.locfileid: "92003054"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342602"
 ---
 # <a name="use-follower-database-to-attach-databases-in-azure-data-explorer"></a>Verwenden der Follower-Datenbank zum Anfügen von Datenbanken in Azure Data Explorer
 
@@ -30,7 +30,7 @@ Das Anfügen einer Datenbank an einen anderen Cluster mithilfe der Follower-Funk
 
 1. Wenn Sie kein Azure-Abonnement besitzen, können Sie ein [kostenloses Konto](https://azure.microsoft.com/free/) erstellen, bevor Sie beginnen.
 1. [Erstellen Sie Cluster und Datenbank](create-cluster-database-portal.md) für den Leader und den Follower.
-1. [Erfassen Sie Daten](ingest-sample-data.md) in der Leader-Datenbank mithilfe einer der verschiedenen Methoden, die unter [Übersicht über die Datenerfassung](/azure/data-explorer/ingest-data-overview) erläutert werden.
+1. [Erfassen Sie Daten](ingest-sample-data.md) in der Leader-Datenbank mithilfe einer der verschiedenen Methoden, die unter [Übersicht über die Datenerfassung](./ingest-data-overview.md) erläutert werden.
 
 ## <a name="attach-a-database"></a>Anfügen einer Datenbank
 
@@ -476,4 +476,3 @@ Der Administrator der Follower-Datenbank kann die [Cacherichtlinie](kusto/manage
 ## <a name="next-steps"></a>Nächste Schritte
 
 * Informationen zur Konfiguration von Follower-Clustern finden Sie unter [Steuerungsbefehle zum Verwalten eines Follower-Clusters](kusto/management/cluster-follower.md).
-

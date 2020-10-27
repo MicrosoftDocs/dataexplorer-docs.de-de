@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 3452ca547778869ae08e7aef92c1a3a7a4754446
-ms.sourcegitcommit: 58588ba8d1fc5a6adebdce2b556db5bc542e38d8
+ms.openlocfilehash: 209a58dd53dd773567aeb527fa45499ddd397c20
+ms.sourcegitcommit: 4f24d68f1ae4903a2885985aa45fd15948867175
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2020
-ms.locfileid: "92098437"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92558222"
 ---
 # <a name="ingest-blobs-into-azure-data-explorer-by-subscribing-to-event-grid-notifications"></a>Erfassen von Blobs in Azure Data Explorer durch das Abonnieren von Event Grid-Benachrichtigungen
 
@@ -42,7 +42,7 @@ Erstellen Sie in Azure Data Explorer eine Tabelle, an die Event Hubs Daten sende
 
     :::image type="content" source="media/ingest-data-event-grid/query-explorer-link.png" alt-text="Link zum Abfrage-Explorer"::: 
 
-1. Kopieren Sie den folgenden Befehl in das Fenster, und wählen Sie **Ausführen**, um die Tabelle (TestTable) zu erstellen, die die erfassten Daten erhalten soll.
+1. Kopieren Sie den folgenden Befehl in das Fenster, und wählen Sie **Ausführen** , um die Tabelle (TestTable) zu erstellen, die die erfassten Daten erhalten soll.
 
     ```kusto
     .create table TestTable (TimeStamp: datetime, Value: string, Source:string)
@@ -50,7 +50,7 @@ Erstellen Sie in Azure Data Explorer eine Tabelle, an die Event Hubs Daten sende
 
     :::image type="content" source="media/ingest-data-event-grid/run-create-table.png" alt-text="Link zum Abfrage-Explorer":::
 
-1. Kopieren Sie den folgenden Befehl in das Fenster, und wählen Sie **Ausführen**, um die eingehenden JSON-Daten den Spaltennamen und Datentypen der Tabelle (TestTable) zuzuordnen.
+1. Kopieren Sie den folgenden Befehl in das Fenster, und wählen Sie **Ausführen** , um die eingehenden JSON-Daten den Spaltennamen und Datentypen der Tabelle (TestTable) zuzuordnen.
 
     ```kusto
     .create table TestTable ingestion json mapping 'TestMapping' '[{"column":"TimeStamp","path":"$.TimeStamp"},{"column":"Value","path":"$.Value"},{"column":"Source","path":"$.Source"}]'
@@ -60,17 +60,17 @@ Erstellen Sie in Azure Data Explorer eine Tabelle, an die Event Hubs Daten sende
 
 Verbinden Sie nun das Speicherkonto mit Azure Data Explorer, so dass die in den Speicher fließenden Daten in die Testtabelle gestreamt werden. 
 
-1. Wählen Sie unter dem von Ihnen erstellten Cluster **Datenbanken** > **TestDatabase**.
+1. Wählen Sie unter dem von Ihnen erstellten Cluster **Datenbanken** > **TestDatabase** .
 
     :::image type="content" source="media/ingest-data-event-grid/select-test-database.png" alt-text="Link zum Abfrage-Explorer":::
 
-1. Wählen Sie **Datenerfassung** > **Datenverbindung hinzufügen**.
+1. Wählen Sie **Datenerfassung** > **Datenverbindung hinzufügen** .
 
     :::image type="content" source="media/ingest-data-event-grid/data-ingestion-create.png" alt-text="Link zum Abfrage-Explorer":::
 
 ### <a name="data-connection---basics-tab"></a>Datenverbindung: Registerkarte „Grundlagen“
 
-1. Wählen Sie den Verbindungstyp aus: **Blobspeicher**.
+1. Wählen Sie den Verbindungstyp aus: **Blobspeicher** .
 
 1. Füllen Sie das Formular mit den folgenden Informationen aus:
 
@@ -94,7 +94,7 @@ Verbinden Sie nun das Speicherkonto mit Azure Data Explorer, so dass die in den 
     
     :::image type="content" source="media/ingest-data-event-grid/filter-settings.png" alt-text="Link zum Abfrage-Explorer":::    
 
-1. Klicken Sie auf **Weiter: Erfassungseigenschaften**.
+1. Klicken Sie auf **Weiter: Erfassungseigenschaften** .
 
 ### <a name="data-connection---ingest-properties-tab"></a>Datenverbindung: Registerkarte „Erfassungseigenschaften“
 
@@ -113,7 +113,7 @@ Verbinden Sie nun das Speicherkonto mit Azure Data Explorer, so dass die in den 
 
    > [!NOTE]
    > Sie müssen nicht alle **Standardroutingeinstellungen** angeben. Es ist auch zulässig, nur einen Teil der Einstellungen anzugeben.
-1. Klicken Sie auf **Weiter: Überprüfen und erstellen**.
+1. Klicken Sie auf **Weiter: Überprüfen und erstellen** .
 
 ### <a name="data-connection---review--create-tab"></a>Datenverbindung: Registerkarte „Überprüfen und erstellen“
 
@@ -173,7 +173,7 @@ Speichern Sie die Daten in einer Datei, und laden Sie sie mit diesem Skript hoch
 
 ### <a name="ingestion-properties"></a>Erfassungseigenschaften
 
-Sie können die [Datenerfassungseigenschaften](ingest-data-event-grid-overview.md#set-ingestion-properties) für die Bloberfassung über die Blobmetadaten angeben. 
+Sie können die [Datenerfassungseigenschaften](ingest-data-event-grid-overview.md#ingestion-properties) für die Bloberfassung über die Blobmetadaten angeben. 
 
 > [!NOTE]
 > Azure Data Explorer löscht die Blobs nach der Erfassung nicht.
@@ -184,8 +184,8 @@ Sie können die [Datenerfassungseigenschaften](ingest-data-event-grid-overview.m
 
 > [!NOTE]
 > Azure Data Explorer verfügt über eine Aggregationsrichtlinie (Batching) für die Datenerfassung, die für die Optimierung des Erfassungsprozesses konzipiert ist.
-Die Richtlinie ist standardmäßig auf fünf Minuten festgelegt.
-Sie kann bei Bedarf zu einem späteren Zeitpunkt geändert werden. In diesem Artikel ist mit einer Wartezeit von wenigen Minuten zu rechnen.
+> Die Richtlinie ist standardmäßig auf fünf Minuten festgelegt.
+> Sie kann bei Bedarf zu einem späteren Zeitpunkt geändert werden. In diesem Artikel ist mit einer Wartezeit von wenigen Minuten zu rechnen.
 
 1. Im Azure-Portal sehen Sie unter Ihrer Event Grid-Instanz den Anstieg der Aktivität während der App-Ausführung.
 

@@ -7,12 +7,12 @@ ms.reviewer: prvavill
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/31/2020
-ms.openlocfilehash: 630b03fc0e89005f1031aba4cbd1a86d803ff275
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: 0fe11b4218f86d501c88e6a217f9ae867a17f5f4
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91942028"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343469"
 ---
 # <a name="monitor-azure-data-explorer-using-resource-health-preview"></a>Überwachen von Azure Data Explorer mithilfe von Resource Health (Vorschau)
 
@@ -53,10 +53,10 @@ Der Integritätsstatus **Nicht verfügbar** gibt an, dass ein Problem mit Ihrer 
 
 ### <a name="unknown"></a>Unknown
 
-Der Integritätsstatus **Unbekannt** gibt an, dass **Resource Health** seit mehr als 10 Minuten keine Informationen mehr zu dieser Azure Data Explorer-Ressource empfangen hat. Dieser Status ist zwar keine definitive Angabe des Azure Data Explorer-Ressourcenzustands, aber ein wichtiger Datenpunkt im Problembehandlungsprozess. Wenn Ihr Azure Data Explorer-Cluster erwartungsgemäß funktioniert, ändert sich der Status innerhalb weniger Minuten in **Verfügbar**. Der Integritätsstatus **Unbekannt** kann darauf hindeuten, dass ein Ereignis auf der Plattform die Ressource beeinträchtigt. 
+Der Integritätsstatus **Unbekannt** gibt an, dass **Resource Health** seit mehr als 10 Minuten keine Informationen mehr zu dieser Azure Data Explorer-Ressource empfangen hat. Dieser Status ist zwar keine definitive Angabe des Azure Data Explorer-Ressourcenzustands, aber ein wichtiger Datenpunkt im Problembehandlungsprozess. Wenn Ihr Azure Data Explorer-Cluster erwartungsgemäß funktioniert, ändert sich der Status innerhalb weniger Minuten in **Verfügbar** . Der Integritätsstatus **Unbekannt** kann darauf hindeuten, dass ein Ereignis auf der Plattform die Ressource beeinträchtigt. 
 
 > [!TIP]
-> Die Integrität der Azure Data Explorer-Clusterressource ist **Unbekannt**, wenn sie sich im Zustand „Beendet“ befindet.
+> Die Integrität der Azure Data Explorer-Clusterressource ist **Unbekannt** , wenn sie sich im Zustand „Beendet“ befindet.
 
 :::image type="content" source="media/monitor-with-resource-health/unknown.png" alt-text="Screenshot: Ressourcenintegritätsseite für eine Azure Data Explorer-Ressource. Der Status ist als „Verfügbar“ angegeben und hervorgehoben." border="false":::
 
@@ -68,6 +68,6 @@ Im Bereich **Resource Health** unter **Integritätsverlauf** können Sie auf Inf
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-* [Konfigurieren von Resource Health-Warnungen](https://docs.microsoft.com/azure/service-health/resource-health-alert-arm-template-guide)
+* [Konfigurieren von Resource Health-Warnungen](/azure/service-health/resource-health-alert-arm-template-guide)
 * [Tutorial: Erfassen und Abfragen von Überwachungsdaten in Azure Data Explorer](ingest-data-no-code.md)
 * [Überwachen der Azure Data Explorer-Leistung, -Integrität und -Auslastung mit Metriken](using-metrics.md)

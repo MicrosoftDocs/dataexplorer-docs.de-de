@@ -7,21 +7,21 @@ ms.reviewer: maraheja
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 05/21/2020
-ms.openlocfilehash: adbf974852f071dde54cc668b213e7b7d6d7cfea
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: b019f0f8cfefab2ed111b023993c929bd5f19e5f
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88871943"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342517"
 ---
 # <a name="connect-to-azure-data-explorer-from-azure-databricks"></a>Herstellen einer Verbindung mit Azure Data Explorer von Azure Databricks
 
-[Azure Databricks](https://docs.microsoft.com/azure/azure-databricks/what-is-azure-databricks) ist eine Apache Spark-basierte Analyseplattform, die für die Microsoft Azure Platform optimiert ist. In diesem Artikel erfahren Sie, wie Sie Azure Databricks verwenden, um von Azure Data Explorer aus auf Daten zuzugreifen. Es gibt mehrere Möglichkeiten der Authentifizierung mit Azure Data Explorer, z.B. per Geräteanmeldung und per Azure AD-App (Azure Active Directory).
+[Azure Databricks](/azure/azure-databricks/what-is-azure-databricks) ist eine Apache Spark-basierte Analyseplattform, die für die Microsoft Azure Platform optimiert ist. In diesem Artikel erfahren Sie, wie Sie Azure Databricks verwenden, um von Azure Data Explorer aus auf Daten zuzugreifen. Es gibt mehrere Möglichkeiten der Authentifizierung mit Azure Data Explorer, z.B. per Geräteanmeldung und per Azure AD-App (Azure Active Directory).
  
 ## <a name="prerequisites"></a>Voraussetzungen
 
 - [Erstellen eines Azure Data Explorer-Clusters und einer Datenbank](create-cluster-database-portal.md)
-- [Erstellen eines Azure Databricks-Arbeitsbereichs](/azure/azure-databricks/quickstart-create-databricks-workspace-portal#create-an-azure-databricks-workspace). Wählen Sie unter **Azure Databricks-Dienst** in der Dropdownliste **Tarif** die Option **Premium**. Wenn Sie diese Option wählen, können Sie mit Azure Databricks-Geheimnissen Ihre Anmeldeinformationen speichern und dann in Notebooks und Aufträgen darauf verweisen.
+- [Erstellen eines Azure Databricks-Arbeitsbereichs](/azure/azure-databricks/quickstart-create-databricks-workspace-portal#create-an-azure-databricks-workspace). Wählen Sie unter **Azure Databricks-Dienst** in der Dropdownliste **Tarif** die Option **Premium** . Wenn Sie diese Option wählen, können Sie mit Azure Databricks-Geheimnissen Ihre Anmeldeinformationen speichern und dann in Notebooks und Aufträgen darauf verweisen.
 
 - [Erstellen Sie einen Cluster](https://docs.azuredatabricks.net/user-guide/clusters/create.html) mit den Standardeinstellungen in Azure Databricks.
 
@@ -30,7 +30,7 @@ ms.locfileid: "88871943"
 So installieren Sie den [spark-kusto-connector](https://mvnrepository.com/artifact/com.microsoft.azure.kusto/spark-kusto-connector) in Ihrem Azure Databricks-Cluster
 
 1. Wechseln Sie zu Ihrem Azure Databricks-Arbeitsbereich, und [erstellen Sie eine Bibliothek](https://docs.azuredatabricks.net/user-guide/libraries.html#create-a-library).
-1. Suchen Sie in Maven Central nach dem Paket *spark-kusto-connector*, installieren Sie die neueste Version, und fügen Sie sie an den Cluster an. 
+1. Suchen Sie in Maven Central nach dem Paket *spark-kusto-connector* , installieren Sie die neueste Version, und fügen Sie sie an den Cluster an. 
 
 ## <a name="connect-to-azure-data-explorer-by-using-a-device-authentication"></a>Herstellen einer Verbindung mit Azure Data Explorer per Geräteauthentifizierung
 
@@ -38,7 +38,7 @@ So installieren Sie den [spark-kusto-connector](https://mvnrepository.com/artifa
 
 ## <a name="connect-to-azure-data-explorer-by-using-an-azure-ad-app"></a>Herstellen einer Verbindung mit Azure Data Explorer mithilfe einer Azure AD-App
 
-1. Erstellen Sie eine Azure AD-App mit [Bereitstellung einer Azure AD-Anwendung](kusto/management/access-control/how-to-provision-aad-app.md).
+1. Erstellen Sie eine Azure AD-App mit [Bereitstellung einer Azure AD-Anwendung](./provision-azure-ad-app.md).
 1. Gewähren Sie in Ihrer Azure Data Explorer-Datenbank wie folgt Zugriff auf Ihre Azure AD-App:
 
     ```kusto

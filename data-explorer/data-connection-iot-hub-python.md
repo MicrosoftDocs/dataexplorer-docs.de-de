@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/07/2019
-ms.openlocfilehash: 4c54ae4aeded5579a4c7e5e016d60c8b46ba0908
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: afef1433c8928e0b1b33ca521aeffe881aedf61a
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873286"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342959"
 ---
 # <a name="create-an-iot-hub-data-connection-for-azure-data-explorer-by-using-python-preview"></a>Erstellen einer IoT Hub-Datenverbindung für Azure Data Explorer mit Python (Vorschau)
 
@@ -30,7 +30,7 @@ In diesem Artikel erstellen Sie eine IoT Hub-Datenverbindung für Azure Data Exp
 * Ein Azure-Konto mit einem aktiven Abonnement. Sie können [kostenlos ein Konto erstellen](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
 * [Python 3.4 oder höher](https://www.python.org/downloads/)
 * [Ein Cluster und eine Datenbank](create-cluster-database-python.md).
-* [Tabellen- und Spaltenzuordnung](net-standard-ingest-data.md#create-a-table-on-your-test-cluster)
+* [Tabellen- und Spaltenzuordnung](./net-sdk-ingest-data.md#create-a-table-on-your-test-cluster)
 * [Datenbank- und Tabellenrichtlinien](database-table-policies-python.md) (optional).
 * [Erstellen einer IoT Hub-Instanz](ingest-data-iot-hub.md#create-an-iot-hub).
 

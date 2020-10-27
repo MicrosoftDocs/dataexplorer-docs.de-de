@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: 5fe6776c1df631f6debc00bedabd579a9285f521
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: bb15bf9393ff6ae4a06fa97ade4070dfcd5e2ef8
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872674"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343136"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-powershell"></a>Erstellen eines Azure Data Explorer-Clusters und einer Datenbank mithilfe von PowerShell
 
@@ -117,4 +117,4 @@ Jetzt verfügen Sie über einen Cluster und eine Datenbank.
 ## <a name="next-steps"></a>Nächste Schritte
 
 * [Zusätzliche Az.Kusto-Befehle](/powershell/module/az.kusto/?view=azps-1.7.0#kusto)
-* [Erfassen von Daten mit dem .NET Standard SDK für Azure Data Explorer (Vorschauversion)](net-standard-ingest-data.md)
+* [Erfassen von Daten mit dem .NET Standard SDK für Azure Data Explorer (Vorschauversion)](./net-sdk-ingest-data.md)

@@ -7,13 +7,13 @@ ms.service: iot-hub
 ms.topic: include
 ms.date: 09/07/2018
 ms.author: orspodek
-ms.custom: include file
-ms.openlocfilehash: 8b6426c96070433ba489cc7579cc5168b25dce62
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.custom: include file, devx-track-azurecli
+ms.openlocfilehash: e21bd487ff110068ceee4a737a27157068e1f17a
+ms.sourcegitcommit: 1c836079c713db3aef33529e6a15af47e2984e7f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87375593"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92470653"
 ---
 In diesem Abschnitt wird die Azure-Befehlszeilenschnittstelle verwendet, um eine Geräteidentität für diesen Artikel zu erstellen. Bei Geräte-IDs wird die Groß-/Kleinschreibung beachtet.
 

@@ -7,12 +7,12 @@ ms.reviewer: ankhanol
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/22/2020
-ms.openlocfilehash: 14f4ed38ecb2e5b4a94dad8a73fb43ea3ff1e5ee
-ms.sourcegitcommit: c8256390d745e345f44d401e33e775702d62721d
+ms.openlocfilehash: 8274cd04dc2ecf588bf4771c06e3f8a760cac74d
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "91007795"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343163"
 ---
 # <a name="ingest-data-from-apache-kafka-into-azure-data-explorer"></a>Erfassen von Daten aus Apache Kafka in Azure Data Explorer
  
@@ -24,8 +24,8 @@ Weitere Informationen finden Sie im [Git-Repository](https://github.com/Azure/ka
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
-* Erstellen Sie ein [Microsoft Azure-Konto](https://docs.microsoft.com/azure/).
-* Installieren Sie die [Azure-Befehlszeilenschnittstelle](https://docs.microsoft.com/cli/azure/install-azure-cli).
+* Erstellen Sie ein [Microsoft Azure-Konto](/azure/).
+* Installieren Sie die [Azure-Befehlszeilenschnittstelle](/cli/azure/install-azure-cli).
 * Installieren Sie [Docker](https://docs.docker.com/get-docker/) und [Docker Compose](https://docs.docker.com/compose/install).
 * [Erstellen Sie im Azure-Portal einen Azure Data Explorer-Cluster und eine Datenbank](create-cluster-database-portal.md), indem Sie die Standardrichtlinien für den Cache und die Aufbewahrung verwenden.
 
@@ -322,7 +322,7 @@ Der Connector beginnt damit, Erfassungsprozesse für Azure Data Explorer in die 
     | project StartTime, EndTime, Source, EventId
     ```
     
-1. Verwenden Sie den Operator [`summarize`](https://docs.microsoft.com/azure/data-explorer/write-queries#summarize):
+1. Verwenden Sie den Operator [`summarize`](./write-queries.md#summarize):
 
     ```kusto
     Storms
@@ -334,7 +334,7 @@ Der Connector beginnt damit, Erfassungsprozesse für Azure Data Explorer in die 
     
     :::image type="content" source="media/ingest-data-kafka/kusto-query.png" alt-text="Erstellen einer Tabelle im Azure Data Explorer-Portal":::
 
-Weitere Abfragebeispiele und eine Anleitung finden Sie unter [Schreiben von Abfragen für Azure Data Explorer](write-queries.md) und in der [Dokumentation zur Kusto-Abfragesprache](https://docs.microsoft.com/azure/data-explorer/kusto/query/).
+Weitere Abfragebeispiele und eine Anleitung finden Sie unter [Schreiben von Abfragen für Azure Data Explorer](write-queries.md) und in der [Dokumentation zur Kusto-Abfragesprache](./kusto/query/index.md).
 
 ## <a name="reset"></a>Reset
 
@@ -348,7 +348,7 @@ Führen Sie zum Zurücksetzen die folgenden Schritte aus:
 
 ## <a name="clean-up-resources"></a>Bereinigen von Ressourcen
 
-Verwenden Sie zum Löschen der Azure Data Explorer-Ressourcen [az cluster delete](https://docs.microsoft.com/cli/azure/kusto/cluster#az-kusto-cluster-delete) oder [az Kusto database delete](https://docs.microsoft.com/cli/azure/kusto/database#az-kusto-database-delete):
+Verwenden Sie zum Löschen der Azure Data Explorer-Ressourcen [az cluster delete](/cli/azure/kusto/cluster#az-kusto-cluster-delete) oder [az Kusto database delete](/cli/azure/kusto/database#az-kusto-database-delete):
 
 ```azurecli-interactive
 az kusto cluster delete -n <cluster name> -g <resource group name>
@@ -358,7 +358,7 @@ az kusto database delete -n <database name> --cluster-name <cluster name> -g <re
 ## <a name="next-steps"></a>Nächste Schritte
 
 * Informieren Sie sich über die [Big Data-Architektur](/azure/architecture/solution-ideas/articles/big-data-azure-data-explorer).
-* Informieren Sie sich über das [Erfassen von Beispieldaten im JSON-Format in Azure Data Explorer](https://docs.microsoft.com/azure/data-explorer/ingest-json-formats?tabs=kusto-query-language).
+* Informieren Sie sich über das [Erfassen von Beispieldaten im JSON-Format in Azure Data Explorer](./ingest-json-formats.md?tabs=kusto-query-language).
 * Für zusätzliche Kafka-Labs:
    * [Praxislab zur Erfassung aus Confluent Cloud Kafka im verteilten Modus](https://github.com/Azure/azure-kusto-labs/blob/master/kafka-integration/confluent-cloud/README.md)
    * [Praxislab zur Erfassung aus HDInsight Kafka im verteilten Modus](https://github.com/Azure/azure-kusto-labs/tree/master/kafka-integration/distributed-mode/hdinsight-kafka)

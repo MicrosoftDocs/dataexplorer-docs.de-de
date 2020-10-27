@@ -7,12 +7,12 @@ ms.reviewer: avnera
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/13/2020
-ms.openlocfilehash: 5381b558d54002ddcd50fbbec2e4fbef6d44fdbc
-ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
+ms.openlocfilehash: 44c115cd509b72d5f83b1c1109ae09dc050d1a74
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/13/2020
-ms.locfileid: "92003066"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92337447"
 ---
 # <a name="select-the-correct-compute-sku-for-your-azure-data-explorer-cluster"></a>Auswählen der passenden Compute-SKU für Ihren Azure Data Explorer-Cluster 
 
@@ -23,7 +23,7 @@ Größe und VM-SKU des Datenverwaltungsclusters werden vollständig vom Azure Da
 Sie können die Compute-SKU für den Engine-Cluster jederzeit ändern, indem Sie den [Cluster hochskalieren](manage-cluster-vertical-scaling.md). Es ist am besten, mit der kleinsten SKU-Größe zu beginnen, die zum Ausgangsszenario passt. Beachten Sie, dass die Skalierung des Clusters zu einer Ausfallzeit von bis zu 30 Minuten führt, während der Cluster mit der neuen SKU neu erstellt wird. Sie können auch die [Azure Advisor-Empfehlungen](azure-advisor.md) verwenden, um Ihre Compute-SKU zu optimieren.
 
 > [!TIP]
-> [Reservierte Instanzen (RI) für Compute](https://docs.microsoft.com/azure/virtual-machines/windows/prepay-reserved-vm-instances) können auch für den Azure Data Explorer-Cluster genutzt werden.  
+> [Reservierte Instanzen (RI) für Compute](/azure/virtual-machines/windows/prepay-reserved-vm-instances) können auch für den Azure Data Explorer-Cluster genutzt werden.  
 
 In diesem Artikel werden verschiedene Compute-SKU-Optionen beschrieben, und er enthält die technischen Details, die Ihnen das Treffen der besten Wahl ermöglichen.
 
@@ -31,7 +31,7 @@ In diesem Artikel werden verschiedene Compute-SKU-Optionen beschrieben, und er e
 
 Azure Data Explorer bietet zwei Arten von Clustern:
 
-* **Produktion:** Produktionscluster enthalten zwei Knoten für Engine und Datenverwaltungscluster und werden unter dem Azure Data Explorer-[SLA](https://azure.microsoft.com/support/legal/sla/data-explorer/v1_0/) betrieben.
+* **Produktion:** Produktionscluster enthalten zwei Knoten für Engine und Datenverwaltungscluster und werden unter dem Azure Data Explorer- [SLA](https://azure.microsoft.com/support/legal/sla/data-explorer/v1_0/) betrieben.
 
 * **Dev/Test (kein SLA):** Dev/Test-Cluster verfügen über einen gemeinsamen Knoten für die Engine und den Datenverwaltungscluster. Dieser Clustertyp ist die kostengünstigste Konfiguration aufgrund seiner geringen Anzahl von Instanzen und der fehlenden Aufschlaggebühren für die Engine. Für diese Clusterkonfiguration gibt es kein SLA, da ihr die Redundanz fehlt.
 
@@ -128,4 +128,3 @@ Die technischen Spezifikationen für die Cluster-VMs von Azure Data Explorer wer
 * Sie können die Größe des Engine-Clusters abhängig von unterschiedlichen Anforderungen [ab- oder aufskalieren](manage-cluster-horizontal-scaling.md), um die Kapazität zu ändern.
 
 * Verwenden Sie die [Azure Advisor-Empfehlungen](azure-advisor.md), um Ihre Compute-SKU zu optimieren.
-

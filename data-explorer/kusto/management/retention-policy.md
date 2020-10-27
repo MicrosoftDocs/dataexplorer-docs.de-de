@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: ebbd9aa5544d97ef1e980bcb3a53f74dbde66547
-ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
+ms.openlocfilehash: 79cac49a553a2b906947b4c85948b67718641587
+ms.sourcegitcommit: ef3d919dee27c030842abf7c45c9e82e6e8350ee
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "85967535"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92630074"
 ---
 # <a name="retention-policy-command"></a>Aufbewahrungsrichtlinienbefehl
 
@@ -22,13 +22,13 @@ In diesem Artikel werden Steuerungsbefehle beschrieben, die zum Erstellen und Ä
 ## <a name="show-retention-policy"></a>Aufbewahrungs Richtlinie anzeigen
 
 ```kusto
-.show <entity_type> <database_or_table> policy retention
+.show <entity_type> <database_or_table_or_materialized_view> policy retention
 
 .show <entity_type> *  policy retention
 ```
 
-* `entity_type`: Tabelle oder Datenbank
-* `database_or_table`: `database_name` oder `database_name.table_name` oder `table_name` (im Daten Bank Kontext)
+* `entity_type` : Tabelle, materialisierte Sicht oder Datenbank
+* `database_or_table_or_materialized_view`: `database_name` oder `database_name.table_name` oder `table_name` (im Daten Bank Kontext) oder `materialized_view_name`
 
 **Beispiel**
 
@@ -45,11 +45,11 @@ Durch das Löschen der Daten Aufbewahrungs Richtlinie wird eine unbegrenzte Date
 Das Löschen der Daten Aufbewahrungs Richtlinie der Tabelle führt dazu, dass die Tabelle die Aufbewahrungs Richtlinie von der Datenbankebene ableitet.
 
 ```kusto
-.delete <entity_type> <database_or_table> policy retention
+.delete <entity_type> <database_or_table_or_materialized_view> policy retention
 ```
 
-* `entity_type`: Tabelle oder Datenbank
-* `database_or_table`: `database_name` oder `database_name.table_name` oder `table_name` (im Daten Bank Kontext)
+* `entity_type` : Tabelle, materialisierte Sicht oder Datenbank
+* `database_or_table_or_materialized_view`: `database_name` oder `database_name.table_name` oder `table_name` (im Daten Bank Kontext) oder `materialized_view_name`
 
 **Beispiel**
 
@@ -63,18 +63,18 @@ Löschen Sie die Beibehaltungs Richtlinie für die Tabelle mit dem Namen `MyTabl
 ## <a name="alter-retention-policy"></a>Aufbewahrungs Richtlinie ändern
 
 ```kusto
-.alter <entity_type> <database_or_table> policy retention <retention_policy>
+.alter <entity_type> <database_or_table_or_materialized_view> policy retention <retention_policy>
 
 .alter tables (<table_name> [, ...]) policy retention <retention_policy>
 
-.alter-merge <entity_type> <database_or_table> policy retention <retention_policy>
+.alter-merge <entity_type> <database_or_table_or_materialized_view> policy retention <retention_policy>
 
-.alter-merge <entity_type> <database_or_table_name> policy retention [softdelete = <timespan>] [recoverability = disabled|enabled]
+.alter-merge <entity_type> <database_or_table_or_materialized_view> policy retention [softdelete = <timespan>] [recoverability = disabled|enabled]
 ```
 
-* `entity_type`: Tabelle oder Datenbank
-* `database_or_table`: `database_name` oder `database_name.table_name` oder `table_name` (im Daten Bank Kontext)
-* `table_name`: Name einer Tabelle in einem Daten Bank Kontext.  Ein Platzhalter ( `*` ist hier zulässig).
+* `entity_type` : Tabelle oder Datenbank oder materialisierte Sicht
+* `database_or_table_or_materialized_view`: `database_name` oder `database_name.table_name` oder `table_name` (im Daten Bank Kontext) oder `materialized_view_name`
+* `table_name` : Name einer Tabelle in einem Daten Bank Kontext.  Ein Platzhalter ( `*` ist hier zulässig).
 * `retention_policy` :
 
 ```kusto
@@ -95,12 +95,16 @@ Legt eine Beibehaltungs Richtlinie mit einem vorläufigen Lösch Zeitraum von 10
 
 ```kusto
 .alter-merge table Table1 policy retention softdelete = 10d recoverability = disabled
+
+.alter-merge materialized-view View1 policy retention softdelete = 10d recoverability = disabled
 ```
 
 Legt eine Beibehaltungs Richtlinie mit einem vorläufigen Lösch Zeitraum von 10 Tagen fest und ermöglicht die Wiederherstellbarkeit von Daten:
 
 ```kusto
 .alter table Table1 policy retention "{\"SoftDeletePeriod\": \"10.00:00:00\", \"Recoverability\": \"Enabled\"}"
+
+.alter materialized-view View1 policy retention "{\"SoftDeletePeriod\": \"10.00:00:00\", \"Recoverability\": \"Enabled\"}"
 ```
 
 Legt die gleiche Beibehaltungs Richtlinie wie oben fest, aber dieses Mal für mehrere Tabellen (Table1, Table2 und "table3"):

@@ -7,12 +7,12 @@ ms.reviewer: guregini
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/12/2020
-ms.openlocfilehash: 0d6695ddf6923dcbf44ac3466a2388edc7618551
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: d81ed37a7502e0795fc82f38a918719a5da8db8e
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874969"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342891"
 ---
 # <a name="visualize-data-from-azure-data-explorer-in-kibana-with-the-k2bridge-open-source-connector"></a>Visualisieren von Daten aus Azure Data Explorer in Kibana mit dem Open-Source-Connector K2Bridge
 
@@ -40,7 +40,7 @@ Bevor Sie Daten aus Azure Data Explorer in Kibana visualisieren können, halten 
 
 * [Helm v3](https://github.com/helm/helm#install). Dabei handelt es sich um den Kubernetes-Paket-Manager.
 
-* AKS-Cluster (Azure Kubernetes Service) oder einen beliebigen anderen Kubernetes-Cluster. Die Versionen 1.14 bis 1.16 wurden getestet und überprüft. Wenn Sie einen AKS-Cluster benötigen, lesen Sie die Informationen zum Bereitstellen eines AKS-Clusters [mithilfe der Azure CLI](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough) oder [über das Azure-Portal](https://docs.microsoft.com/azure/aks/kubernetes-walkthrough-portal).
+* AKS-Cluster (Azure Kubernetes Service) oder einen beliebigen anderen Kubernetes-Cluster. Die Versionen 1.14 bis 1.16 wurden getestet und überprüft. Wenn Sie einen AKS-Cluster benötigen, lesen Sie die Informationen zum Bereitstellen eines AKS-Clusters [mithilfe der Azure CLI](/azure/aks/kubernetes-walkthrough) oder [über das Azure-Portal](/azure/aks/kubernetes-walkthrough-portal).
 
 * [Azure Data Explorer-Cluster](create-cluster-database-portal.md), einschließlich der URL und des Datenbanknamens des Clusters
 
@@ -48,7 +48,7 @@ Bevor Sie Daten aus Azure Data Explorer in Kibana visualisieren können, halten 
 
     Wir empfehlen die Verwendung eines Dienstprinzipals mit Anzeigeberechtigung und raten von der Verwendung höherer Berechtigungen ab. [Legen Sie die Anzeigeberechtigung des Clusters für den Azure AD-Dienstprinzipal fest](manage-database-permissions.md#manage-permissions-in-the-azure-portal).
 
-    Weitere Informationen über den Azure AD-Dienstprinzipal finden Sie unter [Erstellen eines Azure AD-Dienstprinzipals](https://docs.microsoft.com/azure/active-directory/develop/howto-create-service-principal-portal#create-an-azure-active-directory-application).
+    Weitere Informationen über den Azure AD-Dienstprinzipal finden Sie unter [Erstellen eines Azure AD-Dienstprinzipals](/azure/active-directory/develop/howto-create-service-principal-portal#create-an-azure-active-directory-application).
 
 ## <a name="run-k2bridge-on-azure-kubernetes-service-aks"></a>Ausführen von K2Bridge für Azure Kubernetes Service (AKS)
 
@@ -87,7 +87,7 @@ Standardmäßig verweist das Helm-Diagramm von K2Bridge auf ein öffentlich verf
         ADX_TENANT_ID=[SERVICE_PRINCIPAL_TENANT_ID]
         ```
 
-    1. Aktivieren Sie optional Azure Application Insights-Telemetrie. Wenn Sie Azure Application Insights zum ersten Mal verwenden, sollten Sie zunächst eine [Application Insights-Ressource erstellen](https://docs.microsoft.com/azure/azure-monitor/app/create-new-resource). [Kopieren Sie den Instrumentierungsschlüssel](https://docs.microsoft.com/azure/azure-monitor/app/create-new-resource#copy-the-instrumentation-key) in eine Variable:
+    1. Aktivieren Sie optional Azure Application Insights-Telemetrie. Wenn Sie Azure Application Insights zum ersten Mal verwenden, sollten Sie zunächst eine [Application Insights-Ressource erstellen](/azure/azure-monitor/app/create-new-resource). [Kopieren Sie den Instrumentierungsschlüssel](/azure/azure-monitor/app/create-new-resource#copy-the-instrumentation-key) in eine Variable:
 
         ```bash
         APPLICATION_INSIGHTS_KEY=[INSTRUMENTATION_KEY]
@@ -118,7 +118,7 @@ Standardmäßig verweist das Helm-Diagramm von K2Bridge auf ein öffentlich verf
 
     1. Machen Sie Kibana für Benutzer verfügbar. Dazu gibt es mehrere Möglichkeiten. Die von Ihnen verwendete Methode hängt weitgehend von Ihrem Anwendungsfall ab.
 
-        Beispielsweise können Sie den Dienst als Load Balancer-Dienst verfügbar machen. Fügen Sie dazu dem oben verwendeten [Installationsbefehl (**install**) von Kibana Helm](#install-kibana-service) den Parameter **--set service.type=LoadBalancer** hinzu.
+        Beispielsweise können Sie den Dienst als Load Balancer-Dienst verfügbar machen. Fügen Sie dazu dem oben verwendeten [Installationsbefehl ( **install** ) von Kibana Helm](#install-kibana-service) den Parameter **--set service.type=LoadBalancer** hinzu.
 
         Führen Sie dann den folgenden Befehl aus:
 
@@ -165,7 +165,7 @@ Wenn Azure Data Explorer als Datenquelle für Kibana konfiguriert ist, können S
 
    ![Ein erweiterter Datensatz](media/k2bridge/k2bridge-expand-record.png)
 
-1. Die Ergebnistabelle enthält standardmäßig die Spalte **_source**. Sie enthält außerdem die Spalte **Time**, falls ein Zeitfeld vorhanden ist. Sie können der Ergebnistabelle bestimmte Spalten hinzufügen, indem Sie im Bereich ganz links neben dem Feldnamen die Option **add** (Hinzufügen) auswählen.
+1. Die Ergebnistabelle enthält standardmäßig die Spalte **_source** . Sie enthält außerdem die Spalte **Time** , falls ein Zeitfeld vorhanden ist. Sie können der Ergebnistabelle bestimmte Spalten hinzufügen, indem Sie im Bereich ganz links neben dem Feldnamen die Option **add** (Hinzufügen) auswählen.
 
    ![Bestimmte Spalten mit hervorgehobener Schaltfläche „add“ (Hinzufügen)](media/k2bridge/k2bridge-specific-columns.png)
 
@@ -175,7 +175,7 @@ Wenn Azure Data Explorer als Datenquelle für Kibana konfiguriert ist, können S
     * Verwenden der Lucene-Abfragesyntax Beispiel:
         * Suchen Sie nach „Fehler“, um alle Datensätze zu finden, die diesen Wert enthalten.
         * Suchen Sie nach „Status: 200“, um alle Datensätze mit dem Statuswert 200 abzurufen.
-    * Verwenden der logischen Operatoren **AND**, **OR** und **NOT**
+    * Verwenden der logischen Operatoren **AND** , **OR** und **NOT**
     * Verwenden der Platzhalterzeichen Sternchen (\*) und Fragezeichen (?). Beispiel: Die Abfrage „destination_city: L*“ entspricht Datensätzen, bei denen der Wert des Zielorts mit „L“ oder „l“ beginnt. (Bei K2Bridge wird keine Groß-/Kleinschreibung beachtet.)
 
     ![Ausführen einer Abfrage](media/k2bridge/k2bridge-run-query.png)

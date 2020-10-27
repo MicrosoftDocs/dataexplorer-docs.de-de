@@ -7,12 +7,12 @@ ms.reviewer: toleibov
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/11/2020
-ms.openlocfilehash: e89ce6f77545b4f0b42cbb3d792edd5ceeb0ed34
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 4949190befdc8adcec9f8115305a2a403994395f
+ms.sourcegitcommit: 88291fd9cebc26e5210463cb95be5540bf84eef8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874669"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92437403"
 ---
 # <a name="enable-infrastructure-encryption-double-encryption-during-cluster-creation-in-azure-data-explorer"></a>Aktivieren der Infrastrukturverschlüsselung (doppelte Verschlüsselung) während der Clustererstellung in Azure Data Explorer
   
@@ -21,7 +21,6 @@ Wenn Sie einen Cluster erstellen, wird der zugehörige Speicher [automatisch auf
 > [!IMPORTANT]
 > * Das Aktivieren der doppelten Verschlüsselung ist nur während der Clustererstellung möglich.
 > * Sobald die Infrastrukturverschlüsselung für Ihren Cluster aktiviert ist, können Sie sie **nicht** mehr deaktivieren.
-> * Die doppelte Verschlüsselung ist nur in Regionen verfügbar, in denen die Infrastrukturverschlüsselung unterstützt wird. Weitere Informationen finden Sie unter [Erstellen eines Speicherkontos mit aktivierter Infrastrukturverschlüsselung für die doppelte Datenverschlüsselung](/azure/storage/common/infrastructure-encryption-enable).
 
 # <a name="azure-portal"></a>[Azure-Portal](#tab/portal)
 

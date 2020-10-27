@@ -7,12 +7,12 @@ ms.reviewer: dorcohen
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/25/2020
-ms.openlocfilehash: 7c40d6b1f62014e8ede6ed3328dd3a3974d41a88
-ms.sourcegitcommit: c2ab3176db4dd55ac9ca8eee52bbd24096d1277f
+ms.openlocfilehash: 72d092683b490c7b58335abc59fd5e3aea2f3e26
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90740302"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342942"
 ---
 # <a name="azure-data-explorer-connector-to-power-automate-preview"></a>Azure Data Explorer-Connector für Power Automate (Vorschauversion)
 
@@ -40,7 +40,7 @@ Weitere Informationen finden Sie unter [Anwendungsbeispiele für den Azure Data 
 Sie können sich mit Benutzeranmeldeinformationen oder mit einer Azure Active Directory-Anwendung (Azure AD) authentifizieren.
 
 > [!Note]
-> Stellen Sie sicher, dass Ihre Anwendung eine [Azure AD-Anwendung](kusto/management/access-control/how-to-provision-aad-app.md) und zudem berechtigt ist, Abfragen in Ihrem Cluster auszuführen.
+> Stellen Sie sicher, dass Ihre Anwendung eine [Azure AD-Anwendung](./provision-azure-ad-app.md) und zudem berechtigt ist, Abfragen in Ihrem Cluster auszuführen.
 
 1. Wählen Sie unter **Steuerungsbefehl ausführen und Ergebnisse visualisieren** die drei Punkte oben rechts im Flow-Connector aus.
 
@@ -149,7 +149,7 @@ Sie können einen Schritt in einen beliebigen Flow einbeziehen, um Berichte per 
 1. Geben Sie die E-Mail-Adresse ein, an die der E-Mail-Bericht gesendet werden soll.
 1. Geben Sie den Betreff der E-Mail ein.
 1. Wählen Sie **Codeansicht** aus.
-1. Platzieren Sie den Cursor in das Feld **Text**, und wählen Sie **Dynamischen Inhalt hinzufügen** aus.
+1. Platzieren Sie den Cursor in das Feld **Text** , und wählen Sie **Dynamischen Inhalt hinzufügen** aus.
 1. Wählen Sie **BodyHtml** aus.
     ![Screenshot: Dialogfeld „E-Mail senden“ mit hervorgehobenen Optionen „Text“ und „BodyHtml“](./media/flow/flow-send-email.png)
 1. Wählen Sie **Erweiterte Optionen anzeigen** aus.

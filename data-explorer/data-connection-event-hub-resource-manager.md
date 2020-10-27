@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 11/28/2019
-ms.openlocfilehash: 3a17d9e63f0e6803b6950d39ccd58183d44bb51e
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 988ace99e8671de229f9bdf796260e64f9d36932
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873575"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92342993"
 ---
 # <a name="create-an-event-hub-data-connection-for-azure-data-explorer-by-using-azure-resource-manager-template"></a>Erstellen einer Event Hub-Datenverbindung für Azure Data Explorer mit einer Azure Resource Manager-Vorlage
 
@@ -30,7 +30,7 @@ In diesem Artikel erstellen Sie eine Event Hub-Datenverbindung für Azure Data E
 * Wenn Sie über kein Azure-Abonnement verfügen, können Sie ein [kostenloses Azure-Konto](https://azure.microsoft.com/free/) erstellen, bevor Sie beginnen.
 * Erstellen eines [Clusters und einer Datenbank](create-cluster-database-portal.md)
 * Erstellen einer [Tabellen- und Spaltenzuordnung](ingest-data-event-hub.md#create-a-target-table-in-azure-data-explorer)
-* Erstellen eines [Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-create)
+* Erstellen eines [Event Hubs](/azure/event-hubs/event-hubs-create)
 
 ## <a name="azure-resource-manager-template-for-adding-an-event-hub-data-connection"></a>Azure Resource Manager-Vorlage zum Hinzufügen einer Event Hub-Datenverbindung
 

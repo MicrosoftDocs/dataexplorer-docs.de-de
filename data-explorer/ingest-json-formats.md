@@ -7,16 +7,16 @@ ms.reviewer: kerend
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 05/19/2020
-ms.openlocfilehash: 711ea8d819fbf8fc66c792a51c0ddc3844647a5e
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: f599698f4b35075aaec4ff3789fa9036c40d8c17
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874748"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343231"
 ---
 # <a name="ingest-json-formatted-sample-data-into-azure-data-explorer"></a>Erfassen von Beispieldaten im JSON-Format in Azure Data Explorer
 
-In diesem Artikel wird das Erfassen von Daten im JSON-Format in einer Azure Data Explorer-Datenbank veranschaulicht. Sie beginnen mit einfachen Beispielen für unformatierten und zugeordneten JSON-Code, fahren dann mit mehrzeiligem JSON-Code fort und beschäftigen sich schließlich mit komplexeren JSON-Schemas, die Arrays und Wörterbücher enthalten.  Anhand der Beispiele wird der Prozess zur Erfassung von Daten im JSON-Format per Kusto-Abfragesprache (KQL), C# oder Python ausführlich beschrieben. Die `ingest`-Steuerbefehle der Kusto-Abfragesprache werden direkt für den Endpunkt der Engine ausgeführt. In Produktionsszenarien wird die Erfassung für den Datenverwaltungsdienst ausgeführt, indem Clientbibliotheken oder Datenverbindungen verwendet werden. Informationen zur exemplarischen Vorgehensweise bei der Erfassung von Daten mit diesen Clientbibliotheken finden Sie unter [Erfassen von Daten mit der Azure Data Explorer-Bibliothek für Python](python-ingest-data.md) und [Erfassen von Daten mit dem .NET Standard SDK für Azure Data Explorer](net-standard-ingest-data.md).
+In diesem Artikel wird das Erfassen von Daten im JSON-Format in einer Azure Data Explorer-Datenbank veranschaulicht. Sie beginnen mit einfachen Beispielen für unformatierten und zugeordneten JSON-Code, fahren dann mit mehrzeiligem JSON-Code fort und beschäftigen sich schließlich mit komplexeren JSON-Schemas, die Arrays und Wörterbücher enthalten.  Anhand der Beispiele wird der Prozess zur Erfassung von Daten im JSON-Format per Kusto-Abfragesprache (KQL), C# oder Python ausführlich beschrieben. Die `ingest`-Steuerbefehle der Kusto-Abfragesprache werden direkt für den Endpunkt der Engine ausgeführt. In Produktionsszenarien wird die Erfassung für den Datenverwaltungsdienst ausgeführt, indem Clientbibliotheken oder Datenverbindungen verwendet werden. Informationen zur exemplarischen Vorgehensweise bei der Erfassung von Daten mit diesen Clientbibliotheken finden Sie unter [Erfassen von Daten mit der Azure Data Explorer-Bibliothek für Python](python-ingest-data.md) und [Erfassen von Daten mit dem .NET Standard SDK für Azure Data Explorer](./net-sdk-ingest-data.md).
 
 ## <a name="prerequisites"></a>Voraussetzungen
 

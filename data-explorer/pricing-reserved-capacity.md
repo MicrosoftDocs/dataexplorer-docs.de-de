@@ -7,12 +7,12 @@ ms.reviewer: avnera
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 11/03/2019
-ms.openlocfilehash: e954b66c59e480d7fc713841e9a029da61dabd8f
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.openlocfilehash: aefbde03b123e9c5413b1ed39e85db096f3ff3d7
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87350535"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343452"
 ---
 # <a name="prepay-for-azure-data-explorer-markup-units-with-azure-data-explorer-reserved-capacity"></a>Vorauszahlen für Azure Data Explorer-Markupeinheiten mit reservierter Azure Data Explorer-Kapazität
 
@@ -44,9 +44,9 @@ Die Reservierungsgröße sollte auf der Gesamtanzahl der Azure Data Explorer-Mar
 
     ![Kaufseite](media/pricing-reserved-capacity/purchase-page.png)
 
-1. Überprüfen Sie die Kosten für die Reservierung von Azure Data Explorer-Kapazität im Abschnitt **Kosten**.
-1. Wählen Sie die Option **Kaufen**.
-1. Klicken Sie auf **Diese Reservierung anzeigen**, um den Status des Einkaufs anzuzeigen.
+1. Überprüfen Sie die Kosten für die Reservierung von Azure Data Explorer-Kapazität im Abschnitt **Kosten** .
+1. Wählen Sie die Option **Kaufen** .
+1. Klicken Sie auf **Diese Reservierung anzeigen** , um den Status des Einkaufs anzuzeigen.
 
 ## <a name="cancellations-and-exchanges"></a>Stornierungen und Umtausch
 
@@ -74,7 +74,7 @@ Weitere Informationen zu Azure-Reservierungen finden Sie in den folgenden Artike
 * [Grundlegendes zum Rabatt für Azure-Reservierungen](/azure/cost-management-billing/reservations/understand-reservation-charges)
 * [Grundlegendes zur Nutzung von Azure-Reservierungen für das Abonnement mit nutzungsbasierter Bezahlung](/azure/cost-management-billing/reservations/understand-reserved-instance-usage)
 * [Grundlegendes zur Nutzung von Azure-Reservierungen für den Konzernbeitritt](/azure/cost-management-billing/reservations/understand-reserved-instance-usage-ea)
-* [Verkaufen Microsoft Azure Reserved Instances](https://docs.microsoft.com/partner-center/azure-reservations)
+* [Verkaufen Microsoft Azure Reserved Instances](/partner-center/azure-reservations)
 
 ## <a name="need-help-contact-us"></a>Sie brauchen Hilfe? Kontakt
 

@@ -7,12 +7,12 @@ ms.reviewer: vladikb
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 07/07/2020
-ms.openlocfilehash: c6a544228d5527f1703567256bd3e824ddc0504a
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 56fd2d253cac80f097caa9206cd3b7c2a9d3c118
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872708"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343503"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-net-sdk"></a>Erfassen von Daten mit dem .NET SDK für Azure Data Explorer 
 
@@ -22,7 +22,7 @@ ms.locfileid: "88872708"
 > * [Node](node-ingest-data.md)
 > * [Go](go-ingest-data.md)
 
-Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Er bietet zwei Clientbibliotheken für .NET: eine [Erfassungsbibliothek](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Ingest/) und eine [Datenbibliothek](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Data/). Weitere Informationen zum .NET SDK finden Sie unter [Über .NET SDK](/azure/data-explorer/kusto/api/netfx/about-the-sdk).
+Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Er bietet zwei Clientbibliotheken für .NET: eine [Erfassungsbibliothek](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Ingest/) und eine [Datenbibliothek](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Data/). Weitere Informationen zum .NET SDK finden Sie unter [Über .NET SDK](./kusto/api/netfx/about-the-sdk.md).
 Mit diesen Bibliotheken können Sie über Ihren Code Daten in einem Cluster erfassen (laden) und Daten abfragen. In diesem Artikel erstellen Sie zunächst eine Tabelle und eine Datenzuordnung in einem Testcluster. Anschließend stellen Sie die Erfassung im Cluster in eine Warteschlange und überprüfen die Ergebnisse.
 
 ## <a name="prerequisites"></a>Voraussetzungen
@@ -75,7 +75,7 @@ var kustoConnectionStringBuilder = new KustoConnectionStringBuilder(kustoUri).Wi
 
 ## <a name="set-source-file-information"></a>Festlegen der Informationen zur Quelldatei
 
-Legen Sie den Pfad für die Quelldatei fest. In diesem Beispiel wird eine Beispieldatei verwendet, die in Azure Blob Storage gehostet wird. Das **StormEvents**-Beispieldataset enthält wetterbezogene Daten der [National Centers for Environmental Information](https://www.ncdc.noaa.gov/stormevents/).
+Legen Sie den Pfad für die Quelldatei fest. In diesem Beispiel wird eine Beispieldatei verwendet, die in Azure Blob Storage gehostet wird. Das **StormEvents** -Beispieldataset enthält wetterbezogene Daten der [National Centers for Environmental Information](https://www.ncdc.noaa.gov/stormevents/).
 
 ```csharp
 var blobPath = "https://kustosamplefiles.blob.core.windows.net/samplefiles/StormEvents.csv?st=2018-08-31T22%3A02%3A25Z&se=2020-09-01T22%3A02%3A00Z&sp=r&sv=2018-03-28&sr=b&sig=LQIbomcKI8Ooz425hWtjeq6d61uEaq21UVX7YrM61N4%3D";
