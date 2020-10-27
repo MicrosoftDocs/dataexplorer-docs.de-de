@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: tutorial
 ms.date: 04/07/2019
-ms.openlocfilehash: a7a964f8bb022885c6ac3bc4828469031987b162
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: f6d993383ecf6c25bf144228e77f02f944bc02d8
+ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872623"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92343333"
 ---
 # <a name="write-queries-for-azure-data-explorer"></a>Schreiben von Abfragen für den Azure-Daten-Explorer
 
@@ -55,7 +55,7 @@ In diesem Fall ist das Ergebnis:
 |   23|
 | |
 
-Weitere Informationen finden Sie in der [Referenz zur Abfragesprache](https://aka.ms/kustolangref).
+Weitere Informationen finden Sie in der [Referenz zur Abfragesprache](./kusto/query/index.md).
 
 ## <a name="most-common-operators"></a>Die gängigsten Operatoren
 
@@ -85,7 +85,7 @@ StormEvents | count
 
 [**take**](kusto/query/takeoperator.md): Gibt maximal die angegebene Anzahl von Zeilen zurück.
 
-Die folgende Abfrage gibt fünf Zeilen aus der Tabelle „StormEvents“ zurück. Das Schlüsselwort *limit* ist ein Alias für *take*.
+Die folgende Abfrage gibt fünf Zeilen aus der Tabelle „StormEvents“ zurück. Das Schlüsselwort *limit* ist ein Alias für *take* .
 
 **\[** [**Zum Ausführen der Abfrage klicken**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSspVqhRKEnMTlUwBQDEz2b8FAAAAA%3d%3d) **\]**
 
@@ -190,9 +190,9 @@ StormEvents
 | summarize event_count = count() by State
 ```
 
-Der **summarize**-Operator gruppiert Zeilen, die denselben Wert in der **by**-Klausel haben, und verwendet dann die Aggregationsfunktion (z. B. **count**), um jeder Gruppe zu einer einzelnen Zeile zu kombinieren. In diesem Fall gibt es also für jeden Bundesstaat eine Zeile und eine Spalte für die Anzahl der Zeilen in diesem Bundesstaat.
+Der **summarize** -Operator gruppiert Zeilen, die denselben Wert in der **by** -Klausel haben, und verwendet dann die Aggregationsfunktion (z. B. **count** ), um jeder Gruppe zu einer einzelnen Zeile zu kombinieren. In diesem Fall gibt es also für jeden Bundesstaat eine Zeile und eine Spalte für die Anzahl der Zeilen in diesem Bundesstaat.
 
-Es gibt eine Reihe von Aggregationsfunktionen, und Sie können mehrere davon in einem **summarize**-Operator verwenden, um mehrere berechnete Spalten zu erzeugen. Beispielsweise könnten Sie die Anzahl der Stürme in jedem Bundesstaat abrufen sowie die eindeutige Anzahl der Stürme pro Bundesstaat und anschließend **top** verwenden, um die am meisten von Stürmen betroffenen Bundesstaaten zu erhalten.
+Es gibt eine Reihe von Aggregationsfunktionen, und Sie können mehrere davon in einem **summarize** -Operator verwenden, um mehrere berechnete Spalten zu erzeugen. Beispielsweise könnten Sie die Anzahl der Stürme in jedem Bundesstaat abrufen sowie die eindeutige Anzahl der Stürme pro Bundesstaat und anschließend **top** verwenden, um die am meisten von Stürmen betroffenen Bundesstaaten zu erhalten.
 
 **\[** [**Zum Ausführen der Abfrage klicken**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSguzc1NLMqsSlUIBkk455fmlSjYKiSDaA1NHYWQyoJU%2fzSwXDFQPAUiAdYPktJUSKoE6kwsSQUZVpJfoGAKEYGblZJanAwAgbFb73QAAAA%3d) **\]**
 
@@ -202,7 +202,7 @@ StormEvents
 | top 5 by StormCount desc
 ```
 
-Das Ergebnis eines **summarize**-Vorgangs enthält:
+Das Ergebnis eines **summarize** -Vorgangs enthält:
 
 - jede in **by** genannte Spalte
 
@@ -262,7 +262,7 @@ StormEvents
 ```
 
 > [!NOTE]
-> Der **render**-Operator ist eher eine clientseitige Funktion als Teil der Engine. Er wurde aus Gründen der Bedienfreundlichkeit in die Sprache integriert. Die Webanwendung unterstützt die folgenden Optionen: Balkendiagramm, Säulendiagramm, Kreisdiagramm, Zeitdiagramm und Liniendiagramm. 
+> Der **render** -Operator ist eher eine clientseitige Funktion als Teil der Engine. Er wurde aus Gründen der Bedienfreundlichkeit in die Sprache integriert. Die Webanwendung unterstützt die folgenden Optionen: Balkendiagramm, Säulendiagramm, Kreisdiagramm, Zeitdiagramm und Liniendiagramm. 
 
 ## <a name="scalar-operators"></a>Skalar-Operatoren
 
@@ -270,7 +270,7 @@ In diesem Abschnitt werden einige der wichtigsten Skalar-Operatoren behandelt.
 
 ### <a name="bin"></a>bin()
 
-[**bin()** ](kusto/query/binfunction.md): Rundet Werte auf eine ganze Zahl ab, die ein Vielfaches der angegebenen bin-Größe ist.
+[**bin()**](kusto/query/binfunction.md): Rundet Werte auf eine ganze Zahl ab, die ein Vielfaches der angegebenen bin-Größe ist.
 
 Die folgende Abfrage berechnet die Anzahl mit einer Bucketgröße von einem Tag.
 
@@ -284,7 +284,7 @@ StormEvents
 
 ### <a name="case"></a>case()
 
-[**case()** ](kusto/query/casefunction.md): Wertet eine Liste von Prädikaten aus und gibt den ersten Ergebnisausdruck zurück, dessen Prädikat erfüllt ist, oder den endgültigen Ausdruck **else**. Sie können mit diesem Operator Daten kategorisieren oder gruppieren:
+[**case()**](kusto/query/casefunction.md): Wertet eine Liste von Prädikaten aus und gibt den ersten Ergebnisausdruck zurück, dessen Prädikat erfüllt ist, oder den endgültigen Ausdruck **else** . Sie können mit diesem Operator Daten kategorisieren oder gruppieren:
 
 Die folgende Abfrage gibt eine neue Spalte `deaths_bucket` zurück und gruppiert die Todesfälle nach Anzahl.
 
@@ -303,7 +303,7 @@ StormEvents
 
 ### <a name="extract"></a>extract()
 
-[**extract()** ](kusto/query/extractfunction.md): Ruft eine Übereinstimmung für einen regulären Ausdruck aus einer Textzeichenfolge ab.
+[**extract()**](kusto/query/extractfunction.md): Ruft eine Übereinstimmung für einen regulären Ausdruck aus einer Textzeichenfolge ab.
 
 Die folgende Abfrage extrahiert bestimmte Attributwerte aus einer Ablaufverfolgung.
 
@@ -315,11 +315,11 @@ MyData
 | extend Duration = extract("Duration=([0-9.]+)", 1, Trace, typeof(real)) * time(1s)
 ```
 
-Diese Abfrage verwendet eine **let**-Anweisung, die einen Namen (in diesem Fall `MyData`) an einen Ausdruck bindet. Im restlichen Gültigkeitsbereichs, in dem die **let**-Anweisung vorkommt (globaler Gültigkeitsbereich oder im Gültigkeitsbereich eines Funktionskörpers), kann der Name verwendet werden, um auf seine gebundenen Wert zu verweisen.
+Diese Abfrage verwendet eine **let** -Anweisung, die einen Namen (in diesem Fall `MyData`) an einen Ausdruck bindet. Im restlichen Gültigkeitsbereichs, in dem die **let** -Anweisung vorkommt (globaler Gültigkeitsbereich oder im Gültigkeitsbereich eines Funktionskörpers), kann der Name verwendet werden, um auf seine gebundenen Wert zu verweisen.
 
 ### <a name="parse_json"></a>parse_json()
 
-[**parse_json()** ](kusto/query/parsejsonfunction.md): Interpretiert eine Zeichenfolge als JSON-Wert und gibt den Wert als dynamischen Datentyp zurück. Diese ist der Nutzung der **extractjson()** -Funktion vorzuziehen, wenn Sie mehrere Elemente eines zusammengesetzten JSON-Objekts extrahieren müssen.
+[**parse_json()**](kusto/query/parsejsonfunction.md): Interpretiert eine Zeichenfolge als JSON-Wert und gibt den Wert als dynamischen Datentyp zurück. Diese ist der Nutzung der **extractjson()** -Funktion vorzuziehen, wenn Sie mehrere Elemente eines zusammengesetzten JSON-Objekts extrahieren müssen.
 
 Die folgende Abfrage extrahiert die JSON-Elemente aus einem Array.
 
@@ -357,7 +357,7 @@ MyData
 
 ### <a name="ago"></a>ago()
 
-[**ago()** ](kusto/query/agofunction.md): Subtrahiert den angegebenen Zeitraum von der aktuellen UTC-Uhrzeit.
+[**ago()**](kusto/query/agofunction.md): Subtrahiert den angegebenen Zeitraum von der aktuellen UTC-Uhrzeit.
 
 Die folgende Abfrage gibt Daten für die letzten 12 Stunden zurück.
 
@@ -373,7 +373,7 @@ print TimeStamp= range(now(-5d), now(), 1h), SomeCounter = range(1,121)
 
 ### <a name="startofweek"></a>startofweek()
 
-[**startofweek()** ](kusto/query/startofweekfunction.md): Gibt den Beginn der Woche zurück, einschließlich Datum, verschoben um einen Offset, falls angegeben.
+[**startofweek()**](kusto/query/startofweekfunction.md): Gibt den Beginn der Woche zurück, einschließlich Datum, verschoben um einen Offset, falls angegeben.
 
 Die folgende Abfrage gibt den Beginn der Woche mit verschiedenen Offsets zurück.
 
@@ -384,11 +384,11 @@ range offset from -1 to 1 step 1
 | project weekStart = startofweek(now(), offset),offset
 ```
 
-Diese Abfrage verwendet den **range**-Operator, der eine einspaltige Tabelle mit Werten erzeugt. Siehe auch: [**startofday()** ](kusto/query/startofdayfunction.md), [**startofweek()** ](kusto/query/startofweekfunction.md), [**startofyear()** ](kusto/query/startofyearfunction.md)), [**startofmonth()** ](kusto/query/startofmonthfunction.md), [**endofday()** ](kusto/query/endofdayfunction.md), [**endofweek()** ](kusto/query/endofweekfunction.md), [**endofmonth()** ](kusto/query/endofmonthfunction.md), and [**endofyear()** ](kusto/query/endofyearfunction.md).
+Diese Abfrage verwendet den **range** -Operator, der eine einspaltige Tabelle mit Werten erzeugt. Siehe auch: [**startofday()**](kusto/query/startofdayfunction.md), [**startofweek()**](kusto/query/startofweekfunction.md), [**startofyear()**](kusto/query/startofyearfunction.md)), [**startofmonth()**](kusto/query/startofmonthfunction.md), [**endofday()**](kusto/query/endofdayfunction.md), [**endofweek()**](kusto/query/endofweekfunction.md), [**endofmonth()**](kusto/query/endofmonthfunction.md), and [**endofyear()**](kusto/query/endofyearfunction.md).
 
 ### <a name="between"></a>between()
 
-[**between()** ](kusto/query/betweenoperator.md): Gleicht die Eingabe ab, die innerhalb des inklusiven Bereichs liegt.
+[**between()**](kusto/query/betweenoperator.md): Gleicht die Eingabe ab, die innerhalb des inklusiven Bereichs liegt.
 
 Die folgende Abfrage filtert die Daten nach einem angegebenen Datumsbereich.
 
@@ -412,7 +412,7 @@ StormEvents
 
 ## <a name="tabular-operators"></a>Tabellarische Operatoren
 
-Kusto verfügt über viele tabellarische Operatoren, von denen einige in anderen Abschnitten dieses Artikels behandelt werden. Hier konzentrieren wir uns auf **parse**. 
+Kusto verfügt über viele tabellarische Operatoren, von denen einige in anderen Abschnitten dieses Artikels behandelt werden. Hier konzentrieren wir uns auf **parse** . 
 
 ### <a name="parse"></a>parse
 
@@ -542,7 +542,7 @@ StormEvents
 
 ### <a name="dcount"></a>dcount()
 
-[**dcount()** ](kusto/query/dcount-aggfunction.md): Gibt eine Schätzung der Anzahl unterschiedlicher Werte eines Ausdrucks in der Gruppe zurück. Sie können [**count()** ](kusto/query/countoperator.md) verwenden, um alle Werte zu zählen.
+[**dcount()**](kusto/query/dcount-aggfunction.md): Gibt eine Schätzung der Anzahl unterschiedlicher Werte eines Ausdrucks in der Gruppe zurück. Sie können [**count()**](kusto/query/countoperator.md) verwenden, um alle Werte zu zählen.
 
 Die folgende Abfrage zählt unterschiedliche `Source` nach `State`.
 
@@ -555,7 +555,7 @@ StormEvents
 
 ### <a name="dcountif"></a>dcountif()
 
-[**dcountif()** ](kusto/query/dcountif-aggfunction.md): Gibt eine Schätzung der Anzahl unterschiedlicher Werte des Ausdrucks für Zeilen zurück, bei denen das Prädikat zu „wahr“ ausgewertet wird.
+[**dcountif()**](kusto/query/dcountif-aggfunction.md): Gibt eine Schätzung der Anzahl unterschiedlicher Werte des Ausdrucks für Zeilen zurück, bei denen das Prädikat zu „wahr“ ausgewertet wird.
 
 Die folgende Abfrage zählt die unterschiedliche Werte von `Source`, mit `DamageProperty < 5000`.
 
@@ -569,7 +569,7 @@ StormEvents
 
 ### <a name="dcount_hll"></a>dcount_hll()
 
-[**dcount_hll()** ](kusto/query/dcount-hllfunction.md): Berechnet **Dcount** anhand von HyperLogLog-Ergebnissen (generiert von [**hll**](kusto/query/hll-aggfunction.md) oder [**hll_merge**](kusto/query/hll-merge-aggfunction.md).
+[**dcount_hll()**](kusto/query/dcount-hllfunction.md): Berechnet **Dcount** anhand von HyperLogLog-Ergebnissen (generiert von [**hll**](kusto/query/hll-aggfunction.md) oder [**hll_merge**](kusto/query/hll-merge-aggfunction.md).
 
 Die folgende Abfrage verwendet den HLL-Algorithmus, um die Anzahl zu generieren.
 
@@ -584,7 +584,7 @@ StormEvents
 
 ### <a name="arg_max"></a>arg_max()
 
-[**arg_max()** ](kusto/query/arg-max-aggfunction.md): Findet eine Zeile in der Gruppe, die einen Ausdruck maximiert, und gibt den Wert eines anderen Ausdrucks zurück (oder „*“, um die gesamte Zeile zurückzugeben).
+[**arg_max()**](kusto/query/arg-max-aggfunction.md): Findet eine Zeile in der Gruppe, die einen Ausdruck maximiert, und gibt den Wert eines anderen Ausdrucks zurück (oder „*“, um die gesamte Zeile zurückzugeben).
 
 Die folgende Abfrage gibt die Zeit des letzten Flutberichts in jedem Bundesstaat zurück.
 
@@ -599,7 +599,7 @@ StormEvents
 
 ### <a name="makeset"></a>makeset()
 
-[**makeset()** ](kusto/query/makeset-aggfunction.md): Gibt ein dynamisches (JSON-) Array der Gruppe unterschiedlicher Werte zurück, die ein Ausdruck in der Gruppe verwendet.
+[**makeset()**](kusto/query/makeset-aggfunction.md): Gibt ein dynamisches (JSON-) Array der Gruppe unterschiedlicher Werte zurück, die ein Ausdruck in der Gruppe verwendet.
 
 Die folgende Abfrage gibt alle Zeiten zurück, zu denen eine Flut von jedem Bundesstaat gemeldet wurde, und erstellt ein Array aus der Gruppe der unterschiedlichen Werte.
 
@@ -616,7 +616,7 @@ StormEvents
 
 [**mv-expand**](kusto/query/mvexpandoperator.md): Erweitert mehrwertige Sammlungen aus einer Spalte des Typs „dynamisch“, sodass jeder Wert in der Sammlung eine gesonderte Zeile erhält. Alle anderen Spalten in einer erweiterten Zeile werden dupliziert. Ist das Gegenteil von makelist.
 
-Die folgende Abfrage generiert die Beispieldaten, indem ein Satz erstellt wird, der dann zur Veranschaulichung der **mv-expand**-Funktionen verwendet wird.
+Die folgende Abfrage generiert die Beispieldaten, indem ein Satz erstellt wird, der dann zur Veranschaulichung der **mv-expand** -Funktionen verwendet wird.
 
 **\[** [**Zum Ausführen der Abfrage klicken**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAFWOQQ6CQAxF9yTcoWGliTcws1MPIFygyk9EKTPpVBTj4Z2BjSz%2f738v7WF06r1vD2xcp%2bCoNq9yHDFYLIsvvW5Q0JybKYCco2omqnyNTxHW7oPFckbwajFZhB%2bIsE1trNZ0gi1dpuRmQ%2baC%2bjuuthS7Fbwvi%2f%2bP8lpGvAMP7Wr3A6BceSu7AAAA) **\]**
 
@@ -631,7 +631,7 @@ FloodDataSet
 
 ### <a name="percentiles"></a>percentiles()
 
-[**percentiles()** ](kusto/query/percentiles-aggfunction.md): Gibt eine Schätzung für den angegebenen [**nächsten Perzentilrang**](kusto/query/percentiles-aggfunction.md) der durch einen Ausdruck definierten Grundgesamtheit. Die Genauigkeit hängt von der Bevölkerungsdichte in der Region des Perzentils ab. Kann nur im Kontext der Aggregation in [**summarize**](kusto/query/summarizeoperator.md) verwendet werden.
+[**percentiles()**](kusto/query/percentiles-aggfunction.md): Gibt eine Schätzung für den angegebenen [**nächsten Perzentilrang**](kusto/query/percentiles-aggfunction.md) der durch einen Ausdruck definierten Grundgesamtheit. Die Genauigkeit hängt von der Bevölkerungsdichte in der Region des Perzentils ab. Kann nur im Kontext der Aggregation in [**summarize**](kusto/query/summarizeoperator.md) verwendet werden.
 
 Die folgende Abfrage berechnet Perzentile für die Sturmdauer.
 
@@ -664,7 +664,7 @@ In diesem Abschnitt werden Elemente behandelt, mit denen Sie komplexere Abfragen
 
 ### <a name="let"></a>let
 
-[**let**](kusto/query/letstatement.md): Verbessert die Modularität und Wiederverwendbarkeit. Die **let**-Anweisung gestattet es Ihnen, einen potenziell komplexen Ausdruck in mehrere Teile aufzuteilen, von denen jeder an einen Namen gebunden ist, und diese Teilen dann zu kombinieren. Eine **let**-Anweisung kann auch verwendet werden, um benutzerdefinierte Funktionen und Sichten (Ausdrücke über Tabellen, deren Ergebnisse wie eine neue Tabelle aussehen) zu erstellen. Durch eine **let**-Anweisung gebundene Ausdrücke können vom Typ „Skalar“, „Tabelle“ oder benutzerdefinierte Funktionen (Lambdas) sein.
+[**let**](kusto/query/letstatement.md): Verbessert die Modularität und Wiederverwendbarkeit. Die **let** -Anweisung gestattet es Ihnen, einen potenziell komplexen Ausdruck in mehrere Teile aufzuteilen, von denen jeder an einen Namen gebunden ist, und diese Teilen dann zu kombinieren. Eine **let** -Anweisung kann auch verwendet werden, um benutzerdefinierte Funktionen und Sichten (Ausdrücke über Tabellen, deren Ergebnisse wie eine neue Tabelle aussehen) zu erstellen. Durch eine **let** -Anweisung gebundene Ausdrücke können vom Typ „Skalar“, „Tabelle“ oder benutzerdefinierte Funktionen (Lambdas) sein.
 
 Im folgenden Beispiel wird eine Variable vom Typ „Tabelle“ erstellt, die diese dann in einem nachfolgenden Ausdruck verwendet.
 
@@ -684,7 +684,7 @@ LightningStorms
 
 ### <a name="join"></a>join
 
-[**join**](kusto/query/joinoperator.md): Führt die Zeilen zweier Tabellen zusammen, um eine neue Tabelle zu erzeugen, indem Werte aus den angegebenen Spalten aus beiden Tabellen zugeordnet werden. Kusto unterstützt eine umfangreiche Zahl von Join-Typen (Verknüpfungen): **fullouter**, **inner**, **innerunique**, **leftanti**, **leftantisemi**, **leftouter**, **leftsemi**, **rightanti**, **rightantisemi**, **rightouter**, **rightsemi**.
+[**join**](kusto/query/joinoperator.md): Führt die Zeilen zweier Tabellen zusammen, um eine neue Tabelle zu erzeugen, indem Werte aus den angegebenen Spalten aus beiden Tabellen zugeordnet werden. Kusto unterstützt eine umfangreiche Zahl von Join-Typen (Verknüpfungen): **fullouter** , **inner** , **innerunique** , **leftanti** , **leftantisemi** , **leftouter** , **leftsemi** , **rightanti** , **rightantisemi** , **rightouter** , **rightsemi** .
 
 Im folgenden Beispiel werden zwei Tabellen mit einem inneren Join verknüpft.
 
@@ -710,7 +710,7 @@ X
 ```
 
 > [!TIP]
-> Verwenden Sie die Operatoren **where** und **project**, um die Anzahl von Zeilen und Spalten in den Eingabetabellen vor dem Join zu verringern. Wenn eine Tabelle immer kleiner als die andere ist, verwenden Sie diese als die linke (weitergeleitete) Seite der Verknüpfung. Die Spalten für die Verknüpfungsübereinstimmung müssen den gleichen Namen haben. Verwenden Sie ggf. den Operator **project**, um eine Spalte in einer der Tabellen umzubenennen.
+> Verwenden Sie die Operatoren **where** und **project** , um die Anzahl von Zeilen und Spalten in den Eingabetabellen vor dem Join zu verringern. Wenn eine Tabelle immer kleiner als die andere ist, verwenden Sie diese als die linke (weitergeleitete) Seite der Verknüpfung. Die Spalten für die Verknüpfungsübereinstimmung müssen den gleichen Namen haben. Verwenden Sie ggf. den Operator **project** , um eine Spalte in einer der Tabellen umzubenennen.
 
 ### <a name="serialize"></a>serialize
 
@@ -727,7 +727,7 @@ StormEvents
 | extend row_number = row_number()
 ```
 
-Das Rowset gilt auch als serialisiert, wenn es ein Ergebnis der folgenden Operatoren ist: **sort**, **top** oder **range**, optional gefolgt von den Operatoren **project**, **project-away**, **extend**, **where**, **parse**, **mv-expand** oder **take**.
+Das Rowset gilt auch als serialisiert, wenn es ein Ergebnis der folgenden Operatoren ist: **sort** , **top** oder **range** , optional gefolgt von den Operatoren **project** , **project-away** , **extend** , **where** , **parse** , **mv-expand** oder **take** .
 
 **\[** [**Zum Ausführen der Abfrage klicken**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSguzc1NLMqsSlVIzi%2fNK9HQVEiqVAguSSxJBcvmF5XABRQSi5NBgqkVJal5KQpF%2beXxeaW5SalFCrZIHA1NAEGimf5iAAAA) **\]**
 
@@ -948,4 +948,4 @@ Im folgenden Beispiel wird die Funktion gelöscht, die im ersten Schritt erstell
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-[Referenz zur Abfragesprache von Kusto](https://aka.ms/kustolangref)
+[Referenz zur Abfragesprache von Kusto](./kusto/query/index.md)
