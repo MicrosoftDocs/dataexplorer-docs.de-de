@@ -7,18 +7,18 @@ ms.author: orspodek
 ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
-ms.custom: has-adal-ref
+ms.custom: has-adal-ref, devx-track-js
 ms.date: 09/13/2019
-ms.openlocfilehash: e1c2a6f5cbec90d59ed54f15147b912ffbc8fdd3
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 65e15fca7c7a69e1c9ba2d79f7dca531304ea91b
+ms.sourcegitcommit: 8a7165b28ac6b40722186300c26002fb132e6e4a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343418"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92749483"
 ---
 # <a name="how-to-authenticate-with-aad-for-azure-data-explorer-access"></a>How-To Authentifizieren mit Aad für Azure Daten-Explorer Access
 
-Die empfohlene Vorgehensweise für den Zugriff auf Azure Daten-Explorer ist die Authentifizierung beim **Azure Active Directory** -Dienst (manchmal auch als **Azure AD**oder einfach als **Aad**bezeichnet). Dadurch wird sichergestellt, dass Azure Daten-Explorer die Verzeichnis Anmelde Informationen des Zugriffs Prinzipals nicht mit einem zweistufigen Prozess ansieht:
+Die empfohlene Vorgehensweise für den Zugriff auf Azure Daten-Explorer ist die Authentifizierung beim **Azure Active Directory** -Dienst (manchmal auch als **Azure AD** oder einfach als **Aad** bezeichnet). Dadurch wird sichergestellt, dass Azure Daten-Explorer die Verzeichnis Anmelde Informationen des Zugriffs Prinzipals nicht mit einem zweistufigen Prozess ansieht:
 
 1. Im ersten Schritt kommuniziert der Client mit dem AAD-Dienst, authentifiziert ihn und fordert ein Zugriffs Token an, das speziell für den jeweiligen Azure-Daten-Explorer Endpunkt ausgestellt wird, auf den der Client zugreifen möchte.
 2. Im zweiten Schritt gibt der Client Anforderungen an Azure Daten-Explorer aus und stellt das Zugriffs Token bereit, das im ersten Schritt als Identitätsnachweis für Azure Daten-Explorer eingerichtet wurde.
@@ -31,15 +31,15 @@ Wenn dies nicht möglich ist, lesen Sie weiter, um ausführliche Informationen z
 
 Die wichtigsten Authentifizierungs Szenarien sind:
 
-* **Eine Client Anwendung, die einen angemeldeten Benutzer authentifiziert**.
+* **Eine Client Anwendung, die einen angemeldeten Benutzer authentifiziert** .
   In diesem Szenario löst eine interaktive (Client-) Anwendung eine Aad-Eingabeaufforderung für Anmelde Informationen (z. b. Benutzername und Kennwort) für den Benutzer aus.
   Siehe [Benutzerauthentifizierung](#user-authentication),
 
-* **Eine "Start lose" Anwendung**.
+* **Eine "Start lose" Anwendung** .
   In diesem Szenario wird eine Anwendung ausgeführt, ohne dass ein Benutzer vorhanden ist, um Anmelde Informationen bereitzustellen, und die Anwendung authentifiziert sich mit einigen Anmelde Informationen, mit denen Sie konfiguriert wurde, als "selbst" in Aad.
   Siehe [Anwendungs Authentifizierung](#application-authentication).
 
-* **Im-Auftrag-der-Authentifizierung**.
+* **Im-Auftrag-der-Authentifizierung** .
   In diesem Szenario, das manchmal als "Webdienst" oder "Web-App"-Szenario bezeichnet wird, erhält die Anwendung ein Aad-Zugriffs Token aus einer anderen Anwendung und konvertiert es dann in ein anderes Aad-Zugriffs Token, das mit Azure Daten-Explorer verwendet werden kann.
   Anders ausgedrückt: die Anwendung fungiert als Vermittler zwischen dem Benutzer oder der Anwendung, der Anmelde Informationen bereitgestellt hat, und dem Azure Daten-Explorer-Dienst.
   Siehe [im Auftrag der Authentifizierung](#on-behalf-of-authentication).
@@ -56,7 +56,7 @@ https://help.kusto.windows.net
 
 ## <a name="specifying-the-aad-tenant-id"></a>Angeben der Aad-Mandanten-ID
 
-Aad ist ein mehr Instanzen fähiger Dienst, und jede Organisation kann ein Objekt mit dem Namen " **Directory** " in Aad erstellen. Das Verzeichnis Objekt enthält sicherheitsbezogene Objekte, wie z. b. Benutzerkonten, Anwendungen und Gruppen. Aad bezieht sich häufig auf das **Verzeichnis als Mandant.** Aad-Mandanten werden anhand einer GUID (Mandanten-**ID**) identifiziert. In vielen Fällen können Aad-Mandanten auch durch den Domänen Namen der Organisation identifiziert werden.
+Aad ist ein mehr Instanzen fähiger Dienst, und jede Organisation kann ein Objekt mit dem Namen " **Directory** " in Aad erstellen. Das Verzeichnis Objekt enthält sicherheitsbezogene Objekte, wie z. b. Benutzerkonten, Anwendungen und Gruppen. Aad bezieht sich häufig auf das **Verzeichnis als Mandant.** Aad-Mandanten werden anhand einer GUID (Mandanten- **ID** ) identifiziert. In vielen Fällen können Aad-Mandanten auch durch den Domänen Namen der Organisation identifiziert werden.
 
 Beispielsweise kann eine Organisation mit dem Namen "kontoso" die Mandanten `4da81d62-e0a8-4899-adad-4349ca6bfe24` -ID und den Domänen Namen aufweisen `contoso.com` .
 
@@ -70,7 +70,7 @@ Aad verfügt über eine Reihe von Endpunkten für die Authentifizierung:
 * Wenn der Mandant, der den Prinzipal, der authentifiziert wird, nicht bekannt ist, kann der "Common"-Endpunkt verwendet werden, indem der `{tenantId}` obige durch den Wert ersetzt wird `common` .
 
 > [!NOTE]
-> Der für die Authentifizierung verwendete Aad-Endpunkt wird auch als **Aad-Autoritäts-URL** oder einfach als **Aad-Autorität**bezeichnet.
+> Der für die Authentifizierung verwendete Aad-Endpunkt wird auch als **Aad-Autoritäts-URL** oder einfach als **Aad-Autorität** bezeichnet.
 
 ## <a name="aad-token-cache"></a>Aad-Tokencache
 
@@ -141,17 +141,17 @@ In der Regel sind mehrere Konfigurationsschritte mit Aad erforderlich, und in ei
 
 1. Öffnen Sie die [Azure-Portal](https://portal.azure.com/) , und stellen Sie sicher, dass Sie beim richtigen Mandanten angemeldet sind (Weitere Informationen finden Sie in der oberen/rechten Ecke der Identität, die für die Anmeldung beim Portal verwendet wird).
 
-2. Klicken Sie im Bereich Ressourcen auf **Azure Active Directory**und dann auf **App-Registrierungen**.
+2. Klicken Sie im Bereich Ressourcen auf **Azure Active Directory** und dann auf **App-Registrierungen** .
 
 3. Suchen Sie die Anwendung, die den im-Auftrag-von-Flow verwendet, und öffnen Sie Sie.
 
-4. Klicken Sie auf **API-Berechtigungen**und dann auf **Berechtigung hinzufügen**.
+4. Klicken Sie auf **API-Berechtigungen** und dann auf **Berechtigung hinzufügen** .
 
 5. Suchen Sie nach der Anwendung namens **Azure Daten-Explorer** , und wählen Sie Sie aus.
 
-6. Wählen Sie **user_impersonation/zugriffskusto**aus.
+6. Wählen Sie **user_impersonation/zugriffskusto** aus.
 
-7. Klicken Sie auf **Berechtigung hinzufügen**.
+7. Klicken Sie auf **Berechtigung hinzufügen** .
 
 **Schritt 2: Ausführen von tokenaustausch in Ihrem Servercode**
 

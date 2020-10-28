@@ -8,19 +8,20 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/23/2018
-ms.openlocfilehash: 4fad66141a31ac7ba72ab79dc0092b963417ae72
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 7c66647dcdebfc86990c9a63f7404681b000b915
+ms.sourcegitcommit: 8a7165b28ac6b40722186300c26002fb132e6e4a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92247557"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92749517"
 ---
 # <a name="dcount_intersect-plugin"></a>Plug-In „dcount_intersect“
 
 Berechnet die Schnittmenge zwischen N Sätzen auf der Grundlage von `hll` Werten (n im Bereich von [2.. 16]) und gibt N- `dcount` Werte zurück.
 
 Die angegebenen Sätze s<sub>1</sub>, s<sub>2</sub>,.. S<sub>n</sub> -gibt Werte zurück, die eine unterschiedliche Anzahl von darstellen:  
-S<sub>1</sub>, s<sub>1</sub> ∩ s<sub>2</sub>,  
+S<sub>1</sub>,  
+S<sub>1</sub> ∩ s<sub>2</sub>,  
 S<sub>1</sub> ∩ s<sub>2</sub> ∩ s<sub>3</sub>,  
 ... ,  
 S<sub>1</sub> ∩ s<sub>2</sub> ∩... ∩ S<sub>n</sub>
@@ -31,14 +32,14 @@ T | evaluate dcount_intersect(hll_1, hll_2, hll_3)
 
 ## <a name="syntax"></a>Syntax
 
-*T* `| evaluate` `dcount_intersect(` *hll_1*, *hll_2*, [ `,` *hll_3* `,` ...]`)`
+*T* `| evaluate` `dcount_intersect(` *hll_1* , *hll_2* , [ `,` *hll_3* `,` ...]`)`
 
 ## <a name="arguments"></a>Argumente
 
-* *T*: der tabellarische Eingabe Ausdruck.
-* *hll_i*: die Werte von<sub>Set S,</sub> die mit [`hll()`](./hll-aggfunction.md) Function berechnet wurden.
+* *T* : der tabellarische Eingabe Ausdruck.
+* *hll_i* : die Werte von <sub>Set S,</sub> die mit [`hll()`](./hll-aggfunction.md) Function berechnet wurden.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Gibt eine Tabelle mit N `dcount` Werten zurück (pro Spalte, die festgelegte Schnittmengen darstellen).
 Spaltennamen sind S0, S1,... (bis n-1).

@@ -8,12 +8,12 @@ ms.reviewer: kedamari
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/12/2020
-ms.openlocfilehash: 053581b5109d0eeacd7b69fd0eda2b53f43ac701
-ms.sourcegitcommit: 468b4ad125657c5131e4c3c839f702ebb6e455a0
+ms.openlocfilehash: 77f0efffbefa8e6e2093f0f59e3d4f3701be61b0
+ms.sourcegitcommit: 8a7165b28ac6b40722186300c26002fb132e6e4a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92134743"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92749546"
 ---
 # <a name="data-purge"></a>Datenbereinigung
 
@@ -79,7 +79,7 @@ So reduzieren Sie die Lösch Ausführungszeit:
 > [!NOTE]
 > Die Lösch Ausführung wird aufgerufen, indem der Befehl zum Löschen der [ *TableName* Records-Tabelle](#purge-table-tablename-records-command) für den Datenverwaltung Endpunkt https://ingest- [yourclustername] ausgeführt wird. [ Region]. Kusto. Windows. net.
 
-### <a name="purge-table-tablename-records-command"></a>Befehl zum Löschen der Tabelle TableName Records
+### <a name="purge-table-tablename-records-command"></a>Befehl zum Löschen der Tabelle *TableName* Records
 
 Der Löschbefehl kann für unterschiedliche Verwendungs Szenarien auf zwei Arten aufgerufen werden:
 
@@ -100,7 +100,7 @@ Der Löschbefehl kann für unterschiedliche Verwendungs Szenarien auf zwei Arten
  > Der erste Schritt im zweistufigen Aufruf erfordert, dass eine Abfrage für das gesamte Dataset ausgeführt wird, um Datensätze zu identifizieren, die gelöscht werden sollen.
  > Diese Abfrage kann für große Tabellen ein Timeout oder einen Fehler verursachen, insbesondere bei einer beträchtlichen Menge an kaltcache-Daten. Wenn Fehler auftreten, überprüfen Sie das Prädikat selbst. Nachdem Sie die Richtigkeit überprüft haben, verwenden Sie das Löschen mit einem einzelnen Schritt mit der `noregrets` Option.
 
-  **Syntax**
+**Syntax**
 
   ```kusto
      // Connect to the Data Management service
@@ -113,20 +113,20 @@ Der Löschbefehl kann für unterschiedliche Verwendungs Szenarien auf zwei Arten
      .purge table [TableName] records in database [DatabaseName] with (verificationtoken='<verification token from step #1>') <| [Predicate]
   ```
     
-    | Parameter  | BESCHREIBUNG  |
-    |---------|---------|
-    | `DatabaseName`   |   Name der Datenbank      |
-    | `TableName`     |     Name der Tabelle    |
-    | `Predicate`    |    Identifiziert die zu löschenden Datensätze. Weitere Informationen finden Sie weiter unten unter Bereinigungs Einschränkungen. | 
-    | `noregrets`    |     Wenn festgelegt, wird eine einstufige Aktivierung ausgelöst.    |
-    | `verificationtoken`     |  Im zweistufigen Aktivierungs Szenario ( `noregrets` ist nicht festgelegt) kann dieses Token verwendet werden, um den zweiten Schritt auszuführen und einen Commit für die Aktion auszuführen. Wenn `verificationtoken` nicht angegeben ist, wird der erste Schritt des Befehls auslöst. Informationen zum Löschvorgang werden mit einem Token zurückgegeben, das an den Befehl zurückgegeben werden soll, um Schritt #2 ausführen zu können.   |
+| Parameter  | BESCHREIBUNG  |
+|---------|---------|
+| `DatabaseName`   |   Name der Datenbank      |
+| `TableName`     |     Name der Tabelle    |
+| `Predicate`    |    Identifiziert die zu löschenden Datensätze. Weitere Informationen finden Sie weiter unten unter Bereinigungs Einschränkungen. | 
+| `noregrets`    |     Wenn festgelegt, wird eine einstufige Aktivierung ausgelöst.    |
+| `verificationtoken`     |  Im zweistufigen Aktivierungs Szenario ( `noregrets` ist nicht festgelegt) kann dieses Token verwendet werden, um den zweiten Schritt auszuführen und einen Commit für die Aktion auszuführen. Wenn `verificationtoken` nicht angegeben ist, wird der erste Schritt des Befehls auslöst. Informationen zum Löschvorgang werden mit einem Token zurückgegeben, das an den Befehl zurückgegeben werden soll, um Schritt #2 ausführen zu können.   |
 
-    **Einschränkungen für Prädikate bereinigen**
+**Einschränkungen für Prädikate bereinigen**
 
-    * Das Prädikat muss eine einfache Auswahl sein (z. b. *WHERE [columnName] = = ' x '*  /  *WHERE [columnName] in (' x ', ' Y ', ' Z ') und [othercolumn] = = ' a '*).
-    * Mehrere Filter müssen mit einem "and" und nicht mit separaten Klauseln kombiniert werden `where` (z. b `where [ColumnName] == 'X' and  OtherColumn] == 'Y'` . und nicht `where [ColumnName] == 'X' | where [OtherColumn] == 'Y'` ).
-    * Das Prädikat kann nicht auf Tabellen verweisen, die nicht die Tabelle sind, die gelöscht wird (*TableName*). Das Prädikat kann nur die Selection-Anweisung ( `where` ) enthalten. Es kann keine bestimmten Spalten aus der Tabelle projizieren (Ausgabe Schema beim Ausführen von "|").* `table` Prädikat*' muss dem Tabellen Schema entsprechen).
-    * System Funktionen (z. b `ingestion_time()` .,, `extent_id()` ) werden nicht unterstützt.
+* Das Prädikat muss eine einfache Auswahl sein (z. b. *WHERE [columnName] = = ' x '*  /  *WHERE [columnName] in (' x ', ' Y ', ' Z ') und [othercolumn] = = ' a '* ).
+* Mehrere Filter müssen mit einem "and" und nicht mit separaten Klauseln kombiniert werden `where` (z. b `where [ColumnName] == 'X' and  OtherColumn] == 'Y'` . und nicht `where [ColumnName] == 'X' | where [OtherColumn] == 'Y'` ).
+* Das Prädikat kann nicht auf Tabellen verweisen, die nicht die Tabelle sind, die gelöscht wird ( *TableName* ). Das Prädikat kann nur die Selection-Anweisung ( `where` ) enthalten. Es kann keine bestimmten Spalten aus der Tabelle projizieren (Ausgabe Schema beim Ausführen von "|"). *`table` Prädikat* ' muss dem Tabellen Schema entsprechen).
+* System Funktionen (z. b `ingestion_time()` .,, `extent_id()` ) werden nicht unterstützt.
 
 #### <a name="example-two-step-purge"></a>Beispiel: Löschen mit zwei Schritten
 
@@ -159,7 +159,7 @@ Verwenden Sie zum Ausführen eines Löschvorgangs in einem zweistufigen Aktivier
 
 | `OperationId` | `DatabaseName` | `TableName`|`ScheduledTime` | `Duration` | `LastUpdatedOn` |`EngineOperationId` | `State` | `StateDetails` |`EngineStartTime` | `EngineDuration` | `Retries` |`ClientRequestId` | `Principal`|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Geplant | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...|
+| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Scheduled | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...|
 
 #### <a name="example-single-step-purge"></a>Beispiel: Löschen mit einem Schritt
 
@@ -176,7 +176,7 @@ Führen Sie den folgenden Befehl aus, um in einem Aktivierungs Szenario mit nur 
 
 | `OperationId` |`DatabaseName` |`TableName` |`ScheduledTime` |`Duration` |`LastUpdatedOn` |`EngineOperationId` |`State` |`StateDetails` |`EngineStartTime` |`EngineDuration` |`Retries` |`ClientRequestId` |`Principal`|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Geplant | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...|
+| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Scheduled | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...|
 
 ### <a name="cancel-purge-operation-command"></a>Befehl "Löschvorgang Abbrechen"
 
@@ -199,7 +199,7 @@ Bei Bedarf können Sie ausstehende Lösch Anforderungen abbrechen.
 
 **Ausgabe**
 
-Die Ausgabe dieses Befehls entspricht der Befehlsausgabe "Show löscht *operationId*" und zeigt den aktualisierten Status des abgebrochenen Löschvorgangs an. Wenn der Versuch erfolgreich ist, wird der Vorgangs Status auf aktualisiert `Abandoned` . Andernfalls wird der Vorgangs Zustand nicht geändert. 
+Die Ausgabe dieses Befehls entspricht der Befehlsausgabe "Show löscht *operationId* " und zeigt den aktualisierten Status des abgebrochenen Löschvorgangs an. Wenn der Versuch erfolgreich ist, wird der Vorgangs Status auf aktualisiert `Abandoned` . Andernfalls wird der Vorgangs Zustand nicht geändert. 
 
 |`OperationId` |`DatabaseName` |`TableName` |`ScheduledTime` |`Duration` |`LastUpdatedOn` |`EngineOperationId` |`State` |`StateDetails` |`EngineStartTime` |`EngineDuration` |`Retries` |`ClientRequestId` |`Principal`
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|

@@ -24,7 +24,7 @@ In diesem Artikel werden Befehle zum Erstellen und Ändern von [Cache Richtlinie
 Die Richtlinie kann für eine Datenbank, eine Tabelle oder eine [materialisierte Sicht](materialized-views/materialized-view-overview.md)festgelegt werden. Sie wird mit einem der folgenden Befehle angezeigt:
 
 * `.show``database` *DatabaseName* `policy``caching`
-* `.show``table` *TableName* `policy``caching`
+* `.show` `table` *TableName* `policy` `caching`
 * `.show``materialized-view` *Materializedviewname* `policy``caching`
 
 ## <a name="altering-the-cache-policy"></a>Ändern der Cache Richtlinie
