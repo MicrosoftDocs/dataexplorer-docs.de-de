@@ -1,5 +1,5 @@
 ---
-title: Verwenden von Logic Apps zum automatischen Ausführen von Kusto-Abfragen
+title: Verwenden Sie Logic apps, um Kusto-Abfragen automatisch in Azure auszuführen Daten-Explorer
 description: Erfahren Sie, wie Sie mit Logic Apps die Kusto-Abfragen und-Befehle automatisch ausführen und planen.
 author: orspod
 ms.author: orspodek
@@ -7,14 +7,14 @@ ms.reviewer: docohe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 04/14/2020
-ms.openlocfilehash: 4c918c43f748f97b3bb3f6d0342c660775c1e5c8
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: a4f79fc367e2769dfe3bf51ed5ad035a7d233ea4
+ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342653"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92902680"
 ---
-# <a name="microsoft-logic-app-and-azure-data-explorer"></a>Microsoft Logic APP und Azure Daten-Explorer
+# <a name="microsoft-logic-app-and-azure-data-explorer-preview"></a>Microsoft Logic APP und Azure Daten-Explorer (Vorschau)
 
 Der Azure Kusto Logic App-Connector ermöglicht das automatische Ausführen von Kusto-Abfragen und-Befehlen im Rahmen einer geplanten oder ausgelösten Aufgabe mithilfe des [Microsoft Logic App](/azure/logic-apps/logic-apps-what-are-logic-apps) -Connector.
 
@@ -32,17 +32,17 @@ Logik-APP und Energie Automatisierung werden auf demselben Connector erstellt. D
     ![Logik-app hinzufügen](./Images/logicapps/logicapp-add.png)
 
 1. Geben Sie die erforderlichen Details zum Formular ein:
-    * Abonnement
-    * Ressourcengruppe
+    * Subscription
+    * Resource group
     * Name der Logik-App
     * Region oder Integrationsdienstumgebung
-    * Standort
+    * Speicherort
     * Protokollanalyse ein-oder ausschalten
-1. Klicken Sie auf **Überprüfen + erstellen**.
+1. Klicken Sie auf **Überprüfen und erstellen** .
 
     ![Erstellen einer Logik-App](./Images/logicapps/logicapp-create-new.png)
 
-1. Wenn die Logik-App erstellt wurde, wählen Sie **Bearbeiten**aus.
+1. Wenn die Logik-App erstellt wurde, wählen Sie **Bearbeiten** aus.
 
     ![Logik-App-Designer bearbeiten](./Images/logicapps/logicapp-editdesigner.png "logicapp-editdesigner")
 
@@ -50,7 +50,7 @@ Logik-APP und Energie Automatisierung werden auf demselben Connector erstellt. D
 
     ![Leere Vorlage für Logik-App](./Images/logicapps/logicapp-blanktemplate.png "logicapp-blanktemplate")
 
-1. Fügen Sie eine Wiederholungs Aktion hinzu, und wählen Sie **Azure Kusto**.
+1. Fügen Sie eine Wiederholungs Aktion hinzu, und wählen Sie **Azure Kusto** .
 
     ![Kusto-Flow-Connector für Logik-apps](./Images/logicapps/logicapp-kustoconnector.png "logicapp-kustoconnector")
 
