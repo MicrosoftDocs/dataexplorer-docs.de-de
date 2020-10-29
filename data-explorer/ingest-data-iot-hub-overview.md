@@ -8,50 +8,53 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 5437a4ecb77b81e7ffd0e60dfa3bacb76240a094
-ms.sourcegitcommit: f2f9cc0477938da87e0c2771c99d983ba8158789
+ms.openlocfilehash: 1ea8960b8d58ed9e549e042f8a4e64164952f32d
+ms.sourcegitcommit: 4f24d68f1ae4903a2885985aa45fd15948867175
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/07/2020
-ms.locfileid: "89502703"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92558188"
 ---
-# <a name="create-a-connection-to-iot-hub"></a>Herstellen einer Verbindung mit IoT Hub
+# <a name="iot-hub-data-connection"></a>IoT Hub-Datenverbindung
 
-[Azure IoT Hub](https://docs.microsoft.com/azure/iot-hub/about-iot-hub) ist ein in der Cloud gehosteter, verwalteter Dienst, der als zentraler Nachrichtenhub für die bidirektionale Kommunikation zwischen Ihrer IoT-Anwendung und den von ihr verwalteten Geräten dient. Azure Data Explorer bietet unter Verwendung des [Event Hub-kompatiblen integrierten Endpunkts](https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messages-d2c#routing-endpoints) eine kontinuierliche Erfassung aus kundenseitig verwalteten IoT Hub-Instanzen.
+[Azure IoT Hub](/azure/iot-hub/about-iot-hub) ist ein in der Cloud gehosteter, verwalteter Dienst, der als zentraler Nachrichtenhub für die bidirektionale Kommunikation zwischen Ihrer IoT-Anwendung und den von ihr verwalteten Geräten dient. Azure Data Explorer bietet unter Verwendung des [Event Hub-kompatiblen integrierten Endpunkts](/azure/iot-hub/iot-hub-devguide-messages-d2c#routing-endpoints) eine kontinuierliche Erfassung aus kundenseitig verwalteten IoT Hub-Instanzen.
 
-Die IoT-Erfassungspipeline umfasst mehrere Schritte. Als Erstes erstellen Sie eine IoT Hub-Instanz, bei der Sie dann ein Gerät registrieren. Anschließend erstellen Sie eine Zieltabelle in Azure Data Explorer, in der die [Daten in einem bestimmten Format](#data-format) anhand der [Erfassungseigenschaften](#set-ingestion-properties) erfasst werden. Die IoT Hub-Verbindung muss über Informationen zum [Ereignisrouting](#set-events-routing) verfügen, um eine Verbindung mit der Azure Data Explorer-Tabelle herzustellen. Daten werden mit ausgewählten Eigenschaften gemäß der [Eigenschaftenzuordnung des Ereignissystems](#set-event-system-properties-mapping) eingebettet. Dieser Prozess kann über das [Azure-Portal](ingest-data-iot-hub.md), programmgesteuert mit [C#](data-connection-iot-hub-csharp.md) oder [Python](data-connection-iot-hub-python.md) oder mit der [Azure Resource Manager-Vorlage](data-connection-iot-hub-resource-manager.md) verwaltet werden.
+Die IoT-Erfassungspipeline umfasst mehrere Schritte. Als Erstes erstellen Sie eine IoT Hub-Instanz, bei der Sie dann ein Gerät registrieren. Anschließend erstellen Sie eine Zieltabelle in Azure Data Explorer, in der die [Daten in einem bestimmten Format](#data-format) anhand der [Erfassungseigenschaften](#ingestion-properties) erfasst werden. Die IoT Hub-Verbindung muss über Informationen zum [Ereignisrouting](#events-routing) verfügen, um eine Verbindung mit der Azure Data Explorer-Tabelle herzustellen. Daten werden mit ausgewählten Eigenschaften gemäß der [Eigenschaftenzuordnung des Ereignissystems](#event-system-properties-mapping) eingebettet. Dieser Prozess kann über das [Azure-Portal](ingest-data-iot-hub.md), programmgesteuert mit [C#](data-connection-iot-hub-csharp.md) oder [Python](data-connection-iot-hub-python.md) oder mit der [Azure Resource Manager-Vorlage](data-connection-iot-hub-resource-manager.md) verwaltet werden.
 
 Allgemeine Informationen zur Datenerfassung in Azure Data Explorer finden Sie unter [Übersicht über die Datenerfassung in Azure Data Explorer](ingest-data-overview.md).
 
 ## <a name="data-format"></a>Datenformat
 
-* Daten werden in Form von [EventData](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata?view=azure-dotnet)-Objekten aus dem Event Hub-Endpunkt gelesen.
+* Daten werden in Form von [EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata?view=azure-dotnet)-Objekten aus dem Event Hub-Endpunkt gelesen.
 * Siehe [Unterstützte Formate](ingestion-supported-formats.md).
     > [!NOTE]
     > Das RAW-Format wird von IoT Hub nicht unterstützt.
 * Siehe [Unterstützte Komprimierungen](ingestion-supported-formats.md#supported-data-compression-formats).
   * Die ursprüngliche Größe der nicht komprimierten Daten sollte Teil der Blobmetadaten sein. Andernfalls wird sie von Azure Data Explorer geschätzt. Das Größenlimit für die Erfassung von nicht komprimierten Daten pro Datei ist 4 GB.
 
-## <a name="set-ingestion-properties"></a>Festlegen von Erfassungseigenschaften
+## <a name="ingestion-properties"></a>Erfassungseigenschaften
 
-Erfassungseigenschaften weisen den Erfassungsprozess an, wohin die Daten weitergeleitet und wie sie verarbeitet werden sollen. Sie können [Erfassungseigenschaften](ingestion-properties.md) der Ereignisse mithilfe von [EventData.Properties](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties) angeben. Sie können die folgenden Eigenschaften festlegen:
+Erfassungseigenschaften weisen den Erfassungsprozess an, wohin die Daten weitergeleitet und wie sie verarbeitet werden sollen. Sie können [Erfassungseigenschaften](ingestion-properties.md) der Ereignisse mithilfe von [EventData.Properties](/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties) angeben. Sie können die folgenden Eigenschaften festlegen:
 
 |Eigenschaft |Beschreibung|
 |---|---|
 | Tabelle | Name (unter Berücksichtigung der Groß/Kleinschreibung) der vorhandenen Zieltabelle. Überschreibt das `Table`-Element, das im Bereich `Data Connection` festgelegt ist. |
 | Format | Datenformat. Überschreibt das `Data format`-Element, das im Bereich `Data Connection` festgelegt ist. |
 | IngestionMappingReference | Name der zu verwendenden vorhandenen [Erfassungszuordnung](kusto/management/create-ingestion-mapping-command.md). Überschreibt das `Column mapping`-Element, das im Bereich `Data Connection` festgelegt ist.|
-| Codierung |  Datencodierung. Die Standardeinstellung ist UTF8. Alle [von .NET unterstützten Codierungen](https://docs.microsoft.com/dotnet/api/system.text.encoding?view=netframework-4.8#remarks) können verwendet werden. |
+| Codierung |  Datencodierung. Die Standardeinstellung ist UTF8. Alle [von .NET unterstützten Codierungen](/dotnet/api/system.text.encoding?view=netframework-4.8#remarks) können verwendet werden. |
 
-## <a name="set-events-routing"></a>Festlegen des Ereignisroutings
+> [!NOTE]
+> Nur Ereignisse, die nach dem Erstellen der Datenverbindung in die Warteschlange eingereiht werden, werden erfasst.
+
+## <a name="events-routing"></a>Ereignisrouting
 
 Beim Einrichten einer IoT Hub-Verbindung mit einem Azure Data Explorer-Cluster geben Sie die Zieltabelleneigenschaften an (Tabellenname, Datenformat und Zuordnung). Diese Einstellung ist das Standardrouting für Ihre Daten, das auch als statisches Routing bezeichnet wird.
-Sie können mithilfe von Ereigniseigenschaften auch Zieltabelleneigenschaften für jedes Ereignis angeben. Die Verbindung leitet die Daten wie in [EventData.Properties](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties) festgelegt dynamisch weiter und setzt dabei die statischen Eigenschaften für dieses Ereignis außer Kraft.
+Sie können mithilfe von Ereigniseigenschaften auch Zieltabelleneigenschaften für jedes Ereignis angeben. Die Verbindung leitet die Daten wie in [EventData.Properties](/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties) festgelegt dynamisch weiter und setzt dabei die statischen Eigenschaften für dieses Ereignis außer Kraft.
 
 > [!Note]
 > Wenn Sie **Meine Daten enthalten Routinginformationen** auswählen, müssen Sie die erforderlichen Routinginformationen in den Ereigniseigenschaften angeben.
 
-## <a name="set-event-system-properties-mapping"></a>Festlegen der Zuordnung von Ereignissystemeigenschaften
+## <a name="event-system-properties-mapping"></a>Zuordnung von Ereignissystemeigenschaften
 
 Die Systemeigenschaften sind eine Sammlung, in der Eigenschaften gespeichert werden, die beim Empfang des Ereignisses vom IoT Hub-Dienst festgelegt werden. Die IoT Hub-Verbindung mit Azure Data Explorer bettet die ausgewählten Eigenschaften in die Daten ein, die in Ihre Tabelle gelangen.
 
@@ -80,7 +83,7 @@ Wenn Sie **Ereignissystemeigenschaften** im Abschnitt **Datenquelle** der Tabell
 
 [!INCLUDE [data-explorer-container-system-properties](includes/data-explorer-container-system-properties.md)]
 
-## <a name="create-iot-hub-connection"></a>Erstellen einer IoT Hub-Verbindung
+## <a name="iot-hub-connection"></a>IoT Hub-Verbindung
 
 > [!Note]
 > Die beste Leistung erzielen Sie, wenn Sie alle Ressourcen in der gleichen Region wie den Azure Data Explorer-Cluster erstellen.

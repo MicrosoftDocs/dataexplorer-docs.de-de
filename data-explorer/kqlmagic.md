@@ -3,26 +3,26 @@ title: Verwenden einer Jupyter Notebook-Instanz zum Analysieren von Daten in Azu
 description: In diesem Thema erfahren Sie, wie Sie mithilfe einer Jupyter Notebook-Instanz und der kqlmagic-Erweiterung Daten in Azure Data Explorer analysieren.
 author: orspod
 ms.author: orspodek
-ms.reviewer: mblythe
+ms.reviewer: maraheja
 ms.service: data-explorer
 ms.topic: how-to
-ms.date: 07/10/2019
-ms.openlocfilehash: 9794c9448ce8f7243d328eb039e8ca4322f3b933
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.date: 10/20/2020
+ms.openlocfilehash: 3af348677bf520d1ccd78388bb6a7a30506e572d
+ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872963"
+ms.lasthandoff: 10/20/2020
+ms.locfileid: "92249996"
 ---
 # <a name="use-a-jupyter-notebook-and-kqlmagic-extension-to-analyze-data-in-azure-data-explorer"></a>Verwenden einer Jupyter Notebook-Instanz und der kqlmagic-Erweiterung zum Analysieren von Daten in Azure Data Explorer
 
 Jupyter Notebook ist eine Open Source-Webanwendung, mit der Sie Dokumente erstellen und freigeben können, die Livecode, Gleichungen, Visualisierungen und beschreibenden Text enthalten. Die Nutzung umfasst Folgendes: Bereinigung und Transformation von Daten, numerische Simulation, statistische Modellierung, Datenvisualisierung und Machine Learning.
-[Jupyter Notebook](https://jupyter.org/) unterstützt Magic-Befehle, die die Funktionen des Kernels mit zusätzlichen Befehlen erweitern. kqlmagic ist ein Befehl, der die Funktionen des Python-Kernels in Jupyter Notebook erweitert, damit Sie Abfragen in der Kusto-Sprache nativ ausführen können. Sie können Python und die Kusto-Abfragesprache mühelos zum Abfragen und Visualisieren von Daten mithilfe der umfassenden Bibliothek „Plot.ly“ kombinieren, die mit `render`-Befehlen integriert ist. Zum Ausführen von Abfragen werden Datenquellen unterstützt. Zu diesen Datenquellen gehören Azure Data Explorer, ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Protokoll- und Telemetriedaten, sowie Azure Monitor-Protokolle und Application Insights. kqlmagic funktioniert auch mit Azure Notebooks, Jupyter Lab und der Jupyter-Erweiterung von Visual Studio Code.
+[Jupyter Notebook](https://jupyter.org/) unterstützt Magic-Befehle, die die Funktionen des Kernels mit zusätzlichen Befehlen erweitern. kqlmagic ist ein Befehl, der die Funktionen des Python-Kernels in Jupyter Notebook erweitert, damit Sie Abfragen in der Kusto-Sprache nativ ausführen können. Sie können Python und die Kusto-Abfragesprache mühelos zum Abfragen und Visualisieren von Daten mithilfe der umfassenden Bibliothek „Plot.ly“ kombinieren, die mit `render`-Befehlen integriert ist. Zum Ausführen von Abfragen werden Datenquellen unterstützt. Zu diesen Datenquellen gehören Azure Data Explorer, ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Protokoll- und Telemetriedaten, sowie Azure Monitor-Protokolle und Application Insights. kqlmagic funktioniert auch mit Azure Data Studio, Jupyter Lab und der Jupyter-Erweiterung von Visual Studio Code.
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
 - Ein Organisations-E-Mail-Konto, das Mitglied von Azure Active Directory (Azure AD) ist
-- Jupyter Notebook, installiert auf ihrem lokalen Computer, oder Azure Notebooks und das geklonte Beispielprojekt [Azure Notebook](https://kustomagicsamples-manojraheja.notebooks.azure.com/j/notebooks/Getting%20Started%20with%20kqlmagic%20on%20Azure%20Data%20Explorer.ipynb)
+- Installation von Jupyter Notebook auf dem lokalen Computer oder Verwendung von [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kqlmagic?view=sql-server-ver15)
 
 ## <a name="install-kqlmagic-library"></a>Installieren der kqlmagic-Bibliothek
 
@@ -31,8 +31,6 @@ Jupyter Notebook ist eine Open Source-Webanwendung, mit der Sie Dokumente erstel
     ```python
     !pip install Kqlmagic --no-cache-dir  --upgrade
     ```
-    > [!NOTE]
-    > Wenn Sie Azure Notebooks verwenden, ist dieser Schritt nicht erforderlich.
 
 1. Laden von kqlmagic:
 
@@ -44,11 +42,15 @@ Jupyter Notebook ist eine Open Source-Webanwendung, mit der Sie Dokumente erstel
     
 ## <a name="connect-to-the-azure-data-explorer-help-cluster"></a>Herstellen einer Verbindung mit dem Azure Data Explorer-Hilfecluster
 
-Verwenden Sie den folgenden Befehl, um eine Verbindung mit der Datenbank *Samples* herzustellen, die auf dem *Hilfecluster* gehostet wird. Wenn Sie nicht Microsoft Azure AD verwenden, ersetzen Sie den Mandantenname `Microsoft.com` durch den Namen Ihres Azure AD-Mandanten.
+Verwenden Sie den folgenden Befehl, um eine Verbindung mit der Datenbank *Samples* herzustellen, die auf dem *Hilfecluster* gehostet wird. Ersetzen Sie für Benutzer, die nicht Microsoft Azure AD verwenden, den Mandantenname `Microsoft.com` durch den Namen Ihres Azure AD-Mandanten.
 
 ```python
 %kql AzureDataExplorer://tenant="Microsoft.com";code;cluster='help';database='Samples'
 ```
+
+> [!Note]
+> Wenn Sie Ihren eigenen ADX-Cluster verwenden, müssen Sie die Region wie folgt in die Verbindungszeichenfolge aufnehmen:   
+   ```%kql azuredataexplorer://tenant="youecompany.com";code;cluster='mycluster.westus';database='mykustodb'```
 
 ## <a name="query-and-visualize"></a>Abfragen und Visualisieren
 

@@ -7,12 +7,12 @@ ms.reviewer: ''
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/19/2020
-ms.openlocfilehash: ff9b78af54141f2c7fdbbf7039aad59dca2312a0
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 2fa4cbd0b1cf7b034bc7ae3202afcde3866ca347
+ms.sourcegitcommit: ee904f45e3eb3feab046263aa9956cb7780a056d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81493986"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92356587"
 ---
 # <a name="kql-quick-reference"></a>KQL-Kurzübersicht
 
@@ -35,6 +35,9 @@ Dieser Artikel enthält eine Liste mit Funktionen und Beschreibungen, um Sie bei
 | [print](kusto/query/printoperator.md)                      | Gibt eine einzelne Zeile mit mindestens einem skalaren Ausdruck aus. | `print [ColumnName =] ScalarExpression [',' ...]` |
 | [project](kusto/query/projectoperator.md)                  | Wählt die einzuschließenden Spalten in der angegebenen Reihenfolge aus. | `T | project ColumnName [= Expression] [, ...]` <br> oder <br> `T | project [ColumnName | (ColumnName[,]) =] Expression [, ...]` |
 | [project-away](kusto/query/projectawayoperator.md)         | Wählt die Spalten aus, die von der Ausgabe ausgeschlossen werden sollen. | `T | project-away ColumnNameOrPattern [, ...]` |
+| [project-keep](kusto/query/project-keep-operator.md)         | Wählt die Spalten aus, die in die Ausgabe eingeschlossen werden sollen. | `T | project-keep ColumnNameOrPattern [, ...]` |
+| [project-rename](kusto/query/projectrenameoperator.md)     | Benennt Spalten in der Ergebnisausgabe um. | `T | project-rename new_column_name = column_name` |
+| [project-reorder](kusto/query/projectreorderoperator.md)   | Ordnet Spalten in der Ergebnisausgabe neu an. | `T | project-reorder Col2, Col1, Col* asc` |
 | [extend](kusto/query/extendoperator.md)                    | Erstellt eine berechnete Spalte und fügt sie dem Resultset hinzu. | `T | extend [ColumnName | (ColumnName[, ...]) =] Expression [, ...]` |
 | **Sortieren und Aggregieren des Datasets**                 |**_Ändern der Datenstruktur durch sinnvolles Sortieren oder Gruppieren_**|                  |
 | [sort](kusto/query/sortoperator.md)                        | Sortiert die Zeilen der Eingabetabelle nach mindestens einer Spalte in aufsteigender oder absteigender Reihenfolge. | `T | sort by expression1 [asc|desc], expression2 [asc|desc], …` |
