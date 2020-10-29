@@ -72,6 +72,8 @@
           href: create-cluster-database-csharp.md
         - name: Python
           href: create-cluster-database-python.md
+        - name: Go
+          href: create-cluster-database-go.md
         - name: Azure Resource Manager-Vorlage
           href: create-cluster-database-resource-manager.md
     - name: Erstellen einer Tabelle
@@ -168,6 +170,8 @@
               href: node-ingest-data.md
             - name: Go SDK
               href: go-ingest-data.md
+            - name: Java-SDK
+              href: java-ingest-data.md
         - name: Kafka
           href: ingest-data-kafka.md
         - name: Logstash
@@ -206,7 +210,7 @@
               href: dashboard-customize-visuals.md
         - name: Power BI
           items:
-            - name: Bewährte Methoden
+            - name: Bewährte Methoden für Power BI
               href: power-bi-best-practices.md
             - name: Connector
               href: power-bi-connector.md
@@ -246,6 +250,8 @@
               href: vnet-deploy-troubleshoot.md
             - name: 'Erstellen eines privaten Endpunkts für Ihren VNET-Cluster: Portal'
               href: vnet-create-private-endpoint.md
+            - name: Erstellen eines von Datenverbindungen genutzten privaten Endpunkts oder Dienstendpunkts für Ressourcen
+              href: vnet-endpoint-storage-event-hub.md
         - name: Verschlüsselung
           items:
             - name: 'Verschlüsselung von Clusterdatenträgern: Portal'
@@ -395,7 +401,7 @@
           href: ./kusto/query/tutorial.md
         - name: Beispiele
           href: ./kusto/query/samples.md
-        - name: Bewährte Methoden
+        - name: Best Practices für Abfragen
           href: ./kusto/query/best-practices.md
         - name: Datenbankübergreifende und clusterübergreifende Abfragen
           href: ./kusto/query/cross-cluster-or-database-queries.md
@@ -1323,8 +1329,8 @@
           href: ./kusto/management/index.md
         - name: Schema
           items:
-            - name: Best Practices für das Schemadesign
-              href: ./kusto/management/best-practices.md
+            - name: Best Practices für die Verwaltung für das Schemadesign
+              href: ./kusto/management/management-best-practices.md
             - name: Datenbankverwaltung
               href: ./kusto/management/databases.md
               items:
@@ -1730,7 +1736,7 @@
                   href: ./kusto/api/netfx/kusto-ingest-client-errors.md
                 - name: Vorgangsstatus
                   href: ./kusto/api/netfx/kusto-ingest-client-status.md
-                - name: Bewährte Methoden
+                - name: Best Practices für Kusto.Ingest
                   href: ./kusto/api/netfx/kusto-ingest-best-practices.md
                 - name: Codebeispiele
                   href: ./kusto/api/netfx/kusto-ingest-client-examples.md
