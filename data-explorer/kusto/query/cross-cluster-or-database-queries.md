@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 57b7b6b4c67e0e8903903cef670a561b30b3904e
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: e341a6b9b51b082b16036e368c61fa4c903750da
+ms.sourcegitcommit: 64fdef912cc925c4bdcae98183eb8d7c7a6392d7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92252584"
+ms.lasthandoff: 10/29/2020
+ms.locfileid: "93027804"
 ---
 # <a name="cross-database-and-cross-cluster-queries"></a>Datenbankübergreifende und clusterübergreifende Abfragen
 
@@ -84,7 +84,7 @@ Im obigen Beispiel wird der Abfrage Zugriff auf die folgenden Entitäten eingesc
 
 * Alle Entitäts Namen, die mit " *My...* " in der Standarddatenbank beginnen. 
 * Eine beliebige Tabelle in allen Datenbanken mit dem Namen *MyOther...* des aktuellen Clusters.
-* Eine beliebige Tabelle in allen Datenbanken mit dem Namen *MY2...* im Cluster *OtherCluster.Kusto.Windows.net*.
+* Eine beliebige Tabelle in allen Datenbanken mit dem Namen *MY2...* im Cluster *OtherCluster.Kusto.Windows.net* .
 
 ## <a name="functions-and-views"></a>Funktionen und Ansichten
 
@@ -121,7 +121,7 @@ Auf tabellarische Funktionen oder Sichten kann Cluster übergreifend verwiesen w
 
 * Die Remote Funktion muss ein tabellarisches Schema zurückgeben. Auf skalare Funktionen kann nur im gleichen Cluster zugegriffen werden.
 * Die Remote Funktion kann nur skalare Parameter akzeptieren. Auf Funktionen, die mindestens ein Tabellen Argument abrufen, kann nur im gleichen Cluster zugegriffen werden.
-* Das Schema der Remote Funktion muss bekanntermaßen und invariante der zugehörigen Parameter sein. Weitere Informationen finden Sie unter [Cluster übergreifende Abfragen und Schema Änderungen](../concepts/crossclusterandschemachanges.md).
+* Aus Leistungsgründen wird das Schema der Remote Entitäten nach dem ersten Aufruf vom aufrufenden Cluster zwischengespeichert. Daher können Änderungen an der Remote Entität zu einem Konflikt mit den zwischengespeicherten Schema Informationen führen, was möglicherweise zu Abfrage Fehlern führt. Weitere Informationen finden Sie unter [Cluster übergreifende Abfragen und Schema Änderungen](../concepts/crossclusterandschemachanges.md).
 
 Der folgende Cluster übergreifende-aufrufswert ist gültig.
 
