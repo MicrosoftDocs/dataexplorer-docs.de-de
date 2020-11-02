@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/11/2020
-ms.openlocfilehash: f73cf5718a80528415c9aed201917c1bd52bb660
-ms.sourcegitcommit: 86636f80a12f47ea434f128fa04fe9fc09629730
+ms.openlocfilehash: 25ad7040b0318206a712a9a7fb8d3be58e0f47f3
+ms.sourcegitcommit: 0e2fbc26738371489491a96924f25553a8050d51
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/12/2020
-ms.locfileid: "91942632"
+ms.lasthandoff: 11/02/2020
+ms.locfileid: "93148438"
 ---
 # <a name="row_level_security-policy-command"></a>Richtlinienbefehl für „row_level_security“
 
@@ -51,7 +51,7 @@ Dies ist nützlich, wenn Sie verschiedene Abfragen für row_level_security auspr
 > Die folgenden Einschränkungen gelten für `query` :
 >
 > * Die Abfrage sollte genau das gleiche Schema wie die Tabelle ergeben, in der die Richtlinie definiert ist. Das heißt, das Ergebnis der Abfrage sollte genau die gleichen Spalten wie die ursprüngliche Tabelle in derselben Reihenfolge mit denselben Namen und Typen zurückgeben.
-> * In der Abfrage können nur die folgenden Operatoren verwendet `extend` werden:, `where` , `project` , `project-away` , `project-rename` , `project-reorder` `join` und `union` .
+> * In der Abfrage können nur die folgenden Operatoren verwendet `extend` werden:, `where` , `project` , `project-away` , `project-keep` , `project-rename` , `project-reorder` `join` und `union` .
 > * Die Abfrage kann nicht auf andere Tabellen verweisen, für die RLS aktiviert ist.
 > * Bei der Abfrage kann es sich um eine der folgenden oder um eine Kombination der folgenden Elemente handeln:
 >    * Abfrage (z. b. `<table_name> | extend CreditCardNumber = "****"` )
@@ -77,7 +77,7 @@ Dies ist nützlich, wenn Sie verschiedene Abfragen für row_level_security auspr
 .alter table Customers policy row_level_security enable "TrimCreditCardNumbers"
 ```
 
-**Leistungs Hinweis**: `UserCanSeeFullNumbers` wird zuerst ausgewertet, und dann wird entweder `AllData` oder `PartialData` ausgewertet, aber nicht beides, was das erwartete Ergebnis ist.
+**Leistungs Hinweis** : `UserCanSeeFullNumbers` wird zuerst ausgewertet, und dann wird entweder `AllData` oder `PartialData` ausgewertet, aber nicht beides, was das erwartete Ergebnis ist.
 Weitere Informationen zu den Auswirkungen von RLS auf die Leistung finden Sie [hier](rowlevelsecuritypolicy.md#performance-impact-on-queries).
 
 ## <a name="deleting-the-policy"></a>Löschen der Richtlinie
