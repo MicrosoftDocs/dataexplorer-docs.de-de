@@ -7,12 +7,12 @@ ms.reviewer: vladikb
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 07/07/2020
-ms.openlocfilehash: 56fd2d253cac80f097caa9206cd3b7c2a9d3c118
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 4ab82b593367a3b9fe466c2ddbd6fbee70ad628f
+ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343503"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92902616"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-net-sdk"></a>Erfassen von Daten mit dem .NET SDK für Azure Data Explorer 
 
@@ -21,6 +21,7 @@ ms.locfileid: "92343503"
 > * [Python](python-ingest-data.md)
 > * [Node](node-ingest-data.md)
 > * [Go](go-ingest-data.md)
+> * [Java](java-ingest-data.md)
 
 Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Er bietet zwei Clientbibliotheken für .NET: eine [Erfassungsbibliothek](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Ingest/) und eine [Datenbibliothek](https://www.nuget.org/packages/Microsoft.Azure.Kusto.Data/). Weitere Informationen zum .NET SDK finden Sie unter [Über .NET SDK](./kusto/api/netfx/about-the-sdk.md).
 Mit diesen Bibliotheken können Sie über Ihren Code Daten in einem Cluster erfassen (laden) und Daten abfragen. In diesem Artikel erstellen Sie zunächst eine Tabelle und eine Datenzuordnung in einem Testcluster. Anschließend stellen Sie die Erfassung im Cluster in eine Warteschlange und überprüfen die Ergebnisse.

@@ -7,12 +7,12 @@ ms.reviewer: radennis
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: b15b2330df96071069e6b86a0fff6b9d77a6b0a1
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 24ec28fee62b4633e5a5694faf731d1888858af3
+ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88872827"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92902603"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-azure-cli"></a>Erstellen eines Azure Data Explorer-Clusters und einer Datenbank über die Azure-Befehlszeilenschnittstelle
 
@@ -22,6 +22,7 @@ ms.locfileid: "88872827"
 > * [PowerShell](create-cluster-database-powershell.md)
 > * [C#](create-cluster-database-csharp.md)
 > * [Python](create-cluster-database-python.md)
+> * [Go](create-cluster-database-go.md)
 > * [ARM-Vorlage](create-cluster-database-resource-manager.md)
 
 Azure Data Explorer ist ein schneller, vollständig verwalteter Datenanalysedienst für Echtzeitanalysen großer Datenmengen, die von Anwendungen, Websites, IoT-Geräten usw. gestreamt werden. Um den Azure Data Explorer zu verwenden, erstellen Sie zuerst einen Cluster und anschließend eine oder mehrere Datenbanken in diesem Cluster. Anschließend erfassen (laden) Sie Daten in eine Datenbank, damit Sie diese abfragen können. In diesem Artikel erstellen Sie einen Cluster und eine Datenbank über die Azure-Befehlszeilenschnittstelle.
@@ -67,7 +68,7 @@ Die folgenden Schritte sind nicht erforderlich, wenn Sie Befehle in Azure Cloud 
    |**Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**|
    |---|---|---|
    | name | *azureclitest* | Der gewünschte Name Ihres Clusters.|
-   | sku | *Standard_D13_v2* | Die SKU, die für Ihren Cluster verwendet wird. Parameter: *name*: Der SKU-Name *tier*: Die SKU-Ebene |
+   | sku | *Standard_D13_v2* | Die SKU, die für Ihren Cluster verwendet wird. Parameter: *name* : Der SKU-Name *tier* : Die SKU-Ebene |
    | resource-group | *testrg* | Der Name der Ressourcengruppe, in der der Cluster erstellt werden soll |
    | location | *westus* | Der Standort, an dem der Cluster erstellt wird. |
 
@@ -94,7 +95,7 @@ Wenn das Ergebnis `provisioningState` mit dem Wert `Succeeded` enthält, wurde d
    | cluster-name | *azureclitest* | Der Name Ihres Clusters, in dem die Datenbank erstellt werden soll.|
    | database-name | *clidatabase* | Der Name Ihrer Datenbank.|
    | resource-group | *testrg* | Der Name der Ressourcengruppe, in der der Cluster erstellt werden soll |
-   | read-write-database | *P365D* *P31D* *westus* | Der Datenbanktyp. Parameter: *soft-delete-period*: Gibt den Zeitraum an, wie lange Daten für Abfragen verfügbar sein sollen. Weitere Informationen finden Sie unter [Aufbewahrungsrichtlinie](kusto/management/retentionpolicy.md). *hot-cache-period*: Gibt den Zeitraum an, wie lange Daten im Cache verfügbar sein sollen. Weitere Informationen finden Sie unter [Cacherichtlinie](kusto/management/cachepolicy.md). *location*: Der Standort, an dem die Datenbank erstellt wird. |
+   | read-write-database | *P365D* *P31D* *westus* | Der Datenbanktyp. Parameter: *soft-delete-period* : Gibt den Zeitraum an, wie lange Daten für Abfragen verfügbar sein sollen. Weitere Informationen finden Sie unter [Aufbewahrungsrichtlinie](kusto/management/retentionpolicy.md). *hot-cache-period* : Gibt den Zeitraum an, wie lange Daten im Cache verfügbar sein sollen. Weitere Informationen finden Sie unter [Cacherichtlinie](kusto/management/cachepolicy.md). *location* : Der Standort, an dem die Datenbank erstellt wird. |
 
 1. Führen Sie den folgenden Befehl aus, um die erstellte Datenbank anzuzeigen:
 

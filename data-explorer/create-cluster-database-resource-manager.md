@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: 46ccf006c6f2cf167953c64bcaa2f3de0fbaf4b6
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: 40cd53d1bff6b33b81878c85c6c22c3fb85655ee
+ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91942215"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92902588"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-an-azure-resource-manager-template"></a>Erstellen eines Azure Data Explorer-Clusters und einer Datenbank mithilfe einer Azure Resource Manager-Vorlage
 
@@ -22,6 +22,7 @@ ms.locfileid: "91942215"
 > * [PowerShell](create-cluster-database-powershell.md)
 > * [C#](create-cluster-database-csharp.md)
 > * [Python](create-cluster-database-python.md)
+> * [Go](create-cluster-database-go.md)
 > * [Azure Resource Manager-Vorlage](create-cluster-database-resource-manager.md)
 
 Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Um den Azure Data Explorer zu verwenden, erstellen Sie zuerst einen Cluster und anschließend eine oder mehrere Datenbanken in diesem Cluster. Anschließend erfassen (laden) Sie Daten in eine Datenbank, damit Sie diese abfragen können. 
@@ -102,7 +103,7 @@ Sie können die Azure Resource Manager-Vorlage über das [Azure-Portal](#use-the
 
 ### <a name="use-the-azure-portal-to-deploy-the-template-and-verify-template-deployment"></a>Verwenden des Azure-Portals zum Bereitstellen der Vorlage und Überprüfen der Vorlagenbereitstellung
 
-1. Verwenden Sie zum Erstellen eines Clusters und einer Datenbank die folgende Schaltfläche, um die Bereitstellung zu starten. Klicken Sie mit der rechten Maustaste, und wählen Sie **In neuem Fenster öffnen**, damit Sie die restlichen Schritte in diesem Artikel ausführen können.
+1. Verwenden Sie zum Erstellen eines Clusters und einer Datenbank die folgende Schaltfläche, um die Bereitstellung zu starten. Klicken Sie mit der rechten Maustaste, und wählen Sie **In neuem Fenster öffnen** , damit Sie die restlichen Schritte in diesem Artikel ausführen können.
 
     [![Screenshot: Blaue Schaltfläche mit abgebildeten Wolken und der Bezeichnung „In Azure bereitstellen“](media/create-cluster-database-resource-manager/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-kusto-cluster-database%2Fazuredeploy.json)
 
@@ -136,7 +137,7 @@ Die Erstellung eines Azure Data Explorer-Clusters und einer Datenbank kann einig
     Write-Host "Press [ENTER] to continue ..."
     ```
 
-1. Wählen Sie **Kopieren**, um das PowerShell-Skript zu kopieren.
+1. Wählen Sie **Kopieren** , um das PowerShell-Skript zu kopieren.
 1. Klicken Sie mit der rechten Maustaste auf die Shellkonsole, und wählen Sie **Einfügen** aus.
 Die Erstellung eines Azure Data Explorer-Clusters und einer Datenbank kann einige Minuten dauern.
 

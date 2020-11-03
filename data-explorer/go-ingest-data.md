@@ -7,12 +7,12 @@ ms.reviewer: abhishgu
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/10/2020
-ms.openlocfilehash: c133c3cf1185e7ffdb959ed6ea127af7502820c4
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 5fc25c64eabfb9fa27b66b47d0443178e19b4e57
+ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342568"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92902500"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-go-sdk"></a>Erfassen von Daten mit dem Go SDK für Azure Data Explorer 
 
@@ -21,6 +21,7 @@ ms.locfileid: "92342568"
 > * [Python](python-ingest-data.md)
 > * [Node](node-ingest-data.md)
 > * [Go](go-ingest-data.md)
+> * [Java](java-ingest-data.md)
 
 Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Er bietet eine [Go SDK-Clientbibliothek](kusto/api/golang/kusto-golang-client-library.md) für die Interaktion mit dem Azure Data Explorer-Dienst. Mit dem [Go SDK](https://github.com/Azure/azure-kusto-go) können Daten in Azure Data Explorer-Clustern erfasst, gesteuert und abgefragt werden. 
 

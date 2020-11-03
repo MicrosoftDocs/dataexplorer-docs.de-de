@@ -7,20 +7,18 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/05/2019
-ms.openlocfilehash: 50e949d7ef15948dd46f5553fad8d10dad5faa96
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: fcb1cf067263b5e6a0aaf7b45605d4e93be1d8cc
+ms.sourcegitcommit: 46ae22f0f1eda2a21ac01de8d0c2fa2f57de0ad3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88875054"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93238266"
 ---
 # <a name="query-data-using-the-azure-data-explorer-python-library"></a>Abfragen von Daten mit der Azure Data Explorer-Bibliothek für Python
 
 In diesem Artikel fragen Sie Daten mithilfe des Azure Data Explorer ab. Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten).
 
 Der Azure-Daten-Explorer bietet eine [Datenclientbibliothek für Python](https://github.com/Azure/azure-kusto-python/tree/master/azure-kusto-data). Mit dieser Bibliothek können Sie Daten aus Ihrem Code abfragen. Stellen Sie eine Verbindung mit einer Tabelle im *Hilfecluster* her, den wir als Lernhilfe eingerichtet haben. Sie können dann eine Tabelle in diesem Cluster abfragen und die Ergebnisse zurückgeben lassen.
-
-Dieser Artikel ist auch als [Azure-Notebook](https://notebooks.azure.com/ManojRaheja/libraries/KustoPythonSamples/html/QueryKusto.ipynb) verfügbar.
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -30,7 +28,7 @@ Dieser Artikel ist auch als [Azure-Notebook](https://notebooks.azure.com/ManojRa
 
 ## <a name="install-the-data-library"></a>Installieren der Datenbibliothek
 
-Installieren Sie *azure-kusto-data*.
+Installieren Sie *azure-kusto-data* .
 
 ```
 pip install azure-kusto-data
@@ -38,7 +36,7 @@ pip install azure-kusto-data
 
 ## <a name="add-import-statements-and-constants"></a>Hinzufügen von Importanweisungen und Konstanten
 
-Importieren Sie Klassen aus der Bibliothek sowie *pandas*, eine Datenanalysebibliothek.
+Importieren Sie Klassen aus der Bibliothek sowie *pandas* , eine Datenanalysebibliothek.
 
 ```python
 from azure.kusto.data import KustoClient, KustoConnectionStringBuilder
@@ -77,7 +75,7 @@ KCSB.authority_id = AAD_TENANT_ID
 
 ## <a name="connect-to-azure-data-explorer-and-execute-a-query"></a>Herstellen einer Verbindung mit dem Azure-Daten-Explorer und Ausführen einer Abfrage
 
-Führen Sie eine Abfrage auf dem Cluster aus, und speichern Sie die Ausgabe in einem Datenrahmen. Wenn dieser Code ausgeführt wird, gibt er eine Meldung wie die folgende zurück: *Verwenden Sie zum Anmelden einen Webbrowser, um die Seite https://microsoft.com/devicelogin zu öffnen, und geben Sie den Code F3W4VWZDM ein, um sich zu authentifizieren*. Befolgen Sie die Schritte für die Anmeldung, und kehren Sie dann zurück, um den Codeblock auszuführen.
+Führen Sie eine Abfrage auf dem Cluster aus, und speichern Sie die Ausgabe in einem Datenrahmen. Wenn dieser Code ausgeführt wird, wird eine Meldung wie die folgende zurückgegeben: *Verwenden Sie zur Anmeldung einen Webbrowser, um die Seite https://microsoft.com/devicelogin zu öffnen. Geben Sie dann zur Authentifizierung den Code F3W4VWZDM ein* . Befolgen Sie die Schritte für die Anmeldung, und kehren Sie dann zurück, um den Codeblock auszuführen.
 
 ```python
 KUSTO_CLIENT = KustoClient(KCSB)

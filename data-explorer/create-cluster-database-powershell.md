@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: bb15bf9393ff6ae4a06fa97ade4070dfcd5e2ef8
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 9d2e50e54d4a33b0648760fc4df395c9686904e9
+ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343136"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92902555"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-powershell"></a>Erstellen eines Azure Data Explorer-Clusters und einer Datenbank mithilfe von PowerShell
 
@@ -22,6 +22,7 @@ ms.locfileid: "92343136"
 > * [PowerShell](create-cluster-database-powershell.md)
 > * [C#](create-cluster-database-csharp.md)
 > * [Python](create-cluster-database-python.md)
+> * [Go](create-cluster-database-go.md)
 > * [ARM-Vorlage](create-cluster-database-resource-manager.md)  
 
 Azure Data Explorer ist ein schneller, vollständig verwalteter Datenanalysedienst für Echtzeitanalysen großer Datenmengen, die von Anwendungen, Websites, IoT-Geräten usw. gestreamt werden. Um den Azure Data Explorer zu verwenden, erstellen Sie zuerst einen Cluster und anschließend eine oder mehrere Datenbanken in diesem Cluster. Anschließend erfassen (laden) Sie Daten in eine Datenbank, damit Sie diese abfragen können. In diesem Artikel erstellen Sie einen Cluster und eine Datenbank mit PowerShell. Sie können PowerShell-Cmdlets und -Skripts unter Windows oder Linux oder in [Azure Cloud Shell](/azure/cloud-shell/overview) mit [Az.Kusto](/powershell/module/az.kusto/?view=azps-1.4.0#kusto) ausführen, um Azure Data Explorer-Cluster und -Datenbanken zu erstellen und zu konfigurieren.
