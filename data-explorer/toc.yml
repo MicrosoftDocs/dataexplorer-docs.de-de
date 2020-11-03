@@ -64,7 +64,7 @@
   items:
     - name: Erstellen eines Clusters und einer Datenbank
       items:
-        - name: Azure-Befehlszeilenschnittstelle
+        - name: Azure CLI
           href: create-cluster-database-cli.md
         - name: PowerShell
           href: create-cluster-database-powershell.md
@@ -226,13 +226,13 @@
             - name: Bewährte Methoden für Power BI
               href: power-bi-best-practices.md
             - name: Connector
-              displayName: PowerBI
+              displayName: Power BI
               href: power-bi-connector.md
             - name: Importierte Abfrage
-              displayName: PowerBI
+              displayName: Power BI
               href: power-bi-imported-query.md
             - name: SQL-Abfrage (SQL query)
-              displayName: PowerBI
+              displayName: Power BI
               href: power-bi-sql-query.md
         - name: Excel
           items:
