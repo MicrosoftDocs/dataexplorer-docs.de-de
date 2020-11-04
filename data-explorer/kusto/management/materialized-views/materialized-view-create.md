@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: 95f8ce19c6edb419de4fb5053a79c243e3e332c4
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 383d1ab5d948a5fbcfb3ab2aad0ff8e5ed675075
+ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92252847"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93349442"
 ---
 # <a name="create-materialized-view"></a>.create materialized-view
 
@@ -45,7 +45,7 @@ Für den Create-Vorgang sind [Datenbankadministrator](../access-control/role-bas
 
 ## <a name="arguments"></a>Argumente
 
-|Argument|type|BESCHREIBUNG
+|Argument|type|Beschreibung
 |----------------|-------|---|
 |Ansichtsname|String|Der materialisierte Sichtname. Der Sichtname kann nicht mit Tabellen-oder Funktionsnamen in derselben Datenbank in Konflikt stehen und muss den [bezeichnerbenennungs Regeln](../../query/schema-entities/entity-names.md#identifier-naming-rules)entsprechen. |
 |SourceTableName|String|Der Name der Quell Tabelle, in der die Sicht definiert ist.|
@@ -72,7 +72,7 @@ Die im materialisierte View-Argument verwendete Abfrage ist durch die folgenden 
 
     * Datensätze in der Quell Tabelle der Sicht (die Fakten Tabelle) werden nur einmal materialisiert. Eine andere Erfassungs Latenz zwischen der Fakten Tabelle und der Dimensions Tabelle kann sich auf die Sicht Ergebnisse auswirken.
 
-    * **Beispiel**: eine Sicht Definition enthält eine innere Verknüpfung mit einer Dimensions Tabelle. Zum Zeitpunkt der Materialisierung wurde der Dimensions Daten Satz nicht vollständig erfasst, wurde aber bereits in der Fakten Tabelle erfasst. Dieser Datensatz wird aus der Sicht gelöscht und nie neu verarbeitet. 
+    * **Beispiel** : eine Sicht Definition enthält eine innere Verknüpfung mit einer Dimensions Tabelle. Zum Zeitpunkt der Materialisierung wurde der Dimensions Daten Satz nicht vollständig erfasst, wurde aber bereits in der Fakten Tabelle erfasst. Dieser Datensatz wird aus der Sicht gelöscht und nie neu verarbeitet. 
 
         Wenn der Join ein äußerer Join ist, wird der Datensatz aus der Fakten Tabelle ebenso verarbeitet und der Ansicht mit einem NULL-Wert für die Spalten der Dimensions Tabelle hinzugefügt. Datensätze, die bereits (mit NULL-Werten) der Sicht hinzugefügt wurden, werden nicht erneut verarbeitet. Ihre Werte in Spalten aus der Dimensions Tabelle bleiben NULL.
 
@@ -80,7 +80,7 @@ Die im materialisierte View-Argument verwendete Abfrage ist durch die folgenden 
 
 Die folgenden Elemente werden in der-Klausel unterstützt `with(propertyName=propertyValue)` . Alle Eigenschaften sind optional.
 
-|Eigenschaft|type|BESCHREIBUNG |
+|Eigenschaft|type|Beschreibung |
 |----------------|-------|---|
 |Abgleich|bool|Gibt an, ob die Ansicht auf der Grundlage aller Datensätze erstellt werden soll, die sich derzeit in *SourceTable* ( `true` ) befinden, oder ob Sie "From-Now-on" () erstellt wird `false` Der Standardwert ist `false`.| 
 |effectivedatetime|datetime| Wenn die Angabe zusammen mit festgelegt `backfill=true` ist, wird die Erstellung nur mit Datensätzen Rück gefüllt, die nach DateTime erfasst wurden. "Backfill" muss ebenfalls auf "true" festgelegt werden. Erwartet ein DateTime-Literalzeichen, z. b. `effectiveDateTime=datetime(2019-05-01)`|
@@ -202,7 +202,7 @@ Die folgenden Aggregations Funktionen werden unterstützt:
 
 * Materialisierte Sicht Abfrage Filter werden optimiert, wenn Sie nach einer der materialisierten Sicht Dimensionen (Aggregation by-Klausel) gefiltert werden. Wenn Sie wissen, dass das Abfrage Muster häufig nach einer Spalte filtert, bei der es sich um eine Dimension in der materialisierten Sicht handeln kann, fügen Sie Sie in die Sicht ein. Beispiel: für eine materialisierte Sicht, die eine `arg_max` durch verfügbar macht, die `ResourceId` häufig von gefiltert wird `SubscriptionId` , lautet die Empfehlung wie folgt:
 
-    **Do**Ausführen:
+    **Do** Ausführen:
     
     ```kusto
     .create materialized-view ArgMaxResourceId on table FactResources
@@ -211,7 +211,7 @@ Die folgenden Aggregations Funktionen werden unterstützt:
     }
     ``` 
     
-    Nicht **tun**:
+    Nicht **tun** :
     
     ```kusto
     .create materialized-view ArgMaxResourceId on table FactResources
@@ -222,7 +222,7 @@ Die folgenden Aggregations Funktionen werden unterstützt:
 
 * Schließen Sie keine Transformationen, Normalisierungen und anderen umfangreichen Berechnungen ein, die als Teil der materialisierten Sicht Definition in eine [Aktualisierungs Richtlinie](../updatepolicy.md) verschoben werden können. Führen Sie stattdessen alle diese Prozesse in einer Update Richtlinie aus, und führen Sie die Aggregation nur in der materialisierten Sicht aus. Verwenden Sie diesen Prozess für die Suche in Dimensions Tabellen, falls zutreffend.
 
-    **Do**Ausführen:
+    **Do** Ausführen:
     
     * Update Richtlinie:
     
@@ -241,19 +241,19 @@ Die folgenden Aggregations Funktionen werden unterstützt:
     ```kusto
     .create materialized-view Usage on table Events
     {
-    &nbsp;     Target 
-    &nbsp;     | summarize count() by ResourceId 
+        Target 
+        | summarize count() by ResourceId 
     }
     ```
     
-    Nicht **tun**:
+    Nicht **tun** :
     
     ```kusto
     .create materialized-view Usage on table SourceTable
     {
-    &nbsp;     SourceTable 
-    &nbsp;     | extend ResourceId = strcat('subscriptions/', toupper(SubscriptionId), '/', resourceId)
-    &nbsp;     | summarize count() by ResourceId
+        SourceTable 
+        | extend ResourceId = strcat('subscriptions/', toupper(SubscriptionId), '/', resourceId)
+        | summarize count() by ResourceId
     }
     ```
 
@@ -289,13 +289,13 @@ Der Erstellungs Prozess kann nicht sofort abgebrochen werden. Der Cancel-Befehl 
 
 ### <a name="properties"></a>Eigenschaften
 
-|Eigenschaft|type|BESCHREIBUNG
+|Eigenschaft|type|Beschreibung
 |----------------|-------|---|
 |operationId|Guid|Die Vorgangs-ID, die vom CREATE MATERIALIZED-VIEW-Befehl zurückgegeben wird.|
 
 ### <a name="output"></a>Output
 
-|Ausgabeparameter |type |BESCHREIBUNG
+|Ausgabeparameter |type |Beschreibung
 |---|---|---
 |OperationId|Guid|Die Vorgangs-ID des Befehls Create materialisierte View.
 |Vorgang|String|Art des Vorgangs.

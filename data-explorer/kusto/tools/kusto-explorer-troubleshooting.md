@@ -7,12 +7,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 04/13/2020
-ms.openlocfilehash: 365ce1e4c8e5dd2157a7975095b9e30dfd1e3722
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 6e460ddaab7d58e4dac104db511119933c531506
+ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342704"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93349425"
 ---
 # <a name="troubleshooting"></a>Problembehandlung
 
@@ -127,7 +127,7 @@ Following errors were detected during this operation.
 #### <a name="enabling-clickonce-verbose-logging"></a>Aktivieren der ausführlichen ClickOnce-Protokollierung
 
 1. Wenn die Anwendung immer noch nicht gestartet wird:
-    1. Aktivieren Sie die ausführliche [ClickOnce-Protokollierung](https://docs.microsoft.com/visualstudio/deployment/how-to-specify-verbose-log-files-for-clickonce-deployments) , indem Sie den LogVerbosityLevel-Zeichen folgen Wert 1 unter:
+    1. Aktivieren Sie die ausführliche [ClickOnce-Protokollierung](/visualstudio/deployment/how-to-specify-verbose-log-files-for-clickonce-deployments) , indem Sie den LogVerbosityLevel-Zeichen folgen Wert 1 unter:
 
         ```kusto
         HKEY_CURRENT_USER\Software\Classes\Software\Microsoft\Windows\CurrentVersion\Deployment
@@ -163,7 +163,7 @@ Die von der Anwendung "Kusto. Explorer" gespeicherten Daten finden Sie hier: `C:
 
 Wenn erforderlich, können Sie Kusto. Explorer vollständig zurücksetzen. Im folgenden Verfahren wird beschrieben, wie Sie "Kusto. Explorer" progressiv zurücksetzen, bis Sie vom Computer entfernt werden und von Grund auf neu installiert werden müssen.
 
-1. Öffnen Sie in Windows das **Programm ändern oder entfernen Sie ein Programm** (auch als **Programme und Funktionen**bezeichnet).
+1. Öffnen Sie in Windows das **Programm ändern oder entfernen Sie ein Programm** (auch als **Programme und Funktionen** bezeichnet).
 1. Wählen Sie alle Elemente aus, die mit beginnen `Kusto.Explorer` .
 1. Wählen Sie **Deinstallieren** aus.
 
@@ -176,8 +176,8 @@ Wenn erforderlich, können Sie Kusto. Explorer vollständig zurücksetzen. Im fo
 Es ist auch möglich, zu einer bestimmten Version von Kusto. Explorer zurückzukehren:
 
 1. Führen Sie `appwiz.cpl` aus.
-1. Wählen Sie **Kusto. Explorer** und anschließend **Deinstallieren/ändern**aus.
-1. Wählen Sie **Wiederherstellen des vorherigen Zustands der Anwendung**aus.
+1. Wählen Sie **Kusto. Explorer** und anschließend **Deinstallieren/ändern** aus.
+1. Wählen Sie **Wiederherstellen des vorherigen Zustands der Anwendung** aus.
 
 ## <a name="next-steps"></a>Nächste Schritte
 
