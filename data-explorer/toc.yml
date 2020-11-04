@@ -39,6 +39,7 @@
         - name: Datenerfassungseigenschaften
           href: ingestion-properties.md
         - name: Formate für die Datenerfassung
+          displayName: supported data formats
           href: ingestion-supported-formats.md
     - name: Kusto-Abfragesprache
       items:
@@ -64,7 +65,7 @@
   items:
     - name: Erstellen eines Clusters und einer Datenbank
       items:
-        - name: Azure CLI
+        - name: Azure-Befehlszeilenschnittstelle
           href: create-cluster-database-cli.md
         - name: PowerShell
           href: create-cluster-database-powershell.md
