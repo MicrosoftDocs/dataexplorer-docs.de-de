@@ -1,6 +1,6 @@
 ---
-title: 'Benutzerdefinierte Funktionen: Azure Daten-Explorer | Microsoft-Dokumentation'
-description: In diesem Artikel werden benutzerdefinierte Funktionen in Azure Daten-Explorer beschrieben.
+title: 'User-Defined Funktionen: Azure Daten-Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel werden User-Defined Funktionen in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,16 +8,16 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 769ebc16da0780f1d1832dcbf49bad516c47abd3
-ms.sourcegitcommit: 2764e739b4ad51398f4f0d3a9742d7168c4f5fd7
+ms.openlocfilehash: e611bfb1d5dbf0122553b223a200400c526c975f
+ms.sourcegitcommit: 42cc7d11f41a5bfa9e021764b044dcd68d99a258
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/05/2020
-ms.locfileid: "91712016"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93403747"
 ---
 # <a name="user-defined-functions"></a>Benutzerdefinierte Funktionen
 
-**Benutzerdefinierte Funktionen** sind wiederverwendbare Unterabfragen, die als Teil der Abfrage selbst definiert werden können (**Ad-hoc-Funktionen**) oder als Teil der Daten Bank Metadaten (**gespeicherte Funktionen**) persistent gespeichert werden. Benutzerdefinierte Funktionen werden durch einen **Namen**aufgerufen, werden mit 0 (null) oder mehr **Eingabe Argumenten** bereitgestellt (bei denen es sich um skalare oder tabellarische Werte handeln kann), und Sie können basierend auf **dem Funktions Rumpf**einen einzelnen Wert (der Skalar oder tabellarisch sein) liefern.
+**Benutzerdefinierte Funktionen** sind wiederverwendbare Unterabfragen, die als Teil der Abfrage selbst definiert werden können ( **Ad-hoc-Funktionen** ) oder als Teil der Daten Bank Metadaten ( **gespeicherte Funktionen** ) persistent gespeichert werden. Benutzerdefinierte Funktionen werden durch einen **Namen** aufgerufen, werden mit 0 (null) oder mehr **Eingabe Argumenten** bereitgestellt (bei denen es sich um skalare oder tabellarische Werte handeln kann), und Sie können basierend auf **dem Funktions Rumpf** einen einzelnen Wert (der Skalar oder tabellarisch sein) liefern.
 
 Eine benutzerdefinierte Funktion gehört zu einer von zwei Kategorien:
 
@@ -44,6 +44,9 @@ Die Eingabeargumente und die Ausgabe der Funktion bestimmen, ob es sich um einen
 Gültige Namen von benutzerdefinierten Funktionen müssen denselben [bezeichnerbenennungs Regeln](../schema-entities/entity-names.md#identifier-naming-rules) wie andere Entitäten entsprechen.
 
 Der Name muss auch innerhalb des Definitions Bereichs eindeutig sein.
+
+> [!NOTE]
+> Wenn eine gespeicherte Funktion und eine Tabelle denselben Namen aufweisen, überschreibt die gespeicherte Funktion beim Abfragen des Tabellen-/Funktionsnamens einen überschreiben.
 
 ## <a name="input-arguments"></a>Eingabeargumente
 
@@ -268,7 +271,7 @@ union
 
 ## <a name="view-functions"></a>Funktionen anzeigen
 
-Eine benutzerdefinierte Funktion, die keine Argumente annimmt und einen tabellarischen Ausdruck zurückgibt, kann als **Sicht**gekennzeichnet werden. Das Markieren einer benutzerdefinierten Funktion als Sicht bedeutet, dass sich die Funktion wie eine Tabelle verhält, wenn die Namensauflösung für die Platzhalter Tabelle durchgeführt wird.
+Eine benutzerdefinierte Funktion, die keine Argumente annimmt und einen tabellarischen Ausdruck zurückgibt, kann als **Sicht** gekennzeichnet werden. Das Markieren einer benutzerdefinierten Funktion als Sicht bedeutet, dass sich die Funktion wie eine Tabelle verhält, wenn die Namensauflösung für die Platzhalter Tabelle durchgeführt wird.
 Das folgende Beispiel zeigt zwei benutzerdefinierte Funktionen, `T_view` und `T_notview` , und zeigt, wie nur der erste durch den Platzhalter Verweis in aufgelöst wird `union` :
 
 ```kusto

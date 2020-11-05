@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: cb8e9d5afea956ee42fe3b444c564059e34b9a24
-ms.sourcegitcommit: d9569989283f4e98846725e2bc4c96149bd01281
+ms.openlocfilehash: 5732d0fa9773d0c8fe5420026cb855d1040b8706
+ms.sourcegitcommit: 42cc7d11f41a5bfa9e021764b044dcd68d99a258
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/17/2020
-ms.locfileid: "92155413"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93403764"
 ---
 # <a name="sandboxes"></a>Sandboxes
 
@@ -65,8 +65,8 @@ Einige Einschränkungen können mithilfe einer [Sandbox-Richtlinie](../managemen
 
 ## <a name="errors"></a>Errors
 
-|ErrorCode                 |Status                     |Nachricht                                                                                            |Möglicher Grund                                                                                                    |
+|ErrorCode                 |Status                     |`Message`                                                                                            |Möglicher Grund                                                                                                    |
 |--------------------------|---------------------------|---------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------|
 |E_SB_QUERY_THROTTLED_ERROR|Toomanyrequests (429)      |Die Sandbox-Abfrage wurde aufgrund einer Drosselung abgebrochen. Erneuter Versuch, nachdem einige Backoff erfolgreich ausgeführt werden konnten   |Auf dem Zielknoten sind keine Sandkästen verfügbar. Neue Sand Fächer sollten in wenigen Sekunden verfügbar werden.         |
 |E_SB_QUERY_THROTTLED_ERROR|Toomanyrequests (429)      |Sandboxes der Art "{Kind}" wurden noch nicht initialisiert.                                            |Die Sandbox Richtlinie wurde vor kurzem geändert. Neue Sand Fächer, die die neue Richtlinie einhalten, werden in wenigen Sekunden verfügbar sein.|
-|                          |Internalserviceerror (520) |Die Sandbox-Abfrage wurde aufgrund eines Fehlers bei der Initialisierung von Sandkästen abgebrochen.                         |Unerwarteter Infrastruktur Fehler. Wenn das Problem weiterhin besteht, öffnen Sie eine Supportanfrage.                         |
+|                          |Internalserviceerror (520) |Die Sandbox-Abfrage wurde aufgrund eines Fehlers bei der Initialisierung von Sandkästen abgebrochen.                         |Unerwarteter Infrastruktur Fehler.                         |
