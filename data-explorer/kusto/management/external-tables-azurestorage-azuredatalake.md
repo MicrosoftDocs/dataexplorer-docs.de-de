@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 1d0625c949fe563084caeec936e3433c9ee70f5e
-ms.sourcegitcommit: ef3d919dee27c030842abf7c45c9e82e6e8350ee
+ms.openlocfilehash: df38761d7ffebdf5e36c14ea25b0d02377bfa128
+ms.sourcegitcommit: fdc1f917621e9b7286bba23903101298cccc4c95
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92630108"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93364121"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake
 
@@ -74,7 +74,7 @@ Die Partitionsliste ist eine beliebige Kombination von Partitions Spalten, die i
 
   *PartitionName* `:` `string` `=` *ColumnName*
 
-* Partition, basierend auf einem [Hash](../query/hashfunction.md)Wert der Zeichen folgen Spalte, Modulo *Number* .
+* Partition, basierend auf einem [Hash](../query/hashfunction.md)Wert der Zeichen folgen Spalte, Modulo *Number*.
 
   *PartitionName* `:` `long` `=` `hash` `(` *ColumnName* - `,` *Nummer*`)`
 
@@ -138,7 +138,7 @@ Weitere Informationen finden Sie unter [Speicher Verbindungs](../api/connection-
 <a name="properties"></a>
 *Optionale Eigenschaften*
 
-| Eigenschaft         | type     | BESCHREIBUNG       |
+| Eigenschaft         | type     | Beschreibung       |
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | Tabellen Ordner                                                                     |
 | `docString`      | `string` | Zeichenfolge, die die Tabelle dokumentiert                                                       |
@@ -219,6 +219,14 @@ dataformat=csv
 with (fileExtension = ".txt")
 ```
 
+Um nach Partitions Spalten in einer Abfrage zu filtern, geben Sie im Abfrage Prädikat den ursprünglichen Spaltennamen an:
+
+```kusto
+external_table("ExternalTable")
+ | where Timestamp between (datetime(2020-01-01) .. datetime(2020-02-01))
+ | where CustomerName in ("John.Doe", "Ivan.Ivanov")
+```
+
 **Beispielausgabe**
 
 |TableName|TableType|Ordner|DocString|Eigenschaften|ConnectionStrings|Partitionen|PathFormat|
@@ -241,6 +249,14 @@ dataformat=parquet
 ( 
    h@'https://storageaccount.blob.core.windows.net/container1;secretKey'
 )
+```
+
+Um nach virtuellen Spalten in einer Abfrage zu filtern, geben Sie im Abfrage Prädikat Partitionsnamen an:
+
+```kusto
+external_table("ExternalTable")
+ | where Date between (datetime(2020-01-01) .. datetime(2020-02-01))
+ | where CustomerName in ("John.Doe", "Ivan.Ivanov")
 ```
 
 <a name="file-filtering"></a>
