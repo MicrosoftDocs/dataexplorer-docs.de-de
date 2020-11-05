@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: a508d40d4e48205288dcb6133e267578a54198f9
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 2d2caef1f406b63bcfd22e8bc565efce8c1f9d39
+ms.sourcegitcommit: 0e2fbc26738371489491a96924f25553a8050d51
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343520"
+ms.lasthandoff: 11/02/2020
+ms.locfileid: "93148506"
 ---
 # <a name="best-practices-for-using-power-bi-to-query-and-visualize-azure-data-explorer-data"></a>Bewährte Methoden für die Verwendung von Power BI zum Abfragen und Visualisieren von Azure Data Explorer-Daten
 
@@ -128,7 +128,7 @@ Mit [Abfrageparametern](kusto/query/queryparametersstatement.md) können Sie die
 
 Verwenden Sie einen Abfrageparameter, um Informationen in der Abfrage zu filtern und die Abfrageleistung zu optimieren.
  
-Öffnen Sie im Fenster **Abfragen bearbeiten** -> **Home** > **Erweiterter Editor** .
+Öffnen Sie im Fenster **Abfragen bearbeiten** -> **Home** > **Erweiterter Editor**.
 
 1. Suchen Sie den folgenden Abschnitt in der Abfrage:
 
@@ -173,6 +173,20 @@ Verwenden Sie einen Abfrageparameter, um Informationen in der Abfrage zu filtern
 Abfrageparameter können in beliebigen Abfrageschritten verwendet werden, vorausgesetzt, sie werden unterstützt. Filtern Sie die Ergebnisse z. B. basierend auf dem Wert eines Parameters.
 
 ![Filtern von Ergebnissen mithilfe eines Parameters](media/power-bi-best-practices/filter-using-parameter.png)
+
+### <a name="use-valuenativequery-for-azure-data-explorer-features"></a>Verwenden von Value.NativeQuery für Azure Data Explorer-Features
+
+Wenn Sie ein Azure Data Explorer-Feature nutzen möchten, das in Power BI nicht unterstützt wird, verwenden Sie die Methode [Value.NativeQuery()](https://docs.microsoft.com/powerquery-m/value-nativequery) in M. Mit dieser Methode wird ein Fragment der Kusto-Abfragesprache in die generierte Abfrage eingefügt, und Sie haben mit dieser Methode außerdem mehr Kontrolle über die ausgeführte Abfrage.
+
+Im folgenden Beispiel wird die Verwendung der `percentiles()`-Funktion in Azure Data Explorer veranschaulicht:
+
+```m
+let
+    StormEvents = AzureDataExplorer.Contents(DefaultCluster, DefaultDatabase){[Name = DefaultTable]}[Data],
+    Percentiles = Value.NativeQuery(StormEvents, "| summarize percentiles(DamageProperty, 50, 90, 95) by State")
+in
+    Percentiles
+```
 
 ### <a name="dont-use-power-bi-data-refresh-scheduler-to-issue-control-commands-to-kusto"></a>Verwenden Sie keinen Power BI-Datenaktualisierungsplaner, um Steuerungsbefehle für Kusto auszugeben
 

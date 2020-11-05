@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/31/2019
-ms.openlocfilehash: 5a7f680dc2ab76a9f952efa52d60b59c7b1d1c93
-ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
+ms.openlocfilehash: ac73abcf1355531a3b8d9917a6f5d9a0d3965c01
+ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91452849"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92902337"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>Bereitstellen von Azure Data Explorer-Clustern in Ihrem virtuellen Netzwerk
 
@@ -30,8 +30,8 @@ Azure Data Explorer unterstützt die Bereitstellung eines Clusters in einem Subn
 
 Sie können auf Ihren Azure Data Explorer-Cluster mit den folgenden IP-Adressen für die einzelnen Dienste (Engine- und Datenverwaltungsdienste) zugreifen:
 
-* **Private IP**: Wird für den Zugriff auf den Cluster innerhalb des VNET verwendet.
-* **Öffentliche IP**: Wird für den Zugriff auf den Cluster von außerhalb des VNET zur Verwaltung und Überwachung sowie als Quelladresse für ausgehende Verbindungen, die aus dem Cluster gestartet werden, verwendet.
+* **Private IP** : Wird für den Zugriff auf den Cluster innerhalb des VNET verwendet.
+* **Öffentliche IP** : Wird für den Zugriff auf den Cluster von außerhalb des VNET zur Verwaltung und Überwachung sowie als Quelladresse für ausgehende Verbindungen, die aus dem Cluster gestartet werden, verwendet.
 
 Die folgenden DNS-Einträge werden für den Zugriff auf den Dienst erstellt: 
 

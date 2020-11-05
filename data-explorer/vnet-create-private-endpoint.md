@@ -7,12 +7,12 @@ ms.reviewer: elbirnbo
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/09/2020
-ms.openlocfilehash: e980527d2342543777ae8186b9166615f9016c5e
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 42203d1a7a89cc86a83ed94e03b1505b21476e83
+ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343401"
+ms.lasthandoff: 10/28/2020
+ms.locfileid: "92902444"
 ---
 # <a name="create-a-private-endpoint-in-your-azure-data-explorer-cluster-in-your-virtual-network-preview"></a>Erstellen eines privaten Endpunkts in Ihrem Azure Data Explorer-Cluster in Ihrem virtuellen Netzwerk (Vorschau)
 
@@ -20,26 +20,27 @@ Verwenden Sie einen Private Link-Dienst mit einem privaten Endpunkt, um sicher 
 
 Verwenden Sie zum Einrichten Ihres [Private Link-Diensts](/azure/private-link/private-link-service-overview) einen privaten Endpunkt mit einer IP-Adresse aus dem Adressraum Ihres virtuellen Azure-Netzwerks. Von dem [privaten Azure-Endpunkt](/azure/private-link/private-endpoint-overview) wird eine private IP-Adresse aus Ihrem VNET verwendet, um eine private und sichere Verbindung mit Azure Data Explorer herzustellen. Darüber hinaus muss die [DNS-Konfiguration](/azure/private-link/private-endpoint-dns) für Ihren Cluster geändert werden, um eine Verbindung unter Verwendung Ihres privaten Endpunkts herzustellen. Bei diesem Setup wird Netzwerkdatenverkehr zwischen einem Client in Ihrem privaten Netzwerk und dem Azure Data Explorer-Cluster über das VNET und über einen [Private Link](/azure/private-link/)-Dienst im Microsoft-Backbonenetzwerk geleitet und das öffentliche Internet umgangen. In diesem Artikel erfahren Sie, wie Sie einen privaten Endpunkt in Ihrem Cluster für die Abfrage (Engine) und die Erfassung (Datenverwaltung) erstellen und konfigurieren.
 
+
 ## <a name="prerequisites"></a>Voraussetzungen
 
 * Erstellen Sie einen [Azure Data Explorer-Cluster in Ihrem virtuellen Netzwerk](./vnet-create-cluster-portal.md).
 * Deaktivieren von Netzwerkrichtlinien:
-  * Deaktivieren Sie im virtuellen Netzwerk des Azure Data Explorer-Clusters die [Richtlinie für den Private Link-Dienst](/azure/private-link/disable-private-link-service-network-policy).
-  * Deaktivieren Sie im virtuellen Netzwerk des privaten Endpunkts, das mit dem virtuellen Netzwerk des Azure Data Explorer-Clusters identisch sein kann, die [Richtlinie für private Endpunkte](/azure/private-link/disable-private-endpoint-network-policy).
+* Deaktivieren Sie im virtuellen Netzwerk des Azure Data Explorer-Clusters die [Richtlinie für den Private Link-Dienst](/azure/private-link/disable-private-link-service-network-policy).
+* Deaktivieren Sie im virtuellen Netzwerk des privaten Endpunkts, das mit dem virtuellen Netzwerk des Azure Data Explorer-Clusters identisch sein kann, die [Richtlinie für private Endpunkte](/azure/private-link/disable-private-endpoint-network-policy).
 
 ## <a name="create-private-link-service"></a>Erstellen eines Private Link-Diensts
 
 Um alle Dienste in Ihrem Cluster sicher miteinander zu verknüpfen, muss der [Private Link-Dienst](/azure/private-link/private-link-service-overview) zweimal erstellt werden: einmal für die Abfrage (Engine) und einmal für die Erfassung (Datenverwaltung).
 
 1. Wählen Sie in der linken oberen Ecke des Portals die Schaltfläche **+ Ressource erstellen** aus.
-1. Suchen Sie nach *Private Link-Dienst* .
+1. Suchen Sie nach *Private Link-Dienst*.
 1. Wählen Sie unter **Private Link-Dienst** die Option **Erstellen** aus.
 
     :::image type="content" source="media/vnet-create-private-endpoint/create-service.gif" alt-text="GIF mit den ersten drei Schritten der Erstellung eines Private Link-Diensts im Azure Data Explorer-Portal":::
 
 1. Füllen Sie im Bereich **Create private link service** (Private Link-Dienst erstellen) die folgenden Felder aus:
 
-    :::image type="content" source="media/vnet-create-private-endpoint/private-link-basics.png" alt-text="GIF mit den ersten drei Schritten der Erstellung eines Private Link-Diensts im Azure Data Explorer-Portal":::
+    :::image type="content" source="media/vnet-create-private-endpoint/private-link-basics.png" alt-text="Registerkarte 1 zum Erstellen eines Private Link-Diensts: Basisinformationen":::
 
     **Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**
     |---|---|---|
@@ -50,7 +51,7 @@ Um alle Dienste in Ihrem Cluster sicher miteinander zu verknüpfen, muss der [Pr
 
 1. Füllen Sie im Bereich **Ausgangseinstellungen** die folgenden Felder aus:
 
-    :::image type="content" source="media/vnet-create-private-endpoint/private-link-outbound.png" alt-text="GIF mit den ersten drei Schritten der Erstellung eines Private Link-Diensts im Azure Data Explorer-Portal":::
+    :::image type="content" source="media/vnet-create-private-endpoint/private-link-outbound.png" alt-text="Private Link, Registerkarte 2: Ausgangseinstellungen":::
 
     |**Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**
     |---|---|---|
@@ -67,11 +68,11 @@ Um alle Dienste in Ihrem Cluster sicher miteinander zu verknüpfen, muss der [Pr
 Um alle Dienste in Ihrem Cluster sicher miteinander zu verknüpfen, muss der [private Endpunkt](/azure/private-link/private-endpoint-overview) zweimal erstellt werden: einmal für die Abfrage (Engine) und einmal für die Erfassung (Datenverwaltung).
 
 1. Wählen Sie in der linken oberen Ecke des Portals die Schaltfläche **+ Ressource erstellen** aus.
-1. Suchen Sie nach *privater Endpunkt* .
+1. Suchen Sie nach *privater Endpunkt*.
 1. Wählen Sie unter **Privater Endpunkt** die Option **Erstellen** aus.
 1. Füllen Sie im Bereich **Privaten Endpunkt erstellen** die folgenden Felder aus:
 
-    :::image type="content" source="media/vnet-create-private-endpoint/step-one-basics.png" alt-text="GIF mit den ersten drei Schritten der Erstellung eines Private Link-Diensts im Azure Data Explorer-Portal":::
+    :::image type="content" source="media/vnet-create-private-endpoint/step-one-basics.png" alt-text="Formular zum Erstellen eines privaten Endpunkts, Schritt 1: Basisinformationen":::
 
     **Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**
     |---|---|---|
@@ -82,7 +83,7 @@ Um alle Dienste in Ihrem Cluster sicher miteinander zu verknüpfen, muss der [pr
     
 1. Füllen Sie im Bereich **Ressource** die folgenden Felder aus:
 
-    :::image type="content" source="media/vnet-create-private-endpoint/step-two-resource.png" alt-text="GIF mit den ersten drei Schritten der Erstellung eines Private Link-Diensts im Azure Data Explorer-Portal":::
+    :::image type="content" source="media/vnet-create-private-endpoint/step-two-resource.png" alt-text="Formular zum Erstellen eines virtuellen Netzwerks, Schritt 2: Ressource":::
 
     **Einstellung** | **Wert**
     |---|---|
@@ -104,7 +105,7 @@ Um alle Dienste in Ihrem Cluster sicher miteinander zu verknüpfen, muss der [pr
 1. Wählen Sie in den Einstellungen Ihres Private Link-Diensts die Option **Verbindungen mit privatem Endpunkt** aus.
 1. Wählen Sie in der Verbindungsliste Ihren privaten Endpunkt und anschließend **Genehmigen** aus.
 
-:::image type="content" source="media/vnet-create-private-endpoint/private-link-approve.png" alt-text="GIF mit den ersten drei Schritten der Erstellung eines Private Link-Diensts im Azure Data Explorer-Portal"::: 
+:::image type="content" source="media/vnet-create-private-endpoint/private-link-approve.png" alt-text="Genehmigungsschritt für die Erstellung eines privaten Endpunkts"::: 
 
 ## <a name="set-dns-configuration"></a>Festlegen der DNS-Konfiguration
 
@@ -119,7 +120,7 @@ Wenn Ihr DNS-Name für die Engine also beispielsweise „myadx.westus.kusto.wind
 
 Richten Sie einen privaten DNS-Server oder eine Zone mit privatem Azure-DNS ein. Zu Testzwecken können Sie den Hosteintrag Ihres Testcomputers ändern.
 
-Erstellen Sie die folgende DNS-Zone: **privatelink.region.kusto.windows.net** . DNS-Zone im Beispiel: *privatelink.westus.kusto.windows.net* . Registrieren Sie den Eintrag für Ihre Engine mit einem A-Eintrag und der IP-Adresse des privaten Endpunkts.
+Erstellen Sie die folgende DNS-Zone: **privatelink.region.kusto.windows.net**. DNS-Zone im Beispiel: *privatelink.westus.kusto.windows.net*. Registrieren Sie den Eintrag für Ihre Engine mit einem A-Eintrag und der IP-Adresse des privaten Endpunkts.
 
 Der Name wird beispielsweise wie folgt aufgelöst:
 
