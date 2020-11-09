@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 27c92b9081844df0e8f8d4dc207ba5d2a8a2e2f3
-ms.sourcegitcommit: a10e7c6ba96bdb94d95ef23f5d1506eb8fda0041
+ms.openlocfilehash: 0a493c4e808a43d04714487ada17964ab048de6f
+ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92058664"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94373764"
 ---
 # <a name="ingestionbatching-policy"></a>Ingestionbatching-Richtlinie
 
@@ -38,7 +38,7 @@ Derzeit beträgt die Größe etwa 1 GB an nicht komprimierten Daten. Die Erfassu
 Die `IngestionBatching` Richtlinie kann für Datenbanken oder Tabellen festgelegt werden. Wenn keine Richtlinie definiert ist, verwendet Kusto standardmäßig einen Standardwert von **5 Minuten** als maximale Verzögerungszeit, **1000** Elemente, Gesamtgröße von **1 g** für die Batch Verarbeitung.
 
 > [!WARNING]
-> Wenn diese Richtlinie auf einen sehr kleinen Wert festgelegt wird, ist dies eine Erhöhung der COGS des Clusters und die geringere Leistung. Darüber hinaus kann das verringern dieses Werts zu einer **höheren** effektiven End-to-End-Erfassungs Latenz führen, weil mehrere Erfassungs Prozesse parallel verwaltet werden.
+> Wenn diese Richtlinie auf einen sehr kleinen Wert festgelegt wird, ist dies eine Erhöhung der COGS (Kosten der verkauften Waren) des Clusters und die geringere Leistung. Darüber hinaus kann das verringern dieses Werts zu einer **höheren** effektiven End-to-End-Erfassungs Latenz führen, weil mehrere Erfassungs Prozesse parallel verwaltet werden.
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 

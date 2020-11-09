@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 03/18/2020
-ms.openlocfilehash: a79c815202e65fa32f62a76c700d808d0fda86ea
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: 33d3515a8465a1e9c3397e675a51c95aa3f00d42
+ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91941994"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94373832"
 ---
 # <a name="kusto-ingest-client-library"></a>Kusto-Erfassungs Client Bibliothek 
 
@@ -53,7 +53,7 @@ Der von ikustodirectingestclient definierte direkt Erfassungs Modus erzwingt ein
 
 Im folgenden Diagramm wird die direkte Erfassung von Client Interaktionen mit Kusto erläutert:
 
-:::image type="content" source="../images/about-kusto-ingest/direct-ingest.png" alt-text="Diagramm, das zeigt, wie die Kusto. Erfassung-Bibliothek Abfragen an den Kusto-Dienst im abgefragten Erfassungs Modus sendet.":::
+:::image type="content" source="../images/about-kusto-ingest/direct-ingest.png" alt-text="Diagramm, das zeigt, wie die Kusto. Erfassungs-Bibliothek im direkt Erfassungs Modus Abfragen an den Kusto-Dienst sendet.":::
 
 > [!NOTE]
 > Der direkte Modus wird für Erfassungs Lösungen in der Produktionsumgebung nicht empfohlen.
@@ -71,7 +71,7 @@ Im folgenden Diagramm wird die direkte Erfassung von Client Interaktionen mit Ku
 
 ## <a name="ingestion-best-practices"></a>Bewährte Methoden für die Erfassung
 
-[Bewährte Methoden](kusto-ingest-best-practices.md) für die Erfassung bieten COGS und Durchsatz-POV bei der Erfassung.
+[Bewährte Methoden](kusto-ingest-best-practices.md) für die Erfassung sind COGS (Cost of waren verkauft) und Durchsatz-POV bei der Erfassung.
 
 * **Thread Sicherheit-** Kusto-Erfassungs Client Implementierungen sind Thread sicher und sollen wieder verwendet werden. Es ist nicht erforderlich, `KustoQueuedIngestClient` für jeden oder mehrere Erfassungs Vorgänge eine Instanz der-Klasse zu erstellen. `KustoQueuedIngestClient`Pro Ziel-Kusto-Cluster pro Benutzer Prozess ist eine einzelne Instanz von erforderlich. Das Ausführen mehrerer Instanzen ist eine gegenproduktivität und kann zu DOS im Datenverwaltung Cluster führen.
 
@@ -83,7 +83,7 @@ Im folgenden Diagramm wird die direkte Erfassung von Client Interaktionen mit Ku
 * **Erfassungs Berechtigungen:** 
  In den [Kusto](kusto-ingest-client-permissions.md) -Erfassungs Berechtigungen wird die Berechtigungs Einrichtung erläutert, die für eine erfolgreiche Erfassung mit dem Paket erforderlich ist `Kusto.Ingest` .
 
-* **Verwendung:** Wie bereits beschrieben, sollte die empfohlene Grundlage für nachhaltige und hochskalierbare Erfassungs Lösungen für Kusto der **kustoqueuedingestclient**sein.
+* **Verwendung:** Wie bereits beschrieben, sollte die empfohlene Grundlage für nachhaltige und hochskalierbare Erfassungs Lösungen für Kusto der **kustoqueuedingestclient** sein.
 Um die unnötige Auslastung Ihres Kusto-Dienstanbieter zu minimieren, empfiehlt es sich, eine einzelne Instanz des Kusto-Erfassungs Clients (in der Warteschlange oder direkt) pro Prozess und pro Kusto-Cluster zu verwenden. Die Kusto-Erfassungs Client Implementierung ist Thread sicher und vollständig Wiedereinstiegs fähig.
 
 ## <a name="next-steps"></a>Nächste Schritte

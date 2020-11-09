@@ -8,12 +8,12 @@ ms.reviewer: kedamari
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/12/2020
-ms.openlocfilehash: 77f0efffbefa8e6e2093f0f59e3d4f3701be61b0
-ms.sourcegitcommit: 8a7165b28ac6b40722186300c26002fb132e6e4a
+ms.openlocfilehash: 0da372ff40975e5536883236453d1fadc52673da
+ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92749546"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94373815"
 ---
 # <a name="data-purge"></a>Datenbereinigung
 
@@ -45,7 +45,7 @@ Der Prozess der selektiven Löschung von Daten aus Azure Daten-Explorer erfolgt 
      * Mehrere weitere Faktoren können die Dauer von Phase 2 zwischen einigen Sekunden und vielen Stunden variieren.
 1. Phase 3: (Hard Delete) arbeiten Sie alle Speicher Artefakte zurück, die möglicherweise die "nicht verarbeitbaren" Daten aufweisen, und löschen Sie Sie aus dem Speicher. Diese Phase erfolgt mindestens fünf Tage nach dem Abschluss der vorherigen Phase, aber nicht mehr als 30 Tage nach dem anfänglichen Befehl. Diese Zeitachsen werden so festgelegt, dass Sie den Datenschutzanforderungen entsprechen.
 
-Durch das Ausgeben eines `.purge` Befehls wird dieser Prozess ausgelöst, der einige Tage in Anspruch nimmt. Wenn die Dichte der Datensätze, für die das Prädikat gilt, ausreichend groß ist, werden alle Daten in der Tabelle durch den Prozess erneut eingefügt. Diese Wiederherstellung hat erhebliche Auswirkungen auf die Leistung und die COGS.
+Durch das Ausgeben eines `.purge` Befehls wird dieser Prozess ausgelöst, der einige Tage in Anspruch nimmt. Wenn die Dichte der Datensätze, für die das Prädikat gilt, ausreichend groß ist, werden alle Daten in der Tabelle durch den Prozess erneut eingefügt. Diese Wiederherstellung hat erhebliche Auswirkungen auf die Leistung und die COGS (Kosten der verkauften Waren).
 
 ## <a name="purge-limitations-and-considerations"></a>Entfernen von Einschränkungen und Überlegungen
 
@@ -113,7 +113,7 @@ Der Löschbefehl kann für unterschiedliche Verwendungs Szenarien auf zwei Arten
      .purge table [TableName] records in database [DatabaseName] with (verificationtoken='<verification token from step #1>') <| [Predicate]
   ```
     
-| Parameter  | BESCHREIBUNG  |
+| Parameter  | Beschreibung  |
 |---------|---------|
 | `DatabaseName`   |   Name der Datenbank      |
 | `TableName`     |     Name der Tabelle    |
@@ -159,7 +159,7 @@ Verwenden Sie zum Ausführen eines Löschvorgangs in einem zweistufigen Aktivier
 
 | `OperationId` | `DatabaseName` | `TableName`|`ScheduledTime` | `Duration` | `LastUpdatedOn` |`EngineOperationId` | `State` | `StateDetails` |`EngineStartTime` | `EngineDuration` | `Retries` |`ClientRequestId` | `Principal`|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Scheduled | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...|
+| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Geplant | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...|
 
 #### <a name="example-single-step-purge"></a>Beispiel: Löschen mit einem Schritt
 
@@ -176,7 +176,7 @@ Führen Sie den folgenden Befehl aus, um in einem Aktivierungs Szenario mit nur 
 
 | `OperationId` |`DatabaseName` |`TableName` |`ScheduledTime` |`Duration` |`LastUpdatedOn` |`EngineOperationId` |`State` |`StateDetails` |`EngineStartTime` |`EngineDuration` |`Retries` |`ClientRequestId` |`Principal`|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Scheduled | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...|
+| c9651d74-3b80-4183-90bb-bbe9e42eadc4 |MyDatabase |MyTable |2019-01-20 11:41:05.4391686 |00:00:00.1406211 |2019-01-20 11:41:05.4391686 | |Geplant | | | |0 |KE. RunCommand; 1d0ad28b-f 791-4f-a-a60b-s32318367b7 |Aad-APP-ID =...|
 
 ### <a name="cancel-purge-operation-command"></a>Befehl "Löschvorgang Abbrechen"
 
@@ -223,7 +223,7 @@ Status = ' abgeschlossen ' gibt den erfolgreichen Abschluss der ersten Phase des
 .show purges from '<StartDate>' to '<EndDate>' [in database <DatabaseName>]
 ```
 
-| Eigenschaften  |BESCHREIBUNG  |Obligatorisch/Optional|
+| Eigenschaften  |Beschreibung  |Obligatorisch/Optional|
 |---------|------------|-------|
 |`OperationId `   |      Die Datenverwaltung Vorgangs-ID, die nach der Ausführung einer Phase oder einer zweiten Phase ausgegeben wird.   |Obligatorisch.
 |`StartDate`    |   Unteres Zeit Limit für Filter Vorgänge. Wenn der Wert weggelassen wird, wird standardmäßig 24 Stunden vor der aktuellen Uhrzeit verwendet      |Optional
@@ -307,7 +307,7 @@ Das Löschen einer Tabelle umfasst das Löschen der Tabelle und das Markieren al
      .purge table [TableName] in database [DatabaseName] allrecords with (verificationtoken='<verification token from step #1>')
      ```
 
-    | Parameter  |BESCHREIBUNG  |
+    | Parameter  |Beschreibung  |
     |---------|---------|
     | `DatabaseName`   |   Der Name der Datenbank.      |
     | `TableName`    |     Der Name der Tabelle.    |
