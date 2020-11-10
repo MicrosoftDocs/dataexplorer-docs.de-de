@@ -7,12 +7,12 @@ ms.reviewer: maraheja
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/20/2020
-ms.openlocfilehash: 3af348677bf520d1ccd78388bb6a7a30506e572d
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 857c654c70a2170a42902514718a52fbf7b02944
+ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92249996"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93349459"
 ---
 # <a name="use-a-jupyter-notebook-and-kqlmagic-extension-to-analyze-data-in-azure-data-explorer"></a>Verwenden einer Jupyter Notebook-Instanz und der kqlmagic-Erweiterung zum Analysieren von Daten in Azure Data Explorer
 
@@ -22,7 +22,7 @@ Jupyter Notebook ist eine Open Source-Webanwendung, mit der Sie Dokumente erstel
 ## <a name="prerequisites"></a>Voraussetzungen
 
 - Ein Organisations-E-Mail-Konto, das Mitglied von Azure Active Directory (Azure AD) ist
-- Installation von Jupyter Notebook auf dem lokalen Computer oder Verwendung von [Azure Data Studio](https://docs.microsoft.com/sql/azure-data-studio/notebooks/notebooks-kqlmagic?view=sql-server-ver15)
+- Installation von Jupyter Notebook auf dem lokalen Computer oder Verwendung von [Azure Data Studio](/sql/azure-data-studio/notebooks/notebooks-kqlmagic?view=sql-server-ver15)
 
 ## <a name="install-kqlmagic-library"></a>Installieren der kqlmagic-Bibliothek
 

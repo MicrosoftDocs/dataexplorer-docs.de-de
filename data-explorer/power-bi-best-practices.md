@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: 2d2caef1f406b63bcfd22e8bc565efce8c1f9d39
-ms.sourcegitcommit: 0e2fbc26738371489491a96924f25553a8050d51
+ms.openlocfilehash: 442185ed0afd977c103d0b571472c0f5e742908c
+ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/02/2020
-ms.locfileid: "93148506"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93349476"
 ---
 # <a name="best-practices-for-using-power-bi-to-query-and-visualize-azure-data-explorer-data"></a>Bewährte Methoden für die Verwendung von Power BI zum Abfragen und Visualisieren von Azure Data Explorer-Daten
 
@@ -176,7 +176,7 @@ Abfrageparameter können in beliebigen Abfrageschritten verwendet werden, voraus
 
 ### <a name="use-valuenativequery-for-azure-data-explorer-features"></a>Verwenden von Value.NativeQuery für Azure Data Explorer-Features
 
-Wenn Sie ein Azure Data Explorer-Feature nutzen möchten, das in Power BI nicht unterstützt wird, verwenden Sie die Methode [Value.NativeQuery()](https://docs.microsoft.com/powerquery-m/value-nativequery) in M. Mit dieser Methode wird ein Fragment der Kusto-Abfragesprache in die generierte Abfrage eingefügt, und Sie haben mit dieser Methode außerdem mehr Kontrolle über die ausgeführte Abfrage.
+Wenn Sie ein Azure Data Explorer-Feature nutzen möchten, das in Power BI nicht unterstützt wird, verwenden Sie die Methode [Value.NativeQuery()](/powerquery-m/value-nativequery) in M. Mit dieser Methode wird ein Fragment der Kusto-Abfragesprache in die generierte Abfrage eingefügt, und Sie haben mit dieser Methode außerdem mehr Kontrolle über die ausgeführte Abfrage.
 
 Im folgenden Beispiel wird die Verwendung der `percentiles()`-Funktion in Azure Data Explorer veranschaulicht:
 

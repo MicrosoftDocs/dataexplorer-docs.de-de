@@ -10,32 +10,33 @@ ms.topic: reference
 ms.date: 02/24/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 1a6349547d5cf1eb3af5a21f6e8c504573f15e52
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: a8a0aae8732104ee64630c1fddb4d563cb542351
+ms.sourcegitcommit: 25c0440cb0390b9629b819611844f1375de00a66
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92241760"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94417556"
 ---
 # <a name="sql_request-plugin"></a>Plug-In „sql_request“
 
 ::: zone pivot="azuredataexplorer"
 
 Das `sql_request` Plug-in sendet eine SQL-Abfrage an einen SQL Server Netzwerk Endpunkt und gibt das erste Rowset in den Ergebnissen zurück.
+Die Abfrage gibt möglicherweise mehr als ein Rowset zurück, aber nur das erste Rowset wird für den Rest der Kusto-Abfrage zur Verfügung gestellt.
 
 ## <a name="syntax"></a>Syntax
 
-  `evaluate``sql_request` `(` *ConnectionString* `,` *sqlQuery* [ `,` *SQLPARAMETERS* [ `,` *Optionen*]]`)`
+  `evaluate``sql_request` `(` *ConnectionString* `,` *sqlQuery* [ `,` *SQLPARAMETERS* [ `,` *Optionen* ]]`)`
 
 ## <a name="arguments"></a>Argumente
 
-* *ConnectionString*: ein `string` Literalwert, der die Verbindungs Zeichenfolge angibt, die auf den SQL Server Netzwerk Endpunkt zeigt. Weitere Informationen finden Sie unter [gültige Authentifizierungsmethoden](#authentication) und angeben des [Netzwerk Endpunkts](#specify-the-network-endpoint).
+* *ConnectionString* : ein `string` Literalwert, der die Verbindungs Zeichenfolge angibt, die auf den SQL Server Netzwerk Endpunkt zeigt. Weitere Informationen finden Sie unter [gültige Authentifizierungsmethoden](#authentication) und angeben des [Netzwerk Endpunkts](#specify-the-network-endpoint).
 
-* *SqlQuery*: ein `string` Literalwert, der die Abfrage angibt, die für den SQL-Endpunkt ausgeführt werden soll. Muss mindestens ein Rowset zurückgeben, aber nur das erste Rowset wird für den Rest der Kusto-Abfrage zur Verfügung gestellt.
+* *SqlQuery* : ein `string` Literalwert, der die Abfrage angibt, die für den SQL-Endpunkt ausgeführt werden soll. Muss mindestens ein Rowset zurückgeben, aber nur das erste Rowset wird für den Rest der Kusto-Abfrage zur Verfügung gestellt.
 
-* *SQLPARAMETERS*: ein konstanter Wert des Typs `dynamic` , der Schlüssel-Wert-Paare enthält, die als Parameter zusammen mit der Abfrage übergeben werden. Dies ist optional.
+* *SQLPARAMETERS* : ein konstanter Wert des Typs `dynamic` , der Schlüssel-Wert-Paare enthält, die als Parameter zusammen mit der Abfrage übergeben werden. Optional.
   
-* *Optionen*: ein konstanter Wert des Typs `dynamic` , der Erweiterte Einstellungen als Schlüssel-Wert-Paare enthält. Zurzeit `token` kann nur festgelegt werden, um einen vom Aufrufer bereitgestellten Azure AD Zugriffs Token zu übergeben, der zur Authentifizierung an den SQL-Endpunkt weitergeleitet wird. Dies ist optional.
+* *Optionen* : ein konstanter Wert des Typs `dynamic` , der Erweiterte Einstellungen als Schlüssel-Wert-Paare enthält. Zurzeit `token` kann nur festgelegt werden, um einen vom Aufrufer bereitgestellten Azure AD Zugriffs Token zu übergeben, der zur Authentifizierung an den SQL-Endpunkt weitergeleitet wird. Optional.
 
 ## <a name="examples"></a>Beispiele
 
@@ -121,7 +122,7 @@ Folglich muss der SQL Server mit einem gültigen SSL/TLS-Server Zertifikat konfi
 Die Angabe des SQL-Netzwerk Endpunkts als Teil der Verbindungs Zeichenfolge ist obligatorisch.
 Die erforderliche Syntax lautet:
 
-`Server`Voll `=` `tcp:` *qualifizierter* Name [ `,` *Port*]
+`Server`Voll `=` `tcp:` *qualifizierter* Name [ `,` *Port* ]
 
 Hierbei gilt:
 

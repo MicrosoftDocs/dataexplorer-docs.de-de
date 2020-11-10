@@ -8,12 +8,12 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: fd596d840dcbaab1843833b4164901423a2ebef8
-ms.sourcegitcommit: 88291fd9cebc26e5210463cb95be5540bf84eef8
+ms.openlocfilehash: 71f00cf921609432860a94061be7411e484fd0c9
+ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/22/2020
-ms.locfileid: "92437383"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93349323"
 ---
 # <a name="azure-data-explorer-tools-and-integrations-overview"></a>Übersicht über Azure Data Explorer-Tools und -Integrationen
 
@@ -39,7 +39,7 @@ Die Datenerfassung ist der Prozess, mit dem Datensätze aus einer oder mehreren 
 * IoT Hub: [Übersicht über die Erfassung aus IoT Hub](ingest-data-iot-hub-overview.md) und Verwendung von [Azure-Portal](ingest-data-iot-hub.md), [C#](data-connection-iot-hub-csharp.md), [Python](data-connection-iot-hub-python.md) oder einer [Azure Resource Manager-Vorlage](data-connection-iot-hub-resource-manager.md)
 * [Logstash](ingest-data-logstash.md)
 * Azure Data Factory: [Übersicht über die Integration](data-factory-integration.md), [Kopieren von Daten](data-factory-load-data.md), [Massenkopieren mit der Azure Data Factory-Vorlage](data-factory-template.md) und [Ausführen von Azure Data Explorer-Steuerungsbefehlen per Azure Data Factory-Befehlsaktivität](data-factory-command-activity.md)
-* [Verbinden mit Azure Data Explorer per Synapse Apache Spark](https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer?context=/azure/data-explorer/context/context)
+* [Verbinden mit Azure Data Explorer per Synapse Apache Spark](/azure/synapse-analytics/quickstart-connect-azure-data-explorer?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)
 * [Apache Spark](spark-connector.md)
 * [Apache Kafka](ingest-data-kafka.md)
 * [Cosmos DB](https://github.com/Azure/azure-kusto-labs/tree/master/cosmosdb-adx-integration)
@@ -61,7 +61,7 @@ Zum Ausführen von Abfragen in Azure Data Explorer stehen verschiedene Tools zur
 
 * [Azure Monitor](query-monitor-data.md)
 * [Azure Data Lake](data-lake-query-data.md)
-* [Verbinden mit Azure Data Explorer per Synapse Apache Spark](https://docs.microsoft.com/azure/synapse-analytics/quickstart-connect-azure-data-explorer?context=/azure/data-explorer/context/context)
+* [Verbinden mit Azure Data Explorer per Synapse Apache Spark](/azure/synapse-analytics/quickstart-connect-azure-data-explorer?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)
 * [Apache Spark](spark-connector.md)
 * [Microsoft Power Apps](power-apps-connector.md)
 * Azure Data Studio: [Übersicht über Kusto-Erweiterung](/sql/azure-data-studio/extensions/kusto-extension?context=%252fazure%252fdata-explorer%252fcontext%252fcontext), [Verwenden von Kusto](/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=%252fazure%252fdata-explorer%252fcontext%252fcontext) und [Verwenden von Kqlmagic](/sql/azure-data-studio/notebooks-kqlmagic?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)
@@ -72,7 +72,7 @@ Die Übersicht über die [Visualisierung](viz-overview.md) enthält Details zu D
 
 ## <a name="notebook-connectivity"></a>Notebook-Konnektivität
 
-* [Azure Notebooks](azure-notebooks.md)
+* [Azure Notebooks](/sql/azure-data-studio/notebooks/notebooks-kqlmagic?context=%252fazure%252fdata-explorer%252fcontext%252fcontext%253fcontext%253d%252fazure%252fdata-explorer%252fcontext%252fcontext)
 * [Jupyter-Notebooks](kqlmagic.md)
 * Azure Data Studio: [Übersicht über Kusto-Erweiterung](/sql/azure-data-studio/extensions/kusto-extension?context=%252fazure%252fdata-explorer%252fcontext%252fcontext), [Verwenden von Kusto](/sql/azure-data-studio/notebooks/notebooks-kusto-kernel?context=%252fazure%252fdata-explorer%252fcontext%252fcontext) und [Verwenden von Kqlmagic](/sql/azure-data-studio/notebooks-kqlmagic?context=%252fazure%252fdata-explorer%252fcontext%252fcontext)
 
