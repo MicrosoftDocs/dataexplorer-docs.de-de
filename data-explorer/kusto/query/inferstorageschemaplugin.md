@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 3c3aa61bdb804d2a1bd6735ea4a22e06e1f1878e
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 895f12799f4c44346af2b6b9be43bf98b7cf870e
+ms.sourcegitcommit: e820a59191d2ca4394e233d51df7a0584fa4494d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92249010"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94446207"
 ---
 # <a name="infer_storage_schema-plugin"></a>Plug-In „infer_storage_schema“
 
@@ -46,12 +46,12 @@ Ein einzelnes *options* Argument ist ein konstanter Wert des Typs `dynamic` , de
 |`FileNamePrefix`|Nein|Nur Dateien überprüfen, die mit diesem Präfix beginnen. Dies ist nicht erforderlich, aber die Angabe kann den Prozess beschleunigen.|
 |`Mode`|Nein|Strategie für die Schema Ableitung, eine der folgenden: `any` , `last` , `all` . Ableiten Sie das Datenschema aus einer beliebigen (ersten gefundenen) Datei, aus der letzten geschriebenen Datei bzw. aus allen Dateien. Der Standardwert ist `last`.|
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Das `infer_storage_schema` Plug-in gibt eine einzelne Ergebnistabelle zurück, die eine einzelne Zeile/Spalte mit der CSL-Schema Zeichenfolge enthält
 
 > [!NOTE]
-> * Geheime Schlüssel für Speicher Container-URI müssen neben *Lesen*über die Berechtigungen für die *Liste* verfügen.
+> * Geheime Schlüssel für Speicher Container-URI müssen neben *Lesen* über die Berechtigungen für die *Liste* verfügen.
 > * Die Strategie "All" für die Schema Rückschluss Strategie ist ein sehr kostengünstiger Vorgang, da Sie das Lesen aus *allen* gefundenen Artefakten und das Zusammenführen Ihres Schemas impliziert.
 > * Einige zurückgegebene Typen sind möglicherweise nicht die tatsächlichen Typen, die durch einen falschen Typ (oder als Ergebnis des Schema Zusammenführung Prozesses) verursacht werden. Aus diesem Grund sollten Sie das Ergebnis sorgfältig überprüfen, bevor Sie eine externe Tabelle erstellen.
 
@@ -60,7 +60,7 @@ Das `infer_storage_schema` Plug-in gibt eine einzelne Ergebnistabelle zurück, d
 ```kusto
 let options = dynamic({
   'StorageContainers': [
-    h@'https://storageaccount.blob.core.windows.net/MovileEvents/2015;secretKey'
+    h@'https://storageaccount.blob.core.windows.net/MovileEvents;secretKey'
   ],
   'FileExtension': '.parquet',
   'FileNamePrefix': 'part-',
@@ -74,3 +74,18 @@ evaluate infer_storage_schema(options)
 |Cslschema|
 |---|
 |app_id: String, user_id: Long, event_Time: DateTime, Country: String, City: String, device_type: String, device_vendor: String, ad_network: String, Kampagne: String, site_id: String, event_type: String, event_name: String, Organic: String, days_from_install: int, Revenue: Real|
+
+Verwenden Sie das zurückgegebene Schema in der Definition externer Tabellen:
+
+```kusto
+.create external table MobileEvents(
+    app_id:string, user_id:long, event_time:datetime, country:string, city:string, device_type:string, device_vendor:string, ad_network:string, campaign:string, site_id:string, event_type:string, event_name:string, organic:string, days_from_install:int, revenue:real
+)
+kind=blob
+partition by (dt:datetime = bin(event_time, 1d), app:string = app_id)
+pathformat = ('app=' app '/dt=' datetime_pattern('yyyyMMdd', dt))
+dataformat = parquet
+(
+    h@'https://storageaccount.blob.core.windows.net/MovileEvents;secretKey'
+)
+```
