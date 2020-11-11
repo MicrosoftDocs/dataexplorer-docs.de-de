@@ -7,15 +7,19 @@ ms.author: orspodek
 ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 02/13/2020
-ms.openlocfilehash: 0db8c472ed3b23a1bf46f8fce9cbd38b0ca960b3
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.date: 10/08/2020
+zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
+zone_pivot_groups: kql-flavors
+ms.openlocfilehash: b2b304d012ea541f6855091874be8ea5483fae63
+ms.sourcegitcommit: b6f0f112b6ddf402e97c011a902bd70ba408e897
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92251024"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94497633"
 ---
-# <a name="samples"></a>Proben
+# <a name="samples"></a>Beispiele
+
+::: zone pivot="azuredataexplorer"
 
 Im folgenden finden Sie einige häufige Abfrage Anforderungen und wie die Kusto-Abfragesprache verwendet werden kann, um Sie zu erfüllen.
 
@@ -105,7 +109,7 @@ Das Join ordnet jede Startzeit mit allen Endzeiten von der gleichen Client-IP-Ad
 
 `arg_min` wählt die Zeile mit der kleinsten Dauer in jeder Gruppe aus, und der `*` Parameter übergibt alle anderen Spalten. Das Argument Präfix "min_" für die einzelnen Spaltennamen. 
 
-:::image type="content" source="images/samples/040.png" alt-text="Screenshot eines Säulen Diagramms. Die y-Achse liegt zwischen 0 und ungefähr 50. Zehn farbige Spalten stellen die entsprechenden Werte von 10 Standorten dar."::: 
+:::image type="content" source="images/samples/040.png" alt-text="Eine Tabelle mit den Ergebnissen mit Spalten für die Startzeit, Client I P, Duration, City und früheste Beendigung für jede Kombination aus Client-und Startzeit."::: 
 
 Fügen Sie Code hinzu, um die Dauer in Containern mit einfacher Größenordnung zu zählen. Wenn in diesem Beispiel ein Balkendiagramm bevorzugt wird, teilen Sie durch, `1s` um die Zeiträume in Zahlen zu konvertieren. 
 
@@ -118,7 +122,7 @@ Fügen Sie Code hinzu, um die Dauer in Containern mit einfacher Größenordnung 
     | sort by duration asc | render barchart 
 ```
 
-:::image type="content" source="images/samples/050.png" alt-text="Screenshot eines Säulen Diagramms. Die y-Achse liegt zwischen 0 und ungefähr 50. Zehn farbige Spalten stellen die entsprechenden Werte von 10 Standorten dar.":::
+:::image type="content" source="images/samples/050.png" alt-text="Säulendiagramm, das die Anzahl der Sitzungen mit Dauer in angegebenen Bereichen darstellt. Mehr als 400 Sitzungen dauerten 10 Sekunden. Weniger als 100 waren 290 Sekunden.":::
 
 ### <a name="real-example"></a>Beispiel aus der Praxis
 
@@ -198,7 +202,7 @@ Im folgenden finden Sie eine Beispiel Eingabe mit dem Namen `X` .
 |SessionID | StartTime | StopTime |
 |---|---|---|
 | a | 10:01:03 | 10:10:08 |
-| k | 10:01:29 | 10:03:10 |
+| b | 10:01:29 | 10:03:10 |
 | c | 10:03:02 | 10:05:20 |
 
 Erstellen Sie für ein Diagramm in 1-Minuten-Containern etwas, das bei jedem 1-Minuten-Intervall eine Anzahl für jede laufende Aktivität gibt.
@@ -214,7 +218,7 @@ X | extend samples = range(bin(StartTime, 1m), StopTime, 1m)
 |SessionID | StartTime | StopTime  | Beispiele|
 |---|---|---|---|
 | a | 10:01:33 | 10:06:31 | [10:01:00,10:02:00,...10:06:00]|
-| k | 10:02:29 | 10:03:45 | [10:02:00,10:03:00]|
+| b | 10:02:29 | 10:03:45 | [10:02:00,10:03:00]|
 | c | 10:03:12 | 10:04:30 | [10:03:00,10:04:00]|
 
 Anstatt diese Arrays beizubehalten, erweitern Sie Sie mithilfe von [MV-Expand](./mvexpandoperator.md).
@@ -231,8 +235,8 @@ X | mv-expand samples = range(bin(StartTime, 1m), StopTime , 1m)
 | a | 10:01:33 | 10:06:31 | 10:04:00|
 | a | 10:01:33 | 10:06:31 | 10:05:00|
 | a | 10:01:33 | 10:06:31 | 10:06:00|
-| k | 10:02:29 | 10:03:45 | 10:02:00|
-| k | 10:02:29 | 10:03:45 | 10:03:00|
+| b | 10:02:29 | 10:03:45 | 10:02:00|
+| b | 10:02:29 | 10:03:45 | 10:03:00|
 | c | 10:03:12 | 10:04:30 | 10:03:00|
 | c | 10:03:12 | 10:04:30 | 10:04:00|
 
@@ -329,7 +333,7 @@ Logs
 | project count_, Message 
 ```
 
-|count_|`Message`
+|count_|Nachricht
 |---|---
 |7125|Fehler bei "executealgorithmmethod" für die Methode "runcyclefrominteridata"...
 |7125|Inferencehostservice-Rückruf failed..System. NullReferenceException: der Objekt Verweis ist nicht auf eine Instanz eines Objekts festgelegt...
@@ -378,7 +382,7 @@ Logs
 | evaluate autocluster()
 ```
 
-|Anzahl |Prozent (%)|Komponente|Cluster|`Message`
+|Anzahl |Prozent (%)|Komponente|Cluster|Nachricht
 |---|---|---|---|---
 |7125|26,64|Inferencehostservice|Db4|Executealgorithmmethod für die-Methode...
 |7125|26,64|Unbekannte Komponente|Db4|Fehler beim inferencehostservice-Befehl....
@@ -494,7 +498,7 @@ Ergebnis:
 
 ## <a name="create-and-use-query-time-dimension-tables"></a>Erstellen und Verwenden von Abfragezeit-Dimensions Tabellen
 
-Häufig möchten Sie die Ergebnisse einer Abfrage mit einer Ad-hoc-Dimensions Tabelle verknüpfen, die nicht in der Datenbank gespeichert ist. Es ist möglich, einen Ausdruck zu definieren, dessen Ergebnis eine Tabelle ist, die auf eine einzelne Abfrage beschränkt ist. Beispiel:
+Häufig möchten Sie die Ergebnisse einer Abfrage mit einer Ad-hoc-Dimensions Tabelle verknüpfen, die nicht in der Datenbank gespeichert ist. Es ist möglich, einen Ausdruck zu definieren, dessen Ergebnis eine Tabelle ist, die auf eine einzelne Abfrage beschränkt ist. Zum Beispiel:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -540,7 +544,7 @@ Angenommen, Sie verfügen über eine Tabelle, die Folgendes enthält:
 
 Eine Abfrage, die die letzten beiden Datensätze für jeden Wert der `ID` Spalte zurückgibt, wobei "Latest" als "mit dem höchsten Wert von" definiert ist, `timestamp` kann mit dem [Top-netsted-Operator](topnestedoperator.md)erstellt werden.
 
-Beispiel:
+Zum Beispiel:
 
 ```kusto
 datatable(id:string, timestamp:datetime, bla:string)           // #1
@@ -681,7 +685,7 @@ Die Schritt-für-Schritt-Erläuterung unten bezieht sich auf Zahlen im Codebeisp
 ## <a name="find-preceding-event"></a>Vorheriges Ereignis suchen
 Im nächsten Beispiel wird veranschaulicht, wie Sie ein vorhergehenden Ereignis zwischen zwei Datasets finden.  
 
-*Zweck:*: Es gibt zwei Datasets: A und B. Suchen Sie für jeden Datensatz in B das vorherige Ereignis in einem (d. h. den ARG_MAX Datensatz in einer, die immer noch "älter" als B ist). Im folgenden finden Sie die erwartete Ausgabe für die folgenden Beispiel Datasets. 
+*Zweck:* : Es gibt zwei Datasets: A und B. Suchen Sie für jeden Datensatz in B das vorherige Ereignis in einem (d. h. den ARG_MAX Datensatz in einer, die immer noch "älter" als B ist). Im folgenden finden Sie die erwartete Ausgabe für die folgenden Beispiel Datasets. 
 
 ```kusto
 let A = datatable(Timestamp:datetime, ID:string, EventA:string)
@@ -786,3 +790,1145 @@ B_events
 |x|2019-01-01 00:00:04.0000000|2019-01-01 00:00:01.0000000|B|Ax2|
 |j|2019-01-01 00:00:04.0000000|2019-01-01 00:00:02.0000000|B|Ay1|
 |z|2019-01-01 00:02:00.0000000||B||
+
+::: zone-end
+
+::: zone pivot="azuremonitor"
+
+## <a name="string-operations"></a>Zeichenfolgenvorgänge
+Die folgenden Abschnitte beschreiben Beispiele für das Arbeiten mit Zeichen folgen in der Kusto-Abfragesprache.
+
+### <a name="strings-and-escaping-them"></a>Zeichenfolgen und Escapezeichen
+Zeichenfolgenwerte werden entweder in einfache oder doppelte Anführungszeichen eingeschlossen. Der umgekehrte Schrägstrich (\\) wird verwendet, um darauffolgende Zeichen mit einem Escapezeichen zu versehen. „\t“ wird beispielsweise für einen Tabstopp, „\n“ für einen Zeilenvorschub und \" für das Anführungszeichen selbst verwendet.
+
+```Kusto
+print "this is a 'string' literal in double \" quotes"
+```
+
+```Kusto
+print 'this is a "string" literal in single \' quotes'
+```
+
+Wenn „\\“ nicht als Escapezeichen verwendet werden soll, müssen Sie der Zeichenfolge „\@“ voranstellen.
+
+```Kusto
+print @"C:\backslash\not\escaped\with @ prefix"
+```
+
+
+### <a name="string-comparisons"></a>Zeichenfolgenvergleiche
+
+Operator       |BESCHREIBUNG                         |Groß-/Kleinschreibung|Beispiel (ergibt `true`)
+---------------|------------------------------------|--------------|-----------------------
+`==`           |Equals                              |Ja           |`"aBc" == "aBc"`
+`!=`           |Not Equals                          |Ja           |`"abc" != "ABC"`
+`=~`           |Equals                              |Nein            |`"abc" =~ "ABC"`
+`!~`           |Not Equals                          |Nein            |`"aBc" !~ "xyz"`
+`has`          |Rechter Ausdruck ist vollständig in linkem Ausdruck enthalten |Nein|`"North America" has "america"`
+`!has`         |Rechter Ausdruck ist nicht vollständig in linkem Ausdruck enthalten       |Nein            |`"North America" !has "amer"` 
+`has_cs`       |Rechter Ausdruck ist vollständig in linkem Ausdruck enthalten |Ja|`"North America" has_cs "America"`
+`!has_cs`      |Rechter Ausdruck ist nicht vollständig in linkem Ausdruck enthalten       |Ja            |`"North America" !has_cs "amer"` 
+`hasprefix`    |Rechter Ausdruck ist Präfix in linkem Ausdruck         |Nein            |`"North America" hasprefix "ame"`
+`!hasprefix`   |Rechter Ausdruck ist kein Präfix in linkem Ausdruck     |Nein            |`"North America" !hasprefix "mer"` 
+`hasprefix_cs`    |Rechter Ausdruck ist Präfix in linkem Ausdruck         |Ja            |`"North America" hasprefix_cs "Ame"`
+`!hasprefix_cs`   |Rechter Ausdruck ist kein Präfix in linkem Ausdruck     |Ja            |`"North America" !hasprefix_cs "CA"` 
+`hassuffix`    |Rechter Ausdruck ist Suffix in linkem Ausdruck         |Nein            |`"North America" hassuffix "ica"`
+`!hassuffix`   |Rechter Ausdruck ist kein Suffix in linkem Ausdruck     |Nein            |`"North America" !hassuffix "americ"`
+`hassuffix_cs`    |Rechter Ausdruck ist Suffix in linkem Ausdruck         |Ja            |`"North America" hassuffix_cs "ica"`
+`!hassuffix_cs`   |Rechter Ausdruck ist kein Suffix in linkem Ausdruck     |Ja            |`"North America" !hassuffix_cs "icA"`
+`contains`     |Rechter Ausdruck tritt als Teilzeichenfolge in linkem Ausdruck auf  |Nein            |`"FabriKam" contains "BRik"`
+`!contains`    |Rechter Ausdruck tritt nicht in linkem Ausdruck auf           |Nein            |`"Fabrikam" !contains "xyz"`
+`contains_cs`   |Rechter Ausdruck tritt als Teilzeichenfolge in linkem Ausdruck auf  |Ja           |`"FabriKam" contains_cs "Kam"`
+`!contains_cs`  |Rechter Ausdruck tritt nicht in linkem Ausdruck auf           |Ja           |`"Fabrikam" !contains_cs "Kam"`
+`startswith`   |Rechter Ausdruck ist eine Teilzeichenfolge, die am Anfang des linken Ausdrucks steht|Nein            |`"Fabrikam" startswith "fab"`
+`!startswith`  |Rechter Ausdruck ist keine Teilzeichenfolge, die am Anfang des linken Ausdrucks steht|Nein        |`"Fabrikam" !startswith "kam"`
+`startswith_cs`   |Rechter Ausdruck ist eine Teilzeichenfolge, die am Anfang des linken Ausdrucks steht|Ja            |`"Fabrikam" startswith_cs "Fab"`
+`!startswith_cs`  |Rechter Ausdruck ist keine Teilzeichenfolge, die am Anfang des linken Ausdrucks steht|Ja        |`"Fabrikam" !startswith_cs "fab"`
+`endswith`     |Rechter Ausdruck ist eine Teilzeichenfolge, die am Ende des linken Ausdrucks steht|Nein             |`"Fabrikam" endswith "Kam"`
+`!endswith`    |Rechter Ausdruck ist keine Teilzeichenfolge, die am Ende des linken Ausdrucks steht|Nein         |`"Fabrikam" !endswith "brik"`
+`endswith_cs`     |Rechter Ausdruck ist eine Teilzeichenfolge, die am Ende des linken Ausdrucks steht|Ja             |`"Fabrikam" endswith "Kam"`
+`!endswith_cs`    |Rechter Ausdruck ist keine Teilzeichenfolge, die am Ende des linken Ausdrucks steht|Ja         |`"Fabrikam" !endswith "brik"`
+`matches regex`|Linker Ausdruck enthält eine Übereinstimmung mit rechtem Ausdruck        |Ja           |`"Fabrikam" matches regex "b.*k"`
+`in`           |Entspricht einem der Elemente       |Ja           |`"abc" in ("123", "345", "abc")`
+`!in`          |Entspricht keinem der Elemente   |Ja           |`"bca" !in ("123", "345", "abc")`
+
+
+### <a name="countof"></a>countof
+
+Zählt die Vorkommnisse einer Teilzeichenfolge in einer Zeichenfolge. Übereinstimmungen können für einfache Zeichenfolgen oder reguläre Ausdrücke ermittelt werden. Bei Übereinstimmungen für einfache Zeichenfolgen treten möglicherweise Überschneidungen auf. Bei Übereinstimmungen für reguläre Ausdrücke ist dies nicht Fall.
+
+```
+countof(text, search [, kind])
+```
+
+- `text`: die eingegebene Zeichenfolge. 
+- `search`: die einfache Zeichenfolge oder der reguläre Ausdruck, die bzw. der in „text“ abgeglichen werden soll.
+- `kind` - _normal_ | _regex_ (Standard: „normal“).
+
+Gibt an, wie oft die Such Zeichenfolge im Container abgeglichen werden kann. Bei Übereinstimmungen für einfache Zeichenfolgen treten möglicherweise Überschneidungen auf. Bei Übereinstimmungen für reguläre Ausdrücke ist dies nicht Fall.
+
+#### <a name="plain-string-matches"></a>Übereinstimmungen für einfache Zeichenfolgen
+
+```Kusto
+print countof("The cat sat on the mat", "at");  //result: 3
+print countof("aaa", "a");  //result: 3
+print countof("aaaa", "aa");  //result: 3 (not 2!)
+print countof("ababa", "ab", "normal");  //result: 2
+print countof("ababa", "aba");  //result: 2
+```
+
+#### <a name="regex-matches"></a>Übereinstimmungen für reguläre Ausdrücke
+
+```Kusto
+print countof("The cat sat on the mat", @"\b.at\b", "regex");  //result: 3
+print countof("ababa", "aba", "regex");  //result: 1
+print countof("abcabc", "a.c", "regex");  // result: 2
+```
+
+
+### <a name="extract"></a>extract
+
+Ermittelt eine Übereinstimmung für einen regulären Ausdruck auf der Grundlage einer angegebenen Zeichenfolge. Optional kann die extrahierte Teilzeichenfolge in den angegebenen Typ konvertiert werden.
+
+```Kusto
+extract(regex, captureGroup, text [, typeLiteral])
+```
+
+- `regex`: ein regulärer Ausdruck.
+- `captureGroup`: eine positive Integerkonstante für die zu extrahierende Erfassungsgruppe. 0 steht für die vollständige Übereinstimmung, 1 für den mit der ersten '('Klammer')' übereinstimmenden Wert im regulären Ausdruck, 2 oder höher für nachfolgende Klammern.
+- `text`: die zu suchende Zeichenfolge.
+- `typeLiteral`: optionales Typliteral (z.B. typeof(long)). Die extrahierte Teilzeichenfolge wird, sofern angegeben, in diesen Typ konvertiert.
+
+Gibt die Teil Zeichenfolge zurück, die mit der angezeigten Erfassungs Gruppe capturegroup übereinstimmt und optional in typeliteral konvertiert wurde.
+Wenn keine Übereinstimmung vorhanden ist oder bei der Typkonvertierung ein Fehler auftritt, wird NULL zurückgegeben.
+
+
+Im folgenden Beispiel wird aus einem Heartbeatdatensatz das letzte Oktett von *ComputerIP* extrahiert:
+```Kusto
+Heartbeat
+| where ComputerIP != "" 
+| take 1
+| project ComputerIP, last_octet=extract("([0-9]*$)", 1, ComputerIP) 
+```
+
+Im folgenden Beispiel wird das letzte Oktett extrahiert und in den Typ *real* (Zahl) umgewandelt. Anschließend wird der nächste IP-Wert berechnet.
+```Kusto
+Heartbeat
+| where ComputerIP != "" 
+| take 1
+| extend last_octet=extract("([0-9]*$)", 1, ComputerIP, typeof(real)) 
+| extend next_ip=(last_octet+1)%255
+| project ComputerIP, last_octet, next_ip
+```
+
+Im folgenden Beispiel wird in der Zeichenfolge *Trace* nach der Definition von „Duration“ gesucht. Die Übereinstimmung wird in *real* umgewandelt und mit einer Zeitkonstante (1 s) multipliziert, *durch die „Duration“ in den Typ „timespan“ umgewandelt wird*.
+```Kusto
+let Trace="A=12, B=34, Duration=567, ...";
+print Duration = extract("Duration=([0-9.]+)", 1, Trace, typeof(real));  //result: 567
+print Duration_seconds =  extract("Duration=([0-9.]+)", 1, Trace, typeof(real)) * time(1s);  //result: 00:09:27
+```
+
+
+### <a name="isempty-isnotempty-notempty"></a>isempty, isnotempty, notempty
+
+- *isempty* gibt TRUE zurück, wenn das Argument eine leere Zeichenfolge oder NULL ist (s. auch *isnull* ).
+- *isnotempty* gibt TRUE zurück, wenn das Argument eine Zeichenfolge ist, die nicht leer oder NULL ist (s. auch *isnotnull* ). Alias: *notempty*.
+
+
+```Kusto
+isempty(value)
+isnotempty(value)
+```
+
+### <a name="examples"></a>Beispiele
+
+```Kusto
+print isempty("");  // result: true
+
+print isempty("0");  // result: false
+
+print isempty(0);  // result: false
+
+print isempty(5);  // result: false
+
+Heartbeat | where isnotempty(ComputerIP) | take 1  // return 1 Heartbeat record in which ComputerIP isn't empty
+```
+
+
+### <a name="parseurl"></a>parseurl
+
+Teilt eine URL in ihre jeweiligen Bestandteile (Protokoll, Host, Port usw.) auf und gibt ein Wörterbuchobjekt zurück, das diese Bestandteile als Zeichenfolgen enthält.
+
+```
+parseurl(urlstring)
+```
+
+#### <a name="examples"></a>Beispiele
+
+```Kusto
+print parseurl("http://user:pass@contoso.com/icecream/buy.aspx?a=1&b=2#tag")
+```
+
+Das Ergebnis sieht wie folgt aus:
+```
+{
+    "Scheme" : "http",
+    "Host" : "contoso.com",
+    "Port" : "80",
+    "Path" : "/icecream/buy.aspx",
+    "Username" : "user",
+    "Password" : "pass",
+    "Query Parameters" : {"a":"1","b":"2"},
+    "Fragment" : "tag"
+}
+```
+
+
+### <a name="replace"></a>replace
+
+Ersetzt alle Übereinstimmungen für reguläre Ausdrücke durch eine andere Zeichenfolge. 
+
+```
+replace(regex, rewrite, input_text)
+```
+
+- `regex`: der reguläre Ausdruck, für den eine Übereinstimmung ermittelt werden soll. Er kann Erfassungsgruppen in „('Klammern')“ enthalten.
+- `rewrite`: der reguläre Ersatzausdruck für alle Übereinstimmungen, die durch „regex“ ermittelt wurden. Verwenden Sie „\0“, um auf die gesamte Übereinstimmung zu verweisen, „\1“ für die erste Erfassungsgruppe, „\2“ für die zweite Erfassungsgruppe usw.
+- `input_text`: die Eingabezeichenfolge, in der gesucht werden soll.
+
+Gibt den Text zurück, nachdem alle Übereinstimmungen von Regex durch Auswertungen von Rewrite ersetzt wurden. Bei Übereinstimmungen kommt es nicht zu Überschneidungen.
+
+
+```Kusto
+SecurityEvent
+| take 1
+| project Activity 
+| extend replaced = replace(@"(\d+) -", @"Activity ID \1: ", Activity) 
+```
+
+Folgende Ergebnisse sind möglich:
+
+Aktivität                                        |replaced
+------------------------------------------------|----------------------------------------------------------
+4663: Es wurde versucht, auf das Objekt zuzugreifen.  |Aktivitäts-ID 4663: Es wurde versucht, auf das Objekt zuzugreifen.
+
+
+### <a name="split"></a>split
+
+Teilt eine angegebene Zeichenfolge entsprechend des festgelegten Trennzeichens auf und gibt ein Array mit den Teilzeichenfolgen zurück.
+
+```
+split(source, delimiter [, requestedIndex])
+```
+
+- `source`: die Zeichenfolge, die entsprechend des festgelegten Trennzeichens geteilt wird.
+- `delimiter`: das Trennzeichen, das zum Teilen der Quellzeichenfolge verwendet wird.
+- `requestedIndex`: ein optionaler nullbasierter Index. Falls ein solcher angegeben wird, enthält das Zeichenfolgenarray nur dieses Element (sofern vorhanden).
+
+
+#### <a name="examples"></a>Beispiele
+
+```Kusto
+print split("aaa_bbb_ccc", "_");    // result: ["aaa","bbb","ccc"]
+print split("aa_bb", "_");          // result: ["aa","bb"]
+print split("aaa_bbb_ccc", "_", 1); // result: ["bbb"]
+print split("", "_");               // result: [""]
+print split("a__b", "_");           // result: ["a","","b"]
+print split("aabbcc", "bb");        // result: ["aa","cc"]
+```
+
+### <a name="strcat"></a>strcat
+
+Verkettet Zeichenfolgenargumente (unterstützt 1 bis 16 Argumente).
+
+```
+strcat("string1", "string2", "string3")
+```
+
+#### <a name="examples"></a>Beispiele
+```Kusto
+print strcat("hello", " ", "world") // result: "hello world"
+```
+
+
+### <a name="strlen"></a>strlen
+
+Gibt die Länge einer Zeichenfolge zurück.
+
+```
+strlen("text_to_evaluate")
+```
+
+#### <a name="examples"></a>Beispiele
+```Kusto
+print strlen("hello")   // result: 5
+```
+
+
+### <a name="substring"></a>substring
+
+Extrahiert ab dem angegebenen Index eine Teilzeichenfolge aus einer Quellzeichenfolge. Optional kann die Länge der angeforderten Teilzeichenfolge angegeben werden.
+
+```
+substring(source, startingIndex [, length])
+```
+
+- `source`: die Quellzeichenfolge, aus der die Teilzeichenfolge entnommen wird.
+- `startingIndex`: die nullbasierte Position des Anfangszeichens der angeforderten Teilzeichenfolge.
+- `length`: ein optionaler Parameter, mit dem die erforderliche Länge der zurückgegebenen Teilzeichenfolge festgelegt werden kann.
+
+#### <a name="examples"></a>Beispiele
+```Kusto
+print substring("abcdefg", 1, 2);   // result: "bc"
+print substring("123456", 1);       // result: "23456"
+print substring("123456", 2, 2);    // result: "34"
+print substring("ABCD", 0, 2);  // result: "AB"
+```
+
+
+### <a name="tolower-toupper"></a>tolower, toupper
+
+Konvertiert eine angegebene Zeichenfolge in Groß-/Kleinbuchstaben.
+
+```
+tolower("value")
+toupper("value")
+```
+
+#### <a name="examples"></a>Beispiele
+```Kusto
+print tolower("HELLO"); // result: "hello"
+print toupper("hello"); // result: "HELLO"
+```
+
+## <a name="date-and-time-operations"></a>Datums- und Uhrzeitvorgänge
+Die folgenden Abschnitte beschreiben Beispiele für das Arbeiten mit Datums-und Uhrzeitwerten in der Kusto-Abfragesprache.
+
+### <a name="date-time-basics"></a>Grundlagen zu Datum und Uhrzeit
+Die Abfragesprache Kusto verfügt über zwei Hauptdatentypen, die Datums- und Uhrzeitangaben zugeordnet sind: datetime und timespan. Alle Datumsangaben werden in UTC ausgedrückt. Es werden zwar mehrere datetime-Formate unterstützt, jedoch wird das ISO8601-Format bevorzugt. 
+
+Zeiträume werden als Dezimalwert gefolgt von einer Zeiteinheit ausgedrückt:
+
+|Kurzform   | Zeiteinheit    |
+|:---|:---|
+|d           | day          |
+|h.           | hour         |
+|m           | minute       |
+|s           | second       |
+|ms          | Millisekunde  |
+|Mikrosekunde | Mikrosekunde  |
+|Takt        | Nanosekunde   |
+
+datetime-Werte können durch Umwandeln einer Zeichenfolge mithilfe des Operators `todatetime` erstellt werden. Beispielsweise verwenden Sie zur Überprüfung der in einer bestimmten Zeitspanne gesendeten VM-Heartbeats den Operator `between`, um einen Zeitraum anzugeben.
+
+```Kusto
+Heartbeat
+| where TimeGenerated between(datetime("2018-06-30 22:46:42") .. datetime("2018-07-01 00:57:27"))
+```
+
+Ein weiteres gängiges Szenario besteht in dem Vergleich eines datetime-Werts mit dem vorhandenen Wert. Wenn Sie beispielsweise sämtliche Heartbeats der letzten zwei Minuten anzeigen möchten, können Sie den Operator `now` zusammen mit einem timespan-Wert verwenden, der zwei Minuten darstellt:
+
+```Kusto
+Heartbeat
+| where TimeGenerated > now() - 2m
+```
+
+Für diese Funktion ist auch eine Verknüpfung verfügbar:
+```Kusto
+Heartbeat
+| where TimeGenerated > now(-2m)
+```
+
+Die kürzeste und am besten lesbare Methode besteht jedoch in der Verwendung des Operators `ago`:
+```Kusto
+Heartbeat
+| where TimeGenerated > ago(2m)
+```
+
+Angenommen, Ihnen ist die Start- und Endzeit nicht bekannt, sondern die Startzeit und die Dauer. Sie können die Abfrage wie folgt erneut generieren:
+
+```Kusto
+let startDatetime = todatetime("2018-06-30 20:12:42.9");
+let duration = totimespan(25m);
+Heartbeat
+| where TimeGenerated between(startDatetime .. (startDatetime+duration) )
+| extend timeFromStart = TimeGenerated - startDatetime
+```
+
+### <a name="converting-time-units"></a>Konvertieren von Zeiteinheiten
+Sie können einen datetime- oder timespan-Wert in einer anderen als der Standardzeiteinheit ausdrücken. Wenn Sie beispielsweise Fehlerereignisse der letzten 30 Minuten überprüfen und eine berechnete Spalte benötigen, in der angezeigt wird, wie viel Zeit seit Auftreten des Ereignisses vergangen ist, gehen Sie wie folgt vor:
+
+```Kusto
+Event
+| where TimeGenerated > ago(30m)
+| where EventLevelName == "Error"
+| extend timeAgo = now() - TimeGenerated 
+```
+
+Die Spalte `timeAgo` enthält Werte wie z.B. „00:09:31.5118992“. Dies bedeutet, dass sie im Format „hh:mm:ss.fffffff“ vorliegen. Wenn Sie diese Werte in `numver` von Minuten seit der Startzeit formatieren möchten, teilen Sie diesen Wert durch „1 Minute“:
+
+```Kusto
+Event
+| where TimeGenerated > ago(30m)
+| where EventLevelName == "Error"
+| extend timeAgo = now() - TimeGenerated
+| extend timeAgoMinutes = timeAgo/1m 
+```
+
+
+### <a name="aggregations-and-bucketing-by-time-intervals"></a>Aggregationen und Zuordnung von Buckets nach Zeitintervallen
+Ein weiteres gängiges Szenario besteht in der Notwendigkeit, Statistiken über einen bestimmten Zeitraum in einem bestimmten Aggregationsintervall abzurufen. Für dieses Szenario kann ein `bin`-Operator als Teil einer Summarize-Klausel verwendet werden.
+
+Mit der folgenden Abfrage können Sie die Anzahl der Ereignisse abrufen, die in der letzten halben Stunde alle 5 Minuten aufgetreten sind:
+
+```Kusto
+Event
+| where TimeGenerated > ago(30m)
+| summarize events_count=count() by bin(TimeGenerated, 5m) 
+```
+
+Diese Abfrage erzeugt die folgende Tabelle:  
+
+|TimeGenerated(UTC)|events_count|
+|--|--|
+|2018-08-01T09:30:00.000|54|
+|2018-08-01T09:35:00.000|41|
+|2018-08-01T09:40:00.000|42|
+|2018-08-01T09:45:00.000|41|
+|2018-08-01T09:50:00.000|41|
+|2018-08-01T09:55:00.000|16|
+
+Eine weitere Möglichkeit zum Erstellen von Buckets für die Ergebnisse besteht in der Verwendung von Funktionen, wie z.B. `startofday`:
+
+```Kusto
+Event
+| where TimeGenerated > ago(4d)
+| summarize events_count=count() by startofday(TimeGenerated) 
+```
+
+Diese Abfrage erzeugt die folgenden Ergebnisse:
+
+|timestamp|count_|
+|--|--|
+|2018-07-28T00:00:00.000|7\.136|
+|2018-07-29T00:00:00.000|12.315|
+|2018-07-30T00:00:00.000|16.847|
+|2018-07-31T00:00:00.000|12.616|
+|2018-08-01T00:00:00.000|5\.416|
+
+
+### <a name="time-zones"></a>Zeitzonen
+Da alle datetime-Werte in UTC ausgedrückt werden, ist es häufig hilfreich, diese Werte in die lokale Zeitzone zu konvertieren. Verwenden Sie beispielsweise die folgende Berechnung zum Konvertieren von UTC- in PST-Zeiten:
+
+```Kusto
+Event
+| extend localTimestamp = TimeGenerated - 8h
+```
+
+## <a name="aggregations"></a>Aggregationen
+In den folgenden Abschnitten sind Beispiele für die Aggregation der Ergebnisse einer Abfrage in der Kusto-Abfragesprache aufgeführt.
+
+### <a name="count"></a>count
+Zählen Sie die Anzahl der Zeilen im Resultset, nachdem alle Filter angewendet wurden. Das folgende Beispiel gibt die Gesamtanzahl der Zeilen in der Tabelle _Perf_ der letzten 30 Minuten aus. Das Ergebnis wird in einer Spalte namens *count_* zurückgegeben, sofern Sie keinen bestimmten Namen zuweisen:
+
+
+```Kusto
+Perf
+| where TimeGenerated > ago(30m) 
+| summarize count()
+```
+
+```Kusto
+Perf
+| where TimeGenerated > ago(30m) 
+| summarize num_of_records=count() 
+```
+
+Eine Zeitdiagrammvisualisierung kann hilfreich sein, um im Zeitverlauf einen Trend zu erkennen:
+
+```Kusto
+Perf 
+| where TimeGenerated > ago(30m) 
+| summarize count() by bin(TimeGenerated, 5m)
+| render timechart
+```
+
+Die Ausgabe in diesem Beispiel zeigt die Trendlinie der Anzahl der Perf-Datensätze in Intervallen von 5 Minuten:
+
+![Anzahl der Trends](images/samples/count-trend.png)
+
+
+### <a name="dcount-dcountif"></a>dcount, dcountif
+Verwenden Sie `dcount` und `dcountif` zum Zählen von bestimmten Werten in einer bestimmten Spalte. Die folgende Abfrage wertet aus, wie viele unterschiedliche Computer in der letzten Stunde Takte gesendet haben:
+
+```Kusto
+Heartbeat 
+| where TimeGenerated > ago(1h) 
+| summarize dcount(Computer)
+```
+
+Verwenden Sie `dcountif`, um nur die Linux-Computer zu zählen, die Heartbeats gesendet haben:
+
+```Kusto
+Heartbeat 
+| where TimeGenerated > ago(1h) 
+| summarize dcountif(Computer, OSType=="Linux")
+```
+
+### <a name="evaluating-subgroups"></a>Auswerten von Untergruppen
+Verwenden Sie das Schlüsselwort `by`, um eine Zählung oder Aggregationen auf Untergruppen in Ihren Daten auszuführen. Beispielsweise um die Anzahl der unterschiedlichen Linux-Computer zu zählen, die in jedem Land bzw. jeder Region Heartbeats gesendet haben:
+
+```Kusto
+Heartbeat 
+| where TimeGenerated > ago(1h) 
+| summarize distinct_computers=dcountif(Computer, OSType=="Linux") by RemoteIPCountry
+```
+
+|RemoteIPCountry  | distinct_computers  |
+------------------|---------------------|
+|USA    | 19                  |
+|Kanada           | 3                   |
+|Irland          | 0                   |
+|Vereinigtes Königreich   | 0                   |
+|Niederlande      | 2                   |
+
+
+Um noch kleineren Untergruppen von Daten zu analysieren, fügen Sie zusätzliche Spaltennamen in den Abschnitt `by` ein. Beispielsweise möchten Sie die unterschiedlichen Computer von jedem Land bzw. jeder Region pro OSType zählen:
+
+```Kusto
+Heartbeat 
+| where TimeGenerated > ago(1h) 
+| summarize distinct_computers=dcountif(Computer, OSType=="Linux") by RemoteIPCountry, OSType
+```
+
+
+### <a name="percentile"></a>Perzentil
+Um den Median zu ermitteln, verwenden Sie die `percentile`-Funktion mit einem Wert zum Angeben des Quantils:
+
+```Kusto
+Perf
+| where TimeGenerated > ago(30m) 
+| where CounterName == "% Processor Time" and InstanceName == "_Total" 
+| summarize percentiles(CounterValue, 50) by Computer
+```
+
+Sie können auch verschiedene Quantile angeben, um für jedes ein aggregiertes Ergebnis zu erhalten:
+
+```Kusto
+Perf
+| where TimeGenerated > ago(30m) 
+| where CounterName == "% Processor Time" and InstanceName == "_Total" 
+| summarize percentiles(CounterValue, 25, 50, 75, 90) by Computer
+```
+
+Dadurch wird möglicherweise deutlich, dass einige CPUs des Computers einen ähnlichen Medianwert haben. Während sich dieser bei manchen stabil in der Nähe des Medians bewegt, melden andere viel niedrigere und höhere CPU-Werte, die von Spitzen verursacht wurden.
+
+### <a name="variance"></a>Variance
+Um die Varianz eines Werts direkt zu evaluieren, verwenden Sie die Standardabweichung und Varianzmethoden:
+
+```Kusto
+Perf
+| where TimeGenerated > ago(30m) 
+| where CounterName == "% Processor Time" and InstanceName == "_Total" 
+| summarize stdev(CounterValue), variance(CounterValue) by Computer
+```
+
+Eine gute Möglichkeit zur Analyse der Stabilität der CPU-Auslastung besteht darin, stdev mit der Berechnung des Medians zu kombinieren:
+
+```Kusto
+Perf
+| where TimeGenerated > ago(130m) 
+| where CounterName == "% Processor Time" and InstanceName == "_Total" 
+| summarize stdev(CounterValue), percentiles(CounterValue, 50) by Computer
+```
+
+### <a name="generating-lists-and-sets"></a>Generieren von Listen und Sätzen
+Sie können mithilfe von `makelist` Daten nach der Reihenfolge der Werte in einer bestimmten Spalte pivotieren. So sollten Sie beispielsweise die Auftragsereignisse untersuchen, die am häufigsten auf Ihren Computern ausgeführt werden. Sie können die Daten im Wesentlichen nach der Reihenfolge der Ereignis-IDs auf den einzelnen Computern pivotieren. 
+
+```Kusto
+Event
+| where TimeGenerated > ago(12h)
+| order by TimeGenerated desc
+| summarize makelist(EventID) by Computer
+```
+
+|Computer|list_EventID|
+|---|---|
+| computer1 | [704,701,1501,1500,1085,704,704,701] |
+| computer2 | [326,105,302,301,300,102] |
+| ... | ... |
+
+`makelist` generiert eine Liste in der Reihenfolge, in der Daten an sie übergeben wurden. Verwenden Sie zum Sortieren von Ereignissen vom ältesten bis zum neuesten in der Auftragsanweisung `asc` anstelle von `desc`. 
+
+Es ist auch sinnvoll, eine Liste der unterschiedlichen Werte zu erstellen. Diese wird als _Satz_ bezeichnet und kann mit `makeset` generiert werden:
+
+```Kusto
+Event
+| where TimeGenerated > ago(12h)
+| order by TimeGenerated desc
+| summarize makeset(EventID) by Computer
+```
+
+|Computer|list_EventID|
+|---|---|
+| computer1 | [704,701,1501,1500,1085] |
+| computer2 | [326,105,302,301,300,102] |
+| ... | ... |
+
+Wie `makelist` kann `makeset` auch mit sortierten Daten ausgeführt werden und generiert die Arrays basierend auf der Reihenfolge der übergebenen Zeilen.
+
+### <a name="expanding-lists"></a>Erweitern von Listen
+Der Inverse-Vorgang von `makelist` oder `makeset` lautet `mvexpand` und erweitert eine Liste von Werten zum Separieren von Zeilen. Der Vorgang kann, bei JSON und Array, eine Erweiterung über eine beliebige Anzahl von dynamischen Spalten erzielen. Sie könnten beispielsweise die Tabelle *Heartbeat* auf Lösungen überprüfen, indem Sie Daten von Computern senden, die in der vergangenen Stunde einen Heartbeat gesendet haben:
+
+```Kusto
+Heartbeat
+| where TimeGenerated > ago(1h)
+| project Computer, Solutions
+```
+
+| Computer | Lösungen | 
+|--------------|----------------------|
+| computer1 | „security“, „updates“, „changeTracking“ |
+| computer2 | „security“, „updates“ |
+| computer3 | „antiMalware“, „changeTracking“ |
+| ... | ... |
+
+Mit `mvexpand` können Sie die einzelnen Werte in einer separaten Zeile statt in einer durch Trennzeichen getrennten Liste anzeigen:
+
+```Kusto
+Heartbeat
+| where TimeGenerated > ago(1h)
+| project Computer, split(Solutions, ",")
+| mvexpand Solutions
+```
+
+| Computer | Lösungen | 
+|--------------|----------------------|
+| computer1 | „security“ |
+| computer1 | „updates“ |
+| computer1 | „changeTracking“ |
+| computer2 | „security“ |
+| computer2 | „updates“ |
+| computer3 | „antiMalware“ |
+| computer3 | „changeTracking“ |
+| ... | ... |
+
+
+Anschließend können Sie erneut `makelist` verwenden, um Elemente zu gruppieren. Zeigen Sie dieses Mal die Liste der Computer pro Lösung an:
+
+```Kusto
+Heartbeat
+| where TimeGenerated > ago(1h)
+| project Computer, split(Solutions, ",")
+| mvexpand Solutions
+| summarize makelist(Computer) by tostring(Solutions) 
+```
+
+|Lösungen | list_Computer |
+|--------------|----------------------|
+| „security“ | ["computer1", "computer2"] |
+| „updates“ | ["computer1", "computer2"] |
+| „changeTracking“ | ["computer1", "computer3"] |
+| „antiMalware“ | [„computer3“] |
+| ... | ... |
+
+### <a name="handling-missing-bins"></a>Behandeln fehlender Klassen
+Eine nützliche Anwendung von `mvexpand` ist die Notwendigkeit, Standardwerte für fehlende Klassen einzugeben. Angenommen beispielsweise, Sie suchen nach der Betriebszeit eines bestimmten Computers, indem Sie dessen Heartbeat untersuchen. Sie möchten auch die Quelle des Heartbeats sehen, die in der Spalte _Kategorie_ zu finden ist. Normalerweise würde eine einfache Summarize-Anweisung wie folgt verwendet:
+
+```Kusto
+Heartbeat
+| where TimeGenerated > ago(12h)
+| summarize count() by Category, bin(TimeGenerated, 1h)
+```
+
+| Category | TimeGenerated | count_ |
+|--------------|----------------------|--------|
+| Direkt-Agent | 2017-06-06T17:00:00Z | 15 |
+| Direkt-Agent | 2017-06-06T18:00:00Z | 60 |
+| Direkt-Agent | 2017-06-06T20:00:00Z | 55 |
+| Direkt-Agent | 2017-06-06T21:00:00Z | 57 |
+| Direkt-Agent | 2017-06-06T22:00:00Z | 60 |
+| ... | ... | ... |
+
+In diesen Ergebnissen fehlt jedoch der Bucket, der „2017-06-06T19:00:00Z“ zugeordnet wurde, da für diese Stunde keine Heartbeatdaten vorhanden sind. Mit der Funktion `make-series` können Sie leeren Buckets einen Standardwert zuweisen. Dadurch wird für jede Kategorie eine Zeile mit zwei zusätzlichen Arrayspalten generiert, von denen eine Spalte für Werte und die andere für übereinstimmende Zeitrahmen vorgesehen ist:
+
+```Kusto
+Heartbeat
+| make-series count() default=0 on TimeGenerated in range(ago(1d), now(), 1h) by Category 
+```
+
+| Category | count_ | TimeGenerated |
+|---|---|---|
+| Direkt-Agent | [15,60,0,55,60,57,60,...] | ["2017-06-06T17:00:00.0000000Z","2017-06-06T18:00:00.0000000Z","2017-06-06T19:00:00.0000000Z","2017-06-06T20:00:00.0000000Z","2017-06-06T21:00:00.0000000Z",...] |
+| ... | ... | ... |
+
+Das dritte Element des Arrays *count_* ist wie erwartet eine 0 (null). Zudem gibt es im Array _TimeGenerated_ einen übereinstimmenden Zeitrahmen von „2017-06-06T19:00:00.0000000Z“. Dieses Arrayformat ist jedoch schwer zu lesen. Verwenden Sie `mvexpand`, um die Arrays zu erweitern und die gleiche Formatausgabe zu generieren, die von `summarize` generiert wurde:
+
+```Kusto
+Heartbeat
+| make-series count() default=0 on TimeGenerated in range(ago(1d), now(), 1h) by Category 
+| mvexpand TimeGenerated, count_
+| project Category, TimeGenerated, count_
+```
+
+| Category | TimeGenerated | count_ |
+|--------------|----------------------|--------|
+| Direkt-Agent | 2017-06-06T17:00:00Z | 15 |
+| Direkt-Agent | 2017-06-06T18:00:00Z | 60 |
+| Direkt-Agent | 2017-06-06T19:00:00Z | 0 |
+| Direkt-Agent | 2017-06-06T20:00:00Z | 55 |
+| Direkt-Agent | 2017-06-06T21:00:00Z | 57 |
+| Direkt-Agent | 2017-06-06T22:00:00Z | 60 |
+| ... | ... | ... |
+
+
+
+### <a name="narrowing-results-to-a-set-of-elements-let-makeset-toscalar-in"></a>Einschränken von Ergebnissen auf eine Reihe von Elementen: `let`, `makeset`, `toscalar`, `in`
+In einem häufig auftretenden Szenario werden die Namen einiger bestimmter Entitäten basierend auf einer Reihe von Kriterien ausgewählt. Anschließend wird ein anderes Dataset für diese Reihe von Entitäten weiter gefiltert. Sie könnten beispielsweise nach Computern suchen, auf denen bekanntermaßen Updates fehlen, und IP-Adressen identifizieren, die von diesen Computern aufgerufen wurden:
+
+
+```Kusto
+let ComputersNeedingUpdate = toscalar(
+    Update
+    | summarize makeset(Computer)
+    | project set_Computer
+);
+WindowsFirewall
+| where Computer in (ComputersNeedingUpdate)
+```
+
+## <a name="joins"></a>Joins
+Mithilfe von Joins können Sie Daten aus mehreren Tabellen in derselben Abfrage analysieren. Diese führen die Zeilen zweier Datasets anhand von übereinstimmenden Werten der angegebenen Spalte zusammen.
+
+
+```Kusto
+SecurityEvent 
+| where EventID == 4624     // sign-in events
+| project Computer, Account, TargetLogonId, LogonTime=TimeGenerated
+| join kind= inner (
+    SecurityEvent 
+    | where EventID == 4634     // sign-out events
+    | project TargetLogonId, LogoffTime=TimeGenerated
+) on TargetLogonId
+| extend Duration = LogoffTime-LogonTime
+| project-away TargetLogonId1 
+| top 10 by Duration desc
+```
+
+In diesem Beispiel filtert das erste Dataset alle Anmeldeereignisse. Dieses Dataset ist mit einem zweiten Dataset verknüpft, das alle Abmeldeereignisse filtert. Die projizierten Spalten sind _Computer_ , _Account_ , _TargetLogonId_ und _TimeGenerated_. Die Datasets werden von einer freigegebenen Spalte ( _TargetLogonId_ ) korreliert. Die Ausgabe ist ein einzelnes Dataset pro Korrelation, das die An- und Abmeldezeit enthält.
+
+Wenn beide Datasets Spalten mit dem gleichen Namen enthalten, wird den Spalten des rechten Datasets eine Indexnummer hinzugefügt. In diesem Beispiel würden die Ergebnisse _TargetLogonId_ mit Werten der linken Tabelle und _TargetLogonId1_ mit Werten der rechten Tabelle anzeigen. In diesem Fall wurde die zweite _TargetLogonId1_ -Spalte mithilfe des `project-away`-Operators entfernt.
+
+> [!NOTE]
+> Behalten Sie mithilfe des `project`-Operators nur die relevanten Spalten der verknüpften Datasets bei, um die Leistung zu verbessern.
+
+
+Verwenden Sie die folgende Syntax, um zwei Datasets zu verknüpfen. Der verknüpfte Schlüssel hat in den beiden Tabellen einen unterschiedlichen Namen:
+```
+Table1
+| join ( Table2 ) 
+on $left.key1 == $right.key2
+```
+
+### <a name="lookup-tables"></a>Nachschlage Tabellen
+Joins werden häufig verwendet, um die statische Zuordnung von Werten mithilfe von `datatable` zu verwenden. Diese kann bei der Transformation der Ergebnisse hilfreich sein, um diese besser darstellen zu können. So können Sie beispielsweise den Sicherheitsereignisdaten den Ereignisnamen für jede Ereignis-ID hinzufügen.
+
+```Kusto
+let DimTable = datatable(EventID:int, eventName:string)
+  [
+    4625, "Account activity",
+    4688, "Process action",
+    4634, "Account activity",
+    4658, "The handle to an object was closed",
+    4656, "A handle to an object was requested",
+    4690, "An attempt was made to duplicate a handle to an object",
+    4663, "An attempt was made to access an object",
+    5061, "Cryptographic operation",
+    5058, "Key file operation"
+  ];
+SecurityEvent
+| join kind = inner
+ DimTable on EventID
+| summarize count() by eventName
+```
+
+| eventName | count_ |
+|:---|:---|
+| Das Handle für ein Objekt wurde geschlossen. | 290.995 |
+| Ein Handle für ein Objekt wurde angefordert. | 154.157 |
+| Es wurde versucht, ein Handle für ein Objekt zu duplizieren. | 144.305 |
+| Es wurde versucht, auf ein Objekt zuzugreifen. | 123.669 |
+| Kryptografischer Vorgang | 153.495 |
+| Schlüsseldatei Vorgang | 153.496 |
+
+## <a name="json-and-data-structures"></a>JSON und Datenstrukturen
+
+Geschachtelte Objekte sind Objekte, die andere Objekte in Form eines Arrays oder einer Zuordnung von Schlüssel-Wert-Paaren enthalten. Diese Objekte werden als JSON-Zeichenfolgen dargestellt. In diesem Abschnitt wird beschrieben, wie JSON zum Abrufen von Daten und Analysieren von geschposteten Objekten verwendet wird.
+
+### <a name="working-with-json-strings"></a>Arbeiten mit JSON-Zeichenfolgen
+Greifen Sie mit `extractjson` auf ein bestimmtes JSON-Element in einem bekannten Pfad zu. Zur Nutzung dieser Funktion ist ein Pfadausdruck erforderlich, für den die folgenden Konventionen gelten:
+
+- _$_ verweist auf den Stammordner.
+- Verwenden Sie die Klammer- oder Punktnotation, um wie in den folgenden Beispielen dargestellt auf Indizes und Elemente zu verweisen.
+
+
+Verwenden Sie Klammern für Indizes und Punkte zum Trennen von Elementen:
+
+```Kusto
+let hosts_report='{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"location":"South_DC", "status":"stopped", "rate":3}]}';
+print hosts_report
+| extend status = extractjson("$.hosts[0].status", hosts_report)
+```
+
+Das gleiche Ergebnis mit der Klammernotation erhalten Sie wie folgt:
+
+```Kusto
+let hosts_report='{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"location":"South_DC", "status":"stopped", "rate":3}]}';
+print hosts_report 
+| extend status = extractjson("$['hosts'][0]['status']", hosts_report)
+```
+
+Wenn nur ein Element vorhanden ist, können Sie nur die Punktnotation verwenden:
+
+```Kusto
+let hosts_report=dynamic({"location":"North_DC", "status":"running", "rate":5});
+print hosts_report 
+| extend status = hosts_report.status
+```
+
+
+### <a name="parsejson"></a>parsejson
+Sie können besonders leicht auf mehrere Elemente in Ihrer JSON-Struktur zugreifen, wenn der Zugriff über ein dynamisches Objekt erfolgt. Wandeln Sie die Textdaten mit `parsejson` in ein dynamisches Objekt um. Anschließend können Sie die Daten mithilfe zusätzlicher Funktionen analysieren.
+
+```Kusto
+let hosts_object = parsejson('{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"location":"South_DC", "status":"stopped", "rate":3}]}');
+print hosts_object 
+| extend status0=hosts_object.hosts[0].status, rate1=hosts_object.hosts[1].rate
+```
+
+
+
+### <a name="arraylength"></a>arraylength
+Verwenden Sie `arraylength`, um die Anzahl der Elemente in einem Array zählen zu lassen:
+
+```Kusto
+let hosts_object = parsejson('{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"location":"South_DC", "status":"stopped", "rate":3}]}');
+print hosts_object 
+| extend hosts_num=arraylength(hosts_object.hosts)
+```
+
+### <a name="mvexpand"></a>mvexpand
+Verwenden Sie `mvexpand`, um die Eigenschaften eines Objekts in separate Zeilen aufzuteilen.
+
+```Kusto
+let hosts_object = parsejson('{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"location":"South_DC", "status":"stopped", "rate":3}]}');
+print hosts_object 
+| mvexpand hosts_object.hosts[0]
+```
+
+![Screenshot von „hosts_0“ mit Werten für „location“, „status“ und „rate“](images/samples/mvexpand.png)
+
+### <a name="buildschema"></a>buildschema
+Verwenden Sie `buildschema`, um das Schema für zulässige Objektwerte abzurufen:
+
+```Kusto
+let hosts_object = parsejson('{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"location":"South_DC", "status":"stopped", "rate":3}]}');
+print hosts_object 
+| summarize buildschema(hosts_object)
+```
+
+Die Ausgabe ist ein Schema im JSON-Format:
+```json
+{
+    "hosts":
+    {
+        "indexer":
+        {
+            "location": "string",
+            "rate": "int",
+            "status": "string"
+        }
+    }
+}
+```
+Diese Ausgabe enthält die Namen der Objektfelder und die übereinstimmenden Datentypen. 
+
+Für geschachtelte Objekte liegen möglicherweise wie im folgenden Beispiel verschiedene Schemas vor:
+
+```Kusto
+let hosts_object = parsejson('{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"status":"stopped", "rate":"3", "range":100}]}');
+print hosts_object 
+| summarize buildschema(hosts_object)
+```
+
+## <a name="charts"></a>Diagramme
+In den folgenden Abschnitten werden Beispiele für das Arbeiten mit Diagrammen in der Kusto-Abfragesprache beschrieben.
+
+### <a name="chart-the-results"></a>Diagramm Ergebnisse
+Beginnen Sie mit der Überprüfung, wie viele Computer pro Betriebssystem während der letzten Stunde vorhanden waren:
+
+```Kusto
+Heartbeat
+| where TimeGenerated > ago(1h)
+| summarize count(Computer) by OSType  
+```
+
+Standardmäßig werden Ergebnisse als Tabelle angezeigt:
+
+![Tabelle](images/samples/table-display.png)
+
+Wählen Sie **Chart** (Diagramm) und dann die Option **Pie** (Kreisdiagramm), um die Ergebnisse anzuzeigen, damit Sie eine bessere Ansicht erhalten:
+
+![Kreisdiagramm](images/samples/charts-and-diagrams-pie.png)
+
+
+### <a name="timecharts"></a>Zeitdiagramme
+Zeigen Sie die durchschnittliche, 50. und 95. Quantile der Prozessorzeit in Containern von einer Stunde an. Die Abfrage generiert mehrere Reihen. Sie können auswählen, welche Reihe im Zeitdiagramm angezeigt wird.
+
+```Kusto
+Perf
+| where TimeGenerated > ago(1d) 
+| where CounterName == "% Processor Time" 
+| summarize avg(CounterValue), percentiles(CounterValue, 50, 95)  by bin(TimeGenerated, 1h)
+```
+
+Wählen Sie die Anzeigeoption für das **Linien** Diagramm aus:
+
+![Liniendiagramm](images/samples/charts-and-diagrams-multiple-series.png)
+
+#### <a name="reference-line"></a>Bezugslinie
+
+Eine Bezugslinie kann Ihnen dabei helfen, einfach zu identifizieren, ob die Metrik einen bestimmten Schwellenwert überschritten hat. Erweitern Sie das Dataset mit einer konstanten Spalte, um dem Diagramm eine Zeile hinzuzufügen:
+
+```Kusto
+Perf
+| where TimeGenerated > ago(1d) 
+| where CounterName == "% Processor Time" 
+| summarize avg(CounterValue), percentiles(CounterValue, 50, 95)  by bin(TimeGenerated, 1h)
+| extend Threshold = 20
+```
+
+![Bezugslinie](images/samples/charts-and-diagrams-multiple-series-threshold.png)
+
+### <a name="multiple-dimensions"></a>Mehrere Dimensionen
+Mit mehreren Ausdrücken in der `by`-Klausel von `summarize` werden mehrere Zeilen in den Ergebnissen erstellt, und zwar eine für jede Kombination der Werte.
+
+```Kusto
+SecurityEvent
+| where TimeGenerated > ago(1d)
+| summarize count() by tostring(EventID), AccountType, bin(TimeGenerated, 1h)
+```
+
+Wenn Sie die Ergebnisse als Diagramm anzeigen, wird die erste Zeile aus der `by`-Klausel verwendet. Im folgenden Beispiel ist ein Diagramm mit gestapelten Säulen mithilfe der _EventID_ dargestellt. Dimensionen müssen vom Typ `string` sein. In diesem Beispiel wird die _EventID_ also in eine Zeichenfolge umgewandelt. 
+
+![Balkendiagramm, EventID](images/samples/charts-and-diagrams-multiple-dimension-1.png)
+
+Sie können zwischen diesen wechseln, indem Sie die Dropdownliste mit dem Spaltennamen auswählen. 
+
+![Balkendiagramm, AccountType](images/samples/charts-and-diagrams-multiple-dimension-2.png)
+
+## <a name="smart-analytics"></a>Intelligente Analysen
+Dieser Abschnitt enthält Beispiele für die Verwendung von intelligenten Analysefunktionen in Log Analytics, um die Analyse der Benutzeraktivität auszuführen. Sie können diese Beispiele verwenden, um Ihre eigenen Anwendungen, die von Application Insights überwacht werden, zu analysieren. Sie können die Konzepte in diesen Abfragen auch für ähnliche Analysen anderer Daten verwenden. 
+
+### <a name="cohorts-analytics"></a>Kohortenanalysen
+
+Bei der Kohortenanalyse wird die Aktivität von bestimmten Benutzergruppen, die als Kohorten bezeichnet werden, nachverfolgt. Damit soll gemessen werden, wie attraktiv ein Dienst ist, indem die Rate der wiederkehrenden Benutzer gemessen wird. Die Benutzer werden nach der Zeit ihrer ersten Nutzung des Diensts gruppiert. Beim Analysieren von Kohorten erwarten wir eine Abnahme der Aktivität gegenüber den ersten nachverfolgten Zeiträumen. Jede Kohorte wird nach der Woche benannt, in der ihre Mitglieder zum ersten Mal identifiziert wurden.
+
+Im folgenden Beispiel wird die Anzahl der Aktivitäten analysiert, die Benutzer im Verlauf von 5 Wochen nach ihrer ersten Nutzung des Diensts ausführen.
+
+```Kusto
+let startDate = startofweek(bin(datetime(2017-01-20T00:00:00Z), 1d));
+let week = range Cohort from startDate to datetime(2017-03-01T00:00:00Z) step 7d;
+// For each user we find the first and last timestamp of activity
+let FirstAndLastUserActivity = (end:datetime) 
+{
+    customEvents
+    | where customDimensions["sourceapp"]=="ai-loganalyticsui-prod"
+    // Check 30 days back to see first time activity
+    | where timestamp > startDate - 30d
+    | where timestamp < end      
+    | summarize min=min(timestamp), max=max(timestamp) by user_AuthenticatedId
+};
+let DistinctUsers = (cohortPeriod:datetime, evaluatePeriod:datetime) {
+    toscalar (
+    FirstAndLastUserActivity(evaluatePeriod)
+    // Find members of the cohort: only users that were observed in this period for the first time
+    | where min >= cohortPeriod and min < cohortPeriod + 7d  
+    // Pick only the members that were active during the evaluated period or after
+    | where max > evaluatePeriod - 7d
+    | summarize dcount(user_AuthenticatedId)) 
+};
+week 
+| where Cohort == startDate
+// Finally, calculate the desired metric for each cohort. In this sample we calculate distinct users but you can change
+// this to any other metric that would measure the engagement of the cohort members.
+| extend 
+    r0 = DistinctUsers(startDate, startDate+7d),
+    r1 = DistinctUsers(startDate, startDate+14d),
+    r2 = DistinctUsers(startDate, startDate+21d),
+    r3 = DistinctUsers(startDate, startDate+28d),
+    r4 = DistinctUsers(startDate, startDate+35d)
+| union (week | where Cohort == startDate + 7d 
+| extend 
+    r0 = DistinctUsers(startDate+7d, startDate+14d),
+    r1 = DistinctUsers(startDate+7d, startDate+21d),
+    r2 = DistinctUsers(startDate+7d, startDate+28d),
+    r3 = DistinctUsers(startDate+7d, startDate+35d) )
+| union (week | where Cohort == startDate + 14d 
+| extend 
+    r0 = DistinctUsers(startDate+14d, startDate+21d),
+    r1 = DistinctUsers(startDate+14d, startDate+28d),
+    r2 = DistinctUsers(startDate+14d, startDate+35d) )
+| union (week | where Cohort == startDate + 21d 
+| extend 
+    r0 = DistinctUsers(startDate+21d, startDate+28d),
+    r1 = DistinctUsers(startDate+21d, startDate+35d) ) 
+| union (week | where Cohort == startDate + 28d 
+| extend 
+    r0 = DistinctUsers (startDate+28d, startDate+35d) )
+// Calculate the retention percentage for each cohort by weeks
+| project Cohort, r0, r1, r2, r3, r4,
+          p0 = r0/r0*100,
+          p1 = todouble(r1)/todouble (r0)*100,
+          p2 = todouble(r2)/todouble(r0)*100,
+          p3 = todouble(r3)/todouble(r0)*100,
+          p4 = todouble(r4)/todouble(r0)*100 
+| sort by Cohort asc
+```
+Durch dieses Beispiel wird die folgende Ausgabe zurückgegeben.
+
+:::image type="content" source="images/samples/cohorts.png" alt-text="Ausgabe der Kohortenanalyse":::
+
+### <a name="rolling-monthly-active-users-and-user-stickiness"></a>Neue monatlich aktive Benutzer und Benutzerbindung
+In den folgenden Beispielen wird die Zeitreihenanalyse mit der Funktion [series_fir](/azure/kusto/query/series-firfunction) veranschaulicht, die Berechnungen für gleitende Fenster ermöglicht. Die überwachte Beispielanwendung ist ein Onlineshop, der die Aktivität der Benutzer über benutzerdefinierte Ereignisse nachverfolgt. Die Abfrage verfolgt zwei Arten von Benutzeraktivitäten: _AddToCart_ und _Checkout_. Außerdem definiert sie _aktive Benutzer_ als diejenigen, die an einem bestimmten Tag mindestens einen Check-Out ausgeführt haben.
+
+
+
+```Kusto
+let endtime = endofday(datetime(2017-03-01T00:00:00Z));
+let window = 60d;
+let starttime = endtime-window;
+let interval = 1d;
+let user_bins_to_analyze = 28;
+// Create an array of filters coefficients for series_fir(). A list of '1' in our case will produce a simple sum.
+let moving_sum_filter = toscalar(range x from 1 to user_bins_to_analyze step 1 | extend v=1 | summarize makelist(v)); 
+// Level of engagement. Users will be counted as engaged if they performed at least this number of activities.
+let min_activity = 1;
+customEvents
+| where timestamp > starttime  
+| where customDimensions["sourceapp"] == "ai-loganalyticsui-prod"
+// We want to analyze users who actually checked-out in our web site
+| where (name == "Checkout") and user_AuthenticatedId <> ""
+// Create a series of activities per user
+| make-series UserClicks=count() default=0 on timestamp 
+    in range(starttime, endtime-1s, interval) by user_AuthenticatedId
+// Create a new column containing a sliding sum. 
+// Passing 'false' as the last parameter to series_fir() prevents normalization of the calculation by the size of the window.
+// For each time bin in the *RollingUserClicks* column, the value is the aggregation of the user activities in the 
+// 28 days that preceded the bin. For example, if a user was active once on 2016-12-31 and then inactive throughout 
+// January, then the value will be 1 between 2016-12-31 -> 2017-01-28 and then 0s. 
+| extend RollingUserClicks=series_fir(UserClicks, moving_sum_filter, false)
+// Use the zip() operator to pack the timestamp with the user activities per time bin
+| project User_AuthenticatedId=user_AuthenticatedId , RollingUserClicksByDay=zip(timestamp, RollingUserClicks)
+// Transpose the table and create a separate row for each combination of user and time bin (1 day)
+| mvexpand RollingUserClicksByDay
+| extend Timestamp=todatetime(RollingUserClicksByDay[0])
+// Mark the users that qualify according to min_activity
+| extend RollingActiveUsersByDay=iff(toint(RollingUserClicksByDay[1]) >= min_activity, 1, 0)
+// And finally, count the number of users per time bin.
+| summarize sum(RollingActiveUsersByDay) by Timestamp
+// First 28 days contain partial data, so we filter them out.
+| where Timestamp > starttime + 28d
+// render as timechart
+| render timechart
+```
+
+Durch dieses Beispiel wird die folgende Ausgabe zurückgegeben.
+
+:::image type="content" source="images/samples/rolling-mau.png" alt-text="Ausgabe für neue monatlich aktive Benutzer":::
+
+Im folgenden Beispiel wird die obige Abfrage in eine wiederverwendbare Funktion umgewandelt und verwendet, um die Benutzerfreundlichkeit zu berechnen. Aktive Benutzer werden in dieser Abfrage als solche Benutzer definiert, die an einem bestimmten Tag mindestens einen Check-Out ausgeführt haben.
+
+``` Kusto
+let rollingDcount = (sliding_window_size: int, event_name:string)
+{
+    let endtime = endofday(datetime(2017-03-01T00:00:00Z));
+    let window = 90d;
+    let starttime = endtime-window;
+    let interval = 1d;
+    let moving_sum_filter = toscalar(range x from 1 to sliding_window_size step 1 | extend v=1| summarize makelist(v));    
+    let min_activity = 1;
+    customEvents
+    | where timestamp > starttime
+    | where customDimensions["sourceapp"]=="ai-loganalyticsui-prod"
+    | where (name == event_name)
+    | where user_AuthenticatedId <> ""
+    | make-series UserClicks=count() default=0 on timestamp 
+        in range(starttime, endtime-1s, interval) by user_AuthenticatedId
+    | extend RollingUserClicks=fir(UserClicks, moving_sum_filter, false)
+    | project User_AuthenticatedId=user_AuthenticatedId , RollingUserClicksByDay=zip(timestamp, RollingUserClicks)
+    | mvexpand RollingUserClicksByDay
+    | extend Timestamp=todatetime(RollingUserClicksByDay[0])
+    | extend RollingActiveUsersByDay=iff(toint(RollingUserClicksByDay[1]) >= min_activity, 1, 0)
+    | summarize sum(RollingActiveUsersByDay) by Timestamp
+    | where Timestamp > starttime + 28d
+};
+// Use the moving_sum_filter with bin size of 28 to count MAU.
+rollingDcount(28, "Checkout")
+| join
+(
+    // Use the moving_sum_filter with bin size of 1 to count DAU.
+    rollingDcount(1, "Checkout")
+)
+on Timestamp
+| project sum_RollingActiveUsersByDay1 *1.0 / sum_RollingActiveUsersByDay, Timestamp
+| render timechart
+```
+
+Durch dieses Beispiel wird die folgende Ausgabe zurückgegeben.
+
+:::image type="content" source="images/samples/user-stickiness.png" alt-text="Ausgabe für Benutzerbindung":::
+
+### <a name="regression-analysis"></a>Regressionsanalyse
+Dieses Beispiel zeigt, wie Sie eine automatisierte Erkennung für Dienstunterbrechungen erstellen, die ausschließlich auf den Ablaufverfolgungsprotokollen einer Anwendung basiert. Die Erkennung sucht nach abweichenden und plötzlichen Anstiegen bei der relativen Anzahl von Ablaufverfolgungen mit Fehlern und Warnungen in der Anwendung.
+
+Für die Auswertung des Dienststatus basierend auf Überwachungsprotokolldaten kommen zwei Verfahren zum Einsatz:
+
+- Mit [make-series](/azure/kusto/query/make-seriesoperator) werden teilweise strukturierte Ablaufverfolgungsprotokolle im Textformat in eine Metrik konvertiert, die das Verhältnis zwischen positiven und negativen Ablaufverfolgungseinträgen darstellt.
+- Mit [series_fit_2lines](/azure/kusto/query/series-fit-2linesfunction) und [series_fit_line](/azure/kusto/query/series-fit-linefunction) wird eine erweiterte Erkennung in einzelnen Schritten über eine Zeitreihenanalyse mit einer zweizeiligen linearen Regression durchgeführt.
+
+``` Kusto
+let startDate = startofday(datetime("2017-02-01"));
+let endDate = startofday(datetime("2017-02-07"));
+let minRsquare = 0.8;  // Tune the sensitivity of the detection sensor. Values close to 1 indicate very low sensitivity.
+// Count all Good (Verbose + Info) and Bad (Error + Fatal + Warning) traces, per day
+traces
+| where timestamp > startDate and timestamp < endDate
+| summarize 
+    Verbose = countif(severityLevel == 0),
+    Info = countif(severityLevel == 1), 
+    Warning = countif(severityLevel == 2),
+    Error = countif(severityLevel == 3),
+    Fatal = countif(severityLevel == 4) by bin(timestamp, 1d)
+| extend Bad = (Error + Fatal + Warning), Good = (Verbose + Info)
+// Determine the ratio of bad traces, from the total
+| extend Ratio = (todouble(Bad) / todouble(Good + Bad))*10000
+| project timestamp , Ratio
+// Create a time series
+| make-series RatioSeries=any(Ratio) default=0 on timestamp in range(startDate , endDate -1d, 1d) by 'TraceSeverity' 
+// Apply a 2-line regression to the time series
+| extend (RSquare2, SplitIdx, Variance2,RVariance2,LineFit2)=series_fit_2lines(RatioSeries)
+// Find out if our 2-line is trending up or down
+| extend (Slope,Interception,RSquare,Variance,RVariance,LineFit)=series_fit_line(LineFit2)
+// Check whether the line fit reaches the threshold, and if the spike represents an increase (rather than a decrease)
+| project PatternMatch = iff(RSquare2 > minRsquare and Slope>0, "Spike detected", "No Match")
+```
+
+
+## <a name="next-steps"></a>Nächste Schritte
+
+- Führen Sie [ein Tutorial zur Kusto-Abfragesprache durch](tutorial.md?pivots=azuremonitor).
+
+
+::: zone-end
+

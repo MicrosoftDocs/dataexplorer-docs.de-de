@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: e341a6b9b51b082b16036e368c61fa4c903750da
-ms.sourcegitcommit: 64fdef912cc925c4bdcae98183eb8d7c7a6392d7
+ms.openlocfilehash: dbab2bda9ee24c79e4b62427a7da5bd7db3f0077
+ms.sourcegitcommit: b6f0f112b6ddf402e97c011a902bd70ba408e897
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/29/2020
-ms.locfileid: "93027804"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94497444"
 ---
 # <a name="cross-database-and-cross-cluster-queries"></a>Datenbankübergreifende und clusterübergreifende Abfragen
 
@@ -84,7 +84,7 @@ Im obigen Beispiel wird der Abfrage Zugriff auf die folgenden Entitäten eingesc
 
 * Alle Entitäts Namen, die mit " *My...* " in der Standarddatenbank beginnen. 
 * Eine beliebige Tabelle in allen Datenbanken mit dem Namen *MyOther...* des aktuellen Clusters.
-* Eine beliebige Tabelle in allen Datenbanken mit dem Namen *MY2...* im Cluster *OtherCluster.Kusto.Windows.net* .
+* Eine beliebige Tabelle in allen Datenbanken mit dem Namen *MY2...* im Cluster *OtherCluster.Kusto.Windows.net*.
 
 ## <a name="functions-and-views"></a>Funktionen und Ansichten
 
@@ -183,6 +183,6 @@ Verwenden Sie den [Rendering-Operator](renderoperator.md), um Daten in grafische
 
 ::: zone pivot="azuremonitor"
 
-Datenbankübergreifende und Cluster übergreifende Abfragen werden in Azure Monitor nicht unterstützt.
+Datenbankübergreifende und Cluster übergreifende Abfragen werden in Azure Monitor nicht unterstützt. Weitere Informationen finden Sie [unter Arbeitsbereichs übergreifende Abfragen in Azure Monitor](/azure/azure-monitor/log-query/cross-workspace-query) für Abfragen über mehrere Arbeitsbereiche und apps hinweg.
 
 ::: zone-end
