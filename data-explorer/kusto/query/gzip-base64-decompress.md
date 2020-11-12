@@ -8,14 +8,14 @@ ms.reviewer: elgevork
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/01/2020
-ms.openlocfilehash: 19fc8c7ce74cfe632034722fda2b23c5105d013a
-ms.sourcegitcommit: 0e2fbc26738371489491a96924f25553a8050d51
+ms.openlocfilehash: a35fd4ed2f43c991aa08e2e1594103cb5f5bd7a7
+ms.sourcegitcommit: 3eabd78305d32cd9b8a6bd1d76877ddc19d8ac63
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/02/2020
-ms.locfileid: "93148534"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94548885"
 ---
-# <a name="gzip_decompress_from_base64_string"></a>gzip_decompress_from_base64_string ()
+# <a name="gzip_decompress_from_base64_string"></a>gzip_decompress_from_base64_string()
 
 Decodiert die Eingabe Zeichenfolge aus Base64 und führt gzip-decodeinkomprimierung durch.
 
@@ -27,7 +27,12 @@ Decodiert die Eingabe Zeichenfolge aus Base64 und führt gzip-decodeinkomprimier
 
 *Input_string* : Eingabe `string` , die mit gzip komprimiert und dann Base64-codiert wurde. Die Funktion akzeptiert ein Zeichen folgen Argument.
 
-## <a name="returns"></a>Rückgabe
+> [!NOTE]
+> Diese Funktion überprüft verbindliche gzip-Header Felder (id1, ID2 und cm) und gibt eine leere Ausgabe zurück, wenn eines dieser Felder falsche Werte hat.
+> Optionale Header Felder werden nicht unterstützt. Sowohl FLG als auch XFL werden als Nullen erwartet.
+
+
+## <a name="returns"></a>Gibt zurück
 
 * Gibt eine zurück `string` , die die ursprüngliche Zeichenfolge darstellt. 
 * Gibt ein leeres Ergebnis zurück, wenn Dekomprimierung oder Decodierung fehlgeschlagen ist 
@@ -36,7 +41,7 @@ Decodiert die Eingabe Zeichenfolge aus Base64 und führt gzip-decodeinkomprimier
 ## <a name="examples"></a>Beispiele
 
 ```kusto
-print res=gzip_decompress_from_base64_string("eAEBFADr/zEyMzQ1Njc4OTBxd2VydHl1aW9wOAkGd0xvZwAzAG5JZA==")
+print res=gzip_decompress_from_base64_string("H4sIAAAAAAAA/wEUAOv/MTIzNDU2Nzg5MHF3ZXJ0eXVpb3A6m7f2FAAAAA==")
 ```
 
 **Ausgabe:**
@@ -54,4 +59,5 @@ print res=gzip_decompress_from_base64_string("x0x0x0")
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-Erstellen Sie eine komprimierte Eingabe Zeichenfolge mit [gzip_compress_to_base64_string ()](gzip-base64-compress.md).
+* Erstellen Sie eine komprimierte Eingabe Zeichenfolge mit [gzip_compress_to_base64_string ()](gzip-base64-compress.md).
+* Siehe auch [zlib_decompress_from_base64_string](zlib-base64-decompress.md).

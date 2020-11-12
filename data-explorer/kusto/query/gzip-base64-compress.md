@@ -8,12 +8,12 @@ ms.reviewer: elgevork
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/01/2020
-ms.openlocfilehash: b2bed8fab33de57da6286a7ea49b9378669a9d5a
-ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
+ms.openlocfilehash: fffa39ca5fa41c065971b4feebfe60752b84ed59
+ms.sourcegitcommit: 3eabd78305d32cd9b8a6bd1d76877ddc19d8ac63
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/09/2020
-ms.locfileid: "94373849"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94548868"
 ---
 # <a name="gzip_compress_to_base64_string"></a>gzip_compress_to_base64_string()
 
@@ -40,8 +40,9 @@ print res = gzip_compress_to_base64_string("1234567890qwertyuiop")
 
 **Ausgabe:** 
 
-| eaebfadr/zEyMzQ1Njc4OTBxd2VydHl1aW9wOAkGd0xvZwAzAG5JZA = = |
+| H4sIAAAAAAAA/weuaov/MTIzNDU2Nzg5MHF3ZXJ0eXVpb3A6m7f2FAAAAA = = |
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-Verwenden Sie [gzip_decompress_from_base64_string ()](gzip-base64-decompress.md) , um die ursprüngliche unkomprimierte Zeichenfolge abzurufen.
+* Verwenden Sie [gzip_decompress_from_base64_string ()](gzip-base64-decompress.md) , um die ursprüngliche unkomprimierte Zeichenfolge abzurufen.
+* Siehe auch [zlib_compress_to_base64_string ()](zlib-base64-compress.md)

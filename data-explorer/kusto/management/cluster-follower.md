@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2020
-ms.openlocfilehash: 2ca15e1970ab785bfd5da8623f3dcc569576f1d9
-ms.sourcegitcommit: 2ee2901cb82e1655b7f0d960d3427da084230731
+ms.openlocfilehash: 9a670e2dead3e3cd5a2d881974678fcb44eaff29
+ms.sourcegitcommit: 3eabd78305d32cd9b8a6bd1d76877ddc19d8ac63
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94520563"
+ms.lasthandoff: 11/12/2020
+ms.locfileid: "94548902"
 ---
 # <a name="cluster-follower-commands"></a>Cluster-Follower-Befehle
 
@@ -50,7 +50,7 @@ Zeigt eine Datenbank (oder Datenbanken) an, auf die von einem anderen Spitzenclu
 
 Ändert eine Richtlinie für die Zwischenspeicherung von Follower-Datenbanken, um die für die Quelldatenbank im übergeordneten Cluster festgelegte zu überschreiben Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich.
 
-**Hinweise**
+**Notizen**
 
 * Der Standardwert für das zwischen `modification kind` Speichern von Richtlinien ist `union` . Um den zu ändern, `modification kind` verwenden Sie den Befehl [. Alter Follower Database Caching-Policies-Change-Kind](#alter-follower-database-caching-policies-modification-kind) .
 * Wenn Sie die Richtlinie oder wirksame Richtlinien nach der Änderung anzeigen, können Sie die folgenden `.show` Befehle ausführen:
@@ -74,7 +74,7 @@ Zeigt eine Datenbank (oder Datenbanken) an, auf die von einem anderen Spitzenclu
 Löscht eine Daten Bank Überschreibungs Richtlinie für die Überschreibung. Dies bewirkt, dass die Richtlinie, die in der Quelldatenbank im Spitzencluster festgelegt ist, gültig ist.
 Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich. 
 
-**Hinweise**
+**Notizen**
 
 * Wenn Sie die Richtlinie oder wirksame Richtlinien nach der Änderung anzeigen, können Sie die folgenden `.show` Befehle ausführen:
     * [. Anzeigen der Daten Bank Richtlinien Beibehaltung](../management/retention-policy.md#show-retention-policy)
@@ -96,7 +96,7 @@ Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-b
 
 Fügt der Follower-Datenbanksammlung von autorisierte Prinzipale überschreiben autorisierte Prinzipale hinzu. Hierfür ist die [databaseadmin-Berechtigung](../management/access-control/role-based-authorization.md)erforderlich.
 
-**Hinweise**
+**Notizen**
 
 * Der Standardwert `modification kind` für solche autorisierten Prinzipale ist `none` . So ändern Sie die `modification kind` Verwendung von [Alter Follower Database Principals-Change-Kind](#alter-follower-database-principals-modification-kind)
 * Die effektive Auflistung von Prinzipale können Sie nach der Änderung mithilfe der folgenden `.show` Befehle anzeigen:
@@ -119,7 +119,7 @@ Fügt der Follower-Datenbanksammlung von autorisierte Prinzipale überschreiben 
 Löscht autorisierte Prinzipale aus der Follower-Datenbanksammlung von autorisierten Prinzipalen außer Kraft setzen.
 Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich.
 
-**Hinweise**
+**Notizen**
 
 * Die effektive Auflistung von Prinzipale können Sie nach der Änderung mithilfe der folgenden `.show` Befehle anzeigen:
     * [. Anzeigen von Daten Bank Prinzipale](../management/security-roles.md#managing-database-security-roles)
@@ -140,7 +140,7 @@ Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-b
 
 Ändert die Art der Änderungs Änderung der Follower-Datenbank für autorisierte Prinzipale. Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich.
 
-**Hinweise**
+**Notizen**
 
 * Die effektive Auflistung von Prinzipale können Sie nach der Änderung mithilfe der folgenden `.show` Befehle anzeigen:
     * [. Anzeigen von Daten Bank Prinzipale](../management/security-roles.md#managing-database-security-roles)
@@ -162,7 +162,7 @@ Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-b
 
 Ändert die Art der Änderungs Änderung für die Follower-Datenbank und die Tabellen Zwischenspeicherung Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich.
 
-**Hinweise**
+**Notizen**
 
 * Die effektive Erfassung von Cache Richtlinien auf Datenbankebene/Tabellenebene nach der Änderung kann mithilfe der Standard Befehle ausgeführt werden `.show` :
     * [. Anzeigen von Tabellen Details](show-tables-command.md)
@@ -194,8 +194,6 @@ Mit dem folgenden Befehl wird die Konfiguration der Follower-Datenbank für das 
 
 `.alter``follower` `database` *DatabaseName* `prefetch-extents` = ( `true`  |  `false` )
 
-`.alter``follower` `database` *DatabaseName* [ `from` `h@'` *Pfad zum Metadatencontainer des Leader-Clusters* `'` ] `prefetch-extents` = ( `true`  |  `false` )
-
 **Beispiel**
 
 <!-- csl -->
@@ -210,7 +208,7 @@ Mit dem folgenden Befehl wird die Konfiguration der Follower-Datenbank für das 
 Ändert eine Cache Richtlinie auf Tabellenebene für die Follower-Datenbank, um die Richtlinie zu überschreiben, die für die Quelldatenbank im Anbieter Cluster festgelegt wurde.
 Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich. 
 
-**Hinweise**
+**Notizen**
 
 * Wenn Sie die Richtlinie oder wirksame Richtlinien nach der Änderung anzeigen, können Sie die folgenden `.show` Befehle ausführen:
     * [. Anzeigen der Daten Bank Richtlinien Beibehaltung](../management/retention-policy.md#show-retention-policy)
@@ -234,7 +232,7 @@ Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-b
 
 Löscht eine über schreibende zwischen Speicherungs Richtlinie auf Tabellenebene für die Follower-Datenbank, sodass die Richtlinie für die Quelldatenbank im Spitzencluster auf die effektive festgelegt ist. Erfordert [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md). 
 
-**Hinweise**
+**Notizen**
 
 * Wenn Sie die Richtlinie oder wirksame Richtlinien nach der Änderung anzeigen, können Sie die folgenden `.show` Befehle ausführen:
     * [. Anzeigen der Daten Bank Richtlinien Beibehaltung](../management/retention-policy.md#show-retention-policy)
