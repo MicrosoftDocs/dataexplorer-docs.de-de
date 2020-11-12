@@ -7,12 +7,12 @@ ms.reviewer: kedamari
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 05/12/2020
-ms.openlocfilehash: 6bf447a845954bde58a0308a03bee45f98f16111
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 68b8ca90898335a971113c1929eea49f4c0cbc5d
+ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873232"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94373866"
 ---
 # <a name="enable-data-purge-on-your-azure-data-explorer-cluster"></a>Aktivieren der Datenbereinigung in Ihrem Azure Data Explorer-Cluster
 
@@ -20,7 +20,7 @@ ms.locfileid: "88873232"
 
 Azure Data Explorer unterstützt die Möglichkeit zum Löschen einzelner Datensätze. Beim Löschen von Daten mithilfe des Befehls `.purge` werden personenbezogene Daten geschützt. Dieses Verfahren sollte daher nicht in anderen Szenarien verwendet werden. Es ist nicht dafür konzipiert, häufige Löschanforderungen oder das Löschen großer Datenmengen zu unterstützen, und wirkt sich unter Umständen erheblich auf die Leistung des Diensts aus.
 
-Durch das Ausführen eines Befehls vom Typ `.purge` wird ein Prozess ausgelöst, deren Ausführung einige Tage dauern kann. Besitzen die Datensätze, auf die `predicate` angewendet wird, eine hohe „Dichte“, werden bei diesem Prozess alle Daten in der Tabelle erneut erfasst. Dieser Prozess hat erhebliche Auswirkungen auf Leistung und Umsatzkosten. Weitere Informationen finden Sie unter [Datenbereinigung](kusto/concepts/data-purge.md).
+Durch das Ausführen eines Befehls vom Typ `.purge` wird ein Prozess ausgelöst, deren Ausführung einige Tage dauern kann. Besitzen die Datensätze, auf die `predicate` angewendet wird, eine hohe „Dichte“, werden bei diesem Prozess alle Daten in der Tabelle erneut erfasst. Dieser Prozess hat erhebliche Auswirkungen auf Leistung und Umsatzkosten (COGS, Cost Of Goods Sold). Weitere Informationen finden Sie unter [Datenbereinigung](kusto/concepts/data-purge.md).
 
 ## <a name="methods-of-invoking-purge-operations"></a>Methoden zum Aufrufen von Bereinigungsvorgängen 
 

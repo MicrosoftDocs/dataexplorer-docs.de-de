@@ -7,14 +7,14 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 05/26/2020
-ms.openlocfilehash: 66bbaddc6fcc953c620b2b439027ecec97016f19
-ms.sourcegitcommit: 95527c793eb873f0135c4f0e9a2f661ca55305e3
+ms.openlocfilehash: 114e3b00b35ff6dd30241cd6afc4666fdedf6f62
+ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90534016"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93349493"
 ---
-# <a name="visualize-data-with-azure-data-explorer-dashboards"></a>Visualisieren von Daten mit Azure Data Explorer-Dashboards
+# <a name="visualize-data-with-azure-data-explorer-dashboardspreview"></a>Visualisieren von Daten mit Azure Data Explorer-Dashboards (Vorschau)
 
 Azure-Daten-Explorer ist ein schneller und hochgradig skalierbarer Dienst zur Untersuchung von Daten (Protokoll- und Telemetriedaten). Azure Data Explorer bietet eine Webanwendung, mit der Sie Abfragen ausführen und Dashboards erstellen können. Dashboards sind in der eigenständigen Webanwendung, der [Webbenutzeroberfläche](web-query-data.md), verfügbar. Azure Data Explorer ist auch mit anderen Dashboarddiensten wie [Power BI](power-bi-connector.md) und [Grafana](grafana.md) integriert.
 
@@ -49,7 +49,7 @@ Fügen Sie die erforderlichen Datenquellen für die Dashboards hinzu.
 
     :::image type="content" source="media/adx-dashboards/data-source.png" alt-text="Datenquelle":::
 
-1. Im Bereich **Neue Datenquelle erstellen**:
+1. Im Bereich **Neue Datenquelle erstellen** :
     1. Geben Sie den **Cluster-URI** oder den partiellen Namen einschließlich der Region ein, und wählen Sie **Verbinden** aus. 
     1. Wählen Sie die **Datenbank** aus der Dropdownliste aus.
     1. Verwenden Sie den Standardwert, oder ändern Sie ggf. den **Datenquellennamen**. 
@@ -72,7 +72,7 @@ Parameter ermöglichen die Verwendung von Dashboardfiltern. Parameter verbessern
 |Feld  |BESCHREIBUNG |
 |---------|---------|
 |**Parameter display name** (Anzeigename des Parameters)    |   Der Name des Parameters, der auf dem Dashboard oder der Bearbeitungskarte angezeigt wird.      |
-|**Parametertyp**    |Einer der folgenden:<ul><li>**Single selection** (Einfachauswahl): Im Filter kann als Eingabe für den Parameter nur ein Wert ausgewählt werden.</li><li>**Mehrfachauswahl:** Im Filter können als Eingaben für den Parameter mehrere Werte ausgewählt werden.</li><li>**Zeitbereich**: Ermöglicht das Erstellen zusätzlicher Parameter, um die Abfragen und Dashboards basierend auf der Zeit zu filtern. Jedes Dashboard verfügt standardmäßig über eine Zeitbereichsauswahl.</li></ul>    |
+|**Parametertyp**    |Einer der folgenden:<ul><li>**Single selection** (Einfachauswahl): Im Filter kann als Eingabe für den Parameter nur ein Wert ausgewählt werden.</li><li>**Mehrfachauswahl:** Im Filter können als Eingaben für den Parameter mehrere Werte ausgewählt werden.</li><li>**Zeitbereich** : Ermöglicht das Erstellen zusätzlicher Parameter, um die Abfragen und Dashboards basierend auf der Zeit zu filtern. Jedes Dashboard verfügt standardmäßig über eine Zeitbereichsauswahl.</li></ul>    |
 |**Variablenname**     |   Der Name des Parameters, der in der Abfrage verwendet werden soll.      |
 |**Datentyp**    |    Der Datentyp des Parameterwerts.     |
 |**Pin as dashboard filter** (Als Dashboardfilter anheften)   |   Heften Sie den parameterbasierten Filter an das Dashboard an, oder lösen Sie ihn vom Dashboard.       |
@@ -87,7 +87,7 @@ Bei **Abfrage hinzufügen** werden Ausschnitte in der Kusto-Abfragesprache zum A
 
     :::image type="content" source="media/adx-dashboards/empty-dashboard-new-query.png" alt-text="Neue Abfrage":::
 
-1. Im Bereich **Abfrage**: 
+1. Im Bereich **Abfrage** : 
     1. Wählen Sie in der Dropdownliste eine Datenquelle aus.
     1. Geben Sie die Abfrage ein, und wählen Sie **Ausführen** aus. 
     1. Wählen Sie **Visual hinzufügen** aus.
@@ -150,7 +150,7 @@ So geben Sie den Dashboardlink frei:
 
     :::image type="content" source="media/adx-dashboards/auto-refresh-toggle.png" alt-text="Aktivieren der automatischen Aktualisierung":::
 
-1. Wählen Sie **Anwenden** aus, und klicken Sie auf **Speichern**, um das Dashboard zu speichern.
+1. Wählen Sie **Anwenden** aus, und klicken Sie auf **Speichern** , um das Dashboard zu speichern.
 
 > [!NOTE]
 > * Wählen Sie den kleinsten Wert für das minimale Zeitintervall aus, um eine unnötige Auslastung des Clusters zu vermeiden. 

@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 12/19/2018
-ms.openlocfilehash: ef71c978681c9e355e82791d4df3ad7da8db66f7
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: fd277cd46a183606e35219f733dbf86b094d62f8
+ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88874697"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94373798"
 ---
 # <a name="handle-duplicate-data-in-azure-data-explorer"></a>Behandeln von doppelten Daten in Azure Data Explorer
 
@@ -109,7 +109,7 @@ Diese Methode wird im folgenden Beispiel veranschaulicht:
     > [!NOTE]
     > Durch die Updaterichtlinie erhöht sich die Datenerfassungsdauer, da die Daten während der Erfassung gefiltert und anschließend zweimal erfasst werden: in der Tabelle `DeviceEventsAll` und in der Tabelle `DeviceEventsUnique`.
 
-1. Optional: Legen Sie für die Tabelle `DeviceEventsAll` eine kürzere Datenaufbewahrung fest, um zu vermeiden, dass Kopien der Daten gespeichert werden. Wählen Sie die Anzahl von Tagen in Abhängigkeit vom Datenvolumen und dem Zeitraum, für den Sie Daten zu Problembehandlungszwecken aufbewahren möchten. Sie können die Datenaufbewahrung auf `0d` Tage festlegen, um Kosten zu sparen und die Leistung zu verbessern, da die Daten dann nicht in den Speicher hochgeladen werden.
+1. Optional: Legen Sie für die Tabelle `DeviceEventsAll` eine kürzere Datenaufbewahrung fest, um zu vermeiden, dass Kopien der Daten gespeichert werden. Wählen Sie die Anzahl von Tagen in Abhängigkeit vom Datenvolumen und dem Zeitraum, für den Sie Daten zu Problembehandlungszwecken aufbewahren möchten. Sie können die Datenaufbewahrung auf `0d` Tage festlegen, um Kosten zu sparen und die Leistung zu verbessern, da die Daten dann nicht in den Speicher hochgeladen werden.
 
     ```kusto
     .alter-merge table DeviceEventsAll policy retention softdelete = 1d

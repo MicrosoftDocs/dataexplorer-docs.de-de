@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: fa18a89e44a09a877cedb41c6d6e77384c965801
-ms.sourcegitcommit: 811cf98edefd919b412d80201400919eedcab5cd
+ms.openlocfilehash: 4ef7e15e3009b3ccd098136d9c5013dbe31813b7
+ms.sourcegitcommit: f71801764fdccb061f3cf1e3cfe43ec1557e4e0f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/01/2020
-ms.locfileid: "89274597"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93293118"
 ---
 # <a name="what-is-one-click-ingestion"></a>Was ist die 1-Klick-Erfassung?
 
@@ -40,15 +40,15 @@ Die 1-Klick-Erfassung ist besonders nützlich, wenn Daten erstmalig erfasst werd
 
 Der Assistent für die 1-Klick-Erfassung leitet Sie durch die 1-Klick-Erfassung.
 
-* Wenn Sie über den Startbildschirm **Welcome to Azure Data Explorer** (Willkommen bei Azure Data Explorer) in Ihrem Cluster auf den Assistenten für die 1-Klick-Erfassung zugreifen möchten, führen Sie die beiden ersten Schritte ([Clustererstellung und Datenbankerstellung](#prerequisites)) aus, und wählen Sie dann **Neue Daten erfassen** aus.
+* Wenn Sie über den Startbildschirm **Welcome to Azure Data Explorer** (Willkommen bei Azure Data Explorer) in Ihrem Cluster auf den Assistenten für die 1-Klick-Erfassung zugreifen möchten, führen Sie die beiden ersten Schritte ( [Clustererstellung und Datenbankerstellung](#prerequisites)) aus, und wählen Sie dann **Neue Daten erfassen** aus.
 
     :::image type="content" source="media/ingest-data-one-click/welcome-ingestion.png" alt-text="Erfassen neuer Daten über den Startbildschirm von Azure Data Explorer":::
 
-* Um den Assistenten über die [Azure Data Explorer-Webbenutzeroberfläche](https://dataexplorer.azure.com/) zu starten, klicken Sie im linken Menü der Azure Data Explorer-Webbenutzeroberfläche mit der rechten Maustaste auf die Zeile **Datenbank** oder **Tabelle**, und wählen Sie **Neue Daten erfassen (Vorschau)** aus.
+* Um den Assistenten über die [Azure Data Explorer-Webbenutzeroberfläche](https://dataexplorer.azure.com/) zu starten, klicken Sie im linken Menü der Azure Data Explorer-Webbenutzeroberfläche mit der rechten Maustaste auf die Zeile **Datenbank** oder **Tabelle** , und wählen Sie **Neue Daten erfassen** aus.
 
     :::image type="content" source="media/ingest-data-one-click/one-click-ingestion-in-webui.png" alt-text="Auswählen der 1-Klick-Erfassung auf der Webbenutzeroberfläche":::
 
-* Um über das Azure-Portal auf den Assistenten zuzugreifen, wählen Sie im linken Menü **Abfrage** aus, klicken Sie mit der rechten Maustaste auf die **Datenbank** oder **Tabelle**, und wählen Sie **Neue Daten erfassen (Vorschau)** aus.
+* Um über das Azure-Portal auf den Assistenten zuzugreifen, wählen Sie im linken Menü **Abfrage** aus, klicken Sie mit der rechten Maustaste auf die **Datenbank** oder **Tabelle** , und wählen Sie **Neue Daten erfassen** aus.
 
     :::image type="content" source="media/ingest-data-one-click/access-from-portal.png" alt-text="Zugreifen auf den Assistenten für die 1-Klick-Erfassung über das Azure-Portal":::
 
@@ -80,14 +80,7 @@ Führen Sie auf der Registerkarte **Schema** die folgenden Aktionen aus:
 
 #### <a name="file-formats"></a>Dateiformate
 
-Die 1-Klick-Erfassung unterstützt das Erfassen einer neuen Tabelle aus Quelldaten in einem der folgenden Formate:
-* JSON
-* CSV
-* TSV
-* SCSV
-* SOHSV
-* TSVE
-* PSV
+Die 1-Klick-Erfassung unterstützt die Erfassung von Quelldaten in allen [von Azure Data Explorer für die Erfassung unterstützten Datenformaten](ingestion-supported-formats.md).
 
 ### <a name="editor-window"></a>Editor-Fenster
 
@@ -95,11 +88,24 @@ Im Fenster **Editor** können Sie Datentabellenspalten nach Bedarf anpassen.
 
 |Tabellentyp  |Verfügbare Spaltenanpassungen  |
 |---------|---------|
-|Neu     | Neue Spalte, Spalte löschen, Aufsteigend sortieren, Absteigend sortieren  |
-|Vorhanden     | Neue Spalte, Aufsteigend sortieren, Absteigend sortieren  |
+|Neu     | Neue Spalte, Spalte löschen, Spalte aktualisieren, Aufsteigend sortieren, Absteigend sortieren  |
+|Vorhanden     | Neue Spalte, Spalte aktualisieren, Aufsteigend sortieren, Absteigend sortieren  |
 
 >[!NOTE]
 > Sie können jederzeit über dem Bereich **Editor** den [Befehls-Editor](one-click-ingestion-new-table.md#command-editor) öffnen. Im Befehls-Editor können Sie die aus Ihren Eingaben generierten automatischen Befehle anzeigen und kopieren.
+
+#### <a name="mapping-transformations"></a>Zuordnungstransformationen
+
+Einige der Datenformatzuordnungen (Parquet, JSON und Avro) unterstützen einfache Transformationen während der Erfassung. Erstellen oder aktualisieren Sie zum Anwenden von Zuordnungstransformationen eine Spalte im [Editorfenster](#editor-window).
+
+Zuordnungstransformationen können für eine Spalte ausgeführt werden, für die als **Typ** der Wert „string“ oder „datetime“ und für **Quelle** der Datentyp „int“ oder „long“ angegeben ist. Die folgenden Zuordnungstransformationen werden unterstützt:
+* DateTimeFromUnixSeconds
+* DateTimeFromUnixMilliseconds
+* DateTimeFromUnixMicroseconds
+* DateTimeFromUnixNanoseconds
+
+Weitere Informationen finden Sie unter [
+Mapping von Transformationen](kusto/management/mappings.md#mapping-transformations).
 
 ### <a name="data-ingestion"></a>Datenerfassung
 

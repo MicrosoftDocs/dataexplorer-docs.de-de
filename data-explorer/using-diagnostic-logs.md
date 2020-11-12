@@ -7,12 +7,12 @@ ms.reviewer: guregini
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/16/2020
-ms.openlocfilehash: 5446337177d0e261bd86fbd18119c34b861b89e4
-ms.sourcegitcommit: 7fa9d0eb3556c55475c95da1f96801e8a0aa6b0f
+ms.openlocfilehash: 606ae915e822cf4f2c02ac590a5bb05bdb17f28a
+ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/11/2020
-ms.locfileid: "91942385"
+ms.lasthandoff: 11/09/2020
+ms.locfileid: "94373900"
 ---
 # <a name="monitor-azure-data-explorer-ingestion-commands-and-queries-using-diagnostic-logs"></a>Überwachen der Erfassung, Befehle und Abfragen von Azure Data Explorer mithilfe von Diagnoseprotokollen
 
@@ -32,6 +32,11 @@ Azure Data Explorer ist ein schneller, vollständig verwalteter Datenanalysedien
 Mit Diagnoseprotokollen kann die Sammlung der folgenden Protokolldaten konfiguriert werden:
 
 # <a name="ingestion"></a>[Erfassung](#tab/ingestion)
+
+> [!NOTE]
+> Erfassungsprotokolle werden für die Erfassung aus der Warteschlange am Erfassungsendpunkt unter Verwendung von SDKs, Datenverbindungen und Connectors unterstützt.
+>
+> Erfassungsprotokolle werden für die Streamingerfassung, die direkte Erfassung an der Engine, die Erfassung von Abfragen oder Befehle vom Typ „set-or-append“ nicht unterstützt.
 
 * **Erfolgreiche Erfassungsvorgänge:** Diese Protokolle enthalten Informationen zu erfolgreich abgeschlossenen Erfassungsvorgängen.
 * **Nicht erfolgreiche Erfassungsvorgänge:** Diese Protokolle enthalten ausführliche Informationen zu fehlgeschlagenen Erfassungsvorgängen, einschließlich Fehlerdetails. 
@@ -58,7 +63,7 @@ Diagnoseprotokolle sind standardmäßig deaktiviert. Führen Sie die folgenden S
     ![Hinzufügen von Diagnoseprotokollen](media/using-diagnostic-logs/add-diagnostic-logs.png)
 
 1. Klicken Sie auf **Diagnoseeinstellung hinzufügen**.
-1. Im Fenster **Diagnoseeinstellungen**:
+1. Im Fenster **Diagnoseeinstellungen** :
 
     :::image type="content" source="media/using-diagnostic-logs/configure-diagnostics-settings.png" alt-text="Konfigurieren von Diagnoseeinstellungen":::
 
