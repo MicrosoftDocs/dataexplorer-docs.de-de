@@ -8,12 +8,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/25/2020
-ms.openlocfilehash: 22463307df0358228469fe480f5578222bed52bf
-ms.sourcegitcommit: a4779e31a52d058b07b472870ecd2b8b8ae16e95
+ms.openlocfilehash: 630b57dc12b3ed0fac797dcc57f3b38c13a0e476
+ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/02/2020
-ms.locfileid: "89379746"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93349516"
 ---
 # <a name="customize-azure-data-explorer-dashboard-visuals"></a>Anpassen der visuellen Elemente des Azure Data Explorer-Dashboards
 
@@ -66,6 +66,12 @@ Bei visuellen Elementen vom Typ „Liniendiagramm“ handelt es sich um den einf
 
 Visuelle Elemente vom Typ „Stat“ zeigen nur ein einzelnes Element an. Sollte die Ausgabe mehrere Spalten und Zeilen umfassen, wird von „Stat“ das erste Element der ersten Spalte angezeigt. Stat-Karten sind hilfreich, um KPIs auf dem Dashboard hervorzuheben.
 
+### <a name="multi-stat"></a>Multi-Stat
+
+:::image type="content" source="media/dashboard-customize-visuals/multistat.png" alt-text="Multi-Stat (visuelles Element)":::
+
+Visuelle Elemente vom Typ „Multi-Stat“ zeigen mehrere Stat-Karten in einer Gruppe unter Verwendung eines einzelnen Abfrageergebnisses an. Hierfür sind zwei Spalten erforderlich: eine für die Bezeichnung und die andere für den Wert. Benutzer können eine Option zur Formatierung des visuellen Elements verwenden, um das Ausgabelayout für die Anzeige anzupassen, indem sie die Anzahl von Zeilen und Spalten auswählen. Diese Formatierungsoption ist nicht nur bequemer, sondern verringert auch die Clusterauslastung, wenn Kunden ähnliche Abfragen zum Erstellen von Multi-Stats verwenden.
+
 ### <a name="pie-chart"></a>Kreisdiagramm
 
 :::image type="content" source="media/dashboard-customize-visuals/pie-chart.png" alt-text="Kreisdiagramm (visuelles Element)":::
@@ -105,7 +111,7 @@ Karten sind hilfreich, um Daten mit Geokoordinaten zu visualisieren. Visuelle El
 ## <a name="customize-visuals"></a>Anpassen visueller Elemente
 
 1. Wählen Sie im Dashboardmenü **Bearbeiten** aus, um in den Bearbeitungsmodus zu wechseln.
-1. Klicken Sie auf einer Karte auf das Dropdownmenü und anschließend auf **Karte bearbeiten**, um auf das Dialogfeld zum Anpassen visueller Elemente zuzugreifen. Alternativ können Sie beim Erstellen einer neuen Karte mithilfe von **Abfrage hinzufügen** die Option **Karte bearbeiten** auswählen.
+1. Klicken Sie auf einer Karte auf das Dropdownmenü und anschließend auf **Karte bearbeiten** , um auf das Dialogfeld zum Anpassen visueller Elemente zuzugreifen. Alternativ können Sie beim Erstellen einer neuen Karte mithilfe von **Abfrage hinzufügen** die Option **Karte bearbeiten** auswählen.
 
 :::image type="content" source="media/dashboard-customize-visuals/edit-card.png" alt-text="Bearbeiten einer Karte, um visuelle Elemente anzupassen":::
 
@@ -121,7 +127,9 @@ Verwenden Sie die folgenden Eigenschaften, um visuelle Elemente anzupassen.
 |**Daten**    |   Wählen Sie **y- und x-Spalten** für Ihr visuelles Element aus. Behalten Sie die Auswahl **Infer** (Ableiten) bei, wenn auf der Grundlage des Abfrageergebnisses automatisch eine Spalte ausgewählt werden soll.    |Balken-, Säulen-, Punkt- und Anomaliediagramme|
 |**Legende**    |   Mit dieser Option können Sie die Legendenanzeige für Ihre visuelle Elemente aktivieren oder deaktivieren.   |Balken-, Säulen-, Flächen-, Linien-, Punkt-, Anomalie- und Zeitdiagramme |
 |**y-Achse**     |   Ermöglicht die Anpassung von Eigenschaften der y-Achse: <ul><li>**Bezeichnung:** Text für eine benutzerdefinierte Bezeichnung. </li><li>**Höchstwert:** Dient zum Ändern des Höchstwerts der y-Achse.  </li><li>**Mindestwert:** Dient zum Ändern des Mindestwerts der y-Achse.  </li></ul>      |Balken-, Säulen-, Flächen-, Linien-, Punkt-, Anomalie- und Zeitdiagramme |
-|**X-Achse**     |    Ermöglicht die Anpassung von Eigenschaften der x-Achse: <ul><li>**Bezeichnung:** Text für eine benutzerdefinierte Bezeichnung. </li>     | Balken-, Säulen-, Flächen-, Linien-, Punkt-, Anomalie- und Zeitdiagramme|
+|**X-Achse**     |    Ermöglicht die Anpassung von Eigenschaften der X-Achse. <li>**Bezeichnung:** Text für eine benutzerdefinierte Bezeichnung. </li>     | Balken-, Säulen-, Flächen-, Linien-, Punkt-, Anomalie- und Zeitdiagramme|
+|**Rendern von Links**     |    Verwenden Sie die Umschaltfläche, um Links, die mit „https://“ beginnen, in Tabellen anklickbar zu machen. <li>**Auf Spalten anwenden:** Wählen Sie Spalten mit URLs aus. </li>     | Tabelle|
+|**Layout**     |    Wählen Sie die Layoutkonfiguration für ein visuelles Element vom Typ „Multi-Stat“ aus. <li>**Auf Spalten anwenden:** Wählen Sie Spalten mit URLs aus. </li>     | Multi-Stat|
 
 ## <a name="next-steps"></a>Nächste Schritte
 
