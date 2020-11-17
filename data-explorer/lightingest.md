@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/28/2020
-ms.openlocfilehash: 5e15983039209e2e0c62ebd761e416ebb3bd1076
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: f72d2b7f2036c7c63bfc5a37e2ab944acc60bbf8
+ms.sourcegitcommit: 2ee2901cb82e1655b7f0d960d3427da084230731
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342619"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94520580"
 ---
 # <a name="use-lightingest-to-ingest-data-to-azure-data-explorer"></a>Verwenden von LightIngest zum Erfassen von Daten in Azure Data Explorer
  
@@ -37,16 +37,16 @@ LightIngest ist besonders bei der Erfassung großer Datenmengen hilfreich, da di
 1. Navigieren Sie zu dem extrahierten Verzeichnis *tools* auf dem Computer.
 1. Löschen Sie die vorhandenen Speicherortinformationen in der Adressleiste.
 
-    :::image type="content" source="media/lightingest/lightingest-locationbar.png" alt-text="LightIngest-Download":::
+    :::image type="content" source="media/lightingest/lightingest-locationbar.png" alt-text="Löschen von vorhandenen Speicherortinformationen für LightIngest in Azure Data Explorer":::
 
 
-1. Geben Sie `cmd` ein, und drücken Sie die **EINGABETASTE** .
+1. Geben Sie `cmd` ein, und drücken Sie die **EINGABETASTE**.
 1. Geben Sie an der Eingabeaufforderung `LightIngest.exe` ein, gefolgt vom entsprechenden Befehlszeilenargument.
 
     > [!Tip]
     > Eine Liste der unterstützten Befehlszeilenargumente erhalten Sie durch Eingeben von `LightIngest.exe /help`.
     >
-    > :::image type="content" source="media/lightingest/lightingest-cmd-line-help.png" alt-text="LightIngest-Download":::
+    > :::image type="content" source="media/lightingest/lightingest-cmd-line-help.png" alt-text="Befehlszeilenhilfe für LightIngest":::
 
 1. Geben Sie `ingest-` gefolgt von der Verbindungszeichenfolge für den Azure Data Explorer-Cluster ein, in dem die Datenerfassung verwaltet wird.
     Setzen Sie die Verbindungszeichenfolge in doppelte Anführungszeichen, und befolgen Sie die [Spezifikation für Kusto-Verbindungszeichenfolgen](kusto/api/connection-strings/kusto.md).
@@ -155,7 +155,7 @@ Die Argumentwerte müssen Folgendes enthalten:
 
     ```kusto
     ingest-{Cluster name and region}.kusto.windows.net;AAD Federated Security=True -db:{Database} -table:Trips -source:"https://{Account}.blob.core.windows.net/{ROOT_CONTAINER};{StorageAccountKey}" -creationTimePattern:"'historicalvalues'yyyyMMdd'.parquet'"
-     -pattern:"*.csv.gz" -format:csv -limit:2 -ignoreFirst:true -cr:10.0 -dontWait:true
+     -pattern:"*.parquet" -format:parquet -limit:2 -cr:10.0 -dontWait:true
     ```
 
 * Bei einem Blob-URI, der sich auf eine hierarchische Ordnerstruktur bezieht (etwa `https://storageaccount/container/folder/2002/12/01/blobname.extension`): 

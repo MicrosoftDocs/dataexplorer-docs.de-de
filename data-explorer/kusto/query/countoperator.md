@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 04/16/2020
-ms.openlocfilehash: bf595e27d7b4881dca7b5e2a370c90a8407a8c78
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 14895e17d77e3bbf1d98d2d68221930d3f291774
+ms.sourcegitcommit: f7bebd245081a5cdc08e88fa4f9a769c18e13e5d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92252600"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94644619"
 ---
 # <a name="count-operator"></a>count-Operator
 
@@ -27,7 +27,7 @@ Gibt die Anzahl der Datensätze in der Eingabedaten Satz Gruppe zurück.
 
 *T:* Die tabellarischen Daten, deren Datensätze gezählt werden.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Diese Funktion gibt eine Tabelle mit einem einzelnen Datensatz und einer Spalte vom Typ `long`zurück. Der Wert der einzigen Zelle ist die Anzahl von Datensätzen in *T*. 
 
@@ -37,3 +37,7 @@ Diese Funktion gibt eine Tabelle mit einem einzelnen Datensatz und einer Spalte 
 ```kusto
 StormEvents | count
 ```
+
+## <a name="see-also"></a>Siehe auch
+
+Weitere Informationen über die count ()-Aggregations Funktion finden Sie unter [count () (Aggregations Funktion)](count-aggfunction.md).
