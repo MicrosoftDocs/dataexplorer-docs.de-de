@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: 442185ed0afd977c103d0b571472c0f5e742908c
-ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
+ms.openlocfilehash: 47a18e8b8a2ec34207acacfd508114955f28953f
+ms.sourcegitcommit: 88f8ad67711a4f614d65d745af699d013d01af32
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/04/2020
-ms.locfileid: "93349476"
+ms.lasthandoff: 11/16/2020
+ms.locfileid: "94639004"
 ---
 # <a name="best-practices-for-using-power-bi-to-query-and-visualize-azure-data-explorer-data"></a>Bewährte Methoden für die Verwendung von Power BI zum Abfragen und Visualisieren von Azure Data Explorer-Daten
 
@@ -26,15 +26,15 @@ Wenn Sie mit neuen Rohdaten im Terabytebereich arbeiten, befolgen Sie diese Anwe
 
 * **Zusammengesetztes Modell** – Verwenden Sie ein [zusammengesetztes Modell](/power-bi/desktop-composite-models), um aggregierte Daten für Dashboards der obersten Ebene mit gefilterten, operativen Rohdaten zu kombinieren. Sie können klar definieren, wann Rohdaten und wann eine aggregierte Ansicht verwendet werden sollen. 
 
-* **Importmodus oder DirectQuery-Modus** – Verwenden Sie den **Importmodus** für Interaktionen mit kleineren Datasets. Verwenden Sie den **DirectQuery-Modus** für große, häufig aktualisierte Datasets. Erstellen Sie beispielsweise Dimensionstabellen mit dem **Importmodus** , da sie klein sind und sich nicht häufig ändern. Legen Sie das Aktualisierungsintervall entsprechend der erwarteten Datenaktualisierungsrate fest. Erstellen Sie mit dem **DirectQuery-Modus** Faktentabellen, da diese Tabellen groß sind und Rohdaten enthalten. Verwenden Sie diese Tabellen, um gefilterte Daten mithilfe von Power BI-[Drillthroughs](/power-bi/desktop-drillthrough) darzustellen.
+* **Importmodus oder DirectQuery-Modus** – Verwenden Sie den **Importmodus** für Interaktionen mit kleineren Datasets. Verwenden Sie den **DirectQuery-Modus** für große, häufig aktualisierte Datasets. Erstellen Sie beispielsweise Dimensionstabellen mit dem **Importmodus**, da sie klein sind und sich nicht häufig ändern. Legen Sie das Aktualisierungsintervall entsprechend der erwarteten Datenaktualisierungsrate fest. Erstellen Sie mit dem **DirectQuery-Modus** Faktentabellen, da diese Tabellen groß sind und Rohdaten enthalten. Verwenden Sie diese Tabellen, um gefilterte Daten mithilfe von Power BI-[Drillthroughs](/power-bi/desktop-drillthrough) darzustellen.
 
-* **Parallelität** : Der Azure Data Explorer ist eine linear skalierbare Datenplattform. Daher können Sie die Leistung beim Dashboardrendering verbessern, indem Sie die Parallelität des End-to-End-Flows wie folgt erhöhen:
+* **Parallelität**: Der Azure Data Explorer ist eine linear skalierbare Datenplattform. Daher können Sie die Leistung beim Dashboardrendering verbessern, indem Sie die Parallelität des End-to-End-Flows wie folgt erhöhen:
 
   * Erhöhen Sie die Anzahl [gleichzeitiger Verbindungen in DirectQuery in Power BI](/power-bi/desktop-directquery-about#maximum-number-of-connections-option-for-directquery).
 
   * Verwenden Sie eine [schwache Konsistenz, um die Parallelität zu verbessern](kusto/concepts/queryconsistency.md). Dies kann sich auf die Aktualität der Daten auswirken.
 
-* **Effektive Slicer** : Verwenden Sie [Synchronisierungsslicer](/power-bi/visuals/power-bi-visualization-slicers#sync-and-use-slicers-on-other-pages), um zu verhindern, dass Daten in Berichte geladen werden, bevor Sie bereit sind. Nachdem Sie das Dataset strukturiert, alle visuellen Elemente platziert und alle Slicer gekennzeichnet haben, können Sie den Synchronisierungsslicer auswählen, um nur die benötigten Daten zu laden.
+* **Effektive Slicer**: Verwenden Sie [Synchronisierungsslicer](/power-bi/visuals/power-bi-visualization-slicers#sync-and-use-slicers-on-other-pages), um zu verhindern, dass Daten in Berichte geladen werden, bevor Sie bereit sind. Nachdem Sie das Dataset strukturiert, alle visuellen Elemente platziert und alle Slicer gekennzeichnet haben, können Sie den Synchronisierungsslicer auswählen, um nur die benötigten Daten zu laden.
 
 * **Verwendung von Filtern** – Verwenden Sie so viele Power BI-Filter wie möglich, um die Azure Data Explorer-Suche auf die relevanten Datenshards zu beschränken.
 
@@ -91,6 +91,7 @@ Sie können eine der folgenden Optionen in der M-Abfrage verwenden:
 | NoTruncate | `[NoTruncate=true]` | Fügt die Set-Anweisung `notruncation` zur Abfrage hinzu. Dadurch kann die Kürzung der an den Aufrufer zurückgegebenen Abfrageergebnisse unterdrückt werden.
 | AdditionalSetStatements | `[AdditionalSetStatements="set query_datascope=hotcache"]` | Fügt der Abfrage die bereitgestellten Set-Anweisungen hinzu. Diese Anweisungen werden zum Festlegen von Abfrageoptionen für die Dauer der Abfrage verwendet. Mit Abfrageoptionen wird gesteuert, wie eine Abfrage ausgeführt wird und wie Ergebnisse zurückgegeben werden.
 | CaseInsensitive | `[CaseInsensitive=true]` | Diese Option bewirkt, dass der Connector Abfragen generiert, bei denen die Groß-/Kleinschreibung nicht beachtet wird. Abfragen verwenden beim Vergleichen von Werten den Operator `=~` anstelle des Operators `==`.
+| ForceUseContains | `[ForceUseContains=true]` | Diese Option bewirkt, dass der Connector bei der Verwendung von Textfeldern Abfragen generiert, die `contains` anstelle des Standardwerts `has` verwenden. `has` ist zwar viel leistungsfähiger, damit werden aber keine Teilzeichenfolgen behandelt. Weitere Informationen zu den Unterschieden zwischen den beiden Operatoren finden Sie unter [Zeichenfolgenoperatoren](./kusto/query/datatypes-string-operators.md).
 | Timeout | `[Timeout=#duration(0,10,0,0)]` | Dient zum Festlegen des Client- und Servertimeouts der Abfrage auf die angegebene Dauer.
 
 > [!NOTE]
