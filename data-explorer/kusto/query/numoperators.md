@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b79979abdc13d5cb6b7a71bde2301ed0169ae59b
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: e020d5f6692c8c290b6a68b2ed1b52bc710c89c8
+ms.sourcegitcommit: 574296b9a84084de031684a65f32b6c1bd1a4858
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92249759"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94713988"
 ---
 # <a name="numerical-operators"></a>Numerische Operatoren
 
@@ -29,12 +29,15 @@ Operator       |BESCHREIBUNG                         |Beispiel
 `%`            |Modulo                              |`4 % 2`
 `<`            |Kleiner                                |`1 < 10`, `10sec < 1h`, `now() < datetime(2100-01-01)`
 `>`            |Größer                             |`0.23 > 0.22`, `10min > 1sec`, `now() > ago(1d)`
-`==`           |Ist gleich                              |`1 == 1`
+`==`           |Gleich                              |`1 == 1`
 `!=`           |Ungleich                          |`1 != 0`
 `<=`           |Kleiner oder gleich                       |`4 <= 5`
 `>=`           |Größer oder gleich                    |`5 >= 4`
 `in`           |Entspricht einem der Elemente       |[siehe hier](inoperator.md)
 `!in`          |Entspricht keinem der Elemente   |[siehe hier](inoperator.md)
+
+> [!NOTE]
+> Verwenden Sie-Funktionen, um einen numerischen Typ in einen anderen zu konvertieren `to*()` . Informationen hierzu finden Sie beispielsweise unter [`tolong()`](tolongfunction.md) und [`toint()`](tointfunction.md) .
 
 **Kommentar zum Modulo-Operator**
 
