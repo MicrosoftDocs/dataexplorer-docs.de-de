@@ -10,14 +10,14 @@ ms.topic: reference
 ms.date: 10/08/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: c3a099dbe431087fd6b79d78ad2b8ec10d5a5a37
-ms.sourcegitcommit: b6f0f112b6ddf402e97c011a902bd70ba408e897
+ms.openlocfilehash: c87979b788c83a819f9e65658b5e44e40e53ad1d
+ms.sourcegitcommit: 0820454feb02ae489f3a86b688690422ae29d788
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94497737"
+ms.lasthandoff: 11/19/2020
+ms.locfileid: "94932734"
 ---
-# <a name="tutorial"></a>Tutorial
+# <a name="tutorial"></a>Lernprogramm
 
 ::: zone pivot="azuredataexplorer"
 
@@ -68,7 +68,7 @@ StormEvents
 | project StartTime, EndTime , State , EventType , EpisodeNarrative
 ```
 
-|StartTime|EndTime|Zustand|EventType|Episodenarrative|
+|StartTime|EndTime|State|EventType|Episodenarrative|
 |---|---|---|---|---|
 |2007-02-19 00:00:00.0000000|2007-02-19 08:00:00.0000000|Kalifornische|Hochwasser|Ein frontaler System, das sich über den südlichen San-Joaquin Valley bewegt, hat in den frühen Morgenstunden des 19 Über Bundesland-Autobahn 166 in der Nähe von Taft wurde eine neben Überflutung|
 
@@ -83,7 +83,7 @@ StormEvents
 | project  StartTime, EndTime, EventType, State, EventNarrative  
 ```
 
-|StartTime|EndTime|EventType|Zustand|EventNarrative|
+|StartTime|EndTime|EventType|State|EventNarrative|
 |---|---|---|---|---|
 |2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|Starker Regen|Flori|Bis zu 9 Zoll in einem Zeitraum von 24 Stunden in Teilen des Küsten bauweiten Kreises.|
 |2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|Hüterin|Flori|Ein Tornado, der in der Stadt von Eustis am Nord Ende des West-kruklake liegt. Der Tornado hat sich schnell auf die EF1 Stärke verstärkt, als er Nord Nordwest durch Eustis verlagert hat. Die Nachverfolgung war direkt unter zwei km lang und hatte eine maximale Breite von 300 Meter.  Der Tornado hat 7 Häuser zerstört. 20 sieben Häuser erhielten größere Schäden, und 81 Häuser haben geringfügige Schäden gemeldet. Es sind keine schwerwiegenden Verletzungen aufgetreten, und der Eigenschafts Schaden wurde bei $6,2 Millionen festgelegt.|
@@ -108,7 +108,7 @@ StormEvents
 | project  StartTime, EndTime, EventType, State, EventNarrative  
 ```
 
-|StartTime|EndTime|EventType|Zustand|EventNarrative|
+|StartTime|EndTime|EventType|State|EventNarrative|
 |---|---|---|---|---|
 |2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Winter Storm|MICHIGAN|Dieses schwere Schnee Ereignis wurde in den frühen Morgenstunden am Tag des neuen Jahrs fortgesetzt.|
 |2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Winter Storm|MICHIGAN|Dieses schwere Schnee Ereignis wurde in den frühen Morgenstunden am Tag des neuen Jahrs fortgesetzt.|
@@ -138,7 +138,7 @@ StormEvents
 | project StartTime, EndTime, Duration, EventType, State
 ```
 
-|StartTime|EndTime|Duration|EventType|Zustand|
+|StartTime|EndTime|Duration|EventType|State|
 |---|---|---|---|---|
 |2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|22:00:00|Starker Regen|Flori|
 |2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|00:08:00|Hüterin|Flori|
@@ -147,7 +147,7 @@ StormEvents
 |2007-12-30 16:00:00.0000000|2007-12-30 16:05:00.0000000|00:05:00|Sturm|Georgien|
 
 Es ist möglich, den Spaltennamen wiederzuverwenden und das Berechnungs Ergebnis der gleichen Spalte zuzuweisen.
-Zum Beispiel:
+Beispiel:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -184,7 +184,7 @@ StormEvents
 | top 5 by StormCount desc
 ```
 
-|Zustand|Stormcount|Typeofstorms|
+|State|Stormcount|Typeofstorms|
 |---|---|---|
 |TEXAS|4701|27|
 |Kansas|3166|21|
@@ -499,7 +499,7 @@ Logs | join cluster("TelemetryCluster").database("Telemetry").Metrics on Request
 
 Die beste Möglichkeit, um mehr über die Kusto-Abfragesprache zu erfahren, besteht darin, einige einfache Abfragen anzusehen, um das "Gefühl" für die Sprache zu erhalten. Diese Abfragen ähneln denen im Tutorial zu Azure-Daten-Explorer, Sie verwenden jedoch Daten aus gemeinsamen Tabellen in einem Log Analytics Arbeitsbereich. 
 
-Führen Sie diese Abfragen mit log Analytics aus. Hierbei handelt es sich um ein Tool im Azure-Portal zum Schreiben von Protokoll Abfragen mithilfe von Protokolldaten in Azure Monitor und zum Auswerten der Ergebnisse. Wenn Sie mit log Analytics nicht vertraut sind, können Sie ein Tutorial in [Log Analytics Tutorial](/azure/azure-monitor/log-query/log-analytics-tutorial.md)durchlaufen.
+Führen Sie diese Abfragen mit log Analytics aus. Hierbei handelt es sich um ein Tool im Azure-Portal zum Schreiben von Protokoll Abfragen mithilfe von Protokolldaten in Azure Monitor und zum Auswerten der Ergebnisse. Wenn Sie mit log Analytics nicht vertraut sind, können Sie ein Tutorial in [Log Analytics Tutorial](/azure/azure-monitor/log-query/log-analytics-tutorial)durchlaufen.
 
 Alle Abfragen hier verwenden die [Log Analytics Demo Umgebung](https://ms.portal.azure.com/#blade/Microsoft_Azure_Monitoring_Logs/DemoLogsBlade). Sie können Ihre eigene Umgebung verwenden, aber Sie verfügen möglicherweise nicht über einige der hier verwendeten Tabellen. Da die Daten in der Demo Umgebung nicht statisch sind, können die Ergebnisse Ihrer Abfragen geringfügig von den hier gezeigten Ergebnissen abweichen.
 
