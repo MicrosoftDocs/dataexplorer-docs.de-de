@@ -65,7 +65,7 @@
   items:
     - name: Erstellen eines Clusters und einer Datenbank
       items:
-        - name: Azure-Befehlszeilenschnittstelle
+        - name: Azure CLI
           href: create-cluster-database-cli.md
         - name: PowerShell
           href: create-cluster-database-powershell.md
@@ -1851,6 +1851,9 @@
           href: kusto/functions-library/series-moving-avg-fl.md
         - name: series_rolling_fl()
           href: kusto/functions-library/series-rolling-fl.md
+    - name: Azure Policy-Integrationen
+      displayName: 'samples, policies, definitions'
+      href: ./policy-reference.md
 - name: Ressourcen
   items:
     - name: Blog
