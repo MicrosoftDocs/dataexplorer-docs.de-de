@@ -8,14 +8,14 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/03/2020
-ms.openlocfilehash: 7f9465df4847a24a4877c8b1cb637ba1d7542db3
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: be16f33c649640ef92ed971665d4c7610c5501bf
+ms.sourcegitcommit: c815c6ccf33864e21e1d3daff26a4f077dff88f7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342534"
+ms.lasthandoff: 11/21/2020
+ms.locfileid: "95012200"
 ---
-# <a name="continuous-data-export-overview"></a>Fortlaufender Datenexport (Übersicht)
+# <a name="continuous-data-export-overview"></a>Übersicht über den kontinuierlichen Datenexport
 
 In diesem Artikel wird der fortlaufende Export von Daten aus Kusto in eine [externe Tabelle](../external-table-commands.md) mit einer regelmäßig laufenden Abfrage beschrieben. Die Ergebnisse werden in der externen Tabelle gespeichert, die das Ziel definiert, z. b. Azure BLOB Storage, und das Schema der exportierten Daten. Durch diesen Vorgang wird sichergestellt, dass alle Datensätze mit einigen [Ausnahmen](#exactly-once-export)"genau einmal" exportiert werden. 
 
@@ -38,9 +38,9 @@ Erstellen Sie zum Aktivieren des fortlaufenden Datenexports [eine externe Tabell
   * Verwenden `single` Sie (oder `distributed` = `false` ), um die Verteilung vollständig zu deaktivieren. Mit dieser Einstellung kann der fortlaufende Export Vorgang erheblich verlangsamt und die Anzahl der Dateien, die in jeder fortlaufenden Export Iterationen erstellt werden, beeinträchtigt werden. 
 * **Anzahl der Dateien**:
   * Die Anzahl der in jeder fortlaufenden Export Iterationen exportierten Dateien hängt davon ab, wie die externe Tabelle partitioniert ist. Weitere Informationen finden Sie unter [Exportieren in einen externen Tabellen Befehl](export-data-to-an-external-table.md#number-of-files). Jede fortlaufende Export Iterationen schreibt immer in neue Dateien und fügt Sie niemals an vorhandene an. Folglich hängt die Anzahl der exportierten Dateien auch von der Häufigkeit ab, mit der der fortlaufende Export ausgeführt wird. Der Frequency-Parameter ist `intervalBetweenRuns` .
-* **Speicherort**:
+* **Externe Speicher Konten für Tabellen**:
   * Für eine optimale Leistung sollten der Azure Daten-Explorer-Cluster und die Speicher Konten in derselben Azure-Region zusammengestellt werden.
-  * Wenn das exportierte Daten Volume groß ist, empfiehlt es sich, mehrere Speicher Konten für die externe Tabelle zu konfigurieren, um eine Speicher Drosselung zu vermeiden. Siehe [Exportieren von Daten in den Speicher](export-data-to-storage.md#known-issues).
+  * Wenn das exportierte Daten Volume groß ist, empfiehlt es sich, mehrere Speicher Konten für die externe Tabelle zu konfigurieren, um eine Speicher Drosselung zu vermeiden. Weitere Informationen finden Sie unter [Speicherfehler während der Export Befehle](export-data-to-storage.md#failures-during-export-commands) .
 
 ## <a name="exactly-once-export"></a>Genau einmal exportieren
 
@@ -48,7 +48,7 @@ Um den "genau einmal"-Export sicherzustellen, verwendet der fortlaufende Export 
 
 Die Garantie für den "genau einmal"-Export ist nur für Dateien bestimmt, die im [Befehl zum Anzeigen exportierter Artefakte angezeigt](show-continuous-artifacts.md)werden. Der fortlaufende Export gewährleistet nicht, dass jeder Datensatz nur einmal in die externe Tabelle geschrieben wird. Wenn ein Fehler auftritt, nachdem der Export begonnen hat und einige Artefakte bereits in die externe Tabelle geschrieben wurden, kann die externe Tabelle Duplikate enthalten. Wenn ein Schreibvorgang vor dem Abschluss abgebrochen wurde, enthält die externe Tabelle möglicherweise beschädigte Dateien. In solchen Fällen werden Artefakte nicht aus der externen Tabelle gelöscht, sondern nicht im [Befehl "exportierte Artefakte anzeigen](show-continuous-artifacts.md)" angezeigt. Wenn Sie die exportierten Dateien mithilfe von verarbeiten, werden `show exported artifacts command` keine Duplikate und keine Beschädigungen sichergestellt.
 
-## <a name="export-to-fact-and-dimension-tables"></a>Exportieren in Fakten-und Dimensions Tabellen
+## <a name="export-from-fact-and-dimension-tables"></a>Exportieren aus Fakten-und Dimensions Tabellen
 
 Standardmäßig wird davon ausgegangen, dass alle Tabellen, auf die in der Export Abfrage verwiesen wird, [Fakten Tabellen](../../concepts/fact-and-dimension-tables.md)sind. Daher sind Sie auf den Daten Bank Cursor beschränkt. Die Syntax deklariert explizit, welche Tabellen Bereichs bezogen (Fakt) sind und welche nicht Bereichs bezogen sind (Dimension). Weitere Informationen finden Sie `over` im Parameter im [Create-Befehl](create-alter-continuous.md) .
 
