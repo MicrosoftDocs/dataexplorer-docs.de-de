@@ -201,6 +201,8 @@
           href: data-lake-query-data.md
         - name: Abfragen von Daten in Azure Monitor
           href: query-monitor-data.md
+        - name: Abfragen von Daten in einer Power Apps-Anwendung
+          href: power-apps-connector.md
         - name: Inlinedebuggen von KQL (Python)
           href: debug-inline-python.md
         - name: mithilfe von SDKs
@@ -370,8 +372,6 @@
           href: using-metrics.md
         - name: Überwachen der Clusterintegrität mithilfe von Resource Health
           href: monitor-with-resource-health.md
-        - name: Erstellen von Power Apps-Anwendungen zum Abfragen von Daten in Azure Data Explorer
-          href: power-apps-connector.md
     - name: Freigeben von Daten
       items:
         - name: Verwenden von Azure Data Share
@@ -912,6 +912,8 @@
           href: ./kusto/query/ipv4-comparefunction.md
         - name: ipv4_is_match()
           href: ./kusto/query/ipv4-is-matchfunction.md
+        - name: ipv4_is_private()
+          href: ./kusto/query/ipv4-is-privatefunction.md
         - name: ipv6_compare()
           href: ./kusto/query/ipv6-comparefunction.md
         - name: ipv6_is_match()
@@ -1845,6 +1847,8 @@
           href: kusto/functions-library/quantize-fl.md
         - name: series_dot_product_fl()
           href: kusto/functions-library/series-dot-product-fl.md
+        - name: series_exp_smoothing_fl()
+          href: kusto/functions-library/series-exp-smoothing-fl.md
         - name: series_fit_poly_fl()
           href: kusto/functions-library/series-fit-poly-fl.md
         - name: series_moving_avg_fl()
