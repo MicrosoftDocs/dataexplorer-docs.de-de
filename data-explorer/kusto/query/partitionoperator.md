@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 31e4f1fc32f758164c3f232e758080213e6f428d
-ms.sourcegitcommit: 8a7165b28ac6b40722186300c26002fb132e6e4a
+ms.openlocfilehash: b6f2628bf2391ccea53e7fe70c76c341dda7f4e9
+ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92749528"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95324566"
 ---
 # <a name="partition-operator"></a>partition-Operator
 
@@ -27,27 +27,27 @@ T | partition by Col1 { U | where Col2=toscalar(Col1) }
 
 ## <a name="syntax"></a>Syntax
 
-*T* `|` `partition` [ *partitionparameters* ] `by` *Spalte* `(` *contextualsubquery*`)`
+*T* `|` `partition` [*partitionparameters*] `by` *Spalte* `(` *contextualsubquery*`)`
 
-*T* `|` `partition` [ *partitionparameters* ] `by` *Spalten* `{` *Unterabfrage*`}`
+*T* `|` `partition` [*partitionparameters*] `by` *Spalten* `{` *Unterabfrage*`}`
 
 ## <a name="arguments"></a>Argumente
 
-* *T* : die tabellarische Quelle, deren Daten vom Operator verarbeitet werden sollen.
+* *T*: die tabellarische Quelle, deren Daten vom Operator verarbeitet werden sollen.
 
-* *Column* : der Name einer Spalte in *T* , deren Werte bestimmen, wie die Eingabe Tabelle partitioniert werden soll. Siehe **Hinweise** weiter unten.
+* *Column*: der Name einer Spalte in *T* , deren Werte bestimmen, wie die Eingabe Tabelle partitioniert werden soll. Siehe **Hinweise** weiter unten.
 
-* *Contextualsubquery* : ein tabellarischer Ausdruck, bei dem es sich um die Quelle des `partition` Operators handelt, die für einen einzelnen *Schlüssel* Wert festgelegt ist.
+* *Contextualsubquery*: ein tabellarischer Ausdruck, bei dem es sich um die Quelle des `partition` Operators handelt, die für einen einzelnen *Schlüssel* Wert festgelegt ist.
 
-* *Unterabfrage* : ein tabellarischer Ausdruck ohne Quelle. Der *Schlüssel* Wert kann über den-Befehl abgerufen werden `toscalar()` .
+* *Unterabfrage*: ein tabellarischer Ausdruck ohne Quelle. Der *Schlüssel* Wert kann über den-Befehl abgerufen werden `toscalar()` .
 
-* *Partitionparameters* : NULL oder mehr (durch Leerzeichen getrennte) Parameter in Form von: *Name* `=` *value* , die das Verhalten des Operators steuern. Die folgenden Parameter werden unterstützt:
+* *Partitionparameters*: NULL oder mehr (durch Leerzeichen getrennte) Parameter in Form von: *Name* `=` *value* , die das Verhalten des Operators steuern. Die folgenden Parameter werden unterstützt:
 
   |Name               |Werte         |BESCHREIBUNG|
   |-------------------|---------------|-----------|
   |`hint.materialized`|`true`,`false` |Wenn festgelegt ist, `true` wird die Quelle des Operators materialisiert `partition` (Standard: `false` ).|
-  |`hint.concurrency`|*Zahl*|Gibt an, wie viele gleichzeitige Unterabfragen des `partition` Operators parallel ausgeführt werden sollen. *Standard* Wert: CPU-Kerne auf dem einzelnen Knoten des Clusters (2 bis 16).|
-  |`hint.spread`|*Zahl*|Gibt an, wie viele Knoten von der gleichzeitigen Ausführung von `partition` Unterabfragen verwendet werden sollen. *Standard* Wert: 1.|
+  |`hint.concurrency`|*Number*|Gibt an, wie viele Partitionen parallel ausgeführt werden sollen. *Standard* Wert: 16.|
+  |`hint.spread`|*Number*|Gibt an, wie die Partitionen zwischen Cluster Knoten verteilt werden sollen (z. b. Wenn N Partitionen vorhanden sind und der Verteilungs Hinweis auf p festgelegt ist, dann werden die N-Partitionen von p verschiedene Cluster Knoten gleichmäßig parallel/sequenziell in Abhängigkeit vom Parallelitäts Hinweis verarbeitet). *Standard* Wert: 1.|
 
 ## <a name="returns"></a>Gibt zurück
 
@@ -57,7 +57,7 @@ Der-Operator gibt eine Union der Ergebnisse der Anwendung der Unterabfrage auf j
 
 * Der Partitions Operator ist zurzeit durch die Anzahl der Partitionen beschränkt.
   Es können bis zu 64 unterschiedliche Partitionen erstellt werden.
-  Der Operator führt zu einem Fehler, wenn die Partitions Spalte ( *Spalte* ) mehr als 64 unterschiedliche Werte aufweist.
+  Der Operator führt zu einem Fehler, wenn die Partitions Spalte (*Spalte*) mehr als 64 unterschiedliche Werte aufweist.
 
 * Die Unterabfrage verweist implizit auf die Eingabe Partition (in der Unterabfrage ist kein "Name" für die Partition vorhanden). Wenn Sie in der Unterabfrage mehrmals auf die Eingabe Partition verweisen möchten, verwenden Sie den [as-Operator](asoperator.md), wie im folgenden **Beispiel: Partitions Verweis** weiter unten.
 
@@ -76,7 +76,7 @@ StormEvents
 ) 
 
 ```
-|EventType|State|Ereignisse|Verletzungs|
+|EventType|Zustand|Ereignisse|Verletzungs|
 |---|---|---|---|
 |Hagel|Wyoming|108|0|
 |Hoher Wind|Wyoming|81|5|

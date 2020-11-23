@@ -8,12 +8,12 @@ ms.reviewer: kedamari
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/12/2020
-ms.openlocfilehash: 0da372ff40975e5536883236453d1fadc52673da
-ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
+ms.openlocfilehash: b4e65fd2ca01f5a2de0a8f703e1b91f0d3722f92
+ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/09/2020
-ms.locfileid: "94373815"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95324718"
 ---
 # <a name="data-purge"></a>Datenbereinigung
 
@@ -42,7 +42,9 @@ Der Prozess der selektiven Löschung von Daten aus Azure Daten-Explorer erfolgt 
      * Aufzeichnen der Verteilung auf die Datenblöcke im Cluster 
      * Die Anzahl der Knoten im Cluster  
      * Die Reservekapazität für Löschvorgänge
-     * Mehrere weitere Faktoren können die Dauer von Phase 2 zwischen einigen Sekunden und vielen Stunden variieren.
+     * Mehrere weitere Faktoren
+     
+    Die Dauer von Phase 2 kann zwischen einigen Sekunden und vielen Stunden variieren.
 1. Phase 3: (Hard Delete) arbeiten Sie alle Speicher Artefakte zurück, die möglicherweise die "nicht verarbeitbaren" Daten aufweisen, und löschen Sie Sie aus dem Speicher. Diese Phase erfolgt mindestens fünf Tage nach dem Abschluss der vorherigen Phase, aber nicht mehr als 30 Tage nach dem anfänglichen Befehl. Diese Zeitachsen werden so festgelegt, dass Sie den Datenschutzanforderungen entsprechen.
 
 Durch das Ausgeben eines `.purge` Befehls wird dieser Prozess ausgelöst, der einige Tage in Anspruch nimmt. Wenn die Dichte der Datensätze, für die das Prädikat gilt, ausreichend groß ist, werden alle Daten in der Tabelle durch den Prozess erneut eingefügt. Diese Wiederherstellung hat erhebliche Auswirkungen auf die Leistung und die COGS (Kosten der verkauften Waren).
@@ -113,7 +115,7 @@ Der Löschbefehl kann für unterschiedliche Verwendungs Szenarien auf zwei Arten
      .purge table [TableName] records in database [DatabaseName] with (verificationtoken='<verification token from step #1>') <| [Predicate]
   ```
     
-| Parameter  | Beschreibung  |
+| Parameter  | BESCHREIBUNG  |
 |---------|---------|
 | `DatabaseName`   |   Name der Datenbank      |
 | `TableName`     |     Name der Tabelle    |
@@ -123,9 +125,9 @@ Der Löschbefehl kann für unterschiedliche Verwendungs Szenarien auf zwei Arten
 
 **Einschränkungen für Prädikate bereinigen**
 
-* Das Prädikat muss eine einfache Auswahl sein (z. b. *WHERE [columnName] = = ' x '*  /  *WHERE [columnName] in (' x ', ' Y ', ' Z ') und [othercolumn] = = ' a '* ).
+* Das Prädikat muss eine einfache Auswahl sein (z. b. *WHERE [columnName] = = ' x '*  /  *WHERE [columnName] in (' x ', ' Y ', ' Z ') und [othercolumn] = = ' a '*).
 * Mehrere Filter müssen mit einem "and" und nicht mit separaten Klauseln kombiniert werden `where` (z. b `where [ColumnName] == 'X' and  OtherColumn] == 'Y'` . und nicht `where [ColumnName] == 'X' | where [OtherColumn] == 'Y'` ).
-* Das Prädikat kann nicht auf Tabellen verweisen, die nicht die Tabelle sind, die gelöscht wird ( *TableName* ). Das Prädikat kann nur die Selection-Anweisung ( `where` ) enthalten. Es kann keine bestimmten Spalten aus der Tabelle projizieren (Ausgabe Schema beim Ausführen von "|"). *`table` Prädikat* ' muss dem Tabellen Schema entsprechen).
+* Das Prädikat kann nicht auf Tabellen verweisen, die nicht die Tabelle sind, die gelöscht wird (*TableName*). Das Prädikat kann nur die Selection-Anweisung ( `where` ) enthalten. Es kann keine bestimmten Spalten aus der Tabelle projizieren (Ausgabe Schema beim Ausführen von "|").*`table` Prädikat*' muss dem Tabellen Schema entsprechen).
 * System Funktionen (z. b `ingestion_time()` .,, `extent_id()` ) werden nicht unterstützt.
 
 #### <a name="example-two-step-purge"></a>Beispiel: Löschen mit zwei Schritten
@@ -199,7 +201,7 @@ Bei Bedarf können Sie ausstehende Lösch Anforderungen abbrechen.
 
 **Ausgabe**
 
-Die Ausgabe dieses Befehls entspricht der Befehlsausgabe "Show löscht *operationId* " und zeigt den aktualisierten Status des abgebrochenen Löschvorgangs an. Wenn der Versuch erfolgreich ist, wird der Vorgangs Status auf aktualisiert `Abandoned` . Andernfalls wird der Vorgangs Zustand nicht geändert. 
+Die Ausgabe dieses Befehls entspricht der Befehlsausgabe "Show löscht *operationId*" und zeigt den aktualisierten Status des abgebrochenen Löschvorgangs an. Wenn der Versuch erfolgreich ist, wird der Vorgangs Status auf aktualisiert `Abandoned` . Andernfalls wird der Vorgangs Zustand nicht geändert. 
 
 |`OperationId` |`DatabaseName` |`TableName` |`ScheduledTime` |`Duration` |`LastUpdatedOn` |`EngineOperationId` |`State` |`StateDetails` |`EngineStartTime` |`EngineDuration` |`Retries` |`ClientRequestId` |`Principal`
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -223,7 +225,7 @@ Status = ' abgeschlossen ' gibt den erfolgreichen Abschluss der ersten Phase des
 .show purges from '<StartDate>' to '<EndDate>' [in database <DatabaseName>]
 ```
 
-| Eigenschaften  |Beschreibung  |Obligatorisch/Optional|
+| Eigenschaften  |BESCHREIBUNG  |Obligatorisch/Optional|
 |---------|------------|-------|
 |`OperationId `   |      Die Datenverwaltung Vorgangs-ID, die nach der Ausführung einer Phase oder einer zweiten Phase ausgegeben wird.   |Obligatorisch.
 |`StartDate`    |   Unteres Zeit Limit für Filter Vorgänge. Wenn der Wert weggelassen wird, wird standardmäßig 24 Stunden vor der aktuellen Uhrzeit verwendet      |Optional
@@ -307,7 +309,7 @@ Das Löschen einer Tabelle umfasst das Löschen der Tabelle und das Markieren al
      .purge table [TableName] in database [DatabaseName] allrecords with (verificationtoken='<verification token from step #1>')
      ```
 
-    | Parameter  |Beschreibung  |
+    | Parameter  |BESCHREIBUNG  |
     |---------|---------|
     | `DatabaseName`   |   Der Name der Datenbank.      |
     | `TableName`    |     Der Name der Tabelle.    |

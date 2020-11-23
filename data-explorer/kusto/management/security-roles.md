@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 4bda122b589e3ba297b3e7c350d15687da6ee123
-ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
+ms.openlocfilehash: 3b30a3e578b6bb1f21dedfcfec7629b60bb255f3
+ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91057001"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95324498"
 ---
 # <a name="security-roles-management"></a>Verwaltung von Sicherheitsrollen
 
@@ -24,7 +24,7 @@ ms.locfileid: "91057001"
 In diesem Artikel werden die Steuerungsbefehle beschrieben, die zum Verwalten von Sicherheitsrollen verwendet werden.
 Sicherheitsrollen definieren, welche Sicherheits Prinzipale (Benutzer und Anwendungen) über Berechtigungen für eine gesicherte Ressource verfügen, wie z. b. eine Datenbank oder eine Tabelle, und welche Vorgänge zulässig sind. Prinzipale, die über die `database viewer` Sicherheitsrolle für eine bestimmte Datenbank verfügen, können z. b. alle Entitäten der Datenbank Abfragen und anzeigen (mit Ausnahme von eingeschränkten Tabellen).
 
-Die Sicherheitsrolle kann Sicherheits Prinzipale oder Sicherheitsgruppen zugeordnet werden (die andere Sicherheits Prinzipale oder andere Sicherheitsgruppen haben können). Wenn ein Sicherheits Prinzipal versucht, einen Vorgang für eine gesicherte Ressource auszuführen, prüft das System, ob der Prinzipal mindestens einer Sicherheitsrolle zugeordnet ist, die Berechtigungen zum Ausführen dieses Vorgangs für die Ressource erteilt. Dies wird als **Autorisierungs Überprüfung**bezeichnet. Wenn die Autorisierungs Überprüfung fehlschlägt, wird der Vorgang abgebrochen.
+Die Sicherheitsrolle kann Sicherheits Prinzipale oder Sicherheitsgruppen zugeordnet werden (die andere Sicherheits Prinzipale oder andere Sicherheitsgruppen haben können). Wenn ein Sicherheits Prinzipal versucht, einen Vorgang für eine gesicherte Ressource auszuführen, prüft das System, ob der Prinzipal mindestens einer Sicherheitsrolle zugeordnet ist, die Berechtigungen zum Ausführen dieses Vorgangs für die Ressource erteilt. Dies wird als **Autorisierungs Überprüfung** bezeichnet. Wenn die Autorisierungs Überprüfung fehlschlägt, wird der Vorgang abgebrochen.
 
 **Syntax**
 
@@ -77,7 +77,7 @@ Der folgende Steuerelement Befehl listet alle Sicherheits Prinzipale auf, die Zu
 
 Im folgenden finden Sie mögliche Ergebnisse dieses Befehls:
 
-|Rolle |Principaltype |Principaldisplayname |Principalobjectid |Principalfqn 
+|Role |Principaltype |Principaldisplayname |Principalobjectid |Principalfqn 
 |---|---|---|---|---
 |Daten Bank apsty-Administrator |Azure AD Benutzer |Mark Smith |cd709aed-a26c-e3953dec735e |aaduser =msmith@fabrikam.com|
 
@@ -107,10 +107,7 @@ Hierbei gilt:
 
 * `skip-results`Wenn angegeben, wird von angefordert, dass der Befehl die aktualisierte Liste der Daten Bank Prinzipale nicht zurückgibt.
 
-* Die *Beschreibung*ist, falls vorhanden, Text, der der Änderung zugeordnet und durch den entsprechenden Befehl abgerufen wird `.show` .
-
-<!-- TODO: Need more examples for the public syntax. Until then we're keeping this internal -->
-
+* Die *Beschreibung* ist, falls vorhanden, Text, der der Änderung zugeordnet und durch den entsprechenden Befehl abgerufen wird `.show` .
 
 ## <a name="managing-table-security-roles"></a>Verwalten von Tabellen Sicherheitsrollen
 
@@ -134,7 +131,7 @@ Hierbei gilt:
 
 * `skip-results`Wenn angegeben, wird von angefordert, dass der Befehl die aktualisierte Liste der Tabellen Prinzipale nicht zurückgibt.
 
-* Die *Beschreibung*ist, falls vorhanden, Text, der der Änderung zugeordnet und durch den entsprechenden Befehl abgerufen wird `.show` .
+* Die *Beschreibung* ist, falls vorhanden, Text, der der Änderung zugeordnet und durch den entsprechenden Befehl abgerufen wird `.show` .
 
 **Beispiel**
 
@@ -179,7 +176,7 @@ Hierbei gilt:
 
 * `skip-results`Wenn bereitgestellt, wird angefordert, dass der Befehl die aktualisierte Liste der Funktions Prinzipale nicht zurückgibt.
 
-* Die *Beschreibung*ist, falls vorhanden, Text, der der Änderung zugeordnet und durch den entsprechenden Befehl abgerufen wird `.show` .
+* Die *Beschreibung* ist, falls vorhanden, Text, der der Änderung zugeordnet und durch den entsprechenden Befehl abgerufen wird `.show` .
 
 **Beispiel**
 

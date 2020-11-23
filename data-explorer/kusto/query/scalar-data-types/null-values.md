@@ -10,17 +10,17 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: c493431fcfa22ad0419659a5b6e036205f3bf299
-ms.sourcegitcommit: 194453a8eb11c3ccb54c473e887c84cb8e91b939
+ms.openlocfilehash: ac8852adb5138bffe10a4726470b1c53d74cec1b
+ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/31/2020
-ms.locfileid: "87473971"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95324379"
 ---
 # <a name="null-values"></a>NULL-Werte
 
 Alle skalaren Datentypen in Kusto haben einen speziellen Wert, der einen fehlenden Wert darstellt.
-Dieser Wert wird als **NULL-Wert**oder einfach **null**bezeichnet.
+Dieser Wert wird als **NULL-Wert** oder einfach **null** bezeichnet.
 
 ## <a name="null-literals"></a>NULL-Literale
 
@@ -60,14 +60,20 @@ Führen Sie anschließend Folgendes durch:
 
 |a     |b     |IsNull (a)|IsEmpty (a)|Straume (a)|IsNull (b)|
 |------|------|---------|----------|---------|---------|
-|&nbsp;|&nbsp;|False    |true      |0        |true     |
-|&nbsp;|&nbsp;|False    |False     |1        |true     |
-|a     |1     |False    |False     |1        |False    |
+|&nbsp;|&nbsp;|false    |true      |0        |true     |
+|&nbsp;|&nbsp;|false    |false     |1        |true     |
+|a     |1     |false    |false     |1        |false    |
 
 ::: zone pivot="azuredataexplorer"
 
 * Wenn Sie die obige Abfrage in Kusto. Explorer ausführen, werden alle `true` Werte als angezeigt `1` , und alle `false` Werte werden als angezeigt `0` .
 
+* Kusto bietet keine Möglichkeit, die Spalte einer Tabelle auf NULL-Werte zu beschränken (d. h., es gibt keine Entsprechung zur SQL- `NOT NULL` Einschränkung).
+
 ::: zone-end
 
+::: zone pivot="azuremonitor"
+
 * Kusto bietet keine Möglichkeit, die Spalte einer Tabelle auf NULL-Werte zu beschränken (d. h., es gibt keine Entsprechung zur SQL- `NOT NULL` Einschränkung).
+
+::: zone-end

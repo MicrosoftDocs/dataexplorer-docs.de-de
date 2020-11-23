@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: ee36823bb3f730a12f7ad2d1febe91439d4a2aad
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 3b857e0e16c212c2f12d43f9709a9278526a7344
+ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343282"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95324685"
 ---
 # <a name="query-limits"></a>Abfragegrenzwerte
 
@@ -31,7 +31,7 @@ Die **Abfrage** Parallelität ist ein Limit, das ein Cluster für eine Reihe von
 
 ## <a name="limit-on-result-set-size-result-truncation"></a>Grenzwert für die Größe des Resultsets (Ergebnis abschneiden)
 
-Das **Abschneiden** von Ergebnissen ist ein Standardmäßiges Limit für das Resultset, das von der Abfrage zurückgegeben wird. Kusto schränkt die Anzahl der an den Client zurückgegebenen Datensätze auf **500.000**und die Gesamtgröße der Datensätze für diese Datensätze auf **64 MB**ein. Wenn eine dieser Grenzwerte überschritten wird, tritt bei der Abfrage ein Fehler mit dem Fehler "partielle Abfrage Fehler" auf. Wenn die Gesamtdaten Größe überschritten wird, wird eine Ausnahme mit der folgenden Meldung generiert:
+Das **Abschneiden** von Ergebnissen ist ein Standardmäßiges Limit für das Resultset, das von der Abfrage zurückgegeben wird. Kusto schränkt die Anzahl der an den Client zurückgegebenen Datensätze auf **500.000** und die Gesamtgröße der Datensätze für diese Datensätze auf **64 MB** ein. Wenn eine dieser Grenzwerte überschritten wird, tritt bei der Abfrage ein Fehler mit dem Fehler "partielle Abfrage Fehler" auf. Wenn die Gesamtdaten Größe überschritten wird, wird eine Ausnahme mit der folgenden Meldung generiert:
 
 ```
 The Kusto DataEngine has failed to execute a query: 'Query result set has exceeded the internal data size limit 67108864 (E_QUERY_RESULT_SET_TOO_LARGE).'
@@ -79,7 +79,7 @@ Wenn Sie die Begrenzung für das Ergebnis abschneiden entfernen, ist es beabsich
 
 Sie können den Grenzwert für das Abschneiden von Ergebnissen entweder für Exportzwecke mithilfe des- `.export` Befehls oder für die spätere Aggregation entfernen. Wenn Sie eine spätere Aggregation auswählen, sollten Sie ggf. mithilfe von Kusto aggregieren.
 
-Kusto bietet eine Reihe von Client Bibliotheken, die "unendlich große" Ergebnisse verarbeiten können, indem Sie an den Aufrufer gestreamt werden. Verwenden Sie eine dieser Bibliotheken, und konfigurieren Sie Sie für den Streamingmodus. Verwenden Sie z. b. den .NET Framework Client (Microsoft. Azure. Kusto. Data), und legen Sie entweder die Streaming-Eigenschaft der Verbindungs Zeichenfolge auf *true*fest, oder verwenden Sie den *ExecuteQueryV2Async ()* -Befehl, der immer Ergebnisse streamt.
+Kusto bietet eine Reihe von Client Bibliotheken, die "unendlich große" Ergebnisse verarbeiten können, indem Sie an den Aufrufer gestreamt werden. Verwenden Sie eine dieser Bibliotheken, und konfigurieren Sie Sie für den Streamingmodus. Verwenden Sie z. b. den .NET Framework Client (Microsoft. Azure. Kusto. Data), und legen Sie entweder die Streaming-Eigenschaft der Verbindungs Zeichenfolge auf *true* fest, oder verwenden Sie den *ExecuteQueryV2Async ()* -Befehl, der immer Ergebnisse streamt.
 
 Die resulttrunzierung wird standardmäßig angewendet, nicht nur auf den resultstream, der an den Client zurückgegeben wird. Sie wird auch standardmäßig auf jede Unterabfrage angewendet, die ein Cluster mit ähnlichen Effekten an einen anderen Cluster in einer Cluster übergreifenden Abfrage ausgibt.
 
@@ -154,7 +154,7 @@ Timeout bei Ausführung von Anforderungen (Abfragen und Steuerungsbefehle) wird 
 
 Standardmäßig ist Timeout für Abfragen auf vier Minuten und für Steuerungsbefehle 10 Minuten festgelegt. Dieser Wert kann bei Bedarf (begrenzt auf eine Stunde) erweitert werden.
 
-* Wenn Sie die Abfrage mithilfe von "Kusto. Explorer" durchführen **, verwenden Sie** Extras &gt; **Optionen**_ &gt; _*Verbindungen* *  &gt; **Abfrage Server Timeout**.
+* Wenn Sie die Abfrage mithilfe von "Kusto. Explorer" durchführen **, verwenden Sie** Extras &gt; **Optionen** _ &gt; _ *Verbindungen* *  &gt; **Abfrage Server Timeout**.
 * Legen `servertimeout` Sie die Client Anforderungs Eigenschaft (einen Wert vom Typ) Programm gesteuert `System.TimeSpan` auf eine Stunde fest.
 
 **Hinweise zu Timeouts**
@@ -162,11 +162,6 @@ Standardmäßig ist Timeout für Abfragen auf vier Minuten und für Steuerungsbe
 * Auf der Clientseite wird das Timeout von der erstellten Anforderung bis zum Startzeitpunkt der Antwort an den Client angewendet. Die Zeit, die zum Lesen der Nutzlast auf dem Client benötigt wird, wird nicht als Teil des Timeouts behandelt. Dies hängt davon ab, wie schnell der Aufrufer die Daten aus dem Stream abruft.
 * Außerdem ist der tatsächliche Timeout Wert auf Clientseite geringfügig höher als der vom Benutzer angeforderte Server Timeout Wert. Dieser Unterschied besteht darin, Netzwerklatenzen zuzulassen.
 * Um das maximal zulässige Anforderungs Timeout automatisch zu verwenden, legen Sie die Client Anforderungs Eigenschaft `norequesttimeout` auf fest `true` .
-
-<!--
-  Request timeout can also be set using a set statement, but we don't mention
-  it here since it shouldn't be used in production scenarios.
--->
 
 ## <a name="limit-on-query-cpu-resource-usage"></a>Limit für Abfrage-CPU-Ressourcennutzung
 
@@ -176,7 +171,7 @@ Zu anderen Zeitpunkten können Sie die CPU-Ressourcen, die für eine bestimmte A
 Kusto unterstützt das Angeben von zwei [Client Anforderungs Eigenschaften](../api/netfx/request-properties.md) , wenn eine Abfrage ausgeführt wird. Die Eigenschaften sind  *query_fanout_threads_percent* und *query_fanout_nodes_percent*.
 Beide Eigenschaften sind ganze Zahlen, die standardmäßig den maximalen Wert (100) aufweisen, jedoch für eine bestimmte Abfrage auf einen anderen Wert reduziert werden können. 
 
-Der erste, *query_fanout_threads_percent*, steuert den Verzweigungen angibt-Faktor für die Thread Verwendung. Bei 100% weist der Cluster alle CPUs auf jedem Knoten zu. Beispielsweise 16 CPUs in einem Cluster, der auf Azure D14-Knoten bereitgestellt ist. Wenn der Wert 50% beträgt, wird die Hälfte der CPUs verwendet usw. Die Zahlen werden auf eine ganze CPU aufgerundet, sodass Sie sicher auf 0 festgelegt werden kann. Mit dem zweiten *query_fanout_nodes_percent*wird gesteuert, wie viele Abfrage Knoten im Cluster pro Unterabfrage-Verteilungs Vorgang verwendet werden sollen. Es funktioniert auf ähnliche Weise.
+Der erste, *query_fanout_threads_percent*, steuert den Verzweigungen angibt-Faktor für die Thread Verwendung. Bei 100% weist der Cluster alle CPUs auf jedem Knoten zu. Beispielsweise 16 CPUs in einem Cluster, der auf Azure D14-Knoten bereitgestellt ist. Wenn der Wert 50% beträgt, wird die Hälfte der CPUs verwendet usw. Die Zahlen werden auf eine ganze CPU aufgerundet, sodass Sie sicher auf 0 festgelegt werden kann. Mit dem zweiten *query_fanout_nodes_percent* wird gesteuert, wie viele Abfrage Knoten im Cluster pro Unterabfrage-Verteilungs Vorgang verwendet werden sollen. Es funktioniert auf ähnliche Weise.
 
 ## <a name="limit-on-query-complexity"></a>Beschränkung der Abfrage Komplexität
 

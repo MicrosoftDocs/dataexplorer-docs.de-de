@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.custom: has-adal-ref
 ms.date: 10/23/2018
-ms.openlocfilehash: 8ef966cb2be70ddca6fb5ab10813abe12cb5bce1
-ms.sourcegitcommit: fd3bf300811243fc6ae47a309e24027d50f67d7e
+ms.openlocfilehash: 2224fe28c7f0088ac1a16cdee4d452e354ff0800
+ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382351"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95324753"
 ---
 # <a name="controlling-and-suppressing-kusto-sdk-client-side-tracing"></a>Steuern und unterdrücken von Client seitiger Kusto SDK-Ablauf Verfolgung
 
@@ -39,12 +39,12 @@ Kusto.Cloud.Platform.Utils.TraceSourceManager.SetTraceVerbosityForAll(
 Um die Ablauf Verfolgung aus den Kusto-Client Bibliotheken durch eine Konfigurationsdatei zu unterdrücken, ändern Sie die Datei `Kusto.Cloud.Platform.dll.tweaks` (die in der Bibliothek enthalten ist `Kusto.Data` ).
 
 ```xml
-    <!-- Overrides the default trace verbosity level -->
+    //Overrides the default trace verbosity level
     <add key="Kusto.Cloud.Platform.Utils.Tracing.OverrideTraceVerbosityLevel" value="0" />
 ```
 
 > [!NOTE]
-> Damit die Optimierung wirksam wird, darf kein Minuszeichen im Wert von vorhanden sein.`key`
+> Damit die Optimierung wirksam wird, darf kein Minuszeichen im Wert von vorhanden sein. `key`
 
 Eine Alternative ist:
 
@@ -57,7 +57,7 @@ Kusto.Cloud.Platform.Utils.Anchor.Tweaks.SetProgrammaticAppSwitch(
 
 ## <a name="enable-the-kusto-client-libraries-tracing"></a>Aktivieren der Ablauf Verfolgung für die Kusto-Client Bibliotheken
 
-Aktivieren Sie die .net-Ablauf Verfolgung in der *app. config-Datei*Ihrer Anwendung, um die Ablauf Verfolgung aus den Kusto-Client Bibliotheken zu aktivieren. Nehmen Sie z. b. an, dass die Anwendung `MyApp.exe` die Kusto. Data-Client Bibliothek verwendet. Wenn Sie die Datei " *myapp. exe. config* " so ändern, dass Sie Folgendes einschließt, wird `Kusto.Data` die Ablauf Verfolgung beim nächsten Start der Anwendung aktiviert.
+Aktivieren Sie die .net-Ablauf Verfolgung in der *app.config Datei* Ihrer Anwendung, um die Ablauf Verfolgung aus den Kusto-Client Bibliotheken zu aktivieren. Nehmen Sie z. b. an, dass die Anwendung `MyApp.exe` die Kusto. Data-Client Bibliothek verwendet. Wenn Sie die Datei *MyApp.exe.config* ändern, um Folgendes einzuschließen, wird die Ablauf `Kusto.Data` Verfolgung beim nächsten Start der Anwendung aktiviert.
 
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -73,7 +73,7 @@ Aktivieren Sie die .net-Ablauf Verfolgung in der *app. config-Datei*Ihrer Anwend
 </configuration>
 ```
 
-Im Code wird ein Ablaufverfolgungslistener konfiguriert, der in CSV-Dateien in einem Unterverzeichnis namens *rollinglogs*schreibt. Das Unterverzeichnis befindet sich im Verzeichnis "Prozess".
+Im Code wird ein Ablaufverfolgungslistener konfiguriert, der in CSV-Dateien in einem Unterverzeichnis namens *rollinglogs* schreibt. Das Unterverzeichnis befindet sich im Verzeichnis "Prozess".
 
 > [!NOTE]
 > Irgendeiner. Die NET-kompatible ablaufverfolgungslistenerklasse kann ebenfalls verwendet werden
