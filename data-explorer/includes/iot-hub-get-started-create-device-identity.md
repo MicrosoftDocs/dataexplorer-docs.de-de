@@ -8,12 +8,12 @@ ms.topic: include
 ms.date: 09/07/2018
 ms.author: orspodek
 ms.custom: include file, devx-track-azurecli
-ms.openlocfilehash: e21bd487ff110068ceee4a737a27157068e1f17a
-ms.sourcegitcommit: 1c836079c713db3aef33529e6a15af47e2984e7f
+ms.openlocfilehash: 035435d535a2b67b0de8c4fb9e2af9b1ea1dc5ff
+ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/23/2020
-ms.locfileid: "92470653"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95390270"
 ---
 In diesem Abschnitt wird die Azure-Befehlszeilenschnittstelle verwendet, um eine Geräteidentität für diesen Artikel zu erstellen. Bei Geräte-IDs wird die Groß-/Kleinschreibung beachtet.
 
@@ -36,4 +36,3 @@ In diesem Abschnitt wird die Azure-Befehlszeilenschnittstelle verwendet, um eine
 
 Notieren Sie sich die Verbindungszeichenfolge für das Gerät aus dem Ergebnis. Diese Geräteverbindungszeichenfolge wird von der Geräte-App verwendet, um die Verbindung mit Ihrem IoT Hub als Gerät herzustellen.
 
-<!-- images and links -->

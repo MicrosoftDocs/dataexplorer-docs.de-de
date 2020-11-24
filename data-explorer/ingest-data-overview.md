@@ -7,12 +7,13 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/18/2020
-ms.openlocfilehash: 8e8673a4502df6167cb2979678588046fc6d5b1b
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.localizationpriority: high
+ms.openlocfilehash: 5304d2fcce23d6143faebb9326a6ab960a964f22
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343248"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512399"
 ---
 # <a name="azure-data-explorer-data-ingestion-overview"></a>Übersicht über die Datenerfassung in Azure Data Explorer 
 
@@ -32,7 +33,7 @@ Azure Data Explorer pullt Daten aus einer externen Quelle und liest Anforderunge
 
 * **[Erfassungseigenschaften:](ingestion-properties.md)** Eigenschaften, die Einfluss auf die Datenerfassung haben (z. B. Tagging, Zuordnung, Erstellungszeit).
 
-* **Berechtigungen** : Zum Erfassen von Daten benötigt der Prozess [Berechtigungen auf Ebene der Datenbankerfassung](kusto/management/access-control/role-based-authorization.md). Für andere Aktionen wie z. B. Abfragen sind möglicherweise die Berechtigungen „Datenbankadministrator“, „Datenbankbenutzer“ oder „Tabellenadministrator“ erforderlich.
+* **Berechtigungen**: Zum Erfassen von Daten benötigt der Prozess [Berechtigungen auf Ebene der Datenbankerfassung](kusto/management/access-control/role-based-authorization.md). Für andere Aktionen wie z. B. Abfragen sind möglicherweise die Berechtigungen „Datenbankadministrator“, „Datenbankbenutzer“ oder „Tabellenadministrator“ erforderlich.
 
 ## <a name="batching-vs-streaming-ingestion"></a>Batcherfassung und Streamingerfassung
 
@@ -62,9 +63,9 @@ Für Organisationen, die eine Verwaltung (Drosselung, Wiederholungen, Überwachu
 
 ### <a name="ingestion-using-connectors-and-plugins"></a>Erfassung mit Konnektoren und Plug-Ins
 
-* **Logstash-Plug-In** , siehe [Erfassen von Daten aus Logstash in Azure Data Explorer](ingest-data-logstash.md).
+* **Logstash-Plug-In**, siehe [Erfassen von Daten aus Logstash in Azure Data Explorer](ingest-data-logstash.md).
 
-* **Kafka-Connector** , siehe [Erfassen von Daten aus Kafka in Azure Data Explorer](ingest-data-kafka.md).
+* **Kafka-Connector**, siehe [Erfassen von Daten aus Kafka in Azure Data Explorer](ingest-data-kafka.md).
 
 * **[Power Automate:](https://flow.microsoft.com/)** Eine automatisierte Workflow-Pipeline zu Azure Data Explorer. Mit Power Automate können Sie eine Abfrage ausführen und vordefinierte Aktionen ausführen, für die Sie die Abfrageergebnisse als Trigger verwenden. Weitere Informationen finden Sie unter [Azure Data Explorer-Connector für Power Automate (Vorschauversion)](flow.md).
 
@@ -98,11 +99,11 @@ Azure-Daten-Explorer bietet SDKs, die für Abfragen und die Datenerfassung verwe
 
 Es gibt eine Reihe von Methoden, mit denen Daten mithilfe von KQL-Befehlen (Kusto Query Language) direkt in der Engine erfasst werden können. Da diese Methode die Datenverwaltungsdienste umgeht, eignet sie sich nur für die Erkundung und Prototyperstellung. Verwenden Sie diese Methode nicht in Produktionsszenarien oder Szenarien mit hohem Volumen.
 
-  * **Inlineerfassung:**  An die Engine wird ein Steuerungsbefehl ( [.ingest inline](kusto/management/data-ingestion/ingest-inline.md)) gesendet, und die zu erfassenden Daten werden direkt im Befehlstext angegeben. Diese Methode ist für improvisierte Testzwecke vorgesehen.
+  * **Inlineerfassung:**  An die Engine wird ein Steuerungsbefehl ([.ingest inline](kusto/management/data-ingestion/ingest-inline.md)) gesendet, und die zu erfassenden Daten werden direkt im Befehlstext angegeben. Diese Methode ist für improvisierte Testzwecke vorgesehen.
 
-  * **Erfassung aus einer Abfrage:** An die Engine wird ein Steuerungsbefehl ( [„.set“, „.append“, „.set-or-append“ oder „.set-or-replace“](kusto/management/data-ingestion/ingest-from-query.md)) gesendet, und die Daten werden indirekt als die Ergebnisse einer Abfrage oder eines Befehls angegeben.
+  * **Erfassung aus einer Abfrage:** An die Engine wird ein Steuerungsbefehl ([„.set“, „.append“, „.set-or-append“ oder „.set-or-replace“](kusto/management/data-ingestion/ingest-from-query.md)) gesendet, und die Daten werden indirekt als die Ergebnisse einer Abfrage oder eines Befehls angegeben.
 
-  * **Erfassung aus dem Speicher (Pull):** An die Engine wird ein Steuerungsbefehl ( [.ingest into](kusto/management/data-ingestion/ingest-from-storage.md)) gesendet, und die Daten sind in einem externen Speicher (beispielsweise in Azure Blob Storage) gespeichert, auf den die Engine zugreifen kann und auf den durch den Befehl verwiesen wird.
+  * **Erfassung aus dem Speicher (Pull):** An die Engine wird ein Steuerungsbefehl ([.ingest into](kusto/management/data-ingestion/ingest-from-storage.md)) gesendet, und die Daten sind in einem externen Speicher (beispielsweise in Azure Blob Storage) gespeichert, auf den die Engine zugreifen kann und auf den durch den Befehl verwiesen wird.
 
 ## <a name="comparing-ingestion-methods-and-tools"></a>Vergleich der Erfassungsmethoden und -tools
 

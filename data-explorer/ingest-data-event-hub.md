@@ -7,17 +7,19 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 69438457dfcbfc4e29805d5d193c227538910e45
-ms.sourcegitcommit: 97404e9ed4a28cd497d2acbde07d00149836d026
+ms.localizationpriority: high
+ms.openlocfilehash: 798a8b201ee87d5c43aeb31d6af515d41c516bef
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/21/2020
-ms.locfileid: "90832645"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512212"
 ---
 # <a name="ingest-data-from-event-hub-into-azure-data-explorer"></a>Erfassen von Daten aus Event Hub in Azure Data Explorer
 
 > [!div class="op_single_selector"]
 > * [Portal](ingest-data-event-hub.md)
+> * [1-Klick](one-click-event-hub.md)
 > * [C#](data-connection-event-hub-csharp.md)
 > * [Python](data-connection-event-hub-python.md)
 > * [Azure Resource Manager-Vorlage](data-connection-event-hub-resource-manager.md)
@@ -156,7 +158,6 @@ Es stehen zwei Routingoptionen für erfasste Daten zur Verfügung: *statisch* un
 > * Für die `csv`-Zuordnung werden am Anfang des Datensatzes Eigenschaften hinzugefügt. Bei einer `json`-Zuordnung werden Eigenschaften entsprechend dem in der Dropdownliste angezeigten Namen hinzugefügt.
 
 Wenn Sie **Ereignissystemeigenschaften** im Abschnitt **Datenquelle** der Tabelle ausgewählt haben, müssen Sie die [Systemeigenschaften](ingest-data-event-hub-overview.md#system-properties) in das Tabellenschema und die Zuordnung einschließen.
-
 
 ## <a name="copy-the-connection-string"></a>Verbindungszeichenfolge kopieren
 

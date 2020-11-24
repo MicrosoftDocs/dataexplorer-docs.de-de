@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: 4ef7e15e3009b3ccd098136d9c5013dbe31813b7
-ms.sourcegitcommit: f71801764fdccb061f3cf1e3cfe43ec1557e4e0f
+ms.openlocfilehash: bf6dced9b0df0b90b0b1ff87389c9dab31ebe7c0
+ms.sourcegitcommit: f7bebd245081a5cdc08e88fa4f9a769c18e13e5d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/03/2020
-ms.locfileid: "93293118"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94644636"
 ---
 # <a name="what-is-one-click-ingestion"></a>Was ist die 1-Klick-Erfassung?
 
@@ -40,15 +40,15 @@ Die 1-Klick-Erfassung ist besonders nützlich, wenn Daten erstmalig erfasst werd
 
 Der Assistent für die 1-Klick-Erfassung leitet Sie durch die 1-Klick-Erfassung.
 
-* Wenn Sie über den Startbildschirm **Welcome to Azure Data Explorer** (Willkommen bei Azure Data Explorer) in Ihrem Cluster auf den Assistenten für die 1-Klick-Erfassung zugreifen möchten, führen Sie die beiden ersten Schritte ( [Clustererstellung und Datenbankerstellung](#prerequisites)) aus, und wählen Sie dann **Neue Daten erfassen** aus.
+* Wenn Sie über den Startbildschirm **Welcome to Azure Data Explorer** (Willkommen bei Azure Data Explorer) in Ihrem Cluster auf den Assistenten für die 1-Klick-Erfassung zugreifen möchten, führen Sie die beiden ersten Schritte ([Clustererstellung und Datenbankerstellung](#prerequisites)) aus, und wählen Sie dann **Neue Daten erfassen** aus.
 
     :::image type="content" source="media/ingest-data-one-click/welcome-ingestion.png" alt-text="Erfassen neuer Daten über den Startbildschirm von Azure Data Explorer":::
 
-* Um den Assistenten über die [Azure Data Explorer-Webbenutzeroberfläche](https://dataexplorer.azure.com/) zu starten, klicken Sie im linken Menü der Azure Data Explorer-Webbenutzeroberfläche mit der rechten Maustaste auf die Zeile **Datenbank** oder **Tabelle** , und wählen Sie **Neue Daten erfassen** aus.
+* Um den Assistenten über die [Azure Data Explorer-Webbenutzeroberfläche](https://dataexplorer.azure.com/) zu starten, klicken Sie im linken Menü der Azure Data Explorer-Webbenutzeroberfläche mit der rechten Maustaste auf die Zeile **Datenbank** oder **Tabelle**, und wählen Sie **Neue Daten erfassen** aus.
 
     :::image type="content" source="media/ingest-data-one-click/one-click-ingestion-in-webui.png" alt-text="Auswählen der 1-Klick-Erfassung auf der Webbenutzeroberfläche":::
 
-* Um über das Azure-Portal auf den Assistenten zuzugreifen, wählen Sie im linken Menü **Abfrage** aus, klicken Sie mit der rechten Maustaste auf die **Datenbank** oder **Tabelle** , und wählen Sie **Neue Daten erfassen** aus.
+* Um über das Azure-Portal auf den Assistenten zuzugreifen, wählen Sie im linken Menü **Abfrage** aus, klicken Sie mit der rechten Maustaste auf die **Datenbank** oder **Tabelle**, und wählen Sie **Neue Daten erfassen** aus.
 
     :::image type="content" source="media/ingest-data-one-click/access-from-portal.png" alt-text="Zugreifen auf den Assistenten für die 1-Klick-Erfassung über das Azure-Portal":::
 
@@ -121,6 +121,7 @@ Wenn die Schemazuordnung und die Spaltenbearbeitung abgeschlossen sind, startet 
 ### <a name="initial-data-exploration"></a>Anfängliche Datenuntersuchung
    
 Nach der Erfassung bietet der Assistent Optionen zur Verwendung von **[Schnellbefehlen](one-click-ingestion-existing-table.md#explore-quick-queries-and-tools)** für die erste Untersuchung Ihrer Daten.
+
 
 ## <a name="next-steps"></a>Nächste Schritte
 

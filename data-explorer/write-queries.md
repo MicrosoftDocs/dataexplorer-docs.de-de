@@ -7,12 +7,13 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: tutorial
 ms.date: 04/07/2019
-ms.openlocfilehash: f6d993383ecf6c25bf144228e77f02f944bc02d8
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.localizationpriority: high
+ms.openlocfilehash: 22a22f1050a366a79017904550854365dc2ef43c
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343333"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513283"
 ---
 # <a name="write-queries-for-azure-data-explorer"></a>Schreiben von Abfragen für den Azure-Daten-Explorer
 
@@ -85,7 +86,7 @@ StormEvents | count
 
 [**take**](kusto/query/takeoperator.md): Gibt maximal die angegebene Anzahl von Zeilen zurück.
 
-Die folgende Abfrage gibt fünf Zeilen aus der Tabelle „StormEvents“ zurück. Das Schlüsselwort *limit* ist ein Alias für *take* .
+Die folgende Abfrage gibt fünf Zeilen aus der Tabelle „StormEvents“ zurück. Das Schlüsselwort *limit* ist ein Alias für *take*.
 
 **\[** [**Zum Ausführen der Abfrage klicken**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSspVqhRKEnMTlUwBQDEz2b8FAAAAA%3d%3d) **\]**
 
@@ -190,9 +191,9 @@ StormEvents
 | summarize event_count = count() by State
 ```
 
-Der **summarize** -Operator gruppiert Zeilen, die denselben Wert in der **by** -Klausel haben, und verwendet dann die Aggregationsfunktion (z. B. **count** ), um jeder Gruppe zu einer einzelnen Zeile zu kombinieren. In diesem Fall gibt es also für jeden Bundesstaat eine Zeile und eine Spalte für die Anzahl der Zeilen in diesem Bundesstaat.
+Der **summarize**-Operator gruppiert Zeilen, die denselben Wert in der **by**-Klausel haben, und verwendet dann die Aggregationsfunktion (z. B. **count**), um jeder Gruppe zu einer einzelnen Zeile zu kombinieren. In diesem Fall gibt es also für jeden Bundesstaat eine Zeile und eine Spalte für die Anzahl der Zeilen in diesem Bundesstaat.
 
-Es gibt eine Reihe von Aggregationsfunktionen, und Sie können mehrere davon in einem **summarize** -Operator verwenden, um mehrere berechnete Spalten zu erzeugen. Beispielsweise könnten Sie die Anzahl der Stürme in jedem Bundesstaat abrufen sowie die eindeutige Anzahl der Stürme pro Bundesstaat und anschließend **top** verwenden, um die am meisten von Stürmen betroffenen Bundesstaaten zu erhalten.
+Es gibt eine Reihe von Aggregationsfunktionen, und Sie können mehrere davon in einem **summarize**-Operator verwenden, um mehrere berechnete Spalten zu erzeugen. Beispielsweise könnten Sie die Anzahl der Stürme in jedem Bundesstaat abrufen sowie die eindeutige Anzahl der Stürme pro Bundesstaat und anschließend **top** verwenden, um die am meisten von Stürmen betroffenen Bundesstaaten zu erhalten.
 
 **\[** [**Zum Ausführen der Abfrage klicken**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSguzc1NLMqsSlUIBkk455fmlSjYKiSDaA1NHYWQyoJU%2fzSwXDFQPAUiAdYPktJUSKoE6kwsSQUZVpJfoGAKEYGblZJanAwAgbFb73QAAAA%3d) **\]**
 
@@ -202,7 +203,7 @@ StormEvents
 | top 5 by StormCount desc
 ```
 
-Das Ergebnis eines **summarize** -Vorgangs enthält:
+Das Ergebnis eines **summarize**-Vorgangs enthält:
 
 - jede in **by** genannte Spalte
 
@@ -262,7 +263,7 @@ StormEvents
 ```
 
 > [!NOTE]
-> Der **render** -Operator ist eher eine clientseitige Funktion als Teil der Engine. Er wurde aus Gründen der Bedienfreundlichkeit in die Sprache integriert. Die Webanwendung unterstützt die folgenden Optionen: Balkendiagramm, Säulendiagramm, Kreisdiagramm, Zeitdiagramm und Liniendiagramm. 
+> Der **render**-Operator ist eher eine clientseitige Funktion als Teil der Engine. Er wurde aus Gründen der Bedienfreundlichkeit in die Sprache integriert. Die Webanwendung unterstützt die folgenden Optionen: Balkendiagramm, Säulendiagramm, Kreisdiagramm, Zeitdiagramm und Liniendiagramm. 
 
 ## <a name="scalar-operators"></a>Skalar-Operatoren
 
@@ -284,7 +285,7 @@ StormEvents
 
 ### <a name="case"></a>case()
 
-[**case()**](kusto/query/casefunction.md): Wertet eine Liste von Prädikaten aus und gibt den ersten Ergebnisausdruck zurück, dessen Prädikat erfüllt ist, oder den endgültigen Ausdruck **else** . Sie können mit diesem Operator Daten kategorisieren oder gruppieren:
+[**case()**](kusto/query/casefunction.md): Wertet eine Liste von Prädikaten aus und gibt den ersten Ergebnisausdruck zurück, dessen Prädikat erfüllt ist, oder den endgültigen Ausdruck **else**. Sie können mit diesem Operator Daten kategorisieren oder gruppieren:
 
 Die folgende Abfrage gibt eine neue Spalte `deaths_bucket` zurück und gruppiert die Todesfälle nach Anzahl.
 
@@ -315,7 +316,7 @@ MyData
 | extend Duration = extract("Duration=([0-9.]+)", 1, Trace, typeof(real)) * time(1s)
 ```
 
-Diese Abfrage verwendet eine **let** -Anweisung, die einen Namen (in diesem Fall `MyData`) an einen Ausdruck bindet. Im restlichen Gültigkeitsbereichs, in dem die **let** -Anweisung vorkommt (globaler Gültigkeitsbereich oder im Gültigkeitsbereich eines Funktionskörpers), kann der Name verwendet werden, um auf seine gebundenen Wert zu verweisen.
+Diese Abfrage verwendet eine **let**-Anweisung, die einen Namen (in diesem Fall `MyData`) an einen Ausdruck bindet. Im restlichen Gültigkeitsbereichs, in dem die **let**-Anweisung vorkommt (globaler Gültigkeitsbereich oder im Gültigkeitsbereich eines Funktionskörpers), kann der Name verwendet werden, um auf seine gebundenen Wert zu verweisen.
 
 ### <a name="parse_json"></a>parse_json()
 
@@ -384,7 +385,7 @@ range offset from -1 to 1 step 1
 | project weekStart = startofweek(now(), offset),offset
 ```
 
-Diese Abfrage verwendet den **range** -Operator, der eine einspaltige Tabelle mit Werten erzeugt. Siehe auch: [**startofday()**](kusto/query/startofdayfunction.md), [**startofweek()**](kusto/query/startofweekfunction.md), [**startofyear()**](kusto/query/startofyearfunction.md)), [**startofmonth()**](kusto/query/startofmonthfunction.md), [**endofday()**](kusto/query/endofdayfunction.md), [**endofweek()**](kusto/query/endofweekfunction.md), [**endofmonth()**](kusto/query/endofmonthfunction.md), and [**endofyear()**](kusto/query/endofyearfunction.md).
+Diese Abfrage verwendet den **range**-Operator, der eine einspaltige Tabelle mit Werten erzeugt. Siehe auch: [**startofday()**](kusto/query/startofdayfunction.md), [**startofweek()**](kusto/query/startofweekfunction.md), [**startofyear()**](kusto/query/startofyearfunction.md)), [**startofmonth()**](kusto/query/startofmonthfunction.md), [**endofday()**](kusto/query/endofdayfunction.md), [**endofweek()**](kusto/query/endofweekfunction.md), [**endofmonth()**](kusto/query/endofmonthfunction.md), and [**endofyear()**](kusto/query/endofyearfunction.md).
 
 ### <a name="between"></a>between()
 
@@ -412,7 +413,7 @@ StormEvents
 
 ## <a name="tabular-operators"></a>Tabellarische Operatoren
 
-Kusto verfügt über viele tabellarische Operatoren, von denen einige in anderen Abschnitten dieses Artikels behandelt werden. Hier konzentrieren wir uns auf **parse** . 
+Kusto verfügt über viele tabellarische Operatoren, von denen einige in anderen Abschnitten dieses Artikels behandelt werden. Hier konzentrieren wir uns auf **parse**. 
 
 ### <a name="parse"></a>parse
 
@@ -616,7 +617,7 @@ StormEvents
 
 [**mv-expand**](kusto/query/mvexpandoperator.md): Erweitert mehrwertige Sammlungen aus einer Spalte des Typs „dynamisch“, sodass jeder Wert in der Sammlung eine gesonderte Zeile erhält. Alle anderen Spalten in einer erweiterten Zeile werden dupliziert. Ist das Gegenteil von makelist.
 
-Die folgende Abfrage generiert die Beispieldaten, indem ein Satz erstellt wird, der dann zur Veranschaulichung der **mv-expand** -Funktionen verwendet wird.
+Die folgende Abfrage generiert die Beispieldaten, indem ein Satz erstellt wird, der dann zur Veranschaulichung der **mv-expand**-Funktionen verwendet wird.
 
 **\[** [**Zum Ausführen der Abfrage klicken**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAFWOQQ6CQAxF9yTcoWGliTcws1MPIFygyk9EKTPpVBTj4Z2BjSz%2f738v7WF06r1vD2xcp%2bCoNq9yHDFYLIsvvW5Q0JybKYCco2omqnyNTxHW7oPFckbwajFZhB%2bIsE1trNZ0gi1dpuRmQ%2baC%2bjuuthS7Fbwvi%2f%2bP8lpGvAMP7Wr3A6BceSu7AAAA) **\]**
 
@@ -664,7 +665,7 @@ In diesem Abschnitt werden Elemente behandelt, mit denen Sie komplexere Abfragen
 
 ### <a name="let"></a>let
 
-[**let**](kusto/query/letstatement.md): Verbessert die Modularität und Wiederverwendbarkeit. Die **let** -Anweisung gestattet es Ihnen, einen potenziell komplexen Ausdruck in mehrere Teile aufzuteilen, von denen jeder an einen Namen gebunden ist, und diese Teilen dann zu kombinieren. Eine **let** -Anweisung kann auch verwendet werden, um benutzerdefinierte Funktionen und Sichten (Ausdrücke über Tabellen, deren Ergebnisse wie eine neue Tabelle aussehen) zu erstellen. Durch eine **let** -Anweisung gebundene Ausdrücke können vom Typ „Skalar“, „Tabelle“ oder benutzerdefinierte Funktionen (Lambdas) sein.
+[**let**](kusto/query/letstatement.md): Verbessert die Modularität und Wiederverwendbarkeit. Die **let**-Anweisung gestattet es Ihnen, einen potenziell komplexen Ausdruck in mehrere Teile aufzuteilen, von denen jeder an einen Namen gebunden ist, und diese Teilen dann zu kombinieren. Eine **let**-Anweisung kann auch verwendet werden, um benutzerdefinierte Funktionen und Sichten (Ausdrücke über Tabellen, deren Ergebnisse wie eine neue Tabelle aussehen) zu erstellen. Durch eine **let**-Anweisung gebundene Ausdrücke können vom Typ „Skalar“, „Tabelle“ oder benutzerdefinierte Funktionen (Lambdas) sein.
 
 Im folgenden Beispiel wird eine Variable vom Typ „Tabelle“ erstellt, die diese dann in einem nachfolgenden Ausdruck verwendet.
 
@@ -684,7 +685,7 @@ LightningStorms
 
 ### <a name="join"></a>join
 
-[**join**](kusto/query/joinoperator.md): Führt die Zeilen zweier Tabellen zusammen, um eine neue Tabelle zu erzeugen, indem Werte aus den angegebenen Spalten aus beiden Tabellen zugeordnet werden. Kusto unterstützt eine umfangreiche Zahl von Join-Typen (Verknüpfungen): **fullouter** , **inner** , **innerunique** , **leftanti** , **leftantisemi** , **leftouter** , **leftsemi** , **rightanti** , **rightantisemi** , **rightouter** , **rightsemi** .
+[**join**](kusto/query/joinoperator.md): Führt die Zeilen zweier Tabellen zusammen, um eine neue Tabelle zu erzeugen, indem Werte aus den angegebenen Spalten aus beiden Tabellen zugeordnet werden. Kusto unterstützt eine umfangreiche Zahl von Join-Typen (Verknüpfungen): **fullouter**, **inner**, **innerunique**, **leftanti**, **leftantisemi**, **leftouter**, **leftsemi**, **rightanti**, **rightantisemi**, **rightouter**, **rightsemi**.
 
 Im folgenden Beispiel werden zwei Tabellen mit einem inneren Join verknüpft.
 
@@ -710,7 +711,7 @@ X
 ```
 
 > [!TIP]
-> Verwenden Sie die Operatoren **where** und **project** , um die Anzahl von Zeilen und Spalten in den Eingabetabellen vor dem Join zu verringern. Wenn eine Tabelle immer kleiner als die andere ist, verwenden Sie diese als die linke (weitergeleitete) Seite der Verknüpfung. Die Spalten für die Verknüpfungsübereinstimmung müssen den gleichen Namen haben. Verwenden Sie ggf. den Operator **project** , um eine Spalte in einer der Tabellen umzubenennen.
+> Verwenden Sie die Operatoren **where** und **project**, um die Anzahl von Zeilen und Spalten in den Eingabetabellen vor dem Join zu verringern. Wenn eine Tabelle immer kleiner als die andere ist, verwenden Sie diese als die linke (weitergeleitete) Seite der Verknüpfung. Die Spalten für die Verknüpfungsübereinstimmung müssen den gleichen Namen haben. Verwenden Sie ggf. den Operator **project**, um eine Spalte in einer der Tabellen umzubenennen.
 
 ### <a name="serialize"></a>serialize
 
@@ -727,7 +728,7 @@ StormEvents
 | extend row_number = row_number()
 ```
 
-Das Rowset gilt auch als serialisiert, wenn es ein Ergebnis der folgenden Operatoren ist: **sort** , **top** oder **range** , optional gefolgt von den Operatoren **project** , **project-away** , **extend** , **where** , **parse** , **mv-expand** oder **take** .
+Das Rowset gilt auch als serialisiert, wenn es ein Ergebnis der folgenden Operatoren ist: **sort**, **top** oder **range**, optional gefolgt von den Operatoren **project**, **project-away**, **extend**, **where**, **parse**, **mv-expand** oder **take**.
 
 **\[** [**Zum Ausführen der Abfrage klicken**](https://dataexplorer.azure.com/clusters/help/databases/Samples?query=H4sIAAAAAAAEAAsuyS%2fKdS1LzSsp5uWqUSguzc1NLMqsSlVIzi%2fNK9HQVEiqVAguSSxJBcvmF5XABRQSi5NBgqkVJal5KQpF%2beXxeaW5SalFCrZIHA1NAEGimf5iAAAA) **\]**
 

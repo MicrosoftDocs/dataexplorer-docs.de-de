@@ -7,12 +7,13 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 07/22/2019
-ms.openlocfilehash: cf2673d92cb5a543baed01b91bdd828cc5862aee
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.localizationpriority: high
+ms.openlocfilehash: 44c2a5adf46d8c136675aa70a45dc89ed60c4cc8
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92902551"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512739"
 ---
 # <a name="quickstart-create-an-azure-data-explorer-cluster-and-database"></a>Schnellstart: Erstellen eines Azure Data Explorer-Clusters und einer Datenbank
 
@@ -40,7 +41,7 @@ Erstellen Sie einen Azure Data Explorer-Cluster mit einem definierten Satz von C
 
 1. Wählen Sie in der linken oberen Ecke des Portals die Schaltfläche **+ Ressource erstellen** aus.
 
-1. Suchen Sie nach *Azure Data Explorer* .
+1. Suchen Sie nach *Azure Data Explorer*.
 
    ![Durchsuchen von Ressourcen](media/create-cluster-database-portal/search-resources.png)
 
@@ -56,13 +57,13 @@ Erstellen Sie einen Azure Data Explorer-Cluster mit einem definierten Satz von C
     | Resource group | Ihre Ressourcengruppe | Verwenden Sie eine vorhandene Ressourcengruppe, oder erstellen Sie eine neue Ressourcengruppe. |
     | Clustername | Ein eindeutiger Clustername | Wählen Sie einen eindeutigen Namen aus, der Ihren Cluster identifiziert. Der Domänenname *[Region].kusto.windows.net* wird an den angegebenen Namen angefügt. Der Name darf nur Kleinbuchstaben und Zahlen enthalten. Er muss zwischen 4 und 22 Zeichen lang sein.
     | Region | *USA, Westen* oder *USA, Westen 2* | Wählen Sie *USA, Westen* oder *USA, Westen 2* (wenn Sie Verfügbarkeitszonen verwenden) für diese Schnellstartanleitung aus. Wählen Sie für ein Produktionssystem die Region aus, die Ihre Anforderungen am besten erfüllt.
-    | Verfügbarkeitszonen | *1* , *2* und/oder *3* | Platzieren Sie die Clusterinstanzen in verschiedenen Verfügbarkeitszonen derselben Region (optional). [Azure-Verfügbarkeitszonen](/azure/availability-zones/az-overview) sind eindeutige physische Standorte in derselben Azure-Region. Sie schützen einen Azure Data Explorer-Cluster und Daten vor einem teilweisen Regionsausfall. Die Clusterknoten werden standardmäßig im gleichen Rechenzentrum erstellt. Durch die Auswahl mehrerer Verfügbarkeitszonen können Sie einen Single Point of Failure vermeiden und eine Hochverfügbarkeit sicherstellen. Die Bereitstellung in Verfügbarkeitszonen ist nur während der Clustererstellung möglich und kann nicht zu einem späteren Zeitpunkt geändert werden.
+    | Verfügbarkeitszonen | *1*, *2* und/oder *3* | Platzieren Sie die Clusterinstanzen in verschiedenen Verfügbarkeitszonen derselben Region (optional). [Azure-Verfügbarkeitszonen](/azure/availability-zones/az-overview) sind eindeutige physische Standorte in derselben Azure-Region. Sie schützen einen Azure Data Explorer-Cluster und Daten vor einem teilweisen Regionsausfall. Die Clusterknoten werden standardmäßig im gleichen Rechenzentrum erstellt. Durch die Auswahl mehrerer Verfügbarkeitszonen können Sie einen Single Point of Failure vermeiden und eine Hochverfügbarkeit sicherstellen. Die Bereitstellung in Verfügbarkeitszonen ist nur während der Clustererstellung möglich und kann nicht zu einem späteren Zeitpunkt geändert werden.
     | Computespezifikationen | *D13_v2* | Wählen Sie für diesen Schnellstart die Spezifikation mit dem niedrigsten Preis aus. Wählen Sie für ein Produktionssystem die Spezifikation aus, die Ihre Anforderungen am besten erfüllt.
     | | | |
 
-1. Wählen Sie **Bewerten + erstellen** , um Ihre Clusterdetails zu überprüfen, und dann **Erstellen** , um den Cluster bereitzustellen. Die Bereitstellung dauert normalerweise etwa zehn Minuten.
+1. Wählen Sie **Bewerten + erstellen**, um Ihre Clusterdetails zu überprüfen, und dann **Erstellen**, um den Cluster bereitzustellen. Die Bereitstellung dauert normalerweise etwa zehn Minuten.
 
-1. Wählen Sie nach Abschluss der Bereitstellung die Option **Zu Ressourcengruppe wechseln** .
+1. Wählen Sie nach Abschluss der Bereitstellung die Option **Zu Ressourcengruppe wechseln**.
 
     ![Zu Ressource wechseln](media/create-cluster-database-portal/notification-resource.png)
 
@@ -85,19 +86,19 @@ Sie sind nun für den zweiten Schritt bereit: das Erstellen der Datenbank.
     | Zwischenspeicherungsdauer | *31* | Die Zeitspanne (in Tagen), wie lange häufig abgefragte Daten im SSD-Speicher oder RAM (und nicht im längerfristigen Speicher) verfügbar bleiben.
     | | | |
 
-1. Wählen Sie **Erstellen** , um die Datenbank zu erstellen. Die Erstellung dauert in der Regel weniger als eine Minute. Wenn der Vorgang abgeschlossen ist, gelangen Sie zurück zur Registerkarte **Übersicht** des Clusters.
+1. Wählen Sie **Erstellen**, um die Datenbank zu erstellen. Die Erstellung dauert in der Regel weniger als eine Minute. Wenn der Vorgang abgeschlossen ist, gelangen Sie zurück zur Registerkarte **Übersicht** des Clusters.
 
 ## <a name="run-basic-commands-in-the-database"></a>Ausführen von grundlegenden Befehlen in der Datenbank
 
 Da Sie nun über einen Cluster und eine Datenbank verfügen, können Sie Abfragen und Befehle ausführen. Es sind noch keine Daten in der Datenbank vorhanden, aber Sie können bereits sehen, wie die Tools funktionieren.
 
-1. Wählen Sie unter Ihrem Cluster **Abfrage** aus. Fügen Sie den Befehl `.show databases` im Abfragefenster ein, und wählen Sie anschließend die Option **Ausführen** .
+1. Wählen Sie unter Ihrem Cluster **Abfrage** aus. Fügen Sie den Befehl `.show databases` im Abfragefenster ein, und wählen Sie anschließend die Option **Ausführen**.
 
     ![Anzeigen von Datenbankbefehlen](media/create-cluster-database-portal/show-databases.png)
 
     Im Resultset wird **TestDatabase** angezeigt, die einzige Datenbank im Cluster.
 
-1. Fügen Sie den Befehl `.show tables` im Abfragefenster ein, und wählen Sie die Option **Ausführen** .
+1. Fügen Sie den Befehl `.show tables` im Abfragefenster ein, und wählen Sie die Option **Ausführen**.
 
     Dieser Befehl gibt ein leeres Resultset zurück, da Sie noch nicht über Tabellen verfügen. Sie fügen im nächsten Artikel dieser Serie eine Tabelle hinzu.
 
@@ -122,7 +123,7 @@ Falls Sie andere Schnellstartanleitungen und Tutorials durcharbeiten möchten, i
 
 1. Wählen Sie ganz links im Azure-Portal die Option **Ressourcengruppen** und anschließend die Ressourcengruppe, die Ihren Data Explorer-Cluster enthält.  
 
-1. Wählen Sie **Ressourcengruppe löschen** , um die gesamte Ressourcengruppe zu löschen. Bei Verwendung einer vorhandenen Ressourcengruppe können Sie auch auswählen, dass nur der Data Explorer-Cluster gelöscht werden soll.
+1. Wählen Sie **Ressourcengruppe löschen**, um die gesamte Ressourcengruppe zu löschen. Bei Verwendung einer vorhandenen Ressourcengruppe können Sie auch auswählen, dass nur der Data Explorer-Cluster gelöscht werden soll.
 
 ## <a name="next-steps"></a>Nächste Schritte
 
