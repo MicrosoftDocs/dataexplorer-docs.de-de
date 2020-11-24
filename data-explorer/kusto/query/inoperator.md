@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2019
-ms.openlocfilehash: 52e26bb5564079de56817e75a203a400ef7f1a50
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: ffb24abe744bfbe3f7f95336edf0263becfa7ec9
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92248997"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513249"
 ---
 # <a name="in-and-in-operators"></a>in- und !in-Operatoren
 
@@ -54,7 +55,7 @@ Table1 | where col in ('value1', 'value2')
 * eine *Liste von Ausdrücken* : eine durch Trennzeichen getrennte Liste von tabellarischen, skalaren oder literalen Ausdrücken.
 * *tabellarischer Ausdruck* : ein tabellarischer Ausdruck, der über einen Satz von Werten verfügt. Wenn der Ausdruck über mehrere Spalten verfügt, wird die erste Spalte verwendet.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Zeilen in *T* , für die das Prädikat ist `true` .
 
@@ -157,7 +158,7 @@ Lightning_By_State
 | summarize sum(lightning_events) by State 
 ```
 
-| Zustand     | sum_lightning_events |
+| Staat     | sum_lightning_events |
 |-----------|----------------------|
 | ALABAMA   | 29                   |
 | Wisconsin | 31                   |

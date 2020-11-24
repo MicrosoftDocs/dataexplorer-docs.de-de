@@ -7,12 +7,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
-ms.openlocfilehash: a424e34561792287d6e761f8d5b0747fbf8c7100
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.localizationpriority: high
+ms.openlocfilehash: 0086fb9f649d7bb3b7031521812c1dff0ca532f7
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342789"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513062"
 ---
 # <a name="kustoexplorer-installation-and-user-interface"></a>Installation und Benutzeroberfläche von Kusto.Explorer
 
@@ -65,7 +66,7 @@ Der Menübereich von Kusto.Explorer enthält die folgenden Registerkarten:
 
 ### <a name="home-tab"></a>Registerkarte "Home"
 
-:::image type="content" source="images/kusto-explorer/home-tab.png" alt-text="Kusto.Explorer: Start":::
+:::image type="content" source="images/kusto-explorer/home-tab.png" alt-text="Registerkarte „Start“ von Kusto.Explorer":::
 
 Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in verschiedenen Abschnitten angezeigt:
 
@@ -77,7 +78,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ### <a name="query-section"></a>Abschnitt „Abfrage“
 
-:::image type="content" source="images/kusto-explorer/home-query-menu.png" alt-text="Kusto.Explorer: Start":::
+:::image type="content" source="images/kusto-explorer/home-query-menu.png" alt-text="Menü „Abfrage“ in Kusto.Explorer":::
 
 |Menü|    Verhalten|
 |----|----------|
@@ -86,7 +87,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ### <a name="share-section"></a>Abschnitt „Freigabe“
 
-:::image type="content" source="images/kusto-explorer/home-share-menu.png" alt-text="Kusto.Explorer: Start":::
+:::image type="content" source="images/kusto-explorer/home-share-menu.png" alt-text="Menü „Freigabe“ von Kusto.Explorer":::
 
 |Menü|    Verhalten|
 |----|----------|
@@ -96,7 +97,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ### <a name="visualizations-section"></a>Abschnitt „Visualisierungen“
 
-:::image type="content" source="images/kusto-explorer/home-visualizations-menu.png" alt-text="Kusto.Explorer: Start":::
+:::image type="content" source="images/kusto-explorer/home-visualizations-menu.png" alt-text="Menü „Visualisierungen“ in Kusto.Explorer":::
 
 |Menü         | Verhalten|
 |-------------|---------|
@@ -120,7 +121,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ### <a name="view-section"></a>Abschnitt „Ansicht“
 
-:::image type="content" source="images/kusto-explorer/home-view-menu.png" alt-text="Kusto.Explorer: Start":::
+:::image type="content" source="images/kusto-explorer/home-view-menu.png" alt-text="Menü „Ansicht“ in Kusto.Explorer":::
 
 |Menü           | Verhalten|
 |---------------|---------|
@@ -138,7 +139,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="file-tab"></a>Registerkarte „Datei“
 
-:::image type="content" source="images/kusto-explorer/file-tab.png" alt-text="Kusto.Explorer: Start":::
+:::image type="content" source="images/kusto-explorer/file-tab.png" alt-text="Registerkarte „Datei“ in Kusto.Explorer":::
 
 |Menü| Verhalten|
 |---------------|---------|
@@ -166,7 +167,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="connections-tab"></a>Registerkarte „Verbindungen“
 
-:::image type="content" source="images/kusto-explorer/connections-tab.png" alt-text="Kusto.Explorer: Start":::
+:::image type="content" source="images/kusto-explorer/connections-tab.png" alt-text="Registerkarte „Verbindungen“ in Kusto.Explorer":::
 
 |Menü|Verhalten|
 |----|----------|
@@ -191,7 +192,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="view-tab"></a>Registerkarte Ansicht
 
-:::image type="content" source="images/kusto-explorer/view-tab.png" alt-text="Kusto.Explorer: Start":::
+:::image type="content" source="images/kusto-explorer/view-tab.png" alt-text="Registerkarte „Ansicht“ in Kusto.Explorer":::
 
 |Menü|Verhalten|
 |----|----------|
@@ -220,7 +221,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="tools-tab"></a>Registerkarte „Extras“
 
-:::image type="content" source="images/kusto-explorer/tools-tab.png" alt-text="Kusto.Explorer: Start":::
+:::image type="content" source="images/kusto-explorer/tools-tab.png" alt-text="Registerkarte „Extras“ in Kusto.Explorer":::
 
 |Menü|Verhalten|
 |----|----------|
@@ -240,7 +241,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="monitoring-tab"></a>Registerkarte „Überwachung“
 
-:::image type="content" source="images/kusto-explorer/monitoring-tab.png" alt-text="Kusto.Explorer: Start":::
+:::image type="content" source="images/kusto-explorer/monitoring-tab.png" alt-text="Registerkarte „Überwachung“ in Kusto.Explorer":::
 
 |Menü             | Verhalten|
 |-----------------|---------| 
@@ -251,7 +252,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="management-tab"></a>Registerkarte „Verwaltung“
 
-:::image type="content" source="images/kusto-explorer/management-tab.png" alt-text="Kusto.Explorer: Start":::
+:::image type="content" source="images/kusto-explorer/management-tab.png" alt-text="Registerkarte „Verwaltung“ in Kusto.Explorer":::
 
 |Menü             | Verhalten|
 |-----------------|---------|
@@ -263,7 +264,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="help-tab"></a>Registerkarte „Hilfe“
 
-:::image type="content" source="images/kusto-explorer/help-tab.png" alt-text="Kusto.Explorer: Start":::
+:::image type="content" source="images/kusto-explorer/help-tab.png" alt-text="Registerkarte „Hilfe“ in Kusto.Explorer":::
 
 |Menü             | Verhalten|
 |-----------------|---------|
@@ -276,7 +277,7 @@ Auf der Registerkarte „Start“ werden die zuletzt verwendeten Funktionen in v
 
 ## <a name="connections-panel"></a>Bereich „Verbindungen“
 
-:::image type="content" source="images/kusto-explorer/connections-panel.png" alt-text="Kusto.Explorer: Start":::
+:::image type="content" source="images/kusto-explorer/connections-panel.png" alt-text="Bereich „Verbindungen“ in Kusto.Explorer":::
 
 Im Bereich „Verbindungen“ werden alle konfigurierten Clusterverbindungen angezeigt. Für jeden Cluster werden die darin gespeicherten Datenbanken, Tabellen und Attribute (Spalten) angezeigt. Wählen Sie Einträge aus (um einen impliziten Kontext für die Suche/Abfrage im Hauptbereich festzulegen), oder doppelklicken Sie auf Einträge, um den Namen in den Bereich für die Suche/Abfrage zu kopieren.
 
@@ -311,7 +312,7 @@ Data Source=https://CLUSTER_NAME.kusto.windows.net;Initial Catalog=DATABASE_NAME
 >[!NOTE]
 > Der Domänenname des Benutzers muss nicht unbedingt dem Domänennamen des Mandanten entsprechen, von dem der Cluster gehostet wird.
 
-:::image type="content" source="images/kusto-explorer/advanced-connection-string.png" alt-text="Kusto.Explorer: Start":::
+:::image type="content" source="images/kusto-explorer/advanced-connection-string.png" alt-text="Erweiterte Verbindungszeichenfolge in Kusto.Explorer":::
 
 ## <a name="keyboard-shortcuts"></a>Tastenkombinationen
 
@@ -323,7 +324,7 @@ Kusto.Explorer versucht, den Schweregrad oder den Ausführlichkeitsgrad der einz
 
 Wählen Sie im Menü **Extras** die Option **Optionen** > **Results Viewer** > **Verbosity color scheme** (Ergebnisansicht > Farbschema für Ausführlichkeit) aus, um das Schema für die Ausgabefarbe zu ändern oder dieses Verhalten zu deaktivieren.
 
-:::image type="content" source="images/kusto-explorer/ke-color-scheme.png" alt-text="Kusto.Explorer: Start":::
+:::image type="content" source="images/kusto-explorer/ke-color-scheme.png" alt-text="Änderung des Farbschemas für Kusto.Explorer":::
 
 ## <a name="next-steps"></a>Nächste Schritte
 

@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 7529fb02c85d10ac451e78b878a21040e966ee34
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: f94003573cab076d8fa83537cb7868e21b9b084c
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92242275"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513266"
 ---
 # <a name="project-operator"></a>project-Operator
 
@@ -36,12 +37,12 @@ oder
 ## <a name="arguments"></a>Argumente
 
 * *T*: die Eingabe Tabelle.
-* *ColumnName:* Optionaler Name einer Spalte, die in der Ausgabe angezeigt werden soll. Wenn kein *Ausdruck*vorhanden ist, ist *ColumnName* obligatorisch, und eine Spalte mit diesem Namen muss in der Eingabe angezeigt werden. Wenn keine Angabe erfolgt, wird der Name automatisch generiert. Wenn *Expression* mehr als eine Spalte zurückgibt, kann eine Liste mit Spaltennamen in Klammern angegeben werden. In diesem Fall erhalten die Ausgabespalten des *Ausdrucks*die angegebenen Namen, wobei alle restlichen Ausgabespalten gelöscht werden, sofern vorhanden. Wenn die Liste der Spaltennamen nicht angegeben wird, werden die Ausgabespalten aller *Ausdrücke*mit generierten Namen der Ausgabe hinzugefügt.
+* *ColumnName:* Optionaler Name einer Spalte, die in der Ausgabe angezeigt werden soll. Wenn kein *Ausdruck* vorhanden ist, ist *ColumnName* obligatorisch, und eine Spalte mit diesem Namen muss in der Eingabe angezeigt werden. Wenn keine Angabe erfolgt, wird der Name automatisch generiert. Wenn *Expression* mehr als eine Spalte zurückgibt, kann eine Liste mit Spaltennamen in Klammern angegeben werden. In diesem Fall erhalten die Ausgabespalten des *Ausdrucks* die angegebenen Namen, wobei alle restlichen Ausgabespalten gelöscht werden, sofern vorhanden. Wenn die Liste der Spaltennamen nicht angegeben wird, werden die Ausgabespalten aller *Ausdrücke* mit generierten Namen der Ausgabe hinzugefügt.
 * *Expression:* Optionaler skalarer Ausdruck, der auf die Eingabespalten verweist. Wenn *ColumnName* nicht weggelassen wird, ist der *Ausdruck* obligatorisch.
 
     Das Zurückgeben einer neuen berechneten Spalte mit dem gleichen Namen wie eine vorhandene Spalte der Eingabe ist zulässig.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Eine Tabelle, deren Spalten als Argumente benannt sind, und die ebenso viele Zeilen wie die Eingabetabelle aufweist.
 

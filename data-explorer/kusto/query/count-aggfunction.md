@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/21/2020
-ms.openlocfilehash: a5f5f554373331d66a08e7166249e8e24c4fbd7c
-ms.sourcegitcommit: 09da3f26b4235368297b8b9b604d4282228a443c
+ms.localizationpriority: high
+ms.openlocfilehash: e45510b893d6e84f029764aa9fdac0d326a96f94
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87348784"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513096"
 ---
 # <a name="count-aggregation-function"></a>count () (Aggregations Funktion)
 
@@ -24,7 +25,7 @@ Gibt die Anzahl der Datensätze pro Zusammenfassungs Gruppe zurück (oder insges
 
 ## <a name="syntax"></a>Syntax
 
-FAS`count()`
+FAS `count()`
 
 ## <a name="returns"></a>Gibt zurück
 
@@ -41,7 +42,7 @@ StormEvents
 | summarize Count=count() by State
 ```
 
-|Zustand|Anzahl|
+|State|Anzahl|
 |---|---|
 |WEST VIRGINIA|757|
 |Wyoming|396|

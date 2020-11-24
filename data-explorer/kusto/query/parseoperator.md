@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: a942015908c9608a76d3c49c411de9d17d6e70f5
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: 2b034719fa7c2f3714020c722b5717f5cf8590ff
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92248614"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512960"
 ---
 # <a name="parse-operator"></a>parse-Operator
 
@@ -47,7 +48,7 @@ T | parse Text with "ActivityName=" name ", ActivityType=" type
   
 * *ColumnType:* Optionale. Der Skalarwert, der den Typ angibt, in den der Wert konvertiert werden soll. Der Standardwert ist der- `string` Typ.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Die Eingabe Tabelle, erweitert entsprechend der Liste der Spalten, die dem Operator bereitgestellt werden.
 
@@ -218,7 +219,7 @@ Traces
 
 **Gelockerter Modus**
 
-In diesem Beispiel für den gelockerten Modus müssen die erweiterte *totalslices* -Spalte den Typ aufweisen `long` . In der analysierten Zeichenfolge weist Sie jedoch den Wert *nonvalidlongvalue*auf.
+In diesem Beispiel für den gelockerten Modus müssen die erweiterte *totalslices* -Spalte den Typ aufweisen `long` . In der analysierten Zeichenfolge weist Sie jedoch den Wert *nonvalidlongvalue* auf.
 In der erweiterten *releasetime* -Spalte kann der Wert *nonvaliddatetime* nicht als *DateTime*-Wert analysiert werden.
 Diese beiden erweiterten Spalten erhalten den Wert NULL, während die anderen, z. b. *slicenenumber*, weiterhin die richtigen Werte erhalten.
 

@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/09/2020
-ms.openlocfilehash: 879b858904ac9f024f70dfef6096141a9ff81bd7
-ms.sourcegitcommit: b8415e01464ca2ac9cd9939dc47e4c97b86bd07a
+ms.localizationpriority: high
+ms.openlocfilehash: c102637adfa1fd0340d28a67b52354956b511ada
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88028475"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513311"
 ---
 # <a name="let-statement"></a>let-Anweisung
 
@@ -47,31 +48,31 @@ Von Let-Anweisungen gebundene Ausdrücke können folgende sein:
 
 [ `view` ] `(` [*Tabulararguments*] [ `,` ] [*scalararguments*] `)` `{` *functionbody*`}`
 
-`TabularArguments`-[*Tabularargname* `:` `(` [*atrname* `:` *atrtype*] [ `,` ...] `)` ] [`,` ... ] [`,`]
+`TabularArguments` -[*Tabularargname* `:` `(` [*atrname* `:` *atrtype*] [ `,` ...] `)` ] [`,` ... ] [`,`]
 
  oder:
 
  [*Tabularargname* `:` `(` `*` `)`]
 
-`ScalarArguments`-[*Argname* `:` *argtype*] [ `,` ...]
+`ScalarArguments` -[*Argname* `:` *argtype*] [ `,` ...]
 
 
 |Feld  |Definition  |Beispiel  |
 |---------|---------|---------|
 | **view** | Kann nur in einem Parameter losen Lambda-Ausdruck angezeigt werden, der keine Argumente aufweist. Gibt an, dass der gebundene Name eingeschlossen wird, wenn "alle Tabellen" Abfragen sind. | Beispielsweise bei Verwendung von `union *` .|
-| ***Tabulararguments*** | Die Liste der formalen Tabellen Ausdrucks Argumente. 
+| ***Tabulararguments** _ | Die Liste der formalen Tabellen Ausdrucks Argumente. 
 | Jedes tabellarische Argument hat Folgendes:||
-|<ul><li> *Tabularargname*</li></ul> | Der Name des formalen tabellarischen Arguments. Der Name wird möglicherweise im *functionbody* -Ausdruck angezeigt und ist an einen bestimmten Wert gebunden, wenn der Lambda-Ausdruck aufgerufen wird. ||
+|<ul><li> _TabularArgName *</li></ul> | Der Name des formalen tabellarischen Arguments. Der Name wird möglicherweise im *functionbody* -Ausdruck angezeigt und ist an einen bestimmten Wert gebunden, wenn der Lambda-Ausdruck aufgerufen wird. ||
 |<ul><li>Tabellen Schema Definition </li></ul> | Eine Liste von Attributen mit ihren Typen| Atrname: atrtype|
-| ***Scalararguments*** | Die Liste der formalen skalaren Argumente. 
+| ***Scalararguments** _ | Die Liste der formalen skalaren Argumente. 
 |Jedes skalare Argument hat Folgendes:||
-|<ul><li>*Argname*</li></ul> | Der Name des formalen skalaren Arguments. Der Name wird möglicherweise im *functionbody* -Ausdruck angezeigt und ist an einen bestimmten Wert gebunden, wenn der Lambda-Ausdruck aufgerufen wird.  |
+|<ul><li>_ArgName *</li></ul> | Der Name des formalen skalaren Arguments. Der Name wird möglicherweise im *functionbody* -Ausdruck angezeigt und ist an einen bestimmten Wert gebunden, wenn der Lambda-Ausdruck aufgerufen wird.  |
 | <ul><li>*Argtype* </li></ul>| Der Typ des formalen skalaren Arguments. | Zurzeit werden nur die folgenden Typen als Lambda-Argumenttyp unterstützt: `bool` , `string` , `long` , `datetime` , `timespan` , `real` und `dynamic` (und Aliase zu diesen Typen).
 
 > [!NOTE]
 >Der tabellarische Ausdruck, der im Lambda Aufruf verwendet wird, muss alle Attribute mit den übereinstimmenden Typen enthalten (ist jedoch nicht darauf beschränkt).
 >
->`(*)`kann als tabellarischer Ausdruck verwendet werden. 
+>`(*)` kann als tabellarischer Ausdruck verwendet werden. 
 >
 > Jeder tabellarische Ausdruck kann im Lambda Aufruf verwendet werden, und auf keine seiner Spalten kann im Lambda-Ausdruck zugegriffen werden. 
 >

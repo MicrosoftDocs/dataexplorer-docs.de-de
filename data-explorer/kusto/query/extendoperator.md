@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 0398efc3f97e9af1f994b16b91a9888fb4fcfa0b
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: 7ead6313128b99357dd61f18f55c5d5543943a05
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92243333"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513351"
 ---
 # <a name="extend-operator"></a>extend-Operator
 
@@ -30,10 +31,10 @@ T | extend duration = endTime - startTime
 ## <a name="arguments"></a>Argumente
 
 * *T*: das tabellarische Eingabe-Resultset.
-* *ColumnName:* Optionale. Der Name der Spalte, die hinzugefügt oder aktualisiert werden soll. Wenn keine Angabe erfolgt, wird der Name generiert. Wenn *Expression* mehr als eine Spalte zurückgibt, kann eine Liste mit Spaltennamen in Klammern angegeben werden. In diesem Fall erhalten die Ausgabespalten des *Ausdrucks*die angegebenen Namen, wobei die restlichen Ausgabespalten gelöscht werden, sofern vorhanden. Wenn keine Liste der Spaltennamen angegeben wird, werden die Ausgabespalten aller *Ausdrücke*mit generierten Namen der Ausgabe hinzugefügt.
+* *ColumnName:* Optionale. Der Name der Spalte, die hinzugefügt oder aktualisiert werden soll. Wenn keine Angabe erfolgt, wird der Name generiert. Wenn *Expression* mehr als eine Spalte zurückgibt, kann eine Liste mit Spaltennamen in Klammern angegeben werden. In diesem Fall erhalten die Ausgabespalten des *Ausdrucks* die angegebenen Namen, wobei die restlichen Ausgabespalten gelöscht werden, sofern vorhanden. Wenn keine Liste der Spaltennamen angegeben wird, werden die Ausgabespalten aller *Ausdrücke* mit generierten Namen der Ausgabe hinzugefügt.
 * *Ausdruck:* Eine Berechnung der Spalten der Eingabe.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Eine Kopie des tabellarischen Eingabe-Resultsets, z. b.:
 1. Die von notierten Spaltennamen `extend` , die bereits in der Eingabe vorhanden sind, werden entfernt und als neue berechnete Werte angehängt.

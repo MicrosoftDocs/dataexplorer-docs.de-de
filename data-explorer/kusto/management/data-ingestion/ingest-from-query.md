@@ -8,18 +8,19 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 5248b9d986845ff7f35085cef0100cf3ab4b90da
-ms.sourcegitcommit: e87b6cb2075d36dbb445b16c5b83eff7eaf3cdfa
+ms.localizationpriority: high
+ms.openlocfilehash: 18959e2387a1a0faf92261dc3c35eca0db44c158
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85264469"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512892"
 ---
 # <a name="ingest-from-query-set-append-set-or-append-set-or-replace"></a>Erfassung von Abfragen (. Set,. Append,. Set-oder-Append,. Set-or-Replace)
 
 Diese Befehle führen eine Abfrage oder einen Steuerungs Befehl aus und erfassen die Ergebnisse der Abfrage in einer Tabelle. Der Unterschied zwischen diesen Befehlen besteht darin, wie vorhandene oder nicht vorhandene Tabellen und Daten behandelt werden.
 
-|Get-Help          |Wenn die Tabelle vorhanden ist                     |Wenn die Tabelle nicht vorhanden ist                    |
+|Befehl          |Wenn die Tabelle vorhanden ist                     |Wenn die Tabelle nicht vorhanden ist                    |
 |-----------------|------------------------------------|------------------------------------------|
 |`.set`           |Der Befehl schlägt fehl.                  |Die Tabelle wird erstellt, und die Daten werden erfasst.|
 |`.append`        |Daten werden an die Tabelle angehängt.      |Der Befehl schlägt fehl.                        |
@@ -60,7 +61,7 @@ Diese Befehle führen eine Abfrage oder einen Steuerungs Befehl aus und erfassen
 
 |Eigenschaft        |type    |BESCHREIBUNG|
 |----------------|--------|-----------------------------------------------------------------------------------------------------------------------------|
-|`distributed`   |`bool`  |Gibt an, dass der Befehl von allen Knoten erfasst wird, die die Abfrage parallel ausführen. Der Standardwert ist "false".  Weitere Informationen finden Sie in den Hinweisen weiter unten.|
+|`distributed`   |`bool`  |Gibt an, dass der Befehl von allen Knoten erfasst wird, die die Abfrage parallel ausführen. Der Standardwert ist "false".  Weitere Informationen finden Sie weiter unten im Abschnitt "Hinweise".|
 
 * *Queryorcommand*: der Text einer Abfrage oder ein Steuerelement Befehl, dessen Ergebnisse als Daten für die Erfassung verwendet werden.
 
@@ -69,7 +70,7 @@ Diese Befehle führen eine Abfrage oder einen Steuerungs Befehl aus und erfassen
 
 **Anmerkungen**
 
-* `.set-or-replace`ersetzt die Daten der Tabelle, falls vorhanden. Die vorhandenen datenshards werden gelöscht, oder die Ziel Tabelle wird erstellt, sofern nicht bereits vorhanden.
+* `.set-or-replace` ersetzt die Daten der Tabelle, falls vorhanden. Die vorhandenen datenshards werden gelöscht, oder die Ziel Tabelle wird erstellt, sofern nicht bereits vorhanden.
   Das Tabellen Schema wird beibehalten, es sei denn, eine der-oder-Erfassungs `extend_schema` `recreate_schema` Eigenschaften ist auf "true" festgelegt. Wenn das Schema geändert wird, erfolgt dies vor der tatsächlichen Datenerfassung in der eigenen Transaktion. Wenn die Daten nicht erfasst werden, bedeutet das nicht, dass das Schema nicht geändert wurde.
 * `.set-or-append``.append`die Befehle und behalten das Schema bei, es sei denn, die Erfassungs `extend_schema` Eigenschaft ist auf "true" festgelegt. Wenn das Schema geändert wird, erfolgt dies vor der tatsächlichen Datenerfassung in der eigenen Transaktion. Wenn die Daten nicht erfasst werden, bedeutet das nicht, dass das Schema nicht geändert wurde.
 * Es wird empfohlen, die Daten für die Erfassung auf weniger als 1 GB pro Erfassungs Vorgang zu beschränken. Ggf. können mehrere Erfassungs Befehle verwendet werden.
@@ -80,7 +81,7 @@ Diese Befehle führen eine Abfrage oder einen Steuerungs Befehl aus und erfassen
 
 **Beispiele** 
 
-Erstellen Sie eine neue Tabelle namens "recenterrors" in der Datenbank, die das gleiche Schema wie "logstable" aufweist und alle Fehler Datensätze der letzten Stunde enthält.
+Erstellen Sie :::no-loc text="RecentErrors"::: in der Datenbank eine neue Tabelle mit dem Namen, die das gleiche Schema wie :::no-loc text="LogsTable"::: enthält und alle Fehler Datensätze der letzten Stunde enthält.
 
 ```kusto
 .set RecentErrors <|

@@ -8,14 +8,15 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/29/2020
+ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 069733d2215257106ede58f4fd6e4f2a923a8982
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: bc083cadbae44723c85c0a119b90ab5b43aba388
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92243117"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512841"
 ---
 # <a name="render-operator"></a>render-Operator
 
@@ -110,7 +111,7 @@ Hierbei gilt:
 ::: zone-end
 
 Einige Visualisierungen können durch Bereitstellen der-Eigenschaft weiterentwickelt werden `kind` .
-Dies sind:
+Diese lauten wie folgt:
 
 |*Visualisierung*|`kind`             |BESCHREIBUNG                        |
 |---------------|-------------------|-----------------------------------|

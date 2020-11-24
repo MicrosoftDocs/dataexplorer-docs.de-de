@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/09/2020
-ms.openlocfilehash: e909754a040308d752b19155e1e69a10097ab219
-ms.sourcegitcommit: 2126c5176df272d149896ac5ef7a7136f12dc3f3
+ms.localizationpriority: high
+ms.openlocfilehash: 582683a9261d84fa24d819b5234e58effaf90a97
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/13/2020
-ms.locfileid: "86280503"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512025"
 ---
 # <a name="the-dynamic-data-type"></a>Der dynamische Datentyp.
 
@@ -61,10 +62,10 @@ print d=dynamic({"a": datetime(1970-05-11)})
 Verwenden Sie die-Funktion, um einen Wert zu analysieren, `string` der den JSON-Codierungsregeln in einen- `dynamic` Wert folgt `parse_json` . Beispiel:
 
 * `parse_json('[43, 21, 65]')` : ein Array mit Zahlen
-* `parse_json('{"name":"Alan", "age":21, "address":{"street":432,"postcode":"JLK32P"}}')`-ein Wörterbuch
+* `parse_json('{"name":"Alan", "age":21, "address":{"street":432,"postcode":"JLK32P"}}')` -ein Wörterbuch
 * `parse_json('21')` : ein einzelner Wert vom Typ „dynamic“ mit einer Zahl
 * `parse_json('"21"')` : ein einzelner Wert vom Typ „dynamic“ mit einer Zeichenfolge
-* `parse_json('{"a":123, "b":"hello", "c":[1,2,3], "d":{}}')`-gibt denselben Wert wie `o` im obigen Beispiel an.
+* `parse_json('{"a":123, "b":"hello", "c":[1,2,3], "d":{}}')` -gibt denselben Wert wie `o` im obigen Beispiel an.
 
 > [!NOTE]
 > Anders als bei JavaScript schreibt JSON die Verwendung von doppelten Anführungszeichen () für Zeichen folgen und Eigenschaften Namen für Eigenschaften Behälter dar `"` .
@@ -171,9 +172,9 @@ Außerdem gibt es mehrere Aggregatfunktionen, die `dynamic` Arrays erstellen, di
 |[`bag_keys(`Beut`)`](../bagkeysfunction.md)| Listet alle Stamm Schlüssel in einem dynamischen Eigenschaften Behälter Objekt auf.
 |[`bag_merge(`bag1,..., Bagn`)`](../bag-merge-function.md)| Führt dynamische Eigenschaften Behälter in einem dynamischen Eigenschaften Behälter zusammen, wobei alle Eigenschaften zusammengeführt werden.
 |[`extractjson(`Pfad, Objekt`)`](../extractjsonfunction.md)|Verwendet den Pfad zum Navigieren in das Objekt.
-|[`parse_json(`Ausgangs`)`](../parsejsonfunction.md)| Wandelt eine JSON-Zeichenfolge in ein dynamisches Objekt um.
+|[`parse_json(`Quelle`)`](../parsejsonfunction.md)| Wandelt eine JSON-Zeichenfolge in ein dynamisches Objekt um.
 |[`range(`von, bis, Schritt`)`](../rangefunction.md)| Ein Array von Werten
-|[`mv-expand`ListColumn](../mvexpandoperator.md) | Repliziert eine Zeile für jeden Wert in einer Liste in eine angegebene Zelle.
+|[`mv-expand` ListColumn](../mvexpandoperator.md) | Repliziert eine Zeile für jeden Wert in einer Liste in eine angegebene Zelle.
 |[`summarize buildschema(`Kolumne`)`](../buildschema-aggfunction.md) |Leitet das Typschema aus dem Spalteninhalt ab.
 |[`summarize make_bag(`Kolumne`)`](../make-bag-aggfunction.md) | Führt die Eigenschaften Behälter Werte (Wörterbuch) in der Spalte in einem Eigenschaften Behälter ohne Schlüssel Duplizierung zusammen.
 |[`summarize make_bag_if(`Spalte, Prädikat`)`](../make-bag-if-aggfunction.md) | Führt die Eigenschaften Behälter Werte (Wörterbuch) in der Spalte zu einem Eigenschaften Behälter zusammen, ohne Schlüssel Duplizierung (mit Prädikat).

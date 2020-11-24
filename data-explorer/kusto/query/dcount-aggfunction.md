@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b35bb7944e894256056e03eb756ac85cf1354ba8
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: 947ab0af6a5aaa98bb07b08005b940fdf2ce6ae5
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92247705"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513181"
 ---
 # <a name="dcount-aggregation-function"></a>DCount () (Aggregations Funktion)
 
@@ -31,7 +32,7 @@ Gibt eine Schätzung für die Anzahl der unterschiedlichen Werte zurück, die vo
 * *Expr*: ein skalarer Ausdruck, dessen unterschiedliche Werte gezählt werden sollen.
 * *Genauigkeit*: ein optionales `int` Literalwert, der die angeforderte Schätzgenauigkeit definiert. Unterstützte Werte finden Sie unten. Wenn nicht angegeben, wird der Standardwert `1` verwendet.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Gibt eine Schätzung der Anzahl der unterschiedlichen Werte von *`Expr`* in der Gruppe zurück.
 
@@ -64,7 +65,7 @@ Die `dcount()` Aggregatfunktion verwendet eine Variante des [hyperloglog (HLL)-A
 |Genauigkeit|Fehler (%)|Anzahl der Einträge   |
 |--------|---------|--------------|
 |       0|      1.6|2<sup>12</sup>|
-|       1|      0.8|2<sup>14</sup>|
+|       1|      0,8|2<sup>14</sup>|
 |       2|      0.4|2<sup>16</sup>|
 |       3|     0.28|2<sup>17</sup>|
 |       4|      0.2|2<sup>18</sup>|
@@ -80,4 +81,4 @@ Die Fehler Bindung ist probabilistisch und keine theoretische Grenze. Der Wert i
 
 Die folgende Abbildung zeigt die Wahrscheinlichkeitsverteilungsfunktion des relativen Schätz Fehlers in Prozent für alle unterstützten Genauigkeits Einstellungen:
 
-:::image type="content" border="false" source="images/dcount-aggfunction/hll-error-distribution.png" alt-text="D-Anzahl":::
+:::image type="content" border="false" source="images/dcount-aggfunction/hll-error-distribution.png" alt-text="HLL-Fehlerverteilung":::

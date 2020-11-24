@@ -8,14 +8,15 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/08/2020
+ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: b2b304d012ea541f6855091874be8ea5483fae63
-ms.sourcegitcommit: b6f0f112b6ddf402e97c011a902bd70ba408e897
+ms.openlocfilehash: b448f4249c777d9b9d61e58dad993f3da1817fda
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94497633"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512467"
 ---
 # <a name="samples"></a>Beispiele
 
@@ -498,7 +499,7 @@ Ergebnis:
 
 ## <a name="create-and-use-query-time-dimension-tables"></a>Erstellen und Verwenden von Abfragezeit-Dimensions Tabellen
 
-Häufig möchten Sie die Ergebnisse einer Abfrage mit einer Ad-hoc-Dimensions Tabelle verknüpfen, die nicht in der Datenbank gespeichert ist. Es ist möglich, einen Ausdruck zu definieren, dessen Ergebnis eine Tabelle ist, die auf eine einzelne Abfrage beschränkt ist. Zum Beispiel:
+Häufig möchten Sie die Ergebnisse einer Abfrage mit einer Ad-hoc-Dimensions Tabelle verknüpfen, die nicht in der Datenbank gespeichert ist. Es ist möglich, einen Ausdruck zu definieren, dessen Ergebnis eine Tabelle ist, die auf eine einzelne Abfrage beschränkt ist. Beispiel:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -544,7 +545,7 @@ Angenommen, Sie verfügen über eine Tabelle, die Folgendes enthält:
 
 Eine Abfrage, die die letzten beiden Datensätze für jeden Wert der `ID` Spalte zurückgibt, wobei "Latest" als "mit dem höchsten Wert von" definiert ist, `timestamp` kann mit dem [Top-netsted-Operator](topnestedoperator.md)erstellt werden.
 
-Zum Beispiel:
+Beispiel:
 
 ```kusto
 datatable(id:string, timestamp:datetime, bla:string)           // #1
@@ -685,7 +686,7 @@ Die Schritt-für-Schritt-Erläuterung unten bezieht sich auf Zahlen im Codebeisp
 ## <a name="find-preceding-event"></a>Vorheriges Ereignis suchen
 Im nächsten Beispiel wird veranschaulicht, wie Sie ein vorhergehenden Ereignis zwischen zwei Datasets finden.  
 
-*Zweck:* : Es gibt zwei Datasets: A und B. Suchen Sie für jeden Datensatz in B das vorherige Ereignis in einem (d. h. den ARG_MAX Datensatz in einer, die immer noch "älter" als B ist). Im folgenden finden Sie die erwartete Ausgabe für die folgenden Beispiel Datasets. 
+*Zweck:*: Es gibt zwei Datasets: A und B. Suchen Sie für jeden Datensatz in B das vorherige Ereignis in einem (d. h. den ARG_MAX Datensatz in einer, die immer noch "älter" als B ist). Im folgenden finden Sie die erwartete Ausgabe für die folgenden Beispiel Datasets. 
 
 ```kusto
 let A = datatable(Timestamp:datetime, ID:string, EventA:string)
@@ -706,7 +707,7 @@ let B = datatable(Timestamp:datetime, ID:string, EventB:string)
 A; B
 ```
 
-|Timestamp|id|Eventb|
+|Timestamp|ID|Eventb|
 |---|---|---|
 |2019-01-01 00:00:00.0000000|x|Ax1|
 |2019-01-01 00:00:00.0000000|z|Az1|
@@ -716,7 +717,7 @@ A; B
 
 </br>
 
-|Timestamp|id|Eventa|
+|Timestamp|ID|Eventa|
 |---|---|---|
 |2019-01-01 00:00:03.0000000|x|B|
 |2019-01-01 00:00:04.0000000|x|B|
@@ -725,7 +726,7 @@ A; B
 
 Erwartete Ausgabe: 
 
-|id|Timestamp|Eventb|A_Timestamp|Eventa|
+|ID|Timestamp|Eventb|A_Timestamp|Eventa|
 |---|---|---|---|---|
 |x|2019-01-01 00:00:03.0000000|B|2019-01-01 00:00:01.0000000|Ax2|
 |x|2019-01-01 00:00:04.0000000|B|2019-01-01 00:00:01.0000000|Ax2|
@@ -931,8 +932,8 @@ print Duration_seconds =  extract("Duration=([0-9.]+)", 1, Trace, typeof(real)) 
 
 ### <a name="isempty-isnotempty-notempty"></a>isempty, isnotempty, notempty
 
-- *isempty* gibt TRUE zurück, wenn das Argument eine leere Zeichenfolge oder NULL ist (s. auch *isnull* ).
-- *isnotempty* gibt TRUE zurück, wenn das Argument eine Zeichenfolge ist, die nicht leer oder NULL ist (s. auch *isnotnull* ). Alias: *notempty*.
+- *isempty* gibt TRUE zurück, wenn das Argument eine leere Zeichenfolge oder NULL ist (s. auch *isnull*).
+- *isnotempty* gibt TRUE zurück, wenn das Argument eine Zeichenfolge ist, die nicht leer oder NULL ist (s. auch *isnotnull*). Alias: *notempty*.
 
 
 ```Kusto
@@ -1515,9 +1516,9 @@ SecurityEvent
 | top 10 by Duration desc
 ```
 
-In diesem Beispiel filtert das erste Dataset alle Anmeldeereignisse. Dieses Dataset ist mit einem zweiten Dataset verknüpft, das alle Abmeldeereignisse filtert. Die projizierten Spalten sind _Computer_ , _Account_ , _TargetLogonId_ und _TimeGenerated_. Die Datasets werden von einer freigegebenen Spalte ( _TargetLogonId_ ) korreliert. Die Ausgabe ist ein einzelnes Dataset pro Korrelation, das die An- und Abmeldezeit enthält.
+In diesem Beispiel filtert das erste Dataset alle Anmeldeereignisse. Dieses Dataset ist mit einem zweiten Dataset verknüpft, das alle Abmeldeereignisse filtert. Die projizierten Spalten sind _Computer_, _Account_, _TargetLogonId_ und _TimeGenerated_. Die Datasets werden von einer freigegebenen Spalte (_TargetLogonId_) korreliert. Die Ausgabe ist ein einzelnes Dataset pro Korrelation, das die An- und Abmeldezeit enthält.
 
-Wenn beide Datasets Spalten mit dem gleichen Namen enthalten, wird den Spalten des rechten Datasets eine Indexnummer hinzugefügt. In diesem Beispiel würden die Ergebnisse _TargetLogonId_ mit Werten der linken Tabelle und _TargetLogonId1_ mit Werten der rechten Tabelle anzeigen. In diesem Fall wurde die zweite _TargetLogonId1_ -Spalte mithilfe des `project-away`-Operators entfernt.
+Wenn beide Datasets Spalten mit dem gleichen Namen enthalten, wird den Spalten des rechten Datasets eine Indexnummer hinzugefügt. In diesem Beispiel würden die Ergebnisse _TargetLogonId_ mit Werten der linken Tabelle und _TargetLogonId1_ mit Werten der rechten Tabelle anzeigen. In diesem Fall wurde die zweite _TargetLogonId1_-Spalte mithilfe des `project-away`-Operators entfernt.
 
 > [!NOTE]
 > Behalten Sie mithilfe des `project`-Operators nur die relevanten Spalten der verknüpften Datasets bei, um die Leistung zu verbessern.

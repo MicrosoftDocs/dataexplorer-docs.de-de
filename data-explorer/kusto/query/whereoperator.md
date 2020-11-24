@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 738683b3042295678f7d507425443b47c9dec79e
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: 6ac800cd4b38396e0f32f44976c4594c093747bb
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92251792"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512008"
 ---
 # <a name="where-operator"></a>where-Operator
 
@@ -23,7 +24,7 @@ Filtert eine Tabelle auf die Teilmenge der Zeilen, die ein Prädikat erfüllen.
 T | where fruit=="apple"
 ```
 
-**Alias**`filter`
+**Alias** `filter`
 
 ## <a name="syntax"></a>Syntax
 
@@ -32,9 +33,9 @@ T | where fruit=="apple"
 ## <a name="arguments"></a>Argumente
 
 * *T*: die tabellarische Eingabe, deren Datensätze gefiltert werden sollen.
-* *Predicate*: ein- `boolean` [Ausdruck](./scalar-data-types/bool.md) für die Spalten von *T*. Sie wird für jede Zeile in *T*ausgewertet.
+* *Predicate*: ein- `boolean` [Ausdruck](./scalar-data-types/bool.md) für die Spalten von *T*. Sie wird für jede Zeile in *T* ausgewertet.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Zeilen in *T*, für die *Predicate* auf `true` festgelegt ist.
 

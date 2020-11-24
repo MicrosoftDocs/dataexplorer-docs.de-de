@@ -8,16 +8,17 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: e611bfb1d5dbf0122553b223a200400c526c975f
-ms.sourcegitcommit: 42cc7d11f41a5bfa9e021764b044dcd68d99a258
+ms.localizationpriority: high
+ms.openlocfilehash: 92627b3325a7a2ba8e2e4d58a82ebf6db3977221
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/05/2020
-ms.locfileid: "93403747"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512875"
 ---
 # <a name="user-defined-functions"></a>Benutzerdefinierte Funktionen
 
-**Benutzerdefinierte Funktionen** sind wiederverwendbare Unterabfragen, die als Teil der Abfrage selbst definiert werden können ( **Ad-hoc-Funktionen** ) oder als Teil der Daten Bank Metadaten ( **gespeicherte Funktionen** ) persistent gespeichert werden. Benutzerdefinierte Funktionen werden durch einen **Namen** aufgerufen, werden mit 0 (null) oder mehr **Eingabe Argumenten** bereitgestellt (bei denen es sich um skalare oder tabellarische Werte handeln kann), und Sie können basierend auf **dem Funktions Rumpf** einen einzelnen Wert (der Skalar oder tabellarisch sein) liefern.
+**Benutzerdefinierte Funktionen** sind wiederverwendbare Unterabfragen, die als Teil der Abfrage selbst definiert werden können (**Ad-hoc-Funktionen**) oder als Teil der Daten Bank Metadaten (**gespeicherte Funktionen**) persistent gespeichert werden. Benutzerdefinierte Funktionen werden durch einen **Namen** aufgerufen, werden mit 0 (null) oder mehr **Eingabe Argumenten** bereitgestellt (bei denen es sich um skalare oder tabellarische Werte handeln kann), und Sie können basierend auf **dem Funktions Rumpf** einen einzelnen Wert (der Skalar oder tabellarisch sein) liefern.
 
 Eine benutzerdefinierte Funktion gehört zu einer von zwei Kategorien:
 

@@ -8,12 +8,13 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2020
-ms.openlocfilehash: 1e39e71aa9406815338974b2da03d05315054b65
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.localizationpriority: high
+ms.openlocfilehash: 6357afeb0a5673584e27b84a231e3c65f897b8fc
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92247351"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512365"
 ---
 # <a name="make-series-operator"></a>make-series-Operator
 
@@ -30,11 +31,11 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
 ## <a name="arguments"></a>Argumente
 
 * *Column:* Optionaler Name für eine Ergebnisspalte. Nimmt standardmäßig den vom Ausdruck abgeleiteten Namen an.
-* *DefaultValue:* Standardwert, der anstelle von fehlenden Werten verwendet wird. Wenn keine Zeile mit bestimmten Werten von *axiscolumn* und *groupexpression*vorhanden ist, wird dem entsprechenden Element des Arrays in den Ergebnissen ein *DefaultValue*zugewiesen. Wenn *DefaultValue* weggelassen wird, wird 0 angenommen. 
+* *DefaultValue:* Standardwert, der anstelle von fehlenden Werten verwendet wird. Wenn keine Zeile mit bestimmten Werten von *axiscolumn* und *groupexpression* vorhanden ist, wird dem entsprechenden Element des Arrays in den Ergebnissen ein *DefaultValue* zugewiesen. Wenn *DefaultValue* weggelassen wird, wird 0 angenommen. 
 * *Aggregation:* Ein Aufrufe einer [Aggregations Funktion](make-seriesoperator.md#list-of-aggregation-functions) , z `count()` `avg()` . b. oder, mit Spaltennamen als Argumente. Weitere Informationen finden Sie [in der Liste der Aggregations Funktionen](make-seriesoperator.md#list-of-aggregation-functions). Nur Aggregations Funktionen, die numerische Ergebnisse zurückgeben, können mit dem-Operator verwendet werden `make-series` .
 * *Axiscolumn:* Eine Spalte, für die die Reihe angeordnet wird. Sie kann als Zeitachse angesehen werden, aber abgesehen `datetime` von allen numerischen Typen werden Sie akzeptiert.
-* *Start*: (optional) der niedrige gebundene Wert der *axiscolumn* für jede zu erstellende Reihe. " *Start*", " *End*" und " *Step* " werden verwendet, um ein Array von *axiscolumn* -Werten innerhalb eines angegebenen Bereichs und den angegebenen *Schritt*zu erstellen. Alle *Aggregations* Werte werden in diesem Array angeordnet. Dieses *axiscolumn* -Array ist auch die letzte Ausgabe Spalte in der Ausgabe, die denselben Namen wie " *axiscolumn*" hat. Wenn kein *Startwert* angegeben wird, ist der Start der erste bin (Step), der Daten in jeder Reihe enthält.
-* *End*: (optional) der hoch gebundene (nicht inklusiv) Wert von *axiscolumn*. Der letzte Index der Zeitreihe ist kleiner als dieser Wert (und wird mit einem ganzzahligen Vielfachen eines *Schritts* , der kleiner als das *Ende*ist), *beginnen* . Wenn *Endwert* nicht angegeben wird, ist dies die obere Grenze der letzten bin (Step), die Daten pro Reihe enthält.
+* *Start*: (optional) der niedrige gebundene Wert der *axiscolumn* für jede zu erstellende Reihe. " *Start*", " *End*" und " *Step* " werden verwendet, um ein Array von *axiscolumn* -Werten innerhalb eines angegebenen Bereichs und den angegebenen *Schritt* zu erstellen. Alle *Aggregations* Werte werden in diesem Array angeordnet. Dieses *axiscolumn* -Array ist auch die letzte Ausgabe Spalte in der Ausgabe, die denselben Namen wie " *axiscolumn*" hat. Wenn kein *Startwert* angegeben wird, ist der Start der erste bin (Step), der Daten in jeder Reihe enthält.
+* *End*: (optional) der hoch gebundene (nicht inklusiv) Wert von *axiscolumn*. Der letzte Index der Zeitreihe ist kleiner als dieser Wert (und wird mit einem ganzzahligen Vielfachen eines *Schritts* , der kleiner als das *Ende* ist), *beginnen* . Wenn *Endwert* nicht angegeben wird, ist dies die obere Grenze der letzten bin (Step), die Daten pro Reihe enthält.
 * *Step*: der Unterschied zwischen zwei aufeinander folgenden Elementen des *axiscolumn* -Arrays (d. h. der bin-Größe).
 * *Groupexpression:* Ein Ausdruck für die Spalten, der einen Satz unterschiedlicher Werte bereitstellt. Hierbei handelt es sich in der Regel um einen Spaltennamen, der bereits einen eingeschränkten Satz von Werten bereitstellt. 
 * *Makeseriesparameters*: NULL oder mehr (durch Leerzeichen getrennte) Parameter in der Form des *namens* `=` *Werts* , die das Verhalten steuern. Die folgenden Parameter werden unterstützt: 
@@ -43,7 +44,7 @@ T | make-series sum(amount) default=0, avg(price) default=0 on timestamp from da
   |---------------|-------------------------------------|------------------------------------------------------------------------------|
   |`kind`          |`nonempty`                               |Erzeugt ein Standard Ergebnis, wenn die Eingabe des Operators "Make-Series" leer ist.|                                
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Die Eingabezeilen werden in Gruppen angeordnet, die dieselben Werte wie die `by` Ausdrücke und den `bin_at(` *AxisColumn* `, ` *step* `, ` *Start* Ausdruck "axiscolumn" aufweisen `)` . Anschließend werden die angegebenen Aggregationsfunktionen über jede Gruppe berechnet, dabei wird eine Zeile für jede Gruppe erzeugt. Das Ergebnis enthält die `by` Spalten *axiscolumn* und auch mindestens eine Spalte für jedes berechnete Aggregat. (Aggregationen, die mehrere Spalten oder nicht numerische Ergebnisse nicht unterstützen.)
 

@@ -8,14 +8,15 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
+ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: b3b7d571662d8a9ed0fd592547f32a131d26e277
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: b8ad39e8c1233acc2df6c30059a6926cea85f37a
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92245749"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95512807"
 ---
 # <a name="union-operator"></a>union-Operator
 
@@ -53,8 +54,8 @@ Der Standardwert ist `isfuzzy=` `false`.
 
   |Name           |Werte                                        |BESCHREIBUNG                                  |
   |---------------|----------------------------------------------|---------------------------------------------|
-  |`hint.concurrency`|*Zahl*|Gibt an, wie viele gleichzeitige Unterabfragen des `union` Operators parallel ausgeführt werden sollen. *Standard*Wert: CPU-Kerne auf dem einzelnen Knoten des Clusters (2 bis 16).|
-  |`hint.spread`|*Zahl*|Gibt an, wie viele Knoten von der gleichzeitigen Ausführung von `union` Unterabfragen verwendet werden sollen. *Standard*Wert: 1.|
+  |`hint.concurrency`|*Number*|Gibt an, wie viele gleichzeitige Unterabfragen des `union` Operators parallel ausgeführt werden sollen. *Standard* Wert: CPU-Kerne auf dem einzelnen Knoten des Clusters (2 bis 16).|
+  |`hint.spread`|*Number*|Gibt an, wie viele Knoten von der gleichzeitigen Ausführung von `union` Unterabfragen verwendet werden sollen. *Standard* Wert: 1.|
 
 ::: zone-end
 
@@ -75,11 +76,11 @@ Der Standardwert ist `isfuzzy=false`.
 
 ::: zone-end
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 Eine Tabelle mit derselben Anzahl von Zeilen, wie in allen Eingabetabellen vorhanden sind.
 
-**Notizen**
+**Hinweise**
 
 ::: zone pivot="azuredataexplorer"
 

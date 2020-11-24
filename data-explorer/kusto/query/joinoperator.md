@@ -8,14 +8,15 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
+ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 8324d0c6537d6d22a2814a7aa80625278dc36aec
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: b90e5f1c95ec75a946490cd75b5dd89ad2cb1aba
+ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92241513"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95513334"
 ---
 # <a name="join-operator"></a>join-Operator
 
@@ -35,7 +36,7 @@ Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2
 
 * *Righables*: die **Rechte** Tabelle oder der Rechte tabellarische Ausdruck, die manchmal als **innere** Tabelle bezeichnet werden, deren Zeilen zusammengeführt werden sollen. Wird als bezeichnet `$right` .
 
-* *Attribute*: eine oder mehrere durch Trennzeichen getrennte **Regeln** , die beschreiben, wie Zeilen von *linksfähigen* Zeilen von *rightfähigen*abgeglichen werden. Mehrere Regeln werden mithilfe des `and` logischen Operators ausgewertet.
+* *Attribute*: eine oder mehrere durch Trennzeichen getrennte **Regeln** , die beschreiben, wie Zeilen von *linksfähigen* Zeilen von *rightfähigen* abgeglichen werden. Mehrere Regeln werden mithilfe des `and` logischen Operators ausgewertet.
 
   Eine **Regel** kann eine der folgenden sein:
 
@@ -72,7 +73,7 @@ Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2
 > [!WARNING]
 > Wenn `kind` nicht angegeben wird, ist die standardmäßige joinkonfiguration `innerunique` . Dies unterscheidet sich von anderen Analyseprodukten, die über `inner` die Standardkonfiguration verfügen.  Informationen zu den Unterschieden finden Sie unter [Join-Varianten](#join-flavors) , um sicherzustellen, dass die Abfrage die gewünschten Ergebnisse liefert.
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
 **Das Ausgabe Schema hängt von der joinkonfiguration ab:**
 
@@ -162,7 +163,7 @@ Die folgenden beiden Beispiel Tabellen werden verwendet, um den Vorgang des Join
 |Schlüssel |Wert1
 |---|---
 |a |1
-|k |2
+|b |2
 |b |3
 |c |4
 
@@ -170,7 +171,7 @@ Die folgenden beiden Beispiel Tabellen werden verwendet, um den Vorgang des Join
 
 |Schlüssel |Wert2
 |---|---
-|k |10
+|b |10
 |c |20
 |c |30
 |T |40
@@ -184,7 +185,7 @@ die effektive linke Seite des Joins, Tabelle X nach der Deduplizierung, wäre:
 |Schlüssel |Wert1
 |---|---
 |a |1
-|k |2
+|b |2
 |c |4
 
 Das Ergebnis des Joins wäre:
@@ -209,7 +210,7 @@ X | join Y on Key
 
 |Schlüssel|Wert1|Key1|Wert2|
 |---|---|---|---|
-|k|2|k|10|
+|b|2|b|10|
 |c|4|c|20|
 |c|4|c|30|
 
@@ -240,8 +241,8 @@ X | join kind=inner Y on Key
 
 |Schlüssel|Wert1|Key1|Wert2|
 |---|---|---|---|
-|b|3|k|10|
-|k|2|k|10|
+|b|3|b|10|
+|b|2|b|10|
 |c|4|c|20|
 |c|4|c|30|
 
@@ -355,8 +356,8 @@ X | join kind=leftouter Y on Key
 
 |Schlüssel|Wert1|Key1|Wert2|
 |---|---|---|---|
-|b|3|k|10|
-|k|2|k|10|
+|b|3|b|10|
+|b|2|b|10|
 |c|4|c|20|
 |c|4|c|30|
 |a|1|||
@@ -385,8 +386,8 @@ X | join kind=rightouter Y on Key
 
 |Schlüssel|Wert1|Key1|Wert2|
 |---|---|---|---|
-|b|3|k|10|
-|k|2|k|10|
+|b|3|b|10|
+|b|2|b|10|
 |c|4|c|20|
 |c|4|c|30|
 |||T|40|
@@ -415,8 +416,8 @@ X | join kind=fullouter Y on Key
 
 |Schlüssel|Wert1|Key1|Wert2|
 |---|---|---|---|
-|b|3|k|10|
-|k|2|k|10|
+|b|3|b|10|
+|b|2|b|10|
 |c|4|c|20|
 |c|4|c|30|
 |||T|40|
@@ -505,7 +506,7 @@ X | join kind=leftsemi Y on Key
 |Schlüssel|Wert1|
 |---|---|
 |b|3|
-|k|2|
+|b|2|
 |c|4|
 
 ### <a name="right-semi-join-flavor"></a>Rechter halbjointyp
@@ -532,7 +533,7 @@ X | join kind=rightsemi Y on Key
 
 |Schlüssel|Wert2|
 |---|---|
-|k|10|
+|b|10|
 |c|20|
 |c|30|
 
