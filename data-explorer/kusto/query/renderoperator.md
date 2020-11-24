@@ -11,12 +11,12 @@ ms.date: 03/29/2020
 ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: bc083cadbae44723c85c0a119b90ab5b43aba388
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
+ms.openlocfilehash: 5670f3f9c7aa8b3d6b10f88433d19246e2daf6d6
+ms.sourcegitcommit: faa747df81c49b96d173dbd5a28d2ca4f3a2db5f
 ms.translationtype: MT
 ms.contentlocale: de-DE
 ms.lasthandoff: 11/24/2020
-ms.locfileid: "95512841"
+ms.locfileid: "95783334"
 ---
 # <a name="render-operator"></a>render-Operator
 
@@ -43,7 +43,7 @@ Hierbei gilt:
 
 |*Visualisierung*     |BESCHREIBUNG|
 |--------------------|-|
-| `anomalychart`     | Vergleichbar mit timechart, [hebt jedoch Anomalien](./samples.md#get-more-out-of-your-data-in-kusto-with-machine-learning) mithilfe [series_decompose_anomalies](./series-decompose-anomaliesfunction.md) Funktion hervor. |
+| `anomalychart`     | Vergleichbar mit timechart, [hebt jedoch Anomalien](./samples.md#get-more-from-your-data-by-using-kusto-with-machine-learning) mithilfe [series_decompose_anomalies](./series-decompose-anomaliesfunction.md) Funktion hervor. |
 | `areachart`        | Flächen Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
 | `barchart`         | Die erste Spalte ist die x-Achse und kann "Text", "DateTime" oder "numeric" sein. Andere Spalten sind numerisch und werden als horizontale Striche angezeigt.|
 | `card`             | Der erste Ergebnisdaten Satz wird als Satz von skalaren Werten behandelt und als Karte angezeigt. |
@@ -169,8 +169,8 @@ range x from -2 to 2 step 0.1
 
 ::: zone pivot="azuredataexplorer"
 
-[Renderingbeispiele in diesem Tutorial](./tutorial.md#render-display-a-chart-or-table).
+[Renderingbeispiele im Tutorial](./tutorial.md#displaychartortable)
 
-[Anomalieerkennung](./samples.md#get-more-out-of-your-data-in-kusto-with-machine-learning)
+[Anomalieerkennung](./samples.md#get-more-from-your-data-by-using-kusto-with-machine-learning)
 
 ::: zone-end
