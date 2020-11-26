@@ -7,12 +7,12 @@ ms.reviewer: guregini
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/16/2020
-ms.openlocfilehash: 606ae915e822cf4f2c02ac590a5bb05bdb17f28a
-ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
+ms.openlocfilehash: fed4027d946792448f2c564d8daa019c991b50d2
+ms.sourcegitcommit: 3af95ea6a6746441ac71b1a217bbb02ee23d5f28
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/09/2020
-ms.locfileid: "94373900"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95473578"
 ---
 # <a name="monitor-azure-data-explorer-ingestion-commands-and-queries-using-diagnostic-logs"></a>Überwachen der Erfassung, Befehle und Abfragen von Azure Data Explorer mithilfe von Diagnoseprotokollen
 
@@ -40,6 +40,7 @@ Mit Diagnoseprotokollen kann die Sammlung der folgenden Protokolldaten konfiguri
 
 * **Erfolgreiche Erfassungsvorgänge:** Diese Protokolle enthalten Informationen zu erfolgreich abgeschlossenen Erfassungsvorgängen.
 * **Nicht erfolgreiche Erfassungsvorgänge:** Diese Protokolle enthalten ausführliche Informationen zu fehlgeschlagenen Erfassungsvorgängen, einschließlich Fehlerdetails. 
+* **Batchvorgänge für die Datenerfassung:** Diese Protokolle enthalten ausführliche Statistiken der Batches, die für die Erfassung bereit sind (Dauer, Batchgröße und Blobanzahl).
 
 # <a name="commands-and-queries"></a>[Befehle und Abfragen](#tab/commands-and-queries)
 
@@ -63,20 +64,20 @@ Diagnoseprotokolle sind standardmäßig deaktiviert. Führen Sie die folgenden S
     ![Hinzufügen von Diagnoseprotokollen](media/using-diagnostic-logs/add-diagnostic-logs.png)
 
 1. Klicken Sie auf **Diagnoseeinstellung hinzufügen**.
-1. Im Fenster **Diagnoseeinstellungen** :
+1. Gehen Sie im Fenster **Diagnoseeinstellungen** wie folgt vor:
 
     :::image type="content" source="media/using-diagnostic-logs/configure-diagnostics-settings.png" alt-text="Konfigurieren von Diagnoseeinstellungen":::
 
-    1. Geben Sie in **Name** einen Namen für die Diagnoseeinstellung ein.
-    1. Wählen Sie ein oder mehrere Ziele aus: Speicherkonto, Event Hub oder Log Analytics.
-    1. Wählen Sie die zu erfassenden Protokolle aus: `SucceededIngestion`, `FailedIngestion`, `Command` oder `Query`.
+    1. Geben Sie unter **Name der Diagnoseeinstellung** einen Namen ein.
+    1. Wählen Sie mindestens ein Ziel aus: Log Analytics-Arbeitsbereich, Speicherkonto oder Event Hub.
+    1. Wählen Sie die zu erfassenden Protokolle aus: `SucceededIngestion`, `FailedIngestion`, `Command` oder `Query`, `TableUsageStatistics` oder `TableDetails`.
     1. Wählen Sie die zu sammelnden [Metriken](using-metrics.md#supported-azure-data-explorer-metrics) aus (optional).  
     1. Wählen Sie **Speichern** aus, um die neuen Diagnoseprotokolleinstellungen und Metriken zu speichern.
 
 Die neuen Einstellungen werden in wenigen Minuten festgelegt. Die Protokolle werden dann im konfigurierten Archivierungsziel (Speicherkonto, Event Hub oder Log Analytics) angezeigt. 
 
 > [!NOTE]
-> Wenn Sie Protokolle an Log Analytics senden, werden die Protokolle `SucceededIngestion`, `FailedIngestion`, `Command` und `Query` in Log Analytics-Tabellen mit den folgenden Namen gespeichert: `SucceededIngestion`, `FailedIngestion`, `ADXCommand` bzw. `ADXQuery`.
+> Wenn Sie Protokolle an Log Analytics senden, werden die Protokolle `SucceededIngestion`, `FailedIngestion`, `Command` und `Query` in Log Analytics-Tabellen mit den folgenden Namen gespeichert: `SucceededIngestion`, `FailedIngestion`, `ADXIngestionBatching`, `ADXCommand` bzw. `ADXQuery`.
 
 ## <a name="diagnostic-logs-schema"></a>Schema „Diagnoseprotokolle“
 
@@ -94,7 +95,7 @@ JSON-Zeichenfolgen im Protokoll enthalten Elemente, die in der folgenden Tabelle
 |resourceId         |Azure Resource Manager-Ressourcen-ID
 |operationName      |Name des Vorgangs: MICROSOFT.KUSTO/CLUSTERS/INGEST/ACTION
 |operationVersion   |Schemaversion: 1.0 
-|category           |Die Kategorie des Vorgangs. `SucceededIngestion` oder `FailedIngestion` Die Eigenschaften unterscheiden sich je nach [erfolgreichem Vorgang](#successful-ingestion-operation-log) oder [fehlgeschlagenem Vorgang](#failed-ingestion-operation-log).
+|category           |Die Kategorie des Vorgangs. `SucceededIngestion`, `FailedIngestion` oder `IngestionBatching`. Die Eigenschaften unterscheiden sich je nach [erfolgreichem Vorgang](#successful-ingestion-operation-log), [fehlgeschlagenem Vorgang](#failed-ingestion-operation-log) oder [Batchvorgang](#ingestion-batching-operation-log).
 |properties         |Ausführliche Informationen zu dem Vorgang
 
 #### <a name="successful-ingestion-operation-log"></a>Protokoll eines erfolgreichen Erfassungsvorgangs
@@ -110,27 +111,27 @@ JSON-Zeichenfolgen im Protokoll enthalten Elemente, die in der folgenden Tabelle
     "category": "SucceededIngestion",
     "properties":
     {
-        "succeededOn": "2019-05-27 07:55:05.3693628",
-        "operationId": "b446c48f-6e2f-4884-b723-92eb6dc99cc9",
-        "database": "Samples",
-        "table": "StormEvents",
-        "ingestionSourceId": "66a2959e-80de-4952-975d-b65072fc571d",
-        "ingestionSourcePath": "https://kustoingestionlogs.blob.core.windows.net/sampledata/events8347293.json",
-        "rootActivityId": "d0bd5dd3-c564-4647-953e-05670e22a81d"
+        "SucceededOn": "2019-05-27 07:55:05.3693628",
+        "OperationId": "b446c48f-6e2f-4884-b723-92eb6dc99cc9",
+        "Database": "Samples",
+        "Table": "StormEvents",
+        "IngestionSourceId": "66a2959e-80de-4952-975d-b65072fc571d",
+        "IngestionSourcePath": "https://kustoingestionlogs.blob.core.windows.net/sampledata/events8347293.json",
+        "RootActivityId": "d0bd5dd3-c564-4647-953e-05670e22a81d"
     }
 }
 ```
 **Eigenschaften eines Diagnoseprotokolls für einen erfolgreichen Vorgang**
 
-|Name               |BESCHREIBUNG
+|Name               |Beschreibung
 |---                |---
-|succeededOn        |Der Abschlusszeitpunkt der Erfassung
-|operationId        |Die ID des Azure Data Explorer-Erfassungsvorgangs
-|database           |Der Name der Zieldatenbank
-|table              |Der Name der Zieltabelle
-|ingestionSourceId  |Die ID der Erfassungsdatenquelle
-|ingestionSourcePath|Der Pfad der Erfassungsdatenquelle oder der Blob-URI
-|rootActivityId     |Aktivitäts-ID
+|SucceededOn        |Der Abschlusszeitpunkt der Erfassung
+|OperationId        |Die ID des Azure Data Explorer-Erfassungsvorgangs
+|Datenbank           |Der Name der Zieldatenbank
+|Tabelle              |Der Name der Zieltabelle
+|IngestionSourceId  |Die ID der Erfassungsdatenquelle
+|IngestionSourcePath|Der Pfad der Erfassungsdatenquelle oder der Blob-URI
+|RootActivityId     |Aktivitäts-ID
 
 #### <a name="failed-ingestion-operation-log"></a>Protokoll eines fehlgeschlagenen Erfassungsvorgangs
 
@@ -163,20 +164,60 @@ JSON-Zeichenfolgen im Protokoll enthalten Elemente, die in der folgenden Tabelle
 
 **Eigenschaften eines Diagnoseprotokolls für einen fehlgeschlagenen Vorgang**
 
-|Name               |BESCHREIBUNG
+|Name               |Beschreibung
 |---                |---
-|failedOn           |Der Abschlusszeitpunkt der Erfassung
-|operationId        |Die ID des Azure Data Explorer-Erfassungsvorgangs
-|database           |Der Name der Zieldatenbank
-|table              |Der Name der Zieltabelle
-|ingestionSourceId  |Die ID der Erfassungsdatenquelle
-|ingestionSourcePath|Der Pfad der Erfassungsdatenquelle oder der Blob-URI
-|rootActivityId     |Aktivitäts-ID
+|FailedOn           |Der Abschlusszeitpunkt der Erfassung
+|OperationId        |Die ID des Azure Data Explorer-Erfassungsvorgangs
+|Datenbank           |Der Name der Zieldatenbank
+|Tabelle              |Der Name der Zieltabelle
+|IngestionSourceId  |Die ID der Erfassungsdatenquelle
+|IngestionSourcePath|Der Pfad der Erfassungsdatenquelle oder der Blob-URI
+|RootActivityId     |Aktivitäts-ID
 |Details            |Die ausführliche Beschreibung des Fehlers und der Fehlermeldung
-|errorCode          |Fehlercode 
-|failureStatus      |`Permanent` oder `Transient` Bei einem vorübergehenden Fehler ist das Wiederholen des Vorgangs möglicherweise erfolgreich.
-|originatesFromUpdatePolicy|„true“, wenn die Herkunft des Fehlers eine Aktualisierungsrichtlinie ist
-|shouldRetry        |„true“, wenn die Wiederholung erfolgreich ausgeführt werden kann
+|ErrorCode          |Fehlercode 
+|FailureStatus      |`Permanent` oder `Transient` Bei einem vorübergehenden Fehler ist das Wiederholen des Vorgangs möglicherweise erfolgreich.
+|OriginatesFromUpdatePolicy|„true“, wenn die Herkunft des Fehlers eine Aktualisierungsrichtlinie ist
+|ShouldRetry        |„true“, wenn die Wiederholung erfolgreich ausgeführt werden kann
+
+#### <a name="ingestion-batching-operation-log"></a>Protokoll zu Batchvorgängen für die Datenerfassung
+
+**Beispiel:**
+
+```json
+{
+  "resourceId": "/SUBSCRIPTIONS/12534EB3-8109-4D84-83AD-576C0D5E1D06/RESOURCEGROUPS/KEREN/PROVIDERS/MICROSOFT.KUSTO/CLUSTERS/KERENEUS",
+  "time": "2020-05-27T07:55:05.3693628Z",
+  "operationVersion": "1.0",
+  "operationName": "MICROSOFT.KUSTO/CLUSTERS/INGESTIONBATCHING/ACTION",
+  "category": "IngestionBatching",
+  "correlationId": "2bb51038-c7dc-4ebd-9d7f-b34ece4cb735",
+  "properties": {
+    "Database": "Samples",
+    "Table": "StormEvents",
+    "BatchingType": "Size",
+    "SourceCreationTime": "2020-05-27 07:52:04.9623640",
+    "BatchTimeSeconds": 215.5,
+    "BatchSizeBytes": 2356425,
+    "DataSourcesInBatch": 4,
+    "RootActivityId": "2bb51038-c7dc-4ebd-9d7f-b34ece4cb735"
+  }
+}
+
+```
+**Eigenschaften eines Diagnoseprotokolls zu Batchvorgängen für die Datenerfassung**
+
+|Name               |BESCHREIBUNG
+|---                   |---
+| TimeGenerated        | Uhrzeit (UTC), zu der dieses Ereignis generiert wurde |
+| Datenbank             | Name der Datenbank mit der Zieltabelle |
+| Tabelle                | Name der Zieltabelle, in der die Daten erfasst werden |
+| BatchingType         | Batchverarbeitungstyp: Gibt an, ob die Batchverarbeitungszeit oder der Grenzwert für Datengröße/Dateianzahl in der Batchrichtlinie erreicht wurde. |
+| SourceCreationTime   | Frühester Zeitpunkt (UTC), zu dem Blobs in diesem Batch erstellt wurden |
+| BatchTimeSeconds     | Gesamtzeit für die Batchverarbeitung dieses Batches (Sekunden) |
+| BatchSizeBytes       | Gesamtgröße der nicht komprimierten Daten in diesem Batch (Bytes) |
+| DataSourcesInBatch   | Anzahl von Datenquellen in diesem Batch |
+| RootActivityId       | Aktivitäts-ID des Vorgangs |
+
 
 # <a name="commands-and-queries"></a>[Befehle und Abfragen](#tab/commands-and-queries)
 

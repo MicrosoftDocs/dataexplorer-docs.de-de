@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 05848ff0a76ed7a102e54ec08412c4bf16e77891
-ms.sourcegitcommit: 4f24d68f1ae4903a2885985aa45fd15948867175
+ms.openlocfilehash: b8ba6199d5353ffd34081483c2ffbbd73e88a60c
+ms.sourcegitcommit: 3af95ea6a6746441ac71b1a217bbb02ee23d5f28
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92558205"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95473521"
 ---
 # <a name="event-hub-data-connection"></a>Event Hub-Datenverbindung
 
@@ -45,10 +45,7 @@ Erfassungseigenschaften weisen den Erfassungsprozess an, wohin die Daten weiterg
 | IngestionMappingReference | Name der zu verwendenden vorhandenen [Erfassungszuordnung](kusto/management/create-ingestion-mapping-command.md). Überschreibt das `Column mapping`-Element, das im Bereich `Data Connection` festgelegt ist.|
 | Komprimierung | Datenkomprimierung. `None` (Standardeinstellung) oder `GZip`-Komprimierung.|
 | Codierung | Datencodierung. Die Standardeinstellung ist UTF8. Alle [von .NET unterstützten Codierungen](/dotnet/api/system.text.encoding?view=netframework-4.8#remarks) können verwendet werden. |
-| Tags (Vorschauversion) | Eine Liste der [Tags](kusto/management/extents-overview.md#extent-tagging), die den erfassten Daten zugeordnet werden sollen (formatiert als JSON-Arrayzeichenfolge). Die Verwendung von Tags hat [Auswirkungen auf die Leistung](kusto/management/extents-overview.md#performance-notes-1). |
-
-<!--| Database | Name of the existing target database.|-->
-<!--| Tags | String representing [tags](/azure/kusto/management/extents-overview#extent-tagging) that will be attached to resulting extent. |-->
+| Tags | Eine Liste der [Tags](kusto/management/extents-overview.md#extent-tagging), die den erfassten Daten zugeordnet werden sollen (formatiert als JSON-Arrayzeichenfolge). Die Verwendung von Tags hat [Auswirkungen auf die Leistung](kusto/management/extents-overview.md#performance-notes-1). |
 
 > [!NOTE]
 > Nur Ereignisse, die nach dem Erstellen der Datenverbindung in die Warteschlange eingereiht werden, werden erfasst.
@@ -126,6 +123,13 @@ Wenn Sie **Ereignissystemeigenschaften** im Abschnitt **Datenquelle** der Tabell
 Sehen Sie sich die [Beispiel-App](https://github.com/Azure-Samples/event-hubs-dotnet-ingest) an, die Daten generiert und an einen Event Hub sendet.
 
 Ein Beispiel zum Generieren von Beispieldaten finden Sie unter [Erfassen von Daten aus Event Hub in Azure Data Explorer](ingest-data-event-hub.md#generate-sample-data).
+
+## <a name="set-up-geo-disaster-recovery-solution"></a>Einrichten einer Lösung für die georedundante Notfallwiederherstellung
+
+Event Hub bietet eine Lösung für die [georedundante Notfallwiederherstellung](/azure/event-hubs/event-hubs-geo-dr). Azure Data Explorer unterstützt keine Event Hub-Namespaces vom Typ `Alias`. Erstellen Sie zum Implementieren der georedundanten Notfallwiederherstellung in Ihrer Lösung zwei Event Hub-Datenverbindungen: eine für den primären Namespace und eine für den sekundären Namespace. Azure Data Explorer lauscht auf beide Event Hub-Verbindungen.
+
+> [!NOTE]
+> Es liegt in der Verantwortung des Benutzers, ein Failover vom primären Namespace auf den sekundären Namespace zu implementieren.
 
 ## <a name="next-steps"></a>Nächste Schritte
 

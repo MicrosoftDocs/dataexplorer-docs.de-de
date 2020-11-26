@@ -8,12 +8,12 @@ ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 07/08/2020
-ms.openlocfilehash: 71f00cf921609432860a94061be7411e484fd0c9
-ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
+ms.openlocfilehash: f996c3e6abbd145e963765f8aa1457f7ddddeb7e
+ms.sourcegitcommit: 4c7f20dfd59fb5b5b1adfbbcbc9b7da07df5e479
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/04/2020
-ms.locfileid: "93349323"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "95324770"
 ---
 # <a name="azure-data-explorer-tools-and-integrations-overview"></a>Übersicht über Azure Data Explorer-Tools und -Integrationen
 
@@ -57,6 +57,13 @@ Zum Ausführen von Abfragen in Azure Data Explorer stehen verschiedene Tools zur
 * [Web-Benutzeroberfläche](web-query-data.md)
 * [Kusto.Cli](kusto/tools/kusto-cli.md)
 
+### <a name="query-open-source-repositories"></a>Abfragen von Open Source-Repositorys
+
+Die folgenden Open Source-Repositorys enthalten den Quellcode für den KQL-Parser und -Editor (Kusto Query Lanuguage, Kusto-Abfragesprache):
+
+* [KQL-Parser](https://github.com/microsoft/Kusto-Query-Language): Ein .NET Core-Repository für den Parser und die Semantikstruktur der Kusto-Abfragesprache
+* [KQL-Plug-In für den Monaco-Editor](https://github.com/Azure/monaco-kusto): Ein Editor der Kusto-Abfragesprache, der in web- und Electron-basierte Anwendungen eingebettet werden kann 
+
 ### <a name="query-integrations"></a>Abfrageintegrationen
 
 * [Azure Monitor](query-monitor-data.md)
@@ -93,4 +100,3 @@ Die Übersicht über die [Visualisierung](viz-overview.md) enthält Details zu D
 * [Azure Pipelines](devops.md) 
 * [Synchronisieren von Kusto](kusto/tools/synckusto.md) 
 
-<!--Open Source Tools-->
