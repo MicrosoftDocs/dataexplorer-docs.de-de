@@ -699,15 +699,18 @@
         - name: Numerische Operatoren
           href: ./kusto/query/numoperators.md
         - name: Zeichenfolgenoperatoren
-          href: ./kusto/query/datatypes-string-operators.md
+          items:
+            - name: Übersicht über Zeichenfolgenoperatoren
+              displayName: 'has, contains'
+              href: ./kusto/query/datatypes-string-operators.md
+            - name: in- und !in-Operatoren
+              href: ./kusto/query/inoperator.md
+            - name: has_any-Operator
+              href: ./kusto/query/has-anyoperator.md
         - name: between-Operator
           href: ./kusto/query/betweenoperator.md
         - name: not-between-Operator (!between)
           href: ./kusto/query/notbetweenoperator.md
-        - name: in- und !in-Operatoren
-          href: ./kusto/query/inoperator.md
-        - name: has_any-Operator
-          href: ./kusto/query/has-anyoperator.md
     - name: Skalarfunktionen
       items:
         - name: Skalarfunktionstypen
