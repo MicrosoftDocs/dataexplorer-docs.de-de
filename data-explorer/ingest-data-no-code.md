@@ -33,7 +33,7 @@ In diesem Tutorial lernen Sie Folgendes:
 ## <a name="prerequisites"></a>Voraussetzungen
 
 * Wenn Sie über kein Azure-Abonnement verfügen, können Sie ein [kostenloses Azure-Konto](https://azure.microsoft.com/free/) erstellen, bevor Sie beginnen.
-* [Schnellstart: Erstellen eines Azure Data Explorer-Clusters und einer Datenbank](create-cluster-database-portal.md). In diesem Tutorial lautet der Datenbankname *TestDatabase* .
+* [Schnellstart: Erstellen eines Azure Data Explorer-Clusters und einer Datenbank](create-cluster-database-portal.md). In diesem Tutorial lautet der Datenbankname *TestDatabase*.
 
 ## <a name="azure-monitor-data-provider-diagnostic-metrics-and-logs-and-activity-logs"></a>Azure Monitor-Datenanbieter: Diagnosemetriken und -protokolle und Aktivitätsprotokolle
 
@@ -200,7 +200,7 @@ Das Einrichten einer Azure Data Explorer-Pipeline umfasst mehrere Schritte, z. 
 
 ### <a name="connect-to-the-azure-data-explorer-web-ui"></a>Herstellen einer Verbindung mit der Azure Data Explorer-Webbenutzeroberfläche
 
-Wählen Sie in Azure Data Explorer für *TestDatabase* die Option **Abfrage** , um die Azure Data Explorer-Webbenutzeroberfläche zu öffnen.
+Wählen Sie in Azure Data Explorer für *TestDatabase* die Option **Abfrage**, um die Azure Data Explorer-Webbenutzeroberfläche zu öffnen.
 
 ![Seite „Abfrage“](media/ingest-data-no-code/query-database.png)
 
@@ -213,17 +213,17 @@ Verwenden Sie die Azure Data Explorer-Webbenutzeroberfläche, um die Zieltabelle
 # <a name="diagnostic-metrics"></a>[Diagnosemetriken](#tab/diagnostic-metrics)
 #### <a name="create-tables-for-the-diagnostic-metrics"></a>Erstellen von Tabellen für die Diagnosemetriken
 
-1. Erstellen Sie in der Datenbank *TestDatabase* eine Tabelle mit dem Namen *DiagnosticMetrics* , um die Diagnosemetrik-Datensätze zu speichern. Verwenden Sie den folgenden `.create table`-Steuerungsbefehl:
+1. Erstellen Sie in der Datenbank *TestDatabase* eine Tabelle mit dem Namen *DiagnosticMetrics*, um die Diagnosemetrik-Datensätze zu speichern. Verwenden Sie den folgenden `.create table`-Steuerungsbefehl:
 
     ```kusto
     .create table DiagnosticMetrics (Timestamp:datetime, ResourceId:string, MetricName:string, Count:int, Total:double, Minimum:double, Maximum:double, Average:double, TimeGrain:string)
     ```
 
-1. Wählen Sie **Ausführen** , um die Tabelle zu erstellen.
+1. Wählen Sie **Ausführen**, um die Tabelle zu erstellen.
 
     ![Abfrage ausführen](media/ingest-data-no-code/run-query.png)
 
-1. Erstellen Sie die Zwischendatentabelle *DiagnosticRawRecords* in der *TestDatabase* -Datenbank für die Datenbearbeitung mit der folgenden Abfrage. Wählen Sie **Ausführen** , um die Tabelle zu erstellen.
+1. Erstellen Sie die Zwischendatentabelle *DiagnosticRawRecords* in der *TestDatabase*-Datenbank für die Datenbearbeitung mit der folgenden Abfrage. Wählen Sie **Ausführen**, um die Tabelle zu erstellen.
 
     ```kusto
     .create table DiagnosticRawRecords (Records:dynamic)
@@ -238,15 +238,15 @@ Verwenden Sie die Azure Data Explorer-Webbenutzeroberfläche, um die Zieltabelle
 # <a name="diagnostic-logs"></a>[Diagnoseprotokolle](#tab/diagnostic-logs)
 #### <a name="create-tables-for-the-diagnostic-logs"></a>Erstellen von Tabellen für die Diagnoseprotokolle 
 
-1. Erstellen Sie in der Datenbank *TestDatabase* eine Tabelle mit dem Namen *DiagnosticLogs* , um die Diagnoseprotokoll-Datensätze zu speichern. Verwenden Sie den folgenden `.create table`-Steuerungsbefehl:
+1. Erstellen Sie in der Datenbank *TestDatabase* eine Tabelle mit dem Namen *DiagnosticLogs*, um die Diagnoseprotokoll-Datensätze zu speichern. Verwenden Sie den folgenden `.create table`-Steuerungsbefehl:
 
     ```kusto
     .create table DiagnosticLogs (Timestamp:datetime, ResourceId:string, OperationName:string, Result:string, OperationId:string, Database:string, Table:string, IngestionSourceId:string, IngestionSourcePath:string, RootActivityId:string, ErrorCode:string, FailureStatus:string, Details:string)
     ```
 
-1. Wählen Sie **Ausführen** , um die Tabelle zu erstellen.
+1. Wählen Sie **Ausführen**, um die Tabelle zu erstellen.
 
-1. Erstellen Sie die Zwischendatentabelle *DiagnosticRawRecords* in der *TestDatabase* -Datenbank für die Datenbearbeitung mit der folgenden Abfrage. Wählen Sie **Ausführen** , um die Tabelle zu erstellen.
+1. Erstellen Sie die Zwischendatentabelle *DiagnosticRawRecords* in der *TestDatabase*-Datenbank für die Datenbearbeitung mit der folgenden Abfrage. Wählen Sie **Ausführen**, um die Tabelle zu erstellen.
 
     ```kusto
     .create table DiagnosticRawRecords (Records:dynamic)
@@ -261,13 +261,13 @@ Verwenden Sie die Azure Data Explorer-Webbenutzeroberfläche, um die Zieltabelle
 # <a name="activity-logs"></a>[Aktivitätsprotokolle](#tab/activity-logs)
 #### <a name="create-tables-for-the-activity-logs"></a>Erstellen von Tabellen für die Aktivitätsprotokolle 
 
-1. Erstellen Sie eine Tabelle mit dem Namen *ActivityLogs* in der Datenbank *TestDatabase* , um Aktivitätsprotokoll-Datensätze zu erhalten. Führen Sie zum Erstellen der Tabelle die folgende Azure Data Explorer-Abfrage aus:
+1. Erstellen Sie eine Tabelle mit dem Namen *ActivityLogs* in der Datenbank *TestDatabase*, um Aktivitätsprotokoll-Datensätze zu erhalten. Führen Sie zum Erstellen der Tabelle die folgende Azure Data Explorer-Abfrage aus:
 
     ```kusto
     .create table ActivityLogs (Timestamp:datetime, ResourceId:string, OperationName:string, Category:string, ResultType:string, ResultSignature:string, DurationMs:int, IdentityAuthorization:dynamic, IdentityClaims:dynamic, Location:string, Level:string)
     ```
 
-1. Erstellen Sie die Zwischentabelle mit dem Namen *ActivityLogsRawRecords* für Daten in der Datenbank *TestDatabase* , um die Bearbeitung der Daten zu ermöglichen:
+1. Erstellen Sie die Zwischentabelle mit dem Namen *ActivityLogsRawRecords* für Daten in der Datenbank *TestDatabase*, um die Bearbeitung der Daten zu ermöglichen:
 
     ```kusto
     .create table ActivityLogsRawRecords (Records:dynamic)
@@ -401,7 +401,7 @@ Verwenden Sie die folgende Abfrage, um die Daten der Aktivitätsprotokolle der T
 
 Mit Azure-Diagnoseeinstellungen können Metriken und Protokolle in ein Speicherkonto oder einen Event Hub exportiert werden. In diesem Tutorial leiten wir die Metriken und Protokolle über einen Event Hub weiter. Sie erstellen mit den folgenden Schritten einen Event Hubs-Namespace und einen Event Hub für die Diagnosemetriken und -protokolle. Azure Monitor erstellt den Event Hub *insights-operational-logs* für die Aktivitätsprotokolle.
 
-1. Erstellen Sie einen Event Hub, indem Sie im Azure-Portal eine Azure Resource Manager-Vorlage verwenden. Klicken Sie zum Ausführen der restlichen Schritte dieses Artikels mit der rechten Maustaste auf die Schaltfläche **In Azure bereitstellen** , und wählen Sie die Option **In neuem Fenster öffnen** . Mit der Schaltfläche **In Azure bereitstellen** gelangen Sie zum Azure-Portal.
+1. Erstellen Sie einen Event Hub, indem Sie im Azure-Portal eine Azure Resource Manager-Vorlage verwenden. Klicken Sie zum Ausführen der restlichen Schritte dieses Artikels mit der rechten Maustaste auf die Schaltfläche **In Azure bereitstellen**, und wählen Sie die Option **In neuem Fenster öffnen**. Mit der Schaltfläche **In Azure bereitstellen** gelangen Sie zum Azure-Portal.
 
     [![Schaltfläche „In Azure bereitstellen“](media/ingest-data-no-code/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F201-event-hubs-create-event-hub-and-consumer-group%2Fazuredeploy.json)
 
@@ -431,31 +431,31 @@ Jetzt müssen Sie für Ihre Diagnosemetriken und -protokolle und Aktivitätsprot
 Wählen Sie eine Ressource aus, für die Metriken exportiert werden sollen. Mehrere Ressourcentypen unterstützen Diagnosedaten, z. B. Event Hubs-Namespace, Azure Key Vault, Azure IoT Hub und Azure Data Explorer-Cluster. In diesem Tutorial verwenden wir einen Azure Data Explorer-Cluster als Ressource. Wir überprüfen die Protokolle für Abfrageleistungsmetriken und Erfassungsergebnisse.
 
 1. Wählen Sie im Azure-Portal Ihren Kusto-Cluster aus.
-1. Wählen Sie **Diagnoseeinstellungen** und dann den Link **Diagnose aktivieren** . 
+1. Wählen Sie **Diagnoseeinstellungen** und dann den Link **Diagnose aktivieren**. 
 
     ![Diagnoseeinstellungen](media/ingest-data-no-code/diagnostic-settings.png)
 
 1. Der Bereich **Diagnoseeinstellungen** wird geöffnet. Führen Sie die folgenden Schritte aus:
-   1. Geben Sie den Diagnoseprotokolldaten den Namen *ADXExportedData* .
-   1. Aktivieren Sie unter **LOG** die Kontrollkästchen **SucceededIngestion** und **FailedIngestion** .
-   1. Aktivieren Sie unter **METRIC** das Kontrollkästchen **Abfrageleistung** .
-   1. Aktivieren Sie das Kontrollkästchen **An einen Event Hub streamen** .
+   1. Geben Sie den Diagnoseprotokolldaten den Namen *ADXExportedData*.
+   1. Aktivieren Sie unter **LOG** die Kontrollkästchen **SucceededIngestion** und **FailedIngestion**.
+   1. Aktivieren Sie unter **METRIC** das Kontrollkästchen **Abfrageleistung**.
+   1. Aktivieren Sie das Kontrollkästchen **An einen Event Hub streamen**.
    1. Wählen Sie **Konfigurieren** aus.
 
       ![Bereich „Diagnoseeinstellungen“](media/ingest-data-no-code/diagnostic-settings-window.png)
 
-1. Konfigurieren Sie im Bereich **Event Hub auswählen** , wie Daten aus Diagnoseprotokollen auf den von Ihnen erstellten Event Hub exportiert werden sollen:
-    1. Wählen Sie in der Liste **Event Hub-Namespace auswählen** die Option *AzureMonitoringData* .
-    1. Wählen Sie in der Liste **Event Hub-Name auswählen** die Option *DiagnosticData* .
-    1. Wählen Sie in der Liste **Event Hub-Richtlinienname auswählen**  die Option **RootManagerSharedAccessKey** .
-    1. Klicken Sie auf **OK** .
+1. Konfigurieren Sie im Bereich **Event Hub auswählen**, wie Daten aus Diagnoseprotokollen auf den von Ihnen erstellten Event Hub exportiert werden sollen:
+    1. Wählen Sie in der Liste **Event Hub-Namespace auswählen** die Option *AzureMonitoringData*.
+    1. Wählen Sie in der Liste **Event Hub-Name auswählen** die Option *DiagnosticData*.
+    1. Wählen Sie in der Liste **Event Hub-Richtlinienname auswählen**  die Option **RootManagerSharedAccessKey**.
+    1. Klicken Sie auf **OK**.
 
 1. Wählen Sie **Speichern** aus.
 
 # <a name="activity-logs"></a>[Aktivitätsprotokolle](#tab/activity-logs)
 ### <a name="connect-activity-logs-to-your-event-hub"></a>Verbinden von Aktivitätsprotokollen mit Ihrem Event Hub
 
-1. Wählen Sie im Azure-Portal im Menü auf der linken Seite die Option **Aktivitätsprotokoll** .
+1. Wählen Sie im Azure-Portal im Menü auf der linken Seite die Option **Aktivitätsprotokoll**.
 1. Das Fenster **Aktivitätsprotokoll** wird geöffnet. Wählen Sie **Diagnoseeinstellungen** aus.
 
     ![Fenster „Aktivitätsprotokoll“](media/ingest-data-no-code/activity-log.png)
@@ -466,17 +466,17 @@ Wählen Sie eine Ressource aus, für die Metriken exportiert werden sollen. Mehr
 
 1. Ein neues Fenster **Diagnoseeinstellungen** wird geöffnet. 
 
-    :::image type="content" source="media/ingest-data-no-code/export-activity-log.PNG" alt-text="Hinzufügen von Diagnoseeinstellungen im Fenster „Diagnoseeinstellungen“, Azure Data Explorer-Portal":::
+    :::image type="content" source="media/ingest-data-no-code/export-activity-log.PNG" alt-text="Fenster „Diagnoseeinstellungen“ mit Feldern zum Ausfüllen: Azure Data Explorer-Portal":::
 
     Führen Sie die folgenden Schritte aus:
     1. Geben Sie im Feld **Name der Diagnoseeinstellung** einen Namen ein.  
     1. Wählen Sie auf der linken Seite der Kontrollkästchen die Plattformprotokolle aus, die Sie von einem Abonnement erfassen möchten.
-    1. Aktivieren Sie das Kontrollkästchen **An einen Event Hub streamen** .
+    1. Aktivieren Sie das Kontrollkästchen **An einen Event Hub streamen**.
     1. Wählen Sie Ihr Abonnement aus.
     1. Wählen Sie in der Liste **Event Hub-Namespace** die Option *AzureMonitoringData* aus.
     1. Wählen Sie optional den **Event Hub-Namen** aus.
     1. Wählen Sie in der Liste **Event Hub-Richtlinienname** den Event Hub-Standardrichtliniennamen aus.
-    1. Wählen Sie oben links im Fenster die Option **Speichern** . Ein Event Hub mit dem Namen *insights-operational-logs* wird erstellt (es sei denn, Sie haben oben einen Event Hub-Namen ausgewählt).
+    1. Wählen Sie oben links im Fenster die Option **Speichern**. Ein Event Hub mit dem Namen *insights-operational-logs* wird erstellt (es sei denn, Sie haben oben einen Event Hub-Namen ausgewählt).
       
     
 
@@ -498,10 +498,10 @@ Nun müssen Sie die Datenverbindungen für Ihre Diagnosemetriken und -protokolle
 
 ### <a name="create-the-data-connection-for-diagnostic-metrics-and-logs-and-activity-logs"></a>Erstellen der Datenverbindung für Diagnosemetriken und -protokolle und Aktivitätsprotokolle
 
-1. Wählen Sie in Ihrem Azure Data Explorer-Cluster mit dem Namen *kustodocs* im Menü auf der linken Seite die Option **Datenbanken** .
+1. Wählen Sie in Ihrem Azure Data Explorer-Cluster mit dem Namen *kustodocs* im Menü auf der linken Seite die Option **Datenbanken**.
 1. Wählen Sie im Fenster **Datenbanken** Ihre Datenbank *TestDatabase* aus.
-1. Wählen Sie im Menü auf der linken Seite die Option **Datenerfassung** .
-1. Klicken Sie im Fenster **Datenerfassung** auf **+ Datenverbindung hinzufügen** .
+1. Wählen Sie im Menü auf der linken Seite die Option **Datenerfassung**.
+1. Klicken Sie im Fenster **Datenerfassung** auf **+ Datenverbindung hinzufügen**.
 1. Geben Sie im Fenster **Datenverbindung** die folgenden Informationen ein:
 
     ![Event Hub-Datenverbindung](media/ingest-data-no-code/event-hub-data-connection.png)
@@ -522,7 +522,7 @@ Nun müssen Sie die Datenverbindungen für Ihre Diagnosemetriken und -protokolle
 
     Zieltabelle:
 
-    Es stehen zwei Routingoptionen zur Verfügung: *statisch* und *dynamisch* . In diesem Tutorial verwenden Sie statisches Routing (Standardeinstellung), für das Sie den Tabellennamen, das Datenformat und die Zuordnung angeben. Lassen Sie das Kontrollkästchen **My data includes routing info** (Meine Daten enthalten Routinginformationen) deaktiviert.
+    Es stehen zwei Routingoptionen zur Verfügung: *statisch* und *dynamisch*. In diesem Tutorial verwenden Sie statisches Routing (Standardeinstellung), für das Sie den Tabellennamen, das Datenformat und die Zuordnung angeben. Lassen Sie das Kontrollkästchen **My data includes routing info** (Meine Daten enthalten Routinginformationen) deaktiviert.
 
      **Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**
     |---|---|---|
@@ -549,7 +549,7 @@ Nun müssen Sie die Datenverbindungen für Ihre Diagnosemetriken und -protokolle
 
     Zieltabelle:
 
-    Es stehen zwei Routingoptionen zur Verfügung: *statisch* und *dynamisch* . In diesem Tutorial verwenden Sie statisches Routing (Standardeinstellung), für das der Tabellenname, das Datenformat und die Zuordnung angegeben werden müssen. Lassen Sie das Kontrollkästchen **My data includes routing info** (Meine Daten enthalten Routinginformationen) deaktiviert.
+    Es stehen zwei Routingoptionen zur Verfügung: *statisch* und *dynamisch*. In diesem Tutorial verwenden Sie statisches Routing (Standardeinstellung), für das der Tabellenname, das Datenformat und die Zuordnung angegeben werden müssen. Lassen Sie das Kontrollkästchen **My data includes routing info** (Meine Daten enthalten Routinginformationen) deaktiviert.
 
      **Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**
     |---|---|---|

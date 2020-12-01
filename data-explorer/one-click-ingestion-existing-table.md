@@ -23,14 +23,14 @@ ms.locfileid: "93293407"
 
 Mit der [1-Klick-Erfassung](ingest-data-one-click.md) können Sie Daten im JSON- und CSV-Format sowie in anderen Formaten schnell in einer Tabelle erfassen und auf einfache Weise Zuordnungsstrukturen erstellen. Die Daten können entweder aus dem Speicher, aus einer lokalen Datei oder aus einem Container als einmaliger oder kontinuierlicher Erfassungsprozess erfasst werden.  
 
-In diesem Dokument erfahren Sie, wie Sie mithilfe des intuitiven 1-Klick-Assistenten in einem bestimmten Anwendungsfall **JSON** -Daten aus einer **lokalen Datei** in einer **vorhandenen Tabelle** erfassen. Verwenden Sie den gleichen Prozess mit geringfügigen Anpassungen, um eine Vielzahl verschiedener Anwendungsfälle abzudecken.
+In diesem Dokument erfahren Sie, wie Sie mithilfe des intuitiven 1-Klick-Assistenten in einem bestimmten Anwendungsfall **JSON**-Daten aus einer **lokalen Datei** in einer **vorhandenen Tabelle** erfassen. Verwenden Sie den gleichen Prozess mit geringfügigen Anpassungen, um eine Vielzahl verschiedener Anwendungsfälle abzudecken.
 
 Eine Übersicht über die 1-Klick-Erfassung sowie eine Liste der Voraussetzungen finden Sie unter [Was ist die 1-Klick-Erfassung?](ingest-data-one-click.md)
 Informationen zu verschiedenen Datentypen oder-quellen finden Sie unter [Erfassen von CSV-Daten aus einem Container in einer neuen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-new-table.md).
 
 ## <a name="ingest-new-data"></a>Erfassen neuer Daten
 
-Klicken Sie im linken Menü der Webbenutzeroberfläche mit der rechten Maustaste auf eine *Datenbank* oder *Tabelle* , und wählen Sie **Neue Daten erfassen** aus.
+Klicken Sie im linken Menü der Webbenutzeroberfläche mit der rechten Maustaste auf eine *Datenbank* oder *Tabelle*, und wählen Sie **Neue Daten erfassen** aus.
 
    :::image type="content" source="media/one-click-ingestion-existing-table/one-click-ingestion-in-webui.png" alt-text="Auswählen der 1-Klick Erfassung auf der Webbenutzeroberfläche":::
  
@@ -72,7 +72,7 @@ Wählen Sie **Schema bearbeiten** aus, um Ihre Tabellenspaltenkonfiguration anzu
       :::image type="content" source="media/one-click-ingestion-existing-table/map-columns.png" alt-text="Fenster für die Spaltenzuordnung"::: 
     
 1. Wählen Sie **Update** aus.
-1. Auf der Registerkarte **Schema** :
+1. Auf der Registerkarte **Schema**:
     * Der **Komprimierungstyp** wird automatisch durch den Quelldateinamen ausgewählt. In diesem Fall ist der Komprimierungstyp **JSON**.
         
     * Bei der Auswahl von **JSON** müssen auch **JSON-Ebenen** (1 bis 10) ausgewählt werden. Die Aufteilung der Tabellenspaltendaten wird durch die Ebenen bestimmt.
@@ -80,7 +80,7 @@ Wählen Sie **Schema bearbeiten** aus, um Ihre Tabellenspaltenkonfiguration anzu
         :::image type="content" source="media/one-click-ingestion-existing-table/json-levels.png" alt-text="Auswählen von JSON-Ebenen":::
     
        > [!TIP]
-       > Informationen zur Verwendung von **CSV** -Dateien finden Sie unter [Erfassen von CSV-Daten aus einem Container in einer neuen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-new-table.md#edit-the-schema).
+       > Informationen zur Verwendung von **CSV**-Dateien finden Sie unter [Erfassen von CSV-Daten aus einem Container in einer neuen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-new-table.md#edit-the-schema).
 
 #### <a name="add-nested-json-data"></a>Hinzufügen von geschachtelten JSON-Daten 
 
@@ -108,7 +108,7 @@ Führen Sie die folgenden Schritte aus, um Spalten aus JSON-Ebenen hinzuzufügen
 Beim Erfassen von Daten in einer vorhandenen Tabelle sind Sie hinsichtlich der Änderungen, die Sie an der Tabelle vornehmen können, stärker eingeschränkt.
 
 In der Tabelle: 
-* Wählen Sie neue Spaltenüberschriften aus, um eine der folgenden Aufgaben auszuführen: **Neue Spalte** hinzufügen, **Spalte löschen** , **Aufsteigend sortieren** oder **Absteigend sortieren**. 
+* Wählen Sie neue Spaltenüberschriften aus, um eine der folgenden Aufgaben auszuführen: **Neue Spalte** hinzufügen, **Spalte löschen**, **Aufsteigend sortieren** oder **Absteigend sortieren**. 
 * Für vorhandene Spalten steht nur eine Datensortierung zur Verfügung.
 
 [!INCLUDE [data-explorer-one-click-column-table](includes/data-explorer-one-click-column-table.md)]
