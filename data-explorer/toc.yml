@@ -65,7 +65,7 @@
   items:
     - name: Erstellen eines Clusters und einer Datenbank
       items:
-        - name: Azure CLI
+        - name: Azure-Befehlszeilenschnittstelle
           href: create-cluster-database-cli.md
         - name: PowerShell
           href: create-cluster-database-powershell.md
@@ -1866,6 +1866,9 @@
         - name: series_exp_smoothing_fl()
           displayName: functions library
           href: kusto/functions-library/series-exp-smoothing-fl.md
+        - name: series_fit_lowess_fl()
+          displayName: functions library
+          href: kusto/functions-library/series-fit-lowess-fl.md
         - name: series_fit_poly_fl()
           displayName: functions library
           href: kusto/functions-library/series-fit-poly-fl.md
