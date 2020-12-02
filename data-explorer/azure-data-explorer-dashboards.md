@@ -9,10 +9,10 @@ ms.topic: how-to
 ms.date: 05/26/2020
 ms.localizationpriority: high
 ms.openlocfilehash: 23bd17b54a1910633baabf2b78a1015f31eead5a
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95512773"
 ---
 # <a name="visualize-data-with-azure-data-explorer-dashboardspreview"></a>Visualisieren von Daten mit Azure Data Explorer-Dashboards (Vorschau)
