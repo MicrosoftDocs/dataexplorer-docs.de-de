@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: 9c066b47e69fd36052ae6e6e8d7599ebc17b3ff7
-ms.sourcegitcommit: f71801764fdccb061f3cf1e3cfe43ec1557e4e0f
+ms.openlocfilehash: 25c0bb4071c74c299ab69432ffc18ad50408be46
+ms.sourcegitcommit: f7bebd245081a5cdc08e88fa4f9a769c18e13e5d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/03/2020
-ms.locfileid: "93293204"
+ms.lasthandoff: 11/17/2020
+ms.locfileid: "94644685"
 ---
 # <a name="use-one-click-ingestion-to-ingest-csv-data-from-a-container-to-a-new-table-in-azure-data-explorer"></a>Erfassen von CSV-Daten aus einem Container in einer neuen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung
 
@@ -22,14 +22,14 @@ ms.locfileid: "93293204"
 
 Mit der [1-Klick-Erfassung](ingest-data-one-click.md) können Sie Daten im JSON- und CSV-Format sowie in anderen Formaten schnell in einer Tabelle erfassen und auf einfache Weise Zuordnungsstrukturen erstellen. Die Daten können entweder aus dem Speicher, aus einer lokalen Datei oder aus einem Container als einmaliger oder kontinuierlicher Erfassungsprozess erfasst werden.  
 
-In diesem Dokument erfahren Sie, wie Sie mithilfe des intuitiven 1-Klick-Assistenten in einem bestimmten Anwendungsfall **CSV** -Daten aus einem **Container** in einer **neuen Tabelle** erfassen. Sie können den gleichen Prozess mit geringfügigen Anpassungen verwenden, um eine Vielzahl verschiedener Anwendungsfälle abzudecken.
+In diesem Dokument erfahren Sie, wie Sie mithilfe des intuitiven 1-Klick-Assistenten in einem bestimmten Anwendungsfall **CSV**-Daten aus einem **Container** in einer **neuen Tabelle** erfassen. Sie können den gleichen Prozess mit geringfügigen Anpassungen verwenden, um eine Vielzahl verschiedener Anwendungsfälle abzudecken.
 
 Eine Übersicht über die 1-Klick-Erfassung sowie eine Liste der Voraussetzungen finden Sie unter [Was ist die 1-Klick-Erfassung?](ingest-data-one-click.md)
 Informationen zum Erfassen von Daten in einer vorhandenen Tabelle in Azure Data Explorer finden Sie unter [Erfassen von Daten in einer vorhandenen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-existing-table.md).
 
 ## <a name="ingest-new-data"></a>Erfassen neuer Daten
 
-1. Klicken Sie im linken Menü der Webbenutzeroberfläche mit der rechten Maustaste auf eine *Datenbank* , und wählen Sie **Neue Daten erfassen** aus.
+1. Klicken Sie im linken Menü der Webbenutzeroberfläche mit der rechten Maustaste auf eine *Datenbank*, und wählen Sie **Neue Daten erfassen** aus.
 
     :::image type="content" source="media/one-click-ingestion-new-table/one-click-ingestion-in-web-ui.png" alt-text="Erfassen neuer Daten":::
 
@@ -47,33 +47,69 @@ Informationen zum Erfassen von Daten in einer vorhandenen Tabelle in Azure Data 
 Führen Sie unter **Erfassungstyp** die folgenden Schritte aus:
    
   1. Wählen Sie **from container** (aus Container) aus. 
-  1. Fügen Sie im Feld **Mit Speicher verknüpfen** die [SAS-URL](/azure/vs-azure-tools-storage-explorer-blobs#get-the-sas-for-a-blob-container) des Containers hinzu, und geben Sie optional die Stichprobengröße ein.
+  1. Fügen Sie im Feld **Mit Speicher verknüpfen** die [SAS-URL](/azure/vs-azure-tools-storage-explorer-blobs#get-the-sas-for-a-blob-container) des Containers hinzu, und geben Sie optional die Stichprobengröße ein. Informationen, wie Sie aus einem Ordner innerhalb dieses Containers erfassen, finden Sie unter [Erfassen aus einem Ordner in einem Container](#ingest-from-folder-in-a-container).
 
       :::image type="content" source="media/one-click-ingestion-new-table/from-container.png" alt-text="1-Klick-Erfassung aus Container":::
 
      > [!TIP] 
      > Informationen zur Erfassung **aus einer Datei** finden Sie unter [Erfassen von JSON-Daten aus einer lokalen Datei in einer vorhandenen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-existing-table.md#select-an-ingestion-type).
 
+### <a name="ingest-from-folder-in-a-container"></a>Erfassen aus einem Ordner in einem Container
+
+Um aus einem bestimmten Ordner innerhalb eines Containers zu erfassen, generieren Sie eine Zeichenfolge im folgenden Format:
+
+*container_path*`/`*folder_path*`;`*access_key_1*
+
+Sie verwenden diese Zeichenfolge anstelle der SAS-URL in [Erfassungstyp auswählen](#select-an-ingestion-type).
+
+1. Navigieren Sie zu dem Speicherkonto, und wählen Sie **Storage-Explorer > Blob-Container auswählen** aus.
+
+    :::image type="content" source="media/one-click-ingestion-new-table/blob-containers.png" alt-text="Screenshot des Zugriffs auf Blob-Container im Azure Storage-Konto":::
+
+1. Wechseln Sie zu dem ausgewählten Ordner, und wählen Sie **URL kopieren** aus. Fügen Sie diesen Wert in eine temporäre Datei ein, und fügen Sie am Ende dieser Zeichenfolge `;` hinzu.
+
+    :::image type="content" source="media/one-click-ingestion-new-table/copy-url.png" alt-text="Screenshot des Kopierens der URL im Ordner im Blob-Container – Azure Storage-Konto":::
+
+1. Wählen Sie im linken Menü unter **Einstellungen** die Option **Zugriffsschlüssel** aus.
+
+    :::image type="content" source="media/one-click-ingestion-new-table/copy-key-1.png" alt-text="Screenshot des Kopierens der Schlüsselzeichenfolge in „Zugriffsschlüssel“ im Speicherkonto":::
+
+1. Kopieren Sie unter **Schlüssel 1** die Zeichenfolge **Schlüssel**. Fügen Sie diesen Wert am Ende der Zeichenfolge von Schritt 2 ein. 
+
+### <a name="storage-subscription-error"></a>Speicherabonnementfehler
+
+Wenn die folgende Fehlermeldung beim Erfassen aus einem Speicherkonto angezeigt wird:
+
+> Der Speicher unter Ihren ausgewählten Abonnements wurde nicht gefunden. Fügen Sie das Speicherkontoabonnement *`storage_account_name`* Ihren ausgewählten Abonnements im Portal hinzu.
+
+1. Wählen Sie im Menü oben rechts das :::image type="icon" source="media/ingest-data-one-click/directory-subscription-icon.png" border="false":::-Symbol aus. Ein Bereich **Verzeichnis und Abonnement** wird geöffnet.
+
+1. Fügen Sie in der Dropdownliste **Alle Abonnements** das Abonnement Ihres Speicherkontos der ausgewählten Liste hinzu. 
+
+    :::image type="content" source="media/ingest-data-one-click/subscription-dropdown.png" alt-text="Screenshot des Bereichs „Verzeichnis + Abonnement“ mit durch einen roten Rahmen hervorgehobener Dropdownliste „Abonnement“.":::
+
+## <a name="sample-data"></a>Beispieldaten
+
 Es wird eine Stichprobe der Daten angezeigt. Sie können diese Anzeige filtern, um nur Dateien zu erfassen, die mit bestimmten Zeichen beginnen und/oder auf bestimmte Zeichen enden. Die Vorschau wird automatisch aktualisiert, sobald Sie die Filter anpassen.
 
 Filtern Sie beispielsweise nach allen Dateien, die mit dem Wort *.csv* beginnen.
 
 :::image type="content" source="media/one-click-ingestion-new-table/from-container-with-filter.png" alt-text="Filter bei der 1-Klick-Erfassung":::
-  
+
 ## <a name="edit-the-schema"></a>Bearbeiten des Schemas
 
 Wählen Sie **Schema bearbeiten** aus, um Ihre Tabellenspaltenkonfiguration anzuzeigen und zu bearbeiten. Vom System wird willkürlich eines der Blobs ausgewählt, und das Schema wird auf der Grundlage dieses Blobs generiert. Anhand des Namens der Quelle identifiziert der Dienst automatisch, ob sie komprimiert ist.
 
-Auf der Registerkarte **Schema** :
+Auf der Registerkarte **Schema**:
 
    1. Wählen Sie **Datenformat** aus:
 
         In diesem Fall ist das Datenformat **CSV**.
 
         > [!TIP]
-        > Wenn Sie **JSON** -Dateien verwenden möchten, lesen Sie die Informationen unter [Erfassen von JSON-Daten aus einer lokalen Datei in einer vorhandenen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-existing-table.md#edit-the-schema).
+        > Wenn Sie **JSON**-Dateien verwenden möchten, lesen Sie die Informationen unter [Erfassen von JSON-Daten aus einer lokalen Datei in einer vorhandenen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-existing-table.md#edit-the-schema).
 
-   1. Aktivieren Sie das Kontrollkästchen **Spaltennamen einschließen** , damit die Überschriftenzeile der Datei ignoriert wird.
+   1. Aktivieren Sie das Kontrollkästchen **Spaltennamen einschließen**, damit die Überschriftenzeile der Datei ignoriert wird.
 
         :::image type="content" source="media/one-click-ingestion-new-table/non-json-format.png" alt-text="Aktivieren des Kontrollkästchens zum Einschließen der Spaltennamen":::
 
