@@ -1,6 +1,6 @@
 ---
-title: Beispiele für Abfragen in Azure Daten-Explorer und Azure Monitor
-description: In diesem Artikel werden häufige Abfragen und Beispiele beschrieben, in denen die Kusto-Abfragesprache für Azure Daten-Explorer und Azure Monitor verwendet wird.
+title: Beispiele für Abfragen in Azure Data Explorer und Azure Monitor
+description: In diesem Artikel werden gängige Abfragen und Beispiele beschrieben, in denen die Kusto-Abfragesprache für Azure Data Explorer und Azure Monitor verwendet wird.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -12,21 +12,21 @@ ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
 ms.openlocfilehash: 866df577fa039e8b92c31753197cf4a4fa03f139
-ms.sourcegitcommit: faa747df81c49b96d173dbd5a28d2ca4f3a2db5f
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95783524"
 ---
-# <a name="samples-for-queries-for-azure-data-explorer-and-azure-monitor"></a>Beispiele für Abfragen für Azure Daten-Explorer und Azure Monitor
+# <a name="samples-for-queries-for-azure-data-explorer-and-azure-monitor"></a>Beispiele für Abfragen für Azure Data Explorer und Azure Monitor
 
 ::: zone pivot="azuredataexplorer"
 
-Dieser Artikel identifiziert allgemeine Abfrage Anforderungen in Azure Daten-Explorer und erläutert, wie Sie die Kusto-Abfragesprache verwenden können, um Sie zu erfüllen.
+Dieser Artikel identifiziert Anforderungen an gängige Abfragen in Azure Data Explorer und erläutert, wie Sie die Kusto-Abfragesprache verwenden können, um sie zu erfüllen.
 
-## <a name="display-a-column-chart"></a>Anzeigen eines Säulen Diagramms
+## <a name="display-a-column-chart"></a>Anzeigen eines Säulendiagramms
 
-Um zwei oder mehr Spalten zu projizieren, und verwenden Sie dann die Spalten als x-Achse und y-Achse eines Diagramms:
+So projizieren Sie zwei oder mehr Spalten und verwenden die Spalten dann als x-Achse und y-Achse eines Diagramms
 
 <!-- csl: https://help.kusto.windows.net/Samples  -->
 ```kusto 
@@ -37,11 +37,11 @@ StormEvents
 | render columnchart
 ```
 
-* Die erste Spalte bildet die x-Achse. Dies kann numerisch, Datum/Uhrzeit oder Zeichenfolge sein. 
-* Verwenden `where` `summarize` Sie, und, `top` um die Datenmenge einzuschränken, die Sie anzeigen.
+* Die erste Spalte bildet die x-Achse. Sie kann vom Typ „Numerisch, „Datum/Uhrzeit“ oder „Zeichenfolge“ sein. 
+* Verwenden Sie `where`, `summarize` und `top`, um das angezeigte Datenvolumen einzuschränken.
 * Sortieren Sie die Ergebnisse, um die Reihenfolge der x-Achse zu definieren.
 
-:::image type="content" source="images/samples/color-bar-chart.png" alt-text="Screenshot eines Säulen Diagramms mit zehn farbigen Spalten, die die entsprechenden Werte von 10 Standorten darstellen.":::
+:::image type="content" source="images/samples/color-bar-chart.png" alt-text="Screenshot eines Säulendiagramms mit zehn farbigen Spalten, die die entsprechenden Werte von 10 Standorten darstellen.":::
 
 ## <a name="get-sessions-from-start-and-stop-events"></a>Abrufen von Sitzungen aus Start- und Stop-Ereignissen
 
@@ -56,7 +56,7 @@ In einem Ereignisprotokoll markieren einige Ereignisse den Anfang oder das Ende 
 |Abbrechen|Manchester|4267667|2015-12-09T10:27:26.29|
 |Beenden|Manchester|4267667|2015-12-09T10:28:31.72|
 
-Jedes Ereignis verfügt über eine Sitzungs-ID ( `SessionId` ). Die Herausforderung besteht darin, Ereignisse zum Starten und Abbrechen mit einer Sitzungs-ID abzugleichen.
+Jedes Ereignis besitzt eine Sitzungs-ID (`SessionId`). Die Herausforderung besteht darin, den Start- und Ende-Ereignissen eine Sitzungs-ID zuzuordnen.
 
 Beispiel:
 
@@ -73,12 +73,12 @@ Events
 | project City, SessionId, StartTime, StopTime, Duration = StopTime - StartTime
 ```
 
-So stimmen Sie Start-und Stoppereignisse mit einer Sitzungs-ID ab:
+So ordnen Sie Start- und Ende-Ereignissen eine Sitzungs-ID zu
 
-1. Verwenden [Sie Let](./letstatement.md) , um eine Projektion der Tabelle zu benennen, die so weit wie möglich vor dem Starten des Joins abgefragt wird.
-1. Verwenden Sie [Project](./projectoperator.md) , um die Namen der Zeitstempel so zu ändern, dass sowohl die Startzeit als auch die Endzeit in den Ergebnissen angezeigt werden. `project` wählt auch die anderen Spalten aus, die in den Ergebnissen angezeigt werden sollen. 
-1. Verwenden Sie [Join](./joinoperator.md) , um die Start-und endeinträge für dieselbe Aktivität abzugleichen. Für jede Aktivität wird eine Zeile erstellt. 
-1. Verwenden `project` Sie erneut zum Hinzufügen einer Spalte, um die Dauer der Aktivität anzuzeigen.
+1. Verwenden Sie [let](./letstatement.md), um eine Projektion der Tabelle zu benennen, die vor dem Beginn der Verknüpfung (join) so weit wie möglich reduziert wurde.
+1. Verwenden Sie [project](./projectoperator.md), um die Namen der Zeitstempel so zu ändern, dass die Start- und Endzeiten in den Ergebnissen angezeigt werden. `project` wählt außerdem die anderen Spalten aus, die in den Ergebnissen angezeigt werden sollen. 
+1. Verwenden Sie [join](./joinoperator.md), um die Start- und Ende-Einträge für dieselbe Aktivität zuzuordnen. Für jede Aktivität wird eine Zeile erstellt. 
+1. Verwenden Sie `project` erneut, um eine Spalte hinzuzufügen, in der die Dauer der Aktivität angezeigt werden soll.
 
 So sieht die Ausgabe aus:
 
@@ -87,9 +87,9 @@ So sieht die Ausgabe aus:
 |London|2817330|2015-12-09T10:12:02.32|2015-12-09T10:23:43.18|00:11:40.46|
 |Manchester|4267667|2015-12-09T10:14:02.23|2015-12-09T10:28:31.72|00:14:29.49|
 
-## <a name="get-sessions-without-using-a-session-id"></a>Sitzungen ohne Verwendung einer Sitzungs-ID erhalten
+## <a name="get-sessions-without-using-a-session-id"></a>Abrufen von Sitzungen ohne Verwendung einer Sitzungs-ID
 
-Angenommen, die Start-und Stoppereignisse haben keine Sitzungs-ID, mit der wir vergleichen können. Wir haben jedoch die IP-Adresse des Clients, auf dem die Sitzung stattfindet. Wenn jede Client Adresse jeweils nur eine Sitzung durchführt, können wir jedes Start Ereignis mit dem nächsten Ereignis der gleichen IP-Adresse vergleichen:
+Angenommen, die Start- und Ende-Ereignisse besitzen keine Sitzungs-ID, die wir zuordnen können. Wir verfügen aber über die IP-Adresse des Clients, in dem die Sitzung stattgefunden hat. Vorausgesetzt, dass jede Clientadresse immer nur eine Sitzung gleichzeitig durchführt, dann können wir jedes Start-Ereignis dem nächsten Ende-Ereignis derselben IP-Adresse zuordnen:
 
 Beispiel:
 
@@ -109,19 +109,19 @@ Events
 | summarize arg_min(duration, *) by bin(StartTime,1s), ClientIp
 ```
 
-Der `join` entspricht jeder Startzeit mit allen Endzeiten der gleichen Client-IP-Adresse. Der Beispielcode:
+`join` ordnet jede Startzeit allen Endzeiten von derselben Client-IP-Adresse zu. Der Beispielcode:
 
 - Entfernt Übereinstimmungen mit früheren Endzeiten.
 - Gruppiert nach Startzeit und IP-Adresse, um eine Gruppe für jede Sitzung zu erhalten. 
-- Stellt eine `bin` Funktion für den- `StartTime` Parameter bereit. Wenn Sie diesen Schritt nicht ausführen, werden von Kusto automatisch einstündige Container verwendet, die mit den falschen Endzeit Punkten mit einigen Startzeiten zu vergleichen sind.
+- Stellt eine `bin`-Funktion für den `StartTime`-Parameter bereit. Wenn Sie diesen Schritt nicht ausführen, verwendet Kusto automatisch einstündige Intervalle, in denen einige Startzeiten falschen Endzeiten zugeordnet werden.
 
-`arg_min` sucht die Zeile mit der kleinsten Dauer in jeder Gruppe, und der `*` Parameter übergibt alle anderen Spalten. 
+`arg_min` sucht die Zeile mit der kürzestsen Dauer in jeder Gruppe, und der `*`-Parameter durchläuft alle anderen Spalten. 
 
-Das Argument Präfix `min_` für die einzelnen Spaltennamen. 
+Das Argument versieht jeden Spaltennamen mit dem Präfix `min_`. 
 
-:::image type="content" source="images/samples/start-stop-ip-address-table.png" alt-text="Screenshot einer Tabelle, in der die Ergebnisse aufgelistet sind, mit Spalten für die Startzeit, Client-IP, Dauer, Stadt und früheste Beendigung für jede Kombination aus Client und Startzeit."::: 
+:::image type="content" source="images/samples/start-stop-ip-address-table.png" alt-text="Screenshot einer Tabelle, in der die Ergebnisse aufgelistet sind, mit Spalten für Startzeit, Client-IP, Dauer, Stadt und frühestes Ende für jede Kombination aus Client und Startzeit."::: 
 
-Fügen Sie Code hinzu, um die Dauer in Containern mit einfacher Größenordnung zu zählen. In diesem Beispiel teilen Sie aufgrund einer Vorliebe für ein Balkendiagramm durch, `1s` um die Zeiträume in Zahlen zu konvertieren:
+Fügen Sie Code hinzu, um die Dauerwerte in Intervallen von angemessener Größe zu zählen. In diesem Beispiel teilen Sie wegen der Bevorzugung eines Balkendiagramms durch `1s`, um die Zeiträume in Zahlen umzuwandeln:
 
 ```
     // Count the frequency of each duration:
@@ -132,7 +132,7 @@ Fügen Sie Code hinzu, um die Dauer in Containern mit einfacher Größenordnung 
     | sort by duration asc | render barchart 
 ```
 
-:::image type="content" source="images/samples/number-of-sessions-bar-chart.png" alt-text="Screenshot eines Säulen Diagramms, das die Anzahl der Sitzungen mit Dauer in angegebenen Bereichen darstellt.":::
+:::image type="content" source="images/samples/number-of-sessions-bar-chart.png" alt-text="Screenshot eines Säulendiagramms, das die Anzahl der Sitzungen zusammen mit Dauerwerten in angegebenen Bereichen darstellt.":::
 
 ### <a name="full-example"></a>Vollständiges Beispiel
 
@@ -205,9 +205,9 @@ on UnitOfWorkId
 
 ## <a name="chart-concurrent-sessions-over-time"></a>Erstellen eines Diagramms für gleichzeitige Sitzungen im Verlauf der Zeit
 
-Angenommen, Sie verfügen über eine Tabelle mit Aktivitäten und deren Start-und Endzeit. Sie können ein Diagramm anzeigen, das anzeigt, wie viele Aktivitäten parallel ausgeführt werden.
+Angenommen, Sie haben eine Tabelle mit Aktivitäten und deren jeweiligen Start- und Endzeiten. Sie können ein Diagramm anzeigen, das darstellt, wie viele Aktivitäten im Laufe der Zeit gleichzeitig ausgeführt werden.
 
-Im folgenden finden Sie eine Beispiel Eingabe mit dem Namen `X` :
+Hier sehen Sie eine Beispieleingabe namens `X`:
 
 |SessionID | StartTime | StopTime |
 |---|---|---|
@@ -215,7 +215,7 @@ Im folgenden finden Sie eine Beispiel Eingabe mit dem Namen `X` :
 | b | 10:01:29 | 10:03:10 |
 | c | 10:03:02 | 10:05:20 |
 
-Für ein Diagramm in einminütigen Containern möchten Sie jede laufende Aktivität in jedem einminütigen Intervall zählen.
+Für ein Diagramm in einminütigen Intervallen zählen Sie jede laufende Aktivität in jedem einminütigen Intervall.
 
 Hier ein Zwischenergebnis:
 
@@ -231,7 +231,7 @@ X | extend samples = range(bin(StartTime, 1m), StopTime, 1m)
 | b | 10:02:29 | 10:03:45 | [10:02:00,10:03:00]|
 | c | 10:03:12 | 10:04:30 | [10:03:00,10:04:00]|
 
-Anstatt diese Arrays beizubehalten, erweitern Sie Sie mithilfe von [MV-Expand](./mvexpandoperator.md):
+Statt diese Arrays zu behalten, erweitern Sie sie mithilfe von [mv-expand](./mvexpandoperator.md):
 
 ```kusto
 X | mv-expand samples = range(bin(StartTime, 1m), StopTime , 1m)
@@ -250,7 +250,7 @@ X | mv-expand samples = range(bin(StartTime, 1m), StopTime , 1m)
 | c | 10:03:12 | 10:04:30 | 10:03:00|
 | c | 10:03:12 | 10:04:30 | 10:04:00|
 
-Gruppieren Sie nun die Ergebnisse nach Stichproben Zeit, und zählen Sie die Vorkommen der einzelnen Aktivitäten:
+Gruppieren Sie nun die Ergebnisse nach Beispielzeit und Anzahl des Auftretens jeder Aktivität:
 
 ```kusto
 X
@@ -258,8 +258,8 @@ X
 | summarize count(SessionId) by bin(todatetime(samples),1m)
 ```
 
-* Verwenden Sie, `todatetime()` weil die [MV-Expand-](./mvexpandoperator.md) Ergebnisse in einer Spalte des dynamischen Typs angezeigt werden.
-* Verwenden `bin()` Sie, wenn Sie für numerische Werte und Datumsangaben, wenn Sie kein Intervall angeben, `summarize` immer eine `bin()` Funktion mithilfe eines Standard Intervalls anwenden. 
+* Verwenden Sie `todatetime()`, weil [mv-expand](./mvexpandoperator.md) eine Spalte vom dynamischen Typ ergibt.
+* Verwenden Sie `bin()`, weil `summarize` für numerische Werte und Daten immer eine `bin()`-Funktion mit einem Standardintervall anwendet, wenn Sie kein Intervall bereitstellen. 
 
 So sieht die Ausgabe aus:
 
@@ -272,11 +272,11 @@ So sieht die Ausgabe aus:
 | 1 | 10:05:00|
 | 1 | 10:06:00|
 
-Sie können ein Balkendiagramm oder ein Zeitdiagramm verwenden, um die Ergebnisse zu erzeugen.
+Sie können ein Balkendiagramm oder ein Zeitdiagramm verwenden, um die Ergebnisse zu rendern.
 
-## <a name="introduce-null-bins-into-summarize"></a>NULL-Behälter zusammen *fassen*
+## <a name="introduce-null-bins-into-summarize"></a>Einführen von NULL-Intervallen in *summarize*
 
-Wenn der- `summarize` Operator auf einen Gruppenschlüssel angewendet wird, der aus einer Datums-/uhrzeitspalte besteht, werden diese Werte in einen Container mit fester Breite gruppiert:
+Wenn der `summarize`-Operator auf einen Gruppenschlüssel angewendet wird, der aus einer Datums-/Uhrzeitspalte besteht, fassen Sie diese Werte in Intervallen mit fester Breite zusammen:
 
 ```kusto
 let StartTime=ago(12h);
@@ -287,9 +287,9 @@ T
 | summarize Count=count() by bin(Timestamp, 5m)
 ```
 
-In diesem Beispiel wird eine Tabelle mit einer einzelnen Zeile pro Zeilen Gruppe in erstellt `T` , die in die einzelnen Klassen von fünf Minuten fallen.
+In diesem Beispiel wird eine Tabelle mit einer einzelnen Zeile pro Gruppe von Zeilen in `T` erzeugt, die jeweils in Intervalle von fünf Minuten fallen.
 
-Was der Code nicht tut, ist das Hinzufügen von "Null-Containern" – Zeilen für Zeit Korb Werte zwischen `StartTime` und `StopTime` , für die keine entsprechende Zeile in vorhanden ist `T` . Es ist ratsam, die Tabelle mit diesen Containern zu "auffüllen". Dies ist eine Möglichkeit, um dies zu erreichen:
+Der Code fügt keine „NULL-Intervalle“ hinzu – Zeilen für Zeit-Intervallwerte zwischen `StartTime` und `StopTime`, für die es keine entsprechende Zeile in `T` gibt. Es ist ratsam, die Tabelle mit diesen Intervallen „aufzufüllen“. Dies können Sie folgendermaßen durchführen:
 
 ```kusto
 let StartTime=ago(12h);
@@ -306,19 +306,19 @@ T
 | summarize Count=sum(Count) by bin(Timestamp, 5m) // 5 
 ```
 
-Im folgenden finden Sie eine Schritt-für-Schritt-Erläuterung der vorhergehenden Abfrage: 
+Im Folgenden finden Sie eine schrittweise Erläuterung der vorhergehenden Abfrage: 
 
-1. Verwenden Sie den- `union` Operator, um einer Tabelle weitere Zeilen hinzuzufügen. Diese Zeilen werden vom Ausdruck erzeugt `union` .
-1. Der- `range` Operator erzeugt eine Tabelle, die eine einzelne Zeile und Spalte enthält. Die Tabelle wird nicht für die Arbeit mit verwendet `mv-expand` .
-1. Der `mv-expand` -Operator für die `range` -Funktion erstellt so viele Zeilen, wie fünfminütige Behälter zwischen `StartTime` und vorhanden sind `EndTime` .
-1. Verwenden Sie einen `Count` von `0` .
-1. Der- `summarize` Operator gruppiert die Klassen vom ursprünglichen (linken oder äußeren) Argument zu `union` . Der Operator wird auch aus dem inneren Argument in den Container (die NULL-bin-Zeilen) eingeordnet. Durch diesen Vorgang wird sichergestellt, dass die Ausgabe eine Zeile pro bin enthält, deren Wert entweder 0 (null) oder die ursprüngliche Anzahl ist.
+1. Verwenden Sie den `union`-Operator, um einer Tabelle weitere Zeilen hinzuzufügen. Diese Zeilen werden vom `union`-Ausdruck erzeugt.
+1. Der `range`-Operator erzeugt eine Tabelle mit einer einzelnen Zeile und Spalte. Die Tabelle wird ausschließlich dafür verwendet, dass sie von `mv-expand` verarbeitet wird.
+1. Der `mv-expand`-Operator für die `range`-Funktion erstellt so viele Zeilen, wie es 5-Minuten-Intervalle zwischen `StartTime` und `EndTime` gibt.
+1. Verwenden Sie eine `Count` von `0`.
+1. Der `summarize`-Operator gruppiert Intervalle vom ursprünglichen (linken oder äußeren) Argument in `union`. Der Operator fasst auch aus dem inneren Argument darin (die NULL-Intervall-Zeilen) in Intervallen zusammen. Durch diesen Vorgang wird sichergestellt, dass die Ausgabe eine Zeile pro Intervall enthält, deren Wert entweder 0 oder die ursprüngliche Anzahl ist.
 
-## <a name="get-more-from-your-data-by-using-kusto-with-machine-learning"></a>Nutzen Sie Kusto mit Machine Learning, um mehr von Ihren Daten zu erfahren 
+## <a name="get-more-from-your-data-by-using-kusto-with-machine-learning"></a>Verbessern der Auswertung Ihrer Daten mithilfe von Kusto mit Machine Learning 
 
-Viele interessante Anwendungsfälle verwenden Machine Learning-Algorithmen und leiten interessante Einblicke aus Telemetriedaten. Häufig erfordern diese Algorithmen ein streng strukturiertes Dataset als Eingabe. Die Rohdaten des Protokolls entsprechen in der Regel nicht der erforderlichen Struktur und Größe. 
+Viele interessante Anwendungsfälle verwenden Machine Learning-Algorithmen und leiten interessante Erkenntnisse aus Telemetriedaten ab. Häufig erfordern diese Algorithmen ein streng strukturiertes Dataset als Eingabe. Die Protokollrohdaten entsprechen in der Regel nicht der erforderlichen Struktur und Größe. 
 
-Beginnen Sie mit der Suche nach Anomalien in der Fehlerrate eines bestimmten Dienstanschluss Dienstanbieter-Dienstanbieter. Die Tabelle "Logs" weist 65 Milliarden Datensätze auf. Die folgende grundlegende Abfrage filtert 250.000-Fehler und erstellt dann eine Zeitreihe von Fehler zählungs Funktionen, die die Funktion zur Anomalieerkennung [series_decompose_anomalies](series-decompose-anomaliesfunction.md)verwenden. Die Anomalien werden vom Kusto-Dienst erkannt und als rote Punkte im Zeitreihen Diagramm hervorgehoben.
+Beginnen Sie mit der Suche nach Anomalien in der Fehlerrate eines bestimmten Bing-Rückschlussdiensts. Die Tabelle „Logs“ enthält 65 Milliarden Datensätze. Die folgende einfache Abfrage filtert 250.000 Fehler und erstellt dann eine Zeitreihe, der Fehleranzahl, die die Funktion zur Anomalieerkennung [series_decompose_anomalies](series-decompose-anomaliesfunction.md) verwendet. Die Anomalien werden vom Kusto-Dienst erkannt und als rote Punkte im Zeitreihendiagramm hervorgehoben.
 
 ```kusto
 Logs
@@ -328,11 +328,11 @@ Logs
 | render anomalychart 
 ```
 
-Der Dienst hat einige Zeit verbuchten mit verdächtigen Fehlerraten identifiziert. Verwenden Sie Kusto, um zu diesem Zeitrahmen zu zoomen. Führen Sie anschließend eine Abfrage aus, die in der Spalte aggregiert `Message` . Versuchen Sie, die häufigsten Fehler zu finden. 
+Der Dienst hat ein paar Zeitbuckets mit verdächtigen Fehlerraten identifiziert. Verwenden Sie Kusto, um diesen Zeitraum zu vergrößern. Führen Sie dann eine Abfrage aus, die über die `Message`-Spalte aggregiert. Versuchen Sie, die häufigsten Fehler zu finden. 
 
-Die relevanten Teile der gesamten Stapel Überwachung der Nachricht werden verkürzt, sodass die Ergebnisse besser auf die Seite passen. 
+Die relevanten Teile der gesamten Stapelüberwachung von Message werden herausgeschnitten, damit die Ergebnisse besser auf die Seite passen. 
 
-Sie können eine erfolgreiche Identifizierung der ersten acht Fehler sehen. Der nächste Schritt ist jedoch eine lange Reihe von Fehlern, da die Fehlermeldung mit einer Format Zeichenfolge erstellt wurde, die sich ändernde Daten enthielt:
+Sie sehen die erfolgreiche Identifizierung der häufigsten acht Fehler. Das Nächste ist jedoch eine lange Reihe von Fehlern, da die Fehlermeldung mit einer Formatzeichenfolge erstellt wurde, die sich ändernde Daten enthielt:
 
 ```kusto
 Logs
@@ -343,20 +343,20 @@ Logs
 | project count_, Message 
 ```
 
-|count_|Nachricht
+|count_|Meldung
 |---|---
-|7125|Fehler bei "executealgorithmmethod" für die Methode "runcyclefrominteridata"...
-|7125|Inferencehostservice-Rückruf failed..System. NullReferenceException: der Objekt Verweis ist nicht auf eine Instanz eines Objekts festgelegt...
-|7124|Unerwartetes Rückschluss System error..System. NullReferenceException: der Objekt Verweis ist nicht auf eine Instanz eines Objekts festgelegt... 
-|5112|Unerwartetes Rückschluss System error..System. NullReferenceException: der Objekt Verweis ist nicht auf eine Instanz eines Objekts festgelegt.
-|174|Inferencehostservice-Aufruf failed..System. Service Model. CommunicationException: Fehler beim Schreiben in die Pipe:...
-|10|Fehler bei "executealgorithmmethod" für die Methode "runcyclefrominteridata"...
-|10|Rückschluss System Fehler.. Microsoft. zeichnen. Platform. Inferences. Service. Managers. userinterims datamanagerexception:...
-|3|Inferencehostservice-Aufruf failed..System. Service Model. CommunicationObjectFaultedException:...
-|1|System Fehler Rückschluss... Socialgraph. Boss. OperationResponse... AIS-traceid: 8292fc561ac64bed8fa243808fe74efd...
-|1|System Fehler Rückschluss... Socialgraph. Boss. OperationResponse... AIS-traceid: 5f79f7587ff943ec9b641e02e701afbf...
+|7125|Fehler von „ExecuteAlgorithmMethod“ für die Methode „RunCycleFromInterimData“...
+|7125|Fehler des Aufrufs von „InferenceHostService“..System.NullReferenceException: Der Objektverweis wurde nicht auf eine Instanz eines Objekts festgelegt...
+|7124|Unerwarteter Rückschlusssystemfehler..System.NullReferenceException: Der Objektverweis wurde nicht auf eine Instanz eines Objekts festgelegt... 
+|5112|Unerwarteter Rückschlusssystemfehler..System.NullReferenceException: Der Objektverweis wurde nicht auf eine Instanz eines Objekts festgelegt.
+|174|Fehler des Aufrufs von „InferenceHostService“..System.ServiceModel.CommunicationException: Fehler beim Schreiben in die Pipe:...
+|10|Fehler von „ExecuteAlgorithmMethod“ für die Methode „RunCycleFromInterimData“...
+|10|Rückschlusssystemfehler..Microsoft.Bing.Platform.Inferences.Service.Managers.UserInterimDataManagerException:...
+|3|Fehler des Aufrufs von „InferenceHostService“..System.ServiceModel.CommunicationException:...
+|1|Rückschlusssystemfehler... SocialGraph.BOSS.OperationResponse...AIS TraceId:8292FC561AC64BED8FA243808FE74EFD...
+|1|Rückschlusssystemfehler... SocialGraph.BOSS.OperationResponse...AIS TraceId: 5F79F7587FF943EC9B641E02E701AFBF...
 
-An diesem Punkt hilft die Verwendung des- `reduce` Operators. Der-Operator hat 63 verschiedene Fehler identifiziert, die am gleichen Ablauf Verfolgungs Instrumentations Punkt im Code entstanden sind. `reduce` hilft bei der Konzentration auf weitere sinnvolle Fehler Ablauf Verfolgungen in diesem Zeitfenster.
+An dieser Stelle hilft die Verwendung des Operators `reduce`. Der Operator hat 63 verschiedene Fehler identifiziert, die am selben Instrumentierungspunkt im Code der Ablaufverfolgung entstanden sind. `reduce` hilft dabei, sich auf weitere sinnvolle Fehlerablaufverfolgungen in diesem Zeitfenster zu konzentrieren.
 
 ```kusto
 Logs
@@ -368,23 +368,23 @@ Logs
 
 |Anzahl|Muster
 |---|---
-|7125|Fehler bei "executealgorithmmethod" für die Methode "runcyclefrominteridata"...
-|  7125|Inferencehostservice-Rückruf failed..System. NullReferenceException: der Objekt Verweis ist nicht auf eine Instanz eines Objekts festgelegt...
-|  7124|Unerwartetes Rückschluss System error..System. NullReferenceException: der Objekt Verweis ist nicht auf eine Instanz eines Objekts festgelegt...
-|  5112|Unerwartetes Rückschluss System error..System. NullReferenceException: der Objekt Verweis ist nicht auf eine Instanz eines Objekts festgelegt...
-|  174|Inferencehostservice-Aufruf failed..System. Service Model. CommunicationException: Fehler beim Schreiben in die Pipe:...
-|  63|Rückschluss System Fehler.. Microsoft. Print. Platform. Inferences. \* : Write \* zum Schreiben in das Objekt "Boss. \* : socialgraph. Boss. reques..."
-|  10|Fehler bei "executealgorithmmethod" für die Methode "runcyclefrominteridata"...
-|  10|Rückschluss System Fehler.. Microsoft. zeichnen. Platform. Inferences. Service. Managers. userinterims datamanagerexception:...
-|  3|Inferencehostservice-Rückruf failed..System. Service Model. \* : das-Objekt, System. Service Model. Channels. \* + \* , for \* \* ist die \* ... bei Syst...
+|7125|Fehler von „ExecuteAlgorithmMethod“ für die Methode „RunCycleFromInterimData“...
+|  7125|Fehler des Aufrufs von „InferenceHostService“..System.NullReferenceException: Der Objektverweis wurde nicht auf eine Instanz eines Objekts festgelegt...
+|  7124|Unerwarteter Rückschlusssystemfehler..System.NullReferenceException: Der Objektverweis wurde nicht auf eine Instanz eines Objekts festgelegt...
+|  5112|Unerwarteter Rückschlusssystemfehler..System.NullReferenceException: Der Objektverweis wurde nicht auf eine Instanz eines Objekts festgelegt...
+|  174|Fehler des Aufrufs von „InferenceHostService“..System.ServiceModel.CommunicationException: Fehler beim Schreiben in die Pipe:...
+|  63|Rückschlusssystemfehler..Microsoft.Bing.Platform.Inferences.\*: \* schreiben, um in das Objekt BOSS.\* zu schreiben: SocialGraph.BOSS.Reques...
+|  10|Fehler von „ExecuteAlgorithmMethod“ für die Methode „RunCycleFromInterimData“...
+|  10|Rückschlusssystemfehler..Microsoft.Bing.Platform.Inferences.Service.Managers.UserInterimDataManagerException:...
+|  3|Fehler des Aufrufs von „InferenceHostService“..System.ServiceModel.\*: Das Objekt System.ServiceModel.Channels.\*+\* für \*\* ist das \*... bei Syst...
 
-Nun haben Sie einen guten Überblick über die wichtigsten Fehler, die zu den erkannten Anomalien beigetragen haben.
+Nun haben Sie einen guten Überblick über die häufigsten Fehler, die zu den erkannten Anomalien beigetragen haben.
 
-Beachten Sie Folgendes, um die Auswirkungen dieser Fehler auf das Beispiel System zu verstehen: 
-* Die `Logs` Tabelle enthält zusätzliche dimensionale Daten, wie `Component` z `Cluster` . b. und.
-* Mit dem neuen Autocluster-Plug-in können Sie Komponenten-und Cluster Einblicke mit einer einfachen Abfrage ableiten. 
+Beachten Sie Folgendes, um die Auswirkungen dieser Fehler auf das Beispielsystem zu verstehen: 
+* Die Tabelle `Logs` enthält zusätzliche Dimensionsdaten, z. B. `Component` und `Cluster`.
+* Mit dem neuen Autocluster-Plug-In können Sie mit einer einfachen Abfrage Erkenntnisse zu Komponenten und Clustern ableiten. 
 
-Im folgenden Beispiel können Sie deutlich erkennen, dass jeder der ersten vier Fehler für eine Komponente spezifisch ist. Auch wenn die ersten drei Fehler für den db4-Cluster spezifisch sind, tritt der vierte Fehler in allen Clustern auf.
+Im folgenden Beispiel können Sie deutlich erkennen, dass jeder der häufigsten vier Fehler für eine Komponente spezifisch ist. Außerdem tritt der vierte Fehler, auch wenn die häufigsten drei Fehler für den DB4-Cluster spezifisch sind, in allen Clustern auf.
 
 ```kusto
 Logs
@@ -393,27 +393,27 @@ Logs
 | evaluate autocluster()
 ```
 
-|Anzahl |Prozentsatz (%)|Komponente|Cluster|Nachricht
+|Anzahl |Prozentsatz (%)|Komponente|Cluster|Meldung
 |---|---|---|---|---
-|7125|26,64|Inferencehostservice|Db4|Executealgorithmmethod für die Methode...
-|7125|26,64|Unbekannte Komponente|Db4|Fehler beim inferencehostservice-Befehl...
-|7124|26,64|Inferencealgorithmexecutor|Db4|Unerwarteter Rückschluss System Fehler...
-|5112|19,11|Inferencealgorithmexecutor|*|Unerwarteter Rückschluss System Fehler...
+|7125|26,64|InferenceHostService|DB4|ExecuteAlgorithmMethod für Methode...
+|7125|26,64|Unbekannte Komponente|DB4|Fehler des Aufrufs von „InferenceHostService“...
+|7124|26,64|InferenceAlgorithmExecutor|DB4|Unerwarteter Rückschlusssystemfehler...
+|5112|19,11|InferenceAlgorithmExecutor|*|Unerwarteter Rückschlusssystemfehler...
 
-## <a name="map-values-from-one-set-to-another"></a>Zuordnen von Werten aus einem Satz zu einem anderen
+## <a name="map-values-from-one-set-to-another"></a>Zuordnen von Werten aus einem Satz zum anderen
 
-Ein allgemeiner Abfrage Anwendungsfall ist die statische Zuordnung von Werten. Die statische Zuordnung kann dazu beitragen, dass Ergebnisse Präsentations fähig werden.
+Ein gängiger Abfrageanwendungsfall ist die statische Zuordnung von Werten. Die statische Zuordnung kann dazu beitragen, dass sich Ergebnisse besser darstellen lassen.
 
-Beispielsweise gibt in der nächsten Tabelle `DeviceModel` ein Gerätemodell an. Die Verwendung des Geräte Modells ist nicht die bequeme Art, auf den Gerätenamen zu verweisen.  
+In der nächsten Tabelle gibt `DeviceModel` beispielsweise ein Gerätemodell an. Die Verwendung des Gerätemodells ist keine bequeme Methode, um auf den Gerätenamen zu verweisen.  
 
 |DeviceModel |Anzahl 
 |---|---
-|iPhone5, 1 |32 
-|iPhone3, 2 |432 
-|iPhone7, 2 |55 
-|iPhone5, 2 |66 
+|iPhone5,1 |32 
+|iPhone3,2 |432 
+|iPhone7,2 |55 
+|iPhone5,2 |66 
 
- Die Verwendung eines anzeigen Amens ist bequemer:  
+ Die Verwendung eines Anzeigenamens ist bequemer:  
 
 |FriendlyName |Anzahl 
 |---|---
@@ -422,11 +422,11 @@ Beispielsweise gibt in der nächsten Tabelle `DeviceModel` ein Gerätemodell an.
 |iPhone 6 |55 
 |iPhone5 |66 
 
-Die folgenden beiden Beispiele veranschaulichen, wie Sie von der Verwendung eines Geräte Modells zu einem anzeigen Amen wechseln, um ein Gerät zu identifizieren.  
+Die nächsten beiden Beispiele veranschaulichen, wie Sie von der Verwendung des Gerätemodells zum Anzeigenamen wechseln, um ein Gerät zu identifizieren.  
 
 ### <a name="map-by-using-a-dynamic-dictionary"></a>Zuordnen mithilfe eines dynamischen Wörterbuchs
 
-Die Zuordnung kann mithilfe eines dynamischen Wörterbuchs und dynamischer Accessoren erreicht werden. Beispiel:
+Sie können die Zuordnung mithilfe eines dynamischen Wörterbuchs und dynamischer Zugriffsmethoden erzielen. Zum Beispiel:
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -459,9 +459,9 @@ Source
 
 ### <a name="map-by-using-a-static-table"></a>Zuordnen mithilfe einer statischen Tabelle
 
-Sie können die Zuordnung auch mit einer permanenten Tabelle und einem `join` Operator erreichen.
+Sie können die Zuordnung auch mithilfe einer persistenten Tabelle und eines `join`-Operators erzielen.
  
-1. Erstellen Sie die Mapping-Tabelle nur einmal:
+1. Erstellen Sie die Zuordnungstabelle nur einmal:
 
     ```kusto
     .create table Devices (DeviceModel: string, FriendlyName: string) 
@@ -470,16 +470,16 @@ Sie können die Zuordnung auch mit einer permanenten Tabelle und einem `join` Op
         ["iPhone5,1","iPhone 5"]["iPhone3,2","iPhone 4"]["iPhone7,2","iPhone 6"]["iPhone5,2","iPhone5"]
     ```
 
-1. Erstellen Sie eine Tabelle mit dem Inhalt des Geräts:
+1. Erstellen einer Tabelle der Geräteinhalte:
 
     |DeviceModel |FriendlyName 
     |---|---
-    |iPhone5, 1 |iPhone 5 
-    |iPhone3, 2 |iPhone 4 
-    |iPhone7, 2 |iPhone 6 
-    |iPhone5, 2 |iPhone5 
+    |iPhone5,1 |iPhone 5 
+    |iPhone3,2 |iPhone 4 
+    |iPhone7,2 |iPhone 6 
+    |iPhone5,2 |iPhone5 
 
-1. Erstellen Sie eine Test Tabellen Quelle:
+1. Erstellen Sie eine Testtabellenquelle:
 
     ```kusto
     .create table Source (DeviceModel: string, Count: int)
@@ -499,17 +499,17 @@ So sieht die Ausgabe aus:
 
 |FriendlyName |Anzahl 
 |---|---
-|iPhone 5 |32 
-|iPhone 4 |432 
-|iPhone 6 |55 
+|iPhone 5 |32 
+|iPhone 4 |432 
+|iPhone 6 |55 
 |iPhone5 |66 
 
 
-## <a name="create-and-use-query-time-dimension-tables"></a>Erstellen und Verwenden von Abfragezeit-Dimensions Tabellen
+## <a name="create-and-use-query-time-dimension-tables"></a>Erstellen und Verwenden von Abfragezeit-Dimensionstabellen
 
-Häufig möchten Sie die Ergebnisse einer Abfrage mit einer Ad-hoc-Dimensions Tabelle verknüpfen, die nicht in der Datenbank gespeichert ist. Sie können einen Ausdruck definieren, dessen Ergebnis eine Tabelle ist, die auf eine einzelne Abfrage beschränkt ist. 
+Häufig möchten Sie die Ergebnisse einer Abfrage mit einer Ad-hoc-Dimensionstabelle verknüpfen, die nicht in der Datenbank gespeichert ist. Sie können einen Ausdruck definieren, dessen Ergebnis eine Tabelle ist, die auf eine einzelne Abfrage beschränkt ist. 
 
-Beispiel:
+Zum Beispiel:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -525,7 +525,7 @@ DimTable
 | summarize count() by Code
 ```
 
-Im folgenden finden Sie ein etwas komplexeres Beispiel:
+Hier sehen Sie ein nur unwesentlich komplexeres Beispiel:
 
 ```kusto
 // Create a query-time dimension table using datatable
@@ -548,12 +548,12 @@ JobHistory
 
 ## <a name="retrieve-the-latest-records-by-timestamp-per-identity"></a>Abrufen der neuesten Datensätze (nach Zeitstempel) pro Identität
 
-Angenommen, Sie verfügen über eine Tabelle, die Folgendes enthält:
-* Eine `ID` Spalte, die die Entität identifiziert, der die einzelnen Zeilen zugeordnet sind, z. b. eine Benutzer-ID oder eine Knoten-ID.
-* Eine `timestamp` Spalte, die den Zeit Verweis für die Zeile bereitstellt.
+Angenommen, Sie haben eine Tabelle, die Folgendes enthält:
+* Eine `ID`-Spalte, die die Entität identifiziert, der jede einzelne Zeile zugeordnet ist, z. B. eine Benutzer-ID oder eine Knoten-ID.
+* Eine `timestamp`-Spalte, die den Zeitverweis für die Zeile bereitstellt.
 * Andere Spalten
 
-Sie können den [Top-netsted-Operator](topnestedoperator.md) verwenden, um eine Abfrage zu erstellen, die die letzten beiden Datensätze für jeden Wert der Spalte zurückgibt `ID` , wobei _Latest_ als _der höchste `timestamp` Wert von_ definiert ist:
+Mit dem [„top-nested“-Operator](topnestedoperator.md) können Sie eine Abfrage erstellen, die die neuesten beiden Datensätze für jeden Wert der Spalte `ID` zurückgibt, wobei _neueste_ als _mit dem höchsten Wert von `timestamp`_ definiert ist:
 
 ```kusto
 datatable(id:string, timestamp:datetime, bla:string)           // #1
@@ -572,38 +572,38 @@ datatable(id:string, timestamp:datetime, bla:string)           // #1
 ```
 
 
-Im folgenden finden Sie eine ausführliche Erläuterung der vorhergehenden Abfrage (die Nummerierung bezieht sich auf die Zahlen in den Code Kommentaren):
+Im Folgenden finden Sie eine schrittweise Erläuterung der vorhergehenden Abfrage (die Nummerierung bezieht sich auf die Zahlen in den Codekommentaren):
 
-1. Der `datatable` ist eine Möglichkeit, Testdaten zu Demonstrationszwecken zu liefern. Normalerweise verwenden Sie hier echte Daten.
-1. Dies bedeutet im Wesentlichen, dass _alle unterschiedlichen `id` Werte von zurückgegeben_ werden. 
-1. Diese Zeile wird dann für die ersten beiden Datensätze, die maximiert werden, zurückgegeben:
-     * Die `timestamp` Spalte
-     * Die Spalten der vorhergehenden Ebene (hier, einfach `id` )
-     * Die auf dieser Ebene angegebene Spalte (hier, `timestamp` ).
-1. Diese Zeile fügt die Werte der- `bla` Spalte für jeden der von der vorangehenden Ebene zurückgegebenen Datensätze hinzu. Wenn die Tabelle andere Spalten enthält, an denen Sie interessiert sind, können Sie diese Zeile für jede dieser Spalten wiederholen.
-1. In der letzten Zeile werden die "zusätzlichen" Spalten, die von eingeführt werden, mithilfe des Projekt Entfernungs [Operators](projectawayoperator.md) entfernt `top-nested` .
+1. Die `datatable` ist eine Möglichkeit, Testdaten zu Demonstrationszwecken zu erzeugen. Normalerweise würden Sie hier echte Daten verwenden.
+1. Diese Zeile bedeutet im Wesentlichen _alle unterschiedlichen Werte von `id` zurückgeben_. 
+1. Diese Zeile gibt dann Ergebnisse für die obersten beiden Datensätze zurück, die ein Maximum bilden:
+     * Die `timestamp`-Spalte
+     * Die Spalten der vorangehenden Ebene (hier nur `id`)
+     * Die auf dieser Ebene angegebene Spalte (hier `timestamp`)
+1. In dieser Zeile werden die Werte der Spalte `bla` für jeden der Datensätze, die von der vorangehenden Ebene zurückgegeben werden, addiert. Wenn die Tabelle weitere Spalten enthält, an denen Sie interessiert sind, können Sie diese Zeile für jede dieser Spalten wiederholen.
+1. In der letzten Zeile wird der [„project-away“-Operator](projectawayoperator.md) verwendet, um die „zusätzlichen“ Spalten zu entfernen, die von `top-nested` eingeführt werden.
 
 ## <a name="extend-a-table-by-a-percentage-of-the-total-calculation"></a>Erweitern einer Tabelle um einen Prozentsatz der Gesamtberechnung
 
-Ein Tabellen Ausdruck, der eine numerische Spalte enthält, ist für den Benutzer nützlicher, wenn er von seinem Wert als Prozentsatz des Gesamtwerts begleitet wird.
+Ein Tabellenausdruck, der eine numerische Spalte enthält, ist für den Benutzer nützlicher, wenn er von seinem Wert als Prozentsatz des Gesamtwerts begleitet wird.
 
 Nehmen Sie beispielsweise an, dass eine Abfrage die folgende Tabelle erzeugt:
 
-|Someseries|Someint|
+|SomeSeries|SomeInt|
 |----------|-------|
 |Apple       |    100|
 |Banana       |    200|
 
 Sie möchten die Tabelle wie folgt anzeigen:
 
-|Someseries|Someint|P |
+|SomeSeries|SomeInt|Proz. |
 |----------|-------|----|
 |Apple       |    100|33,3|
 |Banana       |    200|66,6|
 
-Wenn Sie die Anzeige der Tabelle ändern möchten, berechnen Sie die Summe (Summe) der `SomeInt` Spalte, und Dividieren Sie dann jeden Wert dieser Spalte durch die Summe. Verwenden Sie für beliebige Ergebnisse den [as-Operator](asoperator.md).
+Um die Darstellungsweise der Tabelle zu ändern, berechnen Sie den Gesamtwert (Summe) der Spalte `SomeInt` und teilen dann jeden Wert dieser Spalte durch den Gesamtwert. Um beliebige Ergebnisse zu erzielen, verwenden Sie den [as-Operator](asoperator.md).
 
-Beispiel:
+Zum Beispiel:
 
 ```kusto
 // The following table literally represents a long calculation
@@ -619,32 +619,32 @@ datatable (SomeInt:int, SomeSeries:string) [
 | extend Pct = 100 * bin(todouble(SomeInt) / toscalar(X | summarize sum(SomeInt)), 0.001)
 ```
 
-## <a name="perform-aggregations-over-a-sliding-window"></a>Ausführen von Aggregationen in einem gleitenden Fenster
+## <a name="perform-aggregations-over-a-sliding-window"></a>Durchführen von Aggregation über ein gleitendes Fenster
 
-Im folgenden Beispiel wird gezeigt, wie Spalten mithilfe eines gleitenden Fensters zusammengefasst werden. Verwenden Sie für die Abfrage die folgende Tabelle, die die Preise für Früchte nach Zeitstempeln enthält.
+Im folgenden Beispiel wird gezeigt, wie Sie Spalten mithilfe eines gleitenden Fensters zusammenfassen. Verwenden Sie für die Abfrage die folgende Tabelle, die die Preise von Obst nach Zeitstempeln enthält.
 
-Berechnen Sie die Mindest-, höchst-und Summen Kosten der einzelnen Früchte pro Tag mithilfe eines gleitenden Fensters von sieben Tagen. Jeder Datensatz im Resultset aggregiert die vorangegangenen sieben Tage, und die Ergebnisse enthalten einen Datensatz pro Tag im Analysezeitraum.
+Berechnen Sie die Mindest-, Höchst- und Gesamtkosten der einzelnen Früchte pro Tag, indem Sie ein gleitendes Fenster von sieben Tagen verwenden. Jeder Datensatz im Resultset aggregiert die vorangegangenen sieben Tage, und die Ergebnisse enthalten einen Datensatz pro Tag im Analysezeitraum.
 
-Frucht Tabelle:
+Obst-Tabelle:
 
 |Timestamp|Frucht|Preis|
 |---|---|---|
 |2018-09-24 21:00:00.0000000|Bananen|3|
 |2018-09-25 20:00:00.0000000|Äpfel|9|
 |2018-09-26 03:00:00.0000000|Bananen|4|
-|2018-09-27 10:00:00.0000000|Plums|8|
+|2018-09-27 10:00:00.0000000|Pflaumen|8|
 |2018-09-28 07:00:00.0000000|Bananen|6|
 |2018-09-29 21:00:00.0000000|Bananen|8|
-|2018-09-30 01:00:00.0000000|Plums|2|
+|2018-09-30 01:00:00.0000000|Pflaumen|2|
 |2018-10-01 05:00:00.0000000|Bananen|0|
 |2018-10-02 02:00:00.0000000|Bananen|0|
-|2018-10-03 13:00:00.0000000|Plums|4|
+|2018-10-03 13:00:00.0000000|Pflaumen|4|
 |2018-10-04 14:00:00.0000000|Äpfel|8|
 |2018-10-05 05:00:00.0000000|Bananen|2|
-|2018-10-06 08:00:00.0000000|Plums|8|
+|2018-10-06 08:00:00.0000000|Pflaumen|8|
 |2018-10-07 12:00:00.0000000|Bananen|0|
 
-Hier ist die Aggregations Abfrage für das gleitende Fenster. Weitere Informationen finden Sie in der Erläuterung nach dem Abfrageergebnis.
+Hier sehen Sie die Aggregationsabfrage für das gleitende Fenster. Weitere Informationen finden Sie in der Erläuterung im Anschluss an das Abfrageergebnis.
 
 ```kusto
 let _start = datetime(2018-09-24);
@@ -667,43 +667,43 @@ So sieht die Ausgabe aus:
 |---|---|---|---|---|
 |2018-10-01 00:00:00.0000000|Äpfel|9|9|9|
 |2018-10-01 00:00:00.0000000|Bananen|0|8|18|
-|2018-10-01 00:00:00.0000000|Plums|2|8|10|
+|2018-10-01 00:00:00.0000000|Pflaumen|2|8|10|
 |2018-10-02 00:00:00.0000000|Bananen|0|8|18|
-|2018-10-02 00:00:00.0000000|Plums|2|8|10|
-|2018-10-03 00:00:00.0000000|Plums|2|8|14|
+|2018-10-02 00:00:00.0000000|Pflaumen|2|8|10|
+|2018-10-03 00:00:00.0000000|Pflaumen|2|8|14|
 |2018-10-03 00:00:00.0000000|Bananen|0|8|14|
 |2018-10-04 00:00:00.0000000|Bananen|0|8|14|
-|2018-10-04 00:00:00.0000000|Plums|2|4|6|
+|2018-10-04 00:00:00.0000000|Pflaumen|2|4|6|
 |2018-10-04 00:00:00.0000000|Äpfel|8|8|8|
 |2018-10-05 00:00:00.0000000|Bananen|0|8|10|
-|2018-10-05 00:00:00.0000000|Plums|2|4|6|
+|2018-10-05 00:00:00.0000000|Pflaumen|2|4|6|
 |2018-10-05 00:00:00.0000000|Äpfel|8|8|8|
-|2018-10-06 00:00:00.0000000|Plums|2|8|14|
+|2018-10-06 00:00:00.0000000|Pflaumen|2|8|14|
 |2018-10-06 00:00:00.0000000|Bananen|0|2|2|
 |2018-10-06 00:00:00.0000000|Äpfel|8|8|8|
 |2018-10-07 00:00:00.0000000|Bananen|0|2|2|
-|2018-10-07 00:00:00.0000000|Plums|4|8|12|
+|2018-10-07 00:00:00.0000000|Pflaumen|4|8|12|
 |2018-10-07 00:00:00.0000000|Äpfel|8|8|8|
 
-Die Abfrage "gestreckt" (dupliziert) jeden Datensatz in der Eingabe Tabelle in den sieben Tagen nach der tatsächlichen Darstellung. Jeder Datensatz wird tatsächlich sieben Mal angezeigt. Folglich umfasst die tägliche Aggregation alle Datensätze der vorangegangenen sieben Tage.
+Die Abfrage „streckt“ (dupliziert) jeden Datensatz in der Eingabetabelle über die sieben Tagen nach seinem tatsächlichen Auftreten. Jeder Datensatz wird tatsächlich sieben Mal angezeigt. Folglich umfasst die tägliche Aggregation alle Datensätze der vorangegangenen sieben Tage.
 
 
-Im folgenden finden Sie eine Schritt-für-Schritt-Erläuterung der vorhergehenden Abfrage: 
+Im Folgenden finden Sie eine schrittweise Erläuterung der vorhergehenden Abfrage: 
 
-1. Jeden Datensatz auf einen Tag (relativ zu `_start` ) einfügen. 
-1. Bestimmen Sie das Ende des Bereichs pro Datensatz: `_bin + 7d` , es sei denn, der Wert liegt außerhalb des Bereichs von `_start` und `_end` . in diesem Fall wird er angepasst. 
-1. Erstellen Sie für jeden Datensatz ein Array von sieben Tagen (Timestamps), beginnend mit dem Tag des aktuellen Datensatzes. 
-1. `mv-expand` Das Array, wodurch jeder Datensatz in sieben Datensätze duplizieren, ein Tag voneinander getrennt. 
-1. Führen Sie die Aggregations Funktion für jeden Tag aus. Aufgrund #4 fasst dieser Schritt tatsächlich die _letzten_ sieben Tage zusammen. 
-1. Die Daten für die ersten sieben Tage sind unvollständig, da für die ersten sieben Tage kein Zeitraum von sieben Tagen vorhanden ist. Die ersten sieben Tage werden aus dem Endergebnis ausgeschlossen. In diesem Beispiel sind Sie nur in der Aggregation für 2018-10-01 teilnehmen.
+1. Fassen Sie jeden Datensatz in einem Intervall von einem Tag (relativ zu `_start`) zusammen. 
+1. Bestimmen Sie das Ende des Bereichs pro Datensatz: `_bin + 7d`, es sei denn, der Wert liegt außerhalb des Bereichs von `_start` und `_end`. In diesem Fall wird er angepasst. 
+1. Erstellen Sie für jeden Datensatz ein Array von sieben Tagen (Zeitstempeln), beginnend mit dem Tag des aktuellen Datensatzes. 
+1. Wenden Sie `mv-expand` auf das Array an, wodurch jeder Datensatz in sieben Datensätze dupliziert wird, jeweils einen Tag auseinander. 
+1. Führen Sie die Aggregatfunktion für jeden Tag aus. Aufgrund von #4 fasst dieser Schritt tatsächlich die _vergangenen_ sieben Tagen zusammen. 
+1. Die Daten für die ersten sieben Tage sind unvollständig, da für die ersten sieben Tage kein Rückblickzeitraum von sieben Tagen vorhanden ist. Die ersten sieben Tage werden aus dem Endergebnis ausgeschlossen. In diesem Beispiel sind Sie nur Bestandteil der Aggregation für 2018-10-01.
 
-## <a name="find-the-preceding-event"></a>Vorheriges Ereignis suchen
+## <a name="find-the-preceding-event"></a>Suchen des vorhergehenden Ereignisses
 
-Im nächsten Beispiel wird veranschaulicht, wie Sie ein vorhergehenden Ereignis zwischen zwei Datasets finden.  
+Im nächsten Beispiel wird veranschaulicht, wie Sie ein vorhergehendes Ereignis zwischen zwei Datasets finden.  
 
-Sie verfügen über zwei Datasets: A und B. Suchen Sie für jeden Datensatz in DataSet B das vorherige Ereignis in DataSet a (d `arg_max` . h. den Datensatz in einem, der noch _älter_ als B ist).
+Sie verfügen über zwei Datasets: A und B. Suchen Sie für jeden Datensatz in Dataset B sein vorheriges Ereignis in Dataset A (d. h. den `arg_max`-Datensatz in A, der noch _älter_ als B ist).
 
-Im folgenden finden Sie die Beispiel Datasets: 
+Hier sehen Sie die Beispieldatasets: 
 
 ```kusto
 let A = datatable(Timestamp:datetime, ID:string, EventA:string)
@@ -724,7 +724,7 @@ let B = datatable(Timestamp:datetime, ID:string, EventB:string)
 A; B
 ```
 
-|Timestamp|id|Eventb|
+|Timestamp|ID|EventB|
 |---|---|---|
 |2019-01-01 00:00:00.0000000|x|Ax1|
 |2019-01-01 00:00:00.0000000|z|Az1|
@@ -734,7 +734,7 @@ A; B
 
 </br>
 
-|Timestamp|id|Eventa|
+|Timestamp|ID|EventA|
 |---|---|---|
 |2019-01-01 00:00:03.0000000|x|B|
 |2019-01-01 00:00:04.0000000|x|B|
@@ -743,21 +743,21 @@ A; B
 
 Erwartete Ausgabe: 
 
-|id|Timestamp|Eventb|A_Timestamp|Eventa|
+|ID|Timestamp|EventB|A_Timestamp|EventA|
 |---|---|---|---|---|
 |x|2019-01-01 00:00:03.0000000|B|2019-01-01 00:00:01.0000000|Ax2|
 |x|2019-01-01 00:00:04.0000000|B|2019-01-01 00:00:01.0000000|Ax2|
 |j|2019-01-01 00:00:04.0000000|B|2019-01-01 00:00:02.0000000|Ay1|
 |z|2019-01-01 00:02:00.0000000|B|2019-01-01 00:00:00.0000000|Az1|
 
-Wir empfehlen zwei unterschiedliche Ansätze für dieses Problem. Sie können beide für ihr bestimmtes Dataset testen, um das zu finden, das für Ihr Szenario am besten geeignet ist.
+Wir empfehlen zwei unterschiedliche Ansätze für dieses Problem. Sie können beide mit Ihrem spezifischen Dataset testen, um den herauszufinden, der für Ihr Szenario am besten geeignet ist.
 
 > [!NOTE] 
-> Jeder Ansatz kann für unterschiedliche DataSets unterschiedlich ausgeführt werden.
+> Jeder Ansatz wird mit verschiedenen Datasets möglicherweise unterschiedlich ausgeführt.
 
-### <a name="approach-1"></a>Ansatz 1
+### <a name="approach-1"></a>Ansatz 1
 
-Bei diesem Ansatz werden Datasets nach ID und Timestamp serialisiert. Anschließend werden alle Ereignisse in DataSet B mit all ihren vorstehenden Ereignissen in DataSet a gruppiert. Schließlich werden `arg_max` alle Ereignisse in DataSet A in der Gruppe ausgewählt.
+Bei diesem Ansatz werden beide Datasets nach ID und Zeitstempel serialisiert. Anschließend werden alle Ereignisse in Dataset B mit allen ihren vorangehenden Ereignissen in Dataset A gruppiert. Schließlich wählt er unter allen Ereignissen in Dataset A in der Gruppe den `arg_max` aus.
 
 ```kusto
 A
@@ -772,13 +772,13 @@ A
 | project-away t
 ```
 
-### <a name="approach-2"></a>Ansatz 2
+### <a name="approach-2"></a>Ansatz 2
 
-Diese Vorgehensweise zum Lösen des Problems erfordert einen maximalen Such Zeitraum. Der Ansatz prüft, wie viel _älter_ der Datensatz in DataSet a mit DataSet B verglichen werden kann. Die-Methode fügt dann die beiden Datasets basierend auf der ID und diesem loobackzeitraum an.
+Dieser Ansatz zum Lösen des Problems erfordert einen maximalen Rückblickzeitraum. Der Ansatz untersucht, um wie viel _älter_ der Datensatz in Dataset A im Vergleich zu dem in Dataset B sein könnte. Die Methode verknüpft dann die beiden Datasets auf Grundlage der ID und dieses Rückblickzeitraums.
 
-Das `join` erzeugt alle möglichen Kandidaten, alle Datasets A-Datensätze, die älter sind als Datensätze in DataSet B und innerhalb des Such Zeitraums. Anschließend wird der am nächsten liegenden DataSet B nach gefiltert `arg_min (TimestampB - TimestampA)` . Der kürzerer Zeitraum ist, desto besser sind die Abfrageergebnisse.
+`join` gerzeugt alle möglichen Kandidaten, alle Dataset A-Datensätze, die älter sind als Datensätze in Dataset B und innerhalb des Rückblickzeitraums. Anschließend wird der, der am nächste an dem in Dataset B liegt, nach `arg_min (TimestampB - TimestampA)` gefiltert. Je kürzer der Rückblickzeitraum ist, desto besser werden die Abfrageergebnisse.
 
-Im folgenden Beispiel wird der Such Zeitraum auf festgelegt `1m` . Der Datensatz mit der ID weist `z` kein entsprechendes `A` Ereignis auf, da sein `A` Ereignis um zwei Minuten älter ist.
+Im folgenden Beispiel ist der Rückblickzeitraum auf `1m` festgelegt. Der Datensatz mit der ID `z` weist kein entsprechendes `A`-Ereignis auf, weil sein `A`-Ereignis um zwei Minuten älter ist.
 
 ```kusto 
 let _maxLookbackPeriod = 1m;  
@@ -804,7 +804,7 @@ B_events
 | project ID, B_Timestamp, A_Timestamp, EventB, EventA
 ```
 
-|id|B_Timestamp|A_Timestamp|Eventb|Eventa|
+|ID|B_Timestamp|A_Timestamp|EventB|EventA|
 |---|---|---|---|---|
 |x|2019-01-01 00:00:03.0000000|2019-01-01 00:00:01.0000000|B|Ax2|
 |x|2019-01-01 00:00:04.0000000|2019-01-01 00:00:01.0000000|B|Ax2|
@@ -814,21 +814,21 @@ B_events
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-- Durchlaufen Sie ein [Tutorial zur Kusto-Abfragesprache](tutorial.md?pivots=azuredataexplorer).
+- Exemplarische Vorgehensweise anhand eines [Tutorials zur Kusto-Abfragesprache](tutorial.md?pivots=azuredataexplorer).
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
-Dieser Artikel identifiziert allgemeine Abfrage Anforderungen in Azure Monitor und erläutert, wie Sie die Kusto-Abfragesprache verwenden können, um Sie zu erfüllen.
+Dieser Artikel identifiziert Anforderungen an gängige Abfragen in Azure Monitor und erläutert, wie Sie die Kusto-Abfragesprache verwenden können, um sie zu erfüllen.
 
 ## <a name="string-operations"></a>Zeichenfolgenvorgänge
 
-In den folgenden Abschnitten erfahren Sie, wie Sie mit Zeichen folgen arbeiten, wenn Sie die Kusto-Abfragesprache verwenden.
+In den folgenden Abschnitten finden Sie Beispiele für das Arbeiten mit Zeichenfolgen, wenn Sie die Kusto-Abfragesprache verwenden.
 
-### <a name="strings-and-how-to-escape-them"></a>Zeichen folgen und deren Escapezeichen
+### <a name="strings-and-how-to-escape-them"></a>Zeichenfolgen und deren Escapezeichen
 
-Zeichen folgen Werte werden entweder in einfache oder doppelte Anführungszeichen eingeschlossen. Fügen Sie den umgekehrten Schrägstrich ( \\ ) links neben einem Zeichen hinzu, um das Zeichen mit Escapezeichen zu versehen: für `\t` die Tab-Taste, für `\n` die neue Zeile und `\"` für das einfache Anführungszeichen.
+Zeichenfolgenwerte werden entweder in einfache oder doppelte Anführungszeichen eingeschlossen. Fügen Sie den umgekehrten Schrägstrich (\\) links von einem Zeichen hinzu, um das Zeichen zu escapen: `\t` für Tabulator, `\n` für Zeilenvorschub und `\"` für das einfache Anführungszeichen.
 
 ```kusto
 print "this is a 'string' literal in double \" quotes"
@@ -847,54 +847,54 @@ print @"C:\backslash\not\escaped\with @ prefix"
 
 ### <a name="string-comparisons"></a>Zeichenfolgenvergleiche
 
-Operator       |BESCHREIBUNG                         |Groß-/Kleinschreibung|Beispiel (ergibt `true`)
+Operator       |BESCHREIBUNG                         |Beachtet Groß-/Kleinschreibung|Beispiel (ergibt `true`)
 ---------------|------------------------------------|--------------|-----------------------
 `==`           |Equals                              |Ja           |`"aBc" == "aBc"`
 `!=`           |Not Equals                          |Ja           |`"abc" != "ABC"`
 `=~`           |Equals                              |Nein            |`"abc" =~ "ABC"`
 `!~`           |Not Equals                          |Nein            |`"aBc" !~ "xyz"`
-`has`          |Der Wert auf der rechten Seite ist ein ganzer Begriff in der linken Seite. |Nein|`"North America" has "america"`
-`!has`         |Der Rechte Wert ist kein vollständiger Begriff auf der linken Seite.       |Nein            |`"North America" !has "amer"` 
-`has_cs`       |Der Wert auf der rechten Seite ist ein ganzer Begriff in der linken Seite. |Ja|`"North America" has_cs "America"`
-`!has_cs`      |Der Rechte Wert ist kein vollständiger Begriff auf der linken Seite.       |Ja            |`"North America" !has_cs "amer"` 
-`hasprefix`    |Der Wert auf der rechten Seite ist ein Begriffs Präfix im Wert der linken Seite.         |Nein            |`"North America" hasprefix "ame"`
-`!hasprefix`   |Der Wert auf der rechten Seite ist kein Begriffs Präfix in der linken Seite.     |Nein            |`"North America" !hasprefix "mer"` 
-`hasprefix_cs`    |Der Wert auf der rechten Seite ist ein Begriffs Präfix im Wert der linken Seite.         |Ja            |`"North America" hasprefix_cs "Ame"`
-`!hasprefix_cs`   |Der Wert auf der rechten Seite ist kein Begriffs Präfix in der linken Seite.     |Ja            |`"North America" !hasprefix_cs "CA"` 
-`hassuffix`    |Der Wert auf der rechten Seite ist ein Begriff Suffix in der linken Seite.         |Nein            |`"North America" hassuffix "ica"`
-`!hassuffix`   |Der Wert der rechten Seite ist kein Begriffs Suffix in der linken Seite.     |Nein            |`"North America" !hassuffix "americ"`
-`hassuffix_cs`    |Der Wert auf der rechten Seite ist ein Begriff Suffix in der linken Seite.         |Ja            |`"North America" hassuffix_cs "ica"`
-`!hassuffix_cs`   |Der Wert der rechten Seite ist kein Begriffs Suffix in der linken Seite.     |Ja            |`"North America" !hassuffix_cs "icA"`
-`contains`     |Der Rechte Wert tritt als unter Sequenz des linksseitigen Werts auf.  |Nein            |`"FabriKam" contains "BRik"`
-`!contains`    |Der rechtsseitige Wert tritt nicht in der linken Seite auf.           |Nein            |`"Fabrikam" !contains "xyz"`
-`contains_cs`   |Der Rechte Wert tritt als unter Sequenz des linksseitigen Werts auf.  |Ja           |`"FabriKam" contains_cs "Kam"`
-`!contains_cs`  |Der rechtsseitige Wert tritt nicht in der linken Seite auf.           |Ja           |`"Fabrikam" !contains_cs "Kam"`
-`startswith`   |Der Wert auf der rechten Seite ist eine anfängliche unter Sequenz des Werts auf der linken Seite.|Nein            |`"Fabrikam" startswith "fab"`
-`!startswith`  |Der Rechte Wert ist keine anfängliche unter Sequenz des Werts auf der linken Seite.|Nein        |`"Fabrikam" !startswith "kam"`
-`startswith_cs`   |Der Wert auf der rechten Seite ist eine anfängliche unter Sequenz des Werts auf der linken Seite.|Ja            |`"Fabrikam" startswith_cs "Fab"`
-`!startswith_cs`  |Der Rechte Wert ist keine anfängliche unter Sequenz des Werts auf der linken Seite.|Ja        |`"Fabrikam" !startswith_cs "fab"`
-`endswith`     |Der Wert auf der rechten Seite ist eine schließende unter Sequenz des Werts auf der linken Seite.|Nein             |`"Fabrikam" endswith "Kam"`
-`!endswith`    |Der Rechte Wert ist keine schließende unter Sequenz des Werts auf der linken Seite.|Nein         |`"Fabrikam" !endswith "brik"`
-`endswith_cs`     |Der Wert auf der rechten Seite ist eine schließende unter Sequenz des Werts auf der linken Seite.|Ja             |`"Fabrikam" endswith "Kam"`
-`!endswith_cs`    |Der Rechte Wert ist keine schließende unter Sequenz des Werts auf der linken Seite.|Ja         |`"Fabrikam" !endswith "brik"`
-`matches regex`|Der Wert auf der linken Seite enthält eine Entsprechung für den Wert auf der rechten Seite.|Ja           |`"Fabrikam" matches regex "b.*k"`
+`has`          |Rechter Wert ist vollständig im linken Wert enthalten |Nein|`"North America" has "america"`
+`!has`         |Rechter Wert ist nicht vollständig im linken Wert enthalten       |Nein            |`"North America" !has "amer"` 
+`has_cs`       |Rechter Wert ist vollständig im linken Wert enthalten |Ja|`"North America" has_cs "America"`
+`!has_cs`      |Rechter Wert ist nicht vollständig im linken Wert enthalten       |Ja            |`"North America" !has_cs "amer"` 
+`hasprefix`    |Rechter Wert ist ein Termpräfix im linken Wert         |Nein            |`"North America" hasprefix "ame"`
+`!hasprefix`   |Rechter Wert ist kein Termpräfix im linken Wert     |Nein            |`"North America" !hasprefix "mer"` 
+`hasprefix_cs`    |Rechter Wert ist ein Termpräfix im linken Wert         |Ja            |`"North America" hasprefix_cs "Ame"`
+`!hasprefix_cs`   |Rechter Wert ist kein Termpräfix im linken Wert     |Ja            |`"North America" !hasprefix_cs "CA"` 
+`hassuffix`    |Rechter Wert ist ein Termsuffix im linken Wert         |Nein            |`"North America" hassuffix "ica"`
+`!hassuffix`   |Rechter Wert ist kein Termsuffix im linken Wert     |Nein            |`"North America" !hassuffix "americ"`
+`hassuffix_cs`    |Rechter Wert ist ein Termsuffix im linken Wert         |Ja            |`"North America" hassuffix_cs "ica"`
+`!hassuffix_cs`   |Rechter Wert ist kein Termsuffix im linken Wert     |Ja            |`"North America" !hassuffix_cs "icA"`
+`contains`     |Right-side value occurs as a subsequence of left-side value  |Nein            |`"FabriKam" contains "BRik"`
+`!contains`    |Rechter Wert kommt nicht im linken Wert vor           |Nein            |`"Fabrikam" !contains "xyz"`
+`contains_cs`   |Rechter Wert kommt als Teilzeichenfolge im linken Wert vor  |Ja           |`"FabriKam" contains_cs "Kam"`
+`!contains_cs`  |Rechter Wert kommt nicht im linken Wert vor           |Ja           |`"Fabrikam" !contains_cs "Kam"`
+`startswith`   |Rechter Wert ist eine anfängliche Teilzeichenfolge im linken Wert|Nein            |`"Fabrikam" startswith "fab"`
+`!startswith`  |Rechter Wert ist keine anfängliche Teilzeichenfolge im linken Wert|Nein        |`"Fabrikam" !startswith "kam"`
+`startswith_cs`   |Rechter Wert ist eine Teilzeichenfolge am Anfang des linken Werts|Ja            |`"Fabrikam" startswith_cs "Fab"`
+`!startswith_cs`  |Rechter Wert ist keine Teilzeichenfolge am Anfang des linken Werts|Ja        |`"Fabrikam" !startswith_cs "fab"`
+`endswith`     |Rechter Wert ist eine Teilzeichenfolge am Ende des linken Werts|Nein             |`"Fabrikam" endswith "Kam"`
+`!endswith`    |Rechter Wert ist keine Teilzeichenfolge am Ende des linken Werts|Nein         |`"Fabrikam" !endswith "brik"`
+`endswith_cs`     |Rechter Wert ist eine Teilzeichenfolge am Ende des linken Werts|Ja             |`"Fabrikam" endswith "Kam"`
+`!endswith_cs`    |Rechter Wert ist keine Teilzeichenfolge am Ende des linken Werts|Ja         |`"Fabrikam" !endswith "brik"`
+`matches regex`|Linker Wert enthält eine Übereinstimmung mit dem rechten Wert|Ja           |`"Fabrikam" matches regex "b.*k"`
 `in`           |Entspricht einem der Elemente       |Ja           |`"abc" in ("123", "345", "abc")`
 `!in`          |Entspricht keinem der Elemente   |Ja           |`"bca" !in ("123", "345", "abc")`
 
 
 ### <a name="countof"></a>*countof*
 
-Zählt Vorkommen einer Teil Zeichenfolge innerhalb einer Zeichenfolge. Kann einfache Zeichen folgen vergleichen oder einen regulären Ausdruck (Regex) verwenden. Einfache Zeichen folgen Übereinstimmungen können sich überlappen, aber Regex-Übereinstimmungen überlappen
+Zählt die Vorkommnisse einer Teilzeichenfolge in einer Zeichenfolge. Kann einfache Zeichenfolgen abgleichen oder reguläre Ausdrücke (regex) verwenden. Bei Übereinstimmungen für einfache Zeichenfolgen können Überschneidungen auftreten, doch bei Übereinstimmungen für reguläre Ausdrücke kommt dies nicht vor.
 
 ```
 countof(text, search [, kind])
 ```
 
-- `text`: Die Eingabe Zeichenfolge 
-- `search`: Einfache Zeichenfolge oder Regex für die Suche in Text
-- `kind`: _normaler_ regulärer Ausdruck  |  _regex_ (Standard: normal).
+- `text`: Die eingegebene Zeichenfolge 
+- `search`: Die einfache Zeichenfolge oder der reguläre Ausdruck, die/der in „text“ abgeglichen werden soll.
+- `kind`: _normal_ | _regex_ (Standard: „normal“).
 
-Gibt an, wie oft die Such Zeichenfolge im Container abgeglichen werden kann. Einfache Zeichen folgen Übereinstimmungen können sich überlappen, aber Regex-Übereinstimmungen überlappen
+Gibt zurück, wie oft Übereinstimmungen für die Suchzeichenfolge im Container gefunden werden können. Bei Übereinstimmungen für einfache Zeichenfolgen können Überschneidungen auftreten, doch bei Übereinstimmungen für reguläre Ausdrücke kommt dies nicht vor.
 
 #### <a name="plain-string-matches"></a>Übereinstimmungen für einfache Zeichenfolgen
 
@@ -917,20 +917,20 @@ print countof("abcabc", "a.c", "regex");  // result: 2
 
 ### <a name="extract"></a>*extract*
 
-Ruft eine Entsprechung für einen regulären Ausdruck aus einer bestimmten Zeichenfolge ab. Optional kann die extrahierte Teil Zeichenfolge in den angegebenen Typ konvertieren.
+Ruft eine Übereinstimmung für einen regulären Ausdruck aus einer bestimmten Zeichenfolge ab. Optional kann die extrahierte Teilzeichenfolge in den angegebenen Typ konvertiert werden.
 
 ```kusto
 extract(regex, captureGroup, text [, typeLiteral])
 ```
 
 - `regex`: Ein regulärer Ausdruck.
-- `captureGroup`: Eine positive ganzzahlige Konstante, die die zu Extra hier gende Erfassungs Gruppe angibt. Verwenden Sie 0 für die gesamte Übereinstimmung, 1 für den Wert, der mit der ersten Klammer \( \) im regulären Ausdruck übereinstimmt, und 2 oder mehr für nachfolgende Klammern.
-- `text` : Die zu durchsuchende Zeichenfolge.
-- `typeLiteral` : Ein optionales typliteralzeichen (z `typeof(long)` . b.). Die extrahierte Teilzeichenfolge wird, sofern angegeben, in diesen Typ konvertiert.
+- `captureGroup`: Eine positive Integerkonstante, die die zu extrahierende Erfassungsgruppe angibt. Verwenden Sie 0 für vollständige Übereinstimmung, 1 für den mit der ersten Klammer \(\) übereinstimmenden Wert im regulären Ausdruck und 2 oder höher für nachfolgende Klammern.
+- `text`: Die zu suchende Zeichenfolge.
+- `typeLiteral`: Ein optionales Typliteral (z. B. `typeof(long)`). Die extrahierte Teilzeichenfolge wird, sofern angegeben, in diesen Typ konvertiert.
 
-Gibt die Teil Zeichenfolge zurück, die mit der angeordneten Erfassungs Gruppe übereinstimmt `captureGroup` , optional konvertiert in `typeLiteral` Wenn keine Entsprechung vorhanden ist oder die Typkonvertierung fehlschlägt, gibt NULL zurück.
+Gibt die mit der angegebenen Erfassungsgruppe `captureGroup` abgeglichene Teilzeichenfolge zurück, optional konvertiert in `typeLiteral`. Wenn keine Übereinstimmung vorliegt oder bei der Typkonvertierung ein Fehler auftritt, wird NULL zurückgegeben.
 
-Im folgenden Beispiel wird das letzte Oktett von `ComputerIP` aus einem Takt Daten Satz extrahiert:
+Im folgenden Beispiel wird aus einem Heartbeatdatensatz das letzte Oktett von `ComputerIP` extrahiert:
 
 ```kusto
 Heartbeat
@@ -939,7 +939,7 @@ Heartbeat
 | project ComputerIP, last_octet=extract("([0-9]*$)", 1, ComputerIP) 
 ```
 
-Im folgenden Beispiel wird das letzte Oktett extrahiert, in einen *reellen* Typ (Number) umgewandelt und dann der nächste IP-Wert berechnet:
+Im folgenden Beispiel wird das letzte Oktett extrahiert und in den Typ *real* (Zahl) umgewandelt. Anschließend wird der nächste IP-Wert berechnet:
 
 ```kusto
 Heartbeat
@@ -950,7 +950,7 @@ Heartbeat
 | project ComputerIP, last_octet, next_ip
 ```
 
-Im nächsten Beispiel wird die Zeichenfolge `Trace` nach einer Definition von durchsucht `Duration` . Die Entsprechung wird in umgewandelt `real` und mit einer Zeitkonstante (1 s) multipliziert, die dann `Duration` in den Typ umgewandelt wird `timespan` .
+Im nächsten Beispiel wird die Zeichenfolge `Trace` nach einer Definition für `Duration` durchsucht. Die Übereinstimmung wird in `real` umgewandelt und mit einer Zeitkonstanten (1 s) multipliziert, die dann wiederum `Duration` in den Typ `timespan` umwandelt.
 
 ```kusto
 let Trace="A=12, B=34, Duration=567, ...";
@@ -959,10 +959,10 @@ print Duration_seconds =  extract("Duration=([0-9.]+)", 1, Trace, typeof(real)) 
 ```
 
 
-### <a name="isempty-isnotempty-notempty"></a>*IsEmpty*, *isnotempty*, *notEmpty*
+### <a name="isempty-isnotempty-notempty"></a>*isempty*, *isnotempty*, *notempty*
 
-- `isempty` Gibt zurück, `true` Wenn das Argument eine leere Zeichenfolge oder NULL ist (siehe `isnull` ).
-- `isnotempty` Gibt zurück, `true` Wenn das Argument keine leere Zeichenfolge oder NULL ist (siehe `isnotnull` ). Alias: `notempty` .
+- `isempty` gibt `true` zurück, wenn das Argument eine leere Zeichenfolge oder NULL ist (siehe `isnull`).
+- `isnotempty` gibt `true` zurück, wenn das Argument keine leere Zeichenfolge oder NULL ist (siehe `isnotnull`). Alias: `notempty`.
 
 
 ```kusto
@@ -985,9 +985,9 @@ Heartbeat | where isnotempty(ComputerIP) | take 1  // return 1 Heartbeat record 
 ```
 
 
-### <a name="parseurl"></a>*Analyse-URL*
+### <a name="parseurl"></a>*parseurl*
 
-Teilt eine URL in ihre Teile auf, wie z. b. Protokoll, Host und Port, und gibt dann ein Dictionary-Objekt zurück, das die Teile als Zeichen folgen enthält.
+Teilt eine URL in ihre jeweiligen Bestandteile wie Protokoll, Host und Port auf und gibt dann ein Wörterbuchobjekt zurück, das diese Bestandteile als Zeichenfolgen enthält.
 
 ```
 parseurl(urlstring)
@@ -1022,11 +1022,11 @@ Ersetzt alle Übereinstimmungen für reguläre Ausdrücke durch eine andere Zeic
 replace(regex, rewrite, input_text)
 ```
 
-- `regex`: Der reguläre Ausdruck, mit dem abgeglichen werden soll. Sie kann Erfassungs Gruppen in Klammern enthalten \( \) .
-- `rewrite`: Der Ersetzungs Ausdruck für jede Übereinstimmung, die durch die Übereinstimmung mit einem regulären Ausdruck erzielt wird. Verwenden Sie "\ 0", um auf die gesamte Entsprechung (\ 1 für die erste Erfassungs Gruppe, \ 2 usw.) für nachfolgende Erfassungs Gruppen zu verweisen.
-- `input_text`: Die Eingabe Zeichenfolge, die gesucht werden soll.
+- `regex`: Der reguläre Ausdruck, für den eine Übereinstimmung ermittelt werden soll. Er kann Erfassungsgruppen in Klammern \(\) enthalten.
+- `rewrite`: Der reguläre Ausdruck, durch den alle Übereinstimmungen ersetzt werden sollen, die durch Abgleich mit einem regulären Ausdruck ermittelt wurden. Verwenden Sie „\0“, um auf die gesamte Übereinstimmung zu verweisen, „\1“ für die erste Erfassungsgruppe, „\2“ für die zweite Erfassungsgruppe usw.
+- `input_text`: Die Eingabezeichenfolge, in der gesucht werden soll.
 
-Gibt den Text zurück, nachdem alle Übereinstimmungen von Regex durch Auswertungen von Rewrite ersetzt wurden. Bei Übereinstimmungen kommt es nicht zu Überschneidungen.
+Gibt den Text nach dem Ersetzen aller Übereinstimmungen für reguläre Ausdrücke durch Auswertungen von „rewrite“ zurück. Bei Übereinstimmungen kommt es nicht zu Überschneidungen.
 
 #### <a name="example"></a>Beispiel
 
@@ -1046,15 +1046,15 @@ Aktivität                                        |Ersetzt
 
 ### <a name="split"></a>*split*
 
-Unterteilt eine bestimmte Zeichenfolge gemäß einem angegebenen Trennzeichen und gibt dann ein Array der resultierenden Teil Zeichenfolgen zurück.
+Teilt eine bestimmte Zeichenfolge entsprechend des festgelegten Trennzeichens auf und gibt dann ein Array mit den sich ergebenden Teilzeichenfolgen zurück.
 
 ```
 split(source, delimiter [, requestedIndex])
 ```
 
-- `source`: Die Zeichenfolge, die entsprechend dem angegebenen Trennzeichen aufgeteilt werden soll.
-- `delimiter`: Das Trennzeichen, das zum Aufteilen der Quell Zeichenfolge verwendet wird.
-- `requestedIndex`: Ein optionaler NULL basierter Index. Wenn bereitgestellt, enthält das zurückgegebene Zeichen folgen Array nur dieses Element (sofern vorhanden).
+- `source`: Die Zeichenfolge, die anhand des festgelegten Trennzeichens aufgeteilt werden soll.
+- `delimiter`: Das Trennzeichen, das zum Teilen der Quellzeichenfolge verwendet werden soll.
+- `requestedIndex`: Ein optionaler, nullbasierter Index. Falls ein solcher angegeben wird, enthält das Zeichenfolgenarray nur dieses Element (sofern vorhanden).
 
 
 #### <a name="example"></a>Beispiel
@@ -1100,15 +1100,15 @@ print strlen("hello")   // result: 5
 
 ### <a name="substring"></a>*substring*
 
-Extrahiert eine Teil Zeichenfolge aus einer bestimmten Quell Zeichenfolge, beginnend am angegebenen Index. Optional können Sie die Länge der angeforderten Teil Zeichenfolge angeben.
+Extrahiert ab dem angegebenen Index eine Teilzeichenfolge aus einer bestimmten Quellzeichenfolge. Optional können Sie die Länge der angeforderten Teilzeichenfolge angeben.
 
 ```
 substring(source, startingIndex [, length])
 ```
 
-- `source`: Die Quell Zeichenfolge, aus der die Teil Zeichenfolge stammt.
-- `startingIndex`: Die null basierte anfangs Zeichenposition der angeforderten Teil Zeichenfolge.
-- `length`: Ein optionaler Parameter, den Sie verwenden können, um die angeforderte Länge der zurückgegebenen Teil Zeichenfolge anzugeben.
+- `source`: Die Quellzeichenfolge, aus der die Teilzeichenfolge entnommen wird.
+- `startingIndex`: Die nullbasierte Position des Anfangszeichens der angeforderten Teilzeichenfolge.
+- `length`: Ein optionaler Parameter, mit dem Sie die erforderliche Länge der zurückgegebenen Teilzeichenfolge festlegen können.
 
 #### <a name="example"></a>Beispiel
 
@@ -1120,9 +1120,9 @@ print substring("ABCD", 0, 2);  // result: "AB"
 ```
 
 
-### <a name="tolower-toupper"></a>*ToLower*, *ToUpper*
+### <a name="tolower-toupper"></a>*tolower*, *toupper*
 
-Konvertiert eine bestimmte Zeichenfolge in Kleinbuchstaben oder in Großbuchstaben.
+Konvertiert eine bestimmte Zeichenfolge vollständig in Kleinbuchstaben oder vollständig in Großbuchstaben.
 
 ```
 tolower("value")
@@ -1138,11 +1138,11 @@ print toupper("hello"); // result: "HELLO"
 
 ## <a name="date-and-time-operations"></a>Datums- und Uhrzeitvorgänge
 
-In den folgenden Abschnitten erfahren Sie, wie Sie mit Datums-und Uhrzeitwerten arbeiten, wenn Sie die Kusto-Abfragesprache verwenden.
+In den folgenden Abschnitten finden Sie Beispiele für das Arbeiten mit Datums- und Uhrzeitwerten, wenn Sie die Kusto-Abfragesprache verwenden.
 
-### <a name="date-time-basics"></a>Grundlagen zu Datum/Uhrzeit
+### <a name="date-time-basics"></a>Grundlagen zu Datum und Uhrzeit
 
-Die Kusto-Abfragesprache verfügt über zwei Haupt Datentypen für Datums-und Uhrzeitangaben: `datetime` und `timespan` . Alle Datumsangaben werden in UTC ausgedrückt. Obwohl mehrere Datums-/Uhrzeitformate unterstützt werden, wird das ISO-8601-Format bevorzugt. 
+Die Abfragesprache Kusto verfügt über zwei Hauptdatentypen, die Datums- und Uhrzeitangaben zugeordnet sind: `datetime`und `timespan`. Alle Datumsangaben werden in UTC ausgedrückt. Wenn auch mehrere Datums-/Uhrzeitformate unterstützt werden, wird doch das ISO8601-Format bevorzugt. 
 
 Zeiträume werden als Dezimalwert gefolgt von einer Zeiteinheit ausgedrückt:
 
@@ -1156,14 +1156,14 @@ Zeiträume werden als Dezimalwert gefolgt von einer Zeiteinheit ausgedrückt:
 |Mikrosekunde | Mikrosekunde  |
 |Takt        | Nanosekunde   |
 
-Sie können Datums-/Uhrzeitwerte erstellen, indem Sie mithilfe des-Operators eine Zeichenfolge umwandeln `todatetime` . Um beispielsweise die in einem bestimmten Zeitraum gesendeten VM-Takte zu überprüfen, verwenden Sie den- `between` Operator, um einen Zeitbereich anzugeben:
+Sie können Datums-/Uhrzeitwerte können durch Umwandeln einer Zeichenfolge mithilfe des Operators `todatetime` erstellen. Verwenden Sie beispielsweise zur Überprüfung der in einer bestimmten Zeitspanne gesendeten VM-Heartbeats den Operator `between`, um einen Zeitraum anzugeben:
 
 ```kusto
 Heartbeat
 | where TimeGenerated between(datetime("2018-06-30 22:46:42") .. datetime("2018-07-01 00:57:27"))
 ```
 
-Ein weiteres häufiges Szenario besteht darin, einen Datums-/Uhrzeitwert mit dem aktuellen zu vergleichen. Wenn Sie beispielsweise sämtliche Heartbeats der letzten zwei Minuten anzeigen möchten, können Sie den Operator `now` zusammen mit einem timespan-Wert verwenden, der zwei Minuten darstellt:
+Ein weiteres gängiges Szenario besteht im Vergleichen eines Datums-/Uhrzeitwerts mit der Gegenwart. Wenn Sie beispielsweise sämtliche Heartbeats der letzten zwei Minuten anzeigen möchten, können Sie den Operator `now` zusammen mit einem timespan-Wert verwenden, der zwei Minuten darstellt:
 
 ```kusto
 Heartbeat
@@ -1177,14 +1177,14 @@ Heartbeat
 | where TimeGenerated > now(-2m)
 ```
 
-Die kürzeste und besser lesbare Methode ist die Verwendung des- `ago` Operators:
+Die kürzeste und am besten lesbare Methode besteht in der Verwendung des Operators `ago`:
 
 ```kusto
 Heartbeat
 | where TimeGenerated > ago(2m)
 ```
 
-Angenommen, Sie kennen die Startzeit und die Dauer, anstatt die Start-und Endzeiten zu kennen. Sie können die Abfrage neu schreiben:
+Angenommen, Ihnen ist die Start- und Endzeit nicht bekannt, sondern die Startzeit und die Dauer. Sie können die Abfrage umschreiben:
 
 ```kusto
 let startDatetime = todatetime("2018-06-30 20:12:42.9");
@@ -1196,7 +1196,7 @@ Heartbeat
 
 ### <a name="convert-time-units"></a>Konvertieren von Zeiteinheiten
 
-Möglicherweise möchten Sie einen Datums-/Uhrzeitwert oder einen TimeSpan-Wert in einer anderen Zeiteinheit als der Standardwert Ausdrücken. Wenn Sie z. b. Fehlerereignisse in den letzten 30 Minuten überprüfen und eine berechnete Spalte benötigen, die anzeigt, wie lange das Ereignis aufgetreten ist, können Sie die folgende Abfrage verwenden:
+Sie können einen Datums-/Uhrzeitwert oder einen Zeitraumwert in einer anderen als der Standardzeiteinheit ausdrücken. Wenn Sie beispielsweise Fehlerereignisse der letzten 30 Minuten überprüfen und eine berechnete Spalte benötigen, in der angezeigt wird, wie lange das Auftreten des Ereignisses her ist, können Sie diese Abfrage verwenden:
 
 ```kusto
 Event
@@ -1205,7 +1205,7 @@ Event
 | extend timeAgo = now() - TimeGenerated 
 ```
 
-Die `timeAgo` Spalte enthält Werte wie `00:09:31.5118992` , die als hh: mm: SS. fffffff formatiert sind. Wenn Sie diese Werte in `number` Minuten seit der Startzeit formatieren möchten, teilen Sie den Wert durch `1m` :
+Die Spalte `timeAgo` enthält Werte wie `00:09:31.5118992`, die als „hh:mm:ss.fffffff“ formatiert sind. Wenn Sie diese Werte auf die `number` (Anzahl) der Minuten seit der Startzeit formatieren möchten, teilen Sie diesen Wert durch `1m`:
 
 ```kusto
 Event
@@ -1217,9 +1217,9 @@ Event
 
 ### <a name="aggregations-and-bucketing-by-time-intervals"></a>Aggregationen und Zuordnung von Buckets nach Zeitintervallen
 
-Ein weiteres häufiges Szenario besteht darin, dass Sie Statistiken für einen bestimmten Zeitraum in einer bestimmten Zeiteinheit abrufen müssen. In diesem Szenario können Sie einen `bin` Operator als Teil einer-Klausel verwenden `summarize` .
+Ein weiteres gängiges Szenario besteht in der Notwendigkeit, Statistiken für einen bestimmten Zeitraum in einer bestimmten Zeiteinheit abzurufen. Für dieses Szenario können Sie einen `bin`-Operator als Teil einer `summarize`-Klausel verwenden.
 
-Verwenden Sie die folgende Abfrage, um die Anzahl der Ereignisse zu erhalten, die während der letzten halben Stunde alle fünf Minuten aufgetreten sind:
+Mit der folgenden Abfrage können Sie die Anzahl der Ereignisse abrufen, die in der letzten halben Stunde alle fünf Minuten aufgetreten sind:
 
 ```kusto
 Event
@@ -1238,7 +1238,7 @@ Diese Abfrage erzeugt die folgende Tabelle:
 |2018-08-01T09:50:00.000|41|
 |2018-08-01T09:55:00.000|16|
 
-Eine weitere Möglichkeit zum Erstellen von bucketergebnissen ist die Verwendung von Funktionen wie `startofday` :
+Eine weitere Möglichkeit zum Erstellen von Buckets mit Ergebnissen besteht in der Verwendung von Funktionen wie `startofday`:
 
 ```kusto
 Event
@@ -1268,11 +1268,11 @@ Event
 
 ## <a name="aggregations"></a>Aggregationen
 
-In den folgenden Abschnitten wird erläutert, wie die Ergebnisse einer Abfrage bei Verwendung der Kusto-Abfragesprache aggregiert werden.
+In den folgenden Abschnitten finden Sie Beispiele für das Aggregieren der Ergebnisse einer Abfrage, wenn Sie die Kusto-Abfragesprache verwenden.
 
 ### <a name="count"></a>*count*
 
-Zählen Sie die Anzahl der Zeilen im Resultset, nachdem alle Filter angewendet wurden. Im folgenden Beispiel wird die Gesamtzahl der Zeilen in der- `Perf` Tabelle der letzten 30 Minuten zurückgegeben. Die Ergebnisse werden in einer Spalte mit dem Namen zurückgegeben `count_` , es sei denn, Sie weisen der Spalte einen bestimmten Namen zu:
+Zählen Sie die Anzahl der Zeilen im Resultset, nachdem alle Filter angewendet wurden. Das folgende Beispiel gibt die Gesamtzahl der Zeilen in der Tabelle `Perf` aus den letzten 30 Minuten zurück. Die Ergebnisse werden in einer Spalte namens `count_` zurückgegeben, sofern Sie der Spalte keinen spezifischen Namen zugewiesen haben:
 
 
 ```kusto
@@ -1287,7 +1287,7 @@ Perf
 | summarize num_of_records=count() 
 ```
 
-Eine Zeitdiagramm Visualisierung kann nützlich sein, um einen Trend im Lauf der Zeit anzuzeigen:
+Eine Zeitdiagrammvisualisierung kann hilfreich sein, um einen zeitlichen Trend zu erkennen:
 
 ```kusto
 Perf 
@@ -1296,12 +1296,12 @@ Perf
 | render timechart
 ```
 
-In der Ausgabe dieses Beispiels wird die `Perf` Trendlinie für die Daten Satz Anzahl in fünf-Minuten-Intervallen angezeigt:
+Die Ausgabe in diesem Beispiel zeigt die Trendlinie für die Anzahl der `Perf`-Datensätze in 5-Minuten-Intervallen:
 
 
-:::image type="content" source="images/samples/perf-count-line-chart.png" alt-text="Screenshot eines Linien Diagramms, das die Trendlinie der Leistungsdaten Satz Anzahl in fünfminütigen Intervallen anzeigt.":::
+:::image type="content" source="images/samples/perf-count-line-chart.png" alt-text="Screenshot eines Liniendiagramms, das die Trendlinie für die Anzahl der Perf-Datensätze in 5-Minuten-Intervallen zeigt.":::
 
-### <a name="dcount-dcountif"></a>*DCount*, *dantif*
+### <a name="dcount-dcountif"></a>*dcount*, *dcountif*
 
 Verwenden Sie `dcount` und `dcountif` zum Zählen von bestimmten Werten in einer bestimmten Spalte. Die folgende Abfrage wertet aus, wie viele unterschiedliche Computer in der letzten Stunde Takte gesendet haben:
 
@@ -1319,9 +1319,9 @@ Heartbeat
 | summarize dcountif(Computer, OSType=="Linux")
 ```
 
-### <a name="evaluate-subgroups"></a>Untergruppen auswerten
+### <a name="evaluate-subgroups"></a>Auswerten von Untergruppen
 
-Verwenden Sie das Schlüsselwort `by`, um eine Zählung oder Aggregationen auf Untergruppen in Ihren Daten auszuführen. Verwenden Sie beispielsweise die folgende Abfrage, um die Anzahl von unterschiedlichen Linux-Computern zu zählen, die Takte in den einzelnen Ländern oder Regionen gesendet haben:
+Verwenden Sie das Schlüsselwort `by`, um eine Zählung oder Aggregationen auf Untergruppen in Ihren Daten auszuführen. Beispielsweise um die Anzahl der unterschiedlichen Linux-Computer zu zählen, die in jedem Land bzw. jeder Region Heartbeats gesendet haben, verwenden Sie diese Abfrage:
 
 ```kusto
 Heartbeat 
@@ -1334,11 +1334,11 @@ Heartbeat
 |USA    | 19                  |
 |Kanada           | 3                   |
 |Irland          | 0                   |
-|United Kingdom   | 0                   |
+|Vereinigtes Königreich   | 0                   |
 |Niederlande      | 2                   |
 
 
-Fügen Sie dem Abschnitt Spaltennamen hinzu, um noch kleinere Untergruppen Ihrer Daten zu analysieren `by` . Beispielsweise kann es vorkommen, dass Sie die einzelnen Computer pro Land oder Region pro Betriebs Systemtyp () zählen `OSType` :
+Um noch kleineren Untergruppen Ihrer Daten zu analysieren, fügen Sie im Abschnitt `by` Spaltennamen hinzu. Beispielsweise können Sie die unterschiedlichen Computer aus jedem Land bzw. jeder Region pro Betriebssystemtyp zählen (`OSType`):
 
 ```kusto
 Heartbeat 
@@ -1358,7 +1358,7 @@ Perf
 | summarize percentiles(CounterValue, 50) by Computer
 ```
 
-Sie können auch unterschiedliche Quantilen angeben, um ein aggregiertes Ergebnis für jedes Ergebnis zu erhalten:
+Sie können auch verschiedene Quantile angeben, um für jedes ein aggregiertes Ergebnis zu erhalten:
 
 ```kusto
 Perf
@@ -1367,7 +1367,7 @@ Perf
 | summarize percentiles(CounterValue, 25, 50, 75, 90) by Computer
 ```
 
-Die Ergebnisse zeigen möglicherweise, dass einige Computer CPUs ähnliche Median Werte aufweisen. Obwohl sich einige Computer auf dem Median befinden, haben andere Benutzer viel niedrigere CPU-Werte gemeldet. Der höchst-und Tiefstwert bedeutet, dass auf den Computern Spitzen auftreten.
+Die Ergebnisse zeigen möglicherweise, dass einige Computer-CPUs ähnliche Medianwerte aufweisen. Obwohl sich einige Computer stetig im Bereich des Medians befinden, haben andere wesentlich niedrigere und höhere CPU-Werte gemeldet. Der hohen und niedrigen Werte bedeuten, dass bei den Computern Spitzen aufgetreten sind.
 
 ### <a name="variance"></a>Variance
 
@@ -1380,7 +1380,7 @@ Perf
 | summarize stdev(CounterValue), variance(CounterValue) by Computer
 ```
 
-Eine gute Möglichkeit, die Stabilität der CPU-Auslastung zu analysieren, ist die Kombination `stdev` mit der Median Berechnung:
+Eine gute Möglichkeit zur Analyse der Stabilität der CPU-Auslastung besteht darin, `stdev` mit der Berechnung des Medians zu kombinieren:
 
 ```kusto
 Perf
@@ -1391,7 +1391,7 @@ Perf
 
 ### <a name="generate-lists-and-sets"></a>Generieren von Listen und Sätzen
 
-Sie können verwenden `makelist` , um Daten nach der Reihenfolge der Werte in einer bestimmten Spalte zu pivotieren. Beispielsweise können Sie die am häufigsten vorkommenden Bestell Ereignisse untersuchen, die auf ihren Computern stattfinden. Im Wesentlichen können Sie die Daten nach der Reihenfolge der `EventID` Werte auf den einzelnen Computern pivotieren: 
+Sie können mithilfe von `makelist` Daten nach der Reihenfolge der Werte in einer bestimmten Spalte pivotieren. So können Sie beispielsweise die gängigsten Auftragsereignisse untersuchen, die auf Ihren Computern vorkommen. Sie können die Daten im Wesentlichen nach der Reihenfolge der `EventID`-Werte auf den einzelnen Computern pivotieren: 
 
 ```kusto
 Event
@@ -1408,9 +1408,9 @@ So sieht die Ausgabe aus:
 | computer2 | [326,105,302,301,300,102] |
 | ... | ... |
 
-`makelist` generiert eine Liste in der Reihenfolge, in der Daten an sie übergeben wurden. Verwenden Sie `asc` in der- `order` Anweisung anstelle von, um Ereignisse von der ältesten zu den neuesten zu sortieren `desc` . 
+`makelist` generiert eine Liste in der Reihenfolge, in der Daten an sie übergeben wurden. Verwenden Sie zum Sortieren von Ereignissen vom ältesten zum neuesten in der `order`-Anweisung `asc` anstelle von `desc`. 
 
-Es kann sinnvoll sein, eine Liste nur unterschiedlicher Werte zu erstellen. Diese Liste wird als _Satz_ bezeichnet und kann mit dem folgenden Befehl generiert werden `makeset` :
+Möglicherweise finden Sie es auch hilfreich, eine Liste mit nur den unterschiedlichen Werten zu erstellen. Diese Liste wird als _set_ (Satz) bezeichnet, und Sie können sie mit dem Befehl `makeset` generieren:
 
 ```kusto
 Event
@@ -1427,11 +1427,11 @@ So sieht die Ausgabe aus:
 | computer2 | [326,105,302,301,300,102] |
 | ... | ... |
 
-Wie `makelist` `makeset` funktioniert auch mit geordneten Daten. Der `makeset` Befehl generiert Arrays basierend auf der Reihenfolge der Zeilen, die an die Zeile weitergegeben werden.
+Wie `makelist` funktioniert `makeset` auch mit sortierten Daten. Der Befehl `makeset` generiert die Arrays basierend auf der Reihenfolge der an ihn übergebenen Zeilen.
 
-### <a name="expand-lists"></a>Listen erweitern
+### <a name="expand-lists"></a>Erweitern von Listen
 
-Der umgekehrte Vorgang von `makelist` oder `makeset` ist `mv-expand` . Der `mv-expand` Befehl erweitert eine Liste von Werten in getrennte Zeilen. Sie kann über eine beliebige Anzahl dynamischer Spalten, einschließlich JSON-und Array Spalten, erweitert werden. Beispielsweise können Sie die `Heartbeat` Tabelle auf Lösungen prüfen, die Daten von Computern gesendet haben, von denen in der letzten Stunde ein Takt gesendet wurde:
+Der umgekehrte Vorgang von `makelist` oder `makeset` ist `mv-expand`. Der Befehl `mv-expand` erweitert eine Liste von Werten, um Zeilen zu trennen. Er kann eine Erweiterung über eine beliebige Anzahl dynamischer Spalten erzielen, einschließlich JSON- und Array-Spalten. So können Sie beispielsweise die Tabelle `Heartbeat` auf Lösungen überprüfen, die Daten von Computern gesendet haben, die in der vergangenen Stunde einen Heartbeat gesendet haben:
 
 ```kusto
 Heartbeat
@@ -1448,7 +1448,7 @@ So sieht die Ausgabe aus:
 | computer3 | „antiMalware“, „changeTracking“ |
 | ... | ... |
 
-Verwenden `mv-expand` Sie, um jeden Wert in einer separaten Zeile anstelle einer durch Trennzeichen getrennten Liste anzuzeigen:
+Mit `mv-expand` können Sie die einzelnen Werte in einer separaten Zeile statt in einer durch Trennzeichen getrennten Liste anzeigen:
 
 ```kusto
 Heartbeat
@@ -1471,7 +1471,7 @@ So sieht die Ausgabe aus:
 | ... | ... |
 
 
-Mit können Sie `makelist` Elemente gruppieren. In der Ausgabe wird die Liste der Computer pro Lösung angezeigt:
+Sie können `makelist` zum Gruppieren von Elementen verwenden. In der Ausgabe wird die Liste der Computer pro Lösung angezeigt:
 
 ```kusto
 Heartbeat
@@ -1491,9 +1491,9 @@ So sieht die Ausgabe aus:
 | „antiMalware“ | [„computer3“] |
 | ... | ... |
 
-### <a name="missing-bins"></a>Fehlende Container
+### <a name="missing-bins"></a>Fehlende Intervalle
 
-Bei einer nützlichen Anwendung von werden `mv-expand` Standardwerte für fehlende Behälter ausgefüllt. Nehmen wir beispielsweise an, dass Sie die Betriebszeit eines bestimmten Computers durch Untersuchen des Heartbeat suchen. Außerdem soll die Quelle des Heartbeat angezeigt werden, die in der Spalte angezeigt wird `Category` . Normalerweise verwenden wir eine einfache `summarize` Anweisung:
+Eine nützliche Anwendung von `mv-expand` ist das Ausfüllen von Standardwerten für fehlende Intervalle. Angenommen beispielsweise, Sie suchen nach der Betriebszeit eines bestimmten Computers, indem Sie dessen Heartbeat untersuchen. Sie möchten auch die Quelle des Heartbeats sehen, die in der Spalte `Category` zu finden ist. Normalerweise verwenden wir eine einfache `summarize`-Anweisung:
 
 ```kusto
 Heartbeat
@@ -1512,7 +1512,7 @@ So sieht die Ausgabe aus:
 | Direkt-Agent | 2017-06-06T22:00:00Z | 60 |
 | ... | ... | ... |
 
-In der Ausgabe fehlt der Bucket, der "2017-06-06t19:00:00Z" zugeordnet ist, da keine Takt Daten für diese Stunde vorhanden sind. Mit der Funktion `make-series` können Sie leeren Buckets einen Standardwert zuweisen. Für jede Kategorie wird eine Zeile generiert. Die Ausgabe beinhaltet zwei zusätzliche Array Spalten, eine für Werte und eine für den passenden Zeitrahmen:
+In der Ausgabe fehlt jedoch der Bucket, der „2017-06-06T19:00:00Z“ zugeordnet ist, weil für diese Stunde keine Heartbeatdaten vorhanden sind. Mit der Funktion `make-series` können Sie leeren Buckets einen Standardwert zuweisen. Für jede Kategorie wird eine Zeile generiert. Die Ausgabe umfasst zwei zusätzliche Arrayspalten, eine für Werte und eine für übereinstimmende Zeitbuckets:
 
 ```kusto
 Heartbeat
@@ -1526,7 +1526,7 @@ So sieht die Ausgabe aus:
 | Direkt-Agent | [15,60,0,55,60,57,60,...] | ["2017-06-06T17:00:00.0000000Z","2017-06-06T18:00:00.0000000Z","2017-06-06T19:00:00.0000000Z","2017-06-06T20:00:00.0000000Z","2017-06-06T21:00:00.0000000Z",...] |
 | ... | ... | ... |
 
-Das dritte Element des *count_* Arrays ist wie erwartet 0 (null). Das _TimeGenerated_ -Array verfügt über einen übereinstimmenden Zeitstempel von "2017-06-06t19:00:00.0000000 z". Dieses Array Format ist jedoch schwierig zu lesen. Verwenden Sie `mv-expand`, um die Arrays zu erweitern und die gleiche Formatausgabe zu generieren, die von `summarize` generiert wurde:
+Das dritte Element des *count_* -Arrays ist wie erwartet 0. Das _TimeGenerated_-Array hat einen übereinstimmenden Zeitstempel von „2017-06-06T19:00:00.0000000Z“. Dieses Arrayformat ist jedoch schwer zu lesen. Verwenden Sie `mv-expand`, um die Arrays zu erweitern und die gleiche Formatausgabe zu generieren, die von `summarize` generiert wurde:
 
 ```kusto
 Heartbeat
@@ -1549,9 +1549,9 @@ So sieht die Ausgabe aus:
 
 
 
-### <a name="narrow-results-to-a-set-of-elements-let-makeset-toscalar-in"></a>Schmale Ergebnisse in eine Gruppe von Elementen: *Let*, *makeset*, *chanar*, *in*
+### <a name="narrow-results-to-a-set-of-elements-let-makeset-toscalar-in"></a>Eingrenzen von Ergebnissen auf einen Satz von Elementen: *let*, *makeset*, *toscalar*, *in*
 
-Ein gängiges Szenario besteht darin, die Namen bestimmter Entitäten auf Grundlage eines kriteriensatzes auszuwählen und dann ein anderes Dataset auf diese Entitätenmenge zu filtern. Beispielsweise kann es vorkommen, dass Computer, für die bekanntermaßen Updates vorhanden sind, über fehlende Updates verfügen und die IP-Adressen identifizieren, für die diese Computer aufgerufen wurden.
+Ein gängiges Szenario ist die Auswahl der Namen von bestimmten Entitäten, basierend auf einem Satz von Kriterien. Anschließend wird ein anderes Dataset auf diesen Satz von Entitäten gefiltert. Sie könnten beispielsweise nach Computern suchen, auf denen bekanntermaßen Updates fehlen, und IP-Adressen identifizieren, die von diesen Computern aufgerufen wurden.
 
 Hier sehen Sie ein Beispiel:
 
@@ -1567,7 +1567,7 @@ WindowsFirewall
 
 ## <a name="joins"></a>Joins
 
-Sie können Joins verwenden, um Daten aus mehreren Tabellen in derselben Abfrage zu analysieren. Bei einem Join werden die Zeilen zweier Datasets mit den Werten der angegebenen Spalten zusammengeführt.
+Mithilfe von Joins (Verknüpfungen) können Sie Daten aus mehreren Tabellen in derselben Abfrage analysieren. Ein Join führt die Zeilen zweier Datasets durch Abgleich der Werte zwischen angegebenen Spalten zusammen.
 
 Hier sehen Sie ein Beispiel:
 
@@ -1585,15 +1585,15 @@ SecurityEvent
 | top 10 by Duration desc
 ```
 
-Im Beispiel filtert das erste Dataset alle Anmelde Ereignisse. Dieses DataSet wird mit einem zweiten DataSet verknüpft, das nach allen Abmelde Ereignissen filtert. Die projizierten Spalten lauten `Computer` , `Account` , `TargetLogonId` und `TimeGenerated` . Die Datasets werden durch eine freigegebene Spalte () korreliert `TargetLogonId` . Bei der Ausgabe handelt es sich um einen einzelnen Datensatz pro Korrelation mit der Anmelde-und Abmelde Zeit.
+In diesem Beispiel filtert das erste Dataset auf alle Anmeldeereignisse. Dieses Dataset wird mit einem zweiten Dataset verknüpft, das auf alle Abmeldeereignisse filtert. Die projizierten Spalten sind `Computer`, `Account`, `TargetLogonId` und `TimeGenerated`. Die Datasets werden über die gemeinsam verwendete Spalte `TargetLogonId` korreliert. Die Ausgabe ist ein einzelner Datensatz pro Korrelation, der die An- und Abmeldezeit enthält.
 
-Wenn beide Datasets Spalten mit demselben Namen aufweisen, erhalten die Spalten des rechtsseitigen Datasets eine Indexnummer. In diesem Beispiel werden die Ergebnisse `TargetLogonId` mit Werten aus der linksseitigen Tabelle und `TargetLogonId1` mit Werten aus der rechten Tabelle angezeigt. In diesem Fall wurde die zweite `TargetLogonId1` Spalte mithilfe des-Operators entfernt `project-away` .
+Wenn beide Datasets Spalten mit demselben Namen aufweisen, erhalten die Spalten des rechten Datasets eine Indexnummer. In diesem Beispiel würden die Ergebnisse `TargetLogonId` mit Werten aus der linken Tabelle und `TargetLogonId1` mit Werten aus der rechten Tabelle anzeigen. In diesem Fall wurde die zweite `TargetLogonId1`-Spalte mithilfe des `project-away`-Operators entfernt.
 
 > [!NOTE]
-> Um die Leistung zu verbessern, behalten Sie mithilfe des-Operators nur die relevanten Spalten der verbundenen Datasets `project` .
+> Um die Leistung zu verbessern, behalten Sie mithilfe des `project`-Operators nur die relevanten Spalten der verknüpften Datasets bei.
 
 
-Verwenden Sie die folgende Syntax, um zwei Datasets zu verknüpfen, in denen der verknüpfte Schlüssel einen anderen Namen zwischen den beiden Tabellen hat:
+Verwenden Sie die folgende Syntax, um zwei Datasets zu verknüpfen, in denen der verknüpfte Schlüssel in den beiden Tabellen einen unterschiedlichen Namen besitzt:
 
 ```
 Table1
@@ -1601,9 +1601,9 @@ Table1
 on $left.key1 == $right.key2
 ```
 
-### <a name="lookup-tables"></a>Nachschlage Tabellen
+### <a name="lookup-tables"></a>Nachschlagetabellen
 
-Joins werden häufig verwendet, um die `datatable` Zuordnung statischer Werte zu verwenden. Die Verwendung von `datatable` kann zu einer ausführlicheren Darstellung von Ergebnissen führen. Beispielsweise können Sie Sicherheits Ereignisdaten mit dem Ereignis Namen für jede Ereignis-ID erweitern:
+Joins werden häufig verwendet, um `datatable` für die Zuordnung statischer Werte zu verwenden. Die Verwendung von `datatable` kann dazu beitragen, dass sich Ergebnisse besser darstellen lassen. So können Sie beispielsweise die Sicherheitsereignisdaten um den Ereignisnamen für jede Ereignis-ID erweitern:
 
 ```kusto
 let DimTable = datatable(EventID:int, eventName:string)
@@ -1628,22 +1628,22 @@ So sieht die Ausgabe aus:
 
 | eventName | count_ |
 |:---|:---|
-| Das Handle für ein Objekt wurde geschlossen. | 290.995 |
-| Ein Handle für ein Objekt wurde angefordert. | 154.157 |
-| Es wurde versucht, ein Handle für ein Objekt zu duplizieren. | 144.305 |
-| Es wurde versucht, auf ein Objekt zuzugreifen. | 123.669 |
-| Kryptografischer Vorgang | 153.495 |
-| Schlüsseldatei Vorgang | 153.496 |
+| Das Handle für ein Objekt wurde geschlossen. | 290,995 |
+| Ein Handle für ein Objekt wurde angefordert. | 154,157 |
+| Es wurde versucht, das Handle eines Objekts zu duplizieren. | 144,305 |
+| Es wurde versucht, auf ein Objekt zuzugreifen. | 123,669 |
+| Kryptographischer Vorgang | 153,495 |
+| Schlüsseldateivorgang | 153,496 |
 
 ## <a name="json-and-data-structures"></a>JSON und Datenstrukturen
 
-Bei den-Objekten handelt es sich um Objekte, die andere Objekte in einem Array oder in einer Zuordnung von Schlüssel-Wert-Paaren enthalten. Die Objekte werden als JSON-Zeichen folgen dargestellt. In diesem Abschnitt wird beschrieben, wie sie JSON zum Abrufen von Daten und Analysieren von geschposteten Objekten verwenden können.
+Geschachtelte Objekte sind Objekte, die andere Objekte in Form eines Arrays oder einer Zuordnung von Schlüssel-Wert-Paaren enthalten. Die Objekte werden als JSON-Zeichenfolgen dargestellt. In diesem Abschnitt wird beschrieben, wie Sie mit JSON Daten abrufen und geschachtelte Objekte analysieren können.
 
-### <a name="work-with-json-strings"></a>Arbeiten mit JSON-Zeichen folgen
+### <a name="work-with-json-strings"></a>Arbeiten mit JSON-Zeichenfolgen
 
-Greifen Sie mit `extractjson` auf ein bestimmtes JSON-Element in einem bekannten Pfad zu. Diese Funktion erfordert einen Pfad Ausdruck, der die folgenden Konventionen verwendet:
+Greifen Sie mit `extractjson` auf ein bestimmtes JSON-Element in einem bekannten Pfad zu. Zur Nutzung dieser Funktion ist ein Pfadausdruck erforderlich, für den die folgenden Konventionen gelten:
 
-- Verwenden _$_ Sie, um auf den Stamm Ordner zu verweisen.
+- Verwenden Sie _$_ , um auf den Stammordner zu verweisen.
 - Verwenden Sie die Klammer- oder Punktnotation, um wie in den folgenden Beispielen dargestellt auf Indizes und Elemente zu verweisen.
 
 
@@ -1655,7 +1655,7 @@ print hosts_report
 | extend status = extractjson("$.hosts[0].status", hosts_report)
 ```
 
-Dieses Beispiel ähnelt, verwendet jedoch nur die Notation "eckige Klammern":
+Dieses Beispiel ist ähnlich, aber es verwendet nur die Notation mit eckigen Klammern:
 
 ```kusto
 let hosts_report='{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"location":"South_DC", "status":"stopped", "rate":3}]}';
@@ -1663,7 +1663,7 @@ print hosts_report
 | extend status = extractjson("$['hosts'][0]['status']", hosts_report)
 ```
 
-Nur für ein Element können Sie nur die Punkt Notation verwenden:
+Für nur ein Element können Sie nur die Punktnotation verwenden:
 
 ```kusto
 let hosts_report=dynamic({"location":"North_DC", "status":"running", "rate":5});
@@ -1674,7 +1674,7 @@ print hosts_report
 
 ### <a name="parsejson"></a>*parsejson*
 
-Es ist am einfachsten, auf mehrere Elemente in ihrer JSON-Struktur als dynamisches Objekt zuzugreifen. Wandeln Sie die Textdaten mit `parsejson` in ein dynamisches Objekt um. Nachdem Sie die JSON-Datei in einen dynamischen Typ konvertiert haben, können Sie zusätzliche Funktionen verwenden, um die Daten zu analysieren.
+Auf mehrere Elemente in Ihrer JSON-Struktur lässt sich am leichtesten über ein dynamisches Objekt zugreifen. Wandeln Sie die Textdaten mit `parsejson` in ein dynamisches Objekt um. Nachdem Sie das JSON in einen dynamischen Typ konvertiert haben, können Sie die Daten mithilfe zusätzlicher Funktionen analysieren.
 
 ```kusto
 let hosts_object = parsejson('{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"location":"South_DC", "status":"stopped", "rate":3}]}');
@@ -1694,7 +1694,7 @@ print hosts_object
 
 ### <a name="mv-expand"></a>*mv-expand*
 
-Verwenden `mv-expand` Sie, um die Eigenschaften eines Objekts in separate Zeilen zu unterteilen:
+Verwenden Sie `mv-expand`, um die Eigenschaften eines Objekts in separate Zeilen aufzuteilen:
 
 ```kusto
 let hosts_object = parsejson('{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"location":"South_DC", "status":"stopped", "rate":3}]}');
@@ -1730,9 +1730,9 @@ Das Ergebnis ist ein Schema im JSON-Format:
 }
 ```
 
-Das Schema beschreibt die Namen der Objekt Felder und deren übereinstimmenden Datentypen. 
+Das Schema beschreibt die Namen der Objektfelder und deren entsprechende Datentypen. 
 
-Bei den Sch-Objekten kann es sich um unterschiedliche Schemas wie im folgenden Beispiel:
+Für geschachtelte Objekte liegen möglicherweise wie im folgenden Beispiel andere Schemas vor:
 
 ```kusto
 let hosts_object = parsejson('{"hosts": [{"location":"North_DC", "status":"running", "rate":5},{"status":"stopped", "rate":"3", "range":100}]}');
@@ -1742,11 +1742,11 @@ print hosts_object
 
 ## <a name="charts"></a>Diagramme
 
-In den folgenden Abschnitten werden Beispiele für das Arbeiten mit Diagrammen bei Verwendung der Kusto-Abfragesprache beschrieben.
+In den folgenden Abschnitten finden Sie Beispiele für das Arbeiten mit Diagrammen, wenn Sie die Kusto-Abfragesprache verwenden.
 
-### <a name="chart-the-results"></a>Diagramm Ergebnisse
+### <a name="chart-the-results"></a>Darstellen der Ergebnisse in Diagrammen
 
-Überprüfen Sie zunächst die Anzahl der Computer pro Betriebssystem in der letzten Stunde:
+Beginnen Sie damit, dass Sie die Anzahl der Computer pro Betriebssystem während der letzten Stunde überprüfen:
 
 ```kusto
 Heartbeat
@@ -1756,17 +1756,17 @@ Heartbeat
 
 Standardmäßig werden die Ergebnisse als Tabelle angezeigt:
 
-:::image type="content" source="images/samples/query-results-table.png" alt-text="Screenshot, der Abfrageergebnisse in einer Tabelle anzeigt.":::
+:::image type="content" source="images/samples/query-results-table.png" alt-text="Screenshot, der Abfrageergebnisse in einer Tabelle zeigt.":::
 
-Wählen Sie für eine nützlichere Ansicht **Diagramm** aus, und wählen Sie dann die Option Kreis aus, **um die Ergebnisse** anzuzeigen:
+Für eine bessere Ansicht wählen Sie **Chart** (Diagramm) und dann die Option **Pie** (Kreisdiagramm) aus, um die Ergebnisse anzuzeigen:
 
-:::image type="content" source="images/samples/query-results-pie-chart.png" alt-text="Screenshot, der Abfrageergebnisse in einem Kreis Diagramm anzeigt.":::
+:::image type="content" source="images/samples/query-results-pie-chart.png" alt-text="Screenshot, der Abfrageergebnisse in einem Kreisdiagramm zeigt.":::
 
 ### <a name="timecharts"></a>Zeitdiagramme
 
-Zeigen Sie den Durchschnitt und die 50. und 95. Quantile der Prozessorzeit in Containern von einer Stunde an. 
+Zeigen Sie den Durchschnitt sowie den 50. und 95. Quantil der Prozessorzeit in Intervallen von einer Stunde an. 
 
-Mit der folgenden Abfrage werden mehrere Reihen generiert. In den Ergebnissen können Sie auswählen, welche Reihe im Zeitdiagramm angezeigt werden soll.
+Mit der folgenden Abfrage werden mehrere Reihen generiert. In den Ergebnissen können Sie auswählen, welche Reihen im Zeitdiagramm angezeigt werden sollen.
 
 ```kusto
 Perf
@@ -1775,13 +1775,13 @@ Perf
 | summarize avg(CounterValue), percentiles(CounterValue, 50, 95)  by bin(TimeGenerated, 1h)
 ```
 
-Wählen Sie die Anzeigeoption für das **Linien** Diagramm aus:
+Wählen Sie die Anzeigeoption **Liniendiagramm** aus:
 
-:::image type="content" source="images/samples/multiple-series-line-chart.png" alt-text="Screenshot, der ein Liniendiagramm mit mehreren Reihen anzeigt.":::
+:::image type="content" source="images/samples/multiple-series-line-chart.png" alt-text="Screenshot, der ein Liniendiagramm mit mehreren Reihen zeigt.":::
 
 #### <a name="reference-line"></a>Bezugslinie
 
-Mithilfe einer Bezugslinie können Sie leicht erkennen, ob die Metrik einen bestimmten Schwellenwert überschritten hat. Um einem Diagramm eine Linie hinzuzufügen, erweitern Sie das Dataset durch Hinzufügen einer Konstanten Spalte:
+Eine Bezugslinie kann Ihnen dabei helfen, einfach zu identifizieren, ob die Metrik einen bestimmten Schwellenwert überschritten hat. Um einem Diagramm eine Zeile hinzuzufügen, erweitern Sie das Dataset durch Hinzufügen einer konstanten Spalte:
 
 ```kusto
 Perf
@@ -1791,12 +1791,12 @@ Perf
 | extend Threshold = 20
 ```
 
-:::image type="content" source="images/samples/multiple-series-threshold-line-chart.png" alt-text="Screenshot, der ein Liniendiagramm mit mehreren Reihen mit einer Schwellenwert-Verweis Zeile anzeigt.":::
+:::image type="content" source="images/samples/multiple-series-threshold-line-chart.png" alt-text="Screenshot, der ein Liniendiagramm mit mehreren Reihen mit einer Bezugslinie für einen Schwellenwert zeigt.":::
 
 
 ### <a name="multiple-dimensions"></a>Mehrere Dimensionen
 
-Mehrere Ausdrücke in der- `by` Klausel von `summarize` erstellen mehrere Zeilen in den Ergebnissen. Für jede Kombination von Werten wird eine Zeile erstellt.
+Mit mehreren Ausdrücken in der `by`-Klausel von `summarize` werden mehrere Zeilen in den Ergebnissen erstellt. Für jede Kombination der Werte wird eine Zeile erstellt.
 
 ```kusto
 SecurityEvent
@@ -1804,23 +1804,23 @@ SecurityEvent
 | summarize count() by tostring(EventID), AccountType, bin(TimeGenerated, 1h)
 ```
 
-Wenn Sie die Ergebnisse als Diagramm anzeigen, verwendet das Diagramm die erste Spalte aus der- `by` Klausel. Das folgende Beispiel zeigt ein gestapeltes Säulendiagramm, das mit dem-Wert erstellt wird `EventID` . Dimensionen müssen vom Typ sein `string` . In diesem Beispiel wird der `EventID` Wert in umgewandelt `string` :
+Wenn Sie die Ergebnisse als Diagramm anzeigen, verwendet das Diagramm die erste Spalte aus der `by`-Klausel. Im folgenden Beispiel ist ein gestapeltes Säulendiagramm dargestellt, das unter Verwendung des `EventID`-Werts erstellt wurde. Dimensionen müssen vom Typ `string` sein. In diesem Beispiel wird der `EventID`-Wert in `string` umgewandelt:
 
-:::image type="content" source="images/samples/select-column-chart-type-eventid.png" alt-text="Screenshot, der ein Balkendiagramm auf der Grundlage der EventId-Spalte anzeigt.":::
+:::image type="content" source="images/samples/select-column-chart-type-eventid.png" alt-text="Screenshot, der ein Balkendiagramm zeigt, das auf der Spalte „EventID“ basiert.":::
 
-Sie können zwischen Spalten umschalten, indem Sie den Dropdown Pfeil für den Spaltennamen auswählen:
+Sie können zwischen Spalten wechseln, indem Sie den Dropdownpfeil für den Spaltennamen auswählen:
 
-:::image type="content" source="images/samples/select-column-chart-type-accounttype.png" alt-text="Screenshot, der ein Balkendiagramm auf der Grundlage der AccountType-Spalte anzeigt, wobei die Spaltenauswahl sichtbar ist.":::
+:::image type="content" source="images/samples/select-column-chart-type-accounttype.png" alt-text="Screenshot, der ein Balkendiagramm zeigt, das auf der Spalte „AccountType“ basiert, wobei die Spaltenauswahl angezeigt wird.":::
 
 ## <a name="smart-analytics"></a>Intelligente Analysen
 
-Dieser Abschnitt enthält Beispiele für die Verwendung von intelligenten Analysefunktionen in Azure Log Analytics, um die Benutzeraktivität zu analysieren. Sie können diese Beispiele verwenden, um Ihre eigenen Anwendungen zu analysieren, die durch Azure-Anwendung Insights überwacht werden, oder die Konzepte in diesen Abfragen für eine ähnliche Analyse anderer Daten verwenden. 
+Dieser Abschnitt enthält Beispiele für die Nutzung intelligenter Analysefunktionen in Azure Log Analytics, um Benutzeraktivitäten zu analysieren. Sie können diese Beispiele verwenden, um Ihre eigenen Anwendungen, die von Azure Application Insights überwacht werden, zu analysieren, oder Sie können die Konzepte in diesen Abfragen für ähnliche Analysen anderer Daten verwenden. 
 
 ### <a name="cohorts-analytics"></a>Kohortenanalysen
 
-Bei der Kohorte-Analyse werden die Aktivitäten bestimmter Gruppen von Benutzern nachverfolgt, die als _Kohorten_ bezeichnet werden. Die Analyse der Kohorte versucht, zu messen, wie ansprechend ein Dienst ist, indem die Rate der zurückgegebenen Benutzer gemessen wird. Benutzer werden nach dem Zeitpunkt gruppiert, zu dem Sie den Dienst zum ersten Mal verwendet haben. Beim Analysieren von Kohorten erwarten wir eine Abnahme der Aktivität gegenüber den ersten nachverfolgten Zeiträumen. Jede Kohorte wird nach der Woche benannt, in der ihre Mitglieder zum ersten Mal identifiziert wurden.
+Bei der Kohortenanalyse wird die Aktivität von bestimmten Benutzergruppen, die als _Kohorten_ bezeichnet werden, nachverfolgt. Die Kohortenanalyse versucht zu messen, wie attraktiv ein Dienst ist, indem die Rate der wiederkehrenden Benutzer gemessen wird. Benutzer werden nach der Zeit ihrer ersten Nutzung des Diensts gruppiert. Beim Analysieren von Kohorten erwarten wir eine Abnahme der Aktivität gegenüber den ersten nachverfolgten Zeiträumen. Jede Kohorte wird nach der Woche benannt, in der ihre Mitglieder zum ersten Mal identifiziert wurden.
 
-Im folgenden Beispiel wird die Anzahl der Aktivitäten analysiert, die Benutzer seit fünf Wochen nach der ersten Verwendung des-Dienstanbieter abgeschlossen haben:
+Im folgenden Beispiel wird die Anzahl der Aktivitäten analysiert, die Benutzer im Verlauf von fünf Wochen nach ihrer ersten Nutzung des Diensts ausgeführt haben:
 
 ```kusto
 let startDate = startofweek(bin(datetime(2017-01-20T00:00:00Z), 1d));
@@ -1884,11 +1884,11 @@ week
 
 So sieht die Ausgabe aus:
 
-:::image type="content" source="images/samples/cohorts-table.png" alt-text="Screenshot, der eine Tabelle mit Kohorten auf der Grundlage von Aktivitäten anzeigt.":::
+:::image type="content" source="images/samples/cohorts-table.png" alt-text="Screenshot, der eine Tabelle der Kohorten auf Grundlage ihrer Aktivitäten zeigt.":::
 
 ### <a name="rolling-monthly-active-users-and-user-stickiness"></a>Neue monatlich aktive Benutzer und Benutzerbindung
 
-Im folgenden Beispiel wird die Zeitreihenanalyse mit der [series_fir](/azure/kusto/query/series-firfunction) -Funktion verwendet. Sie können die- `series_fir` Funktion für das Verschieben von Fenster Berechnungen verwenden. Die überwachte Beispielanwendung ist ein Onlineshop, der die Aktivität der Benutzer über benutzerdefinierte Ereignisse nachverfolgt. Mit der Abfrage werden zwei Arten von Benutzeraktivitäten nachverfolgt: `AddToCart` und `Checkout` . Es definiert einen aktiven Benutzer als Benutzer, der ein Auschecken mindestens einmal an einem bestimmten Tag abgeschlossen hat.
+In den folgenden Beispielen wird die Zeitreihenanalyse mit der Funktion [series_fir](/azure/kusto/query/series-firfunction) durchgeführt. Sie können die `series_fir`-Funktion für Berechnungen mit gleitendem Fenster verwenden. Die überwachte Beispielanwendung ist ein Onlineshop, der die Aktivität der Benutzer über benutzerdefinierte Ereignisse nachverfolgt. Die Abfrage verfolgt zwei Arten von Benutzeraktivitäten: `AddToCart` und `Checkout`. Sie definiert einen aktiven Benutzer als Benutzer, der an einem bestimmten Tag mindestens einmal einen Auscheckvorgang abgeschlossen hat.
 
 ```kusto
 let endtime = endofday(datetime(2017-03-01T00:00:00Z));
@@ -1931,9 +1931,9 @@ customEvents
 
 So sieht die Ausgabe aus:
 
-:::image type="content" source="images/samples/rolling-monthly-active-users-chart.png" alt-text="Screenshot eines Diagramms, das aktive aktive Benutzer nach Tag über einen Monat anzeigt":::
+:::image type="content" source="images/samples/rolling-monthly-active-users-chart.png" alt-text="Screenshot eines Diagramms, das gleitende aktive Benutzer nach Tag über einen Monat hinweg zeigt.":::
 
-Im folgenden Beispiel wird die vorherige Abfrage in eine wiederverwendbare Funktion umgewandelt. Im Beispiel wird dann die Abfrage verwendet, um die Benutzerfreundlichkeit zu berechnen. Ein aktiver Benutzer in dieser Abfrage ist als ein Benutzer definiert, der ein Auschecken mindestens einmal an einem bestimmten Tag abgeschlossen hat.
+Im folgenden Beispiel wird die vorangehende Abfrage in eine wiederverwendbare Funktion umgewandelt. Im Beispiel wird dann die Abfrage verwendet, um die gleitende Benutzerbindung zu berechnen. Ein aktiver Benutzer in dieser Abfrage ist als Benutzer definiert, der an einem bestimmten Tag mindestens einen Auscheckvorgang abgeschlossen hat.
 
 ```kusto
 let rollingDcount = (sliding_window_size: int, event_name:string)
@@ -1973,16 +1973,16 @@ on Timestamp
 
 So sieht die Ausgabe aus:
 
-:::image type="content" source="images/samples/user-stickiness-chart.png" alt-text="Screenshot eines Diagramms, das die Benutzer Bindung im Zeitverlauf anzeigt.":::
+:::image type="content" source="images/samples/user-stickiness-chart.png" alt-text="Screenshot eines Diagramms, das die Benutzerbindung im zeitlichen Verlauf zeigt.":::
 
 ### <a name="regression-analysis"></a>Regressionsanalyse
 
-Dieses Beispiel zeigt, wie Sie eine automatisierte Erkennung für Dienstunterbrechungen erstellen, die ausschließlich auf den Ablaufverfolgungsprotokollen einer Anwendung basiert. Das Erkennungs Modul sucht ungewöhnliche, plötzliche Zunahme der relativen Menge an Fehler-und Warnungs Ablauf Verfolgungen in der Anwendung.
+Dieses Beispiel zeigt, wie Sie eine automatisierte Erkennung für Dienstunterbrechungen erstellen, die ausschließlich auf den Ablaufverfolgungsprotokollen einer Anwendung basiert. Die Erkennung sucht nach nicht normalen, plötzlichen Anstiegen bei der relativen Anzahl von Fehler- und Warnungsüberwachungen in der Anwendung.
 
 Für die Auswertung des Dienststatus basierend auf Überwachungsprotokolldaten kommen zwei Verfahren zum Einsatz:
 
 - Mit [make-series](/azure/kusto/query/make-seriesoperator) werden teilweise strukturierte Ablaufverfolgungsprotokolle im Textformat in eine Metrik konvertiert, die das Verhältnis zwischen positiven und negativen Ablaufverfolgungseinträgen darstellt.
-- Verwenden Sie [series_fit_2lines](/azure/kusto/query/series-fit-2linesfunction) und [series_fit_line](/azure/kusto/query/series-fit-linefunction) für die erweiterte Schritt Sprung Erkennung mithilfe der Zeitreihenanalyse mit einer zweizeiligen linearen Regression.
+- Verwenden Sie [series_fit_2lines](/azure/kusto/query/series-fit-2linesfunction) und [series_fit_line](/azure/kusto/query/series-fit-linefunction) für die komplexere Erkennung von Sprüngen unter Verwendung einer Zeitreihenanalyse mit einer linearen Regression mit zwei Linien.
 
 ```kusto
 let startDate = startofday(datetime("2017-02-01"));
@@ -2013,7 +2013,7 @@ traces
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-- Durchlaufen Sie ein [Tutorial zur Kusto-Abfragesprache](tutorial.md?pivots=azuremonitor).
+- Exemplarische Vorgehensweise anhand eines [Tutorials zur Kusto-Abfragesprache](tutorial.md?pivots=azuremonitor).
 
 
 ::: zone-end
