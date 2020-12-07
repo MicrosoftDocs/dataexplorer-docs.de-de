@@ -65,7 +65,7 @@
   items:
     - name: Erstellen eines Clusters und einer Datenbank
       items:
-        - name: Azure-Befehlszeilenschnittstelle
+        - name: Azure CLI
           href: create-cluster-database-cli.md
         - name: PowerShell
           href: create-cluster-database-powershell.md
@@ -1489,6 +1489,9 @@
                   href: ./kusto/management/materialized-views/materialized-view-drop.md
                 - name: .disable | .enable materialized-view
                   href: ./kusto/management/materialized-views/materialized-view-enable-disable.md
+            - name: Gespeicherte Abfrageergebnisse
+              displayName: '.set stored query, .show stored query, .drop stored query'
+              href: ./kusto/management/stored-query-results.md
             - name: Spalten
               items:
                 - name: Spaltenverwaltung
