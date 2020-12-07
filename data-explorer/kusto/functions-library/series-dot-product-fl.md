@@ -7,14 +7,14 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/18/2020
-ms.openlocfilehash: 9b1c6db6af651ae3665c07bda8598212883a8f6c
-ms.sourcegitcommit: 88923cfb2495dbf10b62774ab2370b59681578b9
+ms.openlocfilehash: 9065c6b86807ad27c588ebffe3334c450a1addcb
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/19/2020
-ms.locfileid: "92184143"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321844"
 ---
-# <a name="series_dot_product_fl"></a>series_dot_product_fl ()
+# <a name="series_dot_product_fl"></a>series_dot_product_fl()
 
 Berechnet das Punktprodukt von zwei numerischen Vektoren.
 
@@ -57,7 +57,7 @@ union
 
 # <a name="persistent"></a>[Persistent](#tab/persistent)
 
-Verwenden Sie für die permanente Verwendung die [. Create-Funktion](../management/create-function.md). Zum Erstellen einer Funktion ist die [Berechtigung Datenbankbenutzer](../management/access-control/role-based-authorization.md)erforderlich.
+Verwenden Sie für persistente Verwendung [`.create function`](../management/create-function.md) . Zum Erstellen einer Funktion ist die [Berechtigung Datenbankbenutzer](../management/access-control/role-based-authorization.md)erforderlich.
 
 ### <a name="one-time-installation"></a>Einmalige Installation
 

@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 5192bb2d752a5754ae36840611b9f7b0e84da256
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 569554379ffe672ed75fd15da127f03fea35f6d1
+ms.sourcegitcommit: 2804e3fe40f6cf8e65811b00b7eb6a4f59c88a99
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92250718"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96748381"
 ---
 # <a name="take-operator"></a>take-Operator
 
@@ -36,17 +36,14 @@ Es gibt keine Garantie, welche Datensätze zurückgegeben werden, es sei denn, d
 
 ( `take` und `limit` sind Synonyme.)
 
-## <a name="does-kusto-support-paging-of-query-results"></a>Unterstützt Kusto das Paging von Abfrage Ergebnissen?
+## <a name="paging-of-query-results"></a>Paging von Abfrage Ergebnissen
 
-Kusto bietet keinen integrierten Paging-Mechanismus.
+Zu den Methoden für die Implementierung von Paging gehören:
 
-Kusto ist ein komplexer Dienst, der kontinuierlich die Daten optimiert, die er speichert, um eine hervorragende Abfrageleistung für große Datasets bereitzustellen. Paging ist zwar ein nützlicher Mechanismus für Zustands lose Clients mit eingeschränkten Ressourcen, die Belastung wird jedoch auf den Back-End-Dienst verlagert, der Client Zustandsinformationen nachverfolgen muss. Anschließend ist die Leistung und Skalierbarkeit des Back-End-Dienstanbieter stark eingeschränkt.
+* Exportieren Sie das Ergebnis einer Abfrage in einen externen Speicher, und Paging Sie die generierten Daten.
+* Schreiben Sie eine Anwendung der mittleren Ebene, die eine Zustands behaftete Paging-API bereitstellt, indem Sie die Ergebnisse einer Kusto-Abfrage zwischenspeichern.
+* Verwenden Sie die Paginierung in [gespeicherten Abfrage Ergebnissen](../management/stored-query-results.md#pagination) .
 
-Implementieren Sie für Paging-Unterstützung eine der folgenden Funktionen:
-
-* Exportieren des Ergebnisses einer Abfrage in einen externen Speicher und Paging durch die generierten Daten.
-
-* Schreiben einer Anwendung der mittleren Ebene, die eine Zustands behaftete Paging-API bereitstellt, indem die Ergebnisse einer Kusto-Abfrage zwischengespeichert werden.
 
 ## <a name="see-also"></a>Weitere Informationen
 

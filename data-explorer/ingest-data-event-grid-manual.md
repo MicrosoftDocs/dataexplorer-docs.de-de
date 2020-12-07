@@ -8,12 +8,12 @@ ms.reviewer: kedamari
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/05/2020
-ms.openlocfilehash: 51d5c48fbcd2373ed5cdd1973cc9e53abb26b2de
-ms.sourcegitcommit: 58588ba8d1fc5a6adebdce2b556db5bc542e38d8
+ms.openlocfilehash: e8ec0a07549a8db4027beab8d512f58e3ab6a780
+ms.sourcegitcommit: 4d5628b52b84f7564ea893f621bdf1a45113c137
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/15/2020
-ms.locfileid: "92099492"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96444164"
 ---
 # <a name="manually-create-resources-for-event-grid-ingestion"></a>Manuelles Erstellen von Ressourcen für die Event Grid-Erfassung
 
@@ -31,6 +31,7 @@ In diesem Artikel wird beschrieben, wie Sie die Ressourcen, die für die Event G
 ## <a name="prerequisites"></a>Voraussetzungen
 
 * Ein Azure-Abonnement. Erstellen Sie ein [kostenloses Azure-Konto](https://azure.microsoft.com/free/).
+* [Ein Cluster und eine Datenbank](create-cluster-database-portal.md).
 * [Ein Speicherkonto](/azure/storage/common/storage-quickstart-create-account?tabs=azure-portal).
     * Das Abonnement von Event Grid-Benachrichtigungen kann in Azure Storage-Konten für `BlobStorage`, `StorageV2` oder [Data Lake Storage Gen2](/azure/storage/blobs/data-lake-storage-introduction) festgelegt werden.
 * [Ein Event Hub-Namespace und Event Hub](/azure/event-hubs/event-hubs-create).
@@ -47,7 +48,7 @@ In diesem Artikel wird beschrieben, wie Sie die Ressourcen, die für die Event G
 
 1. Geben Sie im Fenster **Ereignisabonnement erstellen** auf der Registerkarte **Einfach** die folgenden Werte an:
 
-    :::image type="content" source="media/eventgrid/create-event-grid-subscription-2.png" alt-text="Erstellen eines Event Grid-Abonnements":::
+    :::image type="content" source="media/eventgrid/create-event-grid-subscription-2.png" alt-text="Erstellen eines Ereignisabonnements: Einzugebende Werte":::
 
     |**Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**|
     |---|---|---|
@@ -60,13 +61,13 @@ In diesem Artikel wird beschrieben, wie Sie die Ressourcen, die für die Event G
 
 1. Wählen Sie unter **ENDPUNKTDETAILS** die Option **Event Hubs** aus.
 
-    :::image type="content" source="media/eventgrid/endpoint-details.png" alt-text="Erstellen eines Event Grid-Abonnements":::
+    :::image type="content" source="media/eventgrid/endpoint-details.png" alt-text="Auswählen eines Ereignishandlers für den Empfang Ihrer Ereignisse: Event Hub – Azure Data Explorer":::
 
 1. Klicken Sie auf **Endpunkt auswählen**, und fügen Sie den von Ihnen erstellten Event Hub ein, z. B. *test-hub*.
     
 1. Wählen Sie die Registerkarte **Filter** aus, wenn Sie bestimmte Themen nachverfolgen möchten. Legen Sie die Filter für die Benachrichtigungen wie folgt fest:
    
-    :::image type="content" source="media/eventgrid/filters-tab.png" alt-text="Erstellen eines Event Grid-Abonnements":::
+    :::image type="content" source="media/eventgrid/filters-tab.png" alt-text="Registerkarte „Filter“: Event Grid":::
 
    1. Wählen Sie **Betrefffilter aktivieren** aus.
    1. Das Feld **Betreff beginnt mit** ist das *Literalpräfix* des Themas (Betreffs). Da das angewendete Muster *startswith* ist, kann es mehrere Container, Ordner oder Blobs umfassen. Platzhalter sind nicht zulässig.

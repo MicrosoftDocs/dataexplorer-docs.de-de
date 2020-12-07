@@ -8,12 +8,12 @@ ms.reviewer: amitof
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/16/2020
-ms.openlocfilehash: d0942a949454bf12840626ff25d3703a23aed2cc
-ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
+ms.openlocfilehash: 24ab3cb3e423e3ab6b77f09f2c216feb07ae0d0f
+ms.sourcegitcommit: f134d51e52504d3ca722bdf6d33baee05118173a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/13/2020
-ms.locfileid: "92002949"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96563307"
 ---
 # <a name="query-results-cache"></a>Abfrageergebniscache
 
@@ -21,7 +21,7 @@ Kusto enthält einen Abfrageergebnis Cache. Sie können auswählen, ob zwischeng
 
 ## <a name="use-the-cache"></a>Verwenden des Caches
 
-Legen `query_results_cache_max_age` Sie die Option als Teil der Abfrage fest, um den Abfrageergebnis Cache zu verwenden. Sie können diese Option im Abfragetext oder als Client Anforderungs Eigenschaft festlegen. Beispiel:
+Legen `query_results_cache_max_age` Sie die Option als Teil der Abfrage fest, um den Abfrageergebnis Cache zu verwenden. Sie können diese Option im Abfragetext oder als Client Anforderungs Eigenschaft festlegen. Zum Beispiel:
 
 ```kusto
 set query_results_cache_max_age = time(5m);
@@ -41,9 +41,9 @@ Der Abfrageergebnis Cache gibt Ergebnisse nur für Abfragen zurück, die mit ein
 * Die beiden Abfragen haben dieselbe Darstellung (wie UTF-8-Zeichen folgen).
 * Die beiden Abfragen werden an dieselbe Datenbank durchgeführt.
 * Die beiden Abfragen verwenden die gleichen [Client Anforderungs Eigenschaften](../api/netfx/request-properties.md). Die folgenden Eigenschaften werden für zwischen Speicherungs Zwecke ignoriert:
-   * [ClientRequestId](../api/netfx/request-properties.md#the-clientrequestid-x-ms-client-request-id-named-property)
-   * [Anwendung](../api/netfx/request-properties.md#the-application-x-ms-app-named-property)
-   * [Benutzer](../api/netfx/request-properties.md#the-user-x-ms-user-named-property)
+   * [ClientRequestId](../api/netfx/request-properties.md#clientrequestid-x-ms-client-request-id)
+   * [Anwendung](../api/netfx/request-properties.md#application-x-ms-app)
+   * [Benutzer](../api/netfx/request-properties.md#user-x-ms-user)
 
 ### <a name="incompatible-queries"></a>Inkompatible Abfragen
 
@@ -72,7 +72,7 @@ Bei der Reaktion auf eine Abfrage sendet Kusto eine zusätzliche " [ExtendedProp
 Für zwischengespeicherte Abfrageergebnisse wird eine zusätzliche Zeile an die Tabelle angehängt:
 * Die Spalte der Zeile `Key` enthält die Zeichenfolge. `ServerCache`
 * Die Spalte der Zeile `Value` enthält einen Eigenschaften Behälter mit zwei Feldern:
-   * `OriginalClientRequestId` : Gibt die [clientrequestid](../api/netfx/request-properties.md#the-clientrequestid-x-ms-client-request-id-named-property)der ursprünglichen Anforderung an.
+   * `OriginalClientRequestId` : Gibt die [clientrequestid](../api/netfx/request-properties.md#clientrequestid-x-ms-client-request-id)der ursprünglichen Anforderung an.
    * `OriginalStartedOn` : Gibt die Startzeit der ursprünglichen Anforderung an.
 
 ## <a name="distribution"></a>Distribution

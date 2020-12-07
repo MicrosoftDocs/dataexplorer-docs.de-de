@@ -7,14 +7,14 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/18/2020
-ms.openlocfilehash: b56aefd94ed58b8731ea6237f131b4da74d4f7be
-ms.sourcegitcommit: 88923cfb2495dbf10b62774ab2370b59681578b9
+ms.openlocfilehash: 7d2482c36c0c55c34adbc664a6c24f64bdadf7a1
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/19/2020
-ms.locfileid: "92184168"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321946"
 ---
-# <a name="kmeans_fl"></a>kmeans_fl ()
+# <a name="kmeans_fl"></a>kmeans_fl()
 
 Die Funktion `kmeans_fl()` gruppiert ein DataSet mit dem [k-means-Algorithmus](https://en.wikipedia.org/wiki/K-means_clustering).
 
@@ -76,7 +76,7 @@ OccupancyDetection
 
 # <a name="persistent"></a>[Persistent](#tab/persistent)
 
-Verwenden Sie für die permanente Verwendung die [. Create-Funktion](../management/create-function.md). Zum Erstellen einer Funktion ist die [Berechtigung Datenbankbenutzer](../management/access-control/role-based-authorization.md)erforderlich.
+Verwenden Sie für persistente Verwendung [`.create function`](../management/create-function.md) . Zum Erstellen einer Funktion ist die [Berechtigung Datenbankbenutzer](../management/access-control/role-based-authorization.md)erforderlich.
 
 ### <a name="one-time-installation"></a>Einmalige Installation
 

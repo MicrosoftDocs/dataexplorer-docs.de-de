@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: 383d1ab5d948a5fbcfb3ab2aad0ff8e5ed675075
-ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
+ms.openlocfilehash: 3cc5efa2d8b738c58d94d0db397218663fd76740
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/04/2020
-ms.locfileid: "93349442"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96470212"
 ---
 # <a name="create-materialized-view"></a>.create materialized-view
 
@@ -22,16 +22,15 @@ Eine [materialisierte Sicht](materialized-view-overview.md) ist eine Aggregation
 Es gibt zwei Möglichkeiten, eine materialisierte Sicht zu erstellen, die von der Option *Abgleich* im Befehl notiert wird:
 
  * **Basierend auf den vorhandenen Datensätzen in der Quell Tabelle erstellen:** 
-      * Die Erstellung kann in Abhängigkeit von der Anzahl der Datensätze in der Quell Tabelle einige Zeit in Anspruch nehmen. Die Ansicht ist bis zum Abschluss nicht für Abfragen verfügbar.
+      * Die Erstellung kann in Abhängigkeit von der Anzahl der Datensätze in der Quell Tabelle einige Zeit in Anspruch nehmen. Die Ansicht steht erst dann für Abfragen zur Verfügung, wenn die Abfüllung beendet ist.
       * Wenn Sie diese Option verwenden, muss der CREATE-Befehl sein, `async` und die Ausführung kann mit dem Befehl [. Show Operations](../operations.md#show-operations) überwacht werden.
 
     * Das Abbrechen des Abgleich-Prozesses ist mit dem Befehl " [. Cancel Operation](#cancel-materialized-view-creation) " möglich.
 
       > [!IMPORTANT]
-      > * Die Verwendung der Option "Abgleich" wird für Daten im kaltcache nicht unterstützt. Erhöhen Sie ggf. den Zeitraum für den aktiven Cache für die Erstellung der Sicht. Hierfür ist möglicherweise eine horizontale Skalierung erforderlich.    
-      > * Die Verwendung der Abgleich-Option kann für große Quell Tabellen eine lange Zeit in Anspruch nehmen. Wenn dieser Prozess während der Ausführung vorübergehend fehlschlägt, wird er nicht automatisch wiederholt, und eine erneute Ausführung des create-Befehls ist erforderlich.
+      > Die Verwendung der Abgleich-Option kann für große Quell Tabellen eine lange Zeit in Anspruch nehmen. Wenn dieser Prozess während der Ausführung vorübergehend fehlschlägt, wird er nicht automatisch wiederholt, und eine erneute Ausführung des create-Befehls ist erforderlich. Weitere Informationen finden Sie im Abschnitt [rückfüllung einer materialisierten Sicht](#backfill-a-materialized-view) .
     
-* **Erstellen Sie ab jetzt die materialisierte Ansicht:** 
+* **Erstellen Sie ab jetzt die materialisierte Ansicht:**
     * Die materialisierte Sicht wird leer erstellt und enthält nur Datensätze, die nach der Erstellung der Sicht erfasst werden. Die Erstellung dieser Art wird sofort zurückgegeben, erfordert nicht `async` , und die Ansicht ist sofort für Abfragen verfügbar.
 
 Für den Create-Vorgang sind [Datenbankadministrator](../access-control/role-based-authorization.md) Berechtigungen erforderlich. Der Ersteller der materialisierten Sicht wird zum Administrator des IT-Administrators.
@@ -72,7 +71,7 @@ Die im materialisierte View-Argument verwendete Abfrage ist durch die folgenden 
 
     * Datensätze in der Quell Tabelle der Sicht (die Fakten Tabelle) werden nur einmal materialisiert. Eine andere Erfassungs Latenz zwischen der Fakten Tabelle und der Dimensions Tabelle kann sich auf die Sicht Ergebnisse auswirken.
 
-    * **Beispiel** : eine Sicht Definition enthält eine innere Verknüpfung mit einer Dimensions Tabelle. Zum Zeitpunkt der Materialisierung wurde der Dimensions Daten Satz nicht vollständig erfasst, wurde aber bereits in der Fakten Tabelle erfasst. Dieser Datensatz wird aus der Sicht gelöscht und nie neu verarbeitet. 
+    * **Beispiel**: eine Sicht Definition enthält eine innere Verknüpfung mit einer Dimensions Tabelle. Zum Zeitpunkt der Materialisierung wurde der Dimensions Daten Satz nicht vollständig erfasst, wurde aber bereits in der Fakten Tabelle erfasst. Dieser Datensatz wird aus der Sicht gelöscht und nie neu verarbeitet. 
 
         Wenn der Join ein äußerer Join ist, wird der Datensatz aus der Fakten Tabelle ebenso verarbeitet und der Ansicht mit einem NULL-Wert für die Spalten der Dimensions Tabelle hinzugefügt. Datensätze, die bereits (mit NULL-Werten) der Sicht hinzugefügt wurden, werden nicht erneut verarbeitet. Ihre Werte in Spalten aus der Dimensions Tabelle bleiben NULL.
 
@@ -132,6 +131,7 @@ Die folgenden Elemente werden in der-Klausel unterstützt `with(propertyName=pro
         | summarize count(), dcount(User), max(Duration) by Customer, Day
     } 
     ```
+
 1. Eine materialisierte Sicht, die die Quell Tabelle basierend auf der EventId-Spalte dedupliziert:
 
     <!-- csl -->
@@ -211,7 +211,7 @@ Die folgenden Aggregations Funktionen werden unterstützt:
     }
     ``` 
     
-    Nicht **tun** :
+    Nicht **tun**:
     
     ```kusto
     .create materialized-view ArgMaxResourceId on table FactResources
@@ -220,7 +220,7 @@ Die folgenden Aggregations Funktionen werden unterstützt:
     }
     ```
 
-* Schließen Sie keine Transformationen, Normalisierungen und anderen umfangreichen Berechnungen ein, die als Teil der materialisierten Sicht Definition in eine [Aktualisierungs Richtlinie](../updatepolicy.md) verschoben werden können. Führen Sie stattdessen alle diese Prozesse in einer Update Richtlinie aus, und führen Sie die Aggregation nur in der materialisierten Sicht aus. Verwenden Sie diesen Prozess für die Suche in Dimensions Tabellen, falls zutreffend.
+* Schließen Sie keine Transformationen, Normalisierungen, suchen in Dimensions Tabellen und andere intensive Berechnungen ein, die als Teil der materialisierten Sicht Definition in eine [Aktualisierungs Richtlinie](../updatepolicy.md) verschoben werden können. Führen Sie stattdessen alle diese Prozesse in einer Update Richtlinie aus, und führen Sie die Aggregation nur in der materialisierten Sicht aus.
 
     **Do** Ausführen:
     
@@ -233,6 +233,7 @@ Die folgenden Aggregations Funktionen werden unterstützt:
         "Query": 
             "SourceTable 
             | extend ResourceId = strcat('subscriptions/', toupper(SubscriptionId), '/', resourceId)", 
+            | lookup DimResources on ResourceId
         "IsTransactional": false}]'  
     ```
         
@@ -246,19 +247,51 @@ Die folgenden Aggregations Funktionen werden unterstützt:
     }
     ```
     
-    Nicht **tun** :
+    Nicht **tun**:
     
     ```kusto
     .create materialized-view Usage on table SourceTable
     {
-        SourceTable 
+        SourceTable
         | extend ResourceId = strcat('subscriptions/', toupper(SubscriptionId), '/', resourceId)
+        | lookup DimResources on ResourceId
         | summarize count() by ResourceId
     }
     ```
 
-> [!NOTE]
-> Wenn Sie die beste Abfragezeit Leistung benötigen, aber einige Daten der Aktualität der Daten Opfern können, verwenden Sie die [Funktion materialized_view ()](../../query/materialized-view-function.md).
+> [!TIP]
+> Wenn Sie die beste Abfragezeit Leistung benötigen, aber eine gewisse Daten Latenz tolerieren können, verwenden Sie die [Funktion materialized_view ()](../../query/materialized-view-function.md).
+
+## <a name="backfill-a-materialized-view"></a>Eine materialisierte Sicht rückfüllen
+
+Beim Erstellen einer materialisierten Sicht mit der- `backfill` Eigenschaft wird die materialisierte Sicht basierend auf den Datensätzen erstellt, die in der Quell Tabelle verfügbar sind (oder eine Teilmenge dieser Datensätze, wenn `effectiveDateTime` verwendet wird). Die Ausführung von Backfill kann für große Quell Tabellen viel Zeit in Anspruch nehmen.
+
+* Die Verwendung der Option "Abgleich" wird für Daten im kaltcache nicht unterstützt. Erhöhen Sie ggf. den Zeitraum für den aktiven Cache für die Dauer der Ansichts Erstellung. Hierfür ist möglicherweise eine horizontale Skalierung erforderlich.
+
+* Im Hintergrund teilt der Sicherungsprozess die Daten in mehrere Batches auf und führt mehrere Erfassungs Vorgänge aus, um die Ansicht Rück zufüllen. Vorübergehende Fehler, die im Rahmen des Sicherungs Vorgangs auftreten, werden wiederholt, aber wenn alle Wiederholungen erschöpft sind, ist möglicherweise eine manuelle erneute Ausführung des create-Befehls erforderlich.
+
+* Es gibt einige Eigenschaften, die Sie ändern können, wenn bei der Ansichts Erstellung Fehler auftreten:
+
+    * `MaxSourceRecordsForSingleIngest` -Standardmäßig beträgt die Anzahl der Quelldaten Sätze in jedem Erfassungs Vorgang während des Abfüllens 2 Millionen Datensätze pro Knoten. Sie können diese Standardeinstellung ändern, indem Sie diese Eigenschaft auf die gewünschte Anzahl von Datensätzen festlegen (der Wert ist die _Gesamt_ Anzahl der Datensätze in jedem Erfassungs Vorgang). Wenn Sie diesen Wert verringern, kann es hilfreich sein, wenn die Erstellung an Arbeitsspeicher Limits/Abfrage Timeouts fehlschlägt Wenn Sie diesen Wert erhöhen, kann die Ansichts Erstellung beschleunigt werden, vorausgesetzt, der Cluster kann die Aggregations Funktion für mehr Datensätze als die standardmäßige ausführen.
+
+    * `Concurrency` -die Erfassungs Vorgänge, die als Teil des Abgleich-Prozesses ausgeführt werden, werden gleichzeitig ausgeführt. Standardmäßig ist die Parallelität `min(number_of_nodes * 2, 5)` . Sie können diese Eigenschaft festlegen, um die Parallelität zu erhöhen oder zu verringern. Das Erhöhen dieses Werts ist nur empfehlenswert, wenn die CPU-Auslastung des Clusters gering ist, da dies erhebliche Auswirkungen auf die CPU-Auslastung des Clusters haben kann.
+
+  Mit dem folgenden Befehl wird z. b. die materialisierte Sicht aus `2020-01-01` mit der maximalen Anzahl von Datensätzen in jedem Erfassungs Vorgang von `3 million` Datensätzen aufgefüllt, und die Erfassungs Vorgänge werden mit der Parallelität ausgeführt `2` : 
+    
+    <!-- csl -->
+    ```
+    .create async materialized-view with (
+            backfill=true,
+            effectiveDateTime=datetime(2019-01-01),
+            MaxSourceRecordsForSingleIngest=3000000,
+            Concurrency=2
+        )
+        CustomerUsage on table T
+    {
+        T
+        | summarize count(), dcount(User), max(Duration) by Customer, bin(Timestamp, 1d)
+    } 
+    ```
 
 ## <a name="limitations-on-creating-materialized-views"></a>Einschränkungen beim Erstellen materialisierter Sichten
 
@@ -281,7 +314,7 @@ Brechen Sie den Prozess der materialisierten Ansichts Erstellung ab, wenn Sie di
 > [!WARNING]
 > Die materialisierte Sicht kann nicht wieder hergestellt werden, nachdem dieser Befehl ausgeführt wurde.
 
-Der Erstellungs Prozess kann nicht sofort abgebrochen werden. Der Cancel-Befehl signalisiert, dass die Materialisierung angehalten wird, und die Erstellung prüft regelmäßig, ob ein Abbruch angefordert wurde. Der Cancel-Befehl wartet auf einen maximalen Zeitraum von 10 Minuten, bis der Erstellungs Vorgang für materialisierte Sichten abgebrochen wurde, und meldet zurück, wenn der Abbruch erfolgreich war. Auch wenn der Abbruch innerhalb von 10 Minuten nicht erfolgreich war und der Abbruch Befehl einen Fehler meldet, wird die materialisierte Sicht wahrscheinlich später im Erstellungs Prozess abgebrochen. Der Befehl [. Show Operations](../operations.md#show-operations) gibt an, ob der Vorgang abgebrochen wurde. Der `cancel operation` Befehl wird nur für die Erzwingung von materialisierten Sichten und nicht für das Abbrechen anderer Vorgänge unterstützt.
+Der Erstellungs Prozess kann nicht sofort abgebrochen werden. Der Cancel-Befehl signalisiert, dass die Materialisierung angehalten wird, und die Erstellung prüft regelmäßig, ob ein Abbruch angefordert wurde. Der Cancel-Befehl wartet auf einen maximalen Zeitraum von 10 Minuten, bis der Erstellungs Vorgang für materialisierte Sichten abgebrochen wurde, und meldet zurück, wenn der Abbruch erfolgreich war. Auch wenn der Abbruch innerhalb von 10 Minuten nicht erfolgreich war und der Abbruch Befehl einen Fehler meldet, wird die materialisierte Sicht wahrscheinlich später im Erstellungs Prozess abgebrochen. Der [`.show operations`](../operations.md#show-operations) Befehl gibt an, ob der Vorgang abgebrochen wurde. Der `cancel operation` Befehl wird nur für die Erzwingung von materialisierten Sichten und nicht für das Abbrechen anderer Vorgänge unterstützt.
 
 ### <a name="syntax"></a>Syntax
 

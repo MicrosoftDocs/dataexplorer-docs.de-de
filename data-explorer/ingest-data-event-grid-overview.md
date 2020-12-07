@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: e96bdb0e3b00152f287b705317f37bf984b95f26
-ms.sourcegitcommit: 4f24d68f1ae4903a2885985aa45fd15948867175
+ms.openlocfilehash: 99a35b03a171147d5bb511a9eab657903e917d01
+ms.sourcegitcommit: 4d5628b52b84f7564ea893f621bdf1a45113c137
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92558137"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96444127"
 ---
 # <a name="event-grid-data-connection"></a>Event Grid-Datenverbindung
 
@@ -28,6 +28,9 @@ Allgemeine Informationen zur Datenerfassung in Azure Data Explorer finden Sie un
 * Siehe [Unterstützte Formate](ingestion-supported-formats.md).
 * Siehe [Unterstützte Komprimierungen](ingestion-supported-formats.md#supported-data-compression-formats).
     * Die ursprüngliche Größe der nicht komprimierten Daten sollte Teil der Blobmetadaten sein. Andernfalls wird sie von Azure Data Explorer geschätzt. Das Größenlimit für die Erfassung von nicht komprimierten Daten pro Datei ist 4 GB.
+
+> [!NOTE]
+> Das Abonnement von Event Grid-Benachrichtigungen kann in Azure Storage-Konten für `BlobStorage`, `StorageV2` oder [Data Lake Storage Gen2](/azure/storage/blobs/data-lake-storage-introduction) festgelegt werden.
 
 ## <a name="ingestion-properties"></a>Erfassungseigenschaften
 

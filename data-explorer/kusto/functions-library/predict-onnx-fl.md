@@ -7,12 +7,12 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/09/2020
-ms.openlocfilehash: 9cc70418b39ece5c33d6059c7fc90c47f3039ece
-ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
+ms.openlocfilehash: f00f6cdc2a0c52ce0ad2a6832dafdf11bd02fce4
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90998975"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321878"
 ---
 # <a name="predict_onnx_fl"></a>predict_onnx_fl()
 
@@ -92,7 +92,7 @@ OccupancyDetection
 
 # <a name="persistent"></a>[Persistent](#tab/persistent)
 
-Verwenden Sie für die permanente Verwendung die [. Create-Funktion](../management/create-function.md). Zum Erstellen einer Funktion ist die [Berechtigung Datenbankbenutzer](../management/access-control/role-based-authorization.md)erforderlich.
+Verwenden Sie für persistente Verwendung [`.create function`](../management/create-function.md) . Zum Erstellen einer Funktion ist die [Berechtigung Datenbankbenutzer](../management/access-control/role-based-authorization.md)erforderlich.
 
 ### <a name="one-time-installation"></a>Einmalige Installation
 
