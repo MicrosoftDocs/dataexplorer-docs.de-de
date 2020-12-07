@@ -1,6 +1,6 @@
 ---
-title: 'Tutorial: Kusto-Abfragen in Azure Daten-Explorer & Azure Monitor'
-description: In diesem Tutorial wird beschrieben, wie Sie Abfragen in der Kusto-Abfragesprache verwenden, um allgemeine Abfrage Anforderungen in Azure Daten-Explorer und Azure Monitor zu erfüllen.
+title: 'Tutorial: Kusto-Abfragen in Azure Data Explorer und Azure Monitor'
+description: Dieses Tutorial beschreibt, wie Sie Abfragen in der Kusto-Abfragesprache verwenden, um Anforderungen gängiger Abfragen in Azure Data Explorer und Azure Monitor zu erfüllen.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -12,23 +12,23 @@ ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
 ms.openlocfilehash: 8a47c51aa7924a28b27602056ea869bfd7a09936
-ms.sourcegitcommit: faa747df81c49b96d173dbd5a28d2ca4f3a2db5f
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95783721"
 ---
-# <a name="tutorial-use-kusto-queries-in-azure-data-explorer-and-azure-monitor"></a>Tutorial: Verwenden von Kusto-Abfragen in Azure Daten-Explorer und Azure Monitor
+# <a name="tutorial-use-kusto-queries-in-azure-data-explorer-and-azure-monitor"></a>Tutorial: Verwenden von Kusto-Abfragen in Azure Data Explorer und Azure Monitor
 
 ::: zone pivot="azuredataexplorer"
 
-Die beste Möglichkeit, um mehr über die Kusto-Abfragesprache zu erfahren, besteht darin, einige grundlegende Abfragen zu untersuchen, um ein "Gefühl" für die Sprache zu erhalten. Es wird empfohlen, eine [Datenbank mit einigen Beispiel Daten zu](https://help.kusto.windows.net/Samples)verwenden. Die in diesem Tutorial gezeigten Abfragen sollten für diese Datenbank ausgeführt werden. Die- `StormEvents` Tabelle in der-Beispieldatenbank enthält Informationen zu stürmen, die im USA aufgetreten sind.
+Die beste Möglichkeit, um mehr über die Kusto-Abfragesprache zu erfahren, besteht darin, einige grundlegende Abfragen zu untersuchen, um ein „Gefühl“ für die Sprache zu bekommen. Es wird empfohlen, eine [Datenbank mit ein paar Beispieldaten](https://help.kusto.windows.net/Samples) zu verwenden. Die in diesem Tutorial gezeigten Abfragen sollten mit dieser Datenbank ausgeführt werden. Die `StormEvents`-Tabelle in der-Beispieldatenbank enthält Informationen zu Stürmen, die in den USA aufgetreten sind.
 
 ## <a name="count-rows"></a>Zeilen zählen
 
-Die Beispieldatenbank enthält eine Tabelle mit dem Namen `StormEvents` . Um herauszufinden, wie groß die Tabelle ist, übergeben wir Ihren Inhalt an einen Operator, der einfach die Zeilen in der Tabelle zählt. 
+Unsere Beispieldatenbank enthält eine Tabelle namens `StormEvents`. Um herauszufinden, wie groß die Tabelle ist, übergeben wir ihren Inhalt per Pipe an einen Operator, der schlicht die Zeilen in der Tabelle zählt. 
 
-*Syntax Hinweis*: eine Abfrage ist eine Datenquelle (normalerweise ein Tabellenname), gefolgt von einem oder mehreren Paaren des Senk Zeichens und einem tabellarischen Operator.
+*Syntaxhinweis*: Eine Abfrage ist eine Datenquelle (normalerweise ein Tabellenname), optional gefolgt von einem oder mehreren Paaren des Pipe-Zeichens (senkrechter Strich) und einem tabellarischen Operator.
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -43,13 +43,13 @@ So sieht die Ausgabe aus:
     
 Weitere Informationen finden Sie unter [count-Operator](./countoperator.md).
 
-## <a name="select-a-subset-of-columns-project"></a>Wählen Sie eine Teilmenge der Spalten aus: *Project* .
+## <a name="select-a-subset-of-columns-project"></a>Auswählen einer Teilmenge von Spalten: *project*
 
-Verwenden Sie [Project](./projectoperator.md) , um nur die gewünschten Spalten auszuwählen. Sehen Sie sich das folgende Beispiel an, in dem sowohl [die-als auch die](./projectoperator.md) [Take](./takeoperator.md) -Operatoren verwendet werden
+Verwenden Sie [project](./projectoperator.md), um nur die gewünschten Spalten auszuwählen. Weitere Informationen finden Sie im folgenden Beispiel, in dem die beiden Operatoren [project](./projectoperator.md) und [take](./takeoperator.md) verwendet werden.
 
-## <a name="filter-by-boolean-expression-where"></a>Nach booleschem Ausdruck filtern: *Where*
+## <a name="filter-by-boolean-expression-where"></a>Filtern nach booleschem Ausdruck: *where*
 
-Sehen wir uns nur die `flood` Ereignisse in `California` Feb-2007 an:
+Sehen wir uns nur `flood`-Ereignisse in `California` im Februar 2007 an:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -61,13 +61,13 @@ StormEvents
 
 So sieht die Ausgabe aus:
 
-|StartTime|EndTime|Staat|EventType|Episodenarrative|
+|StartTime|EndTime|State|EventType|EpisodeNarrative|
 |---|---|---|---|---|
-|2007-02-19 00:00:00.0000000|2007-02-19 08:00:00.0000000|Kalifornische|Hochwasser|Ein frontaler System, das sich über den südlichen San-Joaquin Valley bewegt, hat in den frühen Morgenstunden des 19 Über Bundesland-Autobahn 166 in der Nähe von Taft wurde eine neben Überflutung|
+|2007-02-19 00:00:00.0000000|2007-02-19 08:00:00.0000000|CALIFORNIA|Hochwasser|Ein Frontensystem, das sich über das südliche San-Joaquin-Tal bewegte, brachte in den frühen Morgenstunden des 19. kurze Perioden starken Regens in das westliche Kern County. Geringfügige Überschwemmungen wurden für den State Highway 166 bei Taft gemeldet.|
 
-## <a name="show-n-rows-take"></a>*N* Zeilen anzeigen: *übernehmen*
+## <a name="show-n-rows-take"></a>Anzeigen von *n* Zeilen: *take*
 
-Sehen wir uns einige Daten an. Was ist eine zufällige Stichprobe von fünf Zeilen?
+Sehen Sie wir uns ein paar Daten an. Was befindet sich in einer zufälligen Stichprobe von fünf Zeilen?
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -78,22 +78,22 @@ StormEvents
 
 So sieht die Ausgabe aus:
 
-|StartTime|EndTime|EventType|Staat|EventNarrative|
+|StartTime|EndTime|EventType|State|EventNarrative|
 |---|---|---|---|---|
-|2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|Starker Regen|Flori|Bis zu 9 Zoll in einem Zeitraum von 24 Stunden in Teilen des Küsten bauweiten Kreises.|
-|2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|Hüterin|Flori|Ein Tornado, der in der Stadt von Eustis am Nord Ende des West-kruklake liegt. Der Tornado hat sich schnell auf die EF1 Stärke verstärkt, als er Nord Nordwest durch Eustis verlagert hat. Die Nachverfolgung war direkt unter zwei km lang und hatte eine maximale Breite von 300 Meter.  Der Tornado hat 7 Häuser zerstört. 20 sieben Häuser erhielten größere Schäden, und 81 Häuser haben geringfügige Schäden gemeldet. Es sind keine schwerwiegenden Verletzungen aufgetreten, und der Eigenschafts Schaden wurde bei $6,2 Millionen festgelegt.|
-|2007-09-29 08:11:00.0000000|2007-09-29 08:11:00.0000000|Wasser Spout|Atlantik, Süden|Ein Wasserzeichen, das im Atlantik-Südosten des Melbourne-Strandes gebildet und kurz nach "Shore" verschoben wurde.|
-|2007-12-20 07:50:00.0000000|2007-12-20 07:53:00.0000000|Sturm|Mississippi|Zahlreiche große Strukturen wurden mit einigen Netz Linien in der Luft gesprengt. In Ost Adams County ist ein Schaden aufgetreten.|
-|2007-12-30 16:00:00.0000000|2007-12-30 16:05:00.0000000|Sturm|Georgien|Die Bezirks Verteilung hat berichtet, dass mehrere Strukturen entlang der Quincey Batch 10-Schleife in der Nähe von State Road 206 aufgesprengt wurden. Die Kosten der Baum Entfernung wurden geschätzt.|
+|2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|Starker Regen|FLORIDA|Bis zu 23 cm Regen fielen in einem Zeitraum von 24 Stunden in Teilen der Küste von Volusia County.|
+|2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|Tornado|FLORIDA|Ein Tornado traf in der Stadt Eustis am nördlichen Ende des West Crooked Lake auf Land. Der Tornado wuchs schnell auf Stärke EF1 an, während er in nordnordwestlicher Richtung durch Eustis zog. Seine Spur blieb knapp unter 3,2 km und hatte eine maximale Breite von 300 Metern.  Der Tornado zerstörte 7 Häuser. 27 Häuser wurden schwer beschädigt, 81 Häuser meldeten geringfügige Schäden. Es gab keine schweren Verletzten, und der Eigentumsschaden wurde auf USD 6,2 Millionen beziffert.|
+|2007-09-29 08:11:00.0000000|2007-09-29 08:11:00.0000000|Wasserhose|ATLANTIC SOUTH|Südöstlich von Melbourne Beach bildete sich im Atlantik eine Wasserhose, die sich kurz darauf in Richtung Ufer bewegte.|
+|2007-12-20 07:50:00.0000000|2007-12-20 07:53:00.0000000|Sturm|MISSISSIPPI|Zahlreiche große Bäume wurden umgelegt, wobei einige Stromleitungen beschädigt wurden. Im östlichen Adams County kam es zu Schäden.|
+|2007-12-30 16:00:00.0000000|2007-12-30 16:05:00.0000000|Sturm|GEORGIA|Die Bezirksleitstelle berichtete, dass mehrere Bäume entlang der Quincey Batten Loop in der Nähe der State Road 206 umgelegt wurden. Die Kosten für die Beseitigung der Bäume wurden geschätzt.|
 
-Wenn [Sie jedoch](./takeoperator.md) Zeilen aus der Tabelle ohne bestimmte Reihenfolge anzeigen, Sortieren Sie Sie. ([Limit](./takeoperator.md) ist ein Alias für [Take](./takeoperator.md) und hat denselben Effekt.)
+[take](./takeoperator.md) zeigt jedoch Zeilen aus der Tabelle in keiner bestimmten Reihenfolge, also sortieren wir sie. ([limit](./takeoperator.md) ist ein Alias für [take](./takeoperator.md) und hat denselben Effekt.)
 
-## <a name="order-results-sort-top"></a>Bestell Ergebnisse: *Sortieren*, nach *oben*
+## <a name="order-results-sort-top"></a>Sortieren von Ergebnissen: *sort*, *top*
 
-* *Syntax Hinweis*: einige Operatoren verfügen über Parameter, die von Schlüsselwörtern wie eingeführt werden `by` .
-* Im folgenden Beispiel `desc` ergibt Orders eine absteigende Reihenfolge, und die Reihen `asc` Folge ergibt sich in aufsteigender Reihenfolge.
+* *Syntaxhinweis*: Einige Operatoren besitzen Parameter, die mit Schlüsselwörtern wie `by` eingeführt werden.
+* Im folgenden Beispiel sortiert `desc` Ergebnisse in absteigender, und `asc` sortiert Ergebnisse in aufsteigender Reihenfolge.
 
-Die ersten *n* Zeilen anzeigen, geordnet nach einer bestimmten Spalte:
+Zeige mir die ersten *n* Zeilen, sortiert nach einer bestimmten Spalte:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -104,15 +104,15 @@ StormEvents
 
 So sieht die Ausgabe aus:
 
-|StartTime|EndTime|EventType|Staat|EventNarrative|
+|StartTime|EndTime|EventType|State|EventNarrative|
 |---|---|---|---|---|
-|2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Winter Storm|MICHIGAN|Dieses schwere Schnee Ereignis wurde in den frühen Morgenstunden am Tag des neuen Jahrs fortgesetzt.|
-|2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Winter Storm|MICHIGAN|Dieses schwere Schnee Ereignis wurde in den frühen Morgenstunden am Tag des neuen Jahrs fortgesetzt.|
-|2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Winter Storm|MICHIGAN|Dieses schwere Schnee Ereignis wurde in den frühen Morgenstunden am Tag des neuen Jahrs fortgesetzt.|
-|2007-12-31 23:53:00.0000000|2007-12-31 23:53:00.0000000|Hoher Wind|Kalifornische|In den Bergen von Ventura County wurden Nord-zu-Nordost-Windböen an ungefähr 58 mph gemeldet.|
-|2007-12-31 23:53:00.0000000|2007-12-31 23:53:00.0000000|Hoher Wind|Kalifornische|Der Warm Springs RAWs-Sensor hat Nord Windböen gemeldet, die an 58 mph ausgegeben wurden.|
+|2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Wintersturm|MICHIGAN|Dieses schwere Schneeereignis setzte sich bis in die frühen Morgenstunden am Neujahrstag fort.|
+|2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Wintersturm|MICHIGAN|Dieses schwere Schneeereignis setzte sich bis in die frühen Morgenstunden am Neujahrstag fort.|
+|2007-12-31 22:30:00.0000000|2007-12-31 23:59:00.0000000|Wintersturm|MICHIGAN|Dieses schwere Schneeereignis setzte sich bis in die frühen Morgenstunden am Neujahrstag fort.|
+|2007-12-31 23:53:00.0000000|2007-12-31 23:53:00.0000000|Starker Wind|CALIFORNIA|In den Bergen von Ventura County wurden Winde aus Nord bis Nordost mit Böen bis zu 95 km/h gemeldet.|
+|2007-12-31 23:53:00.0000000|2007-12-31 23:53:00.0000000|Starker Wind|CALIFORNIA|Der Warm Springs RAWs-Sensor hat nördliche Windböen mit bis zu 95 km/h gemeldet.|
 
-Sie können das gleiche Ergebnis mit [Sortieren](./sortoperator.md)erzielen [und dann Folgendes](./takeoperator.md)ausführen:
+Sie können dieselben Ergebnisse erzielen, indem Sie [sort](./sortoperator.md) und dann [take](./takeoperator.md) verwenden:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -122,9 +122,9 @@ StormEvents
 | project  StartTime, EndTime, EventType, EventNarrative
 ```
 
-## <a name="compute-derived-columns-extend"></a>Abgeleitete Spalten berechnen: *erweitern*
+## <a name="compute-derived-columns-extend"></a>Berechnen abgeleiteter Spalten: *extend*
 
-Erstellen Sie eine neue Spalte, indem Sie in jeder Zeile einen Wert berechnen:
+Erstellen einer neuen Spalte durch Berechnen eines Werts in jeder Zeile:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -136,15 +136,15 @@ StormEvents
 
 So sieht die Ausgabe aus:
 
-|StartTime|EndTime|Duration|EventType|Staat|
+|StartTime|EndTime|Duration|EventType|State|
 |---|---|---|---|---|
-|2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|22:00:00|Starker Regen|Flori|
-|2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|00:08:00|Hüterin|Flori|
-|2007-09-29 08:11:00.0000000|2007-09-29 08:11:00.0000000|00:00:00|Wasser Spout|Atlantik, Süden|
-|2007-12-20 07:50:00.0000000|2007-12-20 07:53:00.0000000|00:03:00|Sturm|Mississippi|
-|2007-12-30 16:00:00.0000000|2007-12-30 16:05:00.0000000|00:05:00|Sturm|Georgien|
+|2007-09-18 20:00:00.0000000|2007-09-19 18:00:00.0000000|22:00:00|Starker Regen|FLORIDA|
+|2007-09-20 21:57:00.0000000|2007-09-20 22:05:00.0000000|00:08:00|Tornado|FLORIDA|
+|2007-09-29 08:11:00.0000000|2007-09-29 08:11:00.0000000|00:00:00|Wasserhose|ATLANTIC SOUTH|
+|2007-12-20 07:50:00.0000000|2007-12-20 07:53:00.0000000|00:03:00|Sturm|MISSISSIPPI|
+|2007-12-30 16:00:00.0000000|2007-12-30 16:05:00.0000000|00:05:00|Sturm|GEORGIA|
 
-Es ist möglich, einen Spaltennamen wiederzuverwenden und der gleichen Spalte ein Berechnungs Ergebnis zuzuweisen.
+Es ist möglich, einen Spaltennamen wiederzuverwenden und derselben Spalte ein Berechnungsergebnis zuzuweisen.
 
 Beispiel:
 
@@ -161,11 +161,11 @@ So sieht die Ausgabe aus:
 |---|---|
 |3|1|
 
-[Skalare Ausdrücke](./scalar-data-types/index.md) können alle üblichen Operatoren ( `+` ,, `-` `*` , `/` ,) enthalten `%` , und es stehen verschiedene nützliche Funktionen zur Verfügung.
+[Skalarausdrücke](./scalar-data-types/index.md) können alle gängigen Operatoren enthalten (`+`, `-`, `*`, `/`, `%`), und ferner steht eine Reihe nützlicher Funktionen zur Verfügung.
 
-## <a name="aggregate-groups-of-rows-summarize"></a>Aggregat Gruppen von Zeilen: zusammen *fassen*
+## <a name="aggregate-groups-of-rows-summarize"></a>Aggregieren von Zeilengruppen: *summarize*
 
-Zählen Sie die Anzahl der Ereignisse, die in jedem Land auftreten:
+Zählen der Anzahl der Ereignisse, die in jedem Land auftreten:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -173,9 +173,9 @@ StormEvents
 | summarize event_count = count() by State
 ```
 
-[fassen](./summarizeoperator.md) Sie Gruppen zusammen, die in der-Klausel dieselben Werte aufweisen `by` , und verwenden Sie dann eine Aggregations Funktion (z. b. `count` ), um die einzelnen Gruppen in einer einzelnen Zeile zu kombinieren. In diesem Fall gibt es eine Zeile für jeden Status und eine Spalte für die Anzahl der Zeilen in diesem Zustand.
+[summarize](./summarizeoperator.md) gruppiert Zeilen, die denselben Wert in der `by`-Klausel haben, und verwendet dann eine Aggregationsfunktion (z. B.`count`), um jede Gruppe zu einer einzelnen Zeile zu kombinieren. In diesem Fall gibt es für jeden Bundesstaat eine Zeile, und eine Spalte für die Anzahl der Zeilen in diesem Bundesstaat.
 
-Ein Bereich von [Aggregations Funktionen](./summarizeoperator.md#list-of-aggregation-functions) ist verfügbar. Sie können mehrere Aggregations Funktionen in einem `summarize` Operator verwenden, um mehrere berechnete Spalten zu entwickeln. Wir könnten beispielsweise die Anzahl der Stürme in jedem Zustand und auch eine Summe eines eindeutigen Typs von Stürmen pro Bundesstaat erhalten. Dann könnten wir [Top](./topoperator.md) verwenden, um die meisten Storm-betroffenen Zustände zu erhalten:
+Es steht eine Reihe von [Aggregationsfunktionen](./summarizeoperator.md#list-of-aggregation-functions) zur Verfügung. Sie können mehrere Aggregationsfunktionen in einem `summarize`-Operator verwenden, um mehrere berechnete Spalten zu erzeugen. Beispielsweise könnten wir die Anzahl der Stürme in jedem Bundesstaat sowie eine Summe eines einzigartigen Typs von Stürmen pro Bundesstaat erhalten. Anschließend könnten wir [top](./topoperator.md) verwenden, um die meisten von Stürmen betroffenen Bundesstaaten zu erhalten:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -186,23 +186,23 @@ StormEvents
 
 So sieht die Ausgabe aus:
 
-|Staat|Stormcount|Typeofstorms|
+|State|StormCount|TypeOfStorms|
 |---|---|---|
 |TEXAS|4701|27|
-|Kansas|3166|21|
+|KANSAS|3166|21|
 |IOWA|2337|19|
-|Illinois|2022|23|
-|Missouri|2016|20|
+|ILLINOIS|2022|23|
+|MISSOURI|2016|20|
 
-In den Ergebnissen eines `summarize` Operators:
+In den Ergebnissen eines `summarize`-Operators:
 
-* Jede Spalte wird in benannt `by` .
-* Jeder berechnete Ausdruck verfügt über eine-Spalte.
-* Jede Kombination von `by` Werten weist eine Zeile auf.
+* Jede Spalte ist in `by` benannt.
+* Jeder berechnete Ausdruck hat eine Spalte.
+* Jede Kombination von `by`-Werten hat eine Zeile.
 
 ## <a name="summarize-by-scalar-values"></a>Zusammenfassen nach Skalarwerten
 
-Sie können skalare Werte (numeric, Time oder Interval) in der- `by` Klausel verwenden, aber Sie sollten die Werte mithilfe der [bin ()](./binfunction.md) -Funktion in Behälter platzieren:
+Sie können Skalarwerte (numerisch, Uhrzeit oder Intervall) in der `by`-Klausel verwenden, aber Sie sollten die Werte in Intervallen platzieren, indem Sie die [bin ()](./binfunction.md)-Funktion verwenden:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -223,12 +223,12 @@ Die Abfrage reduziert alle Zeitstempel auf Intervalle von einem Tag:
 |2007-02-19 00:00:00.0000000|52|
 |2007-02-20 00:00:00.0000000|60|
 
-[Bin ()](./binfunction.md) ist identisch mit der [Floor ()](./floorfunction.md) -Funktion in vielen Sprachen. Dadurch wird jeder Wert einfach auf das nächstgelegene Vielfache des von Ihnen angegebenen Modulo reduziert, sodass die Zeilen von zusammen [fassen](./summarizeoperator.md) den Gruppen zugewiesen werden können.
+Die [bin()](./binfunction.md)-Funktion ist mit der [floor()](./floorfunction.md)-Funktion in vielen Sprachen identisch. Sie reduziert jeden Wert auf das nächste Vielfache des von Ihnen angegebenen Rundungswerts, damit [summarize](./summarizeoperator.md) die Zeilen den Gruppen zuweisen kann.
 
 <a name="displaychartortable"></a>
-## <a name="display-a-chart-or-table-render"></a>Anzeigen eines Diagramms oder einer Tabelle: *Rendering*
+## <a name="display-a-chart-or-table-render"></a>Anzeigen eines Diagramms oder einer Tabelle: *render*
 
-Sie können zwei Spalten projizieren und Sie als x-Achse und die y-Achse eines Diagramms verwenden:
+Sie können zwei Spalten projizieren und sie dann als x-Achse und y-Achse eines Diagramms verwenden:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -240,16 +240,16 @@ StormEvents
 | render columnchart
 ```
 
-:::image type="content" source="images/tutorial/event-counts-state.png" alt-text="Screenshot, der ein Säulendiagramm der Anzahl von Storm-Ereignissen nach Bundesland anzeigt.":::
+:::image type="content" source="images/tutorial/event-counts-state.png" alt-text="Screenshot, der ein Säulendiagramm der Anzahl von Sturmereignissen nach Bundesstaat zeigt.":::
 
-Obwohl wir den `mid` Vorgang entfernt `project` haben, benötigen wir ihn trotzdem, wenn wir möchten, dass das Diagramm die Länder in dieser Reihenfolge anzeigt.
+Obwohl wir im `project`-Vorgang `mid` entfernt haben, benötigen wir es weiterhin, wenn das Diagramm die Länder in dieser Reihenfolge anzeigen soll.
 
-Streng genommen `render` handelt es sich um eine Funktion des-Clients und nicht um einen Teil der-Abfragesprache. Dennoch ist es in die Sprache integriert, und es ist nützlich, um Ihre Ergebnisse zu entwerfen.
+Streng genommen ist `render` eher eine Funktion des Clients anstatt Bestandteil der Abfragesprache. Dennoch ist es in die Sprache integriert und eignet sich für das Visualisieren Ihrer Ergebnisse.
 
 
 ## <a name="timecharts"></a>Zeitdiagramme
 
-Wenn wir zu numerischen Containern zurückkehren, zeigen wir eine Zeitreihe an:
+Wenn wir nun zu numerischen Intervallen zurückkehren, zeigen wir eine Zeitreihe an:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -258,7 +258,7 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tutorial/time-series-start-bin.png" alt-text="Screenshot eines Linien Diagramms von Ereignissen, die nach Zeit klassifiziert werden.":::
+:::image type="content" source="images/tutorial/time-series-start-bin.png" alt-text="Screenshot eines Liniendiagramms von Ereignissen in Intervallen nach Zeit.":::
 
 ## <a name="multiple-series"></a>Mehrere Reihen
 
@@ -272,19 +272,19 @@ StormEvents
 | summarize count() by bin(StartTime, 10h), Source
 ```
 
-:::image type="content" source="images/tutorial/table-count-source.png" alt-text="Screenshot, der eine Tabellen Anzahl nach Quelle anzeigt.":::
+:::image type="content" source="images/tutorial/table-count-source.png" alt-text="Screenshot, der eine Tabellenanzahl nach Quelle zeigt.":::
 
-Fügen Sie dem `render` vorangehenden Beispiel einfach den Begriff hinzu: `| render timechart` .
+Fügen Sie im vorangehenden Beispiel einfach den Begriff `render` hinzu: `| render timechart`.
 
-:::image type="content" source="images/tutorial/line-count-source.png" alt-text="Screenshot, der eine Liniendiagramm Anzahl nach Quelle anzeigt.":::
+:::image type="content" source="images/tutorial/line-count-source.png" alt-text="Screenshot, der eine Tabellenanzahl nach Quelle zeigt.":::
 
-Beachten Sie, dass `render timechart` die erste Spalte als x-Achse verwendet und die anderen Spalten dann als separate Zeilen anzeigt.
+Beachten Sie, dass `render timechart` die erste Spalte als x-Achse verwendet und dann die anderen Spalten als separate Linien anzeigt.
 
 ## <a name="daily-average-cycle"></a>Durchschnittlicher Tageszyklus
 
-Wie unterscheidet sich die Aktivität über den durchschnittlichen Tag?
+Wie variiert die Aktivität im Verlauf eines durchschnittlichen Tages?
 
-Zählen Sie Ereignisse nach Zeit Modulo einen Tag, klassifiziert in Stunden. Hier verwenden wir `floor` anstelle von `bin` :
+Zählen Sie die Ereignisse nach Zeit, gerundet auf 1 Tag, und in Stundenintervallen. Hier verwenden wir `floor` anstelle von `bin`:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -295,15 +295,15 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tutorial/time-count-hour.png" alt-text="Screenshot, der eine Zeitdiagramm Anzahl nach Stunde anzeigt.":::
+:::image type="content" source="images/tutorial/time-count-hour.png" alt-text="Screenshot, der eine Zeitdiagrammanzahl nach Quelle zeigt.":::
 
-Derzeit wird die `render` Dauer nicht ordnungsgemäß beschriftet, aber wir könnten `| render columnchart` stattdessen verwenden:
+Derzeit werden Dauerangaben von `render` nicht ordnungsgemäß bezeichnet, aber wir könnten stattdessen `| render columnchart` verwenden:
 
-:::image type="content" source="images/tutorial/column-count-hour.png" alt-text="Screenshot, der eine Säulendiagramm Anzahl nach Stunde anzeigt.":::
+:::image type="content" source="images/tutorial/column-count-hour.png" alt-text="Screenshot, der eine Säulendiagrammanzahl nach Stunde anzeigt.":::
 
 ## <a name="compare-multiple-daily-series"></a>Vergleichen mehrerer täglicher Reihen
 
-Wie unterscheidet sich die Aktivität im Laufe der Tageszeit in verschiedenen Zuständen?
+Wie variiert die Aktivität im Verlauf des Tages in unterschiedlichen Bundesstaaten?
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -314,9 +314,9 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tutorial/time-hour-state.png" alt-text="Screenshot eines Zeit Diagramms nach Stunde und Zustand.":::
+:::image type="content" source="images/tutorial/time-hour-state.png" alt-text="Screenshot eines Zeitdiagramms nach Stunde und Bundesstaat.":::
 
-Dividieren `1h` Sie durch, um die x-Achse anstelle einer Dauer in eine Stundenzahl umzuwandeln:
+Dividieren Sie durch `1h`, um die x-Achsenwerte in eine Stundenzahl anstelle einer Dauer umzuwandeln:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -327,13 +327,13 @@ StormEvents
 | render columnchart
 ```
 
-:::image type="content" source="images/tutorial/column-hour-state.png" alt-text="Screenshot, der ein Säulendiagramm nach Stunde und Zustand anzeigt":::
+:::image type="content" source="images/tutorial/column-hour-state.png" alt-text="Screenshot, der ein Säulendiagramm nach Stunde und Bundesstaat zeigt.":::
 
-## <a name="join-data-types"></a>Joindatentypen
+## <a name="join-data-types"></a>Verknüpfen von Datentypen
 
-Wie würden Sie zwei spezifische Ereignis Typen finden und in welchem Zustand die einzelnen Ereignisse aufgetreten sind?
+Wie würden Sie zwei spezifische Ereignistypen suchen und dabei herausfinden, in welchem Bundesstaat jeder davon aufgetreten ist?
 
-Sie können Storm-Ereignisse mit dem ersten `EventType` und dem zweiten abrufen `EventType` und dann die beiden Gruppen verknüpfen `State` :
+Sie können Sturmereignisse des ersten `EventType` und zweiten `EventType` abrufen und dann die beiden Sätze über `State` verknüpfen:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -346,17 +346,17 @@ StormEvents
 | distinct State
 ```
 
-:::image type="content" source="images/tutorial/join-events-lightning-avalanche.png" alt-text="Screenshot, der den Einstieg in die Ereignisse Blitz und Lawinen anzeigt":::
+:::image type="content" source="images/tutorial/join-events-lightning-avalanche.png" alt-text="Screenshot, der das Verknüpfen der Ereignisse „Blitz“ und „Lawine“ zeigt.":::
 
-## <a name="user-session-example-of-join"></a>Benutzer Sitzungs Beispiel für *Join*
+## <a name="user-session-example-of-join"></a>Benutzersitzungsbeispiel für *join*
 
-In diesem Abschnitt wird die-Tabelle nicht verwendet `StormEvents` .
+In diesem Abschnitt wird die `StormEvents`-Tabelle nicht verwendet.
 
-Angenommen, Sie verfügen über Daten, die Ereignisse enthalten, die den Beginn und das Ende jeder Benutzersitzung mit einer eindeutigen ID für jede Sitzung markieren. 
+Angenommen, Sie verfügen über Daten, die Ereignisse umfassen, die den Beginn und das Ende jeder Benutzersitzung mit einer eindeutigen ID für jede Sitzung markieren. 
 
 Wie würden Sie feststellen, wie lange die einzelnen Benutzersitzungen dauern?
 
-Sie können verwenden, `extend` um einen Alias für die beiden Zeitstempel anzugeben, und dann die Sitzungsdauer berechnen:
+Mit `extend` können Sie einen Alias für die beiden Zeitstempel angeben und dann die Sitzungsdauer berechnen:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -372,13 +372,13 @@ Events
 | take 10
 ```
 
-:::image type="content" source="images/tutorial/user-session-extend.png" alt-text="Screenshot einer Tabelle mit den Ergebnissen für die Erweiterung der Benutzersitzung.":::
+:::image type="content" source="images/tutorial/user-session-extend.png" alt-text="Screenshot einer Tabelle mit Ergebnissen für Benutzersitzungen mit extend.":::
 
-Es empfiehlt sich, `project` zu verwenden, um nur die Spalten auszuwählen, die Sie benötigen, bevor Sie den Join ausführen. Benennen Sie die Spalte in denselben Klauseln um `timestamp` .
+Es ist eine bewährte Vorgehensweise, `project` zu verwenden, um vor dem Verknüpfen nur die Spalten auszuwählen, die Sie benötigen. In denselben Klauseln benennen Sie die Spalte `timestamp` um.
 
 ## <a name="plot-a-distribution"></a>Darstellen einer Verteilung
 
-`StormEvents`Wie viele Stürme haben unterschiedliche Längen, wenn Sie zur Tabelle zurückkehren?
+Um wieder zu der `StormEvents`-Tabelle zurückzukehren, wie viele Stürme unterschiedlicher Längen sind vorhanden?
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -392,33 +392,33 @@ StormEvents
 | render timechart
 ```
 
-:::image type="content" source="images/tutorial/event-count-duration.png" alt-text="Screenshot der Zeitdiagramm-Ergebnisse für die Ereignis Anzahl nach Dauer.":::
+:::image type="content" source="images/tutorial/event-count-duration.png" alt-text="Screenshot der Zeitdiagrammergebnisse für die Ereignisanzahl nach Dauer.":::
 
-Sie können auch Folgendes verwenden `| render columnchart` :
+Alternativ können Sie auch `| render columnchart` verwenden:
 
-:::image type="content" source="images/tutorial/column-event-count-duration.png" alt-text="Screenshot eines Säulen Diagramms für das Zeitdiagramm der Ereignis Anzahl nach Dauer.":::
+:::image type="content" source="images/tutorial/column-event-count-duration.png" alt-text="Screenshot eines Säulendiagramms für das Ereignisanzahl-Zeitdiagramm nach Dauer.":::
 
 ## <a name="percentiles"></a>Perzentile
 
-Welche Zeiträume werden in verschiedenen Prozentsätzen von Stürmen gefunden?
+Welche Bereiche von Dauerwerten finden wir in verschiedene Prozentsätzen von Stürmen?
 
-Um diese Informationen zu erhalten, verwenden Sie die vorherige Abfrage, aber ersetzen Sie `render` durch:
+Um diese Informationen zu erhalten, verwenden Sie die vorherige Abfrage, ersetzen aber `render` durch:
 
 ```kusto
 | summarize percentiles(duration, 5, 20, 50, 80, 95)
 ```
 
-In diesem Fall haben wir keine- `by` Klausel verwendet, sodass die Ausgabe eine einzelne Zeile ist:
+In diesem Fall haben wir keine `by`-Klausel verwendet, sodass die Ausgabe eine einzelne Zeile ist:
 
-:::image type="content" source="images/tutorial/summarize-percentiles-duration.png" lightbox="images/tutorial/summarize-percentiles-duration.png" alt-text="Screenshot einer Tabelle mit Ergebnissen für das Zusammenfassen von Perzentilen nach Dauer.":::
+:::image type="content" source="images/tutorial/summarize-percentiles-duration.png" lightbox="images/tutorial/summarize-percentiles-duration.png" alt-text="Screenshot einer Tabelle mit Ergebnissen für summarize-Quantile nach Dauer.":::
 
-Aus der Ausgabe wird Folgendes angezeigt:
+In der Ausgabe erkennen wir Folgendes:
 
-* 5% der Stürme haben eine Dauer von weniger als 5 Minuten.
-* 50% der Stürme dauerten weniger als eine Stunde und 25 Minuten.
-* 5% der Stürme dauerten mindestens zwei Stunden und 50 Minuten.
+* 5 % der Stürme dauern weniger als 5 Minuten.
+* 50 % der Stürme dauerten weniger als eine Stunde und 25 Minuten.
+* 5 % der Stürme dauerten mindestens zwei Stunden und 50 Minuten.
 
-Um eine separate Aufschlüsselung für jeden Zustand zu erhalten, verwenden Sie die `state` Spalte separat mit beiden `summarize` Operatoren:
+Um eine gesonderte Aufschlüsselung für jeden Bundesstaat zu erhalten, verwenden Sie die Spalte `state` separat mit beiden `summarize`-Operatoren:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -432,11 +432,11 @@ StormEvents
 | summarize percentiles(duration, 5, 20, 50, 80, 95) by State
 ```
 
-:::image type="content" source="images/tutorial/summarize-percentiles-state.png" alt-text="Tabelle fasst die Dauer des Perzentils nach Bundesstaat zusammen.":::
+:::image type="content" source="images/tutorial/summarize-percentiles-state.png" alt-text="Tabelle der summarize-Quantildauern nach Bundesstaat.":::
 
-## <a name="assign-a-result-to-a-variable-let"></a>Zuweisen eines Ergebnisses zu einer Variablen: *Let*
+## <a name="assign-a-result-to-a-variable-let"></a>Zuweisen eines Ergebnisses zu einer Variablen: *let*
 
-Verwenden [Sie Let](./letstatement.md) , um die Teile des Abfrage Ausdrucks im vorangehenden Beispiel voneinander zu trennen `join` . Die Ergebnisse sind wie folgt unverändert:
+Verwenden Sie [let](./letstatement.md), um die einzelnen Teile des Abfrageausdrucks im vorangehenden `join`-Beispiel zu separieren. Die Ergebnisse sind wie folgt unverändert:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -455,7 +455,7 @@ LightningStorms
 
 ## <a name="combine-data-from-several-databases-in-a-query"></a>Kombinieren von Daten aus mehreren Datenbanken in einer Abfrage
 
-In der folgenden Abfrage muss sich die `Logs` Tabelle in der Standarddatenbank befinden:
+In der folgenden Abfrage muss sich die `Logs`-Tabelle in Ihrer Standarddatenbank befinden:
 
 ```kusto
 Logs | where ...
@@ -467,19 +467,19 @@ Verwenden Sie die folgende Syntax, um auf eine Tabelle in einer anderen Datenban
 database("db").Table
 ```
 
-Wenn Sie z. b. über Daten `Diagnostics` Banken `Telemetry` mit dem Namen und verfügen und einige der Daten in den beiden Tabellen korrelieren möchten, können Sie die folgende Abfrage verwenden (vorausgesetzt, dass `Diagnostics` es sich um die Standarddatenbank handelt):
+Wenn Sie z. B. Datenbanken mit den Namen `Diagnostics` und `Telemetry` haben und einige der Daten in den beiden Tabellen korrelieren möchten, können Sie die folgende Abfrage verwenden (vorausgesetzt, `Diagnostics` ist Ihre Standarddatenbank):
 
 ```kusto
 Logs | join database("Telemetry").Metrics on Request MachineId | ...
 ```
 
-Verwenden Sie diese Abfrage, wenn die Standarddatenbank `Telemetry` :
+Verwenden Sie diese Abfrage, wenn Ihre Standarddatenbank `Telemetry` ist:
 
 ```kusto
 union Requests, database("Diagnostics").Logs | ...
 ```
     
-Bei den vorherigen beiden Abfragen wird davon ausgegangen, dass sich beide Datenbanken im Cluster befinden, mit dem Sie gerade verbunden sind. Wenn sich die `Telemetry` Datenbank in einem Cluster mit dem Namen *TelemetryCluster.Kusto.Windows.net* befunden hat, verwenden Sie diese Abfrage, um darauf zuzugreifen:
+Bei den vorherigen beiden Abfragen wird davon ausgegangen, dass sich beide Datenbanken im Cluster befinden, mit dem Sie gerade verbunden sind. Wenn sich die `Telemetry`-Datenbank in einem Cluster mit dem Namen *TelemetryCluster.kusto.windows.net* befand, verwenden Sie diese Abfrage, um darauf zuzugreifen:
 
 ```kusto
 Logs | join cluster("TelemetryCluster").database("Telemetry").Metrics on Request MachineId | ...
@@ -488,7 +488,7 @@ Logs | join cluster("TelemetryCluster").database("Telemetry").Metrics on Request
 > [!NOTE]
 > Wenn der Cluster angegeben wird, ist die Datenbank obligatorisch.
 
-Weitere Informationen zum Kombinieren von Daten aus mehreren Datenbanken in einer Abfrage finden Sie unter Daten [Bank übergreifende Abfragen](cross-cluster-or-database-queries.md).
+Weitere Informationen zum Kombinieren von Daten aus mehreren Datenbanken in einer Abfrage finden Sie unter [datenbankübergreifende Abfragen](cross-cluster-or-database-queries.md).
 
 ## <a name="next-steps"></a>Nächste Schritte
 
@@ -498,18 +498,18 @@ Weitere Informationen zum Kombinieren von Daten aus mehreren Datenbanken in eine
 
 ::: zone pivot="azuremonitor"
 
-Die beste Möglichkeit, um mehr über die Kusto-Abfragesprache zu erfahren, besteht darin, einige grundlegende Abfragen zu untersuchen, um ein "Gefühl" für die Sprache zu erhalten. Diese Abfragen ähneln Abfragen, die im Azure Daten-Explorer-Tutorial verwendet werden, aber Sie verwenden stattdessen Daten aus gemeinsamen Tabellen in einem Azure Log Analytics-Arbeitsbereich. 
+Die beste Möglichkeit, um mehr über die Kusto-Abfragesprache zu erfahren, besteht darin, einige grundlegende Abfragen zu untersuchen, um ein „Gefühl“ für die Sprache zu bekommen. Diese Abfragen ähneln Abfragen, die im Azure Data Explorer-Tutorial verwendet werden, aber sie verwenden stattdessen Daten aus allgemeinen Tabellen in einem Azure Log Analytics-Arbeitsbereich. 
 
-Führen Sie diese Abfragen mithilfe der Log Analytics im Azure-Portal aus. Log Analytics ist ein Tool, das Sie zum Schreiben von Protokoll Abfragen verwenden können. Verwenden Sie Protokolldaten in Azure Monitor, und Werten Sie dann die Ergebnisse der Protokoll Abfrage aus. Wenn Sie mit log Analytics nicht vertraut sind, führen Sie das [Log Analytics-Tutorial](/azure/azure-monitor/log-query/log-analytics-tutorial)aus.
+Führen Sie diese Abfragen aus, indem Sie Log Analytics im Azure-Portal verwenden. Log Analytics ist ein Tool, das Sie zum Schreiben von Protokollabfragen verwenden können. Verwenden Sie Protokolldaten in Azure Monitor, und werten Sie dann die Ergebnisse der Protokollabfrage aus. Wenn Sie mit Log Analytics nicht vertraut sind, absolvieren Sie das [Log Analytics-Tutorial](/azure/azure-monitor/log-query/log-analytics-tutorial).
 
-Alle Abfragen in diesem Tutorial verwenden die [Log Analytics Demo Umgebung](https://ms.portal.azure.com/#blade/Microsoft_Azure_Monitoring_Logs/DemoLogsBlade). Sie können Ihre eigene Umgebung verwenden, aber Sie verfügen möglicherweise nicht über einige der hier verwendeten Tabellen. Da die Daten in der Demo Umgebung nicht statisch sind, können die Ergebnisse Ihrer Abfragen geringfügig von den hier gezeigten Ergebnissen abweichen.
+Alle Abfragen in diesem Tutorial verwenden die [Log Analytics-Demoumgebung](https://ms.portal.azure.com/#blade/Microsoft_Azure_Monitoring_Logs/DemoLogsBlade). Sie können Ihre eigene Umgebung verwenden, aber Ihnen fehlen dann möglicherweise einige der hier verwendeten Tabellen. Da die Daten in der Demoumgebung nicht statisch sind, können die Ergebnisse Ihrer Abfragen geringfügig von den hier gezeigten Ergebnissen abweichen.
 
 
 ## <a name="count-rows"></a>Zeilen zählen
 
-Die Tabelle [insightmetrics](/azure/azure-monitor/reference/tables/insightsmetrics) enthält Leistungsdaten, die von Erkenntnissen wie Azure Monitor für VMS und Azure Monitor für Container gesammelt werden. Um herauszufinden, wie groß die Tabelle ist, übergeben wir Ihren Inhalt an einen Operator, der die Zeilen einfach zählt.
+Die [InsightsMetrics](/azure/azure-monitor/reference/tables/insightsmetrics)-Tabelle enthält Leistungsdaten, die von Erkenntnissen wie Azure Monitor für VMs und Azure Monitor für Container erfasst werden. Um herauszufinden, wie groß die Tabelle ist, übergeben wir ihren Inhalt per Pipe an einen Operator, der schlicht die Zeilen zählt.
 
-Eine Abfrage ist eine Datenquelle (normalerweise ein Tabellenname), gefolgt von einem oder mehreren Paaren des Senk Zeichens und einem tabellarischen Operator. In diesem Fall werden alle Datensätze aus der `InsightsMetrics` Tabelle zurückgegeben und dann an den [count-Operator](./countoperator.md)gesendet. Der- `count` Operator zeigt die Ergebnisse an, da der Operator der letzte Befehl in der Abfrage ist.
+Eine Abfrage ist eine Datenquelle (normalerweise ein Tabellenname), optional gefolgt von einem oder mehreren Paaren des Pipe-Zeichens (senkrechter Strich) und einem tabellarischen Operator. In diesem Fall werden alle Datensätze aus der `InsightsMetrics`-Tabelle zurückgegeben und dann an den [count-Operator](./countoperator.md) gesendet. Der `count`-Operator zeigt die Ergebnisse an, weil der Operator der letzte Befehl in der Abfrage ist.
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -520,17 +520,17 @@ So sieht die Ausgabe aus:
 
 |Anzahl|
 |-----|
-|1.263.191|
+|1\.263.191|
     
 
-## <a name="filter-by-boolean-expression-where"></a>Nach booleschem Ausdruck filtern: *Where*
+## <a name="filter-by-boolean-expression-where"></a>Filtern nach booleschem Ausdruck: *where*
 
-Die [azureactivity](/azure/azure-monitor/reference/tables/azureactivity) -Tabelle enthält Einträge aus dem Azure-Aktivitätsprotokoll, das Einblicke in Ereignisse auf Abonnement-oder Verwaltungsebene bietet, die in Azure aufgetreten sind. Sehen wir uns nur die `Critical` Einträge in einer bestimmten Woche an.
+Die [AzureActivity](/azure/azure-monitor/reference/tables/azureactivity)-Tabelle enthält Einträge aus dem Azure-Aktivitätsprotokoll, die Erkenntnisse in alle Ereignisse auf Abonnement- oder Verwaltungsgruppenebene vermitteln, die in Azure aufgetreten sind. Sehen wir uns nur `Critical`-Einträge in einer bestimmten Woche an.
 
-Der [Where](/azure/data-explorer/kusto/query/whereoperator) -Operator ist in der Kusto-Abfragesprache üblich. `where` Filtert eine Tabelle mit Zeilen, die bestimmten Kriterien entsprechen. Im folgenden Beispiel werden mehrere-Befehle verwendet. Zuerst Ruft die Abfrage alle Datensätze für die Tabelle ab. Anschließend werden die Daten nur für Datensätze im Zeitbereich gefiltert. Schließlich filtert Sie diese Ergebnisse nur für Datensätze, die über eine `Critical` Ebene verfügen.
+Der [where](/azure/data-explorer/kusto/query/whereoperator)-Operator ist gängig in der Kusto-Abfragesprache. `where` filtert eine Tabelle zu Zeilen, die bestimmten Kriterien entsprechen. Das folgende Beispiel verwendet mehrere Befehle. Zuerst ruft die Abfrage alle Datensätze für die Tabelle ab. Anschließend filtert sie die Daten nach nur Einträgen, die in dem Zeitbereich liegen. Schließlich filtert sie diese Ergebnisse nach nur Datensätzen, die die Stufe `Critical` haben.
 
 > [!NOTE]
-> Zusätzlich zur Angabe eines Filters in der Abfrage mithilfe der- `TimeGenerated` Spalte können Sie den Zeitbereich in Log Analytics angeben. Weitere Informationen finden Sie unter [Protokoll Abfrage Bereich und Zeitbereich in Azure Monitor Log Analytics](/azure/azure-monitor/log-query/scope).
+> Zusätzlich zur Angabe eines Filters in Ihrer Abfrage mithilfe der `TimeGenerated`-Spalte können Sie den Zeitbereich in Log Analytics angeben. Weitere Informationen finden Sie unter [Protokollabfragebereich und Zeitbereich in Azure Monitor Log Analytics](/azure/azure-monitor/log-query/scope).
 
 ```kusto
 AzureActivity
@@ -538,11 +538,11 @@ AzureActivity
 | where Level == 'Critical'
 ```
 
-:::image type="content" source="images/tutorial/azure-monitor-where-results.png" lightbox="images/tutorial/azure-monitor-where-results.png" alt-text="Screenshot, der die Ergebnisse des Beispiels für den Where-Operator anzeigt":::
+:::image type="content" source="images/tutorial/azure-monitor-where-results.png" lightbox="images/tutorial/azure-monitor-where-results.png" alt-text="Screenshot mit den Ergebnissen des where-Operatorbeispiels.":::
 
-## <a name="select-a-subset-of-columns-project"></a>Wählen Sie eine Teilmenge der Spalten aus: *Project* .
+## <a name="select-a-subset-of-columns-project"></a>Auswählen einer Teilmenge von Spalten: *project*
 
-Verwenden Sie [Project](./projectoperator.md) , um nur die gewünschten Spalten einzuschließen. Im vorherigen Beispiel können wir die Ausgabe auf bestimmte Spalten beschränken:
+Verwenden Sie [project](./projectoperator.md), um nur die gewünschten Spalten einzuschließen. Aufbauend auf dem vorherigen Beispiel begrenzen wir die Ausgabe auf bestimmte Spalten:
 
 ```kusto
 AzureActivity
@@ -551,11 +551,11 @@ AzureActivity
 | project TimeGenerated, Level, OperationNameValue, ResourceGroup, _ResourceId
 ```
 
-:::image type="content" source="images/tutorial/azure-monitor-project-results.png" lightbox="images/tutorial/azure-monitor-project-results.png" alt-text="Screenshot, der die Ergebnisse des Beispiel für den Projekt Operator anzeigt.":::
+:::image type="content" source="images/tutorial/azure-monitor-project-results.png" lightbox="images/tutorial/azure-monitor-project-results.png" alt-text="Screenshot mit den Ergebnissen des project-Operatorbeispiels.":::
 
-## <a name="show-n-rows-take"></a>*N* Zeilen anzeigen: *übernehmen*
+## <a name="show-n-rows-take"></a>Anzeigen von *n* Zeilen: *take*
 
-[Network Monitoring](/azure/azure-monitor/reference/tables/networkmonitoring) enthält Überwachungsdaten für virtuelle Azure-Netzwerke. Verwenden Sie den [Take](./takeoperator.md) -Operator, um fünf zufällige Beispiel Zeilen in dieser Tabelle zu betrachten. Der [Vorgang](./takeoperator.md) zeigt eine bestimmte Anzahl von Zeilen aus einer Tabelle ohne bestimmte Reihenfolge an:
+[NetworkMonitoring](/azure/azure-monitor/reference/tables/networkmonitoring) enthält Überwachungsdaten für virtuelle Azure-Netzwerke. Verwenden wir nun den [take](./takeoperator.md)-Operator, um uns fünf zufällige Beispielzeilen in dieser Tabelle anzusehen. [take](./takeoperator.md) zeigt eine bestimmte Anzahl von Zeilen aus einer Tabelle in keiner bestimmten Reihenfolge:
 
 ```kusto
 NetworkMonitoring
@@ -563,9 +563,9 @@ NetworkMonitoring
 | project TimeGenerated, Computer, SourceNetwork, DestinationNetwork, HighLatency, LowLatency
 ```
 
-:::image type="content" source="images/tutorial/azure-monitor-take-results.png" lightbox="images/tutorial/azure-monitor-take-results.png" alt-text="Screenshot, der die Ergebnisse des Beispiels &quot;Take Operator&quot; anzeigt.":::
+:::image type="content" source="images/tutorial/azure-monitor-take-results.png" lightbox="images/tutorial/azure-monitor-take-results.png" alt-text="Screenshot mit den Ergebnissen des take-Operatorbeispiels.":::
 
-## <a name="order-results-sort-top"></a>Bestell Ergebnisse: *Sortieren*, nach *oben*
+## <a name="order-results-sort-top"></a>Sortieren von Ergebnissen: *sort*, *top*
 
 Anstelle zufälliger Datensätze können wir die letzten fünf Datensätze zurückgeben, indem wir zuerst nach Zeit sortieren:
 
@@ -576,7 +576,7 @@ NetworkMonitoring
 | project TimeGenerated, Computer, SourceNetwork, DestinationNetwork, HighLatency, LowLatency
 ```
 
-Sie können dieses exakte Verhalten erzielen, indem Sie stattdessen den [Top](./topoperator.md) -Operator verwenden: 
+Sie können dieses exakte Verhalten erzielen, indem Sie stattdessen den [top](./topoperator.md)-Operator verwenden: 
 
 ```kusto
 NetworkMonitoring
@@ -584,13 +584,13 @@ NetworkMonitoring
 | project TimeGenerated, Computer, SourceNetwork, DestinationNetwork, HighLatency, LowLatency
 ```
 
-:::image type="content" source="images/tutorial/azure-monitor-top-results.png" lightbox="images/tutorial/azure-monitor-top-results.png" alt-text="Screenshot, der die Ergebnisse des Top-Operator Beispiels anzeigt.":::
+:::image type="content" source="images/tutorial/azure-monitor-top-results.png" lightbox="images/tutorial/azure-monitor-top-results.png" alt-text="Screenshot mit den Ergebnissen des top-Operatorbeispiels.":::
 
-## <a name="compute-derived-columns-extend"></a>Abgeleitete Spalten berechnen: *erweitern*
+## <a name="compute-derived-columns-extend"></a>Berechnen abgeleiteter Spalten: *extend*
 
-Der Operator " [erweitern](./projectoperator.md) " ähnelt " [Project](./projectoperator.md)", aber er fügt dem Satz von Spalten hinzu, anstatt ihn zu ersetzen. Sie können beide Operatoren verwenden, um eine neue Spalte auf Grundlage einer Berechnung für jede Zeile zu erstellen.
+Der [extend](./projectoperator.md)-Operator ähnelt [project](./projectoperator.md), aber er fügt dem Satz von Spalten hinzu, anstatt ihn zu ersetzen. Sie können beide Operatoren verwenden, um eine neue Spalte auf Grundlage einer Berechnung für jede Zeile zu erstellen.
 
-Die [perf](/azure/azure-monitor/reference/tables/perf) -Tabelle enthält Leistungsdaten, die von virtuellen Computern gesammelt werden, auf denen der Log Analytics-Agent ausgeführt wird. 
+Die [Perf](/azure/azure-monitor/reference/tables/perf)-Tabelle enthält Leistungsdaten, die von virtuellen Computern erfasst werden, auf denen der Log Analytics-Agent ausgeführt wird. 
 
 ```kusto
 Perf
@@ -599,26 +599,26 @@ Perf
 | extend FreeGigabytes = FreeMegabytes / 1000
 ```
 
-:::image type="content" source="images/tutorial/azure-monitor-extend-results.png" lightbox="images/tutorial/azure-monitor-extend-results.png" alt-text="Screenshot, der die Ergebnisse des Beispiels zum Erweitern eines Operators anzeigt.":::
+:::image type="content" source="images/tutorial/azure-monitor-extend-results.png" lightbox="images/tutorial/azure-monitor-extend-results.png" alt-text="Screenshot mit den Ergebnissen des extend-Operatorbeispiels.":::
 
-## <a name="aggregate-groups-of-rows-summarize"></a>Aggregat Gruppen von Zeilen: zusammen *fassen*
+## <a name="aggregate-groups-of-rows-summarize"></a>Aggregieren von Zeilengruppen: *summarize*
 
-Der [Zusammenfassungs Operator gruppiert](./summarizeoperator.md) Zeilen, die die gleichen Werte in der- `by` Klausel aufweisen. Anschließend wird eine Aggregations Funktion wie verwendet `count` , um die einzelnen Gruppen in einer einzelnen Zeile zu kombinieren. Ein Bereich von [Aggregations Funktionen](./summarizeoperator.md#list-of-aggregation-functions) ist verfügbar. Sie können mehrere Aggregations Funktionen in einem `summarize` Operator verwenden, um mehrere berechnete Spalten zu entwickeln. 
+Der [summarize](./summarizeoperator.md)-Operator gruppiert Zeilen mit denselben Werten in der `by`-Klausel. Anschließend verwendet er eine Aggregationsfunktion wie `count`, um jede Gruppe in einer einzelnen Zeile zu kombinieren. Es steht eine Reihe von [Aggregationsfunktionen](./summarizeoperator.md#list-of-aggregation-functions) zur Verfügung. Sie können mehrere Aggregationsfunktionen in einem `summarize`-Operator verwenden, um mehrere berechnete Spalten zu erzeugen. 
 
-Die Tabelle " [securityevent](/azure/azure-monitor/reference/tables/securityevent) " enthält Sicherheitsereignisse wie Anmeldungen und Prozesse, die auf überwachten Computern gestartet wurden. Sie können zählen, wie viele Ereignisse jeder Ebene auf den einzelnen Computern aufgetreten sind. In diesem Beispiel wird eine Zeile für jede Kombination aus Computer und Ebene erstellt. Eine Spalte enthält die Anzahl der Ereignisse.
+Die [SecurityEvent](/azure/azure-monitor/reference/tables/securityevent)-Tabelle enthält Sicherheitsereignisse wie Anmeldungen und Prozesse, die auf überwachten Computern gestartet wurden. Sie können zählen, wie viele Ereignisse jeder Ebene auf den einzelnen Computern aufgetreten sind. In diesem Beispiel wird für jede Kombination aus Computer und Ebene eine Zeile erstellt. Eine Spalte enthält die Anzahl der Ereignisse.
 
 ```kusto
 SecurityEvent
 | summarize count() by Computer, Level
 ```
 
-:::image type="content" source="images/tutorial/azure-monitor-summarize-count-results.png" lightbox="images/tutorial/azure-monitor-summarize-count-results.png" alt-text="Screenshot, der die Ergebnisse des Beispiels zum Zusammenfassen des Count-Operators anzeigt.":::
+:::image type="content" source="images/tutorial/azure-monitor-summarize-count-results.png" lightbox="images/tutorial/azure-monitor-summarize-count-results.png" alt-text="Screenshot mit den Ergebnissen des „summarize count“-Operatorbeispiels.":::
 
 ## <a name="summarize-by-scalar-values"></a>Zusammenfassen nach Skalarwerten
 
-Sie können durch skalare Werte wie Zahlen und Uhrzeitwerte aggregieren, aber Sie sollten die [bin ()](./binfunction.md) -Funktion verwenden, um Zeilen in unterschiedliche Datensätze zu gruppieren. Wenn Sie z. b. mit aggregieren `TimeGenerated` , erhalten Sie eine Zeile für fast jeden Uhrzeitwert. Verwenden `bin()` Sie, um diese Werte in Stunde oder Tag zu konsolidieren.
+Sie können nach Skalarwerten wie Zahlen und Zeitwerten aggregieren, aber Sie sollten die [bin()](./binfunction.md)-Funktion verwenden, um Zeilen in getrennte Datensätze zu gruppieren. Wenn Sie beispielsweise `TimeGenerated` aggregieren, erhalten Sie eine Zeile für fast jeden Zeitwert. Verwenden Sie `bin()`, um diese Werte in Stunde oder Tag zu konsolidieren.
 
-Die Tabelle [insightmetrics](/azure/azure-monitor/reference/tables/insightsmetrics) enthält Leistungsdaten, die von Erkenntnissen wie Azure Monitor für VMS und Azure Monitor für Container gesammelt werden. Die folgende Abfrage zeigt die stündliche durchschnittliche Prozessorauslastung für mehrere Computer:
+Die [InsightsMetrics](/azure/azure-monitor/reference/tables/insightsmetrics)-Tabelle enthält Leistungsdaten, die von Erkenntnissen wie Azure Monitor für VMs und Azure Monitor für Container erfasst werden. Die folgende Abfrage zeigt die stündliche durchschnittliche Prozessorauslastung für mehrere Computer:
 
 ```kusto
 InsightsMetrics
@@ -627,11 +627,11 @@ InsightsMetrics
 | summarize avg(Val) by Computer, bin(TimeGenerated, 1h)
 ```
 
-:::image type="content" source="images/tutorial/azure-monitor-summarize-avg-results.png" lightbox="images/tutorial/azure-monitor-summarize-avg-results.png" alt-text="Screenshot, der die Ergebnisse des AVG-Operator Beispiels anzeigt.":::
+:::image type="content" source="images/tutorial/azure-monitor-summarize-avg-results.png" lightbox="images/tutorial/azure-monitor-summarize-avg-results.png" alt-text="Screenshot mit den Ergebnissen des avg-Operatorbeispiels.":::
 
-## <a name="display-a-chart-or-table-render"></a>Anzeigen eines Diagramms oder einer Tabelle: *Rendering*
+## <a name="display-a-chart-or-table-render"></a>Anzeigen eines Diagramms oder einer Tabelle: *render*
 
-Der [renderoperator](./renderoperator.md?pivots=azuremonitor) gibt an, wie die Ausgabe der Abfrage gerendert wird. Log Analytics rendert die Ausgabe standardmäßig als Tabelle. Nachdem Sie die Abfrage ausgeführt haben, können Sie verschiedene Diagrammtypen auswählen. Der- `render` Operator ist nützlich, wenn Abfragen in Abfragen eingeschlossen werden, bei denen ein bestimmter Diagrammtyp normalerweise bevorzugt wird.
+Der [render](./renderoperator.md?pivots=azuremonitor)-Operator gibt an, wie die Ausgabe der Abfrage gerendert wird. Log Analytics rendert die Ausgabe standardmäßig als Tabelle. Sie können nach der Ausführung der Abfrage verschiedene Diagrammtypen auswählen. Der `render`-Operator lässt sich nützlicherweise in Abfragen aufnehmen, in denen normalerweise ein bestimmter Diagrammtyp bevorzugt wird.
 
 Das folgende Beispiel zeigt die stündliche durchschnittliche Prozessorauslastung für einen einzelnen Computer. Die Ausgabe wird als Zeitdiagramm gerendert.
 
@@ -643,11 +643,11 @@ InsightsMetrics
 | render timechart
 ```
 
-:::image type="content" source="images/tutorial/azure-monitor-render-results.png" lightbox="images/tutorial/azure-monitor-render-results.png" alt-text="Screenshot, der die Ergebnisse des Beispiels &quot;Rendering-Operator&quot; anzeigt.":::
+:::image type="content" source="images/tutorial/azure-monitor-render-results.png" lightbox="images/tutorial/azure-monitor-render-results.png" alt-text="Screenshot mit den Ergebnissen des render-Operatorbeispiels.":::
 
 ## <a name="work-with-multiple-series"></a>Arbeiten mit mehreren Reihen
 
-Wenn Sie mehrere Werte in einer- `summarize by` Klausel verwenden, wird im Diagramm eine separate Reihe für jeden Satz von Werten angezeigt:
+Verwenden Sie mehrere Werte in einer `summarize by`-Klausel verwenden, zeigt das Diagramm für jeden Satz von Werten eine gesonderte Reihe an:
 
 ```kusto
 InsightsMetrics
@@ -657,15 +657,15 @@ InsightsMetrics
 | render timechart
 ```
 
-:::image type="content" source="images/tutorial/azure-monitor-render-multiple-results.png" lightbox="images/tutorial/azure-monitor-render-multiple-results.png" alt-text="Screenshot, der die Ergebnisse des Beispiels &quot;Rendering-Operator mit mehreren Reihen&quot; anzeigt.":::
+:::image type="content" source="images/tutorial/azure-monitor-render-multiple-results.png" lightbox="images/tutorial/azure-monitor-render-multiple-results.png" alt-text="Screenshot mit den Ergebnissen des render-Operatorbeispiels mit mehreren Reihen.":::
 
 ## <a name="join-data-from-two-tables"></a>Verknüpfen von Daten aus zwei Tabellen
 
-Was geschieht, wenn Sie Daten aus zwei Tabellen in einer einzelnen Abfrage abrufen müssen? Sie können den [Join](/azure/data-explorer/kusto/query/joinoperator?pivots=azuremonitor) -Operator verwenden, um Zeilen aus mehreren Tabellen in einem einzelnen Resultset zu kombinieren. Jede Tabelle muss eine Spalte mit einem übereinstimmenden Wert aufweisen, damit der Join weiß, welche Zeilen übereinstimmen.
+Was ist, wenn Sie Daten aus zwei Tabellen in einer einzelnen Abfrage abrufen müssen? Sie können den [join](/azure/data-explorer/kusto/query/joinoperator?pivots=azuremonitor)-Operator verwenden, um Zeilen aus mehreren Tabellen in einem einzigen Resultset zu kombinieren. Jede Tabelle muss eine Spalte mit einem übereinstimmenden Wert aufweisen, damit der Verknüpfungsvorgang (join) weiß, welche Zeilen zugeordnet werden müssen.
 
-[Vmcomputer](/azure/azure-monitor/reference/tables/vmcomputer) ist eine Tabelle, die von Azure Monitor für VMS verwendet wird, um Details zu den von ihm überwachten virtuellen Maschinen zu speichern. [Insighungmetrics](/azure/azure-monitor/reference/tables/insightsmetrics) enthält Leistungsdaten, die von diesen virtuellen Computern gesammelt werden. Ein in *insightionmetrics* erfasster Wert ist der verfügbare Arbeitsspeicher, jedoch nicht der verfügbare Arbeitsspeicher in Prozent. Um den Prozentsatz zu berechnen, benötigen wir den physischen Speicher für jeden virtuellen Computer. Dieser Wert befindet sich in `VMComputer` .
+[VMComputer](/azure/azure-monitor/reference/tables/vmcomputer) ist eine Tabelle, die Azure Monitor für VMs verwendet, um Details zu den von überwachten virtuellen Computern zu speichern. [InsightsMetrics](/azure/azure-monitor/reference/tables/insightsmetrics) enthält Leistungsdaten, die von diesen virtuellen Computern erfasst werden. Ein in *InsightsMetrics* erfasster Wert ist verfügbarer Arbeitsspeicher, aber nicht der Prozentsatz des verfügbaren Arbeitsspeichers. Um den Prozentsatz zu berechnen, benötigen wir den physischen Arbeitsspeicher für jeden virtuellen Computer. Dieser Wert findet sich in `VMComputer`.
 
-In der folgenden Beispiel Abfrage wird ein Join verwendet, um diese Berechnung auszuführen. Der unter [schiedliche](/azure/data-explorer/kusto/query/distinctoperator) Operator wird mit verwendet, `VMComputer` da Details regelmäßig von jedem Computer gesammelt werden. Als Ergebnis werden mehrere Zeilen für jeden Computer in der Tabelle erstellt. Die beiden Tabellen werden mithilfe der- `Computer` Spalte verknüpft. Im Resultset wird eine Zeile mit Spalten aus beiden Tabellen für jede Zeile in erstellt `InsightsMetrics` , wobei ein Wert in mit `Computer` dem gleichen Wert in der `Computer` Spalte in übereinstimmt `VMComputer` .
+In der folgenden Beispiel Abfrage wird eine Verknüpfung (join) verwendet, um diese Berechnung auszuführen. Der [distinct](/azure/data-explorer/kusto/query/distinctoperator)-Operator wird mit `VMComputer` verwendet, weil Details regelmäßig von jedem Computer erfasst werden. Als Ergebnis werden mehrere Zeilen für jeden Computer in der Tabelle erstellt. Die beiden Tabellen werden mithilfe der Spalte `Computer` verknüpft. Im Resultset wird eine Zeile erstellt, die Spalten aus beiden Tabellen für jede Zeile in `InsightsMetrics` enthält, wobei ein Wert in `Computer` mit demselben Wert in der Spalte `Computer` in `VMComputer` übereinstimmt.
 
 ```kusto
 VMComputer
@@ -678,11 +678,11 @@ VMComputer
 | project TimeGenerated, Computer, PercentMemory = AvailableMemoryMB / PhysicalMemoryMB * 100
 ```
 
-:::image type="content" source="images/tutorial/azure-monitor-join-results.png" lightbox="images/tutorial/azure-monitor-join-results.png" alt-text="Screenshot, der die Ergebnisse des Join-Operators-Beispiels anzeigt":::
+:::image type="content" source="images/tutorial/azure-monitor-join-results.png" lightbox="images/tutorial/azure-monitor-join-results.png" alt-text="Screenshot mit den Ergebnissen des join-Operatorbeispiels.":::
 
-## <a name="assign-a-result-to-a-variable-let"></a>Zuweisen eines Ergebnisses zu einer Variablen: *Let*
+## <a name="assign-a-result-to-a-variable-let"></a>Zuweisen eines Ergebnisses zu einer Variablen: *let*
 
-Verwenden [Sie Let](./letstatement.md) , um das Lesen und Verwalten von Abfragen zu vereinfachen. Sie können diesen Operator verwenden, um die Ergebnisse einer Abfrage einer Variablen zuzuweisen, die Sie später verwenden können. Mithilfe der- `let` Anweisung kann die Abfrage im vorangehenden Beispiel wie folgt umgeschrieben werden:
+Verwenden Sie [let](./letstatement.md), um das Lesen und Verwalten von Abfragen zu vereinfachen. Sie können diesen Operator verwenden, um die Ergebnisse einer Abfrage einer Variablen zuzuweisen, die Sie später verwenden können. Mit der `let`-Anweisung kann die Abfrage im vorangehenden Beispiel wie folgt umgeschrieben werden:
 
  
 ```kusto
@@ -697,7 +697,7 @@ PhysicalComputer
 | project TimeGenerated, Computer, PercentMemory = AvailableMemoryMB / PhysicalMemoryMB * 100
 ```
 
-:::image type="content" source="images/tutorial/azure-monitor-let-results.png" lightbox="images/tutorial/azure-monitor-let-results.png" alt-text="Screenshot, der die Ergebnisse des Let-Operator Beispiels anzeigt.":::
+:::image type="content" source="images/tutorial/azure-monitor-let-results.png" lightbox="images/tutorial/azure-monitor-let-results.png" alt-text="Screenshot mit den Ergebnissen des let-Operatorbeispiels.":::
 
 ## <a name="next-steps"></a>Nächste Schritte
 
