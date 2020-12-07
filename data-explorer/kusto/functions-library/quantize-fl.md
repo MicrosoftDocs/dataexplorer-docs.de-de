@@ -7,12 +7,12 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/08/2020
-ms.openlocfilehash: 38d353caf1e0352688ee91edfe7f1d2cef94d18a
-ms.sourcegitcommit: 5aba5f694420ade57ef24b96699d9b026cdae582
+ms.openlocfilehash: 77524f22be72e977f73e0ac606db00d5d4b0c51d
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90998941"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321895"
 ---
 # <a name="quantize_fl"></a>quantize_fl()
 
@@ -83,7 +83,7 @@ union
 
 # <a name="persistent"></a>[Persistent](#tab/persistent)
 
-Verwenden Sie für die permanente Verwendung die [. Create-Funktion](../management/create-function.md). Zum Erstellen einer Funktion ist die [Berechtigung Datenbankbenutzer](../management/access-control/role-based-authorization.md)erforderlich.
+Verwenden Sie für persistente Verwendung [`.create function`](../management/create-function.md) . Zum Erstellen einer Funktion ist die [Berechtigung Datenbankbenutzer](../management/access-control/role-based-authorization.md)erforderlich.
 
 ### <a name="one-time-installation"></a>Einmalige Installation
 

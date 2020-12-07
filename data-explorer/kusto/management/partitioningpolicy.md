@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 1d2960e4fa8274d9e39aba935a49fd8d14d166e9
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.openlocfilehash: 30929e63c39be10d066815333ba6b277c0aeb5c9
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92902660"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321283"
 ---
 # <a name="partitioning-policy"></a>Partitionierungsrichtlinie
 
@@ -28,10 +28,10 @@ Der Hauptzweck der Richtlinie besteht darin, die Leistung von Abfragen zu verbes
 
 Die folgenden Arten von Partitions Schlüsseln werden unterstützt.
 
-|Art                                                   |Spaltentyp |Partitionseigenschaften                    |Partitions Wert                                        |
-|-------------------------------------------------------|------------|----------------------------------------|----------------------|
-|[Hash](#hash-partition-key)                            |`string`    |`Function`, `MaxPartitionCount`, `Seed` | `Function`(`ColumnName`, `MaxPartitionCount`, `Seed`) |
-|[Einheitlicher Bereich](#uniform-range-datetime-partition-key) |`datetime`  |`RangeSize`, `Reference`                | `bin_at`(`ColumnName`, `RangeSize`, `Reference`)      |
+|Art                                                   |Spaltentyp |Partitionseigenschaften                                               |Partitions Wert                                        |
+|-------------------------------------------------------|------------|-------------------------------------------------------------------|-------------------------------------------------------|
+|[Hash](#hash-partition-key)                            |`string`    |`Function`, `MaxPartitionCount`, `Seed`, `PartitionAssignmentMode` | `Function`(`ColumnName`, `MaxPartitionCount`, `Seed`) |
+|[Einheitlicher Bereich](#uniform-range-datetime-partition-key) |`datetime`  |`RangeSize`, `Reference`, `OverrideCreationTime`                   | `bin_at`(`ColumnName`, `RangeSize`, `Reference`)      |
 
 ### <a name="hash-partition-key"></a>Hash Partitions Schlüssel
 
@@ -83,15 +83,16 @@ Die verwendete Partitions Funktion ist [bin_at ()](../query/binatfunction.md) un
 
 #### <a name="partition-properties"></a>Partitionseigenschaften
 
-|Eigenschaft | Beschreibung | Empfohlener Wert |
-|---|---|---|---|
-| `RangeSize` | Eine `timespan` skalare Konstante, die die Größe der einzelnen DateTime-Partitionen angibt. | Beginnen Sie mit dem Wert `1.00:00:00` (ein Tag). Legen Sie keinen kürzeren Wert fest, da dies dazu führen kann, dass die Tabelle eine große Anzahl kleiner Blöcke aufweist, die nicht zusammengeführt werden können.
-| `Reference` | Eine `datetime` skalare Konstante, die einen festgelegten Zeitpunkt angibt, gemäß dem DateTime-Partitionen ausgerichtet werden. | Beginnen Sie mit `1970-01-01 00:00:00`. Wenn Datensätze vorhanden sind, in denen der DateTime-Partitions Schlüssel `null` Werte aufweist, wird der Partitions Wert auf den Wert von festgelegt `Reference` . |
+|Eigenschaft                | Beschreibung                                                                                                                                                     | Empfohlener Wert                                                                                                                                                                                                                                                            |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `RangeSize`            | Eine `timespan` skalare Konstante, die die Größe der einzelnen DateTime-Partitionen angibt.                                                                                | Beginnen Sie mit dem Wert `1.00:00:00` (ein Tag). Legen Sie keinen kürzeren Wert fest, da dies dazu führen kann, dass die Tabelle eine große Anzahl kleiner Blöcke aufweist, die nicht zusammengeführt werden können.                                                                                                      |
+| `Reference`            | Eine `datetime` skalare Konstante, die einen festgelegten Zeitpunkt angibt, gemäß dem DateTime-Partitionen ausgerichtet werden.                                          | Beginnen Sie mit `1970-01-01 00:00:00`. Wenn Datensätze vorhanden sind, in denen der DateTime-Partitions Schlüssel `null` Werte aufweist, wird der Partitions Wert auf den Wert von festgelegt `Reference` .                                                                                                      |
+| `OverrideCreationTime` | Ein `bool` Wert, der angibt, ob die minimalen und maximalen Erstellungs Zeiten des Ergebnis Bereichs durch den Bereich der Werte im Partitions Schlüssel überschrieben werden sollen. | Wird standardmäßig auf `false` festgelegt. Legen Sie diese Einstellung auf fest, `true` Wenn die Daten nicht in der Reihenfolge der Ankunftszeit erfasst werden (z. b. kann eine einzelne Quelldatei DateTime-Werte enthalten, die sehr weit entfernt sind), und/oder Sie möchten die Beibehaltung/Zwischenspeicherung basierend auf den DateTime-Werten und nicht auf der Erfassungs Zeit erzwingen. |
 
 #### <a name="uniform-range-datetime-partition-example"></a>Beispiel für DateTime-Partition im einheitlichen Bereich
 
 Der Code Ausschnitt zeigt einen einheitlichen DateTime Range-Partitions Schlüssel für eine `datetime` typisierte Spalte mit dem Namen `timestamp` .
-Es `datetime(1970-01-01)` wird als Bezugspunkt mit einer Größe von `1d` für jede Partition verwendet.
+Er verwendet `datetime(1970-01-01)` als Bezugspunkt mit einer Größe von `1d` für jede Partition und überschreibt die Erstellungs Zeiten der Blöcke nicht.
 
 ```json
 {
@@ -99,7 +100,8 @@ Es `datetime(1970-01-01)` wird als Bezugspunkt mit einer Größe von `1d` für j
   "Kind": "UniformRange",
   "Properties": {
     "Reference": "1970-01-01T00:00:00",
-    "RangeSize": "1.00:00:00"
+    "RangeSize": "1.00:00:00",
+    "OverrideCreationTime": false
   }
 }
 ```
@@ -110,7 +112,7 @@ Standardmäßig ist die Daten Partitionierungs Richtlinie einer Tabelle `null` .
 
 Die Richtlinie für die Daten Partitionierung verfügt über die folgenden Haupteigenschaften:
 
-* **Partitionkeys** :
+* **Partitionkeys**:
   * Eine Auflistung von [Partitions Schlüsseln](#partition-keys) , die definieren, wie die Daten in der Tabelle partitioniert werden.
   * Eine Tabelle kann über bis zu `2` Partitions Schlüssel verfügen, mit einer der folgenden Optionen:
     * Ein [Hash Partitions Schlüssel](#hash-partition-key).
@@ -121,7 +123,7 @@ Die Richtlinie für die Daten Partitionierung verfügt über die folgenden Haupt
     * `Kind`: `string` -Die anzuwendende Daten Partitionierungs Art ( `Hash` oder `UniformRange` ).
     * `Properties`: `property bag` Definiert Parameter entsprechend der Partitionierung.
 
-* **Effectivedatetime** :
+* **Effectivedatetime**:
   * Der UTC-DateTime-Wert, aus dem die Richtlinie gültig ist.
   * Diese Eigenschaft ist optional. Wenn Sie nicht angegeben ist, wird die Richtlinie für die Daten übernommen, die nach dem Anwenden der Richtlinie erfasst wurden.
   * Alle nicht homogenen (nicht partitionierten) Blöcke, die aufgrund von Beibehaltungs Dauer gelöscht werden können, werden vom Partitionierungs Prozess ignoriert. Die Blöcke werden ignoriert, weil ihre Erstellungszeit 90% des effektiven vorläufigen Lösch Zeitraums der Tabelle vorausgeht.
@@ -154,7 +156,8 @@ Richtlinien Objekt für die Daten Partitionierung mit zwei Partitions Schlüssel
       "Kind": "UniformRange",
       "Properties": {
         "Reference": "1970-01-01T00:00:00",
-        "RangeSize": "1.00:00:00"
+        "RangeSize": "1.00:00:00",
+        "OverrideCreationTime": false
       }
     }
   ]
@@ -179,7 +182,7 @@ Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden. Di
 
 ## <a name="monitor-partitioning"></a>Monitor Partitionierung
 
-Verwenden Sie den Befehl [. Show Diagnostics](../management/diagnostics.md#show-diagnostics) , um den Status oder den Status der Partitionierung in einem Cluster zu überwachen.
+Verwenden Sie den- [`.show diagnostics`](../management/diagnostics.md#show-diagnostics) Befehl, um den Status oder den Status der Partitionierung in einem Cluster zu überwachen.
 
 ```kusto
 .show diagnostics
@@ -192,7 +195,7 @@ Die Ausgabe umfasst Folgendes:
     * Wenn dieser Prozentsatz konstant weiterhin unter 90% liegt, sollten Sie die Partitions [Kapazität](partitioningpolicy.md#partition-capacity)des Clusters auswerten.
   * `TableWithMinPartitioningPercentage`: Der voll qualifizierte Name der Tabelle, deren Partitionierungs Prozentsatz oben angezeigt wird.
 
-Verwenden Sie [. Show-Befehle](commands.md) , um die Partitionierungs Befehle und deren Ressourcenverwendung zu überwachen. Zum Beispiel:
+Verwenden [`.show commands`](commands.md) Sie, um die Partitionierungs Befehle und deren Ressourcenverwendung zu überwachen. Beispiel:
 
 ```kusto
 .show commands 

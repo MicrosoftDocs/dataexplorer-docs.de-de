@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: f19104111d8db615c82eff2e399fb4857f27c841
-ms.sourcegitcommit: 463ee13337ed6d6b4f21eaf93cf58885d04bccaa
+ms.openlocfilehash: 407db347d4d21450d5648fe8716e2d82553a9669
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/30/2020
-ms.locfileid: "91572158"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320654"
 ---
 # <a name="materialized-views-preview"></a>Materialisierte Sichten (Vorschau)
 
@@ -23,11 +23,11 @@ ms.locfileid: "91572158"
 > Materialisierte Sichten weisen einige [Einschränkungen](materialized-view-create.md#limitations-on-creating-materialized-views)auf und funktionieren nicht garantiert für alle Szenarien. Überprüfen Sie die [Leistungs Überlegungen](#performance-considerations) , bevor Sie mit dem Feature arbeiten.
 
 Verwenden Sie die folgenden Befehle, um materialisierte Sichten zu verwalten:
-* [.create materialized-view](materialized-view-create.md)
-* [.alter materialized-view](materialized-view-alter.md)
-* [.drop materialized-view](materialized-view-drop.md)
-* [.disable | .enable materialized-view](materialized-view-enable-disable.md)
-* [. Anzeigen von Befehlen für materialisierte Sichten](materialized-view-show-commands.md)
+* [`.create materialized-view`](materialized-view-create.md)
+* [`.alter materialized-view`](materialized-view-alter.md)
+* [`.drop materialized-view`](materialized-view-drop.md)
+* [`.disable | .enable materialized-view`](materialized-view-enable-disable.md)
+* [`.show materialized-views commands`](materialized-view-show-commands.md)
 
 ## <a name="why-use-materialized-views"></a>Gründe für die Verwendung materialisierter Sichten
 
@@ -43,8 +43,8 @@ Durch die Investition von Ressourcen (Datenspeicherung, CPU-Hintergrund Zyklen) 
 
 Im folgenden werden gängige Szenarien beschrieben, die mithilfe einer materialisierten Sicht adressiert werden können:
 
-* Abfragen des letzten Datensatzes pro Entität mithilfe von [ARG_MAX () (Aggregations Funktion)](../../query/arg-max-aggfunction.md).
-* Duplizieren von Datensätzen in einer Tabelle mithilfe [von Any () (Aggregations Funktion)](../../query/any-aggfunction.md).
+* Abfragen des letzten Datensatzes pro Entität mithilfe von [ `arg_max()` (Aggregations Funktion)](../../query/arg-max-aggfunction.md).
+* Deduplizieren von Datensätzen in einer Tabelle mithilfe von [ `any()` (Aggregations Funktion)](../../query/any-aggfunction.md).
 * Reduzieren Sie die Datenauflösung, indem Sie regelmäßige Statistiken über die Rohdaten berechnen. Verwenden Sie verschiedene [Aggregations Funktionen](materialized-view-create.md#supported-aggregation-functions) nach Zeit.
     * Verwenden `T | summarize dcount(User) by bin(Timestamp, 1d)` Sie z. b., um eine aktuelle Momentaufnahme von unterschiedlichen Benutzern pro Tag beizubehalten.
 
@@ -64,7 +64,7 @@ Im Abschnitt " [Überwachung](#materialized-views-monitoring) " wird erläutert,
 
 Die primäre Methode, eine materialisierte Sicht abzufragen, ist der Name, wie z. b. das Abfragen eines Tabellen Verweises. Wenn die materialisierte Sicht abgefragt wird, wird der materialisierte Teil der Ansicht mit den Datensätzen in der Quell Tabelle kombiniert, die noch nicht materialisiert wurden. Wenn Sie die materialisierte Sicht Abfragen, werden immer die aktuellsten Ergebnisse zurückgegeben, basierend auf allen Datensätzen, die in der Quell Tabelle erfasst wurden. Weitere Informationen zur Aufschlüsselung der materialisierten Ansichts Teile finden Sie unter [Funktionsweise materialisierter Sichten](#how-materialized-views-work). 
 
-Eine weitere Möglichkeit zum Abfragen der Sicht ist die Verwendung der [materialized_view ()-Funktion](../../query/materialized-view-function.md). Diese Option unterstützt das Abfragen nur des materialisierten Teils der Sicht und die Angabe der maximalen Wartezeit, die der Benutzer tolerieren soll. Diese Option stellt nicht sicher, dass die aktuellsten Datensätze zurückgegeben werden, sondern sollte immer leistungsfähiger sein als das Abfragen der gesamten Sicht. Diese Funktion ist nützlich für Szenarien, in denen Sie bereit sind, eine gewisse Aktualität der Leistung zu Opfern, z. b. für telemetriedashboards.
+Eine weitere Möglichkeit zum Abfragen der Sicht besteht darin, die- [ `materialized_view()` Funktion](../../query/materialized-view-function.md)zu verwenden. Diese Option unterstützt das Abfragen nur des materialisierten Teils der Sicht und die Angabe der maximalen Wartezeit, die der Benutzer tolerieren soll. Diese Option stellt nicht sicher, dass die aktuellsten Datensätze zurückgegeben werden, sondern sollte immer leistungsfähiger sein als das Abfragen der gesamten Sicht. Diese Funktion ist nützlich für Szenarien, in denen Sie bereit sind, eine gewisse Aktualität der Leistung zu Opfern, z. b. für telemetriedashboards.
 
 Die Sicht kann an datenbankübergreifenden oder datenbankübergreifenden Abfragen teilnehmen, aber nicht in Platzhalter-Unions oder-suchen enthalten sein.
 
@@ -116,15 +116,15 @@ Die materialisierte Sicht leitet die Daten Bank Beibehaltungs-und Cache Richtlin
 Überwachen Sie die Integrität der materialisierten Sicht auf folgende Weise:
 
 * Überwacht [materialisierte Ansichts Metriken](../../../using-metrics.md#materialized-view-metrics) in der Azure-Portal.
-* Überwachen Sie die `IsHealthy` von " [MATERIALIZED-VIEW](materialized-view-show-commands.md#show-materialized-view)" zurückgegebene Eigenschaft.
-* Überprüfen Sie, ob Fehler [angezeigt](materialized-view-show-commands.md#show-materialized-view-failures)werden.
+* Überwachen Sie die `IsHealthy` von zurückgegebene Eigenschaft [`.show materialized-view`](materialized-view-show-commands.md#show-materialized-view) .
+* Überprüfen Sie mithilfe von auf Fehler [`.show materialized-view failures`](materialized-view-show-commands.md#show-materialized-view-failures) .
 
 > [!NOTE]
 > Die Materialisierung überspringt niemals Daten, selbst wenn Konstante Fehler auftreten. Die Ansicht gibt immer die aktuellste Momentaufnahme der Abfrage zurück, die auf allen Datensätzen in der Quell Tabelle basiert. Die Abfrageleistung wird durch konstante Ausfälle erheblich beeinträchtigt, aber in Sicht Abfragen werden keine falschen Ergebnisse verursacht.
 
 ### <a name="track-resource-consumption"></a>Nachverfolgen des Ressourcenverbrauchs
 
-**Materialisierte Sichten Ressourcenverbrauch:** die Ressourcen, die vom Materialisierungs Prozess für materialisierte Sichten beansprucht werden, können mit dem Befehl [. Show Commands-and-Queries](../commands-and-queries.md#show-commands-and-queries) nachverfolgt werden. Filtern Sie die Datensätze für eine bestimmte Sicht mithilfe der folgenden (ersetzen Sie `DatabaseName` und `ViewName` ):
+**Materialisierte Sichten Ressourcenverbrauch:** die vom Materialisierungs Prozess für materialisierte Sichten genutzten Ressourcen können mithilfe des-Befehls nachverfolgt werden [`.show commands-and-queries`](../commands-and-queries.md#show-commands-and-queries) . Filtern Sie die Datensätze für eine bestimmte Sicht mithilfe der folgenden (ersetzen Sie `DatabaseName` und `ViewName` ):
 
 <!-- csl -->
 ```
@@ -160,6 +160,6 @@ Wenn keine Materialisierungs Fehler auftreten, `MaterializedViewResult` wird die
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-* [. Create materialisierte View](materialized-view-create.md)
-* [.alter materialized-view](materialized-view-alter.md)
+* [`.create materialized view`](materialized-view-create.md)
+* [`.alter materialized-view`](materialized-view-alter.md)
 * [Materialisierte Sichten zeigen Befehle an](materialized-view-show-commands.md)

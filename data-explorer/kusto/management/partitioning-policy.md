@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/04/2020
-ms.openlocfilehash: 4f5abfd5c7fffd126033baeb2bbb9243b4400f58
-ms.sourcegitcommit: b08b1546122b64fb8e465073c93c78c7943824d9
+ms.openlocfilehash: f34042af4578643f8b1b4120345cb37f66b71830
+ms.sourcegitcommit: a36981785765b85a961f275be24d297d38e498fd
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/06/2020
-ms.locfileid: "85967399"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96310016"
 ---
 # <a name="partitioning-policy-command"></a>Partitionierungsrichtlinienbefehl
 
@@ -27,9 +27,9 @@ Die Richtlinie zur Daten Partitionierung wird [hier](../management/partitioningp
 
 Der `.show` Befehl zeigt die Partitionierungs Richtlinie an, die auf die Tabelle angewendet wird.
 
-### <a name="output"></a>Ausgabe
+### <a name="output"></a>Output
 
-|Richtlinienname | Name der Entität | Policy | Untergeordnete Entitäten | Entitätstyp
+|Richtlinienname | Name der Entität | Richtlinie | Untergeordnete Entitäten | Entitätstyp
 |---|---|---|---|---
 |Datapartitionierung | Tabellenname | JSON-Serialisierung des Policy-Objekts | NULL | Tabelle
 
@@ -77,6 +77,7 @@ Es kann bis zu einer Stunde dauern, bis Änderungen an der Richtlinie wirksam we
       '"Properties": {'
         '"Reference": "1970-01-01T00:00:00",'
         '"RangeSize": "1.00:00:00"'
+        '"OverrideCreationTime": false'
       '}'
     '}'
   ']'
@@ -102,6 +103,7 @@ Es kann bis zu einer Stunde dauern, bis Änderungen an der Richtlinie wirksam we
       '"Properties": {'
         '"Reference": "1970-01-01T00:00:00",'
         '"RangeSize": "1.00:00:00"'
+        '"OverrideCreationTime": false'
       '}'
     '}'
   ']'

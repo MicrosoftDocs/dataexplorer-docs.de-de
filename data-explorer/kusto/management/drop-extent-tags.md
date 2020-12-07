@@ -8,13 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/02/2020
-ms.openlocfilehash: 23784a1e3e00c242665a43dffcc528bfeff68896
-ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.openlocfilehash: 45e7d0abf42e613a9d197371dcc374fe4ac11fed
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
+ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060624"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321011"
 ---
-# <a name="drop-extent-tags"></a>. Drop Block-Tags
+# <a name="drop-extent-tags"></a>.drop extent tags
 
 Der Befehl wird im Kontext einer bestimmten Datenbank ausgeführt. Es löscht bestimmte Block [Tags](extents-overview.md#extent-tagging) aus allen oder bestimmten Blöcken in der Datenbank und in der Tabelle.  
 
@@ -29,14 +30,14 @@ Es gibt zwei Möglichkeiten, um anzugeben, welche Tags aus welchen Blöcken entf
 
 ## <a name="syntax"></a>Syntax
 
-`.drop`[ `async` ] `extent` `tags` `from` `table` *TableName* `(` '*Tag1*' [ `,` '*Tag2*' `,` ... `,` ' *TAGN*']`)`
+`.drop` [ `async` ] `extent` `tags` `from` `table` *TableName* `(` '*Tag1*' [ `,` '*Tag2*' `,` ... `,` ' *TAGN*']`)`
 
 `.drop`[ `async` ] `extent` `tags`  <|  *Abfrage*
 
-`async`(optional): führen Sie den Befehl asynchron aus.
+`async` (optional): führen Sie den Befehl asynchron aus.
    * Eine Vorgangs-ID (GUID) wird zurückgegeben.
-   * Der Status des Vorgangs kann überwacht werden. Verwenden Sie den Befehl [. Show Operations](operations.md#show-operations) .
-   * Verwenden Sie den Befehl [Vorgangs Details anzeigen](operations.md#show-operation-details) , um die Ergebnisse einer erfolgreichen Ausführung abzurufen.
+   * Der Status des Vorgangs kann überwacht werden. Verwenden Sie den [`.show operations`](operations.md#show-operations) Befehl.
+   * Verwenden Sie den- [`.show operation details`](operations.md#show-operation-details) Befehl, um die Ergebnisse einer erfolgreichen Ausführung abzurufen.
 
 ## <a name="restrictions"></a>Beschränkungen
 
@@ -61,7 +62,7 @@ Erfordert die [Table admin-Berechtigung](../management/access-control/role-based
 
 ### <a name="return-output"></a>Ausgabe zurückgeben
 
-Output-Parameter |Typ |Beschreibung 
+Ausgabeparameter |type |Beschreibung 
 ---|---|---
 Originalextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den ursprünglichen Block, dessen Tags geändert wurden. Der Block wird als Teil des Vorgangs gelöscht.
 Resultextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den Ergebnis Block, der Tags geändert hat. Der Block wird erstellt und als Teil des Vorgangs hinzugefügt. Bei Fehler: "failed".

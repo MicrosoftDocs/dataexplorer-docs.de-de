@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 41eb9703f1718bb43b41927f9ec4d7cac52d67c4
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 936b8aedb4244836eff8c8618a53693395a0343c
+ms.sourcegitcommit: 1bdbfdc04c4eac405f3931059bbeee2dedd87004
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92249942"
+ms.lasthandoff: 11/27/2020
+ms.locfileid: "96303267"
 ---
 # <a name="make_bag-aggregation-function"></a>make_bag () (Aggregations Funktion)
 
@@ -28,11 +28,10 @@ Gibt ein `dynamic` (JSON)-Eigenschaften Behälter (Wörterbuch) aller Werte von 
 ## <a name="arguments"></a>Argumente
 
 * *Expr*: ein Ausdruck vom Typ `dynamic` , der für Aggregations Berechnungen verwendet wird.
-* *MaxSize* ist eine optionale ganzzahlige Beschränkung für die maximale Anzahl der zurückgegebenen Elemente. Der Standardwert ist *1048576*. Der MaxSize-Wert darf *1048576*nicht überschreiten.
+* *MaxSize* ist eine optionale ganzzahlige Beschränkung für die maximale Anzahl der zurückgegebenen Elemente. Der Standardwert ist *1048576*. Der MaxSize-Wert darf *1048576* nicht überschreiten.
 
-**Hinweis**
-
-Eine Legacy-und veraltete Variante der Funktion `make_dictionary()` hat ein Standard Limit von *MaxSize* = 128.
+> [!NOTE]
+> `make_dictionary()` ist eine veraltete und veraltete Version von `make_bag()` . Die Legacy Version hat ein Standard Limit von *MaxSize* = 128.
 
 ## <a name="returns"></a>Rückgabe
 

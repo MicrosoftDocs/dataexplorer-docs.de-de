@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 05/26/2020
-ms.openlocfilehash: 8e419d471419a291b3680c4b91d3e6908b2e7f2e
-ms.sourcegitcommit: 83202ec6fec0ce98fdf993bbb72adc985d6d9c78
+ms.openlocfilehash: 7646f86c9a521ab45cf83d7704084f3a5df6b256
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/06/2020
-ms.locfileid: "87877332"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321385"
 ---
 # <a name="external-table-general-control-commands"></a>Externe Tabelle (allgemeine Steuerungsbefehle)
 
@@ -28,11 +28,11 @@ Eine Übersicht über externe Tabellen finden Sie unter [externe Tabellen](../qu
 
 `.show` `external` `tables`
 
-`.show``external` `table` *TableName*
+`.show` `external` `table` *TableName*
 
 **Ausgabe**
 
-| Output-Parameter | type   | BESCHREIBUNG                                                         |
+| Ausgabeparameter | type   | BESCHREIBUNG                                                         |
 |------------------|--------|---------------------------------------------------------------------|
 | TableName        | Zeichenfolge | Name der externen Tabelle                                             |
 | TableType        | Zeichenfolge | Typ externer Tabelle                                              |
@@ -62,11 +62,11 @@ Eine Übersicht über externe Tabellen finden Sie unter [externe Tabellen](../qu
 
 `.show``external` `table` *TableName* `schema` `as` ( `json`  |  `csl` )
 
-`.show``external` `table` *TableName*`cslschema`
+`.show` `external` `table` *TableName* `cslschema`
 
 **Ausgabe**
 
-| Output-Parameter | type   | BESCHREIBUNG                        |
+| Ausgabeparameter | type   | BESCHREIBUNG                        |
 |------------------|--------|------------------------------------|
 | TableName        | Zeichenfolge | Name der externen Tabelle            |
 | Schema           | Zeichenfolge | Das Tabellen Schema in einem JSON-Format. |
@@ -112,7 +112,7 @@ Eine Übersicht über externe Tabellen finden Sie unter [externe Tabellen](../qu
 
 **Ausgabe**
 
-Gibt die Eigenschaften der gelöschten Tabelle zurück. Weitere Informationen finden Sie unter [. anzeigen externer Tabellen](#show-external-tables).
+Gibt die Eigenschaften der gelöschten Tabelle zurück. Weitere Informationen finden Sie unter [`.show external tables`](#show-external-tables).
 
 **Beispiele:**
 

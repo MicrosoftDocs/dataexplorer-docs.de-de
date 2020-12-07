@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/04/2020
-ms.openlocfilehash: 28e88b71b5d7a2f8729e2f9eef416ee5804a2880
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 8f19606a75c388917a5195d0ac5cbb0ecf4335f9
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92337634"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321130"
 ---
 # <a name="update-policy-overview"></a>Übersicht über Update Richtlinien
 
@@ -49,9 +49,9 @@ Die Abfrage für die Update Richtlinie wird in einem speziellen Modus ausgeführ
 Einer Tabelle können NULL, ein oder mehrere Update-Richtlinien Objekte zugeordnet sein.
 Jedes dieser Objekte wird als JSON-Eigenschaften Behälter dargestellt, wobei die folgenden Eigenschaften definiert sind.
 
-|Eigenschaft |type |BESCHREIBUNG  |
+|Eigenschaft |type |Beschreibung  |
 |---------|---------|----------------|
-|IsEnabled                     |`bool`  |Gibt an, ob die Update Richtlinie aktiviert (true) oder deaktiviert (false) ist.                                                                                                                               |
+|isEnabled                     |`bool`  |Gibt an, ob die Update Richtlinie aktiviert (true) oder deaktiviert (false) ist.                                                                                                                               |
 |`Source`                        |`string`|Name der Tabelle, in der die Aktualisier Ende Aktualisierungs Richtlinie ausgelöst wird                                                                                                                                 |
 |Abfrage                         |`string`|Eine Kusto-CSL-Abfrage, mit der die Daten für das Update erzeugt werden.                                                                                                                           |
 |"IsTransactional"               |`bool`  |Gibt an, ob es sich um eine transaktionale Update Richtlinie handelt (Standardwert: false). Fehler beim Ausführen einer Richtlinie für transaktionales Update führt dazu, dass die Quell Tabelle nicht mit neuen Daten aktualisiert wird.   |
@@ -66,10 +66,10 @@ Jedes dieser Objekte wird als JSON-Eigenschaften Behälter dargestellt, wobei di
 
 Folgende Befehle sind zum Steuern der Update Richtlinie zu berücksichtigen:
 
-* [. Anzeigen der Tabelle *TableName* Richtlinien Aktualisierung](update-policy.md#show-update-policy) zeigt die aktuelle Aktualisierungs Richtlinie einer Tabelle an.
-* [. Alter Table *TableName* Policy Update](update-policy.md#alter-update-policy) legt die aktuelle Aktualisierungs Richtlinie einer Tabelle fest.
-* [. Alter-Merge Table *TableName* Policy Update](update-policy.md#alter-merge-table-tablename-policy-update) fügt an die aktuelle Aktualisierungs Richtlinie einer Tabelle an.
-* [. Delete Table *TableName* Policy Update](update-policy.md#delete-table-tablename-policy-update) fügt an die aktuelle Aktualisierungs Richtlinie einer Tabelle an.
+* [`.show table *TableName* policy update`](update-policy.md#show-update-policy) zeigt die aktuelle Aktualisierungs Richtlinie einer Tabelle an.
+* [`.alter table *TableName* policy update`](update-policy.md#alter-update-policy) legt die aktuelle Aktualisierungs Richtlinie einer Tabelle fest.
+* [`.alter-merge table *TableName* policy update`](update-policy.md#alter-merge-table-tablename-policy-update) Fügt die aktuelle Aktualisierungs Richtlinie einer Tabelle an.
+* [`.delete table *TableName* policy update`](update-policy.md#delete-table-tablename-policy-update) Fügt die aktuelle Aktualisierungs Richtlinie einer Tabelle an.
 
 ## <a name="update-policy-is-initiated-following-ingestion"></a>Die Aktualisierungs Richtlinie wird nach der Erfassung initiiert.
 
@@ -106,7 +106,7 @@ Update Richtlinien können sich auf die Leistung eines Kusto-Clusters auswirken.
 
 ### <a name="evaluate-resource-usage"></a>Ressourcenverwendung auswerten
 
-Verwenden Sie [. Show Queries](../management/queries.md), um die Ressourcenverwendung (CPU, Arbeitsspeicher usw.) im folgenden Szenario auszuwerten:
+Verwenden [`.show queries`](../management/queries.md) Sie, um die Ressourcenverwendung (CPU, Arbeitsspeicher usw.) im folgenden Szenario auszuwerten:
 * Der Name der Quell Tabelle (die- `Source` Eigenschaft der Update Richtlinie) ist `MySourceTable` .
 * Die- `Query` Eigenschaft der Update Richtlinie Ruft eine Funktion mit dem Namen auf `MyFunction()` .
 
@@ -122,7 +122,7 @@ MyFunction()
 
 Standardmäßig wirkt sich ein Fehler beim Ausführen der Update Richtlinie nicht auf die Erfassung von Daten in die Quell Tabelle aus. Wenn die Update Richtlinie jedoch als `IsTransactional` : true definiert ist, erzwingt die fehlerhafte Ausführung der Richtlinie, dass die Erfassung von Daten in die Quell Tabelle fehlschlägt. In einigen Fällen ist die Erfassung von Daten in die Quell Tabelle erfolgreich, aber die Update Richtlinie schlägt während der Erfassung in die Ziel Tabelle fehl.
 
-Fehler, die auftreten, während die Richtlinien aktualisiert werden, können mit dem [Befehl ". Show](../management/ingestionfailures.md)Failure Failure" abgerufen werden.
+Fehler, die auftreten, während die Richtlinien aktualisiert werden, können mit dem [ `.show ingestion failures` Befehl](../management/ingestionfailures.md)abgerufen werden.
  
 ```kusto
 .show ingestion failures 

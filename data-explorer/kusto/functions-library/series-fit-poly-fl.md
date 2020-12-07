@@ -7,12 +7,12 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/08/2020
-ms.openlocfilehash: eff9a5cd8ed2d9ed7e518be9aade9ecf2aded7bf
-ms.sourcegitcommit: d0f8d71261f8f01e7676abc77283f87fc450c7b1
+ms.openlocfilehash: 454aa19c5b38eabce49fd319891772746335ceab
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91765471"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321827"
 ---
 # <a name="series_fit_poly_fl"></a>series_fit_poly_fl()
 
@@ -99,7 +99,7 @@ demo_make_series1
 
 # <a name="persistent"></a>[Persistent](#tab/persistent)
 
-Verwenden Sie für die permanente Verwendung die [. Create-Funktion](../management/create-function.md).  Zum Erstellen einer Funktion ist die [Berechtigung Datenbankbenutzer](../management/access-control/role-based-authorization.md)erforderlich.
+Verwenden Sie für persistente Verwendung [`.create function`](../management/create-function.md) .  Zum Erstellen einer Funktion ist die [Berechtigung Datenbankbenutzer](../management/access-control/role-based-authorization.md)erforderlich.
 
 ### <a name="one-time-installation"></a>Einmalige Installation
 
@@ -183,7 +183,7 @@ In den folgenden Beispielen wird davon ausgegangen, dass die Funktion bereits in
     | render timechart with(ycolumns=num, fnum)
     ```
     
-    :::image type="content" source="images/series-fit-poly-fl/irregular-time-series.png" alt-text="Diagramm mit der fünften Reihenfolge Polynoms, die an eine reguläre Zeitreihe angepasst ist" border="false":::
+    :::image type="content" source="images/series-fit-poly-fl/irregular-time-series.png" alt-text="Diagramm mit der achten Reihenfolge Polynoms an eine unregelmäßige Zeitreihe anpassen" border="false":::
 
 1. Fünfte Reihenfolge Polynoms mit Rauschen für x & y-Achsen
 
@@ -200,6 +200,6 @@ In den folgenden Beispielen wird davon ausgegangen, dass die Funktion bereits in
     | render linechart
     ```
         
-    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise.png" alt-text="Diagramm mit der fünften Reihenfolge Polynoms, die an eine reguläre Zeitreihe angepasst ist":::
+    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise.png" alt-text="Diagramm der Anpassung der fünften Reihenfolge Polynoms mit Rauschen für x & y-Achsen":::
        
-    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise-table.png" alt-text="Diagramm mit der fünften Reihenfolge Polynoms, die an eine reguläre Zeitreihe angepasst ist" border="false":::
+    :::image type="content" source="images/series-fit-poly-fl/fifth-order-noise-table.png" alt-text="Koeffizienten der Eignung der fünften Reihenfolge Polynoms mit Rauschen" border="false":::

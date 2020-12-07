@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2020
-ms.openlocfilehash: 9a670e2dead3e3cd5a2d881974678fcb44eaff29
-ms.sourcegitcommit: 3eabd78305d32cd9b8a6bd1d76877ddc19d8ac63
+ms.openlocfilehash: e05f8204ba1e81b9391b6b63f190b81e1db73338
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/12/2020
-ms.locfileid: "94548902"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321045"
 ---
 # <a name="cluster-follower-commands"></a>Cluster-Follower-Befehle
 
@@ -29,13 +29,13 @@ Zeigt eine Datenbank (oder Datenbanken) an, auf die von einem anderen Spitzenclu
 
 **Syntax**
 
-`.show``follower` `database` *DatabaseName*
+`.show` `follower` `database` *DatabaseName*
 
 `.show``follower` `databases` `(` *DatabaseName1* `,` ...`,` *Databasenamen*`)`
 
 **Ausgabe** 
 
-| Ausgabeparameter                     | type    | BESCHREIBUNG                                                                                                        |
+| Ausgabeparameter                     | type    | Beschreibung                                                                                                        |
 |--------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------|
 | DatabaseName                         | String  | Der Name der Datenbank, die befolgt wird.                                                                           |
 | LeaderClusterMetadataPath            | String  | Der Pfad zum Metadatencontainer des leaderclusters.                                                               |
@@ -50,14 +50,14 @@ Zeigt eine Datenbank (oder Datenbanken) an, auf die von einem anderen Spitzenclu
 
 Ändert eine Richtlinie für die Zwischenspeicherung von Follower-Datenbanken, um die für die Quelldatenbank im übergeordneten Cluster festgelegte zu überschreiben Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich.
 
-**Notizen**
+**Hinweise**
 
-* Der Standardwert für das zwischen `modification kind` Speichern von Richtlinien ist `union` . Um den zu ändern, `modification kind` verwenden Sie den Befehl [. Alter Follower Database Caching-Policies-Change-Kind](#alter-follower-database-caching-policies-modification-kind) .
+* Der Standardwert für das zwischen `modification kind` Speichern von Richtlinien ist `union` . Um den zu ändern, `modification kind` verwenden Sie den [`.alter follower database caching-policies-modification-kind`](#alter-follower-database-caching-policies-modification-kind) Befehl.
 * Wenn Sie die Richtlinie oder wirksame Richtlinien nach der Änderung anzeigen, können Sie die folgenden `.show` Befehle ausführen:
-    * [. Anzeigen der Daten Bank Richtlinien Beibehaltung](../management/retention-policy.md#show-retention-policy)
-    * [. Anzeigen von Daten Bank Details](../management/show-databases.md)
-    * [.show table details](show-tables-command.md)
-* Wenn Sie die Außerkraftsetzungs Einstellungen für die Follower-Datenbank anzeigen, nachdem die Änderung vorgenommen wurde, können Sie die [. Show Follower-Datenbank](#show-follower-database) verwenden
+    * [`.show database policy retention`](../management/retention-policy.md#show-retention-policy)
+    * [`.show database details`](../management/show-databases.md)
+    * [`.show table details`](show-tables-command.md)
+* Wenn Sie die Außerkraftsetzungs Einstellungen für die Follower-Datenbank anzeigen, nachdem die Änderung vorgenommen wurde, können Sie mithilfe von [`.show follower database`](#show-follower-database)
 
 **Syntax**
 
@@ -74,17 +74,17 @@ Zeigt eine Datenbank (oder Datenbanken) an, auf die von einem anderen Spitzenclu
 Löscht eine Daten Bank Überschreibungs Richtlinie für die Überschreibung. Dies bewirkt, dass die Richtlinie, die in der Quelldatenbank im Spitzencluster festgelegt ist, gültig ist.
 Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich. 
 
-**Notizen**
+**Hinweise**
 
 * Wenn Sie die Richtlinie oder wirksame Richtlinien nach der Änderung anzeigen, können Sie die folgenden `.show` Befehle ausführen:
-    * [. Anzeigen der Daten Bank Richtlinien Beibehaltung](../management/retention-policy.md#show-retention-policy)
-    * [. Anzeigen von Daten Bank Details](../management/show-databases.md)
-    * [.show table details](show-tables-command.md)
-* Anzeigen der Außerkraftsetzungs Einstellungen für die Follower-Datenbank nach der Änderung mithilfe von [. Show Follower Database](#show-follower-database)
+    * [`.show database policy retention`](../management/retention-policy.md#show-retention-policy)
+    * [`.show database details`](../management/show-databases.md)
+    * [`.show table details`](show-tables-command.md)
+* Anzeigen der Außerkraftsetzungs Einstellungen für die Follower-Datenbank nach der Änderung mithilfe von [`.show follower database`](#show-follower-database)
 
 **Syntax**
 
-`.delete``follower` `database` *DatabaseName* `policy``caching`
+`.delete` `follower` `database` *DatabaseName* `policy` `caching`
 
 **Beispiel**
 
@@ -96,12 +96,12 @@ Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-b
 
 Fügt der Follower-Datenbanksammlung von autorisierte Prinzipale überschreiben autorisierte Prinzipale hinzu. Hierfür ist die [databaseadmin-Berechtigung](../management/access-control/role-based-authorization.md)erforderlich.
 
-**Notizen**
+**Hinweise**
 
 * Der Standardwert `modification kind` für solche autorisierten Prinzipale ist `none` . So ändern Sie die `modification kind` Verwendung von [Alter Follower Database Principals-Change-Kind](#alter-follower-database-principals-modification-kind)
 * Die effektive Auflistung von Prinzipale können Sie nach der Änderung mithilfe der folgenden `.show` Befehle anzeigen:
-    * [. Anzeigen von Daten Bank Prinzipale](../management/security-roles.md#managing-database-security-roles)
-    * [. Anzeigen von Daten Bank Details](../management/show-databases.md)
+    * [`.show database principals`](../management/security-roles.md#managing-database-security-roles)
+    * [`.show database details`](../management/show-databases.md)
 * Anzeigen der Außerkraftsetzungs Einstellungen für die Follower-Datenbank nach der Änderung mithilfe von [. Show Follower Database](#show-follower-database)
 
 **Syntax**
@@ -119,12 +119,12 @@ Fügt der Follower-Datenbanksammlung von autorisierte Prinzipale überschreiben 
 Löscht autorisierte Prinzipale aus der Follower-Datenbanksammlung von autorisierten Prinzipalen außer Kraft setzen.
 Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich.
 
-**Notizen**
+**Hinweise**
 
 * Die effektive Auflistung von Prinzipale können Sie nach der Änderung mithilfe der folgenden `.show` Befehle anzeigen:
-    * [. Anzeigen von Daten Bank Prinzipale](../management/security-roles.md#managing-database-security-roles)
-    * [. Anzeigen von Daten Bank Details](../management/show-databases.md)
-* Anzeigen der Außerkraftsetzungs Einstellungen für die Follower-Datenbank nach der Änderung mithilfe von [. Show Follower Database](#show-follower-database)
+    * [`.show database principals`](../management/security-roles.md#managing-database-security-roles)
+    * [`.show database details`](../management/show-databases.md)
+* Anzeigen der Außerkraftsetzungs Einstellungen für die Follower-Datenbank nach der Änderung mithilfe von [`.show follower database`](#show-follower-database)
 
 **Syntax**
 
@@ -140,11 +140,11 @@ Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-b
 
 Ändert die Art der Änderungs Änderung der Follower-Datenbank für autorisierte Prinzipale. Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich.
 
-**Notizen**
+**Hinweise**
 
 * Die effektive Auflistung von Prinzipale können Sie nach der Änderung mithilfe der folgenden `.show` Befehle anzeigen:
-    * [. Anzeigen von Daten Bank Prinzipale](../management/security-roles.md#managing-database-security-roles)
-    * [. Anzeigen von Daten Bank Details](../management/show-databases.md)
+    * [`.show database principals`](../management/security-roles.md#managing-database-security-roles)
+    * [`.show database details`](../management/show-databases.md)
 * Anzeigen der Außerkraftsetzungs Einstellungen für die Follower-Datenbank nach der Änderung mithilfe von [. Show Follower Database](#show-follower-database)
 
 **Syntax**
@@ -162,12 +162,12 @@ Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-b
 
 Ändert die Art der Änderungs Änderung für die Follower-Datenbank und die Tabellen Zwischenspeicherung Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich.
 
-**Notizen**
+**Hinweise**
 
 * Die effektive Erfassung von Cache Richtlinien auf Datenbankebene/Tabellenebene nach der Änderung kann mithilfe der Standard Befehle ausgeführt werden `.show` :
-    * [. Anzeigen von Tabellen Details](show-tables-command.md)
-    * [. Anzeigen von Daten Bank Details](../management/show-databases.md)
-* Anzeigen der Außerkraftsetzungs Einstellungen für die Follower-Datenbank nach der Änderung mithilfe von [. Show Follower Database](#show-follower-database)
+    * [`.show tables details`](show-tables-command.md)
+    * [`.show database details`](../management/show-databases.md)
+* Anzeigen der Außerkraftsetzungs Einstellungen für die Follower-Datenbank nach der Änderung mithilfe von [`.show follower database`](#show-follower-database)
 
 **Syntax**
 
@@ -208,13 +208,13 @@ Mit dem folgenden Befehl wird die Konfiguration der Follower-Datenbank für das 
 Ändert eine Cache Richtlinie auf Tabellenebene für die Follower-Datenbank, um die Richtlinie zu überschreiben, die für die Quelldatenbank im Anbieter Cluster festgelegt wurde.
 Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich. 
 
-**Notizen**
+**Hinweise**
 
 * Wenn Sie die Richtlinie oder wirksame Richtlinien nach der Änderung anzeigen, können Sie die folgenden `.show` Befehle ausführen:
-    * [. Anzeigen der Daten Bank Richtlinien Beibehaltung](../management/retention-policy.md#show-retention-policy)
-    * [. Anzeigen von Daten Bank Details](../management/show-databases.md)
-    * [.show table details](show-tables-command.md)
-* Anzeigen der Außerkraftsetzungs Einstellungen für die Follower-Datenbank nach der Änderung mithilfe von [. Show Follower Database](#show-follower-database)
+    * [`.show database policy retention`](../management/retention-policy.md#show-retention-policy)
+    * [`.show database details`](../management/show-databases.md)
+    * [`.show table details`](show-tables-command.md)
+* Anzeigen der Außerkraftsetzungs Einstellungen für die Follower-Datenbank nach der Änderung mithilfe von [`.show follower database`](#show-follower-database)
 
 **Syntax**
 
@@ -232,13 +232,13 @@ Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-b
 
 Löscht eine über schreibende zwischen Speicherungs Richtlinie auf Tabellenebene für die Follower-Datenbank, sodass die Richtlinie für die Quelldatenbank im Spitzencluster auf die effektive festgelegt ist. Erfordert [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md). 
 
-**Notizen**
+**Hinweise**
 
 * Wenn Sie die Richtlinie oder wirksame Richtlinien nach der Änderung anzeigen, können Sie die folgenden `.show` Befehle ausführen:
-    * [. Anzeigen der Daten Bank Richtlinien Beibehaltung](../management/retention-policy.md#show-retention-policy)
-    * [. Anzeigen von Daten Bank Details](../management/show-databases.md)
-    * [.show table details](show-tables-command.md)
-* Anzeigen der Außerkraftsetzungs Einstellungen für die Follower-Datenbank nach der Änderung mithilfe von [. Show Follower Database](#show-follower-database)
+    * [`.show database policy retention`](../management/retention-policy.md#show-retention-policy)
+    * [`.show database details`](../management/show-databases.md)
+    * [`.show table details`](show-tables-command.md)
+* Anzeigen der Außerkraftsetzungs Einstellungen für die Follower-Datenbank nach der Änderung mithilfe von [`.show follower database`](#show-follower-database)
 
 **Syntax**
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2020
-ms.openlocfilehash: f51a68fc90237c4213c0135ade4724446800dea9
-ms.sourcegitcommit: ec191391f5ea6df8c591e6d747c67b2c46f98ac4
+ms.openlocfilehash: ff13ec8fcce49f4d92212e6a38797a97f9ea9dd6
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/16/2020
-ms.locfileid: "88259895"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321249"
 ---
 # <a name="streaming-ingestion-policy-command"></a>Befehl zum Übernehmen der streamingrichtlinie
 
@@ -101,7 +101,7 @@ Der `.delete policy streamingingestion` Befehl löscht die streamingingestion-Ri
 
 **Rückgabe**
 
-Mit dem Befehl wird das Richtlinien Objekt "Table" oder "Database streamingingestion" gelöscht und anschließend die Ausgabe des entsprechenden Befehls " [. Show Policy streamingingestion](#display-the-policy) " zurückgegeben.
+Der Befehl löscht das Richtlinien Objekt "Table" oder "Database streamingingestion" und gibt dann die Ausgabe des entsprechenden [`.show policy streamingingestion`](#display-the-policy) Befehls zurück.
 
 **Beispiele**
 

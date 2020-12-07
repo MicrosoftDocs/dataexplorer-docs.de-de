@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: 5b17b69fd49e937b672da07dd0b5c8abae9100fb
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 4b54b7e1c16bce07c5ae97b57f0ebdb6c96a7ad7
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92253045"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320610"
 ---
 # <a name="externaldata-operator"></a>externaldata-Operator
 
@@ -28,7 +28,7 @@ Der `externaldata` -Operator gibt eine Tabelle zurück, deren Schema in der Abfr
 ## <a name="arguments"></a>Argumente
 
 * *ColumnName*, *ColumnType*: die Argumente definieren das Schema der Tabelle.
-  Die Syntax ist identisch mit der Syntax, die beim Definieren einer Tabelle in der [. Create](../management/create-table-command.md)-Tabelle verwendet wird.
+  Die Syntax ist identisch mit der Syntax, die beim Definieren einer Tabelle in verwendet wird [`.create table`](../management/create-table-command.md) .
 
 * *Storageconnectionstring*: [Speicher Verbindungs](../api/connection-strings/storage.md) Zeichenfolgen, die die Speicher Artefakte beschreiben, die die zurück zugebende Daten enthalten.
 
@@ -36,7 +36,7 @@ Der `externaldata` -Operator gibt eine Tabelle zurück, deren Schema in der Abfr
 
 Derzeit werden die folgenden Eigenschaften unterstützt:
 
-| Eigenschaft         | type     | BESCHREIBUNG       |
+| Eigenschaft         | type     | Beschreibung       |
 |------------------|----------|-------------------|
 | `format`         | `string` | Datenformat. Wenn keine Angabe erfolgt, wird versucht, das Datenformat aus der Dateierweiterung (standardmäßig) zu erkennen `CSV` . Alle Erfassungs [Datenformate](../../ingestion-supported-formats.md) werden unterstützt. |
 | `ignoreFirstRecord` | `bool` | Wenn der Wert auf true festgelegt ist, wird angegeben, dass der erste Datensatz in jeder Datei ignoriert wird. Diese Eigenschaft ist hilfreich beim Abfragen von CSV-Dateien mit Headern. |

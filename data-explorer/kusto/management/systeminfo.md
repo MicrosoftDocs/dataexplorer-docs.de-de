@@ -1,6 +1,6 @@
 ---
-title: Systeminformationen - Azure Data Explorer | Microsoft Docs
-description: In diesem Artikel werden Systeminformationen in Azure Data Explorer beschrieben.
+title: System Informationen-Azure Daten-Explorer | Microsoft-Dokumentation
+description: In diesem Artikel werden die System Informationen in Azure Daten-Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,20 +8,20 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/07/2019
-ms.openlocfilehash: fbef39dde5c7bb85c11f26812eec1496ba3f5001
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 22ad4956d94f445b26e49e1e73ed54e86568d1ad
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81519583"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321215"
 ---
 # <a name="system-information"></a>Systeminformationen
 
-In diesem Abschnitt werden Befehle `Database Admins` `Database Monitors` zusammengefasst, die für und rollen verfügbar sind, um die Verwendung zu untersuchen, Vorgänge nachzuverfolgen und Aufnahmefehler zu untersuchen.
+In diesem Abschnitt werden die Befehle zusammengefasst, die für die `Database Admins` Rollen und verfügbar sind `Database Monitors` .
 
-* [.show-Abfragen](queries.md) - zeigt Informationen zu abgeschlossenen und ausgeführten Abfragen an.
-* [.show-Befehle](commands.md) - zeigt Informationen zu abgeschlossenen Befehlen und deren Ressourcenauslastung an.
-* [.show commands-and-queries](commands-and-queries.md) - zeigt Informationen zu abgeschlossenen Befehlen und Abfragen sowie deren Ressourcenauslastung an.
-* [.show journal](journal.md) - zeigt den Verlauf der Metadatenvorgänge an.
-* [.show-Vorgänge](operations.md) - Zeigt administrative Vorgänge an, die ausgeführt und abgeschlossen wurden, seit der Admin-Knoten zuletzt gewählt wurde.
-* [.show fehlgeschlagene Erfassungen](ingestionfailures.md) – zeigt Informationen zu Fehlern an, die bei der Datenerfassung im Cluster aufgetreten sind.
+* [`.show queries`](queries.md) -zeigt Informationen zu abgeschlossenen und ausgelaufenden Abfragen an.
+* [`.show commands`](commands.md) -zeigt Informationen zu abgeschlossenen Befehlen und deren Ressourcenverwendung an.
+* [`.show commands-and-queries`](commands-and-queries.md) -zeigt Informationen zu abgeschlossenen Befehlen und Abfragen sowie deren Ressourcenverwendung an.
+* [`.show journal`](journal.md) -zeigt den Verlauf der Metadatenvorgänge an.
+* [`.show operations`](operations.md) -zeigt administrative Vorgänge an, die ausgeführt und abgeschlossen wurden, seit der Administrator Knoten zuletzt gewählt wurde.
+* [`.show failed ingestions`](ingestionfailures.md) -zeigt Informationen zu Fehlern an, die während der Datenerfassung im Cluster aufgetreten sind.

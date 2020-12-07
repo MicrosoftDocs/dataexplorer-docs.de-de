@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/04/2020
-ms.openlocfilehash: c9ef5b2a205665c692c383654f3d050c4658c0f1
-ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
+ms.openlocfilehash: 5d346e5b7932437322cb8a41210a6f375cd6d6f0
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/13/2020
-ms.locfileid: "92002979"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321113"
 ---
 # <a name="update-policy-commands"></a>Aktualisieren von Richtlinienbefehlen
 
@@ -25,11 +25,11 @@ Mit diesem Befehl wird die Aktualisierungs Richtlinie der angegebenen Tabelle od
 
 ### <a name="syntax"></a>Syntax
 
-* `.show``table` *TableName* `policy``update`
+* `.show` `table` *TableName* `policy` `update`
 * `.show``table` *DatabaseName*( `.` *Tabellenname* `policy` )`update`
 * `.show` `table` `*` `policy` `update`
 
-### <a name="returns"></a>Gibt zurück
+### <a name="returns"></a>Rückgabe
 
 Dieser Befehl gibt eine Tabelle zurück, die über einen Datensatz pro Tabelle verfügt.
 
@@ -72,9 +72,9 @@ Mit diesem Befehl wird die Aktualisierungs Richtlinie der angegebenen Tabelle fe
  > * Wenn `IsTransactional` auf festgelegt ist `true` , prüft, ob die `TableAdmin` Berechtigungen auch anhand von `Source` (der Quell Tabelle) überprüft werden.
  > * Testen Sie die Aktualisierungs Richtlinie oder-Funktion, bevor Sie Sie für die Ausführung bei jeder Erfassung in der Quell Tabelle anwenden. Weitere Informationen finden Sie unter [Testen der Auswirkungen der Update Richtlinie auf die Leistung](updatepolicy.md#performance-impact).
 
-### <a name="returns"></a>Gibt zurück
+### <a name="returns"></a>Rückgabe
 
-Der Befehl legt das Aktualisierungs Richtlinien Objekt der Tabelle fest, wobei jede aktuelle Richtlinie überschrieben wird, und gibt dann die Ausgabe des entsprechenden Befehls der [Tabelle Update-Richtlinie anzeigen](#show-update-policy) zurück.
+Der Befehl legt das Aktualisierungs Richtlinien Objekt der Tabelle fest, wobei jede aktuelle Richtlinie außer Kraft gesetzt wird, und gibt dann die Ausgabe des entsprechenden [`.show table update policy`](#show-update-policy) Befehls zurück.
 
 ### <a name="example"></a>Beispiel
 
@@ -133,7 +133,7 @@ Dieser Befehl ändert die Update Richtlinie der angegebenen Tabelle.
 
 **Rückgabe**
 
-Der Befehl fügt an das Update-Richtlinien Objekt der Tabelle an, wobei jede aktuelle Richtlinie überschrieben wird, und gibt dann die Ausgabe des entsprechenden Befehls " [Tabellen *Register* Karten-Update Richtlinie anzeigen](#show-update-policy) " zurück.
+Der Befehl fügt dem Update-Richtlinien Objekt der Tabelle an, wobei jede aktuelle Richtlinie überschrieben wird, und gibt dann die Ausgabe des entsprechenden [`.show table *TableName* update policy`](#show-update-policy) Befehls zurück.
 
 **Beispiel**
 
@@ -148,12 +148,12 @@ Löscht die Update Richtlinie der angegebenen Tabelle.
 
 **Syntax**
 
-* `.delete``table` *TableName* `policy``update`
+* `.delete` `table` *TableName* `policy` `update`
 * `.delete``table` *DatabaseName*( `.` *Tabellenname* `policy` )`update`
 
 **Rückgabe**
 
-Der Befehl löscht das Update Policy-Objekt der Tabelle und gibt dann die Ausgabe des entsprechenden Befehls " [. Show Table *TableName* Update Policy](#show-update-policy) " zurück.
+Mit dem Befehl wird das Update-Richtlinien Objekt der Tabelle gelöscht, und anschließend wird die Ausgabe des entsprechenden Befehls zurückgegeben [`.show table *TableName* update policy`](#show-update-policy) .
 
 **Beispiel**
 

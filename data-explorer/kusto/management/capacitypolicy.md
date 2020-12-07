@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: 6b0c1247c0d161caae3301dc674a701bd1019ad3
-ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
+ms.openlocfilehash: 6d85b5cbf6752924bbaa03d2b81732cd69be6239
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91056933"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321623"
 ---
 # <a name="capacity-policy"></a>Kapazitätsrichtlinie 
 
@@ -31,7 +31,7 @@ Die Kapazitäts Richtlinie besteht aus:
 
 ## <a name="ingestion-capacity"></a>Erfassungs Kapazität
 
-|Eigenschaft       |type    |BESCHREIBUNG    |
+|Eigenschaft       |type    |Beschreibung    |
 |-----------------------------------|--------|-----------------------------------------------------------------------------------------|
 |Clustermaximumconcurrentoperations |long    |Ein maximaler Wert für die Anzahl von gleichzeitigen Erfassungs Vorgängen in einem Cluster.               |
 |Coreutilizationkoeffizienten         |double  |Ein Koeffizienten für den Prozentsatz der Kerne, die beim Berechnen der Erfassungs Kapazität verwendet werden sollen. Das Ergebnis der Berechnung wird immer von normalisiert. `ClusterMaximumConcurrentOperations` <br> Die Gesamt Erfassungs Kapazität des Clusters, wie von angezeigt [. zeigen](../management/diagnostics.md#show-capacity)Sie die Kapazität an: <br> Minimal ( `ClusterMaximumConcurrentOperations` , `Number of nodes in cluster` * Maximum (1, `Core count per node`  *  `CoreUtilizationCoefficient` ))
@@ -41,12 +41,12 @@ Die Kapazitäts Richtlinie besteht aus:
 
 ## <a name="extents-merge-capacity"></a>Erweitert die Zusammenfassungs Kapazität
 
-|Eigenschaft                           |type    |BESCHREIBUNG                                                                                                |
+|Eigenschaft                           |type    |Beschreibung                                                                                                |
 |-----------------------------------|--------|-----------------------------------------------------------------------------------------------------------|
 |Minimumconcurrentoperationspernode |long    |Ein Minimalwert für die Anzahl der gleichzeitigen Vorgänge zum Zusammenführen und Neuerstellen von Blöcken auf einem einzelnen Knoten. Der Standardwert ist 1 |
 |Maximumconcurrentoperationspernode |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Vorgänge zum Zusammenführen und Neuerstellen von Blöcken auf einem einzelnen Knoten. Der Standardwert ist 3 |
 
-Die Gesamt Zusammenfassungs Kapazität des Clusters, wie von angezeigt [. zeigen](../management/diagnostics.md#show-capacity)Sie die Kapazität an:
+Die Gesamt Zusammenfassungs Kapazität des Clusters, wie von gezeigt, [`.show capacity`](../management/diagnostics.md#show-capacity) wird berechnet durch:
 
 `Number of nodes in cluster` Stuben `Concurrent operations per node`
 
@@ -57,11 +57,11 @@ Der effektive Wert für `Concurrent operations per node` wird automatisch vom Sy
 
 ## <a name="extents-purge-rebuild-capacity"></a>Erweiterbare Lösch Kapazität für Lösch Blöcke
 
-|Eigenschaft                           |type    |BESCHREIBUNG                                                                                                                           |
+|Eigenschaft                           |type    |Beschreibung                                                                                                                           |
 |-----------------------------------|--------|--------------------------------------------------------------------------------------------------------------------------------------|
 |Maximumconcurrentoperationspernode |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Rebuild-Blöcke für Löschvorgänge auf einem einzelnen Knoten. |
 
-Die Gesamtanzahl der Blöcke zum Löschen von Blöcken im Cluster Gesamt (wie von angezeigt [. Anzeige Kapazität](../management/diagnostics.md#show-capacity)) wird berechnet durch:
+Die Gesamtanzahl der Blöcke zum Löschen von Blöcken im Cluster Gesamt (wie von gezeigt [`.show capacity`](../management/diagnostics.md#show-capacity) ) wird berechnet durch:
 
 `Number of nodes in cluster` Stuben `MaximumConcurrentOperationsPerNode`
 
@@ -70,12 +70,12 @@ Die Gesamtanzahl der Blöcke zum Löschen von Blöcken im Cluster Gesamt (wie vo
 
 ## <a name="export-capacity"></a>Exportieren von Kapazität
 
-|Eigenschaft                           |type    |BESCHREIBUNG                                                                                                                                                                            |
+|Eigenschaft                           |type    |Beschreibung                                                                                                                                                                            |
 |-----------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 |Clustermaximumconcurrentoperations |long    |Ein maximaler Wert für die Anzahl von gleichzeitigen Export Vorgängen in einem Cluster.                                           |
 |Coreutilizationkoeffizienten         |double  |Ein Koeffizienten für den Prozentsatz der Kerne, die beim Berechnen der Exportkapazität verwendet werden sollen. Das Ergebnis der Berechnung wird immer von normalisiert `ClusterMaximumConcurrentOperations` . |
 
-Die Gesamt Exportkapazität des Clusters, wie von dargestellt [. Anzeige Kapazität](../management/diagnostics.md#show-capacity)wird berechnet durch:
+Die Gesamt Exportkapazität des Clusters, wie von gezeigt [`.show capacity`](../management/diagnostics.md#show-capacity) , wird berechnet durch:
 
 Minimal ( `ClusterMaximumConcurrentOperations` , `Number of nodes in cluster` * Maximum (1, `Core count per node`  *  `CoreUtilizationCoefficient` ))
 
@@ -84,12 +84,12 @@ Minimal ( `ClusterMaximumConcurrentOperations` , `Number of nodes in cluster` * 
 
 ## <a name="extents-partition-capacity"></a>Erweitert die Partitions Kapazität
 
-|Eigenschaft                           |type    |BESCHREIBUNG                                                                                         |
+|Eigenschaft                           |type    |Beschreibung                                                                                         |
 |-----------------------------------|--------|----------------------------------------------------------------------------------------------------|
 |Clusterminimumconcurrentoperations |long    |Ein Minimalwert für die Anzahl der gleichzeitigen Erweiterungs Vorgänge in einem Cluster. Standardwert: 1  |
 |Clustermaximumconcurrentoperations |long    |Ein maximaler Wert für die Anzahl der gleichzeitigen Erweiterungs Vorgänge in einem Cluster. Standardwert: 16 |
 
-Die Gesamtwerte für die Partitions Kapazität des Clusters (wie von angezeigt [. zeigen Sie Kapazität](../management/diagnostics.md#show-capacity)an).
+Die Gesamtwerte für die Partitions Kapazität des Clusters (wie von dargestellt [`.show capacity`](../management/diagnostics.md#show-capacity) ).
 
 Der effektive Wert für `Concurrent operations` wird automatisch vom System im Bereich [ `ClusterMinimumConcurrentOperations` , `ClusterMaximumConcurrentOperations` ] angepasst, solange die Erfolgsrate der Partitionierungs Vorgänge über 90% liegt.
 
@@ -118,7 +118,7 @@ Die Kapazitäts Richtlinie materialisierte Sichten ist Teil der [Kapazitäts Ric
 
 ### <a name="properties"></a>Eigenschaften
 
-Eigenschaft | BESCHREIBUNG
+Eigenschaft | Beschreibung
 |---|---|
 |`ClusterMaximumConcurrentOperations` | Die maximale Anzahl von materialisierten Sichten, die der Cluster gleichzeitig materialisieren kann. Dieser Wert ist standardmäßig 1, während Materialisierung selbst (einer einzelnen Ansicht) viele gleichzeitige Vorgänge ausführen kann. Wenn im Cluster mehr als eine einzelne materialisierte Sicht definiert ist und sich die Ressourcen des Clusters in einem guten Zustand befinden, wird empfohlen, diesen Wert zu erhöhen. |
 | `ExtentsRebuildCapacity`|  Bestimmt die Anzahl von gleichzeitigen Blöcken zum erneuten Erstellen, die für alle materialisierten Sichten während des Materialisierungs Vorgangs ausgeführt werden. Wenn mehrere Sichten gleichzeitig ausgeführt werden, da `ClusterMaximumConcurrentOperation` größer als 1 ist, wird das von dieser Eigenschaft definierte Kontingent gemeinsam genutzt. Der Wert für die maximale Anzahl von gleichzeitigen Blöcke wird nicht überschritten. |
@@ -168,9 +168,9 @@ Die standardmäßige Kapazitäts Richtlinie weist die folgende JSON-Darstellung 
 > [!WARNING]
 > Wenden Sie sich an das Azure Daten-Explorer-Team, bevor Sie eine Kapazitäts Richtlinie ändern.
 
-* Verwenden Sie [. zeigen Sie die Kapazität der Cluster Richtlinie](capacity-policy.md#show-cluster-policy-capacity) an, um die aktuelle Kapazitäts Richtlinie des Clusters anzuzeigen.
+* Verwenden [`.show cluster policy capacity`](capacity-policy.md#show-cluster-policy-capacity) Sie, um die aktuelle Kapazitäts Richtlinie des Clusters anzuzeigen.
 
-* Ändern Sie die Kapazitäts Richtlinie des Clusters mithilfe von [. Alter Cluster Policy Capacity](capacity-policy.md#alter-cluster-policy-capacity) .
+* Verwenden [`.alter cluster policy capacity`](capacity-policy.md#alter-cluster-policy-capacity) Sie, um die Kapazitäts Richtlinie des Clusters zu ändern.
 
 ## <a name="throttling"></a>Drosselung
 

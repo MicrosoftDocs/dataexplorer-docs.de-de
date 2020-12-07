@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/02/2020
-ms.openlocfilehash: 00c4cfbb4b6415afcd68e8e41864ca4a68cc097e
-ms.sourcegitcommit: d6f35df833d5b4f2829a8924fffac1d0b49ce1c2
+ms.openlocfilehash: 61dba69c3ec40ec13960e9ddf266e47fe88ef3c6
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060616"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321742"
 ---
 # <a name="alter-extent-tags"></a>. Alter Block-Tags
 
@@ -31,10 +31,10 @@ Erfordert die [Table admin-Berechtigung](../management/access-control/role-based
 
 `.alter`[ `async` ] `extent` `tags` `(` '*Tag1*' [ `,` '*Tag2*' `,` ... `,` ' *TAGN*'] `)`  <|  *Abfrage*
 
-`async`(optional): führen Sie den Befehl asynchron aus.
+`async` (optional): führen Sie den Befehl asynchron aus.
    * Eine Vorgangs-ID (GUID) wird zurückgegeben. 
-   * Der Status des Vorgangs kann überwacht werden. Verwenden Sie den Befehl [. Show Operations](operations.md#show-operations) .
-   * Sie können die Ergebnisse einer erfolgreichen Ausführung abrufen. Verwenden Sie den Befehl [Vorgangs Details anzeigen](operations.md#show-operation-details) .
+   * Der Status des Vorgangs kann überwacht werden. Verwenden Sie den [`.show operations`](operations.md#show-operations) Befehl.
+   * Sie können die Ergebnisse einer erfolgreichen Ausführung abrufen. Verwenden Sie den [`.show operation details`](operations.md#show-operation-details) Befehl.
 
 ## <a name="restrictions"></a>Beschränkungen
 
@@ -42,7 +42,7 @@ Alle Blöcke müssen sich in der Kontext Datenbank befinden und müssen derselbe
 
 ## <a name="return-output"></a>Ausgabe zurückgeben
 
-|Output-Parameter |type |BESCHREIBUNG|
+|Ausgabeparameter |type |Beschreibung|
 |---|---|---|
 |Originalextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den ursprünglichen Block, dessen Tags geändert wurden. Der Block wird als Teil des Vorgangs gelöscht.|
 |Resultextentid |Zeichenfolge |Ein eindeutiger Bezeichner (GUID) für den Ergebnis Block, der Tags geändert hat. Der Block wird erstellt und als Teil des Vorgangs hinzugefügt. Bei Fehler: "failed".|
@@ -53,7 +53,7 @@ Alle Blöcke müssen sich in der Kontext Datenbank befinden und müssen derselbe
 
 ### <a name="alter-tags"></a>Tags ändern 
 
-Ändern der Tags aller `MyTable` Blöcke in der Tabelle in`MyTag`
+Ändern der Tags aller `MyTable` Blöcke in der Tabelle in `MyTag`
 
 ```kusto
 .alter extent tags ('MyTag') <| .show table MyTable extents
@@ -61,7 +61,7 @@ Alle Blöcke müssen sich in der Kontext Datenbank befinden und müssen derselbe
 
 ### <a name="alter-tags-of-all-extents"></a>Tags aller Blöcke ändern
 
-Alter Tags aller Blöcke in der Tabelle, die `MyTable` mit gekennzeichnet sind `drop-by:MyTag` , `drop-by:MyNewTag` und`MyOtherNewTag`
+Alter Tags aller Blöcke in der Tabelle, die `MyTable` mit gekennzeichnet sind `drop-by:MyTag` , `drop-by:MyNewTag` und `MyOtherNewTag`
 
 ```kusto
 .alter extent tags ('drop-by:MyNewTag','MyOtherNewTag') <| .show table MyTable extents where tags has 'drop-by:MyTag'

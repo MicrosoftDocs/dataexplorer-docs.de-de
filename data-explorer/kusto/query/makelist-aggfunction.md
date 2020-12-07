@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: f5a4c16f1f259de457ef963f2a400d6c9fd79727
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: bd923724a391cfc1638057fec654a1bd74b78479
+ms.sourcegitcommit: 1bdbfdc04c4eac405f3931059bbeee2dedd87004
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92246385"
+ms.lasthandoff: 11/27/2020
+ms.locfileid: "96303359"
 ---
 # <a name="make_list-aggregation-function"></a>make_list () (Aggregations Funktion)
 
@@ -31,7 +31,7 @@ Gibt ein `dynamic` -Array (JSON) aller Werte von *Expr* in der Gruppe zurück.
 * *MaxSize* ist eine optionale ganzzahlige Beschränkung für die maximale Anzahl von zurückgegebenen Elementen (Standardwert ist *1048576*). Der MaxSize-Wert darf 1048576 nicht überschreiten.
 
 > [!NOTE]
-> Eine Legacy-und veraltete Variante dieser Funktion: `makelist()` hat ein Standard Limit von *MaxSize* = 128.
+> `makelist()` ist eine veraltete und veraltete Version der `make_list` Funktion. Die Legacy Version hat ein Standard Limit von *MaxSize* = 128.
 
 ## <a name="returns"></a>Rückgabe
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/19/2019
-ms.openlocfilehash: c7f692739071496ce492d168c6036a2c2adac8fd
-ms.sourcegitcommit: f7101c6b41ec250d05f4cb6092e2939958b37b40
+ms.openlocfilehash: 222d04939560342bd849c15f249b1a8a582316a2
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/03/2020
-ms.locfileid: "84329043"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321028"
 ---
 # <a name="commands-and-queries-management"></a>Verwaltung von Befehlen und Abfragen
 
@@ -21,7 +21,7 @@ ms.locfileid: "84329043"
 
 `.show``commands-and-queries`gibt eine Tabelle mit admin-Befehlen und Abfragen zurück, die einen Endzustand erreicht haben. Diese Befehle und Abfragen sind 30 Tage lang verfügbar.
 
-Die Informationen, die in der Ausgabe des Befehls angezeigt werden, ähneln [. Show-Befehle](commands.md) und [. Show-Abfragen](queries.md), Sie können jedoch im Grunde beide Resultsets auf einfache Weise verknüpfen.
+Die in der Ausgabe des Befehls dargestellten Informationen ähneln [ `.show` Befehlen](commands.md) und [ `.show` Abfragen](queries.md), Sie ermöglichen Ihnen jedoch im Grunde, beide Resultsets auf einfache Weise zu verknüpfen.
 
 **Syntax**
 
@@ -37,21 +37,21 @@ Das Ausgabe Schema lautet wie folgt:
 | CommandType              | Zeichenfolge     |
 | Text                     | Zeichenfolge     |
 | Datenbank                 | Zeichenfolge     |
-| Startedon                | datetime   |
-| Lastupdatedon            | datetime   |
+| StartedOn                | datetime   |
+| LastUpdatedOn            | datetime   |
 | Duration                 | Zeitraum   |
-| Staat                    | Zeichenfolge     |
+| State                    | Zeichenfolge     |
 | FailureReason            | Zeichenfolge     |
 | RootActivityId           | guid       |
 | Benutzer                     | Zeichenfolge     |
-| Application              | Zeichenfolge     |
+| Anwendung              | Zeichenfolge     |
 | Prinzipal                | Zeichenfolge     |
 | Clientrequestproperties  | dynamisch    |
-| Totalcpu                 | Zeitraum   |
-| Memorypeak               | long       |
+| TotalCpu                 | Zeitraum   |
+| MemoryPeak               | long       |
 | CacheStatistics          | dynamisch    |
-| Scannetdextentsstatistics | dynamisch    |
-| Resultsetstatistics      | dynamisch    |
+| ScannedExtentsStatistics | dynamisch    |
+| ResultSetStatistics      | dynamisch    |
 
 > [!NOTE]
 > Für-Abfragen ist der Wert `CommandType` von `Query` .

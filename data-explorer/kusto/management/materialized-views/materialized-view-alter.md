@@ -8,12 +8,12 @@ ms.reviewer: yifats
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/30/2020
-ms.openlocfilehash: eaa4e759f0987940a86c509788f5e8a58b2f9e75
-ms.sourcegitcommit: 041272af91ebe53a5d573e9902594b09991aedf0
+ms.openlocfilehash: 03d047d89abc3de3c80414564ec101f309bf69b0
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91452730"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320569"
 ---
 # <a name="alter-materialized-view"></a>.alter materialized-view
 
@@ -35,7 +35,7 @@ Erfordert [Datenbankadministrator](../access-control/role-based-authorization.md
 
 ## <a name="arguments"></a>Argumente
 
-|Argument|type|BESCHREIBUNG
+|Argument|type|Beschreibung
 |----------------|-------|---|
 |Ansichtsname|String|Der materialisierte Sichtname.|
 |SourceTableName|String|Der Name der Quell Tabelle, in der die Sicht definiert ist.|
@@ -43,13 +43,13 @@ Erfordert [Datenbankadministrator](../access-control/role-based-authorization.md
 
 ## <a name="properties"></a>Eigenschaften
 
-`dimensionTables`Ist die einzige unterstützte Eigenschaft im MATERIALIZED-VIEW Alter-Befehl. Diese Eigenschaft sollte verwendet werden, wenn die Abfrage auf Dimensions Tabellen verweist. Weitere Informationen finden Sie unter der [. CREATE MATERIALIZED-VIEW-](materialized-view-create.md) Befehl.
+`dimensionTables`Ist die einzige unterstützte Eigenschaft im MATERIALIZED-VIEW Alter-Befehl. Diese Eigenschaft sollte verwendet werden, wenn die Abfrage auf Dimensions Tabellen verweist. Weitere Informationen finden Sie unter dem [`.create materialized-view`](materialized-view-create.md) Befehl.
 
 ## <a name="use-cases"></a>Anwendungsfälle
 
 * Fügen Sie der Sicht Aggregationen hinzu, indem Sie beispielsweise Aggregationen hinzufügen `avg` `T | summarize count(), min(Value) by Id` , indem Sie die Ansichts Abfrage in ändern `T | summarize count(), min(Value), avg(Value) by Id` .
 * Andere Änderungs Operatoren als der Zusammenfassungs Operator. Tor-Beispiel: Filtern Sie einige Datensätze, indem  `T | summarize arg_max(Timestamp, *) by User` Sie in ändern `T | where User != 'someone' | summarize arg_max(Timestamp, *) by User` .
-* Ändern Sie die Abfrage aufgrund einer Änderung in der Quell Tabelle ohne Änderungen an der Abfrage. Tor-Beispiel, angenommen, eine Ansicht von `T | summarize arg_max(Timestamp, *) by Id` , die nicht auf festgelegt ist `autoUpdateSchema` (siehe [. CREATE MATERIALIZED-VIEW-](materialized-view-create.md) Befehl). Wenn eine Spalte der Quell Tabelle der Sicht hinzugefügt oder daraus entfernt wird, wird die Ansicht automatisch deaktiviert. Führen Sie den Alter-Befehl mit genau derselben Abfrage aus, um das Schema der materialisierten Ansicht so zu ändern, dass es dem neuen Tabellen Schema entspricht. Die Sicht muss nach der Änderung weiterhin explizit aktiviert werden, indem der Befehl " [materialisierte Sicht aktivieren](materialized-view-enable-disable.md) " verwendet wird.
+* Ändern Sie die Abfrage aufgrund einer Änderung in der Quell Tabelle ohne Änderungen an der Abfrage. Tor-Beispiel, angenommen, eine Ansicht von `T | summarize arg_max(Timestamp, *) by Id` , die nicht auf festgelegt ist `autoUpdateSchema` (siehe [`.create materialized-view`](materialized-view-create.md) Befehl). Wenn eine Spalte der Quell Tabelle der Sicht hinzugefügt oder daraus entfernt wird, wird die Ansicht automatisch deaktiviert. Führen Sie den Alter-Befehl mit genau derselben Abfrage aus, um das Schema der materialisierten Ansicht so zu ändern, dass es dem neuen Tabellen Schema entspricht. Die Sicht muss nach der Änderung weiterhin explizit aktiviert werden, indem der Befehl " [materialisierte Sicht aktivieren](materialized-view-enable-disable.md) " verwendet wird.
 
 ## <a name="alter-materialized-view-limitations"></a>Einschränkungen für die Alter materialisierte Sicht
 

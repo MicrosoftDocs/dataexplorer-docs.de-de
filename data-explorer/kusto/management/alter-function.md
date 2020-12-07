@@ -8,17 +8,17 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/11/2020
-ms.openlocfilehash: d8248fdd9428df11a8e77316eec621102ddff9d6
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: fc7c29542f63ea9b659bd3318d1442d9bca4ae48
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82617798"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321708"
 ---
 # <a name="alter-function"></a>.alter function
 
 Ändert eine vorhandene Funktion und speichert Sie in den Daten Bank Metadaten.
-Regeln für Parametertypen und CSL-Anweisungen sind identisch mit denen [ `let` ](../query/letstatement.md)für-Anweisungen.
+Regeln für Parametertypen und CSL-Anweisungen sind identisch mit denen für- [ `let` Anweisungen](../query/letstatement.md).
 
 **Syntax**
 
@@ -26,19 +26,19 @@ Regeln für Parametertypen und CSL-Anweisungen sind identisch mit denen [ `let` 
 .alter function [with (docstring = '<description>', folder='<name>', skipvalidation='true')] [FunctionName] ([paramName:paramType], ...) { CSL-statement }
 ```
     
-|Output-Parameter |type |BESCHREIBUNG
+|Ausgabeparameter |type |Beschreibung
 |---|---|--- 
 |Name  |String |Der Name der Funktion.
 |Parameter  |String |Die Parameter, die für die Funktion erforderlich sind.
-|Body  |String |(0 (null) oder mehr) `let` Anweisungen gefolgt von einem gültigen CSL-Ausdruck, der beim Funktionsaufruf ausgewertet wird.
+|Text  |String |(0 (null) oder mehr) `let` Anweisungen gefolgt von einem gültigen CSL-Ausdruck, der beim Funktionsaufruf ausgewertet wird.
 |Ordner|String|Ein für die Kategorisierung von Benutzeroberflächen Funktionen verwendeter Ordner. Dieser Parameter ändert nicht die Methode, mit der die Funktion aufgerufen wird.
 |DocString|String|Eine Beschreibung der Funktion zu UI-Zwecken.
 
 > [!NOTE]
-> * Wenn die Funktion nicht vorhanden ist, wird ein Fehler zurückgegeben. Informationen zum Erstellen einer neuen Funktion finden Sie unter [. Create-Funktion](create-function.md)
+> * Wenn die Funktion nicht vorhanden ist, wird ein Fehler zurückgegeben. Informationen zum Erstellen einer neuen Funktion finden Sie unter. [`.create function`](create-function.md)
 > * Erfordert [Datenbankadministrator Berechtigung](../management/access-control/role-based-authorization.md)
 > * Der [Datenbankbenutzer](../management/access-control/role-based-authorization.md) , der die Funktion ursprünglich erstellt hat, kann die Funktion ändern. 
-> * Nicht alle Kusto-Typen werden in `let` -Anweisungen unterstützt. Folgende Typen werden unterstützt: String, Long, DateTime, TimeSpan und Double.
+> * Nicht alle Kusto-Typen werden in-Anweisungen unterstützt `let` . Folgende Typen werden unterstützt: String, Long, DateTime, TimeSpan und Double.
 > * Verwenden `skipvalidation` Sie, um die semantische Validierung der Funktion zu überspringen. Dies ist nützlich, wenn Funktionen in falscher Reihenfolge erstellt werden und F1, das F2 verwendet, zuvor erstellt wurde.
  
 **Beispiel** 
@@ -49,6 +49,6 @@ with (docstring = 'Demo function with parameter', folder='MyFolder')
  MyFunction2(myLimit: long)  {StormEvents | limit myLimit}
 ``` 
     
-|Name |Parameter |Body|Ordner|DocString
+|Name |Parameter |Text|Ordner|DocString
 |---|---|---|---|---
 |MyFunction2 |(mylimit: Long)| {Stormevents &#124; Limit von mylimit}|MyFolder|Demo Funktion mit Parameter|

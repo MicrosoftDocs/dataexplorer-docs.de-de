@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/23/2020
-ms.openlocfilehash: 8f5494c9d54d2950ba82da8de0b0094b2d17f798
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 6e57f22dae1abef3838ed6f7065759c4a203e389
+ms.sourcegitcommit: 1bdbfdc04c4eac405f3931059bbeee2dedd87004
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92246400"
+ms.lasthandoff: 11/27/2020
+ms.locfileid: "96303294"
 ---
 # <a name="make_set-aggregation-function"></a>MAKE_SET () (Aggregations Funktion)
 
@@ -31,7 +31,7 @@ Gibt ein `dynamic` -Array (JSON) des Satzes eindeutiger Werte zurück, die *Expr
 * *MaxSize* ist eine optionale ganzzahlige Beschränkung für die maximale Anzahl von zurückgegebenen Elementen (Standardwert ist *1048576*). Der MaxSize-Wert darf 1048576 nicht überschreiten.
 
 > [!NOTE]
-> Eine Legacy-und veraltete Variante dieser Funktion: `makeset()` hat ein Standard Limit von *MaxSize* = 128.
+> `makeset()` ist eine veraltete und veraltete Version der Funktion `make_set` . Die Legacy Version hat ein Standard Limit von *MaxSize* = 128.
 
 ## <a name="returns"></a>Rückgabe
 

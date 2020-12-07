@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
-ms.openlocfilehash: bd7482abb9c13130d863e9abb73819d9409109ea
-ms.sourcegitcommit: c815c6ccf33864e21e1d3daff26a4f077dff88f7
+ms.openlocfilehash: fd0ac46aa0e2cf73cf0ee5a51359cd346bf1beda
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/21/2020
-ms.locfileid: "95012159"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321555"
 ---
 # <a name="export-data-to-storage"></a>Exportieren von Daten in den Speicher
 
@@ -41,7 +41,7 @@ Führt eine Abfrage aus und schreibt das erste Resultset in einen externen Speic
 
 * *PropertyName* / *PropertyValue*: NULL oder mehr optionale Export Eigenschaften:
 
-|Eigenschaft        |type    |BESCHREIBUNG                                                                                                                |
+|Eigenschaft        |type    |Beschreibung                                                                                                                |
 |----------------|--------|---------------------------------------------------------------------------------------------------------------------------|
 |`sizeLimit`     |`long`  |Die Größenbeschränkung in Bytes eines einzelnen Speicher Artefakts, das geschrieben wird (vor der Komprimierung). Der zulässige Bereich beträgt 100 MB (Standard) 1 GB.|
 |`includeHeaders`|`string`|Für `csv` / `tsv` die Ausgabe steuert die Generierung von Spalten Headern. Kann eine der `none` (standardmäßigen, keine Header Zeilen ausgegeben), `all` (geben Sie eine Kopfzeile in jedem Speicher Element aus) oder (geben Sie `firstFile` nur eine Kopfzeile in das erste Speicher Element ein).|
@@ -59,7 +59,7 @@ Führt eine Abfrage aus und schreibt das erste Resultset in einen externen Speic
 Die Befehle gibt eine Tabelle zurück, in der die generierten Speicher Artefakte beschrieben werden.
 Jeder Datensatz beschreibt ein einzelnes Element und enthält den Speicherpfad zum Element und die Anzahl der Datensätze, die es enthält.
 
-|Pfad|Numrecords|
+|`Path`|Numrecords|
 |---|---|
 |http://storage1.blob.core.windows.net/containerName/export_1_d08afcae2f044c1092b279412dcb571b.csv|10|
 |http://storage1.blob.core.windows.net/containerName/export_2_454c0f1359e24795b6529da8a0101330.csv|15|
@@ -69,8 +69,8 @@ Jeder Datensatz beschreibt ein einzelnes Element und enthält den Speicherpfad z
 Wenn das- `async` Flag angegeben wird, wird der Befehl im asynchronen Modus ausgeführt.
 In diesem Modus gibt der Befehl sofort eine Vorgangs-ID zurück, und der Datenexport wird im Hintergrund fortgesetzt, bis der Vorgang abgeschlossen ist. Die vom Befehl zurückgegebene Vorgangs-ID kann verwendet werden, um den Fortschritt und letztendlich seine Ergebnisse über die folgenden Befehle zu verfolgen:
 
-* [. Show-Vorgänge](../operations.md#show-operations): Nachverfolgen des Fortschritts.
-* [. Vorgangs Details anzeigen](../operations.md#show-operation-details): Vervollständigungs Ergebnisse erhalten.
+* [`.show operations`](../operations.md#show-operations): Nachverfolgen des Fortschritts.
+* [`.show operation details`](../operations.md#show-operation-details): Vervollständigungs Ergebnisse erhalten.
 
 Nach erfolgreichem Abschluss können Sie die Ergebnisse beispielsweise mithilfe von abrufen:
 
@@ -103,7 +103,7 @@ Spaltennamen Bezeichnungen werden als erste Zeile für jedes BLOB hinzugefügt.
 Export Befehle können während der Ausführung transitiv fehlschlagen. Der [fortlaufende Export](continuous-data-export.md) führt den Befehl automatisch erneut aus. Reguläre Export Befehle ([Exportieren in den Speicher](export-data-to-storage.md), [Exportieren in eine externe Tabelle](export-data-to-an-external-table.md)) führen keine Wiederholungen aus.
 
 *  Wenn der Export Befehl fehlschlägt, werden Artefakte, die bereits in den Speicher geschrieben wurden, nicht gelöscht. Diese Artefakte verbleiben im Speicher. Wenn der Befehl fehlschlägt, gehen Sie davon aus, dass der Export unvollständig ist, auch wenn einige Artefakte geschrieben wurden. 
-* Die beste Möglichkeit zum Nachverfolgen der Ausführung des Befehls und der Elemente, die nach erfolgreichem Abschluss exportiert werden, ist die Verwendung der Befehle [. Show Operations](../operations.md#show-operations) und [. Show Operation Details](../operations.md#show-operation-details) .
+* Die beste Methode zum Nachverfolgen der Ausführung des Befehls und der Elemente, die nach erfolgreichem Abschluss exportiert werden, ist die Verwendung der [`.show operations`](../operations.md#show-operations) [`.show operation details`](../operations.md#show-operation-details) Befehle und.
 
 ### <a name="storage-failures"></a>Speicherfehler
 

@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 871ad751105ba6a3f6ce5dcba55b3a0fd1c17789
-ms.sourcegitcommit: 21dee76964bf284ad7c2505a7b0b6896bca182cc
+ms.openlocfilehash: 37d82807751a604d88eda7de75fb4978efc0ce1b
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/23/2020
-ms.locfileid: "91056984"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321266"
 ---
 # <a name="retention-policy"></a>Aufbewahrungsrichtlinie
 
@@ -49,13 +49,13 @@ Eine Beibehaltungs Richtlinie umfasst die folgenden Eigenschaften:
 
 ## <a name="control-commands"></a>Steuerungsbefehle
 
-* Verwenden Sie [. zeigen Sie die Richtlinien Beibehaltung](../management/retention-policy.md) an, um die aktuelle Aufbewahrungs Richtlinie für eine Datenbank, eine Tabelle oder eine [materialisierte Sicht](materialized-views/materialized-view-overview.md)anzuzeigen.
-* Verwenden Sie zum Ändern der aktuellen Beibehaltungs Richtlinie einer Datenbank, Tabelle oder [materialisierten Sicht](materialized-views/materialized-view-overview.md)die " [. Alter"-Richtlinien Beibehaltung](../management/retention-policy.md) .
+* Verwenden [`.show policy retention`](../management/retention-policy.md) Sie, um die aktuelle Aufbewahrungs Richtlinie für eine Datenbank, eine Tabelle oder eine [materialisierte Sicht](materialized-views/materialized-view-overview.md)anzuzeigen.
+* Verwenden [`.alter policy retention`](../management/retention-policy.md) Sie, um die aktuelle Aufbewahrungs Richtlinie einer Datenbank, Tabelle oder [materialisierten Sicht](materialized-views/materialized-view-overview.md)zu ändern.
 
-## <a name="defaults"></a>der Arbeitszeittabelle
+## <a name="defaults"></a>Standardeinstellungen
 
 Wenn eine Datenbank oder eine Tabelle erstellt wird, wird standardmäßig keine Beibehaltungs Richtlinie definiert. Normalerweise wird die Datenbank erstellt, und die Beibehaltungs Richtlinie wird vom Ersteller gemäß den bekannten Anforderungen sofort festgelegt.
-Wenn Sie einen [Show-Befehl](../management/retention-policy.md) für die Aufbewahrungs Richtlinie einer Datenbank oder Tabelle ausführen, für die die Richtlinie nicht festgelegt wurde, wird `Policy` als angezeigt `null` .
+Wenn Sie einen [ `.show` Befehl](../management/retention-policy.md) für die Aufbewahrungs Richtlinie einer Datenbank oder Tabelle ausführen, für die die Richtlinie nicht festgelegt wurde, wird `Policy` als angezeigt `null` .
 
 Die standardmäßige Aufbewahrungs Richtlinie mit den oben erwähnten Standardwerten kann mithilfe des folgenden Befehls angewendet werden.
 

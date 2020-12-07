@@ -8,21 +8,21 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 60d25403b230be9ef625a6d52d1fdb159f9fc4e3
-ms.sourcegitcommit: 313a91d2a34383b5a6e39add6c8b7fabb4f8d39a
+ms.openlocfilehash: d106d150ca7041c49b4d8eeaa703681c5f461fa8
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/16/2020
-ms.locfileid: "90680659"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321538"
 ---
 # <a name="diagnostic-information"></a>Diagnoseinformationen
 
 Diese Befehle können verwendet werden, um Systemdiagnoseinformationen anzuzeigen.
 
-* [. Cluster anzeigen](#show-cluster)
-* [. Diagnose anzeigen](#show-diagnostics)
-* [. Anzeigen der Kapazität](#show-capacity)
-* [. Show-Vorgänge](#show-operations)
+* [`.show cluster`](#show-cluster)
+* [`.show diagnostics`](#show-diagnostics)
+* [`.show capacity`](#show-capacity)
+* [`.show operations`](#show-operations)
 
 ## <a name="show-cluster"></a>. Cluster anzeigen
 
@@ -34,7 +34,7 @@ Gibt eine Menge zurück, die einen Datensatz für jeden Knoten enthält, der der
 
 **Ergebnisse** 
 
-|Ausgabe Spalte |Typ |Beschreibung
+|Ausgabe Spalte |type |Beschreibung
 |---|---|---|
 |NodeId|String|Identifiziert den Knoten. Bei der Knoten-ID handelt es sich um die Azure-RoleID des Knotens, wenn der Cluster in Azure bereitgestellt wird.
 |Adresse|String |Der interne Endpunkt, der vom Cluster für die Kommunikation zwischen Knoten verwendet wird.
@@ -52,12 +52,12 @@ Gibt eine Menge zurück, die einen Datensatz für jeden Knoten enthält, der der
 .show cluster
 ```
 
-NodeId|Adresse|name|StartTime|IsAdmin|Machinetotalmemory|Machineavailablememory|ProcessorCount|Umgebungs Beschreibung
+NodeId|Adresse|Name|StartTime|IsAdmin|Machinetotalmemory|Machineavailablememory|ProcessorCount|Umgebungs Beschreibung
 ---|---|---|---|---|---|---|---|---
-Kusto. Azure. Svc_IN_1|NET. TCP://100.112.150.30:23107/|Kusto. Azure. Svc_IN_4/rd000d3ab1e9bd/waworkerhost/3820|2016-01-15 02:00:22.6522152|True|274877435904|247797796864|16|{"Updatedomain": 0, "Fehler Domäne": 0}
-Kusto. Azure. Svc_IN_3|NET. TCP://100.112.154.34:23107/|Kusto. Azure. Svc_IN_3/rd000d3ab1e062/waworkerhost/2760|2016-01-15 05:52:52.1434683|False|274877435904|258740346880|16|{"Updatedomain": 1, "Fehler Domäne": 1}
-Kusto. Azure. Svc_IN_2|NET. TCP://100.112.128.40:23107/|Kusto. Azure. Svc_IN_2/rd000d3ab1e054/waworkerhost/3776|2016-01-15 07:17:18.0699790|False|274877435904|244232339456|16|{"Updatedomain": 2, "Fehler Domäne": 2}
-Kusto. Azure. Svc_IN_0|NET. TCP://100.112.138.15:23107/|Kusto. Azure. Svc_IN_0/rd000d3ab0d6c6/waworkerhost/3208|2016-01-15 09:46:36.9865016|False|274877435904|238414581760|16|{"Updatedomain": 3, "Fehler Domäne": 3}
+Kusto.Azure.Svc_IN_1|NET. TCP://100.112.150.30:23107/|Kusto.Azure.Svc_IN_4/rd000d3ab1e9bd/waworkerhost/3820|2016-01-15 02:00:22.6522152|True|274877435904|247797796864|16|{"Updatedomain": 0, "Fehler Domäne": 0}
+Kusto.Azure.Svc_IN_3|NET. TCP://100.112.154.34:23107/|Kusto.Azure.Svc_IN_3/rd000d3ab1e062/waworkerhost/2760|2016-01-15 05:52:52.1434683|False|274877435904|258740346880|16|{"Updatedomain": 1, "Fehler Domäne": 1}
+Kusto.Azure.Svc_IN_2|NET. TCP://100.112.128.40:23107/|Kusto.Azure.Svc_IN_2/rd000d3ab1e054/waworkerhost/3776|2016-01-15 07:17:18.0699790|False|274877435904|244232339456|16|{"Updatedomain": 2, "Fehler Domäne": 2}
+Kusto.Azure.Svc_IN_0|NET. TCP://100.112.138.15:23107/|Kusto.Azure.Svc_IN_0/rd000d3ab0d6c6/waworkerhost/3208|2016-01-15 09:46:36.9865016|False|274877435904|238414581760|16|{"Updatedomain": 3, "Fehler Domäne": 3}
 
 
 ## <a name="show-diagnostics"></a>. Diagnose anzeigen
@@ -70,7 +70,7 @@ Gibt Informationen zum Kusto-Cluster Integritäts Status zurück.
  
 **Rückgabe**
 
-|Output-Parameter |Typ |Beschreibung|
+|Ausgabeparameter |type |Beschreibung|
 |-----------------|-----|-----------| 
 |Ishealthy|Boolean|Wenn der Cluster fehlerfrei ist oder nicht
 |Isscaleumquired|Boolean|Wenn die Größe des Clusters durch Hinzufügen von weiteren Computer Knoten erhöht werden soll
@@ -116,7 +116,7 @@ Gibt die Ergebnisse einer Berechnung für eine geschätzte Cluster Kapazität f�
  
 **Ergebnisse**
 
-|Output-Parameter |Typ |BESCHREIBUNG 
+|Ausgabeparameter |type |BESCHREIBUNG 
 |---|---|---
 |Resource |String |Der Name der Ressource 
 |Gesamt |Int64 |Die Gesamtmenge der Ressourcen vom Typ "Resource", die verfügbar sind. Beispielsweise die Anzahl der gleichzeitigen Ingestionen.
@@ -125,7 +125,7 @@ Gibt die Ergebnisse einer Berechnung für eine geschätzte Cluster Kapazität f�
  
 **Beispiel**
 
-|Ressource |Gesamt |Consumed |Verbleibend
+|Resource |Gesamt |Consumed |Verbleibend
 |---|---|---|---
 |Ingestionen |576 |1 |575
 
@@ -133,7 +133,7 @@ Gibt die Ergebnisse einer Berechnung für eine geschätzte Cluster Kapazität f�
 
 Dieser Befehl gibt eine Tabelle zurück, die alle administrativen Vorgänge enthält, seit der neue Administrator Knoten gewählt wurde.
 
-|Syntax Option |Beschreibung|
+|Syntax Option |BESCHREIBUNG|
 |---|---| 
 |`.show` `operations`              |Gibt alle Vorgänge zurück, die vom Cluster verarbeitet oder verarbeitet wurden.
 |`.show``operations` *OperationId*|Gibt den Vorgangs Status für eine bestimmte ID zurück.
@@ -141,23 +141,23 @@ Dieser Befehl gibt eine Tabelle zurück, die alle administrativen Vorgänge enth
 
 **Ergebnisse**
  
-|Output-Parameter |Typ |BESCHREIBUNG
+|Ausgabeparameter |type |BESCHREIBUNG
 |---|---|---
 |id |String |Vorgangs Bezeichner
 |Vorgang |String |Administrator befehlsalias
 |NodeId |String |, Wenn der Befehl etwas Remote ausgeführt wird, z. b. dataingestpull. Die Knoten-ID enthält die ID des Remote Knotens, auf dem ausgeführt wird.
-|Startedon |Datetime |Datum/Uhrzeit (in UTC), zu der der Vorgang gestartet wurde 
-|Lastupdatedon |Datetime |Datum/Uhrzeit (in UTC), als der Vorgang zuletzt aktualisiert wurde. Der Vorgang kann entweder ein Schritt innerhalb des Vorgangs oder ein Abschluss Schritt sein.
+|StartedOn |Datetime |Datum/Uhrzeit (in UTC), zu der der Vorgang gestartet wurde 
+|LastUpdatedOn |Datetime |Datum/Uhrzeit (in UTC), als der Vorgang zuletzt aktualisiert wurde. Der Vorgang kann entweder ein Schritt innerhalb des Vorgangs oder ein Abschluss Schritt sein.
 |Duration |Datetime |Zeitspanne zwischen "lastupdateon" und "startedon"
 |State |String |Befehls Zustand mit den Werten "InProgress", "abgeschlossen" oder "failed"
 |Status |String |Zusätzliche Hilfe Zeichenfolge, die die Fehler für fehlgeschlagene Vorgänge enthält
  
 **Beispiel**
  
-|id |Vorgang |Knoten-ID |Gestartet am |Zuletzt aktualisiert am |Duration |State |Status 
+|ID |Vorgang |Knoten-ID |Gestartet am |Zuletzt aktualisiert am |Duration |State |Status 
 |--|--|--|--|--|--|--|--
 |3827def6-0773-4f2a-859e-c02cf395gehörlos |Schemashow | |2015-01-06 08:47:01.0000000 |2015-01-06 08:47:01.0000000 |0001-01-01 00:00:00.0000000 |Abgeschlossen | 
-|841-Datei-4-076a-4cba-9300-4836da0d9c75 |Dataingestpull |Kusto. Azure. Svc_IN_1 |2015-01-06 08:47:02.0000000 |2015-01-06 08:48:19.0000000 |0001-01-01 00:01:17.0000000 |Abgeschlossen | 
+|841-Datei-4-076a-4cba-9300-4836da0d9c75 |Dataingestpull |Kusto.Azure.Svc_IN_1 |2015-01-06 08:47:02.0000000 |2015-01-06 08:48:19.0000000 |0001-01-01 00:01:17.0000000 |Abgeschlossen | 
 |e198c519-5263-4629-a158-8d68f7a1022f |Operationsshow | |2015-01-06 08:47:18.0000000 |2015-01-06 08:47:18.0000000 |0001-01-01 00:00:00.0000000 |Abgeschlossen |
 |a9f287a1-f3e6-4154-ad18-b86438da0929 |Extentsdrop | |2015-01-11 08:41:01.0000000 |0001-01-01 00:00:00.0000000 |0001-01-01 00:00:00.0000000 |InProgress |
 |9edb3ecc-f 4b4-4738-87e1-648eed2bd998 |Dataingestpull | |2015-01-10 14:57:41.0000000 |2015-01-10 14:57:41.0000000 |0001-01-01 00:00:00.0000000 |Fehler |Die Sammlung wurde geändert. Enumerationsvorgang kann nicht ausgeführt werden. |

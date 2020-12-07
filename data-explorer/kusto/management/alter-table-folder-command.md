@@ -8,23 +8,23 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/06/2020
-ms.openlocfilehash: f03a2927d3f0a4fe7ee1719594f2d1f19e231d0f
-ms.sourcegitcommit: 1faf502280ebda268cdfbeec2e8ef3d582dfc23e
+ms.openlocfilehash: 8ba9eb06e07dd513d20cdade87322d9ef5f17d24
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/01/2020
-ms.locfileid: "82618359"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96321640"
 ---
 # <a name="alter-table-folder"></a>.alter table folder
 
 Ändert den Ordner Wert einer vorhandenen Tabelle. 
 
-`.alter``table` *Ordner* " *TableName* `folder` "
+`.alter``table`Ordner " *TableName* `folder` *Folder* "
 
 > [!NOTE]
 > * Erfordert [Datenbankadministrator Berechtigung](../management/access-control/role-based-authorization.md)
 > * Der [Datenbankbenutzer](../management/access-control/role-based-authorization.md) , der die Tabelle ursprünglich erstellt hat, kann Sie auch bearbeiten.
-> * Wenn die Tabelle nicht vorhanden ist, wird ein Fehler zurückgegeben. Informationen zum Erstellen einer neuen Tabelle finden Sie unter [. Create Table.](create-table-command.md)
+> * Wenn die Tabelle nicht vorhanden ist, wird ein Fehler zurückgegeben. Informationen zum Erstellen einer neuen Tabelle finden Sie unter. [`.create table`](create-table-command.md)
 
 **Beispiele** 
 

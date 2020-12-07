@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/14/2020
-ms.openlocfilehash: c8fa3a000de67559c83745c598da40797e31f9b9
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: 667fcc87a1e301bdcceb227bb99ad70d62f46153
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92248351"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320824"
 ---
 # <a name="execute-database-script"></a>.execute database script
 
@@ -33,7 +33,7 @@ Führt Befehle für den Batch von Steuerelementen im Bereich einer einzelnen Dat
 
 ### <a name="optional-properties"></a>Optionale Eigenschaften
 
-| Eigenschaft            | type            | BESCHREIBUNG                          |
+| Eigenschaft            | type            | Beschreibung                          |
 |---------------------|-----------------|---------------------------------------------------------------------------------------------------|
 | `ContinueOnErrors`            | `bool`        | Wenn diese Einstellung auf festgelegt ist, `false` wird das Skript beim ersten Fehler beendet. Wenn Sie auf festgelegt ist, `true` wird die Skriptausführung fortgesetzt. Standardwert: `false`. |
 
@@ -41,7 +41,7 @@ Führt Befehle für den Batch von Steuerelementen im Bereich einer einzelnen Dat
 
 Jeder Befehl, der im Skript angezeigt wird, wird als separater Datensatz in der Ausgabe Tabelle gemeldet. Jeder Datensatz enthält die folgenden Felder:
 
-|Ausgabeparameter |type |BESCHREIBUNG
+|Ausgabeparameter |type |Beschreibung
 |---|---|--- 
 |OperationId  |Guid |Der Bezeichner des Befehls.
 |CommandType  |String |Der Typ des Befehls.
@@ -54,7 +54,7 @@ Jeder Befehl, der im Skript angezeigt wird, wird als separater Datensatz in der 
 >* Befehle werden sequenziell in der Reihenfolge ausgeführt, in der Sie im Eingabe Skript angezeigt werden.
 >* Die Skriptausführung ist nicht transaktional, und bei einem Fehler wird kein Rollback ausgeführt. Es wird empfohlen, die idempotente Form von Befehlen zu verwenden, wenn Sie verwenden `.execute database script` .
 >* Standardverhalten des Befehls: Fehler beim ersten Fehler. er kann mithilfe des Property-Arguments geändert werden.
->* Schreibgeschützte Steuerungsbefehle (. Show-Befehle) werden nicht ausgeführt und werden mit dem Status gemeldet `Skipped` .
+>* Schreibgeschützte Steuerungsbefehle ( `.show` Befehle) werden nicht ausgeführt und werden mit dem Status gemeldet `Skipped` .
 
 ## <a name="example"></a>Beispiel
 

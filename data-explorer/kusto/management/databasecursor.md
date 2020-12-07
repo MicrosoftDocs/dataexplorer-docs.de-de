@@ -8,14 +8,14 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: 75dc0aa0ff23bfb4f08be9fac84fa34cf9526508
-ms.sourcegitcommit: 8e097319ea989661e1958efaa1586459d2b69292
+ms.openlocfilehash: 3a3deb388c5a57f3400eb5fbe24f77a31e48b69c
+ms.sourcegitcommit: 1bdbfdc04c4eac405f3931059bbeee2dedd87004
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84780625"
+ms.lasthandoff: 11/27/2020
+ms.locfileid: "96303330"
 ---
-# <a name="database-cursors"></a>Daten Bank Cursor
+# <a name="database-cursors"></a>Datenbankcursor
 
 Ein **Daten Bank Cursor** ist ein Objekt auf Datenbankebene, mit dem Sie eine Datenbank mehrmals Abfragen können. Sie erhalten auch dann konsistente Ergebnisse, wenn- `data-append` oder- `data-retention` Vorgänge parallel zu den Abfragen ausgeführt werden.
 
@@ -38,7 +38,7 @@ Kusto bietet drei Funktionen, die die Implementierung der beiden oben genannten 
 
 * [cursor_after (RHS: String)](../query/cursorafterfunction.md): diese spezielle Funktion kann für Tabellendaten Sätze verwendet werden, für die die [ingestiontime-Richtlinie](ingestiontime-policy.md) aktiviert ist. Es gibt einen Skalarwert des Typs zurück, der `bool` angibt, ob der `ingestion_time()` Daten Bank Cursor Wert des Datensatzes nach dem `rhs` Wert des Daten Bank Cursors liegt.
 
-* [cursor_before_or_at (RHS: String)](../query/cursorbeforeoratfunction.md): diese spezielle Funktion kann für die Tabellendaten Sätze verwendet werden, für die die [ingestiontime-Richtlinie](ingestiontime-policy.md) aktiviert ist. Es gibt einen Skalarwert des Typs zurück, der `bool` angibt, ob der `ingestion_time()` Daten Bank Cursor Wert des Datensatzes nach dem `rhs` Wert des Daten Bank Cursors liegt.
+* [cursor_before_or_at (RHS: String)](../query/cursorbeforeoratfunction.md): diese spezielle Funktion kann für die Tabellendaten Sätze verwendet werden, für die die [ingestiontime-Richtlinie](ingestiontime-policy.md) aktiviert ist. Es gibt einen Skalarwert des Typs zurück, der `bool` angibt, ob der `ingestion_time()` Daten Bank Cursor Wert des Datensatzes vor oder am `rhs` Daten Bank Cursor Wert liegt.
 
 Die beiden speziellen Funktionen ( `cursor_after` und `cursor_before_or_at` ) haben ebenfalls einen Nebeneffekt: Wenn Sie verwendet werden, gibt Kusto den **aktuellen Wert des Daten Bank Cursors** an das `@ExtendedProperties` Resultset der Abfrage aus. Der Eigenschaftsname für den Cursor ist `Cursor` , und sein Wert ist eine einzelne `string` . 
 

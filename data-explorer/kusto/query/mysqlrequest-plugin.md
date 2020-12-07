@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/24/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: c44935a98110cd47f2a40bb261659e12627860c0
-ms.sourcegitcommit: 25c0440cb0390b9629b819611844f1375de00a66
+ms.openlocfilehash: e20e266e6fbae55c308cf13b7601277b8b0f30b2
+ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94422082"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96320739"
 ---
 # <a name="mysql_request-plugin-preview"></a>mysql_request-Plug-in (Vorschau)
 
@@ -25,15 +25,15 @@ Das `mysql_request` Plug-in sendet eine SQL-Abfrage an einen MySQL Server-Netzwe
 
 > [!IMPORTANT]
 > Das `mysql_request` Plug-in befindet sich im Vorschaumodus und ist standardmäßig deaktiviert.
-> Um das Plug-in zu aktivieren, führen Sie den [ `.enable plugin mysql_request` Befehl](../management/enable-plugin.md)aus. Zum Anzeigen der aktivierten Plug-Ins verwenden Sie die [Befehle "Plug](../management/show-plugins.md)-in-Management".
+> Um das Plug-in zu aktivieren, führen Sie den [ `.enable plugin mysql_request` Befehl](../management/enable-plugin.md)aus. Verwenden Sie zum Anzeigen der aktivierten Plug-Ins [ `.show plugin` Verwaltungs Befehle](../management/show-plugins.md).
 
 ## <a name="syntax"></a>Syntax
 
-`evaluate``mysql_request` `(` *ConnectionString* `,` *sqlQuery* [ `,` *SQLPARAMETERS* ]`)`
+`evaluate``mysql_request` `(` *ConnectionString* `,` *sqlQuery* [ `,` *SQLPARAMETERS*]`)`
 
 ## <a name="arguments"></a>Argumente
 
-Name | Typ | BESCHREIBUNG | Erforderlich/Optional |
+Name | type | BESCHREIBUNG | Erforderlich/Optional |
 ---|---|---|---
 | *ConnectionString* | `string`-Literal | Gibt die Verbindungs Zeichenfolge an, die auf den MySQL Server-Netzwerk Endpunkt zeigt. Weitere Informationen finden Sie unter [Authentifizierung](#username-and-password-authentication) und angeben des [Netzwerk Endpunkts](#specify-the-network-endpoint). | Erforderlich |
 | *SqlQuery* | `string`-Literal | Gibt die Abfrage an, die für den SQL-Endpunkt ausgeführt werden soll. Muss mindestens ein Rowset zurückgeben, aber nur das erste Rowset wird für den Rest der Kusto-Abfrage zur Verfügung gestellt. | Erforderlich|
@@ -60,7 +60,7 @@ Im folgenden Beispiel wird gezeigt, wie die Legenden Richtlinie für MySQL DB de
 ]
 ```
 
-Das folgende Beispiel zeigt einen Befehl für die alter Legenden-Richtlinie für `mysql` *callouttype* :
+Das folgende Beispiel zeigt einen Befehl für die alter Legenden-Richtlinie für `mysql` *callouttype*:
 
 ```kusto
 .alter cluster policy callout @'[{"CalloutType": "mysql", "CalloutUriRegex": "\\.mysql\\.database\\.azure\\.com", "CanCall": true}]'
@@ -85,9 +85,9 @@ Aus Sicherheitsgründen `SslMode` wird `Required` beim Herstellen einer Verbindu
 
 Geben Sie den SQL-Netzwerk Endpunkt als Teil der Verbindungs Zeichenfolge an.
 
-**Syntax** :
+**Syntax**:
 
-`Server`Voll `=` *qualifizierter* Name [ `Port` `=` *Port* ]
+`Server`Voll `=` *qualifizierter* Name [ `Port` `=` *Port*]
 
 Hierbei gilt:
 
