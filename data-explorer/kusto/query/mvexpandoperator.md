@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2019
 ms.localizationpriority: high
-ms.openlocfilehash: d9d245da4acd43eb8d5e6a0eeadfa525cbd407a3
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: f14ec4fa24765053711d60f7d2365755b45adbab
+ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96303328"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96774638"
 ---
 # <a name="mv-expand-operator"></a>mv-expand-Operator
 
@@ -41,7 +41,7 @@ Erweitert das Array oder den Eigenschaftenbehälter mit mehreren Werten.
 
 * *IndexColumnName:* Wenn `with_itemindex` angegeben wird, enthält die Ausgabe eine zusätzliche Spalte (mit dem Namen *IndexColumnName*), die den Index (beginnend bei 0) des Elements in der ursprünglichen erweiterten Sammlung enthält. 
 
-## <a name="returns"></a>Gibt zurück
+## <a name="returns"></a>Rückgabe
 
 Mehrere Zeilen für alle Werte in jedem Array, die sich in der benannten Spalte oder im Arrayausdruck befinden.
 Wenn mehrere Spalten oder Ausdrücke angegeben werden, werden diese parallel erweitert. Für jede Eingabezeile gibt es so viele Ausgabezeilen, wie Elemente im längsten erweiterten Ausdruck vorhanden sind (kürzere Listen werden mit Nullen aufgefüllt). Wenn der Wert in einer Zeile ein leeres Array ist, wird die Zeile zu nichts erweitert (wird im Resultset nicht angezeigt). Wenn der Wert in einer Zeile jedoch kein Array ist, wird die Zeile unverändert im Resultset beibehalten. 
@@ -49,8 +49,8 @@ Wenn mehrere Spalten oder Ausdrücke angegeben werden, werden diese parallel erw
 Die erweiterte Spalte ist immer dynamisch typisiert. Verwenden Sie eine Umwandlung wie `todatetime()` oder `tolong()`, wenn Sie Werte berechnen oder aggregieren möchten.
 
 Zwei Erweiterungsmodi für Eigenschaftenbehälter werden unterstützt:
-* `bagexpansion=bag`: Eigenschaftenbehälter werden zu Eigenschaftenbehältern mit einem einzelnen Eintrag erweitert. Bei diesem Modus handelt es sich um die Standarderweiterung.
-* `bagexpansion=array`: Eigenschaftenbehälter werden zu Arraystrukturen mit den beiden Elementen `[`*Schlüssel*`,`*Wert*`]` erweitert und lassen den einheitlichen Zugriff auf Schlüssel und Werte zu (sowie z. B. auch das Ausführen einer distinct-count-Aggregation über Eigenschaftsnamen). 
+* `bagexpansion=bag` oder `kind=bag`: Eigenschaftenbehälter werden zu Eigenschaftenbehältern mit einem einzelnen Eintrag erweitert. Bei diesem Modus handelt es sich um die Standarderweiterung.
+* `bagexpansion=array` oder `kind=array`: Eigenschaftenbehälter werden zu Arraystrukturen mit den beiden Elementen `[`*Schlüssel*`,`*Wert*`]` erweitert und lassen den einheitlichen Zugriff auf Schlüssel und Werte zu (sowie z. B. auch das Ausführen einer distinct-count-Aggregation über Eigenschaftsnamen). 
 
 ## <a name="examples"></a>Beispiele
 
@@ -145,7 +145,7 @@ range x from 1 to 4 step 1
 |3|2|
 |4|3|
  
-## <a name="see-also"></a>Siehe auch
+## <a name="see-also"></a>Weitere Informationen
 
 * Weitere Beispiele finden Sie unter [Diagrammanzahl von Liveaktivitäten im Lauf der Zeit](./samples.md#chart-concurrent-sessions-over-time).
 * [mv-apply](./mv-applyoperator.md)-Operator
