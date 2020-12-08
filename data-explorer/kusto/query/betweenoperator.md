@@ -1,6 +1,6 @@
 ---
-title: zwischen Operator-Azure Daten-Explorer
-description: In diesem Artikel wird der Operator in Azure Daten-Explorer beschrieben.
+title: 'between-Operator: Azure Data Explorer'
+description: In diesem Artikel wird der between-Operator in Azure Data Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,10 +10,10 @@ ms.topic: reference
 ms.date: 10/23/2018
 ms.localizationpriority: high
 ms.openlocfilehash: 8bb2049c7bc7c81092eb137c820f650bf88abc4e
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95512977"
 ---
 # <a name="between-operator"></a>between-Operator
@@ -29,26 +29,26 @@ Table1 | where Time between (datetime(2017-01-01) .. datetime(2017-01-01))
  
 ## <a name="syntax"></a>Syntax
 
-*T* `|` `where` *expr* `between` `(` *leftrange* ` .. ` *rightrange*`)`   
+*T* `|` `where` *expr* `between` `(`*leftRange*` .. `*rightRange*`)`   
  
-Wenn der *expr* -Ausdruck "DateTime" ist, wird eine andere syntaktische Sugar-Syntax bereitgestellt:
+Wenn der *expr*-Ausdruck DateTime ist, wird eine andere syntaktische Sugar-Syntax bereitgestellt:
 
-*T* `|` `where` *expr* `between` `(` *leftrangedatetime* ` .. ` *rightrangetimespan*`)`   
+*T* `|` `where` *expr* `between` `(`*leftRangeDateTime*` .. `*rightRangeTimespan*`)`   
 
 ## <a name="arguments"></a>Argumente
 
-* *T* : die tabellarische Eingabe, deren Datensätze abgeglichen werden sollen.
-* *expr* -der Ausdruck, der gefiltert werden soll.
-* *leftrange* -Ausdruck des linken Bereichs (inklusiv).
-* *rightrange* -Ausdruck des rechten Bereichs (inklusiv).
+* *T*: Die tabellarische Eingabe, deren Datensätze abgeglichen werden sollen.
+* *expr*: Der zu filternde Ausdruck.
+* *leftRange*: Ausdruck des linken Bereichs (inklusiv).
+* *rightRange*: Ausdruck des rechten Bereichs (inklusiv).
 
 ## <a name="returns"></a>Gibt zurück
 
-Zeilen in *T* , für die das Prädikat von (*expr*  >=  *leftrange* und *expr*  <=  *rightrange*) als ausgewertet wird `true` .
+Zeilen in *T*, für die das Prädikat (*expr* >= *leftRange* und *expr* <= *rightRange*) in `true`ausgewertet wird.
 
 ## <a name="examples"></a>Beispiele  
 
-**Filtern numerischer Werte mithilfe eines ' between '-Operators**  
+**Filtern numerischer Werte mithilfe des between-Operators**  
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -65,7 +65,7 @@ range x from 1 to 100 step 1
 |54|
 |55|
 
-**Filtern von DateTime mit einem ' between '-Operator**  
+**Filtern von DateTime mit einem between-Operator**  
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

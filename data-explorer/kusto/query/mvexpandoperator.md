@@ -1,6 +1,6 @@
 ---
-title: MV-Expand-Operator-Azure Daten-Explorer
-description: Dieser Artikel beschreibt den MV-Expand-Operator in Azure Daten-Explorer.
+title: 'mv-expand-Operator: Azure Data Explorer'
+description: In diesem Artikel wird der mv-expand-Operator in Azure Data Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -9,48 +9,48 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2019
 ms.localizationpriority: high
-ms.openlocfilehash: 3324cfe658b2eb29c54ff8a3d44ed660ec13ead5
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.openlocfilehash: d9d245da4acd43eb8d5e6a0eeadfa525cbd407a3
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
-ms.locfileid: "95512722"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96303328"
 ---
 # <a name="mv-expand-operator"></a>mv-expand-Operator
 
-Erweitert das Array oder den Eigenschaften Behälter mit mehreren Werten.
+Erweitert das Array oder den Eigenschaftenbehälter mit mehreren Werten.
 
-`mv-expand` wird auf ein [dynamisch](./scalar-data-types/dynamic.md)typisiertes Array oder eine Eigenschaften Behälter Spalte angewendet, sodass jeder Wert in der Auflistung eine separate Zeile erhält. Alle anderen Spalten in einer erweiterten Zeile werden dupliziert. 
+`mv-expand` wird auf ein Array oder einen Eigenschaftenbehälter des Typs [dynamisch](./scalar-data-types/dynamic.md) angewendet, sodass jeder Wert in der Sammlung eine gesonderte Zeile erhält. Alle anderen Spalten in einer erweiterten Zeile werden dupliziert. 
 
 ## <a name="syntax"></a>Syntax
 
-*T* `| mv-expand ` [ `bagexpansion=` ( `bag`  |  `array` )] [ `with_itemindex=` *indexcolumnname*] *ColumnName* [ `,` *ColumnName* ...] [ `limit` *ROWLIMIT*]
+*T* `| mv-expand ` [`bagexpansion=`(`bag` | `array`)] [`with_itemindex=`*IndexColumnName*] *ColumnName* [`,` *ColumnName* ...] [`limit` *Rowlimit*]
 
-*T* `| mv-expand ` [ `bagexpansion=` ( `bag`  |  `array` )] [*Name* `=` ] *arrayexpression* [ `to typeof(` *Typname* `)` ] [, [*Name* `=` ] *arrayexpression* [ `to typeof(` *Typname* `)` ]...] [ `limit` *ROWLIMIT*]
+*T* `| mv-expand ` [`bagexpansion=`(`bag` | `array`)] [*Name* `=`] *ArrayExpression* [`to typeof(`*Typename*`)`] [, [*Name* `=`] *ArrayExpression* [`to typeof(`*Typename*`)`] ...] [`limit` *Rowlimit*]
 
 ## <a name="arguments"></a>Argumente
 
 * *ColumnName:* Im Ergebnis werden Arrays in der benannten Spalte auf mehrere Zeilen erweitert. 
 * *ArrayExpression:* Ein Ausdruck, der ein Array zurückgibt. Bei Verwendung dieses Formulars wird eine neue Spalte hinzugefügt, und die vorhandene wird beibehalten.
 * *Name:* Ein Name für die neue Spalte.
-* *Typname:* Gibt den zugrunde liegenden Typ der Elemente des Arrays an, der zum Typ der vom Operator erzeugten Spalte wird `mv-apply` . Der Vorgang zum Anwenden des Typs ist nur Umwandlungs Vorgänge und umfasst weder die-noch die-Typkonvertierung. Array Elemente, die nicht mit dem deklarierten Typ übereinstimmen, werden zu `null` Werten.
+* *Typname:* Gibt den zugrunde liegenden Typ der Elemente des Arrays an, der zum Typ der Spalte wird, die vom `mv-apply`-Operator generiert wird. Der Vorgang zum Anwenden des Typs ist nur Umwandlung und umfasst keine Analyse oder Typkonvertierung. Arrayelemente, die nicht mit dem deklarierten Typ übereinstimmen, werden zu `null`-Werten.
 * *RowLimit:* Die maximale Anzahl von Zeilen, die aus jeder ursprünglichen Zeile generiert werden. Der Standardwert ist 2147483647. 
 
-  > [!Note]
-  > Die Legacy-und veraltete Form des-Operators `mvexpand` haben ein Standardzeilen Limit von 128.
+  > [!NOTE]
+  > `mvexpand` ist eine Legacy- und veraltete Form des Operators `mv-expand`. Die Legacyversion weist ein Standardzeilenlimit von 128 auf.
 
-* *Indexcolumnname:* Wenn `with_itemindex` angegeben ist, enthält die Ausgabe eine zusätzliche Spalte (mit dem Namen *indexcolumnname*), die den Index (beginnend bei 0) des Elements in der ursprünglichen erweiterten Auflistung enthält. 
+* *IndexColumnName:* Wenn `with_itemindex` angegeben wird, enthält die Ausgabe eine zusätzliche Spalte (mit dem Namen *IndexColumnName*), die den Index (beginnend bei 0) des Elements in der ursprünglichen erweiterten Sammlung enthält. 
 
 ## <a name="returns"></a>Gibt zurück
 
-Mehrere Zeilen für jeden der Werte in einem Array, die in der benannten Spalte oder im Array Ausdruck vorhanden sind.
-Wenn mehrere Spalten oder Ausdrücke angegeben werden, werden Sie parallel erweitert. Für jede Eingabezeile gibt es so viele Ausgabezeilen, wie Elemente im längsten erweiterten Ausdruck vorhanden sind (kürzere Listen werden mit Nullen aufgefüllt). Wenn der Wert in einer Zeile ein leeres Array ist, wird die Zeile zu "Nothing" erweitert (wird im Resultset nicht angezeigt). Wenn der Wert in einer Zeile jedoch kein Array ist, wird die Zeile unverändert im Resultset gespeichert. 
+Mehrere Zeilen für alle Werte in jedem Array, die sich in der benannten Spalte oder im Arrayausdruck befinden.
+Wenn mehrere Spalten oder Ausdrücke angegeben werden, werden diese parallel erweitert. Für jede Eingabezeile gibt es so viele Ausgabezeilen, wie Elemente im längsten erweiterten Ausdruck vorhanden sind (kürzere Listen werden mit Nullen aufgefüllt). Wenn der Wert in einer Zeile ein leeres Array ist, wird die Zeile zu nichts erweitert (wird im Resultset nicht angezeigt). Wenn der Wert in einer Zeile jedoch kein Array ist, wird die Zeile unverändert im Resultset beibehalten. 
 
 Die erweiterte Spalte ist immer dynamisch typisiert. Verwenden Sie eine Umwandlung wie `todatetime()` oder `tolong()`, wenn Sie Werte berechnen oder aggregieren möchten.
 
 Zwei Erweiterungsmodi für Eigenschaftenbehälter werden unterstützt:
-* `bagexpansion=bag`: Eigenschaftenbehälter werden zu Eigenschaftenbehältern mit einem einzelnen Eintrag erweitert. Bei diesem Modus handelt es sich um die Standard Erweiterung.
-* `bagexpansion=array`: Eigenschaften Behälter werden in `[` Array Strukturen mit *zwei Elementen erweitert* `,` *value* `]` , sodass ein einheitlicher Zugriff auf Schlüssel und Werte möglich ist (z. b. das Ausführen einer Aggregation mit unterschiedlicher Anzahl über Eigenschaftsnamen). 
+* `bagexpansion=bag`: Eigenschaftenbehälter werden zu Eigenschaftenbehältern mit einem einzelnen Eintrag erweitert. Bei diesem Modus handelt es sich um die Standarderweiterung.
+* `bagexpansion=array`: Eigenschaftenbehälter werden zu Arraystrukturen mit den beiden Elementen `[`*Schlüssel*`,`*Wert*`]` erweitert und lassen den einheitlichen Zugriff auf Schlüssel und Werte zu (sowie z. B. auch das Ausführen einer distinct-count-Aggregation über Eigenschaftsnamen). 
 
 ## <a name="examples"></a>Beispiele
 
@@ -66,12 +66,12 @@ datatable (a:int, b:dynamic)[1,dynamic({"prop1":"a", "prop2":"b"})]
 
 |a|b|
 |---|---|
-|1|{"Eigenschaft PROP1": "a"}|
-|1|{"Prop2": "b"}|
+|1|{"prop1":"a"}|
+|1|{"prop2":"b"}|
 
-### <a name="zipped-two-columns"></a>Zwei Spalten zippt
+### <a name="zipped-two-columns"></a>Zippen zweier Spalten
 
-Wenn Sie zwei Spalten erweitern, werden die entsprechenden Spalten zuerst "zip" und dann erweitert:
+Wenn Sie zwei Spalten erweitern, werden die entsprechenden Spalten zuerst „gezippt“ und dann erweitert:
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -81,13 +81,13 @@ datatable (a:int, b:dynamic, c:dynamic)[1,dynamic({"prop1":"a", "prop2":"b"}), d
 
 |a|b|c|
 |---|---|---|
-|1|{"Eigenschaft PROP1": "a"}|5|
-|1|{"Prop2": "b"}|4|
+|1|{"prop1":"a"}|5|
+|1|{"prop2":"b"}|4|
 |1||3|
 
 ### <a name="cartesian-product-of-two-columns"></a>Kartesisches Produkt von zwei Spalten
 
-Wenn Sie ein kartesisches Produkt zum Erweitern von zwei Spalten erhalten möchten, erweitern Sie eins nach dem anderen:
+Wenn Sie ein kartesisches Produkt des Erweiterns von zwei Spalten erhalten möchten, erweitern Sie ein Spalte nach der anderen:
 
 <!-- csl: https://kuskusdfv3.kusto.windows.net/Kuskus -->
 ```kusto
@@ -103,14 +103,14 @@ datatable (a:int, b:dynamic, c:dynamic)
 
 |a|b|c|
 |---|---|---|
-|1|{"Eigenschaft PROP1": "a"}|5|
-|1|{"Eigenschaft PROP1": "a"}|6|
-|1|{"Prop2": "b"}|5|
-|1|{"Prop2": "b"}|6|
+|1|{  "prop1": "a"}|5|
+|1|{  "prop1": "a"}|6|
+|1|{  "prop2": "b"}|5|
+|1|{  "prop2": "b"}|6|
 
 ### <a name="convert-output"></a>Ausgabe konvertieren
 
-Wenn Sie die Ausgabe eines MV-Expand-Aufschlags auf einen bestimmten Typ erzwingen möchten (Standardwert: dynamisch), verwenden Sie Folgendes `to typeof` :
+Wenn Sie die Ausgabe von mv-expand für einen bestimmten Typ (standardmäßig dynamisch) erzwingen möchten, verwenden Sie `to typeof`:
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -125,11 +125,11 @@ a|0|System.String|Zeichenfolge
 b|1|System.Object|dynamisch
 c|2|System.Int32|INT
 
-Beachten Sie, dass die Spalte als angezeigt wird `b` , `dynamic` während `c` als herauskommt `int` .
+Beachten Sie, dass Spalte `b` als `dynamic` ausgegeben wird, während `c` als `int` ausgegeben wird.
 
 ### <a name="using-with_itemindex"></a>Verwenden von with_itemindex
 
-Erweiterung eines Arrays mit `with_itemindex` :
+Erweitern eines Arrays mit `with_itemindex`:
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -147,7 +147,7 @@ range x from 1 to 4 step 1
  
 ## <a name="see-also"></a>Siehe auch
 
-* Weitere Beispiele finden Sie [unter Diagramm Anzahl von Live Aktivitäten im Zeit](./samples.md#chart-concurrent-sessions-over-time) Verlauf.
-* [MV-Apply-](./mv-applyoperator.md) Operator.
-* [fassen Sie make_list ()](makelist-aggfunction.md)zusammen, wobei es sich um die umgekehrte Funktion von MV-Expand handelt.
-* [bag_unpack ()](bag-unpackplugin.md) -Plug-in zum Erweitern dynamischer JSON-Objekte in Spalten mithilfe von Eigenschaften Behälter Schlüsseln.
+* Weitere Beispiele finden Sie unter [Diagrammanzahl von Liveaktivitäten im Lauf der Zeit](./samples.md#chart-concurrent-sessions-over-time).
+* [mv-apply](./mv-applyoperator.md)-Operator
+* [summarize make_list()](makelist-aggfunction.md), die umgekehrte Funktion von mv-expand.
+* [bag_unpack()](bag-unpackplugin.md)-Plug-In für die Erweiterung dynamischer JSON-Objekte in Spalten mithilfe von Eigenschaftenbehälterschlüsseln.

@@ -1,6 +1,6 @@
 ---
-title: 'Analyse Operator: Azure-Daten-Explorer'
-description: In diesem Artikel wird der Analyse Operator in Azure Daten-Explorer beschrieben.
+title: 'parse-Operator: Azure Data Explorer'
+description: In diesem Artikel wird der parse-Operator in Azure Data Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,16 +10,16 @@ ms.topic: reference
 ms.date: 02/13/2020
 ms.localizationpriority: high
 ms.openlocfilehash: 2b034719fa7c2f3714020c722b5717f5cf8590ff
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95512960"
 ---
 # <a name="parse-operator"></a>parse-Operator
 
-Wertet einen Zeichenfolgenausdruck aus und analysiert dessen Wert in eine oder mehrere berechnete Spalten. Die berechneten Spalten verfügen über Nullen für nicht erfolgreich analysierte Zeichen folgen.
-Weitere Informationen finden Sie unter dem [Operator "Bise-WHERE](parsewhereoperator.md)".
+Wertet einen Zeichenfolgenausdruck aus und analysiert dessen Wert in eine oder mehrere berechnete Spalten. Die berechneten Spalten verfügen über NULL-Werte für nicht erfolgreich analysierte Zeichenfolgen.
+Weitere Informationen finden Sie unter [parse-where-Operator](parsewhereoperator.md).
 
 ```kusto
 T | parse Text with "ActivityName=" name ", ActivityType=" type
@@ -27,67 +27,67 @@ T | parse Text with "ActivityName=" name ", ActivityType=" type
 
 ## <a name="syntax"></a>Syntax
 
-*T* `| parse` [ `kind=regex` [ `flags=regex_flags` ] | `simple` | `relaxed` ]- *Ausdruck* `with` `*` (*StringConstant* *ColumnName* [ `:` *ColumnType*]) `*` ...
+*T* `| parse` [`kind=regex` [`flags=regex_flags`] |`simple`|`relaxed`] *Expression* `with` `*` (*StringConstant* *ColumnName* [`:` *ColumnType*]) `*`...
 
 ## <a name="arguments"></a>Argumente
 
-* *T*: die Eingabe Tabelle.
-* Art
+* *T*: Die Eingabetabelle.
+* kind:
 
-    * Simple (Standard): StringConstant ist ein regulärer Zeichen folgen Wert, und die Entsprechung ist "Strict". Alle Zeichen folgen Trennzeichen sollten in der analysierten Zeichenfolge angezeigt werden, und alle erweiterten Spalten müssen mit den erforderlichen Typen identisch sein.
+    * simple (Standardwert): StringConstant ist ein regulärer Zeichenfolgenwert, und die Übereinstimmung ist „strict“. Alle Zeichenfolgentrennzeichen sollten in der analysierten Zeichenfolge vorkommen, und alle erweiterten Spalten müssen mit den erforderlichen Typen übereinstimmen.
         
-    * Regex: "StringConstant" kann ein regulärer Ausdruck sein, und die Entsprechung ist "Strict". Alle Zeichen folgen Trennzeichen, die ein Regex für diesen Modus sein können, sollten in der analysierten Zeichenfolge angezeigt werden, und alle erweiterten Spalten müssen mit den erforderlichen Typen identisch sein.
+    * regex: StringConstant kann ein regulärer Ausdruck sein, und die Übereinstimmung ist „strict“. Alle Zeichenfolgentrennzeichen, die für diesen Modus reguläre Ausdrücke sein können, sollten in der analysierten Zeichenfolge vorkommen, und alle erweiterten Spalten müssen mit den erforderlichen Typen übereinstimmen.
     
-    * Flags: Flags, die im Regex-Modus verwendet werden sollen, wie `U` (ungierig), `m` (mehrzeiligen Modus), `s` (Übereinstimmung mit neuer Zeile) `\n` , (ohne Beachtung `i` der Groß-/Kleinschreibung) in [RE2-Flags](re2.md).
+    * flags: Flags, die im RegEx-Modus verwendet werden, etwa `U` (Ungreedy), `m` (mehrzeiliger Modus), `s` (Übereinstimmung mit neuer Zeile `\n`), `i` (Groß-/Kleinschreibung wird nicht beachtet) in [RE2-Flags](re2.md).
         
-    * gelockert: StringConstant ist ein regulärer Zeichen folgen Wert, und die Übereinstimmung wird gelockert. Alle Zeichen folgen Trennzeichen sollten in der analysierten Zeichenfolge angezeigt werden, aber erweiterte Spalten können teilweise mit den erforderlichen Typen verglichen werden. Erweiterte Spalten, die nicht den erforderlichen Typen entsprechen, erhalten den Wert NULL.
+    * relaxed: StringConstant ist ein regulärer Zeichenfolgenwert, und die Übereinstimmung ist „relaxed“. Alle Zeichenfolgentrennzeichen sollten in der analysierten Zeichenfolge vorkommen, aber erweiterte Spalten können teilweise mit den erforderlichen Typen übereinstimmen. Erweiterte Spalten, die nicht den erforderlichen Typen entsprechen, erhalten den Wert NULL.
 
-* *Expression*: ein Ausdruck, der zu einer Zeichenfolge ausgewertet wird.
+* *Expression* (Ausdruck): Ein Ausdruck ein, der in eine Zeichenfolge ausgewertet wird.
 
-* *ColumnName:* Der Name einer Spalte, der ein Wert zugewiesen werden soll, der aus dem Zeichen folgen Ausdruck extrahiert wird. 
+* *ColumnName:* Der Name einer Spalte, der ein Wert zugewiesen werden soll, extrahiert aus dem Zeichenfolgenausdruck. 
   
-* *ColumnType:* Optionale. Der Skalarwert, der den Typ angibt, in den der Wert konvertiert werden soll. Der Standardwert ist der- `string` Typ.
+* *ColumnType:* Optional. Der Skalarwert, der den Typ angibt, in den der Wert konvertiert werden soll. Der Standardwert ist der `string`-Typ.
 
 ## <a name="returns"></a>Gibt zurück
 
-Die Eingabe Tabelle, erweitert entsprechend der Liste der Spalten, die dem Operator bereitgestellt werden.
+Die Eingabetabelle, erweitert gemäß der Liste der Spalten, die für den Operator bereitgestellt werden.
 
 **Tipps**
 
-* Verwenden [`project`](projectoperator.md) Sie, wenn Sie auch einige Spalten löschen oder umbenennen möchten.
+* Verwenden Sie [`project`](projectoperator.md), wenn Sie einige Spalten auch löschen oder umbenennen möchten.
 
-* Verwenden Sie * im Muster, um Junk-Werte zu überspringen. 
+* Verwenden Sie * im Muster, um Junkwerte zu überspringen. 
 
     > [!NOTE] 
-    > Der `*` kann nicht nach einer `string` Typspalte verwendet werden.
+    > `*` kann nicht nach einer Spalte vom Typ `string` verwendet werden.
 
-* Das Analyse Muster kann mit *ColumnName* beginnen und nicht nur mit *StringConstant*.
+* Das Analysemuster kann mit *ColumnName* beginnen, nicht nur mit *StringConstant*.
 
-* Wenn der analysierte *Ausdruck* nicht vom Typ `string` ist, wird er in den Typ konvertiert `string` .
+* Wenn der analysierte *Ausdruck* nicht vom Typ `string` ist, wird er in den Typ `string` konvertiert.
 
-* Wenn der Regex-Modus verwendet wird, gibt es eine Option zum Hinzufügen von Regex-Flags, um den gesamten in der Analyse verwendeten Regex-Wert zu steuern.
+* Wenn der Regex-Modus verwendet wird, gibt es eine Option zum Hinzufügen von Regex-Flags, um die gesamten in der Analyse verwendeten regulären Ausdrücke zu steuern.
 
-* Im Regex-Modus übersetzt die Analyse das Muster in ein Regex. Verwenden Sie die [RE2-Syntax](re2.md) , um den Abgleich durchzuführen, und verwenden Sie nummerierte, intern behandelte Gruppen.
-    Beispiel:
+* Im Regex-Modus übersetzt die Analyse das Muster in einen regulären Ausdruck. Verwenden Sie [RE2-Syntax](re2.md), um den Abgleich durchzuführen, und nummerierte erfasste Gruppen, die intern verarbeitet werden.
+    Zum Beispiel:
 
     ```kusto
     parse kind=regex Col with * <regex1> var1:string <regex2> var2:long
     ```
 
-    In der Analyse Anweisung ist der Regex, der intern von der Analyse generiert wird, `.*?<regex1>(.*?)<regex2>(\-\d+)` .
+    In der Analyseanweisung ist der reguläre Ausdruck, der intern von der Analyse generiert wird, `.*?<regex1>(.*?)<regex2>(\-\d+)`.
         
-    * `*` wurde in übersetzt `.*?` .
+    * `*` wurde in `.*?` übersetzt.
         
-    * `string` wurde in übersetzt `.*?` .
+    * `string` wurde in `.*?` übersetzt.
         
-    * `long` wurde in übersetzt `\-\d+` .
+    * `long` wurde in `\-\d+` übersetzt.
 
 ## <a name="examples"></a>Beispiele
 
-Der- `parse` Operator bietet eine optimierte Methode für `extend` eine Tabelle, indem mehrere `extract` Anwendungen für denselben `string` Ausdruck verwendet werden. Dieses Ergebnis ist hilfreich, wenn die Tabelle eine `string` Spalte enthält, die mehrere Werte enthält, die Sie in einzelne Spalten unterbrechen möchten. Beispielsweise eine Spalte, die von einer Entwickler `printf` -Trace-Anweisung (""/" `Console.WriteLine` ") erstellt wurde.
+Der `parse`-Operator bietet eine optimierte Möglichkeit zum `extend` einer Tabelle, indem mehrere `extract`-Anwendungen für denselben `string`-Ausdruck verwendet werden. Dieses Ergebnis ist nützlich, wenn die Tabelle eine `string`-Spalte aufweist, die mehrere Werte enthält, die Sie in einzelne Spalten aufteilen möchten. Beispielsweise eine Spalte, die von einer Entwicklerablaufverfolgungs-Anweisung ("`printf`"/"`Console.WriteLine`") erstellt wurde.
 
-Nehmen Sie im folgenden Beispiel an, dass die Spalte `EventText` der Tabelle Zeichen folgen `Traces` des Formulars enthält `Event: NotifySliceRelease (resourceName={0}, totalSlices= {1}, sliceNumber={2}, lockTime={3}, releaseTime={4}, previousLockTime={5})` .
-Durch den-Vorgang wird die Tabelle mit sechs Spalten erweitert: `resourceName` , `totalSlices` , `sliceNumber` , `lockTime ` , `releaseTime` , `previousLockTime` , `Month` und `Day` . 
+Nehmen Sie im folgenden Beispiel an, dass die Spalte `EventText` der Tabelle `Traces` Zeichenfolgen der Form `Event: NotifySliceRelease (resourceName={0}, totalSlices= {1}, sliceNumber={2}, lockTime={3}, releaseTime={4}, previousLockTime={5})` enthält.
+Durch den Vorgang wird die Tabelle um sechs Spalten erweitert: `resourceName`, `totalSlices`, `sliceNumber`, `lockTime `, `releaseTime`, `previousLockTime`, `Month` und `Day`. 
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -104,13 +104,13 @@ Traces
 | project resourceName ,totalSlices , sliceNumber , lockTime , releaseTime , previousLockTime
 ```
 
-|resourceName|totalslices|slicennummer|Sperr Zeit|releasetime|previouslocktime|
+|resourceName|totalSlices|sliceNumber|lockTime|ReleaseTime|previousLockTime|
 |---|---|---|---|---|---|
-|Pipelinescheduler|27|15|02/17/2016 08:40:00|2016-02-17 08:40:00.0000000|2016-02-17 08:39:00.0000000|
-|Pipelinescheduler|27|23|02/17/2016 08:40:01|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
-|Pipelinescheduler|27|20|02/17/2016 08:40:01|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
-|Pipelinescheduler|27|16|02/17/2016 08:41:00 (17.02.2016)|2016-02-17 08:41:00.0000000|2016-02-17 08:40:00.0000000|
-|Pipelinescheduler|27|22|02/17/2016 08:41:01|2016-02-17 08:41:00.0000000|2016-02-17 08:40:01.0000000|
+|PipelineScheduler|27|15|02/17/2016 08:40:00|2016-02-17 08:40:00.0000000|2016-02-17 08:39:00.0000000|
+|PipelineScheduler|27|23|02/17/2016 08:40:01|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
+|PipelineScheduler|27|20|02/17/2016 08:40:01|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
+|PipelineScheduler|27|16|02/17/2016 08:41:00 (17.02.2016)|2016-02-17 08:41:00.0000000|2016-02-17 08:40:00.0000000|
+|PipelineScheduler|27|22|02/17/2016 08:41:01|2016-02-17 08:41:00.0000000|2016-02-17 08:40:01.0000000|
 
 **Für den Regex-Modus**
 
@@ -129,17 +129,17 @@ Traces
 | project resourceName , sliceNumber , lockTime , releaseTime , previousLockTime
 ```
 
-|resourceName|slicennummer|Sperr Zeit|releasetime|previouslocktime|
+|resourceName|sliceNumber|lockTime|ReleaseTime|previousLockTime|
 |---|---|---|---|---|
-|Pipelinescheduler|15|02/17/2016 08:40:00, |02/17/2016 08:40:00, |2016-02-17 08:39:00.0000000|
-|Pipelinescheduler|23|02/17/2016 08:40:01, |02/17/2016 08:40:01, |2016-02-17 08:39:01.0000000|
-|Pipelinescheduler|20|02/17/2016 08:40:01, |02/17/2016 08:40:01, |2016-02-17 08:39:01.0000000|
-|Pipelinescheduler|16|02/17/2016 08:41:00, |02/17/2016 08:41:00, |2016-02-17 08:40:00.0000000|
-|Pipelinescheduler|22|02/17/2016 08:41:01, |02/17/2016 08:41:00, |2016-02-17 08:40:01.0000000|
+|PipelineScheduler|15|02/17/2016 08:40:00, |02/17/2016 08:40:00, |2016-02-17 08:39:00.0000000|
+|PipelineScheduler|23|02/17/2016 08:40:01, |02/17/2016 08:40:01, |2016-02-17 08:39:01.0000000|
+|PipelineScheduler|20|02/17/2016 08:40:01, |02/17/2016 08:40:01, |2016-02-17 08:39:01.0000000|
+|PipelineScheduler|16|02/17/2016 08:41:00, |02/17/2016 08:41:00, |2016-02-17 08:40:00.0000000|
+|PipelineScheduler|22|02/17/2016 08:41:01, |02/17/2016 08:41:00, |2016-02-17 08:40:01.0000000|
 
 **Für den Regex-Modus mit Regex-Flags**
 
-Wenn Sie nur den resourceName erhalten möchten, verwenden Sie die folgende Abfrage:
+Wenn Sie nur resourceName abrufen möchten, verwenden Sie die folgende Abfrage:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -158,16 +158,16 @@ Traces
 
 |resourceName|
 |---|
-|Pipelinescheduler, totalslices = 27, slicengber = 23, Locktime = 02/17/2016 08:40:01, releasetime = 02/17/2016 08:40:01|
-|Pipelinescheduler, totalslices = 27, slicenumschlag = 15, Locktime = 02/17/2016 08:40:00, releasetime = 02/17/2016 08:40:00|
-|Pipelinescheduler, totalslices = 27, slicengber = 20, Locktime = 02/17/2016 08:40:01, releasetime = 02/17/2016 08:40:01|
-|Pipelinescheduler, totalslices = 27, slicengber = 22, Locktime = 02/17/2016 08:41:01, releasetime = 02/17/2016 08:41:00|
-|Pipelinescheduler, totalslices = 27, slicengber = 16, Locktime = 02/17/2016 08:41:00, releasetime = 02/17/2016 08:41:00|
+|PipelineScheduler, totalSlices=27, sliceNumber=23, lockTime=02/17/2016 08:40:01, releaseTime=02/17/2016 08:40:01|
+|PipelineScheduler, totalSlices=27, sliceNumber=15, lockTime=02/17/2016 08:40:00, releaseTime=02/17/2016 08:40:00|
+|PipelineScheduler, totalSlices=27, sliceNumber=20, lockTime=02/17/2016 08:40:01, releaseTime=02/17/2016 08:40:01|
+|PipelineScheduler, totalSlices=27, sliceNumber=22, lockTime=02/17/2016 08:41:01, releaseTime=02/17/2016 08:41:00|
+|PipelineScheduler, totalSlices=27, sliceNumber=16, lockTime=02/17/2016 08:41:00, releaseTime=02/17/2016 08:41:00|
 
-Die erwarteten Ergebnisse werden nicht angezeigt, da der Standardmodus gieriger ist.
-Wenn Sie über einige Datensätze verfügen, bei denen *resourceName*  manchmal als Kleinbuchstaben und manchmal auch als Großbuchstaben angezeigt wird, erhalten Sie möglicherweise NULL-Werte für einige Werte.
+Sie erhalten nicht die erwarteten Ergebnisse, da der Standardmodus „greedy“ ist.
+Wenn Sie über einige Datensätze verfügen, die *resourceName* manchmal in Kleinbuchstaben und manchmal in Großbuchstaben enthalten, erhalten Sie möglicherweise NULL-Werte für einige Werte.
 
-Um das gewünschte Ergebnis zu erhalten, führen Sie die Abfrage mit dem nicht gierigen aus, und deaktivieren Sie die Unterscheidung nach `U` Groß-/Kleinschreibung `i` .
+Um das gewünschte Ergebnis abzurufen, führen Sie die Abfrage mit `U` („non-greedy“) aus, und deaktivieren Sie `i`-Regex-Flags, für die zwischen Groß-/Kleinschreibung unterschieden wird.
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -186,13 +186,13 @@ Traces
 
 |resourceName|
 |---|
-|Pipelinescheduler|
-|Pipelinescheduler|
-|Pipelinescheduler|
-|Pipelinescheduler|
-|Pipelinescheduler|
+|PipelineScheduler|
+|PipelineScheduler|
+|PipelineScheduler|
+|PipelineScheduler|
+|PipelineScheduler|
 
-Wenn die analysierte Zeichenfolge Zeilenumbrüche enthält, verwenden Sie das-Flag `s` , um den Text zu analysieren.
+Wenn die analysierte Zeichenfolge Zeilenvorschübe enthält, verwenden Sie das Flag `s`, um den Text zu analysieren.
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -209,24 +209,24 @@ Traces
 | project-away EventText
 ```
 
-|resourceName|totalslices|Sperr Zeit|releasetime|previouslocktime|
+|resourceName|totalSlices|lockTime|ReleaseTime|previousLockTime|
 |---|---|---|---|---|
-|Pipelinescheduler<br>|27|2016-02-17 08:40:00.0000000|2016-02-17 08:40:00.0000000|2016-02-17 08:39:00.0000000|
-|Pipelinescheduler<br>|27|2016-02-17 08:40:01.0000000|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
-|Pipelinescheduler<br>|27|2016-02-17 08:40:01.0000000|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
-|Pipelinescheduler<br>|27|2016-02-17 08:41:00.0000000|2016-02-17 08:41:00.0000000|2016-02-17 08:40:00.0000000|
-|Pipelinescheduler<br>|27|2016-02-17 08:41:01.0000000|2016-02-17 08:41:00.0000000|2016-02-17 08:40:01.0000000|
+|PipelineScheduler<br>|27|2016-02-17 08:40:00.0000000|2016-02-17 08:40:00.0000000|2016-02-17 08:39:00.0000000|
+|PipelineScheduler<br>|27|2016-02-17 08:40:01.0000000|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
+|PipelineScheduler<br>|27|2016-02-17 08:40:01.0000000|2016-02-17 08:40:01.0000000|2016-02-17 08:39:01.0000000|
+|PipelineScheduler<br>|27|2016-02-17 08:41:00.0000000|2016-02-17 08:41:00.0000000|2016-02-17 08:40:00.0000000|
+|PipelineScheduler<br>|27|2016-02-17 08:41:01.0000000|2016-02-17 08:41:00.0000000|2016-02-17 08:40:01.0000000|
 
-**Gelockerter Modus**
+**Relaxed-Modus**
 
-In diesem Beispiel für den gelockerten Modus müssen die erweiterte *totalslices* -Spalte den Typ aufweisen `long` . In der analysierten Zeichenfolge weist Sie jedoch den Wert *nonvalidlongvalue* auf.
-In der erweiterten *releasetime* -Spalte kann der Wert *nonvaliddatetime* nicht als *DateTime*-Wert analysiert werden.
-Diese beiden erweiterten Spalten erhalten den Wert NULL, während die anderen, z. b. *slicenenumber*, weiterhin die richtigen Werte erhalten.
+In diesem Beispiel für den Relaxed-Modus muss die erweiterte Spalte *totalSlices* den Typ `long` aufweisen. In der analysierten Zeichenfolge weist sie jedoch den Wert *nonValidLongValue* auf.
+In der erweiterten Spalte *releaseTime* kann der Wert *nonValidDateTime* nicht als *datetime* analysiert werden.
+Diese beiden erweiterten Spalten erhalten den Wert NULL, während die anderen (z. B. *sliceNumber*) weiterhin die richtigen Werte erhalten.
 
-Wenn Sie Options *Kind = Simple* für dieselbe Abfrage verwenden, erhalten Sie für alle erweiterten Spalten den Wert NULL. Diese Option ist für erweiterte Spalten streng und ist der Unterschied zwischen dem gelockerten und dem einfachen Modus.
+Wenn Sie die Option *kind = simple* für dieselbe unten gezeigte Abfrage verwenden, erhalten Sie für alle erweiterten Spalten den Wert NULL. Diese Option ist für erweiterte Spalten „strict“ und stellt den Unterschied zwischen dem Relaxed- und dem Simple-Modus dar.
 
  > [!NOTE] 
- > Im gelockerten Modus können erweiterte Spalten teilweise abgeglichen werden.
+ > Im Relaxed-Modus können erweiterte Spalten teilweise abgeglichen werden.
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -243,11 +243,11 @@ Traces
 | project-away EventText
 ```
 
-|resourceName|totalslices|slicennummer|Sperr Zeit|releasetime|previouslocktime|
+|resourceName|totalSlices|sliceNumber|lockTime|ReleaseTime|previousLockTime|
 |---|---|---|---|---|---|
-|Pipelinescheduler|27|15|02/17/2016 08:40:00||2016-02-17 08:39:00.0000000|
-|Pipelinescheduler|27|23|02/17/2016 08:40:01||2016-02-17 08:39:01.0000000|
-|Pipelinescheduler||20|02/17/2016 08:40:01||2016-02-17 08:39:01.0000000|
-|Pipelinescheduler||16|02/17/2016 08:41:00 (17.02.2016)|2016-02-17 08:41:00.0000000|2016-02-17 08:40:00.0000000|
-|Pipelinescheduler|27|22|02/17/2016 08:41:01|2016-02-17 08:41:00.0000000|2016-02-17 08:40:01.0000000|
+|PipelineScheduler|27|15|02/17/2016 08:40:00||2016-02-17 08:39:00.0000000|
+|PipelineScheduler|27|23|02/17/2016 08:40:01||2016-02-17 08:39:01.0000000|
+|PipelineScheduler||20|02/17/2016 08:40:01||2016-02-17 08:39:01.0000000|
+|PipelineScheduler||16|02/17/2016 08:41:00 (17.02.2016)|2016-02-17 08:41:00.0000000|2016-02-17 08:40:00.0000000|
+|PipelineScheduler|27|22|02/17/2016 08:41:01|2016-02-17 08:41:00.0000000|2016-02-17 08:40:01.0000000|
  

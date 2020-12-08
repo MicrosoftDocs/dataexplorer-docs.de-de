@@ -1,6 +1,6 @@
 ---
-title: 'Rendering-Operator: Azure Daten-Explorer'
-description: In diesem Artikel wird der Rendering-Operator in Azure Daten-Explorer beschrieben.
+title: 'render-Operator: Azure Data Explorer'
+description: In diesem Artikel wird der render-Operator in Azure Data Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -12,50 +12,50 @@ ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
 ms.openlocfilehash: 5670f3f9c7aa8b3d6b10f88433d19246e2daf6d6
-ms.sourcegitcommit: faa747df81c49b96d173dbd5a28d2ca4f3a2db5f
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95783334"
 ---
 # <a name="render-operator"></a>render-Operator
 
-Weist den Benutzer-Agent an, die Ergebnisse der Abfrage auf eine bestimmte Weise zu erzeugen.
+Weist den Benutzer-Agent an, die Ergebnisse der Abfrage auf eine bestimmte Weise zu rendern.
 
 ```kusto
 range x from 0.0 to 2*pi() step 0.01 | extend y=sin(x) | render linechart
 ```
 
 > [!NOTE]
-> * Der Rendering-Operator muss der letzte Operator in der Abfrage sein und wird nur mit Abfragen verwendet, die ein einzelnes Tabular Data Stream Ergebnis erzeugen.
-> * Der Rendering-Operator ändert keine Daten. Sie fügt eine Anmerkung ("Visualisierung") in die erweiterten Eigenschaften des Ergebnisses ein. Die-Anmerkung enthält die Informationen, die vom-Operator in der Abfrage bereitgestellt werden.
-> * Die Interpretation der Visualisierungs Informationen erfolgt über den Benutzer-Agent. Verschiedene Agents (z. b. Kusto. Explorer, Kusto. Webexplorer) unterstützen möglicherweise unterschiedliche Visualisierungen.
+> * Der render-Operator muss der letzte Operator in der Abfrage sein und wird nur mit Abfragen verwendet, die ein einzelnes Tabular Data Stream-Ergebnis generieren.
+> * Der render-Operator ändert keine Daten. Sie fügt eine Anmerkung („Visualisierung“) in die erweiterten Eigenschaften des Ergebnisses ein. Die Anmerkung enthält die Informationen, die vom Operator in der Abfrage bereitgestellt werden.
+> * Die Interpretation der Visualisierungsinformationen erfolgt über den Benutzer-Agent. Verschiedene Agents (z. B. Kusto.Explorer, Kusto.WebExplorer) unterstützen möglicherweise unterschiedliche Visualisierungen.
 
 ## <a name="syntax"></a>Syntax
 
-*T* - `|` `render` *Visualisierung* [ `with` `(` *propertyName* `=` *PropertyValue* [ `,` ...] `)` ]
+*T* `|` `render` *Visualization* [`with` `(` *PropertyName* `=` *PropertyValue* [`,` ...] `)`]
 
 Hierbei gilt:
 
-* *Visualisierung* gibt die Art der zu verwendenden Visualisierung an. Die unterstützten Werte sind:
+* *Visualization* gibt die Art der zu verwendenden Visualisierung an. Die unterstützten Werte sind:
 
 ::: zone pivot="azuredataexplorer"
 
 |*Visualisierung*     |BESCHREIBUNG|
 |--------------------|-|
-| `anomalychart`     | Vergleichbar mit timechart, [hebt jedoch Anomalien](./samples.md#get-more-from-your-data-by-using-kusto-with-machine-learning) mithilfe [series_decompose_anomalies](./series-decompose-anomaliesfunction.md) Funktion hervor. |
-| `areachart`        | Flächen Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
-| `barchart`         | Die erste Spalte ist die x-Achse und kann "Text", "DateTime" oder "numeric" sein. Andere Spalten sind numerisch und werden als horizontale Striche angezeigt.|
-| `card`             | Der erste Ergebnisdaten Satz wird als Satz von skalaren Werten behandelt und als Karte angezeigt. |
-| `columnchart`      | Wie `barchart` bei vertikalen Streifen anstelle von horizontalen Bändern.|
-| `ladderchart`      | Die letzten zwei Spalten sind die x-Achse, andere Spalten sind y-Achse.|
-| `linechart`        | ein Liniendiagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
+| `anomalychart`     | Ähnlich wie timechart, [hebt Anomalien](./samples.md#get-more-from-your-data-by-using-kusto-with-machine-learning) jedoch mit der [series_decompose_anomalies](./series-decompose-anomaliesfunction.md)-Funktion hervor. |
+| `areachart`        | Bereichsdiagramm. Die erste Spalte ist die x-Achse und muss eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
+| `barchart`         | Die erste Spalte ist die x-Achse und kann Text, DateTime oder numerische Daten enthalten. Andere Spalten sind numerisch und werden als horizontale Streifen angezeigt.|
+| `card`             | Der erste Ergebnisdatensatz wird als Satz von Skalarwerten behandelt und als Karte angezeigt. |
+| `columnchart`      | Wie `barchart` mit vertikalen Streifen anstelle von horizontalen Streifen.|
+| `ladderchart`      | Die letzten zwei Spalten sind die x-Achse, andere Spalten sind die y-Achse.|
+| `linechart`        | ein Liniendiagramm. Die erste Spalte ist die x-Achse und muss eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
 | `piechart`         | Die erste Spalte ist eine Farbachse, die zweite Spalte enthält Zahlen. |
 | `pivotchart`       | Zeigt eine Pivottabelle und ein Diagramm an. Der Benutzer kann Daten, Spalten, Zeilen und verschiedene Diagrammtypen interaktiv auswählen. |
-| `scatterchart`     | Punkt Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
-| `stackedareachart` | Gestapeltes Flächen Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
-| `table`            | Standard-Ergebnisse werden als Tabelle angezeigt.|
-| `timechart`        | ein Liniendiagramm. Die erste Spalte ist die X-Achse und muss einen datetime-Wert enthalten. Andere (numerische) Spalten sind y-Achsen. Es gibt eine Zeichen folgen Spalte, deren Werte verwendet werden, um die numerischen Spalten zu gruppieren und verschiedene Zeilen im Diagramm zu erstellen (weitere Zeichen folgen Spalten werden ignoriert). |
+| `scatterchart`     | Punktdiagramm. Die erste Spalte ist die x-Achse und muss eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
+| `stackedareachart` | Gestapeltes Flächendiagramm. Die erste Spalte ist die x-Achse und muss eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
+| `table`            | Ergebnisse werden standardmäßig als Tabelle angezeigt.|
+| `timechart`        | ein Liniendiagramm. Die erste Spalte ist die X-Achse und muss einen datetime-Wert enthalten. Andere (numerische) Spalten werden als y-Achsen verwendet. Es gibt eine Zeichenfolgenspalte, deren Werte verwendet werden, um die numerischen Spalten zu „gruppieren“ und verschiedene Linien im Diagramm zu erstellen (weitere Zeichenfolgenspalten werden ignoriert). |
 | `timepivot`        | Interaktive Navigation durch die Ereignisse der Zeitachse (Pivotierung auf der Zeitachse).|
 
 ::: zone-end
@@ -64,38 +64,38 @@ Hierbei gilt:
 
 |*Visualisierung*     |BESCHREIBUNG|
 |--------------------|-|
-| `areachart`        | Flächen Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
-| `barchart`         | Die erste Spalte ist die x-Achse und kann "Text", "DateTime" oder "numeric" sein. Andere Spalten sind numerisch und werden als horizontale Striche angezeigt.|
-| `columnchart`      | Wie `barchart` bei vertikalen Streifen anstelle von horizontalen Bändern.|
+| `areachart`        | Bereichsdiagramm. Die erste Spalte ist die x-Achse und muss eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
+| `barchart`         | Die erste Spalte ist die x-Achse und kann Text, DateTime oder numerische Daten enthalten. Andere Spalten sind numerisch und werden als horizontale Streifen angezeigt.|
+| `columnchart`      | Wie `barchart` mit vertikalen Streifen anstelle von horizontalen Streifen.|
 | `piechart`         | Die erste Spalte ist eine Farbachse, die zweite Spalte enthält Zahlen. |
-| `scatterchart`     | Punkt Diagramm. Die erste Spalte ist die x-Achse und sollte eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
-| `table`            | Standard-Ergebnisse werden als Tabelle angezeigt.|
-| `timechart`        | ein Liniendiagramm. Die erste Spalte ist die X-Achse und muss einen datetime-Wert enthalten. Andere (numerische) Spalten sind y-Achsen. Es gibt eine Zeichen folgen Spalte, deren Werte verwendet werden, um die numerischen Spalten zu gruppieren und verschiedene Zeilen im Diagramm zu erstellen (weitere Zeichen folgen Spalten werden ignoriert).|
+| `scatterchart`     | Punktdiagramm. Die erste Spalte ist die x-Achse und muss eine numerische Spalte sein. Andere numerische Spalten werden als y-Achsen verwendet. |
+| `table`            | Ergebnisse werden standardmäßig als Tabelle angezeigt.|
+| `timechart`        | ein Liniendiagramm. Die erste Spalte ist die X-Achse und muss einen datetime-Wert enthalten. Andere (numerische) Spalten werden als y-Achsen verwendet. Es gibt eine Zeichenfolgenspalte, deren Werte verwendet werden, um die numerischen Spalten zu „gruppieren“ und verschiedene Linien im Diagramm zu erstellen (weitere Zeichenfolgenspalten werden ignoriert).|
 
 ::: zone-end
 
-* *PropertyName* / *PropertyValue* gibt zusätzliche Informationen an, die beim Rendern verwendet werden.
+* *PropertyName*/*PropertyValue* zusätzliche Informationen an, die beim Rendern verwendet werden sollen.
   Alle Eigenschaften sind optional. Folgende Eigenschaften werden unterstützt:
 
 ::: zone pivot="azuredataexplorer"
 
 |*PropertyName*|*PropertyValue*                                                                   |
 |--------------|----------------------------------------------------------------------------------|
-|`accumulate`  |Gibt an, ob der Wert jedes Measures allen seinen Vorgängern hinzugefügt wird. ( `true` oder `false` )|
-|`kind`        |Weitere Erläuterung der Visualisierungs Art. Siehe unten.                         |
-|`legend`      |Gibt an, ob eine Legende oder nicht angezeigt werden soll ( `visible` oder `hidden` ).                       |
+|`accumulate`  |Gibt an, ob der Wert jedes Measures allen seinen Vorgängern hinzugefügt wird. (`true` oder `false`)|
+|`kind`        |Weitere Erläuterung der Visualisierungsart. Siehe unten.                         |
+|`legend`      |Gibt an, ob eine Legende angezeigt werden soll (`visible` oder `hidden`).                       |
 |`series`      |Durch Trennzeichen getrennte Liste von Spalten, deren kombinierte Werte pro Datensatz die Reihen definieren, zu denen der Datensatz gehört.|
 |`ymin`        |Der Minimalwert, der auf der Y-Achse angezeigt werden soll.                                      |
-|`ymax`        |Der maximale Wert, der auf der Y-Achse angezeigt werden soll.                                      |
-|`title`       |Der Titel der Visualisierung (vom Typ `string` ).                                |
-|`xaxis`       |Skalieren der x-Achse ( `linear` oder `log` ).                                      |
-|`xcolumn`     |Welche Spalte im Ergebnis für die x-Achse verwendet wird.                                |
-|`xtitle`      |Der Titel der x-Achse (vom Typ `string` ).                                       |
-|`yaxis`       |Skalieren der y-Achse ( `linear` oder `log` ).                                      |
-|`ycolumns`    |Durch Trennzeichen getrennte Liste von Spalten, die aus den Werten, die pro Wert der x-Spalte bereitgestellt werden, bestehen.|
+|`ymax`        |Der Maximalwert, der auf der Y-Achse angezeigt werden soll.                                      |
+|`title`       |Der Titel der Visualisierung (vom Typ `string`).                                |
+|`xaxis`       |Skalierungsart der x-Achse (`linear` oder `log`).                                      |
+|`xcolumn`     |Gibt an, welche Spalte im Ergebnis für die x-Achse verwendet wird.                                |
+|`xtitle`      |Der Titel der x-Achse (vom Typ `string`).                                       |
+|`yaxis`       |Skalierungsart der y-Achse (`linear` oder `log`).                                      |
+|`ycolumns`    |Durch Trennzeichen getrennte Liste von Spalten, die aus den Werten bestehen, die pro Wert der x-Spalte bereitgestellt werden.|
 |`ysplit`      |Vorgehensweise beim Aufteilen mehrerer Visualisierungen Siehe unten.                               |
-|`ytitle`      |Der Titel der y-Achse (vom Typ `string` ).                                       |
-|`anomalycolumns`|Eigenschaft, die nur für relevant ist `anomalychart` . Durch Trennzeichen getrennte Liste von Spalten, die als anomaliereihe angesehen und als Punkte im Diagramm angezeigt werden.|
+|`ytitle`      |Der Titel der y-Achse (vom Typ `string`).                                       |
+|`anomalycolumns`|Eigenschaft, die nur für `anomalychart` relevant ist. Durch Trennzeichen getrennte Liste von Spalten, die als Anomaliereihe angesehen und als Punkte im Diagramm angezeigt werden.|
 
 ::: zone-end
 
@@ -103,58 +103,58 @@ Hierbei gilt:
 
 |*PropertyName*|*PropertyValue*                                                                   |
 |--------------|----------------------------------------------------------------------------------|
-|`kind`        |Weitere Erläuterung der Visualisierungs Art. Siehe unten.                         |
+|`kind`        |Weitere Erläuterung der Visualisierungsart. Siehe unten.                         |
 |`series`      |Durch Trennzeichen getrennte Liste von Spalten, deren kombinierte Werte pro Datensatz die Reihen definieren, zu denen der Datensatz gehört.|
-|`title`       |Der Titel der Visualisierung (vom Typ `string` ).                                |
-|`yaxis`       |Skalieren der y-Achse ( `linear` oder `log` ).                                      |
+|`title`       |Der Titel der Visualisierung (vom Typ `string`).                                |
+|`yaxis`       |Skalierungsart der y-Achse (`linear` oder `log`).                                      |
 
 ::: zone-end
 
-Einige Visualisierungen können durch Bereitstellen der-Eigenschaft weiterentwickelt werden `kind` .
+Einige Visualisierungen können durch Bereitstellen der `kind`-Eigenschaft weiterentwickelt werden.
 Diese lauten wie folgt:
 
 |*Visualisierung*|`kind`             |BESCHREIBUNG                        |
 |---------------|-------------------|-----------------------------------|
-|`areachart`    |`default`          |Jeder "Bereich" steht eigenständig.     |
+|`areachart`    |`default`          |Jeder „Bereich“ steht für sich selbst.     |
 |               |`unstacked`        |Wie in `default`.                 |
-|               |`stacked`          |Stapeln Sie die Bereiche auf der rechten Seite.        |
-|               |`stacked100`       |Stapeln Sie die Bereiche auf der rechten Seite, und Strecken Sie diese auf die gleiche Breite wie die anderen.|
-|`barchart`     |`default`          |Jede "Leiste" steht alleine.      |
+|               |`stacked`          |Stapelt „Bereiche“ auf der rechten Seite.        |
+|               |`stacked100`       |Stapelt „Bereiche“ auf der rechten Seite und streckt diese auf die gleiche Breite wie die anderen.|
+|`barchart`     |`default`          |Jeder „Balken“ steht für sich selbst.      |
 |               |`unstacked`        |Wie in `default`.                 |
-|               |`stacked`          |Stapel "leisten".                      |
-|               |`stacked100`       |Stapeln Sie "Bard", und Strecken Sie die einzelnen in dieselbe Breite wie die anderen.|
-|`columnchart`  |`default`          |Jede "Spalte" steht eigenständig.   |
+|               |`stacked`          |Stapelt „Balken“.                      |
+|               |`stacked100`       |Stapelt „Balken“ und streckt diese auf die gleiche Breite wie die anderen.|
+|`columnchart`  |`default`          |Jede „Spalte“ steht für sich selbst.   |
 |               |`unstacked`        |Wie in `default`.                 |
-|               |`stacked`          |Stapeln Sie die Spalten in der anderen.|
-|               |`stacked100`       |Stapeln Sie "Columns" (Spalten), und Strecken Sie diese auf dieselbe Höhe wie die anderen.|
-|`scatterchart` |`map`              |Erwartete Spalten sind [Längengrad, Breitengrad] oder geojson-Punkt. Die Reihen Spalte ist optional.|
-|`piechart`     |`map`              |Erwartete Spalten sind [Längengrad, Breitengrad], geojson-Punkt, farbachse und numerisch. Wird in Kusto Explorer Desktop unterstützt.|
+|               |`stacked`          |Stapelt „Spalten“ aufeinander.|
+|               |`stacked100`       |Stapelt „Spalten“ und streckt diese auf die gleiche Höhe wie die anderen.|
+|`scatterchart` |`map`              |Erwartete Spalten sind [Longitude, Latitude] oder „GeoJSON point“. Die Spalte „Series“ ist optional.|
+|`piechart`     |`map`              |Erwartete Spalten sind [Longitude, Latitude] oder „GeoJSON point“, color-axis und „numeric“. Wird in Kusto Explorer-Desktop unterstützt.|
 
 ::: zone pivot="azuredataexplorer"
 
-Einige Visualisierungen unterstützen das Aufteilen in mehrere y-Achsen Werte:
+Einige Visualisierungen unterstützen das Aufteilen in mehrere Werte der y-Achse:
 
 |`ysplit`  |BESCHREIBUNG                                                       |
 |----------|------------------------------------------------------------------|
-|`none`    |Für alle Reihen Daten wird eine einzelne y-Achse angezeigt. (Standardwert)       |
-|`axes`    |Es wird ein einzelnes Diagramm mit mehreren y-Achsen angezeigt (eine pro Reihe).|
-|`panels`  |Ein Diagramm wird für jeden `ycolumn` Wert (bis zu einem Grenzwert) gerendert.|
+|`none`    |Für alle Reihendaten wird eine einzelne y-Achse angezeigt. (Standardwert)       |
+|`axes`    |Es wird ein einzelnes Diagramm mit mehreren y-Achsen angezeigt (eine Achse pro Reihe).|
+|`panels`  |Ein Diagramm wird für jeden `ycolumn`-Wert (bis zu einem Grenzwert) gerendert.|
 
 ::: zone-end
 
 > [!NOTE]
-> Das Datenmodell des Rendering-Operators prüft die tabellarischen Daten so, als wären es drei Arten von Spalten:
+> Das Datenmodell des render-Operators prüft die tabellarischen Daten so, als wären es drei Arten von Spalten vorhanden:
 >
-> * Die Spalte der x-Achse (angegeben durch die- `xcolumn` Eigenschaft).
-> * Die Reihen Spalten (eine beliebige Anzahl von Spalten, die von der-Eigenschaft angegeben werden `series` .) Für jeden Datensatz definieren die kombinierten Werte dieser Spalten eine einzelne Reihe, und das Diagramm verfügt über so viele Reihen, wie es unterschiedliche kombinierte Werte gibt.
-> * Die Spalten der y-Achse (eine beliebige Anzahl von Spalten, die von der-Eigenschaft angegeben werden `ycolumns` ).
-  Für jeden Datensatz enthält die Reihe so viele Messungen ("Punkte" im Diagramm), wie die Spalten der y-Achse vorhanden sind.
+> * Die Spalte der x-Achse (angegeben durch die `xcolumn`-Eigenschaft).
+> * Die Reihenspalten (eine beliebige Anzahl von Spalten, die durch die `series`-Eigenschaft angegeben werden). Für jeden Datensatz definieren die kombinierten Werte dieser Spalten eine einzelne Reihe, und das Diagramm verfügt über so viele Reihen, wie es unterschiedliche kombinierte Werte gibt.
+> * Die Spalten der y-Achse (eine beliebige Anzahl von Spalten, die durch die `ycolumns`-Eigenschaft angegeben werden).
+  Für jeden Datensatz enthält die Reihe so viele Messungen („Punkte“ im Diagramm), wie Spalten der y-Achse vorhanden sind.
 
 > [!TIP]
 > 
-> * Verwenden `where` `summarize` Sie und, um das angezeigter `top` Volume einzuschränken.
+> * Verwenden Sie `where`, `summarize` und `top`, um das angezeigter Volumen einzuschränken.
 > * Sortieren Sie die Daten, um die Reihenfolge der x-Achse zu definieren.
-> * Benutzer-Agents können den Wert von Eigenschaften "erraten", die nicht durch die Abfrage angegeben werden. Insbesondere kann es vorkommen, dass sich "uninteressante" Spalten im Schema des Ergebnisses in ein falsches Problem setzen. Versuchen Sie, solche Spalten zu projizieren, wenn dies geschieht. 
+> * Benutzer-Agents können den Wert von Eigenschaften „erraten“, die nicht durch die Abfrage angegeben werden. Insbesondere kann es vorkommen, dass „uninteressante“ Spalten im Schema des Ergebnisses dazu führen, dass sie falsch raten. Versuchen Sie, solche Spalten wegzuprojizieren, wenn dies geschieht. 
 
 ## <a name="example"></a>Beispiel
 

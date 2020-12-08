@@ -1,6 +1,6 @@
 ---
-title: 'Where-Operator in der Kusto-Abfragesprache: Azure Daten-Explorer'
-description: Dieser Artikel beschreibt den Where-Operator in Azure Daten-Explorer.
+title: 'where-Operator in der Kusto-Abfragesprache: Azure Data Explorer'
+description: In diesem Artikel wird der where-Operator in Azure Data Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,10 +10,10 @@ ms.topic: reference
 ms.date: 02/13/2020
 ms.localizationpriority: high
 ms.openlocfilehash: 6ac800cd4b38396e0f32f44976c4594c093747bb
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95512008"
 ---
 # <a name="where-operator"></a>where-Operator
@@ -28,34 +28,34 @@ T | where fruit=="apple"
 
 ## <a name="syntax"></a>Syntax
 
-*T* - `| where` *Prädikat*
+*T* `| where` *Prädikat*
 
 ## <a name="arguments"></a>Argumente
 
-* *T*: die tabellarische Eingabe, deren Datensätze gefiltert werden sollen.
-* *Predicate*: ein- `boolean` [Ausdruck](./scalar-data-types/bool.md) für die Spalten von *T*. Sie wird für jede Zeile in *T* ausgewertet.
+* *T*: Die tabellarische Eingabe, deren Datensätze gefiltert werden sollen.
+* *Prädikat*: Ein `boolean` [Ausdruck](./scalar-data-types/bool.md) über die Spalten von *T*. Er wird für jede Zeile in *T* ausgewertet.
 
 ## <a name="returns"></a>Gibt zurück
 
 Zeilen in *T*, für die *Predicate* auf `true` festgelegt ist.
 
-**Hinweise** NULL-Werte: alle Filterfunktionen geben false zurück, wenn Sie mit NULL-Werten verglichen werden. Sie können spezielle NULL-fähige Funktionen verwenden, um Abfragen zu schreiben, die NULL-Werte verarbeiten.
+**Hinweise** NULL-Werte: Alle Filterfunktionen geben beim Vergleich mit NULL-Werten FALSE zurück. Sie können spezielle NULL-fähige Funktionen verwenden, um Abfragen zu schreiben, die NULL-Werte verarbeiten können.
 
-[IsNull ()](./isnullfunction.md), [IsNotNull ()](./isnotnullfunction.md), [IsEmpty ()](./isemptyfunction.md), [isnotempty ()](./isnotemptyfunction.md). 
+[isnull()](./isnullfunction.md), [isnotnull()](./isnotnullfunction.md), [isempty()](./isemptyfunction.md), [isnotempty()](./isnotemptyfunction.md). 
 
 **Tipps**
 
 So erzielen Sie die optimale Leistung:
 
-* **Verwenden Sie einfache Vergleiche** zwischen dem Spaltennamen und Konstanten. ("Constant" bedeutet Konstante über der Tabelle. daher `now()` sind und in `ago()` Ordnung, und es handelt sich um skalare Werte, die mit einer- [ `let` Anweisung](./letstatement.md)zugewiesen werden.)
+* **Verwenden Sie einfache Vergleiche** zwischen dem Spaltennamen und Konstanten. („Konstant“ bedeutet konstant innerhalb der Tabelle, d. h. `now()` und `ago()` sind ebenso zulässig wie Skalarwerte, die mithilfe einer [`let`-Anweisung](./letstatement.md) zugewiesen werden.)
 
     Beispielsweise wird `where Timestamp >= ago(1d)` gegenüber `where floor(Timestamp, 1d) == ago(1d)` bevorzugt.
 
 * **Einfachste Begriffe zuerst**: Wenn Sie mehrere mit `and` verbundene Klauseln haben, stellen Sie die Klauseln, die nur eine Spalte umfassen, an den Anfang. `Timestamp > ago(1d) and OpId == EventId` ist also besser als anders herum.
 
-Weitere Informationen finden Sie in der Zusammenfassung der [verfügbaren Zeichen folgen Operatoren](./datatypes-string-operators.md) und der Zusammenfassung der [verfügbaren numerischen Operatoren](./numoperators.md).
+Weitere Informationen finden Sie in der Zusammenfassung der [verfügbaren Zeichenfolgenoperatoren](./datatypes-string-operators.md) und in der Zusammenfassung der [verfügbaren numerischen Operatoren](./numoperators.md).
 
-## <a name="example-simple-comparisons-first"></a>Beispiel: einfache Vergleiche zuerst
+## <a name="example-simple-comparisons-first"></a>Beispiel: Einfache Vergleiche zuerst
 
 ```kusto
 Traces
@@ -64,9 +64,9 @@ Traces
     and ActivityId == SubActivityId 
 ```
 
-In diesem Beispiel werden Datensätze abgerufen, die nicht älter als 1 Stunde sind, aus einer Quelle `MyCluster` mit dem Namen stammen und zwei Spalten mit dem gleichen Wert aufweisen. 
+Dieses Beispiel ruft Datensätze ab, die nicht älter als 1 Stunde sind, aus der Quelle namens `MyCluster` stammen und zwei Spalten mit dem gleichen Wert aufweisen. 
 
-Beachten Sie, dass der Vergleich zwischen zwei Spalten zuletzt durchgesetzt wurde, da der Index nicht verwendet werden kann und eine Überprüfung erzwungen wird.
+Beachten Sie, dass wir den Vergleich zwischen zwei Spalten an das Ende stellen, da der Index nicht verwendet werden kann und ein Scan erzwungen wird.
 
 ## <a name="example-columns-contain-string"></a>Beispiel: Spalten enthalten Zeichenfolge
 
@@ -74,5 +74,5 @@ Beachten Sie, dass der Vergleich zwischen zwei Spalten zuletzt durchgesetzt wurd
 Traces | where * has "Kusto"
 ```
 
-Alle Zeilen, in denen das Wort "Kusto" in einer beliebigen Spalte angezeigt wird.
+Alle Zeilen, in denen das Wort „Kusto“ in einer beliebigen Spalte vorkommt.
  

@@ -1,6 +1,6 @@
 ---
-title: 'Join-Operator: Azure-Daten-Explorer'
-description: Dieser Artikel beschreibt den Join-Operator in Azure Daten-Explorer.
+title: 'join-Operator: Azure Data Explorer'
+description: In diesem Artikel wird der join-Operator in Azure Data Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -12,15 +12,15 @@ ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
 ms.openlocfilehash: b90e5f1c95ec75a946490cd75b5dd89ad2cb1aba
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95513334"
 ---
 # <a name="join-operator"></a>join-Operator
 
-Führen Sie die Zeilen zweier Tabellen aus, um eine neue Tabelle zu bilden, indem Sie die Werte der angegebenen Spalten aus den einzelnen Tabellen abgleichen.
+Mergt die Zeilen zweier Tabellen, um eine neue Tabelle zu erzeugen, indem Werte aus den angegebenen Spalten aus beiden Tabellen zugeordnet werden.
 
 ```kusto
 Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2
@@ -28,35 +28,35 @@ Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2
 
 ## <a name="syntax"></a>Syntax
 
-*Linkfähig* `|` `join` [*Joinparameters*] `(` *rightfähige* `)` `on` *Attribute*
+*LeftTable* `|` `join` [*JoinParameters*] `(` *RightTable* `)` `on` *Attributes*
 
 ## <a name="arguments"></a>Argumente
 
-* *Lefables*: die **linke** Tabelle oder der Tabellen Ausdruck, die manchmal als **äußere** Tabelle bezeichnet werden, deren Zeilen zusammengeführt werden sollen. Wird als bezeichnet `$left` .
+* *LeftTable*: Die **linke** Tabelle oder der tabellarischen Ausdruck, die bzw. der manchmal als **äußere** Tabelle bezeichnet wird, deren Zeilen gemergt werden sollen. Wird als `$left` bezeichnet.
 
-* *Righables*: die **Rechte** Tabelle oder der Rechte tabellarische Ausdruck, die manchmal als **innere** Tabelle bezeichnet werden, deren Zeilen zusammengeführt werden sollen. Wird als bezeichnet `$right` .
+* *RightTable*: Die **rechte** Tabelle oder der tabellarischen Ausdruck, die bzw. der manchmal als **innere** Tabelle bezeichnet wird, deren Zeilen gemergt werden sollen. Wird als `$right` bezeichnet.
 
-* *Attribute*: eine oder mehrere durch Trennzeichen getrennte **Regeln** , die beschreiben, wie Zeilen von *linksfähigen* Zeilen von *rightfähigen* abgeglichen werden. Mehrere Regeln werden mithilfe des `and` logischen Operators ausgewertet.
+* *Attribute*: Eine oder mehrere durch Trennzeichen getrennte **Regeln**, die beschreiben, wie Zeilen aus *LeftTable* mit Zeilen aus *RightTable* abgeglichen werden. Mehrere Regeln werden mithilfe des logischen Operators `and` ausgewertet.
 
-  Eine **Regel** kann eine der folgenden sein:
+  Folgende **Regeln** sind möglich:
 
   |Regelart        |Syntax          |Predicate    |
   |-----------------|--------------|-------------------------|
-  |Gleichheit nach Name |*ColumnName*    |`where`*Linksbar*. *ColumnName* `==` *Righbar*. *ColumnName*|
-  |Gleichheit nach Wert|`$left.`*LeftColumn* `==` `$right.` *Rechte Spalte*|`where``$left.` *LeftColumn* `==` `$right.` *Rechte Spalte*       |
+  |Gleichheit nach Name |*ColumnName*    |`where` *LeftTable*.*ColumnName* `==` *RightTable*.*ColumnName*|
+  |Gleichheit nach Wert|`$left.`*LeftColumn* `==` `$right.`*RightColumn*|`where` `$left.`*LeftColumn* `==` `$right.`*RightColumn*       |
 
     > [!NOTE]
-    > Für ' Gleichheit nach Wert ' *müssen* die Spaltennamen mit der anwendbaren Besitzer Tabelle qualifiziert werden, die durch die `$left` -und- `$right` Notationen gekennzeichnet ist.
+    > Für „Gleichheit nach Wert“ *müssen* die Spaltennamen mit der anwendbaren Besitzertabelle qualifiziert werden, die durch die Notationen `$left` und `$right` gekennzeichnet ist.
 
-* *Joinparameters*: NULL oder mehr durch Leerzeichen getrennte Parameter in Form eines *namens* `=` *Werts* , die das Verhalten des Zeilen Übereinstimmungs Vorgangs und Ausführungs Plans steuern. Die folgenden Parameter werden unterstützt:
+* *JoinParameters*: Null oder mehr durch Leerzeichen getrennte Parameter in Form von *Name* `=` *Wert*, die das Verhalten des Vorgangs zum Zuordnen der Zeilen und den Ausführungsplan steuern. Die folgenden Parameter werden unterstützt:
 
     ::: zone pivot="azuredataexplorer"
 
-    |Parameter Name           |Werte                                        |BESCHREIBUNG                                  |
+    |Parametername           |Werte                                        |BESCHREIBUNG                                  |
     |---------------|----------------------------------------------|---------------------------------------------|
-    |`kind`         |Join-Varianten|Siehe [joinvarianten](#join-flavors)|                                             |
-    |`hint.remote`  |`auto`, `left`, `local`, `right`              |Siehe [Cluster übergreifende](joincrosscluster.md) Verknüpfung|
-    |`hint.strategy`|Ausführungs Hinweise                               |Siehe [Joinhinweise](#join-hints)                |
+    |`kind`         |Join-Varianten|Siehe [Join-Varianten](#join-flavors)|                                             |
+    |`hint.remote`  |`auto`, `left`, `local`, `right`              |Siehe [clusterübergreifender Join](joincrosscluster.md)|
+    |`hint.strategy`|Ausführungshinweise                               |Siehe [Join-Hinweise](#join-hints)                |
 
     ::: zone-end
 
@@ -64,47 +64,47 @@ Table1 | join (Table2) on CommonColumn, $left.Col1 == $right.Col2
 
     |Name           |Werte                                        |BESCHREIBUNG                                  |
     |---------------|----------------------------------------------|---------------------------------------------|
-    |`kind`         |Join-Varianten|Siehe [joinvarianten](#join-flavors)|                                             |
+    |`kind`         |Join-Varianten|Siehe [Join-Varianten](#join-flavors)|                                             |
     |`hint.remote`  |`auto`, `left`, `local`, `right`              |                                             |
-    |`hint.strategy`|Ausführungs Hinweise                               |Siehe [Joinhinweise](#join-hints)                |
+    |`hint.strategy`|Ausführungshinweise                               |Siehe [Join-Hinweise](#join-hints)                |
 
     ::: zone-end
 
 > [!WARNING]
-> Wenn `kind` nicht angegeben wird, ist die standardmäßige joinkonfiguration `innerunique` . Dies unterscheidet sich von anderen Analyseprodukten, die über `inner` die Standardkonfiguration verfügen.  Informationen zu den Unterschieden finden Sie unter [Join-Varianten](#join-flavors) , um sicherzustellen, dass die Abfrage die gewünschten Ergebnisse liefert.
+> Wenn `kind` nicht angegeben ist, ist die Join-Standardvariante `innerunique`. Dies unterscheidet sich von anderen Analyseprodukten, die `inner` als Standardvariante verwenden.  Informationen zu den Unterschieden finden Sie unter [Join-Varianten](#join-flavors), damit Sie sicherstellen können, dass die Abfrage die gewünschten Ergebnisse liefert.
 
 ## <a name="returns"></a>Gibt zurück
 
-**Das Ausgabe Schema hängt von der joinkonfiguration ab:**
+**Das Ausgabeschema hängt von der Join-Variante ab:**
 
-| Joinkonfiguration | Ausgabeschema |
+| Join-Variante | Ausgabeschema |
 |---|---|
 |`kind=leftanti`, `kind=leftsemi`| Die Ergebnistabelle enthält nur Spalten von der linken Seite.|
 | `kind=rightanti`, `kind=rightsemi` | Die Ergebnistabelle enthält nur Spalten von der rechten Seite.|
-|  `kind=innerunique`, `kind=inner`, `kind=leftouter`, `kind=rightouter`, `kind=fullouter` |  Einer Spalte für jede Spalte in jeder der beiden Tabellen, einschließlich der übereinstimmenden Schlüssel. Die Spalten der rechten Seite werden bei Namenskonflikten automatisch umbenannt. |
+|  `kind=innerunique`, `kind=inner`, `kind=leftouter`, `kind=rightouter`, `kind=fullouter` |  Eine Spalte für jede Spalte in jeder der beiden Tabellen, einschließlich der übereinstimmenden Schlüssel. Die Spalten der rechten Seite werden bei Namenskonflikten automatisch umbenannt. |
    
-**Ausgabedaten Sätze sind von der joinkonfiguration abhängig:**
+**Ausgabedatensätze sind von der Join-Variante abhängig:**
 
    > [!NOTE]
    > Wenn mehrere Zeilen mit denselben Werten für diese Felder vorhanden sind, erhalten Sie Zeilen für alle Kombinationen.
    > Eine Übereinstimmung ist eine ausgewählte Zeile in einer Tabelle, die in allen `on` -Feldern denselben Wert wie eine Zeile in der anderen Tabelle aufweist.
 
-| Joinkonfiguration | Ausgabedaten Sätze |
+| Join-Variante | Ausgabedatensätze |
 |---|---|
-|`kind=leftanti`, `kind=leftantisemi`| Gibt alle Datensätze von der linken Seite zurück, für die keine Übereinstimmungen von rechts vorhanden sind.|
-| `kind=rightanti`, `kind=rightantisemi`| Gibt alle Datensätze von der rechten Seite zurück, für die keine Übereinstimmungen von Links vorhanden sind.|
-| `kind` nicht angegeben `kind=innerunique`| Nur eine Zeile der linken Seite wird für jeden Wert des `on` -Schlüssels abgeglichen. Die Ausgabe enthält eine Zeile für jede Übereinstimmung dieser Zeile mit Zeilen der rechten Seite.|
-| `kind=leftsemi`| Gibt alle Datensätze von der linken Seite zurück, die Übereinstimmungen von rechts aufweisen. |
-| `kind=rightsemi`| Gibt alle Datensätze von der rechten Seite zurück, die Übereinstimmungen von Links aufweisen. |
-|`kind=inner`| Enthält eine Zeile in der Ausgabe für jede Kombination aus übereinstimmenden Zeilen von links nach rechts. |
-| `kind=leftouter` (oder `kind=rightouter` oder `kind=fullouter`)| Enthält eine Zeile für jede Zeile auf der linken und rechten Seite, auch wenn keine Entsprechung vorliegt. Die nicht übereinstimmenden Ausgabe Zellen enthalten Nullen. |
+|`kind=leftanti`, `kind=leftantisemi`| Gibt alle Datensätze von der linken Seite zurück, für die keine Übereinstimmungen auf der rechten Seite vorhanden sind.|
+| `kind=rightanti`, `kind=rightantisemi`| Gibt alle Datensätze von der rechten Seite zurück, für die keine Übereinstimmungen auf der linken Seite vorhanden sind.|
+| `kind` nicht angegeben, `kind=innerunique`| Nur eine Zeile der linken Seite wird für jeden Wert des `on` -Schlüssels abgeglichen. Die Ausgabe enthält eine Zeile für jede Übereinstimmung dieser Zeile mit Zeilen der rechten Seite.|
+| `kind=leftsemi`| Gibt alle Datensätze von der linken Seite zurück, für die Übereinstimmungen auf der rechten Seite vorhanden sind. |
+| `kind=rightsemi`| Gibt alle Datensätze von der rechten Seite zurück, für die Übereinstimmungen auf der linken Seite vorhanden sind. |
+|`kind=inner`| Enthält eine Zeile in der Ausgabe für jede Kombination von übereinstimmenden Zeilen von der linken und rechten Seite. |
+| `kind=leftouter` (oder `kind=rightouter` oder `kind=fullouter`)| Enthält eine Zeile für jede Zeile auf der linken und rechten Seite, auch wenn keine Übereinstimmung vorliegt. Die Ausgabezellen ohne Übereinstimmung enthalten NULL-Werte. |
 
 > [!TIP]
-> Wenn eine Tabelle immer kleiner als die andere Tabelle ist, verwenden Sie diese als linke (weitergeleitete) Seite des Joins, um eine optimale Leistung zu erzielen.
+> Wenn eine Tabelle immer kleiner als die andere ist, verwenden Sie diese für die bestmögliche Leistung als die linke (weitergeleitete) Seite der Verknüpfung.
 
 ## <a name="example"></a>Beispiel
 
-Erhalten Sie erweiterte Aktivitäten aus einer `login` , die einige Einträge als Anfang und Ende einer Aktivität markieren.
+Abrufen erweiterter Aktivitäten aus einem `login`, in dem einige Einträge den Start und das Ende einer Aktivität markieren.
 
 ```kusto
 let Events = MyLogTable | where type=="Event" ;
@@ -132,23 +132,23 @@ Events
 
 ## <a name="join-flavors"></a>Join-Varianten
 
-Der genaue Typ des Join-Operators wird mit dem *Kind* -Schlüsselwort angegeben. Die folgenden Varianten des Join-Operators werden unterstützt:
+Die genaue Variante des Join-Operators wird mit dem *kind*-Schlüsselwort angegeben. Die folgenden Varianten des Join-Operators werden unterstützt:
 
-|Joinart/-Konfiguration|BESCHREIBUNG|
+|Join-Art/-Variante|BESCHREIBUNG|
 |--|--|
-|[`innerunique`](#default-join-flavor) (oder leer als Standard)|Innerer Join mit linker seitiger Deduplizierung|
-|[`inner`](#inner-join-flavor)|Innerer Standard Beitritt|
+|[`innerunique`](#default-join-flavor) (oder leer als Standardwert)|Innerer Join mit linker seitiger Deduplizierung|
+|[`inner`](#inner-join-flavor)|Innerer Standard-Join|
 |[`leftouter`](#left-outer-join-flavor)|Left Outer Join|
 |[`rightouter`](#right-outer-join-flavor)|Rechte äußere Verknüpfung|
 |[`fullouter`](#full-outer-join-flavor)|Vollständiger äußerer Join|
 |[`leftanti`](#left-anti-join-flavor), [`anti`](#left-anti-join-flavor) oder [`leftantisemi`](#left-anti-join-flavor)|Linker Anti-Join|
 |[`rightanti`](#right-anti-join-flavor) oder [`rightantisemi`](#right-anti-join-flavor)|Rechter Anti-Join|
-|[`leftsemi`](#left-semi-join-flavor)|Linker Semijoin|
-|[`rightsemi`](#right-semi-join-flavor)|Rechter Semijoin|
+|[`leftsemi`](#left-semi-join-flavor)|Linker Semi-Join|
+|[`rightsemi`](#right-semi-join-flavor)|Rechter Semi-Join|
 
-### <a name="default-join-flavor"></a>Standardmäßige joinkonfiguration
+### <a name="default-join-flavor"></a>Join-Standardvariante
 
-Die standardmäßige joinkonfiguration ist eine innere Verknüpfung mit der linken Seite der Deduplizierung. Die standardjoinimplementierung ist in typischen Szenarios für die Protokoll-und Ablauf Verfolgungs Analyse hilfreich, in denen zwei Ereignisse korreliert werden sollen, die jeweils mit einem Filter Kriterium übereinstimmen. Sie möchten alle Vorkommen des Phänomens wiederholen und mehrere Vorkommen der Mitwirkenden Ablauf Verfolgungs Datensätze ignorieren.
+Die Join- Standardvariante ist ein innerer Join mit linksseitiger Deduplizierung. Die Join-Standardimplementierung ist in typischen Protokoll- und Ablaufverfolgungsanalyse-Szenarien hilfreich, in denen zwei Ereignisse korreliert werden sollen, die jeweils mit einem Filterkriterium übereinstimmen. Sie möchten alle Vorkommen des Phänomens zurückgeben und mehrere Vorkommen der beitragenden Stapelüberwachungsdatensätze ignorieren.
 
 ``` 
 X | join Y on Key
@@ -156,7 +156,7 @@ X | join Y on Key
 X | join kind=innerunique Y on Key
 ```
 
-Die folgenden beiden Beispiel Tabellen werden verwendet, um den Vorgang des Joins zu erläutern.
+Die folgenden beiden Beispieltabellen werden verwendet, um den Vorgang des Joins zu erläutern.
 
 **Tabelle X**
 
@@ -176,11 +176,11 @@ Die folgenden beiden Beispiel Tabellen werden verwendet, um den Vorgang des Join
 |c |30
 |T |40
 
-Der Standard Join führt einen inneren Join aus, nachdem die Deduplizierung der linken Seite auf dem joinschlüssel durchführt (bei der Deduplizierung wird der erste Datensatz beibehalten).
+Der standardmäßige Join führt einen inneren Join nach der Deduplizierung der linken Seite für den Join-Schlüssel durch (die Deduplizierung behält den ersten Datensatz bei).
 
-Bei dieser Anweisung: `X | join Y on Key`
+Wenn die folgende Anweisung gilt: `X | join Y on Key`,
 
-die effektive linke Seite des Joins, Tabelle X nach der Deduplizierung, wäre:
+würde die effektive linke Seite des Joins (Tabelle X nach Deduplizierung) folgendermaßen lauten:
 
 |Schlüssel |Wert1
 |---|---
@@ -215,11 +215,11 @@ X | join Y on Key
 |c|4|c|30|
 
 > [!NOTE]
-> Die Schlüssel ' a ' und ' 'd ' werden nicht in der Ausgabe angezeigt, da auf der linken und der rechten Seite keine übereinstimmenden Schlüssel vorhanden waren.
+> Die Schlüssel „a“ und „d“ werden nicht in der Ausgabe angezeigt, da es keine übereinstimmenden Schlüssel links und rechts gab.
 
-### <a name="inner-join-flavor"></a>Innere joinkonfiguration
+### <a name="inner-join-flavor"></a>Inner-Join-Variante
 
-Die innere joinfunktion ähnelt der standardmäßigen inneren Verknüpfung aus der SQL-Welt. Ein Ausgabedatensatz wird erstellt, wenn ein Datensatz auf der linken Seite denselben joinschlüssel wie der Datensatz auf der rechten Seite aufweist.
+Die Inner-Join-Funktion ähnelt dem Standard-inner-join aus der SQL-Welt. Ein Ausgabedatensatz wird erstellt, wenn ein Datensatz auf der linken Seite über den gleichen Join-Schlüssel verfügt wie der Datensatz auf der rechten Seite.
 
 ```kusto
 let X = datatable(Key:string, Value1:long)
@@ -247,17 +247,17 @@ X | join kind=inner Y on Key
 |c|4|c|30|
 
 > [!NOTE]
-> * (b, 10) auf der rechten Seite wurde zweimal verknüpft: mit (b, 2) und (b, 3) auf der linken Seite.
-> * (c, 4) auf der linken Seite wurde zweimal verknüpft: mit (c, 20) und (c, 30) auf der rechten Seite.
+> * Für (b,10) auf der rechten Seite wurden zwei Joins verwendet: mit (b,2) und (b,3) auf der linken Seite.
+> * Für (c,4) auf der linken Seite wurden zwei Joins verwendet: mit (c,20) und (c,30) auf der rechten Seite.
 
-### <a name="innerunique-join-flavor"></a>Innerunique-Join-Konfiguration
+### <a name="innerunique-join-flavor"></a>Innerunique-Join-Variante
  
-Verwenden Sie die **innerunique-Join-** Konfiguration, um Schlüssel von der linken Seite zu deduplizieren. Das Ergebnis ist eine Zeile in der Ausgabe aller Kombinationen aus deduplizierten linken und rechten Schlüsseln.
+Verwenden Sie die **Innerunique-Join-Variante**, um Schlüssel von der linken Seite zu deduplizieren. Das Ergebnis ist eine Zeile in der Ausgabe aus jeder Kombination aus deduplizierten linken und rechten Schlüsseln.
 
 > [!NOTE]
-> die **innerunique** -Konfiguration kann zwei mögliche Ausgaben ergeben, und beide sind richtig.
-In der ersten Ausgabe hat der Joinoperator den ersten Schlüssel, der in T1 mit dem Wert "Val 1.1" angezeigt wird, nach dem Zufallsprinzip ausgewählt und mit T2-Schlüsseln abgeglichen.
-In der zweiten Ausgabe hat der Join-Operator zufällig den zweiten Schlüssel ausgewählt, der in T1 mit dem Wert "Val 1.2" angezeigt wird, und mit T2-Schlüsseln übereinstimmen.
+> Die **innerunique-Variante** kann zwei mögliche Ausgaben ergeben, und beide sind richtig.
+In der ersten Ausgabe hat der join-Operator den ersten Schlüssel, der in t1 mit dem Wert „val1.1“ vorhanden ist, nach dem Zufallsprinzip ausgewählt und mit t2-Schlüsseln abgeglichen.
+In der zweiten Ausgabe hat der join-Operator den zweiten Schlüssel, der in t1 mit dem Wert „val1.2“ vorhanden ist, nach dem Zufallsprinzip ausgewählt und mit t2-Schlüsseln abgeglichen.
 
 ```kusto
 let t1 = datatable(key:long, value:string)  
@@ -278,8 +278,8 @@ on key
 
 |Schlüssel|value|key1|value1|
 |---|---|---|---|
-|1|Val 1.1|1|Val 1.3|
-|1|Val 1.1|1|Val 1.4|
+|1|val1.1|1|val1.3|
+|1|val1.1|1|val1.4|
 
 ```kusto
 let t1 = datatable(key:long, value:string)  
@@ -300,14 +300,14 @@ on key
 
 |Schlüssel|value|key1|value1|
 |---|---|---|---|
-|1|Val 1.2|1|Val 1.3|
-|1|Val 1.2|1|Val 1.4|
+|1|val1.2|1|val1.3|
+|1|val1.2|1|val1.4|
 
-* Kusto ist für das Übermitteln von Filtern, die nach dem zur `join` entsprechenden joinseite stehen, nach links oder rechts optimiert.
+* Kusto ist so optimiert, dass Filter, die nach dem `join` vorhanden sind, nach Möglichkeit auf die entsprechende Join-Seite (linke oder rechte Seite) gepusht werden.
 
-* Manchmal ist der verwendete Wert **innerunique** , und der Filter wird auf der linken Seite des Joins weitergegeben. Der Typ wird automatisch weitergegeben, und die Schlüssel, die für diesen Filter gelten, werden immer in der Ausgabe angezeigt.
+* Manchmal wird **innerunique** als Variante verwendet, und der Filter wird an die linke Seite des Joins weitergegeben. Die Variante wird automatisch weitergegeben, und die Schlüssel, die für diesen Filter gelten, werden immer in der Ausgabe angezeigt.
     
-* Verwenden Sie das obige Beispiel, und fügen Sie einen Filter hinzu `where value == "val1.2" ` . Dabei wird immer das zweite Ergebnis angezeigt, und es wird nie das erste Ergebnis für die Datasets zurückgibt:
+* Verwenden Sie das Beispiel oben, und fügen Sie einen Filter `where value == "val1.2" ` hinzu. Dabei wird immer das zweite Ergebnis und nie das erste Ergebnis für die Datasets zurückgegeben:
 
 ```kusto
 let t1 = datatable(key:long, value:string)  
@@ -329,12 +329,12 @@ on key
 
 |Schlüssel|value|key1|value1|
 |---|---|---|---|
-|1|Val 1.2|1|Val 1.3|
-|1|Val 1.2|1|Val 1.4|
+|1|val1.2|1|val1.3|
+|1|val1.2|1|val1.4|
 
-### <a name="left-outer-join-flavor"></a>Linker äußerer Jointyp
+### <a name="left-outer-join-flavor"></a>Linke Outer-Join-Variante
 
-Das Ergebnis einer linken äußeren Verknüpfung für die Tabellen X und Y enthält immer alle Datensätze der linken Tabelle (x), auch wenn die Joinbedingung keinen übereinstimmenden Datensatz in der rechten Tabelle (Y) findet.
+Das Ergebnis eines linken äußeren Joins für die Tabellen X und Y enthält immer alle Datensätze der linken Tabelle (X), auch wenn die Join-Bedingung keinen übereinstimmenden Datensatz in der rechten Tabelle (Y) findet.
 
 ```kusto
 let X = datatable(Key:string, Value1:long)
@@ -362,9 +362,9 @@ X | join kind=leftouter Y on Key
 |c|4|c|30|
 |a|1|||
 
-### <a name="right-outer-join-flavor"></a>Rechter äußerer Join-Typ
+### <a name="right-outer-join-flavor"></a>Rechte Outer-Join-Variante
 
-Die Rechte äußere joinkonfiguration ähnelt der linken äußeren Verknüpfung, die Verarbeitung der Tabellen wird jedoch umgekehrt.
+Die rechte Outer-Join-Variante ähnelt dem linken Outer-Join, allerdings werden die Tabellen umgekehrt behandelt.
 
 ```kusto
 let X = datatable(Key:string, Value1:long)
@@ -392,9 +392,9 @@ X | join kind=rightouter Y on Key
 |c|4|c|30|
 |||T|40|
 
-### <a name="full-outer-join-flavor"></a>Vollständiger äußerer Join-Vorgang
+### <a name="full-outer-join-flavor"></a>Vollständige Outer-Join-Variante
 
-Ein vollständiger äußerer Join kombiniert die Auswirkung der Anwendung von linken und rechten äußeren Joins. Wenn Datensätze in den verbundenen Tabellen nicht übereinstimmen, enthält das Resultset `null` Werte für jede Spalte der Tabelle, für die keine übereinstimmende Zeile vorhanden ist. Für Datensätze, die eine Entsprechung aufweisen, wird eine einzelne Zeile im Resultset erstellt, die aus beiden Tabellen aufgefüllte Felder enthält.
+Ein vollständiger Outer-Join kombiniert den Effekt der Anwendung von sowohl linken als auch rechten Outer-Joins. Wenn Datensätze in verknüpften Tabellen nicht übereinstimmen, hat das Resultset für jede Spalte der Tabelle, für die eine übereinstimmende Zeile fehlt, `null`-Werte. Für die Datensätze, die übereinstimmen, wird eine einzelne Zeile im Resultset erstellt, das Felder mit Werten aus beiden Tabellen enthält.
 
 ```kusto
 let X = datatable(Key:string, Value1:long)
@@ -423,9 +423,9 @@ X | join kind=fullouter Y on Key
 |||T|40|
 |a|1|||
 
-### <a name="left-anti-join-flavor"></a>Linke Anti-Join-Konfiguration
+### <a name="left-anti-join-flavor"></a>Linke Anti-Join-Variante
 
-Linker Anti-Join gibt alle Datensätze von der linken Seite zurück, die mit keinem Datensatz von der rechten Seite identisch sind.
+Bei einem linken Anti-Join werden alle Datensätzen von der linken Seite zurückgegeben, die nicht mit einem Datensatz von der rechten Seite übereinstimmen.
 
 ```kusto
 let X = datatable(Key:string, Value1:long)
@@ -452,9 +452,9 @@ X | join kind=leftanti Y on Key
 > [!NOTE]
 > Anti-Join formt die Abfrage „NOT IN“.
 
-### <a name="right-anti-join-flavor"></a>Rechter Anti-Join-Typ
+### <a name="right-anti-join-flavor"></a>Rechte Anti-Join-Variante
 
-Der Rechte Anti-Join gibt alle Datensätze von der rechten Seite zurück, die mit keinem Datensatz von der linken Seite identisch sind.
+Bei einem rechten Anti-Join werden alle Datensätzen von der rechten Seite zurückgegeben, die nicht mit einem Datensatz von der linken Seite übereinstimmen.
 
 ```kusto
 let X = datatable(Key:string, Value1:long)
@@ -481,9 +481,9 @@ X | join kind=rightanti Y on Key
 > [!NOTE]
 > Anti-Join formt die Abfrage „NOT IN“.
 
-### <a name="left-semi-join-flavor"></a>Linker halbjointyp
+### <a name="left-semi-join-flavor"></a>Linke Semi-Join-Variante
 
-Linker Semijoin gibt alle Datensätze von der linken Seite zurück, die einem Datensatz von der rechten Seite entsprechen. Es werden nur Spalten von der linken Seite zurückgegeben.
+Bei einem linken Semi-Join werden alle Datensätzen von der linken Seite zurückgegeben, die mit einem Datensatz von der rechten Seite übereinstimmen. Es werden nur Spalten von der linken Seite zurückgegeben.
 
 ```kusto
 let X = datatable(Key:string, Value1:long)
@@ -509,9 +509,9 @@ X | join kind=leftsemi Y on Key
 |b|2|
 |c|4|
 
-### <a name="right-semi-join-flavor"></a>Rechter halbjointyp
+### <a name="right-semi-join-flavor"></a>Rechte Semi-Join-Variante
 
-Rechter Semijoin gibt alle Datensätze von der rechten Seite zurück, die einem Datensatz von der linken Seite entsprechen. Es werden nur Spalten von der rechten Seite zurückgegeben.
+Bei einem rechten Semi-Join werden alle Datensätzen von der rechten Seite zurückgegeben, die mit einem Datensatz von der linken Seite übereinstimmen. Es werden nur Spalten von der rechten Seite zurückgegeben.
 
 ```kusto
 let X = datatable(Key:string, Value1:long)
@@ -539,18 +539,18 @@ X | join kind=rightsemi Y on Key
 
 ### <a name="cross-join"></a>Cross-Join
 
-Kusto stellt nicht nativ eine Kreuz Verknüpfungs Konfiguration bereit. Der Operator kann nicht mit markiert werden `kind=cross` .
-Verwenden Sie zum simulieren eine Pseudo Taste.
+Kusto stellt nicht nativ eine Cross-Join-Variante bereit. Der Operator kann nicht mit `kind=cross` markiert werden.
+Verwenden Sie zum Simulieren einen Pseudoschlüssel.
 
 `X | extend dummy=1 | join kind=inner (Y | extend dummy=1) on dummy`
 
-## <a name="join-hints"></a>Joinhinweise
+## <a name="join-hints"></a>Join-Hinweise
 
-Der- `join` Operator unterstützt eine Reihe von hinweisen, die Steuern, wie eine Abfrage ausgeführt wird.
-Diese Hinweise ändern nicht die Semantik von `join` , können sich jedoch auf die Leistung auswirken.
+Der `join`-Operator unterstützt eine Reihe von Hinweisen, die steuern, wie eine Abfrage ausgeführt wird.
+Diese Hinweise ändern nicht die Semantik von `join`, können sich jedoch auf die Leistung auswirken.
 
-Joinhinweise werden in den folgenden Artikeln erläutert:
+Join-Hinweise werden in den folgenden Artikeln erläutert:
 
-* `hint.shufflekey=<key>`und `hint.strategy=shuffle`  -  [shuffle-Abfrage](shufflequery.md)
+* `hint.shufflekey=<key>` und `hint.strategy=shuffle` - [Shuffleabfrage](shufflequery.md)
 * `hint.strategy=broadcast` - [Broadcast-Join](broadcastjoin.md)
-* `hint.remote=<strategy>` - [Cluster übergreifender Join](joincrosscluster.md)
+* `hint.remote=<strategy>` - [Clusterübergreifender Join](joincrosscluster.md)

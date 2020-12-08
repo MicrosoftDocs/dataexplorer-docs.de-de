@@ -1,6 +1,6 @@
 ---
-title: 'Zeichen folgen Operatoren: Azure Daten-Explorer'
-description: In diesem Artikel werden Zeichen folgen Operatoren in Azure Daten-Explorer beschrieben.
+title: 'String-Operator: Azure Data Explorer'
+description: In diesem Artikel wird der String-Operator in Azure Data Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -9,40 +9,40 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/19/2020
 ms.localizationpriority: high
-ms.openlocfilehash: d7c975dcf3fb00ed1108f55957a35f494310203e
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.openlocfilehash: 845f0b5c9446f927fadf0141de4568cc28641c8d
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
-ms.locfileid: "95513232"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96320688"
 ---
 # <a name="string-operators"></a>Zeichenfolgenoperatoren
 
-Kusto bietet eine Vielzahl von Abfrage Operatoren zum Durchsuchen von Zeichen folgen Datentypen. Im folgenden Artikel wird beschrieben, wie Zeichen folgen Begriffe indiziert werden, die Zeichen folgen Abfrage Operatoren aufgelistet werden und Tipps zur Leistungsoptimierung erhalten.
+Kusto bietet eine Vielzahl von Abfrageoperatoren zum Durchsuchen von Zeichenfolgendatentypen. Im folgenden Artikel wird beschrieben, wie Zeichenfolgenbegriffe indiziert werden, die Zeichenfolgenabfrageoperatoren werden aufgelistet, und Sie erhalten Tipps zur Leistungsoptimierung.
 
-## <a name="understanding-string-terms"></a>Verstehen von Zeichen folgen Begriffen
+## <a name="understanding-string-terms"></a>Verstehen von Zeichenfolgenbegriffen
 
-Kusto indiziert alle Spalten, einschließlich Spalten vom Typ `string` . Abhängig von den eigentlichen Daten werden mehrere Indizes für diese Spalten erstellt. Diese Indizes sind nicht direkt verfügbar, werden jedoch in Abfragen mit den `string` Operatoren verwendet, die `has` als Teil Ihres Namens enthalten sind, z `has` . b.,, `!has` `hasprefix` , `!hasprefix` . Die Semantik dieser Operatoren wird durch die Art der Codierung der Spalte vorgegeben. Anstatt eine "einfache" Teil Zeichenfolge abzugleichen, entsprechen diese Operatoren *den Begriffen*.
+Kusto indiziert alle Spalten, einschließlich Spalten vom Typ `string`. Abhängig von den tatsächlichen Daten werden mehrere Indizes für solche Spalten erstellt. Diese Indizes werden nicht direkt bereitgestellt, sondern in Abfragen mit den `string`-Operatoren verwendet, die `has` als Teil ihres Namens aufweisen, z. B. `has`, `!has`, `hasprefix`, `!hasprefix`. Die Semantik dieser Operatoren wird durch die Art der Codierung der Spalte vorgegeben. Anstatt eine „einfache“ Teilzeichenfolge abzugleichen, gleichen diese Operatoren *Begriffe* ab.
 
 ### <a name="what-is-a-term"></a>Was ist ein Begriff? 
 
-Standardmäßig wird jeder `string` Wert in maximale Sequenz von alphanumerischen ASCII-Zeichen unterteilt, und jede dieser Sequenzen wird in einen Begriff umgewandelt.
-Im folgenden sind die Begriffe z. b. `string` `Kusto` , `WilliamGates3rd` und die folgenden Teil Zeichenfolgen: `ad67d136` , `c1db` , `4f9f` , `88ef` , `d94f3b6b0b5a` .
+Standardmäßig wird jeder `string`-Wert in maximale Sequenzen von alphanumerischen ASCII-Zeichen unterteilt, und jede dieser Sequenzen wird in einen Begriff umgewandelt.
+Im folgenden `string`-Element sind die Begriffe z. B. `Kusto`, `WilliamGates3rd` und die folgenden Teilzeichenfolgen: `ad67d136`, `c1db`, `4f9f`, `88ef`, `d94f3b6b0b5a`.
 
 ```
 Kusto:  ad67d136-c1db-4f9f-88ef-d94f3b6b0b5a;;WilliamGates3rd
 ```
 
-Kusto erstellt einen Begriffs Index, der aus allen Begriffen mit *vier oder mehr Zeichen* besteht, und dieser Index wird von `has` , `!has` usw. verwendet. Wenn die Abfrage nach einem Begriff sucht, der kleiner als vier Zeichen ist, oder einen `contains` Operator verwendet, kehrt Kusto das Scannen der Werte in der Spalte wieder, wenn keine Entsprechung ermittelt werden kann. Diese Methode ist viel langsamer als der Begriff im Begriffs Index.
+Kusto erstellt einen Begriffsindex, der aus allen Begriffen besteht, die *vier Zeichen lang oder länger* sind. Dieser Index wird von `has`, `!has` usw. verwendet. Wenn die Abfrage nach einem Begriff sucht, der kleiner als vier Zeichen ist, oder einen `contains`-Operator verwendet, kehrt Kusto zum Scannen der Werte in der Spalte zurück, wenn keine Übereinstimmung ermittelt werden kann. Diese Methode ist viel langsamer als das Nachschlagen des Begriffs im Begriffsindex.
 
-## <a name="operators-on-strings"></a>Operatoren für Zeichen folgen
+## <a name="operators-on-strings"></a>Operatoren für Zeichenfolgen
 
 > [!NOTE]
-> In der folgenden Tabelle werden die folgenden Abkürzungen verwendet:
-> * RHS = Rechte Seite des Ausdrucks
-> * LHS = linke Seite des Ausdrucks
+> In der Tabelle unten werden die folgenden Abkürzungen verwendet:
+> * RS = Rechte Seite des Ausdrucks
+> * LS = Linke Seite des Ausdrucks
 > 
-> Bei Operatoren mit einem `_cs` Suffix wird Groß-/Kleinschreibung
+> Bei Operatoren mit einem `_cs`-Suffix wird Groß-/Kleinschreibung beachtet.
 
 Operator        |BESCHREIBUNG                                                       |Groß-/Kleinschreibung|Beispiel (ergibt `true`)
 ----------------|------------------------------------------------------------------|--------------|-----------------------
@@ -51,17 +51,18 @@ Operator        |BESCHREIBUNG                                                   
 `=~`            |Equals                                                            |Nein            |`"abc" =~ "ABC"`
 `!~`            |Not Equals                                                        |Nein            |`"aBc" !~ "xyz"`
 `has`           |Rechte Seite (RS) ist ein ganzer Begriff innerhalb der linken Seite (LS)     |Nein            |`"North America" has "america"`
-`!has`          |RHS ist kein vollständiger Begriff in LHS                                     |Nein            |`"North America" !has "amer"` 
-`has_cs`        |RHS ist ein ganzer Begriff in LHS                                        |Ja           |`"North America" has_cs "America"`
-`!has_cs`       |RHS ist kein vollständiger Begriff in LHS                                     |Ja           |`"North America" !has_cs "amer"` 
-`hasprefix`     |RHS ist ein Begriffs Präfix in LHS                                       |Nein            |`"North America" hasprefix "ame"`
-`!hasprefix`    |RHS ist kein Begriffs Präfix in LHS                                   |Nein            |`"North America" !hasprefix "mer"` 
-`hasprefix_cs`  |RHS ist ein Begriffs Präfix in LHS                                       |Ja           |`"North America" hasprefix_cs "Ame"`
-`!hasprefix_cs` |RHS ist kein Begriffs Präfix in LHS                                   |Ja           |`"North America" !hasprefix_cs "CA"` 
-`hassuffix`     |RHS ist ein Begriff Suffix in LHS                                       |Nein            |`"North America" hassuffix "ica"`
-`!hassuffix`    |RHS ist kein Begriffs Suffix in LHS                                   |Nein            |`"North America" !hassuffix "americ"`
-`hassuffix_cs`  |RHS ist ein Begriff Suffix in LHS                                       |Ja           |`"North America" hassuffix_cs "ica"`
-`!hassuffix_cs` |RHS ist kein Begriffs Suffix in LHS                                   |Ja           |`"North America" !hassuffix_cs "icA"`
+`!has`          |RS ist kein vollständiger Begriff in LS                                     |Nein            |`"North America" !has "amer"` 
+[`has_any`](has-anyoperator.md)       |Identisch mit `has`, funktioniert aber für jedes der Elemente                    |Nein            |`"North America" has_any("south", "north")`
+`has_cs`        |RS ist ein vollständiger Begriff in LS                                        |Ja           |`"North America" has_cs "America"`
+`!has_cs`       |RS ist kein vollständiger Begriff in LS                                     |Ja           |`"North America" !has_cs "amer"` 
+`hasprefix`     |RS ist ein Begriffspräfix in LS                                       |Nein            |`"North America" hasprefix "ame"`
+`!hasprefix`    |RS ist kein Begriffspräfix in LS                                   |Nein            |`"North America" !hasprefix "mer"` 
+`hasprefix_cs`  |RS ist ein Begriffspräfix in LS                                       |Ja           |`"North America" hasprefix_cs "Ame"`
+`!hasprefix_cs` |RS ist kein Begriffspräfix in LS                                   |Ja           |`"North America" !hasprefix_cs "CA"` 
+`hassuffix`     |RS ist ein Begriffssuffix in LS                                       |Nein            |`"North America" hassuffix "ica"`
+`!hassuffix`    |RS ist kein Begriffssuffix in LS                                   |Nein            |`"North America" !hassuffix "americ"`
+`hassuffix_cs`  |RS ist ein Begriffssuffix in LS                                       |Ja           |`"North America" hassuffix_cs "ica"`
+`!hassuffix_cs` |RS ist kein Begriffssuffix in LS                                   |Ja           |`"North America" !hassuffix_cs "icA"`
 `contains`      |Rechte Seite kommt als Teilsequenz von linker Seite vor                                |Nein            |`"FabriKam" contains "BRik"`
 `!contains`     |Rechte Seite kommt auf linker Seite nicht vor                                         |Nein            |`"Fabrikam" !contains "xyz"`
 `contains_cs`   |Rechte Seite kommt als Teilsequenz von linker Seite vor                                |Ja           |`"FabriKam" contains_cs "Kam"`
@@ -75,26 +76,26 @@ Operator        |BESCHREIBUNG                                                   
 `endswith_cs`   |Rechte Seite ist eine schließende Teilsequenz von linker Seite                               |Ja           |`"Fabrikam" endswith_cs "kam"`
 `!endswith_cs`  |Rechte Seite ist keine schließende Teilsequenz von linker Seite                           |Ja           |`"Fabrikam" !endswith_cs "brik"`
 `matches regex` |Linke Seite enthält eine Übereinstimmung für rechte Seite                                      |Ja           |`"Fabrikam" matches regex "b.*k"`
-`in`            |Entspricht einem der Elemente                                     |Ja           |`"abc" in ("123", "345", "abc")`
-`!in`           |Entspricht keinem der Elemente                                 |Ja           |`"bca" !in ("123", "345", "abc")`
+[`in`](inoperator.md)            |Entspricht einem der Elemente                                     |Ja           |`"abc" in ("123", "345", "abc")`
+[`!in`](inoperator.md)           |Entspricht keinem der Elemente                                 |Ja           |`"bca" !in ("123", "345", "abc")`
 `in~`           |Entspricht einem der Elemente                                     |Nein            |`"abc" in~ ("123", "345", "ABC")`
 `!in~`          |Entspricht keinem der Elemente                                 |Nein            |`"bca" !in~ ("123", "345", "ABC")`
-`has_any`       |Identisch `has` mit, funktioniert aber an einem der Elemente                    |Nein            |`"North America" has_any("south", "north")`
+
 
 > [!TIP]
-> Alle Operatoren `has` , die die Suche nach indizierten *Begriffen* mit vier oder mehr Zeichen und nicht mit Teil Zeichenfolgen-Übereinstimmungen enthalten. Ein Begriff wird erstellt, indem die Zeichenfolge in Sequenzen von alphanumerischen ASCII-Zeichen unterteilt wird. Siehe Grundlegendes zu [Zeichen folgen Begriffen](#understanding-string-terms).
+> Alle Operatoren, die `has`-Suchen für indizierte *Begriffe* enthalten, die vier Zeichen lang oder länger sind, und nicht für Teilzeichenfolgenübereinstimmungen. Ein Begriff wird erstellt, indem die Zeichenfolge in Sequenzen von alphanumerischen ASCII-Zeichen unterteilt wird. Weitere Informationen finden Sie unter [Verstehen von Zeichenfolgenbegriffen](#understanding-string-terms).
 
 ## <a name="performance-tips"></a>Leistungstipps
 
-Verwenden Sie für eine bessere Leistung bei zwei Operatoren, die dieselbe Aufgabe ausführen, die Groß-/Kleinschreibung.
-Beispiel:
+Verwenden Sie für bessere Leistung bei zwei Operatoren, die dieselbe Aufgabe ausführen, den Operator, der zwischen Groß-/Kleinschreibung unterscheidet.
+Zum Beispiel:
 
-* Verwenden Sie anstelle von `=~``==`
-* Verwenden Sie anstelle von `in~``in`
-* Verwenden Sie anstelle von `contains``contains_cs`
+* Verwenden Sie `==` anstelle von `=~`.
+* Verwenden Sie `in` anstelle von `in~`.
+* Verwenden Sie `contains_cs` anstelle von `contains`.
 
-Wenn Sie das vorhanden sein eines Symbols oder eines alphanumerischen Worts, das durch nicht-alphanumerische Zeichen gebunden ist, oder durch den Anfang oder das Ende eines Felds testen möchten, verwenden Sie `has` oder `in` . 
-`has` funktioniert schneller als `contains` , `startswith` oder `endswith` .
+Um schnellere Ergebnisse zu erhalten, verwenden Sie `has` oder `in`, wenn Sie auf das Vorhandensein eines Symbols oder alphanumerischen Worts, das durch nicht-alphanumerische Zeichen gebunden ist, oder auf den Anfang oder das Ende eines Felds testen. 
+`has` ist schneller als `contains`, `startswith` oder `endswith`.
 
 Beispielsweise wird die erste dieser Abfragen schneller ausgeführt:
 

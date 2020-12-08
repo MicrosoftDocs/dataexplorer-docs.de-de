@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 07/22/2019
 ms.localizationpriority: high
-ms.openlocfilehash: 44c2a5adf46d8c136675aa70a45dc89ed60c4cc8
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
+ms.openlocfilehash: 02e746a3ce929bab9883f1b4faafe7a6fb1ce953
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
-ms.locfileid: "95512739"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "95783266"
 ---
 # <a name="quickstart-create-an-azure-data-explorer-cluster-and-database"></a>Schnellstart: Erstellen eines Azure Data Explorer-Clusters und einer Datenbank
 
@@ -66,6 +66,11 @@ Erstellen Sie einen Azure Data Explorer-Cluster mit einem definierten Satz von C
 1. Wählen Sie nach Abschluss der Bereitstellung die Option **Zu Ressourcengruppe wechseln**.
 
     ![Zu Ressource wechseln](media/create-cluster-database-portal/notification-resource.png)
+
+> [!NOTE]
+> Wenn die Bereitstellung mit dem Fehler „SubscriptionNotRegistered“ fehlschlägt, wiederholen Sie den Vorgang. 
+> 
+> Bei der Bereitstellung tritt ein Fehler auf, wenn der Kusto-Ressourcenanbieter nicht bei dem unter [Azure-Ressourcenanbieter und -Typen](/azure/azure-resource-manager/management/resource-providers-and-types) beschriebenen Abonnement registriert ist. Wenn bei der Bereitstellung ein Fehler auftritt, registriert sich der Kusto-Ressourcenanbieter selbst beim Abonnement, und der Wiederholungsversuch kann erfolgreich ausgeführt werden.
 
 ## <a name="create-a-database"></a>Erstellen einer Datenbank
 

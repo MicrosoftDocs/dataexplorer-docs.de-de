@@ -1,6 +1,6 @@
 ---
-title: Extract ()-Azure Daten-Explorer | Microsoft-Dokumentation
-description: In diesem Artikel wird Extract () in Azure Daten-Explorer beschrieben.
+title: 'extract(): Azure Data Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird extract() in Azure Data Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,17 +10,17 @@ ms.topic: reference
 ms.date: 02/13/2020
 ms.localizationpriority: high
 ms.openlocfilehash: 483c926d60abef120de2a355a6fa040b9608cd7a
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95513045"
 ---
 # <a name="extract"></a>extract()
 
 Ruft eine Übereinstimmung für einen [regulären Ausdruck](./re2.md) aus einer Textzeichenfolge ab. 
 
-Konvertieren Sie optional die extrahierte Teil Zeichenfolge in den bestimmten Typ.
+Konvertiert optional die extrahierte Teilzeichenfolge in den angegebenen Typ.
 
 ```kusto
 extract("x=([0-9.]+)", 1, "hello x=45.6|wo") == "45.6"
@@ -28,14 +28,14 @@ extract("x=([0-9.]+)", 1, "hello x=45.6|wo") == "45.6"
 
 ## <a name="syntax"></a>Syntax
 
-`extract(`*Regex* `,` *capturegroup* `,` *Text* [ `,` *typeliteral*]`)`
+`extract(`*regex*`,` *captureGroup*`,` *text* [`,` *typeLiteral*]`)`
 
 ## <a name="arguments"></a>Argumente
 
-* *Regex*: ein [regulärer Ausdruck](./re2.md).
-* *capturegroup*: eine positive `int` Konstante, die die Erfassungs Gruppe angibt, die extrahiert werden soll. 0 steht für die vollständige Übereinstimmung, 1 für den mit der ersten „("Klammer")“ übereinstimmenden Wert im regulären Ausdruck, 2 oder höher für nachfolgende Klammern.
-* *Text*: ein `string` zu durch Suchvorgang.
-* *typeliteral*: Optionales typliterale (z. b. `typeof(long)` ). Die extrahierte Teilzeichenfolge wird, sofern angegeben, in diesen Typ konvertiert. 
+* *regex*: Ein [regulärer Ausdruck](./re2.md).
+* *captureGroup*: Eine positive `int`-Konstante, die die zu extrahierende Erfassungsgruppe angibt. 0 steht für die vollständige Übereinstimmung, 1 für den mit der ersten „("Klammer")“ übereinstimmenden Wert im regulären Ausdruck, 2 oder höher für nachfolgende Klammern.
+* *text*: Ein zu suchendes `string`-Element.
+* *typeLiteral*: Ein optionales Typliteral (z. B. `typeof(long)`). Die extrahierte Teilzeichenfolge wird, sofern angegeben, in diesen Typ konvertiert. 
 
 ## <a name="returns"></a>Rückgabe
 

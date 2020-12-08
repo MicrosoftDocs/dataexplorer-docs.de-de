@@ -1,6 +1,6 @@
 ---
-title: count () (Aggregations Funktion)-Azure Daten-Explorer | Microsoft-Dokumentation
-description: In diesem Artikel wird count () (Aggregations Funktion) in Azure Daten-Explorer beschrieben.
+title: 'count() (Aggregationsfunktion): Azure Data Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird die Aggregationsfunktion count() in Azure Data Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,30 +10,30 @@ ms.topic: reference
 ms.date: 06/21/2020
 ms.localizationpriority: high
 ms.openlocfilehash: e45510b893d6e84f029764aa9fdac0d326a96f94
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95513096"
 ---
-# <a name="count-aggregation-function"></a>count () (Aggregations Funktion)
+# <a name="count-aggregation-function"></a>count() (Aggregationsfunktion)
 
-Gibt die Anzahl der Datensätze pro Zusammenfassungs Gruppe zurück (oder insgesamt, wenn die Zusammenfassung ohne Gruppierung erfolgt).
+Gibt die Anzahl der Datensätze pro Zusammenfassungsgruppe zurück (oder die Gesamtzahl, wenn die Zusammenfassung ohne Gruppierung erfolgt).
 
-* Kann [nur im Kontext der Aggregation innerhalb von](summarizeoperator.md) Zusammenfassung verwendet werden.
-* Verwenden Sie [die count-Aggregations](countif-aggfunction.md) Funktion, um nur Datensätze zu zählen, die von einem Prädikat `true` zurückgegeben werden
+* Kann nur im Kontext der Aggregation in [summarize](summarizeoperator.md) verwendet werden.
+* Verwenden Sie die [countif](countif-aggfunction.md)-Aggregationsfunktion, um nur Datensätze zu zählen, für die ein Prädikat `true` zurückgibt.
 
 ## <a name="syntax"></a>Syntax
 
-FAS `count()`
+summarize `count()`
 
 ## <a name="returns"></a>Gibt zurück
 
-Gibt die Anzahl der Datensätze pro Zusammenfassungs Gruppe zurück (oder insgesamt, wenn die Zusammenfassung ohne Gruppierung erfolgt).
+Gibt die Anzahl der Datensätze pro Zusammenfassungsgruppe zurück (oder die Gesamtzahl, wenn die Zusammenfassung ohne Gruppierung erfolgt).
 
 ## <a name="example"></a>Beispiel
 
-Zählen von Ereignissen in Zuständen, beginnend mit dem Buchstaben `W` :
+Zählen von Ereignissen in Bundesstaaten, die mit dem Buchstaben `W` beginnen:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -45,6 +45,6 @@ StormEvents
 |State|Anzahl|
 |---|---|
 |WEST VIRGINIA|757|
-|Wyoming|396|
-|Washingtons|261|
-|Wisconsin|1850|
+|WYOMING|396|
+|WASHINGTON|261|
+|WISCONSIN|1850|

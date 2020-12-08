@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: overview
 ms.date: 09/24/2018
 ms.localizationpriority: high
-ms.openlocfilehash: 2af4aff9667ecc53794c63010a723494e85126fa
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
+ms.openlocfilehash: cd2ad1bebf91cacc80e3cb92fd06bc991c05cc7c
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
-ms.locfileid: "95512824"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96354053"
 ---
 # <a name="what-is-azure-data-explorer"></a>Was ist der Azure-Daten-Explorer?
 
@@ -57,7 +57,7 @@ Eine Abfrage in Azure-Daten-Explorer ist eine schreibgeschützte Anforderung, Da
 
 Azure-Daten-Explorer eignet sich gleichermaßen gut für die Verarbeitung großer Mengen strukturierter, halbstrukturierter (geschachtelte JSON-Typen) und unstrukturierter Daten (Freitext). Er ermöglicht das Suchen nach bestimmten Textbegriffen, das Auffinden konkreter Ereignisse und das Durchführen metrischer Berechnungen für strukturierte Daten. Azure Data Explorer schlägt eine Brücke zwischen Protokollen mit unstrukturiertem Text und strukturierten Zahlen und Dimensionen, indem Werte zur Laufzeit aus Freitextfeldern extrahiert werden. Das Durchsuchen der Daten wird durch eine Kombination aus schneller Textindizierung, ColumnStore- und Zeitreihenvorgängen erleichtert.
 
-Die Funktionen von Azure Data Explorer werden durch andere Dienste erweitert, die auf seiner leistungsfähigen Abfragesprache aufbauen, u. a. durch [Azure Monitor-Protokolle](/azure/log-analytics/), [Application Insights](/azure/application-insights/), [Time Series Insights](/azure/time-series-insights/) und [Windows Defender Advanced Threat Protection](/windows/security/threat-protection/windows-defender-atp/windows-defender-advanced-threat-protection/).
+Die Funktionen von Azure Data Explorer werden durch andere Dienste erweitert, die auf seiner leistungsfähigen Abfragesprache aufbauen, u. a. durch [Azure Monitor-Protokolle](/azure/log-analytics/), [Application Insights](/azure/application-insights/), [Time Series Insights](/azure/time-series-insights/) und [Windows Defender for Endpoint](/windows/security/threat-protection/windows-defender-atp/windows-defender-advanced-threat-protection/).
 
 ## <a name="how-to-provide-feedback"></a>Senden von Feedback
 

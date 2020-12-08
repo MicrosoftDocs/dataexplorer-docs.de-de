@@ -1,6 +1,6 @@
 ---
-title: 'in-und NOTIN "-Operatoren: Azure Daten-Explorer'
-description: Dieser Artikel beschreibt die Operatoren in und NOTIN "in Azure Daten-Explorer.
+title: 'in- und notin-Operatoren: Azure Data Explorer'
+description: In diesem Artikel werden die in- und notin-Operatoren in Azure Data Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,58 +10,58 @@ ms.topic: reference
 ms.date: 03/18/2019
 ms.localizationpriority: high
 ms.openlocfilehash: ffb24abe744bfbe3f7f95336edf0263becfa7ec9
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95513249"
 ---
 # <a name="in-and-in-operators"></a>in- und !in-Operatoren
 
-Filtert einen Daten Satz Satz basierend auf dem bereitgestellten Satz von Werten.
+Filtert einen Datensatz basierend auf dem bereitgestellten Satz von Werten.
 
 ```kusto
 Table1 | where col in ('value1', 'value2')
 ```
 
 > [!NOTE]
-> * Durch das Hinzufügen von ' ~ ' zum Operator wird die Groß-/Kleinschreibung nicht beachtet: `x in~ (expression)` oder `x !in~ (expression)` .
+> * Durch das Hinzufügen von „~“ zum Operator wird bei der Suche des Werts Groß-/Kleinschreibung nicht beachtet: `x in~ (expression)` oder `x !in~ (expression)`.
 > * In tabellarischen Ausdrücken wird die erste Spalte des Resultsets ausgewählt.
-> * Die Ausdrucks Liste kann bis zu `1,000,000` Werte liefern.
-> * In einer einzelnen Werteliste werden die in der Liste befindlichen Arrays vereinfacht. `x in (dynamic([1,[2,3]]))` wird beispielsweise zu `x in (1,2,3)`.
+> * Die Ausdrucksliste kann bis zu `1,000,000` Werte generieren.
+> * Geschachtelte Arrays werden in einer einzigen Liste von Werten vereinfacht. `x in (dynamic([1,[2,3]]))` wird beispielsweise zu `x in (1,2,3)`.
  
 ## <a name="syntax"></a>Syntax
 
-### <a name="case-sensitive-syntax"></a>Syntax der Groß-/Kleinschreibung
+### <a name="case-sensitive-syntax"></a>Syntax für Beachtung von Groß-/Kleinschreibung
 
-*T* - `|` `where` *col* `in` `(` *Liste der Skalarausdrücke*`)`   
-*T* - `|` `where` *col* `in` `(` *Tabellen Ausdruck (Tabellen* )`)`   
+*T* `|` `where` *col* `in` `(`*Liste mit Skalarausdrücken*`)`   
+*T* `|` `where` *col* `in` `(`*tabularischer Ausdruck*`)`   
  
-*T* - `|` `where` *col* `!in` `(` *Liste der Skalarausdrücke*`)`  
-*T* - `|` `where` *col* `!in` `(` *Tabellen Ausdruck (Tabellen* )`)`   
+*T* `|` `where` *col* `!in` `(`*Liste mit Skalarausdrücken*`)`  
+*T* `|` `where` *col* `!in` `(`*tabularischer Ausdruck*`)`   
 
-### <a name="case-insensitive-syntax"></a>Syntax ohne Beachtung
+### <a name="case-insensitive-syntax"></a>Syntax für Nichtbeachtung von Groß-/Kleinschreibung
 
-*T* - `|` `where` *col* `in~` `(` *Liste der Skalarausdrücke*`)`   
-*T* - `|` `where` *col* `in~` `(` *Tabellen Ausdruck (Tabellen* )`)`   
+*T* `|` `where` *col* `in~` `(`*Liste mit Skalarausdrücken*`)`   
+*T* `|` `where` *col* `in~` `(`*tabularischer Ausdruck*`)`   
  
-*T* - `|` `where` *col* `!in~` `(` *Liste der Skalarausdrücke*`)`  
-*T* - `|` `where` *col* `!in~` `(` *Tabellen Ausdruck (Tabellen* )`)`   
+*T* `|` `where` *col* `!in~` `(`*Liste mit Skalarausdrücken*`)`  
+*T* `|` `where` *col* `!in~` `(`*tabularischer Ausdruck*`)`   
 
 ## <a name="arguments"></a>Argumente
 
-* *T* : die tabellarische Eingabe, deren Datensätze gefiltert werden sollen.
-* *Col* : die zu filternde Spalte.
-* eine *Liste von Ausdrücken* : eine durch Trennzeichen getrennte Liste von tabellarischen, skalaren oder literalen Ausdrücken.
-* *tabellarischer Ausdruck* : ein tabellarischer Ausdruck, der über einen Satz von Werten verfügt. Wenn der Ausdruck über mehrere Spalten verfügt, wird die erste Spalte verwendet.
+* *T*: Die tabellarische Eingabe, deren Datensätze gefiltert werden sollen.
+* *col*: Die zu filternde Spalte.
+* *Liste mit Ausdrücken*: Eine durch Trennzeichen getrennte Liste von tabellarischen, Skalar- oder Literalausdrücken.
+* *tabellarischer Ausdruck*: Ein tabellarischer Ausdruck, der einen Satz von Werten aufweist. Wenn der Ausdruck über mehrere Spalten verfügt, wird die erste Spalte verwendet.
 
 ## <a name="returns"></a>Gibt zurück
 
-Zeilen in *T* , für die das Prädikat ist `true` .
+Zeilen in *T*, für die das Prädikat `true` ist.
 
 ## <a name="examples"></a>Beispiele  
 
-### <a name="use-in-operator"></a>Verwenden des "in"-Operators
+### <a name="use-in-operator"></a>Verwendung des in-Operators
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -74,7 +74,7 @@ StormEvents
 |---|
 |4775|  
 
-### <a name="use-in-operator"></a>Use ' in ~ '-Operator  
+### <a name="use-in-operator"></a>Verwendung des in~-Operators  
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -87,7 +87,7 @@ StormEvents
 |---|
 |4775|  
 
-### <a name="use-in-operator"></a>Use '! in '-Operator
+### <a name="use-in-operator"></a>Verwendung des !in-Operators
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -101,7 +101,7 @@ StormEvents
 |54291|  
 
 
-### <a name="use-dynamic-array"></a>Dynamisches Array verwenden
+### <a name="use-dynamic-array"></a>Verwendung eines dynamischen Arrays
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -158,16 +158,16 @@ Lightning_By_State
 | summarize sum(lightning_events) by State 
 ```
 
-| Staat     | sum_lightning_events |
+| State     | sum_lightning_events |
 |-----------|----------------------|
 | ALABAMA   | 29                   |
-| Wisconsin | 31                   |
+| WISCONSIN | 31                   |
 | TEXAS     | 55                   |
-| Flori   | 85                   |
-| Georgien   | 106                  |
-| Sonstiges     | 415                  |
+| FLORIDA   | 85                   |
+| GEORGIA   | 106                  |
+| Andere     | 415                  |
 
-### <a name="use-a-static-list-returned-by-a-function"></a>Verwenden einer statischen Liste, die von einer Funktion zurückgegeben wird
+### <a name="use-a-static-list-returned-by-a-function"></a>Verwendung einer statischen Liste, die von einer Funktion zurückgegeben wird
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
@@ -188,4 +188,4 @@ Die Funktionsdefinition.
 
 |Name|Parameter|Text|Ordner|DocString|
 |---|---|---|---|---|
-|Interessantheits Zustände|()|{Dynamic (["Washington", "Florida", "Georgia", "New York"])}
+|InterestingStates|()|{ dynamic(["WASHINGTON", "FLORIDA", "GEORGIA", "NEW YORK"]) }

@@ -1,6 +1,6 @@
 ---
-title: Union-Operator-Azure Daten-Explorer | Microsoft-Dokumentation
-description: Dieser Artikel beschreibt den Union-Operator in Azure Daten-Explorer.
+title: 'union-Operator: Azure Data Explorer | Microsoft-Dokumentation'
+description: In diesem Artikel wird der union-Operator in Azure Data Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -12,10 +12,10 @@ ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
 ms.openlocfilehash: b8ad39e8c1233acc2df6c30059a6926cea85f37a
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95512807"
 ---
 # <a name="union-operator"></a>union-Operator
@@ -28,50 +28,50 @@ Table1 | union Table2, Table3
 
 ## <a name="syntax"></a>Syntax
 
-*T* `| union` [*unionparameters*] [ `kind=` `inner` | `outer` ] [ `withsource=` *ColumnName*] [ `isfuzzy=` `true` | `false` ]- *Tabelle* [ `,` *Tabelle*]...  
+*T* `| union` [*UnionParameters*] [`kind=` `inner`|`outer`] [`withsource=`*ColumnName*] [`isfuzzy=` `true`|`false`] *Table* [`,` *Table*]...  
 
-Alternatives Formular ohne weitergeleitete Eingabe:
+Alternative Form ohne weitergeleitete Eingabe:
 
-`union`[*Unionparameters*] [ `kind=` `inner` | `outer` ] [ `withsource=` *ColumnName*] [ `isfuzzy=` `true` | `false` ]- *Tabelle* [ `,` *Tabelle*]...  
+`union` [*UnionParameters*] [`kind=` `inner`|`outer`] [`withsource=`*ColumnName*] [`isfuzzy=` `true`|`false`] *Table* [`,` *Table*]...  
 
 ## <a name="arguments"></a>Argumente
 
 ::: zone pivot="azuredataexplorer"
 
 * `Table`:
-    *  Der Name einer Tabelle, z. b `Events` . oder.
-    *  Ein Abfrage Ausdruck, der in Klammern eingeschlossen werden muss, z `(Events | where id==42)` . b `(cluster("https://help.kusto.windows.net:443").database("Samples").table("*"))` . oder.
-    *  Ein Satz von Tabellen, die mit einem Platzhalterzeichen angegeben sind. Beispielsweise `E*` würde die Vereinigung aller Tabellen in der Datenbank bilden, deren Namen beginnen `E` .
+    *  Der Name einer Tabelle, z. B. `Events`, oder
+    *  Ein Abfrageausdruck, der in Klammern eingeschlossen werden muss, z. B. `(Events | where id==42)` oder `(cluster("https://help.kusto.windows.net:443").database("Samples").table("*"))`, oder
+    *  Ein Satz von Tabellen, die mit einem Platzhalterzeichen angegeben sind. `E*` würde z. B. die Vereinigungsmenge aller Tabellen in der Datenbank bilden, deren Namen mit `E` beginnen.
 * `kind`: 
     * `inner` : Das Ergebnis enthält die Teilmenge der Spalten, die in allen Eingabetabellen vorkommen.
-    * `outer` -(Standard). Das Ergebnis enthält alle Spalten, die in einer der Eingaben auftreten. Zellen, die nicht durch eine Eingabezeile definiert wurden, werden auf festgelegt `null` .
-* `withsource`=*ColumnName*: Wenn angegeben, enthält die Ausgabe eine Spalte namens *ColumnName* , deren Wert angibt, welche Quell Tabelle die einzelnen Zeilen beigetragen hat.
-Wenn die Abfrage (nach Platzhalter Übereinstimmung) auf Tabellen aus mehreren Datenbanken verweist (Standarddatenbank immer zählt), wird für den Wert dieser Spalte ein Tabellenname mit der Datenbank qualifiziert.
-Entsprechend werden __Cluster-und Daten Bank__ Qualifizierungen im Wert vorhanden sein, wenn auf mehr als ein Cluster verwiesen wird. 
-* `isfuzzy=``true`  |  `false` : Wenn `isfuzzy` auf festgelegt ist, `true` lässt die fuzzyauflösung von Union-Beinen zu. `Fuzzy` gilt für den Satz von `union` Quellen. Dies bedeutet, dass bei der Analyse der Abfrage und der Vorbereitung auf die Ausführung der Satz von Union-Quellen auf den Satz von Tabellen verweisen reduziert wird, der vorhanden und jederzeit zugänglich ist. Wenn mindestens eine solche Tabelle gefunden wurde, ergibt jeder Auflösungs Fehler eine Warnung in den Ergebnissen des Abfrage Status (eine für jeden fehlenden Verweis), verhindert jedoch die Abfrage Ausführung. Wenn keine Auflösungen erfolgreich waren, gibt die Abfrage einen Fehler zurück.
+    * `outer` (Standardwert). Das Ergebnis enthält alle Spalten, die in einer der Eingaben vorkommen. Zellen, die nicht durch eine Eingabezeile definiert wurden, werden auf `null` festgelegt.
+* `withsource`=*ColumnName*: Wenn diese Einstellung festgelegt ist, enthält die Ausgabe eine Spalte namens *ColumnName*, deren Wert angibt, aus welchen Quelltabellen die einzelnen Zeilen stammen.
+Wenn die Abfrage (nach Platzhalterabgleich) auf Tabellen aus mehreren Datenbanken verweist (Standarddatenbank zählt immer mit), wird für den Wert dieser Spalte ein Tabellenname mit der Datenbank qualifiziert.
+Auf ähnliche Weise sind __Cluster- und Datenbankqualifikationen__ im Wert vorhanden, wenn auf mehrere Cluster verwiesen wird. 
+* `isfuzzy=` `true` | `false`: Wenn `isfuzzy` auf `true` festgelegt ist, wird Fuzzyauflösung von Union-Elementen ermöglicht. `Fuzzy` gilt für den Satz von `union`-Quellen. Dies bedeutet, dass bei der Analyse der Abfrage und der Vorbereitung für die Ausführung der Satz von Union-Quellen auf den Satz von Tabellenverweisen reduziert wird, der vorhanden und jederzeit zugänglich ist. Wenn mindestens eine solche Tabelle gefunden wurde, ergibt jeder Auflösungsfehler eine Warnung in den Ergebnissen des Abfragestatus (eine Warnung für jeden fehlenden Verweis), verhindert jedoch nicht die Abfrageausführung. Wenn keine Auflösungen erfolgreich waren, gibt die Abfrage einen Fehler zurück.
 Der Standardwert ist `isfuzzy=` `false`.
-* *Unionparameters*: NULL oder mehr (durch Leerzeichen getrennte) Parameter in der Form des *namens* `=` *Werts* , die das Verhalten der Zeilen Übereinstimmungs Operation und des Ausführungs Plans steuern. Die folgenden Parameter werden unterstützt: 
+* *UnionParameters*: Null oder mehr (durch Leerzeichen getrennte) Parameter in Form von *Name* `=` *Wert*, die das Verhalten des Vorgangs zum Zuordnen der Zeilen und den Ausführungsplan steuern. Die folgenden Parameter werden unterstützt: 
 
   |Name           |Werte                                        |BESCHREIBUNG                                  |
   |---------------|----------------------------------------------|---------------------------------------------|
-  |`hint.concurrency`|*Number*|Gibt an, wie viele gleichzeitige Unterabfragen des `union` Operators parallel ausgeführt werden sollen. *Standard* Wert: CPU-Kerne auf dem einzelnen Knoten des Clusters (2 bis 16).|
-  |`hint.spread`|*Number*|Gibt an, wie viele Knoten von der gleichzeitigen Ausführung von `union` Unterabfragen verwendet werden sollen. *Standard* Wert: 1.|
+  |`hint.concurrency`|*Number*|Weist das System darauf hin, wie viele gleichzeitige Unterabfragen des `union`-Operators parallel ausgeführt werden sollen. *Standard:* Menge der CPU-Kerne auf dem einzelnen Knoten des Clusters (2 bis 16).|
+  |`hint.spread`|*Number*|Weist das System darauf hin, wie viele Knoten von der gleichzeitigen Ausführung von `union`-Unterabfragen verwendet werden sollen. *Standard:* 1.|
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
 * `Table`:
-    *  Der Name einer Tabelle, z. b. `Events`
-    *  Ein Abfrage Ausdruck, der in Klammern eingeschlossen werden muss, z. b. `(Events | where id==42)`
-    *  Ein Satz von Tabellen, die mit einem Platzhalterzeichen angegeben sind. Beispielsweise `E*` würde die Vereinigung aller Tabellen in der Datenbank bilden, deren Namen beginnen `E` .
+    *  Der Name einer Tabelle, z. B. `Events`.
+    *  Ein Abfrageausdruck, der in Klammern eingeschlossen werden muss, z. B. `(Events | where id==42)`.
+    *  Ein Satz von Tabellen, die mit einem Platzhalterzeichen angegeben sind. `E*` würde z. B. die Vereinigungsmenge aller Tabellen in der Datenbank bilden, deren Namen mit `E` beginnen.
 * `kind`: 
     * `inner` : Das Ergebnis enthält die Teilmenge der Spalten, die in allen Eingabetabellen vorkommen.
-    * `outer` -(Standard). Das Ergebnis enthält alle Spalten, die in einer der Eingaben auftreten. Zellen, die nicht durch eine Eingabezeile definiert wurden, werden auf festgelegt `null` .
-* `withsource`=*ColumnName*: Wenn angegeben, enthält die Ausgabe eine Spalte namens *ColumnName* , deren Wert angibt, welche Quell Tabelle für die einzelnen Zeilen beigetragen hat.
-Wenn die Abfrage (nach Platzhalter Übereinstimmung) auf Tabellen aus mehreren Datenbanken verweist (Standarddatenbank immer zählt), wird für den Wert dieser Spalte ein Tabellenname mit der Datenbank qualifiziert.
-Entsprechend sind die __Cluster-und Daten Bank__ Qualifizierungen im Wert vorhanden, wenn auf mehr als ein Cluster verwiesen wird. 
-* `isfuzzy=``true`  |  `false` : Wenn `isfuzzy` auf festgelegt ist, `true` lässt die fuzzyauflösung von Union-Beinen zu. `Fuzzy` gilt für den Satz von `union` Quellen. Dies bedeutet, dass bei der Analyse der Abfrage und der Vorbereitung auf die Ausführung der Satz von Union-Quellen auf den Satz von Tabellen verweisen reduziert wird, der vorhanden und jederzeit zugänglich ist. Wenn mindestens eine solche Tabelle gefunden wurde, ergibt jeder Auflösungs Fehler eine Warnung in den Ergebnissen des Abfrage Status (eine für jeden fehlenden Verweis), verhindert jedoch die Abfrage Ausführung. Wenn keine Auflösungen erfolgreich waren, gibt die Abfrage einen Fehler zurück.
+    * `outer` (Standardwert). Das Ergebnis enthält alle Spalten, die in einer der Eingaben vorkommen. Zellen, die nicht durch eine Eingabezeile definiert wurden, werden auf `null` festgelegt.
+* `withsource`=*ColumnName*: Wenn diese Einstellung festgelegt ist, enthält die Ausgabe eine Spalte namens *ColumnName*, deren Wert angibt, aus welchen Quelltabellen die einzelnen Zeilen stammen.
+Wenn die Abfrage (nach Platzhalterabgleich) auf Tabellen aus mehreren Datenbanken verweist (Standarddatenbank zählt immer mit), wird für den Wert dieser Spalte ein Tabellenname mit der Datenbank qualifiziert.
+Auf ähnliche Weise sind die __Cluster- und Datenbankqualifikationen__ im Wert vorhanden, wenn auf mehrere Cluster verwiesen wird. 
+* `isfuzzy=` `true` | `false`: Wenn `isfuzzy` auf `true` festgelegt ist, wird Fuzzyauflösung von Union-Elementen ermöglicht. `Fuzzy` gilt für den Satz von `union`-Quellen. Dies bedeutet, dass bei der Analyse der Abfrage und der Vorbereitung für die Ausführung der Satz von Union-Quellen auf den Satz von Tabellenverweisen reduziert wird, der vorhanden und jederzeit zugänglich ist. Wenn mindestens eine solche Tabelle gefunden wurde, ergibt jeder Auflösungsfehler eine Warnung in den Ergebnissen des Abfragestatus (eine Warnung für jeden fehlenden Verweis), verhindert jedoch nicht die Abfrageausführung. Wenn keine Auflösungen erfolgreich waren, gibt die Abfrage einen Fehler zurück.
 Der Standardwert ist `isfuzzy=false`.
 
 ::: zone-end
@@ -84,34 +84,34 @@ Eine Tabelle mit derselben Anzahl von Zeilen, wie in allen Eingabetabellen vorha
 
 ::: zone pivot="azuredataexplorer"
 
-1. `union`der Bereich kann [Let-Anweisungen](./letstatement.md) einschließen, wenn diese mit dem [View-Schlüsselwort](./letstatement.md) versehen sind
-2. `union` der Bereich enthält keine [Funktionen](../management/functions.md). Definieren [Sie eine Let-Anweisung](./letstatement.md) mit dem View- [Schlüsselwort](./letstatement.md) , um eine Funktion in den Union-Bereich einzubeziehen.
-3. Wenn `union` es sich bei der Eingabe um [Tabellen](../management/tables.md) handelt (im Vergleich zu [tabellarischen Ausdrücken](./tabularexpressionstatements.md)) und `union` auf den ein WHERE- [Operator](./whereoperator.md)folgt, um eine bessere Leistung zu [erzielen](./findoperator.md), empfiehlt es sich, beides durchsuchen zu ersetzen. Beachten Sie das andere [Ausgabe Schema](./findoperator.md#output-schema) , das vom-Operator erzeugt wird `find` . 
-4. `isfuzzy=true` gilt nur für die `union` Auflösungsphase für Quellen. Sobald der Satz von Quell Tabellen bestimmt wird, werden mögliche zusätzliche Abfrage Fehler nicht unterdrückt.
-5. Bei Verwendung `outer union` von enthält das Ergebnis alle Spalten, die in einer der Eingaben vorkommen, eine Spalte für jeden Namen und jede Art von vorkommen. Dies bedeutet Folgendes: Wenn eine Spalte in mehreren Tabellen angezeigt wird und mehrere Typen aufweist, enthält Sie eine entsprechende Spalte für jeden Typ im `union` Ergebnis. Dieser Spaltenname wird mit einem "_" versehen, gefolgt vom Ursprungs [Spaltentyp](./scalar-data-types/index.md).
+1. Der `union`-Bereich kann [let-Anweisungen](./letstatement.md) enthalten, wenn diese mit dem [View-Schlüsselwort](./letstatement.md) attributiert werden.
+2. Der `union`-Bereich enthält keine [Funktionen](../management/functions.md). Wenn Sie eine Funktion in den Union-Bereich einschließen möchten, definieren Sie eine [let-Anweisung](./letstatement.md) mit dem [View-Schlüsselwort](./letstatement.md).
+3. Wenn die `union`-Eingabe [Tabellen](../management/tables.md) (im Gegensatz zu [tabellarischen Ausdrücken](./tabularexpressionstatements.md)) sind und auf `union` ein [where-Operator](./whereoperator.md) folgt, um bessere Leistung zu erzielen, empfiehlt es sich, beides durch [find](./findoperator.md) zu ersetzen. Beachten Sie die verschiedenen [Ausgabeschemas](./findoperator.md#output-schema), die vom `find`-Operator generiert werden. 
+4. `isfuzzy=true` gilt nur für die Auflösungsphase der `union`-Quellen. Sobald der Satz von Quelltabellen bestimmt wird, werden mögliche zusätzliche Abfragefehler nicht unterdrückt.
+5. Wenn Sie `outer union` verwenden, enthält das Ergebnis alle Spalten, die in einer der Eingaben vorkommen: eine Spalte für jeden Namen und jeden Typ von Vorkommen. Dies bedeutet Folgendes: Wenn eine Spalte in mehreren Tabellen vorkommt und mehrere Typen aufweist, enthält sie eine entsprechende Spalte für jeden Typ im Ergebnis der `union`. Dieser Spaltenname wird mit einem „_“ als Suffix versehen, gefolgt vom ursprünglichen [Typ](./scalar-data-types/index.md) der Spalte.
 
 ::: zone-end
 
 ::: zone pivot="azuremonitor"
 
-1. `union`der Bereich kann [Let-Anweisungen](./letstatement.md) einschließen, wenn diese mit dem [View-Schlüsselwort](./letstatement.md) versehen sind
-2. `union` der Bereich enthält keine Funktionen. So schließen [Sie](./letstatement.md) eine Funktion in den Union-Bereich ein [view keyword](./letstatement.md)
-3. Wenn `union` es sich bei der Eingabe um Tabellen handelt (im Vergleich zu [tabellarischen Ausdrücken](./tabularexpressionstatements.md)) und auf den `union` ein WHERE- [Operator](./whereoperator.md)folgt, empfiehlt es sich, beides durch die [Suche](./findoperator.md) zu verbessern Beachten Sie das andere [Ausgabe Schema](./findoperator.md#output-schema) , das vom-Operator erzeugt wird `find` . 
-4. `isfuzzy=``true`gilt nur für die Phase der `union` Quellen Auflösung. Nachdem der Satz von Quell Tabellen ermittelt wurde, werden möglicherweise zusätzliche Abfrage Fehler nicht unterdrückt.
-5. Bei Verwendung `outer union` von enthält das Ergebnis alle Spalten, die in einer der Eingaben vorkommen, eine Spalte für jeden Namen und jede Art von vorkommen. Dies bedeutet Folgendes: Wenn eine Spalte in mehreren Tabellen angezeigt wird und mehrere Typen aufweist, enthält Sie eine entsprechende Spalte für jeden Typ im `union` Ergebnis. Dieser Spaltenname wird mit einem "_" versehen, gefolgt vom Ursprungs [Spaltentyp](./scalar-data-types/index.md).
+1. Der `union`-Bereich kann [let-Anweisungen](./letstatement.md) enthalten, wenn diese mit dem [View-Schlüsselwort](./letstatement.md) attributiert werden.
+2. Der `union`-Bereich enthält keine Funktionen. Wenn Sie eine Funktion in den Union-Bereich einschließen möchten, definieren Sie eine [let-Anweisung](./letstatement.md) mit dem [View-Schlüsselwort](./letstatement.md).
+3. Wenn die `union`-Eingabe Tabellen (im Gegensatz zu [tabellarischen Ausdrücken](./tabularexpressionstatements.md)) sind und auf `union` ein [where-Operator](./whereoperator.md) folgt, empfiehlt es sich, beides durch [find](./findoperator.md) zu ersetzen, um bessere Leistung zu erzielen. Beachten Sie die verschiedenen [Ausgabeschemas](./findoperator.md#output-schema), die vom `find`-Operator generiert werden. 
+4. `isfuzzy=` `true` gilt nur für die Phase der Auflösung von `union`-Quellen. Sobald der Satz von Quelltabellen bestimmt wurde, werden mögliche zusätzliche Abfragefehler nicht unterdrückt.
+5. Wenn Sie `outer union` verwenden, enthält das Ergebnis alle Spalten, die in einer der Eingaben vorkommen: eine Spalte für jeden Namen und jeden Typ von Vorkommen. Dies bedeutet Folgendes: Wenn eine Spalte in mehreren Tabellen vorkommt und mehrere Typen aufweist, enthält sie eine entsprechende Spalte für jeden Typ im Ergebnis der `union`. Dieser Spaltenname wird mit einem „_“ als Suffix versehen, gefolgt vom ursprünglichen [Typ](./scalar-data-types/index.md) der Spalte.
 
 ::: zone-end
 
 
-## <a name="example-tables-with-string-in-name-or-column"></a>Beispiel: Tabellen mit Zeichenfolge in Name oder Spalte
+## <a name="example-tables-with-string-in-name-or-column"></a>Beispiel: Tabellen mit einer Zeichenfolge im Namen oder einer Spalte
 
 ```kusto
 union K* | where * has "Kusto"
 ```
 
-Zeilen aus allen Tabellen in der Datenbank, deren Name mit beginnt `K` und in dem eine beliebige Spalte das Wort enthält `Kusto` .
+Zeilen aus allen Tabellen in der Datenbank, deren Name mit `K` beginnt und in denen eine beliebige Spalten das Wort `Kusto` enthält.
 
-## <a name="example-distinct-count"></a>Beispiel: unterschiedliche Anzahl
+## <a name="example-distinct-count"></a>Beispiel: Distinct Count
 
 ```kusto
 union withsource=SourceTable kind=outer Query, Command
@@ -149,7 +149,7 @@ union isfuzzy=true
 |---|
 |2|
 
-Der Abfrage Status wird beobachtet: die folgende Warnung wurde zurückgegeben: `Failed to resolve entity 'View_3'`
+Der Abfragestatus wird beobachtet: Die folgende Warnung wurde zurückgegeben: `Failed to resolve entity 'View_3'`
 
 ```kusto
 // Using union isfuzzy=true and wildcard access:
@@ -164,9 +164,9 @@ union isfuzzy=true View*, SomeView*, OtherView*
 |---|
 |3|
 
-Der Abfrage Status wird beobachtet: die folgende Warnung wurde zurückgegeben: `Failed to resolve entity 'SomeView*'`
+Der Abfragestatus wird beobachtet: Die folgende Warnung wurde zurückgegeben: `Failed to resolve entity 'SomeView*'`
 
-**Beispiel: Quell Spaltentypen stimmen nicht überein.**
+**Beispiel: Quellspaltentypen stimmen nicht überein**
  
 ```kusto     
 let View_1 = view () { print x=1 };
@@ -192,4 +192,4 @@ union withsource=TableName View_1, View_2, View_3
 |View_2   |       |2     |      |
 |View_3   |       |      |3     |
 
-`x`Die Spalte aus `View_1` hat das Suffix empfangen `_long` , und wie eine Spalte `x_long` mit dem Namen bereits im Ergebnis Schema vorhanden ist, wurden die Spaltennamen dupliziert, und es wird eine neue Spalte erstellt.`x_long1`
+Die Spalte `x` aus `View_1` hat das Suffix `_long` erhalten, und da eine Spalte mit dem Namen `x_long` bereits im Ergebnisschema vorhanden ist, wurden die Spaltennamen dedupliziert, sodass eine neue Spalte erstellt wurde: `x_long1`.

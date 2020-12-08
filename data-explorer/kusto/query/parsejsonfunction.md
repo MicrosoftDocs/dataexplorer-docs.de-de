@@ -1,6 +1,6 @@
 ---
-title: parse_json ()-Azure Daten-Explorer
-description: In diesem Artikel wird parse_json () in Azure Daten-Explorer beschrieben.
+title: 'parse_json(): Azure Data Explorer'
+description: In diesem Artikel wird parse_json() in Azure Data Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,17 +10,17 @@ ms.topic: reference
 ms.date: 02/13/2020
 ms.localizationpriority: high
 ms.openlocfilehash: 3125a51733f6672d041e6c1522ea755e5677cb0c
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95512858"
 ---
 # <a name="parse_json"></a>parse_json()
 
-Interpretiert einen `string` als JSON-Wert und gibt den Wert als zurück `dynamic` .
+Interpretiert `string` als JSON-Wert und gibt den Wert als `dynamic` zurück.
 
-Diese Funktion ist besser als die [extractjson ()-Funktion](./extractjsonfunction.md) , wenn Sie mehr als ein Element eines JSON-Verbund Objekts extrahieren müssen.
+Diese Funktion ist der [extractjson()](./extractjsonfunction.md)-Funktion vorzuziehen, wenn Sie mehrere Elemente eines zusammengesetzten JSON-Objekts extrahieren müssen.
 
 ## <a name="syntax"></a>Syntax
 
@@ -28,18 +28,18 @@ Diese Funktion ist besser als die [extractjson ()-Funktion](./extractjsonfunctio
 
 Aliase:
 - [todynamic()](./todynamicfunction.md)
-- [Objekt ()](./todynamicfunction.md)
+- [toobject()](./todynamicfunction.md)
 
 ## <a name="arguments"></a>Argumente
 
-* *JSON*: ein Ausdruck vom Typ `string` . Sie stellt einen [JSON-formatierten Wert](https://json.org/)oder einen Ausdruck vom Typ [Dynamic](./scalar-data-types/dynamic.md)dar, der den tatsächlichen `dynamic` Wert darstellt.
+* *json*: Ein Ausdruck vom Typ `string`. Er stellt einen [JSON-formatierten Wert](https://json.org/) oder einen Ausdruck vom Typ [dynamic](./scalar-data-types/dynamic.md) dar, der den tatsächlichen `dynamic`-Wert darstellt.
 
 ## <a name="returns"></a>Gibt zurück
 
-Ein Objekt vom Typ `dynamic` , das durch den Wert von *JSON* bestimmt wird:
-* Wenn *JSON* vom Typ ist `dynamic` , wird der zugehörige Wert unverändert verwendet.
-* Wenn *JSON* vom Typ ist `string` und eine [ordnungsgemäß formatierte JSON-Zeichenfolge](https://json.org/)ist, wird die Zeichenfolge analysiert, und der erzeugte Wert wird zurückgegeben.
-* Wenn *JSON* vom Typ ist `string` , aber keine [ordnungsgemäß formatierte JSON-Zeichenfolge](https://json.org/)ist, ist der zurückgegebene Wert ein Objekt vom Typ, das `dynamic` den ursprünglichen `string` Wert enthält.
+Ein Objekt vom Typ `dynamic`, das durch den Wert von *json* festgelegt wird:
+* Wenn *json* vom Typ `dynamic` ist, wird der zugehörige Wert unverändert verwendet.
+* Wenn *json* vom Typ `string` und eine [ordnungsgemäß formatierte JSON-Zeichenfolge](https://json.org/) ist, wird die Zeichenfolge analysiert und der generierte Wert zurückgegeben.
+* Wenn *json* vom Typ `string`, aber keine [ordnungsgemäß formatierte JSON-Zeichenfolge](https://json.org/) ist, ist der zurückgegebene Wert ein Objekt vom Typ `dynamic`, das den ursprünglichen `string`-Wert enthält.
 
 ## <a name="example"></a>Beispiel
 
@@ -49,7 +49,7 @@ Für das folgende Beispiel gilt: Wenn `context_custom_metrics` ein `string`-Elem
 {"duration":{"value":118.0,"count":5.0,"min":100.0,"max":150.0,"stdDev":0.0,"sampledValue":118.0,"sum":118.0}}
 ```
 
-dann ruft das folgende CSL-Fragment den Wert des `duration` Slots im-Objekt ab und ruft dann zwei Slots `duration.value` `duration.min` ( `118.0` `110.0` bzw. bzw.) ab.
+dann ruft das folgende CSL-Fragment zunächst den Wert des `duration`-Slots im Objekt und daraus zwei Slots ab: `duration.value` und `duration.min` (bzw. `118.0` und `110.0`).
 
 ```kusto
 T
@@ -59,16 +59,16 @@ T
 
 **Hinweise**
 
-Es kommt häufig vor, dass eine JSON-Zeichenfolge einen Eigenschaften Behälter beschreibt, in dem einer der "Slots" eine andere JSON-Zeichenfolge ist. 
+Es kommt häufig vor, dass eine JSON-Zeichenfolge einen Eigenschaftenbehälter beschreibt, in dem einer der „Slots“ eine weitere JSON-Zeichenfolge ist. 
 
-Beispiel:
+Zum Beispiel:
 
 ```kusto
 let d='{"a":123, "b":"{\\"c\\":456}"}';
 print d
 ```
 
-In solchen Fällen ist es nicht erforderlich, `parse_json` zweimal aufzurufen, sondern auch sicherzustellen, dass im zweiten Aufruf `tostring` verwendet wird. Andernfalls übergibt der zweite-Befehl `parse_json` lediglich die Eingabe unverändert an die Ausgabe, da der deklarierte Typ ist `dynamic` .
+In solchen Fällen ist es nur erforderlich, `parse_json` zwei Mal aufzurufen. Jedoch muss sichergestellt werden, dass im zweiten Aufruf `tostring` verwendet wird. Andernfalls übergibt der zweite Aufruf von `parse_json` einfach die Eingabe unverändert an die Ausgabe, da der deklarierte Typ `dynamic` ist.
 
 ```kusto
 let d='{"a":123, "b":"{\\"c\\":456}"}';

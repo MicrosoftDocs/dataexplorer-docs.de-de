@@ -1,6 +1,6 @@
 ---
-title: bin ()-Azure Daten-Explorer | Microsoft-Dokumentation
-description: In diesem Artikel wird bin () in Azure Daten-Explorer beschrieben.
+title: 'bin(): Azure Data Explorer | Microsoft-Dokumentation'
+description: Dieser Artikel beschreibt bin() in Azure Data Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -10,31 +10,31 @@ ms.topic: reference
 ms.date: 02/13/2020
 ms.localizationpriority: high
 ms.openlocfilehash: 6fc2e55b43e7c7c2dc2bb537730f8f627e3e4a66
-ms.sourcegitcommit: 4e811d2f50d41c6e220b4ab1009bb81be08e7d84
-ms.translationtype: MT
+ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/24/2020
+ms.lasthandoff: 12/01/2020
 ms.locfileid: "95513113"
 ---
 # <a name="bin"></a>bin()
 
 Rundet Werte auf eine ganze Zahl ab, die ein Vielfaches der angegebenen bin-Größe ist. 
 
-Wird häufig in Kombination mit verwendet [`summarize by ...`](./summarizeoperator.md) .
+Wird häufig in Kombination mit [`summarize by ...`](./summarizeoperator.md) verwendet.
 Wenn Sie über einen verstreuten Satz von Werten verfügen, werden sie zu einem kleineren Satz bestimmter Werte gruppiert.
 
-NULL-Werte, eine NULL-bin-Größe oder eine negative bin-Größe ergeben NULL. 
+NULL-Werte, eine bin-Größe von NULL oder eine negative bin-Größe ergeben NULL. 
 
-Alias für die `floor()` Funktion.
+Alias für `floor()`-Funktion.
 
 ## <a name="syntax"></a>Syntax
 
-`bin(`*Wert* `,` *roundTo*`)`
+`bin(`*value*`,`*roundTo*`)`
 
 ## <a name="arguments"></a>Argumente
 
-* *Wert*: eine Zahl, ein Datum oder ein TimeSpan-Wert. 
-* *roundTo*: die "bin size". Eine Zahl oder ein TimeSpan- *Wert*, der den Wert dividiert 
+* *value:* Eine Zahl, ein Datum oder ein Zeitraum. 
+* *roundTo*: Die Bingröße. Eine Zahl oder ein Zeitraum zum Teilen des Werts ( *value*). 
 
 ## <a name="returns"></a>Gibt zurück
 
