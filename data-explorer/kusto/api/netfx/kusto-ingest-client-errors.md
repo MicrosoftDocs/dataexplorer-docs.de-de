@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/30/2019
-ms.openlocfilehash: 61c183f11aa7658faba00c5dd3c4795f235e5467
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: a4da1c35d34a1677cc0608fdf70dcbdb5a3c7c73
+ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92337481"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96774604"
 ---
 # <a name="kustoingest-errors-and-exceptions"></a>Kusto. Erfassungs Fehler und Ausnahmen
 Jeder Fehler während der Erfassungs Behandlung auf der Clientseite wird durch eine c#-Ausnahme angegeben.
@@ -67,40 +67,7 @@ In der `IngestFromDataReader` - `IngestFromDataReaderAsync` Methode und der-Meth
 
 Um Erfassungs Fehler Programm gesteuert zu behandeln, werden Fehlerinformationen durch einen numerischen Fehlercode ( `IngestionErrorCode enumeration` ) erweitert.
 
-|ErrorCode                                      |`Reason`                                                        |
-|-----------------------------------------------|--------------------------------------------------------------|
-|Unknown                                        | Unbekannter Fehler ist aufgetreten|
-|Stream_LowMemoryCondition                      | Nicht genügend Arbeitsspeicher für den Vorgang.|
-|Stream_WrongNumberOfFields                     | CSV-Dokument enthält inkonsistente Anzahl von Feldern|
-|Stream_InputStreamTooLarge                     | Das für die Erfassung übermittelte Dokument hat die zulässige Größe überschritten.|
-|Stream_NoDataToIngest                          | Es wurden keine Datenströme für die Erfassung gefunden.|
-|Stream_DynamicPropertyBagTooLarge              | Eine der dynamischen Spalten in den erfassten Daten enthält zu viele eindeutige Eigenschaften.|
-|Download_SourceNotFound                        | Fehler beim Herunterladen der Quelle von Azure Storage-Quelle nicht gefunden.|
-|Download_AccessConditionNotSatisfied           | Fehler beim Herunterladen der Quelle aus Azure Storage: Zugriff verweigert.|
-|Download_Forbidden                             | Fehler beim Herunterladen der Quelle aus Azure Storage: der Zugriff ist nicht zulässig.|
-|Download_AccountNotFound                       | Fehler beim Herunterladen der Quelle von Azure Storage-das Konto wurde nicht gefunden.|
-|Download_BadRequest                            | Fehler beim Herunterladen der Quelle aus Azure Storage-ungültige Anforderung.|
-|Download_NotTransient                          | Fehler beim Herunterladen der Quelle aus Azure Storage: vorübergehender Fehler.|
-|Download_UnknownError                          | Fehler beim Herunterladen der Quelle aus Azure Storage-unbekannter Fehler.|
-|UpdatePolicy_QuerySchemaDoesNotMatchTableSchema| Fehler beim Aufrufen der Update Richtlinie. Das Abfrage Schema stimmt nicht mit dem Tabellen Schema.|
-|UpdatePolicy_FailedDescendantTransaction       | Fehler beim Aufrufen der Update Richtlinie. Fehler bei der nachfolgenden Richtlinie für transaktionale Updates|
-|UpdatePolicy_IngestionError                    | Fehler beim Aufrufen der Update Richtlinie. Erfassungs Fehler|
-|UpdatePolicy_UnknownError                      | Fehler beim Aufrufen der Update Richtlinie. Unbekannter Fehler ist aufgetreten|
-|BadRequest_MissingJsonMappingtFailure          | Das JSON-Muster konnte nicht mit dem jsonmapping-Parameter erfasst werden.|
-|BadRequest_InvalidBlob                         | Engine konnte kein nicht-ZIP-BLOB öffnen und lesen|
-|BadRequest_EmptyBlob                           | Leeres BLOB|
-|BadRequest_EmptyArchive                        | Die ZIP-Datei enthält keine archivierten Elemente.|
-|BadRequest_EmptyBlobUri                        | Der angegebene BLOB-URI ist leer.|
-|BadRequest_DatabaseNotExist                    | Die Datenbank ist nicht vorhanden|
-|BadRequest_TableNotExist                       | Tabelle ist nicht vorhanden.|
-|BadRequest_InvalidKustoIdentityToken           | Ungültiges Kusto-Identitäts Token.|
-|BadRequest_UriMissingSas                       | BLOB-Pfad ohne SAS aus unbekanntem BLOB-Speicher|
-|BadRequest_FileTooLarge                        | Es wird versucht, zu große Dateien zu erfassen.|
-|BadRequest_NoValidResponseFromEngine           | Keine gültige Antwort vom Erfassungs Befehl.|
-|BadRequest_TableAccessDenied                   | Der Zugriff auf die Tabelle wurde verweigert.|
-|BadRequest_MessageExhausted                    | Nachricht ist erschöpft.|
-|General_BadRequest                             | Allgemeine ungültige Anforderung. Hinweise zur Erfassung an eine nicht vorhandene Datenbank/Tabelle|
-|General_InternalServerError                    | Interner Server Fehler.|
+Eine vollständige Liste der Erfassungs Fehlercodes finden Sie unter Erfassungs [Fehlercodes in Azure Daten-Explorer](../../../error-codes.md).
 
 ## <a name="detailed-exceptions-reference"></a>Ausführliche Ausnahmen Referenz
 
@@ -191,7 +158,7 @@ Basisklasse: ingestcliumtexception
 
 |Feldname   |type     |Bedeutung       
 |-------------|---------|-----------------------|
-|Größe         | long    | Die Größe der Erfassungs Quelle
+|Size         | long    | Die Größe der Erfassungs Quelle
 |MaxSize      | long    | Die maximal zulässige Größe für die Erfassung.
 
 Wenn eine Erfassungs Quelle die maximale Größe von 4 GB überschreitet, wird die Ausnahme ausgelöst. Die Größen Validierung kann durch das- `IgnoreSizeLimit` Flag in der [ingestionproperties-Klasse](kusto-ingest-client-reference.md#class-kustoingestionproperties)überschrieben werden. Es wird jedoch nicht empfohlen, [einzelne Quellen, die größer als 1 GB](about-kusto-ingest.md#ingestion-best-practices)sind, zu erfassen.
@@ -225,6 +192,4 @@ Basisklasse: [AggregateException](/dotnet/api/system.aggregateexception)
 |Ingestionerrors | IList<IngestClientException>    | Die Fehler, die auftreten, wenn versucht wird, zu erfassen, und die damit verbundenen Quellen
 |Isglobalerror   | bool                            | Gibt an, ob die Ausnahme für alle Quellen aufgetreten ist.
 
-## <a name="next-steps"></a>Nächste Schritte
 
-Weitere Informationen zu Fehlern in nativem Code finden Sie unter [Fehler in](../../concepts/errorsinnativecode.md)System eigenem Code.

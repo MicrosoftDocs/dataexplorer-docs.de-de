@@ -1,6 +1,6 @@
 ---
-title: 'Bewährte Methoden für den Schema Entwurf: Azure Daten-Explorer'
-description: Dieser Artikel beschreibt bewährte Methoden für den Schema Entwurf in Azure Daten-Explorer.
+title: 'Bewährte Methoden für die Schema Verwaltung: Azure Daten-Explorer'
+description: Dieser Artikel beschreibt bewährte Methoden für die Schema Verwaltung in Azure Daten-Explorer.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/18/2020
-ms.openlocfilehash: a16cb4b425e26a5896b4109ad6f906b5925c93a5
-ms.sourcegitcommit: 8a7165b28ac6b40722186300c26002fb132e6e4a
+ms.openlocfilehash: ba0d931fcca257cb3b5658354dfb8bf70dc6848f
+ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92755243"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96774621"
 ---
-# <a name="best-practices-for-schema-design"></a>Best Practices für das Schemadesign
+# <a name="best-practices-for-schema-management"></a>Bewährte Methoden für die Schema Verwaltung
 
 Es folgen einige bewährte Methoden, die befolgt werden müssen. Sie unterstützen Sie dabei, die Funktionsweise ihrer Verwaltungs Befehle zu verbessern und die Dienst Ressourcen leichter zu beeinträchtigen.
 
-|Aktion  |Zweck  |Nicht verwenden | Notizen |
+|Aktion  |Verwendung  |Nicht verwenden | Notizen |
 |---------|---------|---------|----
 | **Erstellen mehrerer Tabellen**    |  Verwenden eines einzelnen [`.create tables`](create-tables-command.md) Befehls       | Viele Befehle nicht ausgeben `.create table`        | |
 | **Umbenennen mehrerer Tabellen**    | Erstellen Sie einen einzelnen-Befehl. [`.rename tables`](rename-table-command.md)        |  Geben Sie für jedes Tabellen Paar keinen separaten-Befehl aus.   |    |
