@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 11/22/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 5ccae7e467b2ce41a36868cdad1b059aeec3ef9d
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 38b67a0843cc38c2cbce7d5a41a8eff85b25ebd5
+ms.sourcegitcommit: 7edce9d9d20f9c0505abda67bb8cc3d2ecd60d15
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95872474"
+ms.lasthandoff: 12/02/2020
+ms.locfileid: "96524299"
 ---
 # <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>Schnellstart: Abfragen von Daten auf der Azure Data Explorer-Webbenutzeroberfläche
 
@@ -35,7 +35,7 @@ Wenn Sie die Anwendung zum ersten Mal öffnen, sind keine Clusterverbindungen vo
 
 ![Hinzufügen eines Clusters](media/web-query-data/add-cluster.png)
 
-Sie müssen eine Verbindung mit einem Cluster hinzufügen, bevor Sie Abfragen ausführen können. In diesem Abschnitt fügen Sie Azure Data Explorer Verbindungen mit dem **Hilfecluster** und dem Testcluster, den Sie unter[Voraussetzungen](#prerequisites) erstellt haben (optional), hinzu.
+Sie müssen eine Verbindung mit einem Cluster hinzufügen, bevor Sie Abfragen ausführen können. In diesem Abschnitt fügen Sie Azure Data Explorer Verbindungen mit dem **Hilfecluster** und dem Testcluster, den Sie unter [Voraussetzungen](#prerequisites) erstellt haben (optional), hinzu.
 
 ### <a name="add-help-cluster"></a>Hinzufügen des Hilfeclusters
 
@@ -55,7 +55,7 @@ Fügen Sie nun den erstellten Testcluster hinzu.
 
 1. Wählen Sie **Add Cluster** (Cluster hinzufügen) aus.
 
-1. Geben Sie im Dialogfeld **Add Cluster** (Cluster hinzufügen) die URL Ihres Testclusters im Format `https://<ClusterName>.<Region>.kusto.windows.net/` ein, und wählen Sie dann **Add** (Hinzufügen) aus. Verwenden Sie beispielsweise https://mydataexplorercluster.westus.kusto.windows.net wie in der folgenden Abbildung:
+1. Geben Sie im Dialogfeld **Add Cluster** (Cluster hinzufügen) die URL Ihres Testclusters im Format `https://<ClusterName>.<Region>.kusto.windows.net/` ein, und wählen Sie dann **Add** (Hinzufügen) aus. Verwenden Sie beispielsweise `https://mydataexplorercluster.westus.kusto.windows.net` wie in der folgenden Abbildung:
 
     :::image type="content" source="media/web-query-data/server-uri.png" alt-text="Eingeben der Testcluster-URL":::
     

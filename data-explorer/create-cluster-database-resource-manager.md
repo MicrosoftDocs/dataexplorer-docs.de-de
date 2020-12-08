@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: 40cd53d1bff6b33b81878c85c6c22c3fb85655ee
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.openlocfilehash: e083303d3d8270f0d673199c3547bff13001174e
+ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92902588"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96774672"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-an-azure-resource-manager-template"></a>Erstellen eines Azure Data Explorer-Clusters und einer Datenbank mithilfe einer Azure Resource Manager-Vorlage
 
@@ -76,6 +76,29 @@ In diesem Artikel verwenden Sie eine [vorhandene Schnellstartvorlage](https://ra
           "location": "[parameters('location')]",
           "tags": {
             "Created By": "GitHub quickstart template"
+          },
+          "properties": {
+              "trustedExternalTenants": [],
+              "optimizedAutoscale": {
+                  "version": 1,
+                  "isEnabled": true,
+                  "minimum": 2,
+                  "maximum": 10
+              },
+              "enableDiskEncryption": false,
+              "enableStreamingIngest": false,
+              "virtualNetworkConfiguration":{
+                  "subnetId": "<subnet resource id>",
+                  "enginePublicIpId": "<Engine service's public IP address resource id>",
+                  "dataManagementPublicIpId": "<Data management's service public IP address resource id>"
+              },
+              "keyVaultProperties":{
+                  "keyName": "<Key name>",
+                  "keyVaultUri": "<Key vault uri>"
+              },
+              "enablePurge": false,
+              "enableDoubleEncryption": false,
+              "engineType": "V3",
           }
       },
       {
@@ -103,7 +126,7 @@ Sie können die Azure Resource Manager-Vorlage über das [Azure-Portal](#use-the
 
 ### <a name="use-the-azure-portal-to-deploy-the-template-and-verify-template-deployment"></a>Verwenden des Azure-Portals zum Bereitstellen der Vorlage und Überprüfen der Vorlagenbereitstellung
 
-1. Verwenden Sie zum Erstellen eines Clusters und einer Datenbank die folgende Schaltfläche, um die Bereitstellung zu starten. Klicken Sie mit der rechten Maustaste, und wählen Sie **In neuem Fenster öffnen** , damit Sie die restlichen Schritte in diesem Artikel ausführen können.
+1. Verwenden Sie zum Erstellen eines Clusters und einer Datenbank die folgende Schaltfläche, um die Bereitstellung zu starten. Klicken Sie mit der rechten Maustaste, und wählen Sie **In neuem Fenster öffnen**, damit Sie die restlichen Schritte in diesem Artikel ausführen können.
 
     [![Screenshot: Blaue Schaltfläche mit abgebildeten Wolken und der Bezeichnung „In Azure bereitstellen“](media/create-cluster-database-resource-manager/deploybutton.png)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FAzure%2Fazure-quickstart-templates%2Fmaster%2F101-kusto-cluster-database%2Fazuredeploy.json)
 
@@ -137,7 +160,7 @@ Die Erstellung eines Azure Data Explorer-Clusters und einer Datenbank kann einig
     Write-Host "Press [ENTER] to continue ..."
     ```
 
-1. Wählen Sie **Kopieren** , um das PowerShell-Skript zu kopieren.
+1. Wählen Sie **Kopieren**, um das PowerShell-Skript zu kopieren.
 1. Klicken Sie mit der rechten Maustaste auf die Shellkonsole, und wählen Sie **Einfügen** aus.
 Die Erstellung eines Azure Data Explorer-Clusters und einer Datenbank kann einige Minuten dauern.
 
