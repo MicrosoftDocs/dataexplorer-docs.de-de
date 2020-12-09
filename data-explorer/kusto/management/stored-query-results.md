@@ -8,12 +8,12 @@ ms.reviewer: mispecto
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/3/2020
-ms.openlocfilehash: fb998499205be7645f011fe727f5e37495ff3697
-ms.sourcegitcommit: 2804e3fe40f6cf8e65811b00b7eb6a4f59c88a99
+ms.openlocfilehash: 352f82bdb11847574807f81bc63236127900ae94
+ms.sourcegitcommit: 202357f866801aafd92e3e29a84bb312e17aebc7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/07/2020
-ms.locfileid: "96749303"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96933858"
 ---
 # <a name="stored-query-results-preview"></a>Gespeicherte Abfrageergebnisse (Vorschau)
 
@@ -29,7 +29,7 @@ Der Zugriff auf gespeicherte Abfrageergebnisse kann bis zu 24 Stunden nach dem Z
 
 Gespeicherte Abfrageergebnisse Verhalten sich wie Tabellen, da die Reihenfolge der Datensätze nicht beibehalten wird. Zum paginieren der Ergebnisse wird empfohlen, dass die Abfrage eindeutige ID-Spalten enthält. Weitere Informationen finden Sie unter [Beispiele](#examples). Wenn von einer Abfrage mehrere Resultsets zurückgegeben werden, wird nur das erste Resultset gespeichert. 
 
-Die Verwendung gespeicherter Abfrageergebnisse erfordert `Database User` oder eine höhere Zugriffs Rolle.
+Die Verwendung gespeicherter Abfrageergebnisse erfordert `Database Viewer` oder eine höhere Zugriffs Rolle.
 
 ## <a name="store-the-results-of-a-query"></a>Speichern der Ergebnisse einer Abfrage
 
@@ -43,7 +43,7 @@ Die Verwendung gespeicherter Abfrageergebnisse erfordert `Database User` oder ei
 * *Query*: eine potenziell schwerwiegende kql-Abfrage, deren Ergebnisse gespeichert werden.
 * *PropertyName*: (alle Eigenschaften sind optional)
     
-    | Eigenschaft       | type       | Beschreibung       |
+    | Eigenschaft       | type       | BESCHREIBUNG       |
     |----------------|------------|-------------------------------------------------------------------------------------|
     | `expiresAfter` | `timespan` | Ein TimeSpan-Literale, das angibt, wann das Ergebnis der gespeicherten Abfrage abläuft (maximal 24 Stunden). |
     | `previewCount` | `int`      | Die Anzahl der Zeilen, die in einer Vorschau zurückgegeben werden sollen. Wenn diese Eigenschaft auf `0` (Standard) festgelegt wird, gibt der Befehl alle Abfrageergebnis Zeilen zurück. |
@@ -160,7 +160,7 @@ Löscht ein aktives Ergebnis der gespeicherten Abfrage, das in der aktuellen Dat
 
 `.drop``stored_query_result` *Storedqueryresultname*
 
-`Database User` zum Aufrufen dieses Befehls ist eine Berechtigung erforderlich.
+`Database Viewer` zum Aufrufen dieses Befehls ist eine Berechtigung erforderlich.
 
 #### <a name="returns"></a>Rückgabe
 
