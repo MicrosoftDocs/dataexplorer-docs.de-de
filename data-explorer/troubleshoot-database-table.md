@@ -6,17 +6,17 @@ ms.author: orspodek
 ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: how-to
-ms.date: 09/24/2018
-ms.openlocfilehash: fdcc048c9abdbbc7b99ba938dd5f4ce3792fce41
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.date: 12/01/2020
+ms.openlocfilehash: 8b94a36bc2e5190770db424126a3461330c4245d
+ms.sourcegitcommit: 4d5628b52b84f7564ea893f621bdf1a45113c137
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88875360"
+ms.lasthandoff: 12/01/2020
+ms.locfileid: "96444181"
 ---
 # <a name="troubleshoot-failure-to-create-or-delete-a-database-or-table-in-azure-data-explorer"></a>Problembehandlung: Fehler beim Erstellen oder Löschen einer Datenbank oder Tabelle im Azure-Daten-Explorer
 
-Im Azure-Daten-Explorer arbeiten Sie regelmäßig mit Datenbanken und Tabellen. Dieser Artikel enthält Schritte zur Behandlung von Problemen, die möglicherweise auftreten.
+Im Azure-Daten-Explorer arbeiten Sie regelmäßig mit Datenbanken und Tabellen. Dieser Artikel enthält Schritte zur Behandlung von Problemen, die möglicherweise auftreten. 
 
 ## <a name="creating-a-database"></a>Erstellen einer Datenbank
 
@@ -28,7 +28,7 @@ Im Azure-Daten-Explorer arbeiten Sie regelmäßig mit Datenbanken und Tabellen. 
 
 ## <a name="deleting-or-renaming-a-database"></a>Löschen oder Umbenennen einer Datenbank
 
-Stellen Sie sicher, dass Sie über die erforderlichen Berechtigungen verfügen. Um eine Datenbank löschen oder umbenennen zu können, müssen Sie Mitglied der Rolle *Mitwirkender* oder *Besitzer* für das Azure-Abonnement sein. Arbeiten Sie ggf. mit Ihrem Abonnementadministrator zusammen, damit dieser Sie der entsprechenden Rolle hinzufügen kann.
+Stellen Sie sicher, dass Sie über die erforderlichen Berechtigungen verfügen. Um eine Datenbank löschen oder umbenennen zu können, müssen Sie Mitglied der Rolle *Mitwirkender* oder *Besitzer* für das Azure-Abonnement sein. Arbeiten Sie ggf. mit Ihrem Abonnementadministrator zusammen, damit dieser Sie der entsprechenden Rolle hinzufügen kann. Sie können eine Datenbank auch löschen oder umbenennen, wenn Sie über die Rolle *Datenbankadministrator* verfügen.
 
 ## <a name="creating-a-table"></a>Erstellen einer Tabelle
 
@@ -60,4 +60,5 @@ Informationen zu Berechtigungen finden Sie unter [Verwalten von Datenbankberecht
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-[Überprüfen der Clusterintegrität](check-cluster-health.md)
+* [Überprüfen der Clusterintegrität](check-cluster-health.md)
+* [Verwalten von Datenbankberechtigungen](manage-database-permissions.md)

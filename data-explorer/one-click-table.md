@@ -7,14 +7,14 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/06/2020
-ms.openlocfilehash: 3302e7cb94a2184be64664f3c3d8698b8bea7643
-ms.sourcegitcommit: 92b8057a36bd7daa16226f1526b29253bceb3602
+ms.openlocfilehash: 2f31d49e4612134cf4111e018eb5ab02c243427b
+ms.sourcegitcommit: faa747df81c49b96d173dbd5a28d2ca4f3a2db5f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/28/2020
-ms.locfileid: "91402740"
+ms.lasthandoff: 11/24/2020
+ms.locfileid: "95783357"
 ---
-# <a name="create-a-table-in-azure-data-explorer-preview"></a>Erstellen einer Tabelle in Azure Data Explorer (Vorschauversion)
+# <a name="create-a-table-in-azure-data-explorer"></a>Erstellen einer Tabelle in Azure Data Explorer
 
 Das Erstellen einer Tabelle ist ein wichtiger Schritt bei der [Datenerfassung](ingest-data-overview.md) und [Abfrage](write-queries.md) in Azure Data Explorer. Nach der [Erstellung eines Clusters und einer Datenbank in Azure Data Explorer](create-cluster-database-portal.md) können Sie eine Tabelle erstellen. In diesem Artikel erfahren Sie, wie Sie über die Webbenutzeroberfläche von Azure Data Explorer schnell eine Tabelle und eine Schemazuordnung erstellen. 
 
@@ -26,7 +26,7 @@ Das Erstellen einer Tabelle ist ein wichtiger Schritt bei der [Datenerfassung](i
 
 ## <a name="create-a-table"></a>Erstellen einer Tabelle
 
-1. Klicken Sie im linken Menü der Webbenutzeroberfläche mit der rechten Maustaste auf **ExampleDB** (der Name Ihrer Datenbank), und wählen Sie **Tabelle erstellen (Vorschau)** aus.
+1. Klicken Sie im linken Menü der Webbenutzeroberfläche mit der rechten Maustaste auf den Namen Ihrer Datenbank, und wählen Sie **Tabelle erstellen** aus.
 
     :::image type="content" source="./media/one-click-table/create-table.png" alt-text="Erstellen einer Tabelle über die Webbenutzeroberfläche von Azure Data Explorer":::
 

@@ -11,12 +11,12 @@ ms.date: 10/08/2020
 ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 8a47c51aa7924a28b27602056ea869bfd7a09936
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 0616c0d4dd2a44ba1d54ac83c699a1c0bac249b0
+ms.sourcegitcommit: f134d51e52504d3ca722bdf6d33baee05118173a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95783721"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96563358"
 ---
 # <a name="tutorial-use-kusto-queries-in-azure-data-explorer-and-azure-monitor"></a>Tutorial: Verwenden von Kusto-Abfragen in Azure Data Explorer und Azure Monitor
 
@@ -555,7 +555,7 @@ AzureActivity
 
 ## <a name="show-n-rows-take"></a>Anzeigen von *n* Zeilen: *take*
 
-[NetworkMonitoring](/azure/azure-monitor/reference/tables/networkmonitoring) enthält Überwachungsdaten für virtuelle Azure-Netzwerke. Verwenden wir nun den [take](./takeoperator.md)-Operator, um uns fünf zufällige Beispielzeilen in dieser Tabelle anzusehen. [take](./takeoperator.md) zeigt eine bestimmte Anzahl von Zeilen aus einer Tabelle in keiner bestimmten Reihenfolge:
+[NetworkMonitoring](/azure/azure-monitor/reference/tables/networkmonitoring) enthält Überwachungsdaten für virtuelle Azure-Netzwerke. Verwenden Sie nun den [take](./takeoperator.md)-Operator, um sich zehn zufällige Beispielzeilen in dieser Tabelle anzusehen. [take](./takeoperator.md) zeigt eine bestimmte Anzahl von Zeilen aus einer Tabelle in keiner bestimmten Reihenfolge:
 
 ```kusto
 NetworkMonitoring

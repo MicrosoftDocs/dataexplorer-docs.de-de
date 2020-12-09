@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/19/2020
 ms.custom: contperfq1
-ms.openlocfilehash: a91eca7232cb2583312ea54cab92aec014f4dcbd
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 153b4265aade03e4059db0b38362d217cdad90df
+ms.sourcegitcommit: 2804e3fe40f6cf8e65811b00b7eb6a4f59c88a99
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343384"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96748415"
 ---
 # <a name="monitor-azure-data-explorer-performance-health-and-usage-with-metrics"></a>Überwachen der Azure Data Explorer-Leistung, -Integrität und -Nutzung mit Metriken
 
@@ -29,7 +29,7 @@ Weitere Informationen zum Azure-Metrik-Explorer finden Sie unter [Erste Schritte
 ## <a name="use-metrics-to-monitor-your-azure-data-explorer-resources"></a>Überwachen Ihrer Azure Data Explorer-Ressourcen mithilfe von Metriken
 
 1. Melden Sie sich beim [Azure-Portal](https://portal.azure.com/) an.
-1. Suchen Sie im linken Bereich Ihres Azure Data Explorer-Clusters nach *Metriken* .
+1. Suchen Sie im linken Bereich Ihres Azure Data Explorer-Clusters nach *Metriken*.
 1. Wählen Sie **Metriken** aus, um den Bereich „Metriken“ zu öffnen und mit der Analyse Ihres Clusters zu beginnen.
     :::image type="content" source="media/using-metrics/select-metrics.gif" alt-text="Suchen nach und Auswählen von „Metriken“ im Azure-Portal":::
 
@@ -46,7 +46,7 @@ In der Auswahl für die **Ressource** und den **Metriknamespace** ist Ihr Azure 
 1. Wählen Sie **+ Neues Diagramm** aus, um mehrere Diagramme in einer einzelnen Ansicht anzuzeigen.
 1. Verwenden Sie die Zeitauswahl, um den Zeitbereich zu ändern (Standardeinstellung: Letzte 24 Stunden).
 1. Verwenden Sie [**Filter hinzufügen** und **Teilung anwenden**](/azure/azure-monitor/platform/metrics-getting-started#apply-dimension-filters-and-splitting) für Metriken, die über Dimensionen verfügen.
-1. Wählen Sie die Option **An Dashboard anheften** , um Ihre Diagrammkonfiguration den Dashboards hinzuzufügen, damit Sie die Anzeige erneut verwenden können.
+1. Wählen Sie die Option **An Dashboard anheften**, um Ihre Diagrammkonfiguration den Dashboards hinzuzufügen, damit Sie die Anzeige erneut verwenden können.
 1. Legen Sie die Option **Neue Warnungsregel** fest, um Ihre Metriken mit den festgelegten Kriterien zu visualisieren. Die neue Warnungsregel enthält Ihre Dimensionen für Zielressource, Metrik, Teilung und Filter aus dem Diagramm. Ändern Sie diese Einstellungen im [Bereich für die Erstellung von Warnungsregeln](/azure/azure-monitor/platform/metrics-charts#create-alert-rules).
 
 ## <a name="supported-azure-data-explorer-metrics"></a>Unterstützte Azure Data Explorer-Metriken
@@ -98,10 +98,10 @@ Erfassungsmetriken dienen zum Nachverfolgen der allgemeinen Integrität und Leis
 | Batchdauer | Sekunden | Avg, Max, Min | Dauer der Batchverarbeitungsphase im Erfassungsflow  | Datenbank |
 | Batchgröße | Byte | Avg, Max, Min | Nicht komprimierte erwartete Datengröße in einem aggregierten Batch für die Erfassung | Datenbank |
 | Verarbeitete Batches | Anzahl | Avg, Max, Min | Anzahl der für die Erfassung abgeschlossenen Batches `Batching Type`: Gibt an, ob die Batchverarbeitungszeit oder der Grenzwert für Datengröße/Dateianzahl in der [Batchrichtlinie](./kusto/management/batchingpolicy.md) erreicht wurde. | Datenbank, Batchverarbeitungstyp |
-| Wartezeit bei der Ermittlung | Sekunden | Avg, Max, Min | Die Zeit zwischen dem Hinzufügen von Daten zur Warteschlange und der Erkennung durch die Datenverbindung. Diese Zeit ist nicht in der **Gesamterfassungsdauer für Kusto** oder in **KustoEventAge (Wartezeit bei der Erfassung)** enthalten. | Datenbank, Tabelle, Art der Datenverbindung, Name der Datenverbindung |
+| Wartezeit bei der Ermittlung | Sekunden | Avg, Max, Min | Die Zeit zwischen dem Hinzufügen von Daten zur Warteschlange und der Erkennung durch die Datenverbindung. Diese Zeit ist nicht in der **Gesamterfassungsdauer für Azure Data Explorer** oder in **KustoEventAge (Wartezeit bei der Erfassung)** enthalten. | Datenbank, Tabelle, Art der Datenverbindung, Name der Datenverbindung |
 | Verarbeitete Ereignisse (für Event/IoT Hub) | Anzahl | Max, Min, Sum | Gesamtzahl der Ereignisse, die von Event Hubs gelesen und vom Cluster verarbeitet werden. Die Ereignisse werden danach unterteilt, ob sie vom Clustermodul abgelehnt oder akzeptiert werden. | EventStatus |
 | Latenz bei der Erfassung | Sekunden | Avg, Max, Min | Latenz der erfassten Daten ab dem Empfangszeitpunkt der Daten im Cluster bis zu dem Zeitpunkt, zu dem die Daten bereit zum Abfragen sind. Der Zeitraum der Erfassungslatenz richtet sich nach dem Erfassungsszenario. | Keine |
-| Ergebnis der Datenerfassung | Anzahl | Anzahl | Gesamtzahl von nicht erfolgreichen und erfolgreichen Erfassungsvorgängen. <br> <br> Verwenden Sie die Option **Teilung anwenden** , um Buckets mit Erfolgs- und Fehlerergebnissen zu erstellen und die Dimensionen zu analysieren ( **Wert** > **Status** ).| IngestionResultDetails |
+| Ergebnis der Datenerfassung | Anzahl | Anzahl | Gesamtzahl von nicht erfolgreichen und erfolgreichen Erfassungsvorgängen. <br> <br> Verwenden Sie die Option **Teilung anwenden**, um Buckets mit Erfolgs- und Fehlerergebnissen zu erstellen und die Dimensionen zu analysieren (**Wert** > **Status**).| IngestionResultDetails |
 | Datenerfassungsvolumen (in MB) | Anzahl | Max, Sum | Die Gesamtgröße der im Cluster erfassten Daten (in MB) vor der Komprimierung. | Datenbank |
 | Phasenlatenz | Sekunden | Avg, Max, Min | Gibt an, wie lange die Verarbeitung dieses Datenbatches durch eine bestimmte Komponente dauert. Die gesamte Phasenlatenz für alle Komponenten eines Datenbatches entspricht der Erfassungslatenz. | Datenbank, Art der Datenverbindung, Name der Datenverbindung|
 

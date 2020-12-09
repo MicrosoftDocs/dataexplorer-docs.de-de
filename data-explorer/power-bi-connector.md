@@ -6,13 +6,13 @@ ms.author: orspodek
 ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
-ms.date: 07/10/2019
-ms.openlocfilehash: 47bb390e6211a0448e16b3fca16560176dcc8702
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.date: 12/03/2020
+ms.openlocfilehash: d02f9732791bf66a488779e2bc413fa441664ef7
+ms.sourcegitcommit: f134d51e52504d3ca722bdf6d33baee05118173a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343537"
+ms.lasthandoff: 12/03/2020
+ms.locfileid: "96563330"
 ---
 # <a name="visualize-data-using-the-azure-data-explorer-connector-for-power-bi"></a>Visualisieren von Daten mithilfe des Azure Data Explorer-Connectors für Power BI
 
@@ -34,7 +34,7 @@ Sie stellen zunächst eine Verbindung mit dem Azure Data Explorer-Hilfecluster h
 
     ![Datensammlung](media/power-bi-connector/get-data-more.png)
 
-1. Suchen Sie nach *Azure Data Explorer* , wählen Sie **Azure Data Explorer** und dann **Verbinden** aus.
+1. Suchen Sie nach *Azure Data Explorer*, wählen Sie **Azure Data Explorer** und dann **Verbinden** aus.
 
     ![Suchen und Abrufen von Daten](media/power-bi-connector/search-get-data.png)
 
@@ -44,22 +44,22 @@ Sie stellen zunächst eine Verbindung mit dem Azure Data Explorer-Hilfecluster h
 
     | Einstellung | Wert | Feldbeschreibung
     |---|---|---
-    | Cluster | *https://help.kusto.windows.net* | Die URL für den Hilfecluster. Für andere Cluster hat die URL das Format *https://\<ClusterName\>.\<Region\>.kusto.windows.net* . |
+    | Cluster | *https://help.kusto.windows.net* | Die URL für den Hilfecluster. Für andere Cluster hat die URL das Format *https://\<ClusterName\>.\<Region\>.kusto.windows.net*. |
     | Datenbank | Nicht ausfüllen | Eine Datenbank, die in dem Cluster gehostet wird, mit dem Sie eine Verbindung herstellen. Wird in einem späteren Schritt ausgewählt. |
     | Tabellenname | Nicht ausfüllen | Eine der Tabellen in der Datenbank oder eine Abfrage wie <code>StormEvents \| take 1000</code> Wird in einem späteren Schritt ausgewählt. |
     | Erweiterte Optionen | Nicht ausfüllen | Optionen für Ihre Abfragen (etwa die Größe des Resultsets).
     | Datenkonnektivitätsmodus | *DirectQuery* | Bestimmt, ob Power BI die Daten importiert oder direkt eine Verbindung mit der Datenquelle herstellt. Für diesen Connector sind beide Optionen geeignet. |
 
     > [!NOTE]
-    > Im **Import** -Modus werden Daten nach Power BI verschoben. Im **DirectQuery** -Modus werden Daten direkt aus dem Azure Data Explorer-Cluster abgefragt.
+    > Im **Import**-Modus werden Daten nach Power BI verschoben. Im **DirectQuery**-Modus werden Daten direkt aus dem Azure Data Explorer-Cluster abgefragt.
     >
-    > Verwenden Sie den **Import** -Modus in folgenden Fällen:
+    > Verwenden Sie den **Import**-Modus in folgenden Fällen:
     >
     > * Ihr Dataset ist klein.
     > * Sie benötigen keine Fast-Echtzeitdaten.
     > * Ihre Daten sind bereits aggregiert, oder Sie führen die [Aggregation in Kusto](kusto/query/summarizeoperator.md#list-of-aggregation-functions) aus.
     >
-    > Verwenden Sie den **DirectQuery** -Modus in folgenden Fällen:
+    > Verwenden Sie den **DirectQuery**-Modus in folgenden Fällen:
     > * Ihr Dataset ist sehr umfangreich.
     > * Sie benötigen Fast-Echtzeitdaten.
 
@@ -76,7 +76,7 @@ Sie stellen zunächst eine Verbindung mit dem Azure Data Explorer-Hilfecluster h
 
     ![Anmelden](media/power-bi-connector/sign-in.png)
 
-1. Erweitern Sie im Bildschirm **Navigator** die Datenbank **Samples** , und wählen Sie **StormEvents** > **Bearbeiten** aus.
+1. Erweitern Sie auf dem Bildschirm **Navigator** die Datenbank **Samples**, und wählen Sie **StormEvents** > **Daten transformieren** aus.
 
     ![Tabelle auswählen](media/power-bi-connector/select-table.png)
 
@@ -90,7 +90,7 @@ Sie stellen zunächst eine Verbindung mit dem Azure Data Explorer-Hilfecluster h
 
     ![Beibehalten der ersten Zeilen](media/power-bi-connector/keep-top-rows.png)
 
-1. Klicken Sie auf der Registerkarte **Start** auf **Schließen und übernehmen** .
+1. Klicken Sie auf der Registerkarte **Start** auf **Schließen und übernehmen**.
 
     ![Schließen und übernehmen](media/power-bi-connector/close-apply.png)
 

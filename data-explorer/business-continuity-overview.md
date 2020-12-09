@@ -7,12 +7,12 @@ ms.reviewer: ankhanol
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/05/2020
-ms.openlocfilehash: 39bddff724d30e19f240a25fe3a277fd2151d81e
-ms.sourcegitcommit: f7f3ecef858c1e8d132fc10d1e240dcd209163bd
+ms.openlocfilehash: 2dcb1fb83d592ff7fd81fcfc5f51cf6fc95254b7
+ms.sourcegitcommit: a36981785765b85a961f275be24d297d38e498fd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88201334"
+ms.lasthandoff: 11/30/2020
+ms.locfileid: "96310033"
 ---
 # <a name="business-continuity-and-disaster-recovery-overview"></a>Übersicht über Business Continuity & Disaster Recovery
 
@@ -84,14 +84,14 @@ Recovery Time Objective (RTO) bezieht sich auf die Zeit bis zur Wiederherstellun
 Erfassungs-, Verarbeitungs- und Zusammenstellungsprozesse müssen bereits im Vorfeld der Notfallwiederherstellungsplanung sorgfältig entworfen werden. Erfassung bezieht sich auf Daten, die aus verschiedenen Quellen in Azure Data Explorer integriert werden. Verarbeitung bezieht sich auf Transformationen und ähnliche Aktivitäten. Zusammenstellung bezieht sich auf materialisierte Sichten, Exporte in den Data Lake und Ähnliches.
 
 Hier finden Sie gängige Notfallwiederherstellungskonfigurationen, die im Anschluss jeweils ausführlich beschrieben werden:
-* [Always On-Konfiguration](#always-on-configuration)
+* [Aktiv/Aktiv/Aktiv-Konfiguration (Always On)](#active-active-active-configuration)
 * [Aktiv/Aktiv-Konfiguration](#active-active-configuration)
 * [Konfiguration mit einem aktiven und einem unmittelbar betriebsbereiten Cluster](#active-hot-standby-configuration)
 * [Konfiguration mit bedarfsgesteuertem Datenwiederherstellungscluster](#on-demand-data-recovery-configuration)
 
-### <a name="always-on-configuration"></a>Always On-Konfiguration
+### <a name="active-active-active-configuration"></a>Aktiv/Aktiv/Aktiv-Konfiguration
 
-Bei kritischen Anwendungsbereitstellungen ohne Toleranz für Ausfälle empfiehlt sich die Verwendung mehrerer Azure Data Explorer-Cluster in verschiedenen Azure-Regionspaaren. Richten Sie die Erfassung, Verarbeitung und Zusammenstellung parallel zu allen Clustern ein. Die Cluster-SKU muss regionsübergreifend gleich sein. Von Azure wird sichergestellt, dass Updates in Azure-Regionspaaren angewendet und gestaffelt werden. Der Ausfall einer Azure-Region führt nicht zu einem Anwendungsausfall. Es kommt jedoch möglicherweise zu Wartezeiten oder Leistungseinbußen.
+Diese Konfiguration wird auch als „Always On“ bezeichnet. Bei kritischen Anwendungsbereitstellungen ohne Toleranz für Ausfälle empfiehlt sich die Verwendung mehrerer Azure Data Explorer-Cluster in verschiedenen Azure-Regionspaaren. Richten Sie die Erfassung, Verarbeitung und Zusammenstellung parallel zu allen Clustern ein. Die Cluster-SKU muss regionsübergreifend gleich sein. Von Azure wird sichergestellt, dass Updates in Azure-Regionspaaren angewendet und gestaffelt werden. Der Ausfall einer Azure-Region führt nicht zu einem Anwendungsausfall. Es kommt jedoch möglicherweise zu Wartezeiten oder Leistungseinbußen.
 
 :::image type="content" source="media/business-continuity-overview/active-active-active-n.png" alt-text="Aktiv/Aktiv/Aktiv/n-Konfiguration":::
 
@@ -101,7 +101,7 @@ Bei kritischen Anwendungsbereitstellungen ohne Toleranz für Ausfälle empfiehlt
 
 ### <a name="active-active-configuration"></a>Aktiv/Aktiv-Konfiguration
 
-Diese Konfiguration ist mit der [Always On-Konfiguration](#always-on-configuration) identisch, umfasst jedoch nur zwei Azure-Regionspaare. Konfigurieren Sie eine duale Erfassung, Verarbeitung und Zusammenstellung. Benutzer werden an die nächstgelegene Region weitergeleitet. Die Cluster-SKU muss regionsübergreifend gleich sein.
+Diese Konfiguration ist mit der [Aktiv/Aktiv/Aktiv-Konfiguration](#active-active-active-configuration) identisch, umfasst jedoch nur zwei Azure-Regionspaare. Konfigurieren Sie eine duale Erfassung, Verarbeitung und Zusammenstellung. Benutzer werden an die nächstgelegene Region weitergeleitet. Die Cluster-SKU muss regionsübergreifend gleich sein.
 
 :::image type="content" source="media/business-continuity-overview/active-active.png" alt-text="Aktiv/Aktiv-Konfiguration":::
 

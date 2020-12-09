@@ -6,21 +6,24 @@ ms.author: orspodek
 ms.reviewer: takamara
 ms.service: data-explorer
 ms.topic: how-to
-ms.date: 06/03/2019
-ms.openlocfilehash: 228722bab25dc19532860f92b8194c4fd2d79a38
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.date: 11/26/2020
+ms.openlocfilehash: 83d382de4f5bd683dff934267b5258ece475a8da
+ms.sourcegitcommit: 1bdbfdc04c4eac405f3931059bbeee2dedd87004
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343095"
+ms.lasthandoff: 11/27/2020
+ms.locfileid: "96303348"
 ---
-# <a name="ingest-data-from-logstash-to-azure-data-explorer"></a>Erfassen von Daten aus Logstash in Azure Data Explorer
+# <a name="ingest-data-from-logstash-to-azure-data-explorer-preview"></a>Erfassen von Daten aus Logstash in Azure Data Explorer (Vorschau)
 
 [Logstash](https://www.elastic.co/products/logstash) ist eine serverseitige Open-Source-Datenverarbeitungspipeline, die gleichzeitig Daten aus zahlreichen Quellen erfasst, transformiert und anschließend an Ihren bevorzugten Stash sendet. In diesem Artikel werden Sie diese Daten an Azure Data Explorer senden. Dabei handelt es sich um einen schnellen und hochgradig skalierbaren Dienst zur Untersuchung von Protokoll- und Telemetriedaten. Sie erstellen eine Tabelle und eine Datenzuordnung in einem Testcluster und weisen Logstash anschließend an, Daten an die Tabelle zu senden und die Ergebnisse zu überprüfen.
 
+> [!NOTE]
+> Dieser Connector unterstützt derzeit nur das JSON-Datenformat.
+
 ## <a name="prerequisites"></a>Voraussetzungen
 
-* ein Azure-Abonnement Sollten Sie keins besitzen, erstellen Sie ein [kostenloses Azure-Konto](https://azure.microsoft.com/free/), bevor Sie beginnen.
+* Ein Azure-Abonnement. Sollten Sie keins besitzen, erstellen Sie ein [kostenloses Azure-Konto](https://azure.microsoft.com/free/), bevor Sie beginnen.
 * [Testcluster und Datenbank](create-cluster-database-portal.md) für Azure Data Explorer
 * Version 6 von Logstash ([Installationsanleitung](https://www.elastic.co/guide/en/logstash/current/installing-logstash.html))
 
@@ -85,7 +88,7 @@ Falls Sie Logstash bereits verwenden und Zugriff auf Ihren eigenen Ereignisdaten
     }
     ```
 
-Diese Konfiguration enthält auch das Eingabe-Plug-In `stdin`, das es Ihnen ermöglicht, weitere Nachrichten zu schreiben. (Drücken Sie die *EINGABETASTE* , um die Nachrichten an die Pipeline zu übermitteln.)
+Diese Konfiguration enthält auch das Eingabe-Plug-In `stdin`, das es Ihnen ermöglicht, weitere Nachrichten zu schreiben. (Drücken Sie die *EINGABETASTE*, um die Nachrichten an die Pipeline zu übermitteln.)
 
 ## <a name="configure-logstash-to-send-data-to-azure-data-explorer"></a>Konfigurieren von Logstash, um Daten an Azure Data Explorer zu senden
 
@@ -110,7 +113,7 @@ output {
 | --- | --- |
 | **path** | Das Logstash-Plug-In schreibt Ereignisse vor dem Senden an Azure Data Explorer in temporäre Dateien. Dieser Parameter enthält einen Pfad, an dem die Dateien geschrieben werden sollen, sowie einen Zeitausdruck für die Dateirotation, um einen Uploadvorgang an den Azure Data Explorer-Dienst auszulösen.|
 | **ingest_url** | Der Kusto-Endpunkt für die erfassungsbezogene Kommunikation.|
-| **app_id** , **app_key** und **app_tenant**| Anmeldeinformationen für die Verbindungsherstellung mit Azure Data Explorer. Wichtig: Verwenden Sie eine Anwendung mit Erfassungsberechtigungen. |
+| **app_id**, **app_key** und **app_tenant**| Anmeldeinformationen für die Verbindungsherstellung mit Azure Data Explorer. Wichtig: Verwenden Sie eine Anwendung mit Erfassungsberechtigungen. |
 | **database**| Name der Zieldatenbank für Ereignisse. |
 | **Tabelle** | Name der Zieltabelle für Ereignisse. |
 | **mapping** | Mit dem mapping-Parameter wird die JSON-Zeichenfolge eines eingehenden Ereignisses dem korrekten Zeilenformat zugeordnet (also definiert, welche Eigenschaft in welche Spalte eingefügt wird). |
