@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/19/2020
 ms.custom: contperfq1
-ms.openlocfilehash: 153b4265aade03e4059db0b38362d217cdad90df
-ms.sourcegitcommit: 2804e3fe40f6cf8e65811b00b7eb6a4f59c88a99
+ms.openlocfilehash: e92717e68794b21a0c991806aa7319e528433afb
+ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
 ms.translationtype: HT
 ms.contentlocale: de-DE
 ms.lasthandoff: 12/07/2020
-ms.locfileid: "96748415"
+ms.locfileid: "96774519"
 ---
 # <a name="monitor-azure-data-explorer-performance-health-and-usage-with-metrics"></a>Überwachen der Azure Data Explorer-Leistung, -Integrität und -Nutzung mit Metriken
 
@@ -101,7 +101,7 @@ Erfassungsmetriken dienen zum Nachverfolgen der allgemeinen Integrität und Leis
 | Wartezeit bei der Ermittlung | Sekunden | Avg, Max, Min | Die Zeit zwischen dem Hinzufügen von Daten zur Warteschlange und der Erkennung durch die Datenverbindung. Diese Zeit ist nicht in der **Gesamterfassungsdauer für Azure Data Explorer** oder in **KustoEventAge (Wartezeit bei der Erfassung)** enthalten. | Datenbank, Tabelle, Art der Datenverbindung, Name der Datenverbindung |
 | Verarbeitete Ereignisse (für Event/IoT Hub) | Anzahl | Max, Min, Sum | Gesamtzahl der Ereignisse, die von Event Hubs gelesen und vom Cluster verarbeitet werden. Die Ereignisse werden danach unterteilt, ob sie vom Clustermodul abgelehnt oder akzeptiert werden. | EventStatus |
 | Latenz bei der Erfassung | Sekunden | Avg, Max, Min | Latenz der erfassten Daten ab dem Empfangszeitpunkt der Daten im Cluster bis zu dem Zeitpunkt, zu dem die Daten bereit zum Abfragen sind. Der Zeitraum der Erfassungslatenz richtet sich nach dem Erfassungsszenario. | Keine |
-| Ergebnis der Datenerfassung | Anzahl | Anzahl | Gesamtzahl von nicht erfolgreichen und erfolgreichen Erfassungsvorgängen. <br> <br> Verwenden Sie die Option **Teilung anwenden**, um Buckets mit Erfolgs- und Fehlerergebnissen zu erstellen und die Dimensionen zu analysieren (**Wert** > **Status**).| IngestionResultDetails |
+| Ergebnis der Datenerfassung | Anzahl | Anzahl | Gesamtzahl von nicht erfolgreichen und erfolgreichen Erfassungsvorgängen. <br> <br> Verwenden Sie die Option **Teilung anwenden**, um Buckets mit Erfolgs- und Fehlerergebnissen zu erstellen und die Dimensionen zu analysieren (**Wert** > **Status**).| Status |
 | Datenerfassungsvolumen (in MB) | Anzahl | Max, Sum | Die Gesamtgröße der im Cluster erfassten Daten (in MB) vor der Komprimierung. | Datenbank |
 | Phasenlatenz | Sekunden | Avg, Max, Min | Gibt an, wie lange die Verarbeitung dieses Datenbatches durch eine bestimmte Komponente dauert. Die gesamte Phasenlatenz für alle Komponenten eines Datenbatches entspricht der Erfassungslatenz. | Datenbank, Art der Datenverbindung, Name der Datenverbindung|
 

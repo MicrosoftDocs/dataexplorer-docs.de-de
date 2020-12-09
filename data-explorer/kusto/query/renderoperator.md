@@ -7,16 +7,16 @@ ms.author: orspodek
 ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 03/29/2020
+ms.date: 12/08/2020
 ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 5670f3f9c7aa8b3d6b10f88433d19246e2daf6d6
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 8370e69914b2bc5e141321a6bc6722bba6f1fd4d
+ms.sourcegitcommit: 79d923d7b7e8370726974e67a984183905f323ff
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95783334"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96868602"
 ---
 # <a name="render-operator"></a>render-Operator
 
@@ -140,8 +140,6 @@ Einige Visualisierungen unterstützen das Aufteilen in mehrere Werte der y-Achse
 |`axes`    |Es wird ein einzelnes Diagramm mit mehreren y-Achsen angezeigt (eine Achse pro Reihe).|
 |`panels`  |Ein Diagramm wird für jeden `ycolumn`-Wert (bis zu einem Grenzwert) gerendert.|
 
-::: zone-end
-
 > [!NOTE]
 > Das Datenmodell des render-Operators prüft die tabellarischen Daten so, als wären es drei Arten von Spalten vorhanden:
 >
@@ -167,10 +165,40 @@ range x from -2 to 2 step 0.1
 | render linechart with  (ycolumns = sin, cos, series = x_sign, sum_sign)
 ```
 
-::: zone pivot="azuredataexplorer"
-
 [Renderingbeispiele im Tutorial](./tutorial.md#displaychartortable)
 
 [Anomalieerkennung](./samples.md#get-more-from-your-data-by-using-kusto-with-machine-learning)
+
+::: zone-end
+
+::: zone pivot="azuremonitor"
+
+> [!NOTE]
+> Das Datenmodell des render-Operators prüft die tabellarischen Daten so, als wären es drei Arten von Spalten vorhanden:
+>
+> * Die Spalte der x-Achse (angegeben durch die `xcolumn`-Eigenschaft).
+> * Die Reihenspalten (eine beliebige Anzahl von Spalten, die durch die `series`-Eigenschaft angegeben werden).
+> * Die Spalten der y-Achse (eine beliebige Anzahl von Spalten, die durch die `ycolumns`-Eigenschaft angegeben werden).
+  Für jeden Datensatz enthält die Reihe so viele Messungen („Punkte“ im Diagramm), wie Spalten der y-Achse vorhanden sind.
+
+> [!TIP]
+> 
+> * Verwenden Sie `where`, `summarize` und `top`, um das angezeigter Volumen einzuschränken.
+> * Sortieren Sie die Daten, um die Reihenfolge der x-Achse zu definieren.
+> * Benutzer-Agents können den Wert von Eigenschaften „erraten“, die nicht durch die Abfrage angegeben werden. Insbesondere kann es vorkommen, dass „uninteressante“ Spalten im Schema des Ergebnisses dazu führen, dass sie falsch raten. Versuchen Sie, solche Spalten wegzuprojizieren, wenn dies geschieht. 
+
+## <a name="example"></a>Beispiel
+
+<!-- csl: https://help.kusto.windows.net/Samples -->
+```kusto
+InsightsMetrics
+| where Computer == "DC00.NA.contosohotels.com"
+| where Namespace  == "Processor" and Name == "UtilizationPercentage"
+| summarize avg(Val) by Computer, bin(TimeGenerated, 1h)
+| render timechart
+```
+
+[Renderingbeispiele im Tutorial](./tutorial.md?pivots=azuremonitor#display-a-chart-or-table-render-1)
+
 
 ::: zone-end
