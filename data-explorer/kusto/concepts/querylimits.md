@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
 ms.localizationpriority: high
-ms.openlocfilehash: cbdebe75713bb7cd786941e7546ab477df497c20
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 3b230ea0ed8bba80741e18f24cd96cf271224f25
+ms.sourcegitcommit: e278dae04f12658d0907f7b6ba46c6a34c53dcd7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512909"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96901102"
 ---
 # <a name="query-limits"></a>Abfragegrenzwerte
 
@@ -83,6 +83,13 @@ Sie können den Grenzwert für die Ergebniskürzung entweder für Exportzwecke m
 Kusto bietet eine Reihe von Clientbibliotheken, die „unendlich große“ Ergebnisse verarbeiten können, indem sie an den Aufrufer gestreamt werden. Verwenden Sie eine dieser Bibliotheken, und konfigurieren Sie sie für den Streamingmodus. Verwenden Sie beispielsweise den .NET Framework-Client (Microsoft.Azure.Kusto.Data), und legen Sie entweder die Streaming-Eigenschaft der Verbindungszeichenfolge auf *true* fest, oder verwenden Sie den *ExecuteQueryV2Async()* -Aufruf, der Ergebnisse immer streamt.
 
 Ergebniskürzung wird standardmäßig angewendet, nicht nur auf den Ergebnisstream, der an den Client zurückgegeben wird. Sie wird auch standardmäßig mit ähnlichen Effekten auf jede Unterabfrage angewendet, die ein Cluster an einen anderen Cluster in einer clusterübergreifenden Abfrage ausgibt.
+
+### <a name="setting-multiple-result-truncation-properties"></a>Festlegen der Eigenschaften für das Abschneiden mehrerer Ergebnisse
+
+Bei der Verwendung von `set`-Anweisungen und/oder bei der Angabe von Flags in [Clientanforderungseigenschaften](../api/netfx/request-properties.md) gilt Folgendes:
+
+* Wenn `truncationmaxsize`, `truncationmaxrecords` oder `query_take_max_records` zusätzlich zu `notruncation` festgelegt ist, wird `notruncation` ignoriert.
+* Wenn `truncationmaxsize`, `truncationmaxrecords` und/oder `query_take_max_records` mehrmals festgelegt sind, gilt jeweils der *niedrigere* Wert für jede Eigenschaft.
 
 ## <a name="limit-on-memory-per-iterator"></a>Grenzwert für Arbeitsspeicher pro Iterator
 

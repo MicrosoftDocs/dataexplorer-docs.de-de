@@ -1672,8 +1672,10 @@
           href: ./kusto/management/query-results-cache-commands.md
           items:
             - name: Anzeigen des Cache
+              displayName: show database cache query results
               href: ./kusto/management/show-query-results-cache-command.md
             - name: Löschen des Cache
+              displayName: clear query results cache
               href: ./kusto/management/clear-query-results-cache-command.md
         - name: Systeminformationen
           href: ./kusto/management/systeminfo.md
