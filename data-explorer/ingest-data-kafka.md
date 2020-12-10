@@ -7,12 +7,12 @@ ms.reviewer: ankhanol
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/22/2020
-ms.openlocfilehash: 8274cd04dc2ecf588bf4771c06e3f8a760cac74d
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: cc2f10570081fec3a5762ab3f2e23b9e22839063
+ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343163"
+ms.lasthandoff: 12/07/2020
+ms.locfileid: "96774655"
 ---
 # <a name="ingest-data-from-apache-kafka-into-azure-data-explorer"></a>Erfassen von Daten aus Apache Kafka in Azure Data Explorer
  
@@ -89,7 +89,7 @@ Dieser Dienstprinzipal ist die Identität, die vom Connector zum Schreiben in di
 1. Erstellen Sie eine Batcherfassungsrichtlinie in der Tabelle für die konfigurierbare Erfassungslatenz.
 
     > [!TIP]
-    > Bei der [Richtlinie für die Batcherfassung](kusto/management/batchingpolicy.md) handelt es sich um eine Leistungsoptimierung mit drei Parametern. Wenn die Bedingung für den ersten Parameter erfüllt ist, wird die Erfassung für die Azure Data Explorer-Tabelle ausgelöst.
+    > Bei der [Richtlinie für die Batcherfassung](kusto/management/batchingpolicy.md) handelt es sich um eine Leistungsoptimierung mit drei Parametern. Die erste erfüllte Bedingung löst die Erfassung in der Azure Data Explorer-Tabelle aus.
 
     ```kusto
     .alter table Storms policy ingestionbatching @'{"MaximumBatchingTimeSpan":"00:00:15", "MaximumNumberOfItems": 100, "MaximumRawDataSizeMB": 300}'
@@ -332,7 +332,7 @@ Der Connector beginnt damit, Erfassungsprozesse für Azure Data Explorer in die 
     | render columnchart
     ```
     
-    :::image type="content" source="media/ingest-data-kafka/kusto-query.png" alt-text="Erstellen einer Tabelle im Azure Data Explorer-Portal":::
+    :::image type="content" source="media/ingest-data-kafka/kusto-query.png" alt-text="Diagramm: Ergebnisse der Kafka-Abfragespalte in Azure Data Explorer":::
 
 Weitere Abfragebeispiele und eine Anleitung finden Sie unter [Schreiben von Abfragen für Azure Data Explorer](write-queries.md) und in der [Dokumentation zur Kusto-Abfragesprache](./kusto/query/index.md).
 
