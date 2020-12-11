@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 06/10/2020
-ms.openlocfilehash: 30929e63c39be10d066815333ba6b277c0aeb5c9
-ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
+ms.openlocfilehash: fdf72c8c58ec8a9fb9c64ecea6219dcc3a736d18
+ms.sourcegitcommit: 2bdb904e6253c9ceb8f1eaa2da35fcf27e13a2cd
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96321283"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97091350"
 ---
 # <a name="partitioning-policy"></a>Partitionierungsrichtlinie
 
@@ -47,7 +47,7 @@ Die folgenden Arten von Partitions Schlüsseln werden unterstützt.
 
 #### <a name="partition-properties"></a>Partitionseigenschaften
 
-|Eigenschaft | Beschreibung | Unterstützte Werte| Empfohlener Wert |
+|Eigenschaft | BESCHREIBUNG | Unterstützte Werte| Empfohlener Wert |
 |---|---|---|---|
 | `Function` | Der Name einer zu verwendenden Hash Modulo-Funktion.| `XxHash64` | |
 | `MaxPartitionCount` | Die maximale Anzahl der zu erstellenden Partitionen (das Modulo-Argument der Hash Modulo-Funktion) pro Zeitraum. | Im Bereich `(1,2048]` . <br>  Die Anzahl der Knoten im Cluster ist größer als fünfmal und kleiner als die Kardinalität der Spalte. |  Höhere Werte führen zu einem größeren mehr Aufwand für den Daten Partitionierungs Prozess auf den Knoten des Clusters und für jeden Zeitraum eine höhere Anzahl von Blöcken. Beginnen Sie bei Clustern mit weniger als 50 Knoten mit `256` . Passen Sie den Wert basierend auf diesen Überlegungen oder basierend auf dem Vorteil der Abfrageleistung und dem Aufwand für die Partitionierung der Daten nach der Erfassung an.
@@ -83,7 +83,7 @@ Die verwendete Partitions Funktion ist [bin_at ()](../query/binatfunction.md) un
 
 #### <a name="partition-properties"></a>Partitionseigenschaften
 
-|Eigenschaft                | Beschreibung                                                                                                                                                     | Empfohlener Wert                                                                                                                                                                                                                                                            |
+|Eigenschaft                | BESCHREIBUNG                                                                                                                                                     | Empfohlener Wert                                                                                                                                                                                                                                                            |
 |------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `RangeSize`            | Eine `timespan` skalare Konstante, die die Größe der einzelnen DateTime-Partitionen angibt.                                                                                | Beginnen Sie mit dem Wert `1.00:00:00` (ein Tag). Legen Sie keinen kürzeren Wert fest, da dies dazu führen kann, dass die Tabelle eine große Anzahl kleiner Blöcke aufweist, die nicht zusammengeführt werden können.                                                                                                      |
 | `Reference`            | Eine `datetime` skalare Konstante, die einen festgelegten Zeitpunkt angibt, gemäß dem DateTime-Partitionen ausgerichtet werden.                                          | Beginnen Sie mit `1970-01-01 00:00:00`. Wenn Datensätze vorhanden sind, in denen der DateTime-Partitions Schlüssel `null` Werte aufweist, wird der Partitions Wert auf den Wert von festgelegt `Reference` .                                                                                                      |
@@ -128,7 +128,8 @@ Die Richtlinie für die Daten Partitionierung verfügt über die folgenden Haupt
   * Diese Eigenschaft ist optional. Wenn Sie nicht angegeben ist, wird die Richtlinie für die Daten übernommen, die nach dem Anwenden der Richtlinie erfasst wurden.
   * Alle nicht homogenen (nicht partitionierten) Blöcke, die aufgrund von Beibehaltungs Dauer gelöscht werden können, werden vom Partitionierungs Prozess ignoriert. Die Blöcke werden ignoriert, weil ihre Erstellungszeit 90% des effektiven vorläufigen Lösch Zeitraums der Tabelle vorausgeht.
     > [!NOTE]
-    > Sie können in der Vergangenheit einen DateTime-Wert festlegen und bereits erfasste Daten partitionieren. Diese Vorgehensweise kann jedoch die im Partitionierungs Prozess verwendeten Ressourcen erheblich erhöhen. 
+    > Sie können in der Vergangenheit einen DateTime-Wert festlegen und bereits erfasste Daten partitionieren. Diese Vorgehensweise kann jedoch die im Partitionierungs Prozess verwendeten Ressourcen erheblich erhöhen.
+    > Sie sollten dies schrittweise durchgehen, indem Sie den Wert für " *effectivedatetime* " `datetime` in Schritten von bis zu einigen Tagen jedes Mal festlegen, wenn Sie die Richtlinie ändern.
 
 ### <a name="data-partitioning-example"></a>Beispiel zur Daten Partitionierung
 
@@ -168,7 +169,7 @@ Richtlinien Objekt für die Daten Partitionierung mit zwei Partitions Schlüssel
 
 Die folgenden Eigenschaften können als Teil der Richtlinie definiert werden. Diese Eigenschaften sind optional, und es wird empfohlen, Sie nicht zu ändern.
 
-|Eigenschaft | Beschreibung | Empfohlener Wert | Standardwert |
+|Eigenschaft | BESCHREIBUNG | Empfohlener Wert | Standardwert |
 |---|---|---|---|
 | **Minrowzählperoperation** |  Mindestens das Ziel für die Summe der Zeilen Anzahl der Quell Blöcke eines einzelnen Daten Partitionierungs Vorgangs. | | `0` |
 | **Maxrowzählperoperation** |  Maximales Ziel für die Summe der Zeilen Anzahl der Quell Blöcke eines einzelnen Daten Partitionierungs Vorgangs. | Legen Sie einen Wert kleiner als 5 Mio. fest, wenn Sie festzustellen, dass die Partitionierungs Vorgänge eine große Menge an Arbeitsspeicher oder CPU pro Vorgang belegen. Weitere Informationen finden Sie unter [Überwachung](#monitor-partitioning). | `0`mit einem Standardziel von 5 Millionen Datensätzen. |
@@ -211,7 +212,7 @@ Verwenden [`.show commands`](commands.md) Sie, um die Partitionierungs Befehle u
 * Der Daten Partitionierungs Prozess führt zur Erstellung von weiteren Erweiterungen. Der Cluster kann die [Zusammenführungs Kapazität für Blöcke](../management/capacitypolicy.md#extents-merge-capacity)allmählich erhöhen, sodass der Prozess zum Zusammenführen von [Blöcken](../management/extents-overview.md) fortgeführt werden kann.
 * Wenn ein hoher Erfassungs Durchsatz oder eine ausreichend große Anzahl von Tabellen vorhanden ist, für die eine Partitionierungs Richtlinie definiert ist, kann der Cluster die [Partitions Kapazität des Extenders](../management/capacitypolicy.md#extents-partition-capacity)allmählich erhöhen, sodass [der Prozess der Partitionierung von Blöcken](#the-data-partitioning-process) fort bleiben kann.
 * Um zu vermeiden, dass zu viele Ressourcen verbraucht werden, sind diese dynamischen Steigerungen begrenzt. Sie müssen Sie möglicherweise schrittweise und linear über die Obergrenze hinaus erhöhen, wenn Sie vollständig genutzt werden.
-  * Wenn die Kapazität der Cluster Ressourcen erheblich zunimmt, können Sie den Cluster [up](../../manage-cluster-vertical-scaling.md) / entweder manuell oder durch Aktivieren der automatischen Skalierung horizontal hoch[skalieren](../../manage-cluster-horizontal-scaling.md).
+  * Wenn die Kapazität der Cluster Ressourcen erheblich zunimmt, können Sie den Cluster [](../../manage-cluster-vertical-scaling.md) / entweder manuell oder durch Aktivieren der automatischen Skalierung horizontal hoch[skalieren](../../manage-cluster-horizontal-scaling.md).
 
 ## <a name="outliers-in-partitioned-columns"></a>Ausreißer in partitionierten Spalten
 
