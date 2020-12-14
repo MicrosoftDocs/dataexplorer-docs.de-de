@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/19/2020
-ms.openlocfilehash: 04c59b33d780db1c9731ac71d1f905315afbc302
-ms.sourcegitcommit: 4405ae34e119948778e0de5021077638d24da812
+ms.openlocfilehash: 2ff3578b055fd487f3d339dc9b7fb4aa1ad11e14
+ms.sourcegitcommit: d9e203a54b048030eeb6d05b01a65902ebe4e0b8
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86448043"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97371440"
 ---
 # <a name="ingestionbatching-policy-command"></a>Befehl "ingestionbatching Policy"
 
@@ -23,13 +23,19 @@ Die Richtlinie kann auf festgelegt werden. `null` in diesem Fall werden die Stan
 
 Wenn die Richtlinie für eine bestimmte Entität nicht festgelegt ist, wird eine Richtlinie für eine höhere Hierarchieebene gesucht, wenn alle auf NULL festgelegt sind, wird der Standardwert verwendet. 
 
-Die Richtlinie weist eine niedrigere Grenze von 10 Sekunden auf, und es wird nicht empfohlen, Werte zu verwenden, die größer als 15 Minuten sind.
+**Ingestionbatching-Grenzwerte:**
+
+| type | Standard | Minimum | Maximum
+|---|---|---|---|
+| Anzahl von Elementen | 1000 | 1 | 2000 |
+| Datengröße (MB) | 1000 | 100 | 1000 |
+| Zeit | 5 Minuten | 10 Sekunden | 15 Minuten |
 
 ## <a name="displaying-the-ingestionbatching-policy"></a>Anzeigen der ingestionbatching-Richtlinie
 
 Die Richtlinie kann für eine Datenbank oder Tabelle festgelegt werden und wird mit einem der folgenden Befehle angezeigt:
 
-* `.show` `database` *DatabaseName* `policy` `ingestionbatching`
+* `.show``database` *DatabaseName* `policy``ingestionbatching`
 * `.show``table` *DatabaseName*( `.` *Tabellenname* `policy` )`ingestionbatching`
 
 ## <a name="altering-the-ingestionbatching-policy"></a>Ändern der ingestionbatching-Richtlinie
@@ -54,11 +60,11 @@ Ingestionbatching-Richtlinie:
 }
 ```
 
-* `entity_type`: Tabelle, Datenbank
+* `entity_type` : Tabelle, Datenbank
 * `database_or_table`: Wenn die Entität eine Tabelle oder Datenbank ist, sollte Ihr Name wie folgt im Befehl angegeben werden: 
   - `database_name` oder 
   - `database_name.table_name` oder 
-  - `table_name`(bei Ausführung im Kontext einer bestimmten Datenbank)
+  - `table_name` (bei Ausführung im Kontext einer bestimmten Datenbank)
 
 ## <a name="deleting-the-ingestionbatching-policy"></a>Löschen der ingestionbatching-Richtlinie
 
