@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/30/2020
-ms.openlocfilehash: 8cd79b6f6531efd9621edf603b38d71bb074f6aa
-ms.sourcegitcommit: c815c6ccf33864e21e1d3daff26a4f077dff88f7
+ms.openlocfilehash: 8b549ca239dac0e88e0a8c0f0748eb86984f5cb4
+ms.sourcegitcommit: fcaf3056db2481f0e3f4c2324c4ac956a4afef38
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/21/2020
-ms.locfileid: "95012186"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97389003"
 ---
 # <a name="export-data-to-an-external-table"></a>Exportieren von Daten in eine externe Tabelle
 
@@ -37,15 +37,15 @@ Der Befehl erfordert die [Berechtigung "Table admin" oder "Database admin](../ac
     * `spread`, `concurrency` -Properties, um die Parallelität von Schreibvorgängen zu verringern bzw. zu erhöhen. Weitere Informationen finden Sie unter [Partitions Operator](../../query/partitionoperator.md) . Diese Eigenschaften sind nur relevant, wenn Sie in eine externe Tabelle exportieren, die durch eine _Zeichen_ folgen Partition partitioniert ist. Standardmäßig ist die Anzahl der gleichzeitig exportierten Knoten der Mindestwert zwischen 64 und der Anzahl von Cluster Knoten.
 
 
-## <a name="output"></a>Output
+## <a name="output"></a>Ausgabe
 
-|Ausgabeparameter |type |BESCHREIBUNG
+|Ausgabeparameter |Typ |Beschreibung
 |---|---|---
-|Externaltablename  |String |Der Name der externen Tabelle.
+|Externaltablename  |Zeichenfolge |Der Name der externen Tabelle.
 |`Path`|String|Ausgabepfad.
-|Numrecords|String| Anzahl der Datensätze, die in den Pfad exportiert werden.
+|Numrecords|Zeichenfolge| Anzahl der Datensätze, die in den Pfad exportiert werden.
 
-## <a name="notes"></a>Hinweise
+## <a name="notes"></a>Notizen
 
 * Das Export Abfrage-Ausgabe Schema muss mit dem Schema der externen Tabelle, einschließlich aller von den Partitionen definierten Spalten, identisch sein. Wenn die Tabelle beispielsweise nach *DateTime* partitioniert wird, muss das Abfrageausgabe Schema über eine timestamp-Spalte verfügen, die mit *timestampcolumnname* übereinstimmt. Dieser Spaltenname wird in der Partitionierungs Definition der externen Tabelle definiert.
 
@@ -86,9 +86,8 @@ Partitionedexternalblob ist eine externe Tabelle, die wie folgt definiert wird:
 ```kusto
 .create external table PartitionedExternalBlob (Timestamp:datetime, CustomerName:string) 
 kind=blob
-partition by 
-   "CustomerName="CustomerName,
-   bin(Timestamp, 1d)
+partition by (CustomerName:string=CustomerName, Date:datetime=startofday(Timestamp))   
+pathformat = ("CustomerName=" CustomerName "/" datetime_pattern("yyyy/MM/dd", Date))   
 dataformat=csv
 ( 
    h@'http://storageaccount.blob.core.windows.net/container1;secretKey'

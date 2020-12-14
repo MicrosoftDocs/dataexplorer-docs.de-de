@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/24/2020
-ms.openlocfilehash: df38761d7ffebdf5e36c14ea25b0d02377bfa128
-ms.sourcegitcommit: fdc1f917621e9b7286bba23903101298cccc4c95
+ms.openlocfilehash: 6af499d97e4733d0b8e099d02bec9573da6817d3
+ms.sourcegitcommit: fcaf3056db2481f0e3f4c2324c4ac956a4afef38
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/05/2020
-ms.locfileid: "93364121"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97389020"
 ---
 # <a name="create-and-alter-external-tables-in-azure-storage-or-azure-data-lake"></a>Erstellen und Ändern externer Tabellen in Azure Storage oder Azure Data Lake
 
@@ -83,14 +83,14 @@ Die Partitionsliste ist eine beliebige Kombination von Partitions Spalten, die i
   *PartitionName* `:` `datetime` `=` ( `startofyear` \| `startofmonth` \| `startofweek` \| `startofday` ) `(` *ColumnName*`)`  
   *PartitionName* `:` `datetime` `=` `bin` `(` *ColumnName* `,` *TimeSpan*`)`
 
-Um die Richtigkeit der Partitionierungs Definitionen zu überprüfen, verwenden Sie die-Eigenschaft `sampleUris` beim Erstellen einer externen Tabelle.
+Zum Überprüfen der Richtigkeit der Partitionierungs Definitionen verwenden Sie die-Eigenschaft `sampleUris` oder, `filesPreview` Wenn Sie eine externe Tabelle erstellen.
 
 <a name="path-format"></a>
 *PathFormat*
 
 Dateipfad-Format für externe Daten, das zusätzlich zu Partitionen angegeben werden kann. Das Pfad Format ist eine Sequenz von Partitions Elementen und Text Trennzeichen:
 
-&nbsp;&nbsp;[ *Stringseparator* ] *Partition* [ *stringseparator* ] [ *Partition* [ *stringseparator* ]...]  
+&nbsp;&nbsp;[*Stringseparator*] *Partition* [*stringseparator*] [*Partition* [*stringseparator*]...]  
 
 Dabei verweist *Partition* auf eine in-Klausel deklarierte Partition `partition` `by` , und *stringseparator* ist ein beliebiger Text, der in Anführungszeichen eingeschlossen ist. Aufeinander folgende Partitions Elemente müssen mithilfe von *stringseparator* getrennt festgelegt werden.
 
@@ -138,7 +138,7 @@ Weitere Informationen finden Sie unter [Speicher Verbindungs](../api/connection-
 <a name="properties"></a>
 *Optionale Eigenschaften*
 
-| Eigenschaft         | type     | Beschreibung       |
+| Eigenschaft         | Typ     | Beschreibung       |
 |------------------|----------|-------------------------------------------------------------------------------------|
 | `folder`         | `string` | Tabellen Ordner                                                                     |
 | `docString`      | `string` | Zeichenfolge, die die Tabelle dokumentiert                                                       |
@@ -147,8 +147,10 @@ Weitere Informationen finden Sie unter [Speicher Verbindungs](../api/connection-
 | `namePrefix`     | `string` | Wenn festgelegt, wird das Präfix der Dateien angegeben. Bei Schreibvorgängen werden alle Dateien mit diesem Präfix geschrieben. Bei Lesevorgängen werden nur Dateien mit diesem Präfix gelesen. |
 | `fileExtension`  | `string` | Wenn festgelegt, werden Dateierweiterungen der Dateien angegeben. Beim Schreiben enden Dateinamen mit diesem Suffix. Beim Lesen werden nur Dateien mit dieser Dateierweiterung gelesen.           |
 | `encoding`       | `string` | Gibt an, wie der Text codiert wird: `UTF8NoBOM` (Standard) oder `UTF8BOM` .             |
-| `sampleUris`     | `bool`   | Wenn festgelegt, liefert das Befehls Ergebnis mehrere Beispiele für den URI externer Datendateien, da Sie von der Definition der externen Tabelle erwartet werden (die Beispiele werden in der zweiten Ergebnistabelle zurückgegeben). Mit dieser Option können Sie überprüfen, ob *[Partitionen](#partitions)* und *[PathFormat](#path-format)* -Parameter ordnungsgemäß definiert sind. |
+| `sampleUris`     | `bool`   | Wenn festgelegt, stellt das Befehls Ergebnis mehrere Beispiele für simulierte externe Datendateien dar, die von der Definition der externen Tabelle erwartet werden. Mit dieser Option wird überprüft, ob die Parameter " *[Partitions](#partitions)* " und " *[PathFormat](#path-format)* " ordnungsgemäß definiert sind. |
+| `filesPreview`   | `bool`   | Wenn dieser Wert festgelegt ist, enthält eine der Befehls Ergebnistabellen eine Vorschau des Befehls " [. Show externe Tabellen Artefakte](#show-external-table-artifacts) ". `sampleUri`Die Option unterstützt die Validierung der *[Partitionen](#partitions)* und *[PathFormat](#path-format)* -Parameter der externen Tabellendefinition. |
 | `validateNotEmpty` | `bool`   | Wenn diese Einstellung festgelegt ist, werden die Verbindungs Zeichenfolgen überprüft, damit Sie Inhalte aufweisen. Der Befehl schlägt fehl, wenn der angegebene URI-Speicherort nicht vorhanden ist, oder wenn keine ausreichenden Zugriffsberechtigungen vorhanden sind. |
+| `dryRun` | `bool` | Wenn diese Einstellung festgelegt ist, wird die Definition der externen Tabelle nicht beibehalten. Diese Option ist nützlich, um die Definition externer Tabellen zu validieren, insbesondere in Verbindung mit dem- `filesPreview` Parameter oder dem- `sampleUris` Parameter. |
 
 > [!TIP]
 > Weitere Informationen zu den Rollen `namePrefix` und `fileExtension` Eigenschaften, die beim Filtern von Datendateien während der Abfrage abgespielt werden, finden Sie im Abschnitt [Dateifilter Logik](#file-filtering) .
@@ -286,17 +288,17 @@ Gibt eine Liste aller Dateien zurück, die verarbeitet werden, wenn eine bestimm
 
 **Syntax:** 
 
-`.show``external` `table` *TableName* `artifacts` [ `limit` *maxResults* ]
+`.show``external` `table` *TableName* `artifacts` [ `limit` *maxResults*]
 
 Dabei ist " *maxResults* " ein optionaler Parameter, der so festgelegt werden kann, dass die Anzahl der Ergebnisse beschränkt wird.
 
 **Ausgabe**
 
-| Ausgabeparameter | type   | Beschreibung                       |
+| Ausgabeparameter | Typ   | Beschreibung                       |
 |------------------|--------|-----------------------------------|
 | URI              | Zeichenfolge | URI der externen Speicher Datendatei |
-| Size             | long   | Dateilänge in Byte              |
-| Partition        | dynamisch | Dynamisches Objekt, das Datei Partitionen für eine partitionierte externe Tabelle beschreibt |
+| Größe             | long   | Dateilänge in Byte              |
+| Partition        | dynamic | Dynamisches Objekt, das Datei Partitionen für eine partitionierte externe Tabelle beschreibt |
 
 > [!TIP]
 > Das Durchlaufen aller Dateien, auf die von einer externen Tabelle verwiesen wird, kann in Abhängigkeit von der Anzahl der Dateien recht kostspielig sein. Stellen Sie sicher, dass Sie den Parameter verwenden, `limit` Wenn Sie nur einige URI-Beispiele sehen möchten.
@@ -309,7 +311,7 @@ Dabei ist " *maxResults* " ein optionaler Parameter, der so festgelegt werden ka
 
 **Ausgabe:**
 
-| Uri                                                                     | Size | Partition |
+| Uri                                                                     | Größe | Partition |
 |-------------------------------------------------------------------------| ---- | --------- |
 | `https://storageaccount.blob.core.windows.net/container1/folder/file.csv` | 10743 | `{}`   |
 
@@ -318,21 +320,21 @@ Für eine partitionierte Tabelle `Partition` enthält die Spalte extrahierte Par
 
 **Ausgabe:**
 
-| Uri                                                                     | Size | Partition |
+| Uri                                                                     | Größe | Partition |
 |-------------------------------------------------------------------------| ---- | --------- |
 | `https://storageaccount.blob.core.windows.net/container1/customer=john.doe/dt=20200101/file.csv` | 10743 | `{"Customer": "john.doe", "Date": "2020-01-01T00:00:00.0000000Z"}` |
 
 
 ## <a name="create-external-table-mapping"></a>. Erstellen einer externen Tabellen Zuordnung
 
-`.create``external` `table` *Externaltablename* `json` `mapping` *MappingName* *mappinginjsonformat*
+`.create``external` `table` *Externaltablename* `mapping` *MappingName* *mappinginjsonformat*
 
 Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./mappings.md#json-mapping)Zuordnungen.
 
 **Beispiel** 
  
 ```kusto
-.create external table MyExternalTable json mapping "Mapping1" '[{"Column": "rownumber", "Properties": {"Path": "$.rownumber"}}, {"Column": "rowguid", "Properties": {"Path": "$.rowguid"}}]'
+.create external table MyExternalTable mapping "Mapping1" '[{"Column": "rownumber", "Properties": {"Path": "$.rownumber"}}, {"Column": "rowguid", "Properties": {"Path": "$.rowguid"}}]'
 ```
 
 **Beispielausgabe**
@@ -343,14 +345,14 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 ## <a name="alter-external-table-mapping"></a>. Alter externer Tabellen Zuordnung
 
-`.alter``external` `table` *Externaltablename* `json` `mapping` *MappingName* *mappinginjsonformat*
+`.alter``external` `table` *Externaltablename* `mapping` *MappingName* *mappinginjsonformat*
 
 Ändert eine vorhandene Zuordnung. 
  
 **Beispiel** 
  
 ```kusto
-.alter external table MyExternalTable json mapping "Mapping1" '[{"Column": "rownumber", "Properties": {"Path": "$.rownumber"}}, {"Column": "rowguid", "Properties": {"Path": "$.rowguid"}}]'
+.alter external table MyExternalTable mapping "Mapping1" '[{"Column": "rownumber", "Properties": {"Path": "$.rownumber"}}, {"Column": "rowguid", "Properties": {"Path": "$.rowguid"}}]'
 ```
 
 **Beispielausgabe**
@@ -361,18 +363,18 @@ Erstellt eine neue Zuordnung. Weitere Informationen finden Sie unter [Daten](./m
 
 ## <a name="show-external-table-mappings"></a>. Zuordnungen externer Tabellen anzeigen
 
-`.show``external` `table` *Externaltablename* `json` `mapping` *MappingName* 
+`.show``external` `table` *Externaltablename* `mapping` *MappingName* 
 
-`.show``external` `table` *Externaltablename* `json``mappings`
+`.show``external` `table` *Externaltablename*`mappings`
 
 Zeigt die Zuordnungen an (alle oder die durch den Namen angegebenen).
  
 **Beispiel** 
  
 ```kusto
-.show external table MyExternalTable json mapping "Mapping1" 
+.show external table MyExternalTable mapping "Mapping1" 
 
-.show external table MyExternalTable json mappings 
+.show external table MyExternalTable mappings 
 ```
 
 **Beispielausgabe**
@@ -383,14 +385,14 @@ Zeigt die Zuordnungen an (alle oder die durch den Namen angegebenen).
 
 ## <a name="drop-external-table-mapping"></a>. Löschen der Zuordnung externer Tabellen
 
-`.drop``external` `table` *Externaltablename* `json` `mapping` *MappingName* 
+`.drop``external` `table` *Externaltablename* `mapping` *MappingName* 
 
 Löscht die Zuordnung aus der Datenbank.
  
 **Beispiel** 
  
 ```kusto
-.drop external table MyExternalTable json mapping "Mapping1" 
+.drop external table MyExternalTable mapping "Mapping1" 
 ```
 ## <a name="next-steps"></a>Nächste Schritte
 

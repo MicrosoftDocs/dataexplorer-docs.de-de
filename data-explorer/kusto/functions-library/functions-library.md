@@ -7,12 +7,12 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 09/08/2020
-ms.openlocfilehash: fb08edf4105c44a6be96cf6b2f314cf25887e69a
-ms.sourcegitcommit: 4d5628b52b84f7564ea893f621bdf1a45113c137
+ms.openlocfilehash: b7e066133817184664e37aec52a562525afa9504
+ms.sourcegitcommit: fcaf3056db2481f0e3f4c2324c4ac956a4afef38
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96443999"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97388952"
 ---
 # <a name="functions-library"></a>Functions-Bibliothek
 
@@ -27,6 +27,16 @@ Der Code der benutzerdefinierten Funktionen wird in den Artikeln angegeben.  Sie
 |[kmeans_fl()](kmeans-fl.md)|Clusterize mithilfe des k-means-Algorithmus. |
 |[predict_fl()](predict-fl.md)|Vorhersagen mithilfe eines vorhandenen trainierten Machine Learning-Modells. |
 |[predict_onnx_fl()](predict-onnx-fl.md)| Prognostizieren Sie die Verwendung eines vorhandenen trainierten Machine Learning-Modells im onnx-Format. |
+
+## <a name="promql-functions"></a>Promql-Funktionen
+
+Der folgende Abschnitt enthält allgemeine [promql](https://prometheus.io/docs/prometheus/latest/querying/basics/) -Funktionen. Diese Funktionen können für die Analyse von Metriken verwendet werden, die vom [Prometheus](https://prometheus.io/) -Überwachungssystem in Azure Daten-Explorer erfasst wurden. Alle Funktionen gehen davon aus, dass die Metriken in Azure Daten-Explorer mit dem [Prometheus-Datenmodell](https://prometheus.io/docs/concepts/data_model/)strukturiert werden.
+
+
+|Funktionsname     |Beschreibung                                          |
+|-------------------------|--------------------------------------------------------|
+|[series_metric_fl ()](series-metric-fl.md)|Wählt mit dem Prometheus-Datenmodell gespeicherte Zeitreihen aus und ruft diese ab. |
+|[series_rate_fl ()](series-rate-fl.md)|Berechnet die durchschnittliche Rate der Erhöhung der gegen Metrik pro Sekunde. |
 
 ## <a name="series-processing-functions"></a>Reihen Verarbeitungsfunktionen
 
