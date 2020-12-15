@@ -7,12 +7,12 @@ ms.reviewer: abhishgu
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/28/2020
-ms.openlocfilehash: 833a801e6455fd4d88fbbbab83010aea1d406f02
-ms.sourcegitcommit: 7edce9d9d20f9c0505abda67bb8cc3d2ecd60d15
+ms.openlocfilehash: 3a8133c42ad87ec7eec693be3109ce5e7aea4935
+ms.sourcegitcommit: 79d923d7b7e8370726974e67a984183905f323ff
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/02/2020
-ms.locfileid: "96524248"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96868636"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-using-go"></a>Erstellen eines Azure Data Explorer-Clusters und einer Datenbank mithilfe von Go
 
@@ -195,7 +195,7 @@ Wenn Sie den Beispielcode unverändert ausführen, werden folgende Aktionen ausg
     cd azure-data-explorer-go-cluster-management
     ```
 
-1. Das Programm wird mithilfe von Anmeldeinformationen authentifiziert. Erstellen Sie mithilfe des Azure CLI-Befehls [az ad sp create-for-rbac](/cli/azure/ad/sp?view=azure-cli-latest#az-ad-sp-create-for-rbac) einen Dienstprinzipal. Speichern Sie die Client-ID, den geheimen Clientschlüssel und die Mandanten-ID-Informationen für die Verwendung im nächsten Schritt.
+1. Das Programm wird mithilfe von Anmeldeinformationen authentifiziert. Erstellen Sie mithilfe des Azure CLI-Befehls [az ad sp create-for-rbac](/cli/azure/ad/sp#az-ad-sp-create-for-rbac) einen Dienstprinzipal. Speichern Sie die Client-ID, den geheimen Clientschlüssel und die Mandanten-ID-Informationen für die Verwendung im nächsten Schritt.
 
 1. Exportieren Sie erforderliche Umgebungsvariablen, einschließlich Dienstprinzipalinformationen. Geben Sie die Abonnement-ID, die Ressourcengruppe und die Region ein, in der Sie den Cluster erstellen möchten.
 

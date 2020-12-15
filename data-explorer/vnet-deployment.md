@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/31/2019
-ms.openlocfilehash: ac73abcf1355531a3b8d9917a6f5d9a0d3965c01
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.openlocfilehash: 196d1f5a72b0b99186f4739ce6b6a25c23b6c325
+ms.sourcegitcommit: 2bdb904e6253c9ceb8f1eaa2da35fcf27e13a2cd
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92902337"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97091367"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>Bereitstellen von Azure Data Explorer-Clustern in Ihrem virtuellen Netzwerk
 
@@ -30,8 +30,8 @@ Azure Data Explorer unterstützt die Bereitstellung eines Clusters in einem Subn
 
 Sie können auf Ihren Azure Data Explorer-Cluster mit den folgenden IP-Adressen für die einzelnen Dienste (Engine- und Datenverwaltungsdienste) zugreifen:
 
-* **Private IP** : Wird für den Zugriff auf den Cluster innerhalb des VNET verwendet.
-* **Öffentliche IP** : Wird für den Zugriff auf den Cluster von außerhalb des VNET zur Verwaltung und Überwachung sowie als Quelladresse für ausgehende Verbindungen, die aus dem Cluster gestartet werden, verwendet.
+* **Private IP**: Wird für den Zugriff auf den Cluster innerhalb des VNET verwendet.
+* **Öffentliche IP**: Wird für den Zugriff auf den Cluster von außerhalb des VNET zur Verwaltung und Überwachung sowie als Quelladresse für ausgehende Verbindungen, die aus dem Cluster gestartet werden, verwendet.
 
 Die folgenden DNS-Einträge werden für den Zugriff auf den Dienst erstellt: 
 
@@ -161,7 +161,7 @@ Erstellen Sie einen [privaten Endpunkt](/azure/private-link/private-endpoint-ove
 | Australien, Südosten | 191.239.160.47 |
 | Brasilien Süd | 23.98.145.105 |
 | Kanada, Mitte | 168.61.212.201 |
-| Kanada, Osten | 168.61.212.201 |
+| Kanada, Osten | 168.61.212.201, 23.101.115.123 |
 | Indien, Mitte | 23.99.5.162 |
 | USA (Mitte) | 168.61.212.201, 23.101.115.123 |
 | USA, Mitte (EUAP) | 168.61.212.201, 23.101.115.123 |
@@ -191,7 +191,7 @@ Erstellen Sie einen [privaten Endpunkt](/azure/private-link/private-endpoint-ove
 | US Gov Arizona | 52.244.48.35 |
 | US Gov Texas | 52.238.116.34 |
 | US Government, Virginia | 23.97.0.26 |
-| USA, Westen-Mitte | 168.61.212.201 |
+| USA, Westen-Mitte | 168.61.212.201, 23.101.115.123 |
 | Europa, Westen | 23.97.212.5, 213.199.136.176 |
 | Indien, Westen | 23.99.5.162 |
 | USA (Westen) | 23.99.5.162, 13.88.13.50 |

@@ -7,12 +7,12 @@ ms.reviewer: radennis
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: 24ec28fee62b4633e5a5694faf731d1888858af3
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.openlocfilehash: 4098f8bd6992ce5f76bfd3f611ba4d4bad2374b3
+ms.sourcegitcommit: 79d923d7b7e8370726974e67a984183905f323ff
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92902603"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96868653"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-azure-cli"></a>Erstellen eines Azure Data Explorer-Clusters und einer Datenbank über die Azure-Befehlszeilenschnittstelle
 
@@ -33,7 +33,7 @@ Für diesen Artikel benötigen Sie ein Azure-Abonnement. Falls Sie kein Abonneme
 
 [!INCLUDE [cloud-shell-try-it.md](includes/cloud-shell-try-it.md)]
 
-Wenn Sie die Azure-Befehlszeilenschnittstelle lokal installieren und verwenden möchten, müssen Sie für diesen Artikel mindestens die Azure CLI-Version 2.0.4 verwenden. Führen Sie `az --version` aus, um Ihre Version zu überprüfen. Installations- und Upgradeinformationen finden Sie bei Bedarf unter [Installieren von Azure CLI](/cli/azure/install-azure-cli?view=azure-cli-latest).
+Wenn Sie die Azure-Befehlszeilenschnittstelle lokal installieren und verwenden möchten, müssen Sie für diesen Artikel mindestens die Azure CLI-Version 2.0.4 verwenden. Führen Sie `az --version` aus, um Ihre Version zu überprüfen. Installations- und Upgradeinformationen finden Sie bei Bedarf unter [Installieren von Azure CLI](/cli/azure/install-azure-cli).
 
 ## <a name="configure-the-cli-parameters"></a>Konfigurieren der CLI-Parameter
 
@@ -68,7 +68,7 @@ Die folgenden Schritte sind nicht erforderlich, wenn Sie Befehle in Azure Cloud 
    |**Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**|
    |---|---|---|
    | name | *azureclitest* | Der gewünschte Name Ihres Clusters.|
-   | sku | *Standard_D13_v2* | Die SKU, die für Ihren Cluster verwendet wird. Parameter: *name* : Der SKU-Name *tier* : Die SKU-Ebene |
+   | sku | *Standard_D13_v2* | Die SKU, die für Ihren Cluster verwendet wird. Parameter: *name*: Der SKU-Name *tier*: Die SKU-Ebene |
    | resource-group | *testrg* | Der Name der Ressourcengruppe, in der der Cluster erstellt werden soll |
    | location | *westus* | Der Standort, an dem der Cluster erstellt wird. |
 
@@ -95,7 +95,7 @@ Wenn das Ergebnis `provisioningState` mit dem Wert `Succeeded` enthält, wurde d
    | cluster-name | *azureclitest* | Der Name Ihres Clusters, in dem die Datenbank erstellt werden soll.|
    | database-name | *clidatabase* | Der Name Ihrer Datenbank.|
    | resource-group | *testrg* | Der Name der Ressourcengruppe, in der der Cluster erstellt werden soll |
-   | read-write-database | *P365D* *P31D* *westus* | Der Datenbanktyp. Parameter: *soft-delete-period* : Gibt den Zeitraum an, wie lange Daten für Abfragen verfügbar sein sollen. Weitere Informationen finden Sie unter [Aufbewahrungsrichtlinie](kusto/management/retentionpolicy.md). *hot-cache-period* : Gibt den Zeitraum an, wie lange Daten im Cache verfügbar sein sollen. Weitere Informationen finden Sie unter [Cacherichtlinie](kusto/management/cachepolicy.md). *location* : Der Standort, an dem die Datenbank erstellt wird. |
+   | read-write-database | *P365D* *P31D* *westus* | Der Datenbanktyp. Parameter: *soft-delete-period*: Gibt den Zeitraum an, wie lange Daten für Abfragen verfügbar sein sollen. Weitere Informationen finden Sie unter [Aufbewahrungsrichtlinie](kusto/management/retentionpolicy.md). *hot-cache-period*: Gibt den Zeitraum an, wie lange Daten im Cache verfügbar sein sollen. Weitere Informationen finden Sie unter [Cacherichtlinie](kusto/management/cachepolicy.md). *location*: Der Standort, an dem die Datenbank erstellt wird. |
 
 1. Führen Sie den folgenden Befehl aus, um die erstellte Datenbank anzuzeigen:
 

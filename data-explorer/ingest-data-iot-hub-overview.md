@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 1ea8960b8d58ed9e549e042f8a4e64164952f32d
-ms.sourcegitcommit: 4f24d68f1ae4903a2885985aa45fd15948867175
+ms.openlocfilehash: b76321fd843efe915a6fd55797bd2dc68059b004
+ms.sourcegitcommit: 8ac4717dbff679991b122b09a0c1ed700562a736
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92558188"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97488575"
 ---
 # <a name="iot-hub-data-connection"></a>IoT Hub-Datenverbindung
 
@@ -98,7 +98,7 @@ Wenn Sie **Ereignissystemeigenschaften** im Abschnitt **Datenquelle** der Tabell
 
 ## <a name="sending-events"></a>Senden von Ereignissen
 
-Weitere Informationen finden Sie im [Beispielprojekt](https://github.com/Azure-Samples/azure-iot-samples-csharp/tree/master/iot-hub/Quickstarts/simulated-device) zur Simulation eines Geräts und Generierung von Daten.
+Weitere Informationen finden Sie im [Beispielprojekt](https://github.com/Azure-Samples/azure-iot-samples-csharp/tree/master/iot-hub/Quickstarts/SimulatedDevice) zur Simulation eines Geräts und Generierung von Daten.
 
 ## <a name="next-steps"></a>Nächste Schritte
 

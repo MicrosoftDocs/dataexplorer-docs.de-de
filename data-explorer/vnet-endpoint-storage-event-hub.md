@@ -7,12 +7,12 @@ ms.reviewer: gunjand
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/12/2020
-ms.openlocfilehash: 43f7705170228afa3d3f5e31086d40cea73c62db
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.openlocfilehash: a8e351dc04b77a41dd7ab793581a1f464f181f4e
+ms.sourcegitcommit: 724d3a3c817867b17a5a5853b6433818cbc97cf7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92906209"
+ms.lasthandoff: 12/10/2020
+ms.locfileid: "97050517"
 ---
 # <a name="create-a-private-or-service-endpoint-to-event-hub-and-azure-storage"></a>Erstellen eines privaten Endpunkts oder eines Dienstendpunkts für Event Hub und Azure Storage
 
@@ -98,9 +98,9 @@ In diesem Abschnitt erfahren Sie, wie Sie mit dem Azure-Portal einen VNET-Dienst
 
 ### <a name="add-a-virtual-network"></a>Hinzufügen eines virtuellen Netzwerks
 
-1. Navigieren Sie im Azure-Portal zu dem **Event Hubs-Namespace** , den Sie schützen möchten.
+1. Navigieren Sie im Azure-Portal zu dem **Event Hubs-Namespace**, den Sie schützen möchten.
 1. Wählen Sie im Menü auf der linken Seite die Option **Netzwerk** aus. Diese Registerkarte wird nur in Namespaces vom Typ **Standard** oder **Dedicated** angezeigt.
-1. Schließen Sie die Registerkarte **Firewalls und virtuelle Netzwerke**.
+1. Schließen Sie die Registerkarte **Firewalls und virtuelle Netzwerke**. 
 
     :::image type="content" source="media/vnet-private-link-storage-event-hub/networking.png" alt-text="„Netzwerk“ in Event Hub":::
 
