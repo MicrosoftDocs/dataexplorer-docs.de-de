@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
-ms.openlocfilehash: b77fe78ec43bce775774ae95c1ea713d03873cf4
-ms.sourcegitcommit: c351c2c8ab6e184827c4702eb0ec8bf783c7bbd3
+ms.openlocfilehash: 4f3639aeb6e401aa37703bbef929af2275960a91
+ms.sourcegitcommit: 35236fefb52978ce9a09bc36affd5321acb039a4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/18/2020
-ms.locfileid: "94874796"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97513978"
 ---
 # <a name="show-database-schema-commands"></a>. Datenbankschema Befehle anzeigen
 
@@ -50,11 +50,11 @@ Die Datenbank "TestDB" verfügt über eine Tabelle mit dem Namen "Events".
 |DatabaseName|TableName|ColumnName|ColumnType|Isdefaulbar|Isdefaultcolumn|Prettyname|Version
 |---|---|---|---|---|---|---|--- 
 |TestDB||||False|False||v. 1.1       
-|TestDB|Ereignisse|||True|False||       
-|TestDB|Ereignisse| Name|System.String|True|False||     
-|TestDB|Ereignisse| StartTime|  System.DateTime|True|False||    
-|TestDB|Ereignisse| EndTime|    System.DateTime|True|False||        
-|TestDB|Ereignisse| City|   System.String|True| False||     
+|TestDB|Ereignisse|||Richtig|Falsch||       
+|TestDB|Ereignisse| Name|System.String|Richtig|Falsch||     
+|TestDB|Ereignisse| StartTime|  System.DateTime|Richtig|Falsch||    
+|TestDB|Ereignisse| EndTime|    System.DateTime|Richtig|Falsch||        
+|TestDB|Ereignisse| City|   System.String|Richtig| Falsch||     
 |TestDB|Ereignisse| SessionID|  System.Int32|True|  True|| 
 
 **Beispiel** 
@@ -70,11 +70,11 @@ Im folgenden Beispiel wird die Datenbank nur zurückgegeben, wenn Sie eine neuer
 |DatabaseName|TableName|ColumnName|ColumnType|Isdefaulbar|Isdefaultcolumn|Prettyname|Version
 |---|---|---|---|---|---|---|--- 
 |TestDB||||False|False||v. 1.1       
-|TestDB|Ereignisse|||True|False||       
-|TestDB|Ereignisse| Name|System.String|True|False||     
-|TestDB|Ereignisse| StartTime|  System.DateTime|True|False||    
-|TestDB|Ereignisse| EndTime|    System.DateTime|True|False||        
-|TestDB|Ereignisse| City|   System.String|True| False||     
+|TestDB|Ereignisse|||Richtig|Falsch||       
+|TestDB|Ereignisse| Name|System.String|Richtig|Falsch||     
+|TestDB|Ereignisse| StartTime|  System.DateTime|Richtig|Falsch||    
+|TestDB|Ereignisse| EndTime|    System.DateTime|Richtig|Falsch||        
+|TestDB|Ereignisse| City|   System.String|Richtig| Falsch||     
 |TestDB|Ereignisse| SessionID|  System.Int32|True|  True||  
 
 Da eine niedrigere Version als die aktuelle Datenbankversion bereitgestellt wurde, wurde das Schema "TestDB" zurückgegeben. Das Bereitstellen einer gleichen oder einer höheren Version hätte ein leeres Ergebnis generiert.
@@ -118,19 +118,17 @@ Generiert ein CSL-Skript mit allen erforderlichen Befehlen, um eine Kopie des an
 
 Die folgenden *Optionen* sind optional:
 
-* `IncludeEncodingPolicies`: ( `true`  |  `false` ): Wenn `true` , werden Codierungs Richtlinien auf Datenbank-/Tabellen-/Spaltenebene eingeschlossen. Wird standardmäßig auf `false` festgelegt. 
+* `IncludeEncodingPolicies`: ( `true`  |  `false` ): Wenn `true` , werden Codierungs Richtlinien auf Datenbank-/Tabellen-/Spaltenebene eingeschlossen. Dies ist standardmäßig `false`. 
 * `IncludeSecuritySettings`: (): Standardwert ist `true`  |  `false` `false` . Gibt an `true` , dass die folgenden Optionen eingeschlossen werden:
   * Autorisierte Prinzipale auf Datenbank-/Tabellenebene.
   * Sicherheitsrichtlinien auf Zeilenebene auf Tabellenebene.
   * Eingeschränkte Anzeige Zugriffsrichtlinien auf Tabellenebene.
-* `IncludeIngestionMappings`: (): Wenn, werden Erfassungs Zuordnungen `true`  |  `false` `true` auf Tabellenebene eingeschlossen. Wird standardmäßig auf `false` festgelegt. 
+* `IncludeIngestionMappings`: (): Wenn, werden Erfassungs Zuordnungen `true`  |  `false` `true` auf Tabellenebene eingeschlossen. Dies ist standardmäßig `false`. 
 
 **Rückgabe**
 
 Das Skript, das als Zeichenfolge zurückgegeben wird, enthält Folgendes:
 
-* Befehle zum Erstellen der Datenbank und zum Festlegen des entsprechenden Namens, falls vorhanden.
-  * Mit dem generierten Befehl wird eine flüchtige Datenbank erstellt, die beim Hinzufügen zum Skript auskommentiert wird.
 * Befehle zum Erstellen aller Tabellen in der Datenbank.
 * Befehle zum Festlegen aller Richtlinien für Datenbank/Tabellen/Spalten, die den ursprünglichen Richtlinien entsprechen.
 * Befehle zum Erstellen oder Ändern aller benutzerdefinierten Funktionen in der Datenbank.

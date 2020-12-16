@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/04/2020
-ms.openlocfilehash: 8f19606a75c388917a5195d0ac5cbb0ecf4335f9
-ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
+ms.openlocfilehash: 166d5f4f4d81957c49fb3fdedd3b2654985648ab
+ms.sourcegitcommit: 35236fefb52978ce9a09bc36affd5321acb039a4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96321130"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97514069"
 ---
 # <a name="update-policy-overview"></a>Übersicht über Update Richtlinien
 
@@ -40,6 +40,7 @@ Die Abfrage für die Update Richtlinie wird in einem speziellen Modus ausgeführ
 * Beim Verweisen auf die `Source` Tabelle im `Query` Rahmen der Richtlinie oder in Funktionen, auf die vom Teil verwiesen wird `Query` :
    * Verwenden Sie nicht den qualifizierten Namen der Tabelle. Verwenden Sie stattdessen `TableName`. 
    * Verwenden Sie nicht `database("DatabaseName").TableName` oder `cluster("ClusterName").database("DatabaseName").TableName` .
+* Informationen zu Update Richtlinien Einschränkungen bei der streamingerfassung finden Sie unter Einschränkungen bei der [streamingansung](../../ingest-data-streaming.md#limitations). 
 
 > [!WARNING]
 > Wenn Sie eine falsche Abfrage in der Update Richtlinie definieren, kann dies verhindern, dass Daten in die Quell Tabelle aufgenommen werden.
@@ -49,7 +50,7 @@ Die Abfrage für die Update Richtlinie wird in einem speziellen Modus ausgeführ
 Einer Tabelle können NULL, ein oder mehrere Update-Richtlinien Objekte zugeordnet sein.
 Jedes dieser Objekte wird als JSON-Eigenschaften Behälter dargestellt, wobei die folgenden Eigenschaften definiert sind.
 
-|Eigenschaft |type |Beschreibung  |
+|Eigenschaft |type |BESCHREIBUNG  |
 |---------|---------|----------------|
 |isEnabled                     |`bool`  |Gibt an, ob die Update Richtlinie aktiviert (true) oder deaktiviert (false) ist.                                                                                                                               |
 |`Source`                        |`string`|Name der Tabelle, in der die Aktualisier Ende Aktualisierungs Richtlinie ausgelöst wird                                                                                                                                 |
