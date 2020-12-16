@@ -8,18 +8,55 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/18/2020
-ms.openlocfilehash: e05f8204ba1e81b9391b6b63f190b81e1db73338
-ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
+ms.openlocfilehash: efa7c3237ce85938634b1c8b31b1c3e10d01a6f8
+ms.sourcegitcommit: 35236fefb52978ce9a09bc36affd5321acb039a4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96321045"
+ms.lasthandoff: 12/15/2020
+ms.locfileid: "97514102"
 ---
 # <a name="cluster-follower-commands"></a>Cluster-Follower-Befehle
 
 Die Kontroll Befehle zum Verwalten der Follower-Cluster Konfiguration sind unten aufgeführt. Diese Befehle werden synchron ausgeführt, aber bei der nächsten periodischen Schema Aktualisierung angewendet. Daher kann es einige Minuten dauern, bis die neue Konfiguration angewendet wird.
 
 Die Follower-Befehle enthalten [Befehle auf Datenbankebene](#database-level-commands) und [Befehle auf Tabellenebene](#table-level-commands).
+
+## <a name="database-policy-overrides"></a>Über schreibungen von Daten Bank Richtlinien
+
+In einer Datenbank, auf die ein Follower-Cluster folgt, können die Richtlinien auf Datenbankebene der zwischen [Speicherungs Richtlinie](#caching-policy) und [autorisierte Prinzipale](#authorized-principals) im Follower-Cluster überschrieben werden.
+
+### <a name="caching-policy"></a>Caching-Richtlinie
+
+Die standardmäßige Cache [Richtlinie](cachepolicy.md) für den Follower-Cluster besteht darin, die übergeordnete Cluster Datenbank und Cache Richtlinien auf Tabellenebene beizubehalten.
+
+|Option             |Beschreibung                                                                                                                                                                                                           |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|**Keine** (Standard) |Dabei handelt es sich um die verwendeten Cache Richtlinien, die in der Quelldatenbank (im Anbieter Cluster) definiert sind.                                                                                                                           |
+|**replace**        |Die Quelldatenbank in der Gruppenrichtlinien-Cluster Datenbank und zwischen Speicherungs Richtlinien auf Tabellenebene werden entfernt (festgelegt auf `null` ). Sie werden durch die in der Datenbank definierten und Überschreibungs Richtlinien auf Tabellenebene ersetzt, sofern definiert.|
+|**union**          |Die Quelldatenbank in der übergeordneten Cluster Datenbank und die Cache Richtlinien auf Tabellenebene werden mit den in der Datenbank definierten und den Überschreibungs Richtlinien auf Tabellenebene vereinheitalten.                                              |
+
+> [!NOTE]
+>  * Wenn die Auflistung der zwischen Speicherungs Richtlinien auf Tabellen-und Tabellenebene *leer* ist, wird *alles* standardmäßig zwischengespeichert.
+>  * Sie können die Außerkraftsetzungs Richtlinie auf Datenbankebene auf festlegen `0d` , sodass *nichts* standardmäßig zwischengespeichert wird.
+
+### <a name="authorized-principals"></a>Autorisierte Prinzipale
+
+Die standardmäßigen [autorisierten Prinzipale](access-control/index.md#authorization) behalten die Quelldatenbank der autorisierten Prinzipale des Führer Clusters bei.
+
+|Option             |Beschreibung                                                                                                                              |
+|-------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+|**Keine** (Standard) |Die verwendeten autorisierten Prinzipale sind die, die in der Quelldatenbank (im übergeordneten Cluster) definiert sind.                                         |
+|**replace**        |Die Quelldatenbank in den autorisierten Prinzipale des führenden Clusters wird durch die in der überschreiben autorisierten Prinzipale definierten ersetzt.  |
+|**union**          |Die Quelldatenbank in den autorisierten Prinzipale des Führer Clusters wird mit den in der überschreiben autorisierten Prinzipale definierten Berechtigungen vereinigt. |
+
+> [!NOTE]
+> Wenn die Auflistung der über schreibenden autorisierten Prinzipale *leer* ist, gibt es keine Prinzipale auf Datenbankebene.
+
+## <a name="table-policy-overrides"></a>Über schreibungen von Tabellen Richtlinien
+
+In einer Tabelle in einer Datenbank, auf die ein Follower-Cluster folgt, kann die Cache [Richtlinie](cachepolicy.md) auf Tabellenebene im Follower-Cluster überschrieben werden.
+Der Standardwert ist die Beibehaltung der zwischen Speicherungs Richtlinie der Quell Tabelle. Wenn diese Richtlinie in der Quelldatenbank vorhanden ist, wird Sie auf dem Follower-Cluster weiterhin wirksam.
+Die `replace` Option wird unterstützt. bei der Verwendung wird die zwischen Speicherungs Richtlinie der Quell Tabelle durch die als außer Kraft Setzung definierte ersetzt.
 
 ## <a name="database-level-commands"></a>Befehle auf Datenbankebene
 
@@ -29,7 +66,7 @@ Zeigt eine Datenbank (oder Datenbanken) an, auf die von einem anderen Spitzenclu
 
 **Syntax**
 
-`.show` `follower` `database` *DatabaseName*
+`.show``follower` `database` *DatabaseName*
 
 `.show``follower` `databases` `(` *DatabaseName1* `,` ...`,` *Databasenamen*`)`
 
@@ -50,7 +87,7 @@ Zeigt eine Datenbank (oder Datenbanken) an, auf die von einem anderen Spitzenclu
 
 Ändert eine Richtlinie für die Zwischenspeicherung von Follower-Datenbanken, um die für die Quelldatenbank im übergeordneten Cluster festgelegte zu überschreiben Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich.
 
-**Hinweise**
+**Notizen**
 
 * Der Standardwert für das zwischen `modification kind` Speichern von Richtlinien ist `union` . Um den zu ändern, `modification kind` verwenden Sie den [`.alter follower database caching-policies-modification-kind`](#alter-follower-database-caching-policies-modification-kind) Befehl.
 * Wenn Sie die Richtlinie oder wirksame Richtlinien nach der Änderung anzeigen, können Sie die folgenden `.show` Befehle ausführen:
@@ -74,7 +111,7 @@ Zeigt eine Datenbank (oder Datenbanken) an, auf die von einem anderen Spitzenclu
 Löscht eine Daten Bank Überschreibungs Richtlinie für die Überschreibung. Dies bewirkt, dass die Richtlinie, die in der Quelldatenbank im Spitzencluster festgelegt ist, gültig ist.
 Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich. 
 
-**Hinweise**
+**Notizen**
 
 * Wenn Sie die Richtlinie oder wirksame Richtlinien nach der Änderung anzeigen, können Sie die folgenden `.show` Befehle ausführen:
     * [`.show database policy retention`](../management/retention-policy.md#show-retention-policy)
@@ -84,7 +121,7 @@ Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-b
 
 **Syntax**
 
-`.delete` `follower` `database` *DatabaseName* `policy` `caching`
+`.delete``follower` `database` *DatabaseName* `policy``caching`
 
 **Beispiel**
 
@@ -96,7 +133,7 @@ Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-b
 
 Fügt der Follower-Datenbanksammlung von autorisierte Prinzipale überschreiben autorisierte Prinzipale hinzu. Hierfür ist die [databaseadmin-Berechtigung](../management/access-control/role-based-authorization.md)erforderlich.
 
-**Hinweise**
+**Notizen**
 
 * Der Standardwert `modification kind` für solche autorisierten Prinzipale ist `none` . So ändern Sie die `modification kind` Verwendung von [Alter Follower Database Principals-Change-Kind](#alter-follower-database-principals-modification-kind)
 * Die effektive Auflistung von Prinzipale können Sie nach der Änderung mithilfe der folgenden `.show` Befehle anzeigen:
@@ -119,7 +156,7 @@ Fügt der Follower-Datenbanksammlung von autorisierte Prinzipale überschreiben 
 Löscht autorisierte Prinzipale aus der Follower-Datenbanksammlung von autorisierten Prinzipalen außer Kraft setzen.
 Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich.
 
-**Hinweise**
+**Notizen**
 
 * Die effektive Auflistung von Prinzipale können Sie nach der Änderung mithilfe der folgenden `.show` Befehle anzeigen:
     * [`.show database principals`](../management/security-roles.md#managing-database-security-roles)
@@ -140,7 +177,7 @@ Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-b
 
 Ändert die Art der Änderungs Änderung der Follower-Datenbank für autorisierte Prinzipale. Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich.
 
-**Hinweise**
+**Notizen**
 
 * Die effektive Auflistung von Prinzipale können Sie nach der Änderung mithilfe der folgenden `.show` Befehle anzeigen:
     * [`.show database principals`](../management/security-roles.md#managing-database-security-roles)
@@ -162,7 +199,7 @@ Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-b
 
 Ändert die Art der Änderungs Änderung für die Follower-Datenbank und die Tabellen Zwischenspeicherung Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich.
 
-**Hinweise**
+**Notizen**
 
 * Die effektive Erfassung von Cache Richtlinien auf Datenbankebene/Tabellenebene nach der Änderung kann mithilfe der Standard Befehle ausgeführt werden `.show` :
     * [`.show tables details`](show-tables-command.md)
@@ -208,7 +245,7 @@ Mit dem folgenden Befehl wird die Konfiguration der Follower-Datenbank für das 
 Ändert eine Cache Richtlinie auf Tabellenebene für die Follower-Datenbank, um die Richtlinie zu überschreiben, die für die Quelldatenbank im Anbieter Cluster festgelegt wurde.
 Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md)erforderlich. 
 
-**Hinweise**
+**Notizen**
 
 * Wenn Sie die Richtlinie oder wirksame Richtlinien nach der Änderung anzeigen, können Sie die folgenden `.show` Befehle ausführen:
     * [`.show database policy retention`](../management/retention-policy.md#show-retention-policy)
@@ -232,7 +269,7 @@ Hierfür sind [databaseadmin-Berechtigungen](../management/access-control/role-b
 
 Löscht eine über schreibende zwischen Speicherungs Richtlinie auf Tabellenebene für die Follower-Datenbank, sodass die Richtlinie für die Quelldatenbank im Spitzencluster auf die effektive festgelegt ist. Erfordert [databaseadmin-Berechtigungen](../management/access-control/role-based-authorization.md). 
 
-**Hinweise**
+**Notizen**
 
 * Wenn Sie die Richtlinie oder wirksame Richtlinien nach der Änderung anzeigen, können Sie die folgenden `.show` Befehle ausführen:
     * [`.show database policy retention`](../management/retention-policy.md#show-retention-policy)
@@ -298,7 +335,7 @@ Sehen Sie sich die aktuelle Konfiguration an, nach der die folgenden Schritte au
 |Cachingpolicyoverride                | NULL                                                     |
 |Authorizedprincipalsoverride         | []                                                       |
 |Authorizedprincipalsmodificationkind | Keine                                                     |
-|Isautoprefetchenabled                | False                                                    |
+|Isautoprefetchenabled                | Falsch                                                    |
 |TableMetadataOverrides               |                                                          |
 |Cachingpoliciesmodificationkind      | Union                                                    |                                                                                                                      |
 
@@ -320,7 +357,7 @@ Nur die beiden spezifischen Prinzipale sind autorisiert, auf zuzugreifen. `MyDat
 .show database MyDatabase principals
 ```
 
-| Role                       | Principaltype | Principaldisplayname                        | Principalobjectid                    | Principalfqn                                                                      | Notizen |
+| Rolle                       | Principaltype | Principaldisplayname                        | Principalobjectid                    | Principalfqn                                                                      | Notizen |
 |----------------------------|---------------|---------------------------------------------|--------------------------------------|-----------------------------------------------------------------------------------|-------|
 | Datenbank mydatabase admin  | Aad-Benutzer      | Jack Kusto (UPN: jack@contoso.com )       | 12345678-ABCD-efef-1234-350 BF 486087b | aaduser = 87654321-ABCD-efef -1234-350bf 486087b; 55555555-4444-3333-2222-2d7cd011db47 |       |
 | Datenbank-mydatabase-Viewer | Aad-Benutzer      | Jill Kusto (UPN: jack@contoso.com )       | abcdefab-abcd-efef-1234-350bf486087b | aaduser = 54321789-ABCD-efef -1234-350bf 486087b; 55555555-4444-3333-2222-2d7cd011db47 |       |
@@ -389,6 +426,6 @@ Sehen Sie sich die aktuelle Konfiguration `MyDatabase` an, in der befolgt wird `
 |Cachingpolicyoverride                | {"Datahotspan": {"Value": "00:00:00"}, "indexhotspan": {"Value": "00:00:00"}}                                                                                                        |
 |Authorizedprincipalsoverride         | [{"Principal": {"FullyQualifiedName": "aaduser = 87654321-ABCD-efef -1234-350bf 486087b",...}, {"Principal": {"FullyQualifiedName": "aaduser = 54321789-ABCD-efef -1234-350bf 486087b",...}] |
 |Authorizedprincipalsmodificationkind | Replace                                                                                                                                                                         |
-|Isautoprefetchenabled                | False                                                                                                                                                                           |
+|Isautoprefetchenabled                | Falsch                                                                                                                                                                           |
 |TableMetadataOverrides               | {"Mytarge\": {"cachingpolicyoverride": {"datahotspan": {"Value": "3.00:00:00"}...}, "mySourceTable": {"cachingpolicyoverride": {"datahotspan": {"Value": "1,00:00:00"},...}}}       |
 |Cachingpoliciesmodificationkind      | Replace                                                                                                                                                                         |
