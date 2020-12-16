@@ -7,12 +7,12 @@ ms.reviewer: adieldar
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 12/13/2020
-ms.openlocfilehash: 6678f17624225895734781f32782ed5b9bd79955
-ms.sourcegitcommit: fcaf3056db2481f0e3f4c2324c4ac956a4afef38
+ms.openlocfilehash: 9d34fa3d880b4888cd7f43913644e9cba8b4ca9d
+ms.sourcegitcommit: 335e05864e18616c10881db4ef232b9cda285d6a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/14/2020
-ms.locfileid: "97389143"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97596837"
 ---
 # <a name="series_rate_fl"></a>series_rate_fl ()
 
@@ -31,8 +31,9 @@ Die-Funktion `series_rate_fl()` berechnet die durchschnittliche Rate der metrike
 ## <a name="arguments"></a>Argumente
 
 * *n_bins*: die Anzahl der Behälter zum Angeben der Lücke zwischen den extrahierten Metrikwerten für die Berechnung der Rate. Die-Funktion berechnet den Unterschied zwischen dem aktuellen Sample und dem *n_bins* vor und dividiert ihn durch den Unterschied der jeweiligen Zeitstempel in Sekunden. Dieser Parameter ist optional und hat den Standardwert 1. Die Standardeinstellungen berechnen " [unate ()](https://prometheus.io/docs/prometheus/latest/querying/functions/#irate)", die Funktion "promql Instant trate".
+* *fix_reset*: ein boolesches Flag, das steuert, ob die Zurückstellung von Indikatorensätzen überprüft und wie die promql [Rate ()](https://prometheus.io/docs/prometheus/latest/querying/functions/#rate) -Funktion korrigiert werden soll. Dieser Parameter ist optional. der Standardwert ist `true` . Legen Sie es auf fest, `false` um eine redundante Analyse zu speichern, falls keine Überprüfung auf zurück Stellungen erforderlich ist.
 
-## <a name="usage"></a>Verbrauch
+## <a name="usage"></a>Verwendung
 
 `series_rate_fl()` ist eine benutzerdefinierte [Tabellen Funktion](../query/functions/user-defined-functions.md#tabular-function), die mit dem [Aufruf Operator](../query/invokeoperator.md)angewendet werden soll. Sie können den Code entweder in die Abfrage einbetten oder in der Datenbank installieren. Es gibt zwei Verwendungs Optionen: Ad-hoc und persistente Verwendung. Beispiele finden Sie auf den folgenden Registerkarten.
 
@@ -45,16 +46,22 @@ Fügen Sie den Code für die Ad-hoc-Verwendung mithilfe der [Let-Anweisung](../q
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
-let series_rate_fl=(tbl:(timestamp:dynamic, name:string, labels:string, value:dynamic), n_bins:int=1)
+let series_rate_fl=(tbl:(timestamp:dynamic, value:dynamic), n_bins:int=1, fix_reset:bool=true)
 {
     tbl
+    | where fix_reset                                                   //  Prometheus counters can only go up
+    | mv-apply value to typeof(double) on   
+    ( extend correction = iff(value < prev(value), prev(value), 0.0)    // if the value decreases we assume it was reset to 0, so add last value
+    | extend cum_correction = row_cumsum(correction)
+    | extend corrected_value = value + cum_correction
+    | summarize value = make_list(corrected_value))
+    | union (tbl | where not(fix_reset))
     | extend timestampS = array_shift_right(timestamp, n_bins), valueS = array_shift_right(value, n_bins)
     | extend dt = series_subtract(timestamp, timestampS)
     | extend dt = series_divide(dt, 1e7)                              //  converts from ticks to seconds
     | extend dv = series_subtract(value, valueS)
-    | extend dv = array_iff(series_greater_equals(dv, 0), dv, value)  //  handles negative difference like PromQL
     | extend rate = series_divide(dv, dt)
-    | project timestamp, name, rate, labels
+    | project-away dt, dv, timestampS, value, valueS
 }
 ;
 //
@@ -73,20 +80,26 @@ Verwenden Sie für persistente Verwendung [`.create function`](../management/cre
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto
 .create-or-alter function with (folder = "Packages\\Series", docstring = "Simulate PromQL rate()")
-series_rate_fl(tbl:(timestamp:dynamic, name:string, labels:string, value:dynamic), n_bins:int=1)
+series_rate_fl(tbl:(timestamp:dynamic, value:dynamic), n_bins:int=1, fix_reset:bool=true)
 {
     tbl
+    | where fix_reset                                                   //  Prometheus counters can only go up
+    | mv-apply value to typeof(double) on   
+    ( extend correction = iff(value < prev(value), prev(value), 0.0)    // if the value decreases we assume it was reset to 0, so add last value
+    | extend cum_correction = row_cumsum(correction)
+    | extend corrected_value = value + cum_correction
+    | summarize value = make_list(corrected_value))
+    | union (tbl | where not(fix_reset))
     | extend timestampS = array_shift_right(timestamp, n_bins), valueS = array_shift_right(value, n_bins)
     | extend dt = series_subtract(timestamp, timestampS)
     | extend dt = series_divide(dt, 1e7)                              //  converts from ticks to seconds
     | extend dv = series_subtract(value, valueS)
-    | extend dv = array_iff(series_greater_equals(dv, 0), dv, value)  //  handles negative difference like PromQL
     | extend rate = series_divide(dv, dt)
-    | project timestamp, name, rate, labels
+    | project-away dt, dv, timestampS, value, valueS
 }
 ```
 
-### <a name="usage"></a>Verbrauch
+### <a name="usage"></a>Verwendung
 
 <!-- csl: https://help.kusto.windows.net:443/Samples -->
 ```kusto

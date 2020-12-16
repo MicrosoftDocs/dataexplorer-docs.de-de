@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 02/13/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 1fa4c303624c62b7c43d2ddd0de58977ed6e42aa
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: f8ae6bc55df90dc27fc329e9b49f63430cd77aba
+ms.sourcegitcommit: 335e05864e18616c10881db4ef232b9cda285d6a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92241342"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97596820"
 ---
 # <a name="pattern-statement"></a>Pattern-Anweisung
 
@@ -46,7 +46,7 @@ app("ApplicationX").StartEvents
 
 Diese Abfrage generiert einen Fehler von Kusto und zeigt an, dass die nächsten musteraufrufe nicht aufgelöst werden können: `app("ApplicationX")["StartEvents"]` und `app("ApplicationX")["StopEvents"]` .
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax-of-pattern-declaration"></a>Syntax der Muster Deklaration
 
 `declare``pattern` *PatternName*
 
@@ -67,7 +67,7 @@ app("ApplicationX").StartEvents
 
 Der Ausdruck, der für jedes übereinstimmende Muster bereitgestellt wird, ist entweder ein Tabellenname oder ein Verweis auf eine [Let-Anweisung](letstatement.md).
 
-## <a name="syntax"></a>Syntax
+## <a name="syntax-of-pattern-definition"></a>Syntax der Muster Definition
 
 `declare``pattern` *PatternName*  =  `(` *Argname* `:` *Argtype* [ `,` ...] `)` [ `[` *Pfadname* `:` *pathargtype* `]` ]`{`
 &nbsp;&nbsp;&nbsp;&nbsp;`(` *ArgValue1* [ `,` *ArgValue2* ...] `)` [ `.[` * pathValue `]` ] `=` `{` *Ausdruck* `};` &nbsp; &nbsp; &nbsp; &nbsp; [ &nbsp; &nbsp; &nbsp; &nbsp; `(` *ArgValue1_2* [ `,` *ArgValue2_2* ...] `)` [ `.[` *PathValue_2* `]` ] `=` `{` *expression_2* `};` &nbsp; &nbsp; &nbsp; &nbsp; ... &nbsp; &nbsp; &nbsp; &nbsp; ]        `}`

@@ -10,12 +10,12 @@ ms.topic: reference
 ms.date: 04/01/2020
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 98888ddd5dd6155c9476163337e7c031e0f84a1e
-ms.sourcegitcommit: afc369ab4c4bcc74f2dce22b397a340572db8ecf
+ms.openlocfilehash: 918d0f2f7fa8667a4cf90b2813bb3b80dd49fa78
+ms.sourcegitcommit: 335e05864e18616c10881db4ef232b9cda285d6a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87528145"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97596854"
 ---
 # <a name="python-plugin"></a>Python-Plugin
 
@@ -32,7 +32,7 @@ Die Laufzeit des Plug-ins wird in [Sand Fächern](../concepts/sandboxes.md)gehos
 
 * *output_schema*: ein `type` Literalwert, der das Ausgabe Schema der tabellarischen Daten definiert, die vom Python-Code zurückgegeben werden.
     * Das Format ist: `typeof(` *ColumnName* `:` *ColumnType*[,...] `)` . Beispiel: `typeof(col1:string, col2:long)` .
-    * Verwenden Sie die folgende Syntax, um das Eingabe Schema zu erweitern:`typeof(*, col1:string, col2:long)`
+    * Verwenden Sie die folgende Syntax, um das Eingabe Schema zu erweitern: `typeof(*, col1:string, col2:long)`
 * *Skript*: ein `string` Literalzeichen, das das gültige auszuführende Python-Skript ist.
 * *script_parameters*: ein optionales `dynamic` Literalzeichen. Dabei handelt es sich um einen Eigenschaften Behälter mit Name-Wert-Paaren, die als reserviertes Wörterbuch an das Python-Skript übermittelt werden `kargs` . Weitere Informationen finden Sie unter [reservierte python-Variablen](#reserved-python-variables).
 * *Hint. Distribution*: ein optionaler Hinweis für die Ausführung des Plug-ins, das auf mehrere Cluster Knoten verteilt wird.
@@ -134,7 +134,7 @@ print "This is an example for using 'external_artifacts'"
     * Sie können auch den [Partitions Operator](partitionoperator.md) für die Partitionierung des Eingabe Datasets verwenden.
 * Verwenden Sie die Abfragesprache von Kusto, wenn dies möglich ist, um die Logik Ihres python-Skripts zu implementieren.
 
-    ## <a name="example"></a>Beispiel
+    ### <a name="example"></a>Beispiel
 
     ```kusto    
     .show operations
@@ -150,16 +150,16 @@ print "This is an example for using 'external_artifacts'"
 
 ## <a name="usage-tips"></a>Verwendungstipps
 
-* Um mehrzeilige Zeichen folgen zu generieren, die das Python-Skript in enthalten `Kusto.Explorer` , kopieren Sie Ihr Python-Skript aus Ihrem bevorzugten python-Editor (*jupyter*, *Visual Studio Code*, *pycharm*usw.). 
+* Um mehrzeilige Zeichen folgen zu generieren, die das Python-Skript in enthalten `Kusto.Explorer` , kopieren Sie Ihr Python-Skript aus Ihrem bevorzugten python-Editor (*jupyter*, *Visual Studio Code*, *pycharm* usw.). 
   Führen Sie einen der folgenden Schritte aus:
     * Drücken Sie **F2** , um das Fenster *in python bearbeiten* zu öffnen. Fügen Sie das Skript in dieses Fenster ein. Klicken Sie auf **OK**. Das Skript wird mit Anführungszeichen und neuen Zeilen versehen und ist daher in Kusto gültig und wird automatisch in die Registerkarte Abfrage eingefügt.
-    * Fügen Sie den Python-Code direkt in die Registerkarte Abfrage ein. Wählen Sie die Zeilen aus, und drücken Sie **STRG + K**, **STRG + S** , um Sie wie oben zu ergänzen. Um umzukehren, drücken Sie **STRG + K**, **STRG + M** -Taste. Sehen Sie sich die vollständige Liste der [Abfrage-Editor](../tools/kusto-explorer-shortcuts.md#query-editor)-Verknüpfungen
+    * Fügen Sie den Python-Code direkt in die Registerkarte Abfrage ein. Wählen Sie diese Zeilen aus, und drücken Sie **STRG + K**, **STRG + S** , um Sie wie oben zu ergänzen. Um umzukehren, drücken Sie **STRG + K**, **STRG + M** -Taste. Sehen Sie sich die vollständige Liste der [Abfrage-Editor](../tools/kusto-explorer-shortcuts.md#query-editor)-Verknüpfungen
 * Verwenden Sie zum Vermeiden von Konflikten zwischen Kusto-Zeichen folgen Trennzeichen und python-Zeichenfolgenliteralen Folgendes:
      * Einfache Anführungszeichen ( `'` ) für Kusto-Zeichen folgen Literale in Kusto-Abfragen
      * Doppelte Anführungszeichen ( `"` ) für python-Zeichen folgen Literale in python-Skripts
 * Verwenden Sie den- [ `externaldata` Operator](externaldata-operator.md) zum Abrufen des Inhalts eines Skripts, das Sie an einem externen Speicherort gespeichert haben, z. b. Azure BLOB Storage.
   
-    ## <a name="example"></a>Beispiel
+    ### <a name="example"></a>Beispiel
 
     ```kusto
     let script = 
