@@ -7,12 +7,12 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/26/2019
-ms.openlocfilehash: 47a18e8b8a2ec34207acacfd508114955f28953f
-ms.sourcegitcommit: 88f8ad67711a4f614d65d745af699d013d01af32
+ms.openlocfilehash: 2abdc80a261980723b9f4535fed26758c4895ce6
+ms.sourcegitcommit: d9e203a54b048030eeb6d05b01a65902ebe4e0b8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/16/2020
-ms.locfileid: "94639004"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97371491"
 ---
 # <a name="best-practices-for-using-power-bi-to-query-and-visualize-azure-data-explorer-data"></a>Bewährte Methoden für die Verwendung von Power BI zum Abfragen und Visualisieren von Azure Data Explorer-Daten
 
@@ -26,7 +26,7 @@ Wenn Sie mit neuen Rohdaten im Terabytebereich arbeiten, befolgen Sie diese Anwe
 
 * **Zusammengesetztes Modell** – Verwenden Sie ein [zusammengesetztes Modell](/power-bi/desktop-composite-models), um aggregierte Daten für Dashboards der obersten Ebene mit gefilterten, operativen Rohdaten zu kombinieren. Sie können klar definieren, wann Rohdaten und wann eine aggregierte Ansicht verwendet werden sollen. 
 
-* **Importmodus oder DirectQuery-Modus** – Verwenden Sie den **Importmodus** für Interaktionen mit kleineren Datasets. Verwenden Sie den **DirectQuery-Modus** für große, häufig aktualisierte Datasets. Erstellen Sie beispielsweise Dimensionstabellen mit dem **Importmodus**, da sie klein sind und sich nicht häufig ändern. Legen Sie das Aktualisierungsintervall entsprechend der erwarteten Datenaktualisierungsrate fest. Erstellen Sie mit dem **DirectQuery-Modus** Faktentabellen, da diese Tabellen groß sind und Rohdaten enthalten. Verwenden Sie diese Tabellen, um gefilterte Daten mithilfe von Power BI-[Drillthroughs](/power-bi/desktop-drillthrough) darzustellen.
+* **Importmodus oder [DirectQuery](/power-bi/connect-data/desktop-directquery-about)-Modus:** Verwenden Sie den **Importmodus** für Interaktionen mit kleineren Datasets. Verwenden Sie den **DirectQuery-Modus** für große, häufig aktualisierte Datasets. Erstellen Sie beispielsweise Dimensionstabellen mit dem **Importmodus**, da sie klein sind und sich nicht häufig ändern. Legen Sie das Aktualisierungsintervall entsprechend der erwarteten Datenaktualisierungsrate fest. Erstellen Sie mit dem **DirectQuery-Modus** Faktentabellen, da diese Tabellen groß sind und Rohdaten enthalten. Verwenden Sie diese Tabellen, um gefilterte Daten mithilfe von Power BI-[Drillthroughs](/power-bi/desktop-drillthrough) darzustellen. Bei der Verwendung von **DirectQuery** können Sie [**Abfrageverringerung**](/power-bi/connect-data/desktop-directquery-about#report-design-guidance) verwenden, um zu verhindern, dass Daten in Berichte geladen werden, bevor Sie bereit sind.
 
 * **Parallelität**: Der Azure Data Explorer ist eine linear skalierbare Datenplattform. Daher können Sie die Leistung beim Dashboardrendering verbessern, indem Sie die Parallelität des End-to-End-Flows wie folgt erhöhen:
 

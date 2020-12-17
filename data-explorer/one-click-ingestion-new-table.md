@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: 25c0bb4071c74c299ab69432ffc18ad50408be46
-ms.sourcegitcommit: f7bebd245081a5cdc08e88fa4f9a769c18e13e5d
+ms.openlocfilehash: e2c84649653d6d3762a82c1e4aa3c98c9ef8119d
+ms.sourcegitcommit: d9e203a54b048030eeb6d05b01a65902ebe4e0b8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94644685"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97371658"
 ---
 # <a name="use-one-click-ingestion-to-ingest-csv-data-from-a-container-to-a-new-table-in-azure-data-explorer"></a>Erfassen von CSV-Daten aus einem Container in einer neuen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung
 
@@ -22,7 +22,7 @@ ms.locfileid: "94644685"
 
 Mit der [1-Klick-Erfassung](ingest-data-one-click.md) können Sie Daten im JSON- und CSV-Format sowie in anderen Formaten schnell in einer Tabelle erfassen und auf einfache Weise Zuordnungsstrukturen erstellen. Die Daten können entweder aus dem Speicher, aus einer lokalen Datei oder aus einem Container als einmaliger oder kontinuierlicher Erfassungsprozess erfasst werden.  
 
-In diesem Dokument erfahren Sie, wie Sie mithilfe des intuitiven 1-Klick-Assistenten in einem bestimmten Anwendungsfall **CSV**-Daten aus einem **Container** in einer **neuen Tabelle** erfassen. Sie können den gleichen Prozess mit geringfügigen Anpassungen verwenden, um eine Vielzahl verschiedener Anwendungsfälle abzudecken.
+In diesem Dokument erfahren Sie, wie Sie mithilfe des intuitiven 1-Klick-Assistenten in einem bestimmten Anwendungsfall **CSV**-Daten aus einem **Container** in einer **neuen Tabelle** erfassen. Nach der Erfassung können Sie [eine Event Grid-Erfassungspipeline einrichten](#create-continuous-ingestion-for-container), die auf neue Dateien im Quellcontainer lauscht und qualifizierende Daten in der neuen Tabelle erfasst. Sie können den gleichen Prozess mit geringfügigen Anpassungen verwenden, um eine Vielzahl verschiedener Anwendungsfälle abzudecken.
 
 Eine Übersicht über die 1-Klick-Erfassung sowie eine Liste der Voraussetzungen finden Sie unter [Was ist die 1-Klick-Erfassung?](ingest-data-one-click.md)
 Informationen zum Erfassen von Daten in einer vorhandenen Tabelle in Azure Data Explorer finden Sie unter [Erfassen von Daten in einer vorhandenen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-existing-table.md).
@@ -46,7 +46,7 @@ Informationen zum Erfassen von Daten in einer vorhandenen Tabelle in Azure Data 
 
 Führen Sie unter **Erfassungstyp** die folgenden Schritte aus:
    
-  1. Wählen Sie **from container** (aus Container) aus. 
+  1. Wählen Sie **from container** (aus Container) (Blobcontainer, ADLS Gen1-Container, ADLS Gen2-Container) aus.
   1. Fügen Sie im Feld **Mit Speicher verknüpfen** die [SAS-URL](/azure/vs-azure-tools-storage-explorer-blobs#get-the-sas-for-a-blob-container) des Containers hinzu, und geben Sie optional die Stichprobengröße ein. Informationen, wie Sie aus einem Ordner innerhalb dieses Containers erfassen, finden Sie unter [Erfassen aus einem Ordner in einem Container](#ingest-from-folder-in-a-container).
 
       :::image type="content" source="media/one-click-ingestion-new-table/from-container.png" alt-text="1-Klick-Erfassung aus Container":::
@@ -96,9 +96,11 @@ Filtern Sie beispielsweise nach allen Dateien, die mit dem Wort *.csv* beginnen.
 
 :::image type="content" source="media/one-click-ingestion-new-table/from-container-with-filter.png" alt-text="Filter bei der 1-Klick-Erfassung":::
 
+Vom System wird nach dem Zufallsprinzip eine der Dateien ausgewählt, und das Schema wird auf der Grundlage dieser **Schemadefinitionsdatei** generiert. Sie können eine andere Datei auswählen.
+
 ## <a name="edit-the-schema"></a>Bearbeiten des Schemas
 
-Wählen Sie **Schema bearbeiten** aus, um Ihre Tabellenspaltenkonfiguration anzuzeigen und zu bearbeiten. Vom System wird willkürlich eines der Blobs ausgewählt, und das Schema wird auf der Grundlage dieses Blobs generiert. Anhand des Namens der Quelle identifiziert der Dienst automatisch, ob sie komprimiert ist.
+Wählen Sie **Schema bearbeiten** aus, um Ihre Tabellenspaltenkonfiguration anzuzeigen und zu bearbeiten.  Anhand des Namens der Quelle identifiziert der Dienst automatisch, ob sie komprimiert ist.
 
 Auf der Registerkarte **Schema**:
 
@@ -121,14 +123,10 @@ Geben Sie im Feld **Mapping name** (Zuordnungsname) einen Zuordnungsnamen ein. S
 
 Ändern Sie bei der Erfassung in einer neuen Tabelle verschiedene Aspekte der Tabelle bei ihrer Erstellung.
 
-In der Tabelle: 
- * Doppelklicken Sie zur Bearbeitung auf den Namen der neuen Spalte.
- * Wählen Sie neue Spaltenüberschriften aus, und führen Sie beliebige der folgenden Aktionen aus:
+[!INCLUDE [data-explorer-one-click-column-table](includes/data-explorer-one-click-column-table.md)]
 
-    [!INCLUDE [data-explorer-one-click-column-table](includes/data-explorer-one-click-column-table.md)]
-
-  > [!NOTE]
-  > Bei Tabellenformaten kann jede Spalte in einer Spalte in Azure Data Explorer erfasst werden.
+> [!NOTE]
+> Bei Tabellenformaten können Sie eine Spalte nicht zweimal zuordnen. Löschen Sie bei einer Zuordnung zu einer vorhandenen Spalte zunächst die neue Spalte.
 
 [!INCLUDE [data-explorer-one-click-command-editor](includes/data-explorer-one-click-command-editor.md)]
 

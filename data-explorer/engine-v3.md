@@ -7,12 +7,12 @@ ms.reviewer: avnera
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 10/11/2020
-ms.openlocfilehash: e018e8ae6b25437a8665a5b5eb90fc2bac4ce9b9
-ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
+ms.openlocfilehash: 133f01498d4cf430d7fdc2649df88186610b3954
+ms.sourcegitcommit: fcaf3056db2481f0e3f4c2324c4ac956a4afef38
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/13/2020
-ms.locfileid: "92003271"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97388969"
 ---
 # <a name="enginev3---preview"></a>EngineV3 (Vorschauversion)
 
@@ -45,8 +45,8 @@ Bei EngineV3 geht es hauptsächlich um die Optimierung dieses „unteren Teils�
 
 Die verbesserte Leistung und höhere Geschwindigkeit von Abfragen beruht auf den zwei wichtigsten Änderungen der Engine:
 
-* Neues und verbessertes Shardspeicherformat
-* Umgestaltung der grundlegenden Abfrage-Engine für Shards
+* **Neues und verbessertes Shardspeicherformat** Ähnlich wie bei EngineV2 wird als Speicherformat ein komprimierter Spaltenspeicher verwendet – mit besonderem Augenmerk auf unstrukturierte Datentypen (Text) und teilweise strukturierte Datentypen. EngineV3 verbessert die Codierung dieser verschiedenen Datentypen. Indizes wurden neu gestaltet, um die Granularität zu erhöhen, sodass Teile der Abfrage basierend auf dem Index ausgewertet werden können, ohne die Daten zu scannen.
+* **Umgestaltung der grundlegenden Abfrage-Engine für Shards** Die neue Shardabfrage wird mit Just-In-Time-Kompilierung in hocheffizienten Computercode umgewandelt. Das Ergebnis ist eine schnelle und effiziente Abfrageauswertungslogik. Die Abfragekompilierung orientiert sich an den von allen Shards gesammelten Datenstatistiken und ist auf die Besonderheiten der Spaltencodierung zugeschnitten.
 
 Das Ausmaß der Leistungssteigerung von EngineV3 hängt vom Dataset, den Abfragemustern, der Parallelität und den verwendeten VM-SKUs ab. Bei Leistungstests wurde ein 100-TB-Dataset verwendet, und es wurden unterschiedliche Szenarien untersucht, bei denen Analysen mit strukturierten, unstrukturierten und teilweise strukturierten Daten durchgeführt wurden. Bei Verwendung des gleichen Parallelitätsgrads und der gleichen Hardwarekonfiguration wurde im Durchschnitt eine Verbesserung der Leistung um das Achtfache erzielt. Die tatsächliche Leistungsverbesserung variiert je nach Abfrage und Dataset.
 
@@ -54,7 +54,7 @@ Das Ausmaß der Leistungssteigerung von EngineV3 hängt vom Dataset, den Abfrage
 
 Aktivieren Sie zum [Erstellen eines neuen Clusters](create-cluster-database-portal.md) mit EngineV3 auf der Registerkarte **Grundlagen** des Bildschirms für die Clustererstellung das Kontrollkästchen **Use Engine V3 preview** (EngineV3-Vorschauversion verwenden):
 
-:::image type="content" source="media/engine-v3/create-new-cluster-v3.png" alt-text="Schematische Darstellung der Architektur von Azure Data Explorer/Kusto-EngineV3":::
+:::image type="content" source="media/engine-v3/create-new-cluster-v3.png" alt-text="Screenshot: Kontrollkästchen „Use Engine V3 preview“ (EngineV3-Vorschauversion verwenden) beim Erstellen eines Clusters":::
 
 ## <a name="next-steps"></a>Nächste Schritte
 

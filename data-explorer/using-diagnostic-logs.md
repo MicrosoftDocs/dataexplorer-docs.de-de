@@ -7,12 +7,12 @@ ms.reviewer: guregini
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/16/2020
-ms.openlocfilehash: fed4027d946792448f2c564d8daa019c991b50d2
-ms.sourcegitcommit: 3af95ea6a6746441ac71b1a217bbb02ee23d5f28
+ms.openlocfilehash: 5dbd1aeb777b067e0c7bee15be838eb2f306086f
+ms.sourcegitcommit: d9e203a54b048030eeb6d05b01a65902ebe4e0b8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/23/2020
-ms.locfileid: "95473578"
+ms.lasthandoff: 12/14/2020
+ms.locfileid: "97371474"
 ---
 # <a name="monitor-azure-data-explorer-ingestion-commands-and-queries-using-diagnostic-logs"></a>Überwachen der Erfassung, Befehle und Abfragen von Azure Data Explorer mithilfe von Diagnoseprotokollen
 
@@ -37,6 +37,9 @@ Mit Diagnoseprotokollen kann die Sammlung der folgenden Protokolldaten konfiguri
 > Erfassungsprotokolle werden für die Erfassung aus der Warteschlange am Erfassungsendpunkt unter Verwendung von SDKs, Datenverbindungen und Connectors unterstützt.
 >
 > Erfassungsprotokolle werden für die Streamingerfassung, die direkte Erfassung an der Engine, die Erfassung von Abfragen oder Befehle vom Typ „set-or-append“ nicht unterstützt.
+
+> [!NOTE]
+> Fehlerhafte Erfassungsprotokolle werden nur für den endgültigen Status eines Erfassungsvorgangs gemeldet. Dies steht im Gegensatz zur Metrik „Erfassungsergebnis“[using-metrics#ingestion-metrics], die für intern wiederholte vorübergehende Fehler ausgegeben wird.
 
 * **Erfolgreiche Erfassungsvorgänge:** Diese Protokolle enthalten Informationen zu erfolgreich abgeschlossenen Erfassungsvorgängen.
 * **Nicht erfolgreiche Erfassungsvorgänge:** Diese Protokolle enthalten ausführliche Informationen zu fehlgeschlagenen Erfassungsvorgängen, einschließlich Fehlerdetails. 

@@ -4,12 +4,12 @@ ms.service: data-explorer
 ms.topic: include
 ms.date: 01/07/2020
 ms.author: orspodek
-ms.openlocfilehash: 5187f89a939daf45c0a5826e483de52cb7784103
-ms.sourcegitcommit: bb8c61dea193fbbf9ffe37dd200fa36e428aff8c
+ms.openlocfilehash: c00ea9998b1ec6f05c36d0e0b926bd3b6f8d3509
+ms.sourcegitcommit: 79d923d7b7e8370726974e67a984183905f323ff
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83383862"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "96933895"
 ---
 Azure Data Explorer verschlüsselt alle Daten in einem Speicherkonto für ruhende Daten. Standardmäßig werden Daten mit von Microsoft verwalteten Schlüsseln verschlüsselt. Um zusätzliche Kontrolle über die Verschlüsselungsschlüssel zu erhalten, können Sie kundenseitig verwaltete Schlüssel für die Datenverschlüsselung bereitstellen. 
 
@@ -26,4 +26,4 @@ Um kundenseitig verwaltete Schlüssel mit Azure Data Explorer zu konfigurieren, 
 
 ## <a name="assign-an-identity-to-the-cluster"></a>Zuweisen einer Identität zum Cluster
 
-Um kundenseitig verwaltete Schlüssel für Ihren Cluster zu aktivieren, weisen Sie dem Cluster zunächst eine vom System zugewiesene verwaltete Identität hinzu. Sie verwenden diese verwaltete Identität, um dem Cluster Berechtigungen für den Zugriff auf die Key Vault-Instanz zu gewähren. Informationen zum Konfigurieren systemseitig zugewiesener verwalteter Identitäten finden Sie unter [Verwaltete Identitäten](../managed-identities.md).
+Um kundenseitig verwaltete Schlüssel für Ihren Cluster zu aktivieren, weisen Sie dem Cluster zunächst eine systemseitig oder benutzerseitig zugewiesene verwaltete Identität hinzu. Sie verwenden diese verwaltete Identität, um dem Cluster Berechtigungen für den Zugriff auf die Key Vault-Instanz zu gewähren. Informationen zum Konfigurieren verwalteter Identitäten finden Sie unter [Verwaltete Identitäten](../managed-identities.md).

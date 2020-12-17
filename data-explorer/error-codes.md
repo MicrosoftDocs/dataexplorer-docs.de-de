@@ -7,16 +7,16 @@ ms.reviewer: vladikbr
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 11/11/2020
-ms.openlocfilehash: aeef0c9295fbb22c225068fb240670fb7d637a98
-ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
+ms.openlocfilehash: 18ac718edd50c804f71b9b82cbffb5b2b7bb2e24
+ms.sourcegitcommit: 202357f866801aafd92e3e29a84bb312e17aebc7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/07/2020
-ms.locfileid: "96776553"
+ms.lasthandoff: 12/09/2020
+ms.locfileid: "96933774"
 ---
 # <a name="ingestion-error-codes-in-azure-data-explorer"></a>Erfassungsfehlercodes in Azure Data Explorer
 
-Die folgende Liste enthält Fehlercodes, die bei der [Erfassung](ingest-data-overview.md) auftreten können. Wenn Sie für Ihren Cluster [Diagnoseprotokolle](using-diagnostic-logs.md#ingestion-logs-schema) für nicht erfolgreiche Erfassungen aktivieren, werden im Betriebsprotokoll **Failed ingestion** (Nicht erfolgreiche Erfassung) Fehlercodes angezeigt. Alternativ können Sie die [Metrik](using-metrics.md#ingestion-metrics) **Ergebnis der Datenerfassung** überwachen, um die **Kategorie** von Erfassungsfehlern (aber nicht den spezifischen Fehler) zu ermitteln. Die folgenden Fehler sind nach solchen Kategorien strukturiert. 
+Die folgende Liste enthält Fehlercodes, die bei der [Erfassung](ingest-data-overview.md) auftreten können. Wenn Sie für Ihren Cluster [Diagnoseprotokolle](using-diagnostic-logs.md#ingestion-logs-schema) für nicht erfolgreiche Erfassungen aktivieren, werden im Betriebsprotokoll **Failed ingestion** (Nicht erfolgreiche Erfassung) Fehlercodes angezeigt. Sie können auch die [Metrik](using-metrics.md#ingestion-metrics) **Erfassungsergebnis** überwachen, um die **Kategorie** von Erfassungsfehlern (aber nicht den spezifischen Fehler) zu ermitteln. Die folgenden Fehler sind nach diesen Kategorien gegliedert. 
 
 > [!NOTE]
 > Im Falle eines vorübergehenden Fehlers ist möglicherweise eine erneute Ausführung der Erfassung erfolgreich.
