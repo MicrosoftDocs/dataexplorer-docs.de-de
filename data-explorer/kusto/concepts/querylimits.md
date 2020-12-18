@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 3b230ea0ed8bba80741e18f24cd96cf271224f25
-ms.sourcegitcommit: e278dae04f12658d0907f7b6ba46c6a34c53dcd7
+ms.openlocfilehash: be8d6e9172364d4177e7421e524cc067e4d58d18
+ms.sourcegitcommit: 66577436bcd1106f10fc9c0f233ee17b94478323
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/08/2020
-ms.locfileid: "96901102"
+ms.lasthandoff: 12/16/2020
+ms.locfileid: "97532186"
 ---
 # <a name="query-limits"></a>Abfragegrenzwerte
 
@@ -128,6 +128,9 @@ T | where rand() < 0.1 | ...
 T | where hash(UserId, 10) == 1 | ...
 ```
 
+Wird `maxmemoryconsumptionperiterator` mehrmals festgelegt (beispielsweise in Clientanforderungseigenschaften und mithilfe einer `set`-Anweisung), gilt der *niedrigere* Wert.
+
+
 ## <a name="limit-on-memory-per-node"></a>Grenzwert für Arbeitsspeicher pro Knoten
 
 **Maximaler Arbeitsspeicher pro Abfrage und Knoten** ist ein weiterer verwendeter Grenzwert zum Schutz vor „Endlosabfragen“. Dieser Grenzwert, der von der Anforderungsoption `max_memory_consumption_per_query_per_node` dargestellt wird, legt eine obere Grenze für die Menge an Arbeitsspeicher fest, die auf einem einzelnen Knoten für eine bestimmte Abfrage verwendet werden kann.
@@ -136,6 +139,8 @@ T | where hash(UserId, 10) == 1 | ...
 set max_memory_consumption_per_query_per_node=68719476736;
 MyTable | ...
 ```
+
+Wird `max_memory_consumption_per_query_per_node` mehrmals festgelegt (beispielsweise in Clientanforderungseigenschaften und mithilfe einer `set`-Anweisung), gilt der *niedrigere* Wert.
 
 ## <a name="limit-on-accumulated-string-sets"></a>Grenzwert für akkumulierte Zeichenfolgensätze
 
@@ -176,10 +181,19 @@ Standardmäßig ist das Timeout für Abfragen auf vier Minuten und für Steuerun
 Kusto ermöglicht Ihnen das Ausführen von Abfragen und das Verwenden von so viel CPU-Ressourcen, wie der Cluster besitzt. Es versucht, ein faires Roundrobin zwischen Abfragen durchzuführen, wenn mehr als eine ausgeführt wird. Diese Methode liefert die beste Leistung bei Ad-hoc-Abfragen.
 Zu anderen Zeitpunkten können Sie die CPU-Ressourcen, die für eine bestimmte Abfrage verwendet werden, begrenzen. Wenn Sie z. B. einen „Hintergrundauftrag“ ausführen, toleriert das System möglicherweise höhere Wartezeiten, um gleichzeitigen Ad-hoc-Abfragen eine hohe Priorität einzuräumen.
 
-Beim Ausführen einer Abfrage unterstützt Kusto die Angabe von zwei [Clientanforderungseigenschaften](../api/netfx/request-properties.md). Die Eigenschaften sind *query_fanout_threads_percent* und *query_fanout_nodes_percent*.
-Beide Eigenschaften sind ganze Zahlen, die standardmäßig den maximalen Wert (100) annehmen, jedoch für eine bestimmte Abfrage auf einen anderen Wert verringert werden können. 
+Beim Ausführen einer Abfrage unterstützt Kusto die Angabe von zwei [Clientanforderungseigenschaften](../api/netfx/request-properties.md).
+Die Eigenschaften sind *query_fanout_threads_percent* und *query_fanout_nodes_percent*.
+Beide Eigenschaften sind ganze Zahlen, die standardmäßig den maximalen Wert (100) annehmen, jedoch für eine bestimmte Abfrage auf einen anderen Wert verringert werden können.
 
-Die erste, *query_fanout_threads_percent*, steuert den Auffächerungsfaktor für die Threadverwendung. Wenn sie 100 % beträgt, weist der Cluster alle CPUs auf jedem Knoten zu. Beispielsweise 16 CPUs in einem Cluster, der auf Azure D14-Knoten bereitgestellt ist. Wenn sie 50 % beträgt, wird die Hälfte der CPUs verwendet usw. Die Zahlen werden auf eine ganze CPU aufgerundet, sodass sie problemlos auf 0 festgelegt werden kann. Die zweite, *query_fanout_nodes_percent*, steuert, wie viele der Abfrageknoten im Cluster pro Verteilungsvorgang für Unterabfragen verwendet werden sollen. Sie funktioniert auf ähnliche Weise.
+Die erste, *query_fanout_threads_percent*, steuert den Auffächerungsfaktor für die Threadverwendung.
+Wenn sie 100 % beträgt, weist der Cluster alle CPUs auf jedem Knoten zu. Beispielsweise 16 CPUs in einem Cluster, der auf Azure D14-Knoten bereitgestellt ist.
+Wenn sie 50 % beträgt, wird die Hälfte der CPUs verwendet usw.
+Die Zahlen werden auf eine ganze CPU aufgerundet, sodass sie problemlos auf 0 festgelegt werden kann.
+
+Die zweite, *query_fanout_nodes_percent*, steuert, wie viele der Abfrageknoten im Cluster pro Verteilungsvorgang für Unterabfragen verwendet werden sollen.
+Sie funktioniert auf ähnliche Weise.
+
+Wird `query_fanout_nodes_percent` oder `query_fanout_threads_percent` mehrmals festgelegt (beispielsweise in Clientanforderungseigenschaften und mithilfe einer `set`-Anweisung), gilt der *niedrigere* Wert für jede Eigenschaft.
 
 ## <a name="limit-on-query-complexity"></a>Grenzwert für Abfragekomplexität
 
