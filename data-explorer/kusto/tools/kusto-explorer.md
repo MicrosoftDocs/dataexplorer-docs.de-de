@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 05/19/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 0086fb9f649d7bb3b7031521812c1dff0ca532f7
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 2c23633c13c2a58f3c6e6e9b9daf001942117bfb
+ms.sourcegitcommit: 1530a38181ec92ed1c2c1f3aa2a75f69bd3e9045
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95513062"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97822830"
 ---
 # <a name="kustoexplorer-installation-and-user-interface"></a>Installation und Benutzeroberfläche von Kusto.Explorer
 
@@ -325,6 +325,11 @@ Kusto.Explorer versucht, den Schweregrad oder den Ausführlichkeitsgrad der einz
 Wählen Sie im Menü **Extras** die Option **Optionen** > **Results Viewer** > **Verbosity color scheme** (Ergebnisansicht > Farbschema für Ausführlichkeit) aus, um das Schema für die Ausgabefarbe zu ändern oder dieses Verhalten zu deaktivieren.
 
 :::image type="content" source="images/kusto-explorer/ke-color-scheme.png" alt-text="Änderung des Farbschemas für Kusto.Explorer":::
+
+
+Farbschemalegende für **Excel**| **Kräftige** Farbschemalegende
+|---|---
+| :::image type="content" source="images/kusto-explorer/excel-color-scheme.png" alt-text="Screenshot der Excel-Farbschemalegende im Kusto-Explorer" border="false"::: |:::image type="content" source="images/kusto-explorer/vivid-color-scheme.png" alt-text="Screenshot der kräftigen Farbschemalegende im Kusto-Explorer" border="false":::
 
 ## <a name="next-steps"></a>Nächste Schritte
 

@@ -9,21 +9,21 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
 ms.localizationpriority: high
-ms.openlocfilehash: be8d6e9172364d4177e7421e524cc067e4d58d18
-ms.sourcegitcommit: 66577436bcd1106f10fc9c0f233ee17b94478323
+ms.openlocfilehash: 455b3cfc3976566d9c4383890bbd4c20c775cf15
+ms.sourcegitcommit: 4c6bd4cb1eb1f64d84f844d4e7aff2de3a46b009
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/16/2020
-ms.locfileid: "97532186"
+ms.lasthandoff: 12/23/2020
+ms.locfileid: "97756363"
 ---
 # <a name="query-limits"></a>Abfragegrenzwerte
 
 Kusto ist eine Ad-hoc-Abfrage-Engine, die große Datasets hostet und versucht, Abfragen zu erfüllen, indem alle relevanten Daten im Arbeitsspeicher gehalten werden.
-Dabei besteht das inhärente Risiko, dass Abfragen die Dienstressourcen grenzenlos monopolisieren. Kusto bietet eine Reihe integrierter Schutzmaßnahmen in Form von standardmäßigen Abfragegrenzwerten. Wenn Sie erwägen, diese Grenzwerte zu entfernen, ermitteln Sie zunächst, ob Sie dadurch tatsächlich einen Vorteil gewinnen.
+Dabei besteht das inhärente Risiko, dass Abfragen die Dienstressourcen grenzenlos monopolisieren. Kusto bietet verschiedene integrierte Schutzmaßnahmen in Form von standardmäßigen Abfragegrenzwerten. Wenn Sie erwägen, diese Grenzwerte zu entfernen, ermitteln Sie zunächst, ob Sie dadurch tatsächlich einen Vorteil gewinnen.
 
 ## <a name="limit-on-query-concurrency"></a>Grenzwert für Abfrageparallelität
 
-**Abfrageparallelität** ist ein Grenzwert, den ein Cluster für einer Reihe von Abfragen auferlegt, die gleichzeitig ausgeführt werden.
+**Abfrageparallelität** ist ein Grenzwert, den ein Cluster für verschiedene Abfragen auferlegt, die gleichzeitig ausgeführt werden.
 
 * Der Standardwert des Grenzwerts für Abfrageparallelität hängt von dem SKU-Cluster ab, auf dem die Abfragen ausgeführt werden, und wird berechnet als: `Cores-Per-Node x 10`.
   * Beispielsweise ist der Standardgrenzwert für Abfrageparallelität für einen Cluster, der auf der D14v2-SKU eingerichtet ist, bei der jeder Computer über 16 virtuelle Kerne verfügt, `16 cores x10 = 160`.
@@ -44,10 +44,10 @@ Das Überschreiten der Anzahl von Datensätzen schlägt mit folgender Ausnahme f
 The Kusto DataEngine has failed to execute a query: 'Query result set has exceeded the internal record count limit 500000 (E_QUERY_RESULT_SET_TOO_LARGE).'
 ```
 
-Es gibt eine Reihe von Strategien für den Umgang mit diesem Fehler.
+Es gibt verschiedene Strategien für den Umgang mit diesem Fehler.
 
 * Verringern Sie die Resultsetgröße, indem Sie die Abfrage so ändern, dass nur interessante Daten zurückgegeben werden. Diese Strategie ist nützlich, wenn die anfängliche fehlerhafte Abfrage zu „breit“ gefasst ist. Beispielsweise projiziert die Abfrage Datenspalten nicht weg, die nicht benötigt werden.
-* Verringern Sie die Größe des Resultsets, indem Sie die Nachverarbeitung der Abfrage, z. B. Aggregationen, in die Abfrage selbst verschieben. Die Strategie ist in Szenarios nützlich, in denen die Ausgabe der Abfrage an ein anderes Verarbeitungssystem weitergeleitet wird, das dann zusätzliche Aggregationen durchführt.
+* Verringern Sie die Größe des Resultsets, indem Sie die Nachverarbeitung der Abfrage, z. B. Aggregationen, in die Abfrage selbst verschieben. Die Strategie ist in Szenarien nützlich, in denen die Ausgabe der Abfrage an ein anderes Verarbeitungssystem weitergeleitet wird, das dann andere Aggregationen durchführt.
 * Wechseln Sie von Abfragen zur Verwendung des [Datenexports](../management/data-export/index.md), wenn Sie große Datenmengen aus dem Dienst exportieren möchten.
 * Weisen Sie den Dienst an, diesen Abfragegrenzwert zu unterdrücken, indem Sie die unten aufgeführten `set`-Anweisungen oder Flags in [Eigenschaften von Clientanforderungen](../api/netfx/request-properties.md) verwenden.
 
@@ -128,7 +128,7 @@ T | where rand() < 0.1 | ...
 T | where hash(UserId, 10) == 1 | ...
 ```
 
-Wird `maxmemoryconsumptionperiterator` mehrmals festgelegt (beispielsweise in Clientanforderungseigenschaften und mithilfe einer `set`-Anweisung), gilt der *niedrigere* Wert.
+Wird `maxmemoryconsumptionperiterator` mehrmals festgelegt (beispielsweise in Clientanforderungseigenschaften und mithilfe einer `set`-Anweisung), gilt der niedrigere Wert.
 
 
 ## <a name="limit-on-memory-per-node"></a>Grenzwert für Arbeitsspeicher pro Knoten
@@ -140,7 +140,7 @@ set max_memory_consumption_per_query_per_node=68719476736;
 MyTable | ...
 ```
 
-Wird `max_memory_consumption_per_query_per_node` mehrmals festgelegt (beispielsweise in Clientanforderungseigenschaften und mithilfe einer `set`-Anweisung), gilt der *niedrigere* Wert.
+Wird `max_memory_consumption_per_query_per_node` mehrmals festgelegt (beispielsweise in Clientanforderungseigenschaften und mithilfe einer `set`-Anweisung), gilt der niedrigere Wert.
 
 ## <a name="limit-on-accumulated-string-sets"></a>Grenzwert für akkumulierte Zeichenfolgensätze
 
@@ -186,14 +186,14 @@ Die Eigenschaften sind *query_fanout_threads_percent* und *query_fanout_nodes_pe
 Beide Eigenschaften sind ganze Zahlen, die standardmäßig den maximalen Wert (100) annehmen, jedoch für eine bestimmte Abfrage auf einen anderen Wert verringert werden können.
 
 Die erste, *query_fanout_threads_percent*, steuert den Auffächerungsfaktor für die Threadverwendung.
-Wenn sie 100 % beträgt, weist der Cluster alle CPUs auf jedem Knoten zu. Beispielsweise 16 CPUs in einem Cluster, der auf Azure D14-Knoten bereitgestellt ist.
-Wenn sie 50 % beträgt, wird die Hälfte der CPUs verwendet usw.
-Die Zahlen werden auf eine ganze CPU aufgerundet, sodass sie problemlos auf 0 festgelegt werden kann.
+Wenn diese Eigenschaft auf 100 % festgelegt wird, weist der Cluster alle CPUs auf jedem Knoten zu. Beispielsweise 16 CPUs in einem Cluster, der auf Azure D14-Knoten bereitgestellt ist.
+Wenn diese Eigenschaft auf 50 % festgelegt wird, wird die Hälfte der CPUs verwendet usw.
+Die Zahlen werden auf eine ganze CPU aufgerundet, sodass der Eigenschaftswert problemlos auf 0 festgelegt werden kann.
 
 Die zweite, *query_fanout_nodes_percent*, steuert, wie viele der Abfrageknoten im Cluster pro Verteilungsvorgang für Unterabfragen verwendet werden sollen.
 Sie funktioniert auf ähnliche Weise.
 
-Wird `query_fanout_nodes_percent` oder `query_fanout_threads_percent` mehrmals festgelegt (beispielsweise in Clientanforderungseigenschaften und mithilfe einer `set`-Anweisung), gilt der *niedrigere* Wert für jede Eigenschaft.
+Wird `query_fanout_nodes_percent` oder `query_fanout_threads_percent` mehrmals festgelegt (beispielsweise in Clientanforderungseigenschaften und mithilfe einer `set`-Anweisung), gilt der niedrigere Wert für jede Eigenschaft.
 
 ## <a name="limit-on-query-complexity"></a>Grenzwert für Abfragekomplexität
 

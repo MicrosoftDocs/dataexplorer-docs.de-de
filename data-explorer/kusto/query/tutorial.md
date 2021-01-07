@@ -11,12 +11,12 @@ ms.date: 10/08/2020
 ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 0616c0d4dd2a44ba1d54ac83c699a1c0bac249b0
-ms.sourcegitcommit: f134d51e52504d3ca722bdf6d33baee05118173a
+ms.openlocfilehash: 56f6952be508a79f06077077f6ec479c7a17c13a
+ms.sourcegitcommit: c4ab6f07e2e5363e331ccd4ecfb6ed813edfbc48
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/03/2020
-ms.locfileid: "96563358"
+ms.lasthandoff: 12/21/2020
+ms.locfileid: "97706395"
 ---
 # <a name="tutorial-use-kusto-queries-in-azure-data-explorer-and-azure-monitor"></a>Tutorial: Verwenden von Kusto-Abfragen in Azure Data Explorer und Azure Monitor
 
@@ -165,7 +165,7 @@ So sieht die Ausgabe aus:
 
 ## <a name="aggregate-groups-of-rows-summarize"></a>Aggregieren von Zeilengruppen: *summarize*
 
-Zählen der Anzahl der Ereignisse, die in jedem Land auftreten:
+Zählen der Anzahl der Ereignisse, die in jedem Bundesstaat auftreten:
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto
@@ -242,7 +242,7 @@ StormEvents
 
 :::image type="content" source="images/tutorial/event-counts-state.png" alt-text="Screenshot, der ein Säulendiagramm der Anzahl von Sturmereignissen nach Bundesstaat zeigt.":::
 
-Obwohl wir im `project`-Vorgang `mid` entfernt haben, benötigen wir es weiterhin, wenn das Diagramm die Länder in dieser Reihenfolge anzeigen soll.
+Obwohl wir im `project`-Vorgang `mid` entfernt haben, benötigen wir es weiterhin, wenn das Diagramm die Bundesstaaten in dieser Reihenfolge anzeigen soll.
 
 Streng genommen ist `render` eher eine Funktion des Clients anstatt Bestandteil der Abfragesprache. Dennoch ist es in die Sprache integriert und eignet sich für das Visualisieren Ihrer Ergebnisse.
 

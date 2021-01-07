@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 08/09/2020
 ms.localizationpriority: high
-ms.openlocfilehash: c102637adfa1fd0340d28a67b52354956b511ada
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 7723a3ccd06963596744db9c73f499a882b54c3e
+ms.sourcegitcommit: 1530a38181ec92ed1c2c1f3aa2a75f69bd3e9045
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95513311"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97822779"
 ---
 # <a name="let-statement"></a>let-Anweisung
 
@@ -52,15 +52,15 @@ Die folgenden durch let-Anweisungen gebundenen Ausdrücke sind möglich:
 
  oder:
 
- [*TabularArgName* `:` `(` `*` `)`]
+ [*TabularArgName* `:` `(` `*` `)`]: Gibt tabellarische Ausdrücke mit einer Variablen und unbekannten Spalten an.
 
 `ScalarArguments` - [*ArgName* `:` *ArgType*] [`,` ... ]
 
 
 |Feld  |Definition  |Beispiel  |
 |---------|---------|---------|
-| **view** | Kann nur in einem parameterlosen Lambdaausdruck angezeigt werden, der keine Argumente aufweist. Gibt an, dass der gebundene Name eingeschlossen wird, wenn „alle Tabellen“ Abfragen sind. | Beispielsweise bei der Verwendung von `union *`.|
-| ***TabularArguments** _ | Die Liste der formalen tabellarischen Ausdrucksargumente. 
+| **view** | Wird unter Umständen nur in einer parameterlosen let-Anweisung angezeigt, die keine Argumente aufweist. Wenn das Schlüsselwort „view“ verwendet wird, wird die let-Anweisung in Abfragen eingeschlossen, die einen `union`-Operator mit Platzhalterauswahl der Tabellen/Ansichten verwenden. |  |
+| **_TabularArguments_* _ | Die Liste der formalen tabellarischen Ausdrucksargumente. 
 | Jedes tabellarische Argument verfügt über Folgendes:||
 |<ul><li> _TabularArgName*</li></ul> | Der Name des formalen tabellarischen Arguments. Der Name wird möglicherweise im *FunctionBody* angezeigt und ist an einen bestimmten Wert gebunden, wenn das Lambda aufgerufen wird. ||
 |<ul><li>Tabellenschemadefinition </li></ul> | Eine Liste von Attributen mit ihren Typen| AtrName: AtrType|

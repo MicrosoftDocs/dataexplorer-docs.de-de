@@ -9,17 +9,16 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/13/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 2b034719fa7c2f3714020c722b5717f5cf8590ff
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: a9da3735df9299b387188157bbae3d561f5de631
+ms.sourcegitcommit: f20619fac91f9bb2e6507cac10d41fb8425218e0
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512960"
+ms.lasthandoff: 12/29/2020
+ms.locfileid: "97811768"
 ---
 # <a name="parse-operator"></a>parse-Operator
 
-Wertet einen Zeichenfolgenausdruck aus und analysiert dessen Wert in eine oder mehrere berechnete Spalten. Die berechneten Spalten verfügen über NULL-Werte für nicht erfolgreich analysierte Zeichenfolgen.
-Weitere Informationen finden Sie unter [parse-where-Operator](parsewhereoperator.md).
+Wertet einen Zeichenfolgenausdruck aus und analysiert dessen Wert in eine oder mehrere berechnete Spalten. Die berechneten Spalten verfügen über NULL-Werte für nicht erfolgreich analysierte Zeichenfolgen. Wenn keine Zeilen verwendet werden müssen, bei denen die Analyse nicht erfolgreich ist, sollten Sie den [Operator „parse-where“](parsewhereoperator.md) bevorzugen.
 
 ```kusto
 T | parse Text with "ActivityName=" name ", ActivityType=" type
@@ -87,7 +86,7 @@ Die Eingabetabelle, erweitert gemäß der Liste der Spalten, die für den Operat
 Der `parse`-Operator bietet eine optimierte Möglichkeit zum `extend` einer Tabelle, indem mehrere `extract`-Anwendungen für denselben `string`-Ausdruck verwendet werden. Dieses Ergebnis ist nützlich, wenn die Tabelle eine `string`-Spalte aufweist, die mehrere Werte enthält, die Sie in einzelne Spalten aufteilen möchten. Beispielsweise eine Spalte, die von einer Entwicklerablaufverfolgungs-Anweisung ("`printf`"/"`Console.WriteLine`") erstellt wurde.
 
 Nehmen Sie im folgenden Beispiel an, dass die Spalte `EventText` der Tabelle `Traces` Zeichenfolgen der Form `Event: NotifySliceRelease (resourceName={0}, totalSlices= {1}, sliceNumber={2}, lockTime={3}, releaseTime={4}, previousLockTime={5})` enthält.
-Durch den Vorgang wird die Tabelle um sechs Spalten erweitert: `resourceName`, `totalSlices`, `sliceNumber`, `lockTime `, `releaseTime`, `previousLockTime`, `Month` und `Day`. 
+Durch den Vorgang wird die Tabelle um sechs Spalten erweitert: `resourceName`, `totalSlices`, `sliceNumber`, `lockTime `, `releaseTime` und `previousLockTime`. 
 
 <!-- csl: https://help.kusto.windows.net/Samples -->
 ```kusto

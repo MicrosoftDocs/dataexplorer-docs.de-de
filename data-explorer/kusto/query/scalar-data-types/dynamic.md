@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 07/09/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 582683a9261d84fa24d819b5234e58effaf90a97
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 2ef75f2249466a9796fb0313186546bd9088ff07
+ms.sourcegitcommit: 28f18c3500992fd7dcfd95dffe2bae0161a22ca3
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512025"
+ms.lasthandoff: 12/28/2020
+ms.locfileid: "97792930"
 ---
 # <a name="the-dynamic-data-type"></a>Der Datentyp „dynamic“
 
@@ -163,6 +163,8 @@ Außerdem gibt es mehrere Aggregatfunktionen, die `dynamic`-Arrays erstellen, di
 * [make_set_if()](../makesetif-aggfunction.md) gibt ein Array zurück, das alle eindeutigen Werte (mit einem Prädikat) enthält.
 
 ## <a name="operators-and-functions-over-dynamic-types"></a>Operatoren und Funktionen auf dynamischen Typen
+
+Eine umfassende Liste der dynamischen Skalarfunktionen bzw. der Arrayskalarfunktionen finden Sie unter [Dynamische Funktionen/Arrayfunktionen](../scalarfunctions.md#dynamicarray-functions).
 
 |Operator oder Funktion|Verwendung mit dynamischen Datentypen|
 |---|---|

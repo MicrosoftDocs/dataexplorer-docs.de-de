@@ -11,12 +11,12 @@ ms.date: 02/13/2020
 ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: b8ad39e8c1233acc2df6c30059a6926cea85f37a
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 449a5043d26013c8a41ab6fafe0b3c907a22686b
+ms.sourcegitcommit: 1530a38181ec92ed1c2c1f3aa2a75f69bd3e9045
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512807"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97822762"
 ---
 # <a name="union-operator"></a>union-Operator
 
@@ -65,6 +65,10 @@ Der Standardwert ist `isfuzzy=` `false`.
     *  Der Name einer Tabelle, z. B. `Events`.
     *  Ein Abfrageausdruck, der in Klammern eingeschlossen werden muss, z. B. `(Events | where id==42)`.
     *  Ein Satz von Tabellen, die mit einem Platzhalterzeichen angegeben sind. `E*` würde z. B. die Vereinigungsmenge aller Tabellen in der Datenbank bilden, deren Namen mit `E` beginnen.
+
+> [!NOTE]
+> Wenn die Liste der Tabellen bekannt ist, nehmen Sie mithilfe von Platzhaltern eine Optimierung vor. Einige Arbeitsbereiche enthalten eine sehr große Anzahl von Tabellen, die zu einer ineffizienten Ausführung führen würden. Tabellen können ebenfalls im Laufe der Zeit hinzugefügt werden, was zu unvorhergesehenen Ergebnissen führt.
+    
 * `kind`: 
     * `inner` : Das Ergebnis enthält die Teilmenge der Spalten, die in allen Eingabetabellen vorkommen.
     * `outer` (Standardwert). Das Ergebnis enthält alle Spalten, die in einer der Eingaben vorkommen. Zellen, die nicht durch eine Eingabezeile definiert wurden, werden auf `null` festgelegt.

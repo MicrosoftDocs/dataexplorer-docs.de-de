@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 11/22/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 38b67a0843cc38c2cbce7d5a41a8eff85b25ebd5
-ms.sourcegitcommit: 7edce9d9d20f9c0505abda67bb8cc3d2ecd60d15
+ms.openlocfilehash: b20d9a3e6c01f59a9cde44d6462ffeb0072473ed
+ms.sourcegitcommit: 1530a38181ec92ed1c2c1f3aa2a75f69bd3e9045
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/02/2020
-ms.locfileid: "96524299"
+ms.lasthandoff: 12/30/2020
+ms.locfileid: "97822881"
 ---
 # <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>Schnellstart: Abfragen von Daten auf der Azure Data Explorer-Webbenutzeroberfläche
 
@@ -88,7 +88,8 @@ Sie können jetzt Abfragen für beide Cluster ausführen (vorausgesetzt, Sie hab
 1. Kopieren Sie die folgende Abfrage, und fügen Sie sie im Abfragefenster unter der ersten Abfrage ein. Beachten Sie, dass sie nicht in separaten Zeilen formatiert ist wie die erste Abfrage.
 
     ```kusto
-    StormEvents | sort by StartTime desc | project StartTime, EndTime, State, EventType, DamageProperty, EpisodeNarrative | take 10
+    StormEvents | sort by StartTime desc 
+    | project StartTime, EndTime, State, EventType, DamageProperty, EpisodeNarrative | take 10
     ```
 
 1. Wählen Sie die neue Abfrage aus. Drücken Sie *UMSCHALT+ALT+F*, um die Abfrage zu formatieren, sodass sie wie die folgende Abfrage aussieht.
@@ -247,6 +248,7 @@ Auf der Registerkarte **Settings** (Einstellungen) können Sie die folgenden Auf
 
 * [Exportieren von Umgebungseinstellungen](#export-environment-settings)
 * [Importieren von Umgebungseinstellungen](#import-environment-settings)
+* [Hervorheben von Fehlerebenen](#highlight-error-levels)
 * [Löschen des lokalen Status](#clean-up-resources)
 
 Wählen Sie oben rechts das Einstellungssymbol :::image type="icon" source="media/web-query-data/settings-icon.png" border="false"::: aus, um das Fenster **Settings** (Einstellungen) zu öffnen.
@@ -277,6 +279,21 @@ Mithilfe der Export- und Importaktionen können Sie Ihre Arbeitsumgebung schütz
 
 > [!NOTE]
 > **Import** (Importieren) überschreibt alle vorhandenen Umgebungseinstellungen und Daten.
+
+### <a name="highlight-error-levels"></a>Hervorheben von Fehlerebenen
+
+Kusto versucht, den Schweregrad oder den Ausführlichkeitsgrad der einzelnen Zeilen im Ergebnisbereich zu interpretieren und diese dann entsprechend farbig zu kennzeichnen. Hierfür werden die einzelnen Werte der Spalten anhand von bekannten Mustern abgeglichen („Warnung“, „Fehler“ usw.). 
+
+So aktivieren Sie die Hervorhebung von Fehlerebenen:
+
+1. Wählen Sie neben Ihrem Benutzernamen das Symbol **Einstellungen** aus.
+1. Wählen Sie die Registerkarte **Darstellung** aus, und schieben Sie die Umschaltfläche für die Option zum **Aktivieren der Hervorhebung von Fehlerebenen** nach rechts. 
+
+:::image type="content" source="media/web-query-data/enable-error-highlighting.gif" alt-text="Animiertes GIF, das zeigt, wie Sie die Hervorhebung von Fehlerebenen in den Einstellungen aktivieren":::
+
+Farbschema für Fehlerebenen im Modus **Hell** | Farbschema für Fehlerebenen im Modus **Dunkel**
+|---|---|
+:::image type="content" source="media/web-query-data/light-mode.png" alt-text="Screenshot der Farblegende im hellen Modus"::: | :::image type="content" source="media/web-query-data/dark-mode.png" alt-text="Screenshot der Farblegende im dunklen Modus":::
 
 ## <a name="provide-feedback"></a>Feedback geben
 
