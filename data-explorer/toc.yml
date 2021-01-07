@@ -365,11 +365,11 @@
               href: dealing-with-duplicates.md
     - name: Überwachen
       items:
-        - name: 'Verwenden von Diagnoseprotokollen zum Überwachen der Erfassung, von Befehlen und Abfragen'
-          href: using-diagnostic-logs.md
         - name: Überwachen von Azure Data Explorer mit Metriken
           displayName: 'health, performance'
           href: using-metrics.md
+        - name: 'Verwenden von Diagnoseprotokollen zum Überwachen der Erfassung, von Befehlen und Abfragen'
+          href: using-diagnostic-logs.md
         - name: Überwachen der Clusterintegrität mithilfe von Resource Health
           href: monitor-with-resource-health.md
     - name: Freigeben von Daten
@@ -1444,6 +1444,8 @@
                   href: ./kusto/management/show-ingestion-mapping-command.md
                 - name: .create table
                   href: ./kusto/management/create-table-command.md
+                - name: .create table based-on
+                  href: ./kusto/management/create-table-based-on-command.md
                 - name: .create tables
                   href: ./kusto/management/create-tables-command.md
                 - name: .create-merge table
