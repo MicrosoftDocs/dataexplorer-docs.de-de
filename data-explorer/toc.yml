@@ -65,7 +65,7 @@
   items:
     - name: Erstellen eines Clusters und einer Datenbank
       items:
-        - name: Azure-Befehlszeilenschnittstelle
+        - name: Azure CLI
           href: create-cluster-database-cli.md
         - name: PowerShell
           href: create-cluster-database-powershell.md
@@ -368,7 +368,7 @@
         - name: Überwachen von Azure Data Explorer mit Metriken
           displayName: 'health, performance'
           href: using-metrics.md
-        - name: 'Verwenden von Diagnoseprotokollen zum Überwachen der Erfassung, von Befehlen und Abfragen'
+        - name: 'Verwenden von Diagnoseprotokollen zum Überwachen der Erfassung, von Befehlen, Abfragen und Tabellen'
           href: using-diagnostic-logs.md
         - name: Überwachen der Clusterintegrität mithilfe von Resource Health
           href: monitor-with-resource-health.md
