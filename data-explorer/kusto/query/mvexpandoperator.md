@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2019
 ms.localizationpriority: high
-ms.openlocfilehash: f14ec4fa24765053711d60f7d2365755b45adbab
-ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
+ms.openlocfilehash: e439fff119e005e44a0649fe22cadf3614ce036d
+ms.sourcegitcommit: 555f3da35fe250fabd35fcc6014bf055ef8405db
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/07/2020
-ms.locfileid: "96774638"
+ms.lasthandoff: 01/07/2021
+ms.locfileid: "97972497"
 ---
 # <a name="mv-expand-operator"></a>mv-expand-Operator
 
@@ -33,7 +33,7 @@ Erweitert das Array oder den Eigenschaftenbehälter mit mehreren Werten.
 * *ColumnName:* Im Ergebnis werden Arrays in der benannten Spalte auf mehrere Zeilen erweitert. 
 * *ArrayExpression:* Ein Ausdruck, der ein Array zurückgibt. Bei Verwendung dieses Formulars wird eine neue Spalte hinzugefügt, und die vorhandene wird beibehalten.
 * *Name:* Ein Name für die neue Spalte.
-* *Typname:* Gibt den zugrunde liegenden Typ der Elemente des Arrays an, der zum Typ der Spalte wird, die vom `mv-apply`-Operator generiert wird. Der Vorgang zum Anwenden des Typs ist nur Umwandlung und umfasst keine Analyse oder Typkonvertierung. Arrayelemente, die nicht mit dem deklarierten Typ übereinstimmen, werden zu `null`-Werten.
+* *Typname:* Gibt den zugrunde liegenden Typ der Elemente des Arrays an, der zum Typ der Spalte wird, die vom `mv-expand`-Operator generiert wird. Der Vorgang zum Anwenden des Typs ist nur Umwandlung und umfasst keine Analyse oder Typkonvertierung. Arrayelemente, die nicht mit dem deklarierten Typ übereinstimmen, werden zu `null`-Werten.
 * *RowLimit:* Die maximale Anzahl von Zeilen, die aus jeder ursprünglichen Zeile generiert werden. Der Standardwert ist 2147483647. 
 
   > [!NOTE]
