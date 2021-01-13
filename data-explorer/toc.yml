@@ -1706,6 +1706,8 @@
               href: ./kusto/management/access-control/aad.md
             - name: Prinzipalrollen
               href: ./kusto/management/access-control/role-based-authorization.md
+            - name: Zulassen von mandantenübergreifenden Abfragen und Befehlen
+              href: cross-tenant-query-and-commands.md
             - name: 'Schrittanleitung: Azure Active Directory-Authentifizierung'
               displayName: 'AAD, Azure AD'
               href: ./kusto/management/access-control/how-to-authenticate-with-aad.md
