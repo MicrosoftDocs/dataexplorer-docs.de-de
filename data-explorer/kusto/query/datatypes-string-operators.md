@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/19/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 845f0b5c9446f927fadf0141de4568cc28641c8d
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 13dac735127815c00ac8c1128c710e26208406d7
+ms.sourcegitcommit: d4b359e817e002fba7320132732ce6d9cee97415
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96320688"
+ms.lasthandoff: 01/18/2021
+ms.locfileid: "98541494"
 ---
 # <a name="string-operators"></a>Zeichenfolgenoperatoren
 
@@ -30,7 +30,7 @@ Standardmäßig wird jeder `string`-Wert in maximale Sequenzen von alphanumerisc
 Im folgenden `string`-Element sind die Begriffe z. B. `Kusto`, `WilliamGates3rd` und die folgenden Teilzeichenfolgen: `ad67d136`, `c1db`, `4f9f`, `88ef`, `d94f3b6b0b5a`.
 
 ```
-Kusto:  ad67d136-c1db-4f9f-88ef-d94f3b6b0b5a;;WilliamGates3rd
+Kusto: ad67d136-c1db-4f9f-88ef-d94f3b6b0b5a;;WilliamGates3rd
 ```
 
 Kusto erstellt einen Begriffsindex, der aus allen Begriffen besteht, die *vier Zeichen lang oder länger* sind. Dieser Index wird von `has`, `!has` usw. verwendet. Wenn die Abfrage nach einem Begriff sucht, der kleiner als vier Zeichen ist, oder einen `contains`-Operator verwendet, kehrt Kusto zum Scannen der Werte in der Spalte zurück, wenn keine Übereinstimmung ermittelt werden kann. Diese Methode ist viel langsamer als das Nachschlagen des Begriffs im Begriffsindex.
@@ -43,6 +43,9 @@ Kusto erstellt einen Begriffsindex, der aus allen Begriffen besteht, die *vier Z
 > * LS = Linke Seite des Ausdrucks
 > 
 > Bei Operatoren mit einem `_cs`-Suffix wird Groß-/Kleinschreibung beachtet.
+
+> [!NOTE]
+> Operatoren ohne Beachtung der Groß-/Kleinschreibung werden derzeit nur für ASCII-Text unterstützt. Verwenden Sie für den Vergleich von Nicht-ASCII-Text die Funktion [tolower()](tolowerfunction.md).
 
 Operator        |BESCHREIBUNG                                                       |Groß-/Kleinschreibung|Beispiel (ergibt `true`)
 ----------------|------------------------------------------------------------------|--------------|-----------------------

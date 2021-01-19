@@ -11,12 +11,12 @@ ms.date: 10/08/2020
 ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 56f6952be508a79f06077077f6ec479c7a17c13a
-ms.sourcegitcommit: c4ab6f07e2e5363e331ccd4ecfb6ed813edfbc48
+ms.openlocfilehash: 930936bd9839730ccb0c438cc96a67334ea7ac71
+ms.sourcegitcommit: 64b7b320875950dfee8eb1a23d36aa95e27d7297
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/21/2020
-ms.locfileid: "97706395"
+ms.lasthandoff: 01/14/2021
+ms.locfileid: "98207804"
 ---
 # <a name="tutorial-use-kusto-queries-in-azure-data-explorer-and-azure-monitor"></a>Tutorial: Verwenden von Kusto-Abfragen in Azure Data Explorer und Azure Monitor
 
@@ -416,7 +416,7 @@ In der Ausgabe erkennen wir Folgendes:
 
 * 5 % der Stürme dauern weniger als 5 Minuten.
 * 50 % der Stürme dauerten weniger als eine Stunde und 25 Minuten.
-* 5 % der Stürme dauerten mindestens zwei Stunden und 50 Minuten.
+* 95 % der Stürme dauerten mindestens zwei Stunden und 50 Minuten.
 
 Um eine gesonderte Aufschlüsselung für jeden Bundesstaat zu erhalten, verwenden Sie die Spalte `state` separat mit beiden `summarize`-Operatoren:
 
