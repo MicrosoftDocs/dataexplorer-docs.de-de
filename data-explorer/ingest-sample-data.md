@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 08/12/2019
 ms.localizationpriority: high
-ms.openlocfilehash: d5cff511a67e122af6b71740bbeaec6b7a3048e4
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 5942cd57d2fbc607a5ab80571b0e2937fa29306b
+ms.sourcegitcommit: 8c0674d2bc3c2e10eace5314c30adc7c9e4b3d44
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512756"
+ms.lasthandoff: 01/19/2021
+ms.locfileid: "98571719"
 ---
 # <a name="quickstart-ingest-sample-data-into-azure-data-explorer"></a>Schnellstart: Erfassen von Beispieldaten im Azure-Daten-Explorer
 
@@ -44,7 +44,7 @@ Das **StormEvents**-Beispieldataset enthält wetterbezogene Daten der [National 
 1. Fügen Sie den folgenden Befehl ein, und wählen Sie **Ausführen** aus, um Daten in einer StormEvents-Tabelle zu erfassen.
 
     ```Kusto
-    .ingest into table StormEvents h'https://kustosamplefiles.blob.core.windows.net/samplefiles/StormEvents.csv?sv=2019-12-12&ss=b&srt=o&sp=r&se=2022-09-05T02:23:52Z&st=2020-09-04T18:23:52Z&spr=https&sig=VrOfQMT1gUrHltJ8uhjYcCequEcfhjyyMX%2FSc3xsCy4%3D' with (ignoreFirstRecord=true)
+    .ingest into table StormEvents 'https://kustosamplefiles.blob.core.windows.net/samplefiles/StormEvents.csv?sv=2019-12-12&ss=b&srt=o&sp=r&se=2022-09-05T02:23:52Z&st=2020-09-04T18:23:52Z&spr=https&sig=VrOfQMT1gUrHltJ8uhjYcCequEcfhjyyMX%2FSc3xsCy4%3D' with (ignoreFirstRecord=true)
     ```
 
 1. Fügen Sie nach Abschluss der Erfassung die folgende Abfrage ein, wählen Sie im Fenster die Abfrage aus, und wählen Sie dann **Ausführen** aus.
