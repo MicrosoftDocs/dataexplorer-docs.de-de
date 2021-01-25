@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: quickstart
 ms.date: 11/22/2020
 ms.localizationpriority: high
-ms.openlocfilehash: b20d9a3e6c01f59a9cde44d6462ffeb0072473ed
-ms.sourcegitcommit: 1530a38181ec92ed1c2c1f3aa2a75f69bd3e9045
+ms.openlocfilehash: e2c6a54e675c85d31b44b031f78629fd1afcf8a5
+ms.sourcegitcommit: 8c0674d2bc3c2e10eace5314c30adc7c9e4b3d44
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/30/2020
-ms.locfileid: "97822881"
+ms.lasthandoff: 01/19/2021
+ms.locfileid: "98571787"
 ---
 # <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>Schnellstart: Abfragen von Daten auf der Azure Data Explorer-Webbenutzeroberfläche
 
@@ -284,6 +284,8 @@ Mithilfe der Export- und Importaktionen können Sie Ihre Arbeitsumgebung schütz
 
 Kusto versucht, den Schweregrad oder den Ausführlichkeitsgrad der einzelnen Zeilen im Ergebnisbereich zu interpretieren und diese dann entsprechend farbig zu kennzeichnen. Hierfür werden die einzelnen Werte der Spalten anhand von bekannten Mustern abgeglichen („Warnung“, „Fehler“ usw.). 
 
+#### <a name="enable-error-level-highlighting"></a>Aktivieren der Hervorhebung von Fehlerebenen
+
 So aktivieren Sie die Hervorhebung von Fehlerebenen:
 
 1. Wählen Sie neben Ihrem Benutzernamen das Symbol **Einstellungen** aus.
@@ -295,6 +297,22 @@ Farbschema für Fehlerebenen im Modus **Hell** | Farbschema für Fehlerebenen im
 |---|---|
 :::image type="content" source="media/web-query-data/light-mode.png" alt-text="Screenshot der Farblegende im hellen Modus"::: | :::image type="content" source="media/web-query-data/dark-mode.png" alt-text="Screenshot der Farblegende im dunklen Modus":::
 
+#### <a name="column-requirements-for-highlighting"></a>Spaltenanforderungen für die Hervorhebung
+
+Bei hervorgehobenen Fehlerebenen muss die Spalte den Typ „int“, „long“ oder „string“ aufweisen.
+
+* Wenn die Spalte vom Typ `long` oder `int` ist:
+   * Der Spaltenname muss *Ebene* lauten.
+   * Werte dürfen nur Ziffern zwischen 1 und 5 enthalten.
+* Wenn die Spalte vom Typ `string` ist: 
+   * Der Spaltenname kann optional *Ebene* lauten, um die Leistung zu verbessern. 
+   * Die Spalte darf nur die folgenden Werte enthalten:
+       * critical, crit, fatal, assert, high
+       * error, e
+       * warning, w, monitor
+       * Informationen
+       * verbose, verb, d
+   
 ## <a name="provide-feedback"></a>Feedback geben
 
 1. Wählen Sie rechts oben in der Anwendung das Feedbacksymbol :::image type="icon" source="media/web-query-data/icon-feedback.png" border="false"::: aus.
