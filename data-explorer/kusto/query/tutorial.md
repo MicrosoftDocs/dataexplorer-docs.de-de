@@ -11,12 +11,12 @@ ms.date: 10/08/2020
 ms.localizationpriority: high
 zone_pivot_group_filename: data-explorer/zone-pivot-groups.json
 zone_pivot_groups: kql-flavors
-ms.openlocfilehash: 90c1f09710bcfcf9394113a9eca4764fa51c696e
-ms.sourcegitcommit: 3a2d2def8d6bf395bbbb3b84935bc58adae055b8
+ms.openlocfilehash: bb9df9abc14d26d5c9a6faebe9c9d619ec75262b
+ms.sourcegitcommit: d77e52909001f885d14c4d421098a2c492b8c8ac
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/21/2021
-ms.locfileid: "98636023"
+ms.lasthandoff: 01/26/2021
+ms.locfileid: "98772503"
 ---
 # <a name="tutorial-use-kusto-queries-in-azure-data-explorer-and-azure-monitor"></a>Tutorial: Verwenden von Kusto-Abfragen in Azure Data Explorer und Azure Monitor
 
@@ -527,7 +527,7 @@ So sieht die Ausgabe aus:
 
 Die [AzureActivity](/azure/azure-monitor/reference/tables/azureactivity)-Tabelle enthält Einträge aus dem Azure-Aktivitätsprotokoll, die Erkenntnisse in alle Ereignisse auf Abonnement- oder Verwaltungsgruppenebene vermitteln, die in Azure aufgetreten sind. Sehen wir uns nur `Critical`-Einträge in einer bestimmten Woche an.
 
-Der [where](/azure/data-explorer/kusto/query/whereoperator)-Operator ist gängig in der Kusto-Abfragesprache. `where` filtert eine Tabelle zu Zeilen, die bestimmten Kriterien entsprechen. Das folgende Beispiel verwendet mehrere Befehle. Zuerst ruft die Abfrage alle Datensätze für die Tabelle ab. Anschließend filtert sie die Daten nach nur Einträgen, die in dem Zeitbereich liegen. Schließlich filtert sie diese Ergebnisse nach nur Datensätzen, die die Stufe `Critical` haben.
+Der [where](./whereoperator.md)-Operator ist gängig in der Kusto-Abfragesprache. `where` filtert eine Tabelle zu Zeilen, die bestimmten Kriterien entsprechen. Das folgende Beispiel verwendet mehrere Befehle. Zuerst ruft die Abfrage alle Datensätze für die Tabelle ab. Anschließend filtert sie die Daten nach nur Einträgen, die in dem Zeitbereich liegen. Schließlich filtert sie diese Ergebnisse nach nur Datensätzen, die die Stufe `Critical` haben.
 
 > [!NOTE]
 > Zusätzlich zur Angabe eines Filters in Ihrer Abfrage mithilfe der `TimeGenerated`-Spalte können Sie den Zeitbereich in Log Analytics angeben. Weitere Informationen finden Sie unter [Protokollabfragebereich und Zeitbereich in Azure Monitor Log Analytics](/azure/azure-monitor/log-query/scope).
@@ -661,11 +661,11 @@ InsightsMetrics
 
 ## <a name="join-data-from-two-tables"></a>Verknüpfen von Daten aus zwei Tabellen
 
-Was ist, wenn Sie Daten aus zwei Tabellen in einer einzelnen Abfrage abrufen müssen? Sie können den [join](/azure/data-explorer/kusto/query/joinoperator?pivots=azuremonitor)-Operator verwenden, um Zeilen aus mehreren Tabellen in einem einzigen Resultset zu kombinieren. Jede Tabelle muss eine Spalte mit einem übereinstimmenden Wert aufweisen, damit der Verknüpfungsvorgang (join) weiß, welche Zeilen zugeordnet werden müssen.
+Was ist, wenn Sie Daten aus zwei Tabellen in einer einzelnen Abfrage abrufen müssen? Sie können den [join](./joinoperator.md?pivots=azuremonitor)-Operator verwenden, um Zeilen aus mehreren Tabellen in einem einzigen Resultset zu kombinieren. Jede Tabelle muss eine Spalte mit einem übereinstimmenden Wert aufweisen, damit der Verknüpfungsvorgang (join) weiß, welche Zeilen zugeordnet werden müssen.
 
 [VMComputer](/azure/azure-monitor/reference/tables/vmcomputer) ist eine Tabelle, die Azure Monitor für VMs verwendet, um Details zu den von überwachten virtuellen Computern zu speichern. [InsightsMetrics](/azure/azure-monitor/reference/tables/insightsmetrics) enthält Leistungsdaten, die von diesen virtuellen Computern erfasst werden. Ein in *InsightsMetrics* erfasster Wert ist verfügbarer Arbeitsspeicher, aber nicht der Prozentsatz des verfügbaren Arbeitsspeichers. Um den Prozentsatz zu berechnen, benötigen wir den physischen Arbeitsspeicher für jeden virtuellen Computer. Dieser Wert findet sich in `VMComputer`.
 
-In der folgenden Beispiel Abfrage wird eine Verknüpfung (join) verwendet, um diese Berechnung auszuführen. Der [distinct](/azure/data-explorer/kusto/query/distinctoperator)-Operator wird mit `VMComputer` verwendet, weil Details regelmäßig von jedem Computer erfasst werden. Als Ergebnis werden mehrere Zeilen für jeden Computer in der Tabelle erstellt. Die beiden Tabellen werden mithilfe der Spalte `Computer` verknüpft. Im Resultset wird eine Zeile erstellt, die Spalten aus beiden Tabellen für jede Zeile in `InsightsMetrics` enthält, wobei ein Wert in `Computer` mit demselben Wert in der Spalte `Computer` in `VMComputer` übereinstimmt.
+In der folgenden Beispiel Abfrage wird eine Verknüpfung (join) verwendet, um diese Berechnung auszuführen. Der [distinct](./distinctoperator.md)-Operator wird mit `VMComputer` verwendet, weil Details regelmäßig von jedem Computer erfasst werden. Als Ergebnis werden mehrere Zeilen für jeden Computer in der Tabelle erstellt. Die beiden Tabellen werden mithilfe der Spalte `Computer` verknüpft. Im Resultset wird eine Zeile erstellt, die Spalten aus beiden Tabellen für jede Zeile in `InsightsMetrics` enthält, wobei ein Wert in `Computer` mit demselben Wert in der Spalte `Computer` in `VMComputer` übereinstimmt.
 
 ```kusto
 VMComputer
