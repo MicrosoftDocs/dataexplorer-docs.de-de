@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 455b3cfc3976566d9c4383890bbd4c20c775cf15
-ms.sourcegitcommit: 4c6bd4cb1eb1f64d84f844d4e7aff2de3a46b009
+ms.openlocfilehash: 0a25e0a4354798780b652861ba93494135b6d581
+ms.sourcegitcommit: fd034cf3e3440dcbbbb8494eb4914572055afcee
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/23/2020
-ms.locfileid: "97756363"
+ms.lasthandoff: 01/25/2021
+ms.locfileid: "98759705"
 ---
 # <a name="query-limits"></a>Abfragegrenzwerte
 
@@ -27,7 +27,7 @@ Dabei besteht das inhärente Risiko, dass Abfragen die Dienstressourcen grenzenl
 
 * Der Standardwert des Grenzwerts für Abfrageparallelität hängt von dem SKU-Cluster ab, auf dem die Abfragen ausgeführt werden, und wird berechnet als: `Cores-Per-Node x 10`.
   * Beispielsweise ist der Standardgrenzwert für Abfrageparallelität für einen Cluster, der auf der D14v2-SKU eingerichtet ist, bei der jeder Computer über 16 virtuelle Kerne verfügt, `16 cores x10 = 160`.
-* Der Standardwert kann durch Konfigurieren der [Richtlinie für die Abfragedrosselung](../management/query-throttling-policy.md) geändert werden. 
+* Der Standardwert kann geändert werden, indem Sie die [Richtlinie für die Anforderungsratenbegrenzung](../management/request-rate-limit-policy.md) der Arbeitsauslastungsgruppe `default` konfigurieren.
   * Die tatsächliche Anzahl von Abfragen, die gleichzeitig in einem Cluster ausgeführt werden können, hängt von verschiedenen Faktoren ab. Die wichtigsten Faktoren sind Cluster-SKU, die verfügbaren Ressourcen des Clusters sowie Abfragemuster. Die Richtlinie für die Abfragedrosselung kann auf Grundlage von Auslastungstests konfiguriert werden, die mit produktionsähnlichen Abfragemustern ausgeführt werden.
 
 ## <a name="limit-on-result-set-size-result-truncation"></a>Grenzwert für die Größe des Resultsets (Ergebniskürzung)
