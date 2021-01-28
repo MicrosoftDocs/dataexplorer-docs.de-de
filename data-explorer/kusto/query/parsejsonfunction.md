@@ -1,34 +1,36 @@
 ---
-title: 'parse_json(): Azure Data Explorer'
-description: In diesem Artikel wird parse_json() in Azure Data Explorer beschrieben.
+title: Funktionen „todynamic()“ und „parse_json()“ – Azure Data Explorer
+description: In diesem Artikel werden die Funktionen „todynamic()“ und „parse_json()“ in Azure Data Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
 ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
-ms.date: 02/13/2020
+ms.date: 01/25/2021
 ms.localizationpriority: high
-ms.openlocfilehash: 3125a51733f6672d041e6c1522ea755e5677cb0c
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 680ce93ec2a3b39d14475689ac80793a02d86547
+ms.sourcegitcommit: 8468c6886dc097032ef6db86992a5e8c9b18786e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512858"
+ms.lasthandoff: 01/27/2021
+ms.locfileid: "98911943"
 ---
-# <a name="parse_json"></a>parse_json()
+# <a name="todynamic-parse_json"></a>todynamic(), parse_json()
 
-Interpretiert `string` als JSON-Wert und gibt den Wert als `dynamic` zurück.
+Interpretiert `string` als JSON-Wert und gibt den Wert als `dynamic` zurück. 
 
-Diese Funktion ist der [extractjson()](./extractjsonfunction.md)-Funktion vorzuziehen, wenn Sie mehrere Elemente eines zusammengesetzten JSON-Objekts extrahieren müssen.
+> [!NOTE]
+> Die Funktionen `todynamic()` und `parse_json()` werden gleichwertig interpretiert.
+
+Diese Funktion ist der [extractjson()](./extractjsonfunction.md)-Funktion vorzuziehen, wenn Sie mehrere Elemente eines zusammengesetzten JSON-Objekts extrahieren müssen. Verwenden Sie nach Möglichkeit [dynamic()](./scalar-data-types/dynamic.md).
 
 ## <a name="syntax"></a>Syntax
 
 `parse_json(`*json*`)`
+`todynamic(`*json*`)`
 
-Aliase:
-- [todynamic()](./todynamicfunction.md)
-- [toobject()](./todynamicfunction.md)
+<!-- deprecated aliases: `toobject()` and parsejson() -->
 
 ## <a name="arguments"></a>Argumente
 
