@@ -1,6 +1,6 @@
 ---
-title: Benutzerdefinierte Funktionen – Azure Data Explorer | Microsoft-Dokumentation
-description: In diesem Artikel werden benutzerdefinierte Funktionen in Azure Data Explorer beschrieben.
+title: Benutzerdefinierte Funktionen – Azure Data Explorer
+description: In diesem Artikel werden benutzerdefinierte Funktionen (Skalar- und Ansichtsfunktionen) in Azure Data Explorer beschrieben.
 services: data-explorer
 author: orspod
 ms.author: orspodek
@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 92627b3325a7a2ba8e2e4d58a82ebf6db3977221
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: c85fd5dc784747314fe843d8f2325db76ee18d2c
+ms.sourcegitcommit: c11e3871d600ecaa2824ad78bce9c8fc5226eef9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512875"
+ms.lasthandoff: 02/04/2021
+ms.locfileid: "99554662"
 ---
 # <a name="user-defined-functions"></a>Benutzerdefinierte Funktionen
 
@@ -23,7 +23,7 @@ ms.locfileid: "95512875"
 Eine benutzerdefinierte Funktion gehört zu einer der beiden folgenden Kategorien:
 
 * Skalarfunktionen 
-* Tabellarische Funktionen 
+* Tabellarische Funktionen (auch als Ansichten bezeichnet)
 
 Die Eingabeargumente und die Ausgabe einer Funktion bestimmen, ob sie eine Skalar- oder tabellarische Funktion ist, wodurch dann festlegt wird, wie sie verwendet werden kann. 
 
