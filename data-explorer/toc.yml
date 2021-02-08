@@ -211,6 +211,8 @@
           items:
             - name: Python
               href: python-query-data.md
+        - name: Optimieren zur Erzielung hoher Parallelität
+          href: high-concurrency.md
         - name: Zeitreihenanalyse und Machine Learning
           items:
             - name: Zeitreihenanalyse

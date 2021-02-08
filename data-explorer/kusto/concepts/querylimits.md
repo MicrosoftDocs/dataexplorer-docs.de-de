@@ -9,26 +9,26 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 0a25e0a4354798780b652861ba93494135b6d581
-ms.sourcegitcommit: fd034cf3e3440dcbbbb8494eb4914572055afcee
+ms.openlocfilehash: 615b2f681c22237f9d14ad92e285a564c249857e
+ms.sourcegitcommit: d1c2433df183d0cfbfae4d3b869ee7f9cbf00fe4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/25/2021
-ms.locfileid: "98759705"
+ms.lasthandoff: 02/05/2021
+ms.locfileid: "99586372"
 ---
 # <a name="query-limits"></a>Abfragegrenzwerte
 
 Kusto ist eine Ad-hoc-Abfrage-Engine, die große Datasets hostet und versucht, Abfragen zu erfüllen, indem alle relevanten Daten im Arbeitsspeicher gehalten werden.
 Dabei besteht das inhärente Risiko, dass Abfragen die Dienstressourcen grenzenlos monopolisieren. Kusto bietet verschiedene integrierte Schutzmaßnahmen in Form von standardmäßigen Abfragegrenzwerten. Wenn Sie erwägen, diese Grenzwerte zu entfernen, ermitteln Sie zunächst, ob Sie dadurch tatsächlich einen Vorteil gewinnen.
 
-## <a name="limit-on-query-concurrency"></a>Grenzwert für Abfrageparallelität
+## <a name="limit-on-request-concurrency"></a>Grenzwert für Anforderungsparallelität
 
-**Abfrageparallelität** ist ein Grenzwert, den ein Cluster für verschiedene Abfragen auferlegt, die gleichzeitig ausgeführt werden.
+**Anforderungsparallelität** ist ein Grenzwert, den ein Cluster für verschiedene Anforderungen auferlegt, die gleichzeitig ausgeführt werden.
 
-* Der Standardwert des Grenzwerts für Abfrageparallelität hängt von dem SKU-Cluster ab, auf dem die Abfragen ausgeführt werden, und wird berechnet als: `Cores-Per-Node x 10`.
-  * Beispielsweise ist der Standardgrenzwert für Abfrageparallelität für einen Cluster, der auf der D14v2-SKU eingerichtet ist, bei der jeder Computer über 16 virtuelle Kerne verfügt, `16 cores x10 = 160`.
+* Der Standardwert des Grenzwerts hängt von der SKU ab, in der der Cluster ausgeführt wird, und wird berechnet als: `Cores-Per-Node x 10`.
+  * Beispielsweise ist der Standardgrenzwert für einen Cluster, der für die D14v2-SKU eingerichtet ist, bei der jeder Computer über 16 virtuelle Kerne verfügt, `16 cores x10 = 160`.
 * Der Standardwert kann geändert werden, indem Sie die [Richtlinie für die Anforderungsratenbegrenzung](../management/request-rate-limit-policy.md) der Arbeitsauslastungsgruppe `default` konfigurieren.
-  * Die tatsächliche Anzahl von Abfragen, die gleichzeitig in einem Cluster ausgeführt werden können, hängt von verschiedenen Faktoren ab. Die wichtigsten Faktoren sind Cluster-SKU, die verfügbaren Ressourcen des Clusters sowie Abfragemuster. Die Richtlinie für die Abfragedrosselung kann auf Grundlage von Auslastungstests konfiguriert werden, die mit produktionsähnlichen Abfragemustern ausgeführt werden.
+  * Die tatsächliche Anzahl von Anforderungen, die gleichzeitig in einem Cluster ausgeführt werden können, hängt von verschiedenen Faktoren ab. Die wichtigsten Faktoren sind Cluster-SKU, die verfügbaren Ressourcen des Clusters sowie Verwendungsmuster. Die Richtlinie kann auf Grundlage von Auslastungstests konfiguriert werden, die mit produktionsähnlichen Verwendungsmustern ausgeführt werden.
 
 ## <a name="limit-on-result-set-size-result-truncation"></a>Grenzwert für die Größe des Resultsets (Ergebniskürzung)
 
@@ -167,7 +167,7 @@ Das Timeout für ausgeführte Anforderungen (Abfragen und Steuerungsbefehle) wir
 
 Standardmäßig ist das Timeout für Abfragen auf vier Minuten und für Steuerungsbefehle auf 10 Minuten festgelegt. Dieser Wert kann bei Bedarf erhöht werden (maximal auf eine Stunde).
 
-* Wenn Sie eine Abfrage mittels Kusto.Explorer durchführen, verwenden Sie **Tools** &gt; **Optionen** _ &gt; _ *Verbindungen** &gt; **Abfrageservertimeout**.
+* Wenn Sie eine Abfrage mittels Kusto.Explorer durchführen, verwenden Sie **Tools** &gt; **Optionen*** &gt; **Verbindungen** &gt; **Abfrageservertimeout**.
 * Legen Sie die Clientanforderungseigenschaft `servertimeout`, ein Wert vom Typ `System.TimeSpan`, programmgesteuert auf eine Stunde fest.
 
 **Hinweise zu Timeouts**
