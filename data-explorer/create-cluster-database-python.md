@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: 91d0f6e399cc2b392e62a202cb5df16edb732f92
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.openlocfilehash: 494df2c610329da0f31621e293fe652b2fb3a911
+ms.sourcegitcommit: c11e3871d600ecaa2824ad78bce9c8fc5226eef9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92902523"
+ms.lasthandoff: 02/04/2021
+ms.locfileid: "99554608"
 ---
 # <a name="create-an-azure-data-explorer-cluster-and-database-by-using-python"></a>Erstellen eines Azure Data Explorer-Clusters und einer Datenbank mit Python
 
@@ -93,7 +93,7 @@ Zum Ausführen der Beispiele in diesem Artikel benötigen wir eine Azure AD-Anwe
    | resource_group_name | *testrg* | Der Name der Ressourcengruppe, in der der Cluster erstellt werden soll |
 
     > [!NOTE]
-    > Das **Erstellen eines Clusters** ist ein zeitintensiver Vorgang. Die Methode **create_or_update** gibt eine Instanz von LROPoller zurück. Weitere Informationen finden Sie unter [LROPoller-Klasse](/python/api/msrest/msrest.polling.lropoller?view=azure-python).
+    > Das **Erstellen eines Clusters** ist ein zeitintensiver Vorgang. Die Methode **create_or_update** gibt eine Instanz von LROPoller zurück. Weitere Informationen finden Sie unter [LROPoller-Klasse](/python/api/msrest/msrest.polling.lropoller).
 
 1. Führen Sie den folgenden Befehl aus, um zu überprüfen, ob Ihr Cluster erfolgreich erstellt wurde:
 

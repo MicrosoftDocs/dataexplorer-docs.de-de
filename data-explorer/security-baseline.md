@@ -4,19 +4,19 @@ description: Die Azure Data Explorer-Sicherheitsbaseline enthält Schrittanleitu
 author: msmbaldwin
 ms.service: data-explorer
 ms.topic: conceptual
-ms.date: 11/24/2020
+ms.date: 02/03/2021
 ms.author: mbaldwin
 ms.custom: subject-security-benchmark
-ms.openlocfilehash: d641714607bd1843e46ac708a9302c8a1dad6782
-ms.sourcegitcommit: cffc81de2b5c75a0ef5a3c71ff58d1ef52d4eb5c
+ms.openlocfilehash: c6cf97837f0da34a63f3b9274d160650ab2349fb
+ms.sourcegitcommit: c11e3871d600ecaa2824ad78bce9c8fc5226eef9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/25/2020
-ms.locfileid: "95872327"
+ms.lasthandoff: 02/04/2021
+ms.locfileid: "99554925"
 ---
 # <a name="azure-security-baseline-for-azure-data-explorer"></a>Azure-Sicherheitsbaseline für Azure Data Explorer
 
-Diese Sicherheitsbaseline wendet Empfehlungen des [Azure-Sicherheitsvergleichstests Version 1.0](https://docs.microsoft.com/azure/security/benchmarks/overview-v1) auf Azure Data Explorer an. Der Azure-Sicherheitsvergleichstest enthält Empfehlungen zum Schutz Ihrer Cloudlösungen in Azure.
+Diese Sicherheitsbaseline wendet Empfehlungen des [Azure-Sicherheitsvergleichstests Version 1.0](/azure/security/benchmarks/overview-v1) auf Azure Data Explorer an. Der Azure-Sicherheitsvergleichstest enthält Empfehlungen zum Schutz Ihrer Cloudlösungen in Azure.
 Der Inhalt wird nach den **Sicherheitskontrollen** gruppiert, die durch den Azure-Sicherheitsvergleichstest und die entsprechenden für Azure Data Explorer geltenden Empfehlungen definiert werden. Nicht auf Azure Data Explorer anwendbare **Kontrollen** wurden ausgeschlossen.
 
  
@@ -24,17 +24,17 @@ Die vollständige Zuordnung von Azure Data Explorer zum Azure-Sicherheitsverglei
 
 ## <a name="network-security"></a>Netzwerksicherheit
 
-*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Netzwerksicherheit](https://docs.microsoft.com/azure/security/benchmarks/security-control-network-security).*
+*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Netzwerksicherheit](/azure/security/benchmarks/security-control-network-security).*
 
 ### <a name="11-protect-azure-resources-within-virtual-networks"></a>1.1: Schützen von Azure-Ressourcen in virtuellen Netzwerken
 
 **Leitfaden**: Azure Data Explorer unterstützt die Bereitstellung eines Clusters in einem Subnetz in Ihrem virtuellen Netzwerk. Diese Funktionalität ermöglicht es Ihnen, NSG-Regeln (Netzwerksicherheitsgruppe) für den Datenverkehr Ihres Azure Data Explorer-Clusters durchzusetzen, Ihr lokales Netzwerk mit dem Subnetz des Azure Data Explorer-Clusters zu verbinden und Ihre Datenverbindungsquellen (Event Hub und Event Grid) mit Dienstendpunkten zu sichern.
 
-- [Erstellen eines Clusters im virtuellen Netzwerk](https://docs.microsoft.com/azure/data-explorer/vnet-create-cluster-portal)
+- [Erstellen eines Clusters im virtuellen Netzwerk](./vnet-create-cluster-portal.md)
 
-- [Bereitstellen Ihres Azure Data Explorer-Clusters in einem virtuellen Netzwerk](https://docs.microsoft.com/azure/data-explorer/vnet-deployment)
+- [Bereitstellen Ihres Azure Data Explorer-Clusters in einem virtuellen Netzwerk](./vnet-deployment.md)
 
-- [Behandeln von Problemen mit der VNET-Clustererstellung, -konnektivität und -verwendung](https://docs.microsoft.com/azure/data-explorer/vnet-deploy-troubleshoot?tabs=windows)
+- [Behandeln von Problemen mit der VNET-Clustererstellung, -konnektivität und -verwendung](./vnet-deploy-troubleshoot.md?tabs=windows)
 
 **Azure Security Center-Überwachung**: Ja
 
@@ -44,9 +44,9 @@ Die vollständige Zuordnung von Azure Data Explorer zum Azure-Sicherheitsverglei
 
 **Leitfaden**: Aktivieren Sie Netzwerksicherheitsgruppen-Flussprotokolle (NSG), und senden Sie Protokolle an ein Speicherkonto, um den Datenverkehr zu überwachen.
 
-- [Aktivieren der NSG-Flussprotokolle](https://docs.microsoft.com/azure/network-watcher/network-watcher-nsg-flow-logging-portal)
+- [Aktivieren der NSG-Flussprotokolle](/azure/network-watcher/network-watcher-nsg-flow-logging-portal)
 
-- [Grundlegendes zur Netzwerksicherheit über das Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-network-recommendations)
+- [Grundlegendes zur Netzwerksicherheit über das Azure Security Center](/azure/security-center/security-center-network-recommendations)
 
 **Azure Security Center-Überwachung**: Ja
 
@@ -56,9 +56,9 @@ Die vollständige Zuordnung von Azure Data Explorer zum Azure-Sicherheitsverglei
 
 **Leitfaden**: Aktivieren Sie Azure DDoS Protection Standard im virtuellen Netzwerk, um Ihre Azure Data Explorer-Cluster vor DDoS-Angriffen zu schützen. Verwenden Sie die in Azure Security Center integrierte Threat Intelligence, um die Kommunikation mit bekannten schädlichen oder nicht genutzten IP-Adressen zu verweigern.
 
-- [Konfigurieren von DDoS-Schutz](https://docs.microsoft.com/azure/virtual-network/manage-ddos-protection)
+- [Konfigurieren von DDoS-Schutz](/azure/virtual-network/manage-ddos-protection)
 
-- [Grundlegendes zur integrierten Threat Intelligence in Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-alerts-service-layer)
+- [Grundlegendes zur integrierten Threat Intelligence in Azure Security Center](/azure/security-center/security-center-alerts-service-layer)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -68,7 +68,7 @@ Die vollständige Zuordnung von Azure Data Explorer zum Azure-Sicherheitsverglei
 
 **Leitfaden**: Aktivieren Sie die Flussprotokolle für die Netzwerksicherheitsgruppe (NSG), die zum Schutz Ihres Azure Data Explorer-Clusters verwendet wird, und senden Sie Protokolle an ein Speicherkonto für die Überwachung des Datenverkehrs.
 
-- [Aktivieren der NSG-Flussprotokolle](https://docs.microsoft.com/azure/network-watcher/network-watcher-nsg-flow-logging-portal)
+- [Aktivieren der NSG-Flussprotokolle](/azure/network-watcher/network-watcher-nsg-flow-logging-portal)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -78,9 +78,9 @@ Die vollständige Zuordnung von Azure Data Explorer zum Azure-Sicherheitsverglei
 
 **Leitfaden**: Verwenden Sie Virtual Network-Diensttags, um Netzwerkzugriffssteuerungen in Netzwerksicherheitsgruppen oder Azure Firewalls zu definieren, die Ihren Azure Data Explorer-Clustern zugeordnet sind. Sie können Diensttags anstelle von spezifischen IP-Adressen nutzen, wenn Sie Sicherheitsregeln erstellen. Indem Sie den Diensttagnamen (z. B. „ApiManagement“) im entsprechenden Quell- oder Zielfeld einer Regel angeben, können Sie den Datenverkehr für den entsprechenden Dienst zulassen oder verweigern. Microsoft verwaltet die Adresspräfixe, für die das Diensttag gilt, und aktualisiert das Diensttag automatisch, wenn sich die Adressen ändern.
 
-- [Diensttags in virtuellen Netzwerken](https://docs.microsoft.com/azure/virtual-network/service-tags-overview)
+- [Diensttags in virtuellen Netzwerken](/azure/virtual-network/service-tags-overview)
 
-- [Konfigurationsanforderungen für Diensttags für Azure Data Explorer](https://docs.microsoft.com/azure/data-explorer/vnet-deployment#dependencies-for-vnet-deployment)
+- [Konfigurationsanforderungen für Diensttags für Azure Data Explorer](./vnet-deployment.md#dependencies-for-vnet-deployment)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -92,9 +92,9 @@ Die vollständige Zuordnung von Azure Data Explorer zum Azure-Sicherheitsverglei
 
 Kunden können auch mit Azure Blueprints umfangreiche Azure-Bereitstellungen vereinfachen, indem wichtige Umgebungsartefakte wie Azure Resource Manager-Vorlagen, Azure RBAC-Steuerungen und Azure Policy-Zuweisungen gemeinsam in einer Blaupausendefinition gepackt werden. Sie können die Blaupause leicht auf neue Abonnements und Umgebungen anwenden und die Steuerung und Verwaltung durch die Versionsverwaltung optimieren.
 
-- [Konfigurieren und Verwalten von Azure Policy](https://docs.microsoft.com/azure/governance/policy/tutorials/create-and-manage)
+- [Konfigurieren und Verwalten von Azure Policy](/azure/governance/policy/tutorials/create-and-manage)
 
-- [Erstellen einer Azure-Blaupause](https://docs.microsoft.com/azure/governance/blueprints/create-blueprint-portal)
+- [Erstellen einer Azure-Blaupause](/azure/governance/blueprints/create-blueprint-portal)
 
 **Azure Security Center-Überwachung**: Nicht zutreffend
 
@@ -104,7 +104,7 @@ Kunden können auch mit Azure Blueprints umfangreiche Azure-Bereitstellungen ver
 
 **Leitfaden**: Verwenden Sie Tags für Netzwerksicherheitsgruppen (NSGs) und andere Ressourcen im Zusammenhang mit Netzwerksicherheit und Datenverkehrsfluss für Ihre Azure Data Explorer-Cluster. Verwenden Sie für einzelne NSG-Regeln das Feld „Beschreibung“, um geschäftliche Anforderungen und/oder deren Dauer (usw.) für alle Regeln festzulegen, die Datenverkehr in ein bzw. aus einem Netzwerk zulassen.
 
-- [Erstellen und Verwenden von Tags](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags)
+- [Erstellen und Verwenden von Tags](/azure/azure-resource-manager/resource-group-using-tags)
 
 **Azure Security Center-Überwachung**: Nicht zutreffend
 
@@ -114,7 +114,7 @@ Kunden können auch mit Azure Blueprints umfangreiche Azure-Bereitstellungen ver
 
 **Leitfaden**: Verwenden Sie Azure Policy, um die Konfiguration für Netzwerkressourcen zu überprüfen (und/oder zu korrigieren).
 
-- [Konfigurieren und Verwalten von Azure Policy](https://docs.microsoft.com/azure/governance/policy/tutorials/create-and-manage)
+- [Konfigurieren und Verwalten von Azure Policy](/azure/governance/policy/tutorials/create-and-manage)
 
 **Azure Security Center-Überwachung:** Zurzeit nicht verfügbar
 
@@ -122,15 +122,15 @@ Kunden können auch mit Azure Blueprints umfangreiche Azure-Bereitstellungen ver
 
 ## <a name="logging-and-monitoring"></a>Protokollierung und Überwachung
 
-*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Protokollierung und Überwachung](https://docs.microsoft.com/azure/security/benchmarks/security-control-logging-monitoring).*
+*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Protokollierung und Überwachung](/azure/security/benchmarks/security-control-logging-monitoring).*
 
 ### <a name="22-configure-central-security-log-management"></a>2.2: Konfigurieren der zentralen Sicherheitsprotokollverwaltung
 
 **Leitfaden**: In Azure Data Explorer werden Diagnoseprotokolle verwendet, um Erkenntnisse zu erfolgreichen und fehlgeschlagenen Erfassungsvorgängen zu gewinnen. Sie können Vorgangsprotokolle in Azure Storage, Event Hub oder Log Analytics exportieren, um den Erfassungsstatus zu überwachen.
 
-- [Überwachen der Azure Data Explorer-Erfassungsvorgänge](https://docs.microsoft.com/azure/data-explorer/using-diagnostic-logs)
+- [Überwachen der Azure Data Explorer-Erfassungsvorgänge](./using-diagnostic-logs.md)
 
-- [Erfassen und Abfragen von Überwachungsdaten in Azure Data Explorer](https://docs.microsoft.com/azure/data-explorer/ingest-data-no-code)
+- [Erfassen und Abfragen von Überwachungsdaten in Azure Data Explorer](./ingest-data-no-code.md)
 
 **Azure Security Center-Überwachung**: Ja
 
@@ -140,11 +140,11 @@ Kunden können auch mit Azure Blueprints umfangreiche Azure-Bereitstellungen ver
 
 **Leitfaden**: Aktivieren Sie Diagnoseeinstellungen für Azure Data Explorer für den Zugriff auf und die Protokollierung von dienstspezifischen Vorgängen und die Protokollierung. Azure-Aktivitätsprotokolle innerhalb von Azure Monitor, die auch allgemeine Protokolle über die Ressource enthalten, sind standardmäßig aktiviert.
 
-- [Überwachen der Azure Data Explorer-Erfassungsvorgänge](https://docs.microsoft.com/azure/data-explorer/using-diagnostic-logs)
+- [Überwachen der Azure Data Explorer-Erfassungsvorgänge](./using-diagnostic-logs.md)
 
-- [Sammeln von Plattformprotokollen und -metriken mit Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/platform/diagnostic-settings)
+- [Sammeln von Plattformprotokollen und -metriken mit Azure Monitor](/azure/azure-monitor/platform/diagnostic-settings)
 
-- [Übersicht über Protokolle der Azure-Plattform](https://docs.microsoft.com/azure/azure-monitor/platform/platform-logs-overview)
+- [Übersicht über Protokolle der Azure-Plattform](/azure/azure-monitor/platform/platform-logs-overview)
 
 **Azure Security Center-Überwachung**: Ja
 
@@ -154,7 +154,7 @@ Kunden können auch mit Azure Blueprints umfangreiche Azure-Bereitstellungen ver
 
 **Leitfaden**: Legen Sie in Azure Monitor den Aufbewahrungszeitraum Ihres Log Analytics-Arbeitsbereichs gemäß den Compliancevorschriften Ihrer Organisation fest. Verwenden Sie Azure Storage-Konten für die langfristige/Archivierungsspeicherung.
 
-- [Ändern des Datenaufbewahrungszeitraums](https://docs.microsoft.com/azure/azure-monitor/platform/manage-cost-storage#change-the-data-retention-period)
+- [Ändern des Datenaufbewahrungszeitraums](/azure/azure-monitor/platform/manage-cost-storage#change-the-data-retention-period)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -164,9 +164,9 @@ Kunden können auch mit Azure Blueprints umfangreiche Azure-Bereitstellungen ver
 
 **Leitfaden**: Analysieren und überwachen Sie Protokolle auf anomales Verhalten, und prüfen Sie die Ergebnisse regelmäßig. Nachdem Sie die Diagnoseeinstellungen für Azure Data Explorer aktiviert haben, verwenden Sie den Log Analytics-Arbeitsbereich von Azure Monitor, um Protokolle zu überprüfen und Abfragen für Protokolldaten durchzuführen.
 
-- [Grundlegendes zum Log Analytics-Arbeitsbereich](https://docs.microsoft.com/azure/azure-monitor/log-query/get-started-portal)
+- [Grundlegendes zum Log Analytics-Arbeitsbereich](/azure/azure-monitor/log-query/get-started-portal)
 
-- [Ausführen benutzerdefinierter Abfragen in Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/log-query/get-started-queries)
+- [Ausführen benutzerdefinierter Abfragen in Azure Monitor](/azure/azure-monitor/log-query/get-started-queries)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -174,13 +174,13 @@ Kunden können auch mit Azure Blueprints umfangreiche Azure-Bereitstellungen ver
 
 ## <a name="identity-and-access-control"></a>Identität und Zugriffssteuerung
 
-*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Identität und Zugriffssteuerung](https://docs.microsoft.com/azure/security/benchmarks/security-control-identity-access-control).*
+*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Identität und Zugriffssteuerung](/azure/security/benchmarks/security-control-identity-access-control).*
 
 ### <a name="31-maintain-an-inventory-of-administrative-accounts"></a>3.1: Verwalten eines Bestands von Administratorkonten
 
 **Leitfaden**: In Azure Data Explorer definieren Sicherheitsrollen, welche Sicherheitsprinzipale (Benutzer und Anwendungen) die Berechtigung erhalten, mit einer gesicherten Ressource wie einer Datenbank oder einer Tabelle zu arbeiten, und welche Vorgänge zulässig sind. Sie können die Kusto-Abfrage verwenden, um Prinzipien der Administratorrolle für die Azure Data Explorer-Cluster und -Datenbanken aufzulisten.
 
-- [Sicherheitsrollenverwaltung in Azure Data Explorer mithilfe von Kusto-Abfragen](https://docs.microsoft.com/azure/kusto/management/security-roles)
+- [Sicherheitsrollenverwaltung in Azure Data Explorer mithilfe von Kusto-Abfragen](/azure/kusto/management/security-roles)
 
 **Azure Security Center-Überwachung**: Ja
 
@@ -200,7 +200,7 @@ Kunden können auch mit Azure Blueprints umfangreiche Azure-Bereitstellungen ver
 
 Kunden können außerdem einen Just-In-Time- oder Just-Enough-Zugriff aktivieren, indem sie mit Azure Active Directory (Azure AD) Privileged Identity Management verwaltete privilegierte Rollen für Microsoft-Dienste und ARM verwenden. 
 
-- [Privileged Identity Management](https://docs.microsoft.com/azure/active-directory/privileged-identity-management/pim-configure)
+- [Privileged Identity Management](/azure/active-directory/privileged-identity-management/pim-configure)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -210,7 +210,7 @@ Kunden können außerdem einen Just-In-Time- oder Just-Enough-Zugriff aktivieren
 
 **Leitfaden**: Wo immer möglich, sollte der Kunde das einmalige Anmelden (SSO) mit Azure Active Directory (Azure AD) verwenden, anstatt einzelne eigenständige Anmeldeinformationen pro Dienst zu konfigurieren. Wenden Sie die Empfehlungen für die Identitäts- und Zugriffsverwaltung in Azure Security Center an.
 
-- [Grundlegendes zu SSO mit Azure AD](https://docs.microsoft.com/azure/active-directory/manage-apps/what-is-single-sign-on)
+- [Grundlegendes zu SSO mit Azure AD](/azure/active-directory/manage-apps/what-is-single-sign-on)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -220,9 +220,9 @@ Kunden können außerdem einen Just-In-Time- oder Just-Enough-Zugriff aktivieren
 
 **Leitfaden**: Aktivieren Sie die mehrstufige Authentifizierung (Multi-Factor Authentication, MFA) für Azure Active Directory (Azure AD), und befolgen Sie die Empfehlungen für die Identitäts- und Zugriffsverwaltung in Azure Security Center.
 
-- [Aktivieren von MFA in Azure](https://docs.microsoft.com/azure/active-directory/authentication/howto-mfa-getstarted)
+- [Aktivieren von MFA in Azure](/azure/active-directory/authentication/howto-mfa-getstarted)
 
-- [Überwachen von Identität und Zugriff in Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-identity-access)
+- [Überwachen von Identität und Zugriff in Azure Security Center](/azure/security-center/security-center-identity-access)
 
 **Azure Security Center-Überwachung**: Ja
 
@@ -232,9 +232,9 @@ Kunden können außerdem einen Just-In-Time- oder Just-Enough-Zugriff aktivieren
 
 **Leitfaden**: Verwenden Sie Arbeitsstationen mit privilegiertem Zugriff (Privileged Access Workstations, PAW) mit Multi-Factor Authentication (MFA), die für die Anmeldung und Konfiguration von Azure-Ressourcen konfiguriert sind.
 
-- [Informationen zu Arbeitsstationen mit privilegiertem Zugriff](https://docs.microsoft.com/windows-server/identity/securing-privileged-access/privileged-access-workstations)
+- [Informationen zu Arbeitsstationen mit privilegiertem Zugriff](https://4sysops.com/archives/understand-the-microsoft-privileged-access-workstation-paw-security-model/)
 
-- [Aktivieren von MFA in Azure](https://docs.microsoft.com/azure/active-directory/authentication/howto-mfa-getstarted)
+- [Aktivieren von MFA in Azure](/azure/active-directory/authentication/howto-mfa-getstarted)
 
 **Azure Security Center-Überwachung:** Nicht zutreffend
 
@@ -244,9 +244,9 @@ Kunden können außerdem einen Just-In-Time- oder Just-Enough-Zugriff aktivieren
 
 **Leitfaden**: Verwenden Sie Azure Active Directory-Sicherheitsberichte (Azure AD) für die Generierung von Protokollen und Warnungen bei verdächtigen oder sicherheitsrelevanten Aktivitäten in der Umgebung. Verwenden Sie Azure Security Center zum Überwachen von identitäts- und zugriffsbezogenen Aktivitäten.
 
-- [Identifizieren von Azure AD-Benutzern, die aufgrund riskanter Aktivitäten gekennzeichnet wurden](https://docs.microsoft.com/azure/active-directory/reports-monitoring/concept-user-at-risk)
+- [Identifizieren von Azure AD-Benutzern, die aufgrund riskanter Aktivitäten gekennzeichnet wurden](/azure/active-directory/reports-monitoring/concept-user-at-risk)
 
-- [Überwachen der identitäts- und zugriffsbezogenen Aktivitäten von Benutzern in Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-identity-access)
+- [Überwachen der identitäts- und zugriffsbezogenen Aktivitäten von Benutzern in Azure Security Center](/azure/security-center/security-center-identity-access)
 
 **Azure Security Center-Überwachung**: Ja
 
@@ -256,7 +256,7 @@ Kunden können außerdem einen Just-In-Time- oder Just-Enough-Zugriff aktivieren
 
 **Leitfaden**: Kunden können benannte Standorte mit bedingtem Zugriff verwenden, um den Zugriff nur über bestimmte logische Gruppierungen von IP-Adressbereichen oder Ländern/Regionen zuzulassen.
 
-- [Konfigurieren benannter Standorte in Azure](https://docs.microsoft.com/azure/active-directory/reports-monitoring/quickstart-configure-named-locations)
+- [Konfigurieren benannter Standorte in Azure](/azure/active-directory/reports-monitoring/quickstart-configure-named-locations)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -272,9 +272,9 @@ Kunden können außerdem einen Just-In-Time- oder Just-Enough-Zugriff aktivieren
 
 Weitere Informationen finden Sie in den folgenden Referenzen:
 
-- [Übersicht über Azure Data Explorer Access Control](https://docs.microsoft.com/azure/kusto/management/access-control)
+- [Übersicht über Azure Data Explorer Access Control](/azure/kusto/management/access-control)
 
-- [Authentifizieren mit Azure Active Directory](https://docs.microsoft.com/azure/kusto/management/access-control/aad)
+- [Authentifizieren mit Azure Active Directory](/azure/kusto/management/access-control/aad)
 
 **Azure Security Center-Überwachung**: Ja
 
@@ -284,11 +284,11 @@ Weitere Informationen finden Sie in den folgenden Referenzen:
 
 **Leitfaden**: Azure Active Directory (Azure AD) enthält Protokolle zum Ermitteln von veralteten Konten. Verwenden Sie zusätzlich Zugriffsüberprüfungen für Azure-Identitäten, um Gruppenmitgliedschaften, den Zugriff auf Unternehmensanwendungen und Rollenzuweisungen effizient zu verwalten. Der Benutzerzugriff kann regelmäßig überprüft werden, um sicherzustellen, dass nur die richtigen Benutzer weiterhin Zugriff besitzen. 
 
-- [Authentifizieren mit Azure AD für den Azure Data Explorer-Zugriff](https://docs.microsoft.com/azure/kusto/management/access-control/how-to-authenticate-with-aad)
+- [Authentifizieren mit Azure AD für den Azure Data Explorer-Zugriff](/azure/kusto/management/access-control/how-to-authenticate-with-aad)
 
-- [Azure AD-Berichterstellung](https://docs.microsoft.com/azure/active-directory/reports-monitoring/)
+- [Azure AD-Berichterstellung](/azure/active-directory/reports-monitoring/)
 
-- [Verwenden von Zugriffsüberprüfungen für Azure-Identitäten](https://docs.microsoft.com/azure/active-directory/governance/access-reviews-overview)
+- [Verwenden von Zugriffsüberprüfungen für Azure-Identitäten](/azure/active-directory/governance/access-reviews-overview)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -300,7 +300,7 @@ Weitere Informationen finden Sie in den folgenden Referenzen:
 
  Sie können diesen Prozess optimieren, indem Sie Diagnoseeinstellungen für Azure Active Directory-Benutzerkonten erstellen sowie die Überwachungs- und Anmeldeprotokolle an einen Log Analytics-Arbeitsbereich senden. Kunden können gewünschte Warnungen im Log Analytics-Arbeitsbereich konfigurieren.
 
-- [Integrieren von Azure-Aktivitätsprotokollen in Azure Monitor](https://docs.microsoft.com/azure/active-directory/reports-monitoring/howto-integrate-activity-logs-with-log-analytics)
+- [Integrieren von Azure-Aktivitätsprotokollen in Azure Monitor](/azure/active-directory/reports-monitoring/howto-integrate-activity-logs-with-log-analytics)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -310,9 +310,9 @@ Weitere Informationen finden Sie in den folgenden Referenzen:
 
 **Leitfaden**: Mit den Funktionen zur Risikoerkennung und zum Identitätsschutz von Azure Active Directory (Azure AD) können Sie automatische Antworten auf erkannte verdächtige Aktionen im Zusammenhang mit Benutzeridentitäten konfigurieren. Außerdem können Sie Daten zur weiteren Untersuchung in Azure Sentinel erfassen.
 
-- [Anzeigen riskanter Azure AD-Anmeldungen](https://docs.microsoft.com/azure/active-directory/reports-monitoring/concept-risky-sign-ins)
+- [Anzeigen riskanter Azure AD-Anmeldungen](/azure/active-directory/reports-monitoring/concept-risky-sign-ins)
 
-- [Konfigurieren und Aktivieren von Risikorichtlinien für den Identitätsschutz](https://docs.microsoft.com/azure/active-directory/identity-protection/howto-identity-protection-configure-risk-policies)
+- [Konfigurieren und Aktivieren von Risikorichtlinien für den Identitätsschutz](/azure/active-directory/identity-protection/howto-identity-protection-configure-risk-policies)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -322,7 +322,7 @@ Weitere Informationen finden Sie in den folgenden Referenzen:
 
 **Leitfaden**: In Supportszenarien, bei denen Microsoft auf Kundendaten zugreifen muss, wird per Kunden-Lockbox eine Benutzeroberfläche bereitgestellt, auf der Kunden Anforderungen des Zugriffs auf Kundendaten prüfen und dann genehmigen oder ablehnen können.
 
-- [Grundlegendes zu Kunden-Lockbox](https://docs.microsoft.com/azure/security/fundamentals/customer-lockbox-overview)
+- [Grundlegendes zu Kunden-Lockbox](/azure/security/fundamentals/customer-lockbox-overview)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -330,13 +330,13 @@ Weitere Informationen finden Sie in den folgenden Referenzen:
 
 ## <a name="data-protection"></a>Datenschutz
 
-*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Schutz von Daten](https://docs.microsoft.com/azure/security/benchmarks/security-control-data-protection).*
+*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Schutz von Daten](/azure/security/benchmarks/security-control-data-protection).*
 
 ### <a name="41-maintain-an-inventory-of-sensitive-information"></a>4.1: Verwalten eines Bestands an vertraulichen Informationen
 
 **Leitfaden**: Verwenden Sie Tags für die Nachverfolgung von Azure-Ressourcen, die vertrauliche Informationen speichern oder verarbeiten.
 
-- [Erstellen und Verwenden von Tags](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags)
+- [Erstellen und Verwenden von Tags](/azure/azure-resource-manager/resource-group-using-tags)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -346,15 +346,15 @@ Weitere Informationen finden Sie in den folgenden Referenzen:
 
 **Leitfaden**: Implementieren Sie separate Abonnements und/oder Verwaltungsgruppen für Entwicklungs-, Test- und Produktionsumgebungen. Azure Data Explorer-Cluster sollten von anderen Ressourcen durch ein virtuelles Netzwerk/Subnetz getrennt, entsprechend gekennzeichnet und innerhalb einer Netzwerksicherheitsgruppe (NSG) oder Azure Firewall gesichert werden. Azure Data Explorer-Cluster, die vertrauliche Daten speichern oder verarbeiten, müssen ausreichend isoliert werden.
 
-- [Erstellen zusätzlicher Azure-Abonnements](https://docs.microsoft.com/azure/billing/billing-create-subscription)
+- [Erstellen zusätzlicher Azure-Abonnements](/azure/billing/billing-create-subscription)
 
-- [Erstellen von Verwaltungsgruppen](https://docs.microsoft.com/azure/governance/management-groups/create)
+- [Erstellen von Verwaltungsgruppen](/azure/governance/management-groups/create)
 
-- [Erstellen und Verwenden von Tags](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags)
+- [Erstellen und Verwenden von Tags](/azure/azure-resource-manager/resource-group-using-tags)
 
-- [Bereitstellen Ihres Azure Data Explorer-Clusters in einem virtuellen Netzwerk](https://docs.microsoft.com/azure/data-explorer/vnet-deployment)
+- [Bereitstellen Ihres Azure Data Explorer-Clusters in einem virtuellen Netzwerk](./vnet-deployment.md)
 
-- [Erstellen einer NSG mit einer Sicherheitskonfiguration](https://docs.microsoft.com/azure/virtual-network/tutorial-filter-network-traffic)
+- [Erstellen einer NSG mit einer Sicherheitskonfiguration](/azure/virtual-network/tutorial-filter-network-traffic)
 
 **Azure Security Center-Überwachung**: Nicht zutreffend
 
@@ -374,7 +374,7 @@ Weitere Informationen finden Sie in den folgenden Referenzen:
 
 Für die zugrundeliegende Plattform, die von Microsoft verwaltet wird, behandelt Microsoft alle Kundeninhalte als vertraulich und unternimmt große Anstrengungen, um Kundendaten vor Verlust und Gefährdung zu schützen. Um die Sicherheit von Kundendaten innerhalb von Azure zu gewährleisten, hat Microsoft eine Reihe von robusten Datenschutzkontrollen und -funktionen implementiert und kümmert sich um deren Verwaltung.
 
-- [Grundlegendes zum Schutz von Kundendaten in Azure](https://docs.microsoft.com/azure/security/fundamentals/protection-customer-data)
+- [Grundlegendes zum Schutz von Kundendaten in Azure](/azure/security/fundamentals/protection-customer-data)
 
 **Azure Security Center-Überwachung**: Nicht zutreffend
 
@@ -384,7 +384,7 @@ Für die zugrundeliegende Plattform, die von Microsoft verwaltet wird, behandelt
 
 **Leitfaden**: Azure Data Explorer ermöglicht Ihnen über das Modell für die rollenbasierte Zugriffssteuerung in Azure (Azure RBAC) die Steuerung des Zugriffs auf Datenbanken und Tabellen. Bei diesem Modell werden Prinzipale (Benutzer, Gruppen und Apps) Rollen zugewiesen. Prinzipale können gemäß den zugewiesenen Rollen auf Ressourcen zugreifen.
 
-- [Liste der Rollen, Berechtigungen und Anweisungen zur Konfiguration von RBAC für Azure Data Explorer](https://docs.microsoft.com/azure/data-explorer/manage-database-permissions)
+- [Liste der Rollen, Berechtigungen und Anweisungen zur Konfiguration von RBAC für Azure Data Explorer](./manage-database-permissions.md)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -394,7 +394,7 @@ Für die zugrundeliegende Plattform, die von Microsoft verwaltet wird, behandelt
 
 **Leitfaden**: Azure Disk Encryption unterstützt Sie beim Schutz Ihrer Daten gemäß den Sicherheits- und Complianceanforderungen Ihrer Organisation. Der Dienst bietet Volumeverschlüsselung für das Betriebssystem und die Datenträger Ihrer virtuellen Clustercomputer. Azure Disk Encryption ist außerdem mit Azure Key Vault integriert, um die Schlüssel und Geheimnisse für die Datenträgerverschlüsselung steuern und verwalten zu können. So wird sichergestellt, dass alle ruhenden Daten auf den Datenträgern von virtuellen Computern in Azure Storage verschlüsselt sind.
 
-- [Aktivieren der Verschlüsselung ruhender Daten für Azure Data Explorer-Cluster](https://docs.microsoft.com/azure/data-explorer/manage-cluster-security)
+- [Aktivieren der Verschlüsselung ruhender Daten für Azure Data Explorer-Cluster](./cluster-disk-encryption.md)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -404,9 +404,7 @@ Für die zugrundeliegende Plattform, die von Microsoft verwaltet wird, behandelt
 
 **Leitfaden**: Verwenden Sie Azure Monitor mit dem Azure-Aktivitätsprotokoll, um Warnungen zu erstellen, wenn Änderungen auf Ressourcenebene auf Ihren Azure Data Explorer-Clustern erfolgen.
 
-- [Erstellen von Warnungen für Ereignisse des Azure-Aktivitätsprotokolls](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-activity-log)
-
-- [Erstellen von Warnungen für Ereignisse des Azure-Aktivitätsprotokolls](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-activity-log)
+- [Erstellen von Warnungen für Ereignisse des Azure-Aktivitätsprotokolls](/azure/azure-monitor/platform/alerts-activity-log)
 
 **Azure Security Center-Überwachung**: Ja
 
@@ -414,13 +412,13 @@ Für die zugrundeliegende Plattform, die von Microsoft verwaltet wird, behandelt
 
 ## <a name="vulnerability-management"></a>Verwaltung von Sicherheitsrisiken
 
-*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Verwaltung von Sicherheitsrisiken](https://docs.microsoft.com/azure/security/benchmarks/security-control-vulnerability-management).*
+*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Verwaltung von Sicherheitsrisiken](/azure/security/benchmarks/security-control-vulnerability-management).*
 
 ### <a name="55-use-a-risk-rating-process-to-prioritize-the-remediation-of-discovered-vulnerabilities"></a>5.5: Verwenden eines Risikobewertungsprozesses, um die Behebung von erkannten Sicherheitsrisiken zu priorisieren
 
 **Leitfaden**: Verwenden Sie die Standardrisikobewertungen (Secure Score), die von Azure Security Center bereitgestellt werden.
 
-- [Grundlegendes zum Secure Score des Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-secure-score)
+- [Grundlegendes zum Secure Score des Azure Security Center](/azure/security-center/security-center-secure-score)
 
 **Azure Security Center-Überwachung**: Ja
 
@@ -428,7 +426,7 @@ Für die zugrundeliegende Plattform, die von Microsoft verwaltet wird, behandelt
 
 ## <a name="inventory-and-asset-management"></a>Bestands- und Ressourcenverwaltung
 
-*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Bestands- und Ressourcenverwaltung](https://docs.microsoft.com/azure/security/benchmarks/security-control-inventory-asset-management).*
+*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Bestands- und Ressourcenverwaltung](/azure/security/benchmarks/security-control-inventory-asset-management).*
 
 ### <a name="61-use-automated-asset-discovery-solution"></a>6.1: Verwenden der automatisierten Asset Discovery-Lösung
 
@@ -436,11 +434,11 @@ Für die zugrundeliegende Plattform, die von Microsoft verwaltet wird, behandelt
 
 Obwohl klassische Azure-Ressourcen über das Resource Graph ermittelt werden können, wird dringend empfohlen, Azure Resource Manager-Ressourcen zu erstellen und zu verwenden.
 
-- [Erstellen von Abfragen mit Azure Resource Graph](https://docs.microsoft.com/azure/governance/resource-graph/first-query-portal)
+- [Erstellen von Abfragen mit Azure Resource Graph](/azure/governance/resource-graph/first-query-portal)
 
-- [Anzeigen Ihrer Azure-Abonnements](https://docs.microsoft.com/powershell/module/az.accounts/get-azsubscription?view=azps-4.8.0&amp;preserve-view=true)
+- [Anzeigen Ihrer Azure-Abonnements](/powershell/module/az.accounts/get-azsubscription?preserve-view=true&view=azps-4.8.0)
 
-- [Grundlegendes zu Azure RBAC](https://docs.microsoft.com/azure/role-based-access-control/overview)
+- [Grundlegendes zu Azure RBAC](/azure/role-based-access-control/overview)
 
 **Azure Security Center-Überwachung**: Nicht zutreffend
 
@@ -450,7 +448,7 @@ Obwohl klassische Azure-Ressourcen über das Resource Graph ermittelt werden kö
 
 **Leitfaden**: Wenden Sie Tags auf Ihre Azure-Ressourcen an, die Metadaten erzeugen, um sie logisch in einer Taxonomie zu organisieren.
 
-- [Erstellen und Verwenden von Tags](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags)
+- [Erstellen und Verwenden von Tags](/azure/azure-resource-manager/resource-group-using-tags)
 
 **Azure Security Center-Überwachung**: Nicht zutreffend
 
@@ -460,13 +458,13 @@ Obwohl klassische Azure-Ressourcen über das Resource Graph ermittelt werden kö
 
 **Leitfaden**: Sie können geeignete Namenskonventionen, Kennzeichnungen, Verwaltungsgruppen oder ggf. separate Abonnements verwenden, um Ressourcen zu organisieren und nachzuverfolgen. Sie können Azure Resource Graph verwenden, um den Bestand regelmäßig abzustimmen und sicherzustellen, dass nicht autorisierte Ressourcen rechtzeitig aus dem Abonnement gelöscht werden. 
 
-- [Erstellen zusätzlicher Azure-Abonnements](https://docs.microsoft.com/azure/billing/billing-create-subscription)
+- [Erstellen zusätzlicher Azure-Abonnements](/azure/billing/billing-create-subscription)
 
-- [Erstellen von Verwaltungsgruppen](https://docs.microsoft.com/azure/governance/management-groups/create)
+- [Erstellen von Verwaltungsgruppen](/azure/governance/management-groups/create)
 
-- [Erstellen und Verwenden von Tags](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags)
+- [Erstellen und Verwenden von Tags](/azure/azure-resource-manager/resource-group-using-tags)
 
-- [Erstellen von Abfragen mit Azure Resource Graph](https://docs.microsoft.com/azure/governance/resource-graph/first-query-portal)
+- [Erstellen von Abfragen mit Azure Resource Graph](/azure/governance/resource-graph/first-query-portal)
 
 **Azure Security Center-Überwachung**: Nicht zutreffend
 
@@ -492,11 +490,11 @@ Sie können die von der Richtlinie generierten Ereignisse mithilfe der Aktivitä
 
 Darüber hinaus können Sie Azure Resource Graph verwenden, um Ressourcen in den Abonnements abzufragen und zu ermitteln.
 
-- [Erstellen und Verwalten von Richtlinien zur Konformitätserzwingung](https://docs.microsoft.com/azure/governance/policy/tutorials/create-and-manage)
+- [Erstellen und Verwalten von Richtlinien zur Konformitätserzwingung](/azure/governance/policy/tutorials/create-and-manage)
 
-- [Schnellstart: Ausführen Ihrer ersten Resource Graph-Abfrage mithilfe des Azure Resource Graph-Explorers](https://docs.microsoft.com/azure/governance/resource-graph/first-query-portal)
+- [Schnellstart: Ausführen Ihrer ersten Resource Graph-Abfrage mithilfe des Azure Resource Graph-Explorers](/azure/governance/resource-graph/first-query-portal)
 
-- [Erstellen, Anzeigen und Verwalten von Aktivitätsprotokollwarnungen mit Azure Monitor](https://docs.microsoft.com/azure/azure-monitor/platform/alerts-activity-log)
+- [Erstellen, Anzeigen und Verwalten von Aktivitätsprotokollwarnungen mit Azure Monitor](/azure/azure-monitor/platform/alerts-activity-log)
 
 **Azure Security Center-Überwachung:** Nicht zutreffend
 
@@ -512,9 +510,9 @@ Darüber hinaus können Sie Azure Resource Graph verwenden, um Ressourcen in den
 
 Weitere Informationen finden Sie in den folgenden Referenzen:
 
-- [Erstellen und Verwalten von Richtlinien zur Konformitätserzwingung](https://docs.microsoft.com/azure/governance/policy/tutorials/create-and-manage)
+- [Erstellen und Verwalten von Richtlinien zur Konformitätserzwingung](/azure/governance/policy/tutorials/create-and-manage)
 
-- [Azure Policy-Beispiele](https://docs.microsoft.com/azure/governance/policy/samples/built-in-policies#general)
+- [Azure Policy-Beispiele](/azure/governance/policy/samples/built-in-policies#general)
 
 **Azure Security Center-Überwachung:** Nicht zutreffend
 
@@ -524,7 +522,7 @@ Weitere Informationen finden Sie in den folgenden Referenzen:
 
 **Leitfaden**: Verwenden Sie den bedingten Azure-Zugriff, um die Möglichkeiten der Benutzer zur Interaktion mit Azure Resource Manager einzuschränken, indem Sie „Zugriff blockieren“ für die App zur Verwaltung von Microsoft Azure konfigurieren. Dadurch wird das Erstellen und Ändern von Ressourcen innerhalb Ihrer Azure-Abonnements verhindert. 
 
-- [Verwalten des Zugriffs auf die Azure-Verwaltung mit bedingtem Zugriff](https://docs.microsoft.com/azure/role-based-access-control/conditional-access-azure-management)
+- [Verwalten des Zugriffs auf die Azure-Verwaltung mit bedingtem Zugriff](/azure/role-based-access-control/conditional-access-azure-management)
 
 **Azure Security Center-Überwachung**: Ja
 
@@ -532,7 +530,7 @@ Weitere Informationen finden Sie in den folgenden Referenzen:
 
 ## <a name="secure-configuration"></a>Sichere Konfiguration
 
-*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Sichere Konfiguration](https://docs.microsoft.com/azure/security/benchmarks/security-control-secure-configuration).*
+*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Sichere Konfiguration](/azure/security/benchmarks/security-control-secure-configuration).*
 
 ### <a name="71-establish-secure-configurations-for-all-azure-resources"></a>7.1: Einrichten sicherer Konfigurationen für alle Azure-Ressourcen
 
@@ -542,13 +540,13 @@ Außerdem hat Azure Resource Manager die Möglichkeit, die Vorlage in JSON-Code 
 
 Sie können auch Empfehlungen von Azure Security Center als sichere Konfigurationsbaseline für Ihre Azure-Ressourcen verwenden.
 
-- [Anzeigen verfügbarer Azure Policy-Aliase](https://docs.microsoft.com/powershell/module/az.resources/get-azpolicyalias?view=azps-4.8.0&amp;preserve-view=true)
+- [Anzeigen verfügbarer Azure Policy-Aliase](/powershell/module/az.resources/get-azpolicyalias?preserve-view=true&view=azps-4.8.0)
 
-- [Tutorial: Erstellen und Verwalten von Richtlinien zur Konformitätserzwingung](https://docs.microsoft.com/azure/governance/policy/tutorials/create-and-manage)
+- [Tutorial: Erstellen und Verwalten von Richtlinien zur Konformitätserzwingung](/azure/governance/policy/tutorials/create-and-manage)
 
-- [Exportieren von einzelnen oder mehreren Ressourcen in eine Vorlage im Azure-Portal](https://docs.microsoft.com/azure/azure-resource-manager/templates/export-template-portal)
+- [Exportieren von einzelnen oder mehreren Ressourcen in eine Vorlage im Azure-Portal](/azure/azure-resource-manager/templates/export-template-portal)
 
-- [Sicherheitsempfehlungen: Referenzhandbuch](https://docs.microsoft.com/azure/security-center/recommendations-reference)
+- [Sicherheitsempfehlungen: Referenzhandbuch](/azure/security-center/recommendations-reference)
 
 **Azure Security Center-Überwachung**: Nicht zutreffend
 
@@ -558,13 +556,13 @@ Sie können auch Empfehlungen von Azure Security Center als sichere Konfiguratio
 
 **Leitfaden**: Verwenden Sie die Azure-Richtlinien [Verweigern] und [Bereitstellen, falls nicht vorhanden], um sichere Einstellungen in den Azure-Ressourcen zu erzwingen.  Sie können Lösungen wie Änderungsnachverfolgung, das Dashboard für die Richtlinienkompatibilität oder eine benutzerdefinierte Lösung verwenden, um Sicherheitsänderungen in Ihrer Umgebung leicht zu erkennen.
 
-- [Grundlegendes zu Azure Policy-Auswirkungen](https://docs.microsoft.com/azure/governance/policy/concepts/effects)
+- [Grundlegendes zu Azure Policy-Auswirkungen](/azure/governance/policy/concepts/effects)
 
-- [Erstellen und Verwalten von Richtlinien zur Konformitätserzwingung](https://docs.microsoft.com/azure/governance/policy/tutorials/create-and-manage)
+- [Erstellen und Verwalten von Richtlinien zur Konformitätserzwingung](/azure/governance/policy/tutorials/create-and-manage)
 
-- [Nachverfolgen von Änderungen in Ihrer Umgebung mit der Änderungsnachverfolgung](https://docs.microsoft.com/azure/automation/change-tracking)
+- [Nachverfolgen von Änderungen in Ihrer Umgebung mit der Änderungsnachverfolgung](/azure/automation/change-tracking)
 
-- [Abrufen von Compliancedaten von Azure-Ressourcen](https://docs.microsoft.com/azure/governance/policy/how-to/get-compliance-data)
+- [Abrufen von Compliancedaten von Azure-Ressourcen](/azure/governance/policy/how-to/get-compliance-data)
 
 **Azure Security Center-Überwachung:** Nicht zutreffend
 
@@ -574,9 +572,9 @@ Sie können auch Empfehlungen von Azure Security Center als sichere Konfiguratio
 
 **Leitfaden**: Verwenden Sie Azure Repos, um Ihren Code sicher zu speichern und wie benutzerdefinierte Azure-Richtlinien, Azure Resource Manager-Vorlagen, Desired State Configuration-Skripts usw. zu verwalten. Um auf die Ressourcen zuzugreifen, die Sie in Azure DevOps verwalten, können Sie bestimmten Benutzern, integrierten Sicherheitsgruppen oder in Azure Active Directory (Azure AD) definierte Gruppen (falls in Azure DevOps integriert) oder in Active Directory definierte Gruppen (falls in TFS integriert), Berechtigungen gewähren oder verweigern.
 
-- [Speichern von Code in Azure DevOps](https://docs.microsoft.com/azure/devops/repos/git/gitworkflow?view=azure-devops&amp;preserve-view=true)
+- [Speichern von Code in Azure DevOps](/azure/devops/repos/git/gitworkflow?preserve-view=true&view=azure-devops)
 
-- [Informationen über Berechtigungen und Gruppen in Azure DevOps](https://docs.microsoft.com/azure/devops/organizations/security/about-permissions)
+- [Informationen über Berechtigungen und Gruppen in Azure DevOps](/azure/devops/organizations/security/about-permissions)
 
 **Azure Security Center-Überwachung**: Nicht zutreffend
 
@@ -586,9 +584,9 @@ Sie können auch Empfehlungen von Azure Security Center als sichere Konfiguratio
 
 **Leitfaden**: Definieren und implementieren Sie Standardsicherheitskonfigurationen für Azure-Ressourcen mit Azure Policy. Verwenden Sie Azure Policy-Aliase, um benutzerdefinierte Richtlinien zur Überprüfung oder Durchsetzung der Netzwerkkonfiguration Ihrer Azure-Ressourcen zu erstellen. Sie können auch auf integrierte Richtliniendefinitionen zurückgreifen, die sich auf Ihre spezifischen Ressourcen beziehen.  Zusätzlich können Sie Azure Automation verwenden, um Konfigurationsänderungen bereitzustellen.
 
-- [Konfigurieren und Verwalten von Azure Policy](https://docs.microsoft.com/azure/governance/policy/tutorials/create-and-manage)
+- [Konfigurieren und Verwalten von Azure Policy](/azure/governance/policy/tutorials/create-and-manage)
 
-- [Aliase](https://docs.microsoft.com/azure/governance/policy/concepts/definition-structure#aliases)
+- [Aliase](/azure/governance/policy/concepts/definition-structure#aliases)
 
 **Azure Security Center-Überwachung:** Nicht zutreffend
 
@@ -598,7 +596,7 @@ Sie können auch Empfehlungen von Azure Security Center als sichere Konfiguratio
 
 **Leitfaden**: Verwenden Sie Azure Policy-Aliase, um benutzerdefinierte Richtlinien zum Überwachen oder Erzwingen von Systemkonfigurationen zu erstellen und Warnungen dazu zu erhalten. Verwenden Sie die Azure Policy-Einstellungen [audit] (überwachen), [deny] (verweigern) und [deploy if not existent] (bereitstellen, falls nicht vorhanden), um Konfigurationen für Ihre Azure-Ressourcen automatisch zu erzwingen.
 
-- [Konfigurieren und Verwalten von Azure Policy](https://docs.microsoft.com/azure/governance/policy/tutorials/create-and-manage)
+- [Konfigurieren und Verwalten von Azure Policy](/azure/governance/policy/tutorials/create-and-manage)
 
 **Azure Security Center-Überwachung**: Nicht zutreffend
 
@@ -608,9 +606,9 @@ Sie können auch Empfehlungen von Azure Security Center als sichere Konfiguratio
 
 **Leitfaden**: Verwenden Sie verwaltete Identitäten, um Azure-Dienste mit einer automatisch verwalteten Identität in Azure Active Directory (AAD) bereitzustellen. Mit verwalteten Identitäten können Sie die Authentifizierung bei jedem Dienst verwenden, der die Azure AD-Authentifizierung unterstützt, einschließlich Key Vault. Hierfür müssen keine Anmeldeinformationen im Code enthalten sein.
 
-- [Konfigurieren von verwalteten Identitäten](https://docs.microsoft.com/azure/active-directory/managed-identities-azure-resources/qs-configure-portal-windows-vm)
+- [Konfigurieren von verwalteten Identitäten](/azure/active-directory/managed-identities-azure-resources/qs-configure-portal-windows-vm)
 
-- [Konfigurieren von verwalteten Identitäten für Ihren Azure Data Explorer-Cluster](https://docs.microsoft.com/azure/data-explorer/managed-identities)
+- [Konfigurieren von verwalteten Identitäten für Ihren Azure Data Explorer-Cluster](./managed-identities.md)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -628,7 +626,7 @@ Sie können auch Empfehlungen von Azure Security Center als sichere Konfiguratio
 
 ## <a name="malware-defense"></a>Schutz vor Schadsoftware
 
-*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Schutz vor Schadsoftware](https://docs.microsoft.com/azure/security/benchmarks/security-control-malware-defense).*
+*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Schutz vor Schadsoftware](/azure/security/benchmarks/security-control-malware-defense).*
 
 ### <a name="82-pre-scan-files-to-be-uploaded-to-non-compute-azure-resources"></a>8.2: Vorabprüfen von in computefremde Azure-Ressourcen hochzuladenden Dateien
 
@@ -642,15 +640,15 @@ Führen Sie eine Vorabprüfung aller Inhalte durch, die in Azure-Ressourcen ohne
 
 ## <a name="data-recovery"></a>Datenwiederherstellung
 
-*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Datenwiederherstellung](https://docs.microsoft.com/azure/security/benchmarks/security-control-data-recovery).*
+*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Datenwiederherstellung](/azure/security/benchmarks/security-control-data-recovery).*
 
 ### <a name="91-ensure-regular-automated-back-ups"></a>9.1: Sicherstellen regelmäßiger automatisierter Sicherungen
 
 **Leitfaden**: Die Daten in Ihrem Microsoft Azure-Speicherkonto, die von Ihrem Azure Data Explorer-Cluster verwendet werden, werden stets repliziert, um Beständigkeit und Hochverfügbarkeit sicherzustellen. Azure Storage kopiert Ihre Daten so, dass sie vor geplanten und ungeplanten Ereignissen geschützt sind – von vorübergehend auftretenden Hardwarefehlern und Netzwerk- oder Stromausfällen bis zu schweren Naturkatastrophen usw. Sie können Ihre Daten wahlweise im selben Rechenzentrum, Rechenzentren in derselben Region und sogar übergreifend über geografisch getrennte Regionen replizieren.
 
-- [Grundlegendes zu Azure Storage-Redundanz und Vereinbarungen zum Servicelevel](https://docs.microsoft.com/azure/storage/common/storage-redundancy)
+- [Grundlegendes zu Azure Storage-Redundanz und Vereinbarungen zum Servicelevel](/azure/storage/common/storage-redundancy)
 
-- [Exportieren von Daten in den Speicher](https://docs.microsoft.com/azure/kusto/management/data-export/export-data-to-storage)
+- [Exportieren von Daten in den Speicher](/azure/kusto/management/data-export/export-data-to-storage)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -660,13 +658,13 @@ Führen Sie eine Vorabprüfung aller Inhalte durch, die in Azure-Ressourcen ohne
 
 **Leitfaden**: Azure Data Explorer verschlüsselt alle Daten in einem Speicherkonto für ruhende Daten. Standardmäßig werden Daten mit von Microsoft verwalteten Schlüsseln verschlüsselt. Um zusätzliche Kontrolle über die Verschlüsselungsschlüssel zu erhalten, können Sie kundenseitig verwaltete Schlüssel für die Datenverschlüsselung bereitstellen. Vom Kunden verwaltete Schlüssel müssen in Azure Key Vault gespeichert werden.
 
-- [Konfigurieren von kundenseitig verwalteten Schlüsseln über das Azure-Portal](https://docs.microsoft.com/azure/data-explorer/customer-managed-keys-portal)
+- [Konfigurieren von kundenseitig verwalteten Schlüsseln über das Azure-Portal](./customer-managed-keys-portal.md)
 
-- [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#](https://docs.microsoft.com/azure/data-explorer/customer-managed-keys-csharp)
+- [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#](./customer-managed-keys-csharp.md)
 
-- [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resource Manager-Vorlage](https://docs.microsoft.com/azure/data-explorer/customer-managed-keys-resource-manager)
+- [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resource Manager-Vorlage](./customer-managed-keys-resource-manager.md)
 
-- [Sichern von Azure Key Vault-Zertifikaten](https://docs.microsoft.com/powershell/module/az.keyvault/backup-azkeyvaultcertificate?view=azps-4.8.0&amp;preserve-view=true)
+- [Sichern von Azure Key Vault-Zertifikaten](/powershell/module/az.keyvault/backup-azkeyvaultcertificate?preserve-view=true&view=azps-4.8.0)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -676,11 +674,11 @@ Führen Sie eine Vorabprüfung aller Inhalte durch, die in Azure-Ressourcen ohne
 
 **Leitfaden**: Testen Sie regelmäßig die Datenwiederherstellung Ihrer Azure Key Vault-Geheimnisse.
 
-- [Wiederherstellen von Azure Key Vault-Zertifikaten](https://docs.microsoft.com/powershell/module/az.keyvault/restore-azkeyvaultcertificate?view=azps-4.8.0&amp;preserve-view=true)
+- [Wiederherstellen von Azure Key Vault-Zertifikaten](/powershell/module/az.keyvault/restore-azkeyvaultcertificate?preserve-view=true&view=azps-4.8.0)
 
-- [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#](https://docs.microsoft.com/azure/data-explorer/customer-managed-keys-csharp)
+- [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#](./customer-managed-keys-csharp.md)
 
-- [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resource Manager-Vorlage](https://docs.microsoft.com/azure/data-explorer/customer-managed-keys-resource-manager)
+- [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resource Manager-Vorlage](./customer-managed-keys-resource-manager.md)
 
 **Azure Security Center-Überwachung:** Nicht zutreffend
 
@@ -690,11 +688,11 @@ Führen Sie eine Vorabprüfung aller Inhalte durch, die in Azure-Ressourcen ohne
 
 **Leitfaden**: Kunden können vorläufiges Löschen in Key Vault aktivieren, um Schlüssel vor dem versehentlichen oder böswilligen Löschen zu schützen.  Sie können auch den Bereinigungsschutz aktivieren, sodass ein Schlüsseltresor oder ein Objekt im gelöschten Zustand erst nach Ablauf des Aufbewahrungszeitraums endgültig gelöscht werden kann.  
 
-- [Aktivieren des vorläufigen Löschens und des Löschschutzes in Key Vault](https://docs.microsoft.com/azure/key-vault/key-vault-ovw-soft-delete)
+- [Aktivieren des vorläufigen Löschens und des Löschschutzes in Key Vault](/azure/key-vault/key-vault-ovw-soft-delete)
 
-- [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#](https://docs.microsoft.com/azure/data-explorer/customer-managed-keys-csharp)
+- [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#](./customer-managed-keys-csharp.md)
 
-- [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resource Manager-Vorlage](https://docs.microsoft.com/azure/data-explorer/customer-managed-keys-resource-manager)
+- [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resource Manager-Vorlage](./customer-managed-keys-resource-manager.md)
 
 **Azure Security Center-Überwachung**: Ja
 
@@ -702,7 +700,7 @@ Führen Sie eine Vorabprüfung aller Inhalte durch, die in Azure-Ressourcen ohne
 
 ## <a name="incident-response"></a>Reaktion auf Vorfälle
 
-*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Reaktion auf Vorfälle](https://docs.microsoft.com/azure/security/benchmarks/security-control-incident-response).*
+*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Reaktion auf Vorfälle](/azure/security/benchmarks/security-control-incident-response).*
 
 ### <a name="101-create-an-incident-response-guide"></a>10.1: Erstellen eines Leitfadens für die Reaktion auf Vorfälle
 
@@ -729,9 +727,9 @@ Führen Sie eine Vorabprüfung aller Inhalte durch, die in Azure-Ressourcen ohne
 
 Kennzeichnen Sie außerdem die Abonnements (z. B. Produktion, Nicht-Produktion) mithilfe von Tags, und erstellen Sie ein Namenssystem, um Azure-Ressourcen eindeutig zu identifizieren und zu kategorisieren, insbesondere solche, die vertrauliche Daten verarbeiten.  Die Priorisierung der Behebung von Warnungen basierend auf der Wichtigkeit der Azure-Ressourcen und der Umgebung, in der der Vorfall aufgetreten ist, liegt in Ihrer Verantwortung.
 
-- [Sicherheitswarnungen in Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-alerts-overview)
+- [Sicherheitswarnungen in Azure Security Center](/azure/security-center/security-center-alerts-overview)
 
-- [Verwenden von Tags zum Organisieren von Azure-Ressourcen](https://docs.microsoft.com/azure/azure-resource-manager/resource-group-using-tags)
+- [Verwenden von Tags zum Organisieren von Azure-Ressourcen](/azure/azure-resource-manager/resource-group-using-tags)
 
 **Azure Security Center-Überwachung**: Ja
 
@@ -753,7 +751,7 @@ Kennzeichnen Sie außerdem die Abonnements (z. B. Produktion, Nicht-Produktion)
 **Leitfaden**: Microsoft kontaktiert Sie unter den für Sicherheitsvorfälle angegebenen Kontaktdaten, wenn das Microsoft Security Response Center (MSRC) feststellt, dass Personen unrechtmäßig oder unbefugt auf Ihre Daten zugegriffen haben. Überprüfen Sie die Vorfälle anschließend, um sicherzustellen, dass die Probleme behoben wurden.
     
 
-- [Festlegen der Kontaktinformationen in Azure Security Center](https://docs.microsoft.com/azure/security-center/security-center-provide-security-contact-details)
+- [Festlegen der Kontaktinformationen in Azure Security Center](/azure/security-center/security-center-provide-security-contact-details)
 
 **Azure Security Center-Überwachung**: Ja
 
@@ -764,11 +762,11 @@ Kennzeichnen Sie außerdem die Abonnements (z. B. Produktion, Nicht-Produktion)
 **Leitfaden**: Exportieren Sie die Azure Security Center-Warnungen und -Empfehlungen über die Funktion „Fortlaufender Export“, um Risiken für Azure-Ressourcen zu ermitteln. Über „Fortlaufender Export“ können Sie Warnungen und Empfehlungen entweder manuell oder kontinuierlich exportieren. Sie können den Azure Security Center-Datenconnector verwenden, um die Warnungen an Azure Sentinel zu streamen.
     
 
-- [Konfigurieren des fortlaufenden Exports](https://docs.microsoft.com/azure/security-center/continuous-export)
+- [Konfigurieren des fortlaufenden Exports](/azure/security-center/continuous-export)
 
     
 
-- [Streamen von Warnungen in Azure Sentinel](https://docs.microsoft.com/azure/sentinel/connect-azure-security-center)
+- [Streamen von Warnungen in Azure Sentinel](/azure/sentinel/connect-azure-security-center)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -779,7 +777,7 @@ Kennzeichnen Sie außerdem die Abonnements (z. B. Produktion, Nicht-Produktion)
 **Leitfaden**: Verwenden Sie die Funktion „Workflowautomatisierung“ in Azure Security Center, um über Logic Apps automatisch Reaktionen auf Sicherheitswarnungen und -empfehlungen auszulösen und dadurch Ihre Azure-Ressourcen noch besser zu schützen.
     
 
-- [ Konfigurieren von Workflowautomatisierung und Logic Apps](https://docs.microsoft.com/azure/security-center/workflow-automation)
+- [ Konfigurieren von Workflowautomatisierung und Logic Apps](/azure/security-center/workflow-automation)
 
 **Azure Security Center-Überwachung**: Zurzeit nicht verfügbar
 
@@ -787,7 +785,7 @@ Kennzeichnen Sie außerdem die Abonnements (z. B. Produktion, Nicht-Produktion)
 
 ## <a name="penetration-tests-and-red-team-exercises"></a>Penetrationstests und Red Team-Übungen
 
-*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Penetrationstests und Red Team-Übungen](https://docs.microsoft.com/azure/security/benchmarks/security-control-penetration-tests-red-team-exercises).*
+*Weitere Informationen finden Sie unter [Azure-Sicherheitsvergleichstest: Penetrationstests und Red Team-Übungen](/azure/security/benchmarks/security-control-penetration-tests-red-team-exercises).*
 
 ### <a name="111-conduct-regular-penetration-testing-of-your-azure-resources-and-ensure-remediation-of-all-critical-security-findings"></a>11.1: Durchführen regelmäßiger Penetrationstests Ihrer Azure-Ressourcen und Sicherstellen der Behebung aller kritischen Sicherheitsergebnissen
 

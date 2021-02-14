@@ -8,12 +8,12 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: b76321fd843efe915a6fd55797bd2dc68059b004
-ms.sourcegitcommit: 8ac4717dbff679991b122b09a0c1ed700562a736
+ms.openlocfilehash: 448f6a75223fe4415bae00d145db199aac6f08f1
+ms.sourcegitcommit: c11e3871d600ecaa2824ad78bce9c8fc5226eef9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/15/2020
-ms.locfileid: "97488575"
+ms.lasthandoff: 02/04/2021
+ms.locfileid: "99554643"
 ---
 # <a name="iot-hub-data-connection"></a>IoT Hub-Datenverbindung
 
@@ -25,7 +25,7 @@ Allgemeine Informationen zur Datenerfassung in Azure Data Explorer finden Sie un
 
 ## <a name="data-format"></a>Datenformat
 
-* Daten werden in Form von [EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata?view=azure-dotnet)-Objekten aus dem Event Hub-Endpunkt gelesen.
+* Daten werden in Form von [EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata)-Objekten aus dem Event Hub-Endpunkt gelesen.
 * Siehe [Unterstützte Formate](ingestion-supported-formats.md).
     > [!NOTE]
     > Das RAW-Format wird von IoT Hub nicht unterstützt.
@@ -34,14 +34,14 @@ Allgemeine Informationen zur Datenerfassung in Azure Data Explorer finden Sie un
 
 ## <a name="ingestion-properties"></a>Erfassungseigenschaften
 
-Erfassungseigenschaften weisen den Erfassungsprozess an, wohin die Daten weitergeleitet und wie sie verarbeitet werden sollen. Sie können [Erfassungseigenschaften](ingestion-properties.md) der Ereignisse mithilfe von [EventData.Properties](/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties) angeben. Sie können die folgenden Eigenschaften festlegen:
+Erfassungseigenschaften weisen den Erfassungsprozess an, wohin die Daten weitergeleitet und wie sie verarbeitet werden sollen. Sie können [Erfassungseigenschaften](ingestion-properties.md) der Ereignisse mithilfe von [EventData.Properties](/dotnet/api/microsoft.servicebus.messaging.eventdata.properties#Microsoft_ServiceBus_Messaging_EventData_Properties) angeben. Sie können die folgenden Eigenschaften festlegen:
 
 |Eigenschaft |Beschreibung|
 |---|---|
 | Tabelle | Name (unter Berücksichtigung der Groß/Kleinschreibung) der vorhandenen Zieltabelle. Überschreibt das `Table`-Element, das im Bereich `Data Connection` festgelegt ist. |
 | Format | Datenformat. Überschreibt das `Data format`-Element, das im Bereich `Data Connection` festgelegt ist. |
 | IngestionMappingReference | Name der zu verwendenden vorhandenen [Erfassungszuordnung](kusto/management/create-ingestion-mapping-command.md). Überschreibt das `Column mapping`-Element, das im Bereich `Data Connection` festgelegt ist.|
-| Codierung |  Datencodierung. Die Standardeinstellung ist UTF8. Alle [von .NET unterstützten Codierungen](/dotnet/api/system.text.encoding?view=netframework-4.8#remarks) können verwendet werden. |
+| Codierung |  Datencodierung. Die Standardeinstellung ist UTF8. Alle [von .NET unterstützten Codierungen](/dotnet/api/system.text.encoding#remarks) können verwendet werden. |
 
 > [!NOTE]
 > Nur Ereignisse, die nach dem Erstellen der Datenverbindung in die Warteschlange eingereiht werden, werden erfasst.
@@ -49,7 +49,7 @@ Erfassungseigenschaften weisen den Erfassungsprozess an, wohin die Daten weiterg
 ## <a name="events-routing"></a>Ereignisrouting
 
 Beim Einrichten einer IoT Hub-Verbindung mit einem Azure Data Explorer-Cluster geben Sie die Zieltabelleneigenschaften an (Tabellenname, Datenformat und Zuordnung). Diese Einstellung ist das Standardrouting für Ihre Daten, das auch als statisches Routing bezeichnet wird.
-Sie können mithilfe von Ereigniseigenschaften auch Zieltabelleneigenschaften für jedes Ereignis angeben. Die Verbindung leitet die Daten wie in [EventData.Properties](/dotnet/api/microsoft.servicebus.messaging.eventdata.properties?view=azure-dotnet#Microsoft_ServiceBus_Messaging_EventData_Properties) festgelegt dynamisch weiter und setzt dabei die statischen Eigenschaften für dieses Ereignis außer Kraft.
+Sie können mithilfe von Ereigniseigenschaften auch Zieltabelleneigenschaften für jedes Ereignis angeben. Die Verbindung leitet die Daten wie in [EventData.Properties](/dotnet/api/microsoft.servicebus.messaging.eventdata.properties#Microsoft_ServiceBus_Messaging_EventData_Properties) festgelegt dynamisch weiter und setzt dabei die statischen Eigenschaften für dieses Ereignis außer Kraft.
 
 > [!Note]
 > Wenn Sie **Meine Daten enthalten Routinginformationen** auswählen, müssen Sie die erforderlichen Routinginformationen in den Ereigniseigenschaften angeben.

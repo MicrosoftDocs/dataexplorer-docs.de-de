@@ -7,12 +7,12 @@ ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/06/2020
-ms.openlocfilehash: db20566a9aa9b5c720ea9f72ec9c980042db0625
-ms.sourcegitcommit: 3d9b4c3c0a2d44834ce4de3c2ae8eb5aa929c40f
+ms.openlocfilehash: 7f9256f62b03ac63bdae49afbec236b3a05c67e5
+ms.sourcegitcommit: 8c0674d2bc3c2e10eace5314c30adc7c9e4b3d44
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/13/2020
-ms.locfileid: "92003005"
+ms.lasthandoff: 01/19/2021
+ms.locfileid: "98571760"
 ---
 # <a name="configure-customer-managed-keys-using-c"></a>Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe von C#
 
@@ -72,9 +72,10 @@ Die Azure Data Explorer-Verschlüsselung verwendet standardmäßig von Microsoft
     var resourceGroupName = "testrg";
     var clusterName = "mykustocluster";
     var keyName = "myKey";
-    var keyVersion = "5b52b20e8d8a42e6bd7527211ae32654";
+    var keyVersion = "5b52b20e8d8a42e6bd7527211ae32654"; // Optional, leave as NULL for the latest version of the key.
     var keyVaultUri = "https://mykeyvault.vault.azure.net/";
-    var keyVaultProperties = new KeyVaultProperties (keyName, keyVersion, keyVaultUri);
+    var keyVaultIdentity = "/subscriptions/xxxxxxxx-xxxxx-xxxx-xxxx-xxxxxxxxx/resourcegroups/identityResourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityName"; // Use NULL if you want to use system assigned identity.
+    var keyVaultProperties = new KeyVaultProperties(keyName, keyVaultUri, keyVersion, keyVaultIdentity);
     var clusterUpdate = new ClusterUpdate(keyVaultProperties: keyVaultProperties);
     await kustoManagementClient.Clusters.UpdateAsync(resourceGroupName, clusterName, clusterUpdate);
     ```
@@ -97,5 +98,3 @@ Wenn Sie eine neue Version eines Schlüssels erstellen, müssen Sie den Cluster 
 * [Konfigurieren von verwalteten Identitäten für Ihren Azure Data Explorer-Cluster](managed-identities.md)
 * [Sichern Ihres Clusters in Azure Data Explorer mithilfe von Disk Encryption (Azure-Portal)](cluster-disk-encryption.md) durch Aktivieren der Verschlüsselung ruhender Daten
 * [Konfigurieren von kundenseitig verwalteten Schlüsseln mithilfe der Azure Resource Manager-Vorlage](customer-managed-keys-resource-manager.md)
-
-

@@ -7,12 +7,12 @@ ms.reviewer: maraheja
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/20/2020
-ms.openlocfilehash: 857c654c70a2170a42902514718a52fbf7b02944
-ms.sourcegitcommit: 455d902bad0aae3e3d72269798c754f51442270e
+ms.openlocfilehash: 2d3f81b897f264d9f804f545a2155958606dfc79
+ms.sourcegitcommit: 2b0156fc244757e62aaef5d4782c4abebaf09754
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/04/2020
-ms.locfileid: "93349459"
+ms.lasthandoff: 02/08/2021
+ms.locfileid: "99808657"
 ---
 # <a name="use-a-jupyter-notebook-and-kqlmagic-extension-to-analyze-data-in-azure-data-explorer"></a>Verwenden einer Jupyter Notebook-Instanz und der kqlmagic-Erweiterung zum Analysieren von Daten in Azure Data Explorer
 
@@ -22,7 +22,7 @@ Jupyter Notebook ist eine Open Source-Webanwendung, mit der Sie Dokumente erstel
 ## <a name="prerequisites"></a>Voraussetzungen
 
 - Ein Organisations-E-Mail-Konto, das Mitglied von Azure Active Directory (Azure AD) ist
-- Installation von Jupyter Notebook auf dem lokalen Computer oder Verwendung von [Azure Data Studio](/sql/azure-data-studio/notebooks/notebooks-kqlmagic?view=sql-server-ver15)
+- Installation von Jupyter Notebook auf dem lokalen Computer oder Verwendung von [Azure Data Studio](/sql/azure-data-studio/notebooks/notebooks-kqlmagic)
 
 ## <a name="install-kqlmagic-library"></a>Installieren der kqlmagic-Bibliothek
 
@@ -50,7 +50,7 @@ Verwenden Sie den folgenden Befehl, um eine Verbindung mit der Datenbank *Sample
 
 > [!Note]
 > Wenn Sie Ihren eigenen ADX-Cluster verwenden, müssen Sie die Region wie folgt in die Verbindungszeichenfolge aufnehmen:   
-   ```%kql azuredataexplorer://tenant="youecompany.com";code;cluster='mycluster.westus';database='mykustodb'```
+   ```%kql azuredataexplorer://tenant="yourcompany.com";code;cluster='mycluster.westus';database='mykustodb'```
 
 ## <a name="query-and-visualize"></a>Abfragen und Visualisieren
 

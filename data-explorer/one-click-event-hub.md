@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 11/10/2020
-ms.openlocfilehash: 6f7b33941ca38f80249808d14514faa2378c61fb
-ms.sourcegitcommit: 574296b9a84084de031684a65f32b6c1bd1a4858
+ms.openlocfilehash: 983b9c59e6130c58d04e1d4f1a7042a3aa73bba7
+ms.sourcegitcommit: c11e3871d600ecaa2824ad78bce9c8fc5226eef9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94714975"
+ms.lasthandoff: 02/04/2021
+ms.locfileid: "99554935"
 ---
 # <a name="use-one-click-ingestion-to-create-an-event-hub-data-connection-for-azure-data-explorer"></a>Erstellen einer Event Hub-Datenverbindung für Azure Data Explorer mithilfe der 1-Klick-Erfassung
 
@@ -63,7 +63,7 @@ Das Fenster **Neue Daten erfassen** wird mit der Registerkarte **Quelle** geöff
     | Event Hub-Namespace |  | Der Name, der Ihren Namespace bezeichnet |
     | Event Hub |  | Der zu verwendende Event Hub |
     | Consumergruppe |  | Die in Ihrem Event Hub definierte Consumergruppe |
-    | Datenformat | | Daten werden in Form von [EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata?view=azure-dotnet)-Objekten aus dem Event Hub gelesen. Die folgenden Formate werden unterstützt: CSV, JSON, PSV, SCsv, SOHsv TSV und TSVE. |
+    | Datenformat | | Daten werden in Form von [EventData](/dotnet/api/microsoft.servicebus.messaging.eventdata)-Objekten aus dem Event Hub gelesen. Die folgenden Formate werden unterstützt: CSV, JSON, PSV, SCsv, SOHsv TSV und TSVE. |
     | Ereignissystemeigenschaften | Auswählen relevanter Eigenschaften | Die [Event Hub-Systemeigenschaften](/azure/service-bus-messaging/service-bus-amqp-protocol-guide#message-annotations). Wenn pro Ereignisnachricht mehrere Datensätze vorhanden sind, werden die Systemeigenschaften dem ersten Datensatz hinzugefügt. Beim Hinzufügen von Systemeigenschaften [erstellen](kusto/management/create-table-command.md) oder [aktualisieren](kusto/management/alter-table-command.md) Sie das Tabellenschema und die [Zuordnung](kusto/management/mappings.md), um die ausgewählten Eigenschaften einzubeziehen. |
 
 1. Wählen Sie **Schema bearbeiten** aus.

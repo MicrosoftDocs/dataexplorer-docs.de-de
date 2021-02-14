@@ -8,19 +8,19 @@ ms.reviewer: jasonh
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 05/05/2019
-ms.openlocfilehash: 14ba0226efc5f38ef3d549f38b2a6224da7c201e
-ms.sourcegitcommit: 80f0c8b410fa4ba5ccecd96ae3803ce25db4a442
+ms.openlocfilehash: e64d348387e18d9421632d3ebf6a4772fcf2d82a
+ms.sourcegitcommit: c11e3871d600ecaa2824ad78bce9c8fc5226eef9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96320722"
+ms.lasthandoff: 02/04/2021
+ms.locfileid: "99554912"
 ---
 # <a name="azure-devops-task-for-azure-data-explorer"></a>Azure DevOps-Aufgabe für Azure Data Explorer
 
 [Azure DevOps Services](https://azure.microsoft.com/services/devops/) bietet Tools für die Entwicklungszusammenarbeit wie leistungsstarke Pipelines, kostenlose private Git-Repositorys, konfigurierbare Kanban-Boards und umfangreiche automatisierte und kontinuierliche Testfunktionen. [Azure Pipelines](https://azure.microsoft.com/services/devops/pipelines/) ist eine Azure DevOps-Funktion, die es Ihnen ermöglicht, CI/CD zu verwalten, um Ihren Code mit leistungsstarken Pipelines bereitzustellen, die mit jeder Sprache, Plattform und Cloud funktionieren.
 [Azure Data Explorer - Admin Commands](https://marketplace.visualstudio.com/items?itemName=Azure-Kusto.PublishToADX) ist die Azure Pipelines-Aufgabe, mit der Sie Releasepipelines erstellen und Ihre Datenbankänderungen in Ihren Azure Data Explorer-Datenbanken bereitstellen können. Diese finden Sie kostenlos im [Visual Studio Marketplace](https://marketplace.visualstudio.com/).
 
-Dieses Dokument beschreibt ein einfaches Beispiel für die Verwendung der Aufgabe **Azure Data Explorer – Admin Commands** zum Bereitstellen Ihrer Schemaänderungen in Ihrer Datenbank. Vollständige CI/CD-Pipelines finden Sie unter [Azure DevOps-Dokumentation](/azure/devops/user-guide/what-is-azure-devops?view=azure-devops#vsts).
+Dieses Dokument beschreibt ein einfaches Beispiel für die Verwendung der Aufgabe **Azure Data Explorer – Admin Commands** zum Bereitstellen Ihrer Schemaänderungen in Ihrer Datenbank. Vollständige CI/CD-Pipelines finden Sie unter [Azure DevOps-Dokumentation](/azure/devops/user-guide/what-is-azure-devops#vsts).
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -30,10 +30,10 @@ Dieses Dokument beschreibt ein einfaches Beispiel für die Verwendung der Aufgab
     * Erstellen Sie eine Azure Active Directory (Azure AD)-App mit [Bereitstellung einer Azure AD-Anwendung](./provision-azure-ad-app.md).
     * Gewährleisten Sie den Zugriff auf Ihre Azure AD-App in Ihrer Azure Data Explorer-Datenbank, indem Sie [die Berechtigungen der Azure Data Explorer-Datenbank verwalten](manage-database-permissions.md).
 * Azure DevOps-Setup:
-    * [Für eine kostenlose Organisation registrieren](/azure/devops/user-guide/sign-up-invite-teammates?view=azure-devops)
-    * [Eine Organisation erstellen](/azure/devops/organizations/accounts/create-organization?view=azure-devops)
-    * [Erstellen eines Projekts in Azure DevOps](/azure/devops/organizations/projects/create-project?view=azure-devops)
-    * [Mit Git codieren](/azure/devops/user-guide/code-with-git?view=azure-devops)
+    * [Für eine kostenlose Organisation registrieren](/azure/devops/user-guide/sign-up-invite-teammates)
+    * [Eine Organisation erstellen](/azure/devops/organizations/accounts/create-organization)
+    * [Erstellen eines Projekts in Azure DevOps](/azure/devops/organizations/projects/create-project)
+    * [Mit Git codieren](/azure/devops/user-guide/code-with-git)
 
 ## <a name="create-folders"></a>Erstellen Sie die Ordner.
 
