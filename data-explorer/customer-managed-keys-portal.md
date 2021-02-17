@@ -7,12 +7,12 @@ ms.reviewer: itsagui
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/26/2020
-ms.openlocfilehash: 0f77782b5174683d091685064afa7debff7ae777
-ms.sourcegitcommit: 202357f866801aafd92e3e29a84bb312e17aebc7
+ms.openlocfilehash: dc94b3712b51336b8ef069329a2f1aa48aae0bb2
+ms.sourcegitcommit: ab318bcb8f40c9d10395d1dc3e0cf7a1be1a549f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/09/2020
-ms.locfileid: "96933906"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98625564"
 ---
 # <a name="configure-customer-managed-keys-using-the-azure-portal"></a>Konfigurieren von kundenseitig verwalteten Schlüsseln über das Azure-Portal
 
@@ -39,7 +39,9 @@ In diesem Artikel erfahren Sie, wie Sie die Verschlüsselung mit vom Kunden verw
 1. Wählen Sie im Fenster **Schlüssel aus Azure Key Vault auswählen** einen vorhandenen **Schlüsseltresor** aus der Dropdownliste aus. Wenn Sie **Neu erstellen** auswählen, um einen [neuen Schlüsseltresor zu erstellen](/azure/key-vault/quick-create-portal#create-a-vault), werden Sie zum Bildschirm **Schlüsseltresor erstellen** weitergeleitet.
 
 1. Wählen Sie **Schlüssel** aus.
-1. Wählen Sie **Version** aus.
+1. Version:
+    * Um sicherzustellen, dass für diesen Schlüssel immer die aktuelle Schlüsselversion verwendet wird, aktivieren Sie das Kontrollkästchen **Always use current key version** (Immer aktuelle Schlüsselversion verwenden).
+    * Wählen Sie andernfalls **Version** aus.
 1. Klicken Sie auf **Auswählen**.
 
     :::image type="content" source="media/customer-managed-keys-portal/customer-managed-key-key-vault.png" alt-text="Auswählen des Schlüssels aus Azure Key Vault":::

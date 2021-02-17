@@ -7,12 +7,12 @@ ms.reviewer: lugoldbe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/07/2019
-ms.openlocfilehash: 824556388c2f3f70f006ab372e06967c42117f06
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 3c79d95575e88e7f4d3969ad0cf521703db536e9
+ms.sourcegitcommit: c11e3871d600ecaa2824ad78bce9c8fc5226eef9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92343061"
+ms.lasthandoff: 02/04/2021
+ms.locfileid: "99554705"
 ---
 # <a name="create-an-event-grid-data-connection-for-azure-data-explorer-by-using-c"></a>Erstellen einer Event Grid-Datenverbindung für Azure Data Explorer mit C#
 
@@ -28,7 +28,7 @@ ms.locfileid: "92343061"
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
-* Falls Sie Visual Studio 2019 nicht installiert haben, können Sie die **kostenlose** [Visual Studio 2019 Community-Edition](https://www.visualstudio.com/downloads/) herunterladen und verwenden. Aktivieren Sie beim Setup von Visual Studio die Option **Azure-Entwicklung** .
+* Falls Sie Visual Studio 2019 nicht installiert haben, können Sie die **kostenlose** [Visual Studio 2019 Community-Edition](https://www.visualstudio.com/downloads/) herunterladen und verwenden. Aktivieren Sie beim Setup von Visual Studio die Option **Azure-Entwicklung**.
 * Wenn Sie über kein Azure-Abonnement verfügen, können Sie ein [kostenloses Azure-Konto](https://azure.microsoft.com/free/) erstellen, bevor Sie beginnen.
 * Erstellen eines [Clusters und einer Datenbank](create-cluster-database-csharp.md)
 * Erstellen einer [Tabelle und Spaltenzuordnung](./net-sdk-ingest-data.md#create-a-table-on-your-test-cluster)
@@ -73,9 +73,10 @@ var location = "Central US";
 var tableName = "StormEvents";
 var mappingRuleName = "StormEvents_CSV_Mapping";
 var dataFormat = DataFormat.CSV;
+var blobStorageEventType = "Microsoft.Storage.BlobCreated";
 
 await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupName, clusterName, databaseName, dataConnectionName,
-    new EventGridDataConnection(storageAccountResourceId, eventHubResourceId, consumerGroup, tableName: tableName, location: location, mappingRuleName: mappingRuleName, dataFormat: dataFormat));
+    new EventGridDataConnection(storageAccountResourceId, eventHubResourceId, consumerGroup, tableName: tableName, location: location, mappingRuleName: mappingRuleName, dataFormat: dataFormat, blobStorageEventType: blobStorageEventType));
 ```
 
 |**Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**|
@@ -95,6 +96,7 @@ await kustoManagementClient.DataConnections.CreateOrUpdateAsync(resourceGroupNam
 | storageAccountResourceId | *Ressourcen-ID* | Die Ressourcen-ID Ihres Speicherkontos, das die Daten für die Erfassung enthält. |
 | consumerGroup | *$Default* | Die Consumergruppe Ihres Event Hubs.|
 | location | *USA, Mitte* | Der Speicherort der Datenverbindungsressource.|
+| blobStorageEventType | *Microsoft.Storage.BlobCreated* | Der Typ des Ereignisses, das die Erfassung auslöst Folgende Ereignisse werden unterstützt: „Microsoft.Storage.BlobCreated“ oder „Microsoft.Storage.BlobRenamed“. Das Umbenennen von Blobs wird nur für ADLSv2-Speicher unterstützt.|
 
 ## <a name="generate-sample-data"></a>Generieren von Beispieldaten
 
@@ -134,7 +136,7 @@ var blobs = container.ListBlobs();
 
 ### <a name="upload-file-using-azure-data-lake-sdk"></a>Hochladen einer Datei mit dem Azure Data Lake SDK
 
-Wenn Sie mit Data Lake Storage Gen2 arbeiten, können Sie das [Azure Data Lake SDK](https://www.nuget.org/packages/Azure.Storage.Files.DataLake/) verwenden, um Dateien in den Speicher hochzuladen. Mit dem folgenden Codeausschnitt wird ein neues Dateisystem in Ihrem Azure Data Lake-Speicher erstellt, und eine lokale Datei mit Metadaten wird in dieses Dateisystem hochgeladen.
+Wenn Sie mit Data Lake Storage Gen2 arbeiten, können Sie das [Azure Data Lake SDK](https://www.nuget.org/packages/Azure.Storage.Files.DataLake/) verwenden, um Dateien in den Speicher hochzuladen. Der folgende Codeausschnitt nutzt Azure.Storage.Files.DataLake v12.5.0, um ein neues Dateisystem in Azure Data Lake-Speicher zu erstellen und eine lokale Datei mit Metadaten in dieses Dateisystem hochzuladen.
 
 ```csharp
 var accountName = <storage_account_name>;
@@ -149,24 +151,54 @@ var sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey
 var dfsUri = "https://" + accountName + ".dfs.core.windows.net";
 var dataLakeServiceClient = new DataLakeServiceClient(new Uri(dfsUri), sharedKeyCredential);
 
-// Create the filesystem and an empty file
+// Create the filesystem
 var dataLakeFileSystemClient = dataLakeServiceClient.CreateFileSystem(fileSystemName).Value;
-var dataLakeFileClient = dataLakeFileSystemClient.CreateFile(fileName).Value;
 
-// Set metadata
+// Define metadata
 IDictionary<String, String> metadata = new Dictionary<string, string>();
 metadata.Add("rawSizeBytes", uncompressedSizeInBytes);
 metadata.Add("kustoIngestionMappingReference", mapping);
-dataLakeFileClient.SetMetadata(metadata);
 
-// Write to the file and close it
-var fileStream = File.OpenRead(localFileName);
-var fileSize = fileStream.Length;
-dataLakeFileClient.Append(fileStream, offset: 0);
-dataLakeFileClient.Flush(position: fileSize, close: true); // Note: This line triggers the event being processed by the data connection
+// Set uploading options
+var uploadOptions = new DataLakeFileUploadOptions
+{
+    Metadata = metadata,
+    Close = true // Note: The close option triggers the event being processed by the data connection
+};
+
+// Write to the file
+var dataLakeFileClient = dataLakeFileSystemClient.GetFileClient(fileName);
+dataLakeFileClient.Upload(localFileName, uploadOptions);
 ```
 
 > [!NOTE]
-> Wenn Sie das [Azure Data Lake SDK](https://www.nuget.org/packages/Azure.Storage.Files.DataLake/) zum Hochladen einer Datei verwenden, löst der erste Aufruf von [CreateFile](/dotnet/api/azure.storage.files.datalake.datalakefilesystemclient.createfile?view=azure-dotnet) ein Event Grid-Ereignis mit der Größe 0 aus, und dieses Ereignis wird von Azure Data Explorer ignoriert. Ein weiteres Ereignis wird ausgelöst, wenn „flush“ aufgerufen wird, wobei der Parameter „close“ auf „true“ festgelegt ist. Dieses Ereignis gibt an, dass dies das endgültige Update ist und der Dateistream geschlossen wurde. Dieses Ereignis wird von der Event Grid-Datenverbindung verarbeitet. Weitere Informationen zum Leeren finden Sie unter [Methode zum Leeren in Azure Data Lake](/dotnet/api/azure.storage.files.datalake.datalakefileclient.flush?view=azure-dotnet).
+> Wenn Sie das [Azure Data Lake SDK](https://www.nuget.org/packages/Azure.Storage.Files.DataLake/) zum Hochladen einer Datei verwenden, löst die Dateierstellung ein Event Grid-Ereignis mit der Größe 0 aus, und dieses Ereignis wird von Azure Data Explorer ignoriert. Durch den Dateileerungsvorgang wird ein anderes Ereignis ausgelöst, wenn der Parameter *Close* auf *true* festgelegt ist. Dieses Ereignis gibt an, dass dies das endgültige Update ist und der Dateistream geschlossen wurde. Dieses Ereignis wird von der Event Grid-Datenverbindung verarbeitet. Im obigen Codeausschnitt löst die Uploadmethode das Leeren aus, wenn der Dateiupload abgeschlossen ist. Daher muss der auf *true* festgelegte Parameter *Close* definiert werden. Weitere Informationen zum Leeren finden Sie unter [Methode zum Leeren in Azure Data Lake](/dotnet/api/azure.storage.files.datalake.datalakefileclient.flush).
+
+### <a name="rename-file-using-azure-data-lake-sdk"></a>Umbenennen einer Datei mit dem Azure Data Lake SDK
+
+Der folgende Codeausschnitt verwendet das [Azure Data Lake SDK](https://www.nuget.org/packages/Azure.Storage.Files.DataLake/), um ein Blob in einem ADLSv2-Speicherkonto umzubenennen.
+
+```csharp
+var accountName = <storage_account_name>;
+var accountKey = <storage_account_key>;
+var fileSystemName = <file_system_name>;
+var sourceFilePath = <source_file_path>;
+var destinationFilePath = <destination_file_path>;
+
+var sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
+var dfsUri = "https://" + accountName + ".dfs.core.windows.net";
+var dataLakeServiceClient = new DataLakeServiceClient(new Uri(dfsUri), sharedKeyCredential);
+
+// Get a client to the the filesystem
+var dataLakeFileSystemClient = dataLakeServiceClient.GetFileSystemClient(fileSystemName);
+
+// Rename a file in the file system
+var dataLakeFileClient = dataLakeFileSystemClient.GetFileClient(sourceFilePath);
+dataLakeFileClient.Rename(destinationFilePath);
+```
+
+> [!NOTE]
+> * Das Umbenennen von Verzeichnissen ist in ADLSv2 möglich, löst jedoch keine Ereignisse zur *Umbenennung von Blobs* und keine Erfassung von Blobs innerhalb des Verzeichnisses aus. Wenn Sie Blobs nach dem Umbenennen erfassen möchten, benennen Sie die gewünschten Blobs direkt um.
+> * Wenn Sie Filter zum Nachverfolgen bestimmter Themen beim [Erstellen der Datenverbindung](ingest-data-event-grid.md#create-an-event-grid-data-connection-in-azure-data-explorer) oder beim [manuellen Erstellen von Event Grid-Ressourcen](ingest-data-event-grid-manual.md#create-an-event-grid-subscription) festgelegt haben, werden diese Filter auf den Zieldateipfad angewendet.
 
 [!INCLUDE [data-explorer-data-connection-clean-resources-csharp](includes/data-explorer-data-connection-clean-resources-csharp.md)]

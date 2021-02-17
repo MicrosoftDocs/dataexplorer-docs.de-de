@@ -7,12 +7,12 @@ ms.reviewer: herauch
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 04/01/2020
-ms.openlocfilehash: 5cffee705c6a9225112e7ada8154084de40035c4
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 4a8c3cbceb4fa16b8f1ddefc53447ad52f0166f7
+ms.sourcegitcommit: 6e2fb2d7284c9b260034454236e669b2358383fb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88875020"
+ms.lasthandoff: 02/03/2021
+ms.locfileid: "99522988"
 ---
 # <a name="create-an-azure-active-directory-application-registration-in-azure-data-explorer"></a>Erstellen einer Azure Active Directory-Anwendungsregistrierung in Azure Data Explorer
 
@@ -83,7 +83,7 @@ Wenn Ihre Anwendung mit den Anmeldeinformationen des aufrufenden Benutzers auf A
 
 ## <a name="grant-the-service-principal-access-to-an-azure-data-explorer-database"></a>Gewähren des Zugriffs auf eine Azure Data Explorer-Datenbank für den Dienstprinzipal
 
-Nachdem nun die Anwendungsregistrierung Ihres Dienstprinzipals erstellt würde, müssen Sie dem entsprechenden Dienstprinzipal Zugriff auf Ihre Azure Data Explorer-Datenbank gewähren. 
+Nachdem nun die Anwendungsregistrierung Ihres Dienstprinzipals erstellt würde, müssen Sie dem entsprechenden Dienstprinzipal Zugriff auf Ihre Azure Data Explorer-Datenbank gewähren. Im folgenden Beispiel wird Zugriff zum Anzeigen gewährt. Informationen zu anderen Rollen finden Sie unter [Verwalten der Berechtigungen für Datenbanken in Azure Data Explorer](manage-database-permissions.md). 
 
 1. Stellen Sie in der [Webbenutzeroberfläche](https://dataexplorer.azure.com/) eine Verbindung mit Ihrer Datenbank her, und öffnen Sie eine Abfrageregisterkarte.
 

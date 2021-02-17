@@ -6,19 +6,21 @@ ms.author: orspodek
 ms.reviewer: olgolden
 ms.service: data-explorer
 ms.topic: quickstart
-ms.date: 11/22/2020
+ms.date: 02/09/2021
 ms.localizationpriority: high
-ms.openlocfilehash: e2c6a54e675c85d31b44b031f78629fd1afcf8a5
-ms.sourcegitcommit: 8c0674d2bc3c2e10eace5314c30adc7c9e4b3d44
+ms.openlocfilehash: d581ade4a9cbba083e8cebf39a30f01586d2635c
+ms.sourcegitcommit: db99b9d0b5f34341ad3be38cc855c9b80b3c0b0e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/19/2021
-ms.locfileid: "98571787"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100360145"
 ---
 # <a name="quickstart-query-data-in-azure-data-explorer-web-ui"></a>Schnellstart: Abfragen von Daten auf der Azure Data Explorer-Webbenutzeroberfläche
 
 Azure Data Explorer ist ein schneller, vollständig verwalteter Datenanalysedienst für Echtzeitanalysen großer Mengen an Daten. Azure Data Explorer bietet eine Webbenutzeroberfläche, die Ihnen das Herstellen einer Verbindung mit Ihren Azure Data Explorer-Clustern sowie das Schreiben, Ausführen und Freigeben von Befehlen und Abfragen der Kusto-Abfragesprache ermöglicht. Die Webbenutzeroberfläche steht im Azure-Portal sowie als eigenständige Webanwendung ([Azure Data Explorer-Webbenutzeroberfläche](https://dataexplorer.azure.com)) zur Verfügung. Die Azure Data Explorer-Webbenutzeroberfläche kann auch von anderen Webportalen in einem HTML-iFrame gehostet werden. Weitere Informationen zum Hosten der Webbenutzeroberfläche und zum verwendeten Monaco-Editor finden Sie unter [Integration der Monaco-IDE](kusto/api/monaco/monaco-kusto.md).
 In diesem Schnellstart arbeiten Sie in der eigenständigen Azure Data Explorer-Webbenutzeroberfläche.
+
+:::image type="content" source="media/web-query-data/walkthrough.gif" alt-text="Exemplarische Vorgehensweise für den Kusto-Web-Explorer":::
 
 ## <a name="prerequisites"></a>Voraussetzungen
 
@@ -65,7 +67,7 @@ Fügen Sie nun den erstellten Testcluster hinzu.
 
 ## <a name="run-queries"></a>Ausführen von Abfragen
 
-Sie können jetzt Abfragen für beide Cluster ausführen (vorausgesetzt, Sie haben Daten in Ihrem Testcluster). Im Rahmen dieses Artikels konzentrieren wir uns auf den **Hilfecluster**.
+Sie können jetzt Abfragen für beide Cluster ausführen (vorausgesetzt, Sie haben Daten in Ihrem Testcluster). In diesem Artikel konzentrieren wir uns auf den **Hilfecluster**.
 
 1. Wählen Sie im linken Bereich unter dem **Hilfecluster** die Datenbank **Samples** aus.
 
@@ -125,9 +127,43 @@ Sie können jetzt Abfragen für beide Cluster ausführen (vorausgesetzt, Sie hab
 
 ## <a name="work-with-the-table-grid"></a>Arbeiten mit dem Tabellenraster
 
-Da Sie nun wissen, wie grundlegende Abfragen funktionieren, sehen wir uns an, wie Sie mit dem Tabellenraster Ergebnisse anpassen und weitere Analysen ausführen können.
+Da Sie nun wissen, wie grundlegende Abfragen funktionieren, können Sie mit dem Tabellenraster Ergebnisse anpassen und weitere Analysen ausführen. 
 
-1. Führen Sie die erste Abfrage erneut aus. Zeigen Sie mit der Maus auf die Spalte **State** (Bundesstaat), und wählen Sie das Menü und dann **Group by State** (Nach Bundesstaat gruppieren) aus.
+### <a name="expand-a-cell"></a>Erweitern einer Zeile
+
+Die Erweiterung von Zellen ist nützlich, um lange Zeichenfolgen oder dynamische Felder wie JSON-Daten anzuzeigen. 
+
+1. Doppelklicken Sie auf eine Zelle, um eine erweiterte Ansicht zu öffnen. In dieser Ansicht können Sie lange Zeichenfolgen lesen, und es wird eine JSON-Formatierung für dynamische Daten bereitgestellt.
+
+    :::image type="content" source="media/web-query-data/expand-cell.png" alt-text="Erweitern von Zellen auf der Azure Data Explorer-Webbenutzeroberfläche zum Anzeigen langer Zeichenfolgen":::
+
+1. Klicken Sie in der oberen rechten Ecke des Ergebnisrasters auf das Symbol, um zwischen den Modi für den Lesebereich zu wechseln. Wählen Sie zwischen den folgenden Lesebereichsmodi für die erweiterte Ansicht: inline, unten und rechts.
+
+    :::image type="content" source="media/web-query-data/expanded-view-icon.png" alt-text="Symbol zum Ändern des Lesebereichsmodus für die erweiterte Ansicht: Abfrageergebnisse auf der Azure Data Explorer-Webbenutzeroberfläche":::
+
+### <a name="expand-a-row"></a>Erweitern einer Zeile
+
+Erweitern Sie bei einer Tabelle mit Dutzenden von Spalten die gesamte Zeile, um einfach eine Übersicht der verschiedenen Spalten und ihrer Inhalte anzuzeigen. 
+
+1. Klicken Sie links neben der Zeile, die Sie erweitern möchten, auf den Pfeil **>** .
+
+    :::image type="content" source="media/web-query-data/expand-row.png" alt-text="Erweitern einer Zeile auf der Azure Data Explorer-Webbenutzeroberfläche":::
+
+1. In der erweiterten Zeile sind einige Spalten erweitert (nach unten zeigender Pfeil) und einige Spalten reduziert (nach rechts zeigender Pfeil). Klicken Sie auf diese Pfeile, um zwischen diesen beiden Modi zu wechseln.
+
+### <a name="group-column-by-results"></a>Gruppieren von Spalten nach Ergebnissen
+
+Innerhalb der Ergebnisse können Sie Ergebnisse nach beliebigen Spalten gruppieren.
+
+1. Führen Sie die folgende Abfrage aus:
+     
+    ```kusto
+    StormEvents
+    | sort by StartTime desc
+    | take 10
+    ```
+
+1. Zeigen Sie mit der Maus auf die Spalte **State** (Bundesstaat), und wählen Sie das Menü und dann **Group by State** (Nach Bundesstaat gruppieren) aus.
 
     ![Nach Bundesstaat gruppieren](media/web-query-data/group-by.png)
 
@@ -138,6 +174,34 @@ Da Sie nun wissen, wie grundlegende Abfragen funktionieren, sehen wir uns an, wi
 1. Zeigen Sie mit der Maus auf die Spalte **Group** (Gruppe), und wählen Sie dann **Spalten zurücksetzen** aus. Diese Einstellung setzt das Raster auf den ursprünglichen Zustand zurück.
 
     ![Spalten zurücksetzen](media/web-query-data/reset-columns.png)
+
+#### <a name="use-value-aggregation"></a>Verwenden der Wertaggregation
+
+Nach dem Gruppieren einer Spalte können Sie mit der Funktion für die Wertaggregation einfache Statistiken pro Gruppe berechnen.
+
+1. Wählen Sie das Menü für die Spalte aus, die Sie auswerten möchten.
+1. Wählen Sie **Wertaggregation** und dann den Typ der Funktion aus, die Sie für diese Spalte ausführen möchten.
+
+    :::image type="content" source="media/web-query-data/aggregate.png" alt-text="Aggregieren von Ergebnissen beim Gruppieren von Spalten nach Ergebnissen":::
+
+### <a name="filter-columns"></a>Filtern von Spalten
+
+Sie können Operatoren verwenden, um die Ergebnisse einer Spalte zu filtern.
+
+1. Wählen Sie zum Filtern einer bestimmten Spalte das Menü für diese Spalte aus.
+1. Wählen Sie das Filtersymbol aus.
+1. Wählen Sie im Filter-Generator den gewünschten Operator aus.
+1. Geben Sie den Ausdruck ein, nach dem Sie die Spalte filtern möchten. Die Ergebnisse werden bei der Eingabe gefiltert.
+    
+    > [!NOTE] 
+    > Der Filter unterscheidet nicht zwischen Groß- und Kleinschreibung.
+
+1. Um einen Filter mit mehreren Bedingungen zu erstellen, wählen Sie einen booleschen Operator aus, um eine weitere Bedingung hinzuzufügen.
+1. Wenn Sie den Filter entfernen möchten, löschen Sie den Text aus der ersten Filterbedingung.
+
+    :::image type="content" source="media/web-query-data/filter-column.gif" alt-text="GIF, das zeigt, wie eine Spalte auf der Azure Data Explorer-Webbenutzeroberfläche gefiltert wird":::
+
+### <a name="run-cell-statistics"></a>Ausführen von Statistiken für Zellen
 
 1. Führen Sie die folgende Abfrage aus.
 
@@ -153,25 +217,42 @@ Da Sie nun wissen, wie grundlegende Abfragen funktionieren, sehen wir uns an, wi
 
     :::image type="content" source="media/web-query-data/select-stats.png" alt-text="Auswählen von Funktionen"::: 
 
-1. Wählen Sie auf der rechten Seite des Rasters **Columns** (Spalten) aus, um den Tabellentoolbereich anzuzeigen. Dieser Bereich funktioniert ähnlich wie die PivotTable-Feldliste in Excel, da Sie hier weitere Analysen im Raster selbst durchführen können.
+### <a name="filter-to-query-from-grid"></a>Filter für Abfrage aus dem Raster
+
+Eine weitere einfache Möglichkeit zum Filtern des Rasters besteht darin, der Abfrage einen Filteroperator direkt aus dem Raster hinzuzufügen.
+
+1. Wählen Sie eine Zelle mit Inhalt aus, für die Sie einen Abfragefilter erstellen möchten.
+1. Klicken Sie mit der rechten Maustaste, um das Menü mit den Zellaktionen zu öffnen. Wählen Sie **Auswahl als Filter hinzufügen** aus.
+    
+    :::image type="content" source="media/web-query-data/add-selection-filter.png" alt-text="Hinzufügen der Auswahl als Filter auf der Azure Data Explorer-Webbenutzeroberfläche, um die Rasterergebnisse abzufragen":::
+
+1. Eine Abfrageklausel wird der Abfrage im Abfrage-Editor hinzugefügt:
+
+    :::image type="content" source="media/web-query-data/add-query-from-filter.png" alt-text="Hinzufügen einer Abfrageklausel aus der Filterung des Rasters auf der Azure Data Explorer-Webbenutzeroberfläche":::
+
+### <a name="pivot"></a>Pivotieren
+
+Die Funktion für den Pivot-Modus ähnelt der Funktion „PivotTable“ in Excel. Sie ermöglicht die Ausführung erweiterter Analysen im Raster selbst.
+
+Mithilfe der Pivotierung können Sie einen Spaltenwert in Spalten umwandeln. Sie können beispielsweise *State* pivotieren, um Spalten für Florida, Missouri, Alabama usw. zu erstellen.
+
+1. Wählen Sie auf der rechten Seite des Rasters **Columns** (Spalten) aus, um den Tabellentoolbereich anzuzeigen.
 
     ![Tabellentoolbereich](media/web-query-data/tool-panel.png)
 
-1. Wählen Sie **Pivot-Modus** aus, und ziehen Sie Spalten wie folgt: **State** nach **Row groups**, **DamageProperty** nach **Values** und **EventType** nach **Column labels**.  
+1. Wählen Sie **Pivot-Modus** aus, und ziehen Sie Spalten wie folgt: **EventType** nach **Row groups** (Zeilengruppen), **DamageProperty** nach **Values** (Werte) und **State** nach **Column labels** (Spaltenbezeichnungen).  
 
     ![Pivot-Modus](media/web-query-data/pivot-mode.png)
 
-    Das Ergebnis sollte der folgenden PivotTable ähneln.
+    Das Ergebnis sollte der folgenden PivotTable ähneln:
 
     ![PivotTable](media/web-query-data/pivot-table.png)
-
-    Beachten Sie, dass Vermont und Alabama jeweils zwei Ereignisse in derselben Kategorie aufweisen, während Texas zwei Ereignisse in verschiedenen Kategorien aufweist. Pivottabellen sind ein hervorragend Tool für schnelle Analysen, da sie es Ihnen ermöglichen, diese Unterschiede schnell zu erkennen.
 
 ## <a name="search-in-the-results-table"></a>Suchen in der Ergebnistabelle
 
 Sie können in einer Ergebnistabelle nach einem bestimmten Ausdruck suchen.
 
-1.  Führen Sie die folgende Abfrage aus:
+1. Führen Sie die folgende Abfrage aus:
 
     ```Kusto
     StormEvents
@@ -195,7 +276,7 @@ Häufig möchten Sie die erstellten Abfragen freigeben.
 
 1. Wählen Sie oben im Abfragefenster **Freigeben** aus. 
 
-:::image type="content" source="media/web-query-data/share-menu.png" alt-text="Menü „Freigeben“":::
+    :::image type="content" source="media/web-query-data/share-menu.png" alt-text="Menü „Freigeben“":::
 
 Die folgenden Optionen sind im Dropdown verfügbar:
 * Link in Zwischenablage
@@ -291,7 +372,7 @@ So aktivieren Sie die Hervorhebung von Fehlerebenen:
 1. Wählen Sie neben Ihrem Benutzernamen das Symbol **Einstellungen** aus.
 1. Wählen Sie die Registerkarte **Darstellung** aus, und schieben Sie die Umschaltfläche für die Option zum **Aktivieren der Hervorhebung von Fehlerebenen** nach rechts. 
 
-:::image type="content" source="media/web-query-data/enable-error-highlighting.gif" alt-text="Animiertes GIF, das zeigt, wie Sie die Hervorhebung von Fehlerebenen in den Einstellungen aktivieren":::
+    :::image type="content" source="media/web-query-data/enable-error-highlighting.gif" alt-text="Animiertes GIF, das zeigt, wie Sie die Hervorhebung von Fehlerebenen in den Einstellungen aktivieren":::
 
 Farbschema für Fehlerebenen im Modus **Hell** | Farbschema für Fehlerebenen im Modus **Dunkel**
 |---|---|
@@ -299,7 +380,7 @@ Farbschema für Fehlerebenen im Modus **Hell** | Farbschema für Fehlerebenen im
 
 #### <a name="column-requirements-for-highlighting"></a>Spaltenanforderungen für die Hervorhebung
 
-Bei hervorgehobenen Fehlerebenen muss die Spalte den Typ „int“, „long“ oder „string“ aufweisen.
+Bei hervorgehobenen Fehlerebenen muss die Spalte den Typ „int“, „long“ oder „string“ aufweisen. 
 
 * Wenn die Spalte vom Typ `long` oder `int` ist:
    * Der Spaltenname muss *Ebene* lauten.

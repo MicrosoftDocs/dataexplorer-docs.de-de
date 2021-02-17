@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 12/19/2018
-ms.openlocfilehash: fd277cd46a183606e35219f733dbf86b094d62f8
-ms.sourcegitcommit: 4b061374c5b175262d256e82e3ff4c0cbb779a7b
+ms.openlocfilehash: 9f5e6ce09fb6d0f7c41162505fe3d124ff901030
+ms.sourcegitcommit: d640e9c54e6b7baa9f999b957a76076bbbcd56d6
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/09/2020
-ms.locfileid: "94373798"
+ms.lasthandoff: 02/10/2021
+ms.locfileid: "100088328"
 ---
 # <a name="handle-duplicate-data-in-azure-data-explorer"></a>Behandeln von doppelten Daten in Azure Data Explorer
 
@@ -68,9 +68,18 @@ DeviceEventsAll
 }
 ```
 
-### <a name="solution-3-filter-duplicates-during-the-ingestion-process"></a>Lösung 3: Filtern nach Duplikaten während der Datenerfassung
+### <a name="solution-3-use-materialized-views-to-deduplicate"></a>Lösung 3: Verwenden von materialisierten Sichten für die Deduplizierung
 
-Eine weitere Möglichkeit besteht darin, während der Datenerfassung nach Duplikaten zu filtern. Die doppelten Daten werden daraufhin bei der Datenerfassung in Kusto-Tabellen ignoriert. Daten werden in einer Stagingtabelle erfasst und nach dem Entfernen doppelter Zeilen in eine andere Tabelle kopiert. Vorteil: Im Vergleich zur vorherigen Lösung verbessert sich die Abfrageleistung erheblich. Nachteil: Erfassungsdauer und Datenspeicherkosten erhöhen sich. Darüber hinaus funktioniert diese Lösung nur, wenn nicht gleichzeitig Duplikate erfasst werden. Wenn mehrere gleichzeitige Erfassungen durchgeführt werden, die doppelte Datensätze enthalten, können alle erfasst werden, da der Deduplizierungsprozess keine vorhandenen übereinstimmenden Datensätze in der Tabelle findet.    
+[Materialisierte Sichten](kusto/management/materialized-views/materialized-view-overview.md) können für die Deduplizierung unter Verwendung der Aggregationsfunktionen [any()](kusto/query/any-aggfunction.md)/[arg_min()](kusto/query/arg-min-aggfunction.md)/[arg_max()](kusto/query/arg-max-aggfunction.md) verwendet werden (siehe Beispiel 4: [Befehl zum Erstellen materialisierter Sichten](kusto/management/materialized-views/materialized-view-create.md#examples)). 
+
+> [!NOTE]
+> Materialisierte Sichten sind mit Kosten für die Nutzung von Clusterressourcen verbunden, die möglicherweise nicht unerheblich sind. Weitere Informationen finden Sie im Artikel zu materialisierten Sichten im Abschnitt [Überlegungen zur Leistung](kusto/management/materialized-views/materialized-view-overview.md#performance-considerations).
+
+### <a name="solution-4-filter-duplicates-during-the-ingestion-process"></a>Lösung 4: Filtern nach Duplikaten während der Datenerfassung
+
+Wenn Sie Duplikate während des Erfassungsvorgangs filtern, ignoriert das System die doppelten Daten während der Erfassung in Kusto-Tabellen. Daten werden in einer Stagingtabelle erfasst und nach dem Entfernen doppelter Zeilen in eine andere Tabelle kopiert. Diese Lösung kann die Abfrageleistung verbessern, da Datensätze während der Abfragezeit bereits dedupliziert werden. 
+
+Diese Option erhöht jedoch die Erfassungszeit und verursacht zusätzliche Datenspeicherkosten. Darüber hinaus funktioniert diese Lösung nur, wenn nicht gleichzeitig Duplikate erfasst werden. Bei mehreren gleichzeitigen Erfassungen mit doppelten Datensätzen findet der Deduplizierungsprozess keine vorhandenen übereinstimmenden Datensätze in der Tabelle und erfasst unter Umständen alle Datensätze.
 
 Diese Methode wird im folgenden Beispiel veranschaulicht:
 

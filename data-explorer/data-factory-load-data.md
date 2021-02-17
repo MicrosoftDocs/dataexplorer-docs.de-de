@@ -8,12 +8,12 @@ ms.reviewer: jasonh
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 04/15/2019
-ms.openlocfilehash: c38a55294ba26ed130cac2c57b2ae12abe70526e
-ms.sourcegitcommit: f354accde64317b731f21e558c52427ba1dd4830
+ms.openlocfilehash: 2af70ec7905a89b5a3f7caf5a60e05d150c722e5
+ms.sourcegitcommit: 18092550a9f55de314dd337b7ee7e00e8733a35f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88873354"
+ms.lasthandoff: 01/06/2021
+ms.locfileid: "97941277"
 ---
 # <a name="copy-data-to-azure-data-explorer-by-using-azure-data-factory"></a>Kopieren von Daten in Azure Data Explorer mithilfe von Azure Data Factory 
 
@@ -168,7 +168,8 @@ Führen Sie zum Erstellen des verknüpften Azure Data Explorer-Diensts die folge
     * Wählen Sie **From Azure subscription** (Aus Azure-Abonnement) und dann in den jeweiligen Dropdownlisten Ihr **Azure-Abonnement** und Ihren **Cluster** aus. 
 
         > [!NOTE]
-        > In der Dropdownliste **Cluster** sind nur Cluster aufgeführt, die Ihrem Abonnement zugeordnet sind.
+        > * In der Dropdownliste **Cluster** sind nur Cluster aufgeführt, die Ihrem Abonnement zugeordnet sind.
+        > * Für Ihren Cluster muss eine geeignete [SKU](manage-cluster-choose-sku.md) festgelegt sein, damit die [optimale Leistung](data-factory-integration.md#performance) erzielt werden kann.
 
     * Wählen Sie **Manuell eingeben** aus, und geben Sie dann den **Endpunkt** ein.
 

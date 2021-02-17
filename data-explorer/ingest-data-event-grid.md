@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: 2c5c5cbb15e55b585bae632a960909070c724eb8
-ms.sourcegitcommit: 4d5628b52b84f7564ea893f621bdf1a45113c137
+ms.openlocfilehash: 2881bbf1397aaf8aeb410598fbf080d8b9d3fbda
+ms.sourcegitcommit: 3a2d2def8d6bf395bbbb3b84935bc58adae055b8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96444207"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98635996"
 ---
 # <a name="ingest-blobs-into-azure-data-explorer-by-subscribing-to-event-grid-notifications"></a>Erfassen von Blobs in Azure Data Explorer durch das Abonnieren von Event Grid-Benachrichtigungen
 
@@ -83,7 +83,7 @@ Verbinden Sie nun das Speicherkonto mit Azure Data Explorer, so dass die in den 
     | Name der Datenverbindung | *test-grid-connection* | Der Name der Verbindung, die Sie im Azure Data Explorer erstellen möchten.|
     | Speicherkontoabonnement | Ihre Abonnement-ID | Die Abonnement-ID, unter der sich Ihr Speicherkonto befindet.|
     | Speicherkonto | *gridteststorage1* | Der Name des zuvor erstellten Speicherkontos.|
-    | Ereignistyp | *Blob erstellt* oder *Blob umbenannt* | Der Typ des Ereignisses, das die Erfassung auslöst |
+    | Ereignistyp | *Blob erstellt* oder *Blob umbenannt* | Der Typ des Ereignisses, das die Erfassung auslöst *Blob umbenannt* wird nur für ADLSv2-Speicher unterstützt. Folgende Typen werden unterstützt: „Microsoft.Storage.BlobCreated“ oder „Microsoft.Storage.BlobRenamed“. |
     | Ressourcenerstellung | *Automatisch* | Legen Sie fest, ob mit Azure Data Explorer ein Event Grid-Abonnement, Event Hub-Namespace und Event Hub für Sie erstellt werden soll. Informationen zur manuellen Erstellung von Ressourcen finden Sie unter [Manuelles Erstellen von Ressourcen für die Event Grid-Erfassung](ingest-data-event-grid-manual.md).|
 
 1. Wählen Sie **Filtereinstellungen** aus, wenn Sie bestimmte Themen nachverfolgen möchten. Legen Sie die Filter für die Benachrichtigungen wie folgt fest:
@@ -131,7 +131,9 @@ Warten Sie, bis die Bereitstellung abgeschlossen wurde. Wenn bei Ihrer Bereitste
 
 ## <a name="generate-sample-data"></a>Generieren von Beispieldaten
 
-Nachdem nun eine Verbindung zwischen Azure Data Explorer und dem Speicherkonto besteht, können Sie Beispieldaten erstellen und in den Speichercontainer hochladen.
+Nachdem nun eine Verbindung zwischen Azure Data Explorer und dem Speicherkonto besteht, können Sie Beispieldaten erstellen.
+
+### <a name="upload-blob-to-the-storage-container"></a>Hochladen eines Blobs in den Speichercontainer
 
 Wir verwenden ein kleines Shellskript, das einige grundlegenden Azure CLI-Befehle für die Interaktion mit Azure Storage-Ressourcen aufruft. Das Skript bewirkt Folgendes: 
 1. Erstellen eines Blobcontainers in Ihrem Speicherkonto
@@ -172,6 +174,12 @@ Speichern Sie die Daten in einer Datei, und laden Sie sie mit diesem Skript hoch
 
 > [!NOTE]
 > Für eine optimale Leistung bei der Erfassung muss die *unkomprimierte* Größe der für die Erfassung übertragenen komprimierten Blobs übermittelt werden. Da Event Grid-Benachrichtigungen nur grundlegende Details enthalten, müssen die Größeninformationen explizit übermittelt werden. Die Informationen zur unkomprimierten Größe können durch Festlegen der `rawSizeBytes`-Eigenschaft in den Blobmetadaten angegeben werden, wobei die Größenangabe der *unkomprimierten* Daten in Byte erfolgt.
+
+### <a name="rename-blob"></a>Umbenennen eines Blobs
+
+Wenn Sie Daten aus ADLSv2-Speicher erfassen und *Blob umbenannt* als Ereignistyp für die Datenverbindung definiert haben, ist der Auslöser für die Bloberfassung die Blobumbenennung. Navigieren Sie zum Umbenennen eines Blobs im Azure-Portal zum Blob, klicken Sie mit der rechten Maustaste auf das Blob, und wählen Sie **Umbenennen** aus:
+
+   :::image type="content" source="media/ingest-data-event-grid/rename-blob-in-the-portal.png" alt-text="Umbenennen eines Blobs im Azure-Portal":::
 
 ### <a name="ingestion-properties"></a>Erfassungseigenschaften
 

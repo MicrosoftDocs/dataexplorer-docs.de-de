@@ -8,12 +8,12 @@ ms.reviewer: kedamari
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/05/2020
-ms.openlocfilehash: e8ec0a07549a8db4027beab8d512f58e3ab6a780
-ms.sourcegitcommit: 4d5628b52b84f7564ea893f621bdf1a45113c137
+ms.openlocfilehash: 5ea03b982a42232eb1dda728e1df04952fc1183d
+ms.sourcegitcommit: 3a2d2def8d6bf395bbbb3b84935bc58adae055b8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "96444164"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98635938"
 ---
 # <a name="manually-create-resources-for-event-grid-ingestion"></a>Manuelles Erstellen von Ressourcen für die Event Grid-Erfassung
 
@@ -54,10 +54,10 @@ In diesem Artikel wird beschrieben, wie Sie die Ressourcen, die für die Event G
     |---|---|---|
     | Name | *test-grid-connection* | Der Name des zu erstellenden Event Grid-Abonnements.|
     | Ereignisschema | *Event Grid-Schema* | Das gewünschte Schema für die Event Grid-Instanz. |
-    | Thementyp | *Speicherkonto* | Der Typ des Event Grid-Themas. Wird automatisch eingefügt.|
+    | Thementyp | *Speicherkonto* | Die Art des Event Grid-Themas. Wird automatisch eingefügt.|
     | Quellressource | *gridteststorage1* | Der Name Ihres Speicherkontos. Wird automatisch eingefügt.|
     | Name des Systemthemas | *gridteststorage1...* | Das Systemthema, unter dem Ereignisse von Azure Storage veröffentlicht werden. Von diesem Systemthema wird das Ereignis dann an einen Abonnenten weitergeleitet, der Ereignisse empfängt und verarbeitet. Wird automatisch eingefügt.|
-    | Nach Ereignistypen filtern | *Blob erstellt* | Gibt an, bei welchen spezifischen Ereignissen eine Benachrichtigung erfolgen soll. Wählen Sie beim Erstellen des Abonnements einen der derzeit unterstützten Typen aus: „Microsoft.Storage.BlobCreated“ oder „Microsoft.Storage.BlobRenamed“|
+    | Nach Ereignistypen filtern | *Blob erstellt* | Gibt an, bei welchen spezifischen Ereignissen eine Benachrichtigung erfolgen soll. Wählen Sie beim Erstellen des Abonnements einen der unterstützten Typen aus: „Microsoft.Storage.BlobCreated“ oder „Microsoft.Storage.BlobRenamed“. Das Umbenennen von Blobs wird nur für ADLSv2-Speicher unterstützt. |
 
 1. Wählen Sie unter **ENDPUNKTDETAILS** die Option **Event Hubs** aus.
 

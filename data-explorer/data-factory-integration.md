@@ -8,12 +8,12 @@ ms.reviewer: tomersh26
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 01/20/2020
-ms.openlocfilehash: 18fd9aa351bf1fb3528c48f4125c6fae6a9ccba1
-ms.sourcegitcommit: 25c0440cb0390b9629b819611844f1375de00a66
+ms.openlocfilehash: 2f5a181f921d9eebb3edfef284ea8f53a02569f3
+ms.sourcegitcommit: 18092550a9f55de314dd337b7ee7e00e8733a35f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94417573"
+ms.lasthandoff: 01/06/2021
+ms.locfileid: "97941209"
 ---
 # <a name="integrate-azure-data-explorer-with-azure-data-factory"></a>Integration von Azure Data Explorer und Azure Data Factory
 
@@ -70,7 +70,7 @@ In der folgenden Tabelle finden Sie einen Vergleich zwischen der Kopieraktivitä
 
 | | Copy-Aktivität | .export-Befehl |
 |---|---|---|
-| **Beschreibung des Ablaufs** | ADF führt eine Abfrage in Kusto aus, verarbeitet das Ergebnis und sendet es an den Zieldatenspeicher. <br>( **ADX > ADF > Senkendatenspeicher** ) | ADF sendet einen `.export`-Steuerungsbefehl an Azure Data Explorer, der den Befehl ausführt, und sendet die Daten direkt an den Zieldatenspeicher. <br>( **ADX > Senkendatenspeicher** ) |
+| **Beschreibung des Ablaufs** | ADF führt eine Abfrage in Kusto aus, verarbeitet das Ergebnis und sendet es an den Zieldatenspeicher. <br>(**ADX > ADF > Senkendatenspeicher**) | ADF sendet einen `.export`-Steuerungsbefehl an Azure Data Explorer, der den Befehl ausführt, und sendet die Daten direkt an den Zieldatenspeicher. <br>(**ADX > Senkendatenspeicher**) |
 | **Unterstützte Zieldatenspeicher** | Eine Vielzahl von [unterstützten Datenspeichern](/azure/data-factory/copy-activity-overview#supported-data-stores-and-formats) | ADLSv2, Azure-Blob, SQL-Datenbank |
 | **Leistung** | Zentralisiert | <ul><li>Verteilt (Standard), gleichzeitiger Export von Daten aus mehreren Knoten</li><li>Schneller und COGS-effizient (Cost Of Goods Sold, Umsatzkosten)</li></ul> |
 | **Servereinschränkungen** | [Abfragelimits](kusto/concepts/querylimits.md) können erweitert/deaktiviert werden. Standardmäßig gilt für ADF-Abfragen: <ul><li>Größenbeschränkung von 500.000 Datensätzen oder 64 MB.</li><li>Zeitlimit von 10 Minuten.</li><li>`noTruncation` auf FALSE festgelegt.</li></ul> | Erweitert oder deaktiviert standardmäßig die Abfragelimits: <ul><li>Größenbeschränkungen sind deaktiviert.</li><li>Das Serverzeitlimit wird auf 1 Stunde verlängert.</li><li>`MaxMemoryConsumptionPerIterator` und `MaxMemoryConsumptionPerQueryPerNode` werden auf das Maximum (5 GB, Hälfte des gesamten physischen Arbeitsspeichers) erweitert.</li></ul>
@@ -86,7 +86,7 @@ In der folgenden Tabelle finden Sie einen Vergleich zwischen der Kopieraktivitä
 
 | | Copy-Aktivität | Erfassung aus der Abfrage<br> `.set-or-append` / `.set-or-replace` / `.set` / `.replace` | Erfassung aus dem Speicher <br> `.ingest` |
 |---|---|---|---|
-| **Beschreibung des Ablaufs** | ADF ruft die Daten aus dem Quelldatenspeicher ab, konvertiert sie in ein Tabellenformat und führt die erforderlichen Schemazuordnungsänderungen durch. ADF lädt die Daten dann in Azure-Blobs hoch, teilt sie in Blöcke auf und lädt die Blobs dann herunter, um sie in der ADX-Tabelle zu erfassen. <br> ( **Quelldatenspeicher > ADF > Azure-Blob > ADX** ) | Diese Befehle können eine Abfrage oder einen `.show`-Befehl ausführen und die Ergebnisse der Abfrage in einer Tabelle erfassen ( **ADX > ADX** ). | Mit diesem Befehl werden Daten in einer Tabelle erfasst, indem die Daten aus mindestens einem Cloudspeicherartefakt abgerufen werden (Pull). |
+| **Beschreibung des Ablaufs** | ADF ruft die Daten aus dem Quelldatenspeicher ab, konvertiert sie in ein Tabellenformat und führt die erforderlichen Schemazuordnungsänderungen durch. ADF lädt die Daten dann in Azure-Blobs hoch, teilt sie in Blöcke auf und lädt die Blobs dann herunter, um sie in der ADX-Tabelle zu erfassen. <br> (**Quelldatenspeicher > ADF > Azure-Blob > ADX**) | Diese Befehle können eine Abfrage oder einen `.show`-Befehl ausführen und die Ergebnisse der Abfrage in einer Tabelle erfassen (**ADX > ADX**). | Mit diesem Befehl werden Daten in einer Tabelle erfasst, indem die Daten aus mindestens einem Cloudspeicherartefakt abgerufen werden (Pull). |
 | **Unterstützte Quelldatenspeicher** |  [Vielzahl verschiedener Optionen](/azure/data-factory/copy-activity-overview#supported-data-stores-and-formats) | ADLS Gen 2, Azure Blob, SQL (mit dem Plug-In [sql_request()](kusto/query/sqlrequestplugin.md)), Cosmos (mit dem Plug-In [cosmosdb_sql_request](kusto\query\mysqlrequest-plugin.md)) und jeder andere Datenspeicher, der HTTP- oder Python-APIs bereitstellt | Dateisystem, Azure Blob Storage, ADLS Gen 1, ADLS Gen 2 |
 | **Leistung** | Erfassungen werden in die Warteschlange eingereiht und verwaltet. Dadurch werden Erfassungen mit geringer Größe sichergestellt sowie durch Lastenausgleich, Wiederholungsversuchen und Fehlerbehandlung hohe Verfügbarkeit gewährleistet. | <ul><li>Die Befehle wurden nicht für den Import großer Datenmengen konzipiert.</li><li>Funktioniert erwartungsgemäß und günstiger. Verwenden Sie jedoch für Produktionsszenarien und bei großen Datenverkehrsraten sowie umfangreichen Daten die Kopieraktivität.</li></ul> |
 | **Servereinschränkungen** | <ul><li>Kein Größenlimit.</li><li>Maximales Zeitlimit: 1 Stunde für jedes erfasste Blob. |<ul><li>Es gibt lediglich eine Größenbeschränkung für den Abfrageteil, die durch Angeben von `noTruncation=true` ausgesetzt werden kann.</li><li>Maximales Zeitlimit: 1 Stunde.</li></ul> | <ul><li>Kein Größenlimit.</li><li>Maximales Zeitlimit: 1 Stunde.</li></ul>|
@@ -122,7 +122,7 @@ In diesem Abschnitt wird die Verwendung der Kopieraktivität behandelt, wenn Azu
 |---|---|
 | **Geografische Anordnung der Komponenten** | Platzieren Sie alle Komponenten in derselben Region:<ul><li>Quellen- und Senkendatenspeicher.</li><li>ADF Integration Runtime.</li><li>Ihr ADX-Cluster.</li></ul>Stellen Sie sicher, dass sich zumindest die Integration Runtime in derselben Region wie Ihr ADX-Cluster befindet. |
 | **Anzahl von DIUs** | 1 VM für jeweils 4 DIUs, die von ADF verwendet werden. <br>Eine Erhöhung der Anzahl von DIUs ist nur hilfreich, wenn es sich bei der Quelle um einen dateibasierten Speicher mit mehreren Dateien handelt. Die verschiedenen Dateien werden dann parallel von einer VM verarbeitet. Daher weist das Kopieren einer einzelnen großen Datei eine höhere Latenz auf als das Kopieren mehrerer kleinerer Dateien.|
-|**Umfang und SKU des ADX-Clusters** | Eine hohe Anzahl von ADX-Knoten steigert die Verarbeitungszeit für die Erfassung.|
+|**Umfang und SKU des ADX-Clusters** | Eine hohe Anzahl von ADX-Knoten steigert die Verarbeitungszeit für die Erfassung. Durch die Verwendung von Entwicklungs-SKUs wird die Leistung erheblich eingeschränkt.|
 | **Parallelität** |    Wenn Sie sehr viele Daten aus einer Datenbank kopieren möchten, partitionieren Sie die Daten und verwenden Sie dann eine ForEach-Schleife, um die einzelnen Partitionen parallel zu kopieren. Sie können auch die [Vorlage zum Massenkopieren aus der Datenbank in Azure Data Explorer](data-factory-template.md) verwenden. Hinweis: **Einstellungen** > **Parallelitätsgrad** in der Kopieraktivität ist für ADX nicht relevant. |
 | **Komplexität der Datenverarbeitung** | Die Latenz hängt jeweils vom Format der Quelldatei, von der Spaltenzuordnung und von der Komprimierung ab.|
 | **Die VM, auf der die Integration Runtime ausgeführt wird** | <ul><li>Für Azure-interne Kopiervorgänge können ADF-VMs und Computer-SKUs nicht geändert werden.</li><li> Bei Kopiervorgängen aus der lokalen Umgebung nach Azure muss sichergestellt sein, dass der virtuelle Hostcomputer für die selbstgehostete IR leistungsfähig genug ist.</li></ul>|
@@ -131,7 +131,7 @@ In diesem Abschnitt wird die Verwendung der Kopieraktivität behandelt, wenn Azu
 
 ### <a name="monitor-activity-progress"></a>Überwachen des Aktivitätsstatus
 
-* Bei der Überwachung des Aktivitätsstatus ist die Eigenschaft *Daten geschrieben* möglicherweise wesentlich größer als die Eigenschaft *Daten gelesen* , da *Daten gelesen* basierend auf der Größe der Binärdatei berechnet wird, während *Daten geschrieben* basierend auf der Größe im Arbeitsspeicher berechnet wird, nachdem die Daten deserialisiert und dekomprimiert wurden.
+* Bei der Überwachung des Aktivitätsstatus ist die Eigenschaft *Daten geschrieben* möglicherweise wesentlich größer als die Eigenschaft *Daten gelesen*, da *Daten gelesen* basierend auf der Größe der Binärdatei berechnet wird, während *Daten geschrieben* basierend auf der Größe im Arbeitsspeicher berechnet wird, nachdem die Daten deserialisiert und dekomprimiert wurden.
 
 * Bei der Überwachung des Aktivitätsstatus können Sie sehen, dass Daten in die Azure Data Explorer-Senke geschrieben werden. Wenn Sie die Azure Data Explorer-Tabelle abfragen, sehen Sie, dass die Daten nicht angekommen sind. Dies liegt daran, dass das Kopieren in Azure Data Explorer in zwei Phasen erfolgt. 
     * In der ersten Phase werden die Quelldaten gelesen, in Blöcke zu je 900 MB aufgeteilt und die einzelnen Blöcke in ein Azure-Blob hochgeladen. Die erste Phase ist in der Statusansicht der ADF-Aktivität sichtbar. 

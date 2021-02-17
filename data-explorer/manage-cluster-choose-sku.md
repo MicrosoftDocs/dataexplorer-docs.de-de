@@ -7,12 +7,12 @@ ms.reviewer: avnera
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/13/2020
-ms.openlocfilehash: 44c115cd509b72d5f83b1c1109ae09dc050d1a74
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 930271d2d7c2b46b3ac873449338dda98472c36d
+ms.sourcegitcommit: c11e3871d600ecaa2824ad78bce9c8fc5226eef9
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92337447"
+ms.lasthandoff: 02/04/2021
+ms.locfileid: "99554873"
 ---
 # <a name="select-the-correct-compute-sku-for-your-azure-data-explorer-cluster"></a>Auswählen der passenden Compute-SKU für Ihren Azure Data Explorer-Cluster 
 
@@ -31,7 +31,7 @@ In diesem Artikel werden verschiedene Compute-SKU-Optionen beschrieben, und er e
 
 Azure Data Explorer bietet zwei Arten von Clustern:
 
-* **Produktion:** Produktionscluster enthalten zwei Knoten für Engine und Datenverwaltungscluster und werden unter dem Azure Data Explorer- [SLA](https://azure.microsoft.com/support/legal/sla/data-explorer/v1_0/) betrieben.
+* **Produktion:** Produktionscluster enthalten zwei Knoten für Engine und Datenverwaltungscluster und werden unter dem Azure Data Explorer-[SLA](https://azure.microsoft.com/support/legal/sla/data-explorer/v1_0/) betrieben.
 
 * **Dev/Test (kein SLA):** Dev/Test-Cluster verfügen über einen gemeinsamen Knoten für die Engine und den Datenverwaltungscluster. Dieser Clustertyp ist die kostengünstigste Konfiguration aufgrund seiner geringen Anzahl von Instanzen und der fehlenden Aufschlaggebühren für die Engine. Für diese Clusterkonfiguration gibt es kein SLA, da ihr die Redundanz fehlt.
 
@@ -94,31 +94,32 @@ Die technischen Spezifikationen für die Cluster-VMs von Azure Data Explorer wer
 |**Name**| **Kategorie** | **SSD-Größe** | **Kerne** | **RAM** | **Storage Premium-Datenträger (1&nbsp;TB)**| **Minimale Anzahl von Instanzen pro Cluster** | **Maximale Anzahl von Instanzen pro Cluster**
 |---|---|---|---|---|---|---|---
 |Dev (keine SLA) Standard_D11_v2| Compute-optimiert | 75&nbsp;GB    | 1 | 14&nbsp;GB | 0 | 1 | 1
-|Dev (keine SLA) Standard_E2a_v4| Compute-optimiert | 18&nbsp;GB    | 1 | 14&nbsp;GB | 0 | 1 | 1
+|Dev (keine SLA) Standard_E2a_v4| Compute-optimiert | 18&nbsp;GB    | 1 | 16&nbsp;GB | 0 | 1 | 1
 |Standard_D11_v2| Compute-optimiert | 75&nbsp;GB    | 2 | 14&nbsp;GB | 0 | 2 | 8 
 |Standard_D12_v2| Compute-optimiert | 150&nbsp;GB   | 4 | 28&nbsp;GB | 0 | 2 | 16
 |Standard_D13_v2| Compute-optimiert | 307&nbsp;GB   | 8 | 56&nbsp;GB | 0 | 2 | 1\.000
 |Standard_D14_v2| Compute-optimiert | 614&nbsp;GB   | 16| 112&nbsp;GB | 0 | 2 | 1\.000
-|Standard_E2a_v4| Hoher Computeaufwand | 18&nbsp;GB    | 2 | 14&nbsp;GB | 0 | 2 | 8 
-|Standard_E4a_v4| Hoher Computeaufwand | 54&nbsp;GB   | 4 | 28&nbsp;GB | 0 | 2 | 16
-|Standard_E8a_v4| Hoher Computeaufwand | 127&nbsp;GB   | 8 | 56&nbsp;GB | 0 | 2 | 1\.000
-|Standard_E16a_v4| Hoher Computeaufwand | 273&nbsp;GB   | 16| 112&nbsp;GB | 0 | 2 | 1\.000
+|Standard_E2a_v4| Hoher Computeaufwand | 18&nbsp;GB    | 2 | 16&nbsp;GB | 0 | 2 | 8 
+|Standard_E4a_v4| Hoher Computeaufwand | 54&nbsp;GB   | 4 | 32&nbsp;GB | 0 | 2 | 16
+|Standard_E8a_v4| Hoher Computeaufwand | 127&nbsp;GB   | 8 | 64&nbsp;GB | 0 | 2 | 1\.000
+|Standard_E16a_v4| Hoher Computeaufwand | 273&nbsp;GB   | 16| 128&nbsp;GB | 0 | 2 | 1\.000
 |Standard_DS13_v2 + 1&nbsp;TB&nbsp;PS| Speicheroptimiert | 1&nbsp;TB | 8 | 56&nbsp;GB | 1 | 2 | 1\.000
 |Standard_DS13_v2 + 2&nbsp;TB&nbsp;PS| Speicheroptimiert | 2&nbsp;TB | 8 | 56&nbsp;GB | 2 | 2 | 1\.000
 |Standard_DS14_v2 + 3&nbsp;TB&nbsp;PS| Speicheroptimiert | 3&nbsp;TB | 16 | 112&nbsp;GB | 2 | 2 | 1\.000
 |Standard_DS14_v2 + 4&nbsp;TB&nbsp;PS| Speicheroptimiert | 4&nbsp;TB | 16 | 112&nbsp;GB | 4 | 2 | 1\.000
-|Standard_E8as_v4 + 1&nbsp;TB&nbsp;PS| Speicheroptimiert | 1&nbsp;TB | 8 | 56&nbsp;GB | 1 | 2 | 1\.000
-|Standard_E8as_v4 + 2&nbsp;TB&nbsp;PS| Speicheroptimiert | 2&nbsp;TB | 8 | 56&nbsp;GB | 2 | 2 | 1\.000
-|Standard_E16as_v4 + 3&nbsp;TB&nbsp;PS| Speicheroptimiert | 3&nbsp;TB | 16 | 112&nbsp;GB | 3 | 2 | 1\.000
-|Standard_E16as_v4 + 4&nbsp;TB&nbsp;PS| Speicheroptimiert | 4&nbsp;TB | 16 | 112&nbsp;GB | 4 | 2 | 1\.000
+|Standard_E8as_v4 + 1&nbsp;TB&nbsp;PS| Speicheroptimiert | 1&nbsp;TB | 8 | 64&nbsp;GB | 1 | 2 | 1\.000
+|Standard_E8as_v4 + 2&nbsp;TB&nbsp;PS| Speicheroptimiert | 2&nbsp;TB | 8 | 64&nbsp;GB | 2 | 2 | 1\.000
+|Standard_E16as_v4 + 3&nbsp;TB&nbsp;PS| Speicheroptimiert | 3&nbsp;TB | 16 | 128&nbsp;GB | 3 | 2 | 1\.000
+|Standard_E16as_v4 + 4&nbsp;TB&nbsp;PS| Speicheroptimiert | 4&nbsp;TB | 16 | 128&nbsp;GB | 4 | 2 | 1\.000
 |Standard_L4s| Speicheroptimiert | 650&nbsp;GB | 4 | 32&nbsp;GB | 0 | 2 | 16
 |Standard_L8s| Speicheroptimiert | 1,3&nbsp;TB | 8 | 64&nbsp;GB | 0 | 2 | 1\.000
 |Standard_L16s| Speicheroptimiert | 2,6&nbsp;TB | 16| 128&nbsp;GB | 0 | 2 | 1\.000
 |Standard_L8s_v2| Speicheroptimiert | 1,7&nbsp;TB | 8 | 64&nbsp;GB | 0 | 2 | 1\.000
 |Standard_L16s_v2| Speicheroptimiert | 3,5&nbsp;TB | 16| 128&nbsp;GB | 0 | 2 | 1\.000
-|Standard_E64i1_v3| Isolierte Computeressource | 1,1&nbsp;TB | 16| 128&nbsp;GB | 0 | 2 | 1\.000
+|Standard_E64i_v3| Isolierte Computeressource | 1,1&nbsp;TB | 64 | 432&nbsp;GB | 0 | 2 | 1\.000
+|Standard_E80ids_v4| Isolierte Computeressource | 1,8&nbsp;TB | 80 | 504&nbsp;GB | 0 | 2 | 1\.000
 
-* Sie können die aktualisierte Liste mit den Compute-SKUs pro Region mit der [ListSkus API](/dotnet/api/microsoft.azure.management.kusto.clustersoperationsextensions.listskus?view=azure-dotnet) von Azure Data Explorer anzeigen. 
+* Sie können die aktualisierte Liste mit den Compute-SKUs pro Region mit der [ListSkus API](/dotnet/api/microsoft.azure.management.kusto.clustersoperationsextensions.listskus) von Azure Data Explorer anzeigen. 
 * Weitere Informationen zu den verschiedenen SKUs finden Sie [hier](/azure/virtual-machines/windows/sizes). 
 
 ## <a name="next-steps"></a>Nächste Schritte

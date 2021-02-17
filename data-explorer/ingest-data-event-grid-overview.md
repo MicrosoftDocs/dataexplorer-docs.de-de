@@ -8,18 +8,18 @@ ms.reviewer: rkarlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
-ms.openlocfilehash: fde0e79fbe8a8080fa6e21dde12434de5c92353f
-ms.sourcegitcommit: d9e203a54b048030eeb6d05b01a65902ebe4e0b8
+ms.openlocfilehash: 009c7cbfd458af33a5d38a3907720d8aff1f203a
+ms.sourcegitcommit: 3a2d2def8d6bf395bbbb3b84935bc58adae055b8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/14/2020
-ms.locfileid: "97371457"
+ms.lasthandoff: 01/21/2021
+ms.locfileid: "98635921"
 ---
 # <a name="event-grid-data-connection"></a>Event Grid-Datenverbindung
 
 Die Event Grid-Erfassung ist eine Pipeline, die auf Azure Storage lauscht und Azure Data Explorer aktualisiert, um Informationen zu pullen, wenn abonnierte Ereignisse auftreten. Azure Data Explorer ermöglicht eine kontinuierliche Erfassung aus Azure Storage (Blobspeicher und ADLSv2) mit einem [Azure Event Grid](/azure/event-grid/overview)-Abonnement für Benachrichtigungen zur Erstellung oder Umbenennung von Blobs und das Streaming dieser Benachrichtigungen an Azure Data Explorer über einen Event Hub.
 
-Die Event Grid-Erfassungspipeline umfasst mehrere Schritte. Sie erstellen eine Zieltabelle in Azure Data Explorer, in der die [Daten in einem bestimmten Format](#data-format) erfasst werden. Anschließend erstellen Sie eine Event Grid-Datenverbindung in Azure Data Explorer. Die Event Grid-Datenverbindung muss über Informationen zum [Ereignisrouting](#events-routing) verfügen, z. B. die Tabelle, an die Daten gesendet werden sollen, und die Tabellenzuordnung. Außerdem geben Sie [Erfassungseigenschaften](#ingestion-properties) an, die die zu erfassenden Daten, die Zieltabelle und die Zuordnung beschreiben. Sie können Beispieldaten generieren und [Blobs hochladen](#upload-blobs), um Ihre Verbindung zu testen. [Löschen Sie Blobs](#delete-blobs-using-storage-lifecycle) nach der Erfassung. Dieser Prozess kann über das [Azure-Portal](ingest-data-event-grid.md), mithilfe der [1-Klick-Erfassung](one-click-ingestion-new-table.md), programmgesteuert mit [C#](data-connection-event-grid-csharp.md) oder [Python](data-connection-event-grid-python.md) oder mit der [Azure Resource Manager-Vorlage](data-connection-event-grid-resource-manager.md) verwaltet werden. 
+Die Event Grid-Erfassungspipeline umfasst mehrere Schritte. Sie erstellen eine Zieltabelle in Azure Data Explorer, in der die [Daten in einem bestimmten Format](#data-format) erfasst werden. Anschließend erstellen Sie eine Event Grid-Datenverbindung in Azure Data Explorer. Die Event Grid-Datenverbindung muss über Informationen zum [Ereignisrouting](#events-routing) verfügen, z. B. die Tabelle, an die Daten gesendet werden sollen, und die Tabellenzuordnung. Außerdem geben Sie [Erfassungseigenschaften](#ingestion-properties) an, die die zu erfassenden Daten, die Zieltabelle und die Zuordnung beschreiben. Sie können Beispieldaten generieren und [Blobs hochladen](#upload-blobs) oder [Blobs umbenennen](#rename-blobs), um Ihre Verbindung zu testen. [Löschen Sie Blobs](#delete-blobs-using-storage-lifecycle) nach der Erfassung. Dieser Prozess kann über das [Azure-Portal](ingest-data-event-grid.md), mithilfe der [1-Klick-Erfassung](one-click-ingestion-new-table.md), programmgesteuert mit [C#](data-connection-event-grid-csharp.md) oder [Python](data-connection-event-grid-python.md) oder mit der [Azure Resource Manager-Vorlage](data-connection-event-grid-resource-manager.md) verwaltet werden.
 
 Allgemeine Informationen zur Datenerfassung in Azure Data Explorer finden Sie unter [Übersicht über die Datenerfassung in Azure Data Explorer](ingest-data-overview.md).
 
@@ -73,6 +73,14 @@ Sie können ein Blob aus einer lokalen Datei erstellen, Erfassungseigenschaften 
 > Ein ausführliches Beispiel zur korrekten Verwendung des Data Lake Gen2 SDK finden Sie unter [Hochladen einer Datei mit dem Azure Data Lake SDK](data-connection-event-grid-csharp.md#upload-file-using-azure-data-lake-sdk).
 > * Wenn der Empfang eines Ereignisses vom Event Hub-Endpunkt nicht bestätigt wird, wird von Azure Event Grid ein Wiederholungsmechanismus aktiviert. Falls diese Wiederholung der Zustellung nicht erfolgreich ist, kann Event Grid die nicht übermittelten Ereignisse per *Dead-Lettering* (Unzustellbare Nachrichten) an ein Speicherkonto senden. Weitere Informationen finden Sie unter [Event Grid – Nachrichtenübermittlung und -wiederholung](/azure/event-grid/delivery-and-retry#retry-schedule-and-duration).
 
+## <a name="rename-blobs"></a>Umbenennen von Blobs
+
+Wenn Sie ADLSv2 verwenden, können Sie ein Blob umbenennen, um die Bloberfassung in Azure Data Explorer auszulösen. Beispiele finden Sie unter [Erfassen von Blobs in Azure Data Explorer durch das Abonnieren von Event Grid-Benachrichtigungen](ingest-data-event-grid.md#generate-sample-data).
+
+> [!NOTE]
+> * Das Umbenennen von Verzeichnissen ist in ADLSv2 möglich, löst jedoch keine Ereignisse zur *Umbenennung von Blobs* und keine Erfassung von Blobs innerhalb des Verzeichnisses aus. Wenn Sie Blobs nach dem Umbenennen erfassen möchten, benennen Sie die gewünschten Blobs direkt um.
+> * Wenn Sie Filter zum Nachverfolgen bestimmter Themen beim [Erstellen der Datenverbindung](ingest-data-event-grid.md#create-an-event-grid-data-connection-in-azure-data-explorer) oder beim [manuellen Erstellen von Event Grid-Ressourcen](ingest-data-event-grid-manual.md#create-an-event-grid-subscription) festgelegt haben, werden diese Filter auf den Zieldateipfad angewendet.
+
 ## <a name="delete-blobs-using-storage-lifecycle"></a>Löschen von Blobs mithilfe des Speicherlebenszyklus
 
 Azure Data Explorer löscht Blobs nach der Erfassung nicht. Informationen zum Löschen von Blobs finden Sie unter [Azure Blob Storage-Lebenszyklus](/azure/storage/blobs/storage-lifecycle-management-concepts?tabs=azure-portal). Es wird empfohlen, die Blobs für drei bis fünf Tage beizubehalten.
@@ -89,3 +97,4 @@ Azure Data Explorer löscht Blobs nach der Erfassung nicht. Informationen zum L�
 * [Erstellen einer Event Grid-Datenverbindung für Azure Data Explorer mit C#](data-connection-event-grid-csharp.md)
 * [Erstellen einer Event Grid-Datenverbindung für Azure Data Explorer mit Python](data-connection-event-grid-python.md)
 * [Erstellen einer Event Grid-Datenverbindung für Azure Data Explorer mit einer Azure Resource Manager-Vorlage](data-connection-event-grid-resource-manager.md)
+* [Erfassen von CSV-Daten aus einem Container in einer neuen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-new-table.md)

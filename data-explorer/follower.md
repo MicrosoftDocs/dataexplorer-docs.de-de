@@ -7,12 +7,12 @@ ms.reviewer: gabilehner
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/06/2020
-ms.openlocfilehash: 4d8574e0b68c234f1cef0ba49b37eb869e61c142
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 359758cfc8a394aa7c9d9d7a3db3e6a62d84120a
+ms.sourcegitcommit: 4c6bd4cb1eb1f64d84f844d4e7aff2de3a46b009
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342602"
+ms.lasthandoff: 12/23/2020
+ms.locfileid: "97756414"
 ---
 # <a name="use-follower-database-to-attach-databases-in-azure-data-explorer"></a>Verwenden der Follower-Datenbank zum Anfügen von Datenbanken in Azure Data Explorer
 
@@ -256,7 +256,7 @@ Sie können die Azure Resource Manager-Vorlage über das [Azure-Portal](https://
 |Name der angehängten Datenbankkonfigurationen    |    Der Name des Objekts für angefügte Datenbankkonfigurationen. Der Name kann eine beliebige Zeichenfolge sein, die auf Clusterebene eindeutig ist.     |
 |Datenbankname     |      Der Name der zu folgenden Datenbank. Wenn Sie allen Datenbanken des Leaders folgen möchten, verwenden Sie „*“.   |
 |Leader-Clusterressourcen-ID    |   Die Ressourcen-ID des Leader-Clusters.      |
-|Standardänderungsart für Prinzipale    |   Die Standardänderungsart für Prinzipale. Dies kann `Union`, `Replace` oder `None` sein. Weitere Informationen zur Standardänderungsart für Prinzipale finden Sie unter [Steuerungsbefehl für Prinzipaländerungsart](kusto/management/cluster-follower.md#alter-follower-database-principals-modification-kind).      |
+|Standardänderungsart für Prinzipale    |   Die Standardänderungsart für Prinzipale. Kann `Union`, `Replace` oder `None` sein. Weitere Informationen zur Standardänderungsart für Prinzipale finden Sie unter [Steuerungsbefehl für Prinzipaländerungsart](kusto/management/cluster-follower.md#alter-follower-database-principals-modification-kind).      |
 |Standort   |   Der Speicherort aller Ressourcen. Der Leader und der Follower müssen sich am gleichen Speicherort befinden.       |
 
 ---
@@ -451,9 +451,9 @@ Wenn Sie eine Datenbank anfügen, geben Sie die **Standardänderungsart für Pri
 
 |**Kind** |**Beschreibung**  |
 |---------|---------|
-|**Union**     |   Die angefügten Datenbankprinzipale umfassen immer die ursprünglichen Datenbankprinzipale und zusätzliche neue Prinzipale, die der Follower-Datenbank hinzugefügt werden.      |
+|**Union**     |   Die angefügten Datenbankprinzipale umfassen immer die ursprünglichen Datenbankprinzipale und weitere neue Prinzipale, die der Follower-Datenbank hinzugefügt werden.      |
 |**Replace**   |    Keine Vererbung von Prinzipalen aus der ursprünglichen Datenbank. Für die angefügte Datenbank müssen neue Prinzipale erstellt werden.     |
-|**None**   |   Die angefügten Datenbankprinzipale umfassen nur die Prinzipale der ursprünglichen Datenbank ohne zusätzliche Prinzipale.      |
+|**None**   |   Die angefügten Datenbankprinzipale umfassen nur die Prinzipale der ursprünglichen Datenbank ohne weitere Prinzipale.      |
 
 Weitere Informationen zur Verwendung von Steuerungsbefehlen zum Konfigurieren der autorisierten Prinzipale finden Sie unter [Steuerungsbefehle zum Verwalten eines Follower-Clusters](kusto/management/cluster-follower.md).
 
@@ -465,11 +465,19 @@ Das Verwalten der Berechtigung für schreibgeschützte Datenbanken entspricht de
 
 Der Administrator der Follower-Datenbank kann die [Cacherichtlinie](kusto/management/cache-policy.md) der angefügten Datenbank oder einer der zugehörigen Tabellen im Hostingcluster ändern. Die Standardeinstellung ist die Beibehaltung der Leader-Datenbanksammlung von Cacherichtlinien auf Datenbank- und Tabellenebene. Sie können beispielsweise über eine 30-Tage-Cacherichtlinie für die Leader-Datenbank zur monatlichen Berichterstellung und eine 3-Tage-Cacherichtlinie für die Follower-Datenbank zum ausschließlichen Abfragen der aktuellen Daten für die Problembehandlung verfügen. Weitere Informationen zur Verwendung von Steuerungsbefehlen zum Konfigurieren der Cacherichtlinie für die Follower-Datenbank oder -Tabelle finden Sie unter [Steuerungsbefehle zum Verwalten eines Follower-Clusters](kusto/management/cluster-follower.md).
 
+## <a name="notes"></a>Hinweise
+
+* Wenn allen Datenbanken vom Follower-Cluster gefolgt wird und Konflikte zwischen den Datenbanken von Leader-/Follower-Clustern auftreten, werden diese Konflikte wie folgt gelöst:
+  * Eine im Follower-Cluster erstellte Datenbank mit dem Namen *DB* hat Vorrang vor einer Datenbank mit demselben Namen, die im Leader-Cluster erstellt wurde. Daher muss die Datenbank *DB* im Follower-Cluster entfernt oder umbenannt werden, damit der Follower-Cluster die Datenbank *DB* des Leaders beinhalten kann.
+  * Eine Datenbank mit dem Namen *DB*, der mindestens zwei Leader-Cluster folgen, wird willkürlich aus *einem* Leader-Cluster ausgewählt, und ihr wird nicht mehr als einmal gefolgt.
+* Befehle zum Anzeigen der [Clusteraktivitätsprotokolle und des Verlaufs](kusto/management/systeminfo.md), die in einem Follower-Cluster ausgeführt werden, zeigen die Aktivität und den Verlauf für den Follower-Cluster. Ihre Resultsets enthalten nicht die Ergebnisse der Leader-Cluster.
+  * Beispiel: Mit einem Befehl vom Typ `.show queries`, der für den Follower-Cluster ausgeführt wird, werden nur Abfragen angezeigt, die für Datenbanken ausgeführt wurden, denen der Follower-Cluster folgt. Abfragen, die für die gleiche Datenbank im Leader-Cluster ausgeführt wurden, werden nicht angezeigt.
+  
 ## <a name="limitations"></a>Einschränkungen
 
 * Die Leader- und Follower-Cluster müssen sich in derselben Region befinden.
 * Die [Streamingerfassung](ingest-data-streaming.md) kann für eine Datenbank, der gefolgt wird, nicht verwendet werden.
-* Datenverschlüsselung mithilfe von [kundenseitig verwalteten Schlüsseln](security.md#customer-managed-keys-with-azure-key-vault) wird auf Leader- und Follower-Clustern nicht unterstützt. 
+* Datenverschlüsselung mithilfe von [kundenseitig verwalteten Schlüsseln](security.md#customer-managed-keys-with-azure-key-vault) wird in Leader- und Follower-Clustern nicht unterstützt. 
 * Sie können eine Datenbank, die an einen anderen Cluster angefügt ist, erst nach dem Trennen löschen.
 * Sie können einen Cluster mit einer Datenbank, die an einen anderen Cluster angefügt ist, erst nach dem Trennen löschen.
 

@@ -4,12 +4,12 @@ ms.service: data-explorer
 ms.topic: include
 ms.date: 03/25/2020
 ms.author: orspodek
-ms.openlocfilehash: 081ba777f6ab19be774f127383e359ff761e7f0e
-ms.sourcegitcommit: 47a002b7032a05ef67c4e5e12de7720062645e9e
+ms.openlocfilehash: 6e9c489850d77155ca4832275883c7749edd6284
+ms.sourcegitcommit: 79d923d7b7e8370726974e67a984183905f323ff
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/15/2020
-ms.locfileid: "81492842"
+ms.lasthandoff: 12/08/2020
+ms.locfileid: "98571759"
 ---
 ## <a name="create-a-new-key-vault"></a>Erstellen eines neuen Schlüsseltresors
 
@@ -25,13 +25,24 @@ $keyVault = New-AzKeyVault -Name <key-vault> `
 
 ## <a name="configure-the-key-vault-access-policy"></a>Konfigurieren der Zugriffsrichtlinie für den Schlüsseltresor
 
-Konfigurieren Sie als Nächstes die Zugriffsrichtlinie für die Key Vault-Instanz, sodass der Cluster die Berechtigung für den Zugriff darauf erhält. In diesem Schritt verwenden Sie die systemseitig zugewiesene verwaltete Identität, die Sie zuvor dem Cluster zugewiesen haben. Rufen Sie zum Festlegen der Zugriffsrichtlinie für den Schlüsseltresor [Set-AzKeyVaultAccessPolicy](/powershell/module/az.keyvault/set-azkeyvaultaccesspolicy) auf. Ersetzen Sie die Platzhalterwerte in Klammern durch Ihre eigenen Werte, und verwenden Sie die in den vorherigen Beispielen definierten Variablen.
+Konfigurieren Sie als Nächstes die Zugriffsrichtlinie für die Key Vault-Instanz, sodass der Cluster die Berechtigung für den Zugriff darauf erhält. In diesem Schritt verwenden Sie entweder die systemseitig zugewiesene oder die benutzerseitig zugewiesene verwaltete Identität, die Sie zuvor dem Cluster zugewiesen haben. Rufen Sie zum Festlegen der Zugriffsrichtlinie für den Schlüsseltresor [Set-AzKeyVaultAccessPolicy](/powershell/module/az.keyvault/set-azkeyvaultaccesspolicy) auf. Ersetzen Sie die Platzhalterwerte in Klammern durch Ihre eigenen Werte, und verwenden Sie die in den vorherigen Beispielen definierten Variablen.
+
+Verwenden Sie für die systemseitig zugewiesene Identität die Prinzipal-ID (principalId) des Clusters:
 
 ```azurepowershell-interactive
 Set-AzKeyVaultAccessPolicy `
     -VaultName $keyVault.VaultName `
     -ObjectId $cluster.Identity.PrincipalId `
-    -PermissionsToKeys wrapkey,unwrapkey,get,recover
+    -PermissionsToKeys wrapkey,unwrapkey,get
+```
+
+Verwenden Sie für die benutzerseitig zugewiesene Identität die Prinzipal-ID (principalId) der Identität:
+
+```azurepowershell-interactive
+Set-AzKeyVaultAccessPolicy `
+    -VaultName $keyVault.VaultName `
+    -ObjectId $userIdentity.Properties.PrincipalId `
+    -PermissionsToKeys wrapkey,unwrapkey,get
 ```
 
 ## <a name="create-a-new-key"></a>Erstellen eines neuen Schlüssels

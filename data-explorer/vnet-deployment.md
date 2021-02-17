@@ -7,12 +7,12 @@ ms.reviewer: basaba
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/31/2019
-ms.openlocfilehash: 196d1f5a72b0b99186f4739ce6b6a25c23b6c325
-ms.sourcegitcommit: 2bdb904e6253c9ceb8f1eaa2da35fcf27e13a2cd
+ms.openlocfilehash: 834cd41548155dfbc73c8b501c49a028b4eff182
+ms.sourcegitcommit: 8468c6886dc097032ef6db86992a5e8c9b18786e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/10/2020
-ms.locfileid: "97091367"
+ms.lasthandoff: 01/27/2021
+ms.locfileid: "98912045"
 ---
 # <a name="deploy-azure-data-explorer-cluster-into-your-virtual-network"></a>Bereitstellen von Azure Data Explorer-Clustern in Ihrem virtuellen Netzwerk
 
@@ -131,7 +131,7 @@ Erstellen Sie einen [privaten Endpunkt](/azure/private-link/private-endpoint-ove
 | Japan, Westen | 40.81.184.86 |
 | Korea, Mitte | 40.82.156.149 |
 | Korea, Süden | 40.80.234.9 |
-| USA Nord Mitte | 40.81.45.254 |
+| USA Nord Mitte | 40.81.43.47 |
 | Nordeuropa | 52.142.91.221 |
 | Südafrika, Norden | 102.133.129.138 |
 | Südafrika, Westen | 102.133.0.97 |
@@ -194,7 +194,7 @@ Erstellen Sie einen [privaten Endpunkt](/azure/private-link/private-endpoint-ove
 | USA, Westen-Mitte | 168.61.212.201, 23.101.115.123 |
 | Europa, Westen | 23.97.212.5, 213.199.136.176 |
 | Indien, Westen | 23.99.5.162 |
-| USA (Westen) | 23.99.5.162, 13.88.13.50 |
+| USA (Westen) | 23.99.5.162, 13.88.13.50, 104.210.32.14 |
 | USA, Westen 2 | 23.99.5.162, 104.210.32.14, 52.183.35.124 |
 
 ## <a name="disable-access-to-azure-data-explorer-from-the-public-ip"></a>Deaktivieren des Zugriffs auf Azure Data Explorer über die öffentliche IP-Adresse

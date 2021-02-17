@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/19/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 13dac735127815c00ac8c1128c710e26208406d7
-ms.sourcegitcommit: d4b359e817e002fba7320132732ce6d9cee97415
+ms.openlocfilehash: 0dffa044ff47748d46b3ab4758bb61684bb8bb10
+ms.sourcegitcommit: db99b9d0b5f34341ad3be38cc855c9b80b3c0b0e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/18/2021
-ms.locfileid: "98541494"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100359725"
 ---
 # <a name="string-operators"></a>Zeichenfolgenoperatoren
 
@@ -55,6 +55,7 @@ Operator        |BESCHREIBUNG                                                   
 `!~`            |Not Equals                                                        |Nein            |`"aBc" !~ "xyz"`
 `has`           |Rechte Seite (RS) ist ein ganzer Begriff innerhalb der linken Seite (LS)     |Nein            |`"North America" has "america"`
 `!has`          |RS ist kein vollständiger Begriff in LS                                     |Nein            |`"North America" !has "amer"` 
+[`has_all`](has-all-operator.md)       |Identisch mit `has`, funktioniert aber für alle Elemente                    |Nein            |`"North and South America" has_all("south", "north")`
 [`has_any`](has-anyoperator.md)       |Identisch mit `has`, funktioniert aber für jedes der Elemente                    |Nein            |`"North America" has_any("south", "north")`
 `has_cs`        |RS ist ein vollständiger Begriff in LS                                        |Ja           |`"North America" has_cs "America"`
 `!has_cs`       |RS ist kein vollständiger Begriff in LS                                     |Ja           |`"North America" !has_cs "amer"` 

@@ -7,13 +7,13 @@ ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/19/2020
-ms.custom: contperfq1
-ms.openlocfilehash: e92717e68794b21a0c991806aa7319e528433afb
-ms.sourcegitcommit: c6cb2b1071048daa872e2fe5a1ac7024762c180e
+ms.custom: contperf-fy21q1
+ms.openlocfilehash: fb428e443559b579bab4764283ce124f9d9ec192
+ms.sourcegitcommit: 62eff65b320ce4ca53eabed6156eb9fe5b77f548
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/07/2020
-ms.locfileid: "96774519"
+ms.lasthandoff: 02/01/2021
+ms.locfileid: "99224212"
 ---
 # <a name="monitor-azure-data-explorer-performance-health-and-usage-with-metrics"></a>Überwachen der Azure Data Explorer-Leistung, -Integrität und -Nutzung mit Metriken
 
@@ -92,18 +92,31 @@ Exportauslastung |    Percent | Max   | Die genutzte Exportkapazität relativ zu
 
 Erfassungsmetriken dienen zum Nachverfolgen der allgemeinen Integrität und Leistung von Erfassungsvorgängen anhand von Aspekten wie Wartezeit, Ergebnissen und Volumen.
 
+> [!NOTE]
+> * [Wenden Sie Filter auf Diagramme an](/azure/azure-monitor/platform/metrics-charts#apply-filters-to-charts), um partielle Daten nach Dimensionen darzustellen. Untersuchen Sie beispielsweise die Erfassung in einem bestimmten `Database`-Element.
+> * [Wenden Sie die Teilung auf ein Diagramm an](/azure/azure-monitor/platform/metrics-charts#apply-splitting-to-a-chart), um Daten nach verschiedenen Komponenten zu visualisieren. Dieser Vorgang ist nützlich für die Analyse von Metriken, die in den einzelnen Schritten der Erfassungspipeline gemeldet werden, z. B. `Blobs received`.
+
 |**Metrik** | **Einheit** | **Aggregation** | **Beschreibung der Metrik** | **Dimensionen** |
 |---|---|---|---|---|
-| Batchblob – Anzahl | Anzahl | Avg, Max, Min | Anzahl der Datenquellen in einem abgeschlossenen Batch für die Erfassung | Datenbank |
-| Batchdauer | Sekunden | Avg, Max, Min | Dauer der Batchverarbeitungsphase im Erfassungsflow  | Datenbank |
-| Batchgröße | Byte | Avg, Max, Min | Nicht komprimierte erwartete Datengröße in einem aggregierten Batch für die Erfassung | Datenbank |
-| Verarbeitete Batches | Anzahl | Avg, Max, Min | Anzahl der für die Erfassung abgeschlossenen Batches `Batching Type`: Gibt an, ob die Batchverarbeitungszeit oder der Grenzwert für Datengröße/Dateianzahl in der [Batchrichtlinie](./kusto/management/batchingpolicy.md) erreicht wurde. | Datenbank, Batchverarbeitungstyp |
-| Wartezeit bei der Ermittlung | Sekunden | Avg, Max, Min | Die Zeit zwischen dem Hinzufügen von Daten zur Warteschlange und der Erkennung durch die Datenverbindung. Diese Zeit ist nicht in der **Gesamterfassungsdauer für Azure Data Explorer** oder in **KustoEventAge (Wartezeit bei der Erfassung)** enthalten. | Datenbank, Tabelle, Art der Datenverbindung, Name der Datenverbindung |
-| Verarbeitete Ereignisse (für Event/IoT Hub) | Anzahl | Max, Min, Sum | Gesamtzahl der Ereignisse, die von Event Hubs gelesen und vom Cluster verarbeitet werden. Die Ereignisse werden danach unterteilt, ob sie vom Clustermodul abgelehnt oder akzeptiert werden. | EventStatus |
+| Batchblob – Anzahl  | Anzahl | Avg, Max, Min | Anzahl der Datenquellen in einem abgeschlossenen Batch für die Erfassung | Datenbank |
+| Batchdauer    | Sekunden | Avg, Max, Min | Dauer der Batchverarbeitungsphase im Erfassungsflow  | Datenbank |
+| Batchgröße        | Byte | Avg, Max, Min | Nicht komprimierte erwartete Datengröße in einem aggregierten Batch für die Erfassung | Datenbank |
+| Verarbeitete Batches | Anzahl | Sum, Max, Min | Anzahl der für die Erfassung abgeschlossenen Batches <br> `Batching Type`: Gibt an, ob die Fertigstellung des Batches auf der Batchverarbeitungszeit oder dem Grenzwert für Datengröße/Dateianzahl in der [Batchrichtlinie](./kusto/management/batchingpolicy.md) basierte. | Datenbank, Batchverarbeitungstyp |
+| Empfangene Blobs    | Anzahl | Sum, Max, Min | Die Anzahl der von einer Komponente aus dem Eingabestream empfangenen Blobs. <br> <br> Verwenden Sie **Teilung anwenden**, um die einzelnen Komponenten zu analysieren. | Datenbank, Komponententyp, Komponentenname |
+| Verarbeitete Blobs   | Anzahl | Sum, Max, Min | Die Anzahl der von einer Komponente verarbeiteten Blobs. <br> <br> Verwenden Sie **Teilung anwenden**, um die einzelnen Komponenten zu analysieren. | Datenbank, Komponententyp, Komponentenname |
+| Gelöschte Blobs     | Anzahl | Sum, Max, Min | Die Anzahl der von einer Komponente dauerhaft gelöschten Blobs. Für jeden dieser Blobs wird eine Metrik vom Typ `Ingestion result` mit der Fehlerursache gesendet. <br> <br> Verwenden Sie **Teilung anwenden**, um die einzelnen Komponenten zu analysieren. | Datenbank, Komponententyp, Komponentenname |
+| Wartezeit bei der Ermittlung | Sekunden | Avg | Die Zeit zwischen dem Einreihen von Daten in die Warteschlange und der Erkennung durch die Datenverbindungen. Diese Zeit ist nicht in der Metrik **Phasenlatenz** oder **Erfassungslatenz** enthalten. | Komponententyp, Komponentenname |
+| Empfangene Ereignisse   | Anzahl | Sum, Max, Min | Anzahl der von den Datenverbindungen aus dem Eingabestream empfangenen Ereignisse | Komponententyp, Komponentenname |
+| Verarbeitete Ereignisse  | Anzahl | Sum, Max, Min | Anzahl der von den Datenverbindungen verarbeiteten Ereignisse | Komponententyp, Komponentenname | 
+| Gelöschte Ereignisse    | Anzahl | Sum, Max, Min | Anzahl der von den Datenverbindungen dauerhaft gelöschten Ereignisse | Komponententyp, Komponentenname | 
+| Verarbeitete Ereignisse (für Event/IoT Hub) | Anzahl | Max, Min, Sum | Gesamtzahl der Ereignisse, die von Event Hubs gelesen und vom Cluster verarbeitet werden. Diese Ereignisse werden in zwei Gruppen unterteilt: vom Clustermodul abgelehnte Ereignisse und vom Cluster akzeptierte Ereignisse. | Status |
 | Latenz bei der Erfassung | Sekunden | Avg, Max, Min | Latenz der erfassten Daten ab dem Empfangszeitpunkt der Daten im Cluster bis zu dem Zeitpunkt, zu dem die Daten bereit zum Abfragen sind. Der Zeitraum der Erfassungslatenz richtet sich nach dem Erfassungsszenario. | Keine |
-| Ergebnis der Datenerfassung | Anzahl | Anzahl | Gesamtzahl von nicht erfolgreichen und erfolgreichen Erfassungsvorgängen. <br> <br> Verwenden Sie die Option **Teilung anwenden**, um Buckets mit Erfolgs- und Fehlerergebnissen zu erstellen und die Dimensionen zu analysieren (**Wert** > **Status**).| Status |
+| Ergebnis der Datenerfassung  | Anzahl | SUM | Gesamtzahl von nicht erfolgreichen oder erfolgreichen Erfassungsvorgängen. <br> <br> Verwenden Sie die Option **Teilung anwenden**, um Buckets mit Erfolgs- und Fehlerergebnissen zu erstellen und die Dimensionen zu analysieren (**Wert** > **Status**). <br>Weitere Informationen zu möglichen Fehlerergebnissen finden Sie unter [Erfassungsfehlercodes in Azure Data Explorer](error-codes.md).| Status |
 | Datenerfassungsvolumen (in MB) | Anzahl | Max, Sum | Die Gesamtgröße der im Cluster erfassten Daten (in MB) vor der Komprimierung. | Datenbank |
-| Phasenlatenz | Sekunden | Avg, Max, Min | Gibt an, wie lange die Verarbeitung dieses Datenbatches durch eine bestimmte Komponente dauert. Die gesamte Phasenlatenz für alle Komponenten eines Datenbatches entspricht der Erfassungslatenz. | Datenbank, Art der Datenverbindung, Name der Datenverbindung|
+| Warteschlangenlänge | Anzahl | Avg | Anzahl ausstehender Nachrichten in der Eingabewarteschlange einer Komponente | Komponententyp |
+| Älteste Nachricht in Warteschlange | Sekunden | Avg | Zeit in Sekunden ab dem Zeitpunkt, zu dem die älteste Nachricht in die Eingabewarteschlange einer Komponente eingefügt wurde | Komponententyp | 
+| Größe der empfangenen Daten in Bytes | Byte | Avg, Sum | Größe der von den Datenverbindungen aus dem Eingabestream empfangenen Daten | Komponententyp, Komponentenname |
+| Phasenlatenz | Sekunden | Avg | Zeit ab dem Zeitpunkt, zu dem eine Nachricht von Azure Data Explorer erkannt wird, bis zu dem Zeitpunkt, zu dem ihr Inhalt von einer Erfassungskomponente zur Verarbeitung empfangen wird. <br> <br> Verwenden Sie die Option **Filter anwenden**, und wählen Sie **Komponententyp > EngineStorage** aus, um die gesamte Erfassungslatenz anzuzeigen.| Datenbank, Komponententyp | 
 
 ## <a name="streaming-ingest-metrics"></a>Streamingerfassungsmetriken
 
@@ -124,7 +137,7 @@ Abfrageleistungsmetriken verfolgen die Abfragedauer und Gesamtanzahl gleichzeiti
 |---|---|---|---|---|
 | Abfragedauer | Millisekunden | Avg, Min, Max, Sum | Gesamtzeit bis zum Empfangen der Abfrageergebnisse (ohne Netzwerklatenz). | QueryStatus |
 | Gesamtanzahl gleichzeitiger Abfragen | Anzahl | Avg, Max, Min, Sum | Die Anzahl der Abfragen, die im Cluster parallel ausgeführt werden. Diese Metrik ist eine gute Möglichkeit, um die Auslastung des Clusters einzuschätzen. | Keine |
-| Gesamtanzahl gedrosselter Abfragen | Anzahl | Avg, Max, Min, Sum | Die Anzahl der gedrosselten (abgelehnten) Abfragen im Cluster. Die maximal zulässige Anzahl gleichzeitiger (paralleler) Abfragen wird in der Richtlinie für gleichzeitige Abfragen definiert. | Keine |
+| Gesamtanzahl gedrosselter Abfragen | Anzahl | Avg, Max, Min, Sum | Die Anzahl der gedrosselten (abgelehnten) Abfragen im Cluster. Die maximal zulässige Anzahl gleichzeitiger (paralleler) Abfragen wird in der Richtlinie für die Anforderungsratenbegrenzung definiert. | Keine |
 
 ## <a name="materialized-view-metrics"></a>Metriken der materialisierten Sicht
 

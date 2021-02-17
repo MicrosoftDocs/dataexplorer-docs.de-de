@@ -6,13 +6,13 @@ ms.author: orspodek
 ms.reviewer: gabil
 ms.service: data-explorer
 ms.topic: how-to
-ms.date: 09/09/2020
-ms.openlocfilehash: 08093fd06fed1facc1d8e55d98785abb952632c8
-ms.sourcegitcommit: 95527c793eb873f0135c4f0e9a2f661ca55305e3
+ms.date: 01/05/2021
+ms.openlocfilehash: 523fc2d9fcde2ec0626225c3179676a9cc2d653d
+ms.sourcegitcommit: 18092550a9f55de314dd337b7ee7e00e8733a35f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90534059"
+ms.lasthandoff: 01/06/2021
+ms.locfileid: "97941300"
 ---
 # <a name="visualize-data-from-azure-data-explorer-in-grafana"></a>Visualisieren von Daten über Azure Data Explorer in Grafana
 
@@ -52,7 +52,7 @@ Wenn der Dienstprinzipal der Rolle *Betrachter* zugeordnet ist, geben Sie jetzt 
 
     ![Verbindungsname und -typ](media/grafana/connection-name-type.png)
 
-1. Geben Sie den Namen Ihres Clusters in der Form „https://{ClusterName}.{Region}.kusto.windows.net“ ein. Geben Sie die anderen Werte aus dem Azure-Portal oder der Befehlszeilenschnittstelle ein. Eine Zuordnung finden Sie in der Tabelle unten dem folgenden Bild.
+1. Geben Sie unter **Einstellungen** > **Verbindungsdetails** den Namen Ihres Clusters in der Form „https://{ClusterName}.{Region}.kusto.windows.net“ ein. Geben Sie die anderen Werte aus dem Azure-Portal oder der Befehlszeilenschnittstelle ein. Eine Zuordnung finden Sie in der Tabelle unten dem folgenden Bild.
 
     ![Verbindungseigenschaften](media/grafana/connection-properties.png)
 
@@ -67,6 +67,31 @@ Wenn der Dienstprinzipal der Rolle *Betrachter* zugeordnet ist, geben Sie jetzt 
 1. Wählen Sie **Speichern und testen** aus.
 
     Wenn der Test erfolgreich war, wechseln Sie zum nächsten Abschnitt. Sollten irgendwelche Probleme auftreten, überprüfen Sie die in Grafana angegebenen Werte, und wiederholen Sie die vorherigen Schritte.
+
+### <a name="optimize-queries"></a>Optimieren von Abfragen
+
+Es gibt zwei Features, die für die Abfrageoptimierung verwendet werden können:
+* [Optimieren der Dashboardrenderingleistung für Abfragen](#optimize-dashboard-query-rendering-performance-using-query-results-caching)
+* [Aktivieren der schwachen Konsistenz](#enable-weak-consistency)
+
+Nehmen Sie zum Ausführen der Optimierung unter **Datenquellen** > **Einstellungen** > **Abfrageoptimierungen** die erforderlichen Änderungen vor.
+
+:::image type="content" source="media/grafana/query-optimization.PNG" alt-text="Bereich für die Abfrageoptimierung":::
+
+#### <a name="optimize-dashboard-query-rendering-performance-using-query-results-caching"></a>Optimieren der Dashboardrenderingleistung für Abfragen mithilfe eines Abfrageergebniscache 
+
+Wenn ein Dashboard oder ein visuelles Element mehrmals von mindestens einem Benutzer gerendert wird, sendet Grafana standardmäßig mindestens eine Abfrage an Azure Data Explorer. Aktivieren Sie den [Abfrageergebniscache](kusto/query/query-results-cache.md), um die Dashboardrenderingleistung zu verbessern und die Auslastung des Azure Data Explorer-Clusters zu verringern. Während des angegebenen Zeitraums verwendet Azure Data Explorer den Ergebniscache zum Abrufen der vorherigen Ergebnisse und führt keine unnötige Abfrage aus. Diese Funktion ist besonders effektiv, um die Ressourcenauslastung zu reduzieren und die Leistung zu steigern, wenn mehrere Benutzer dasselbe Dashboard verwenden.
+
+Führen Sie zum Aktivieren des Ergebniscacherenderings im Bereich **Abfrageoptimierungen** die folgenden Schritte aus:
+1. Deaktivieren Sie **Use dynamic caching** (Dynamischen Cache verwenden). 
+1. Geben Sie unter **Cache Max Age** (Maximales Alter des Cache) den Zeitraum in Minuten ein, in dem Sie zwischengespeicherte Ergebnisse verwenden möchten.
+
+#### <a name="enable-weak-consistency"></a>Aktivieren der schwachen Konsistenz
+
+Cluster werden mit starker Konsistenz konfiguriert. Dadurch wird sichergestellt, dass Abfrageergebnisse auf dem neuesten Stand sind und alle Änderungen im Cluster beinhalten.
+Wenn Sie die schwache Konsistenz aktivieren, kann bei Abfrageergebnissen nach Clusteränderungen eine Verzögerung von 1 bis 2 Minuten auftreten. Andererseits kann schwache Konsistenz das visuelle Rendering erheblich beschleunigen. Wenn die unmittelbare Konsistenz nicht entscheidend und die Leistung grenzwertig ist, aktivieren Sie schwache Konsistenz, um die Leistung zu steigern. Weitere Informationen zur Abfragekonsistenz finden Sie unter [Abfragekonsistenz](kusto/concepts/queryconsistency.md).
+
+Wählen Sie zum Aktivieren schwacher Konsistenz im Bereich **Abfrageoptimierungen** unter **Datenkonsistenz** die Option **Schwach** aus.
 
 ## <a name="visualize-data"></a>Visualisieren von Daten
 

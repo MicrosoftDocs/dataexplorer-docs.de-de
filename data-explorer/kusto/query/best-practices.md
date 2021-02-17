@@ -9,12 +9,13 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/03/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 762c3075c162ba35bdba539d0e86460c78f3297e
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+adobe-target: true
+ms.openlocfilehash: 87154368a033afe1da7669e71e269081865b689d
+ms.sourcegitcommit: db99b9d0b5f34341ad3be38cc855c9b80b3c0b0e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95511787"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100359912"
 ---
 # <a name="query-best-practices"></a>Best Practices für Abfragen
 
@@ -29,6 +30,7 @@ Es stehen einige bewährte Methoden zur Verfügung, damit die Abfrage schneller 
 |  | Verwenden Sie `contains_cs`         | Verwenden Sie nicht `contains`.        | Wenn Sie `has`/`has_cs` verwenden können und `contains`/`contains_cs` nicht verwenden, ist dies noch besser. |
 | **Durchsuchen von Text**    |    Suchen in einer bestimmten Spalte     |    Verwenden Sie nicht `*`.    |   `*` führt eine Volltextsuche über alle Spalten hinweg durch.    |
 | **Extrahieren von Feldern aus [dynamischen Objekten](./scalar-data-types/dynamic.md) in Millionen von Zeilen**    |  Materialisieren Sie die Spalte zur Erfassungszeit, wenn die meisten Ihrer Abfragen Felder aus dynamischen Objekten aus Millionen von Zeilen extrahieren.      |         | Auf diese Weise fällt die Spaltenextraktion nur ein Mal an.    |
+| **Lookup für seltene Schlüssel/Werte in [dynamischen Objekten](./scalar-data-types/dynamic.md)**    |  Verwenden Sie `MyTable | where DynamicColumn has "Rare value" | where DynamicColumn.SomeKey == "Rare value"` | Verwenden Sie nicht `MyTable | where DynamicColumn.SomeKey == "Rare value"`. | Auf diese Weise werden die meisten Datensätze herausgefiltert, und die JSON-Analyse wird nur für den Rest ausgeführt. |
 | **`let`-Anweisung mit einem Wert, den Sie mehrmals verwenden** | Verwenden Sie die [materialize()-Funktion](./materializefunction.md). |  |   Weitere Informationen zur Verwendung von `materialize()` finden Sie unter [materialize()](materializefunction.md).|
 | **Anwenden von Konvertierungen auf mehr als 1 Milliarde Datensätze**| Strukturieren Sie die Abfrage neu, um die Datenmenge zu reduzieren, die in die Konvertierung eingespeist wird.| Konvertieren Sie keine großen Datenmengen, wenn dies vermieden werden kann. | |
 | **Neue Abfragen** | Verwenden Sie `limit [small number]` oder `count` am Ende. | |     Das Ausführen von ungebundenen Abfragen für unbekannte Datasets kann zu Ergebnissen im GB-Bereich führen, die an den Client zurückgegeben werden, was zu einer langsamen Reaktion und hoher Auslastung des Clusters führt.|

@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 615b2f681c22237f9d14ad92e285a564c249857e
-ms.sourcegitcommit: d1c2433df183d0cfbfae4d3b869ee7f9cbf00fe4
+ms.openlocfilehash: a50900a5ea0f0c3d8f25e68a606572093af07432
+ms.sourcegitcommit: db99b9d0b5f34341ad3be38cc855c9b80b3c0b0e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "99586372"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100359606"
 ---
 # <a name="query-limits"></a>Abfragegrenzwerte
 
@@ -120,7 +120,9 @@ set maxmemoryconsumptionperiterator=68719476736;
 MyTable | ...
 ```
 
-In vielen Fällen lässt sich das Überschreiten dieses Grenzwerts vermeiden, indem dem Dataset Stichproben entnommen werden. Die folgenden zwei Abfragen zeigen, wie die Stichprobenentnahme erfolgt. Die erste ist eine statistische Stichprobenentnahme, bei der ein Zufallszahlengenerator verwendet wird. Die zweite ist eine deterministische Stichprobenentnahme, die durch das Hashing einer Spalte aus dem Dataset erfolgt, in der Regel eine ID.
+Verwendet die Abfrage den Operator `summarize`, `join` oder `make-series`, können Sie die Strategie [Shuffleabfrage](../query/shufflequery.md) nutzen, um die Arbeitsspeicherauslastung auf einem einzelnen Computer zu reduzieren.
+
+In anderen Fällen können Sie Stichproben für das Dataset entnehmen, um die Überschreitung dieses Grenzwerts zu vermeiden. Die folgenden zwei Abfragen zeigen, wie die Stichprobenentnahme erfolgt. Die erste Abfrage ist eine statistische Stichprobenentnahme, bei der ein Zufallszahlengenerator verwendet wird. Die zweite Abfrage ist eine deterministische Stichprobenentnahme, die durch das Hashing einer Spalte aus dem Dataset erfolgt, in der Regel eine ID.
 
 ```kusto
 T | where rand() < 0.1 | ...
@@ -142,19 +144,7 @@ MyTable | ...
 
 Wird `max_memory_consumption_per_query_per_node` mehrmals festgelegt (beispielsweise in Clientanforderungseigenschaften und mithilfe einer `set`-Anweisung), gilt der niedrigere Wert.
 
-## <a name="limit-on-accumulated-string-sets"></a>Grenzwert für akkumulierte Zeichenfolgensätze
-
-In verschiedenen Abfragevorgängen muss Kusto Zeichenfolgenwerte „sammeln“ und diese intern puffern, bevor mit der Erzeugung der Ergebnisse begonnen wird. Diese akkumulierten Zeichenfolgensätze sind hinsichtlich ihrer Größe und der Anzahl der Elemente, die sie enthalten können, beschränkt. Außerdem sollte jede einzelne Zeichenfolge ein bestimmtes Limit nicht überschreiten.
-Das Überschreiten eines dieser Limits führt zu einem der folgenden Fehler:
-
-```
-Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too large and exceeds the limit of ...GB (see https://aka.ms/kustoquerylimits)')
-
-Runaway query (E_RUNAWAY_QUERY). (message: 'Accumulated string array getting too large and exceeds the maximum count of ..GB items (see http://aka.ms/kustoquerylimits)')
-```
-
-Zurzeit gibt es keinen Switch, mit dem sich die maximale Größe von Zeichenfolgensätzen erhöhen lässt.
-Um dieses Problem zu umgehen, formulieren Sie die Abfrage so neu, dass die Menge der zu puffernden Daten verringert wird. Nicht benötigte Spalten können wegprojiziert werden, bevor sie von Operatoren wie „join“ und „summarize“ verwendet werden. Oder Sie können die [Shuffleabfrage](../query/shufflequery.md)-Strategie verwenden.
+Verwendet die Abfrage den Operator `summarize`, `join` oder `make-series`, können Sie die Strategie [Shuffleabfrage](../query/shufflequery.md) nutzen, um die Arbeitsspeicherauslastung auf einem einzelnen Computer zu reduzieren.
 
 ## <a name="limit-execution-timeout"></a>Grenzwert für Ausführungstimeout
 

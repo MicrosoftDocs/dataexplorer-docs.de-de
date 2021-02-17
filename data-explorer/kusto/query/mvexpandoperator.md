@@ -9,48 +9,64 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 02/24/2019
 ms.localizationpriority: high
-ms.openlocfilehash: e439fff119e005e44a0649fe22cadf3614ce036d
-ms.sourcegitcommit: 555f3da35fe250fabd35fcc6014bf055ef8405db
+ms.openlocfilehash: 956c24fa70df89f5bf99d4de12a8b07da6cb6912
+ms.sourcegitcommit: db99b9d0b5f34341ad3be38cc855c9b80b3c0b0e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/07/2021
-ms.locfileid: "97972497"
+ms.lasthandoff: 02/14/2021
+ms.locfileid: "100359980"
 ---
 # <a name="mv-expand-operator"></a>mv-expand-Operator
 
-Erweitert das Array oder den Eigenschaftenbehälter mit mehreren Werten.
+Erweitert dynamische Arrays oder Eigenschaftenbehälter mit mehreren Werten auf mehrere Datensätze.
 
-`mv-expand` wird auf ein Array oder einen Eigenschaftenbehälter des Typs [dynamisch](./scalar-data-types/dynamic.md) angewendet, sodass jeder Wert in der Sammlung eine gesonderte Zeile erhält. Alle anderen Spalten in einer erweiterten Zeile werden dupliziert. 
+`mv-expand` kann als Gegenteil der Aggregationsoperatoren beschrieben werden, die mehrere Werte in einem einzelnen Array oder Eigenschaftenbehälter des Typs [dynamisch](./scalar-data-types/dynamic.md) packen, z. B. `summarize` ... `make-list()` und `make-series`.
+Jedes Element im (skalaren) Array oder Eigenschaftenbehälter generiert einen neuen Datensatz in der Ausgabe des Operators. Alle nicht erweiterten Spalten der Eingabe werden in alle Datensätze in der Ausgabe dupliziert.
 
 ## <a name="syntax"></a>Syntax
 
-*T* `| mv-expand ` [`bagexpansion=`(`bag` | `array`)] [`with_itemindex=`*IndexColumnName*] *ColumnName* [`,` *ColumnName* ...] [`limit` *Rowlimit*]
+*T* `| mv-expand ` [`bagexpansion=`(`bag` | `array`)] [`with_itemindex=`*IndexColumnName*] *ColumnName* [`to typeof(` *Typename*`)`] [`,` *ColumnName* ...] [`limit` *Rowlimit*]
 
-*T* `| mv-expand ` [`bagexpansion=`(`bag` | `array`)] [*Name* `=`] *ArrayExpression* [`to typeof(`*Typename*`)`] [, [*Name* `=`] *ArrayExpression* [`to typeof(`*Typename*`)`] ...] [`limit` *Rowlimit*]
+*T* `| mv-expand ` [`bagexpansion=`(`bag` | `array`)] *Name* `=` *ArrayExpression* [`to typeof(`*Typename*`)`] [, [*Name* `=`] *ArrayExpression* [`to typeof(`*Typename*`)`] ...] [`limit` *Rowlimit*]
 
 ## <a name="arguments"></a>Argumente
 
-* *ColumnName:* Im Ergebnis werden Arrays in der benannten Spalte auf mehrere Zeilen erweitert. 
-* *ArrayExpression:* Ein Ausdruck, der ein Array zurückgibt. Bei Verwendung dieses Formulars wird eine neue Spalte hinzugefügt, und die vorhandene wird beibehalten.
+* *ColumnName*, *ArrayExpression*: Ein Spaltenverweis oder ein skalarer Ausdruck mit einem Wert vom Typ `dynamic`, der ein Array oder einen Eigenschaftenbehälter enthält. Die einzelnen Elemente der obersten Ebene des Arrays oder Eigenschaftenbehälters werden auf mehrere Datensätze erweitert.<br>
+  Wenn *ArrayExpression* verwendet wird und *Name* keinem Eingabespaltennamen entspricht, wird der erweiterte Wert auf eine neue Spalte in der Ausgabe erweitert.
+  Andernfalls wird der vorhandene *ColumnName*-Wert ersetzt.
+
 * *Name:* Ein Name für die neue Spalte.
+
 * *Typname:* Gibt den zugrunde liegenden Typ der Elemente des Arrays an, der zum Typ der Spalte wird, die vom `mv-expand`-Operator generiert wird. Der Vorgang zum Anwenden des Typs ist nur Umwandlung und umfasst keine Analyse oder Typkonvertierung. Arrayelemente, die nicht mit dem deklarierten Typ übereinstimmen, werden zu `null`-Werten.
+
 * *RowLimit:* Die maximale Anzahl von Zeilen, die aus jeder ursprünglichen Zeile generiert werden. Der Standardwert ist 2147483647. 
 
   > [!NOTE]
   > `mvexpand` ist eine Legacy- und veraltete Form des Operators `mv-expand`. Die Legacyversion weist ein Standardzeilenlimit von 128 auf.
 
-* *IndexColumnName:* Wenn `with_itemindex` angegeben wird, enthält die Ausgabe eine zusätzliche Spalte (mit dem Namen *IndexColumnName*), die den Index (beginnend bei 0) des Elements in der ursprünglichen erweiterten Sammlung enthält. 
+* *IndexColumnName:* Wenn `with_itemindex` angegeben wird, enthält die Ausgabe eine weitere Spalte (mit dem Namen *IndexColumnName*), die den Index (beginnend bei 0) des Elements in der ursprünglichen erweiterten Sammlung enthält. 
 
-## <a name="returns"></a>Rückgabe
+## <a name="returns"></a>Gibt zurück
 
-Mehrere Zeilen für alle Werte in jedem Array, die sich in der benannten Spalte oder im Arrayausdruck befinden.
-Wenn mehrere Spalten oder Ausdrücke angegeben werden, werden diese parallel erweitert. Für jede Eingabezeile gibt es so viele Ausgabezeilen, wie Elemente im längsten erweiterten Ausdruck vorhanden sind (kürzere Listen werden mit Nullen aufgefüllt). Wenn der Wert in einer Zeile ein leeres Array ist, wird die Zeile zu nichts erweitert (wird im Resultset nicht angezeigt). Wenn der Wert in einer Zeile jedoch kein Array ist, wird die Zeile unverändert im Resultset beibehalten. 
+Der Operator gibt für jeden Datensatz in der Eingabe null, einen oder mehrere Datensätze in der Ausgabe zurück, wie auf folgende Weise festgelegt:
 
-Die erweiterte Spalte ist immer dynamisch typisiert. Verwenden Sie eine Umwandlung wie `todatetime()` oder `tolong()`, wenn Sie Werte berechnen oder aggregieren möchten.
+1. Nicht erweiterte Eingabespalten werden in der Ausgabe mit ihrem ursprünglichen Wert angezeigt.
+   Wird ein einzelner Eingabedatensatz auf mehrere Ausgabedatensätze erweitert, wird der Wert in alle Datensätze dupliziert.
+
+1. Für jeden erweiterten *ColumnName*- oder *ArrayExpression*-Wert wird die Anzahl von Ausgabedatensätzen für jeden Wert wie [weiter unten](#modes-of-expansion) beschrieben bestimmt. Für jeden Eingabedatensatz wird die maximale Anzahl von Ausgabedatensätzen berechnet. Alle Arrays oder Eigenschaftenbehälter werden parallel erweitert, sodass fehlende Werte (sofern vorhanden) durch NULL-Werte ersetzt werden.
+
+1. Ist der dynamische Wert NULL, wird ein einzelner Datensatz für diesen Wert erstellt (NULL).
+   Ist der dynamische Wert ein leeres Array oder ein leerer Eigenschaftenbehälter, wird kein Datensatz für diesen Wert erstellt.
+   Andernfalls werden so viele Datensätze erstellt, wie es Elemente im dynamischen Wert gibt.
+
+Die erweiterten Spalten sind vom Typ `dynamic`, es sei denn, sie werden explizit mit der Klausel `to typeof()` typisiert.
+
+### <a name="modes-of-expansion"></a>Erweiterungsmodi
 
 Zwei Erweiterungsmodi für Eigenschaftenbehälter werden unterstützt:
-* `bagexpansion=bag` oder `kind=bag`: Eigenschaftenbehälter werden zu Eigenschaftenbehältern mit einem einzelnen Eintrag erweitert. Bei diesem Modus handelt es sich um die Standarderweiterung.
-* `bagexpansion=array` oder `kind=array`: Eigenschaftenbehälter werden zu Arraystrukturen mit den beiden Elementen `[`*Schlüssel*`,`*Wert*`]` erweitert und lassen den einheitlichen Zugriff auf Schlüssel und Werte zu (sowie z. B. auch das Ausführen einer distinct-count-Aggregation über Eigenschaftsnamen). 
+
+* `bagexpansion=bag` oder `kind=bag`: Eigenschaftenbehälter werden zu Eigenschaftenbehältern mit einem einzelnen Eintrag erweitert. Dieser Modus ist der Standardmodus.
+* `bagexpansion=array` oder `kind=array`: Eigenschaftenbehälter werden zu Arraystrukturen mit den beiden Elementen `[`*Schlüssel*`,`*Wert*`]` erweitert und lassen den einheitlichen Zugriff auf Schlüssel und Werte zu. Dieser Modus ermöglicht beispielsweise auch das Ausführen einer distinct-count-Aggregation über Eigenschaftsnamen. 
 
 ## <a name="examples"></a>Beispiele
 
@@ -125,7 +141,7 @@ a|0|System.String|Zeichenfolge
 b|1|System.Object|dynamisch
 c|2|System.Int32|INT
 
-Beachten Sie, dass Spalte `b` als `dynamic` ausgegeben wird, während `c` als `int` ausgegeben wird.
+Beachten Sie, dass die Spalte `b` als `dynamic` zurückgegeben wird, während `c` als `int`zurückgegeben wird.
 
 ### <a name="using-with_itemindex"></a>Verwenden von with_itemindex
 
@@ -144,7 +160,7 @@ range x from 1 to 4 step 1
 |2|1|
 |3|2|
 |4|3|
- 
+
 ## <a name="see-also"></a>Weitere Informationen
 
 * Weitere Beispiele finden Sie unter [Diagrammanzahl von Liveaktivitäten im Lauf der Zeit](./samples.md#chart-concurrent-sessions-over-time).

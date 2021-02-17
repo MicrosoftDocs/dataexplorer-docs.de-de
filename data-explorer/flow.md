@@ -7,12 +7,12 @@ ms.reviewer: dorcohen
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/25/2020
-ms.openlocfilehash: 72d092683b490c7b58335abc59fd5e3aea2f3e26
-ms.sourcegitcommit: 898f67b83ae8cf55e93ce172a6fd3473b7c1c094
+ms.openlocfilehash: 9f537011cb8030b7d82189df169b0447de488430
+ms.sourcegitcommit: 2605250764561a295291b2862cd145572e0036c8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92342942"
+ms.lasthandoff: 12/21/2020
+ms.locfileid: "97708278"
 ---
 # <a name="azure-data-explorer-connector-to-power-automate-preview"></a>Azure Data Explorer-Connector für Power Automate (Vorschauversion)
 
@@ -149,7 +149,7 @@ Sie können einen Schritt in einen beliebigen Flow einbeziehen, um Berichte per 
 1. Geben Sie die E-Mail-Adresse ein, an die der E-Mail-Bericht gesendet werden soll.
 1. Geben Sie den Betreff der E-Mail ein.
 1. Wählen Sie **Codeansicht** aus.
-1. Platzieren Sie den Cursor in das Feld **Text** , und wählen Sie **Dynamischen Inhalt hinzufügen** aus.
+1. Platzieren Sie den Cursor in das Feld **Text**, und wählen Sie **Dynamischen Inhalt hinzufügen** aus.
 1. Wählen Sie **BodyHtml** aus.
     ![Screenshot: Dialogfeld „E-Mail senden“ mit hervorgehobenen Optionen „Text“ und „BodyHtml“](./media/flow/flow-send-email.png)
 1. Wählen Sie **Erweiterte Optionen anzeigen** aus.
@@ -186,7 +186,7 @@ Wählen Sie die Startzeit der Ausführung aus, um zu prüfen, warum bei der Ausf
 
 ## <a name="timeout-exceptions"></a>Timeoutausnahmen
 
-Ihr Flow kann einen Fehler aufweisen und eine „RequestTimeout“-Ausnahme zurückgeben, wenn er länger als sieben Minuten ausgeführt wird.
+Ihr Flow kann einen Fehler aufweisen und die Ausnahme „RequestTimeout“ zurückgeben, wenn er länger als 90 Sekunden ausgeführt wird.
     
 ![Screenshot: Timeoutausnahmefehler bei der Flow-Anforderung](./media/flow/flow-requesttimeout.png)
 
@@ -196,7 +196,7 @@ Dieselbe Abfrage kann erfolgreich in Azure Data Explorer ausgeführt werden, wo 
 
 ## <a name="limitations"></a>Einschränkungen
 
-* An den Client zurückgegebene Ergebnisse sind auf 500.000 Datensätze begrenzt. Der gesamte Arbeitsspeicher für diese Datensätze darf 64 MB und eine Ausführungszeit von sieben Minuten nicht überschreiten.
+* An den Client zurückgegebene Ergebnisse sind auf 500.000 Datensätze begrenzt. Der gesamte Arbeitsspeicher für diese Datensätze darf 64 MB und eine Ausführungszeit von 90 Sekunden nicht überschreiten.
 * Der Connector unterstützt die Operatoren [fork](kusto/query/forkoperator.md) und [facet](kusto/query/facetoperator.md) nicht.
 * Der Flow funktioniert am besten mit Microsoft Edge und Google Chrome.
 

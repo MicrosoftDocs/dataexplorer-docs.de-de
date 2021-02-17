@@ -7,12 +7,12 @@ ms.reviewer: elbirnbo
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/09/2020
-ms.openlocfilehash: 42203d1a7a89cc86a83ed94e03b1505b21476e83
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.openlocfilehash: de07600bc775abcf149b89e2858907915aa997ec
+ms.sourcegitcommit: c4ab6f07e2e5363e331ccd4ecfb6ed813edfbc48
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92902444"
+ms.lasthandoff: 12/21/2020
+ms.locfileid: "97706378"
 ---
 # <a name="create-a-private-endpoint-in-your-azure-data-explorer-cluster-in-your-virtual-network-preview"></a>Erstellen eines privaten Endpunkts in Ihrem Azure Data Explorer-Cluster in Ihrem virtuellen Netzwerk (Vorschau)
 
@@ -55,13 +55,13 @@ Um alle Dienste in Ihrem Cluster sicher miteinander zu verknüpfen, muss der [Pr
 
     |**Einstellung** | **Empfohlener Wert** | **Feldbeschreibung**
     |---|---|---|
-    | Load Balancer | Der Lastenausgleich für Ihre Engine oder *Datenverwaltung* | Wählen Sie den Lastenausgleich aus, der für Ihre Clusterengine erstellt wurde (Lastenausgleich, der auf die öffentliche IP-Adresse Ihrer Engine verweist).  Der Name des Lastenausgleichs für die Engine hat folgendes Format: kucompute-{Clustername}-elb <br> *Der Name des Lastenausgleichs für die Datenverwaltung hat folgendes Format: kudatamgmt-{Clustername}-elb*|
-    | Front-End-IP-Adresse des Lastenausgleichs | Die öffentliche IP-Adresse Ihrer Engine oder Datenverwaltung. | Wählen Sie die öffentliche IP-Adresse des Lastenausgleichs aus. |
+    | Load Balancer | Der Lastenausgleich für Ihre Engine oder *Datenverwaltung* | Wählen Sie den Lastenausgleich aus, der für die Cluster-Engine erstellt wurde. Sie können den externen oder den internen Lastenausgleich verwenden.  <br> **Der Name des Lastenausgleichs für die Engine hat folgendes Format:** <br> Externer Lastenausgleich: *kucompute-{Clustername}-elb* <br> Interner Lastenausgleich: *kucompute-{Clustername}-ilb* <br> **Der Name des Lastenausgleichs für die Datenverwaltung hat folgendes Format:** <br> kudatamgmt-{Clustername}-elb <br> kudatamgmt-{Clustername}-ilb*|
+    | Front-End-IP-Adresse des Lastenausgleichs | Die IP-Adresse Ihrer Engine oder Datenverwaltung | Wählen Sie die IP-Adresse des Lastenausgleichs aus. |
     | NAT-Quellsubnetz | Subnetz des Clusters | Ihr Subnetz, in dem der Cluster bereitgestellt wird.
     
 1. Wählen Sie im Bereich **Zugriffssicherheit** die Benutzer aus, die Zugriff auf Ihren Private Link-Dienst anfordern können.
 1. Wählen Sie **Überprüfen + erstellen** aus, um die Konfiguration Ihres Private Link-Diensts zu überprüfen. Wählen Sie **Erstellen** aus, um den Private Link-Dienst zu erstellen.
-1. Öffnen Sie nach der Erstellung des Private Link-Diensts die Ressource, und speichern Sie den Private Link-Alias für den nächsten Schritt ( **Erstellen eines privaten Endpunkts** ). Beispielalias: *AzureDataExplorerPLS.111-222-333.westus.azure.privatelinkservice*
+1. Öffnen Sie nach der Erstellung des Private Link-Diensts die Ressource, und speichern Sie den Private Link-Alias für den nächsten Schritt (**Erstellen eines privaten Endpunkts**). Beispielalias: *AzureDataExplorerPLS.111-222-333.westus.azure.privatelinkservice*
 
 ## <a name="create-private-endpoint"></a>Erstellen eines privaten Endpunkts
 
@@ -113,8 +113,8 @@ Wenn Sie einen Azure Data Explorer-Cluster in Ihrem virtuellen Netzwerk bereit
 
 Wenn Ihr DNS-Name für die Engine also beispielsweise „myadx.westus.kusto.windows.net“ lautet, ergibt sich folgende Namensauflösung:
 
-* **name** : myadx.westus.kusto.windows.net   <br> **Typ** : CNAME   <br> **value** : myadx.privatelink.westus.kusto.windows.net
-* **name** : myadx.privatelink.westus.kusto.windows.net   <br> **Typ** : A   <br> **value:** 40.122.110.154
+* **name**: myadx.westus.kusto.windows.net   <br> **Typ**: CNAME   <br> **value**: myadx.privatelink.westus.kusto.windows.net
+* **name**: myadx.privatelink.westus.kusto.windows.net   <br> **Typ**: A   <br> **value:** 40.122.110.154
     > [!NOTE]
     > Dieser Wert ist die öffentliche IP-Adresse für die Abfrage (Engine), die Sie bei der Clustererstellung angegeben haben.
 
@@ -124,8 +124,8 @@ Erstellen Sie die folgende DNS-Zone: **privatelink.region.kusto.windows.net**. D
 
 Der Name wird beispielsweise wie folgt aufgelöst:
 
-* **name** : myadx.westus.kusto.windows.net   <br>**type** : CNAME   <br>**value** : myadx.privatelink.westus.kusto.windows.net
-* **name** : myadx.privatelink.westus.kusto.windows.net   <br>**Typ** : A   <br>**value:** 10.3.0.9
+* **name**: myadx.westus.kusto.windows.net   <br>**type**: CNAME   <br>**value**: myadx.privatelink.westus.kusto.windows.net
+* **name**: myadx.privatelink.westus.kusto.windows.net   <br>**Typ**: A   <br>**value:** 10.3.0.9
     > [!NOTE]
     > Dieser Wert ist die IP-Adresse Ihres privaten Endpunkts. Sie haben die IP-Adresse bereits mit dem Private Link-Dienst für die Abfrage (Engine) verknüpft.
 

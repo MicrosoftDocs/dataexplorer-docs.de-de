@@ -6,17 +6,17 @@ ms.author: orspodek
 ms.reviewer: guregini
 ms.service: data-explorer
 ms.topic: how-to
-ms.date: 09/16/2020
-ms.openlocfilehash: 5dbd1aeb777b067e0c7bee15be838eb2f306086f
-ms.sourcegitcommit: d9e203a54b048030eeb6d05b01a65902ebe4e0b8
+ms.date: 01/07/2021
+ms.openlocfilehash: 5142b6abfb5a7898fe58cd6264251e57dc95ae81
+ms.sourcegitcommit: e37f52d6a4f6e782471b44ce21f978e2d83ffc28
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/14/2020
-ms.locfileid: "97371474"
+ms.lasthandoff: 01/11/2021
+ms.locfileid: "98068703"
 ---
-# <a name="monitor-azure-data-explorer-ingestion-commands-and-queries-using-diagnostic-logs"></a>Überwachen der Erfassung, Befehle und Abfragen von Azure Data Explorer mithilfe von Diagnoseprotokollen
+# <a name="monitor-azure-data-explorer-ingestion-commands-queries-and-tables-using-diagnostic-logs"></a>Überwachen der Erfassung, Befehle, Abfragen und Tabellen von Azure Data Explorer mithilfe von Diagnoseprotokollen
 
-Azure Data Explorer ist ein schneller, vollständig verwalteter Datenanalysedienst für Echtzeitanalysen großer Datenmengen, die von Anwendungen, Websites, IoT-Geräten usw. gestreamt werden. [Azure Monitor-Aktivitätsprotokolle](/azure/azure-monitor/platform/diagnostic-logs-overview) enthalten Daten zum Betrieb von Azure-Ressourcen. Von Azure Data Explorer werden Diagnoseprotokolle verwendet, um Erkenntnisse zu erfolgreichen und nicht erfolgreichen Erfassungen, Befehlen und Abfragevorgängen zu gewinnen. Sie können Vorgangsprotokolle in Azure Storage, Event Hub oder Log Analytics exportieren, um den Status von Erfassungen, Befehlen und Abfragen zu überwachen. Protokolle aus Azure Storage und Azure Event Hub können zur weiteren Analyse an eine Tabelle im Azure Data Explorer-Cluster weitergeleitet werden.
+Azure Data Explorer ist ein schneller, vollständig verwalteter Datenanalysedienst für Echtzeitanalysen großer Datenmengen, die von Anwendungen, Websites, IoT-Geräten usw. gestreamt werden. [Azure Monitor-Aktivitätsprotokolle](/azure/azure-monitor/platform/diagnostic-logs-overview) enthalten Daten zum Betrieb von Azure-Ressourcen. In Azure Data Explorer werden Diagnoseprotokolle verwendet, um Erkenntnisse zur Erfassung, zu Befehlen, Abfragen und Tabellen zu gewinnen. Sie können Vorgangsprotokolle in Azure Storage, Event Hub oder Log Analytics exportieren, um den Status von Erfassungen, Befehlen und Abfragen zu überwachen. Protokolle aus Azure Storage und Azure Event Hub können zur weiteren Analyse an eine Tabelle im Azure Data Explorer-Cluster weitergeleitet werden.
 
 > [!IMPORTANT] 
 > Diagnoseprotokolle können vertrauliche Daten enthalten. Schränken Sie die Berechtigungen des Protokollziels gemäß Ihren Überwachungsanforderungen ein. 
@@ -39,7 +39,7 @@ Mit Diagnoseprotokollen kann die Sammlung der folgenden Protokolldaten konfiguri
 > Erfassungsprotokolle werden für die Streamingerfassung, die direkte Erfassung an der Engine, die Erfassung von Abfragen oder Befehle vom Typ „set-or-append“ nicht unterstützt.
 
 > [!NOTE]
-> Fehlerhafte Erfassungsprotokolle werden nur für den endgültigen Status eines Erfassungsvorgangs gemeldet. Dies steht im Gegensatz zur Metrik „Erfassungsergebnis“[using-metrics#ingestion-metrics], die für intern wiederholte vorübergehende Fehler ausgegeben wird.
+> Fehlerhafte Erfassungsprotokolle werden nur für den endgültigen Status eines Erfassungsvorgangs gemeldet. Dies steht im Gegensatz zur Metrik [Erfassungsergebnis](using-metrics.md#ingestion-metrics), die für intern wiederholte vorübergehende Fehler ausgegeben wird.
 
 * **Erfolgreiche Erfassungsvorgänge:** Diese Protokolle enthalten Informationen zu erfolgreich abgeschlossenen Erfassungsvorgängen.
 * **Nicht erfolgreiche Erfassungsvorgänge:** Diese Protokolle enthalten ausführliche Informationen zu fehlgeschlagenen Erfassungsvorgängen, einschließlich Fehlerdetails. 
@@ -52,6 +52,15 @@ Mit Diagnoseprotokollen kann die Sammlung der folgenden Protokolldaten konfiguri
 
     > [!NOTE]
     > Der Abfragetext ist in den Abfrageprotokolldaten nicht enthalten.
+    
+# <a name="tables"></a>[Tabellen](#tab/tables)
+
+* **TableUsageStatistics**: Diese Protokolle enthalten ausführliche Informationen zur Nutzung von Befehlen und Abfragen, die einen Endzustand erreicht haben.
+
+    > [!NOTE]
+    > Der Befehls- oder Abfragetext ist in den Protokolldaten für `TableUsageStatistics` nicht enthalten.
+
+* **TableDetails**: Diese Protokolle enthalten ausführliche Informationen zu den Tabellen des Clusters.
 
 ---
 
@@ -73,14 +82,14 @@ Diagnoseprotokolle sind standardmäßig deaktiviert. Führen Sie die folgenden S
 
     1. Geben Sie unter **Name der Diagnoseeinstellung** einen Namen ein.
     1. Wählen Sie mindestens ein Ziel aus: Log Analytics-Arbeitsbereich, Speicherkonto oder Event Hub.
-    1. Wählen Sie die zu erfassenden Protokolle aus: `SucceededIngestion`, `FailedIngestion`, `Command` oder `Query`, `TableUsageStatistics` oder `TableDetails`.
+    1. Wählen Sie die zu erfassenden Protokolle aus: `SucceededIngestion`, `FailedIngestion`, `IngestionBatching`, `Command` oder `Query`, `TableUsageStatistics` oder `TableDetails`.
     1. Wählen Sie die zu sammelnden [Metriken](using-metrics.md#supported-azure-data-explorer-metrics) aus (optional).  
     1. Wählen Sie **Speichern** aus, um die neuen Diagnoseprotokolleinstellungen und Metriken zu speichern.
 
 Die neuen Einstellungen werden in wenigen Minuten festgelegt. Die Protokolle werden dann im konfigurierten Archivierungsziel (Speicherkonto, Event Hub oder Log Analytics) angezeigt. 
 
 > [!NOTE]
-> Wenn Sie Protokolle an Log Analytics senden, werden die Protokolle `SucceededIngestion`, `FailedIngestion`, `Command` und `Query` in Log Analytics-Tabellen mit den folgenden Namen gespeichert: `SucceededIngestion`, `FailedIngestion`, `ADXIngestionBatching`, `ADXCommand` bzw. `ADXQuery`.
+> Wenn Sie Protokolle an Log Analytics senden, werden die Protokolle `SucceededIngestion`, `FailedIngestion`, `IngestionBatching`, `Command`, `Query`, `TableUsageStatistics` und `TableDetails` in Log Analytics-Tabellen mit den folgenden Namen gespeichert: `SucceededIngestion`, `FailedIngestion`, `ADXIngestionBatching`, `ADXCommand`, `ADXQuery`, `ADXTableUsageStatistics` bzw. `ADXTableDetails`.
 
 ## <a name="diagnostic-logs-schema"></a>Schema „Diagnoseprotokolle“
 
@@ -397,6 +406,117 @@ JSON-Zeichenfolgen im Protokoll enthalten Elemente, die in der folgenden Tabelle
 |TablesStatistics        |Enthält Resultset-Tabellenstatistiken
 |RowCount        | Tabellenzeilenanzahl für Resultset
 |TableSize        |Tabellenzeilenanzahl für Resultset
+
+
+# <a name="tables"></a>[Tabellen](#tab/tables)
+
+### <a name="tableusagestatistics-and-tabledetails-logs-schema"></a>Schema der Protokolle „TableUsageStatistics“ und „TableDetails“
+
+JSON-Zeichenfolgen im Protokoll enthalten Elemente, die in der folgenden Tabelle aufgeführt sind:
+
+|Name               |BESCHREIBUNG
+|---                |---
+|time               |Die Zeit des Berichts
+|resourceId         |Azure Resource Manager-Ressourcen-ID
+|operationName      |Name des Vorgangs: MICROSOFT.KUSTO/CLUSTERS/DATABASE/SCHEMA/READ. Eigenschaften sind für TableUsageStatistics und TableDetails identisch.
+|operationVersion   |Schemaversion: 1.0 
+|properties         |Ausführliche Informationen zu dem Vorgang
+
+#### <a name="tableusagestatistics-log"></a>TableUsageStatistics-Protokoll
+
+**Beispiel:**
+
+```json
+{
+    "resourceId": "/SUBSCRIPTIONS/0571b364-eeeb-4f28-ba74-90a8b4132b53/RESOURCEGROUPS/MYRG/PROVIDERS/MICROSOFT.KUSTO/CLUSTERS/MYKUSTOCLUSTER",
+    "time": "08-04-2020 16:42:29",
+    "operationName": "MICROSOFT.KUSTO/CLUSTERS/DATABASE/SCHEMA/READ",
+    "correlationId": "MyApp.Kusto.DM.MYKUSTOCLUSTER.ShowTableUsageStatistics.e10fe80b-6f4d-4b7e-9756-b87720f88901",
+    "properties": {
+        "RootActivityId": "3e6e8814-e64f-455a-926d-bf16229f6d2d",
+        "StartedOn": "2020-08-19T11:51:41.1258308Z",
+        "Database": "MyDB",
+        "Table": "MyTable",
+        "MinCreatedOn": "2020-07-20T09:16:00.9906347Z",
+        "MaxCreatedOn": "2020-08-19T11:50:37.1233374Z",
+        "Application": "MyApp",
+        "User": "AAD app id=0571b364-eeeb-4f28-ba74-90a8b4132b53",
+        "Principal": "aadapp=0571b364-eeeb-4f28-ba74-90a8b4132b53;5c823e4d-c927-4010-a2d8-6dda2449b6cf"
+    }
+}
+```
+
+**Eigenschaften eines TableUsageStatistics-Diagnoseprotokolls**
+
+|Name               |BESCHREIBUNG
+|---                |---
+|RootActivityId |Die ID der Stammaktivität
+|StartedOn        |Die Startzeit (UTC) dieses Befehls
+|Datenbank          |den Namen der Datenbank
+|TableName              |Der Name der Tabelle.
+|MinCreatedOn  |Zeit der ältesten Erweiterungen der Tabelle
+|MaxCreatedOn |Zeit der letzten Erweiterungen der Tabelle
+|ApplicationName     |Der Name der Anwendung, durch die der Befehl aufgerufen wurde
+|Benutzer     |Der Benutzer, der die Abfrage aufgerufen hat
+|Prinzipal     |Der Prinzipal, der die Abfrage aufgerufen hat
+
+#### <a name="tabledetails-log"></a>TableDetails-Protokoll
+
+**Beispiel:**
+
+```json
+{
+    "resourceId": "/SUBSCRIPTIONS/0571b364-eeeb-4f28-ba74-90a8b4132b53/RESOURCEGROUPS/MYRG/PROVIDERS/MICROSOFT.KUSTO/CLUSTERS/MYKUSTOCLUSTER",
+    "time": "08-04-2020 16:42:29",
+    "operationName": "MICROSOFT.KUSTO/CLUSTERS/DATABASE/SCHEMA/READ",
+    "correlationId": "MyApp.Kusto.DM.MYKUSTOCLUSTER.ShowTableUsageStatistics.e10fe80b-6f4d-4b7e-9756-b87720f88901",
+    "properties": {
+        "RootActivityId": "3e6e8814-e64f-455a-926d-bf16229f6d2d",
+        "TableName": "MyTable",
+        "DatabaseName": "MyDB",
+        "TotalExtentSize": 9632.0,
+        "TotalOriginalSize": 4143.0,
+        "HotExtentSize": 0.0,
+        "RetentionPolicyOrigin": "table",
+        "RetentionPolicy": "{\"SoftDeletePeriod\":\"90.00:00:00\",\"Recoverability\":\"Disabled\"}",
+        "CachingPolicyOrigin": "database",
+        "CachingPolicy": "{\"DataHotSpan\":\"7.00:00:00\",\"IndexHotSpan\":\"7.00:00:00\",\"ColumnOverrides\":[]}",
+        "MaxExtentsCreationTime": "2020-08-30T02:44:43.9824696Z",
+        "MinExtentsCreationTime": "2020-08-30T02:38:42.3031288Z",
+        "TotalExtentCount": 1164,
+        "TotalRowCount": 223325,
+        "HotExtentCount": 29,
+        "HotOriginalSize": 1388213,
+        "HotRowCount": 5117
+  }
+}
+```
+
+**Eigenschaften eines TableDetails-Diagnoseprotokolls**
+
+|Name               |BESCHREIBUNG
+|---                |---
+|RootActivityId |Die ID der Stammaktivität
+|TableName        |Der Name der Tabelle.
+|DatabaseName           |Der Name der Datenbank
+|TotalExtentSize              |Die gesamte ursprüngliche Größe der Daten in der Tabelle (in Bytes)
+|HotExtentSize  |Die gesamte ursprüngliche Größe (in Bytes) der Erweiterungen (komprimierte Größe und Indexgröße) in der Tabelle (gespeichert im Cache für heiße Daten)
+|RetentionPolicyOrigin |Ursprungsentität der Aufbewahrungsrichtlinie (Tabelle/Datenbank/Cluster)
+|RetentionPolicy     |Die effektive Entitätsaufbewahrungsrichtlinie der Tabelle (als JSON serialisiert)
+|CachingPolicyOrigin            |Ursprungsentität der Cacherichtlinie (Tabelle/Datenbank/Cluster)
+|CachingPolicy          |Die effektive Entitätscacherichtlinie der Tabelle (als JSON serialisiert)
+|MaxExtentsCreationTime      |Die maximale Erstellungszeit einer Erweiterung in der Tabelle (oder NULL, wenn keine Erweiterungen vorhanden sind)
+|MinExtentsCreationTime |Die minimale Erstellungszeit einer Erweiterung in der Tabelle (oder NULL, wenn keine Erweiterungen vorhanden sind)
+|TotalExtentCount        |Gesamtanzahl der Erweiterungen in der Tabelle
+|TotalRowCount        |Gesamtanzahl der Zeilen in der Tabelle
+|MinDataScannedTime        |Die minimale Datenüberprüfungszeit
+|MaxDataScannedTime        |Die maximale Datenüberprüfungszeit
+|TotalExtentsCount        |Die Gesamtanzahl von Erweiterungen
+|ScannedExtentsCount        |Die Anzahl überprüfter Erweiterungen
+|TotalRowsCount        |Die Gesamtanzahl von Zeilen
+|HotExtentCount        |Gesamtanzahl der Erweiterungen in der Tabelle (gespeichert im Cache für heiße Daten)
+|HotOriginalSize        |Die gesamte ursprüngliche Größe (in Bytes) der Daten in der Tabelle (gespeichert im Cache für heiße Daten)
+|HotRowCount        |Gesamtanzahl der Zeilen in der Tabelle (gespeichert im Cache für heiße Daten)
 
 ---
 
