@@ -7,12 +7,12 @@ ms.reviewer: gabilehner
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/06/2020
-ms.openlocfilehash: 359758cfc8a394aa7c9d9d7a3db3e6a62d84120a
-ms.sourcegitcommit: 4c6bd4cb1eb1f64d84f844d4e7aff2de3a46b009
+ms.openlocfilehash: 218d4962c1b7317f4ed94fb86c576da336ba93ee
+ms.sourcegitcommit: abbcb27396c6d903b608e7b19edee9e7517877bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/23/2020
-ms.locfileid: "97756414"
+ms.lasthandoff: 02/15/2021
+ms.locfileid: "100528121"
 ---
 # <a name="use-follower-database-to-attach-databases-in-azure-data-explorer"></a>Verwenden der Follower-Datenbank zum Anfügen von Datenbanken in Azure Data Explorer
 
@@ -25,6 +25,7 @@ Das Anfügen einer Datenbank an einen anderen Cluster mithilfe der Follower-Funk
 * Ein Cluster kann einer Datenbank, mehreren Datenbanken oder allen Datenbanken eines Leader-Clusters folgen. 
 * Ein einzelner Cluster kann Datenbanken von mehreren Leader-Clustern folgen. 
 * Ein Cluster kann sowohl Follower- als auch Leader-Datenbanken enthalten.
+* EngineV3-Cluster können nur EngineV3-Clustern und EngineV2-Cluster nur EngineV2-Clustern folgen.
 
 ## <a name="prerequisites"></a>Voraussetzungen
 

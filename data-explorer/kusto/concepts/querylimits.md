@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/12/2020
 ms.localizationpriority: high
-ms.openlocfilehash: a50900a5ea0f0c3d8f25e68a606572093af07432
-ms.sourcegitcommit: db99b9d0b5f34341ad3be38cc855c9b80b3c0b0e
+ms.openlocfilehash: 160846f1f543b5c5ae3e156c410551bd8d59a627
+ms.sourcegitcommit: abbcb27396c6d903b608e7b19edee9e7517877bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2021
-ms.locfileid: "100359606"
+ms.lasthandoff: 02/15/2021
+ms.locfileid: "100528053"
 ---
 # <a name="query-limits"></a>Abfragegrenzwerte
 
@@ -29,6 +29,10 @@ Dabei besteht das inhärente Risiko, dass Abfragen die Dienstressourcen grenzenl
   * Beispielsweise ist der Standardgrenzwert für einen Cluster, der für die D14v2-SKU eingerichtet ist, bei der jeder Computer über 16 virtuelle Kerne verfügt, `16 cores x10 = 160`.
 * Der Standardwert kann geändert werden, indem Sie die [Richtlinie für die Anforderungsratenbegrenzung](../management/request-rate-limit-policy.md) der Arbeitsauslastungsgruppe `default` konfigurieren.
   * Die tatsächliche Anzahl von Anforderungen, die gleichzeitig in einem Cluster ausgeführt werden können, hängt von verschiedenen Faktoren ab. Die wichtigsten Faktoren sind Cluster-SKU, die verfügbaren Ressourcen des Clusters sowie Verwendungsmuster. Die Richtlinie kann auf Grundlage von Auslastungstests konfiguriert werden, die mit produktionsähnlichen Verwendungsmustern ausgeführt werden.
+
+Wird das Parallelitätslimit für Anforderungen überschritten, geschieht Folgendes:
+* Bei Befehlen, die aufgrund der Richtlinie für die Anforderungsratenbegrenzung verweigert werden, wird eine Ausnahme vom Typ `ControlCommandThrottledException` (Fehlercode 429) zurückgegeben.
+* Bei Abfragen, die aufgrund der Richtlinie für die Anforderungsratenbegrenzung verweigert werden, wird eine Ausnahme vom Typ `QueryThrottledException` (Fehlercode 429) zurückgegeben.
 
 ## <a name="limit-on-result-set-size-result-truncation"></a>Grenzwert für die Größe des Resultsets (Ergebniskürzung)
 

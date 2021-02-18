@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 10/19/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 0dffa044ff47748d46b3ab4758bb61684bb8bb10
-ms.sourcegitcommit: db99b9d0b5f34341ad3be38cc855c9b80b3c0b0e
+ms.openlocfilehash: 9e8197d3af25da0b0e2488b4a5c70f5cfa2dde17
+ms.sourcegitcommit: abbcb27396c6d903b608e7b19edee9e7517877bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/14/2021
-ms.locfileid: "100359725"
+ms.lasthandoff: 02/15/2021
+ms.locfileid: "100528070"
 ---
 # <a name="string-operators"></a>Zeichenfolgenoperatoren
 
@@ -27,13 +27,16 @@ Kusto indiziert alle Spalten, einschließlich Spalten vom Typ `string`. Abhängi
 ### <a name="what-is-a-term"></a>Was ist ein Begriff? 
 
 Standardmäßig wird jeder `string`-Wert in maximale Sequenzen von alphanumerischen ASCII-Zeichen unterteilt, und jede dieser Sequenzen wird in einen Begriff umgewandelt.
-Im folgenden `string`-Element sind die Begriffe z. B. `Kusto`, `WilliamGates3rd` und die folgenden Teilzeichenfolgen: `ad67d136`, `c1db`, `4f9f`, `88ef`, `d94f3b6b0b5a`.
+Im folgenden `string`-Element sind die Begriffe z. B. `Kusto`, `KustoExplorerQueryRun` und die folgenden Teilzeichenfolgen: `ad67d136`, `c1db`, `4f9f`, `88ef`, `d94f3b6b0b5a`.
 
 ```
-Kusto: ad67d136-c1db-4f9f-88ef-d94f3b6b0b5a;;WilliamGates3rd
+Kusto: ad67d136-c1db-4f9f-88ef-d94f3b6b0b5a;KustoExplorerQueryRun
 ```
 
-Kusto erstellt einen Begriffsindex, der aus allen Begriffen besteht, die *vier Zeichen lang oder länger* sind. Dieser Index wird von `has`, `!has` usw. verwendet. Wenn die Abfrage nach einem Begriff sucht, der kleiner als vier Zeichen ist, oder einen `contains`-Operator verwendet, kehrt Kusto zum Scannen der Werte in der Spalte zurück, wenn keine Übereinstimmung ermittelt werden kann. Diese Methode ist viel langsamer als das Nachschlagen des Begriffs im Begriffsindex.
+Kusto erstellt einen Begriffsindex mit allen Begriffen, die *mindestens drei Zeichen* lang sind. Dieser Index wird von Zeichenfolgenoperatoren wie `has`, `!has` usw. verwendet.  Wenn bei der Abfrage nach einem Begriff mit weniger als drei Zeichen gesucht oder ein Operator vom Typ `contains` verwendet wird, werden wieder die Werte in der Spalte überprüft. Die Überprüfung ist viel langsamer als das Nachschlagen des Begriffs im Begriffsindex.
+
+> [!NOTE]
+> In EngineV2 besteht ein Begriff aus mindestens vier Zeichen.
 
 ## <a name="operators-on-strings"></a>Operatoren für Zeichenfolgen
 

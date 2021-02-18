@@ -7,12 +7,12 @@ ms.reviewer: miwalia
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 01/11/2021
-ms.openlocfilehash: 2fd45c2608e83c46b39d65fd8d3d564ca1b2df29
-ms.sourcegitcommit: 2b0156fc244757e62aaef5d4782c4abebaf09754
+ms.openlocfilehash: 340d8b953ba9d56da2de1198c32bde71d4edb738
+ms.sourcegitcommit: abbcb27396c6d903b608e7b19edee9e7517877bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/08/2021
-ms.locfileid: "99808686"
+ms.lasthandoff: 02/15/2021
+ms.locfileid: "100528086"
 ---
 # <a name="optimize-for-high-concurrency-with-azure-data-explorer"></a>Optimieren für hohe Parallelität mit Azure Data Explorer
 
@@ -43,7 +43,7 @@ Abfragen sollten möglichst wenig CPU-Ressourcen beanspruchen, um eine hohe Para
 Nutzen Sie die folgenden Designvorschläge für das Tabellenschema, um die CPU-Ressourcenauslastung zu minimieren:
 
 * Stimmen Sie den Spaltendatentyp optimal auf die Daten ab, die tatsächlich in den Spalten gespeichert sind. Speichern Sie beispielsweise Datums-/Uhrzeitwerte nicht in einer Zeichenfolgenspalte.
-* Vermeiden Sie große Tabellen mit geringer Dichte sowie die Verwendung dynamischer Spalten zum Speichern von Eigenschaften mit geringer Dichte.
+* Vermeiden Sie große Tabellen mit geringer Dichte, und verwenden Sie dynamische Spalten, um Eigenschaften mit geringer Dichte zu speichern.
 * Speichern Sie häufig verwendete Eigenschaften in einer eigenen Spalte mit einem nicht dynamischen Datentyp.
 * Denormalisieren Sie Daten, um Verknüpfungen zu vermeiden, die mit einem relativ hohen CPU-Ressourcenbedarf einhergehen.
 
@@ -72,7 +72,7 @@ Bei der Follower-Datenbank handelt es sich um ein Feature, das einer Datenbank o
 Verwenden Sie das Leader-Follower-Muster, um Computeressourcen für verschiedene Workloads festzulegen. Richten Sie beispielsweise einen Cluster für Erfassungen, einen Cluster für Abfragen oder für die Bereitstellung von Dashboards oder Anwendungen und einen Cluster für die Bereitstellung der Data Science-Workloads ein. Alle Workloads verfügen in diesem Fall jeweils über dedizierte Computeressourcen, die unabhängig voneinander skaliert werden können, sowie über unterschiedliche Cache- und Sicherheitskonfigurationen. Von allen Clustern werden die gleichen Daten verwendet. Die Daten werden dabei vom Leader geschrieben und von den Followern im schreibgeschützten Modus genutzt.
 
 > [!NOTE]
-> Die Verzögerung zwischen Follower-Datenbanken und Leader beträgt in der Regel einige Minuten. Sollte Ihre Lösung auf neueste Daten ohne Wartezeit angewiesen sein, ist möglicherweise die folgende Lösung hilfreich: Verwenden Sie eine Sicht für den Follower-Cluster, die die Daten des Leaders mit den Daten des Followers vereint, indem die neuesten Daten vom Leader und die restlichen Daten vom Follower abgefragt werden.
+> Die Verzögerung zwischen Follower-Datenbanken und Leader beträgt in der Regel wenige Sekunden. Sollte Ihre Lösung auf neueste Daten ohne Wartezeit angewiesen sein, ist möglicherweise die folgende Lösung hilfreich: Verwenden Sie eine Sicht für den Follower-Cluster, die die Daten des Leaders mit den Daten des Followers vereint, indem die neuesten Daten vom Leader und die restlichen Daten vom Follower abgefragt werden.
 
 Die Leistung von Abfragen für den Follower-Cluster lässt sich durch Aktivieren der [Konfiguration zum Vorabruf von horizontalen Datenbankpartitionen](kusto/management/cluster-follower.md#alter-follower-database-prefetch-extents) verbessern. Verwenden Sie diese Konfiguration jedoch mit Bedacht, da sie sich auf die Aktualität der Daten in der Follower-Datenbank auswirken kann.
 
@@ -90,16 +90,13 @@ Wenn mehrere Benutzer zu einer ähnlichen Zeit das gleiche Dashboard laden, kann
 
 Für die Abfragekonsistenz stehen zwei Modelle zur Verfügung: *stark* (Standard) und *schwach*. Bei starker Konsistenz werden unabhängig davon, bei welchem Computeknoten die Abfrage eingeht, nur aktuelle, konsistente Daten angezeigt. Bei schwacher Konsistenz wird die Kopie der Metadaten regelmäßig durch die Knoten aktualisiert, was aufgrund der Synchronisierung von Metadatenänderungen zu einer Wartezeit von ein bis zwei Minuten führt. Mit dem schwachen Modell können Sie die Last auf dem Knoten verringern, von dem die Metadatenänderungen verwaltet werden, was eine höhere Parallelität als bei der standardmäßigen hohen Konsistenz ermöglicht. Legen Sie diese Konfiguration in [Clientanforderungseigenschaften](kusto/api/netfx/request-properties.md) und in den Grafana-Datenquellenkonfigurationen fest.
 
-> [!NOTE]
-> Falls Sie die Verzögerung für die Aktualisierung von Metadaten noch weiter verkürzen müssen, erstellen Sie ein Supportticket.
-
 ### <a name="optimize-queries"></a>Optimieren von Abfragen
 
 Verwenden Sie die [bewährten Methoden für Abfragen](kusto/query/best-practices.md), um Ihre Abfragen so effizient wie möglich zu machen.
 
 ## <a name="set-cluster-policies"></a>Festlegen von Clusterrichtlinien
 
-Die Anzahl gleichzeitiger Abfragen ist standardmäßig begrenzt und wird durch die [Richtlinie für die Anforderungsratenbegrenzung](kusto/management/request-rate-limit-policy.md) gesteuert, damit der Cluster nicht überlastet wird. Sie können diese Richtlinie für Situationen mit hoher Parallelität anpassen, die Anpassung sollte jedoch erst nach strengen Tests (vorzugsweise für produktionsähnliche Abfragemuster und Datasets) durchgeführt werden. Durch die Tests wird sichergestellt, dass der geänderte Wert für den Cluster geeignet ist. Dieser Grenzwert kann basierend auf den Anwendungsanforderungen konfiguriert werden.
+Die Anzahl gleichzeitiger Anforderungen ist standardmäßig begrenzt und wird durch die [Richtlinie für die Anforderungsratenbegrenzung](kusto/management/request-rate-limit-policy.md) gesteuert, damit der Cluster nicht überlastet wird. Sie können diese Richtlinie für Situationen mit hoher Parallelität anpassen, die Anpassung sollte jedoch erst nach strengen Tests (vorzugsweise für produktionsähnliche Nutzungsmuster und Datasets) durchgeführt werden. Durch die Tests wird sichergestellt, dass der geänderte Wert für den Cluster geeignet ist. Dieser Grenzwert kann basierend auf den Anwendungsanforderungen konfiguriert werden.
 
 ## <a name="monitor-azure-data-explorer-clusters"></a>Überwachen von Azure Data Explorer-Clustern
 

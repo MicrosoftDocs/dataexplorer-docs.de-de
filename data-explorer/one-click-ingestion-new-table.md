@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: e2c84649653d6d3762a82c1e4aa3c98c9ef8119d
-ms.sourcegitcommit: d9e203a54b048030eeb6d05b01a65902ebe4e0b8
+ms.openlocfilehash: 3ac9788eda7a75173778ce0533f59820cfd7e7dd
+ms.sourcegitcommit: abbcb27396c6d903b608e7b19edee9e7517877bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/14/2020
-ms.locfileid: "97371658"
+ms.lasthandoff: 02/15/2021
+ms.locfileid: "100528237"
 ---
 # <a name="use-one-click-ingestion-to-ingest-csv-data-from-a-container-to-a-new-table-in-azure-data-explorer"></a>Erfassen von CSV-Daten aus einem Container in einer neuen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung
 
@@ -33,9 +33,11 @@ Informationen zum Erfassen von Daten in einer vorhandenen Tabelle in Azure Data 
 
     :::image type="content" source="media/one-click-ingestion-new-table/one-click-ingestion-in-web-ui.png" alt-text="Erfassen neuer Daten":::
 
-1. Im Fenster **Neue Daten erfassen** wird die Registerkarte **Quelle** ausgewählt. 
+1. Im Fenster **Neue Daten erfassen** wird die Registerkarte **Quelle** ausgewählt. Die Felder **Cluster** und **Datenbank** werden automatisch aufgefüllt.
 
-1. Wählen Sie **Neue Tabelle erstellen** aus, und geben Sie einen Namen für die neue Tabelle ein. Sie können alphanumerische Zeichen, Bindestriche und Unterstriche verwenden. Sonderzeichen werden nicht unterstützt.
+    [!INCLUDE [one-click-cluster](includes/one-click-cluster.md)]
+
+1. Wählen Sie **Tabelle** > **Neu erstellen** aus, und geben Sie einen Namen für die neue Tabelle ein. Sie können alphanumerische Zeichen, Bindestriche und Unterstriche verwenden. Sonderzeichen werden nicht unterstützt.
 
     > [!NOTE]
     > Tabellennamen müssen zwischen einem und 1024 Zeichen lang sein.
@@ -44,9 +46,9 @@ Informationen zum Erfassen von Daten in einer vorhandenen Tabelle in Azure Data 
 
 ## <a name="select-an-ingestion-type"></a>Auswahl eines Erfassungstyps
 
-Führen Sie unter **Erfassungstyp** die folgenden Schritte aus:
+Führen Sie unter **Quelltyp** die folgenden Schritte aus:
    
-  1. Wählen Sie **from container** (aus Container) (Blobcontainer, ADLS Gen1-Container, ADLS Gen2-Container) aus.
+  1. Wählen Sie **Aus Blobcontainer** (Blobcontainer, ADLS Gen1-Container, ADLS Gen2-Container) aus. Sie können bis zu 1.000 Blobs aus einem einzelnen Container erfassen.
   1. Fügen Sie im Feld **Mit Speicher verknüpfen** die [SAS-URL](/azure/vs-azure-tools-storage-explorer-blobs#get-the-sas-for-a-blob-container) des Containers hinzu, und geben Sie optional die Stichprobengröße ein. Informationen, wie Sie aus einem Ordner innerhalb dieses Containers erfassen, finden Sie unter [Erfassen aus einem Ordner in einem Container](#ingest-from-folder-in-a-container).
 
       :::image type="content" source="media/one-click-ingestion-new-table/from-container.png" alt-text="1-Klick-Erfassung aus Container":::
@@ -56,7 +58,7 @@ Führen Sie unter **Erfassungstyp** die folgenden Schritte aus:
 
 ### <a name="ingest-from-folder-in-a-container"></a>Erfassen aus einem Ordner in einem Container
 
-Um aus einem bestimmten Ordner innerhalb eines Containers zu erfassen, generieren Sie eine Zeichenfolge im folgenden Format:
+Wenn Sie Daten aus einem bestimmten Ordner innerhalb eines Containers erfassen möchten, [generieren Sie eine Zeichenfolge im folgenden Format](kusto/api/connection-strings/storage.md#azure-data-lake-store):
 
 *container_path*`/`*folder_path*`;`*access_key_1*
 

@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: bf6dced9b0df0b90b0b1ff87389c9dab31ebe7c0
-ms.sourcegitcommit: f7bebd245081a5cdc08e88fa4f9a769c18e13e5d
+ms.openlocfilehash: 5ebd3ee711baa24c6f73facfdab361e2de5ada20
+ms.sourcegitcommit: abbcb27396c6d903b608e7b19edee9e7517877bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/17/2020
-ms.locfileid: "94644636"
+ms.lasthandoff: 02/15/2021
+ms.locfileid: "100528144"
 ---
 # <a name="what-is-one-click-ingestion"></a>Was ist die 1-Klick-Erfassung?
 
@@ -26,7 +26,7 @@ Die 1-Klick-Erfassung ist aufgrund der folgenden Funktionen überaus nützlich:
 * Erfassung von Daten in verschiedenen [Formaten](#file-formats)
 * Erfassung von Daten in neuen oder vorhandenen Tabellen
 * Empfehlung und einfache Änderung von Tabellenzuordnung und -schema
-* Einfache und schnelle Fortsetzung der Erfassung aus einem Container mit Event Grid
+* Einfache und schnelle Fortsetzung der Erfassung aus einem Container mit [Event Grid](one-click-ingestion-new-table.md#create-continuous-ingestion-for-container)
 
 Die 1-Klick-Erfassung ist besonders nützlich, wenn Daten erstmalig erfasst werden oder Sie nicht mit dem Schema Ihrer Daten vertraut sind.
 
@@ -40,13 +40,19 @@ Die 1-Klick-Erfassung ist besonders nützlich, wenn Daten erstmalig erfasst werd
 
 Der Assistent für die 1-Klick-Erfassung leitet Sie durch die 1-Klick-Erfassung.
 
+* Auf der [Webbenutzeroberfläche von Azure Data Explorer](https://dataexplorer.azure.com/) können Sie wie folgt auf den Assistenten zugreifen:
+    * Wählen Sie im linken Bereich die Option **Daten** aus. Wählen Sie auf der Seite **Datenverwaltung** einen Erfassungstyp aus, und klicken Sie auf **Erfassen**. 
+      
+      :::image type="content" source="media/ingest-data-one-click/data-management.png" alt-text="Erfassen von Daten über das Fenster „Datenverwaltung“ der Webbenutzeroberfläche: Azure Data Explorer" lightbox="media/ingest-data-one-click/data-management.png":::
+   
+     * Klicken Sie auf der Webbenutzeroberfläche von Azure Data Explorer im linken Menü mit der rechten Maustaste auf die Zeile **Datenbank** oder **Tabelle**, und wählen Sie **Neue Daten erfassen** aus.
+        
+        :::image type="content" source="media/ingest-data-one-click/one-click-ingestion-in-webui.png" alt-text="Auswählen der 1-Klick Erfassung auf der Webbenutzeroberfläche":::
+
 * Wenn Sie über den Startbildschirm **Welcome to Azure Data Explorer** (Willkommen bei Azure Data Explorer) in Ihrem Cluster auf den Assistenten für die 1-Klick-Erfassung zugreifen möchten, führen Sie die beiden ersten Schritte ([Clustererstellung und Datenbankerstellung](#prerequisites)) aus, und wählen Sie dann **Neue Daten erfassen** aus.
 
     :::image type="content" source="media/ingest-data-one-click/welcome-ingestion.png" alt-text="Erfassen neuer Daten über den Startbildschirm von Azure Data Explorer":::
 
-* Um den Assistenten über die [Azure Data Explorer-Webbenutzeroberfläche](https://dataexplorer.azure.com/) zu starten, klicken Sie im linken Menü der Azure Data Explorer-Webbenutzeroberfläche mit der rechten Maustaste auf die Zeile **Datenbank** oder **Tabelle**, und wählen Sie **Neue Daten erfassen** aus.
-
-    :::image type="content" source="media/ingest-data-one-click/one-click-ingestion-in-webui.png" alt-text="Auswählen der 1-Klick-Erfassung auf der Webbenutzeroberfläche":::
 
 * Um über das Azure-Portal auf den Assistenten zuzugreifen, wählen Sie im linken Menü **Abfrage** aus, klicken Sie mit der rechten Maustaste auf die **Datenbank** oder **Tabelle**, und wählen Sie **Neue Daten erfassen** aus.
 
@@ -65,10 +71,9 @@ Der Assistent führt Sie durch die folgenden Optionen:
    * Erfassung in einer [vorhandenen Tabelle](one-click-ingestion-existing-table.md)
    * Erfassung in einer [neuen Tabelle](one-click-ingestion-new-table.md)
    * Erfassung von Daten aus:
-      * Blob Storage
-      * [einer lokalen Datei](one-click-ingestion-existing-table.md)
-      * [einem Container](one-click-ingestion-new-table.md)
-
+      * Blobspeicher: Bis zu zehn Blobs
+      * [Lokale Datei:](one-click-ingestion-existing-table.md) Bis zu zehn Dateien
+      * [Container](one-click-ingestion-new-table.md) (Blobcontainer, ADLS Gen1-Container, ADLS Gen2-Container)
 
 ### <a name="schema-mapping"></a>Schemazuordnung
 
@@ -77,6 +82,7 @@ Der Dienst generiert automatisch Schema- und Erfassungseigenschaften, die Sie ä
 Führen Sie auf der Registerkarte **Schema** die folgenden Aktionen aus:
    * Bestätigen Sie den automatisch generierten Komprimierungstyp.
    * Wählen Sie das [Format Ihrer Daten](#file-formats) aus. Unterschiedliche Formate ermöglichen weitere Änderungen.
+   * Ändern Sie die Zuordnung im [Editor-Fenster](#editor-window).
 
 #### <a name="file-formats"></a>Dateiformate
 
@@ -84,12 +90,9 @@ Die 1-Klick-Erfassung unterstützt die Erfassung von Quelldaten in allen [von Az
 
 ### <a name="editor-window"></a>Editor-Fenster
 
-Im Fenster **Editor** können Sie Datentabellenspalten nach Bedarf anpassen. 
+Im Fenster **Editor** der Registerkarte **Schema** können Sie Datentabellenspalten nach Bedarf anpassen. 
 
-|Tabellentyp  |Verfügbare Spaltenanpassungen  |
-|---------|---------|
-|Neu     | Neue Spalte, Spalte löschen, Spalte aktualisieren, Aufsteigend sortieren, Absteigend sortieren  |
-|Vorhanden     | Neue Spalte, Spalte aktualisieren, Aufsteigend sortieren, Absteigend sortieren  |
+[!INCLUDE [data-explorer-one-click-column-table](includes/data-explorer-one-click-column-table.md)]
 
 >[!NOTE]
 > Sie können jederzeit über dem Bereich **Editor** den [Befehls-Editor](one-click-ingestion-new-table.md#command-editor) öffnen. Im Befehls-Editor können Sie die aus Ihren Eingaben generierten automatischen Befehle anzeigen und kopieren.
@@ -105,7 +108,7 @@ Zuordnungstransformationen können für eine Spalte ausgeführt werden, für die
 * DateTimeFromUnixNanoseconds
 
 Weitere Informationen finden Sie unter [
-Mapping von Transformationen](kusto/management/mappings.md#mapping-transformations).
+Mapping von Transformationen](#mapping-transformations).
 
 ### <a name="data-ingestion"></a>Datenerfassung
 

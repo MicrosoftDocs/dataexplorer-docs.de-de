@@ -9,12 +9,12 @@ ms.service: data-explorer
 ms.topic: reference
 ms.date: 03/16/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 6357afeb0a5673584e27b84a231e3c65f897b8fc
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 29fdacc9483c21c4a8a148d2134f4082d439bb89
+ms.sourcegitcommit: ee49cd8186d4aecd5de1ed6d24db6c7b7a079ac4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512365"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100549002"
 ---
 # <a name="make-series-operator"></a>make-series-Operator
 
@@ -87,6 +87,7 @@ Es wird empfohlen, die Hauptsyntax mit make-series und nicht die alternative Syn
 |[maxif()](maxif-aggfunction.md)|Gibt den Maximalwert mit dem Prädikat der Gruppe zurück.|
 |[min()](min-aggfunction.md)|Gibt den Mindestwert in der Gruppe zurück.|
 |[minif()](minif-aggfunction.md)|Gibt einen Minimalwert mit dem Prädikat der Gruppe zurück.|
+|[percentile()](percentiles-aggfunction.md)|Gibt den Perzentilwert für die Gruppe zurück.|
 |[stdev()](stdev-aggfunction.md)|Gibt die Standardabweichung für die Gruppe zurück.|
 |[sum()](sum-aggfunction.md)|Gibt die Summe der Elemente in der Gruppe zurück.|
 |[sumif()](sumif-aggfunction.md)|Gibt die Summe der Elemente mit dem Prädikat der Gruppe zurück.|
@@ -107,7 +108,9 @@ Es wird empfohlen, die Hauptsyntax mit make-series und nicht die alternative Syn
 |[series_periods_validate()](series-periods-validatefunction.md)|Überprüft, ob eine Zeitreihe periodische Muster mit den angegebenen Längen enthält.|
 |[series_stats_dynamic()](series-stats-dynamicfunction.md)|Gibt mehrere Spalten mit den allgemeinen Statistiken zurück (min/max/variance/stdev/average).|
 |[series_stats()](series-statsfunction.md)|Generiert einen dynamischen Wert mit den allgemeinen Statistiken (min/max/variance/stdev/average).|
-  
+
+Eine vollständige Liste der Analysefunktionen für Zeitreihen finden Sie hier: [Funktionen zum Verarbeiten von Zeitreihen](scalarfunctions.md#series-processing-functions)
+
 ## <a name="list-of-series-interpolation-functions"></a>Liste der Reiheninterpolationsfunktionen
 
 |Funktion|BESCHREIBUNG|
