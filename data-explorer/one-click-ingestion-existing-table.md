@@ -7,12 +7,12 @@ ms.reviewer: tzgitlin
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 03/29/2020
-ms.openlocfilehash: 41e0e50b2e91280c79941340ebfc855ef6cab27e
-ms.sourcegitcommit: f71801764fdccb061f3cf1e3cfe43ec1557e4e0f
+ms.openlocfilehash: b5b6c199c1b374caa40a07e277a06591edccdd59
+ms.sourcegitcommit: abbcb27396c6d903b608e7b19edee9e7517877bb
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/03/2020
-ms.locfileid: "93293407"
+ms.lasthandoff: 02/15/2021
+ms.locfileid: "100528406"
 ---
 # <a name="use-one-click-ingestion-to-ingest-json-data-from-a-local-file-to-an-existing-table-in-azure-data-explorer"></a>Erfassen von JSON-Daten aus einer lokalen Datei in einer vorhandenen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung
 
@@ -38,53 +38,35 @@ Klicken Sie im linken Menü der Webbenutzeroberfläche mit der rechten Maustaste
 
 1. Im Fenster **Neue Daten erfassen** wird die Registerkarte **Quelle** ausgewählt.
 
+1. Falls die Felder **Cluster** und **Datenbank** nicht automatisch ausgefüllt werden, wählen Sie über das Dropdownmenü einen vorhandenen Cluster und eine vorhandene Datenbank aus.
+    
+    [!INCLUDE [one-click-cluster](includes/one-click-cluster.md)]
+
 1. Wenn das Feld **Tabelle** nicht automatisch gefüllt wird, wählen Sie eine vorhandene Tabelle aus dem Dropdownmenü aus.
 
-    > [!NOTE]
-    > Wenn Sie **Neue Daten erfassen** für eine Zeile vom Typ *Tabelle* ausgewählt haben, wird der Name der ausgewählten Tabelle in den **Projektdetails** angezeigt.
-
-1. Führen Sie unter **Erfassungstyp** die folgenden Schritte aus:
+1. Führen Sie unter **Quelltyp** die folgenden Schritte aus:
 
    1. Wählen Sie **aus Datei** aus.  
-   1. Wählen Sie **Durchsuchen** aus, um nach der Datei zu suchen, oder ziehen Sie die Datei in das Feld.
+   1. Wählen Sie **Durchsuchen** aus, um nach bis zu zehn Dateien zu suchen, oder ziehen Sie die Dateien in das Feld. Die Schemadefinitionsdatei kann mithilfe des blauen Sterns ausgewählt werden.
     
       :::image type="content" source="media/one-click-ingestion-existing-table/from-file.png" alt-text="1-Klick-Erfassung aus Datei":::
 
- 1. Es wird eine Stichprobe der Daten angezeigt. Filtern Sie die Daten, um nur Dateien zu erfassen, die mit bestimmten Zeichen beginnen oder auf bestimmte Zeichen enden. 
-
-    >[!NOTE] 
-    >Die Vorschau wird automatisch aktualisiert, sobald Sie die Filter anpassen.
-  
-> [!TIP]
-> Informationen zur Erfassung **aus einem Container** finden Sie unter [Erfassen von CSV-Daten aus einem Container in einer neuen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-new-table.md#select-an-ingestion-type).
-
 ## <a name="edit-the-schema"></a>Bearbeiten des Schemas
 
-Wählen Sie **Schema bearbeiten** aus, um Ihre Tabellenspaltenkonfiguration anzuzeigen und zu bearbeiten.
+Wählen Sie **Schema bearbeiten** aus, um Ihre Tabellenspaltenkonfiguration anzuzeigen und zu bearbeiten. Auf der Registerkarte **Schema**:
 
-### <a name="map-columns"></a>Zuordnen von Spalten 
-
-1. Das Dialogfeld **Spalten zuordnen** wird geöffnet. Fügen Sie Quellspalten oder -attribute an Ihre Azure Data Explorer-Spalten an.
-    * Neue Zuordnungen werden automatisch festgelegt. Verwenden Sie alternativ eine vorhandene Zuordnung. 
-    * Geben Sie in den Feldern **Quellspalten** die Spaltennamen ein, die den **Zielspalten** zugeordnet werden sollen.
-    * Um eine Spalte aus der Zuordnung zu löschen, wählen Sie das Papierkorbsymbol aus.
-
-      :::image type="content" source="media/one-click-ingestion-existing-table/map-columns.png" alt-text="Fenster für die Spaltenzuordnung"::: 
-    
-1. Wählen Sie **Update** aus.
-1. Auf der Registerkarte **Schema**:
-    * Der **Komprimierungstyp** wird automatisch durch den Quelldateinamen ausgewählt. In diesem Fall ist der Komprimierungstyp **JSON**.
+   * Der **Komprimierungstyp** wird automatisch durch den Quelldateinamen ausgewählt. In diesem Fall ist der Komprimierungstyp **JSON**.
         
-    * Bei der Auswahl von **JSON** müssen auch **JSON-Ebenen** (1 bis 10) ausgewählt werden. Die Aufteilung der Tabellenspaltendaten wird durch die Ebenen bestimmt.
+   * Bei Verwendung von **JSON** müssen auch geschachtelte Ebenen (**Nested levels**) von 1 bis 10 ausgewählt werden. Die Aufteilung der Tabellenspaltendaten wird durch die Ebenen bestimmt.
 
-        :::image type="content" source="media/one-click-ingestion-existing-table/json-levels.png" alt-text="Auswählen von JSON-Ebenen":::
+        :::image type="content" source="media/one-click-ingestion-existing-table/json-levels.png" alt-text="Auswählen geschachtelter Ebenen":::
     
        > [!TIP]
        > Informationen zur Verwendung von **CSV**-Dateien finden Sie unter [Erfassen von CSV-Daten aus einem Container in einer neuen Tabelle in Azure Data Explorer mithilfe der 1-Klick-Erfassung](one-click-ingestion-new-table.md#edit-the-schema).
 
-#### <a name="add-nested-json-data"></a>Hinzufügen von geschachtelten JSON-Daten 
+### <a name="add-nested-json-data"></a>Hinzufügen von geschachtelten JSON-Daten 
 
-Führen Sie die folgenden Schritte aus, um Spalten aus JSON-Ebenen hinzuzufügen, die sich von den oben aufgeführten **JSON-Hauptebenen** unterscheiden:
+Führen Sie die folgenden Schritte aus, um Spalten aus JSON-Ebenen hinzuzufügen, die sich von den oben ausgewählten **geschachtelten Hauptebenen** unterscheiden:
 
 1. Klicken Sie auf den Pfeil neben einem beliebigen Spaltennamen, und wählen Sie **Neue Spalte** aus.
 
@@ -105,13 +87,11 @@ Führen Sie die folgenden Schritte aus, um Spalten aus JSON-Ebenen hinzuzufügen
 
 ### <a name="edit-the-table"></a>Bearbeiten der Tabelle 
 
-Beim Erfassen von Daten in einer vorhandenen Tabelle sind Sie hinsichtlich der Änderungen, die Sie an der Tabelle vornehmen können, stärker eingeschränkt.
-
-In der Tabelle: 
-* Wählen Sie neue Spaltenüberschriften aus, um eine der folgenden Aufgaben auszuführen: **Neue Spalte** hinzufügen, **Spalte löschen**, **Aufsteigend sortieren** oder **Absteigend sortieren**. 
-* Für vorhandene Spalten steht nur eine Datensortierung zur Verfügung.
-
 [!INCLUDE [data-explorer-one-click-column-table](includes/data-explorer-one-click-column-table.md)]
+
+> [!NOTE]
+> * Bei Tabellenformaten können Sie eine Spalte nicht zweimal zuordnen. Löschen Sie bei einer Zuordnung zu einer vorhandenen Spalte zunächst die neue Spalte.
+> * Der Typ einer vorhandenen Spalte kann nicht geändert werden. Wenn Sie als Zuordnungsziel eine Spalte mit einem anderen Format verwenden, erhalten Sie ggf. leere Spalten.
 
 [!INCLUDE [data-explorer-one-click-command-editor](includes/data-explorer-one-click-command-editor.md)]
 
