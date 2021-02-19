@@ -4,6 +4,8 @@
   items:
     - name: Was ist der Azure-Daten-Explorer?
       href: data-explorer-overview.md
+    - name: Neuerungen in Azure Data Explorer
+      href: whats-new.md
 - name: Schnellstarts
   expanded: true
   items:
@@ -67,7 +69,7 @@
   items:
     - name: Erstellen eines Clusters und einer Datenbank
       items:
-        - name: Azure-Befehlszeilenschnittstelle
+        - name: Azure CLI
           href: create-cluster-database-cli.md
         - name: PowerShell
           href: create-cluster-database-powershell.md
