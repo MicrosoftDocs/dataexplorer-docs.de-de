@@ -7,12 +7,12 @@ ms.reviewer: toleibov
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/11/2020
-ms.openlocfilehash: 4949190befdc8adcec9f8115305a2a403994395f
-ms.sourcegitcommit: 88291fd9cebc26e5210463cb95be5540bf84eef8
+ms.openlocfilehash: 4a26f0544e8ec718fb0e44dd5afef5652a58673b
+ms.sourcegitcommit: 25d42ba55d04108fecf0ee6559caed8593096082
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/22/2020
-ms.locfileid: "92437403"
+ms.lasthandoff: 02/17/2021
+ms.locfileid: "100638825"
 ---
 # <a name="enable-infrastructure-encryption-double-encryption-during-cluster-creation-in-azure-data-explorer"></a>Aktivieren der Infrastrukturverschlüsselung (doppelte Verschlüsselung) während der Clustererstellung in Azure Data Explorer
   
@@ -91,9 +91,8 @@ Mithilfe einer Azure Resource Manager-Vorlage kann die Bereitstellung Ihrer Azur
 
 ## <a name="add-a-system-assigned-identity-using-an-azure-resource-manager-template"></a>Hinzufügen einer systemseitig zugewiesenen Identität unter Verwendung einer Azure Resource Manager-Vorlage
 
-1. Fügen Sie den Typ „EnableDoubleEncryption“ hinzu, um Azure anzuweisen, die Infrastrukturverschlüsselung (doppelte Verschlüsselung) für Ihren Cluster zu aktivieren.
-    
-    ```json
+Fügen Sie den Typ „EnableDoubleEncryption“ hinzu, um Azure anzuweisen, die Infrastrukturverschlüsselung (doppelte Verschlüsselung) für Ihren Cluster zu aktivieren.    
+```json
     {
         "apiVersion": "2020-06-14",
         "type": "Microsoft.Kusto/clusters",
@@ -108,17 +107,7 @@ Mithilfe einer Azure Resource Manager-Vorlage kann die Bereitstellung Ihrer Azur
             "enableDoubleEncryption": true,
         }
     }
-    ```
-
-1. Wenn der Cluster erstellt wird, verfügt er über folgende zusätzliche Eigenschaften:
-
-    ```json
-    "identity": {
-        "type": "SystemAssigned",
-        "tenantId": "<TENANTID>",
-        "principalId": "<PRINCIPALID>"
-    }
-    ```
+```
 ---
 
 ## <a name="next-steps"></a>Nächste Schritte

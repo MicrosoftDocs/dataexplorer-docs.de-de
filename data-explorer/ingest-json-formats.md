@@ -7,12 +7,12 @@ ms.reviewer: kerend
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 05/19/2020
-ms.openlocfilehash: 5c0de46e6b6b14be7076533204e63504368e71ad
-ms.sourcegitcommit: d77e52909001f885d14c4d421098a2c492b8c8ac
+ms.openlocfilehash: e0a9808e7fc8dc2c0fc2233911d467d20a64986a
+ms.sourcegitcommit: 25d42ba55d04108fecf0ee6559caed8593096082
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/26/2021
-ms.locfileid: "98772483"
+ms.lasthandoff: 02/17/2021
+ms.locfileid: "100638799"
 ---
 # <a name="ingest-json-formatted-sample-data-into-azure-data-explorer"></a>Erfassen von Beispieldaten im JSON-Format in Azure Data Explorer
 
@@ -79,7 +79,7 @@ Verwenden Sie die Kusto-Abfragesprache (KQL), um Daten im JSON-Rohformat zu erfa
 1. Erfassen Sie Daten in der Tabelle `RawEvents`.
 
     ```kusto
-    .ingest into table RawEvents ('https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json') with '{"format":"json", "ingestionMappingReference":"DiagnosticRawRecordsMapping"}'
+    .ingest into table RawEvents ('https://kustosamplefiles.blob.core.windows.net/jsonsamplefiles/simple.json') with '{"format":"json", "ingestionMappingReference":"RawEventMapping"}'
     ```
 
 # <a name="c"></a>[C#](#tab/c-sharp)
@@ -413,7 +413,7 @@ Arraydatentypen sind eine geordnete Sammlung von Werten. Die Erfassung eines JSO
     ```kusto
     .create function EventRecordsExpand() {
         RawEvents
-        | mv-expand records = Event
+        | mv-expand records = Event.records
         | project
             Time = todatetime(records["timestamp"]),
             Device = tostring(records["deviceId"]),
