@@ -7,12 +7,12 @@ ms.reviewer: avnera
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 10/13/2020
-ms.openlocfilehash: 930271d2d7c2b46b3ac873449338dda98472c36d
-ms.sourcegitcommit: c11e3871d600ecaa2824ad78bce9c8fc5226eef9
+ms.openlocfilehash: 73ba99c71139a38b32b2242d33e9901f3f79df82
+ms.sourcegitcommit: ee49cd8186d4aecd5de1ed6d24db6c7b7a079ac4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/04/2021
-ms.locfileid: "99554873"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100548951"
 ---
 # <a name="select-the-correct-compute-sku-for-your-azure-data-explorer-cluster"></a>Auswählen der passenden Compute-SKU für Ihren Azure Data Explorer-Cluster 
 
@@ -93,15 +93,15 @@ Die technischen Spezifikationen für die Cluster-VMs von Azure Data Explorer wer
 
 |**Name**| **Kategorie** | **SSD-Größe** | **Kerne** | **RAM** | **Storage Premium-Datenträger (1&nbsp;TB)**| **Minimale Anzahl von Instanzen pro Cluster** | **Maximale Anzahl von Instanzen pro Cluster**
 |---|---|---|---|---|---|---|---
-|Dev (keine SLA) Standard_D11_v2| Compute-optimiert | 75&nbsp;GB    | 1 | 14&nbsp;GB | 0 | 1 | 1
-|Dev (keine SLA) Standard_E2a_v4| Compute-optimiert | 18&nbsp;GB    | 1 | 16&nbsp;GB | 0 | 1 | 1
-|Standard_D11_v2| Compute-optimiert | 75&nbsp;GB    | 2 | 14&nbsp;GB | 0 | 2 | 8 
-|Standard_D12_v2| Compute-optimiert | 150&nbsp;GB   | 4 | 28&nbsp;GB | 0 | 2 | 16
-|Standard_D13_v2| Compute-optimiert | 307&nbsp;GB   | 8 | 56&nbsp;GB | 0 | 2 | 1\.000
-|Standard_D14_v2| Compute-optimiert | 614&nbsp;GB   | 16| 112&nbsp;GB | 0 | 2 | 1\.000
-|Standard_E2a_v4| Hoher Computeaufwand | 18&nbsp;GB    | 2 | 16&nbsp;GB | 0 | 2 | 8 
-|Standard_E4a_v4| Hoher Computeaufwand | 54&nbsp;GB   | 4 | 32&nbsp;GB | 0 | 2 | 16
-|Standard_E8a_v4| Hoher Computeaufwand | 127&nbsp;GB   | 8 | 64&nbsp;GB | 0 | 2 | 1\.000
+|Dev (keine SLA) Standard_D11_v2| Compute-optimiert | 80&nbsp;GB    | 1 | 14&nbsp;GB | 0 | 1 | 1
+|Dev (keine SLA) Standard_E2a_v4| Compute-optimiert | 24&nbsp;GB    | 1 | 16&nbsp;GB | 0 | 1 | 1
+|Standard_D11_v2| Compute-optimiert | 80&nbsp;GB    | 2 | 14&nbsp;GB | 0 | 2 | 8 
+|Standard_D12_v2| Compute-optimiert | 160&nbsp;GB   | 4 | 28&nbsp;GB | 0 | 2 | 16
+|Standard_D13_v2| Compute-optimiert | 317&nbsp;GB   | 8 | 56&nbsp;GB | 0 | 2 | 1\.000
+|Standard_D14_v2| Compute-optimiert | 628&nbsp;GB   | 16| 112&nbsp;GB | 0 | 2 | 1\.000
+|Standard_E2a_v4| Hoher Computeaufwand | 24&nbsp;GB    | 2 | 16&nbsp;GB | 0 | 2 | 8 
+|Standard_E4a_v4| Hoher Computeaufwand | 60&nbsp;GB   | 4 | 32&nbsp;GB | 0 | 2 | 16
+|Standard_E8a_v4| Hoher Computeaufwand | 137&nbsp;GB   | 8 | 64&nbsp;GB | 0 | 2 | 1\.000
 |Standard_E16a_v4| Hoher Computeaufwand | 273&nbsp;GB   | 16| 128&nbsp;GB | 0 | 2 | 1\.000
 |Standard_DS13_v2 + 1&nbsp;TB&nbsp;PS| Speicheroptimiert | 1&nbsp;TB | 8 | 56&nbsp;GB | 1 | 2 | 1\.000
 |Standard_DS13_v2 + 2&nbsp;TB&nbsp;PS| Speicheroptimiert | 2&nbsp;TB | 8 | 56&nbsp;GB | 2 | 2 | 1\.000
