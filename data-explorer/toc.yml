@@ -4,7 +4,7 @@
   items:
     - name: Was ist der Azure-Daten-Explorer?
       href: data-explorer-overview.md
-    - name: Neuerungen in Azure Data Explorer
+    - name: Neues
       href: whats-new.md
 - name: Schnellstarts
   expanded: true
