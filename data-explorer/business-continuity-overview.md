@@ -7,12 +7,12 @@ ms.reviewer: ankhanol
 ms.service: data-explorer
 ms.topic: conceptual
 ms.date: 08/05/2020
-ms.openlocfilehash: 2dcb1fb83d592ff7fd81fcfc5f51cf6fc95254b7
-ms.sourcegitcommit: a36981785765b85a961f275be24d297d38e498fd
+ms.openlocfilehash: b1e8188e78e3b2c6b4c56ce59f1294261ff54ab1
+ms.sourcegitcommit: 40f86b7f085152c21b6a1ee877f3ab324b59b88b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/30/2020
-ms.locfileid: "96310033"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "101838438"
 ---
 # <a name="business-continuity-and-disaster-recovery-overview"></a>Übersicht über Business Continuity & Disaster Recovery
 
@@ -107,7 +107,7 @@ Diese Konfiguration ist mit der [Aktiv/Aktiv/Aktiv-Konfiguration](#active-active
 
 | **Konfiguration** | **RPO** | **RTO** | **Aufwand** | **Kosten** |
 | --- | --- | --- | --- | --- |
-| **Aktiv/Aktiv** | Keine | Keine | Geringer | Hoch |
+| **Aktiv/Aktiv** | 0 Stunden | 0 Stunden | Geringer | Hoch |
 
 ### <a name="active-hot-standby-configuration"></a>Konfiguration mit einem aktiven und einem unmittelbar betriebsbereiten Cluster
 
@@ -134,7 +134,7 @@ Diese Lösung bietet die geringste Resilienz (höchster RPO- und RTO-Wert) und d
 | **Konfiguration** | **Resilienz** | **RPO** | **RTO** | **Aufwand** | **Kosten** |
 | --- | --- | --- | --- | --- | --- |
 | **Aktiv/Aktiv/Aktiv/-n** | Maximal | 0 Stunden | 0 Stunden | Geringer | Maximal |
-| **Aktiv/Aktiv** | Hoch | Keine | Keine | Geringer | Hoch |
+| **Aktiv/Aktiv** | Hoch | 0 Stunden | 0 Stunden | Geringer | Hoch |
 | **Ein aktiver und ein unmittelbar betriebsbereiter Cluster** | Medium | Niedrig | Niedrig | Medium | Medium |
 | **Bedarfsgesteuerter Datenwiederherstellungscluster** | Niedrigste | Maximal | Maximal | Maximal | Niedrigste |
 
