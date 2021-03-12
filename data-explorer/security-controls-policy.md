@@ -1,18 +1,18 @@
 ---
 title: Kontrollen zur Einhaltung gesetzlicher Bestimmungen in Azure Policy für Azure Data Explorer
 description: Listet Kontrollen zur Einhaltung gesetzlicher Bestimmungen in Azure Policy auf, die für Azure Data Explorer verfügbar sind. Diese integrierten Richtliniendefinitionen bieten allgemeine Ansätze für die Verwaltung der Compliance Ihrer Azure-Ressourcen.
-ms.date: 02/05/2021
+ms.date: 03/10/2021
 ms.topic: sample
 author: orspod
 ms.author: orspodek
 ms.service: data-explorer
 ms.custom: subject-policy-compliancecontrols
-ms.openlocfilehash: 9f52935e235dcf64c5236d3fbdd58b95441aa5c9
-ms.sourcegitcommit: d1c2433df183d0cfbfae4d3b869ee7f9cbf00fe4
+ms.openlocfilehash: 359fea754419ec6df7fa54aedc7fa822af228158
+ms.sourcegitcommit: 4ec122b5142e57468b44aa06e0d6522d6dbd9868
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "99586387"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "102771719"
 ---
 # <a name="azure-policy-regulatory-compliance-controls-for-azure-data-explorer"></a>Kontrollen zur Einhaltung gesetzlicher Bestimmungen in Azure Policy für Azure Data Explorer
 

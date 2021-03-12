@@ -8,12 +8,12 @@ ms.reviewer: lizlotor
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/14/2020
-ms.openlocfilehash: 1d7fafcab3293a66bafb4b60f86413d00ee9c354
-ms.sourcegitcommit: 608539af6ab511aa11d82c17b782641340fc8974
+ms.openlocfilehash: f2439097258ea6c8b4780bf04dd358d47b42d480
+ms.sourcegitcommit: 483f6902735f399bf889035cbc41ddb68d1a71b8
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/20/2020
-ms.locfileid: "92241875"
+ms.lasthandoff: 03/05/2021
+ms.locfileid: "102189185"
 ---
 # <a name="use-azure-advisor-recommendations-to-optimize-your-azure-data-explorer-cluster-preview"></a>Optimieren Ihres Azure Data Explorer-Clusters mithilfe von Azure Advisor-Empfehlungen (Vorschau)
 
@@ -36,7 +36,7 @@ Es gibt zwei Möglichkeiten, auf die Azure Advisor-Empfehlungen zuzugreifen.
 1. Wählen Sie unter **Übersicht** die Abonnements aus, für die Sie Empfehlungen erhalten möchten. 
 1. Wählen Sie **Azure Data Explorer-Cluster** und im zweiten Dropdownmenü **Azure Data Explorer-Datenbanken** aus.
  
-    :::image type="content" source="media/azure-advisor/advisor-resource.png" alt-text="Azure Advisor-Empfehlungen für Ihren Azure Data Explorer-Cluster":::
+    :::image type="content" source="media/azure-advisor/advisor-resource.png" alt-text="Azure Advisor-Ressource":::
 
 ## <a name="use-the-azure-advisor-recommendations"></a>Verwenden der Azure Advisor-Empfehlungen
 
@@ -44,15 +44,15 @@ Es gibt verschiedene Azure Advisor-Empfehlungstypen. Verwenden Sie den entsprec
 
 1. Wählen Sie in **Advisor** unter **Empfehlungen** die Option **Kosten** aus, um Kostenempfehlungen zu erhalten.
 
-    :::image type="content" source="media/azure-advisor/select-recommendation-type.png" alt-text="Azure Advisor-Empfehlungen für Ihren Azure Data Explorer-Cluster":::
+    :::image type="content" source="media/azure-advisor/select-recommendation-type.png" alt-text="Auswählen des Empfehlungstyps":::
 
 1. Wählen Sie in der Liste eine Empfehlung aus. 
 
-    :::image type="content" source="media/azure-advisor/select-recommendation.png" alt-text="Azure Advisor-Empfehlungen für Ihren Azure Data Explorer-Cluster":::
+    :::image type="content" source="media/azure-advisor/select-recommendation.png" alt-text="Auswählen einer Empfehlung":::
 
 1. Das folgende Fenster enthält eine Liste von Clustern, für die die Empfehlung relevant ist. Die Empfehlungsdetails unterscheiden sich für jeden Cluster und enthalten die empfohlene Aktion.
 
-    :::image type="content" source="media/azure-advisor/clusters-with-recommendations.png" alt-text="Azure Advisor-Empfehlungen für Ihren Azure Data Explorer-Cluster":::
+    :::image type="content" source="media/azure-advisor/clusters-with-recommendations.png" alt-text="Liste der Cluster mit Empfehlungen":::
 
 ## <a name="recommendation-types"></a>Empfehlungstypen
 
@@ -69,14 +69,15 @@ Die **Kostenempfehlungen** sind für Cluster verfügbar, die geändert werden k�
 * [Azure Data Explorer-Cluster mit Daten und geringer Aktivität](#azure-data-explorer-clusters-containing-data-with-low-activity)
 * [Richtiges Dimensionieren des Azure Data Explorer-Clusters zur Optimierung der Kosten](#correctly-size-azure-data-explorer-clusters-to-optimize-cost)
 * [Verringern des Caches für Azure Data Explorer-Tabellen](#reduce-cache-for-azure-data-explorer-tables)
+* [Ausführen eines Bereinigungsbefehls zum Löschen von nicht verwendeten Speicherartefakten](#delete-unused-storage-artifacts)
 
 #### <a name="azure-data-explorer-unused-cluster"></a>Nicht verwendeter Azure Data Explorer-Cluster
 
-Ein Cluster wird als nicht verwendet betrachtet, wenn er in den letzten 30 Tagen nur eine geringe Menge an Daten, Abfragen und Erfassungsereignissen verarbeitet hat, während der letzten zwei Tage die CPU-Auslastung gering war und es keine Follower während des letzten Tages gegeben hat. Die Empfehlung, **die Löschung leerer/nicht verwendeter Cluster zu erwägen** , enthält die empfohlene Aktion zum Löschen des nicht verwendeten Clusters.
+Ein Cluster wird als nicht verwendet betrachtet, wenn er in den letzten 30 Tagen nur eine geringe Menge an Daten, Abfragen und Erfassungsereignissen verarbeitet hat, während der letzten zwei Tage die CPU-Auslastung gering war und es keine Follower während des letzten Tages gegeben hat. Die Empfehlung, **die Löschung leerer/nicht verwendeter Cluster zu erwägen**, enthält die empfohlene Aktion zum Löschen des nicht verwendeten Clusters.
 
 #### <a name="azure-data-explorer-clusters-containing-data-with-low-activity"></a>Azure Data Explorer-Cluster mit Daten und geringer Aktivität
 
-Die Empfehlung, **Azure Data Explorer-Cluster zu beenden, um Kosten zu senken und Daten beizubehalten** , wird für einen Cluster angegeben, der Daten enthält, aber geringe Aktivität aufweist. Geringe Aktivität bedeutet eine geringe Menge an Abfragen und Erfassungen in den letzten 30 Tagen, eine geringe CPU-Auslastung während der letzten zwei Tage und keine Follower während des letzten Tages. Es wird empfohlen, den Cluster zu beenden, um die Kosten zu senken, die Daten jedoch beizubehalten. Werden die Daten nicht benötigt, sollten Sie den Cluster löschen, um die Einsparungen zu erhöhen.
+Die Empfehlung, **Azure Data Explorer-Cluster zu beenden, um Kosten zu senken und Daten beizubehalten**, wird für einen Cluster angegeben, der Daten enthält, aber geringe Aktivität aufweist. Geringe Aktivität bedeutet eine geringe Menge an Abfragen und Erfassungen in den letzten 30 Tagen, eine geringe CPU-Auslastung während der letzten zwei Tage und keine Follower während des letzten Tages. Es wird empfohlen, den Cluster zu beenden, um die Kosten zu senken, die Daten jedoch beizubehalten. Werden die Daten nicht benötigt, sollten Sie den Cluster löschen, um die Einsparungen zu erhöhen.
 
 #### <a name="correctly-size-azure-data-explorer-clusters-to-optimize-cost"></a>Richtiges Dimensionieren des Azure Data Explorer-Clusters zur Optimierung der Kosten
 
@@ -90,6 +91,14 @@ Es wird empfohlen, die [Konfiguration für die optimierte Autoskalierung](manage
 #### <a name="reduce-cache-for-azure-data-explorer-tables"></a>Verringern des Caches für Azure Data Explorer-Tabellen
 
 Die Empfehlung zum **Verkürzen des Azure Data Explorer-Tabellencachezeitraums zur Clusterkostenoptimierung** wird für einen Cluster angegeben, bei dem die [Cacherichtlinie](kusto/management/cachepolicy.md) der Tabelle reduziert werden kann. Diese Empfehlung basiert auf dem Abfragezeitraum der letzten 30 Tage. Die zehn obersten Tabellen mit möglichen Cacheeinsparungen werden angezeigt. Diese Empfehlung wird nur angeboten, wenn der Cluster nach der Änderung der Cacherichtlinie horizontal oder zentral herunterskaliert werden kann. Advisor überprüft, ob der Cluster „durch Daten begrenzt“ ist. Das bedeutet, dass der Cluster eine geringe CPU- und Erfassungsauslastung aufweist, aufgrund einer hohen Datenkapazität jedoch nicht zentral oder horizontal herunterskaliert werden konnte.
+
+#### <a name="delete-unused-storage-artifacts"></a>Löschen von nicht verwendeten Speicherartefakten
+
+Die Empfehlung zum **Löschen nicht verwendeter Speicherartefakte** wird für einen Cluster angegeben, der nicht verwendete Speicherartefakte aus Wartungs- und Hintergrundvorgängen für [Datenshards (Blöcke)](kusto/management/extents-overview.md) enthält. Im Laufe der Zeit können sich bei internen Zusammenführungsvorgängen für Blöcke redundante und nicht verwendete Speicherartefakte ansammeln, die über den Datenaufbewahrungszeitraum hinaus erhalten bleiben. Diese nicht referenzierten Daten wirken sich zwar nicht negativ auf die Leistung aus, können aber zu einer höheren Speichernutzung als nötig führen.
+Es wird empfohlen, den Befehl [clean databases extentcontainers](kusto/management/clean-extent-containers.md#clean-databases-extentcontainers) auszuführen, um nicht verwendete Speicherartefakte zu ermitteln und zu löschen und dadurch Kosten zu senken. 
+
+> [!IMPORTANT]
+> Die Wiederherstellbarkeit von Daten wird auf die Bereinigungszeit zurückgesetzt, und Daten, die vor der Bereinigung erstellt wurden, können nicht wiederhergestellt werden.
 
 ### <a name="performance-recommendations"></a>Empfehlungen zur Leistung
 

@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: how-to
 ms.date: 09/19/2020
 ms.custom: contperf-fy21q1
-ms.openlocfilehash: fb428e443559b579bab4764283ce124f9d9ec192
-ms.sourcegitcommit: 62eff65b320ce4ca53eabed6156eb9fe5b77f548
+ms.openlocfilehash: 3feac9960970c0605bafd07b3806a6eb39f9d9a5
+ms.sourcegitcommit: 40f86b7f085152c21b6a1ee877f3ab324b59b88b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/01/2021
-ms.locfileid: "99224212"
+ms.lasthandoff: 03/04/2021
+ms.locfileid: "101838421"
 ---
 # <a name="monitor-azure-data-explorer-performance-health-and-usage-with-metrics"></a>Überwachen der Azure Data Explorer-Leistung, -Integrität und -Nutzung mit Metriken
 
@@ -145,10 +145,10 @@ Abfrageleistungsmetriken verfolgen die Abfragedauer und Gesamtanzahl gleichzeiti
 |---|---|---|---|---|
 |MaterializedViewHealth                    | 1, 0    | Avg     |  Der Wert ist „1“, wenn die Sicht als fehlerfrei angesehen wird, und andernfalls „0“. | Database, MaterializedViewName |
 |MaterializedViewAgeMinutes                | Minuten | Avg     | Das Alter (`age`) der Sicht ist definiert durch den aktuellen Zeitpunkt abzüglich des letzten Erfassungszeitpunkts, der von der Sicht verarbeitet wurde. Der Metrikwert ist die Zeit in Minuten (je niedriger der Wert, desto „fehlerfreier“ ist die Sicht). | Database, MaterializedViewName |
-|MaterializedViewResult                    | 1       | Avg     | Die Metrik enthält die Dimension `Result`, mit der das Ergebnis des letzten Materialisierungszyklus angegeben wird (siehe mögliche Werte unten). Der Metrikwert ist immer „1“. | Database, MaterializedViewName, Result |
+|MaterializedViewResult                    | 1       | Avg     | Die Metrik enthält eine Dimension vom Typ `Result`, die das Ergebnis des letzten Materialisierungszyklus angibt. (Weitere Informationen zu möglichen Werten finden Sie unter [MaterializedViewResult-Metrik](kusto/management/materialized-views/materialized-view-overview.md#materializedviewresult-metric).) Der Metrikwert ist immer „1“. | Database, MaterializedViewName, Result |
 |MaterializedViewRecordsInDelta            | Anzahl von Datensätzen | Avg | Die Anzahl von Datensätzen, die sich derzeit im nicht verarbeiteten Teil der Quelltabelle befinden. Weitere Informationen finden Sie im Abschnitt zur [Funktionsweise von materialisierten Sichten](./kusto/management/materialized-views/materialized-view-overview.md#how-materialized-views-work).| Database, MaterializedViewName |
 |MaterializedViewExtentsRebuild            | Anzahl von Erweiterungen | Avg | Die Anzahl von Erweiterungen („Extents“), die während des Materialisierungszyklus neu erstellt wurden. | Database, MaterializedViewName|
-|MaterializedViewDataLoss                  | 1       | Max    | Die Metrik wird ausgelöst, wenn für nicht verarbeitete Quelldaten demnächst der Aufbewahrungszeitraum beginnt. | Database, MaterializedViewName, Kind |
+|MaterializedViewDataLoss                  | 1       | Max    | Die Metrik wird ausgelöst, wenn für nicht verarbeitete Quelldaten demnächst der Aufbewahrungszeitraum beginnt. Gibt an, dass die materialisierte Sicht fehlerhaft ist. | Database, MaterializedViewName, Kind |
 
 ## <a name="next-steps"></a>Nächste Schritte
 

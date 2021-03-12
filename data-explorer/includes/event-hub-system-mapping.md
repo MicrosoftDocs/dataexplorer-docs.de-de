@@ -4,15 +4,15 @@ ms.service: data-explorer
 ms.topic: include
 ms.date: 12/22/2020
 ms.author: orspodek
-ms.openlocfilehash: bd12845234ec57c1393935b7366b8d2e387b3890
-ms.sourcegitcommit: d19b4214625eeb1ec7aec4fd6c92007a07c76ebc
+ms.openlocfilehash: 52a6de4c8ecb3ccbe4e315145b8ae8a3c314ebfc
+ms.sourcegitcommit: 600c3430c00eb62d52540fe08dab386a860193cc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/22/2020
-ms.locfileid: "99554825"
+ms.lasthandoff: 03/08/2021
+ms.locfileid: "102472201"
 ---
 > [!NOTE]
-> * Systemeigenschaften werden nicht für komprimierte Daten unterstützt.
+> * Systemeigenschaften werden für `json` und Tabellenformate (`csv`, `tsv` usw.), aber nicht für komprimierte Daten unterstützt. Bei Verwendung eines nicht unterstützten Formats werden die Daten weiterhin erfasst, die Eigenschaften werden jedoch ignoriert.
 > * Bei Tabellendaten werden Systemeigenschaften nur für Ereignismeldungen mit einem Datensatz unterstützt.
 > * Bei JSON-Daten werden Systemeigenschaften auch für Ereignismeldungen mit mehreren Datensätzen unterstützt. In solchen Fällen werden die Systemeigenschaften nur dem ersten Datensatz der Ereignismeldung hinzugefügt. 
 > * Für die `csv`-Zuordnung werden Eigenschaften in der in der Tabelle [Systemeigenschaften](../ingest-data-event-hub-overview.md#system-properties) aufgeführten Reihenfolge am Anfang des Datensatzes hinzugefügt.

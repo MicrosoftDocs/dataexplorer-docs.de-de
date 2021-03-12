@@ -8,12 +8,12 @@ ms.service: data-explorer
 ms.topic: how-to
 ms.date: 08/13/2020
 ms.localizationpriority: high
-ms.openlocfilehash: 798a8b201ee87d5c43aeb31d6af515d41c516bef
-ms.sourcegitcommit: f49e581d9156e57459bc69c94838d886c166449e
+ms.openlocfilehash: 3ffead54d87354b9c7f6a6a370fccfaeac670207
+ms.sourcegitcommit: d19b4214625eeb1ec7aec4fd6c92007a07c76ebc
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/01/2020
-ms.locfileid: "95512212"
+ms.lasthandoff: 12/22/2020
+ms.locfileid: "102472200"
 ---
 # <a name="ingest-data-from-event-hub-into-azure-data-explorer"></a>Erfassen von Daten aus Event Hub in Azure Data Explorer
 
@@ -128,7 +128,7 @@ Als Nächstes stellen Sie über Azure Data Explorer eine Verbindung mit dem Even
     | Event Hub-Namespace | Ein eindeutiger Namespacename | Der von Ihnen zuvor ausgewählte Name, der Ihren Namespace identifiziert. |
     | Event Hub | *test-hub* | Der von Ihnen erstellte Event Hub |
     | Consumergruppe | *test-group* | Die Consumergruppe, die in dem von Ihnen erstellten Event Hub definiert ist |
-    | Ereignissystemeigenschaften | Auswählen relevanter Eigenschaften | Die [Event Hub-Systemeigenschaften](/azure/service-bus-messaging/service-bus-amqp-protocol-guide#message-annotations). Wenn pro Ereignisnachricht mehrere Datensätze vorhanden sind, werden die Systemeigenschaften dem ersten Datensatz hinzugefügt. Beim Hinzufügen von Systemeigenschaften [erstellen](kusto/management/create-table-command.md) oder [aktualisieren](kusto/management/alter-table-command.md) Sie das Tabellenschema und die [Zuordnung](kusto/management/mappings.md), um die ausgewählten Eigenschaften einzubeziehen. |
+    | Ereignissystemeigenschaften | Auswählen relevanter Eigenschaften | Die [Event Hub-Systemeigenschaften](/azure/service-bus-messaging/service-bus-amqp-protocol-guide#message-annotations). Beim Hinzufügen von Systemeigenschaften [erstellen](kusto/management/create-table-command.md) oder [aktualisieren](kusto/management/alter-table-command.md) Sie das Tabellenschema und die [Zuordnung](kusto/management/mappings.md), um die ausgewählten Eigenschaften einzubeziehen. Weitere Informationen zu Einschränkungen für Systemeigenschaften finden Sie unter [Zuordnung von Ereignissystemeigenschaften](#event-system-properties-mapping). |
     | Komprimierung | *None* | Der Komprimierungstyp der Event Hub-Nachrichtennutzlast. Unterstützte Komprimierungstypen: *None, GZip*.|
     
 #### <a name="target-table"></a>Zieltabelle
@@ -153,9 +153,7 @@ Es stehen zwei Routingoptionen für erfasste Daten zur Verfügung: *statisch* un
 
 ### <a name="event-system-properties-mapping"></a>Zuordnung von Ereignissystemeigenschaften
 
-> [!Note]
-> * Systemeigenschaften werden für Ereignisse mit einem Datensatz unterstützt.
-> * Für die `csv`-Zuordnung werden am Anfang des Datensatzes Eigenschaften hinzugefügt. Bei einer `json`-Zuordnung werden Eigenschaften entsprechend dem in der Dropdownliste angezeigten Namen hinzugefügt.
+[!INCLUDE [event-hub-system-mapping](includes/event-hub-system-mapping.md)]
 
 Wenn Sie **Ereignissystemeigenschaften** im Abschnitt **Datenquelle** der Tabelle ausgewählt haben, müssen Sie die [Systemeigenschaften](ingest-data-event-hub-overview.md#system-properties) in das Tabellenschema und die Zuordnung einschließen.
 
@@ -215,7 +213,7 @@ Anhand der von der App generierten Daten können Sie den Datenfluss vom Event Hu
     ![Nachrichten-Resultset](media/ingest-data-event-hub/message-result-set.png)
 
     > [!NOTE]
-    > * Azure Data Explorer verfügt über eine Aggregationsrichtlinie (Batching) für die Datenerfassung, die für die Optimierung des Erfassungsprozesses konzipiert ist. Da die Richtlinie standardmäßig mit fünf Minuten oder einem Datenvolumen von 500 MB konfiguriert ist, kann es zu Wartezeiten kommen. Aggregationsoptionen finden Sie unter [IngestionBatching policy](kusto/management/batchingpolicy.md) (IngestionBatching-Richtlinie). 
+    > * Azure Data Explorer verfügt über eine Aggregationsrichtlinie (Batching) für die Datenerfassung, die für die Optimierung des Erfassungsprozesses konzipiert ist. Die Standardrichtlinie für die Batchverarbeitung ist so konfiguriert, dass ein Batch versiegelt wird, wenn eine der folgenden Bedingungen für den Batch zutrifft: eine maximale Verzögerungszeit von 5 Minuten, eine Gesamtgröße von 1 G oder 1.000 Blobs. Daher kann es zu Wartezeit kommen. Weitere Informationen finden Sie unter [IngestionBatching-Richtlinie](kusto/management/batchingpolicy.md). 
     > * Die Event Hub-Erfassung beinhaltet die Event Hub-Antwortzeit von zehn Sekunden oder 1 MB. 
     > * Konfigurieren Sie Ihre Tabelle so, dass sie Streaming unterstützt und die Verzögerung bei der Antwortzeit entfernt wird. Weitere Informationen finden Sie unter [Streaming ingestion policy](kusto/management/streamingingestionpolicy.md) (Richtlinie für die Streamingerfassung). 
 
