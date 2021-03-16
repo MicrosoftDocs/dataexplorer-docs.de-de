@@ -8,12 +8,12 @@ ms.reviewer: alexans
 ms.service: data-explorer
 ms.topic: reference
 ms.date: 01/27/2020
-ms.openlocfilehash: 95bb28c81ec3221569758ead8a289bdf81d32d3d
-ms.sourcegitcommit: 4f576c1b89513a9e16641800abd80a02faa0da1c
+ms.openlocfilehash: a7508866f85bb7edb5a6feee5cfe9d191b946a09
+ms.sourcegitcommit: c09cc374d5d1d8b396c466ef397690b4b7e4174f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/22/2020
-ms.locfileid: "85128647"
+ms.lasthandoff: 03/15/2021
+ms.locfileid: "103481541"
 ---
 # <a name="scalar-data-types"></a>Skalare Datentypen
 
@@ -31,7 +31,7 @@ Die folgende Tabelle enthält neben den von Kusto unterstützten Datentypen auch
 | `bool`     | `boolean`            | `System.Boolean`                  | `int8`      |
 | `datetime` | `date`               | `System.DateTime`                 | `datetime`  |
 | `dynamic`  |                      | `System.Object`                   | `array`, `dictionary` oder einer der anderen Werte |
-| `guid`     | `uuid`, `uniqueid`   | `System.Guid`                     | `guid`      |
+| `guid`     |                      | `System.Guid`                     | `guid`      |
 | `int`      |                      | `System.Int32`                    | `int`       |
 | `long`     |                      | `System.Int64`                    | `long`      |
 | `real`     | `double`             | `System.Double`                   | `real`      |
