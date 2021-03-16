@@ -1,18 +1,18 @@
 ---
 title: Integrierte Richtliniendefinitionen für Azure Data Explorer
 description: Auflistung der integrierten Azure Policy-Richtliniendefinitionen für Azure Data Explorer Diese integrierten Richtliniendefinitionen bieten allgemeine Ansätze für die Verwaltung von Azure-Ressourcen.
-ms.date: 02/05/2021
+ms.date: 03/10/2021
 ms.topic: reference
 author: orspod
 ms.author: orspodek
 ms.service: data-explorer
 ms.custom: subject-policy-reference
-ms.openlocfilehash: 3c3c680d7c3cb0b35c925f840cd6504d3b288776
-ms.sourcegitcommit: d1c2433df183d0cfbfae4d3b869ee7f9cbf00fe4
+ms.openlocfilehash: 4d65b5de097f83e6958cab2f36ce33c6043e7726
+ms.sourcegitcommit: 4ec122b5142e57468b44aa06e0d6522d6dbd9868
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "99586404"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "102771703"
 ---
 # <a name="azure-policy-built-in-definitions-for-azure-data-explorer"></a>Integrierte Azure Policy-Richtliniendefinitionen für Azure Data Explorer
 

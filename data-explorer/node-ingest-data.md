@@ -7,12 +7,12 @@ ms.reviewer: mblythe
 ms.service: data-explorer
 ms.topic: how-to
 ms.date: 06/03/2019
-ms.openlocfilehash: 128f15910fee6008a6abd99fc3562518ae5625d6
-ms.sourcegitcommit: a7458819e42815a0376182c610aba48519501d92
+ms.openlocfilehash: 7052b4f0972856905ad8a23fe0940add25ffc962
+ms.sourcegitcommit: c09cc374d5d1d8b396c466ef397690b4b7e4174f
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/28/2020
-ms.locfileid: "92902623"
+ms.lasthandoff: 03/15/2021
+ms.locfileid: "103481635"
 ---
 # <a name="ingest-data-using-the-azure-data-explorer-node-library"></a>Erfassen von Daten mit der Azure Data Explorer-Bibliothek für Node
 
@@ -37,7 +37,7 @@ Zusätzlich zu einem Azure-Abonnement benötigen Sie Folgendes für diesen Artik
 
 ## <a name="install-the-data-and-ingest-libraries"></a>Installieren der Daten- und der Erfassungsbibliothek
 
-Installieren Sie *azure-kusto-ingest* und *azure-kusto-data* .
+Installieren Sie *azure-kusto-ingest* und *azure-kusto-data*.
 
 ```bash
 npm i azure-kusto-ingest azure-kusto-data
@@ -49,12 +49,16 @@ Importieren Sie Klassen aus den Bibliotheken.
 
 ```javascript
 
-const KustoConnectionStringBuilder = require("azure-kusto-data").KustoConnectionStringBuilder;
-const KustoClient = require("azure-kusto-data").Client;
-const KustoIngestClient = require("azure-kusto-ingest").IngestClient;
-const IngestionProperties = require("azure-kusto-ingest").IngestionProperties;
-const { DataFormat } = require("azure-kusto-ingest").IngestionPropertiesEnums;
-const { BlobDescriptor } = require("azure-kusto-ingest").IngestionDescriptors;
+import { Client as KustoClient, KustoConnectionStringBuilder } from 'azure-kusto-data';
+import {
+    IngestClient as KustoIngestClient,
+    IngestionProperties,
+    IngestionDescriptors,
+    IngestionPropertiesEnums
+} from "azure-kusto-ingest";
+
+const { BlobDescriptor } = IngestionDescriptors;
+const { DataFormat } = IngestionPropertiesEnums;
 
 ```
 Für die Authentifizierung von Anwendungen verwendet Azure Data Explorer Ihre Azure Active Directory-Mandanten-ID. Informationen zum Ermitteln Ihrer Mandanten-ID finden Sie unter [Ermitteln Ihrer Microsoft 365-Mandanten-ID](/onedrive/find-your-office-365-tenant-id).
@@ -83,7 +87,7 @@ const destTableMapping = "StormEvents_CSV_Mapping";
 
 ## <a name="set-source-file-information"></a>Festlegen der Informationen zur Quelldatei
 
-Importieren Sie zusätzliche Klassen, und legen Sie Konstanten für die Datenquellendatei fest. In diesem Beispiel wird eine Beispieldatei verwendet, die in Azure Blob Storage gehostet wird. Das **StormEvents** -Beispieldataset enthält wetterbezogene Daten der [National Centers for Environmental Information](https://www.ncdc.noaa.gov/stormevents/).
+Importieren Sie zusätzliche Klassen, und legen Sie Konstanten für die Datenquellendatei fest. In diesem Beispiel wird eine Beispieldatei verwendet, die in Azure Blob Storage gehostet wird. Das **StormEvents**-Beispieldataset enthält wetterbezogene Daten der [National Centers for Environmental Information](https://www.ncdc.noaa.gov/stormevents/).
 
 ```javascript
 const container = "samplefiles";
@@ -95,15 +99,14 @@ const blobPath = `https://${account}.blob.core.windows.net/${container}/${filePa
 
 ## <a name="create-a-table-on-your-test-cluster"></a>Erstellen einer Tabelle im Testcluster
 
-Erstellen Sie eine Tabelle, die dem Schema der Daten in der Datei `StormEvents.csv` entspricht. Wenn dieser Code ausgeführt wird, gibt er eine Meldung wie die folgende zurück: *Verwenden Sie zum Anmelden einen Webbrowser, um die Seite https://microsoft.com/devicelogin zu öffnen, und geben Sie den Code XXXXXXXXX ein, um sich zu authentifizieren* . Befolgen Sie die Schritte für die Anmeldung, und kehren Sie dann zurück, um den Codeblock auszuführen. Für nachfolgende Codeblöcke, die eine Verbindung herstellen, müssen Sie sich wieder anmelden.
+Erstellen Sie eine Tabelle, die dem Schema der Daten in der Datei `StormEvents.csv` entspricht. Wenn dieser Code ausgeführt wird, gibt er eine Meldung wie die folgende zurück: *Verwenden Sie zum Anmelden einen Webbrowser, um die Seite https://microsoft.com/devicelogin zu öffnen, und geben Sie den Code XXXXXXXXX ein, um sich zu authentifizieren*. Befolgen Sie die Schritte für die Anmeldung, und kehren Sie dann zurück, um den Codeblock auszuführen. Für nachfolgende Codeblöcke, die eine Verbindung herstellen, müssen Sie sich wieder anmelden.
 
 ```javascript
 const kustoClient = new KustoClient(kcsbData);
 const createTableCommand = `.create table ${destTable} (StartTime: datetime, EndTime: datetime, EpisodeId: int, EventId: int, State: string, EventType: string, InjuriesDirect: int, InjuriesIndirect: int, DeathsDirect: int, DeathsIndirect: int, DamageProperty: int, DamageCrops: int, Source: string, BeginLocation: string, EndLocation: string, BeginLat: real, BeginLon: real, EndLat: real, EndLon: real, EpisodeNarrative: string, EventNarrative: string, StormSummary: dynamic)`;
 
-kustoClient.executeMgmt(kustoDatabase, createTableCommand, (err, results) => {
-    console.log(results.primaryResults[0][0].toString());
-});
+const createTableResults = await kustoClient.executeMgmt(kustoDatabase, createTableCommand);
+console.log(createTableResults.primaryResults[0][0].toString());
 ```
 
 ## <a name="define-ingestion-mapping"></a>Definieren der Erfassungszuordnung
@@ -113,9 +116,8 @@ Ordnen Sie eingehende JSON-Daten den beim Erstellen der Tabelle verwendeten Spal
 ```javascript
 const createMappingCommand = `.create table ${destTable} ingestion csv mapping '${destTableMapping}' '[{"Name":"StartTime","datatype":"datetime","Ordinal":0}, {"Name":"EndTime","datatype":"datetime","Ordinal":1},{"Name":"EpisodeId","datatype":"int","Ordinal":2},{"Name":"EventId","datatype":"int","Ordinal":3},{"Name":"State","datatype":"string","Ordinal":4},{"Name":"EventType","datatype":"string","Ordinal":5},{"Name":"InjuriesDirect","datatype":"int","Ordinal":6},{"Name":"InjuriesIndirect","datatype":"int","Ordinal":7},{"Name":"DeathsDirect","datatype":"int","Ordinal":8},{"Name":"DeathsIndirect","datatype":"int","Ordinal":9},{"Name":"DamageProperty","datatype":"int","Ordinal":10},{"Name":"DamageCrops","datatype":"int","Ordinal":11},{"Name":"Source","datatype":"string","Ordinal":12},{"Name":"BeginLocation","datatype":"string","Ordinal":13},{"Name":"EndLocation","datatype":"string","Ordinal":14},{"Name":"BeginLat","datatype":"real","Ordinal":16},{"Name":"BeginLon","datatype":"real","Ordinal":17},{"Name":"EndLat","datatype":"real","Ordinal":18},{"Name":"EndLon","datatype":"real","Ordinal":19},{"Name":"EpisodeNarrative","datatype":"string","Ordinal":20},{"Name":"EventNarrative","datatype":"string","Ordinal":21},{"Name":"StormSummary","datatype":"dynamic","Ordinal":22}]'`;
 
-kustoClient.executeMgmt(kustoDatabase, createMappingCommand, (err, results) => {
-    console.log(results.primaryResults[0][0].toString());
-});
+const mappingCommandResults = await kustoClient.executeMgmt(kustoDatabase, createMappingCommand);
+console.log(mappingCommandResults.primaryResults[0][0].toString());
 ```
 
 ## <a name="queue-a-message-for-ingestion"></a>Stellen einer Nachricht in eine Warteschlange für die Erfassung
@@ -128,9 +130,11 @@ const ingestClient = new KustoIngestClient(kcsbIngest, defaultProps);
 // All ingestion properties are documented here: https://docs.microsoft.com/azure/kusto/management/data-ingest#ingestion-properties
 
 const blobDesc = new BlobDescriptor(blobPath, 10);
-ingestClient.ingestFromBlob(blobDesc,null, (err) => {
-    if (err) throw new Error(err);
-});
+try {
+    const ingestionResult = await ingestClient.ingestFromBlob(blobDesc, null);
+} catch (err) {
+    // Handle errors
+}
 ```
 
 ## <a name="validate-that-table-contains-data"></a>Überprüfen, ob die Tabelle Daten enthält
@@ -140,10 +144,9 @@ ingestClient.ingestFromBlob(blobDesc,null, (err) => {
 ```javascript
 const query = `${destTable} | count`;
 
-kustoClient.execute(kustoDatabase, query, (err, results) => {
-    if (err) throw new Error(err);  
-    console.log(results.primaryResults[0][0].toString());
-});
+var tableResults = await kustoClient.execute(kustoDatabase, query);
+console.log(tableResults.primaryResults[0][0].toString());
+
 ```
 
 ## <a name="run-troubleshooting-queries"></a>Ausführen von Abfragen zur Problembehandlung
